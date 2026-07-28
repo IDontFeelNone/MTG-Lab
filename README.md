@@ -1,19 +1,199 @@
 # MTG Lab
 
-An AI-powered decision intelligence platform for collectible card games.
+> **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
-MTG Lab combines structured data, advanced analytics, simulation, and artificial intelligence to help collectors, players, investors, and researchers make better decisions across collectible card games.
+MTG Lab is a research and analytics platform designed to help collectors, players, investors, and researchers make better decisions across collectible card games.
 
-Rather than functioning as a traditional card database, MTG Lab is designed to transform large collections of collectible card data into explainable, actionable intelligence.
+Rather than functioning as a traditional card database, MTG Lab transforms large collections of structured card data into explainable, actionable intelligence through statistical analysis, simulation, and AI-assisted reasoning.
 
-## Why MTG Lab Exists
+---
 
-Collectible card games generate enormous amounts of information—from product configurations and printings to market prices, decklists, and collection inventories. While this data is widely available, it is often fragmented across websites and difficult to analyze as a whole.
+# Why MTG Lab Exists
 
-MTG Lab brings these datasets together into a unified knowledge base, allowing statistical analysis, simulation, and AI reasoning to operate on the same canonical source of truth.
+Collectible card games generate enormous amounts of information—from product configurations and print sheets to market prices, decklists, and personal collections. While this information is widely available, it is often fragmented across multiple websites and difficult to analyze as a whole.
 
-## Vision
+MTG Lab brings these datasets together into a unified knowledge base that supports probability analysis, market analytics, simulation, and AI reasoning from a single canonical source of truth.
+
+---
+
+# Vision
 
 MTG Lab aims to become a comprehensive decision-support platform capable of analyzing products, collections, decks, markets, and historical trends across multiple collectible card games.
 
-Magic: The Gathering, beginning with Mystery Booster 2, serves as the reference implementation for the platform before expanding to additional games.
+The platform is designed to answer questions such as:
+
+- Which sealed product offers the highest expected value?
+- How should I optimize my collection?
+- Which cards provide the best upgrade for my deck?
+- What is the probability of opening specific cards?
+- Which products have historically appreciated the most?
+- How close am I to building a competitive deck?
+- What purchasing strategy best fits my budget?
+
+---
+
+# Supported Games
+
+MTG Lab is architected as a multi-game platform.
+
+## Current Implementation
+
+- **Magic: The Gathering**
+  - Mystery Booster 2 (Reference Implementation)
+
+## Planned Support
+
+- Pokémon Trading Card Game
+- Disney Lorcana
+- One Piece Card Game
+- Yu-Gi-Oh!
+- Star Wars: Unlimited
+- Flesh and Blood
+
+The architecture is intentionally extensible so additional games can share the same analytics and AI infrastructure.
+
+---
+
+# Architecture
+
+MTG Lab is built around four primary layers.
+
+```text
+Repository / Database
+        │
+        ▼
+Analytics Engine
+        │
+        ▼
+AI Reasoning Layer
+        │
+        ▼
+Applications & User Interfaces
+```
+
+Each layer has a distinct responsibility.
+
+## Repository / Database
+
+The canonical source of structured information including:
+
+- Cards
+- Products
+- Printings
+- Collections
+- Market data
+- Probability definitions
+
+## Analytics Engine
+
+Responsible for computing:
+
+- Pull probabilities
+- Expected value
+- Monte Carlo simulations
+- Portfolio metrics
+- Collection statistics
+- Historical analysis
+
+## AI Reasoning Layer
+
+Retrieves structured information, interprets analytical results, and generates explainable recommendations.
+
+## Applications & User Interfaces
+
+Exposes MTG Lab through:
+
+- Dashboards
+- APIs
+- Command-line tools
+- Conversational AI
+- Future desktop and web applications
+
+---
+
+# Core Capabilities
+
+MTG Lab is designed to support:
+
+- Canonical card repositories
+- Product databases
+- Print sheet reconstruction
+- Slot probability analysis
+- Expected value (EV) calculations
+- Monte Carlo simulation
+- Collection management
+- Portfolio analytics
+- Deck-building analysis
+- Market intelligence
+- AI-powered decision support
+
+---
+
+# Repository Philosophy
+
+The GitHub repository serves as the canonical source of truth.
+
+Development follows a documentation-first approach:
+
+- Architecture is defined through documentation.
+- Implementation follows the documented architecture.
+- Every significant decision is recorded.
+- Assumptions are documented.
+- Milestones are implemented incrementally.
+- Documentation and implementation remain synchronized.
+
+---
+
+# Repository Organization
+
+```text
+MTG-Lab/
+│
+├── README.md
+├── ROADMAP.md
+├── ARCHITECTURE.md
+├── CHANGELOG.md
+├── DECISIONS.md
+├── TODO.md
+│
+├── docs/
+│   ├── AI_ARCHITECTURE_VISION.md
+│   ├── PROJECT_INVENTORY.md
+│   └── ...
+│
+├── games/
+│   ├── magic/
+│   │   └── mystery_booster_2/
+│   ├── pokemon/
+│   ├── lorcana/
+│   ├── one_piece/
+│   ├── yugioh/
+│   └── ...
+│
+├── src/
+├── schemas/
+├── tests/
+└── exports/
+```
+
+This organization allows multiple trading card games to share a common analytics platform while maintaining independent datasets.
+
+---
+
+# Project Status
+
+**Architecture:** Version 12
+
+**Status:** Active Development
+
+**Current Focus:** Magic: The Gathering — Mystery Booster 2
+
+Mystery Booster 2 serves as the reference implementation used to validate the platform's data models, analytics engine, simulation framework, and AI reasoning before expanding to additional games.
+
+---
+
+# Long-Term Goal
+
+Build the premier decision intelligence platform for collectible card games by combining high-quality structured data, advanced analytics, simulation, and explainable artificial intelligence.
+
+MTG Lab is designed to become the definitive platform for understanding collectible card games through data rather than intuition.
