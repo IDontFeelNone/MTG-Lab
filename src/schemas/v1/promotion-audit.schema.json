@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.dev/schemas/v1/promotion-audit.schema.json",
+  "title": "Canonical Promotion Audit Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "id", "action", "entity_type", "entity_id",
+    "candidate_artifact_id", "candidate_id", "actor", "decided_at",
+    "decision", "outcome", "candidate_snapshot", "canonical_before",
+    "canonical_after"
+  ],
+  "properties": {
+    "schema_version": {"const": "v1"},
+    "id": {"$ref": "#/$defs/id"},
+    "action": {"enum": ["promotion", "rejection", "rollback"]},
+    "entity_type": {"const": "product"},
+    "entity_id": {"$ref": "#/$defs/id"},
+    "candidate_artifact_id": {"$ref": "#/$defs/id"},
+    "candidate_id": {"$ref": "#/$defs/id"},
+    "actor": {"type": "string", "minLength": 1},
+    "decided_at": {"type": "string", "format": "date-time"},
+    "decision": {"enum": ["approved", "rejected"]},
+    "outcome": {"enum": ["promoted", "confirmed", "rejected", "rolled_back"]},
+    "reason": {"type": "string", "minLength": 1},
+    "candidate_snapshot": {"type": "object"},
+    "canonical_before": {"type": ["object", "null"]},
+    "canonical_after": {"type": ["object", "null"]},
+    "related_audit_id": {"$ref": "#/$defs/id"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
+  }
+}
