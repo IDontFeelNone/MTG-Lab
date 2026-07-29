@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 54 — Controlled Canonical Promotion complete
+- Current implementation phase: Phase 55 — Data Model migration complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -27,6 +27,7 @@
 - Cards, printings, slots, sheets, collation, probabilities, simulations, and market data remain unpopulated
 
 ## Completed Work
+- Approved Tier 0 Data Model Specification migrated to `docs/DATA_MODEL.md`
 - Versioned schemas and validation infrastructure
 - Mystery Booster 2 product/source/acquisition foundations
 - Evidence-preserving ingestion pipeline foundation
@@ -44,7 +45,7 @@ Architectural documents are migrated with the implementation milestone that
 requires them; no standalone migration sprint is planned.
 
 ### Tier 0
-- `DATA_MODEL.md` — Not Started
+- `DATA_MODEL.md` — Complete
 - `DATA_REPOSITORY.md` — In Progress
 - `DATABASE_ENGINE.md` — Not Started
 
