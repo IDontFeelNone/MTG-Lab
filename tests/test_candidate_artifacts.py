@@ -20,6 +20,22 @@ class PartialNormalizer(FixtureNormalizer):
 class FailingNormalizer(FixtureNormalizer):
  def normalize(self,p):raise RuntimeError("fixture failure")
 class CandidateTests(unittest.TestCase):
+ def test_serialized_nested_values_do_not_alias_models(self):
+  record=replace(parsed().records[0],raw_fields={"nested":{"items":["original"]}},source_excerpt={"lines":[{"text":"original"}]})
+  parsed_artifact=replace(parsed(),records=(record,));parsed_dict=parsed_artifact.to_dict()
+  nested_candidate=replace(candidate(),payload={"nested":{"items":["original"]}});candidate_artifact=replace(artifact(),candidates=(nested_candidate,));candidate_dict=candidate_artifact.to_dict()
+  parsed_dict["records"][0]["raw_fields"]["nested"]["items"].append("changed");parsed_dict["records"][0]["source_excerpt"]["lines"][0]["text"]="changed";candidate_dict["candidates"][0]["payload"]["nested"]["items"].append("changed")
+  self.assertEqual(record.raw_fields,{"nested":{"items":["original"]}});self.assertEqual(record.source_excerpt,{"lines":[{"text":"original"}]});self.assertEqual(nested_candidate.payload,{"nested":{"items":["original"]}})
+  validate_document(parsed_artifact.to_dict(),"parsed-record-artifact");validate_document(candidate_artifact.to_dict(),"normalized-candidate-artifact")
+ def test_json_serialization_preserves_immutable_models(self):
+  parsed_artifact=replace(parsed(),records=(replace(parsed().records[0],errors=("bad row",),warnings=("check row",)),),errors=("parse error",))
+  parsed_dict=parsed_artifact.to_dict();self.assertIsInstance(parsed_dict["errors"],list);self.assertIsInstance(parsed_dict["records"],list);self.assertIsInstance(parsed_dict["records"][0]["errors"],list)
+  candidate_artifact=artifact();candidate_dict=candidate_artifact.to_dict();serialized_candidate=candidate_dict["candidates"][0]
+  self.assertIsInstance(candidate_dict["candidates"],list);self.assertIsInstance(serialized_candidate["parsed_record_ids"],list);self.assertIsInstance(serialized_candidate["field_provenance"],list)
+  self.assertNotIn("notes",serialized_candidate["field_provenance"][0])
+  validate_document(parsed_dict,"parsed-record-artifact");validate_document(candidate_dict,"normalized-candidate-artifact")
+  self.assertIsInstance(parsed_artifact.errors,tuple);self.assertIsInstance(parsed_artifact.records,tuple)
+  self.assertIsInstance(candidate_artifact.candidates,tuple);self.assertIsInstance(candidate_artifact.candidates[0].parsed_record_ids,tuple);self.assertIsInstance(candidate_artifact.candidates[0].field_provenance,tuple)
  def test_schemas_reject_invalid_states_confidence_and_metadata(self):
   validate_document(parsed().to_dict(),"parsed-record-artifact");bad=parsed().to_dict();bad["parse_status"]="bad"
   with self.assertRaises(SchemaValidationError):validate_document(bad,"parsed-record-artifact")
