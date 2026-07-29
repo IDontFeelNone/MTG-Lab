@@ -4,26 +4,21 @@
   "game": "magic",
   "name": "Mystery Booster 2",
   "product_type": "sealed_product",
+  "lifecycle_status": "foundation",
   "slot_ids": [],
-  "metadata": {
-    "record_version": "1",
-    "status": "foundation",
-    "provenance": {
-      "confirmed_official_facts": [
-        {
-          "claim": "Mystery Booster 2 is a Magic: The Gathering product.",
-          "source_type": "official_wizards",
-          "source_url": "https://magic.wizards.com/en/products/mystery-booster"
-        }
-      ],
-      "community_supported_research": [],
-      "unverified_or_future_inference": [
-        {
-          "scope": "card list, print sheets, slot definitions, collation, and probabilities",
-          "status": "not recorded",
-          "reason": "These require validated source evidence and are intentionally outside the foundation record."
-        }
-      ]
+  "provenance": [
+    {
+      "claim": "Mystery Booster 2 is a Magic: The Gathering product.",
+      "source_classification": "official",
+      "source_location": "https://magic.wizards.com/en/products/mystery-booster",
+      "verification_status": "confirmed"
+    },
+    {
+      "claim": "Card list, print sheets, slot definitions, collation, and probabilities are intentionally not recorded in this foundation product definition.",
+      "source_classification": "internal",
+      "source_location": "MTG Lab canonical product foundation scope",
+      "verification_status": "unverified",
+      "notes": "These require validated source evidence before they may be represented as canonical data."
     }
-  }
+  ]
 }
