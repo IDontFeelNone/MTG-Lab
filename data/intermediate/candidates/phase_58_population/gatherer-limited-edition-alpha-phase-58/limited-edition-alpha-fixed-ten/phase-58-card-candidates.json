@@ -1,0 +1,980 @@
+{
+  "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+  "artifact_version": "1",
+  "candidate_count": 10,
+  "candidate_type": "card",
+  "candidates": [
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-ancestral-recall-candidate",
+      "parsed_record_ids": [
+        "card-ancestral-recall-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.ancestral-recall",
+        "name": "Ancestral Recall",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-time-walk-candidate",
+      "parsed_record_ids": [
+        "card-time-walk-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.time-walk",
+        "name": "Time Walk",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-timetwister-candidate",
+      "parsed_record_ids": [
+        "card-timetwister-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.timetwister",
+        "name": "Timetwister",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-black-lotus-candidate",
+      "parsed_record_ids": [
+        "card-black-lotus-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.black-lotus",
+        "name": "Black Lotus",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-mox-emerald-candidate",
+      "parsed_record_ids": [
+        "card-mox-emerald-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.mox-emerald",
+        "name": "Mox Emerald",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-mox-jet-candidate",
+      "parsed_record_ids": [
+        "card-mox-jet-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.mox-jet",
+        "name": "Mox Jet",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-mox-pearl-candidate",
+      "parsed_record_ids": [
+        "card-mox-pearl-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.mox-pearl",
+        "name": "Mox Pearl",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-mox-ruby-candidate",
+      "parsed_record_ids": [
+        "card-mox-ruby-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.mox-ruby",
+        "name": "Mox Ruby",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-mox-sapphire-candidate",
+      "parsed_record_ids": [
+        "card-mox-sapphire-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.mox-sapphire",
+        "name": "Mox Sapphire",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "card",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "game",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "game"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "name",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "name"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-card-parsed",
+          "parsed_record_id": "card-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "card-sol-ring-candidate",
+      "parsed_record_ids": [
+        "card-sol-ring-record"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "magic.sol-ring",
+        "name": "Sol Ring",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    }
+  ],
+  "errors": [],
+  "id": "phase-58-card-candidates",
+  "normalization_status": "succeeded",
+  "normalized_at": "2026-07-29T14:00:00Z",
+  "normalizer_id": "phase-58-controlled-normalization",
+  "normalizer_version": "1",
+  "parsed_artifact_id": "phase-58-card-parsed",
+  "product_id": "phase_58_population",
+  "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+  "schema_version": "v1",
+  "source_id": "gatherer-limited-edition-alpha-phase-58",
+  "warnings": []
+}

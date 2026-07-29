@@ -1,0 +1,389 @@
+{
+  "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+  "artifact_version": "1",
+  "errors": [],
+  "id": "phase-58-printing-parsed",
+  "input_content_type": "application/json",
+  "parse_status": "succeeded",
+  "parsed_at": "2026-07-29T14:00:00Z",
+  "parser_id": "phase-58-controlled-extraction",
+  "parser_version": "1",
+  "product_id": "phase_58_population",
+  "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+  "record_count": 10,
+  "records": [
+    {
+      "errors": [],
+      "id": "printing-ancestral-recall-record",
+      "raw_fields": {
+        "card_id": "magic.ancestral-recall",
+        "collector_number": "47",
+        "id": "magic.lea.47.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "47",
+        "language": "en",
+        "name": "Ancestral Recall",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "printing-time-walk-record",
+      "raw_fields": {
+        "card_id": "magic.time-walk",
+        "collector_number": "83",
+        "id": "magic.lea.83.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "83",
+        "language": "en",
+        "name": "Time Walk",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "printing-timetwister-record",
+      "raw_fields": {
+        "card_id": "magic.timetwister",
+        "collector_number": "85",
+        "id": "magic.lea.85.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "85",
+        "language": "en",
+        "name": "Timetwister",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "printing-black-lotus-record",
+      "raw_fields": {
+        "card_id": "magic.black-lotus",
+        "collector_number": "232",
+        "id": "magic.lea.232.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "232",
+        "language": "en",
+        "name": "Black Lotus",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "printing-mox-emerald-record",
+      "raw_fields": {
+        "card_id": "magic.mox-emerald",
+        "collector_number": "262",
+        "id": "magic.lea.262.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "262",
+        "language": "en",
+        "name": "Mox Emerald",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "printing-mox-jet-record",
+      "raw_fields": {
+        "card_id": "magic.mox-jet",
+        "collector_number": "263",
+        "id": "magic.lea.263.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "263",
+        "language": "en",
+        "name": "Mox Jet",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "printing-mox-pearl-record",
+      "raw_fields": {
+        "card_id": "magic.mox-pearl",
+        "collector_number": "264",
+        "id": "magic.lea.264.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "264",
+        "language": "en",
+        "name": "Mox Pearl",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "printing-mox-ruby-record",
+      "raw_fields": {
+        "card_id": "magic.mox-ruby",
+        "collector_number": "265",
+        "id": "magic.lea.265.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "265",
+        "language": "en",
+        "name": "Mox Ruby",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "printing-mox-sapphire-record",
+      "raw_fields": {
+        "card_id": "magic.mox-sapphire",
+        "collector_number": "266",
+        "id": "magic.lea.266.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "266",
+        "language": "en",
+        "name": "Mox Sapphire",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "printing-sol-ring-record",
+      "raw_fields": {
+        "card_id": "magic.sol-ring",
+        "collector_number": "270",
+        "id": "magic.lea.270.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "uncommon",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "record_type": "printing",
+      "source_excerpt": {
+        "collector_number": "270",
+        "language": "en",
+        "name": "Sol Ring",
+        "rarity": "uncommon",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    }
+  ],
+  "schema_version": "v1",
+  "source_id": "gatherer-limited-edition-alpha-phase-58",
+  "warnings": []
+}

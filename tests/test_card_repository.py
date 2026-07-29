@@ -71,18 +71,24 @@ def _write(root: Path, relative: str, document: dict) -> None:
 
 
 class CanonicalCardRepositoryTests(unittest.TestCase):
-    def test_phase_56_dataset_is_structurally_and_referentially_valid(self) -> None:
+    def test_canonical_dataset_is_structurally_and_referentially_valid(self) -> None:
         cards, printings = load_card_repository("magic")
-        self.assertEqual([card["id"] for card in cards], ["magic.lightning-bolt"])
-        self.assertEqual(printings[0]["card_id"], cards[0]["id"])
-        self.assertEqual(load_card("magic", cards[0]["id"]), cards[0])
-        self.assertEqual(load_printing("magic", printings[0]["id"]), printings[0])
+        self.assertEqual(len(cards), 11)
+        self.assertEqual(len(printings), 11)
+        card_ids = {card["id"] for card in cards}
+        self.assertEqual({printing["card_id"] for printing in printings}, card_ids)
+        for card in cards:
+            self.assertEqual(load_card("magic", card["id"]), card)
+        for printing in printings:
+            self.assertEqual(load_printing("magic", printing["id"]), printing)
 
     def test_canonical_output_is_reproducible(self) -> None:
         first = canonical_repository_bytes("magic")
         second = canonical_repository_bytes("magic")
         self.assertEqual(first, second)
-        self.assertEqual(json.loads(first)["printings"][0]["id"], "magic.lea.161.en")
+        snapshot = json.loads(first)
+        self.assertEqual(snapshot["cards"][0]["id"], "magic.ancestral-recall")
+        self.assertEqual(snapshot["printings"][0]["id"], "magic.lea.161.en")
 
     def test_orphaned_printing_is_rejected_with_identifiers(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

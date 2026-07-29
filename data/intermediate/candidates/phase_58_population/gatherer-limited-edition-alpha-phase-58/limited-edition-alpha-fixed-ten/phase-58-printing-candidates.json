@@ -1,0 +1,1420 @@
+{
+  "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+  "artifact_version": "1",
+  "candidate_count": 10,
+  "candidate_type": "printing",
+  "candidates": [
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-ancestral-recall-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-ancestral-recall-candidate",
+      "parsed_record_ids": [
+        "printing-ancestral-recall-record"
+      ],
+      "payload": {
+        "card_id": "magic.ancestral-recall",
+        "collector_number": "47",
+        "id": "magic.lea.47.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-time-walk-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-time-walk-candidate",
+      "parsed_record_ids": [
+        "printing-time-walk-record"
+      ],
+      "payload": {
+        "card_id": "magic.time-walk",
+        "collector_number": "83",
+        "id": "magic.lea.83.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-timetwister-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-timetwister-candidate",
+      "parsed_record_ids": [
+        "printing-timetwister-record"
+      ],
+      "payload": {
+        "card_id": "magic.timetwister",
+        "collector_number": "85",
+        "id": "magic.lea.85.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-black-lotus-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-black-lotus-candidate",
+      "parsed_record_ids": [
+        "printing-black-lotus-record"
+      ],
+      "payload": {
+        "card_id": "magic.black-lotus",
+        "collector_number": "232",
+        "id": "magic.lea.232.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-emerald-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-mox-emerald-candidate",
+      "parsed_record_ids": [
+        "printing-mox-emerald-record"
+      ],
+      "payload": {
+        "card_id": "magic.mox-emerald",
+        "collector_number": "262",
+        "id": "magic.lea.262.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-jet-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-mox-jet-candidate",
+      "parsed_record_ids": [
+        "printing-mox-jet-record"
+      ],
+      "payload": {
+        "card_id": "magic.mox-jet",
+        "collector_number": "263",
+        "id": "magic.lea.263.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-pearl-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-mox-pearl-candidate",
+      "parsed_record_ids": [
+        "printing-mox-pearl-record"
+      ],
+      "payload": {
+        "card_id": "magic.mox-pearl",
+        "collector_number": "264",
+        "id": "magic.lea.264.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-ruby-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-mox-ruby-candidate",
+      "parsed_record_ids": [
+        "printing-mox-ruby-record"
+      ],
+      "payload": {
+        "card_id": "magic.mox-ruby",
+        "collector_number": "265",
+        "id": "magic.lea.265.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-mox-sapphire-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-mox-sapphire-candidate",
+      "parsed_record_ids": [
+        "printing-mox-sapphire-record"
+      ],
+      "payload": {
+        "card_id": "magic.mox-sapphire",
+        "collector_number": "266",
+        "id": "magic.lea.266.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "rare",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    },
+    {
+      "confidence": 1.0,
+      "entity_type": "printing",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "schema_version"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "card_id",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "card_id"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "set_code",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "set_code"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "collector_number",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "collector_number"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "rarity",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "rarity"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "language",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "language"
+        },
+        {
+          "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "parsed_artifact_id": "phase-58-printing-parsed",
+          "parsed_record_id": "printing-sol-ring-record",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+          "source_id": "gatherer-limited-edition-alpha-phase-58",
+          "transformation_id": "phase-58-controlled-normalization",
+          "transformation_version": "1",
+          "value_origin": "provenance"
+        }
+      ],
+      "id": "printing-sol-ring-candidate",
+      "parsed_record_ids": [
+        "printing-sol-ring-record"
+      ],
+      "payload": {
+        "card_id": "magic.sol-ring",
+        "collector_number": "270",
+        "id": "magic.lea.270.en",
+        "language": "en",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+            "field_paths": [
+              "card_id",
+              "collector_number",
+              "id",
+              "language",
+              "rarity",
+              "set_code"
+            ],
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "rarity": "uncommon",
+        "schema_version": "v1",
+        "set_code": "LEA"
+      },
+      "validation_state": "valid",
+      "warnings": []
+    }
+  ],
+  "errors": [],
+  "id": "phase-58-printing-candidates",
+  "normalization_status": "succeeded",
+  "normalized_at": "2026-07-29T14:00:00Z",
+  "normalizer_id": "phase-58-controlled-normalization",
+  "normalizer_version": "1",
+  "parsed_artifact_id": "phase-58-printing-parsed",
+  "product_id": "phase_58_population",
+  "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+  "schema_version": "v1",
+  "source_id": "gatherer-limited-edition-alpha-phase-58",
+  "warnings": []
+}

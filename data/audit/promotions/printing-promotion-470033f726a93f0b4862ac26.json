@@ -1,0 +1,178 @@
+{
+  "action": "promotion",
+  "actor": "maintainer",
+  "candidate_artifact_id": "phase-58-printing-candidates",
+  "candidate_id": "printing-mox-pearl-candidate",
+  "candidate_snapshot": {
+    "confidence": 1.0,
+    "entity_type": "printing",
+    "errors": [],
+    "field_provenance": [
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "schema_version",
+        "parsed_artifact_id": "phase-58-printing-parsed",
+        "parsed_record_id": "printing-mox-pearl-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "schema_version"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "id",
+        "parsed_artifact_id": "phase-58-printing-parsed",
+        "parsed_record_id": "printing-mox-pearl-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "id"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "card_id",
+        "parsed_artifact_id": "phase-58-printing-parsed",
+        "parsed_record_id": "printing-mox-pearl-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "card_id"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "set_code",
+        "parsed_artifact_id": "phase-58-printing-parsed",
+        "parsed_record_id": "printing-mox-pearl-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "set_code"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "collector_number",
+        "parsed_artifact_id": "phase-58-printing-parsed",
+        "parsed_record_id": "printing-mox-pearl-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "collector_number"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "rarity",
+        "parsed_artifact_id": "phase-58-printing-parsed",
+        "parsed_record_id": "printing-mox-pearl-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "rarity"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "language",
+        "parsed_artifact_id": "phase-58-printing-parsed",
+        "parsed_record_id": "printing-mox-pearl-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "language"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "provenance",
+        "parsed_artifact_id": "phase-58-printing-parsed",
+        "parsed_record_id": "printing-mox-pearl-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "provenance"
+      }
+    ],
+    "id": "printing-mox-pearl-candidate",
+    "parsed_record_ids": [
+      "printing-mox-pearl-record"
+    ],
+    "payload": {
+      "card_id": "magic.mox-pearl",
+      "collector_number": "264",
+      "id": "magic.lea.264.en",
+      "language": "en",
+      "provenance": [
+        {
+          "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+          "field_paths": [
+            "card_id",
+            "collector_number",
+            "id",
+            "language",
+            "rarity",
+            "set_code"
+          ],
+          "source_id": "gatherer-limited-edition-alpha-phase-58"
+        }
+      ],
+      "rarity": "rare",
+      "schema_version": "v1",
+      "set_code": "LEA"
+    },
+    "validation_state": "valid",
+    "warnings": []
+  },
+  "canonical_after": {
+    "card_id": "magic.mox-pearl",
+    "collector_number": "264",
+    "id": "magic.lea.264.en",
+    "language": "en",
+    "provenance": [
+      {
+        "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+        "field_paths": [
+          "card_id",
+          "collector_number",
+          "id",
+          "language",
+          "rarity",
+          "set_code"
+        ],
+        "source_id": "gatherer-limited-edition-alpha-phase-58"
+      }
+    ],
+    "rarity": "rare",
+    "schema_version": "v1",
+    "set_code": "LEA"
+  },
+  "canonical_before": null,
+  "decided_at": "2026-07-29T14:00:00Z",
+  "decision": "approved",
+  "entity_id": "magic.lea.264.en",
+  "entity_type": "printing",
+  "id": "printing-promotion-470033f726a93f0b4862ac26",
+  "outcome": "promoted",
+  "reason": "Approved bounded Phase 58 population from official Wizards of the Coast evidence.",
+  "schema_version": "v1"
+}

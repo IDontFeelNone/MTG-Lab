@@ -27,5 +27,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   Printing candidates with explicit approval and rejection, immutable audits,
   idempotent and conflict-safe writes, source and provenance validation,
   Printing-to-Card enforcement, and dependency-safe rollback.
+- A fixed Phase 58 increment of ten official-source-attributed Limited Edition
+  Alpha Cards and Printings, including retained candidate artifacts, canonical
+  records, and twenty immutable approval audits.
 
 [Unreleased]: https://github.com/IDontFeelNone/MTG-Lab/compare/v0.0.0...HEAD

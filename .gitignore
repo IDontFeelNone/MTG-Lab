@@ -44,6 +44,11 @@ data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+data/intermediate/*
+!data/intermediate/parsed/
+!data/intermediate/parsed/**
+!data/intermediate/candidates/
+!data/intermediate/candidates/**
 data/canonical/*
 !data/canonical/.gitkeep
 !data/canonical/games/
