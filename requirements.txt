@@ -1,0 +1,2 @@
+# Runtime dependencies
+jsonschema>=4.22,<5
