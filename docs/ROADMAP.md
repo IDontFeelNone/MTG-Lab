@@ -20,7 +20,7 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Current Status
 
-**Current Phase:** Phase 57 ✅ Complete
+**Current Phase:** Phase 58 ✅ Complete
 
 **Next Phase:** Awaiting approval
 
@@ -63,6 +63,21 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Most Recently Completed Milestone
 
+## Phase 58 — Initial Card and Printing Candidate Population
+
+### Objective
+Populate a fixed, official-source-backed increment through controlled promotion.
+
+### Success Criteria
+- [x] Ten Card and ten Printing candidates retain official source attribution.
+- [x] Explicit approval promotes Cards before their associated Printings.
+- [x] Twenty immutable promotion audits preserve the reviewed snapshots.
+- [x] The bounded canonical increment is schema-valid and referentially safe.
+
+---
+
+# Previously Completed Milestone
+
 ## Phase 57 — Card and Printing Candidate Ingestion and Controlled Promotion
 
 ### Objective
@@ -78,7 +93,7 @@ it for Card and Printing candidates.
 
 ---
 
-# Previously Completed Milestone
+## Earlier Milestone
 
 ## Phase 56 — Card and Printing Repository Foundation
 
@@ -106,10 +121,10 @@ identity relationship.
 
 # Upcoming Phases
 
-## Proposed Phase 58
+## Proposed Phase 59
 
-Add a small, controlled, reviewed Card and Printing population increment through
-the Phase 57 workflow, subject to explicit milestone approval.
+Define a small slot, print-sheet, and collation foundation, subject to Tier 0
+architectural readiness review and explicit milestone approval.
 
 ---
 

@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 57 — Card and Printing Candidate Promotion complete
+- Current implementation phase: Phase 58 — Initial Card and Printing Candidate Population complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -30,7 +30,8 @@
 - The approved official product-page target has a controlled, hash-recorded evidence fixture and a deterministic Mystery Booster 2 title parser and normalizer
 - Parsed and normalized product candidates are traceable and schema-validated;
   controlled promotion is available only for explicitly reviewed product candidates
-- One deliberately small Card and Printing foundation dataset is populated;
+- An initial fixed increment of ten reviewed Cards and their Printings, in
+  addition to the foundation pair, is populated from an official source;
   slots, sheets, collation, probabilities, simulations, and market data remain unpopulated
 
 ## Completed Work
@@ -45,6 +46,8 @@
   identity-path, source-reference, and Printing-to-Card validation
 - Generic controlled candidate review and canonical promotion enabled for Card
   and Printing while retaining the existing Product workflow
+- Fixed, source-attributed ten-Card and ten-Printing candidate population,
+  canonical promotion, and immutable promotion audit history
 
 ## Remaining Work
 - Broader reviewed Card and Printing candidate acquisition and population,

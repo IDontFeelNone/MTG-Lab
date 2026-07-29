@@ -1,0 +1,24 @@
+{
+  "schema_version": "v1",
+  "id": "gatherer-limited-edition-alpha-phase-58",
+  "title": "Gatherer — Limited Edition Alpha fixed Phase 58 record set",
+  "source_classification": "official",
+  "provider": "Wizards of the Coast",
+  "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+  "access_date": "2026-07-29",
+  "verification_status": "supported",
+  "claims": [
+    "Ancestral Recall has a Limited Edition Alpha English printing with collector number 47 and rarity rare.",
+    "Time Walk has a Limited Edition Alpha English printing with collector number 83 and rarity rare.",
+    "Timetwister has a Limited Edition Alpha English printing with collector number 85 and rarity rare.",
+    "Black Lotus has a Limited Edition Alpha English printing with collector number 232 and rarity rare.",
+    "Mox Emerald has a Limited Edition Alpha English printing with collector number 262 and rarity rare.",
+    "Mox Jet has a Limited Edition Alpha English printing with collector number 263 and rarity rare.",
+    "Mox Pearl has a Limited Edition Alpha English printing with collector number 264 and rarity rare.",
+    "Mox Ruby has a Limited Edition Alpha English printing with collector number 265 and rarity rare.",
+    "Mox Sapphire has a Limited Edition Alpha English printing with collector number 266 and rarity rare.",
+    "Sol Ring has a Limited Edition Alpha English printing with collector number 270 and rarity uncommon."
+  ],
+  "notes": "Phase 58 is intentionally bounded to these ten records and does not claim a complete set or Mystery Booster 2 card list.",
+  "record_version": "1"
+}

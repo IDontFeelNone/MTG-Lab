@@ -1,0 +1,18 @@
+{
+  "game": "magic",
+  "id": "magic.time-walk",
+  "name": "Time Walk",
+  "provenance": [
+    {
+      "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+      "field_paths": [
+        "game",
+        "id",
+        "name"
+      ],
+      "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+      "source_id": "gatherer-limited-edition-alpha-phase-58"
+    }
+  ],
+  "schema_version": "v1"
+}

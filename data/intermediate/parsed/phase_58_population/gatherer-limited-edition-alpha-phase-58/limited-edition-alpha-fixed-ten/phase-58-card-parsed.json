@@ -1,0 +1,339 @@
+{
+  "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+  "artifact_version": "1",
+  "errors": [],
+  "id": "phase-58-card-parsed",
+  "input_content_type": "application/json",
+  "parse_status": "succeeded",
+  "parsed_at": "2026-07-29T14:00:00Z",
+  "parser_id": "phase-58-controlled-extraction",
+  "parser_version": "1",
+  "product_id": "phase_58_population",
+  "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+  "record_count": 10,
+  "records": [
+    {
+      "errors": [],
+      "id": "card-ancestral-recall-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.ancestral-recall",
+        "name": "Ancestral Recall",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "47",
+        "language": "en",
+        "name": "Ancestral Recall",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "card-time-walk-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.time-walk",
+        "name": "Time Walk",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "83",
+        "language": "en",
+        "name": "Time Walk",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "card-timetwister-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.timetwister",
+        "name": "Timetwister",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "85",
+        "language": "en",
+        "name": "Timetwister",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "card-black-lotus-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.black-lotus",
+        "name": "Black Lotus",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "232",
+        "language": "en",
+        "name": "Black Lotus",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "card-mox-emerald-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.mox-emerald",
+        "name": "Mox Emerald",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "262",
+        "language": "en",
+        "name": "Mox Emerald",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "card-mox-jet-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.mox-jet",
+        "name": "Mox Jet",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "263",
+        "language": "en",
+        "name": "Mox Jet",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "card-mox-pearl-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.mox-pearl",
+        "name": "Mox Pearl",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "264",
+        "language": "en",
+        "name": "Mox Pearl",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "card-mox-ruby-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.mox-ruby",
+        "name": "Mox Ruby",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "265",
+        "language": "en",
+        "name": "Mox Ruby",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "card-mox-sapphire-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.mox-sapphire",
+        "name": "Mox Sapphire",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "266",
+        "language": "en",
+        "name": "Mox Sapphire",
+        "rarity": "rare",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    },
+    {
+      "errors": [],
+      "id": "card-sol-ring-record",
+      "raw_fields": {
+        "game": "magic",
+        "id": "magic.sol-ring",
+        "name": "Sol Ring",
+        "provenance": [
+          {
+            "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+            "field_paths": [
+              "game",
+              "id",
+              "name"
+            ],
+            "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+            "source_id": "gatherer-limited-edition-alpha-phase-58"
+          }
+        ],
+        "schema_version": "v1"
+      },
+      "record_type": "card",
+      "source_excerpt": {
+        "collector_number": "270",
+        "language": "en",
+        "name": "Sol Ring",
+        "rarity": "uncommon",
+        "set_code": "LEA"
+      },
+      "source_location": "https://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Limited%20Edition%20Alpha%22]",
+      "warnings": []
+    }
+  ],
+  "schema_version": "v1",
+  "source_id": "gatherer-limited-edition-alpha-phase-58",
+  "warnings": []
+}

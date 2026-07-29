@@ -1,0 +1,129 @@
+{
+  "action": "promotion",
+  "actor": "maintainer",
+  "candidate_artifact_id": "phase-58-card-candidates",
+  "candidate_id": "card-mox-sapphire-candidate",
+  "candidate_snapshot": {
+    "confidence": 1.0,
+    "entity_type": "card",
+    "errors": [],
+    "field_provenance": [
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "schema_version",
+        "parsed_artifact_id": "phase-58-card-parsed",
+        "parsed_record_id": "card-mox-sapphire-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "schema_version"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "id",
+        "parsed_artifact_id": "phase-58-card-parsed",
+        "parsed_record_id": "card-mox-sapphire-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "id"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "game",
+        "parsed_artifact_id": "phase-58-card-parsed",
+        "parsed_record_id": "card-mox-sapphire-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "game"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "name",
+        "parsed_artifact_id": "phase-58-card-parsed",
+        "parsed_record_id": "card-mox-sapphire-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "name"
+      },
+      {
+        "acquisition_target_id": "limited-edition-alpha-fixed-ten",
+        "confidence": 1.0,
+        "field_path": "provenance",
+        "parsed_artifact_id": "phase-58-card-parsed",
+        "parsed_record_id": "card-mox-sapphire-record",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "d5ff1d9a6dba13818fa17b94c8a477666aa7b576d99cb22897017a3b55371996",
+        "source_id": "gatherer-limited-edition-alpha-phase-58",
+        "transformation_id": "phase-58-controlled-normalization",
+        "transformation_version": "1",
+        "value_origin": "provenance"
+      }
+    ],
+    "id": "card-mox-sapphire-candidate",
+    "parsed_record_ids": [
+      "card-mox-sapphire-record"
+    ],
+    "payload": {
+      "game": "magic",
+      "id": "magic.mox-sapphire",
+      "name": "Mox Sapphire",
+      "provenance": [
+        {
+          "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+          "field_paths": [
+            "game",
+            "id",
+            "name"
+          ],
+          "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+          "source_id": "gatherer-limited-edition-alpha-phase-58"
+        }
+      ],
+      "schema_version": "v1"
+    },
+    "validation_state": "valid",
+    "warnings": []
+  },
+  "canonical_after": {
+    "game": "magic",
+    "id": "magic.mox-sapphire",
+    "name": "Mox Sapphire",
+    "provenance": [
+      {
+        "claim": "Official Gatherer evidence establishes the Magic card identity and name.",
+        "field_paths": [
+          "game",
+          "id",
+          "name"
+        ],
+        "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name.",
+        "source_id": "gatherer-limited-edition-alpha-phase-58"
+      }
+    ],
+    "schema_version": "v1"
+  },
+  "canonical_before": null,
+  "decided_at": "2026-07-29T14:00:00Z",
+  "decision": "approved",
+  "entity_id": "magic.mox-sapphire",
+  "entity_type": "card",
+  "id": "card-promotion-edf5a2ba40be450822a692bd",
+  "outcome": "promoted",
+  "reason": "Approved bounded Phase 58 population from official Wizards of the Coast evidence.",
+  "schema_version": "v1"
+}

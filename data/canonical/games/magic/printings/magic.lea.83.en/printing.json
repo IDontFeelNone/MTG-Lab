@@ -1,0 +1,23 @@
+{
+  "card_id": "magic.time-walk",
+  "collector_number": "83",
+  "id": "magic.lea.83.en",
+  "language": "en",
+  "provenance": [
+    {
+      "claim": "Official Gatherer evidence establishes the printing identity, set, collector number, rarity, language, and related Card.",
+      "field_paths": [
+        "card_id",
+        "collector_number",
+        "id",
+        "language",
+        "rarity",
+        "set_code"
+      ],
+      "source_id": "gatherer-limited-edition-alpha-phase-58"
+    }
+  ],
+  "rarity": "rare",
+  "schema_version": "v1",
+  "set_code": "LEA"
+}
