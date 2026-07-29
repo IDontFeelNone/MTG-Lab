@@ -21,6 +21,7 @@
 - Repository
 - Schemas
 - Validation
+- Ingestion — generic, evidence-preserving acquisition-to-parse foundation
 - Mystery Booster 2 dataset
 - Probability engine
 - Simulation
@@ -34,6 +35,8 @@ Primary dataset: Mystery Booster 2
 - Foundation established
 - Canonical product foundation recorded at `data/canonical/games/magic/products/mystery_booster_2/`
 - Product record schema-validated and loadable through the repository layer
+- Source registry and acquisition manifest are schema-validated and cross-reference checked
+- Raw evidence ingestion foundation preserves acquired bytes outside canonical data and returns parsed intermediate artifacts only
 - Card list, slot definitions, print sheets, collation, and probabilities intentionally unpopulated
 
 ## Completed Work
@@ -44,13 +47,16 @@ Primary dataset: Mystery Booster 2
 - Development workflow established
 - Versioned canonical schemas and validation infrastructure
 - Mystery Booster 2 canonical product foundation
+- Source registry and acquisition manifest foundation
+- Evidence-preserving ingestion pipeline foundation
 
 ## Remaining Work
+- Acquired source evidence and product-specific parsers
+- Candidate normalization and canonical-data validation integration
 - Complete card repository
 - Slot definitions
 - Print sheets
 - Probability engine
-- Validation
 - Monte Carlo simulation
 - Analytics
 - Market intelligence
