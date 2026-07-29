@@ -83,6 +83,10 @@ Every contributor should:
 - Record significant reusable architectural, implementation, testing, or debugging insights in `docs/LESSONS_LEARNED.md`; do not use it for routine fixes or release notes.
 - Keep engineering knowledge in `docs/LESSONS_LEARNED.md` and domain research in the Research Log defined by `docs/RESEARCH_LOG_ARCHITECTURE.md`; do not mix their purposes.
 - Avoid unrelated refactoring, formatting, or dependency changes.
+- Before implementing a milestone that introduces a new subsystem, verify that
+  a corresponding approved Tier 0 architecture document exists. If none
+  exists, stop and recommend an architecture/documentation milestone before
+  implementation.
 
 ## Documentation Responsibilities
 

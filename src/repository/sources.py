@@ -10,7 +10,10 @@ def _path(game,product_id,name,root):
  if not all(_ID.fullmatch(x) for x in (game,product_id,name)): raise ValueError("identifiers must be stable lowercase identifiers")
  return (Path(root) if root else _ROOT)/game/"products"/product_id/"sources"/f"{name}.json"
 def load_source_record(game,product_id,source_id,*,games_root=None):
- p=_path(game,product_id,source_id,games_root)
+ root=Path(games_root) if games_root else _ROOT
+ product_path=_path(game,product_id,source_id,root)
+ global_path=root/game/"sources"/f"{source_id}.json"
+ p=product_path if product_path.exists() else global_path
  try: d=json.loads(p.read_text(encoding="utf-8"))
  except FileNotFoundError as e: raise SourceLoadError(f"Source record not found: {p}") from e
  except json.JSONDecodeError as e: raise SourceLoadError(f"Malformed source record: {p}") from e

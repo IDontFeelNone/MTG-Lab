@@ -20,7 +20,7 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Current Status
 
-**Current Phase:** Phase 60 ✅ Complete
+**Current Phase:** Phase 61 ✅ Complete
 
 **Next Phase:** Awaiting approval
 
@@ -62,6 +62,22 @@ Current focus is establishing the canonical architecture and reference implement
 ---
 
 # Most Recently Completed Milestone
+
+## Phase 61 — Mystery Booster 2 Card and Printing Population, Wave 1
+
+### Objective
+Validate the complete deterministic ingestion and controlled-promotion workflow
+on up to five evidence-supported Mystery Booster 2 Card and Printing pairs.
+
+### Success Criteria
+- [x] Three pairs were supported and promoted in dependency order.
+- [x] Multiple sources retain field-level attribution.
+- [x] Retained artifacts reproduce deterministically and six audits are immutable.
+- [x] No Print Sheet, Slot, probability, or simulation work was introduced.
+
+---
+
+# Previously Completed Milestone
 
 ## Phase 60 — Canonical Print Sheet and Slot Repository Foundation
 
@@ -153,9 +169,8 @@ identity relationship.
 
 # Upcoming Phases
 
-No implementation phase is currently approved. A bounded Print Sheet and Slot
-milestone may be proposed only after review of the Phase 59 architecture
-migration.
+No implementation phase is currently approved. Wave 2 or any Print Sheet and
+Slot milestone requires separate review and explicit approval.
 
 ---
 

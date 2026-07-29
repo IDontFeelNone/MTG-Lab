@@ -103,7 +103,8 @@ referential boundaries while shared approval, conflict, audit, and rollback
 behavior remains reusable for future canonical entity types.
 
 The canonical repository also contains a deliberately small Card and Printing
-foundation dataset. Game-scoped loaders validate schemas, stable identity paths,
+foundation dataset, now including a three-pair Mystery Booster 2 Wave 1 increment
+produced by a deterministic, bounded, multi-source ingestion workflow. Game-scoped loaders validate schemas, stable identity paths,
 source-backed field provenance, and every Printing-to-Card reference before
 producing deterministic repository snapshots. Identifier and layout rules are
 documented in the [Card and Printing Repository](docs/CARD_PRINTING_REPOSITORY.md).

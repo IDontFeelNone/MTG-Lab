@@ -42,6 +42,10 @@ htmlcov/
 # Data generated locally; retain directory placeholders
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/magic/
+!data/raw/magic/mystery_booster_2/
+!data/raw/magic/mystery_booster_2/wave_1/
+!data/raw/magic/mystery_booster_2/wave_1/card-printing-evidence.json
 data/processed/*
 !data/processed/.gitkeep
 data/intermediate/*

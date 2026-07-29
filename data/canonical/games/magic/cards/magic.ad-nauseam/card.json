@@ -1,0 +1,18 @@
+{
+  "game": "magic",
+  "id": "magic.ad-nauseam",
+  "name": "Ad Nauseam",
+  "provenance": [
+    {
+      "claim": "The cited card database establishes the Magic card identity and name.",
+      "field_paths": [
+        "id",
+        "game",
+        "name"
+      ],
+      "notes": "The MTG Lab ID is deterministically derived from game and normalized name.",
+      "source_id": "gatherer-magic-card-identities-wave-1"
+    }
+  ],
+  "schema_version": "v1"
+}

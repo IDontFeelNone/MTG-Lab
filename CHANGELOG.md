@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Deterministic multi-source Mystery Booster 2 Card and Printing ingestion,
+  demonstrated by three evidence-supported pairs promoted in dependency order
+  with retained raw, parsed, candidate, canonical, and immutable audit records.
 - Canonical Print Sheet and Slot repository foundation with minimally aligned
   provenance and game-scoped contracts, stable paths, deterministic snapshots,
   complete dependency validation, controlled promotion, immutable audits, and

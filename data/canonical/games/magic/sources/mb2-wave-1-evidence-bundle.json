@@ -1,0 +1,16 @@
+{
+  "schema_version": "v1",
+  "id": "mb2-wave-1-evidence-bundle",
+  "title": "Mystery Booster 2 Card and Printing Wave 1 evidence bundle",
+  "source_classification": "internal",
+  "provider": "MTG Lab",
+  "source_location": "data/raw/magic/mystery_booster_2/wave_1/card-printing-evidence.json",
+  "access_date": "2026-07-29",
+  "verification_status": "confirmed",
+  "claims": [
+    "Controlled aggregation of separately attributed source fields for deterministic ingestion."
+  ],
+  "record_version": "1",
+  "content_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+  "archival_location": "data/raw/magic/mystery_booster_2/wave_1/card-printing-evidence.json"
+}

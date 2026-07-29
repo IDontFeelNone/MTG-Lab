@@ -1,0 +1,129 @@
+{
+  "action": "promotion",
+  "actor": "maintainer",
+  "candidate_artifact_id": "mb2-wave-1-card-printings-card-candidates-555ad2bc6b8755e0",
+  "candidate_id": "magic.ad-nauseam-candidate",
+  "candidate_snapshot": {
+    "confidence": 1.0,
+    "entity_type": "card",
+    "errors": [],
+    "field_provenance": [
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "schema_version",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-03",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "gatherer-magic-card-identities-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "schema_version"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "id",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-03",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "gatherer-magic-card-identities-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "id"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "game",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-03",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "gatherer-magic-card-identities-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "game"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "name",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-03",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "gatherer-magic-card-identities-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "name"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "provenance",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-03",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "gatherer-magic-card-identities-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "provenance"
+      }
+    ],
+    "id": "magic.ad-nauseam-candidate",
+    "parsed_record_ids": [
+      "mb2-wave-1-card-printings-record-03"
+    ],
+    "payload": {
+      "game": "magic",
+      "id": "magic.ad-nauseam",
+      "name": "Ad Nauseam",
+      "provenance": [
+        {
+          "claim": "The cited card database establishes the Magic card identity and name.",
+          "field_paths": [
+            "id",
+            "game",
+            "name"
+          ],
+          "notes": "The MTG Lab ID is deterministically derived from game and normalized name.",
+          "source_id": "gatherer-magic-card-identities-wave-1"
+        }
+      ],
+      "schema_version": "v1"
+    },
+    "validation_state": "valid",
+    "warnings": []
+  },
+  "canonical_after": {
+    "game": "magic",
+    "id": "magic.ad-nauseam",
+    "name": "Ad Nauseam",
+    "provenance": [
+      {
+        "claim": "The cited card database establishes the Magic card identity and name.",
+        "field_paths": [
+          "id",
+          "game",
+          "name"
+        ],
+        "notes": "The MTG Lab ID is deterministically derived from game and normalized name.",
+        "source_id": "gatherer-magic-card-identities-wave-1"
+      }
+    ],
+    "schema_version": "v1"
+  },
+  "canonical_before": null,
+  "decided_at": "2026-07-29T23:45:00Z",
+  "decision": "approved",
+  "entity_id": "magic.ad-nauseam",
+  "entity_type": "card",
+  "id": "card-promotion-1dde8c5ddfaa03ceac14c16b",
+  "outcome": "promoted",
+  "reason": "Approved bounded Mystery Booster 2 Wave 1 evidence-backed population.",
+  "schema_version": "v1"
+}
