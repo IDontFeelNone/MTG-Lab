@@ -20,7 +20,9 @@ It is read together with:
 - [`DECISIONS.md`](DECISIONS.md), especially the accepted data-driven,
   repository-authority, validation, and canonical-pipeline decisions; and
 - [`DATA_REPOSITORY.md`](DATA_REPOSITORY.md), which defines the raw, processed,
-  canonical, validation, and derived-data layers.
+  canonical, validation, and derived-data layers; and
+- [`RULES_ENGINE.md`](RULES_ENGINE.md), which records the approved boundary for
+  interpreting structured product rules.
 
 This migration reconciles the approved model with repository terminology. It
 does not expand the model, populate entities, or authorize persistence work.

@@ -1,45 +1,39 @@
 # Next Task
 
-## Phase 58 — Initial Card and Printing Candidate Population
+## Phase 59 — Rules Engine Architecture Migration
 
 **Status:** Complete
 
 ## Objective
 
-Populate one small, fixed set of representative Card and Printing candidates
-from official Wizards of the Coast card data and promote them through the Phase
-57 controlled-review workflow.
+Migrate the already approved Rules Engine architecture into the repository as a
+Tier 0 document and make only the minimal Tier 0 Data Repository updates needed
+to place Print Sheets and Slots within the existing data lifecycle.
 
 ## Delivered Scope
 
-- Ten Limited Edition Alpha Card candidates and their ten associated Printing
-  candidates are retained as non-canonical intermediate artifacts.
-- An official Gatherer source record attributes every candidate and promoted
-  canonical field.
-- Explicit maintainer approval promoted Cards before Printings and produced
-  twenty immutable audit events.
-- The complete canonical repository remains structurally, referentially, and
-  deterministically valid.
+- `docs/RULES_ENGINE.md` now records the approved data-driven, generic,
+  validation-gated, evidence-backed, and reproducible Rules Engine boundaries.
+- `docs/DATA_REPOSITORY.md` now explicitly places Print Sheet and Slot
+  candidates, canonical definitions, validation, and derived output within the
+  existing repository layers.
+- Project state documents record the completed migration and leave the next
+  implementation milestone unapproved.
 
 ## Constraints Honored
 
-- The increment is fixed at ten pairs and is not a complete Mystery Booster 2
-  or Limited Edition Alpha dataset.
-- No automated approval, persistence, slots, sheets, collation, probability,
-  simulation, analytics, market, API, or AI behavior was introduced.
-- No Tier 0 architectural document was modified.
+- The migration faithfully records existing approved architecture and does not
+  redesign the Rules Engine.
+- No schema, canonical data, source evidence, or application code was changed.
+- No Print Sheet, Slot, collation, probability, simulation, persistence,
+  analytics, market, API, or AI implementation was approved or introduced.
 
 ## Validation
 
 - `PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v`
-- Candidate, parsed artifact, canonical entity, source, and promotion-audit
-  schema validation.
-- Printing-to-Card referential validation and deterministic repository output.
 - `git diff --check`
 
-## Recommended Next Milestone
+## Next Milestone
 
-Phase 59 — define a small slot, print-sheet, and collation foundation. Before
-implementation, identify and approve the governing Tier 0 specifications and
-the exact source-backed product scope. Phase 58 does not approve or begin that
-work.
+Awaiting review and explicit approval. This migration does not propose or
+approve a Print Sheet or Slot implementation milestone.
