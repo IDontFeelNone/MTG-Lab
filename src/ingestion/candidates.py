@@ -1,5 +1,6 @@
 """Immutable models for parsed and normalized intermediate artifacts."""
 from __future__ import annotations
+from copy import deepcopy
 from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import Any, Mapping
@@ -14,8 +15,8 @@ class ParsedRecord:
     id:str; record_type:str; raw_fields:Mapping[str,Any]; source_location:str|int|None=None
     source_excerpt:Mapping[str,Any]|None=None; errors:tuple[str,...]=(); warnings:tuple[str,...]=()
     def to_dict(self)->dict[str,Any]:
-        return {"id":self.id,"record_type":self.record_type,"raw_fields":dict(self.raw_fields),
-                "source_location":self.source_location,"source_excerpt":self.source_excerpt,
+        return {"id":self.id,"record_type":self.record_type,"raw_fields":deepcopy(self.raw_fields),
+                "source_location":self.source_location,"source_excerpt":deepcopy(self.source_excerpt),
                 "errors":list(self.errors),"warnings":list(self.warnings)}
 
 @dataclass(frozen=True,slots=True)
@@ -52,7 +53,7 @@ class NormalizedCandidate:
     validation_state:CandidateValidationState=CandidateValidationState.UNVALIDATED
     errors:tuple[str,...]=(); warnings:tuple[str,...]=()
     def to_dict(self)->dict[str,Any]:
-        return {"id":self.id,"entity_type":self.entity_type,"payload":dict(self.payload),
+        return {"id":self.id,"entity_type":self.entity_type,"payload":deepcopy(self.payload),
                 "parsed_record_ids":list(self.parsed_record_ids),
                 "field_provenance":[provenance.to_dict() for provenance in self.field_provenance],
                 "confidence":self.confidence,"validation_state":self.validation_state.value,
