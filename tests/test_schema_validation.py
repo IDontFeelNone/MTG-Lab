@@ -32,10 +32,13 @@ class SchemaValidationTests(unittest.TestCase):
                 {
                     "schema_version": "v1",
                     "id": "rare",
+                    "game": "magic",
                     "name": "Rare",
                     "print_sheet_id": "rare-sheet",
                     "draw_count": 0,
                     "replacement": True,
+                    "provenance": [{"source_id": "fixture", "field_paths": ["id"],
+                                    "claim": "Fixture"}],
                 },
                 "slot",
             )

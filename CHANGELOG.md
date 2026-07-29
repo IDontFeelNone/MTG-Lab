@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Canonical Print Sheet and Slot repository foundation with minimally aligned
+  provenance and game-scoped contracts, stable paths, deterministic snapshots,
+  complete dependency validation, controlled promotion, immutable audits, and
+  dependency-safe rollback verified only with temporary synthetic fixtures.
 - Approved Tier 0 Rules Engine Specification and the minimal canonical
   repository-layer boundaries needed to support future Print Sheet and Slot
   records without introducing implementation behavior.

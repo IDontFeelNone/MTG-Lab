@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 59 — Rules Engine architecture migration complete
+- Current implementation phase: Phase 60 — Print Sheet and Slot repository foundation complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -19,8 +19,9 @@
   deterministic stable identifiers and output, source-backed field provenance,
   and game-scoped Printing-to-Card referential validation
 - Repository includes an entity-agnostic candidate-review and canonical-promotion
-  framework enabled for Card and Printing, with explicit decisions, immutable
-  audits, idempotency, conflict protection, and referentially safe rollback
+  framework enabled for Card, Printing, Print Sheet, and Slot, with explicit
+  decisions, immutable audits, idempotency, conflict protection, and
+  referentially safe rollback
 - Research Log is defined as a Tier 0 architectural subsystem; implementation remains future work
 - Probability, simulation, analytics, and market intelligence remain future work
 
@@ -50,11 +51,13 @@
   canonical promotion, and immutable promotion audit history
 - Approved Rules Engine architecture migrated to `docs/RULES_ENGINE.md`, with
   the Tier 0 repository-layer boundaries for Print Sheets and Slots recorded
+- Canonical Print Sheet and Slot contracts, loaders, deterministic snapshots,
+  dependency validation, controlled promotion, and dependency-safe rollback
 
 ## Remaining Work
 - Broader reviewed Card and Printing candidate acquisition and population,
   canonical promotion definitions for other entity types, and any automated approval workflow
-- Complete card repository, slots, print sheets, probability, simulation,
+- Complete card repository, populated slots and print sheets, probability, simulation,
   analytics, and market intelligence
 
 ## Documentation Migration Backlog
