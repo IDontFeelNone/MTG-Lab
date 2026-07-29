@@ -1,0 +1,29 @@
+{
+  "schema_version": "v1",
+  "id": "mystery_booster_2",
+  "game": "magic",
+  "name": "Mystery Booster 2",
+  "product_type": "sealed_product",
+  "slot_ids": [],
+  "metadata": {
+    "record_version": "1",
+    "status": "foundation",
+    "provenance": {
+      "confirmed_official_facts": [
+        {
+          "claim": "Mystery Booster 2 is a Magic: The Gathering product.",
+          "source_type": "official_wizards",
+          "source_url": "https://magic.wizards.com/en/products/mystery-booster"
+        }
+      ],
+      "community_supported_research": [],
+      "unverified_or_future_inference": [
+        {
+          "scope": "card list, print sheets, slot definitions, collation, and probabilities",
+          "status": "not recorded",
+          "reason": "These require validated source evidence and are intentionally outside the foundation record."
+        }
+      ]
+    }
+  }
+}
