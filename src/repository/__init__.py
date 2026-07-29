@@ -10,11 +10,23 @@ from .cards import (
     printing_record_path,
 )
 from .products import ProductLoadError, load_product, product_record_path
+from .promotion import (
+    CandidatePromotionService,
+    CandidateReview,
+    PromotionConflict,
+    PromotionValidationError,
+    ReviewDecision,
+)
 from .sources import SourceLoadError, load_acquisition_manifest, load_source_record
 
 __all__ = [
     "CardRepositoryError",
+    "CandidatePromotionService",
+    "CandidateReview",
     "ProductLoadError",
+    "PromotionConflict",
+    "PromotionValidationError",
+    "ReviewDecision",
     "SourceLoadError",
     "canonical_repository_bytes",
     "card_record_path",
