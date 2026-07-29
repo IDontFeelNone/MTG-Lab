@@ -18,7 +18,7 @@ v12
 
 ## Current Phase
 
-Phase 54 — Controlled Canonical Promotion complete; awaiting approval for the next milestone
+Phase 55 — Data Model migration complete; awaiting approval for the next milestone
 
 ## Last Merged PR
 
@@ -39,6 +39,7 @@ PR #1 — candidate artifact JSON serialization and mutable-aliasing fixes.
 
 ## Completed Milestones
 
+- Approved Tier 0 Data Model Specification migrated to `docs/DATA_MODEL.md`.
 - Repository, architecture, and documentation foundation.
 - Versioned schemas and schema-validation infrastructure.
 - Mystery Booster 2 product, source, and acquisition foundations.
