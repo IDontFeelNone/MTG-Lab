@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.dev/schemas/v1/slot.schema.json",
+  "title": "MTG Lab Slot",
+  "description": "A product slot that draws one or more entries from a print sheet.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "print_sheet_id",
+    "draw_count",
+    "replacement"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "v1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "print_sheet_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "draw_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "replacement": {
+      "type": "boolean"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}
