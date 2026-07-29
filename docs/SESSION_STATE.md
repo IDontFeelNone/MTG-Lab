@@ -18,8 +18,8 @@ v12
 
 ## Current Phase
 
-Phase 58 — Initial Card and Printing Candidate Population complete; awaiting approval
-for the next milestone
+Phase 59 — Rules Engine architecture migration complete; awaiting review and
+approval for the next milestone
 
 ## Last Merged PR
 
@@ -66,10 +66,15 @@ PR #1 — candidate artifact JSON serialization and mutable-aliasing fixes.
 - A fixed increment of ten Limited Edition Alpha Cards and their ten Printings
   was preserved as candidates, explicitly approved, promoted in dependency
   order, and recorded in immutable audits from an official Gatherer source.
+- Approved Rules Engine architecture is now canonical at
+  `docs/RULES_ENGINE.md`; the Tier 0 data-repository layers now explicitly place
+  Print Sheet and Slot candidates, canonical records, validation, and derived
+  output within the existing repository lifecycle.
 
 ## Current Focus
 
-Awaiting approval for the next focused implementation milestone.
+Awaiting review of the architecture migration. No Print Sheet or Slot
+implementation milestone is approved.
 
 ## Open Risks
 
@@ -88,8 +93,10 @@ Awaiting approval for the next focused implementation milestone.
 
 ## Upcoming Milestones
 
-1. Define a Tier 0-compliant slot, print-sheet, and collation milestone.
-2. Probability, simulation, analytics, and market-intelligence layers.
+1. Review the Phase 59 Rules Engine architecture migration.
+2. After approval, define a bounded Print Sheet and Slot implementation
+   milestone.
+3. Probability, simulation, analytics, and market-intelligence layers.
 
 ## Next Session Checklist
 

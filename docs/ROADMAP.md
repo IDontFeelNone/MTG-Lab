@@ -20,7 +20,7 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Current Status
 
-**Current Phase:** Phase 58 ✅ Complete
+**Current Phase:** Phase 59 ✅ Complete
 
 **Next Phase:** Awaiting approval
 
@@ -63,6 +63,22 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Most Recently Completed Milestone
 
+## Phase 59 — Rules Engine Architecture Migration
+
+### Objective
+Migrate the approved Rules Engine architecture into the Tier 0 repository
+documentation without redesigning it or introducing implementation behavior.
+
+### Success Criteria
+- [x] The approved Rules Engine architecture is canonical in the repository.
+- [x] Tier 0 data-repository layers explicitly support Print Sheets and Slots.
+- [x] No schema, canonical data, or application behavior changed.
+- [x] Print Sheet and Slot implementation remains unapproved pending review.
+
+---
+
+# Previously Completed Milestone
+
 ## Phase 58 — Initial Card and Printing Candidate Population
 
 ### Objective
@@ -76,7 +92,7 @@ Populate a fixed, official-source-backed increment through controlled promotion.
 
 ---
 
-# Previously Completed Milestone
+# Earlier Milestones
 
 ## Phase 57 — Card and Printing Candidate Ingestion and Controlled Promotion
 
@@ -121,10 +137,9 @@ identity relationship.
 
 # Upcoming Phases
 
-## Proposed Phase 59
-
-Define a small slot, print-sheet, and collation foundation, subject to Tier 0
-architectural readiness review and explicit milestone approval.
+No implementation phase is currently approved. A bounded Print Sheet and Slot
+milestone may be proposed only after review of the Phase 59 architecture
+migration.
 
 ---
 

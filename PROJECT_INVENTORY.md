@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 58 — Initial Card and Printing Candidate Population complete
+- Current implementation phase: Phase 59 — Rules Engine architecture migration complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -48,6 +48,8 @@
   and Printing while retaining the existing Product workflow
 - Fixed, source-attributed ten-Card and ten-Printing candidate population,
   canonical promotion, and immutable promotion audit history
+- Approved Rules Engine architecture migrated to `docs/RULES_ENGINE.md`, with
+  the Tier 0 repository-layer boundaries for Print Sheets and Slots recorded
 
 ## Remaining Work
 - Broader reviewed Card and Printing candidate acquisition and population,
@@ -66,8 +68,8 @@ until their subsystem implementation unless separately approved.
 | Specification | Status | Repository basis |
 | --- | --- | --- |
 | `DATA_MODEL.md` | Canonical | Approved Tier 0 specification at `docs/DATA_MODEL.md`. |
-| `DATA_REPOSITORY.md` | Partial | Tier and layer outline exists but states that expansion is pending. |
-| `RULES_ENGINE.md` | Missing | No repository specification exists. |
+| `DATA_REPOSITORY.md` | Partial | Tier and layer definitions cover Print Sheet and Slot lifecycle boundaries; further subsystem-driven expansion remains pending. |
+| `RULES_ENGINE.md` | Canonical | Approved Tier 0 specification at `docs/RULES_ENGINE.md`. |
 
 ### Tier 1 / Subsystem Specifications
 
@@ -92,6 +94,7 @@ Repository-driven session management is defined by:
 - `docs/DEVELOPMENT_PLAYBOOK.md` — reusable implementation patterns and engineering procedures
 - `docs/LESSONS_LEARNED.md` — reusable engineering knowledge and historical implementation insight
 - `docs/RESEARCH_LOG_ARCHITECTURE.md` — Tier 0 architecture for versioned, evidence-grounded domain research
+- `docs/RULES_ENGINE.md` — Tier 0 architecture for data-driven product-rule interpretation
 - `docs/CODEX_WORKFLOW.md` — the standard operating procedure for Codex sessions
 
 At session startup, read those documents together with `PROJECT_INVENTORY.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, and `CHANGELOG.md`. `AI_CONTRIBUTING.md` governs collaboration and document priority, `DEVELOPMENT_PLAYBOOK.md` supplies repeatable procedures, and `LESSONS_LEARNED.md` preserves reusable engineering insight. `HANDOFF.md` supplies only the immediate transition; ongoing status belongs in `SESSION_STATE.md`, approved work in `NEXT_TASK.md`, and history in `CHANGELOG.md`. Continue only from the repository-defined next task; do not rely on previous chat history.

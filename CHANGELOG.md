@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Approved Tier 0 Rules Engine Specification and the minimal canonical
+  repository-layer boundaries needed to support future Print Sheet and Slot
+  records without introducing implementation behavior.
 - Approved Tier 0 Data Model Specification as the canonical architectural
   contract for entity identities, relationships, provenance, and validation.
 - Initial repository foundation for Mystery Booster 2 analysis.
