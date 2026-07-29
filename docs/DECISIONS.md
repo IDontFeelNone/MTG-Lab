@@ -241,6 +241,20 @@ Mystery Booster 2 is complex enough to rigorously test the architecture while pr
 
 ---
 
+## Decision 013 — Research Log Is a Tier 0 Subsystem
+
+**Status:** Accepted
+
+MTG Lab treats the Research Log as a first-class architectural subsystem and scientific notebook for versioned domain research. It preserves questions, hypotheses, methods, experiments, datasets, simulations, observations, conclusions, findings, citations, and evidence without replacing the responsibilities of ingestion, validation, simulation, analytics, persistence, or AI reasoning.
+
+The authoritative subsystem specification is `docs/RESEARCH_LOG_ARCHITECTURE.md`. Its architecture is approved; implementation, schemas, migrations, and persistence models remain future work requiring separately approved milestones.
+
+### Reasoning
+
+Domain conclusions must remain reproducible, searchable, explainable, and traceable to preserved evidence across contributors and tools. Giving research knowledge an explicit lifecycle prevents it from being lost in conversations, flattened into unversioned database state, or mixed with engineering lessons about building the platform.
+
+---
+
 ## Future Decisions
 
 Future architectural decisions will be added as MTG Lab evolves.

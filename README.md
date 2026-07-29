@@ -73,6 +73,8 @@ Applications & User Interfaces
 
 Each layer has a distinct responsibility.
 
+The Tier 0 [Research Log architecture](docs/RESEARCH_LOG_ARCHITECTURE.md) defines MTG Lab's scientific notebook and institutional memory, preserving versioned hypotheses, experiments, observations, conclusions, and evidence across these layers.
+
 ## Repository / Database
 
 The canonical source of structured information including:
@@ -141,6 +143,14 @@ Development follows a documentation-first approach:
 - Assumptions are documented.
 - Milestones are implemented incrementally.
 - Documentation and implementation remain synchronized.
+
+---
+
+# Development Workflow
+
+Development sessions are repository-driven. Before making changes, contributors and Codex read the project inventory, current session state, approved next task, architecture, decisions, roadmap, and changelog. Work proceeds one small milestone at a time, with complete tests and synchronized documentation, and stops when the milestone's pull request is ready for review.
+
+See the authoritative [`docs/AI_CONTRIBUTING.md`](docs/AI_CONTRIBUTING.md) guide, reusable [`docs/DEVELOPMENT_PLAYBOOK.md`](docs/DEVELOPMENT_PLAYBOOK.md), engineering context in [`docs/LESSONS_LEARNED.md`](docs/LESSONS_LEARNED.md), required [`docs/CODEX_WORKFLOW.md`](docs/CODEX_WORKFLOW.md), [`docs/HANDOFF.md`](docs/HANDOFF.md), [`docs/SESSION_STATE.md`](docs/SESSION_STATE.md), and [`docs/NEXT_TASK.md`](docs/NEXT_TASK.md). `HANDOFF.md` provides the concise transfer note from the most recent session. The repository—not previous chat history—is the source of truth.
 
 ---
 

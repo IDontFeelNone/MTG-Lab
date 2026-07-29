@@ -48,6 +48,7 @@ Current focus is establishing the canonical architecture and reference implement
 - Project Inventory
 - Roadmap
 - Architectural standards
+- Tier 0 Research Log architecture (design approved; implementation pending)
 
 ## Portfolio Intelligence
 - Portfolio planning
@@ -84,6 +85,8 @@ Describe the primary goal.
 ---
 
 # Upcoming Phases
+
+Research Log implementation remains unscheduled. Its schemas, persistence, search, and application services require a separately approved milestone and must not be inferred from the architectural specification alone.
 
 ## Phase 54
 Objective

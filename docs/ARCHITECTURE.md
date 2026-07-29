@@ -38,6 +38,8 @@ Major modules include:
 - Analytics Engine
 - Collection Manager
 - Market Intelligence
+- Research Log
+- AI Advisor
 - API
 - Web Interface
 
@@ -93,12 +95,16 @@ The goal is to ensure statistical analyses are built on verified data.
         │                 │
         └────────┬────────┘
                  ▼
+            Research Log
+                 ▼
           Database Layer
                  │
       ┌──────────┴──────────┐
       ▼                     ▼
  Import Pipeline      Market Data
 ```
+
+The Research Log is a Tier 0, first-class subsystem that preserves versioned hypotheses, experiments, observations, conclusions, and their evidence. Its architecture is defined in `docs/RESEARCH_LOG_ARCHITECTURE.md`; the subsystem is architecturally approved but not implemented.
 
 ## Engineering Philosophy
 
