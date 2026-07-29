@@ -1,0 +1,14 @@
+{
+  "schema_version": "v1",
+  "id": "mystery_booster_2_product_overview",
+  "product_id": "mystery_booster_2",
+  "source_ids": [
+    "official_product_page"
+  ],
+  "raw_destination": "data/raw/games/magic/products/mystery_booster_2/official_product_page",
+  "acquisition_method": "manual evidence capture",
+  "acquisition_status": "planned",
+  "expected_content_type": "text/html",
+  "processing_status": "unprocessed",
+  "notes": "No content has been acquired by this manifest."
+}
