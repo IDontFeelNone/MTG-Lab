@@ -18,12 +18,12 @@ v12
 
 ## Current Phase
 
-Phase 59 — Rules Engine architecture migration complete; awaiting review and
-approval for the next milestone
+Phase 60 — Canonical Print Sheet and Slot repository foundation complete;
+awaiting review and approval for the next milestone
 
 ## Last Merged PR
 
-PR #1 — candidate artifact JSON serialization and mutable-aliasing fixes.
+PR #10 — Rules Engine architecture migration.
 
 ## Repository Status
 
@@ -45,6 +45,12 @@ PR #1 — candidate artifact JSON serialization and mutable-aliasing fixes.
   Printing candidates through explicit repository definitions. Approval,
   rejection, idempotency, conflict handling, immutable audit history, and
   rollback are shared; repository validation prevents orphaning relationships.
+- Canonical Print Sheet and Slot contracts now implement the existing Tier 0
+  fields, game scoping, and provenance requirements. Generic loaders validate
+  the full dependency graph and produce deterministic rule snapshots.
+- Controlled review, promotion, immutable audits, and dependency-safe rollback
+  are enabled for Print Sheet and Slot candidates. No canonical Print Sheet or
+  Slot data has been populated.
 
 ## Completed Milestones
 
@@ -70,11 +76,14 @@ PR #1 — candidate artifact JSON serialization and mutable-aliasing fixes.
   `docs/RULES_ENGINE.md`; the Tier 0 data-repository layers now explicitly place
   Print Sheet and Slot candidates, canonical records, validation, and derived
   output within the existing repository lifecycle.
+- Canonical Print Sheet and Slot repository paths, source-backed provenance,
+  structural and referential validation, deterministic snapshots, promotion,
+  and rollback were implemented and verified with temporary synthetic data.
 
 ## Current Focus
 
-Awaiting review of the architecture migration. No Print Sheet or Slot
-implementation milestone is approved.
+Awaiting review of the Phase 60 repository foundation. No canonical Mystery
+Booster 2 Print Sheet or Slot population milestone is approved.
 
 ## Open Risks
 
@@ -85,17 +94,18 @@ implementation milestone is approved.
 
 ## Technical Debt
 
-- Canonical promotion supports Product, Card, and Printing candidates but still
-  requires manual application-workflow decisions; other entity definitions remain future work.
+- Canonical promotion supports Product, Card, Printing, Print Sheet, and Slot
+  candidates but still requires manual application-workflow decisions; other
+  entity definitions remain future work.
 - Only eleven Cards and Printings are populated; comprehensive card data,
   slots, sheets, collation, probabilities, simulations, and market data remain unpopulated.
 - Roadmap technical-debt categories require specific tracked items as work is discovered.
 
 ## Upcoming Milestones
 
-1. Review the Phase 59 Rules Engine architecture migration.
-2. After approval, define a bounded Print Sheet and Slot implementation
-   milestone.
+1. Review the Phase 60 Print Sheet and Slot repository foundation.
+2. After approval, define a bounded evidence and dependency milestone before
+   any Mystery Booster 2 Print Sheet or Slot population.
 3. Probability, simulation, analytics, and market-intelligence layers.
 
 ## Next Session Checklist

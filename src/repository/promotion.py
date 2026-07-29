@@ -16,8 +16,11 @@ from ingestion.candidates import CandidateValidationState
 from ingestion.hashing import hash_bytes
 from validation import SchemaValidationError, validate_document
 
-from .cards import card_record_path, load_card, load_card_repository, load_printing, printing_record_path
+from .cards import card_record_path, load_card, load_printing, printing_record_path
 from .products import product_record_path
+from .rules import (
+    load_print_sheet, load_rules_repository, load_slot, print_sheet_record_path, slot_record_path,
+)
 
 _IDENTIFIER = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -80,7 +83,7 @@ def _card_definition() -> EntityPromotionDefinition:
         "card", "card",
         lambda game, entity_id, root: card_record_path(game, entity_id, games_root=root),
         lambda game, entity_id, root: load_card(game, entity_id, games_root=root),
-        lambda game, root: load_card_repository(game, games_root=root),
+        lambda game, root: load_rules_repository(game, games_root=root),
     )
 
 
@@ -89,7 +92,25 @@ def _printing_definition() -> EntityPromotionDefinition:
         "printing", "printing",
         lambda game, entity_id, root: printing_record_path(game, entity_id, games_root=root),
         lambda game, entity_id, root: load_printing(game, entity_id, games_root=root),
-        lambda game, root: load_card_repository(game, games_root=root),
+        lambda game, root: load_rules_repository(game, games_root=root),
+    )
+
+
+def _print_sheet_definition() -> EntityPromotionDefinition:
+    return EntityPromotionDefinition(
+        "print_sheet", "print-sheet",
+        lambda game, entity_id, root: print_sheet_record_path(game, entity_id, games_root=root),
+        lambda game, entity_id, root: load_print_sheet(game, entity_id, games_root=root),
+        lambda game, root: load_rules_repository(game, games_root=root),
+    )
+
+
+def _slot_definition() -> EntityPromotionDefinition:
+    return EntityPromotionDefinition(
+        "slot", "slot",
+        lambda game, entity_id, root: slot_record_path(game, entity_id, games_root=root),
+        lambda game, entity_id, root: load_slot(game, entity_id, games_root=root),
+        lambda game, root: load_rules_repository(game, games_root=root),
     )
 
 
@@ -104,7 +125,9 @@ class CandidatePromotionService:
         self._game = game
         self._games_root = Path(games_root) if games_root else _PROJECT_ROOT / "data/canonical/games"
         self._audit_root = Path(audit_root) if audit_root else _PROJECT_ROOT / "data/audit/promotions"
-        enabled = definitions if definitions is not None else (_card_definition(), _printing_definition())
+        enabled = definitions if definitions is not None else (
+            _card_definition(), _printing_definition(), _print_sheet_definition(), _slot_definition()
+        )
         self._definitions = {definition.entity_type: definition for definition in enabled}
         if len(self._definitions) != len(enabled):
             raise ValueError("entity promotion definitions must be unique")
@@ -135,8 +158,7 @@ class CandidatePromotionService:
             self._create_canonical(path, payload, definition)
             try:
                 definition.validate_canonical(self._game, entity_id, self._games_root)
-                if definition.entity_type == "printing":
-                    load_card(self._game, payload["card_id"], games_root=self._games_root)
+                definition.validate_repository(self._game, self._games_root)
             except Exception as error:
                 path.unlink(missing_ok=True)
                 raise PromotionValidationError(

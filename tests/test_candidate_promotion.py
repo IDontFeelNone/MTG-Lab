@@ -67,6 +67,21 @@ def printing_payload(card_id: str = "magic.test-card") -> dict:
             "claim": "Fixture printing."}]}
 
 
+def print_sheet_payload() -> dict:
+    return {"schema_version": "v1", "id": "magic.test-sheet", "game": "magic",
+            "name": "Test Sheet", "entries": [{"printing_id": "magic.tst.1.en", "weight": 1}],
+            "provenance": [{"source_id": SOURCE_ID,
+            "field_paths": ["id", "game", "name", "entries"], "claim": "Fixture sheet."}]}
+
+
+def slot_payload() -> dict:
+    return {"schema_version": "v1", "id": "magic.test-slot", "game": "magic",
+            "name": "Test Slot", "print_sheet_id": "magic.test-sheet", "draw_count": 1,
+            "replacement": True, "provenance": [{"source_id": SOURCE_ID,
+            "field_paths": ["id", "game", "name", "print_sheet_id", "draw_count", "replacement"],
+            "claim": "Fixture slot."}]}
+
+
 class CandidatePromotionTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
@@ -101,9 +116,9 @@ class CandidatePromotionTests(unittest.TestCase):
     def test_orphan_printing_and_unsupported_entity_are_rejected(self) -> None:
         with self.assertRaises(PromotionValidationError):
             self.promote("printing", printing_payload("magic.missing"))
-        artifact, parsed = candidate_artifacts("sheet", {"id": "sheet.one", "name": "Future"})
+        artifact, parsed = candidate_artifacts("unsupported", {"id": "future.one", "name": "Future"})
         with self.assertRaisesRegex(PromotionValidationError, "not enabled"):
-            self.service.review(artifact, parsed, "sheet-candidate", self.approved)
+            self.service.review(artifact, parsed, "unsupported-candidate", self.approved)
 
     def test_rejection_and_conflict_do_not_change_canonical_data(self) -> None:
         artifact, parsed = candidate_artifacts("card", card_payload())
@@ -124,6 +139,33 @@ class CandidatePromotionTests(unittest.TestCase):
         self.service.rollback(printing["id"], rollback)
         result = self.service.rollback(card["id"], rollback)
         self.assertEqual(result["outcome"], "rolled_back")
+
+    def test_rules_entities_promote_and_rollback_only_in_dependency_order(self) -> None:
+        card = self.promote("card", card_payload())
+        printing = self.promote("printing", printing_payload())
+        sheet = self.promote("print_sheet", print_sheet_payload())
+        slot = self.promote("slot", slot_payload())
+        self.assertEqual([sheet["entity_type"], slot["entity_type"]], ["print_sheet", "slot"])
+        validate_document(sheet, "promotion-audit"); validate_document(slot, "promotion-audit")
+        product_path = self.root / "canonical/games/magic/products/test-product/product.json"
+        product_path.parent.mkdir(parents=True)
+        product_path.write_text(json.dumps({
+            "schema_version": "v1", "id": "test-product", "game": "magic", "name": "Test Product",
+            "product_type": "booster", "lifecycle_status": "validated", "slot_ids": ["magic.test-slot"],
+            "provenance": [{"claim": "Synthetic dependency fixture",
+                            "source_classification": "internal", "source_location": "unit test",
+                            "verification_status": "confirmed"}],
+        }), encoding="utf-8")
+        rollback = CandidateReview(ReviewDecision.APPROVED, "maintainer",
+                                   "2026-07-29T13:00:00Z", "dependency rollback")
+        with self.assertRaises(PromotionConflict): self.service.rollback(printing["id"], rollback)
+        with self.assertRaises(PromotionConflict): self.service.rollback(sheet["id"], rollback)
+        with self.assertRaises(PromotionConflict): self.service.rollback(slot["id"], rollback)
+        product_path.unlink()
+        self.service.rollback(slot["id"], rollback)
+        self.service.rollback(sheet["id"], rollback)
+        self.service.rollback(printing["id"], rollback)
+        self.service.rollback(card["id"], rollback)
 
 
 if __name__ == "__main__": unittest.main()
