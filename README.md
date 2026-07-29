@@ -96,6 +96,12 @@ promotion is conflict-safe and idempotent, preserves the complete candidate and
 field provenance in immutable audit history, and supports audited rejection and
 rollback without silently overwriting canonical data.
 
+The same controlled-review architecture now provides an entity-agnostic
+promotion framework, enabled for Card and Printing candidates in the current
+milestone. Entity-specific repository definitions preserve schema and
+referential boundaries while shared approval, conflict, audit, and rollback
+behavior remains reusable for future canonical entity types.
+
 The canonical repository also contains a deliberately small Card and Printing
 foundation dataset. Game-scoped loaders validate schemas, stable identity paths,
 source-backed field provenance, and every Printing-to-Card reference before

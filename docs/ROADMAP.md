@@ -20,7 +20,7 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Current Status
 
-**Current Phase:** Phase 56 ✅ Complete
+**Current Phase:** Phase 57 ✅ Complete
 
 **Next Phase:** Awaiting approval
 
@@ -63,6 +63,23 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Most Recently Completed Milestone
 
+## Phase 57 — Card and Printing Candidate Ingestion and Controlled Promotion
+
+### Objective
+Provide a reusable, entity-agnostic controlled-promotion framework and enable
+it for Card and Printing candidates.
+
+### Success Criteria
+- [x] Explicitly approved Card and Printing candidates can be promoted.
+- [x] Rejection, idempotency, conflict protection, and immutable audits are shared.
+- [x] Printing promotion and rollback preserve Card referential integrity.
+- [x] Unsupported entity types remain disabled.
+- [x] Existing Product promotion remains compatible.
+
+---
+
+# Previously Completed Milestone
+
 ## Phase 56 — Card and Printing Repository Foundation
 
 ### Objective
@@ -89,10 +106,10 @@ identity relationship.
 
 # Upcoming Phases
 
-## Proposed Phase 57
+## Proposed Phase 58
 
-Card and Printing candidate ingestion and controlled promotion, subject to
-explicit milestone approval.
+Add a small, controlled, reviewed Card and Printing population increment through
+the Phase 57 workflow, subject to explicit milestone approval.
 
 ---
 

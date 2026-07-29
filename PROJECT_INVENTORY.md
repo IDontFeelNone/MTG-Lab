@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 56 — Card and Printing Repository Foundation complete
+- Current implementation phase: Phase 57 — Card and Printing Candidate Promotion complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -18,6 +18,9 @@
 - Repository includes schema-valid canonical Card and Printing records,
   deterministic stable identifiers and output, source-backed field provenance,
   and game-scoped Printing-to-Card referential validation
+- Repository includes an entity-agnostic candidate-review and canonical-promotion
+  framework enabled for Card and Printing, with explicit decisions, immutable
+  audits, idempotency, conflict protection, and referentially safe rollback
 - Research Log is defined as a Tier 0 architectural subsystem; implementation remains future work
 - Probability, simulation, analytics, and market intelligence remain future work
 
@@ -40,10 +43,12 @@
 - Controlled canonical product promotion with immutable decision and rollback audit history
 - Canonical Card and Printing repository foundation with structural, provenance,
   identity-path, source-reference, and Printing-to-Card validation
+- Generic controlled candidate review and canonical promotion enabled for Card
+  and Printing while retaining the existing Product workflow
 
 ## Remaining Work
-- Controlled candidate ingestion and promotion for Cards and Printings, canonical
-  promotion for other entity types, and any automated approval workflow
+- Broader reviewed Card and Printing candidate acquisition and population,
+  canonical promotion definitions for other entity types, and any automated approval workflow
 - Complete card repository, slots, print sheets, probability, simulation,
   analytics, and market intelligence
 

@@ -14,7 +14,7 @@
     "schema_version": {"const": "v1"},
     "id": {"$ref": "#/$defs/id"},
     "action": {"enum": ["promotion", "rejection", "rollback"]},
-    "entity_type": {"const": "product"},
+    "entity_type": {"enum": ["product", "card", "printing"]},
     "entity_id": {"$ref": "#/$defs/id"},
     "candidate_artifact_id": {"$ref": "#/$defs/id"},
     "candidate_id": {"$ref": "#/$defs/id"},

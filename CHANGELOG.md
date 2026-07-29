@@ -23,5 +23,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   identifiers and snapshots, official source evidence, field-level provenance,
   structural validation, identity-path validation, and Printing-to-Card
   referential validation.
+- Entity-agnostic candidate review and canonical promotion, enabled for Card and
+  Printing candidates with explicit approval and rejection, immutable audits,
+  idempotent and conflict-safe writes, source and provenance validation,
+  Printing-to-Card enforcement, and dependency-safe rollback.
 
 [Unreleased]: https://github.com/IDontFeelNone/MTG-Lab/compare/v0.0.0...HEAD

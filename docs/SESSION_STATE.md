@@ -18,7 +18,7 @@ v12
 
 ## Current Phase
 
-Phase 56 — Card and Printing Repository Foundation complete; awaiting approval
+Phase 57 — Card and Printing Candidate Promotion complete; awaiting approval
 for the next milestone
 
 ## Last Merged PR
@@ -41,6 +41,10 @@ PR #1 — candidate artifact JSON serialization and mutable-aliasing fixes.
   provenance-complete. Repository loading enforces structural validity,
   identity paths, source references, field coverage, and the Printing-to-Card
   relationship, and produces deterministic canonical snapshots.
+- Entity-agnostic controlled review and promotion is enabled for Card and
+  Printing candidates through explicit repository definitions. Approval,
+  rejection, idempotency, conflict handling, immutable audit history, and
+  rollback are shared; repository validation prevents orphaning relationships.
 
 ## Completed Milestones
 
@@ -57,6 +61,8 @@ PR #1 — candidate artifact JSON serialization and mutable-aliasing fixes.
 - Canonical Card and Printing repository representation, initial authoritative
   dataset, deterministic identifiers and output, field provenance, and
   structural and referential validation.
+- Generic candidate-review and canonical-promotion framework enabled for Card
+  and Printing, with the existing Product workflow retained as a compatibility facade.
 
 ## Current Focus
 
@@ -71,17 +77,17 @@ Awaiting approval for the next focused implementation milestone.
 
 ## Technical Debt
 
-- Canonical promotion currently supports only product candidates and manual application-workflow decisions.
+- Canonical promotion supports Product, Card, and Printing candidates but still
+  requires manual application-workflow decisions; other entity definitions remain future work.
 - Only one foundation Card and Printing are populated; comprehensive card data,
   slots, sheets, collation, probabilities, simulations, and market data remain unpopulated.
 - Roadmap technical-debt categories require specific tracked items as work is discovered.
 
 ## Upcoming Milestones
 
-1. Controlled Card and Printing candidate ingestion and promotion.
-2. Broader reviewed Card and Printing repository population.
-3. Slot, print-sheet, and collation definitions.
-4. Probability, simulation, analytics, and market-intelligence layers.
+1. Small, source-bounded reviewed Card and Printing repository population.
+2. Slot, print-sheet, and collation definitions.
+3. Probability, simulation, analytics, and market-intelligence layers.
 
 ## Next Session Checklist
 

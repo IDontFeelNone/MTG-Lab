@@ -40,8 +40,21 @@ fixed separators; it is derived output and does not replace canonical files.
 
 ## Review Boundary
 
-The Phase 56 seed dataset is a deliberately small, maintainer-approved canonical
-foundation backed by an official Source Record. The existing automated
-candidate-promotion service remains limited to Product candidates. Adding Card
-or Printing promotion requires a separately approved lifecycle increment; this
-milestone does not bypass or broaden that service.
+The seed dataset remains deliberately small and backed by an official Source
+Record. Card and Printing normalized candidates may now enter the generic
+candidate-review service. The service enables entity types through explicit
+repository definitions, while the shared workflow owns eligibility, approval,
+rejection, conflict detection, audit storage, and rollback.
+
+Only Card and Printing definitions are enabled through the generic service in
+Phase 57. Each definition supplies its schema, canonical path, record validator,
+and repository validator, allowing future entity types to reuse the workflow
+without embedding their rules in its control flow. The existing Product facade
+uses the same framework and remains backward compatible.
+
+Promotion requires a schema-valid candidate marked `valid`, complete
+candidate-field provenance, and an explicit approval. Canonical Card and
+Printing validation additionally verifies canonical Source Records and field
+coverage. A Printing can be promoted only after its Card exists. Rollback runs
+repository validation and therefore refuses to remove a Card while a Printing
+still references it.

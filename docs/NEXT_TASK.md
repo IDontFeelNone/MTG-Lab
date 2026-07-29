@@ -1,70 +1,48 @@
 # Next Task
 
-## Phase 56 — Card and Printing Repository Foundation
+## Phase 57 — Card and Printing Candidate Ingestion and Controlled Promotion
 
 **Status:** Complete
 
 ## Objective
 
-Establish the first canonical Card and Printing repository records and validate
-the identity relationship defined in `docs/DATA_MODEL.md`.
+Implement an entity-agnostic candidate-review and canonical-promotion framework,
+while enabling only Card and Printing entities in this milestone.
 
-## Scope
+## Delivered Scope
 
-- Define canonical repository representations for Card and Printing records.
-- Create a small, authoritative initial dataset sufficient to validate the model.
-- Establish and document stable Card and Printing identifiers.
-- Represent and validate the required Card-to-Printing relationship.
-- Preserve source evidence and field-level provenance.
-- Produce deterministic canonical output.
-- Implement structural and referential validation.
-- Integrate with the existing controlled-review and canonical-promotion lifecycle
-  where applicable without introducing automated approval.
-- Add unit and integration tests and synchronize relevant documentation.
-- Add a documentation-migration backlog to `PROJECT_INVENTORY.md`; record status
-  only and do not migrate subsystem specifications.
+- Generic entity definitions provide canonical schemas, paths, record
+  validation, and repository-wide validation without entity-specific branches
+  in the review lifecycle.
+- Card and Printing candidates support explicit approval and rejection,
+  immutable decision audits, idempotent promotion, conflict protection, and
+  approval-gated rollback.
+- Canonical validation preserves source-backed field provenance and requires a
+  Card to exist before its Printing can be promoted.
+- Repository validation prevents rollback from orphaning canonical Printings.
+- The existing Product promotion API remains compatible through a framework
+  facade; other future entity types remain disabled.
+- Unit, integration, negative-path, deterministic-output, and Product regression
+  coverage are present.
 
-## Constraints
+## Constraints Honored
 
-- Do not expand or redesign `docs/DATA_MODEL.md`.
-- Do not introduce product-specific logic.
-- Do not implement slots, sheets, collation, probabilities, pack generation,
-  simulation, analytics, market intelligence, API behavior, or AI behavior.
-- Do not introduce or modify SQLAlchemy models, database migrations, or
-  persistence behavior unless explicitly required by approved architecture.
-- Do not populate the complete Mystery Booster 2 card list.
-- Stop and request approval if implementation reveals a genuine architectural defect.
+- No automated approval, broad data population, product-specific logic,
+  persistence, slots, sheets, collation, probability, simulation, analytics,
+  market, API, or AI behavior was introduced.
+- The approved Tier 0 data model and Architecture v12 were not redesigned.
 
-## Acceptance Criteria
+## Validation
 
-- Canonical Card and Printing records validate successfully.
-- Every Printing references an existing Card.
-- Stable identifiers are deterministic and documented.
-- Source and field-level provenance are preserved.
-- Invalid or orphaned records are rejected with useful errors.
-- Canonical output is reproducible.
-- Existing tests continue to pass and new behavior has unit and integration coverage.
-- `PROJECT_INVENTORY.md` accurately reflects implementation and
-  documentation-migration status.
-
-## Testing Requirements
-
-- Run `PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v`.
-- Validate every canonical Card, Printing, and referenced Source Record against
-  its versioned JSON Schema.
-- Verify deterministic serialization and Card-to-Printing referential validation.
-- Verify invalid, duplicate, path-mismatched, and orphaned records are rejected.
-- Run `git diff --check`.
-
-## Definition of Done
-
-A small reviewed canonical Card and Printing dataset is schema-valid,
-provenance-complete, deterministic, and referentially valid; invalid and
-orphaned records fail with useful errors; tests pass; repository documentation
-reflects Phase 56; the focused milestone is committed and ready for review in
-one pull request.
+- `PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v`
+- Promotion audit schema validation for Product, Card, and Printing events.
+- Deterministic serialization, conflict, orphan, unsupported-type, rejection,
+  idempotency, and dependency-safe rollback checks.
+- `git diff --check`
 
 ## Recommended Next Milestone
 
-Define a focused, approval-gated Card and Printing candidate ingestion and
-promotion increment. Phase 56 does not approve or begin that work.
+Phase 58 — add one small, controlled, source-backed Card and Printing candidate
+population increment using the Phase 57 workflow. Define the exact authoritative
+source and bounded record set before approval. Phase 57 does not approve or begin
+that work.
