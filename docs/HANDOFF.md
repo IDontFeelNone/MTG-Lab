@@ -6,19 +6,20 @@
 
 ## Completed in This Session
 
-- Completed Phase 61, Mystery Booster 2 Card and Printing Wave 1.
-- Added a reusable deterministic multi-source pipeline capped at five pairs.
-- Promoted three evidence-supported Cards before three dependent Printings.
-- Retained raw, parsed, candidate, canonical, and six immutable audit records.
-- Added regression guards proving the Product and empty rule repository remain unchanged.
+- Completed Phase 62, Evidence Repository Foundation.
+- Added stable, game-scoped evidence bundles under `data/sources/`.
+- Added a versioned manifest schema and verified archived-bundle loader.
+- Enforced path, content, duplicate, canonical-source, and provenance integrity.
+- Archived the existing Wave 1 extract without adding domain data.
 
 ## Current Repository State
 
-The canonical Magic repository contains fourteen Cards and fourteen Printings.
-Three pairs carry explicit Mystery Booster 2 membership metadata. It still
-contains no canonical Print Sheets or Slots, and the product remains a foundation.
+The canonical Magic repository still contains fourteen Cards and fourteen
+Printings. It contains no canonical Print Sheets or Slots, and the Mystery
+Booster 2 Product remains a foundation. Evidence acquisition now has a stable
+archive boundary suitable for a later, separately approved Wave 2.
 
 ## Recommended Next Action
 
-Review Phase 61. Do not start Wave 2 or any Print Sheet, Slot, probability, or
-simulation work without a separately approved milestone.
+Review Phase 62. Do not begin Wave 2 population or any rules, probability,
+simulation, or analytics milestone without separate approval.

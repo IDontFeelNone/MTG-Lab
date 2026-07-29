@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 61 — Mystery Booster 2 Card and Printing Wave 1 complete
+- Current implementation phase: Phase 62 — Evidence Repository Foundation complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -13,6 +13,8 @@
 ## Module Inventory
 - Repository, schemas, validation, and ingestion
 - Ingestion includes raw evidence, parsed artifacts, normalized candidate artifacts, field provenance, and candidate validation
+- Evidence repository includes game-scoped archived bundles, a versioned
+  manifest contract, content-verified loading, and canonical-source provenance validation
 - Repository includes explicitly reviewed, validated, auditable, idempotent,
   conflict-safe, and reversible canonical product promotion
 - Repository includes schema-valid canonical Card and Printing records,
@@ -58,9 +60,12 @@
 - Bounded, deterministic, multi-source Card and Printing ingestion demonstrated
   with three Mystery Booster 2 pairs, retained intermediate artifacts, controlled
   dependency-order promotion, and six immutable audits
+- Evidence repository foundation with a canonical `data/sources/` layout,
+  versioned manifests, archived-file integrity checks, and provenance validation
+  demonstrated on the existing Wave 1 extract
 
 ## Remaining Work
-- Broader reviewed Card and Printing candidate acquisition and population,
+- Broader reviewed Card and Printing evidence acquisition and population,
   canonical promotion definitions for other entity types, and any automated approval workflow
 - Complete card repository, populated slots and print sheets, probability, simulation,
   analytics, and market intelligence

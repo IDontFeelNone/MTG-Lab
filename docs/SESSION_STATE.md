@@ -18,12 +18,12 @@ v12
 
 ## Current Phase
 
-Phase 61 — Mystery Booster 2 Card and Printing Wave 1 complete;
+Phase 62 — Evidence Repository Foundation complete;
 awaiting review and approval for the next milestone
 
 ## Last Merged PR
 
-PR #10 — Rules Engine architecture migration.
+PR #12 — Phase 61 implementation proposal.
 
 ## Repository Status
 
@@ -55,6 +55,9 @@ PR #10 — Rules Engine architecture migration.
   with field-level attribution. Wave 1 retained parsed and candidate artifacts
   and promoted three Mystery Booster 2 Cards followed by their three Printings,
   with six immutable approval audits.
+- A stable `data/sources/` evidence archive now loads versioned manifests and
+  archived files only after path, size, SHA-256, duplicate, canonical-source,
+  and claim-level provenance validation.
 
 ## Completed Milestones
 
@@ -85,10 +88,13 @@ PR #10 — Rules Engine architecture migration.
   and rollback were implemented and verified with temporary synthetic data.
 - Mystery Booster 2 Card and Printing Wave 1 validated the complete ingestion
   workflow with three evidence-supported pairs and no rule-data population.
+- Evidence Repository Foundation established the canonical archive layout,
+  manifest contract, verified loader, and provenance validation using existing
+  Wave 1 evidence without adding canonical domain records.
 
 ## Current Focus
 
-Awaiting review of Phase 61. No additional Card or Printing wave and no
+Awaiting review of Phase 62. No additional Card or Printing wave and no
 canonical Mystery Booster 2 Print Sheet or Slot population milestone is approved.
 
 ## Open Risks
@@ -109,7 +115,7 @@ canonical Mystery Booster 2 Print Sheet or Slot population milestone is approved
 
 ## Upcoming Milestones
 
-1. Review the Phase 61 Card and Printing Wave 1 implementation.
+1. Review the Phase 62 Evidence Repository Foundation.
 2. Require separate approval for Wave 2 or any Mystery Booster 2 rule population.
 3. Probability, simulation, analytics, and market-intelligence layers.
 

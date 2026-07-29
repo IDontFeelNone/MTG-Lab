@@ -17,7 +17,10 @@ This document defines the canonical data repository architecture for MTG Lab.
 ## Repository Layers
 
 - **Raw Data:** Preserved acquired evidence remains immutable and retains its
-  content identity.
+  content identity. Stable archived evidence bundles live under `data/sources/`
+  with versioned manifests, content hashes, and canonical Source Record
+  references; pipeline-specific raw acquisition destinations may remain under
+  `data/raw/`.
 - **Processed Data:** Parsed records and normalized candidates, including
   proposed Print Sheet and Slot records, retain transformation lineage and are
   explicitly non-canonical.
