@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mtg-lab.dev/schemas/v1/product.schema.json",
   "title": "MTG Lab Product",
-  "description": "A sealed or digital product definition that references slots by stable identifier.",
+  "description": "A sealed or digital product definition that references slots by stable identifier. Foundation-stage records may contain an explicit empty slot list until validated slot definitions are available.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -39,7 +39,7 @@
     },
     "slot_ids": {
       "type": "array",
-      "minItems": 1,
+      "default": [],
       "items": {
         "type": "string",
         "pattern": "^[a-z0-9][a-z0-9._-]*$"
