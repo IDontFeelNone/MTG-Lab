@@ -1,0 +1,23 @@
+{
+  "schema_version": "v1",
+  "id": "mb2_wave_1_card_printings",
+  "product_id": "mystery_booster_2",
+  "source_ids": [
+    "gatherer-magic-card-identities-wave-1",
+    "scryfall-mystery-booster-2-wave-1",
+    "wizards-mystery-booster-2-gallery-wave-1",
+    "mb2-wave-1-evidence-bundle"
+  ],
+  "raw_destination": "data/raw/magic/mystery_booster_2/wave_1/card-printing-evidence.json",
+  "acquisition_method": "Maintainer-reviewed controlled extract from attributed sources",
+  "acquisition_status": "acquired",
+  "last_attempted_date": "2026-07-29",
+  "last_successful_acquisition_date": "2026-07-29",
+  "expected_content_type": "application/json",
+  "processing_status": "processed",
+  "notes": "Bounded to three evidence-supported pairs; does not support sheets, slots, collation, or probability claims.",
+  "integrity": {
+    "algorithm": "sha256",
+    "digest": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548"
+  }
+}

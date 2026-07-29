@@ -1,0 +1,217 @@
+{
+  "action": "promotion",
+  "actor": "maintainer",
+  "candidate_artifact_id": "mb2-wave-1-card-printings-printing-candidates-555ad2bc6b8755e0",
+  "candidate_id": "magic.mb2.2.en-candidate",
+  "candidate_snapshot": {
+    "confidence": 1.0,
+    "entity_type": "printing",
+    "errors": [],
+    "field_provenance": [
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "schema_version",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-02",
+        "provenance_classification": "community",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "scryfall-mystery-booster-2-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "schema_version"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "id",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-02",
+        "provenance_classification": "community",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "scryfall-mystery-booster-2-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "id"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "card_id",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-02",
+        "provenance_classification": "community",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "scryfall-mystery-booster-2-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "card_id"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "set_code",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-02",
+        "provenance_classification": "community",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "scryfall-mystery-booster-2-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "set_code"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "collector_number",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-02",
+        "provenance_classification": "community",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "scryfall-mystery-booster-2-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "collector_number"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "rarity",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-02",
+        "provenance_classification": "community",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "scryfall-mystery-booster-2-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "rarity"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "language",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-02",
+        "provenance_classification": "community",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "scryfall-mystery-booster-2-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "language"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "provenance",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-02",
+        "provenance_classification": "community",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "scryfall-mystery-booster-2-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "provenance"
+      },
+      {
+        "acquisition_target_id": "mb2-wave-1-card-printings",
+        "confidence": 1.0,
+        "field_path": "metadata",
+        "parsed_artifact_id": "mb2-wave-1-card-printings-parsed-555ad2bc6b8755e0",
+        "parsed_record_id": "mb2-wave-1-card-printings-record-02",
+        "provenance_classification": "official",
+        "raw_evidence_hash": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+        "source_id": "wizards-mystery-booster-2-gallery-wave-1",
+        "transformation_id": "bounded-card-printing-wave",
+        "transformation_version": "1",
+        "value_origin": "metadata"
+      }
+    ],
+    "id": "magic.mb2.2.en-candidate",
+    "parsed_record_ids": [
+      "mb2-wave-1-card-printings-record-02"
+    ],
+    "payload": {
+      "card_id": "magic.academy-manufactor",
+      "collector_number": "2",
+      "id": "magic.mb2.2.en",
+      "language": "en",
+      "metadata": {
+        "product_membership": [
+          "mystery_booster_2"
+        ]
+      },
+      "provenance": [
+        {
+          "claim": "The cited printing database establishes the exact printing fields.",
+          "field_paths": [
+            "id",
+            "card_id",
+            "set_code",
+            "collector_number",
+            "rarity",
+            "language"
+          ],
+          "notes": "The MTG Lab ID is deterministically derived from printing identity fields.",
+          "source_id": "scryfall-mystery-booster-2-wave-1"
+        },
+        {
+          "claim": "The official gallery identifies this printing as Mystery Booster 2 content.",
+          "field_paths": [
+            "metadata"
+          ],
+          "source_id": "wizards-mystery-booster-2-gallery-wave-1"
+        }
+      ],
+      "rarity": "rare",
+      "schema_version": "v1",
+      "set_code": "MB2"
+    },
+    "validation_state": "valid",
+    "warnings": []
+  },
+  "canonical_after": {
+    "card_id": "magic.academy-manufactor",
+    "collector_number": "2",
+    "id": "magic.mb2.2.en",
+    "language": "en",
+    "metadata": {
+      "product_membership": [
+        "mystery_booster_2"
+      ]
+    },
+    "provenance": [
+      {
+        "claim": "The cited printing database establishes the exact printing fields.",
+        "field_paths": [
+          "id",
+          "card_id",
+          "set_code",
+          "collector_number",
+          "rarity",
+          "language"
+        ],
+        "notes": "The MTG Lab ID is deterministically derived from printing identity fields.",
+        "source_id": "scryfall-mystery-booster-2-wave-1"
+      },
+      {
+        "claim": "The official gallery identifies this printing as Mystery Booster 2 content.",
+        "field_paths": [
+          "metadata"
+        ],
+        "source_id": "wizards-mystery-booster-2-gallery-wave-1"
+      }
+    ],
+    "rarity": "rare",
+    "schema_version": "v1",
+    "set_code": "MB2"
+  },
+  "canonical_before": null,
+  "decided_at": "2026-07-29T23:45:00Z",
+  "decision": "approved",
+  "entity_id": "magic.mb2.2.en",
+  "entity_type": "printing",
+  "id": "printing-promotion-fb2fc092a8c113ced3c6ba02",
+  "outcome": "promoted",
+  "reason": "Approved bounded Mystery Booster 2 Wave 1 evidence-backed population.",
+  "schema_version": "v1"
+}

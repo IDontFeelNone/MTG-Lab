@@ -1,0 +1,36 @@
+{
+  "card_id": "magic.academy-manufactor",
+  "collector_number": "2",
+  "id": "magic.mb2.2.en",
+  "language": "en",
+  "metadata": {
+    "product_membership": [
+      "mystery_booster_2"
+    ]
+  },
+  "provenance": [
+    {
+      "claim": "The cited printing database establishes the exact printing fields.",
+      "field_paths": [
+        "id",
+        "card_id",
+        "set_code",
+        "collector_number",
+        "rarity",
+        "language"
+      ],
+      "notes": "The MTG Lab ID is deterministically derived from printing identity fields.",
+      "source_id": "scryfall-mystery-booster-2-wave-1"
+    },
+    {
+      "claim": "The official gallery identifies this printing as Mystery Booster 2 content.",
+      "field_paths": [
+        "metadata"
+      ],
+      "source_id": "wizards-mystery-booster-2-gallery-wave-1"
+    }
+  ],
+  "rarity": "rare",
+  "schema_version": "v1",
+  "set_code": "MB2"
+}

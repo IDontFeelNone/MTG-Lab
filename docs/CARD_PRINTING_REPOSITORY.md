@@ -46,8 +46,9 @@ candidate-review service. The service enables entity types through explicit
 repository definitions, while the shared workflow owns eligibility, approval,
 rejection, conflict detection, audit storage, and rollback.
 
-Only Card and Printing definitions are enabled through the generic service in
-Phase 57. Each definition supplies its schema, canonical path, record validator,
+Card and Printing definitions were enabled through the generic service in
+Phase 57, followed by Print Sheet and Slot definitions in Phase 60. Each
+definition supplies its schema, canonical path, record validator,
 and repository validator, allowing future entity types to reuse the workflow
 without embedding their rules in its control flow. The existing Product facade
 uses the same framework and remains backward compatible.
@@ -58,3 +59,13 @@ Printing validation additionally verifies canonical Source Records and field
 coverage. A Printing can be promoted only after its Card exists. Rollback runs
 repository validation and therefore refuses to remove a Card while a Printing
 still references it.
+
+## Mystery Booster 2 Wave 1
+
+Phase 61 validates the complete bounded Card and Printing ingestion workflow
+with three evidence-supported Mystery Booster 2 pairs. A content-identified
+controlled evidence bundle combines separately attributed official Card
+identity, community Printing identity, and official product-membership sources.
+The deterministic pipeline retains parsed and candidate artifacts, promotes
+Cards before Printings, and preserves six immutable approval audits. This wave
+does not define a complete card pool or authorize Print Sheet or Slot data.

@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 60 — Print Sheet and Slot repository foundation complete
+- Current implementation phase: Phase 61 — Mystery Booster 2 Card and Printing Wave 1 complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -32,7 +32,9 @@
 - Parsed and normalized product candidates are traceable and schema-validated;
   controlled promotion is available only for explicitly reviewed product candidates
 - An initial fixed increment of ten reviewed Cards and their Printings, in
-  addition to the foundation pair, is populated from an official source;
+  addition to the foundation pair, is populated from an official source. A
+  deterministic multi-source Wave 1 workflow adds three evidence-supported
+  Mystery Booster 2 Cards and their Printings;
   slots, sheets, collation, probabilities, simulations, and market data remain unpopulated
 
 ## Completed Work
@@ -53,6 +55,9 @@
   the Tier 0 repository-layer boundaries for Print Sheets and Slots recorded
 - Canonical Print Sheet and Slot contracts, loaders, deterministic snapshots,
   dependency validation, controlled promotion, and dependency-safe rollback
+- Bounded, deterministic, multi-source Card and Printing ingestion demonstrated
+  with three Mystery Booster 2 pairs, retained intermediate artifacts, controlled
+  dependency-order promotion, and six immutable audits
 
 ## Remaining Work
 - Broader reviewed Card and Printing candidate acquisition and population,

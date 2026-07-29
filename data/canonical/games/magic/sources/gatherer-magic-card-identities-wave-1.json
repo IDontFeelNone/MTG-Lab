@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "id": "gatherer-magic-card-identities-wave-1",
+  "title": "Gatherer card identity records used by Mystery Booster 2 Wave 1",
+  "source_classification": "official",
+  "provider": "Wizards of the Coast",
+  "source_location": "https://gatherer.wizards.com/",
+  "access_date": "2026-07-29",
+  "verification_status": "confirmed",
+  "claims": ["Magic card names and underlying Card identities for the bounded Wave 1 records."],
+  "record_version": "1"
+}

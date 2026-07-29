@@ -6,20 +6,19 @@
 
 ## Completed in This Session
 
-- Completed Phase 60, the canonical Print Sheet and Slot repository foundation.
-- Minimally aligned the existing schemas with Tier 0 provenance and game scope.
-- Added generic loading, full dependency validation, deterministic snapshots,
-  controlled promotion, immutable audits, and dependency-safe rollback.
-- Proved behavior with temporary synthetic fixtures only.
+- Completed Phase 61, Mystery Booster 2 Card and Printing Wave 1.
+- Added a reusable deterministic multi-source pipeline capped at five pairs.
+- Promoted three evidence-supported Cards before three dependent Printings.
+- Retained raw, parsed, candidate, canonical, and six immutable audit records.
+- Added regression guards proving the Product and empty rule repository remain unchanged.
 
 ## Current Repository State
 
-The canonical Magic repository still contains eleven Cards and eleven
-Printings. It contains no canonical Print Sheets or Slots. The Mystery Booster
-2 fixture still supports only its bounded product-title claim.
+The canonical Magic repository contains fourteen Cards and fourteen Printings.
+Three pairs carry explicit Mystery Booster 2 membership metadata. It still
+contains no canonical Print Sheets or Slots, and the product remains a foundation.
 
 ## Recommended Next Action
 
-Review Phase 60. Stop before acquiring or populating Mystery Booster 2 Print
-Sheet or Slot data; a separate evidence and dependency milestone requires
-explicit approval.
+Review Phase 61. Do not start Wave 2 or any Print Sheet, Slot, probability, or
+simulation work without a separately approved milestone.

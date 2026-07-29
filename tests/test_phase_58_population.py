@@ -38,8 +38,9 @@ class Phase58PopulationTests(unittest.TestCase):
 
     def test_promoted_increment_has_source_attribution_and_audits(self) -> None:
         cards, printings = load_card_repository("magic")
-        phase_cards = [card for card in cards if card["id"] != "magic.lightning-bolt"]
-        phase_printings = [printing for printing in printings if printing["id"] != "magic.lea.161.en"]
+        phase_cards = [card for card in cards if card["provenance"][0]["source_id"] == SOURCE_ID]
+        phase_printings = [printing for printing in printings
+                           if printing["provenance"][0]["source_id"] == SOURCE_ID]
         self.assertEqual(len(phase_cards), 10)
         self.assertEqual(len(phase_printings), 10)
         self.assertTrue(all(
@@ -51,7 +52,8 @@ class Phase58PopulationTests(unittest.TestCase):
         for path in sorted((ROOT / "data/audit/promotions").glob("*.json")):
             event = json.loads(path.read_text())
             validate_document(event, "promotion-audit")
-            audits.append(event)
+            if event["candidate_snapshot"]["payload"]["provenance"][0]["source_id"] == SOURCE_ID:
+                audits.append(event)
         self.assertEqual(len(audits), 20)
         self.assertTrue(all(event["decision"] == "approved" for event in audits))
         self.assertTrue(all(event["outcome"] == "promoted" for event in audits))

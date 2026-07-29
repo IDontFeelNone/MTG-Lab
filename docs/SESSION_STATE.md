@@ -18,7 +18,7 @@ v12
 
 ## Current Phase
 
-Phase 60 — Canonical Print Sheet and Slot repository foundation complete;
+Phase 61 — Mystery Booster 2 Card and Printing Wave 1 complete;
 awaiting review and approval for the next milestone
 
 ## Last Merged PR
@@ -51,6 +51,10 @@ PR #10 — Rules Engine architecture migration.
 - Controlled review, promotion, immutable audits, and dependency-safe rollback
   are enabled for Print Sheet and Slot candidates. No canonical Print Sheet or
   Slot data has been populated.
+- A deterministic bounded ingestion workflow combines multiple approved sources
+  with field-level attribution. Wave 1 retained parsed and candidate artifacts
+  and promoted three Mystery Booster 2 Cards followed by their three Printings,
+  with six immutable approval audits.
 
 ## Completed Milestones
 
@@ -79,11 +83,13 @@ PR #10 — Rules Engine architecture migration.
 - Canonical Print Sheet and Slot repository paths, source-backed provenance,
   structural and referential validation, deterministic snapshots, promotion,
   and rollback were implemented and verified with temporary synthetic data.
+- Mystery Booster 2 Card and Printing Wave 1 validated the complete ingestion
+  workflow with three evidence-supported pairs and no rule-data population.
 
 ## Current Focus
 
-Awaiting review of the Phase 60 repository foundation. No canonical Mystery
-Booster 2 Print Sheet or Slot population milestone is approved.
+Awaiting review of Phase 61. No additional Card or Printing wave and no
+canonical Mystery Booster 2 Print Sheet or Slot population milestone is approved.
 
 ## Open Risks
 
@@ -97,15 +103,14 @@ Booster 2 Print Sheet or Slot population milestone is approved.
 - Canonical promotion supports Product, Card, Printing, Print Sheet, and Slot
   candidates but still requires manual application-workflow decisions; other
   entity definitions remain future work.
-- Only eleven Cards and Printings are populated; comprehensive card data,
+- Only fourteen Cards and Printings are populated; comprehensive card data,
   slots, sheets, collation, probabilities, simulations, and market data remain unpopulated.
 - Roadmap technical-debt categories require specific tracked items as work is discovered.
 
 ## Upcoming Milestones
 
-1. Review the Phase 60 Print Sheet and Slot repository foundation.
-2. After approval, define a bounded evidence and dependency milestone before
-   any Mystery Booster 2 Print Sheet or Slot population.
+1. Review the Phase 61 Card and Printing Wave 1 implementation.
+2. Require separate approval for Wave 2 or any Mystery Booster 2 rule population.
 3. Probability, simulation, analytics, and market-intelligence layers.
 
 ## Next Session Checklist
