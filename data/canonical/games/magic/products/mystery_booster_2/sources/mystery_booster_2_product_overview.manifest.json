@@ -6,9 +6,16 @@
     "official_product_page"
   ],
   "raw_destination": "data/raw/games/magic/products/mystery_booster_2/official_product_page",
-  "acquisition_method": "manual evidence capture",
-  "acquisition_status": "planned",
+  "acquisition_method": "controlled fixture of manually captured official page title metadata",
+  "acquisition_status": "acquired",
+  "last_attempted_date": "2026-07-29",
+  "last_successful_acquisition_date": "2026-07-29",
   "expected_content_type": "text/html",
-  "processing_status": "unprocessed",
-  "notes": "No content has been acquired by this manifest."
+  "integrity": {
+    "algorithm": "sha256",
+    "digest": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+    "fixture": "tests/fixtures/mystery_booster_2/official_product_page.html"
+  },
+  "processing_status": "processed",
+  "notes": "The controlled fixture preserves only the official page title metadata required by this milestone; it is not a complete page archive and supports no collation or card claims."
 }

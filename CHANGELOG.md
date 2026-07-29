@@ -15,5 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Generic source registry and acquisition manifests with validated source-target references.
 - Evidence-preserving ingestion foundation with deterministic SHA-256 hashing, immutable filesystem evidence storage, parser contracts, and a non-canonical pipeline.
 - Parsed-record and normalized-candidate artifact schemas, immutable models, field-level provenance, cross-artifact validation, and hash-safe intermediate storage.
+- Controlled Mystery Booster 2 official product-page title evidence, a deterministic product-specific HTML parser, and provenance-complete non-canonical product normalization.
+- Explicitly approved canonical product promotion with validation gates, complete provenance snapshots, immutable decision audits, idempotency, conflict detection, rejection, and audited rollback.
 
 [Unreleased]: https://github.com/IDontFeelNone/MTG-Lab/compare/v0.0.0...HEAD

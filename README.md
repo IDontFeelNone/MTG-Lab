@@ -86,6 +86,16 @@ The canonical source of structured information including:
 - Market data
 - Probability definitions
 
+The first product-specific ingestion path processes controlled official Mystery
+Booster 2 product-page title evidence into schema-validated parsed records and
+provenance-complete, non-canonical product candidates. It intentionally does not
+promote candidates or infer card, slot, sheet, collation, or probability facts.
+
+Validated product candidates can now enter an explicit review workflow. Product
+promotion is conflict-safe and idempotent, preserves the complete candidate and
+field provenance in immutable audit history, and supports audited rejection and
+rollback without silently overwriting canonical data.
+
 ## Analytics Engine
 
 Responsible for computing:

@@ -4,6 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
+- Current implementation phase: Phase 54 — Controlled Canonical Promotion complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -12,13 +13,17 @@
 ## Module Inventory
 - Repository, schemas, validation, and ingestion
 - Ingestion includes raw evidence, parsed artifacts, normalized candidate artifacts, field provenance, and candidate validation
+- Repository includes explicitly reviewed, validated, auditable, idempotent,
+  conflict-safe, and reversible canonical product promotion
 - Research Log is defined as a Tier 0 architectural subsystem; implementation remains future work
 - Probability, simulation, analytics, and market intelligence remain future work
 
 ## Mystery Booster 2 Repository Status
 - Canonical product, source registry, and acquisition manifest foundations are validated
 - Intermediate artifacts are stored outside canonical data at `data/intermediate/parsed/` and `data/intermediate/candidates/`
-- Parsed and normalized candidates are traceable and schema-validated; canonical promotion is intentionally unavailable
+- The approved official product-page target has a controlled, hash-recorded evidence fixture and a deterministic Mystery Booster 2 title parser and normalizer
+- Parsed and normalized product candidates are traceable and schema-validated;
+  controlled promotion is available only for explicitly reviewed product candidates
 - Cards, printings, slots, sheets, collation, probabilities, simulations, and market data remain unpopulated
 
 ## Completed Work
@@ -26,11 +31,28 @@
 - Mystery Booster 2 product/source/acquisition foundations
 - Evidence-preserving ingestion pipeline foundation
 - Parsed-record and normalized-candidate artifact foundation with field-level provenance and candidate validation
+- Controlled Mystery Booster 2 official product-page title acquisition, parsing, and normalization path
+- Controlled canonical product promotion with immutable decision and rollback audit history
 
 ## Remaining Work
-- Controlled real evidence acquisition and product-specific parsing/normalization
-- Human or approved automated canonical promotion workflow
+- Canonical promotion for entity types beyond products and any automated approval workflow
 - Complete card repository, slots, print sheets, probability, simulation, analytics, and market intelligence
+
+## Documentation Migration
+
+Architectural documents are migrated with the implementation milestone that
+requires them; no standalone migration sprint is planned.
+
+### Tier 0
+- `DATA_MODEL.md` — Not Started
+- `DATA_REPOSITORY.md` — In Progress
+- `DATABASE_ENGINE.md` — Not Started
+
+### Tier 1
+- `IMPORT_PIPELINE.md` — Not Started
+- `SIMULATION_ENGINE.md` — Not Started
+- `ANALYTICS_ENGINE.md` — Not Started
+- `IMPLEMENTATION_PLAN.md` — Not Started
 
 ## Session Startup Protocol
 Repository-driven session management is defined by:
