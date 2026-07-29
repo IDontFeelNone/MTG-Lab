@@ -20,7 +20,7 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Current Status
 
-**Current Phase:** Phase 61 ✅ Complete
+**Current Phase:** Phase 62 ✅ Complete
 
 **Next Phase:** Awaiting approval
 
@@ -62,6 +62,23 @@ Current focus is establishing the canonical architecture and reference implement
 ---
 
 # Most Recently Completed Milestone
+
+## Phase 62 — Evidence Repository Foundation
+
+### Objective
+Establish a stable repository archive for acquired evidence with versioned
+manifests, content verification, and provenance validation.
+
+### Success Criteria
+- [x] Canonical `data/sources/` layout and evidence-manifest schema exist.
+- [x] Archived bundles load only after path, size, and SHA-256 verification.
+- [x] Artifact provenance resolves to declared canonical Source Records.
+- [x] Existing Wave 1 evidence proves the subsystem without new card population.
+- [x] No Product, Print Sheet, Slot, rule, probability, or simulation data changed.
+
+---
+
+# Previously Completed Milestone
 
 ## Phase 61 — Mystery Booster 2 Card and Printing Population, Wave 1
 

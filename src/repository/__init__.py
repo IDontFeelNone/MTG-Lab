@@ -9,7 +9,15 @@ from .cards import (
     load_printing,
     printing_record_path,
 )
+from .evidence import (
+    ArchivedEvidence,
+    EvidenceBundle,
+    EvidenceRepositoryError,
+    evidence_manifest_path,
+    load_evidence_bundle,
+)
 from .products import ProductLoadError, load_product, product_record_path
+from .sources import SourceLoadError, load_acquisition_manifest, load_source_record
 from .promotion import (
     CandidatePromotionService,
     CandidateReview,
@@ -26,12 +34,14 @@ from .rules import (
     print_sheet_record_path,
     slot_record_path,
 )
-from .sources import SourceLoadError, load_acquisition_manifest, load_source_record
 
 __all__ = [
     "CardRepositoryError",
+    "ArchivedEvidence",
     "CandidatePromotionService",
     "CandidateReview",
+    "EvidenceBundle",
+    "EvidenceRepositoryError",
     "ProductLoadError",
     "PromotionConflict",
     "PromotionValidationError",
@@ -41,9 +51,11 @@ __all__ = [
     "canonical_repository_bytes",
     "canonical_rules_repository_bytes",
     "card_record_path",
+    "evidence_manifest_path",
     "load_acquisition_manifest",
     "load_card",
     "load_card_repository",
+    "load_evidence_bundle",
     "load_printing",
     "load_print_sheet",
     "load_product",

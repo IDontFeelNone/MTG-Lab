@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Canonical evidence archive foundation under `data/sources/`, including a
+  versioned evidence-manifest schema, content-verified archived bundle loading,
+  provenance validation against canonical Source Records, and an archive of the
+  existing Mystery Booster 2 Wave 1 evidence without additional card population.
 - Deterministic multi-source Mystery Booster 2 Card and Printing ingestion,
   demonstrated by three evidence-supported pairs promoted in dependency order
   with retained raw, parsed, candidate, canonical, and immutable audit records.

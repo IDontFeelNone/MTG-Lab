@@ -109,6 +109,12 @@ source-backed field provenance, and every Printing-to-Card reference before
 producing deterministic repository snapshots. Identifier and layout rules are
 documented in the [Card and Printing Repository](docs/CARD_PRINTING_REPOSITORY.md).
 
+Repository evidence can now be preserved in stable, game-scoped bundles under
+`data/sources/`. Versioned manifests identify archived files by byte size and
+SHA-256, connect every artifact to canonical Source Records and explicit claims,
+and allow ingestion to load only path-safe, content-verified evidence. The
+[Evidence Repository](docs/EVIDENCE_REPOSITORY.md) defines this boundary.
+
 ## Analytics Engine
 
 Responsible for computing:

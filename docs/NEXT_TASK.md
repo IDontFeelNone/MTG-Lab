@@ -1,39 +1,38 @@
 # Next Task
 
-## Phase 61 — Mystery Booster 2 Card and Printing Population, Wave 1
+## Phase 62 — Evidence Repository Foundation
 
 **Status:** Complete
 
 ## Objective
 
-Validate the complete repeatable Card and Printing ingestion workflow on up to
-five evidence-supported Mystery Booster 2 pairs while preserving multi-source
-field attribution and stopping before rule-data population.
+Implement the evidence acquisition and archival boundary without populating
+additional Mystery Booster 2 Cards or product rules.
 
 ## Delivered Scope
 
-- Added a deterministic, reusable evidence-bundle ingestion pipeline with a
-  hard maximum of five Card and Printing pairs.
-- Registered official Card identity and product-membership sources, a community
-  Printing source, and a content-identified internal evidence bundle.
-- Retained one parsed artifact and separate Card and Printing candidate artifacts.
-- Explicitly approved and promoted three Cards before their three Printings.
-- Preserved six immutable promotion audits and verified the full canonical graph.
+- Established the canonical game-scoped `data/sources/` archive layout.
+- Added the versioned `evidence-manifest` schema for bundle identity, archived
+  artifact integrity, and claim-level provenance.
+- Added immutable bundle and artifact loading with path containment, byte-size,
+  SHA-256, duplicate, and source-reference validation.
+- Archived the existing Wave 1 controlled extract as the first verified bundle.
+- Added focused validation tests and documented the evidence/raw/canonical boundary.
 
 ## Exclusions Honored
 
-- No Print Sheet or Slot candidate or canonical record was created.
+- No additional Card or Printing was populated.
+- No Print Sheet or Slot was created.
 - The Mystery Booster 2 Product remains a foundation with no Slot references.
-- No collation, probability, simulation, persistence, analytics, market, API,
-  collection, Research Log, or AI behavior was added.
+- No collation, probability, Rules Engine execution, simulation, or analytics was added.
 
 ## Validation
 
 - `PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v`
-- `python -m json.tool` for every added JSON document
+- JSON parsing for all repository data and schemas
 - `git diff --check`
 
 ## Next Milestone
 
-Awaiting review and explicit approval. No Wave 2 or Print Sheet, Slot,
-probability, or simulation milestone is approved.
+Awaiting review and explicit approval. No Wave 2 population or downstream rules
+milestone is approved.

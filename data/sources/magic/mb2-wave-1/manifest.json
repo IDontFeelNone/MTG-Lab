@@ -1,0 +1,44 @@
+{
+  "schema_version": "v1",
+  "id": "mb2-wave-1",
+  "game": "magic",
+  "product_id": "mystery_booster_2",
+  "title": "Mystery Booster 2 Card and Printing Wave 1 Archived Evidence",
+  "bundle_version": "1",
+  "created_at": "2026-07-29T23:55:00Z",
+  "source_ids": [
+    "gatherer-magic-card-identities-wave-1",
+    "scryfall-mystery-booster-2-wave-1",
+    "wizards-mystery-booster-2-gallery-wave-1",
+    "mb2-wave-1-evidence-bundle"
+  ],
+  "artifacts": [
+    {
+      "id": "mb2-wave-1-card-printing-evidence",
+      "path": "files/card-printing-evidence.json",
+      "media_type": "application/json",
+      "byte_size": 1419,
+      "sha256": "555ad2bc6b8755e0dfdb5917b26018d5105c86e6fd0469f6b24f5b965b0c6548",
+      "provenance": [
+        {
+          "source_id": "gatherer-magic-card-identities-wave-1",
+          "claims": ["Card identities and names in the controlled extract."]
+        },
+        {
+          "source_id": "scryfall-mystery-booster-2-wave-1",
+          "claims": ["Printing set codes, collector numbers, rarities, and languages in the controlled extract."]
+        },
+        {
+          "source_id": "wizards-mystery-booster-2-gallery-wave-1",
+          "claims": ["Mystery Booster 2 membership for the archived printing records."]
+        },
+        {
+          "source_id": "mb2-wave-1-evidence-bundle",
+          "claims": ["The archived file is the controlled aggregate used by the deterministic Wave 1 ingestion."],
+          "notes": "This internal source describes aggregation only and does not replace external field attribution."
+        }
+      ]
+    }
+  ],
+  "notes": "Foundation fixture archived from existing Wave 1 evidence; it adds no Cards, Printings, Print Sheets, Slots, or product rules."
+}
