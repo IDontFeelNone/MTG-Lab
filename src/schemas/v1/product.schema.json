@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mtg-lab.dev/schemas/v1/product.schema.json",
   "title": "MTG Lab Product",
-  "description": "A sealed or digital product definition that references slots by stable identifier. Foundation-stage records may contain an explicit empty slot list until validated slot definitions are available.",
+  "description": "A versioned canonical product definition.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -11,7 +11,9 @@
     "game",
     "name",
     "product_type",
-    "slot_ids"
+    "lifecycle_status",
+    "slot_ids",
+    "provenance"
   ],
   "properties": {
     "schema_version": {
@@ -33,22 +35,100 @@
       "type": "string",
       "minLength": 1
     },
-    "release_date": {
-      "type": "string",
-      "format": "date"
+    "lifecycle_status": {
+      "description": "Product lifecycle: foundation records established identity only; draft records are incomplete working definitions; validated records passed validation and require slots; deprecated records remain historically readable.",
+      "oneOf": [
+        {
+          "const": "foundation",
+          "description": "Identity and provenance are established; dependent product data may be absent."
+        },
+        {
+          "const": "draft",
+          "description": "Working definition; dependent product data may be incomplete."
+        },
+        {
+          "const": "validated",
+          "description": "Validated product definition; at least one slot identifier is required."
+        },
+        {
+          "const": "deprecated",
+          "description": "Historical record retained for compatibility and auditability."
+        }
+      ]
     },
     "slot_ids": {
       "type": "array",
-      "default": [],
       "items": {
         "type": "string",
         "pattern": "^[a-z0-9][a-z0-9._-]*$"
       },
       "uniqueItems": true
     },
-    "metadata": {
-      "type": "object",
-      "additionalProperties": true
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim",
+          "source_classification",
+          "source_location",
+          "verification_status"
+        ],
+        "properties": {
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_classification": {
+            "type": "string",
+            "enum": [
+              "official",
+              "community",
+              "inferred",
+              "internal"
+            ]
+          },
+          "source_location": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "supported",
+              "unverified"
+            ]
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lifecycle_status": {
+            "const": "validated"
+          }
+        },
+        "required": [
+          "lifecycle_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "slot_ids": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
 }
