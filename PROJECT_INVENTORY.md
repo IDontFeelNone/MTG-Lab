@@ -32,8 +32,9 @@ Primary dataset: Mystery Booster 2
 
 ## Mystery Booster 2 Repository Status
 - Foundation established
-- Repository structure in progress
-- Canonical dataset under construction
+- Canonical product foundation recorded at `data/canonical/games/magic/products/mystery_booster_2/`
+- Product record schema-validated and loadable through the repository layer
+- Card list, slot definitions, print sheets, collation, and probabilities intentionally unpopulated
 
 ## Completed Work
 - Repository initialized
@@ -41,6 +42,8 @@ Primary dataset: Mystery Booster 2
 - CHANGELOG
 - Architecture v12 defined
 - Development workflow established
+- Versioned canonical schemas and validation infrastructure
+- Mystery Booster 2 canonical product foundation
 
 ## Remaining Work
 - Complete card repository
