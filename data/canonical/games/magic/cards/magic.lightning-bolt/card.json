@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "id": "magic.lightning-bolt",
+  "game": "magic",
+  "name": "Lightning Bolt",
+  "provenance": [
+    {
+      "source_id": "gatherer-lightning-bolt-lea",
+      "field_paths": [
+        "game",
+        "id",
+        "name"
+      ],
+      "claim": "Official card evidence establishes the Magic card identity and name.",
+      "notes": "The MTG Lab ID is deterministically derived from the game and normalized card name."
+    }
+  ]
+}

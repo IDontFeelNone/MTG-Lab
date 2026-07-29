@@ -1,0 +1,24 @@
+{
+  "schema_version": "v1",
+  "id": "magic.lea.161.en",
+  "card_id": "magic.lightning-bolt",
+  "set_code": "LEA",
+  "collector_number": "161",
+  "rarity": "common",
+  "language": "en",
+  "provenance": [
+    {
+      "source_id": "gatherer-lightning-bolt-lea",
+      "field_paths": [
+        "card_id",
+        "collector_number",
+        "id",
+        "language",
+        "rarity",
+        "set_code"
+      ],
+      "claim": "Official printing evidence establishes the set, collector number, rarity, language, and related Card.",
+      "notes": "The MTG Lab ID is deterministically derived from game, normalized set code, collector number, and language."
+    }
+  ]
+}

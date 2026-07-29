@@ -96,6 +96,12 @@ promotion is conflict-safe and idempotent, preserves the complete candidate and
 field provenance in immutable audit history, and supports audited rejection and
 rollback without silently overwriting canonical data.
 
+The canonical repository also contains a deliberately small Card and Printing
+foundation dataset. Game-scoped loaders validate schemas, stable identity paths,
+source-backed field provenance, and every Printing-to-Card reference before
+producing deterministic repository snapshots. Identifier and layout rules are
+documented in the [Card and Printing Repository](docs/CARD_PRINTING_REPOSITORY.md).
+
 ## Analytics Engine
 
 Responsible for computing:

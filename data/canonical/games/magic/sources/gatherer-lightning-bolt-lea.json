@@ -1,0 +1,16 @@
+{
+  "schema_version": "v1",
+  "id": "gatherer-lightning-bolt-lea",
+  "title": "Gatherer — Lightning Bolt (Limited Edition Alpha)",
+  "source_classification": "official",
+  "provider": "Wizards of the Coast",
+  "source_location": "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=229",
+  "access_date": "2026-07-29",
+  "verification_status": "supported",
+  "claims": [
+    "Lightning Bolt is a Magic card.",
+    "Limited Edition Alpha contains a common English printing of Lightning Bolt with collector number 161."
+  ],
+  "notes": "The narrowly scoped Phase 56 foundation retains only identity fields needed to exercise the Card-to-Printing relationship.",
+  "record_version": "1"
+}

@@ -46,6 +46,8 @@ data/processed/*
 !data/processed/.gitkeep
 data/canonical/*
 !data/canonical/.gitkeep
+!data/canonical/games/
+!data/canonical/games/**
 data/validation/*
 !data/validation/.gitkeep
 
