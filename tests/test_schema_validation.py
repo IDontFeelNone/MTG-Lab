@@ -15,6 +15,13 @@ class SchemaValidationTests(unittest.TestCase):
                 "id": "magic.lightning-bolt",
                 "game": "magic",
                 "name": "Lightning Bolt",
+                "provenance": [
+                    {
+                        "source_id": "official-card-database",
+                        "field_paths": ["id", "game", "name"],
+                        "claim": "Identity fixture",
+                    }
+                ],
             },
             "card",
         )
