@@ -1,22 +1,26 @@
 # MTG Lab Engineering Decisions
 
-This document records significant architectural and engineering decisions made throughout the development of MTG Lab.
+This document records significant architectural and engineering decisions for MTG Lab.
 
-Each decision should include the reasoning behind it so future development remains consistent.
+Its purpose is to explain why major technical decisions were made so future contributors can understand the rationale behind the architecture.
+
+Each accepted decision remains part of the project's architectural history. A decision that changes later should be superseded by a newer decision rather than silently removed or rewritten.
 
 ---
 
-## Decision 001 — MTG Lab is a Platform
+## Decision 001 — MTG Lab Is a Platform
 
 **Status:** Accepted
 
-MTG Lab will be developed as a general-purpose Magic: The Gathering research platform rather than a simulator for a single product.
+MTG Lab is a research and decision-intelligence platform for collectible trading card games.
 
-Mystery Booster 2 (MB2) will serve as the first supported product, but the architecture should accommodate future products without requiring changes to the core engine.
+Magic: The Gathering is the initial supported game, with Mystery Booster 2 serving as the reference implementation.
+
+The architecture must remain generic enough to support additional Magic products and eventually other collectible trading card games without redesigning the core engine.
 
 ### Reasoning
 
-Building a generic platform avoids product-specific code and makes future expansion significantly easier.
+Building a platform instead of a single-product application maximizes long-term flexibility and encourages reusable architecture.
 
 ---
 
@@ -24,68 +28,90 @@ Building a generic platform avoids product-specific code and makes future expans
 
 **Status:** Accepted
 
-The simulation engine must not contain hard-coded logic for specific Magic products.
+The core engine must not contain hard-coded knowledge of specific products.
 
-Each product should be defined through structured data describing:
+Products are described through structured data, including:
 
+- Products
 - Card pools
-- Pack composition
-- Slot definitions
-- Probability rules
+- Printings
+- Slots
+- Print sheets
+- Probability definitions
 
-The simulation engine interprets these definitions rather than containing product-specific behavior.
+The engine interprets this data rather than embedding product-specific behavior.
 
 ### Reasoning
 
-Separating data from logic makes the simulator easier to test, maintain, and extend.
+Separating data from logic makes the platform extensible, testable, and easier to validate.
 
 ---
 
-## Decision 003 — Reproducible Simulations
+## Decision 003 — Reproducible Analytics and Simulations
 
 **Status:** Accepted
 
-Every simulation must support deterministic execution through configurable random seeds.
+All probabilistic analysis and simulations must support deterministic execution through configurable random seeds.
 
-Simulation metadata should include:
+Simulation metadata should record:
 
 - Product
+- Repository version
+- Database version, when applicable
 - Simulator version
-- Database version
 - Random seed
 - Timestamp
 
 ### Reasoning
 
-Reproducible simulations simplify testing, debugging, and research.
+Deterministic execution simplifies debugging, validation, benchmarking, and scientific reproducibility.
 
 ---
 
-## Decision 004 — Database as the Source of Truth
+## Decision 004 — Git Repository as the Canonical Source of Truth
 
 **Status:** Accepted
 
-All validated product data should be stored in the database.
+The Git repository is the canonical source of truth for MTG Lab.
 
-The application should not rely on duplicated definitions scattered throughout the codebase.
+The repository owns:
+
+- Architecture
+- Schemas
+- Canonical datasets
+- Validation rules
+- Documentation
+- Version-controlled product definitions
+
+Databases are generated persistence and query layers derived from the repository's validated canonical data. They improve runtime access and query performance but are not the authoritative source.
 
 ### Reasoning
 
-Maintaining a single authoritative source reduces inconsistency and simplifies maintenance.
+Version-controlled data and definitions are reproducible, reviewable, auditable, and recoverable. Generated databases can be rebuilt from the repository without losing canonical knowledge.
 
 ---
 
-## Decision 005 — Validation Before Simulation
+## Decision 005 — Validation Before Consumption
 
 **Status:** Accepted
 
-Product data must successfully pass validation before it can be used for simulation.
+Data must successfully pass validation before it is used by downstream components.
 
-Validation includes checks for missing data, invalid references, duplicate identifiers, inconsistent slot definitions, and probability integrity.
+Validation includes:
+
+- Schema validation
+- Missing-reference checks
+- Duplicate-identifier checks
+- Probability integrity
+- Print-sheet integrity
+- Slot integrity
+- Cross-reference validation
+
+Only validated canonical data may be consumed by analytics, simulations, persistence layers, or AI components.
 
 ### Reasoning
 
-Reliable simulations depend on reliable input data.
+Every downstream result is only as trustworthy as its input data.
 
 ---
 
@@ -93,24 +119,141 @@ Reliable simulations depend on reliable input data.
 
 **Status:** Accepted
 
-Significant architectural or behavioral changes should be reflected in the project's documentation as part of the same development effort.
+Documentation is part of the software.
+
+Architectural, structural, or behavioral changes should include corresponding documentation updates within the same development effort.
 
 ### Reasoning
 
-Keeping documentation current reduces confusion and makes the project easier to maintain over time.
+Keeping documentation synchronized with implementation reduces technical debt and improves maintainability.
+
+---
+
+## Decision 007 — Documentation-First Development
+
+**Status:** Accepted
+
+Major architectural work should be designed, documented, and reviewed before implementation.
+
+Implementation follows approved documentation rather than defining architecture informally as code is written.
+
+### Reasoning
+
+Documentation-first development minimizes architectural drift, reduces expensive refactoring, and provides a stable implementation target.
+
+---
+
+## Decision 008 — Layered Architecture
+
+**Status:** Accepted
+
+MTG Lab follows a layered architecture.
+
+The principal layers include:
+
+- Repository
+- Ingestion
+- Validation
+- Probability
+- Analytics
+- AI reasoning
+- Applications
+
+Each layer has a clearly defined responsibility and communicates through stable interfaces.
+
+### Reasoning
+
+Layer separation reduces coupling, improves testability, and allows subsystems to evolve independently.
+
+---
+
+## Decision 009 — Canonical Data Pipeline
+
+**Status:** Accepted
+
+External data follows the standard lifecycle:
+
+```text
+Raw
+  ↓
+Processed
+  ↓
+Canonical
+  ↓
+Validated
+```
+
+Raw data preserves acquired source material.
+
+Processed data contains normalized intermediate representations.
+
+Canonical data represents the repository's approved structured definitions.
+
+Validated canonical data is eligible for use by persistence, analytics, simulations, and AI reasoning.
+
+### Reasoning
+
+A standardized pipeline improves traceability, repeatability, auditability, and data quality.
+
+---
+
+## Decision 010 — Hybrid SQLAlchemy 2.0 Persistence Layer
+
+**Status:** Accepted
+
+MTG Lab uses SQLAlchemy 2.0 for its persistence layer, with SQLite as the initial database backend.
+
+The persistence subsystem may use SQLAlchemy ORM models, SQLAlchemy Core operations, and direct database features where appropriate, while keeping domain and business logic independent of a specific database engine.
+
+### Reasoning
+
+This hybrid approach provides strong schema management, maintainable application models, efficient bulk operations, and a practical migration path to more capable database backends.
+
+---
+
+## Decision 011 — AI Reasons Over Structured Knowledge
+
+**Status:** Accepted
+
+AI components reason over structured, validated repository data rather than relying on conversational memory as the primary knowledge store.
+
+AI serves as a retrieval, analysis, comparison, and explanation layer over canonical knowledge and analytical outputs.
+
+### Reasoning
+
+Grounding AI in structured, version-controlled information improves reliability, transparency, reproducibility, and explainability.
+
+---
+
+## Decision 012 — Mystery Booster 2 Is the Reference Implementation
+
+**Status:** Accepted
+
+Mystery Booster 2 is the first complete product implementation used to validate the MTG Lab architecture.
+
+Its product definitions, card pools, print sheets, collation rules, probabilities, validation evidence, and simulations must be represented through the same generic systems intended for future products.
+
+No MB2-specific assumptions may be embedded in the reusable platform engine.
+
+### Reasoning
+
+Mystery Booster 2 is complex enough to rigorously test the architecture while preserving the platform's long-term extensibility.
 
 ---
 
 ## Future Decisions
 
-Additional decisions will be recorded here as MTG Lab evolves.
+Future architectural decisions will be added as MTG Lab evolves.
 
-Examples may include:
+Examples include:
 
-- Database technology
-- API design
 - Plugin architecture
-- Market data providers
-- Performance optimizations
+- External data providers
+- Public API design
+- Market-intelligence integration
+- Machine-learning pipelines
 - Versioning strategy
-- Testing standards
+- Deployment architecture
+- Performance optimization
+- Security model
+- Multi-game schema boundaries
