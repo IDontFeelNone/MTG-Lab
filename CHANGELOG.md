@@ -1,3 +1,9 @@
+## Phase 87 — Mystery Booster 2 Acquisition Pilot (evidence-blocked)
+
+- Completed the pre-implementation source and Architecture v12 compatibility assessment.
+- Stopped before acquisition because no retrievable, immutable, legally reviewed 25–50-card raw source was available; no dataset was registered and no canonical data was promoted.
+- Added `docs/MYSTERY_BOOSTER_2_ACQUISITION_PILOT.md` with source inventory, evidence gap, limitations, and reproduction requirements.
+
 # Changelog
 
 ## Phase 86 — Canonical Dataset Import Framework (Pilot)

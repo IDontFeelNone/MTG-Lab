@@ -1,3 +1,5 @@
+> **Status: Current — Phase 87 evidence-blocked.** Source assessment completed, but provider retrieval was unavailable; no MB2 pilot dataset was registered, imported, or promoted. Architecture v12 remains unchanged.
+
 # Session State
 
 > **Status: Current — Phase 86 implemented locally; pull request awaits review and green CI.** Dataset registration, resolution, sessions, promotion, reports, CLI, and the non-MB2 pilot are present. Architecture v12 is unchanged.

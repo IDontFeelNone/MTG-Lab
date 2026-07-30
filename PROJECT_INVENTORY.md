@@ -1,3 +1,5 @@
+> **Phase 87 update:** The MB2 acquisition pilot is evidence-blocked. No runtime, dataset registry, import session, or canonical record changed. See `docs/MYSTERY_BOOSTER_2_ACQUISITION_PILOT.md`.
+
 # MTG Lab Project Inventory
 
 > **Phase 86 update:** `src/dataset_import/` provides the registry, resolver, session orchestrator, and reporter; `src/mtglab/__main__.py` provides dataset/import CLI commands; and `data/fixtures/canonical_import/` contains the reviewed pilot.

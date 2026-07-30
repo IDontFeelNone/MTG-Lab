@@ -1,3 +1,5 @@
+> **Phase 87:** The approved MB2 acquisition pilot stopped at the evidence gate because a reproducible, legally reviewed 25–50-card raw snapshot could not be acquired in the execution environment. No import or promotion occurred.
+
 # MTG Lab Roadmap
 
 > **Phase 86:** The governed canonical dataset import pilot is complete locally. Large-scale imports remain future work and must use the same gates.

@@ -1,3 +1,5 @@
+> **Status: Current — Phase 87 evidence-gap handoff.** The pilot stopped before Raw Snapshot. Resume only after provider bytes, acquisition metadata, licensing, and attribution can be preserved and reviewed. No dataset or canonical import exists.
+
 # Handoff
 
 > **Status: Current — Phase 86 implementation handoff.** The pilot deterministically imports 35 of 39 records, rejects three, leaves one unresolved, and preserves acquisition/review/promotion audit. Do not recommend merge until GitHub Actions are green.
