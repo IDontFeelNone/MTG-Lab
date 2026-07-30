@@ -23,7 +23,8 @@ This document defines the canonical data repository architecture for MTG Lab.
   `data/raw/`.
 - **Processed Data:** Parsed records and normalized candidates, including
   proposed Print Sheet and Slot records, retain transformation lineage and are
-  explicitly non-canonical.
+  explicitly non-canonical. Deterministic pre-promotion review reports compare
+  bounded candidates with a validated canonical snapshot and remain processed data.
 - **Canonical Repository:** Reviewed and approved Product, Slot, Print Sheet,
   Printing, and Card definitions are version-controlled under repository-owned
   schemas. Relationships use stable IDs.

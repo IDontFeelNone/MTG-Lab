@@ -1,0 +1,48 @@
+{
+  "acquisition_target_id": "mb2-wave-2-card-printings",
+  "artifact_version": "1",
+  "card_candidate_artifact_id": "mb2-wave-2-card-printings-card-candidates-d76787c51d93f029",
+  "conflicts": [],
+  "duplicates": [
+    {
+      "entity_id": "magic.mb2.4.en",
+      "entity_type": "printing",
+      "reason": "Printing is already canonical with identical content",
+      "record_id": "mb2-wave-2-card-printings-record-01"
+    }
+  ],
+  "expected_repository_counts_after": {
+    "cards": 15,
+    "printings": 15
+  },
+  "generated_at": "2026-07-30T12:30:00Z",
+  "id": "mb2-wave-2-card-printings-review-d76787c51d93-0e731989bd7c",
+  "new_card_ids": [],
+  "new_printing_ids": [],
+  "parsed_artifact_id": "mb2-wave-2-card-printings-parsed-d76787c51d93f029",
+  "printing_candidate_artifact_id": "mb2-wave-2-card-printings-printing-candidates-d76787c51d93f029",
+  "product_id": "mystery_booster_2",
+  "raw_evidence_hash": "d76787c51d93f029a822110c4c77f829f563c647b9fec4ab7c2700bb7e96e058",
+  "rejected_records": [],
+  "repository_counts_before": {
+    "cards": 15,
+    "printings": 15
+  },
+  "repository_snapshot_hash": "0e731989bd7c57da7409f2450009900b5fa8e7be3600f328de47cf751046a113",
+  "reused_card_ids": [
+    "magic.adarkar-windform"
+  ],
+  "schema_version": "v1",
+  "source_id": "mb2-wave-2",
+  "summary": {
+    "conflicts": 0,
+    "duplicates": 1,
+    "expected_card_count_change": 0,
+    "expected_printing_count_change": 0,
+    "new_cards": 0,
+    "new_printings": 0,
+    "rejected_records": 0,
+    "reused_existing_cards": 1,
+    "total_records": 1
+  }
+}

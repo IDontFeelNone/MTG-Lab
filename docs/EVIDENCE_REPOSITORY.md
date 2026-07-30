@@ -56,3 +56,17 @@ skip Card promotion while still promoting a new dependent Printing.
 The Wave 2 retained run uses this bridge exclusively. It does not treat an
 unchecked raw-file copy as input and does not support Print Sheet, Slot,
 collation, probability, or simulation claims.
+
+
+## Scalable population boundary
+
+Phase 64 raises the complete verified Card and Printing batch boundary to at
+most twenty-five records. Oversized evidence fails instead of being truncated.
+An evidence artifact may declare its exact expected record count and Printing
+identifier set; the verified ingestion bridge rejects either form of drift.
+
+Before promotion, the batch is compared with one deterministic canonical
+repository snapshot. The schema-validated report records new and reused Cards,
+new Printings, duplicates, conflicts, rejected records, and expected repository
+count changes. Reports are non-canonical intermediate artifacts retained under
+`data/intermediate/reviews/`; they inform but never replace explicit approval.

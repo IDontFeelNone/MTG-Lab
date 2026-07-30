@@ -1,43 +1,45 @@
 # Next Task
 
-## Phase 63 — Mystery Booster 2 Card and Printing Population, Wave 2
+## Phase 64 — Scalable Evidence-Backed Card and Printing Batch Population
 
 **Status:** Complete; awaiting review
 
 ## Objective
 
-Populate a bounded Wave 2 exclusively from Evidence Repository-verified bytes,
-without adding Mystery Booster 2 product rules.
+Validate scalable, evidence-backed canonical population for a complete bounded
+batch of up to twenty-five verified Printings without weakening explicit review
+or any Tier 0 boundary.
 
 ## Delivered Scope
 
-- Archived one reviewed Card and Printing pair in `mb2-wave-2` with content and
-  claim provenance.
-- Reused the three existing external canonical Source Records and broadened
-  their versioned descriptions to cover both completed waves.
-- Added a verified-evidence ingestion bridge that calls `load_evidence_bundle`,
-  selects one JSON artifact, and rejects embedded sources absent from artifact
-  provenance.
-- Added existing-Card detection so a later wave can skip duplicate Card
-  promotion while promoting a Printing that references the canonical Card.
-- Retained deterministic parsed and candidate artifacts, promoted the new Card
-  before its Printing, and recorded two immutable approval audits.
+- Increased the complete-batch limit from five to twenty-five records.
+- Oversized inputs now fail rather than being silently truncated.
+- Evidence artifacts may declare an exact expected record count and exact set of
+  Printing identifiers; verified ingestion rejects drift from either boundary.
+- Added a versioned, schema-validated pre-promotion review report with deterministic
+  identity bound to both evidence bytes and the canonical repository snapshot.
+- Reports enumerate new Cards, reused Cards, new Printings, duplicates, conflicts,
+  rejected records, and expected before/after repository counts.
+- Added immutable storage for reports under `data/intermediate/reviews/`.
+- Proved the 25-record ceiling with synthetic fixtures and retained the verified
+  Wave 2 replay report. The replay correctly requires no canonical count change.
 
 ## Exclusions Honored
 
-- No Print Sheet, Slot, Product rule, collation, probability, Rules Engine
-  execution, simulation, analytics, market, AI, persistence, or Tier 0 change.
-- No unchecked raw file is a Wave 2 ingestion input.
+- No automatic approval or evidence acquisition.
+- No new Product, Print Sheet, Slot, collation, probability, Rules Engine,
+  simulation, analytics, market, persistence, API, UI, or AI behavior.
+- No Tier 0 architecture or canonical domain schema change.
 
 ## Validation
 
 - `PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v`
 - JSON parsing and schema validation for all repository JSON
-- Deterministic canonical Card/Printing and rule snapshots
-- Canonical entity and audit counts
+- Deterministic retained review-report reproduction
+- Canonical Card/Printing and rules snapshots
 - `git diff --check`
 
 ## Next Milestone
 
-Awaiting review and explicit approval. No Wave 3 or product-rule population is
-approved.
+Awaiting review and explicit approval. No additional population or product-rule
+milestone is approved.

@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Scalable evidence-backed Card and Printing batches of up to twenty-five complete records, with oversized-input rejection and manifest-declared record-count and Printing-identity boundaries.
+- Versioned deterministic pre-promotion review reports retained alongside intermediate artifacts, summarizing new and reused Cards, new Printings, duplicates, conflicts, rejected records, and expected repository count changes.
 - Evidence-repository-exclusive Mystery Booster 2 Card and Printing Wave 2,
   adding one verified pair with deterministic intermediate artifacts, declared
   embedded sources, controlled dependency-order promotion, and immutable audits.

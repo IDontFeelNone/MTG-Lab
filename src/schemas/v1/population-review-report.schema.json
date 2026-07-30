@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.dev/schemas/v1/population-review-report.schema.json",
+  "title": "Canonical Population Pre-Promotion Review Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "artifact_version", "id", "product_id", "source_id",
+    "acquisition_target_id", "generated_at", "raw_evidence_hash",
+    "repository_snapshot_hash", "parsed_artifact_id", "card_candidate_artifact_id",
+    "printing_candidate_artifact_id", "summary", "new_card_ids",
+    "reused_card_ids", "new_printing_ids", "duplicates", "conflicts",
+    "rejected_records", "repository_counts_before", "expected_repository_counts_after"
+  ],
+  "properties": {
+    "schema_version": {"const": "v1"},
+    "artifact_version": {"type": "string", "minLength": 1},
+    "id": {"$ref": "#/$defs/id"},
+    "product_id": {"$ref": "#/$defs/id"},
+    "source_id": {"$ref": "#/$defs/id"},
+    "acquisition_target_id": {"$ref": "#/$defs/id"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "raw_evidence_hash": {"$ref": "#/$defs/hash"},
+    "repository_snapshot_hash": {"$ref": "#/$defs/hash"},
+    "parsed_artifact_id": {"$ref": "#/$defs/id"},
+    "card_candidate_artifact_id": {"$ref": "#/$defs/id"},
+    "printing_candidate_artifact_id": {"$ref": "#/$defs/id"},
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["total_records", "new_cards", "reused_existing_cards", "new_printings", "duplicates", "conflicts", "rejected_records", "expected_card_count_change", "expected_printing_count_change"],
+      "properties": {
+        "total_records": {"type": "integer", "minimum": 1, "maximum": 25},
+        "new_cards": {"type": "integer", "minimum": 0},
+        "reused_existing_cards": {"type": "integer", "minimum": 0},
+        "new_printings": {"type": "integer", "minimum": 0},
+        "duplicates": {"type": "integer", "minimum": 0},
+        "conflicts": {"type": "integer", "minimum": 0},
+        "rejected_records": {"type": "integer", "minimum": 0},
+        "expected_card_count_change": {"type": "integer", "minimum": 0},
+        "expected_printing_count_change": {"type": "integer", "minimum": 0}
+      }
+    },
+    "new_card_ids": {"$ref": "#/$defs/id_list"},
+    "reused_card_ids": {"$ref": "#/$defs/id_list"},
+    "new_printing_ids": {"$ref": "#/$defs/id_list"},
+    "duplicates": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "conflicts": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "rejected_records": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "repository_counts_before": {"$ref": "#/$defs/counts"},
+    "expected_repository_counts_after": {"$ref": "#/$defs/counts"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "id_list": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "counts": {
+      "type": "object", "additionalProperties": false, "required": ["cards", "printings"],
+      "properties": {"cards": {"type": "integer", "minimum": 0}, "printings": {"type": "integer", "minimum": 0}}
+    },
+    "finding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["record_id", "entity_type", "entity_id", "reason"],
+      "properties": {
+        "record_id": {"$ref": "#/$defs/id"},
+        "entity_type": {"enum": ["card", "printing", "record"]},
+        "entity_id": {"$ref": "#/$defs/id"},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

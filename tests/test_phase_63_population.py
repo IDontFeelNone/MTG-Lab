@@ -94,6 +94,9 @@ class Phase63PopulationTests(unittest.TestCase):
             manifest = json.loads(manifest_path.read_text())
             manifest["artifacts"][0]["byte_size"] = len(content)
             manifest["artifacts"][0]["sha256"] = hashlib.sha256(content).hexdigest()
+            manifest["artifacts"][0]["population_batch"]["expected_printing_ids"] = [
+                "magic.mb2.999.en"
+            ]
             manifest_path.write_text(json.dumps(manifest))
             wave = self.ingest(evidence_root=evidence_root, games_root=games_root)
             self.assertEqual(

@@ -14,10 +14,13 @@ class IntermediateArtifactStorage:
     def __init__(self, root:Path|None=None)->None: self._root=Path(root) if root else _ROOT
     def store_parsed(self, document:Mapping[str,Any])->Path: return self._store("parsed","parsed-record-artifact",document)
     def store_candidates(self, document:Mapping[str,Any])->Path: return self._store("candidates","normalized-candidate-artifact",document)
+    def store_review_report(self, document:Mapping[str,Any])->Path: return self._store("reviews","population-review-report",document)
     def load_parsed(self, product_id:str, source_id:str, target_id:str, artifact_id:str)->dict[str,Any]:
         return self._load("parsed","parsed-record-artifact",product_id,source_id,target_id,artifact_id)
     def load_candidates(self, product_id:str, source_id:str, target_id:str, artifact_id:str)->dict[str,Any]:
         return self._load("candidates","normalized-candidate-artifact",product_id,source_id,target_id,artifact_id)
+    def load_review_report(self, product_id:str, source_id:str, target_id:str, artifact_id:str)->dict[str,Any]:
+        return self._load("reviews","population-review-report",product_id,source_id,target_id,artifact_id)
     def _store(self,kind:str,schema:str,d:Mapping[str,Any])->Path:
         try: validate_document(d,schema)
         except SchemaValidationError as e: raise EvidenceStorageError(str(e)) from e

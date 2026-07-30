@@ -32,18 +32,22 @@ def _slug(value: str) -> str:
 
 def ingest_card_printing_wave(
     content: bytes, *, product_id: str, bundle_source_id: str,
-    acquisition_target_id: str, acquired_at: str, limit: int = 5,
+    acquisition_target_id: str, acquired_at: str, limit: int = 25,
 ) -> CardPrintingWave:
-    """Convert a reviewed multi-source evidence bundle into at most ``limit`` pairs."""
-    if not 1 <= limit <= 5:
-        raise ValueError("limit must be between one and five")
+    """Convert one complete, reviewed evidence batch of at most ``limit`` pairs."""
+    if not 1 <= limit <= 25:
+        raise ValueError("limit must be between one and twenty-five")
     document = json.loads(content.decode("utf-8"))
     records = document.get("records")
     if not isinstance(records, list):
         raise ValueError("evidence bundle records must be a list")
-    selected = records[:limit]
-    if not selected:
+    if not records:
         raise ValueError("evidence bundle contains no reviewable records")
+    if len(records) > limit:
+        raise ValueError(
+            f"evidence bundle contains {len(records)} records, exceeding the limit of {limit}"
+        )
+    selected = records
 
     digest = hash_bytes(content)
     artifact_id = f"{acquisition_target_id}-parsed-{digest[:16]}"

@@ -83,3 +83,17 @@ those Cards are not promoted again, while a new Printing may still reference
 the existing Card. The retained Wave 2 run adds one new Card and its Mystery
 Booster 2 Printing in dependency order with two immutable approval audits. It
 does not define a complete card pool or authorize product-rule data.
+
+
+## Scalable population review
+
+Phase 64 supports complete evidence-backed batches of up to twenty-five
+Printings. A batch over its approved limit fails without producing a truncated
+partial interpretation. Optional manifest boundaries bind the verified artifact
+to an exact record count and Printing identifier set.
+
+A deterministic pre-promotion report is bound to the raw evidence hash and the
+validated canonical Card/Printing snapshot hash. It classifies new Cards, reused
+Cards, new Printings, duplicates, conflicts, and rejected records and states the
+expected repository count delta. The report is retained outside canonical data
+and cannot approve or promote a candidate.

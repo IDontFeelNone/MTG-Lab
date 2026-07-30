@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 63 — Mystery Booster 2 Card and Printing Population, Wave 2 complete
+- Current implementation phase: Phase 64 — Scalable Evidence-Backed Card and Printing Batch Population complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -25,6 +25,7 @@
   decisions, immutable audits, idempotency, conflict protection, and
   referentially safe rollback
 - Research Log is defined as a Tier 0 architectural subsystem; implementation remains future work
+- Deterministic pre-promotion population review reports are schema-validated and retained outside canonical data
 - Probability, simulation, analytics, and market intelligence remain future work
 
 ## Mystery Booster 2 Repository Status
@@ -67,6 +68,8 @@
 - Evidence-backed Wave 2 population with one new Card and Printing, verified
   artifact-to-record source attribution, existing-Card promotion filtering,
   deterministic intermediate artifacts, and immutable promotion audits
+- Scalable complete-batch ingestion for up to twenty-five verified Printings,
+  manifest-declared population boundaries, and retained deterministic review reports
 
 ## Remaining Work
 - Broader reviewed Card and Printing evidence acquisition and population,
