@@ -1,0 +1,43 @@
+{
+  "schema_version": "v1",
+  "id": "phase_67_mb2_evidence_20260730",
+  "title": "Mystery Booster 2 artifact-bearing evidence handoff",
+  "created_at": "2026-07-30T00:00:00Z",
+  "notes": "Quarantined Phase 67 handoff. The artifact is an exact re-delivery of the title-only Wizards product-page capture already archived by the Evidence Repository at data/sources/magic/mb2-phase-65-product-overview/files/official-product-page-title.html. Its original URL is https://magic.wizards.com/en/products/mystery-booster, publisher Wizards of the Coast, access date 2026-07-29, and acquisition method a controlled HTML capture. The preserved artifact contains no personal data. Wizards retains copyright; redistribution is limited to repository research and audit. The source bytes support product identity only. They do not support pack structure, Slots, Print Sheets, pools, weights, replacement, treatments, collation, probabilities, packaging, or version differences. Live external acquisition attempts on 2026-07-30 were blocked by the environment (HTTP 401 from web retrieval and proxy HTTP 403 from direct HTTPS), so no unverifiable content was added.",
+  "sources": [
+    {
+      "id": "wizards-mystery-booster-2-product-overview",
+      "reference": "https://magic.wizards.com/en/products/mystery-booster",
+      "retrieved_at": "2026-07-29T00:00:00Z"
+    }
+  ],
+  "required_artifact_ids": [
+    "wizards-mb2-product-page-title"
+  ],
+  "artifacts": [
+    {
+      "id": "wizards-mb2-product-page-title",
+      "path": "artifacts/wizards-mb2-product-page-title-20260729.html",
+      "media_type": "text/html",
+      "byte_size": 238,
+      "sha256": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+      "source_ids": [
+        "wizards-mystery-booster-2-product-overview"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "mb2.product.identity.title",
+      "topic": "mystery-booster-2.product-page-title",
+      "value": "Mystery Booster 2",
+      "statement": "The captured HTML title, Open Graph title, and page heading identify Mystery Booster 2.",
+      "artifact_ids": [
+        "wizards-mb2-product-page-title"
+      ],
+      "source_ids": [
+        "wizards-mystery-booster-2-product-overview"
+      ]
+    }
+  ]
+}
