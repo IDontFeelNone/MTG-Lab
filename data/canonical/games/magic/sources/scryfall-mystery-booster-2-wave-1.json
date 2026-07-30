@@ -1,13 +1,15 @@
 {
   "schema_version": "v1",
   "id": "scryfall-mystery-booster-2-wave-1",
-  "title": "Scryfall Mystery Booster 2 printing records used by Wave 1",
+  "title": "Scryfall Mystery Booster 2 printing records used by Waves 1 and 2",
   "source_classification": "community",
   "provider": "Scryfall",
   "source_location": "https://scryfall.com/sets/mb2",
   "access_date": "2026-07-29",
   "verification_status": "supported",
-  "claims": ["Set code, collector number, rarity, and language for the bounded Wave 1 printings."],
+  "claims": [
+    "Set code, collector number, rarity, and language for the bounded Wave 1 and Wave 2 printings."
+  ],
   "notes": "Printing fields are attributed separately from official product-membership evidence.",
-  "record_version": "1"
+  "record_version": "2"
 }

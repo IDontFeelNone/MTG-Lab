@@ -69,3 +69,17 @@ identity, community Printing identity, and official product-membership sources.
 The deterministic pipeline retains parsed and candidate artifacts, promotes
 Cards before Printings, and preserves six immutable approval audits. This wave
 does not define a complete card pool or authorize Print Sheet or Slot data.
+
+## Mystery Booster 2 Wave 2
+
+Phase 63 requires the population workflow to enter through the Evidence
+Repository. The application bridge loads and verifies the archived bundle,
+selects one JSON artifact, checks every embedded Card, Printing, and membership
+source against artifact provenance, and only then invokes the bounded
+deterministic normalizer.
+
+Review identifies Card candidates whose stable IDs already exist canonically;
+those Cards are not promoted again, while a new Printing may still reference
+the existing Card. The retained Wave 2 run adds one new Card and its Mystery
+Booster 2 Printing in dependency order with two immutable approval audits. It
+does not define a complete card pool or authorize product-rule data.

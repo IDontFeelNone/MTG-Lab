@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 62 — Evidence Repository Foundation complete
+- Current implementation phase: Phase 63 — Mystery Booster 2 Card and Printing Population, Wave 2 complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -34,9 +34,10 @@
 - Parsed and normalized product candidates are traceable and schema-validated;
   controlled promotion is available only for explicitly reviewed product candidates
 - An initial fixed increment of ten reviewed Cards and their Printings, in
-  addition to the foundation pair, is populated from an official source. A
-  deterministic multi-source Wave 1 workflow adds three evidence-supported
-  Mystery Booster 2 Cards and their Printings;
+  addition to the foundation pair, is populated from an official source.
+  Deterministic multi-source Waves 1 and 2 add four evidence-supported Mystery
+  Booster 2 Cards and their Printings; Wave 2 loads its input exclusively from
+  the verified Evidence Repository and reuses existing canonical Source Records;
   slots, sheets, collation, probabilities, simulations, and market data remain unpopulated
 
 ## Completed Work
@@ -63,6 +64,9 @@
 - Evidence repository foundation with a canonical `data/sources/` layout,
   versioned manifests, archived-file integrity checks, and provenance validation
   demonstrated on the existing Wave 1 extract
+- Evidence-backed Wave 2 population with one new Card and Printing, verified
+  artifact-to-record source attribution, existing-Card promotion filtering,
+  deterministic intermediate artifacts, and immutable promotion audits
 
 ## Remaining Work
 - Broader reviewed Card and Printing evidence acquisition and population,

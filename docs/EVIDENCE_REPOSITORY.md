@@ -43,3 +43,16 @@ Phase 62 archives the already-reviewed Mystery Booster 2 Wave 1 controlled
 extract as the first evidence bundle. This proves loading and provenance
 validation against real repository evidence without adding or changing Cards,
 Printings, Print Sheets, Slots, the Product, or any product-rule data.
+
+## Verified ingestion boundary
+
+Phase 63 adds an application-level bridge for bounded Card and Printing waves.
+The bridge always calls `load_evidence_bundle`, selects one declared JSON
+artifact, and validates every source identifier embedded in its records against
+that artifact's provenance before invoking deterministic ingestion. It also
+identifies Card candidates whose canonical Cards already exist so review can
+skip Card promotion while still promoting a new dependent Printing.
+
+The Wave 2 retained run uses this bridge exclusively. It does not treat an
+unchecked raw-file copy as input and does not support Print Sheet, Slot,
+collation, probability, or simulation claims.

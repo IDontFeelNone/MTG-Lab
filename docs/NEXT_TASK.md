@@ -1,38 +1,43 @@
 # Next Task
 
-## Phase 62 — Evidence Repository Foundation
+## Phase 63 — Mystery Booster 2 Card and Printing Population, Wave 2
 
-**Status:** Complete
+**Status:** Complete; awaiting review
 
 ## Objective
 
-Implement the evidence acquisition and archival boundary without populating
-additional Mystery Booster 2 Cards or product rules.
+Populate a bounded Wave 2 exclusively from Evidence Repository-verified bytes,
+without adding Mystery Booster 2 product rules.
 
 ## Delivered Scope
 
-- Established the canonical game-scoped `data/sources/` archive layout.
-- Added the versioned `evidence-manifest` schema for bundle identity, archived
-  artifact integrity, and claim-level provenance.
-- Added immutable bundle and artifact loading with path containment, byte-size,
-  SHA-256, duplicate, and source-reference validation.
-- Archived the existing Wave 1 controlled extract as the first verified bundle.
-- Added focused validation tests and documented the evidence/raw/canonical boundary.
+- Archived one reviewed Card and Printing pair in `mb2-wave-2` with content and
+  claim provenance.
+- Reused the three existing external canonical Source Records and broadened
+  their versioned descriptions to cover both completed waves.
+- Added a verified-evidence ingestion bridge that calls `load_evidence_bundle`,
+  selects one JSON artifact, and rejects embedded sources absent from artifact
+  provenance.
+- Added existing-Card detection so a later wave can skip duplicate Card
+  promotion while promoting a Printing that references the canonical Card.
+- Retained deterministic parsed and candidate artifacts, promoted the new Card
+  before its Printing, and recorded two immutable approval audits.
 
 ## Exclusions Honored
 
-- No additional Card or Printing was populated.
-- No Print Sheet or Slot was created.
-- The Mystery Booster 2 Product remains a foundation with no Slot references.
-- No collation, probability, Rules Engine execution, simulation, or analytics was added.
+- No Print Sheet, Slot, Product rule, collation, probability, Rules Engine
+  execution, simulation, analytics, market, AI, persistence, or Tier 0 change.
+- No unchecked raw file is a Wave 2 ingestion input.
 
 ## Validation
 
 - `PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v`
-- JSON parsing for all repository data and schemas
+- JSON parsing and schema validation for all repository JSON
+- Deterministic canonical Card/Printing and rule snapshots
+- Canonical entity and audit counts
 - `git diff --check`
 
 ## Next Milestone
 
-Awaiting review and explicit approval. No Wave 2 population or downstream rules
-milestone is approved.
+Awaiting review and explicit approval. No Wave 3 or product-rule population is
+approved.
