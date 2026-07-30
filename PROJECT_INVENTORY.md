@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 65 — Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment complete
+- Current implementation phase: Phase 65 merged; post-Phase 65 planning complete; proposed Phase 66 awaits approval
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation

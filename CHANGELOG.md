@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- A post-Phase 65 architectural assessment and complete dependency plan for the
+  first evidence-backed Mystery Booster 2 booster, including a bounded proposed
+  evidence-acquisition milestone; no implementation or canonical data changed.
+- A documentation-only Phase 66 Evidence Acquisition Packet, controlled raw
+  handoff layout, source/claim checklist, stop conditions, and machine-readable
+  external intake manifest template for network-restricted operation.
 - A retained, schema-validated Mystery Booster 2 Rule Claim Matrix with stable claims, evidence classifications, Source Record and bundle references, precise locators, Tier 0 entity mappings, and explicit uncertainty.
 - A deterministic Evidence Sufficiency Report separating known, partial, and unknown claims, blockers for canonical rules, pack generation, and probability, plus a no-redesign architectural sufficiency assessment.
 - A content-verified archive of the controlled official Mystery Booster 2 product-title capture and cross-validation for non-canonical rule research artifacts.

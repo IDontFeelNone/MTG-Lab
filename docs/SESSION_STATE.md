@@ -18,12 +18,11 @@ v12
 
 ## Current Phase
 
-Phase 65 — Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment complete;
-awaiting review and approval for the next milestone
+Post-Phase 65 planning cycle complete; proposed Phase 66 awaits explicit approval
 
 ## Last Merged PR
 
-PR #15 — Phase 64 Scalable Evidence-Backed Card and Printing Batch Population.
+PR #16 — Phase 65 Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment.
 
 ## Repository Status
 
@@ -111,8 +110,10 @@ PR #15 — Phase 64 Scalable Evidence-Backed Card and Printing Batch Population.
 
 ## Current Focus
 
-Awaiting review of Phase 65. No canonical Mystery Booster 2 Print Sheet, Slot,
-product-rule population, probability, or pack-generation milestone is approved.
+The fresh critical-path assessment is recorded in `FIRST_BOOSTER_PLAN.md`.
+Proposed Phase 66 targets pack-topology and selection-semantics evidence; it is
+not approved. No canonical Mystery Booster 2 Print Sheet, Slot, product-rule
+population, probability, or pack-generation milestone is approved.
 
 ## Open Risks
 
@@ -131,8 +132,8 @@ product-rule population, probability, or pack-generation milestone is approved.
 
 ## Upcoming Milestones
 
-1. Review Phase 65, Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment.
-2. Require separate approval for targeted rule-evidence acquisition.
+1. Review and approve or revise proposed Phase 66.
+2. Require separate approval before targeted rule-evidence acquisition.
 3. Canonical rule population, probability, simulation, and analytics remain blocked.
 
 ## Next Session Checklist

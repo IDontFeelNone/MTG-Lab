@@ -1,0 +1,57 @@
+{
+  "template_version": "1",
+  "handoff_id": "<lowercase-stable-handoff-id>",
+  "game": "magic",
+  "product_id": "mystery_booster_2",
+  "phase": 66,
+  "prepared_by": "<person-or-organization>",
+  "prepared_at": "<YYYY-MM-DD>",
+  "reviewed_by": "<independent-reviewer-or-pending>",
+  "reviewed_at": "<YYYY-MM-DD-or-pending>",
+  "scope_notes": "<product-version-and-acquisition-scope>",
+  "artifacts": [
+    {
+      "artifact_id": "<lowercase-stable-artifact-id>",
+      "proposed_source_record_id": "<lowercase-stable-source-record-id>",
+      "source_title": "<verbatim-source-title>",
+      "publisher": "<publisher-name>",
+      "original_url": "<https-url>",
+      "access_date": "<YYYY-MM-DD>",
+      "artifact_filename": "<exact-filename-with-extension>",
+      "media_type": "<iana-media-type>",
+      "file_size_bytes": "<non-negative-integer>",
+      "sha256": "<64-lowercase-hex-characters>",
+      "authority_classification": "<official_wizards_product_page|official_wizards_announcement_or_article|official_card_gallery_or_checklist|official_packaging_or_instructions|archived_first_party_material|well_documented_community_research|observed_opening_dataset>",
+      "acquisition_method": "<direct-download|browser-save|scan|photograph|archive-download|dataset-export>",
+      "product_version_scope": "<release-region-language-channel-packaging-or-production-run>",
+      "claims_supported": [
+        {
+          "rule_claim_id": "<existing-or-proposed-rule-claim-id>",
+          "exact_claim": "<narrow-factual-claim-supported-by-this-artifact>",
+          "precise_locators": [
+            "<page-heading-paragraph-table-row-image-panel-json-pointer-timestamp-or-row-range>"
+          ]
+        }
+      ],
+      "known_limitations": [
+        "<missing-context-version-or-evidentiary-limitation>"
+      ],
+      "conflict_notes": [
+        "<contradictory-artifact-id-and-description-or-none-known>"
+      ],
+      "redistribution_notes": "<restrictions-or-none-known>",
+      "personal_data_notes": "<presence-and-handling-or-none>"
+    }
+  ],
+  "failed_leads": [
+    {
+      "source_title": "<title-or-description>",
+      "original_url": "<https-url>",
+      "attempt_date": "<YYYY-MM-DD>",
+      "failure": "<inaccessible-dead-link-blocked-or-no-relevant-claim>"
+    }
+  ],
+  "handoff_notes": [
+    "<additional-review-note-or-none>"
+  ]
+}
