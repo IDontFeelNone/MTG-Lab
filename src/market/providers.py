@@ -6,6 +6,7 @@ import hashlib
 from abc import ABC, abstractmethod
 from datetime import datetime, timezone
 
+from .mappings import ExternalIdentifierMapping, ExternalMappingRepository
 from .models import PriceValues, ProviderResponse, validate_identifier
 
 
@@ -20,6 +21,23 @@ class MarketProvider(ABC):
     @abstractmethod
     def fetch(self, printing_id: str) -> ProviderResponse:
         """Retrieve partial market information for a canonical printing."""
+
+
+class MappedMarketProvider(MarketProvider):
+    """Base for future adapters that require an exact external identifier mapping."""
+
+    def __init__(self, mappings: ExternalMappingRepository, mapping_version: str):
+        self.mappings = mappings
+        self.mapping_version = validate_identifier(mapping_version, "mapping_version")
+
+    def fetch(self, printing_id: str) -> ProviderResponse:
+        mapping = self.mappings.resolve(printing_id, self.name, version=self.mapping_version)
+        return self.fetch_mapped(printing_id, mapping)
+
+    @abstractmethod
+    def fetch_mapped(self, printing_id: str,
+                     mapping: ExternalIdentifierMapping) -> ProviderResponse:
+        """Retrieve data using a mapping selected by the shared mapping layer."""
 
 
 class ManualMarketProvider(MarketProvider):
