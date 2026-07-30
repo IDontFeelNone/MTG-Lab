@@ -9,6 +9,7 @@ from external_ingestion import (AdapterRegistry, ExternalDatasetIngestor, MTGJSO
 from query import CanonicalQueryEngine
 from analytics import CanonicalAnalyticsEngine
 from semantic import CanonicalSemanticQueryEngine, SemanticRequest
+from reasoning import ReasoningContextBuilder, ReasoningContextError, ReasoningContextRequest
 
 
 def main(argv=None) -> int:
@@ -65,9 +66,39 @@ def main(argv=None) -> int:
         command = semantic_commands.add_parser(name); command.add_argument("identifier", nargs="?")
         command.add_argument("--statistics", action="store_true"); command.add_argument("--game", default="magic")
         command.add_argument("--format", choices=("json",), default="json")
+    reasoning = commands.add_parser("reasoning")
+    reasoning_commands = reasoning.add_subparsers(dest="reasoning_command", required=True)
+    for name in ("context", "entity", "dataset", "analytics", "provenance"):
+        command = reasoning_commands.add_parser(name)
+        command.add_argument("identifier", nargs="?")
+        command.add_argument("--game", default="magic"); command.add_argument("--type", default="card")
+        command.add_argument("--max-entities", type=int, default=100)
+        command.add_argument("--max-relationships", type=int, default=100)
+        command.add_argument("--max-evidence", type=int, default=100)
+        command.add_argument("--format", choices=("json",), default="json")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "semantic":
+    if args.command == "reasoning":
+        query_engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games", data_root=args.data_root)
+        semantic_engine = CanonicalSemanticQueryEngine(query_engine)
+        if args.reasoning_command == "entity":
+            if not args.identifier: parser.error("reasoning entity requires identifier")
+            semantic_request = SemanticRequest("find_identifier", {"identifier": args.identifier})
+        elif args.reasoning_command == "dataset":
+            if not args.identifier: parser.error("reasoning dataset requires identifier")
+            semantic_request = SemanticRequest("list_dataset", {"dataset": args.identifier})
+        elif args.reasoning_command == "provenance":
+            if not args.identifier: parser.error("reasoning provenance requires identifier")
+            semantic_request = SemanticRequest("list_provenance", {"source_id": args.identifier})
+        else:
+            semantic_request = SemanticRequest("list_type", {"entity_type": args.type})
+        request = ReasoningContextRequest(semantic_request, include_analytics=args.reasoning_command == "analytics",
+            maximum_entities=args.max_entities, maximum_relationships=args.max_relationships,
+            maximum_evidence_items=args.max_evidence)
+        try: result = ReasoningContextBuilder(semantic_engine).build(request).to_dict()
+        except ReasoningContextError as error:
+            print(json.dumps(error.to_dict(), indent=2, sort_keys=True)); return 2
+    elif args.command == "semantic":
         query_engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games",
                                             data_root=args.data_root)
         engine = CanonicalSemanticQueryEngine(query_engine)

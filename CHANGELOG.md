@@ -1,3 +1,9 @@
+# Phase 94 — AI Reasoning Context Layer v1 (Unreleased)
+
+- Added immutable, content-addressed reasoning context requests/results, deterministic evidence and provenance maps, mechanical truncation, typed errors, and JSON CLI commands.
+- The layer consumes only public semantic contracts and adds no LLM, advice generation, canonical mutation, or Architecture v12 change.
+- Merge recommendation remains withheld until GitHub Actions are green.
+
 ## Phase 93 — Canonical Semantic Query Layer v1
 
 - Added immutable, schema-versioned semantic requests and responses plus deterministic operations

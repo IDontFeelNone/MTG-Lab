@@ -1,3 +1,5 @@
+> **Phase 94 update:** `src/reasoning/` deterministically packages public semantic responses into immutable provenance-backed AI reasoning contexts. It performs no AI inference or language generation and awaits review and green CI.
+
 > **Phase 90 update:** the only supplied MTGJSON fixture was validated as synthetic set
 > `TST`, not MB2. The pilot stopped at its evidence gate with deterministic reports and no
 > registration, resolution, promotion, or canonical mutation.
