@@ -16,3 +16,7 @@ boxes/
 Each pack preserves the reported card order and any explicitly reported treatment or frame information. Unreported attributes remain unknown rather than inferred.
 
 Observation records must remain separate from canonical data and evidence-based rule promotion.
+
+Verification and dated market analysis are derived artifacts; see
+[`docs/MB2_OBSERVATION_INTELLIGENCE.md`](../../../../docs/MB2_OBSERVATION_INTELLIGENCE.md).
+They must never overwrite these raw reports or modify the canonical product dataset.
