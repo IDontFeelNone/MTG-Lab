@@ -1,27 +1,26 @@
 # Next Task
 
-> **Status: Current** — Phase 77.1 completion and merge gate.
+> **Status: Current** — Phase 79 architectural blocker resolution gate.
 
 ## Current approved milestone
 
-**Phase 77.1 — Repository Documentation Reconciliation**
+**Phase 79 — Mystery Booster 2 Canonical Dataset v1 (blocked)**
 
-Reconcile repository-authoritative documentation with the implementation through Phase
-76 and the Phase 77 architecture review. This is documentation-only: application code,
-tests, schemas, data models, canonical data, and public APIs must remain unchanged.
+Review `PHASE_79_PREIMPLEMENTATION_REVIEW.md`. Do not populate MB2 data or extend the
+importer until a separately approved, product-agnostic change can represent the
+required fields, assertion classes, and unknown collation without arbitrary metadata.
 
 ## Remaining approved actions
 
-- Review the final documentation diff for conflicting phase, subsystem, deferred-work,
-  count, roadmap, handoff, and next-action statements.
-- Run the CI-equivalent 137-test suite and documentation hygiene checks.
+- Review the blocker inventory and architectural-fit findings.
+- Run the CI-equivalent 141-test suite and documentation hygiene checks.
 - Observe the GitHub Actions result for the pull request.
 - Recommend merge only after GitHub Actions is green.
 
-## After Phase 77.1
+## After the Phase 79 review
 
 No implementation milestone is currently approved. Stop after the green merge handoff
-and request explicit authorization for one bounded next milestone.
+and request explicit authorization for one bounded contract/importer resolution.
 
 Possible future work is recorded, but not authorized, in two separate tracks:
 

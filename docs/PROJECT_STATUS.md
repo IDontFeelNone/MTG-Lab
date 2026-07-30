@@ -1,6 +1,6 @@
 # MTG Lab Project Status
 
-> **Status: Current** — executive dashboard through Phase 77.1.
+> **Status: Current** — executive dashboard at the Phase 79 stop gate.
 > This summary is subordinate to Architecture v12 and the documentation authority
 > defined in `../PROJECT_INVENTORY.md`.
 
@@ -9,15 +9,15 @@
 | Status item | Current state |
 | --- | --- |
 | Architecture version | v12; unchanged |
-| Current phase | Phase 77.1 — Repository Documentation Reconciliation |
+| Current phase | Phase 79 — MB2 Canonical Dataset v1 (blocked) |
 | Latest implementation milestone | Phase 76 — Decision Engine v1 |
 | Latest architecture milestone | Phase 77 — Architecture Consolidation & Technical Debt Review |
-| Current milestone scope | Documentation-only reconciliation; no runtime, API, schema, model, or canonical-data change |
+| Current milestone scope | Mandatory pre-implementation inventory; no dataset/importer implementation |
 | Repository maturity | Pre-alpha deterministic local reference implementation |
 | Canonical rule status | MB2 rule population remains evidence-blocked and unauthorized |
 | Implemented downstream foundations | Observation, Market, External Mapping, Collection, Analytics, and Decision engines |
 | Unimplemented product layers | Probability, simulation, live providers, database-backed persistence, API, UI, and AI advisor |
-| Next implementation milestone | None approved |
+| Next implementation milestone | None approved; contract/importer resolution required |
 | Merge gate | Do not recommend merge until GitHub Actions are green |
 
 ## Verified repository statistics
@@ -31,7 +31,7 @@ Counts below were derived directly from tracked repository content on 2026-07-30
 | Python source files under `src/` | 74 |
 | Versioned JSON schemas | 16 |
 | Top-level test modules | 26 |
-| Passing automated tests | 137 |
+| Passing automated tests | 141 |
 | Promotion audits | 28 |
 
 ### Canonical entities

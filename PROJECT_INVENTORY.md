@@ -1,13 +1,13 @@
 # MTG Lab Project Inventory
 
-> **Status: Current** — canonical inventory reconciled at Phase 77.1 on 2026-07-30.
+> **Status: Current** — Phase 79 pre-implementation review completed on 2026-07-30.
 
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Milestone:** Phase 77.1 repository documentation reconciliation
+- **Milestone:** Phase 79 MB2 dataset pre-implementation review (blocked)
 - **Maturity:** pre-alpha; deterministic local reference implementation
-- **Validation baseline:** 137 passing unit/integration-style tests under the CI command
+- **Validation baseline:** 141 passing unit/integration-style tests under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
   Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
   remain unpopulated
@@ -48,7 +48,7 @@
   `src/decisions` — downstream domain engines
 - `src/mtglab` — command-line application namespaces
 - `src/schemas/v1`, `src/validation` — versioned JSON contracts and validation
-- `tests/` — 137 deterministic tests collected by the Python validation workflow
+- `tests/` — 141 deterministic tests collected by the Python validation workflow
 - `docs/` — Architecture v12, subsystem contracts, governance, status, and history
 
 ## Architecture constraints and known debt
@@ -104,8 +104,9 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 77.1 reconciles documentation and authorizes no refactor. Any code change must be
-a separately scoped, non-breaking milestone with characterization tests. Evidence-
-blocked MB2 rule or simulation work remains subject to the existing sufficiency and
-promotion gates. No next implementation milestone is approved. Do not recommend merge
-of Phase 77.1 until GitHub Actions are green.
+Phase 79 stopped before implementation because Card/Printing v1 cannot represent the
+required facts and uncertainty, while the v1 importer cannot emit Contract v2 product
+graphs or retain assertion-level provenance. `docs/PHASE_79_PREIMPLEMENTATION_REVIEW.md`
+is the controlling blocker report. Any contract/importer resolution requires separate
+approval and must remain product-agnostic. Do not recommend merge until GitHub Actions
+are green.
