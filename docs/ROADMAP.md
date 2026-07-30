@@ -1,12 +1,12 @@
 # MTG Lab Roadmap
 
-> **Status: Current — Phase 91 implemented; review and green CI pending.**
+> **Status: Current — Phase 92 implemented; review and green CI pending.**
 
-## Current milestone — Phase 91
+## Current milestone — Phase 92
 
-Phase 90 is merged. The Canonical Query Engine now provides the sole supported deterministic
-read contract for entity, relationship, provenance, audit, dataset, validation, and exact
-search queries. Architecture v12 remains unchanged. Merge recommendation remains withheld
+Phase 91 is implemented. The Canonical Analytics Engine now provides immutable, versioned,
+content-addressed derived summaries over Canonical Query Engine results. Architecture v12
+remains unchanged. Merge recommendation remains withheld
 until GitHub Actions are green.
 
 ## Completed milestone — Phase 89
@@ -21,7 +21,7 @@ external acquisition/review boundary without canonical authority.
 | --- | --- |
 | Architecture | v12, unchanged |
 | Latest merged phase | Phase 90 — MB2 pilot evidence-gap outcome |
-| Current milestone | Phase 91 — Canonical Query Engine v1 |
+| Current milestone | Phase 92 — Canonical Analytics Engine v1 |
 | External formats | JSON, CSV, ZIP containing JSON/CSV |
 | Mystery Booster 2 dataset | Supplied-data evidence gap; not imported |
 | Simulation | Not implemented |
@@ -30,8 +30,8 @@ external acquisition/review boundary without canonical authority.
 
 ## Next milestone boundary
 
-Only Phase 91 review and CI are authorized. Future consumers must integrate through the
-stable Query Engine contract rather than repository internals. Simulation, Analytics
+Only Phase 92 review and CI are authorized. Future consumers must integrate through the
+stable Query Engine contract rather than repository internals. Simulation, further Analytics
 expansion, REST, and AI reasoning remain out of scope.
 
 ## Historical milestone summary

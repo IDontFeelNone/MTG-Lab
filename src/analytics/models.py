@@ -62,3 +62,33 @@ class AnalyticsReport:
         import json
 
         return json.dumps(self.to_dict(), indent=indent, sort_keys=True, separators=(",", ":") if indent is None else None)
+
+
+@dataclass(frozen=True)
+class CanonicalAnalyticsResult:
+    """Immutable, versioned result derived from one canonical query snapshot."""
+
+    analytics_type: str
+    canonical_snapshot_id: str
+    game: str
+    data: Mapping[str, Any]
+    provenance: Mapping[str, Any]
+    schema_version: str = "canonical-analytics-v1"
+
+    def __post_init__(self) -> None:
+        if self.schema_version != "canonical-analytics-v1":
+            raise ValueError(f"unsupported canonical analytics schema: {self.schema_version}")
+        if not self.canonical_snapshot_id.startswith("sha256:"):
+            raise ValueError("canonical_snapshot_id must be content-addressed")
+        object.__setattr__(self, "data", _freeze(self.data))
+        object.__setattr__(self, "provenance", _freeze(self.provenance))
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"schema_version": self.schema_version, "analytics_type": self.analytics_type,
+                "canonical_snapshot_id": self.canonical_snapshot_id, "game": self.game,
+                "data": thaw(self.data), "provenance": thaw(self.provenance)}
+
+    def to_json(self, *, indent: int | None = None) -> str:
+        import json
+        return json.dumps(self.to_dict(), indent=indent, sort_keys=True,
+                          separators=(",", ":") if indent is None else None)

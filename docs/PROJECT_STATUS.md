@@ -1,11 +1,11 @@
 # Project Status
 
-> **Status: Current — Phase 91 Canonical Query Engine implemented.**
+> **Status: Current — Phase 92 Canonical Analytics Engine implemented.**
 
-Phase 90 has been merged. MTG Lab remains a pre-alpha deterministic Architecture v12
-reference implementation. Phase 91 establishes the provider-agnostic Canonical Query Engine
-as the supported read boundary over typed canonical and governed promotion state.
+Phase 91 has been implemented. MTG Lab remains a pre-alpha deterministic Architecture v12
+reference implementation. Phase 92 establishes the read-only Canonical Analytics Engine
+as a derived consumer of the Phase 91 query boundary.
 
-The CLI exposes entity, search, dataset, provenance, and validation operations. Canonical
+The CLI exposes summary, entity, dataset, provenance, and validation analytics. Canonical
 state is unchanged; Simulation, REST, and AI remain unimplemented. Merge recommendation is
 withheld until GitHub Actions are green.
