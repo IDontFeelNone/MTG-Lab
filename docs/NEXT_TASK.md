@@ -1,12 +1,11 @@
 # Next Task
 
-> **Status: Current — validate Phase 90 evidence-gap outcome and CI.**
+> **Status: Current — review Phase 91 and await green CI.**
 
-Review the Phase 90 dataset inventory, checksum, adapter validation, deterministic report,
-and stop-condition enforcement. Confirm that the supplied fixture contains only `TST`, that
-no MB2 lifecycle stage after validation ran, and that no canonical state changed. The Project
-Owner may merge only after Project Architect approval and green GitHub Actions.
+Review the Canonical Query Engine contract, provider-neutral projections, relationship and
+provenance traversal, explicit validation states, deterministic search and ordering, CLI,
+tests, and documentation. The Project Owner may merge only after Project Architect approval
+and green GitHub Actions.
 
-A subsequent pilot requires a user-supplied or checked-in reproducible MTGJSON v5 dataset
-that actually contains MB2. Do not retrieve it live, fabricate records, bypass human review
-or promotion, implement Simulation, or add Analytics or Intelligence features.
+Do not add Analytics, Simulation, REST, AI reasoning, product-specific behavior, canonical
+schema changes, or direct downstream repository reads as part of this review.

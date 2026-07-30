@@ -1,14 +1,13 @@
 # MTG Lab Roadmap
 
-> **Status: Current — Phase 90 evidence-blocked; review and green CI pending.**
+> **Status: Current — Phase 91 implemented; review and green CI pending.**
 
-## Current milestone — Phase 90
+## Current milestone — Phase 91
 
-The requested Mystery Booster 2 pilot stopped after source validation: the repository's only
-supplied MTGJSON fixture contains synthetic set `TST`, not MB2. Deterministic reports preserve
-the checksum, observed contents, zero-import outcome, and evidence limitation. No acquisition,
-registration, resolution, promotion, or Architecture v12 change occurred. Merge recommendation
-remains withheld until GitHub Actions are green.
+Phase 90 is merged. The Canonical Query Engine now provides the sole supported deterministic
+read contract for entity, relationship, provenance, audit, dataset, validation, and exact
+search queries. Architecture v12 remains unchanged. Merge recommendation remains withheld
+until GitHub Actions are green.
 
 ## Completed milestone — Phase 89
 
@@ -21,8 +20,8 @@ external acquisition/review boundary without canonical authority.
 | Area | State |
 | --- | --- |
 | Architecture | v12, unchanged |
-| Latest merged phase | Phase 89 — MTGJSON Provider Adapter v1 |
-| Current milestone | Phase 90 — MB2 pilot stopped after validation |
+| Latest merged phase | Phase 90 — MB2 pilot evidence-gap outcome |
+| Current milestone | Phase 91 — Canonical Query Engine v1 |
 | External formats | JSON, CSV, ZIP containing JSON/CSV |
 | Mystery Booster 2 dataset | Supplied-data evidence gap; not imported |
 | Simulation | Not implemented |
@@ -31,9 +30,9 @@ external acquisition/review boundary without canonical authority.
 
 ## Next milestone boundary
 
-Only Phase 90 review and CI are authorized. A future retry requires supplied, reproducible
-MTGJSON v5 bytes containing MB2 and must preserve all manifest, integrity, review, resolution,
-and promotion boundaries. Simulation and Intelligence remain out of scope.
+Only Phase 91 review and CI are authorized. Future consumers must integrate through the
+stable Query Engine contract rather than repository internals. Simulation, Analytics
+expansion, REST, and AI reasoning remain out of scope.
 
 ## Historical milestone summary
 
