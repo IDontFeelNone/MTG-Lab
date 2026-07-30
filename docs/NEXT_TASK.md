@@ -1,8 +1,8 @@
 # Next Task
 
-> **Status: Current — review Phase 94 and await green CI.**
+> **Status: Current — review Phase 95 and await green CI.**
 
-Review the AI Reasoning Context Layer v1 contracts, semantic-only dependency boundary,
-deterministic evidence mapping and truncation, CLI, tests, and documentation. The Project Owner
-may merge only after Project Architect approval and green GitHub Actions. Do not add model
-providers, natural-language generation, recommendations, simulation, or upstream contract changes.
+Review the AI Model Adapter Framework v1 contracts, reasoning-context-only provider boundary,
+explicit registry, lifecycle validation, CLI, tests, and documentation. The Project Owner may
+merge only after Project Architect approval and green GitHub Actions. Do not add model providers,
+SDKs, prompts, inference, natural-language generation, or upstream contract changes.

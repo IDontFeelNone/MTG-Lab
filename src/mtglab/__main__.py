@@ -10,6 +10,8 @@ from query import CanonicalQueryEngine
 from analytics import CanonicalAnalyticsEngine
 from semantic import CanonicalSemanticQueryEngine, SemanticRequest
 from reasoning import ReasoningContextBuilder, ReasoningContextError, ReasoningContextRequest
+from ai import AIProviderRegistry, SCHEMA_VERSION as AI_SCHEMA_VERSION
+from ai.errors import AIAdapterError
 
 
 def main(argv=None) -> int:
@@ -76,9 +78,39 @@ def main(argv=None) -> int:
         command.add_argument("--max-relationships", type=int, default=100)
         command.add_argument("--max-evidence", type=int, default=100)
         command.add_argument("--format", choices=("json",), default="json")
+    ai = commands.add_parser("ai")
+    ai_commands = ai.add_subparsers(dest="ai_command", required=True)
+    for name in ("providers", "capabilities"):
+        command = ai_commands.add_parser(name)
+        command.add_argument("--format", choices=("json",), default="json")
+    ai_validate = ai_commands.add_parser("validate")
+    ai_validate.add_argument("--provider")
+    ai_validate.add_argument("--version")
+    ai_validate.add_argument("--capability")
+    ai_validate.add_argument("--format", choices=("json",), default="json")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "reasoning":
+    if args.command == "ai":
+        providers = AIProviderRegistry()
+        try:
+            if args.ai_command == "providers":
+                result = {"schema_version": AI_SCHEMA_VERSION, "providers": [], "versions": providers.versions()}
+            elif args.ai_command == "capabilities":
+                result = {"schema_version": AI_SCHEMA_VERSION, "providers": []}
+            elif args.provider:
+                provider = providers.lookup(args.provider, args.version)
+                if args.capability and args.capability not in provider.capabilities().capabilities:
+                    from ai.errors import UnsupportedCapability
+                    raise UnsupportedCapability(f"unsupported capability: {args.capability}")
+                result = {"schema_version": AI_SCHEMA_VERSION, "valid": True,
+                          "provider": provider.metadata().to_dict()}
+            else:
+                result = {"schema_version": AI_SCHEMA_VERSION, "valid": True,
+                          "registered_provider_count": len(providers.providers()),
+                          "message": "adapter contracts and registry are valid"}
+        except AIAdapterError as error:
+            print(json.dumps(error.to_dict(), indent=2, sort_keys=True)); return 2
+    elif args.command == "reasoning":
         query_engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games", data_root=args.data_root)
         semantic_engine = CanonicalSemanticQueryEngine(query_engine)
         if args.reasoning_command == "entity":
