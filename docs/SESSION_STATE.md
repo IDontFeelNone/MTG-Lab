@@ -1,6 +1,6 @@
 # Session State
 
-> **Status: Current** — Phase 84 is implemented locally; merge remains gated on green GitHub Actions.
+> **Status: Current** — Phase 83 is merged and complete as of 2026-07-30.
 
 ## Authoritative baseline
 
@@ -8,13 +8,13 @@
 | --- | --- |
 | Architecture | v12, unchanged |
 | Latest completed phase | Phase 83 — Institutional Memory and Project Constitution |
-| Latest merged runtime phase | Phase 82 — Raw Data Acquisition Framework |
-| Validation baseline | 160 passing tests locally (Phase 84 branch) |
+| Latest runtime phase | Phase 82 — Raw Data Acquisition Framework |
+| Validation baseline | 154 passing tests |
 | Mystery Booster 2 | Dataset remains evidence-acquisition blocked |
 | Simulation | Not implemented |
 | Intelligence Engine | Vision only; not implemented |
-| Active merge gate | Phase 84 GitHub Actions and human review |
-| Current milestone | Knowledge Acquisition Pipeline v1; no promotion |
+| Active merge gate | None from a prior pull request |
+| Next milestone | Requires explicit approval |
 
 Phase 83 added the Tier 0 [`CONSTITUTION.md`](CONSTITUTION.md),
 [`ARCHITECTS_NOTEBOOK.md`](ARCHITECTS_NOTEBOOK.md),

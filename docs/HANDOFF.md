@@ -1,13 +1,8 @@
 # Handoff
 
-> **Status: Current handoff** — Phase 84 implementation complete; CI and review pending.
+> **Status: Current handoff** — post-merge reconciliation after completed Phase 83.
 
 ## What the next session inherits
-
-- Phase 84 provides the complete non-canonical knowledge acquisition path through a
-  deterministic review package and machine-readable reports.
-- Local validation is 160 passing tests; confirm GitHub Actions before recommending merge.
-- Canonical promotion is deliberately absent and remains a future milestone.
 
 - Architecture v12 is unchanged.
 - Phase 83 — Institutional Memory and Project Constitution is merged and is the latest
