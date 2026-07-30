@@ -17,6 +17,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Documentation reconciliation for the merged first artifact-bearing Phase 67
+  evidence handoff and its successful Evidence Review Engine run. The handoff's
+  re-delivered official product-title capture supports only MB2 identity; frozen
+  Tier 0, the evidence-insufficient rule assessment, and the prohibition on
+  canonical promotion remain unchanged.
 - An executive `docs/PROJECT_STATUS.md` dashboard that records verified repository
   counts, documentation authority, Phase 66 entry and exit gates, mandatory stop
   conditions, debt categories, critical path, risks, and bounded estimates.

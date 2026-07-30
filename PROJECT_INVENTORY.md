@@ -4,8 +4,8 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 65 complete; Phase 66 is evidence-waiting
-  and its verification processing has not begun
+- Current implementation phase: Phase 67 evidence-waiting after successful
+  mechanical review of the first artifact-bearing handoff
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -28,9 +28,10 @@
 - Research Log is defined as a Tier 0 architectural subsystem; implementation remains future work
 - Deterministic pre-promotion population review reports are schema-validated and retained outside canonical data
 - A schema-validated Rule Claim Matrix and evidence sufficiency report retain MB2 rule research outside canonical data
-- The PR #18 Phase 66 raw research handoff structure is present with one empty-
-  artifact manifest and no acquired external evidence bytes; verification is
-  authorized only after the documented entry gate is satisfied
+- The first artifact-bearing Phase 67 handoff is merged. The Evidence Review
+  Engine successfully verified its bounded manifest, artifact integrity,
+  provenance, completeness, and internal consistency; the re-delivered official
+  product-title capture supports only the already-known MB2 product identity
 - Probability, simulation, analytics, and market intelligence remain future work
 
 ## Mystery Booster 2 Repository Status
@@ -45,8 +46,8 @@
   Booster 2 Cards and their Printings; Wave 2 loads its input exclusively from
   the verified Evidence Repository and reuses existing canonical Source Records;
   Phase 65 confirms preserved evidence remains insufficient for canonical rules.
-  The current Phase 66 handoff adds no evidence claim; slots, sheets, collation,
-  probabilities, simulations, and market data remain unpopulated
+  The Phase 67 handoff adds no outcome-affecting rule evidence; slots, sheets,
+  collation, probabilities, simulations, and market data remain unpopulated
 
 ## Completed Work
 - Approved Tier 0 Data Model Specification migrated to `docs/DATA_MODEL.md`
@@ -83,6 +84,9 @@
 - Product-agnostic Evidence Review Engine with versioned external-handoff and
   report contracts, integrity and provenance checks, deterministic completeness
   and consistency findings, and validated JSON and Markdown output
+- First artifact-bearing Phase 67 evidence handoff, quarantined outside canonical
+  data and successfully exercised through the Evidence Review Engine; its narrow
+  product-title claim does not authorize canonical rule promotion
 
 ## Remaining Work
 - Broader reviewed Card and Printing evidence acquisition and population,
