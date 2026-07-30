@@ -1,3 +1,5 @@
+> **Status: Current — unblock Phase 87 evidence acquisition.** Obtain a reproducible, legally usable MB2 provider snapshot and document terms before resuming the pilot. Do not substitute derived extracts or assumptions.
+
 # Next Task
 
 > **Status: Current — validate Phase 86 review and CI.** No large-scale product import is authorized; future imports must use Phase 86 governance.

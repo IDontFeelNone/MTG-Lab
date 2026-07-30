@@ -1,3 +1,5 @@
+> **Status: Current — Phase 87 stopped at evidence gate.** No admissible 25–50-card MB2 raw snapshot was available, so the governed lifecycle did not begin and canonical state is unchanged.
+
 # Project Status
 
 > **Status: Current — Phase 86 implementation submitted.** The complete reviewed-dataset governance lifecycle is implemented; merge remains contingent on green GitHub Actions.
