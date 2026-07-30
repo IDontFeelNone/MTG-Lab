@@ -22,7 +22,7 @@ Current focus is establishing the canonical architecture and reference implement
 
 **Current Phase:** Phase 65 ✅ Complete
 
-**Next Phase:** Awaiting approval
+**Next Phase:** Proposed Phase 66 — MB2 Pack Topology and Selection-Semantics Evidence Acquisition (awaiting approval)
 
 **Current Version:** v0.x
 
@@ -242,8 +242,13 @@ identity relationship.
 
 # Upcoming Phases
 
-No implementation phase is currently approved. Further canonical population or
-any Print Sheet and Slot milestone requires separate review and explicit approval.
+## Proposed Phase 66 — MB2 Pack Topology and Selection-Semantics Evidence Acquisition
+
+Acquire and preserve evidence for pack topology, pool mapping, replacement,
+treatments, and collation; reconcile the Rule Claim Matrix; and decide whether
+Tier 0 can express the supported behavior. This proposal is not approved and
+does not authorize canonical population or engine work. The end-to-end critical
+path is recorded in `docs/FIRST_BOOSTER_PLAN.md`.
 
 ---
 
