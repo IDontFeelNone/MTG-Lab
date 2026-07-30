@@ -20,10 +20,11 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Current Status
 
-**Current Phase:** Phase 65 ✅ Complete
+**Current Phase:** Phase 77.1 — Repository Documentation Reconciliation
 
-**Current Transition:** Phase 66 evidence-waiting; PR #18 handoff structure is
-present, contains no acquired artifacts, and has not entered verification
+**Current Transition:** Repository-authoritative documentation reconciled locally;
+merge remains contingent on green GitHub Actions. Architecture v12 is unchanged, and
+no next implementation milestone is approved.
 
 **Current Version:** v0.x
 
@@ -32,6 +33,58 @@ present, contains no acquired artifacts, and has not entered verification
 ---
 
 # Completed Milestones
+
+## Phase 68–76 — Foundational Backend Vertical Slice
+
+- Phase 68–69 established immutable observation verification and the generic
+  observation import pipeline.
+- Phase 70–71 established the typed Canonical Repository and reviewed local Canonical
+  Import Pipeline.
+- Phase 72–73 established the Market Provider Framework and versioned External Mapping
+  Layer.
+- Phase 74 established the immutable Collection Engine.
+- Phase 75 established the deterministic Analytics Engine and its seven factual reports.
+- Phase 76 established the explicit, explainable Decision Engine.
+
+All remain downstream of evidence-backed canonical identity and introduce no MB2 pack
+rules, probability, simulation, or user-facing application feature.
+
+## Phase 77 — Architecture Consolidation & Technical Debt Review
+
+### Objective
+
+Assess all implemented backend subsystems without redesigning Architecture v12 or
+changing behavior.
+
+### Success Criteria
+
+- [x] Repository-wide architecture assessment and dependency diagram.
+- [x] Responsibilities, coupling, cohesion, APIs, dependency direction, drift,
+  duplication, naming, organization, scale, extension, tests, and documentation
+  assessed for every requested subsystem.
+- [x] Maturity ratings, risks, technical debt, future scale concerns, and a non-
+  breaking consolidation sequence recorded in `ARCHITECTURE_REVIEW_v1.md`.
+- [x] Defects documented separately and not fixed automatically.
+- [x] Inventory, roadmap, and changelog reconciled through Phase 77.
+- [ ] GitHub Actions green on the Phase 77 pull request (merge gate).
+
+## Phase 77.1 — Repository Documentation Reconciliation
+
+### Objective
+
+Reconcile current-state, handoff, roadmap, architecture-overview, and historical-plan
+documentation with the implementation through Phase 76 and the Phase 77 review.
+
+### Success Criteria
+
+- [x] Current session state, dashboard, handoff, and next task report one Phase 77.1
+  baseline with accurate subsystem status, counts, and authorization.
+- [x] Phase 65–67 plans remain retained and are explicitly labeled Historical,
+  Superseded, or Reference where appropriate.
+- [x] README and Architecture v12 distinguish implemented behavior from target vision.
+- [x] Documentation status labels and subsystem names are standardized.
+- [x] No application code, tests, schemas, models, APIs, or canonical data changed.
+- [ ] GitHub Actions green on the Phase 77.1 pull request (merge gate).
 
 ## Foundation
 - Initial repository
@@ -62,7 +115,7 @@ present, contains no acquired artifacts, and has not entered verification
 
 ---
 
-# Most Recently Completed Milestone
+# Earlier Evidence Milestone
 
 ## Phase 65 — Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment
 
@@ -243,19 +296,29 @@ identity relationship.
 
 # Upcoming Phases
 
-## Phase 66 — MB2 Pack Topology and Selection-Semantics Evidence Verification
+## Post-77 consolidation candidates
 
-**Status:** Evidence-waiting; processing has not begun.
+No refactor is authorized by this roadmap entry. Separately approved milestones may:
 
-The controlled research handoff structure from PR #18 exists, but its manifest
-declares no artifacts and its artifact directory is empty. Verification is
-conditionally authorized only after an artifact-bearing, content-complete,
-independently reviewed handoff satisfies the entry gate. Phase 66 may then
-preserve supported evidence for pack topology, pool mapping, replacement,
-treatments, and collation; reconcile the Rule Claim Matrix; and decide whether
-Tier 0 can express the supported behavior. It does not authorize canonical
-population or engine work. The end-to-end critical path is recorded in
-`docs/FIRST_BOOSTER_PLAN.md`.
+1. publish stable public and provenance protocols;
+2. add characterization tests for overlapping canonical, observation analytics, and
+   market representations;
+3. introduce compatibility adapters and internal ID indexes; and
+4. harden single-writer filesystem transactions and recovery.
+
+These changes must remain non-breaking and preserve Architecture v12. Feature work and
+evidence-blocked MB2 rules are outside Phase 77.
+
+## MB2 evidence-dependent work
+
+**Status:** Blocked by evidence sufficiency; not authorized by Phase 77.
+
+Phase 66 established the controlled external handoff. The first artifact-bearing
+Phase 67 handoff was subsequently integrity/provenance reviewed, but its official
+product-title capture supported only the already-known product identity. Preserved
+evidence remains insufficient for pack topology, pool mapping, replacement,
+treatments, collation, canonical rule population, probability, or simulation. The
+end-to-end critical path and stop conditions remain in `docs/FIRST_BOOSTER_PLAN.md`.
 
 ---
 
@@ -301,10 +364,18 @@ Long-term platform evolution.
 - Cross-document status consistency is review-driven rather than enforced by an
   automated documentation validator.
 - Research Log Tier 0 architecture is approved, but its implementation is deferred.
+- Typed and schema-backed canonical repository representations overlap.
+- Observation-specific analytics and market snapshot types overlap the newer generic
+  Analytics and Market engines.
+- Cross-subsystem provenance is comprehensive but lacks one vocabulary and lineage API.
+- Filesystem loaders use eager tree scans, linear lookup, and single-writer assumptions.
+- Stable serialization, immutable conversion, identifier, timestamp, and atomic-write
+  helpers are duplicated across packages.
 
 ## Evidence Debt
 
-- No artifact-bearing Phase 66 external handoff exists.
+- The reviewed Phase 67 artifact-bearing handoff adds no outcome-affecting rule
+  evidence beyond the already-known MB2 product identity.
 - Complete MB2 pack topology, event pools, weights/frequency semantics,
   replacement, treatments, conditionality, correlation, and sequencing remain
   unsupported by preserved evidence.
@@ -324,9 +395,10 @@ Long-term platform evolution.
 
 ## Deferred Product Layers
 
-- Persistence/database, analytics, market intelligence, collection management,
-  API, UI, and AI advisor layers remain intentionally deferred. Their absence is
-  roadmap scope, not evidence that partially implemented behavior is complete.
+- Database-backed persistence, live market providers, API, UI, simulation, and AI
+  advisor layers remain intentionally deferred. Market, collection, analytics, and
+  deterministic decisions now have bounded v1 implementations; they are not complete
+  product applications.
 
 ---
 

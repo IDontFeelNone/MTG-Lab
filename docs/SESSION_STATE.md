@@ -1,179 +1,115 @@
 # Session State
 
-## Purpose
+> **Status: Current** — authoritative durable project-state handoff through Phase 77.1.
 
-Provide the repository-owned handoff between development sessions. This file records the current project state; it replaces assumptions based on previous conversations.
+## Current baseline
 
-## Last Updated
+| Item | State |
+| --- | --- |
+| Last updated | 2026-07-30 |
+| Version | v0.x (pre-alpha, unreleased) |
+| Architecture | v12 (unchanged) |
+| Current phase | Phase 77.1 — Repository Documentation Reconciliation |
+| Last completed implementation phase | Phase 76 — Decision Engine v1 |
+| Last completed review phase | Phase 77 — Architecture Consolidation & Technical Debt Review |
+| Current change type | Documentation only |
+| Merge gate | GitHub Actions must be green |
 
-2026-07-30
+Phase 77.1 reconciles repository-authoritative documentation with the implementation
+merged through Phase 76 and the architecture assessment completed in Phase 77. It
+changes no runtime behavior, public API, schema, data model, or canonical data.
 
-## Current Version
+## Implemented backend baseline
 
-v0.x (pre-alpha, unreleased)
+- Architecture v12, versioned schemas, JSON-schema validation, and deterministic
+  filesystem repositories are established.
+- Evidence acquisition, immutable storage, parsing, normalization, candidate review,
+  promotion, rollback, provenance, and external-handoff review are implemented for
+  their bounded workflows.
+- The Canonical Repository and reviewed local Canonical Import Pipeline provide the
+  typed read aggregate and staged import boundary while older schema-backed loaders
+  remain compatibility paths identified as consolidation debt.
+- The Observation Engine and Observation Import Pipeline preserve non-canonical pack
+  reports, verify identities against canonical data, and produce descriptive summaries.
+- The Market Provider Framework and External Mapping Layer provide offline provider,
+  mapping, cache, and append-only snapshot foundations; no live provider is implemented.
+- The Collection Engine provides immutable ownership operations and local persistence.
+- The Analytics Engine provides seven deterministic factual reports.
+- The Decision Engine evaluates explicit versioned rules over analytics reports and
+  emits immutable, explainable decisions.
+- Canonical promotion supports Product, Card, Printing, Print Sheet, and Slot. Canonical
+  Mystery Booster 2 Print Sheets and Slots remain unpopulated.
+- Probability and simulation are not implemented; `src/probability/` is a placeholder.
+- Database-backed persistence, live provider integrations, API, UI, and AI advisor are
+  not implemented.
 
-## Current Architecture Version
+## Verified repository baseline
 
-v12
+Counts were re-derived from tracked repository content on 2026-07-30:
 
-## Current Phase
+| Item | Count |
+| --- | ---: |
+| Tracked files | 289 |
+| Tracked Markdown documents | 40 |
+| Python source files under `src/` | 74 |
+| Versioned JSON schemas | 16 |
+| Top-level test modules | 26 |
+| Passing tests | 137 |
+| Promotion audits | 28 |
+| Canonical Cards | 15 |
+| Canonical Printings | 15 |
+| Mystery Booster 2 Printings | 4 |
+| Canonical Products | 1 |
+| Canonical Print Sheets | 0 |
+| Canonical Slots | 0 |
+| Game-level Source Records | 7 |
+| Verified Evidence Repository bundles | 3 |
 
-Phase 67 evidence-waiting after successful mechanical review of the first
-artifact-bearing handoff; outcome-affecting MB2 rules remain evidence-insufficient
+The test baseline is the result of the same command used by CI:
+`PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -q`.
 
-## Last Merged PR
+## Evidence and canonical-rule boundary
 
-The first artifact-bearing Phase 67 evidence handoff and Repository Steward
-guidance are merged into the authoritative repository baseline.
+The artifact-bearing Phase 67 handoff passed bounded integrity, provenance,
+completeness, duplicate, and explicit-conflict review. Its artifact re-delivers the
+already archived official product-title capture and supports only the existing MB2
+identity claim. It provides no outcome-affecting rule evidence.
 
-## Repository Status
+Consequently, complete MB2 topology, pools, weights, replacement, treatment,
+conditionality, correlation, sequencing, canonical rules, probability, and simulation
+remain unsupported or unimplemented. This evidence gate restricts MB2 rule work; it
+does not erase the separately completed Phase 68–76 generic backend foundations.
 
-- Active development using Mystery Booster 2 as the reference implementation.
-- Product, source registry, acquisition manifest, evidence-preserving ingestion, parsed artifact, normalized candidate, provenance, and candidate-validation foundations are implemented.
-- Intermediate artifacts remain non-canonical until an explicitly approved,
-  validation-gated product promotion succeeds.
-- The approved Mystery Booster 2 official product-page target has a controlled,
-  hash-recorded title-evidence fixture and deterministic product-specific parsing
-  and normalization into schema-valid, provenance-complete intermediate artifacts.
-- Explicitly reviewed and validated product candidates can be promoted or
-  rejected through an immutable audit trail; promotion is idempotent and
-  conflict-safe, and rollback is approval-gated and auditable.
-- The first canonical Card and Printing records are source-backed and
-  provenance-complete. Repository loading enforces structural validity,
-  identity paths, source references, field coverage, and the Printing-to-Card
-  relationship, and produces deterministic canonical snapshots.
-- Entity-agnostic controlled review and promotion is enabled for Card and
-  Printing candidates through explicit repository definitions. Approval,
-  rejection, idempotency, conflict handling, immutable audit history, and
-  rollback are shared; repository validation prevents orphaning relationships.
-- Canonical Print Sheet and Slot contracts now implement the existing Tier 0
-  fields, game scoping, and provenance requirements. Generic loaders validate
-  the full dependency graph and produce deterministic rule snapshots.
-- Controlled review, promotion, immutable audits, and dependency-safe rollback
-  are enabled for Print Sheet and Slot candidates. No canonical Print Sheet or
-  Slot data has been populated.
-- A deterministic bounded ingestion workflow combines multiple approved sources
-  with field-level attribution. Wave 1 retained parsed and candidate artifacts
-  and promoted three Mystery Booster 2 Cards followed by their three Printings,
-  with six immutable approval audits.
-- A stable `data/sources/` evidence archive now loads versioned manifests and
-  archived files only after path, size, SHA-256, duplicate, canonical-source,
-  and claim-level provenance validation.
-- Wave 2 consumes only a verified archived artifact, validates every embedded
-  source against artifact provenance, and adds one Card and Printing in
-  dependency order with two immutable promotion audits.
-- Phase 64 supports complete batches of up to twenty-five verified Printings,
-  optional exact manifest population boundaries, and deterministic retained
-  pre-promotion reports bound to canonical snapshot hashes.
-- Phase 65 retains a schema-validated Rule Claim Matrix and Evidence Sufficiency
-  Report outside canonical data, cross-validated against verified bundles. Current
-  evidence supports Product identity and four partial membership examples but no
-  complete MB2 product-rule graph.
-- The first artifact-bearing Phase 67 handoff is quarantined under `data/raw/`.
-  It re-delivers the exact official product-title bytes already archived by the
-  Evidence Repository and supports only the existing MB2 identity claim.
-- The product-agnostic Evidence Review Engine is complete. It reviews external
-  handoff manifests, hashes, artifact integrity, source references, provenance,
-  completeness, duplicate artifacts, and explicit claim conflicts and produces
-  versioned JSON and Markdown reports without inference or canonical writes.
-- The Evidence Review Engine was exercised successfully on the Phase 67 handoff:
-  the declared artifact passed integrity, provenance, completeness, duplicate,
-  and explicit-conflict review with a bounded `Ready for verification` result.
-  That mechanical result does not establish any outcome-affecting rule claim.
+## Architecture review and debt
 
-## Completed Milestones
+`../ARCHITECTURE_REVIEW_v1.md` is the current implementation assessment. It identifies
+consolidation rather than redesign as the appropriate architectural direction:
 
-- Approved Tier 0 Data Model Specification migrated to `docs/DATA_MODEL.md`.
-- Repository, architecture, and documentation foundation.
-- Versioned schemas and schema-validation infrastructure.
-- Mystery Booster 2 product, source, and acquisition foundations.
-- Deterministic hashing and evidence-preserving ingestion foundation.
-- Immutable parsed-record and normalized-candidate artifacts.
-- Field-level provenance, cross-artifact validation, and hash-safe intermediate storage.
-- JSON-compatible artifact serialization without mutable aliasing.
-- Controlled official Mystery Booster 2 title-evidence acquisition, parsing, and normalization.
-- Controlled canonical product promotion, rejection, conflict detection, immutable audit history, and rollback.
-- Canonical Card and Printing repository representation, initial authoritative
-  dataset, deterministic identifiers and output, field provenance, and
-  structural and referential validation.
-- Generic candidate-review and canonical-promotion framework enabled for Card
-  and Printing, with the existing Product workflow retained as a compatibility facade.
-- A fixed increment of ten Limited Edition Alpha Cards and their ten Printings
-  was preserved as candidates, explicitly approved, promoted in dependency
-  order, and recorded in immutable audits from an official Gatherer source.
-- Approved Rules Engine architecture is now canonical at
-  `docs/RULES_ENGINE.md`; the Tier 0 data-repository layers now explicitly place
-  Print Sheet and Slot candidates, canonical records, validation, and derived
-  output within the existing repository lifecycle.
-- Canonical Print Sheet and Slot repository paths, source-backed provenance,
-  structural and referential validation, deterministic snapshots, promotion,
-  and rollback were implemented and verified with temporary synthetic data.
-- Mystery Booster 2 Card and Printing Wave 1 validated the complete ingestion
-  workflow with three evidence-supported pairs and no rule-data population.
-- Evidence Repository Foundation established the canonical archive layout,
-  manifest contract, verified loader, and provenance validation using existing
-  Wave 1 evidence without adding canonical domain records.
-- Mystery Booster 2 Wave 2 added one verified Card and Printing through an
-  Evidence Repository-exclusive bridge with embedded-source validation and
-  existing-Card promotion filtering.
-- Scalable population review now fails oversized batches without truncation and
-  retains schema-validated classifications and expected repository count deltas.
-- Product-rule research now retains stable evidence classifications, explicit
-  blockers, and an architectural sufficiency question without changing Tier 0.
-- Product-agnostic external evidence review is implemented with versioned
-  handoff and report schemas, deterministic recommendations, and comprehensive
-  tests. It is the automated review boundary before Rule Claim Matrix work.
-- The first artifact-bearing Phase 67 handoff was reviewed successfully without
-  changing canonical data, Tier 0 architecture, or the Phase 65 sufficiency conclusion.
+- typed and schema-backed canonical representations overlap;
+- observation analytics and snapshot types overlap newer generic engines;
+- provenance lacks a shared cross-subsystem vocabulary and lineage reader;
+- filesystem repositories rely on eager loading, linear lookup, and single-writer
+  assumptions; and
+- stable serialization, immutable conversion, identifier, timestamp, and atomic-write
+  primitives are duplicated.
 
-## Current Focus
+The defects documented in that review were not fixed in Phase 77 or 77.1. Any refactor
+requires a separately approved, non-breaking milestone with characterization tests.
 
-The critical-path assessment is recorded in `FIRST_BOOSTER_PLAN.md`. Phase 67
-is in the evidence-waiting state. The first artifact-bearing handoff passed
-mechanical review for its product-identity claim, but supplies no outcome-affecting
-MB2 rule evidence. Further verification and research reconciliation may begin
-only for a content-complete, independently reviewed handoff whose evidence is
-relevant to an unresolved rule claim.
-Canonical Mystery Booster 2 rule population and pack generation, probability,
-simulation, analytics, API, and UI remain unauthorized.
+## Current focus and next authorization
 
-## Open Risks
+Phase 77.1 is limited to documentation reconciliation and validation. After this pull
+request is green and merged, **no further implementation milestone is automatically
+authorized**. `NEXT_TASK.md` is the sole current next-action statement: verify this
+documentation-only change, wait for GitHub Actions, and obtain explicit approval before
+starting either a consolidation refactor or evidence-dependent MB2 work.
 
-- The controlled title fixture is deliberately not a complete page archive and cannot support card or collation claims.
-- Product-specific evidence may be incomplete or contradictory.
-- Canonical data must not be populated from unreviewed intermediate candidates.
-- Downstream probability and simulation work remains blocked on validated product data.
-- External evidence is the current blocker on the approved critical path to the
-  first evidence-backed MB2 booster, not the only project-wide blocker.
+## Startup checklist
 
-## Technical Debt
-
-- Canonical promotion intentionally requires manual application-workflow decisions;
-  batch-level transactional orchestration remains future work.
-- Canonical-data debt: only fifteen Cards and Printings are populated; MB2 has
-  four Printings, while complete pools, Slots, sheets, and collation are absent.
-- Evidence debt: the Phase 67 handoff contains only a previously archived
-  product-title artifact; complete topology, pools, weights, replacement,
-  treatments, dependencies, and version scope remain unsupported.
-- Implementation debt: generic generation, probability, simulation, and
-  generated-pack validation are absent.
-- Deferred layers: persistence, analytics, market intelligence, collection,
-  API, UI, and AI advisor work remains outside the authorized milestone.
-
-## Upcoming Milestones
-
-1. Wait for a content-complete, independently reviewed handoff containing
-   evidence relevant to unresolved outcome-affecting MB2 rule claims.
-2. Verify and reconcile it only after the documented evidence gate is satisfied.
-3. Require separate approval before canonical population or downstream implementation.
-
-## Next Session Checklist
-
-1. Read `PROJECT_INVENTORY.md`, `docs/SESSION_STATE.md`, and `docs/NEXT_TASK.md`.
-2. Read `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, and `CHANGELOG.md`.
-3. Verify the checkout, branch, and working-tree status.
-4. Confirm the objective and acceptance criteria before editing.
-5. Implement only the approved milestone.
-6. Run the complete test suite and relevant validation.
-7. Update repository documentation to reflect implementation changes.
-8. Commit the focused change, open or update its PR, and stop when it is ready for review.
+1. Read `../PROJECT_INVENTORY.md` and `../ARCHITECTURE_REVIEW_v1.md`.
+2. Read this file, `PROJECT_STATUS.md`, `NEXT_TASK.md`, and `HANDOFF.md`.
+3. Read `ARCHITECTURE.md`, `DECISIONS.md`, `ROADMAP.md`, and `../CHANGELOG.md`.
+4. Treat documents marked Historical, Superseded, Reference, or Vision according to
+   their status banners; they do not override current-state documents.
+5. Verify the checkout, branch, working tree, objective, and acceptance criteria.
+6. Run the complete test suite and relevant validation before handing off work.

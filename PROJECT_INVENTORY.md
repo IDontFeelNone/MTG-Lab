@@ -1,139 +1,111 @@
-# PROJECT_INVENTORY.md
+# MTG Lab Project Inventory
 
-> Canonical project inventory for MTG Lab.
+> **Status: Current** — canonical inventory reconciled at Phase 77.1 on 2026-07-30.
 
-## Architecture v12 Inventory
-- Current architecture: v12
-- Current implementation phase: Phase 67 evidence-waiting after successful
-  mechanical review of the first artifact-bearing handoff
-- Canonical data-first design
-- Deterministic pipelines
-- Modular implementation
-- AI-assisted analytics
+## Current state
 
-## Module Inventory
-- Repository, schemas, validation, and ingestion
-- Ingestion includes raw evidence, parsed artifacts, normalized candidate artifacts, field provenance, and candidate validation
-- Evidence repository includes game-scoped archived bundles, a versioned
-  manifest contract, content-verified loading, and canonical-source provenance validation
-- Repository includes explicitly reviewed, validated, auditable, idempotent,
-  conflict-safe, and reversible canonical product promotion
-- Repository includes schema-valid canonical Card and Printing records,
-  deterministic stable identifiers and output, source-backed field provenance,
-  and game-scoped Printing-to-Card referential validation
-- Repository includes an entity-agnostic candidate-review and canonical-promotion
-  framework enabled for Card, Printing, Print Sheet, and Slot, with explicit
-  decisions, immutable audits, idempotency, conflict protection, and
-  referentially safe rollback
-- Research Log is defined as a Tier 0 architectural subsystem; implementation remains future work
-- Deterministic pre-promotion population review reports are schema-validated and retained outside canonical data
-- A schema-validated Rule Claim Matrix and evidence sufficiency report retain MB2 rule research outside canonical data
-- The first artifact-bearing Phase 67 handoff is merged. The Evidence Review
-  Engine successfully verified its bounded manifest, artifact integrity,
-  provenance, completeness, and internal consistency; the re-delivered official
-  product-title capture supports only the already-known MB2 product identity
-- Probability, simulation, analytics, and market intelligence remain future work
+- **Architecture:** v12 (unchanged)
+- **Milestone:** Phase 77.1 repository documentation reconciliation
+- **Maturity:** pre-alpha; deterministic local reference implementation
+- **Validation baseline:** 137 passing unit/integration-style tests under the CI command
+- **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
+  Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
+  remain unpopulated
+- **Review authority:** `ARCHITECTURE_REVIEW_v1.md` records current maturity, debt,
+  risks, dependency direction, and non-breaking consolidation recommendations
 
-## Mystery Booster 2 Repository Status
-- Canonical product, source registry, and acquisition manifest foundations are validated
-- Intermediate artifacts are stored outside canonical data at `data/intermediate/parsed/` and `data/intermediate/candidates/`
-- The approved official product-page target has a controlled, hash-recorded evidence fixture and a deterministic Mystery Booster 2 title parser and normalizer
-- Parsed and normalized product candidates are traceable and schema-validated;
-  controlled promotion is available only for explicitly reviewed product candidates
-- An initial fixed increment of ten reviewed Cards and their Printings, in
-  addition to the foundation pair, is populated from an official source.
-  Deterministic multi-source Waves 1 and 2 add four evidence-supported Mystery
-  Booster 2 Cards and their Printings; Wave 2 loads its input exclusively from
-  the verified Evidence Repository and reuses existing canonical Source Records;
-  Phase 65 confirms preserved evidence remains insufficient for canonical rules.
-  The Phase 67 handoff adds no outcome-affecting rule evidence; slots, sheets,
-  collation, probabilities, simulations, and market data remain unpopulated
+## Implemented subsystem inventory
 
-## Completed Work
-- Approved Tier 0 Data Model Specification migrated to `docs/DATA_MODEL.md`
-- Versioned schemas and validation infrastructure
-- Mystery Booster 2 product/source/acquisition foundations
-- Evidence-preserving ingestion pipeline foundation
-- Parsed-record and normalized-candidate artifact foundation with field-level provenance and candidate validation
-- Controlled Mystery Booster 2 official product-page title acquisition, parsing, and normalization path
-- Controlled canonical product promotion with immutable decision and rollback audit history
-- Canonical Card and Printing repository foundation with structural, provenance,
-  identity-path, source-reference, and Printing-to-Card validation
-- Generic controlled candidate review and canonical promotion enabled for Card
-  and Printing while retaining the existing Product workflow
-- Fixed, source-attributed ten-Card and ten-Printing candidate population,
-  canonical promotion, and immutable promotion audit history
-- Approved Rules Engine architecture migrated to `docs/RULES_ENGINE.md`, with
-  the Tier 0 repository-layer boundaries for Print Sheets and Slots recorded
-- Canonical Print Sheet and Slot contracts, loaders, deterministic snapshots,
-  dependency validation, controlled promotion, and dependency-safe rollback
-- Bounded, deterministic, multi-source Card and Printing ingestion demonstrated
-  with three Mystery Booster 2 pairs, retained intermediate artifacts, controlled
-  dependency-order promotion, and six immutable audits
-- Evidence repository foundation with a canonical `data/sources/` layout,
-  versioned manifests, archived-file integrity checks, and provenance validation
-  demonstrated on the existing Wave 1 extract
-- Evidence-backed Wave 2 population with one new Card and Printing, verified
-  artifact-to-record source attribution, existing-Card promotion filtering,
-  deterministic intermediate artifacts, and immutable promotion audits
-- Scalable complete-batch ingestion for up to twenty-five verified Printings,
-  manifest-declared population boundaries, and retained deterministic review reports
-- Evidence-backed MB2 rule-claim research with stable claim identities, verified evidence references, explicit unknowns, blocker reporting, and a no-redesign architectural sufficiency assessment
-- Controlled Phase 66 raw-handoff structure and source-lead research summary,
-  containing no acquired artifact bytes and authorizing no processing or inference
-- Product-agnostic Evidence Review Engine with versioned external-handoff and
-  report contracts, integrity and provenance checks, deterministic completeness
-  and consistency findings, and validated JSON and Markdown output
-- First artifact-bearing Phase 67 evidence handoff, quarantined outside canonical
-  data and successfully exercised through the Evidence Review Engine; its narrow
-  product-title claim does not authorize canonical rule promotion
-
-## Remaining Work
-- Broader reviewed Card and Printing evidence acquisition and population,
-  canonical promotion definitions for other entity types, and any automated approval workflow
-- Complete card repository, populated slots and print sheets, probability, simulation,
-  analytics, and market intelligence
-
-## Documentation Migration Backlog
-
-This backlog records migration status only. A related schema or implementation
-does not make an absent specification canonical. Specifications remain deferred
-until their subsystem implementation unless separately approved.
-
-### Tier 0 / Architectural
-
-| Specification | Status | Repository basis |
+| Subsystem | Implementation | Contract / status |
 | --- | --- | --- |
-| `DATA_MODEL.md` | Canonical | Approved Tier 0 specification at `docs/DATA_MODEL.md`. |
-| `DATA_REPOSITORY.md` | Partial | Tier and layer definitions cover Print Sheet and Slot lifecycle boundaries; further subsystem-driven expansion remains pending. |
-| `RULES_ENGINE.md` | Canonical | Approved Tier 0 specification at `docs/RULES_ENGINE.md`. |
+| Canonical Repository | Typed game aggregate, specialized schema-backed repositories, deterministic snapshots, relationship validation, staged bulk apply | Operational v1; overlapping repository generations are consolidation debt |
+| Canonical Import Pipeline | Reviewed local JSON/CSV adapters, provenance, dry-run/validation-only modes, deterministic report, atomic game-tree replacement | Operational v1; local-only and single-writer |
+| Evidence and candidate ingestion | Immutable evidence storage, parsers/normalizers, candidate validation, retained intermediate artifacts, population review | Operational for bounded reviewed workflows |
+| Evidence Repository and Review | Content-verified bundles, Source Record validation, external handoff integrity/provenance/completeness/conflict reports | Operational pre-promotion gate |
+| Canonical promotion | Explicit entity-agnostic review, immutable audits, conflict protection, idempotency, rollback, dependency safety | Operational for Product, Card, Printing, Print Sheet, and Slot |
+| Observation Engine | Immutable pack reports, verification records, descriptive box summaries, dated legacy valuation snapshots | Developing; strictly non-canonical |
+| Observation Import Pipeline | Plain-text multi-pack import, create-only allocation, manifest reconciliation, verification and derived summary refresh | Operational v1; single-writer multi-file workflow |
+| Market Framework | Provider abstraction, service/cache, normalized immutable snapshots, append-only repository, offline manual provider | Operational v1; no live provider |
+| External Mapping Layer | Versioned canonical-to-provider IDs, lifecycle/provenance, exact resolution, append-only mapping sets | Operational v1 |
+| Collection Engine | Immutable ownership aggregate, acquisitions, locations, quantity operations, summaries, local repository and CLI | Operational v1 |
+| Analytics Engine | Seven immutable deterministic reports, input fingerprints, optional canonical enrichment and CLI | Operational v1 factual analytics |
+| Decision Engine | Explicit versioned rules, immutable explainable decisions/reports, stable fact lineage and CLI | Operational v1 deterministic reasoning |
+| Probability / simulation | Package placeholder only | Not implemented; canonical rules remain evidence-blocked |
+| Research Log | Tier 0 architecture document | Implementation deferred |
+| API / UI / AI advisor | Vision only | Not implemented |
 
-### Tier 1 / Subsystem Specifications
+## Repository layout
 
-| Specification | Status | Repository basis |
-| --- | --- | --- |
-| `DATABASE_ENGINE.md` | Deferred until subsystem implementation | No specification exists; persistence is outside Phase 56. |
-| `IMPORT_PIPELINE.md` | Deferred until subsystem implementation | Ingestion code exists, but no canonical subsystem specification exists. |
-| `API_CONTRACT.md` | Deferred until subsystem implementation | No API subsystem is implemented or specified. |
-| `SIMULATION_ENGINE.md` | Deferred until subsystem implementation | No simulation subsystem is implemented or specified. |
-| `ANALYTICS_ENGINE.md` | Deferred until subsystem implementation | No analytics subsystem is implemented or specified. |
-| `COLLECTION_MANAGER.md` | Deferred until subsystem implementation | No collection subsystem is implemented or specified. |
-| `MARKET_INTELLIGENCE.md` | Deferred until subsystem implementation | No market subsystem is implemented or specified. |
-| `AI_ADVISOR.md` | Deferred until subsystem implementation | Vision documents exist, but no canonical advisor specification exists. |
+- `data/canonical/` — authoritative game-scoped canonical records
+- `data/sources/` and `data/raw/` — archived evidence and controlled handoffs
+- `data/intermediate/` — parsed, candidate, review, and research artifacts
+- `data/observations/` — immutable non-canonical opening reports
+- `data/audit/` — immutable promotion decisions
+- `src/canonical`, `src/repository`, `src/canonical_import` — canonical model,
+  persistence/validation, and reviewed bulk import
+- `src/ingestion`, `src/evidence_review` — evidence-to-candidate and handoff review
+- `src/observations`, `src/market`, `src/collection`, `src/analytics`,
+  `src/decisions` — downstream domain engines
+- `src/mtglab` — command-line application namespaces
+- `src/schemas/v1`, `src/validation` — versioned JSON contracts and validation
+- `tests/` — 137 deterministic tests collected by the Python validation workflow
+- `docs/` — Architecture v12, subsystem contracts, governance, status, and history
 
-## Session Startup Protocol
-Repository-driven session management is defined by:
+## Architecture constraints and known debt
 
-- `docs/SESSION_STATE.md` — current version, phase, milestone status, risks, and handoff checklist
-- `docs/PROJECT_STATUS.md` — subordinate executive dashboard synthesizing the
-  current inventory, phase gates, counts, debt, critical path, and risks
-- `docs/NEXT_TASK.md` — the single approved next objective and its definition of done
-- `docs/HANDOFF.md` — the concise, replaceable transfer note from the most recent session
-- `docs/AI_CONTRIBUTING.md` — the authoritative governance, contributor responsibilities, and collaboration guide
-- `docs/DEVELOPMENT_PLAYBOOK.md` — reusable implementation patterns and engineering procedures
-- `docs/LESSONS_LEARNED.md` — reusable engineering knowledge and historical implementation insight
-- `docs/RESEARCH_LOG_ARCHITECTURE.md` — Tier 0 architecture for versioned, evidence-grounded domain research
-- `docs/RULES_ENGINE.md` — Tier 0 architecture for data-driven product-rule interpretation
-- `docs/CODEX_WORKFLOW.md` — the standard operating procedure for Codex sessions
+- Canonical identity and evidence provenance remain upstream of observations,
+  ownership, analytics, and decisions; downstream results never promote themselves.
+- No canonical MB2 rules, complete pools, probability tables, pack generator, or
+  simulator are authorized by present evidence.
+- Specialized canonical repositories overlap the newer typed aggregate; observation
+  analytics and market snapshots overlap newer generic engines.
+- Provenance is pervasive but does not yet have one cross-subsystem vocabulary or
+  lineage reader.
+- Filesystem stores are deterministic and appropriate for current volume, but full-
+  tree loading/copying, linear lookup, and single-writer assumptions limit scale.
+- The four defects recorded in `ARCHITECTURE_REVIEW_v1.md` are documentation findings;
+  Phase 77 intentionally changes no behavior.
 
-At session startup, read those documents together with `PROJECT_INVENTORY.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, and `CHANGELOG.md`. `AI_CONTRIBUTING.md` governs collaboration and document priority, `DEVELOPMENT_PLAYBOOK.md` supplies repeatable procedures, and `LESSONS_LEARNED.md` preserves reusable engineering insight. `HANDOFF.md` supplies only the immediate transition; ongoing status belongs in `SESSION_STATE.md`, approved work in `NEXT_TASK.md`, and history in `CHANGELOG.md`. Continue only from the repository-defined next task; do not rely on previous chat history.
+## Documentation hierarchy
+
+Documentation status labels have the following consistent meaning:
+
+- **Current** — reports the active repository baseline or authorization.
+- **Historical** or **Superseded** — preserves earlier decisions or plans but cannot
+  override Current documents.
+- **Reference** — retains a reusable contract or context without claiming current
+  milestone authority.
+- **Vision** — describes target-state capability and does not imply implementation.
+
+Architecture and governance are defined by `docs/ARCHITECTURE.md`,
+`docs/DATA_MODEL.md`, `docs/DATA_REPOSITORY.md`, `docs/RULES_ENGINE.md`, and
+`docs/AI_CONTRIBUTING.md`. The current implementation assessment is
+`ARCHITECTURE_REVIEW_v1.md`. Implemented subsystem contracts include
+`docs/CANONICAL_IMPORT_PIPELINE.md`, `docs/MB2_OBSERVATION_INTELLIGENCE.md`,
+`docs/MARKET_PROVIDER_FRAMEWORK.md`, `docs/COLLECTION_ENGINE.md`,
+`docs/ANALYTICS_ENGINE.md`, and `docs/DECISION_ENGINE.md`. This inventory describes
+what exists; the architecture review evaluates it; `docs/ROADMAP.md` controls future
+milestones; `CHANGELOG.md` preserves history.
+
+Current operational state is reported by `docs/SESSION_STATE.md`,
+`docs/PROJECT_STATUS.md`, `docs/NEXT_TASK.md`, and `docs/HANDOFF.md`. Phase-specific
+plans explicitly marked Historical, Superseded, or Reference remain retained artifacts.
+
+## Session startup workflow
+
+1. Read this inventory and `ARCHITECTURE_REVIEW_v1.md`.
+2. Read `docs/SESSION_STATE.md`, `docs/PROJECT_STATUS.md`, `docs/NEXT_TASK.md`, and
+   `docs/HANDOFF.md` for the sole current operational state.
+3. Read `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, and
+   `CHANGELOG.md` for architecture, authorization, and history.
+4. Treat Historical, Superseded, Reference, and Vision documents according to their
+   labels; do not use them to override Current documents.
+5. Confirm explicit milestone approval before changing the repository.
+
+## Next-work boundary
+
+Phase 77.1 reconciles documentation and authorizes no refactor. Any code change must be
+a separately scoped, non-breaking milestone with characterization tests. Evidence-
+blocked MB2 rule or simulation work remains subject to the existing sufficiency and
+promotion gates. No next implementation milestone is approved. Do not recommend merge
+of Phase 77.1 until GitHub Actions are green.
