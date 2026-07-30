@@ -4,11 +4,21 @@
   "product": "mystery_booster_2",
   "observation_status": "in_progress",
   "verification_status": "unverified_user_report",
-  "pack_count_recorded": 1,
+  "pack_count_recorded": 3,
   "packs": [
     {
       "pack_id": "pack_001",
       "path": "pack_001.json",
+      "card_count": 15
+    },
+    {
+      "pack_id": "pack_002",
+      "path": "pack_002.json",
+      "card_count": 15
+    },
+    {
+      "pack_id": "pack_003",
+      "path": "pack_003.json",
       "card_count": 15
     }
   ],
