@@ -42,10 +42,9 @@ than manufacturing canonical data. Analytics may join those IDs to repository va
 but analytics outputs remain under derived-data storage and never feed back into this
 repository.
 
-## Future canonical import pipeline
+## Canonical import pipeline
 
-A later, explicitly reviewed pipeline may stage official-source candidates outside
-`data/canonical`, validate schemas and references, produce a deterministic diff and
-provenance audit, and promote accepted records in one transaction. It must not consume
-user observations as official facts. Scraping, probability computation, simulation,
-and print-sheet reconstruction are intentionally outside this milestone.
+The explicitly reviewed pipeline stages source candidates outside `data/canonical`,
+validates schemas and references, produces a deterministic report and provenance
+audit, and promotes accepted records through the repository in one transaction. See
+`CANONICAL_IMPORT_PIPELINE.md`. It does not consume user observations as official facts.
