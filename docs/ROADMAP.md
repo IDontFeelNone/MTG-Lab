@@ -1,39 +1,39 @@
 # MTG Lab Roadmap
 
-> **Status: Current — Phase 89 implemented locally; review and green CI pending.**
+> **Status: Current — Phase 90 evidence-blocked; review and green CI pending.**
 
-## Current milestone — Phase 89
+## Current milestone — Phase 90
 
-The MTGJSON Provider Adapter v1 detects and validates v5 AllPrintings-style supplied files,
-generates provider metadata/manifests, and deterministically maps the bounded supported scope
-through the unchanged Phase 88 acquisition and review stages. It does not promote canonical
-facts, import the full corpus or MB2, or change Architecture v12. Merge recommendation remains
-withheld until GitHub Actions are green.
+The requested Mystery Booster 2 pilot stopped after source validation: the repository's only
+supplied MTGJSON fixture contains synthetic set `TST`, not MB2. Deterministic reports preserve
+the checksum, observed contents, zero-import outcome, and evidence limitation. No acquisition,
+registration, resolution, promotion, or Architecture v12 change occurred. Merge recommendation
+remains withheld until GitHub Actions are green.
 
-## Completed milestone — Phase 87
+## Completed milestone — Phase 89
 
-The Mystery Booster 2 acquisition pilot is merged with an evidence-blocked result. It
-correctly stopped because no reproducible, legally reviewed source snapshot was available.
-No dataset registration, import, promotion, or canonical mutation occurred.
+The MTGJSON Provider Adapter v1 is merged. It validates v5 AllPrintings-style supplied files,
+generates provider metadata/manifests, and maps its bounded scope through the unchanged
+external acquisition/review boundary without canonical authority.
 
 ## Current baseline
 
 | Area | State |
 | --- | --- |
 | Architecture | v12, unchanged |
-| Latest merged phase | Phase 87 — evidence-blocked acquisition pilot |
-| Current milestone | Phase 89 — MTGJSON Provider Adapter v1 |
+| Latest merged phase | Phase 89 — MTGJSON Provider Adapter v1 |
+| Current milestone | Phase 90 — MB2 pilot stopped after validation |
 | External formats | JSON, CSV, ZIP containing JSON/CSV |
-| Mystery Booster 2 dataset | Evidence-acquisition blocked; not imported |
+| Mystery Booster 2 dataset | Supplied-data evidence gap; not imported |
 | Simulation | Not implemented |
 | Intelligence Engine | Vision only |
 | Merge recommendation | Withheld until GitHub Actions are green |
 
 ## Next milestone boundary
 
-Only Phase 89 review and CI are authorized. Future dataset formats or provider extensions
-must preserve the manifest, integrity, review, and promotion boundaries. MB2 population
-remains subject to its evidence gate. Simulation and Intelligence remain out of scope.
+Only Phase 90 review and CI are authorized. A future retry requires supplied, reproducible
+MTGJSON v5 bytes containing MB2 and must preserve all manifest, integrity, review, resolution,
+and promotion boundaries. Simulation and Intelligence remain out of scope.
 
 ## Historical milestone summary
 

@@ -1,3 +1,7 @@
+> **Phase 90 update:** the only supplied MTGJSON fixture was validated as synthetic set
+> `TST`, not MB2. The pilot stopped at its evidence gate with deterministic reports and no
+> registration, resolution, promotion, or canonical mutation.
+
 > **Phase 89 update:** `src/external_ingestion/mtgjson.py` provides MTGJSON v5 detection,
 > metadata/manifest generation, bounded deterministic mappings, and composition into the
 > unchanged Phase 88 acquisition/review pipeline. No full corpus or MB2 data was imported.
@@ -12,7 +16,8 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 89 is implemented locally and awaits Project Architect review and green GitHub Actions.
+> **Status: Current** — Phase 89 is merged. Phase 90 is evidence-blocked and awaits review
+> and green GitHub Actions.
 
 ## Phase 83 constitutional guidance
 
@@ -29,10 +34,10 @@ questions guide future proposals without authorizing them.
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Latest merged milestone:** Phase 87 — evidence-blocked MB2 acquisition pilot
-- **Current runtime milestone:** Phase 89 — MTGJSON Provider Adapter v1
+- **Latest merged milestone:** Phase 89 — MTGJSON Provider Adapter v1
+- **Current milestone:** Phase 90 — MB2 MTGJSON pilot, stopped after validation
 - **Maturity:** pre-alpha; deterministic local reference implementation
-- **Validation baseline:** 181 passing tests locally under the CI command
+- **Validation baseline:** 182 passing tests locally under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
   Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
   remain unpopulated
@@ -78,7 +83,7 @@ questions guide future proposals without authorizing them.
   `src/decisions` — downstream domain engines
 - `src/mtglab` — command-line application namespaces
 - `src/schemas/v1`, `src/validation` — versioned JSON contracts and validation
-- `tests/` — 181 deterministic tests collected by the Python validation workflow
+- `tests/` — 182 deterministic tests collected by the Python validation workflow
 - `docs/` — Architecture v12, subsystem contracts, governance, status, and history
 
 ## Architecture constraints and known debt
@@ -134,9 +139,10 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 89 review and green CI are the only active work. Mystery Booster 2 remains
-evidence-acquisition blocked; Simulation is not implemented; and the Intelligence Engine
-is vision only. Earlier milestone merge gates through Phase 87 are satisfied. No external
+Phase 90 review and green CI are the only active work. Mystery Booster 2 remains blocked
+because the supplied MTGJSON fixture contains no MB2 records; Simulation is not implemented;
+and the Intelligence Engine is vision only. Earlier milestone merge gates through Phase 89
+are satisfied. No external
 dataset may bypass manifest integrity, human review, or controlled promotion.
 
 ## Phase 80 — Canonical fact and evidence contract
