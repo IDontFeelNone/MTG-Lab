@@ -17,7 +17,7 @@ def ingest_verified_card_printing_wave(
     *,
     acquisition_target_id: str,
     acquired_at: str,
-    limit: int = 5,
+    limit: int = 25,
     evidence_root: Path | None = None,
     games_root: Path | None = None,
 ) -> CardPrintingWave:
@@ -35,6 +35,12 @@ def ingest_verified_card_printing_wave(
         raise EvidenceRepositoryError("Card and Printing evidence must be application/json")
 
     document = _load_wave_document(artifact.content)
+    if artifact.population_batch is not None:
+        expected_count = artifact.population_batch["expected_record_count"]
+        if len(document["records"]) != expected_count:
+            raise EvidenceRepositoryError(
+                "Wave record count does not match the evidence manifest population boundary"
+            )
     attributed_sources = {entry["source_id"] for entry in artifact.provenance}
     embedded_sources = {
         record[field]
@@ -57,6 +63,15 @@ def ingest_verified_card_printing_wave(
         acquired_at=acquired_at,
         limit=limit,
     )
+    if artifact.population_batch is not None:
+        actual_printing_ids = {
+            candidate.payload["id"] for candidate in wave.printings.candidates
+        }
+        expected_printing_ids = set(artifact.population_batch["expected_printing_ids"])
+        if actual_printing_ids != expected_printing_ids:
+            raise EvidenceRepositoryError(
+                "Wave Printing identifiers do not match the evidence manifest population boundary"
+            )
     return wave
 
 

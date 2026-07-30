@@ -6,7 +6,7 @@ Provide the repository-owned handoff between development sessions. This file rec
 
 ## Last Updated
 
-2026-07-29
+2026-07-30
 
 ## Current Version
 
@@ -18,12 +18,12 @@ v12
 
 ## Current Phase
 
-Phase 63 — Mystery Booster 2 Card and Printing Population, Wave 2 complete;
+Phase 64 — Scalable Evidence-Backed Card and Printing Batch Population complete;
 awaiting review and approval for the next milestone
 
 ## Last Merged PR
 
-PR #13 — Phase 62 Evidence Repository Foundation.
+PR #14 — Phase 63 Mystery Booster 2 Card and Printing Population, Wave 2.
 
 ## Repository Status
 
@@ -61,6 +61,9 @@ PR #13 — Phase 62 Evidence Repository Foundation.
 - Wave 2 consumes only a verified archived artifact, validates every embedded
   source against artifact provenance, and adds one Card and Printing in
   dependency order with two immutable promotion audits.
+- Phase 64 supports complete batches of up to twenty-five verified Printings,
+  optional exact manifest population boundaries, and deterministic retained
+  pre-promotion reports bound to canonical snapshot hashes.
 
 ## Completed Milestones
 
@@ -97,10 +100,12 @@ PR #13 — Phase 62 Evidence Repository Foundation.
 - Mystery Booster 2 Wave 2 added one verified Card and Printing through an
   Evidence Repository-exclusive bridge with embedded-source validation and
   existing-Card promotion filtering.
+- Scalable population review now fails oversized batches without truncation and
+  retains schema-validated classifications and expected repository count deltas.
 
 ## Current Focus
 
-Awaiting review of Phase 63. No additional Card or Printing wave and no
+Awaiting review of Phase 64. No additional Card or Printing population and no
 canonical Mystery Booster 2 Print Sheet or Slot population milestone is approved.
 
 ## Open Risks
@@ -112,17 +117,16 @@ canonical Mystery Booster 2 Print Sheet or Slot population milestone is approved
 
 ## Technical Debt
 
-- Canonical promotion supports Product, Card, Printing, Print Sheet, and Slot
-  candidates but still requires manual application-workflow decisions; other
-  entity definitions remain future work.
+- Canonical promotion intentionally requires manual application-workflow decisions;
+  batch-level transactional orchestration remains future work.
 - Only fifteen Cards and Printings are populated; comprehensive card data,
   slots, sheets, collation, probabilities, simulations, and market data remain unpopulated.
 - Roadmap technical-debt categories require specific tracked items as work is discovered.
 
 ## Upcoming Milestones
 
-1. Review Phase 63, Mystery Booster 2 Card and Printing Population, Wave 2.
-2. Require separate approval for Wave 3 or any Mystery Booster 2 rule population.
+1. Review Phase 64, Scalable Evidence-Backed Card and Printing Batch Population.
+2. Require separate approval for broader population or any Mystery Booster 2 rule population.
 3. Probability, simulation, analytics, and market-intelligence layers.
 
 ## Next Session Checklist

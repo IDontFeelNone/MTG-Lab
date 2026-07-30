@@ -48,8 +48,8 @@ class Phase61PopulationTests(unittest.TestCase):
     def test_pipeline_enforces_wave_cap_and_complete_evidence(self) -> None:
         arguments = dict(product_id="mystery_booster_2", bundle_source_id="bundle",
                          acquisition_target_id="target", acquired_at="2026-07-29T23:30:00Z")
-        with self.assertRaisesRegex(ValueError, "between one and five"):
-            ingest_card_printing_wave(RAW.read_bytes(), limit=6, **arguments)
+        with self.assertRaisesRegex(ValueError, "between one and twenty-five"):
+            ingest_card_printing_wave(RAW.read_bytes(), limit=26, **arguments)
         document = json.loads(RAW.read_text()); del document["records"][0]["rarity"]
         with self.assertRaisesRegex(ValueError, "lacks required fields"):
             ingest_card_printing_wave(json.dumps(document).encode(), **arguments)

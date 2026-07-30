@@ -53,6 +53,8 @@ data/intermediate/*
 !data/intermediate/parsed/**
 !data/intermediate/candidates/
 !data/intermediate/candidates/**
+!data/intermediate/reviews/
+!data/intermediate/reviews/**
 data/canonical/*
 !data/canonical/.gitkeep
 !data/canonical/games/

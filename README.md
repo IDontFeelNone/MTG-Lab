@@ -117,6 +117,12 @@ SHA-256, connect every artifact to canonical Source Records and explicit claims,
 and allow ingestion to load only path-safe, content-verified evidence. The
 [Evidence Repository](docs/EVIDENCE_REPOSITORY.md) defines this boundary.
 
+Verified Card and Printing ingestion accepts complete bounded batches of up to
+twenty-five records and rejects oversized inputs without truncation. Before
+promotion, a deterministic retained review report binds the candidates to the
+validated canonical snapshot and summarizes new and reused Cards, new
+Printings, duplicates, conflicts, rejected records, and expected count changes.
+
 ## Analytics Engine
 
 Responsible for computing:

@@ -37,7 +37,13 @@
             "Mystery Booster 2 membership for the archived Wave 2 printing."
           ]
         }
-      ]
+      ],
+      "population_batch": {
+        "expected_record_count": 1,
+        "expected_printing_ids": [
+          "magic.mb2.4.en"
+        ]
+      }
     }
   ],
   "notes": "Bounded Wave 2 evidence for one Card and Printing pair; it supports no Print Sheet, Slot, collation, probability, or simulation claims."

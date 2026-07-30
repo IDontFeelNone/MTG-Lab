@@ -33,6 +33,7 @@ class ArchivedEvidence:
     media_type: str
     content: bytes
     provenance: tuple[Mapping[str, Any], ...]
+    population_batch: Mapping[str, Any] | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -108,6 +109,7 @@ def load_evidence_bundle(
             id=record["id"], path=resolved_path, media_type=record["media_type"],
             content=content,
             provenance=tuple(_freeze(entry) for entry in record["provenance"]),
+            population_batch=_freeze(record.get("population_batch")),
         ))
 
     unused_sources = set(known_sources) - referenced_sources
