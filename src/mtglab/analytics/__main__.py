@@ -16,10 +16,10 @@ def _arguments() -> argparse.ArgumentParser:
     parser.add_argument("--collection-file", type=Path, default=Path("data/collections/default.json"))
     parser.add_argument("--observations-dir", type=Path, default=Path("data/observations"))
     commands = parser.add_subparsers(dest="command", required=True)
-    for command in ("collection", "duplicates", "acquisitions", "inventory", "observations"):
+    for command in ("collection", "duplicates", "acquisitions", "inventory", "observations", "distributions", "products"):
         commands.add_parser(command)
     report = commands.add_parser("report", help="emit all collection reports")
-    report.add_argument("--output", choices=("json",), default="json")
+    report.add_argument("--format", "--output", dest="format", choices=("json",), default="json")
     return parser
 
 
@@ -46,8 +46,16 @@ def main(argv: list[str] | None = None) -> int:
     }
     if args.command == "observations":
         output: Any = analytics.observation_report(_observations(args.observations_dir)).to_dict()
+    elif args.command == "products":
+        output = analytics.product_report(_observations(args.observations_dir)).to_dict()
+    elif args.command == "distributions":
+        output = analytics.distribution_report(collection).to_dict()
     elif args.command == "report":
+        observations = _observations(args.observations_dir)
         output = {name: operation(collection).to_dict() for name, operation in operations.items()}
+        output["distributions"] = analytics.distribution_report(collection).to_dict()
+        output["observations"] = analytics.observation_report(observations).to_dict()
+        output["products"] = analytics.product_report(observations).to_dict()
     else:
         output = operations[args.command](collection).to_dict()
     print(json.dumps(output, indent=2, sort_keys=True))

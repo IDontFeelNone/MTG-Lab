@@ -6,6 +6,7 @@ from pathlib import Path
 from types import MappingProxyType
 
 from analytics import AnalyticsService
+from canonical import Printing
 from collection import (Acquisition, Collection, DeckAssignment, InventoryLocation, OwnedCard)
 from mtglab.analytics.__main__ import main
 
@@ -64,6 +65,36 @@ class AnalyticsEngineTests(unittest.TestCase):
         self.assertEqual(first["data"]["product_openings"], {"set-x": 1})
         self.assertEqual(first["data"]["card_frequency"], [{"id": "card-z", "count": 2}])
 
+    def test_distribution_report_can_use_canonical_dimensions(self):
+        class CanonicalSnapshot:
+            game_id = "test_game"
+            printings = (
+                Printing("printing-a", {}, "card-a", "rare", ("extended",), ("foil",)),
+                Printing("printing-b", {}, "card-b", "common", (), ("nonfoil",)),
+            )
+
+        report = self.analytics.distribution_report(self.collection, CanonicalSnapshot()).data
+        self.assertEqual(report["language"], {"en": 4})
+        self.assertEqual(report["rarity"], {"common": 1, "rare": 3})
+        self.assertEqual(report["treatment"], {"extended": 3, "none": 1})
+
+    def test_product_report_supports_repository_observation_shape(self):
+        observations = [
+            {"observation_id": "b", "product": {"slug": "set-x"}, "cards": [{}, {}]},
+            {"observation_id": "a", "product": {"slug": "set-x"}, "cards": [{}]},
+        ]
+        report = self.analytics.product_report(observations)
+        self.assertEqual(report.inputs["observation_ids"], ("a", "b"))
+        self.assertEqual(report.data["products"], (
+            {"product_id": "set-x", "openings": 2, "cards_observed": 3, "cards_per_opening": 1.5},
+        ))
+
+    def test_serialization_and_input_fingerprint_are_stable(self):
+        first = self.analytics.collection_summary(self.collection)
+        second = self.analytics.collection_summary(self.collection)
+        self.assertEqual(first.to_json(), second.to_json())
+        self.assertEqual(len(first.inputs["collection_sha256"]), 64)
+
     def test_cli_emits_json_for_an_empty_collection(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "missing.json"
@@ -75,6 +106,23 @@ class AnalyticsEngineTests(unittest.TestCase):
             payload = json.loads(output.getvalue())
             self.assertEqual(payload["report_type"], "collection_summary")
             self.assertEqual(payload["data"]["total_cards"], 0)
+
+    def test_cli_combined_report_supports_documented_format_flag(self):
+        with tempfile.TemporaryDirectory() as directory:
+            from contextlib import redirect_stdout
+            from io import StringIO
+            output = StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(main([
+                    "--collection-file", str(Path(directory) / "missing.json"),
+                    "--observations-dir", str(Path(directory) / "observations"),
+                    "report", "--format", "json",
+                ]), 0)
+            payload = json.loads(output.getvalue())
+            self.assertEqual(sorted(payload), [
+                "acquisitions", "collection", "distributions", "duplicates",
+                "inventory", "observations", "products",
+            ])
 
 
 if __name__ == "__main__":
