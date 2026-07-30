@@ -41,6 +41,8 @@ The platform is designed to answer questions such as:
 
 MTG Lab is architected as a multi-game platform.
 
+MTGJSON v5 AllPrintings-style supplied datasets can be detected, inspected, and normalized through the governed acquisition pipeline with `mtg-lab adapter`; successful runs stop at human review. See [the provider adapter contract](docs/MTGJSON_PROVIDER_ADAPTER.md).
+
 ## Current Implementation
 
 - **Magic: The Gathering**

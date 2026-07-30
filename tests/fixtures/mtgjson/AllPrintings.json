@@ -1,0 +1,182 @@
+{
+  "data": {
+    "TST": {
+      "cards": [
+        {
+          "colors": [
+            "U"
+          ],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000001",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000001"
+          },
+          "layout": "normal",
+          "manaCost": "{1}{U}",
+          "name": "Alpha Adept",
+          "number": "1",
+          "rarity": "common",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "colors": [
+            "R"
+          ],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000002",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000002"
+          },
+          "layout": "normal",
+          "manaCost": "{2}{R}",
+          "name": "Blazing Test",
+          "number": "2",
+          "rarity": "uncommon",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000002"
+        },
+        {
+          "colors": [],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000003",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000003"
+          },
+          "layout": "normal",
+          "manaCost": "{3}",
+          "name": "Colorless Relic",
+          "number": "3",
+          "rarity": "rare",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000003"
+        },
+        {
+          "colors": [
+            "G"
+          ],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000004",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000004"
+          },
+          "layout": "transform",
+          "manaCost": "{1}{G}",
+          "name": "Double Example",
+          "number": "4",
+          "rarity": "mythic",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000004"
+        },
+        {
+          "colors": [
+            "G"
+          ],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000005",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000005"
+          },
+          "layout": "normal",
+          "manaCost": "{G}",
+          "name": "Forest Guide",
+          "number": "5",
+          "rarity": "common",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000005"
+        },
+        {
+          "colors": [
+            "B"
+          ],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000006",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000006"
+          },
+          "layout": "normal",
+          "manaCost": "{2}{B}",
+          "name": "Grave Reader",
+          "number": "6",
+          "rarity": "uncommon",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000006"
+        },
+        {
+          "colors": [
+            "W"
+          ],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000007",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000007"
+          },
+          "layout": "normal",
+          "manaCost": "{W}",
+          "name": "Healing Light",
+          "number": "7",
+          "rarity": "common",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000007"
+        },
+        {
+          "colors": [
+            "U",
+            "R"
+          ],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000008",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000008"
+          },
+          "layout": "normal",
+          "manaCost": "{U}{R}",
+          "name": "Izzet Trial",
+          "number": "8",
+          "rarity": "rare",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000008"
+        },
+        {
+          "colors": [],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000009",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000009"
+          },
+          "layout": "normal",
+          "name": "Nameless Land",
+          "number": "9",
+          "rarity": "common",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000009"
+        },
+        {
+          "colors": [
+            "W"
+          ],
+          "identifiers": {
+            "scryfallId": "10000000-0000-4000-8000-000000000010",
+            "scryfallOracleId": "20000000-0000-4000-8000-000000000010"
+          },
+          "layout": "normal",
+          "manaCost": "{W}{W}",
+          "name": "White Knight Test",
+          "number": "10",
+          "rarity": "uncommon",
+          "text": "Unsupported fixture text",
+          "type": "Creature \u2014 Test",
+          "uuid": "00000000-0000-4000-8000-000000000010"
+        }
+      ],
+      "code": "TST",
+      "name": "Adapter Test Set",
+      "releaseDate": "2026-07-30",
+      "type": "expansion"
+    }
+  },
+  "meta": {
+    "date": "2026-07-30T00:00:00Z",
+    "version": "5.2.1"
+  }
+}

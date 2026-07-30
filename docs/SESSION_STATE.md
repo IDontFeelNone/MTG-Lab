@@ -1,12 +1,10 @@
 # Session State
 
-> **Status: Current — Phase 88 implemented locally; review and green CI pending.**
+> **Status: Current — Phase 89 implemented locally; review and green CI pending.**
 
-Phase 87 is merged and remains evidence-blocked: no MB2 dataset was registered, imported,
-or promoted. Phase 88 adds a provider-agnostic external file boundary for JSON, CSV, and ZIP.
-Verified bytes enter the unchanged raw acquisition and Knowledge Review Package stages and
-stop at human review. No canonical state, Simulation, Analytics, Intelligence feature, Tier 0
-contract, or Architecture v12 boundary changed.
-
-The active gate is Project Architect review followed by green GitHub Actions. Do not
-recommend merge while Actions are pending or failing.
+Phase 89 adds the first production provider adapter: MTGJSON v5 AllPrintings-style supplied
+datasets are detected, schema/version checked, metadata captured, and deterministically mapped
+to provider-neutral Set, Card, and Printing candidates. Verified bytes enter the unchanged
+Phase 88 acquisition/review pipeline and stop at human review. No full corpus or MB2 data was
+imported; no canonical state, Simulation, Analytics, Intelligence, Tier 0 contract, or
+Architecture v12 boundary changed. Do not recommend merge until GitHub Actions are green.

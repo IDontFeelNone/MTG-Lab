@@ -1,3 +1,8 @@
+## Phase 89 — MTGJSON Provider Adapter v1
+
+- Added provider-edge-only MTGJSON v5 detection, metadata/manifest generation, strict validation, deterministic bounded Set/Card/Printing mapping, explicit unknowns, and acquisition integration.
+- Added `adapter detect`, `adapter inspect`, and `adapter normalize`, a ten-card synthetic fixture, provider-specific tests, and adapter documentation. Architecture v12 and promotion authority remain unchanged; no full corpus or MB2 data was imported.
+
 ## Phase 88 — External Dataset Ingestion Framework
 
 - Added provider-agnostic JSON, CSV, and ZIP ingestion with a canonical external dataset

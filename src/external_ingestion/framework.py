@@ -138,9 +138,10 @@ class CsvAdapter(FormatAdapter):
 
 class AdapterRegistry:
     """Extension point for formats; the ingestion core does not branch by provider."""
-    def __init__(self) -> None:
+    def __init__(self, *, include_defaults: bool = True) -> None:
         self._adapters: dict[str, FormatAdapter] = {}
-        self.register(JsonAdapter()); self.register(CsvAdapter())
+        if include_defaults:
+            self.register(JsonAdapter()); self.register(CsvAdapter())
     def register(self, adapter: FormatAdapter) -> None:
         for extension in adapter.extensions:
             if extension in self._adapters: raise ExternalDatasetError(f"adapter already registered: {extension}")

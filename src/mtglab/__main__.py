@@ -4,7 +4,8 @@ import json
 from pathlib import Path
 
 from dataset_import import DatasetRegistry, ImportManager
-from external_ingestion import ExternalDatasetIngestor
+from external_ingestion import (AdapterRegistry, ExternalDatasetIngestor, MTGJSONAdapter,
+                                detect_mtgjson, generate_manifest)
 
 
 def main(argv=None) -> int:
@@ -20,9 +21,27 @@ def main(argv=None) -> int:
     ingest = commands.add_parser("ingest")
     ingest.add_argument("ingest_targets", nargs="*"); ingest.add_argument("--manifest", type=Path)
     ingest.add_argument("--timestamp")
+    adapter = commands.add_parser("adapter")
+    adapter_commands = adapter.add_subparsers(dest="adapter_command", required=True)
+    for name in ("detect", "inspect", "normalize"):
+        command = adapter_commands.add_parser(name); command.add_argument("source", type=Path)
+        if name == "normalize": command.add_argument("--timestamp", required=True)
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "ingest":
+    if args.command == "adapter":
+        if args.adapter_command == "detect": result = detect_mtgjson(args.source)
+        else:
+            manifest = generate_manifest(args.source)
+            if args.adapter_command == "inspect":
+                result = {"detected": detect_mtgjson(args.source), "manifest": manifest.as_dict()}
+            else:
+                manifest_path = args.data_root / "adapter" / "mtgjson" / "manifest.json"
+                manifest_path.parent.mkdir(parents=True, exist_ok=True)
+                manifest_path.write_text(json.dumps(manifest.as_dict(), sort_keys=True) + "\n")
+                registry = AdapterRegistry(include_defaults=False); registry.register(MTGJSONAdapter())
+                result = ExternalDatasetIngestor(args.data_root, registry).ingest(
+                    args.source, manifest_path, timestamp=args.timestamp)
+    elif args.command == "ingest":
         external = ExternalDatasetIngestor(args.data_root)
         operation = args.ingest_targets[0] if args.ingest_targets else None
         if operation == "list": result = external.list()
