@@ -1,8 +1,9 @@
 # Next Task
 
-> **Status: Current — review Phase 95 and await green CI.**
+> **Status: Current — resolve the Phase 96 evidence and contract gates.**
 
-Review the AI Model Adapter Framework v1 contracts, reasoning-context-only provider boundary,
-explicit registry, lifecycle validation, CLI, tests, and documentation. The Project Owner may
-merge only after Project Architect approval and green GitHub Actions. Do not add model providers,
-SDKs, prompts, inference, natural-language generation, or upstream contract changes.
+Supply and review a content-complete, immutable Mystery Booster 2 source and obtain Project
+Architect clarification for the Set/Language, unknown pack-topology, and uniform governance-field
+requirements described in `PHASE_96_PREIMPLEMENTATION_ASSESSMENT.md`. Do not fabricate records,
+bypass promotion, or redesign frozen contracts inside Phase 96. Merge only after Project
+Architect approval and green GitHub Actions.

@@ -1,3 +1,10 @@
+## Phase 96 — Mystery Booster 2 Canonical Product Repository v1 (blocked assessment)
+
+- Confirmed merged Phase 95 as the baseline and Architecture v12 as unchanged.
+- Stopped before canonical mutation because no complete reviewed MB2 source is retained and the
+  requested entity coverage conflicts with frozen Set/Language and unknown-pack representations.
+- Preserved explicit unknowns and documented evidence and architect-clarification resume gates.
+
 ## Phase 95 — AI Model Adapter Framework v1
 
 - Added immutable, versioned provider-neutral request, response, capability, provider, and
