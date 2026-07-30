@@ -1,0 +1,42 @@
+{
+  "acquisition_target_id": "mb2-wave-2-card-printings",
+  "artifact_version": "1",
+  "errors": [],
+  "id": "mb2-wave-2-card-printings-parsed-d76787c51d93f029",
+  "input_content_type": "application/json",
+  "parse_status": "succeeded",
+  "parsed_at": "2026-07-30T00:35:00Z",
+  "parser_id": "bounded-card-printing-evidence-bundle",
+  "parser_version": "1",
+  "product_id": "mystery_booster_2",
+  "raw_evidence_hash": "d76787c51d93f029a822110c4c77f829f563c647b9fec4ab7c2700bb7e96e058",
+  "record_count": 1,
+  "records": [
+    {
+      "errors": [],
+      "id": "mb2-wave-2-card-printings-record-01",
+      "raw_fields": {
+        "card_source_id": "gatherer-magic-card-identities-wave-1",
+        "collector_number": "4",
+        "language": "en",
+        "membership_source_id": "wizards-mystery-booster-2-gallery-wave-1",
+        "name": "Adarkar Windform",
+        "printing_source_id": "scryfall-mystery-booster-2-wave-1",
+        "rarity": "uncommon",
+        "set_code": "MB2",
+        "source_location": "Scryfall set MB2 collector number 4; Wizards Mystery Booster 2 card gallery"
+      },
+      "record_type": "card_printing_pair",
+      "source_excerpt": {
+        "collector_number": "4",
+        "name": "Adarkar Windform",
+        "set_code": "MB2"
+      },
+      "source_location": "Scryfall set MB2 collector number 4; Wizards Mystery Booster 2 card gallery",
+      "warnings": []
+    }
+  ],
+  "schema_version": "v1",
+  "source_id": "mb2-wave-2",
+  "warnings": []
+}

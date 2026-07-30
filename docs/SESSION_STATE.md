@@ -18,12 +18,12 @@ v12
 
 ## Current Phase
 
-Phase 62 — Evidence Repository Foundation complete;
+Phase 63 — Mystery Booster 2 Card and Printing Population, Wave 2 complete;
 awaiting review and approval for the next milestone
 
 ## Last Merged PR
 
-PR #12 — Phase 61 implementation proposal.
+PR #13 — Phase 62 Evidence Repository Foundation.
 
 ## Repository Status
 
@@ -58,6 +58,9 @@ PR #12 — Phase 61 implementation proposal.
 - A stable `data/sources/` evidence archive now loads versioned manifests and
   archived files only after path, size, SHA-256, duplicate, canonical-source,
   and claim-level provenance validation.
+- Wave 2 consumes only a verified archived artifact, validates every embedded
+  source against artifact provenance, and adds one Card and Printing in
+  dependency order with two immutable promotion audits.
 
 ## Completed Milestones
 
@@ -91,10 +94,13 @@ PR #12 — Phase 61 implementation proposal.
 - Evidence Repository Foundation established the canonical archive layout,
   manifest contract, verified loader, and provenance validation using existing
   Wave 1 evidence without adding canonical domain records.
+- Mystery Booster 2 Wave 2 added one verified Card and Printing through an
+  Evidence Repository-exclusive bridge with embedded-source validation and
+  existing-Card promotion filtering.
 
 ## Current Focus
 
-Awaiting review of Phase 62. No additional Card or Printing wave and no
+Awaiting review of Phase 63. No additional Card or Printing wave and no
 canonical Mystery Booster 2 Print Sheet or Slot population milestone is approved.
 
 ## Open Risks
@@ -109,14 +115,14 @@ canonical Mystery Booster 2 Print Sheet or Slot population milestone is approved
 - Canonical promotion supports Product, Card, Printing, Print Sheet, and Slot
   candidates but still requires manual application-workflow decisions; other
   entity definitions remain future work.
-- Only fourteen Cards and Printings are populated; comprehensive card data,
+- Only fifteen Cards and Printings are populated; comprehensive card data,
   slots, sheets, collation, probabilities, simulations, and market data remain unpopulated.
 - Roadmap technical-debt categories require specific tracked items as work is discovered.
 
 ## Upcoming Milestones
 
-1. Review the Phase 62 Evidence Repository Foundation.
-2. Require separate approval for Wave 2 or any Mystery Booster 2 rule population.
+1. Review Phase 63, Mystery Booster 2 Card and Printing Population, Wave 2.
+2. Require separate approval for Wave 3 or any Mystery Booster 2 rule population.
 3. Probability, simulation, analytics, and market-intelligence layers.
 
 ## Next Session Checklist

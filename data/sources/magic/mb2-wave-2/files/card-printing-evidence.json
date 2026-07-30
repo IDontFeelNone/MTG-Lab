@@ -1,0 +1,16 @@
+{
+  "bundle_version": "1",
+  "records": [
+    {
+      "name": "Adarkar Windform",
+      "set_code": "MB2",
+      "collector_number": "4",
+      "rarity": "uncommon",
+      "language": "en",
+      "card_source_id": "gatherer-magic-card-identities-wave-1",
+      "printing_source_id": "scryfall-mystery-booster-2-wave-1",
+      "membership_source_id": "wizards-mystery-booster-2-gallery-wave-1",
+      "source_location": "Scryfall set MB2 collector number 4; Wizards Mystery Booster 2 card gallery"
+    }
+  ]
+}

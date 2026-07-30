@@ -73,8 +73,8 @@ def _write(root: Path, relative: str, document: dict) -> None:
 class CanonicalCardRepositoryTests(unittest.TestCase):
     def test_canonical_dataset_is_structurally_and_referentially_valid(self) -> None:
         cards, printings = load_card_repository("magic")
-        self.assertEqual(len(cards), 14)
-        self.assertEqual(len(printings), 14)
+        self.assertEqual(len(cards), 15)
+        self.assertEqual(len(printings), 15)
         card_ids = {card["id"] for card in cards}
         self.assertEqual({printing["card_id"] for printing in printings}, card_ids)
         for card in cards:

@@ -1,12 +1,14 @@
 {
   "schema_version": "v1",
   "id": "wizards-mystery-booster-2-gallery-wave-1",
-  "title": "Mystery Booster 2 Card Image Gallery Wave 1",
+  "title": "Mystery Booster 2 Card Image Gallery Waves 1 and 2",
   "source_classification": "official",
   "provider": "Wizards of the Coast",
   "source_location": "https://magic.wizards.com/en/products/mystery-booster/card-image-gallery",
   "access_date": "2026-07-29",
   "verification_status": "confirmed",
-  "claims": ["Mystery Booster 2 product membership for the bounded Wave 1 printings."],
-  "record_version": "1"
+  "claims": [
+    "Mystery Booster 2 product membership for the bounded Wave 1 and Wave 2 printings."
+  ],
+  "record_version": "2"
 }

@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Evidence-repository-exclusive Mystery Booster 2 Card and Printing Wave 2,
+  adding one verified pair with deterministic intermediate artifacts, declared
+  embedded sources, controlled dependency-order promotion, and immutable audits.
+- A verified-wave application boundary that selects one archived JSON artifact,
+  validates its embedded source identifiers, and identifies existing Cards that
+  must not be promoted again.
 - Canonical evidence archive foundation under `data/sources/`, including a
   versioned evidence-manifest schema, content-verified archived bundle loading,
   provenance validation against canonical Source Records, and an archive of the
