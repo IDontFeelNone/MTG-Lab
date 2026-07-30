@@ -1,3 +1,11 @@
+## Phase 90 — Mystery Booster 2 MTGJSON Pilot (evidence-blocked)
+
+- Reconciled the project baseline to record Phase 89 as merged, then validated the only
+  checked-in MTGJSON dataset as a ten-card synthetic `TST` fixture containing no MB2 records.
+- Applied the mandated stop condition before acquisition, registration, resolution, or
+  promotion; added deterministic machine-readable and narrative evidence-gap reports plus a
+  regression test. No canonical data or Architecture v12 contract changed.
+
 ## Phase 89 — MTGJSON Provider Adapter v1
 
 - Added provider-edge-only MTGJSON v5 detection, metadata/manifest generation, strict validation, deterministic bounded Set/Card/Printing mapping, explicit unknowns, and acquisition integration.

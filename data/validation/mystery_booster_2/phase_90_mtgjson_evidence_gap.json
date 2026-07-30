@@ -1,0 +1,32 @@
+{
+  "architecture_version": "12",
+  "dataset": {
+    "generation_timestamp": "2026-07-30T00:00:00Z",
+    "mtgjson_version": "5.2.1",
+    "path": "tests/fixtures/mtgjson/AllPrintings.json",
+    "sha256": "d31b4daf1e02e54de2ec20228930f65acf37af94ba0caad8efb0bc5dbd08074a"
+  },
+  "evidence_gap": "The only supplied MTGJSON fixture contains set TST, not Mystery Booster 2 (MB2).",
+  "observed": {
+    "cards": 10,
+    "normalized_records": 21,
+    "printings": 10,
+    "set_codes": [
+      "TST"
+    ],
+    "sets": 1
+  },
+  "phase": 90,
+  "requested_card_range": {
+    "maximum": 50,
+    "minimum": 25
+  },
+  "result": {
+    "canonical_promotions": 0,
+    "dataset_registrations": 0,
+    "imported_entities": 0,
+    "rejected_entities": 0,
+    "unresolved_entities": 0
+  },
+  "status": "stopped_after_validation_evidence_gap"
+}

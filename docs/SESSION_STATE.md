@@ -1,10 +1,10 @@
 # Session State
 
-> **Status: Current — Phase 89 implemented locally; review and green CI pending.**
+> **Status: Current — Phase 90 evidence-gap report; review and green CI pending.**
 
-Phase 89 adds the first production provider adapter: MTGJSON v5 AllPrintings-style supplied
-datasets are detected, schema/version checked, metadata captured, and deterministically mapped
-to provider-neutral Set, Card, and Printing candidates. Verified bytes enter the unchanged
-Phase 88 acquisition/review pipeline and stop at human review. No full corpus or MB2 data was
-imported; no canonical state, Simulation, Analytics, Intelligence, Tier 0 contract, or
-Architecture v12 boundary changed. Do not recommend merge until GitHub Actions are green.
+Phase 89 is merged. Phase 90 validated the repository's sole MTGJSON fixture: it contains
+ten synthetic cards in `TST` and zero MB2 cards. Per the explicit stop condition, no MB2 raw
+snapshot, review package, dataset registration, entity resolution, promotion, or import was
+performed. Deterministic narrative and JSON reports preserve the evidence gap. Canonical
+state and Architecture v12 are unchanged. Do not recommend merge until GitHub Actions are
+green.
