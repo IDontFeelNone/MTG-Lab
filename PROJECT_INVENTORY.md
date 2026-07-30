@@ -4,7 +4,7 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 64 — Scalable Evidence-Backed Card and Printing Batch Population complete
+- Current implementation phase: Phase 65 — Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment complete
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -26,6 +26,7 @@
   referentially safe rollback
 - Research Log is defined as a Tier 0 architectural subsystem; implementation remains future work
 - Deterministic pre-promotion population review reports are schema-validated and retained outside canonical data
+- A schema-validated Rule Claim Matrix and evidence sufficiency report retain MB2 rule research outside canonical data
 - Probability, simulation, analytics, and market intelligence remain future work
 
 ## Mystery Booster 2 Repository Status
@@ -39,7 +40,7 @@
   Deterministic multi-source Waves 1 and 2 add four evidence-supported Mystery
   Booster 2 Cards and their Printings; Wave 2 loads its input exclusively from
   the verified Evidence Repository and reuses existing canonical Source Records;
-  slots, sheets, collation, probabilities, simulations, and market data remain unpopulated
+  Phase 65 confirms preserved evidence remains insufficient for canonical rules; slots, sheets, collation, probabilities, simulations, and market data remain unpopulated
 
 ## Completed Work
 - Approved Tier 0 Data Model Specification migrated to `docs/DATA_MODEL.md`
@@ -70,6 +71,7 @@
   deterministic intermediate artifacts, and immutable promotion audits
 - Scalable complete-batch ingestion for up to twenty-five verified Printings,
   manifest-declared population boundaries, and retained deterministic review reports
+- Evidence-backed MB2 rule-claim research with stable claim identities, verified evidence references, explicit unknowns, blocker reporting, and a no-redesign architectural sufficiency assessment
 
 ## Remaining Work
 - Broader reviewed Card and Printing evidence acquisition and population,

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.dev/schemas/v1/rule-claim-matrix.schema.json",
+  "title": "MTG Lab Rule Claim Matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "game", "product_id", "artifact_version", "claims"],
+  "properties": {
+    "schema_version": {"const": "v1"},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "game": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "product_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "artifact_version": {"type": "string", "minLength": 1},
+    "claims": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "description", "category", "classification", "source_record_ids", "evidence_references", "source_locators", "affected_tier_0_entities", "notes"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "description": {"type": "string", "minLength": 1},
+          "category": {"enum": ["pack structure", "slot", "print sheet", "card pool", "replacement", "treatment", "collation", "probability", "other"]},
+          "classification": {"enum": ["confirmed", "corroborated", "conflicting", "incomplete", "inferred", "unsupported"]},
+          "source_record_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}},
+          "evidence_references": {
+            "type": "array", "uniqueItems": true,
+            "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["bundle_id", "artifact_id"],
+              "properties": {
+                "bundle_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+                "artifact_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
+              }
+            }
+          },
+          "source_locators": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "affected_tier_0_entities": {"type": "array", "uniqueItems": true, "items": {"enum": ["Product", "Slot", "Print Sheet", "Printing", "Card"]}},
+          "notes": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

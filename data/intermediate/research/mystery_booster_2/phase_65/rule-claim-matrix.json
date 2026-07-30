@@ -1,0 +1,164 @@
+{
+  "schema_version": "v1",
+  "id": "mb2-phase-65-rule-claim-matrix",
+  "game": "magic",
+  "product_id": "mystery_booster_2",
+  "artifact_version": "1",
+  "claims": [
+    {
+      "id": "mb2.rule.card-pool.membership.partial",
+      "description": "Four retained MB2 Printing records have evidence-supported Mystery Booster 2 membership, but the complete card pools and their boundaries are not established.",
+      "category": "card pool",
+      "classification": "incomplete",
+      "source_record_ids": [
+        "wizards-mystery-booster-2-gallery-wave-1"
+      ],
+      "evidence_references": [
+        {
+          "bundle_id": "mb2-wave-1",
+          "artifact_id": "mb2-wave-1-card-printing-evidence"
+        },
+        {
+          "bundle_id": "mb2-wave-2",
+          "artifact_id": "mb2-wave-2-card-printing-evidence"
+        }
+      ],
+      "source_locators": [
+        "mb2-wave-1/files/card-printing-evidence.json: records[0:3].printing and records[0:3].membership_source_id",
+        "mb2-wave-2/files/card-printing-evidence.json: records[0].printing and records[0].membership_source_id"
+      ],
+      "affected_tier_0_entities": [
+        "Print Sheet",
+        "Printing",
+        "Card"
+      ],
+      "notes": "Membership for four bounded examples cannot establish a complete pool, pool partition, print-sheet entry set, entry weight, or pack eligibility."
+    },
+    {
+      "id": "mb2.rule.collation.dependencies",
+      "description": "Any conditional, mutually exclusive, correlated, sequenced, or other non-independent Mystery Booster 2 collation behavior.",
+      "category": "collation",
+      "classification": "unsupported",
+      "source_record_ids": [],
+      "evidence_references": [],
+      "source_locators": [],
+      "affected_tier_0_entities": [
+        "Product",
+        "Slot",
+        "Print Sheet"
+      ],
+      "notes": "No preserved repository evidence supports or rules out dependencies between selection events."
+    },
+    {
+      "id": "mb2.rule.pack.structure",
+      "description": "The number and roles of selection events that compose one Mystery Booster 2 booster.",
+      "category": "pack structure",
+      "classification": "unsupported",
+      "source_record_ids": [],
+      "evidence_references": [],
+      "source_locators": [],
+      "affected_tier_0_entities": [
+        "Product",
+        "Slot"
+      ],
+      "notes": "No preserved repository evidence states the complete pack structure."
+    },
+    {
+      "id": "mb2.rule.print-sheet.entries-and-weights",
+      "description": "The complete Printing entries and positive relative weights for each Mystery Booster 2 selection pool.",
+      "category": "print sheet",
+      "classification": "unsupported",
+      "source_record_ids": [],
+      "evidence_references": [],
+      "source_locators": [],
+      "affected_tier_0_entities": [
+        "Slot",
+        "Print Sheet",
+        "Printing"
+      ],
+      "notes": "The four membership examples do not support any sheet boundary, completeness assertion, or weight."
+    },
+    {
+      "id": "mb2.rule.probability.distribution",
+      "description": "The normalized probability distribution for every possible Printing outcome in a Mystery Booster 2 booster.",
+      "category": "probability",
+      "classification": "unsupported",
+      "source_record_ids": [],
+      "evidence_references": [],
+      "source_locators": [],
+      "affected_tier_0_entities": [
+        "Product",
+        "Slot",
+        "Print Sheet",
+        "Printing"
+      ],
+      "notes": "Pack structure, complete pools, weights, replacement, and collation must be known before probabilities can be derived or validated."
+    },
+    {
+      "id": "mb2.rule.product.identity",
+      "description": "Mystery Booster 2 is a Magic: The Gathering sealed product.",
+      "category": "other",
+      "classification": "confirmed",
+      "source_record_ids": [
+        "wizards-mystery-booster-2-product-overview"
+      ],
+      "evidence_references": [
+        {
+          "bundle_id": "mb2-phase-65-product-overview",
+          "artifact_id": "official-product-page-title"
+        }
+      ],
+      "source_locators": [
+        "official-product-page-title.html: html/head/title, meta[property='og:title'], and html/body/main/h1"
+      ],
+      "affected_tier_0_entities": [
+        "Product"
+      ],
+      "notes": "The retained title-only capture supports identity, but no product-rule detail."
+    },
+    {
+      "id": "mb2.rule.replacement.behavior",
+      "description": "Whether repeated draws within any Mystery Booster 2 Slot use replacement.",
+      "category": "replacement",
+      "classification": "unsupported",
+      "source_record_ids": [],
+      "evidence_references": [],
+      "source_locators": [],
+      "affected_tier_0_entities": [
+        "Slot",
+        "Print Sheet"
+      ],
+      "notes": "No preserved repository evidence describes replacement behavior."
+    },
+    {
+      "id": "mb2.rule.slot.definitions",
+      "description": "The stable Slot definitions, draw counts, and purposes required by one Mystery Booster 2 booster.",
+      "category": "slot",
+      "classification": "unsupported",
+      "source_record_ids": [],
+      "evidence_references": [],
+      "source_locators": [],
+      "affected_tier_0_entities": [
+        "Product",
+        "Slot",
+        "Print Sheet"
+      ],
+      "notes": "No preserved repository evidence identifies canonical MB2 Slots or maps them to pools."
+    },
+    {
+      "id": "mb2.rule.treatment.selection",
+      "description": "How treatments, frames, or special card classes participate in Mystery Booster 2 pack selection.",
+      "category": "treatment",
+      "classification": "unsupported",
+      "source_record_ids": [],
+      "evidence_references": [],
+      "source_locators": [],
+      "affected_tier_0_entities": [
+        "Slot",
+        "Print Sheet",
+        "Printing"
+      ],
+      "notes": "Printing metadata in bounded examples does not establish treatment-specific pack rules."
+    }
+  ]
+}

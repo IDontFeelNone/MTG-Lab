@@ -1,0 +1,31 @@
+{
+  "schema_version": "v1",
+  "id": "mb2-phase-65-product-overview",
+  "game": "magic",
+  "product_id": "mystery_booster_2",
+  "title": "Mystery Booster 2 Phase 65 Product Overview Evidence",
+  "bundle_version": "1",
+  "created_at": "2026-07-30T12:00:00Z",
+  "source_ids": [
+    "wizards-mystery-booster-2-product-overview"
+  ],
+  "artifacts": [
+    {
+      "id": "official-product-page-title",
+      "path": "files/official-product-page-title.html",
+      "media_type": "text/html",
+      "byte_size": 238,
+      "sha256": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+      "provenance": [
+        {
+          "source_id": "wizards-mystery-booster-2-product-overview",
+          "claims": [
+            "The captured title, Open Graph title, and heading identify Mystery Booster 2."
+          ],
+          "notes": "This deliberately narrow capture contains no product-rule content."
+        }
+      ]
+    }
+  ],
+  "notes": "Research evidence only. This bundle supports product identity and explicitly supports no canonical product-rule population."
+}

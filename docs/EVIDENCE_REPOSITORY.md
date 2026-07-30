@@ -70,3 +70,17 @@ repository snapshot. The schema-validated report records new and reused Cards,
 new Printings, duplicates, conflicts, rejected records, and expected repository
 count changes. Reports are non-canonical intermediate artifacts retained under
 `data/intermediate/reviews/`; they inform but never replace explicit approval.
+
+
+## Rule research boundary
+
+Phase 65 archives the controlled official product-title capture and reconciles it
+with the existing Wave 1 and Wave 2 bundles. The resulting Rule Claim Matrix and
+evidence sufficiency report live under `data/intermediate/research/` as processed
+research, not archived evidence or canonical domain data. Cross-validation
+requires cited Source Records and artifact identities to resolve through verified
+evidence bundles. Unsupported claims carry no fabricated citations.
+
+The current archive confirms Product identity and four bounded membership
+examples but contains no support for complete pack structure, Slots, Print Sheets,
+replacement, treatment selection, collation, or probability claims.
