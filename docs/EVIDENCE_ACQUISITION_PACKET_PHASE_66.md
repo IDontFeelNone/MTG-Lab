@@ -1,8 +1,13 @@
 # Phase 66 Evidence Acquisition Packet
 
-**Status:** Evidence-waiting. The PR #18 raw research handoff structure exists,
-but it contains no acquired external evidence artifacts and Phase 66 processing
-has not begun.
+> **Status: Reference** — retained intake contract for future externally acquired MB2
+> evidence. Its original PR #18/Phase 66 status narrative is historical: Phase 67 later
+> delivered one mechanically reviewed product-title artifact, but it did not satisfy
+> any unresolved outcome-affecting rule need. Current authorization is defined only by
+> `ROADMAP.md`, `SESSION_STATE.md`, and `NEXT_TASK.md`.
+
+**Original status:** Evidence-waiting. The PR #18 raw research handoff contained no
+acquired external evidence artifacts, and Phase 66 processing had not begun.
 
 **Purpose:** Define a controlled external-evidence handoff for Mystery Booster 2
 pack topology and selection semantics when the Codex environment cannot reliably

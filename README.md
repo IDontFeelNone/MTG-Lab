@@ -2,6 +2,11 @@
 
 > **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
+> **Status: Current Overview and Vision.** Statements labeled as vision or planned
+> capability describe the target platform, not implemented behavior. The current
+> implementation baseline is maintained in `PROJECT_INVENTORY.md` and
+> `docs/PROJECT_STATUS.md`.
+
 MTG Lab is a research and analytics platform designed to help collectors, players, investors, and researchers make better decisions across collectible card games.
 
 Rather than functioning as a traditional card database, MTG Lab transforms large collections of structured card data into explainable, actionable intelligence through statistical analysis, simulation, and AI-assisted reasoning.
@@ -56,7 +61,11 @@ The architecture is intentionally extensible so additional games can share the s
 
 # Architecture
 
-MTG Lab is built around four primary layers.
+## Long-term vision
+
+The target platform is organized around four primary layers. Database-backed
+persistence, simulation, AI reasoning, and graphical/API applications in this diagram
+are not implemented in the current pre-alpha repository.
 
 ```text
 Repository / Database
@@ -75,9 +84,10 @@ Each layer has a distinct responsibility.
 
 The Tier 0 [Research Log architecture](docs/RESEARCH_LOG_ARCHITECTURE.md) defines MTG Lab's scientific notebook and institutional memory, preserving versioned hypotheses, experiments, observations, conclusions, and evidence across these layers.
 
-## Repository / Database
+## Repository and canonical identity
 
-The canonical source of structured information including:
+The implemented filesystem repositories preserve canonical identity and immutable
+domain snapshots. The long-term repository vision includes:
 
 - Cards
 - Products
@@ -138,7 +148,7 @@ Printings, duplicates, conflicts, rejected records, and expected count changes.
 
 ## Analytics Engine
 
-Responsible for computing:
+The long-term analytics vision includes:
 
 - Pull probabilities
 - Expected value
@@ -147,16 +157,19 @@ Responsible for computing:
 - Collection statistics
 - Historical analysis
 
-The first game-agnostic analytics subsystem now produces immutable, versioned
-fact reports for collections, duplicates, acquisitions, inventory utilization,
-and observations. See the [Analytics Engine v1](docs/ANALYTICS_ENGINE.md) for its
-service API, report contract, CLI, and deliberately excluded decision features.
+The implemented game-agnostic Analytics Engine v1 currently produces seven immutable,
+versioned factual reports for collections, duplicates, acquisitions, inventory,
+observations, distributions, and products. It does not implement probability, expected
+value, simulation, portfolio optimization, or recommendations. See
+[Analytics Engine v1](docs/ANALYTICS_ENGINE.md) for its bounded contract.
 
-## AI Reasoning Layer
+## AI Reasoning Layer — vision
 
-Retrieves structured information, interprets analytical results, and generates explainable recommendations.
+The planned layer will retrieve structured information, interpret analytical results,
+and generate explainable recommendations. It is not implemented. The current Decision
+Engine is deterministic explicit-rule evaluation rather than AI/ML reasoning.
 
-## Applications & User Interfaces
+## Applications & User Interfaces — vision
 
 Exposes MTG Lab through:
 
@@ -254,9 +267,14 @@ This organization allows multiple trading card games to share a common analytics
 
 **Status:** Active Development
 
-**Current Focus:** Magic: The Gathering — Mystery Booster 2
+**Current Phase:** Phase 77.1 — Repository Documentation Reconciliation
 
-Mystery Booster 2 serves as the reference implementation used to validate the platform's data models, analytics engine, simulation framework, and AI reasoning before expanding to additional games.
+**Reference Product:** Magic: The Gathering — Mystery Booster 2
+
+Mystery Booster 2 validates evidence, canonical, and observation boundaries. The
+generic Market, External Mapping, Collection, Analytics, and Decision foundations are
+also implemented. The repository does not yet contain an MB2 simulation framework,
+probability engine, or AI reasoning layer.
 
 ---
 

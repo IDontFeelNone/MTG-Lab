@@ -1,5 +1,10 @@
 # MTG Lab Architecture
 
+> **Status: Current Architecture and Vision** — Architecture v12 remains the approved
+> direction. The high-level target diagram includes planned layers and is not a claim
+> that every component is implemented. `../ARCHITECTURE_REVIEW_v1.md` contains the
+> Phase 77 current-implementation dependency diagram and maturity assessment.
+
 Purpose
 
 MTG Lab is designed as a modular research platform for Magic: The Gathering. The architecture emphasizes correctness, extensibility, reproducibility, and maintainability over short-term implementation speed.
@@ -29,15 +34,16 @@ The engine interprets the data rather than containing special-case rules for ind
 
 Each major system has a single responsibility.
 
-Major modules include:
+Long-term modules include:
 
 - Database
-- Import Pipeline
+- Canonical Import Pipeline and Observation Import Pipeline
 - Validation Engine
 - Simulation Engine
 - Analytics Engine
-- Collection Manager
-- Market Intelligence
+- Collection Engine
+- Market Provider Framework and External Mapping Layer
+- Decision Engine
 - API
 - Web Interface
 
@@ -74,6 +80,11 @@ Validation includes:
 The goal is to ensure statistical analyses are built on verified data.
 
 ## High-Level Architecture
+
+The following is the long-term target architecture. Web Interface, REST API,
+Simulation Engine, and Database Layer are not implemented. The current pre-alpha
+implementation uses deterministic filesystem repositories and CLI entry points; its
+implemented dependency direction is documented in `../ARCHITECTURE_REVIEW_v1.md`.
 
 ```text
                 User

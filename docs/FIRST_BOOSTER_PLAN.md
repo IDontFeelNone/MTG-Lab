@@ -1,7 +1,13 @@
 # First Evidence-Backed Booster Plan
 
-**Status:** Approved critical-path planning baseline; Phase 66 is evidence-waiting
-and processing has not begun
+> **Status: Historical Reference** — Phase 65/66 critical-path plan retained without
+> rewriting its original assessment. Phase 67 superseded its “empty handoff” status by
+> delivering one mechanically reviewed artifact, which supported only known product
+> identity. `ROADMAP.md`, `SESSION_STATE.md`, and `NEXT_TASK.md` now control current
+> status and authorization.
+
+**Original status:** Approved critical-path planning baseline; Phase 66 was evidence-
+waiting and processing had not begun.
 
 **Assessment date:** 2026-07-30
 

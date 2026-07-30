@@ -1,62 +1,34 @@
 # Next Task
 
-## Phase 67 — Await Sufficient Rule-Relevant External Evidence
+> **Status: Current** — Phase 77.1 completion and merge gate.
 
-**Status:** Evidence-waiting; the first artifact-bearing handoff passed bounded
-mechanical review but supports only the existing MB2 product-identity claim
+## Current approved milestone
 
-**Acquisition constraint:** Live-web access is not assumed. Use the controlled
-external-evidence handoff in `docs/EVIDENCE_ACQUISITION_PACKET_PHASE_66.md`.
+**Phase 77.1 — Repository Documentation Reconciliation**
 
-## Current Authorized Action
+Reconcile repository-authoritative documentation with the implementation through Phase
+76 and the Phase 77 architecture review. This is documentation-only: application code,
+tests, schemas, data models, canonical data, and public APIs must remain unchanged.
 
-Maintain the controlled handoff boundary and wait for a content-complete,
-independently reviewed external-evidence handoff containing evidence relevant to
-an unresolved outcome-affecting MB2 rule claim. Once and only once the entry gate
-is satisfied, verify the supplied bytes and reconcile supported claims with the
-Rule Claim Matrix. Repository agents must not acquire or fabricate missing evidence.
+## Remaining approved actions
 
-## Entry Gate
+- Review the final documentation diff for conflicting phase, subsystem, deferred-work,
+  count, roadmap, handoff, and next-action statements.
+- Run the CI-equivalent 137-test suite and documentation hygiene checks.
+- Observe the GitHub Actions result for the pull request.
+- Recommend merge only after GitHub Actions is green.
 
-- At least one real external artifact relevant to an unresolved outcome-affecting
-  MB2 rule claim exists under the raw handoff.
-- The manifest declares every file, size, SHA-256, media type, acquisition context,
-  product-version scope, narrow claim, and independently resolvable locator.
-- An identified second human has reviewed bytes, hashes, locators, scope, and claims.
-- The handoff is content-complete for the bounded submission and explicitly
-  authorized for verification.
+## After Phase 77.1
 
-The merged Phase 67 handoff passed the Evidence Review Engine's mechanical gate
-for its single product-identity claim. Because it only re-delivers a previously
-archived title capture, it does not satisfy this rule-evidence gate and does not
-authorize Rule Claim Matrix advancement or canonical promotion.
+No implementation milestone is currently approved. Stop after the green merge handoff
+and request explicit authorization for one bounded next milestone.
 
-## Scope After Entry
+Possible future work is recorded, but not authorized, in two separate tracks:
 
-- Archive bounded, high-authority sources for pack event count and roles, draw
-  counts, pool mappings, replacement, treatment rules, and collation dependencies.
-- Verify a human-supplied raw intake manifest and exact artifact bytes before
-  preparing any Evidence Repository bundle.
-- Reconcile the retained matrix/report with exact locators, contradictions, and
-  explicit unresolved claims.
-- Decide architectural fit from supported behavior without redesigning Tier 0.
-- Authorize or block a later canonical-rule population milestone claim by claim.
+1. non-breaking consolidation candidates from `../ARCHITECTURE_REVIEW_v1.md`; and
+2. evidence-dependent MB2 research or rule work, which remains gated by a content-
+   complete, independently reviewed handoff relevant to unresolved outcome-affecting
+   claims.
 
-## Exclusions
-
-- No Product, Print Sheet, Slot, Card, or Printing record may change or be populated.
-- No probability, simulation, analytics, promotion, API, UI, persistence, or AI behavior.
-- No Tier 0 redesign or product-specific engine logic.
-- No repository-side external acquisition and no reinterpretation of the reviewed
-  title-only handoff as outcome-affecting rule evidence.
-
-## Acceptance Baseline
-
-- All evidence bytes are content-verified, source-registered, and precisely located.
-- The revised matrix/report are deterministic, schema-valid, and cross-validated.
-- Unknown or conflicting claims remain explicit and are never inferred silently.
-- Canonical repositories and promotion audits remain unchanged.
-- The complete suite and repository validation pass.
-
-The complete dependency assessment, exclusions, and acceptance criteria are in
-`docs/FIRST_BOOSTER_PLAN.md`. Wait until the entry gate is demonstrably satisfied.
+Neither track permits Architecture v12 redesign, inferred MB2 behavior, or unreviewed
+canonical promotion.

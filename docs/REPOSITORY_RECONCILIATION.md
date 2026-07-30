@@ -1,6 +1,12 @@
 # Repository Reconciliation Plan
 
-**Status:** Proposed — no structural changes applied  
+> **Status: Superseded Historical Plan** — retained as the pre-implementation structure
+> assessment from 2026-07-28. Phases 56–76 subsequently created or populated many of
+> the packages it calls empty or missing. `../PROJECT_INVENTORY.md` and
+> `../ARCHITECTURE_REVIEW_v1.md` are the current inventory and implementation assessment;
+> none of this plan's proposed migrations is authorized by its retention.
+
+**Original status:** Proposed — no structural changes applied
 **Date:** 2026-07-28  
 **Scope:** Reconcile the source tree with the approved MTG Lab architecture before feature implementation.
 

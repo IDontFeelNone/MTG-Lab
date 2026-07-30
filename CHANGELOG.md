@@ -17,6 +17,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Phase 77.1 repository documentation reconciliation: current session state, executive
+  dashboard, handoff, next task, documentation hierarchy, startup workflow, historical
+  status labels, and implementation-versus-vision wording now describe one consistent
+  baseline through Phase 77. Historical plans remain retained. No runtime behavior,
+  tests, schemas, models, public APIs, or canonical data changed.
+
+- Phase 77 repository-wide Architecture v12 review, including subsystem maturity
+  ratings, dependency direction, technical debt and risk register, documented defects,
+  non-breaking consolidation sequence, future scaling considerations, and reconciled
+  inventory and roadmap. This milestone changes no runtime behavior, canonical data,
+  public API, or user-facing feature.
+
 - Documentation reconciliation for the merged first artifact-bearing Phase 67
   evidence handoff and its successful Evidence Review Engine run. The handoff's
   re-delivered official product-title capture supports only MB2 identity; frozen

@@ -1,5 +1,9 @@
 # AI Architecture Vision
 
+> **Status: Vision** — target-state AI capability, not current implementation. The
+> repository currently implements deterministic Analytics Engine and Decision Engine
+> foundations; it does not implement an AI advisor or AI/ML reasoning layer.
+
 **Status:** Approved
 
 **Tier:** Tier 0 (Architectural Constitution)
