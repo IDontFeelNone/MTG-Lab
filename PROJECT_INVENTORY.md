@@ -110,3 +110,10 @@ graphs or retain assertion-level provenance. `docs/PHASE_79_PREIMPLEMENTATION_RE
 is the controlling blocker report. Any contract/importer resolution requires separate
 approval and must remain product-agnostic. Do not recommend merge until GitHub Actions
 are green.
+
+## Phase 80 — Canonical fact and evidence contract
+
+- `src/schemas/v3/`: additive Card, Printing, assertion, and partial-collation schemas.
+- `src/canonical/evidence.py`: uncertainty, promotion, and fail-closed consumer API.
+- `docs/CANONICAL_CARD_PRINTING_EVIDENCE_CONTRACT.md`: authoritative v3 policy.
+- No Mystery Booster 2 dataset records were added or rewritten.
