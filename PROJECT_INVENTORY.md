@@ -1,6 +1,6 @@
 # MTG Lab Project Inventory
 
-> **Status: Current** — Phase 83 institutional memory established on 2026-07-30; GitHub Actions merge gate pending.
+> **Status: Current** — Phase 83 is merged and complete as of 2026-07-30; no prior pull-request merge gate is active.
 
 ## Phase 83 constitutional guidance
 
@@ -17,7 +17,8 @@ questions guide future proposals without authorizing them.
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Milestone:** Phase 83 institutional memory and project constitution (documentation complete; CI pending)
+- **Latest completed milestone:** Phase 83 — Institutional Memory and Project Constitution
+- **Latest runtime milestone:** Phase 82 — Raw Data Acquisition Framework
 - **Maturity:** pre-alpha; deterministic local reference implementation
 - **Validation baseline:** 154 passing unit/integration-style tests under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
@@ -63,7 +64,7 @@ questions guide future proposals without authorizing them.
   `src/decisions` — downstream domain engines
 - `src/mtglab` — command-line application namespaces
 - `src/schemas/v1`, `src/validation` — versioned JSON contracts and validation
-- `tests/` — 141 deterministic tests collected by the Python validation workflow
+- `tests/` — 154 deterministic tests collected by the Python validation workflow
 - `docs/` — Architecture v12, subsystem contracts, governance, status, and history
 
 ## Architecture constraints and known debt
@@ -119,12 +120,12 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 79 stopped before implementation because Card/Printing v1 cannot represent the
-required facts and uncertainty, while the v1 importer cannot emit Contract v2 product
-graphs or retain assertion-level provenance. `docs/PHASE_79_PREIMPLEMENTATION_REVIEW.md`
-is the controlling blocker report. Any contract/importer resolution requires separate
-approval and must remain product-agnostic. Do not recommend merge until GitHub Actions
-are green.
+The repository is ready for a separately approved Phase 84, but no next milestone is
+currently authorized. Mystery Booster 2 remains evidence-acquisition blocked; Simulation
+is not implemented; and the Intelligence Engine is vision only. Earlier Phase 79 contract
+gaps were resolved by Phase 80, so `docs/PHASE_79_PREIMPLEMENTATION_REVIEW.md` is retained
+as **Historical reference**, not as the current authorization boundary. Prior Phase 82 and
+Phase 83 pull-request merge gates are satisfied and no longer active.
 
 ## Phase 80 — Canonical fact and evidence contract
 

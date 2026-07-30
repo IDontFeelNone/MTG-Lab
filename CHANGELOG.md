@@ -15,6 +15,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Phase 83.1 reconciled authoritative project-state documentation after the successful
+  Phase 83 merge: Phase 83 is complete, Phase 82 remains the latest runtime milestone,
+  Architecture v12 is unchanged, the active baseline is 154 passing tests, and no prior
+  pull-request merge gate or follow-on implementation authorization remains active.
+
 ### Added
 
 - Phase 83 Tier 0 institutional memory: a Project Constitution and amendment process, a
@@ -112,11 +119,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 [Unreleased]: https://github.com/IDontFeelNone/MTG-Lab/compare/v0.0.0...HEAD
 
-## Phase 80 — Canonical Card, Printing, Evidence, and Uncertainty Contract (2026-07-30)
+## Historical — Phase 80 Canonical Card, Printing, Evidence, and Uncertainty Contract (2026-07-30)
 
 Phase 80 adds the compatible v3 Card/Printing and assertion-level evidence contract,
 explicit partial-knowledge semantics, deterministic promotion, legacy projections,
 and fail-closed simulation readiness. Historical canonical records remain unchanged;
 full Mystery Booster 2 population remains out of scope. See
-`docs/CANONICAL_CARD_PRINTING_EVIDENCE_CONTRACT.md`. Do not recommend merge until
-GitHub Actions are green.
+`docs/CANONICAL_CARD_PRINTING_EVIDENCE_CONTRACT.md`. Its former pull-request merge gate
+is satisfied and is not active guidance.
