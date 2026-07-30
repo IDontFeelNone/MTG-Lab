@@ -1,6 +1,7 @@
 """Deterministic, provider-neutral queries over canonical repository state."""
 from __future__ import annotations
 
+import hashlib
 import json
 import unicodedata
 from dataclasses import asdict, dataclass, is_dataclass
@@ -45,6 +46,19 @@ class QueryResult:
         return _plain(asdict(self))
 
 
+@dataclass(frozen=True)
+class QuerySnapshot:
+    """A content-addressed, storage-independent canonical query snapshot."""
+
+    snapshot_id: str
+    game: str
+    entities: tuple[QueryResult, ...]
+
+    def as_dict(self) -> dict[str, Any]:
+        return {"snapshot_id": self.snapshot_id, "game": self.game,
+                "entities": [item.as_dict() for item in self.entities]}
+
+
 class CanonicalQueryEngine:
     """Read-only facade; downstream callers do not receive repository objects."""
 
@@ -56,6 +70,13 @@ class CanonicalQueryEngine:
         self._repository = CanonicalRepository(game, games_root=self.games_root)
         self._raw = self._load_raw()
         self._results = tuple(sorted(self._build_results(), key=lambda x: (x.entity_type, x.canonical_identity)))
+
+    def snapshot(self) -> QuerySnapshot:
+        """Return all query results and their deterministic content identity."""
+        payload = json.dumps([item.as_dict() for item in self._results], sort_keys=True,
+                             separators=(",", ":"), ensure_ascii=False).encode()
+        return QuerySnapshot("sha256:" + hashlib.sha256(payload).hexdigest(), self.game,
+                             self._results)
 
     def entities(self, *, canonical_id: str | None = None, provider_id: str | None = None,
                  external_id: str | None = None, entity_type: str | None = None,

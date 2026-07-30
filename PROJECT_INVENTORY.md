@@ -16,7 +16,7 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 90 is merged. Phase 91 is implemented and awaits review and
+> **Status: Current** — Phase 91 is implemented. Phase 92 is implemented and awaits review and
 > green GitHub Actions.
 
 ## Phase 83 constitutional guidance
@@ -35,9 +35,9 @@ questions guide future proposals without authorizing them.
 
 - **Architecture:** v12 (unchanged)
 - **Latest merged milestone:** Phase 90 — MB2 pilot evidence-gap outcome
-- **Current milestone:** Phase 91 — Canonical Query Engine v1
+- **Current milestone:** Phase 92 — Canonical Analytics Engine v1
 - **Maturity:** pre-alpha; deterministic local reference implementation
-- **Validation baseline:** 182 passing tests locally under the CI command
+- **Validation baseline:** 194 passing tests locally under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
   Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
   remain unpopulated
@@ -141,7 +141,7 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 91 review and green CI are the only active work. Future Analytics, Simulation, REST,
+Phase 92 review and green CI are the only active work. Future Analytics expansion, Simulation, REST,
 and AI consumers must use the Query Engine instead of repository storage internals. Mystery
 Booster 2 remains evidence-blocked; Simulation and Intelligence remain unimplemented.
 

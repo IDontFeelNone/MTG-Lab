@@ -7,6 +7,7 @@ from dataset_import import DatasetRegistry, ImportManager
 from external_ingestion import (AdapterRegistry, ExternalDatasetIngestor, MTGJSONAdapter,
                                 detect_mtgjson, generate_manifest)
 from query import CanonicalQueryEngine
+from analytics import CanonicalAnalyticsEngine
 
 
 def main(argv=None) -> int:
@@ -41,9 +42,19 @@ def main(argv=None) -> int:
     for name in ("dataset", "provenance"):
         command = query_commands.add_parser(name); command.add_argument("identifier"); command.add_argument("--game", default="magic")
     validation = query_commands.add_parser("validation"); validation.add_argument("state", choices=("unknown", "conflicting", "unresolved", "rejected", "validation_failure", "superseded")); validation.add_argument("--game", default="magic")
+    analytics = commands.add_parser("analytics")
+    analytics_commands = analytics.add_subparsers(dest="analytics_command", required=True)
+    for name in ("summary", "entity", "dataset", "validation", "provenance"):
+        command = analytics_commands.add_parser(name)
+        command.add_argument("--game", default="magic")
+        command.add_argument("--format", choices=("json",), default="json")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "query":
+    if args.command == "analytics":
+        query_engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games",
+                                            data_root=args.data_root)
+        result = getattr(CanonicalAnalyticsEngine(query_engine), args.analytics_command)().to_dict()
+    elif args.command == "query":
         engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games",
                                       data_root=args.data_root)
         if args.query_command == "entity":

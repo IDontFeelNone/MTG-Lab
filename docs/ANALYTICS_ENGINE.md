@@ -1,4 +1,42 @@
-# Analytics Engine v1
+# Analytics Engines
+
+> **Status: Current — Phase 92 Canonical Analytics Engine v1 implemented.**
+
+## Phase 92 pre-implementation assessment
+
+Architecture v12 already places deterministic analytics downstream of canonical truth and
+prohibits derived artifacts from promoting themselves. Phase 91 supplied the missing stable,
+provider-neutral read boundary. Phase 92 therefore fits without changing a frozen contract:
+the new engine accepts only `CanonicalQueryEngine` snapshots, returns immutable derived
+results, and has no repository-storage dependency or write path. Canonical schemas, authority,
+promotion, evidence, uncertainty, and filesystem layouts remain unchanged. The work relies on
+the constitutional laws that canonical state is the sole truth, unknown is preferable to an
+invented value, derived knowledge remains derived, history and provenance are retained, and
+product-specific behavior belongs in data. It adds neither AI reasoning nor simulation.
+
+## Canonical Analytics Engine v1
+
+`CanonicalAnalyticsEngine` content-addresses the complete, deterministically ordered query
+result snapshot and repeats that `sha256:` identity in every `canonical-analytics-v1` result.
+Results are recursively immutable and serialize with sorted JSON keys. The supported views are
+`summary`, `entity`, `dataset`, `validation`, and `provenance`.
+
+The summary includes entity counts, cards and printings by set, printings by card, rarity,
+color, layout, language and finish distributions, explicit unknown counts, confidence and
+validation-state distributions, provenance and dataset coverage, and supersession statistics.
+Absent dimensions are reported as `unknown`; they are never inferred. Dataset and provenance
+coverage count query-projected lineage only. Validation analytics use the Query Engine's public
+validation results so rejected and validation-failure audits are not mistaken for entities.
+
+```bash
+PYTHONPATH=src python -m mtglab analytics summary --format json
+PYTHONPATH=src python -m mtglab analytics entity --format json
+PYTHONPATH=src python -m mtglab analytics dataset --format json
+PYTHONPATH=src python -m mtglab analytics validation --format json
+PYTHONPATH=src python -m mtglab analytics provenance --format json
+```
+
+## Legacy caller-supplied analytics
 
 The analytics engine is the deterministic boundary between stored domain data
 and consumers such as applications or a future reasoning layer. It accepts

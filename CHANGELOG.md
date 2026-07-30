@@ -1,3 +1,10 @@
+## Phase 92 — Canonical Analytics Engine v1
+
+- Added deterministic, immutable, versioned analytics over content-addressed Canonical Query
+  Engine snapshots, including entity, dataset, validation, provenance, confidence, unknown,
+  distribution, coverage, and supersession statistics plus five JSON CLI commands. No
+  Architecture v12 contract, canonical schema, canonical state, AI, or simulation changed.
+
 ## Phase 91 — Canonical Query Engine v1
 
 - Added the provider-agnostic, read-only Canonical Query Engine with a stable,
