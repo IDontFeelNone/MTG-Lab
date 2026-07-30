@@ -18,11 +18,12 @@ v12
 
 ## Current Phase
 
-Post-Phase 65 planning cycle complete; proposed Phase 66 awaits explicit approval
+Phase 66 evidence-waiting; verification is conditionally authorized after the
+entry gate, and processing has not begun
 
 ## Last Merged PR
 
-PR #16 — Phase 65 Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment.
+PR #18 — Phase 66 external research handoff.
 
 ## Repository Status
 
@@ -67,6 +68,9 @@ PR #16 — Phase 65 Mystery Booster 2 Product-Rule Evidence Sufficiency Assessme
   Report outside canonical data, cross-validated against verified bundles. Current
   evidence supports Product identity and four partial membership examples but no
   complete MB2 product-rule graph.
+- PR #18 adds a controlled raw Phase 66 research handoff with an empty-artifact
+  manifest, an empty artifact directory, failed-access notes, and source leads.
+  It adds no acquired external evidence and supports no new factual claim.
 
 ## Completed Milestones
 
@@ -110,10 +114,12 @@ PR #16 — Phase 65 Mystery Booster 2 Product-Rule Evidence Sufficiency Assessme
 
 ## Current Focus
 
-The fresh critical-path assessment is recorded in `FIRST_BOOSTER_PLAN.md`.
-Proposed Phase 66 targets pack-topology and selection-semantics evidence; it is
-not approved. No canonical Mystery Booster 2 Print Sheet, Slot, product-rule
-population, probability, or pack-generation milestone is approved.
+The critical-path assessment is recorded in `FIRST_BOOSTER_PLAN.md`. Phase 66
+is in the evidence-waiting state. Verification and research reconciliation may
+begin only after an artifact-bearing, content-complete, independently reviewed
+handoff satisfies the documented entry gate. The current handoff does not.
+Canonical Mystery Booster 2 rule population and pack generation, probability,
+simulation, analytics, API, and UI remain unauthorized.
 
 ## Open Risks
 
@@ -121,20 +127,26 @@ population, probability, or pack-generation milestone is approved.
 - Product-specific evidence may be incomplete or contradictory.
 - Canonical data must not be populated from unreviewed intermediate candidates.
 - Downstream probability and simulation work remains blocked on validated product data.
+- External evidence is the current blocker on the approved critical path to the
+  first evidence-backed MB2 booster, not the only project-wide blocker.
 
 ## Technical Debt
 
 - Canonical promotion intentionally requires manual application-workflow decisions;
   batch-level transactional orchestration remains future work.
-- Only fifteen Cards and Printings are populated; comprehensive card data,
-  slots, sheets, collation, probabilities, simulations, and market data remain unpopulated.
-- Roadmap technical-debt categories require specific tracked items as work is discovered.
+- Canonical-data debt: only fifteen Cards and Printings are populated; MB2 has
+  four Printings, while complete pools, Slots, sheets, and collation are absent.
+- Evidence debt: the current Phase 66 handoff contains no acquired artifact bytes.
+- Implementation debt: generic generation, probability, simulation, and
+  generated-pack validation are absent.
+- Deferred layers: persistence, analytics, market intelligence, collection,
+  API, UI, and AI advisor work remains outside the authorized milestone.
 
 ## Upcoming Milestones
 
-1. Review and approve or revise proposed Phase 66.
-2. Require separate approval before targeted rule-evidence acquisition.
-3. Canonical rule population, probability, simulation, and analytics remain blocked.
+1. Wait for an artifact-bearing, content-complete, independently reviewed handoff.
+2. Verify and reconcile it only after the Phase 66 entry gate is satisfied.
+3. Require separate approval before canonical population or downstream implementation.
 
 ## Next Session Checklist
 

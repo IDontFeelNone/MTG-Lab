@@ -193,7 +193,15 @@ Development follows a documentation-first approach:
 
 Development sessions are repository-driven. Before making changes, contributors and Codex read the project inventory, current session state, approved next task, architecture, decisions, roadmap, and changelog. Work proceeds one small milestone at a time, with complete tests and synchronized documentation, and stops when the milestone's pull request is ready for review.
 
-See the authoritative [`docs/AI_CONTRIBUTING.md`](docs/AI_CONTRIBUTING.md) guide, reusable [`docs/DEVELOPMENT_PLAYBOOK.md`](docs/DEVELOPMENT_PLAYBOOK.md), engineering context in [`docs/LESSONS_LEARNED.md`](docs/LESSONS_LEARNED.md), required [`docs/CODEX_WORKFLOW.md`](docs/CODEX_WORKFLOW.md), [`docs/HANDOFF.md`](docs/HANDOFF.md), [`docs/SESSION_STATE.md`](docs/SESSION_STATE.md), and [`docs/NEXT_TASK.md`](docs/NEXT_TASK.md). `HANDOFF.md` provides the concise transfer note from the most recent session. The repository—not previous chat history—is the source of truth.
+See the executive [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) dashboard,
+authoritative [`docs/AI_CONTRIBUTING.md`](docs/AI_CONTRIBUTING.md) guide,
+reusable [`docs/DEVELOPMENT_PLAYBOOK.md`](docs/DEVELOPMENT_PLAYBOOK.md),
+engineering context in [`docs/LESSONS_LEARNED.md`](docs/LESSONS_LEARNED.md),
+required [`docs/CODEX_WORKFLOW.md`](docs/CODEX_WORKFLOW.md),
+[`docs/HANDOFF.md`](docs/HANDOFF.md), [`docs/SESSION_STATE.md`](docs/SESSION_STATE.md),
+and [`docs/NEXT_TASK.md`](docs/NEXT_TASK.md). `PROJECT_STATUS.md` is subordinate
+to the Tier 0 constitution and summarizes, rather than replaces, those detailed
+authorities. The repository—not previous chat history—is the source of truth.
 
 ---
 
@@ -203,30 +211,25 @@ See the authoritative [`docs/AI_CONTRIBUTING.md`](docs/AI_CONTRIBUTING.md) guide
 MTG-Lab/
 │
 ├── README.md
-├── ROADMAP.md
-├── ARCHITECTURE.md
 ├── CHANGELOG.md
-├── DECISIONS.md
-├── TODO.md
+├── PROJECT_INVENTORY.md
 │
 ├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── DECISIONS.md
+│   ├── ENGINEERING_STANDARDS.md
+│   ├── PROJECT_STATUS.md
+│   ├── ROADMAP.md
+│   ├── SESSION_STATE.md
+│   ├── NEXT_TASK.md
+│   ├── HANDOFF.md
 │   ├── AI_ARCHITECTURE_VISION.md
-│   ├── PROJECT_INVENTORY.md
 │   └── ...
 │
-├── games/
-│   ├── magic/
-│   │   └── mystery_booster_2/
-│   ├── pokemon/
-│   ├── lorcana/
-│   ├── one_piece/
-│   ├── yugioh/
-│   └── ...
-│
+├── data/
 ├── src/
-├── schemas/
 ├── tests/
-└── exports/
+└── scripts/
 ```
 
 This organization allows multiple trading card games to share a common analytics platform while maintaining independent datasets.
