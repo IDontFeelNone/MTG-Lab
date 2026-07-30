@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
+import tempfile
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
@@ -51,6 +53,40 @@ class CanonicalRepository:
 
     def get_pack_definition(self, identifier: str) -> PackDefinition:
         return self._get(self.pack_definitions, "PackDefinition", identifier)
+
+    @classmethod
+    def apply_import(cls, game: str, records: Mapping[str, Mapping[str, Any]], *,
+                     games_root: Path | None = None) -> "CanonicalRepository":
+        """Atomically apply importer-prepared relative paths through the repository API."""
+        root = Path(games_root) if games_root is not None else _DEFAULT_ROOT
+        root.mkdir(parents=True, exist_ok=True)
+        current = root / game
+        with tempfile.TemporaryDirectory(dir=root) as temporary:
+            staged = Path(temporary) / game
+            if current.exists():
+                shutil.copytree(current, staged)
+            else:
+                staged.mkdir()
+            for relative, document in sorted(records.items()):
+                path = Path(relative)
+                if path.is_absolute() or ".." in path.parts:
+                    raise CanonicalRepositoryError(f"Unsafe canonical path: {relative}")
+                destination = staged / path
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n",
+                                       encoding="utf-8")
+            # The normal loader is the final relationship/schema gate before mutation.
+            cls(game, games_root=Path(temporary))
+            backup = root / f".{game}.import-backup"
+            if backup.exists(): shutil.rmtree(backup)
+            if current.exists(): current.rename(backup)
+            try:
+                staged.rename(current)
+            except BaseException:
+                if backup.exists(): backup.rename(current)
+                raise
+            if backup.exists(): shutil.rmtree(backup)
+        return cls(game, games_root=root)
 
     def _load_game(self) -> Game:
         path = self.root / self.game_id / "game.json"
