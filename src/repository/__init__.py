@@ -9,6 +9,9 @@ from .cards import (
     load_printing,
     printing_record_path,
 )
+from .canonical import (
+    CanonicalRepository, CanonicalRepositoryError, load_canonical_repository,
+)
 from .evidence import (
     ArchivedEvidence,
     EvidenceBundle,
@@ -38,6 +41,8 @@ from .rules import (
 
 __all__ = [
     "CardRepositoryError",
+    "CanonicalRepository",
+    "CanonicalRepositoryError",
     "ArchivedEvidence",
     "CandidatePromotionService",
     "CandidateReview",
@@ -56,6 +61,7 @@ __all__ = [
     "evidence_manifest_path",
     "load_acquisition_manifest",
     "load_card",
+    "load_canonical_repository",
     "load_card_repository",
     "load_evidence_bundle",
     "load_printing",

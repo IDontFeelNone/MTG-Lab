@@ -64,6 +64,18 @@
       },
       "uniqueItems": true
     },
+    "version_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9._-]*$"
+      },
+      "uniqueItems": true
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    },
     "provenance": {
       "type": "array",
       "minItems": 1,
