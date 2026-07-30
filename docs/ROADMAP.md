@@ -1,6 +1,6 @@
 # MTG Lab Roadmap
 
-> **Status: Current** — Phase 84 is implemented on the current branch and awaits green CI and review.
+> **Status: Current** — Phase 83 is merged and complete; the next milestone requires explicit approval.
 
 ## Current baseline
 
@@ -8,19 +8,13 @@
 | --- | --- |
 | Architecture | v12, unchanged |
 | Latest completed phase | Phase 83 — Institutional Memory and Project Constitution |
-| Current milestone | Phase 84 — Knowledge Acquisition Pipeline v1 (implementation complete; CI pending) |
-| Test baseline | 160 passing tests locally |
+| Latest runtime phase | Phase 82 — Raw Data Acquisition Framework |
+| Test baseline | 154 passing tests |
 | Mystery Booster 2 dataset | Evidence-acquisition blocked |
 | Simulation | Not implemented |
 | Intelligence Engine | Vision only |
 | Prior merge gates | None active |
-| Merge recommendation | Withheld until GitHub Actions are green |
-
-## Current milestone — Phase 84
-
-Phase 84 composes Phase 82 raw acquisition into validated dataset identities, independent
-provider policies, deterministic reports, and integrity-addressed review packages. It
-performs no canonical promotion and leaves Architecture v12 frozen.
+| Next milestone | Requires explicit approval |
 
 ## Completed milestone — Phase 83
 

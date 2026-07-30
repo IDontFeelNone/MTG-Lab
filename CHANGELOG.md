@@ -15,13 +15,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-### Added
-
-- Phase 84 Knowledge Acquisition Pipeline v1: deterministic dataset identities, independent
-  provider policies, pre-review validation, machine-readable reports, review packages,
-  offline collectible-card fixtures, CLI stages, documentation, and tests. No canonical
-  promotion or Mystery Booster 2 population was performed; Architecture v12 is unchanged.
-
 ### Changed
 
 - Phase 83.1 reconciled authoritative project-state documentation after the successful
