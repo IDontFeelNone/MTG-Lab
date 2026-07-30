@@ -1,3 +1,11 @@
+## Phase 95 — AI Model Adapter Framework v1
+
+- Added immutable, versioned provider-neutral request, response, capability, provider, and
+  execution contracts with deterministic serialization.
+- Added an abstract reasoning-context-only provider interface, validated lifecycle, explicit
+  deterministic registry, typed failures, and JSON AI CLI.
+- Added no provider, SDK, inference, prompt, runtime dependency, or Architecture v12 change.
+
 # Phase 94 — AI Reasoning Context Layer v1 (Unreleased)
 
 - Added immutable, content-addressed reasoning context requests/results, deterministic evidence and provenance maps, mechanical truncation, typed errors, and JSON CLI commands.

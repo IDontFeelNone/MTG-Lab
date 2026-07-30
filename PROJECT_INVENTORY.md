@@ -18,7 +18,7 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 93 is implemented and awaits review and
+> **Status: Current** — Phase 95 is implemented and awaits review and
 > green GitHub Actions.
 
 ## Phase 83 constitutional guidance
@@ -37,7 +37,7 @@ questions guide future proposals without authorizing them.
 
 - **Architecture:** v12 (unchanged)
 - **Latest merged milestone:** Phase 90 — MB2 pilot evidence-gap outcome
-- **Current milestone:** Phase 93 — Canonical Semantic Query Layer v1
+- **Current milestone:** Phase 95 — AI Model Adapter Framework v1
 - **Maturity:** pre-alpha; deterministic local reference implementation
 - **Validation baseline:** 194 passing tests locally under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
@@ -67,6 +67,8 @@ questions guide future proposals without authorizing them.
 | Analytics Engine | Seven immutable deterministic reports, input fingerprints, optional canonical enrichment and CLI | Operational v1 factual analytics |
 | Decision Engine | Explicit versioned rules, immutable explainable decisions/reports, stable fact lineage and CLI | Operational v1 deterministic reasoning |
 | Probability / simulation | Package placeholder only | Not implemented; canonical rules remain evidence-blocked |
+| AI Reasoning Context | Immutable content-addressed evidence packages over Semantic responses | Operational v1; only allowed reasoning input for AI adapters |
+| AI Model Adapter | Provider-neutral immutable contracts, abstract interface, explicit registry, lifecycle validation, CLI | Framework v1; no provider implementation or inference |
 | Research Log | Tier 0 architecture document | Implementation deferred |
 | API / UI / AI advisor | Vision only | Not implemented |
 
@@ -86,6 +88,7 @@ questions guide future proposals without authorizing them.
 - `src/ingestion`, `src/evidence_review` — evidence-to-candidate and handoff review
 - `src/observations`, `src/market`, `src/collection`, `src/analytics`,
   `src/decisions` — downstream domain engines
+- `src/reasoning`, `src/ai` — reasoning-context packaging and provider-independent model boundary
 - `src/mtglab` — command-line application namespaces
 - `src/schemas/v1`, `src/validation` — versioned JSON contracts and validation
 - `tests/` — deterministic tests collected by the Python validation workflow
