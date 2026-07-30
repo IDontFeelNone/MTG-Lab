@@ -1,3 +1,6 @@
-"""Derived analytics built from validated repository, probability, simulation, and market outputs."""
+"""Deterministic reports derived from caller-supplied domain snapshots."""
 
-__all__: list[str] = []
+from .models import AnalyticsReport
+from .service import AnalyticsService
+
+__all__ = ["AnalyticsReport", "AnalyticsService"]

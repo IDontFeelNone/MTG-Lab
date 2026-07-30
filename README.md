@@ -147,6 +147,11 @@ Responsible for computing:
 - Collection statistics
 - Historical analysis
 
+The first game-agnostic analytics subsystem now produces immutable, versioned
+fact reports for collections, duplicates, acquisitions, inventory utilization,
+and observations. See the [Analytics Engine v1](docs/ANALYTICS_ENGINE.md) for its
+service API, report contract, CLI, and deliberately excluded decision features.
+
 ## AI Reasoning Layer
 
 Retrieves structured information, interprets analytical results, and generates explainable recommendations.
