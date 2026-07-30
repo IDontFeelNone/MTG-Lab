@@ -1,6 +1,18 @@
 # MTG Lab Project Status
 
-> **Status: Current** — Phase 82 implemented; GitHub Actions merge gate pending.
+> **Status: Current** — Phase 83 institutional memory complete; GitHub Actions merge gate pending.
+
+## Phase 83 executive update
+
+MTG Lab now has permanent Tier 0 institutional memory: `CONSTITUTION.md` defines foundational
+laws and amendment governance; `ARCHITECTS_NOTEBOOK.md` preserves chronological design
+rationale; `FUTURE_VISION.md` states long-term architectural intent; and
+`QUESTIONS_MTG_LAB_SHOULD_ANSWER.md` supplies a user-question compass. This is a documentation-
+only milestone. Architecture v12 and every runtime, data, schema, provider, simulation, and
+intelligence boundary remain unchanged. Review the pull request and do not recommend merge
+until GitHub Actions are green.
+
+> **Retained baseline:** Phase 82 implemented; its framework remains the latest runtime milestone.
 
 ## Phase 82 current state
 
@@ -151,14 +163,16 @@ requesting the next bounded milestone.
 
 ## Documentation authority
 
-1. **Architecture:** `ARCHITECTURE.md`, `DECISIONS.md`, `DATA_MODEL.md`,
+1. **Constitution and institutional memory:** `CONSTITUTION.md`, `ARCHITECTS_NOTEBOOK.md`,
+   `FUTURE_VISION.md`, and `QUESTIONS_MTG_LAB_SHOULD_ANSWER.md`.
+2. **Architecture:** `ARCHITECTURE.md`, `DECISIONS.md`, `DATA_MODEL.md`,
    `DATA_REPOSITORY.md`, and `RULES_ENGINE.md`.
-2. **Implemented inventory and review:** `../PROJECT_INVENTORY.md` and
+3. **Implemented inventory and review:** `../PROJECT_INVENTORY.md` and
    `../ARCHITECTURE_REVIEW_v1.md`.
-3. **Roadmap and history:** `ROADMAP.md` and `../CHANGELOG.md`.
-4. **Current operational state:** `SESSION_STATE.md`, this dashboard,
+4. **Roadmap and history:** `ROADMAP.md` and `../CHANGELOG.md`.
+5. **Current operational state:** `SESSION_STATE.md`, this dashboard,
    `NEXT_TASK.md`, and `HANDOFF.md`.
-5. **Historical/reference documents:** files explicitly bearing Historical,
+6. **Historical/reference documents:** files explicitly bearing Historical,
    Superseded, Reference, or Vision status; these preserve context but do not override
    current documents.
 

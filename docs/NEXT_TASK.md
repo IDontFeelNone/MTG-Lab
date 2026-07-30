@@ -1,6 +1,16 @@
 # Next Task
 
-> **Status: Current** — Phase 82 implemented; GitHub Actions merge gate pending.
+> **Status: Current** — Phase 83 complete; only review and green-CI handoff are authorized.
+
+## Current approved action
+
+Review the Phase 83 constitutional documentation for internal consistency and verify the
+documentation-only diff. Wait for GitHub Actions and do not recommend merge until every check
+is green. Stop after handoff: the future vision and question catalog are guidance, not
+authorization for runtime work, dataset population, new providers, simulation, or intelligence
+implementation. Any next milestone requires explicit maintainer approval.
+
+> **Retained baseline:** Phase 82 implemented; its framework remains the latest runtime milestone.
 
 ## Phase 82 current state
 

@@ -1,11 +1,23 @@
 # MTG Lab Project Inventory
 
-> **Status: Current** — Phase 82 raw data acquisition framework implemented on 2026-07-30.
+> **Status: Current** — Phase 83 institutional memory established on 2026-07-30; GitHub Actions merge gate pending.
+
+## Phase 83 constitutional guidance
+
+Four Tier 0 documents now preserve the project's enduring laws, architectural rationale,
+long-term intent, and question-led product compass: `docs/CONSTITUTION.md`,
+`docs/ARCHITECTS_NOTEBOOK.md`, `docs/FUTURE_VISION.md`, and
+`docs/QUESTIONS_MTG_LAB_SHOULD_ANSWER.md`. They add no runtime behavior, canonical data,
+schema, provider, or Architecture v12 change. The Constitution governs why; existing
+architecture contracts govern structure; the notebook records rationale; the vision and
+questions guide future proposals without authorizing them.
+
+> **Retained baseline:** Phase 82 raw data acquisition framework implemented on 2026-07-30.
 
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Milestone:** Phase 82 generic raw data acquisition framework (implemented; CI pending)
+- **Milestone:** Phase 83 institutional memory and project constitution (documentation complete; CI pending)
 - **Maturity:** pre-alpha; deterministic local reference implementation
 - **Validation baseline:** 154 passing unit/integration-style tests under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
@@ -80,7 +92,7 @@ Documentation status labels have the following consistent meaning:
   milestone authority.
 - **Vision** — describes target-state capability and does not imply implementation.
 
-Architecture and governance are defined by `docs/ARCHITECTURE.md`,
+Tier 0 purpose and institutional memory are defined by `docs/CONSTITUTION.md`, `docs/ARCHITECTS_NOTEBOOK.md`, `docs/FUTURE_VISION.md`, and `docs/QUESTIONS_MTG_LAB_SHOULD_ANSWER.md`. Architecture and governance are defined by `docs/ARCHITECTURE.md`,
 `docs/DATA_MODEL.md`, `docs/DATA_REPOSITORY.md`, `docs/RULES_ENGINE.md`, and
 `docs/AI_CONTRIBUTING.md`. The current implementation assessment is
 `ARCHITECTURE_REVIEW_v1.md`. Implemented subsystem contracts include
@@ -96,7 +108,7 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Session startup workflow
 
-1. Read this inventory and `ARCHITECTURE_REVIEW_v1.md`.
+1. Read `docs/CONSTITUTION.md`, this inventory, and `ARCHITECTURE_REVIEW_v1.md`.
 2. Read `docs/SESSION_STATE.md`, `docs/PROJECT_STATUS.md`, `docs/NEXT_TASK.md`, and
    `docs/HANDOFF.md` for the sole current operational state.
 3. Read `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, and

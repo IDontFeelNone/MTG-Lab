@@ -1,5 +1,19 @@
 # MTG Lab Roadmap
 
+> **Status: Current** — Phase 83 institutional memory complete; Architecture v12 remains frozen.
+
+## Phase 83 — Institutional Memory and Project Constitution (complete; CI pending)
+
+- Established `CONSTITUTION.md` as Tier 0 foundational law with a controlled amendment path.
+- Added the chronological `ARCHITECTS_NOTEBOOK.md` to preserve problems, decisions, alternatives,
+  rationale, tradeoffs, implications, and authoritative links for major milestones.
+- Added `FUTURE_VISION.md` for long-term AI-powered decision-intelligence intent and
+  `QUESTIONS_MTG_LAB_SHOULD_ANSWER.md` as a user-question design compass.
+- Reconciled current state and history documents. No runtime feature, schema, dataset, provider,
+  Simulation Engine, Intelligence Engine, or Architecture v12 change was made.
+- Do not recommend merge until GitHub Actions are green. These vision documents do not authorize
+  the next implementation milestone.
+
 > **Living implementation roadmap for MTG Lab.**
 
 ---
@@ -20,9 +34,9 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Current Status
 
-**Current Phase:** Phase 82 — Raw Data Acquisition Framework (implemented; CI pending)
+**Current Phase:** Phase 83 — Institutional Memory and Project Constitution (documentation complete; CI pending)
 
-**Current Transition:** Phase 82 adds the reviewed, reproducible, source-agnostic acquisition workflow required after Phase 81. Raw bytes, normalization, assertions, and promotion remain separate; Architecture v12 is unchanged. Merge remains contingent on green GitHub Actions.
+**Current Transition:** Phase 83 establishes Tier 0 constitutional guidance and institutional memory. It changes no runtime behavior or Architecture v12 contract, and it authorizes no subsequent implementation. Merge remains contingent on green GitHub Actions.
 
 **Current Version:** v0.x
 
