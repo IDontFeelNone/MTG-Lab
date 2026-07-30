@@ -66,7 +66,7 @@ The architecture is intentionally extensible so additional games can share the s
 ## Long-term vision
 
 The target platform is organized around four primary layers. Database-backed
-persistence, simulation, AI reasoning, and graphical/API applications in this diagram
+persistence, simulation, AI Advisor/model integration and graphical/API applications in this diagram
 are not implemented in the current pre-alpha repository.
 
 ```text
@@ -165,11 +165,9 @@ observations, distributions, and products. It does not implement probability, ex
 value, simulation, portfolio optimization, or recommendations. See
 [Analytics Engine v1](docs/ANALYTICS_ENGINE.md) for its bounded contract.
 
-## AI Reasoning Layer — vision
+## AI Reasoning Layer
 
-The planned layer will retrieve structured information, interpret analytical results,
-and generate explainable recommendations. It is not implemented. The current Decision
-Engine is deterministic explicit-rule evaluation rather than AI/ML reasoning.
+The implemented AI Reasoning Context Layer v1 converts public Semantic Query Layer responses into immutable, deterministic, provenance-backed evidence packages. It does not perform AI reasoning or generate advice. Model integration and explainable recommendations remain planned. The current Decision Engine is deterministic explicit-rule evaluation rather than AI/ML reasoning.
 
 ## Applications & User Interfaces — vision
 

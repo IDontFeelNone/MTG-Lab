@@ -1,3 +1,7 @@
+# Phase 94 — AI Reasoning Context Layer v1 (implemented; review pending)
+
+A deterministic, immutable, provenance-backed context package now bridges structured semantic responses to future reasoning consumers. LLM/provider integration, prompts, generated advice, embeddings, simulation, and subjective ranking remain excluded. Merge requires green GitHub Actions.
+
 # MTG Lab Roadmap
 
 > **Status: Current — Phase 93 implemented; review and green CI pending.**

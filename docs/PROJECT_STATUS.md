@@ -1,11 +1,9 @@
 # Project Status
 
-> **Status: Current — Phase 93 Canonical Semantic Query Layer implemented.**
+> **Status: Current — Phase 94 AI Reasoning Context Layer v1 implemented.**
 
-Phase 91 has been implemented. MTG Lab remains a pre-alpha deterministic Architecture v12
-reference implementation. Phase 92 establishes the read-only Canonical Analytics Engine
-as a derived consumer of the Phase 91 query boundary.
-
-Phase 93 adds immutable structured semantic requests and responses that delegate only to the
-Query and Analytics engines. Canonical state is unchanged; Simulation, REST, and AI reasoning remain unimplemented. Merge recommendation is
+MTG Lab remains a pre-alpha deterministic Architecture v12 reference implementation. Phase 94
+adds immutable, deterministic, content-addressed evidence packages downstream of the public
+Semantic Query Layer. Canonical authority, Architecture v12, and all upstream contracts are
+unchanged. No LLM integration or advice generation is implemented. Merge recommendation is
 withheld until GitHub Actions are green.
