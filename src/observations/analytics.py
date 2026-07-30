@@ -7,6 +7,37 @@ from decimal import Decimal
 from typing import Any, Iterable, Mapping
 
 
+def summarize_observations(raw_packs: Iterable[Mapping[str, Any]],
+                           verifications: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
+    """Return deterministic composition and verification counts without market data."""
+    packs = list(raw_packs)
+    verified_by_id = {item["observation_id"]: item for item in verifications}
+    names: Counter[str] = Counter()
+    treatments: Counter[str] = Counter()
+    statuses: Counter[str] = Counter()
+    for pack in packs:
+        verification = verified_by_id[pack["observation_id"]]
+        for card in pack["cards"]:
+            names[normalize_key(card["reported_name"])] += 1
+            treatments[card.get("reported_treatment") or "standard_or_unreported"] += 1
+        statuses.update(card["verification_status"] for card in verification["cards"])
+    return {
+        "schema_version": "v1",
+        "pack_count": len(packs),
+        "card_count": sum(len(pack["cards"]) for pack in packs),
+        "verification_statuses": dict(sorted(statuses.items())),
+        "duplicates": [
+            {"normalized_name": name, "count": count}
+            for name, count in sorted(names.items()) if count > 1
+        ],
+        "treatments": dict(sorted(treatments.items())),
+        "methodology": (
+            "Descriptive summary of reported contents; no prices, probabilities, "
+            "slot rules, or collation are inferred."
+        ),
+    }
+
+
 def analyze_box(raw_packs: Iterable[Mapping[str, Any]], verifications: Iterable[Mapping[str, Any]],
                 snapshot: Mapping[str, Any]) -> dict[str, Any]:
     """Return observed (not predicted) EV and composition summaries."""

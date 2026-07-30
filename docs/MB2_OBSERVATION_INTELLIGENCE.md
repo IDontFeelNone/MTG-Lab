@@ -45,3 +45,37 @@ VerificationStore(Path("data/derived/observations/mb2/verifications")).save(veri
 Generated records should remain outside both the raw observation tree and the
 canonical product repository. Publication should include the snapshot and verification
 records needed to reproduce the report.
+
+## Plain-text observation import
+
+The generic importer appends one or more packs to any product observation box. Put
+one reported card name on each line and separate packs with a line containing only
+`---`. An optional treatment may follow a name in square brackets:
+
+```text
+Sol Ring [future_sight_frame]
+Lightning Bolt
+---
+Time Walk [foil]
+Ancestral Recall
+```
+
+Run the importer from the repository root:
+
+```bash
+PYTHONPATH=src python -m observations.importer packs.txt \
+  --game magic --product mystery_booster_2 --box box_001 \
+  --recorded-on 2026-07-30
+```
+
+Each import allocates the next `pack_XXX.json` name, appends the manifest, writes
+create-only verification records, and regenerates the box's descriptive
+`analytics.json`. The input file's exact UTF-8 text and SHA-256 digest are retained
+inside every imported pack. Existing observations are checked against the manifest
+and are never overwritten. Missing derived verification records for legacy packs
+may be created, but existing verification records must still match their raw pack.
+
+The importer reads the canonical Card/Printing repository only to construct the
+existing verifier's lookup index. It never writes canonical data, downloads prices,
+or runs simulation, probability, slot, or print-sheet inference. Market valuation
+remains a separate explicit workflow using a caller-supplied dated snapshot.
