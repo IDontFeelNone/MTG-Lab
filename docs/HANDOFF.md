@@ -1,6 +1,17 @@
 # Handoff
 
-> **Status: Current** — Phase 82 implemented; GitHub Actions merge gate pending.
+> **Status: Current handoff** — Phase 83 institutional memory complete; GitHub Actions pending.
+
+## Immediate handoff
+
+Phase 83 added four Tier 0 documents: the Project Constitution, Architect's Notebook, Future
+Vision, and question-led product compass. The seven project-state documents were reconciled
+to reference their roles. No Python, tests, schemas, canonical records, datasets, providers,
+or Architecture v12 contracts changed. Review the documentation diff, observe GitHub Actions,
+and do not recommend merge until all checks are green. Do not begin a future capability from
+the vision documents without a separately approved milestone.
+
+> **Retained baseline:** Phase 82 implemented; its framework remains the latest runtime milestone.
 
 ## Phase 82 current state
 

@@ -17,6 +17,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Phase 83 Tier 0 institutional memory: a Project Constitution and amendment process, a
+  chronological Architect's Notebook, an architectural Future Vision, and a user-question
+  compass. Project-state documents now cross-reference their roles. This documentation-only
+  milestone leaves Architecture v12, runtime behavior, schemas, canonical data, providers,
+  simulation, and intelligence implementation unchanged.
+
+
+### Added
+
 - Phase 82 generic raw data acquisition framework: immutable checksum-addressed snapshots, provider abstraction and offline fixture, normalized source records, Phase 80 candidate-assertion bridge and change reports, auditable resumable acquisition runs, security controls, explicit-stage CLI, documentation, and comprehensive tests. No canonical records or MB2 population were added; Architecture v12 remains unchanged.
 
 - Phase 79 pre-implementation inventory and architectural-fit review. The review found

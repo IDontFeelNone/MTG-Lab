@@ -1,6 +1,23 @@
 # Session State
 
-> **Status: Current** — Phase 82 implemented; GitHub Actions merge gate pending.
+> **Status: Current** — Phase 83 institutional memory complete; GitHub Actions merge gate pending.
+
+## Phase 83 current state
+
+The documentation-only Institutional Memory and Project Constitution milestone establishes
+`CONSTITUTION.md`, `ARCHITECTS_NOTEBOOK.md`, `FUTURE_VISION.md`, and
+`QUESTIONS_MTG_LAB_SHOULD_ANSWER.md` as Tier 0 guidance. Together they state enduring laws,
+preserve architectural rationale, describe long-term decision-intelligence intent, and orient
+future design around user questions. Architecture v12, runtime behavior, schemas, canonical
+data, datasets, and acquisition providers are unchanged.
+
+## Current next action
+
+Review the Phase 83 pull request and wait for GitHub Actions. Do not recommend merge until
+all Actions checks are green. No subsequent implementation milestone is authorized by the
+vision or question catalog; future work requires an explicit bounded approval.
+
+> **Retained baseline:** Phase 82 implemented; its framework remains the latest runtime milestone.
 
 ## Phase 82 current state
 
