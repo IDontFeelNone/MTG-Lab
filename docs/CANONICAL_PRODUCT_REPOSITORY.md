@@ -48,3 +48,9 @@ The explicitly reviewed pipeline stages source candidates outside `data/canonica
 validates schemas and references, produces a deterministic report and provenance
 audit, and promotes accepted records through the repository in one transaction. See
 `CANONICAL_IMPORT_PIPELINE.md`. It does not consume user observations as official facts.
+
+## v2 reconciliation
+
+[`CANONICAL_CONTRACT_v2.md`](CANONICAL_CONTRACT_v2.md) supersedes the entity field
+and layout details in this v1 implementation guide. Retained v1 records remain
+immutable and are projected by the repository compatibility boundary.

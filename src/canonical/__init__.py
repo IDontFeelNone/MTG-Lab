@@ -2,10 +2,10 @@
 
 from .models import (
     Card, Finish, Game, PackDefinition, PackSlot, Printing, Product,
-    ProductVersion, Rarity, Sheet, SheetEntry, Treatment,
+    ProductComponent, ProductVersion, Rarity, Sheet, SheetEntry, Treatment,
 )
 
 __all__ = [
     "Card", "Finish", "Game", "PackDefinition", "PackSlot", "Printing",
-    "Product", "ProductVersion", "Rarity", "Sheet", "SheetEntry", "Treatment",
+    "Product", "ProductComponent", "ProductVersion", "Rarity", "Sheet", "SheetEntry", "Treatment",
 ]
