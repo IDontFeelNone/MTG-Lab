@@ -22,7 +22,8 @@ Current focus is establishing the canonical architecture and reference implement
 
 **Current Phase:** Phase 65 ✅ Complete
 
-**Next Phase:** Proposed Phase 66 — MB2 Pack Topology and Selection-Semantics Evidence Acquisition (awaiting approval)
+**Current Transition:** Phase 66 evidence-waiting; PR #18 handoff structure is
+present, contains no acquired artifacts, and has not entered verification
 
 **Current Version:** v0.x
 
@@ -242,13 +243,19 @@ identity relationship.
 
 # Upcoming Phases
 
-## Proposed Phase 66 — MB2 Pack Topology and Selection-Semantics Evidence Acquisition
+## Phase 66 — MB2 Pack Topology and Selection-Semantics Evidence Verification
 
-Acquire and preserve evidence for pack topology, pool mapping, replacement,
+**Status:** Evidence-waiting; processing has not begun.
+
+The controlled research handoff structure from PR #18 exists, but its manifest
+declares no artifacts and its artifact directory is empty. Verification is
+conditionally authorized only after an artifact-bearing, content-complete,
+independently reviewed handoff satisfies the entry gate. Phase 66 may then
+preserve supported evidence for pack topology, pool mapping, replacement,
 treatments, and collation; reconcile the Rule Claim Matrix; and decide whether
-Tier 0 can express the supported behavior. This proposal is not approved and
-does not authorize canonical population or engine work. The end-to-end critical
-path is recorded in `docs/FIRST_BOOSTER_PLAN.md`.
+Tier 0 can express the supported behavior. It does not authorize canonical
+population or engine work. The end-to-end critical path is recorded in
+`docs/FIRST_BOOSTER_PLAN.md`.
 
 ---
 
@@ -285,19 +292,41 @@ Long-term platform evolution.
 
 ---
 
-# Technical Debt
+# Debt and Deferred Work
 
-## Documentation
-Outstanding documentation work.
+## Technical Debt
 
-## Architecture
-Future refactors.
+- Canonical promotion intentionally requires manual application-workflow
+  decisions; batch-level transactional orchestration remains deferred.
+- Cross-document status consistency is review-driven rather than enforced by an
+  automated documentation validator.
+- Research Log Tier 0 architecture is approved, but its implementation is deferred.
 
-## Performance
-Optimization opportunities.
+## Evidence Debt
 
-## Testing
-Validation and automation.
+- No artifact-bearing Phase 66 external handoff exists.
+- Complete MB2 pack topology, event pools, weights/frequency semantics,
+  replacement, treatments, conditionality, correlation, and sequencing remain
+  unsupported by preserved evidence.
+
+## Canonical-Data Debt
+
+- Only 15 Cards and 15 Printings are populated, including four MB2 Printings.
+- The MB2 Product remains a foundation record; canonical Print Sheets and Slots
+  are empty and no canonical product rules or complete pools exist.
+
+## Implementation Debt
+
+- Generic pack generation, exact probability, simulation, and generated-pack
+  validation are not implemented.
+- Complete evidence-backed canonical population requires separately approved,
+  bounded milestones after Phase 66 sufficiency and architectural-fit decisions.
+
+## Deferred Product Layers
+
+- Persistence/database, analytics, market intelligence, collection management,
+  API, UI, and AI advisor layers remain intentionally deferred. Their absence is
+  roadmap scope, not evidence that partially implemented behavior is complete.
 
 ---
 

@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- An executive `docs/PROJECT_STATUS.md` dashboard that records verified repository
+  counts, documentation authority, Phase 66 entry and exit gates, mandatory stop
+  conditions, debt categories, critical path, risks, and bounded estimates.
+- Documentation recovery that reconciles the PR #18 empty-artifact research
+  handoff into the Phase 66 evidence-waiting state without beginning Phase 66,
+  changing canonical data, or authorizing downstream product layers.
 - A post-Phase 65 architectural assessment and complete dependency plan for the
   first evidence-backed Mystery Booster 2 booster, including a bounded proposed
   evidence-acquisition milestone; no implementation or canonical data changed.

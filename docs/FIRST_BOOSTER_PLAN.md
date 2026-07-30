@@ -1,21 +1,27 @@
 # First Evidence-Backed Booster Plan
 
-**Status:** Proposed planning baseline; no implementation milestone approved
+**Status:** Approved critical-path planning baseline; Phase 66 is evidence-waiting
+and processing has not begun
 
 **Assessment date:** 2026-07-30
 
 ## 1. Executive assessment
 
-Phase 65 is merged in PR #16. The repository has a sound evidence archive,
+Phase 65 is complete. PR #18 added the controlled Phase 66 raw research handoff
+structure, but its manifest declares zero artifacts and its artifact directory
+contains no external evidence bytes. The repository has a sound evidence archive,
 claim-assessment boundary, canonical entity contracts, and dependency-safe
 repository validation, but it cannot yet generate an evidence-backed Mystery
 Booster 2 pack. The Rule Claim Matrix confirms only Product identity and four
 partial Printing-membership examples. Pack topology, complete pools, weights,
 replacement, treatments, and collation remain unsupported.
 
-The project is therefore primarily evidence-blocked, then data-population and
-engine-blocked. Implementing a generator now would either encode assumptions or
-exercise only synthetic rules. The shortest trustworthy route is to acquire and
+The current blocker on the approved critical path to the first evidence-backed
+MB2 booster is therefore an artifact-bearing, content-complete, independently
+reviewed handoff. This is not the only project-wide blocker: canonical-data and
+implementation debt remain after evidence verification. Implementing a generator
+now would either encode assumptions or exercise only synthetic rules. The
+shortest trustworthy route is to acquire and
 preserve a bounded evidence set that establishes the complete pack topology and
 selection semantics, reconcile it into the claim matrix, and only then decide
 whether Tier 0 can express the observed behavior.
@@ -98,15 +104,20 @@ Sheets, Print Sheets before Slots, and Slots before the validated Product.
 6. The canonical MB2 Product is a foundation record; Print Sheets and Slots are empty.
 7. Generic pack generation, exact probability, and generated-pack validation are absent.
 
-## 6. Recommended next milestone
+## 6. Authorized next milestone
 
-**Proposed Phase 66 — MB2 Pack Topology and Selection-Semantics Evidence Acquisition.**
+**Phase 66 — MB2 Pack Topology and Selection-Semantics Evidence Verification and Reconciliation.**
 
 This is the highest-value bounded milestone because the same evidence resolves
 the first critical-path node, upgrades most unknown matrix claims, determines
 whether Tier 0 is usable, and prevents premature population or engine design.
 It is deliberately an acquisition and assessment milestone, not another card
 population wave.
+
+Verification work may enter only after the raw handoff includes real artifacts,
+complete manifest metadata and resolvable locators, and an identified independent
+reviewer who has checked the bytes, hashes, scope, and claim limits. The current
+PR #18 handoff fails that entry gate, so processing has not begun.
 
 The smallest evidence target with the largest downstream unlock is one
 content-complete, reviewable source set that establishes: the number and roles

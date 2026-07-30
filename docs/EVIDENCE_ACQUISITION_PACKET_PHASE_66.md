@@ -1,6 +1,8 @@
 # Phase 66 Evidence Acquisition Packet
 
-**Status:** Prepared for review; external acquisition and Phase 66 implementation have not begun
+**Status:** Evidence-waiting. The PR #18 raw research handoff structure exists,
+but it contains no acquired external evidence artifacts and Phase 66 processing
+has not begun.
 
 **Purpose:** Define a controlled external-evidence handoff for Mystery Booster 2
 pack topology and selection semantics when the Codex environment cannot reliably
@@ -9,6 +11,15 @@ retrieve live Wizards, Scryfall, archive, or community sources.
 The packet is an intake contract, not evidence. A filled manifest without the
 declared artifact bytes supports no claim. Codex must not fabricate a capture,
 substitute remembered web content, or treat an inaccessible URL as evidence.
+
+The current raw handoff under
+`data/raw/magic/mystery_booster_2/phase_66/handoffs/` contains an
+empty-artifact manifest, an empty artifact directory, and a research summary of
+failed acquisition attempts and source leads. It does not satisfy the entry
+gate. Phase 66 evidence verification is authorized only after a future handoff
+is artifact-bearing, content-complete, and independently reviewed as specified
+below. That authorization is limited to verification and research reconciliation;
+canonical population and all downstream implementation remain unauthorized.
 
 ## 1. Required evidence questions
 
@@ -206,4 +217,3 @@ across product versions.
 7. Codex reconciles only verified claims into new processed research artifacts,
    reports whether the minimum threshold is met, decides evidenced Tier 0 fit,
    and stops without canonical population or engine implementation.
-

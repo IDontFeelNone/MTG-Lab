@@ -4,7 +4,8 @@
 
 ## Architecture v12 Inventory
 - Current architecture: v12
-- Current implementation phase: Phase 65 merged; post-Phase 65 planning complete; proposed Phase 66 awaits approval
+- Current implementation phase: Phase 65 complete; Phase 66 is evidence-waiting
+  and its verification processing has not begun
 - Canonical data-first design
 - Deterministic pipelines
 - Modular implementation
@@ -27,6 +28,9 @@
 - Research Log is defined as a Tier 0 architectural subsystem; implementation remains future work
 - Deterministic pre-promotion population review reports are schema-validated and retained outside canonical data
 - A schema-validated Rule Claim Matrix and evidence sufficiency report retain MB2 rule research outside canonical data
+- The PR #18 Phase 66 raw research handoff structure is present with one empty-
+  artifact manifest and no acquired external evidence bytes; verification is
+  authorized only after the documented entry gate is satisfied
 - Probability, simulation, analytics, and market intelligence remain future work
 
 ## Mystery Booster 2 Repository Status
@@ -40,7 +44,9 @@
   Deterministic multi-source Waves 1 and 2 add four evidence-supported Mystery
   Booster 2 Cards and their Printings; Wave 2 loads its input exclusively from
   the verified Evidence Repository and reuses existing canonical Source Records;
-  Phase 65 confirms preserved evidence remains insufficient for canonical rules; slots, sheets, collation, probabilities, simulations, and market data remain unpopulated
+  Phase 65 confirms preserved evidence remains insufficient for canonical rules.
+  The current Phase 66 handoff adds no evidence claim; slots, sheets, collation,
+  probabilities, simulations, and market data remain unpopulated
 
 ## Completed Work
 - Approved Tier 0 Data Model Specification migrated to `docs/DATA_MODEL.md`
@@ -72,6 +78,8 @@
 - Scalable complete-batch ingestion for up to twenty-five verified Printings,
   manifest-declared population boundaries, and retained deterministic review reports
 - Evidence-backed MB2 rule-claim research with stable claim identities, verified evidence references, explicit unknowns, blocker reporting, and a no-redesign architectural sufficiency assessment
+- Controlled Phase 66 raw-handoff structure and source-lead research summary,
+  containing no acquired artifact bytes and authorizing no processing or inference
 
 ## Remaining Work
 - Broader reviewed Card and Printing evidence acquisition and population,
@@ -110,6 +118,8 @@ until their subsystem implementation unless separately approved.
 Repository-driven session management is defined by:
 
 - `docs/SESSION_STATE.md` — current version, phase, milestone status, risks, and handoff checklist
+- `docs/PROJECT_STATUS.md` — subordinate executive dashboard synthesizing the
+  current inventory, phase gates, counts, debt, critical path, and risks
 - `docs/NEXT_TASK.md` — the single approved next objective and its definition of done
 - `docs/HANDOFF.md` — the concise, replaceable transfer note from the most recent session
 - `docs/AI_CONTRIBUTING.md` — the authoritative governance, contributor responsibilities, and collaboration guide
