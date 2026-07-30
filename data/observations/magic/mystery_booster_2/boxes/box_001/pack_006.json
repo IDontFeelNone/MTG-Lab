@@ -1,0 +1,28 @@
+{
+  "observation_id": "mb2-box-001-pack-006",
+  "game": "magic_the_gathering",
+  "product": {"name": "Mystery Booster 2", "slug": "mystery_booster_2"},
+  "container": {"box_id": "box_001", "pack_id": "pack_006"},
+  "observation": {"source_type": "user_report", "recorded_on": "2026-07-29", "verification_status": "unverified_report", "card_order_preserved": true, "card_count": 15},
+  "cards": [
+    {"position": 1, "reported_name": "Acorder Paladin", "reported_treatment": null},
+    {"position": 2, "reported_name": "The Birth of Meletis", "reported_treatment": null},
+    {"position": 3, "reported_name": "Flash of Insight", "reported_treatment": null},
+    {"position": 4, "reported_name": "Shadow Rift", "reported_treatment": null},
+    {"position": 5, "reported_name": "Deepwood Legate", "reported_treatment": null},
+    {"position": 6, "reported_name": "Peat Bog", "reported_treatment": null},
+    {"position": 7, "reported_name": "Volcanic Geyser", "reported_treatment": null},
+    {"position": 8, "reported_name": "Bolt Bend", "reported_treatment": null},
+    {"position": 9, "reported_name": "Predator's Strike", "reported_treatment": null},
+    {"position": 10, "reported_name": "Reclamation Sage", "reported_treatment": null},
+    {"position": 11, "reported_name": "Mystic Monastery", "reported_treatment": null},
+    {"position": 12, "reported_name": "Mogg infestation", "reported_treatment": null},
+    {"position": 13, "reported_name": "Ice-Fang Coatl", "reported_treatment": "white_border"},
+    {"position": 14, "reported_name": "Serenity", "reported_treatment": "future_sight_frame"},
+    {"position": 15, "reported_name": "Boltfire", "reported_treatment": "playtest_card"}
+  ],
+  "claims_boundary": {
+    "supports": ["These fifteen cards were reported together as one Mystery Booster 2 pack opening in the listed order."],
+    "does_not_support": ["canonical slot definitions", "complete card pools", "print-sheet membership", "pull weights or probabilities", "replacement behavior", "independence or collation rules"]
+  }
+}
