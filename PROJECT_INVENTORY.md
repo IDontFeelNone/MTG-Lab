@@ -1,13 +1,13 @@
 # MTG Lab Project Inventory
 
-> **Status: Current** — Phase 79 pre-implementation review completed on 2026-07-30.
+> **Status: Current** — Phase 82 raw data acquisition framework implemented on 2026-07-30.
 
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Milestone:** Phase 79 MB2 dataset pre-implementation review (blocked)
+- **Milestone:** Phase 82 generic raw data acquisition framework (implemented; CI pending)
 - **Maturity:** pre-alpha; deterministic local reference implementation
-- **Validation baseline:** 141 passing unit/integration-style tests under the CI command
+- **Validation baseline:** 154 passing unit/integration-style tests under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
   Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
   remain unpopulated
@@ -20,6 +20,7 @@
 | --- | --- | --- |
 | Canonical Repository | Typed game aggregate, specialized schema-backed repositories, deterministic snapshots, relationship validation, staged bulk apply | Operational v1; overlapping repository generations are consolidation debt |
 | Canonical Import Pipeline | Reviewed local JSON/CSV adapters, provenance, dry-run/validation-only modes, deterministic report, atomic game-tree replacement | Operational v1; local-only and single-writer |
+| Raw data acquisition | Immutable byte snapshots, provider adapters, normalized source records, assertion bridge, acquisition-run reports, offline CLI | Operational v1; no live providers or canonical promotion |
 | Evidence and candidate ingestion | Immutable evidence storage, parsers/normalizers, candidate validation, retained intermediate artifacts, population review | Operational for bounded reviewed workflows |
 | Evidence Repository and Review | Content-verified bundles, Source Record validation, external handoff integrity/provenance/completeness/conflict reports | Operational pre-promotion gate |
 | Canonical promotion | Explicit entity-agnostic review, immutable audits, conflict protection, idempotency, rollback, dependency safety | Operational for Product, Card, Printing, Print Sheet, and Slot |
@@ -37,12 +38,14 @@
 ## Repository layout
 
 - `data/canonical/` — authoritative game-scoped canonical records
-- `data/sources/` and `data/raw/` — archived evidence and controlled handoffs
+- `data/raw/<provider>/<dataset>/<snapshot-id>/` — generic immutable source snapshots
+- `data/sources/` and retained raw evidence paths — archived evidence and controlled handoffs
 - `data/intermediate/` — parsed, candidate, review, and research artifacts
 - `data/observations/` — immutable non-canonical opening reports
 - `data/audit/` — immutable promotion decisions
 - `src/canonical`, `src/repository`, `src/canonical_import` — canonical model,
   persistence/validation, and reviewed bulk import
+- `src/acquisition` — source-agnostic raw snapshots, normalization, and assertion bridge
 - `src/ingestion`, `src/evidence_review` — evidence-to-candidate and handoff review
 - `src/observations`, `src/market`, `src/collection`, `src/analytics`,
   `src/decisions` — downstream domain engines
