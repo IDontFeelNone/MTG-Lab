@@ -1,0 +1,637 @@
+{
+  "records": [
+    {
+      "entity_type": "card",
+      "id": "row-card-1",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-001",
+        "external_identifiers": [
+          "ext-1001"
+        ],
+        "provider_identifier": "provider-card-1"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 1,
+        "name": "Pilot Card 1"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-2",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-002",
+        "external_identifiers": [
+          "ext-1002"
+        ],
+        "provider_identifier": "provider-card-2"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 2,
+        "name": "Pilot Card 2"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-3",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-003",
+        "external_identifiers": [
+          "ext-1003"
+        ],
+        "provider_identifier": "provider-card-3"
+      },
+      "normalized": {
+        "faces": [
+          {
+            "name": "Pilot Card 3 Front"
+          },
+          {
+            "name": "Pilot Card 3 Back"
+          }
+        ],
+        "layout": "transform",
+        "mana_value": 3,
+        "name": "Pilot Card 3"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-4",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-004",
+        "external_identifiers": [
+          "ext-1004"
+        ],
+        "provider_identifier": "provider-card-4"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 4,
+        "name": "Pilot Card 4"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-5",
+      "identifiers": {
+        "alternate_identifiers": [
+          "alias-card-5"
+        ],
+        "canonical_identifier": "pilot-card-005",
+        "external_identifiers": [
+          "ext-1005"
+        ],
+        "provider_identifier": "provider-card-5"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 5,
+        "name": "Pilot Card 5"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-6",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-006",
+        "external_identifiers": [
+          "ext-1006"
+        ],
+        "provider_identifier": "provider-card-6"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 6,
+        "name": "Pilot Card 6"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-7",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-007",
+        "external_identifiers": [
+          "ext-1007"
+        ],
+        "provider_identifier": "provider-card-7"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": null,
+        "name": "Pilot Card 7"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-8",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-008",
+        "external_identifiers": [
+          "ext-1008"
+        ],
+        "provider_identifier": "provider-card-8"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 0,
+        "name": "Pilot Card 8"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-9",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-009",
+        "external_identifiers": [
+          "ext-1009"
+        ],
+        "provider_identifier": "provider-card-9"
+      },
+      "normalized": {
+        "faces": [
+          {
+            "name": "Pilot Card 9 Front"
+          },
+          {
+            "name": "Pilot Card 9 Back"
+          }
+        ],
+        "layout": "transform",
+        "mana_value": 1,
+        "name": "Pilot Card 9"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-10",
+      "identifiers": {
+        "alternate_identifiers": [
+          "alias-card-10"
+        ],
+        "canonical_identifier": "pilot-card-010",
+        "external_identifiers": [
+          "ext-1010"
+        ],
+        "provider_identifier": "provider-card-10"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 2,
+        "name": "Pilot Card 10"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-11",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-011",
+        "external_identifiers": [
+          "ext-1011"
+        ],
+        "provider_identifier": "provider-card-11"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 3,
+        "name": "Pilot Card 11"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-12",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-012",
+        "external_identifiers": [
+          "ext-1012"
+        ],
+        "provider_identifier": "provider-card-12"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 4,
+        "name": "Pilot Card 12"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-13",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-013",
+        "external_identifiers": [
+          "ext-1013"
+        ],
+        "provider_identifier": "provider-card-13"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 5,
+        "name": "Pilot Card 13"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-14",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-014",
+        "external_identifiers": [
+          "ext-1014"
+        ],
+        "provider_identifier": "provider-card-14"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 6,
+        "name": "Pilot Card 14"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-15",
+      "identifiers": {
+        "alternate_identifiers": [
+          "alias-card-15"
+        ],
+        "canonical_identifier": "pilot-card-015",
+        "external_identifiers": [
+          "ext-1015"
+        ],
+        "provider_identifier": "provider-card-15"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 7,
+        "name": "Pilot Card 15"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-16",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-016",
+        "external_identifiers": [
+          "ext-1016"
+        ],
+        "provider_identifier": "provider-card-16"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 0,
+        "name": "Pilot Card 16"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-17",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-017",
+        "external_identifiers": [
+          "ext-1017"
+        ],
+        "provider_identifier": "provider-card-17"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 1,
+        "name": "Pilot Card 17"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-18",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-018",
+        "external_identifiers": [
+          "ext-1018"
+        ],
+        "provider_identifier": "provider-card-18"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 2,
+        "name": "Pilot Card 18"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-19",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-019",
+        "external_identifiers": [
+          "ext-1019"
+        ],
+        "provider_identifier": "provider-card-19"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": null,
+        "name": "Pilot Card 19"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-20",
+      "identifiers": {
+        "alternate_identifiers": [
+          "alias-card-20"
+        ],
+        "canonical_identifier": "pilot-card-020",
+        "external_identifiers": [
+          "ext-1020"
+        ],
+        "provider_identifier": "provider-card-20"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 4,
+        "name": "Pilot Card 20"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-21",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-021",
+        "external_identifiers": [
+          "ext-1021"
+        ],
+        "provider_identifier": "provider-card-21"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 5,
+        "name": "Pilot Card 21"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-22",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-022",
+        "external_identifiers": [
+          "ext-1022"
+        ],
+        "provider_identifier": "provider-card-22"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 6,
+        "name": "Pilot Card 22"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-23",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-023",
+        "external_identifiers": [
+          "ext-1023"
+        ],
+        "provider_identifier": "provider-card-23"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 7,
+        "name": "Pilot Card 23"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-24",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-024",
+        "external_identifiers": [
+          "ext-1024"
+        ],
+        "provider_identifier": "provider-card-24"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 0,
+        "name": "Pilot Card 24"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-card-25",
+      "identifiers": {
+        "alternate_identifiers": [
+          "alias-card-25"
+        ],
+        "canonical_identifier": "pilot-card-025",
+        "external_identifiers": [
+          "ext-1025"
+        ],
+        "provider_identifier": "provider-card-25"
+      },
+      "normalized": {
+        "layout": "normal",
+        "mana_value": 1,
+        "name": "Pilot Card 25"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-1",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-001",
+        "provider_identifier": "provider-print-1"
+      },
+      "normalized": {
+        "artist": "Pilot Artist 1",
+        "card_id": "pilot-card-001",
+        "collector_number": "1",
+        "finish": "nonfoil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-2",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-002",
+        "provider_identifier": "provider-print-2"
+      },
+      "normalized": {
+        "artist": null,
+        "card_id": "pilot-card-002",
+        "collector_number": "2",
+        "finish": "nonfoil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-3",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-003",
+        "provider_identifier": "provider-print-3"
+      },
+      "normalized": {
+        "artist": "Pilot Artist 3",
+        "card_id": "pilot-card-003",
+        "collector_number": "3",
+        "finish": "nonfoil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-4",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-004",
+        "provider_identifier": "provider-print-4"
+      },
+      "normalized": {
+        "artist": "Pilot Artist 4",
+        "card_id": "pilot-card-004",
+        "collector_number": "4",
+        "finish": "nonfoil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-5",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-005",
+        "provider_identifier": "provider-print-5"
+      },
+      "normalized": {
+        "artist": "Pilot Artist 5",
+        "card_id": "pilot-card-005",
+        "collector_number": "5",
+        "finish": "nonfoil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-6",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-006",
+        "provider_identifier": "provider-print-6"
+      },
+      "normalized": {
+        "artist": "Pilot Artist 1",
+        "card_id": "pilot-card-001",
+        "collector_number": "1",
+        "finish": "foil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-7",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-007",
+        "provider_identifier": "provider-print-7"
+      },
+      "normalized": {
+        "artist": "Pilot Artist 2",
+        "card_id": "pilot-card-002",
+        "collector_number": "2",
+        "finish": "foil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-8",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-008",
+        "provider_identifier": "provider-print-8"
+      },
+      "normalized": {
+        "artist": null,
+        "card_id": "pilot-card-003",
+        "collector_number": "3",
+        "finish": "foil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-9",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-009",
+        "provider_identifier": "provider-print-9"
+      },
+      "normalized": {
+        "artist": "Pilot Artist 4",
+        "card_id": "pilot-card-004",
+        "collector_number": "4",
+        "finish": "foil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "printing",
+      "id": "row-printing-10",
+      "identifiers": {
+        "canonical_identifier": "pilot-printing-010",
+        "provider_identifier": "provider-print-10"
+      },
+      "normalized": {
+        "artist": "Pilot Artist 5",
+        "card_id": "pilot-card-005",
+        "collector_number": "5",
+        "finish": "foil",
+        "set_code": "PLT"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-unresolved",
+      "identifiers": {},
+      "normalized": {
+        "layout": "normal",
+        "name": "Unknown Identity"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-conflict",
+      "identifiers": {
+        "canonical_identifier": "pilot-card-conflict",
+        "provider_identifier": "provider-conflict"
+      },
+      "identity_conflict": true,
+      "normalized": {
+        "layout": "normal",
+        "name": "Conflicting Assertion"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-collision-a",
+      "identifiers": {
+        "alternate_identifiers": [
+          "shared-alias"
+        ],
+        "canonical_identifier": "pilot-collision-a"
+      },
+      "normalized": {
+        "layout": "normal",
+        "name": "Collision A"
+      }
+    },
+    {
+      "entity_type": "card",
+      "id": "row-collision-b",
+      "identifiers": {
+        "alternate_identifiers": [
+          "shared-alias"
+        ],
+        "canonical_identifier": "pilot-collision-b"
+      },
+      "normalized": {
+        "layout": "normal",
+        "name": "Collision B"
+      }
+    }
+  ],
+  "review_notes": "Synthetic production-style pilot; no Mystery Booster 2 records.",
+  "review_status": "reviewed"
+}

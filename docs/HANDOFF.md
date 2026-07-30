@@ -1,5 +1,7 @@
 # Handoff
 
+> **Status: Current — Phase 86 implementation handoff.** The pilot deterministically imports 35 of 39 records, rejects three, leaves one unresolved, and preserves acquisition/review/promotion audit. Do not recommend merge until GitHub Actions are green.
+
 > **Status: Current — Phase 85 implementation handoff.**
 
 Phase 85 adds the deterministic Canonical Promotion Engine consuming Phase 84 Knowledge

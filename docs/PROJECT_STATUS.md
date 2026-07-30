@@ -1,5 +1,7 @@
 # Project Status
 
+> **Status: Current — Phase 86 implementation submitted.** The complete reviewed-dataset governance lifecycle is implemented; merge remains contingent on green GitHub Actions.
+
 > **Status: Current — Phase 85 implementation submitted.**
 
 MTG Lab remains a pre-alpha deterministic Architecture v12 reference implementation.

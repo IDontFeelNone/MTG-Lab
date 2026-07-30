@@ -1,0 +1,8 @@
+{
+  "dataset_version": "1.0.0",
+  "logical_dataset_identity": "mtg-lab-pilot-cards",
+  "provider": "MTG Lab reviewed pilot",
+  "publication_date": "2026-07-30",
+  "schema_version": "pilot-card-dataset-v1",
+  "supported_entity_types": ["card", "printing"]
+}

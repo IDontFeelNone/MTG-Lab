@@ -1,5 +1,7 @@
 # MTG Lab Project Inventory
 
+> **Phase 86 update:** `src/dataset_import/` provides the registry, resolver, session orchestrator, and reporter; `src/mtglab/__main__.py` provides dataset/import CLI commands; and `data/fixtures/canonical_import/` contains the reviewed pilot.
+
 > **Phase 84 update:** `src/acquisition/knowledge.py` adds provider policy, dataset
 > identity, pre-review validation, reports, and deterministic review packages;
 > `data/fixtures/knowledge/` contains test-only reviewed collectible-card inputs;
