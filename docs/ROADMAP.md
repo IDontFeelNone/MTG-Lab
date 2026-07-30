@@ -1,5 +1,7 @@
 # MTG Lab Roadmap
 
+> **Phase 86:** The governed canonical dataset import pilot is complete locally. Large-scale imports remain future work and must use the same gates.
+
 > **Status: Current** — Phase 85 is implemented on the current branch and awaits green CI and review.
 
 ## Phase 85 — Canonical Promotion Engine v1

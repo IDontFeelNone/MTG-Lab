@@ -1,5 +1,7 @@
 # Next Task
 
+> **Status: Current — validate Phase 86 review and CI.** No large-scale product import is authorized; future imports must use Phase 86 governance.
+
 > **Status: Current — complete Phase 85 review and CI gate; no later milestone authorized.**
 
 Review the Canonical Promotion Engine v1 pull request against the Phase 85 objective and

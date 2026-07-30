@@ -1,5 +1,7 @@
 # Session State
 
+> **Status: Current — Phase 86 implemented locally; pull request awaits review and green CI.** Dataset registration, resolution, sessions, promotion, reports, CLI, and the non-MB2 pilot are present. Architecture v12 is unchanged.
+
 > **Status: Current — Phase 85 implemented; pull request awaiting review and green CI.**
 
 Architecture v12 remains unchanged. Phase 85 is the latest runtime milestone and implements

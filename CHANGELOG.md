@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 86 — Canonical Dataset Import Framework (Pilot)
+
+- Added first-class dataset registration, deterministic entity resolution, governed import sessions, reporting, unified CLI commands, and a reviewed non-MB2 pilot.
+- Composed the existing acquisition, review, and promotion engines without changing Architecture v12.
+
 ## Unreleased
 
 - Phase 85 Canonical Promotion Engine v1: fail-closed Knowledge Review Package validation, deterministic provenance-preserving canonical versions, immutable success/failure audits, supersession chains, compensating rollback, replay verification, acquisition CLI commands, and comprehensive tests. Architecture v12 remains unchanged and no MB2 data was imported.
