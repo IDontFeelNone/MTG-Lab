@@ -117,6 +117,12 @@ SHA-256, connect every artifact to canonical Source Records and explicit claims,
 and allow ingestion to load only path-safe, content-verified evidence. The
 [Evidence Repository](docs/EVIDENCE_REPOSITORY.md) defines this boundary.
 
+Phase 65 adds a retained, schema-validated Mystery Booster 2 Rule Claim
+Matrix and evidence sufficiency report under the processed research boundary.
+The assessment confirms that preserved evidence remains insufficient for
+canonical product rules or pack generation and makes no canonical rule changes.
+See the [Mystery Booster 2 Rule Research](docs/MB2_RULE_RESEARCH.md) report.
+
 Verified Card and Printing ingestion accepts complete bounded batches of up to
 twenty-five records and rejects oversized inputs without truncation. Before
 promotion, a deterministic retained review report binds the candidates to the

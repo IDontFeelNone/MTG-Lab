@@ -25,6 +25,7 @@ from .promotion import (
     PromotionValidationError,
     ReviewDecision,
 )
+from .rule_research import RuleResearchError, load_rule_research, rule_research_bytes
 from .rules import (
     RulesRepositoryError,
     canonical_rules_repository_bytes,
@@ -46,6 +47,7 @@ __all__ = [
     "PromotionConflict",
     "PromotionValidationError",
     "ReviewDecision",
+    "RuleResearchError",
     "RulesRepositoryError",
     "SourceLoadError",
     "canonical_repository_bytes",
@@ -60,10 +62,12 @@ __all__ = [
     "load_print_sheet",
     "load_product",
     "load_source_record",
+    "load_rule_research",
     "load_rules_repository",
     "load_slot",
     "print_sheet_record_path",
     "printing_record_path",
     "product_record_path",
+    "rule_research_bytes",
     "slot_record_path",
 ]

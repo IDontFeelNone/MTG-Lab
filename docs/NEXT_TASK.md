@@ -1,45 +1,47 @@
 # Next Task
 
-## Phase 64 — Scalable Evidence-Backed Card and Printing Batch Population
+## Phase 65 — Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment
 
 **Status:** Complete; awaiting review
 
 ## Objective
 
-Validate scalable, evidence-backed canonical population for a complete bounded
-batch of up to twenty-five verified Printings without weakening explicit review
-or any Tier 0 boundary.
+Build the evidence-backed bridge between research and future canonical rule
+population by determining exactly which Mystery Booster 2 product-rule claims
+are supported by preserved evidence.
 
 ## Delivered Scope
 
-- Increased the complete-batch limit from five to twenty-five records.
-- Oversized inputs now fail rather than being silently truncated.
-- Evidence artifacts may declare an exact expected record count and exact set of
-  Printing identifiers; verified ingestion rejects drift from either boundary.
-- Added a versioned, schema-validated pre-promotion review report with deterministic
-  identity bound to both evidence bytes and the canonical repository snapshot.
-- Reports enumerate new Cards, reused Cards, new Printings, duplicates, conflicts,
-  rejected records, and expected before/after repository counts.
-- Added immutable storage for reports under `data/intermediate/reviews/`.
-- Proved the 25-record ceiling with synthetic fixtures and retained the verified
-  Wave 2 replay report. The replay correctly requires no canonical count change.
+- Archived the controlled official product-title capture in a content-verified
+  Evidence Repository bundle without expanding its narrow claim scope.
+- Added a versioned Rule Claim Matrix contract and authoritative retained matrix
+  with stable claims, classifications, source and evidence references, precise
+  locators, Tier 0 entity mappings, and explicit uncertainty.
+- Added a versioned Evidence Sufficiency Report covering known, partial, and
+  unknown facts and separate blockers for canonical rules, pack generation, and
+  probability calculation.
+- Assessed the existing Tier 0 relationship as sufficient for currently
+  supported facts but indeterminate for the complete product, retaining the
+  conditional-collation expressiveness question without redesign.
+- Added deterministic loading and cross-validation of the processed research
+  pair against canonical Source Records and content-verified evidence bundles.
 
 ## Exclusions Honored
 
-- No automatic approval or evidence acquisition.
-- No new Product, Print Sheet, Slot, collation, probability, Rules Engine,
-  simulation, analytics, market, persistence, API, UI, or AI behavior.
-- No Tier 0 architecture or canonical domain schema change.
+- No Product, Print Sheet, Slot, Card, or Printing record changed or populated.
+- No probability, simulation, analytics, promotion, API, UI, persistence, or AI behavior.
+- No Tier 0 redesign or product-specific engine logic.
 
 ## Validation
 
 - `PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v`
-- JSON parsing and schema validation for all repository JSON
-- Deterministic retained review-report reproduction
+- Schema validation for all repository JSON
+- Deterministic Rule Claim Matrix and report loading
+- Evidence bundle content and provenance verification
 - Canonical Card/Printing and rules snapshots
 - `git diff --check`
 
 ## Next Milestone
 
-Awaiting review and explicit approval. No additional population or product-rule
-milestone is approved.
+Awaiting review and explicit approval. Evidence acquisition remains the blocker;
+no canonical rule-population or pack-generation milestone is approved.

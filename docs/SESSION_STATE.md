@@ -18,12 +18,12 @@ v12
 
 ## Current Phase
 
-Phase 64 — Scalable Evidence-Backed Card and Printing Batch Population complete;
+Phase 65 — Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment complete;
 awaiting review and approval for the next milestone
 
 ## Last Merged PR
 
-PR #14 — Phase 63 Mystery Booster 2 Card and Printing Population, Wave 2.
+PR #15 — Phase 64 Scalable Evidence-Backed Card and Printing Batch Population.
 
 ## Repository Status
 
@@ -64,6 +64,10 @@ PR #14 — Phase 63 Mystery Booster 2 Card and Printing Population, Wave 2.
 - Phase 64 supports complete batches of up to twenty-five verified Printings,
   optional exact manifest population boundaries, and deterministic retained
   pre-promotion reports bound to canonical snapshot hashes.
+- Phase 65 retains a schema-validated Rule Claim Matrix and Evidence Sufficiency
+  Report outside canonical data, cross-validated against verified bundles. Current
+  evidence supports Product identity and four partial membership examples but no
+  complete MB2 product-rule graph.
 
 ## Completed Milestones
 
@@ -102,11 +106,13 @@ PR #14 — Phase 63 Mystery Booster 2 Card and Printing Population, Wave 2.
   existing-Card promotion filtering.
 - Scalable population review now fails oversized batches without truncation and
   retains schema-validated classifications and expected repository count deltas.
+- Product-rule research now retains stable evidence classifications, explicit
+  blockers, and an architectural sufficiency question without changing Tier 0.
 
 ## Current Focus
 
-Awaiting review of Phase 64. No additional Card or Printing population and no
-canonical Mystery Booster 2 Print Sheet or Slot population milestone is approved.
+Awaiting review of Phase 65. No canonical Mystery Booster 2 Print Sheet, Slot,
+product-rule population, probability, or pack-generation milestone is approved.
 
 ## Open Risks
 
@@ -125,9 +131,9 @@ canonical Mystery Booster 2 Print Sheet or Slot population milestone is approved
 
 ## Upcoming Milestones
 
-1. Review Phase 64, Scalable Evidence-Backed Card and Printing Batch Population.
-2. Require separate approval for broader population or any Mystery Booster 2 rule population.
-3. Probability, simulation, analytics, and market-intelligence layers.
+1. Review Phase 65, Mystery Booster 2 Product-Rule Evidence Sufficiency Assessment.
+2. Require separate approval for targeted rule-evidence acquisition.
+3. Canonical rule population, probability, simulation, and analytics remain blocked.
 
 ## Next Session Checklist
 

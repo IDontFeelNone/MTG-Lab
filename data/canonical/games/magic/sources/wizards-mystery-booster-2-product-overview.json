@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "id": "wizards-mystery-booster-2-product-overview",
+  "title": "Mystery Booster 2 official product-page title capture",
+  "source_classification": "official",
+  "provider": "Wizards of the Coast",
+  "source_location": "https://magic.wizards.com/en/products/mystery-booster",
+  "access_date": "2026-07-29",
+  "verification_status": "confirmed",
+  "claims": [
+    "Mystery Booster 2 is a Magic: The Gathering product."
+  ],
+  "notes": "Phase 65 archives the existing controlled title-only capture. The preserved bytes support product identity only and do not support pack structure, slots, sheets, pools, replacement, treatments, collation, or probability.",
+  "content_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+  "archival_location": "data/sources/magic/mb2-phase-65-product-overview/files/official-product-page-title.html",
+  "record_version": "1"
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.dev/schemas/v1/evidence-sufficiency-report.schema.json",
+  "title": "MTG Lab Evidence and Architectural Sufficiency Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "game", "product_id", "artifact_version", "rule_claim_matrix_id", "known_claim_ids", "partially_known_claim_ids", "unknown_claim_ids", "canonical_rule_population_blockers", "pack_generation_blockers", "probability_calculation_blockers", "architectural_sufficiency"],
+  "properties": {
+    "schema_version": {"const": "v1"},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "game": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "product_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "artifact_version": {"type": "string", "minLength": 1},
+    "rule_claim_matrix_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "known_claim_ids": {"$ref": "#/$defs/claimIds"},
+    "partially_known_claim_ids": {"$ref": "#/$defs/claimIds"},
+    "unknown_claim_ids": {"$ref": "#/$defs/claimIds"},
+    "canonical_rule_population_blockers": {"$ref": "#/$defs/statements"},
+    "pack_generation_blockers": {"$ref": "#/$defs/statements"},
+    "probability_calculation_blockers": {"$ref": "#/$defs/statements"},
+    "architectural_sufficiency": {
+      "type": "object", "additionalProperties": false,
+      "required": ["relationship", "supported_evidence_status", "complete_product_status", "limitations", "architectural_questions", "tier_0_change_authorized"],
+      "properties": {
+        "relationship": {"const": "Product -> Slot -> Print Sheet -> Printing -> Card"},
+        "supported_evidence_status": {"enum": ["sufficient", "insufficient"]},
+        "complete_product_status": {"enum": ["sufficient", "insufficient", "indeterminate"]},
+        "limitations": {"$ref": "#/$defs/statements"},
+        "architectural_questions": {"$ref": "#/$defs/statements"},
+        "tier_0_change_authorized": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "claimIds": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}},
+    "statements": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  }
+}

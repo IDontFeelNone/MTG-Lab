@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- A retained, schema-validated Mystery Booster 2 Rule Claim Matrix with stable claims, evidence classifications, Source Record and bundle references, precise locators, Tier 0 entity mappings, and explicit uncertainty.
+- A deterministic Evidence Sufficiency Report separating known, partial, and unknown claims, blockers for canonical rules, pack generation, and probability, plus a no-redesign architectural sufficiency assessment.
+- A content-verified archive of the controlled official Mystery Booster 2 product-title capture and cross-validation for non-canonical rule research artifacts.
 - Scalable evidence-backed Card and Printing batches of up to twenty-five complete records, with oversized-input rejection and manifest-declared record-count and Printing-identity boundaries.
 - Versioned deterministic pre-promotion review reports retained alongside intermediate artifacts, summarizing new and reused Cards, new Printings, duplicates, conflicts, rejected records, and expected repository count changes.
 - Evidence-repository-exclusive Mystery Booster 2 Card and Printing Wave 2,
