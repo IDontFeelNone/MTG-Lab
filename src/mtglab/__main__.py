@@ -8,6 +8,7 @@ from external_ingestion import (AdapterRegistry, ExternalDatasetIngestor, MTGJSO
                                 detect_mtgjson, generate_manifest)
 from query import CanonicalQueryEngine
 from analytics import CanonicalAnalyticsEngine
+from semantic import CanonicalSemanticQueryEngine, SemanticRequest
 
 
 def main(argv=None) -> int:
@@ -48,9 +49,53 @@ def main(argv=None) -> int:
         command = analytics_commands.add_parser(name)
         command.add_argument("--game", default="magic")
         command.add_argument("--format", choices=("json",), default="json")
+    semantic = commands.add_parser("semantic")
+    semantic_commands = semantic.add_subparsers(dest="semantic_command", required=True)
+    find = semantic_commands.add_parser("find"); find.add_argument("--identifier"); find.add_argument("--name")
+    find.add_argument("--type"); find.add_argument("--game", default="magic"); find.add_argument("--format", choices=("json",), default="json")
+    listing = semantic_commands.add_parser("list")
+    selectors = listing.add_mutually_exclusive_group(required=True)
+    selectors.add_argument("--type"); selectors.add_argument("--dataset"); selectors.add_argument("--provenance")
+    selectors.add_argument("--validation"); selectors.add_argument("--confidence", nargs=2, type=float, metavar=("MIN", "MAX"))
+    listing.add_argument("--game", default="magic"); listing.add_argument("--format", choices=("json",), default="json")
+    semantic_analytics = semantic_commands.add_parser("analytics")
+    semantic_analytics.add_argument("analytics_type", nargs="?", choices=("summary", "dataset", "provenance", "validation"), default="summary")
+    semantic_analytics.add_argument("--game", default="magic"); semantic_analytics.add_argument("--format", choices=("json",), default="json")
+    for name in ("dataset", "provenance"):
+        command = semantic_commands.add_parser(name); command.add_argument("identifier", nargs="?")
+        command.add_argument("--statistics", action="store_true"); command.add_argument("--game", default="magic")
+        command.add_argument("--format", choices=("json",), default="json")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "analytics":
+    if args.command == "semantic":
+        query_engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games",
+                                            data_root=args.data_root)
+        engine = CanonicalSemanticQueryEngine(query_engine)
+        if args.semantic_command == "find":
+            if bool(args.identifier) == bool(args.name): parser.error("semantic find requires exactly one of --identifier or --name")
+            operation = "find_identifier" if args.identifier else "find_name"
+            parameters = {"identifier": args.identifier, "entity_type": args.type} if args.identifier else {"name": args.name}
+            parameters = {key: value for key, value in parameters.items() if value is not None}
+        elif args.semantic_command == "list":
+            if args.type: operation, parameters = "list_type", {"entity_type": args.type}
+            elif args.dataset: operation, parameters = "list_dataset", {"dataset": args.dataset}
+            elif args.provenance: operation, parameters = "list_provenance", {"source_id": args.provenance}
+            elif args.validation: operation, parameters = "list_validation", {"state": args.validation}
+            else: operation, parameters = "list_confidence", {"minimum": args.confidence[0], "maximum": args.confidence[1]}
+        elif args.semantic_command == "analytics":
+            operation = {"summary": "analytics_summary", "dataset": "dataset_statistics",
+                         "provenance": "provenance_statistics", "validation": "validation_statistics"}[args.analytics_type]
+            parameters = {}
+        elif args.semantic_command == "dataset":
+            if args.statistics: operation, parameters = "dataset_statistics", {}
+            elif args.identifier: operation, parameters = "list_dataset", {"dataset": args.identifier}
+            else: parser.error("semantic dataset requires identifier or --statistics")
+        else:
+            if args.statistics: operation, parameters = "provenance_statistics", {}
+            elif args.identifier: operation, parameters = "list_provenance", {"source_id": args.identifier}
+            else: parser.error("semantic provenance requires identifier or --statistics")
+        result = engine.execute(SemanticRequest(operation, parameters)).to_dict()
+    elif args.command == "analytics":
         query_engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games",
                                             data_root=args.data_root)
         result = getattr(CanonicalAnalyticsEngine(query_engine), args.analytics_command)().to_dict()

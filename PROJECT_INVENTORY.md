@@ -16,7 +16,7 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 91 is implemented. Phase 92 is implemented and awaits review and
+> **Status: Current** — Phase 93 is implemented and awaits review and
 > green GitHub Actions.
 
 ## Phase 83 constitutional guidance
@@ -35,7 +35,7 @@ questions guide future proposals without authorizing them.
 
 - **Architecture:** v12 (unchanged)
 - **Latest merged milestone:** Phase 90 — MB2 pilot evidence-gap outcome
-- **Current milestone:** Phase 92 — Canonical Analytics Engine v1
+- **Current milestone:** Phase 93 — Canonical Semantic Query Layer v1
 - **Maturity:** pre-alpha; deterministic local reference implementation
 - **Validation baseline:** 194 passing tests locally under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
@@ -50,6 +50,7 @@ questions guide future proposals without authorizing them.
 | --- | --- | --- |
 | Canonical Repository | Typed game aggregate, specialized schema-backed repositories, deterministic snapshots, relationship validation, staged bulk apply | Operational v1; overlapping repository generations are consolidation debt |
 | Canonical Query Engine | Stable provenance-bearing entity results; relationship, dataset, audit, validation, and deterministic exact search queries; CLI | Operational v1; sole supported read boundary for future consumers |
+| Canonical Semantic Query Layer | Immutable structured operations, deterministic Query/Analytics delegation, snapshot identities, provenance, and JSON CLI | Operational v1; no AI reasoning or language generation |
 | Canonical Import Pipeline | Reviewed local JSON/CSV adapters, provenance, dry-run/validation-only modes, deterministic report, atomic game-tree replacement | Operational v1; local-only and single-writer |
 | Raw data acquisition | Immutable byte snapshots, provider adapters, normalized source records, assertion bridge, acquisition-run reports, offline CLI | Operational v1; no live providers or canonical promotion |
 | External dataset ingestion | Canonical supplied-dataset manifest, JSON/CSV/ZIP integrity, MTGJSON v5 provider detection/mapping, registrations, review-package handoff, CLI | Operational v1; stops before human review and promotion |
@@ -141,7 +142,7 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 92 review and green CI are the only active work. Future Analytics expansion, Simulation, REST,
+Phase 93 review and green CI are the only active work. Future Analytics expansion, Simulation, REST,
 and AI consumers must use the Query Engine instead of repository storage internals. Mystery
 Booster 2 remains evidence-blocked; Simulation and Intelligence remain unimplemented.
 
