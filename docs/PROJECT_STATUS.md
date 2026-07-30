@@ -11,12 +11,12 @@
 | Status item | Current state |
 | --- | --- |
 | Architecture version | v12 |
-| Project phase | Phase 66 evidence-waiting state; processing has not begun |
+| Project phase | Phase 67 evidence-waiting after successful review of the first artifact-bearing handoff |
 | Last completed phase | Phase 65 — MB2 Product-Rule Evidence Sufficiency Assessment |
-| Last merged repository baseline | PR #18 — Phase 66 external research handoff |
+| Last merged repository baseline | First artifact-bearing Phase 67 evidence handoff and Repository Steward guidance |
 | Latest completed repository capability | Product-agnostic Evidence Review Engine |
-| Phase 66 status | Research handoff structure exists; verification may begin only after the entry gate is satisfied |
-| Current critical-path blocker | No artifact-bearing, content-complete, independently reviewed raw handoff exists for the first evidence-backed MB2 booster |
+| Phase 67 status | The first bounded handoff passed mechanical review; it supports product identity only |
+| Current critical-path blocker | No sufficient verified evidence establishes any outcome-affecting MB2 rule claim |
 | Canonical rule status | Population unauthorized |
 | Downstream product layers | Pack generation, probability, simulation, analytics, API, and UI unauthorized |
 
@@ -31,8 +31,8 @@ Counts below were derived directly from the repository on 2026-07-30.
 
 | Item | Count |
 | --- | ---: |
-| Tracked files | 213 |
-| Markdown documents | 29 |
+| Tracked files | 218 |
+| Markdown documents | 31 |
 | Python source files under `src/` | 37 |
 | Versioned JSON schemas | 16 |
 | Test modules | 17 |
@@ -58,13 +58,16 @@ Counts below were derived directly from the repository on 2026-07-30.
 | Verified Evidence Repository bundles | 3 |
 | Rule Claim Matrices | 1 |
 | Evidence Sufficiency Reports | 1 |
-| Phase 66 raw handoff manifests | 1 |
-| Phase 66 acquired external evidence artifacts | 0 |
+| Raw external-evidence handoff manifests | 1 |
+| Phase 67 external evidence artifacts | 1 |
+| Phase 67 Evidence Review Engine reports | 1 JSON and 1 Markdown |
 
-The raw handoff contains a research summary, an empty-artifact intake manifest,
-and an intentionally empty `artifacts/` directory. It is a controlled research
-package and source-lead record, not an Evidence Repository bundle and not proof
-of any new product-rule claim.
+The first artifact-bearing Phase 67 handoff is merged and remains quarantined
+under `data/raw/`. Its manifest and re-delivered 238-byte official product-title
+capture passed the Evidence Review Engine's integrity, provenance, completeness,
+and consistency checks. The artifact is byte-identical to evidence already held
+in the Evidence Repository, supports only MB2 product identity, and supplies no
+new outcome-affecting product-rule evidence.
 
 ## Maturity and debt
 
@@ -73,7 +76,8 @@ of any new product-rule claim.
 - Tier 0 data and Rules Engine architecture is approved and remains unchanged.
 - Canonical repository contracts, deterministic validation, evidence archival,
   candidate review, promotion audits, and rollback foundations are implemented.
-- The product-agnostic Evidence Review Engine is complete. It validates external
+- The product-agnostic Evidence Review Engine is complete and has been exercised
+  successfully on the first artifact-bearing Phase 67 handoff. It validates external
   handoff metadata, provenance, artifact integrity, completeness, and internal
   consistency and emits schema-validated JSON and Markdown reports before Rule
   Claim Matrix processing.
@@ -89,7 +93,8 @@ of any new product-rule claim.
 - Complete event-specific Printing pools and exclusions are absent.
 - Weights or justified frequency semantics are absent.
 - Replacement, treatments, conditionality, correlation, and sequence remain unknown.
-- The current raw handoff contains leads and failed-access notes but no acquired bytes.
+- The current Phase 67 handoff contains one mechanically verified, previously
+  archived product-title artifact but no evidence for outcome-affecting rules.
 
 ### Canonical-data debt
 
@@ -111,7 +116,8 @@ of any new product-rule claim.
 
 ## Critical path to the first evidence-backed MB2 booster
 
-1. Receive an artifact-bearing, content-complete, independently reviewed handoff.
+1. Receive a content-complete, independently reviewed handoff containing evidence
+   relevant to one or more unresolved outcome-affecting MB2 rule claims.
 2. Verify raw bytes, paths, sizes, hashes, metadata, version scope, claims, and locators.
 3. Register supported sources and construct content-verified Evidence Repository bundles.
 4. Reconcile the Rule Claim Matrix and Evidence Sufficiency Report.
@@ -122,14 +128,14 @@ of any new product-rule claim.
 8. Separately approve and implement exact probability and pack validation.
 9. Produce and byte-reproduce one fixed-seed, fully traceable booster result.
 
-## Phase 66 gates
+## External-evidence gates
 
 ### Entry criteria
 
-Phase 66 evidence verification is authorized only when all of the following hold:
+Evidence verification is authorized only when all of the following hold:
 
 - the raw handoff contains at least one real external artifact needed for a
-  Phase 66 claim;
+  unresolved MB2 rule claim;
 - the manifest is content-complete and lists each exact artifact path, byte size,
   SHA-256, media type, acquisition context, product-version scope, narrow claim,
   and independently resolvable locator;
@@ -139,8 +145,10 @@ Phase 66 evidence verification is authorized only when all of the following hold
 - explicit authorization is limited to verification and research reconciliation,
   not canonical population or downstream implementation.
 
-The current PR #18 handoff fails this gate because its `artifacts` array and
-artifact directory are empty. Phase 66 processing has therefore not begun.
+The Phase 67 title-only handoff satisfies the mechanical gate for its single
+declared identity claim and was reviewed successfully. It does not satisfy the
+substantive evidence needs of any outcome-affecting MB2 rule claim and therefore
+does not authorize Rule Claim Matrix advancement or canonical promotion.
 
 ### Exit criteria
 
@@ -154,7 +162,7 @@ artifact directory are empty. Phase 66 processing has therefore not begun.
 - The conclusion authorizes or blocks a later canonical-rule population
   milestone claim by claim.
 - Canonical repositories, promotion audits, runtime code, schemas, and tests
-  remain unchanged during Phase 66.
+  remain unchanged during evidence reconciliation.
 
 ### Mandatory stop conditions
 

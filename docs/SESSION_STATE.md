@@ -18,12 +18,13 @@ v12
 
 ## Current Phase
 
-Phase 66 evidence-waiting; verification is conditionally authorized after the
-entry gate, and processing has not begun
+Phase 67 evidence-waiting after successful mechanical review of the first
+artifact-bearing handoff; outcome-affecting MB2 rules remain evidence-insufficient
 
 ## Last Merged PR
 
-PR #18 — Phase 66 external research handoff.
+The first artifact-bearing Phase 67 evidence handoff and Repository Steward
+guidance are merged into the authoritative repository baseline.
 
 ## Repository Status
 
@@ -68,13 +69,17 @@ PR #18 — Phase 66 external research handoff.
   Report outside canonical data, cross-validated against verified bundles. Current
   evidence supports Product identity and four partial membership examples but no
   complete MB2 product-rule graph.
-- PR #18 adds a controlled raw Phase 66 research handoff with an empty-artifact
-  manifest, an empty artifact directory, failed-access notes, and source leads.
-  It adds no acquired external evidence and supports no new factual claim.
+- The first artifact-bearing Phase 67 handoff is quarantined under `data/raw/`.
+  It re-delivers the exact official product-title bytes already archived by the
+  Evidence Repository and supports only the existing MB2 identity claim.
 - The product-agnostic Evidence Review Engine is complete. It reviews external
   handoff manifests, hashes, artifact integrity, source references, provenance,
   completeness, duplicate artifacts, and explicit claim conflicts and produces
   versioned JSON and Markdown reports without inference or canonical writes.
+- The Evidence Review Engine was exercised successfully on the Phase 67 handoff:
+  the declared artifact passed integrity, provenance, completeness, duplicate,
+  and explicit-conflict review with a bounded `Ready for verification` result.
+  That mechanical result does not establish any outcome-affecting rule claim.
 
 ## Completed Milestones
 
@@ -118,13 +123,17 @@ PR #18 — Phase 66 external research handoff.
 - Product-agnostic external evidence review is implemented with versioned
   handoff and report schemas, deterministic recommendations, and comprehensive
   tests. It is the automated review boundary before Rule Claim Matrix work.
+- The first artifact-bearing Phase 67 handoff was reviewed successfully without
+  changing canonical data, Tier 0 architecture, or the Phase 65 sufficiency conclusion.
 
 ## Current Focus
 
-The critical-path assessment is recorded in `FIRST_BOOSTER_PLAN.md`. Phase 66
-is in the evidence-waiting state. Verification and research reconciliation may
-begin only after an artifact-bearing, content-complete, independently reviewed
-handoff satisfies the documented entry gate. The current handoff does not.
+The critical-path assessment is recorded in `FIRST_BOOSTER_PLAN.md`. Phase 67
+is in the evidence-waiting state. The first artifact-bearing handoff passed
+mechanical review for its product-identity claim, but supplies no outcome-affecting
+MB2 rule evidence. Further verification and research reconciliation may begin
+only for a content-complete, independently reviewed handoff whose evidence is
+relevant to an unresolved rule claim.
 Canonical Mystery Booster 2 rule population and pack generation, probability,
 simulation, analytics, API, and UI remain unauthorized.
 
@@ -143,7 +152,9 @@ simulation, analytics, API, and UI remain unauthorized.
   batch-level transactional orchestration remains future work.
 - Canonical-data debt: only fifteen Cards and Printings are populated; MB2 has
   four Printings, while complete pools, Slots, sheets, and collation are absent.
-- Evidence debt: the current Phase 66 handoff contains no acquired artifact bytes.
+- Evidence debt: the Phase 67 handoff contains only a previously archived
+  product-title artifact; complete topology, pools, weights, replacement,
+  treatments, dependencies, and version scope remain unsupported.
 - Implementation debt: generic generation, probability, simulation, and
   generated-pack validation are absent.
 - Deferred layers: persistence, analytics, market intelligence, collection,
@@ -151,8 +162,9 @@ simulation, analytics, API, and UI remain unauthorized.
 
 ## Upcoming Milestones
 
-1. Wait for an artifact-bearing, content-complete, independently reviewed handoff.
-2. Verify and reconcile it only after the Phase 66 entry gate is satisfied.
+1. Wait for a content-complete, independently reviewed handoff containing
+   evidence relevant to unresolved outcome-affecting MB2 rule claims.
+2. Verify and reconcile it only after the documented evidence gate is satisfied.
 3. Require separate approval before canonical population or downstream implementation.
 
 ## Next Session Checklist
