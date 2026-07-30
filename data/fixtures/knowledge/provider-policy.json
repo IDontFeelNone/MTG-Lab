@@ -1,0 +1,10 @@
+{
+  "allowed_entity_types": ["card", "printing"],
+  "attribution": "Offline reviewed fixture created for MTG Lab tests",
+  "confidence_default": 0.8,
+  "evidence_class": "authoritative_structured",
+  "license_constraints": ["test-only", "no external redistribution claim"],
+  "normalization_rules": {"collector_number": "preserve-string", "faces": "preserve-order"},
+  "provider_id": "fixture",
+  "schema_version": "provider-policy-v1"
+}

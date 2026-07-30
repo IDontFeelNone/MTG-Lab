@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Phase 85 Canonical Promotion Engine v1: fail-closed Knowledge Review Package validation, deterministic provenance-preserving canonical versions, immutable success/failure audits, supersession chains, compensating rollback, replay verification, acquisition CLI commands, and comprehensive tests. Architecture v12 remains unchanged and no MB2 data was imported.
+
 ## Evidence Review Engine
 
 - Added a product-agnostic pre-promotion engine for external evidence handoffs.
@@ -14,6 +18,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0/).
 
 ## [Unreleased]
+
+### Added
+
+- Phase 84 Knowledge Acquisition Pipeline v1: deterministic dataset identities, independent
+  provider policies, pre-review validation, machine-readable reports, review packages,
+  offline collectible-card fixtures, CLI stages, documentation, and tests. No canonical
+  promotion or Mystery Booster 2 population was performed; Architecture v12 is unchanged.
 
 ### Changed
 

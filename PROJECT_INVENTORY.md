@@ -1,6 +1,12 @@
 # MTG Lab Project Inventory
 
-> **Status: Current** — Phase 83 is merged and complete as of 2026-07-30; no prior pull-request merge gate is active.
+> **Phase 84 update:** `src/acquisition/knowledge.py` adds provider policy, dataset
+> identity, pre-review validation, reports, and deterministic review packages;
+> `data/fixtures/knowledge/` contains test-only reviewed collectible-card inputs;
+> `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
+> canonical storage are unchanged.
+
+> **Status: Current** — Phase 85 is implemented and awaits Project Architect review and green GitHub Actions.
 
 ## Phase 83 constitutional guidance
 
@@ -17,10 +23,10 @@ questions guide future proposals without authorizing them.
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Latest completed milestone:** Phase 83 — Institutional Memory and Project Constitution
-- **Latest runtime milestone:** Phase 82 — Raw Data Acquisition Framework
+- **Latest completed milestone:** Phase 84 — Knowledge Acquisition Pipeline v1
+- **Current runtime milestone:** Phase 85 — Canonical Promotion Engine v1
 - **Maturity:** pre-alpha; deterministic local reference implementation
-- **Validation baseline:** 154 passing unit/integration-style tests under the CI command
+- **Validation baseline:** 164 passing tests locally under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
   Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
   remain unpopulated
@@ -36,7 +42,7 @@ questions guide future proposals without authorizing them.
 | Raw data acquisition | Immutable byte snapshots, provider adapters, normalized source records, assertion bridge, acquisition-run reports, offline CLI | Operational v1; no live providers or canonical promotion |
 | Evidence and candidate ingestion | Immutable evidence storage, parsers/normalizers, candidate validation, retained intermediate artifacts, population review | Operational for bounded reviewed workflows |
 | Evidence Repository and Review | Content-verified bundles, Source Record validation, external handoff integrity/provenance/completeness/conflict reports | Operational pre-promotion gate |
-| Canonical promotion | Explicit entity-agnostic review, immutable audits, conflict protection, idempotency, rollback, dependency safety | Operational for Product, Card, Printing, Print Sheet, and Slot |
+| Canonical promotion | Legacy entity promotion plus Phase 85 review-package engine, deterministic versions, immutable success/failure audits, supersession, rollback, replay, and CLI | Operational v1; Phase 85 review/CI pending |
 | Observation Engine | Immutable pack reports, verification records, descriptive box summaries, dated legacy valuation snapshots | Developing; strictly non-canonical |
 | Observation Import Pipeline | Plain-text multi-pack import, create-only allocation, manifest reconciliation, verification and derived summary refresh | Operational v1; single-writer multi-file workflow |
 | Market Framework | Provider abstraction, service/cache, normalized immutable snapshots, append-only repository, offline manual provider | Operational v1; no live provider |

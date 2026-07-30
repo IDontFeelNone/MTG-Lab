@@ -255,3 +255,16 @@ A task is complete only when:
 - The focused change is committed.
 - The PR is ready for review.
 - The contributor stops and waits for approval.
+
+## Standard milestone development workflow
+
+1. Codex implements approved milestones.
+2. Codex runs validation and opens a pull request.
+3. The Project Architect (ChatGPT) reviews the implementation.
+4. If the Project Architect recommends merge, the Project Owner waits for GitHub Actions
+   to pass and merges the pull request.
+5. No additional approval message is expected after merge.
+6. A merge following a Project Architect recommendation constitutes acceptance of the
+   milestone.
+
+A merge recommendation must not be made before GitHub Actions are green.
