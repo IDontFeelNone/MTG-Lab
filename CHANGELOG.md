@@ -17,6 +17,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Phase 82 generic raw data acquisition framework: immutable checksum-addressed snapshots, provider abstraction and offline fixture, normalized source records, Phase 80 candidate-assertion bridge and change reports, auditable resumable acquisition runs, security controls, explicit-stage CLI, documentation, and comprehensive tests. No canonical records or MB2 population were added; Architecture v12 remains unchanged.
+
 - Phase 79 pre-implementation inventory and architectural-fit review. The review found
   blocking Card/Printing field, assertion-provenance, unknown-collation, and v2 importer
   limitations, so no MB2 dataset, fixture, canonical record, or collation claim was

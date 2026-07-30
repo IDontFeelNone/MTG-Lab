@@ -20,12 +20,9 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Current Status
 
-**Current Phase:** Phase 79 — MB2 Canonical Dataset v1 (blocked at pre-implementation review)
+**Current Phase:** Phase 82 — Raw Data Acquisition Framework (implemented; CI pending)
 
-**Current Transition:** The mandatory Phase 79 review found architectural contract and
-importer limitations. Dataset implementation has stopped; Architecture v12 is
-unchanged and resolution requires separately approved product-agnostic work. Merge of
-this review remains contingent on green GitHub Actions.
+**Current Transition:** Phase 82 adds the reviewed, reproducible, source-agnostic acquisition workflow required after Phase 81. Raw bytes, normalization, assertions, and promotion remain separate; Architecture v12 is unchanged. Merge remains contingent on green GitHub Actions.
 
 **Current Version:** v0.x
 
@@ -34,6 +31,14 @@ this review remains contingent on green GitHub Actions.
 ---
 
 # Completed Milestones
+
+## Phase 82 — Raw Data Acquisition Framework
+
+Immutable raw snapshots, generic providers, deterministic normalization, the Phase 80
+candidate-assertion bridge, change/conflict reports, resumable acquisition runs, security
+controls, offline CLI, tests, and operational documentation are implemented. No live
+provider, canonical promotion, complete MB2 population, price history, or simulation was
+added. GitHub Actions is the remaining merge gate.
 
 ## Phase 79 — Mystery Booster 2 Canonical Dataset v1 (blocked)
 
