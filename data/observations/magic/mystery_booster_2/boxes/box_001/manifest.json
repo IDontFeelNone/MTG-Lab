@@ -1,0 +1,20 @@
+{
+  "box_id": "box_001",
+  "game": "magic_the_gathering",
+  "product": "mystery_booster_2",
+  "observation_status": "in_progress",
+  "verification_status": "unverified_user_report",
+  "pack_count_recorded": 1,
+  "packs": [
+    {
+      "pack_id": "pack_001",
+      "path": "pack_001.json",
+      "card_count": 15
+    }
+  ],
+  "governance": {
+    "canonical": false,
+    "eligible_for_direct_rule_promotion": false,
+    "notes": "Personal opening observations require separate review and corroboration before supporting product-rule claims."
+  }
+}
