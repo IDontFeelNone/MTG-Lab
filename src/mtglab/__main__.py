@@ -6,6 +6,7 @@ from pathlib import Path
 from dataset_import import DatasetRegistry, ImportManager
 from external_ingestion import (AdapterRegistry, ExternalDatasetIngestor, MTGJSONAdapter,
                                 detect_mtgjson, generate_manifest)
+from query import CanonicalQueryEngine
 
 
 def main(argv=None) -> int:
@@ -26,9 +27,39 @@ def main(argv=None) -> int:
     for name in ("detect", "inspect", "normalize"):
         command = adapter_commands.add_parser(name); command.add_argument("source", type=Path)
         if name == "normalize": command.add_argument("--timestamp", required=True)
+    query = commands.add_parser("query")
+    query_commands = query.add_subparsers(dest="query_command", required=True)
+    entity = query_commands.add_parser("entity")
+    entity.add_argument("identifier", nargs="?")
+    entity.add_argument("--game", default="magic"); entity.add_argument("--type")
+    entity.add_argument("--provider-id"); entity.add_argument("--external-id")
+    entity.add_argument("--name"); entity.add_argument("--normalized-name")
+    entity.add_argument("--printing-id"); entity.add_argument("--set-id")
+    search = query_commands.add_parser("search"); search.add_argument("text")
+    search.add_argument("--game", default="magic"); search.add_argument("--mode", choices=("exact", "normalized", "prefix"), default="exact")
+    search.add_argument("--case-insensitive", action="store_true")
+    for name in ("dataset", "provenance"):
+        command = query_commands.add_parser(name); command.add_argument("identifier"); command.add_argument("--game", default="magic")
+    validation = query_commands.add_parser("validation"); validation.add_argument("state", choices=("unknown", "conflicting", "unresolved", "rejected", "validation_failure", "superseded")); validation.add_argument("--game", default="magic")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "adapter":
+    if args.command == "query":
+        engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games",
+                                      data_root=args.data_root)
+        if args.query_command == "entity":
+            result = engine.entities(canonical_id=args.identifier, provider_id=args.provider_id,
+                external_id=args.external_id, entity_type=args.type, card_name=args.name,
+                normalized_name=args.normalized_name, printing_id=args.printing_id, set_id=args.set_id)
+            result = [item.as_dict() for item in result]
+        elif args.query_command == "search":
+            result = [item.as_dict() for item in engine.search(args.text, mode=args.mode,
+                                                               case_insensitive=args.case_insensitive)]
+        elif args.query_command == "dataset": result = engine.dataset(args.identifier)
+        elif args.query_command == "provenance": result = engine.provenance(args.identifier)
+        else:
+            result = [item.as_dict() if hasattr(item, "as_dict") else item
+                      for item in engine.validation(args.state)]
+    elif args.command == "adapter":
         if args.adapter_command == "detect": result = detect_mtgjson(args.source)
         else:
             manifest = generate_manifest(args.source)

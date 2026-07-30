@@ -1,3 +1,12 @@
+## Phase 91 — Canonical Query Engine v1
+
+- Added the provider-agnostic, read-only Canonical Query Engine with a stable,
+  provenance-bearing result contract; deterministic entity, relationship, provenance,
+  audit, dataset, validation, and exact search queries; and five CLI query operations.
+- Added comprehensive contract, relationship, state, ordering, repetition, and CLI tests
+  plus architecture and integration documentation. Architecture v12 and canonical data are
+  unchanged.
+
 ## Phase 90 — Mystery Booster 2 MTGJSON Pilot (evidence-blocked)
 
 - Reconciled the project baseline to record Phase 89 as merged, then validated the only

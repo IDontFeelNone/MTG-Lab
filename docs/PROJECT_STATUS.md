@@ -1,13 +1,11 @@
 # Project Status
 
-> **Status: Current — Phase 90 stopped after dataset validation.**
+> **Status: Current — Phase 91 Canonical Query Engine implemented.**
 
-Phase 89 has been merged. MTG Lab remains a pre-alpha deterministic Architecture v12
-reference implementation. Phase 90 validated the only supplied MTGJSON fixture and found
-only synthetic set `TST`, not Mystery Booster 2. The governed stop condition therefore
-prevented acquisition, registration, resolution, and promotion.
+Phase 90 has been merged. MTG Lab remains a pre-alpha deterministic Architecture v12
+reference implementation. Phase 91 establishes the provider-agnostic Canonical Query Engine
+as the supported read boundary over typed canonical and governed promotion state.
 
-No Mystery Booster 2 records were imported and canonical state is unchanged. The narrative
-and machine-readable evidence-gap reports are the Phase 90 result. Simulation and
-Intelligence remain unimplemented. Merge recommendation is withheld until GitHub Actions
-are green.
+The CLI exposes entity, search, dataset, provenance, and validation operations. Canonical
+state is unchanged; Simulation, REST, and AI remain unimplemented. Merge recommendation is
+withheld until GitHub Actions are green.

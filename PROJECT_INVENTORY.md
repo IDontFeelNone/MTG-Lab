@@ -16,8 +16,8 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 89 is merged. Phase 90 is evidence-blocked and awaits review
-> and green GitHub Actions.
+> **Status: Current** — Phase 90 is merged. Phase 91 is implemented and awaits review and
+> green GitHub Actions.
 
 ## Phase 83 constitutional guidance
 
@@ -34,8 +34,8 @@ questions guide future proposals without authorizing them.
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Latest merged milestone:** Phase 89 — MTGJSON Provider Adapter v1
-- **Current milestone:** Phase 90 — MB2 MTGJSON pilot, stopped after validation
+- **Latest merged milestone:** Phase 90 — MB2 pilot evidence-gap outcome
+- **Current milestone:** Phase 91 — Canonical Query Engine v1
 - **Maturity:** pre-alpha; deterministic local reference implementation
 - **Validation baseline:** 182 passing tests locally under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
@@ -49,6 +49,7 @@ questions guide future proposals without authorizing them.
 | Subsystem | Implementation | Contract / status |
 | --- | --- | --- |
 | Canonical Repository | Typed game aggregate, specialized schema-backed repositories, deterministic snapshots, relationship validation, staged bulk apply | Operational v1; overlapping repository generations are consolidation debt |
+| Canonical Query Engine | Stable provenance-bearing entity results; relationship, dataset, audit, validation, and deterministic exact search queries; CLI | Operational v1; sole supported read boundary for future consumers |
 | Canonical Import Pipeline | Reviewed local JSON/CSV adapters, provenance, dry-run/validation-only modes, deterministic report, atomic game-tree replacement | Operational v1; local-only and single-writer |
 | Raw data acquisition | Immutable byte snapshots, provider adapters, normalized source records, assertion bridge, acquisition-run reports, offline CLI | Operational v1; no live providers or canonical promotion |
 | External dataset ingestion | Canonical supplied-dataset manifest, JSON/CSV/ZIP integrity, MTGJSON v5 provider detection/mapping, registrations, review-package handoff, CLI | Operational v1; stops before human review and promotion |
@@ -76,6 +77,7 @@ questions guide future proposals without authorizing them.
 - `data/audit/` — immutable promotion decisions
 - `src/canonical`, `src/repository`, `src/canonical_import` — canonical model,
   persistence/validation, and reviewed bulk import
+- `src/query` — provider-neutral canonical read contract and deterministic query facade
 - `src/acquisition` — source-agnostic raw snapshots, normalization, and assertion bridge
 - `src/external_ingestion` — supplied-file manifests, validation, MTGJSON provider adapter, and governed handoff
 - `src/ingestion`, `src/evidence_review` — evidence-to-candidate and handoff review
@@ -83,7 +85,7 @@ questions guide future proposals without authorizing them.
   `src/decisions` — downstream domain engines
 - `src/mtglab` — command-line application namespaces
 - `src/schemas/v1`, `src/validation` — versioned JSON contracts and validation
-- `tests/` — 182 deterministic tests collected by the Python validation workflow
+- `tests/` — deterministic tests collected by the Python validation workflow
 - `docs/` — Architecture v12, subsystem contracts, governance, status, and history
 
 ## Architecture constraints and known debt
@@ -139,11 +141,9 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 90 review and green CI are the only active work. Mystery Booster 2 remains blocked
-because the supplied MTGJSON fixture contains no MB2 records; Simulation is not implemented;
-and the Intelligence Engine is vision only. Earlier milestone merge gates through Phase 89
-are satisfied. No external
-dataset may bypass manifest integrity, human review, or controlled promotion.
+Phase 91 review and green CI are the only active work. Future Analytics, Simulation, REST,
+and AI consumers must use the Query Engine instead of repository storage internals. Mystery
+Booster 2 remains evidence-blocked; Simulation and Intelligence remain unimplemented.
 
 ## Phase 80 — Canonical fact and evidence contract
 
