@@ -1,0 +1,7 @@
+{
+  "id": "magic",
+  "name": "Magic: The Gathering",
+  "metadata": {
+    "status": "infrastructure_only"
+  }
+}

@@ -13,7 +13,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from repository.cards import load_card_repository
+from repository.canonical import load_canonical_repository as load_card_repository
 
 from .analytics import summarize_observations
 from .verification import ObservationError, ObservationVerifier, canonical_json
@@ -76,7 +76,15 @@ class ObservationImporter:
         manifest_path = box_root / "manifest.json"
         manifest = self._load_manifest(manifest_path, game, product, box_id)
         next_number = self._next_pack_number(box_root, manifest)
-        cards, printings = load_card_repository(game, games_root=self.games_root)
+        loaded = load_card_repository(game, games_root=self.games_root)
+        # Tuple support keeps the importer boundary compatible with repository
+        # test doubles used before Canonical Product Repository v1.
+        if isinstance(loaded, tuple):
+            cards, printings = loaded
+        else:
+            cards = ({"id": item.id, "name": item.name} for item in loaded.cards)
+            printings = ({"id": item.id, "card_id": item.card_id,
+                          "metadata": item.metadata} for item in loaded.printings)
         printing_by_card: dict[str, list[str]] = {}
         for printing in printings:
             memberships = printing.get("metadata", {}).get("product_membership", [])
