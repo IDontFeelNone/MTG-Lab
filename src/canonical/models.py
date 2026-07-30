@@ -42,13 +42,25 @@ class Product(Entity):
     name: str = ""
     product_type: str = ""
     version_ids: tuple[str, ...] = ()
+    schema_version: str = "v2"
+    lifecycle_status: str = "foundation"
+
+
+@dataclass(frozen=True)
+class ProductComponent:
+    """One positive-quantity, typed member of a product version."""
+
+    component_type: str
+    component_id: str
+    quantity: int
 
 
 @dataclass(frozen=True)
 class ProductVersion(Entity):
     product_id: str = ""
     name: str = ""
-    pack_definition_ids: tuple[str, ...] = ()
+    components: tuple[ProductComponent, ...] = ()
+    schema_version: str = "v2"
 
 
 @dataclass(frozen=True)
@@ -88,13 +100,26 @@ class PackDefinition(Entity):
     product_version_id: str = ""
     name: str = ""
     slot_ids: tuple[str, ...] = ()
+    schema_version: str = "v2"
 
 
 @dataclass(frozen=True)
 class PackSlot(Entity):
     name: str = ""
-    sheet_id: str = ""
-    count: int = 1
+    print_sheet_id: str = ""
+    draw_count: int = 1
+    replacement: bool = True
+    schema_version: str = "v2"
+
+    @property
+    def sheet_id(self) -> str:
+        """Deprecated v1 typed-model alias."""
+        return self.print_sheet_id
+
+    @property
+    def count(self) -> int:
+        """Deprecated v1 typed-model alias."""
+        return self.draw_count
 
 
 @dataclass(frozen=True)
@@ -107,3 +132,4 @@ class SheetEntry:
 class Sheet(Entity):
     name: str = ""
     entries: tuple[SheetEntry, ...] = ()
+    schema_version: str = "v2"

@@ -24,9 +24,10 @@ def load_schema(schema_name: str, version: str = "v1") -> Mapping[str, Any]:
 
 
 def validate_document(
-    document: Mapping[str, Any], schema_name: str, version: str = "v1"
+    document: Mapping[str, Any], schema_name: str, version: str | None = None
 ) -> None:
-    """Validate one canonical document or raise a concise domain error."""
+    """Validate a canonical document against its declared contract version."""
+    version = version or str(document.get("schema_version", "v1"))
     validator = Draft202012Validator(load_schema(schema_name, version), format_checker=FormatChecker())
     errors = sorted(validator.iter_errors(document), key=lambda error: list(error.absolute_path))
     if not errors:
