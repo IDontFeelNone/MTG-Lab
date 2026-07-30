@@ -6,5 +6,7 @@ from .framework import (
     ExternalDatasetError,
     ExternalDatasetIngestor,
 )
+from .mtgjson import MTGJSONAdapter, detect_mtgjson, generate_manifest
 
-__all__ = ["AdapterRegistry", "DatasetManifest", "ExternalDatasetError", "ExternalDatasetIngestor"]
+__all__ = ["AdapterRegistry", "DatasetManifest", "ExternalDatasetError", "ExternalDatasetIngestor",
+           "MTGJSONAdapter", "detect_mtgjson", "generate_manifest"]

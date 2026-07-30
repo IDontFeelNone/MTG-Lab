@@ -1,14 +1,14 @@
 # MTG Lab Roadmap
 
-> **Status: Current — Phase 88 implemented locally; review and green CI pending.**
+> **Status: Current — Phase 89 implemented locally; review and green CI pending.**
 
-## Current milestone — Phase 88
+## Current milestone — Phase 89
 
-The External Dataset Ingestion Framework accepts manifest-governed JSON, CSV, and ZIP
-inputs, establishes integrity before registration, and composes supplied bytes into the
-unchanged acquisition and Knowledge Review Package stages. It does not promote canonical
-facts, import MB2, or change Architecture v12. Merge recommendation remains withheld until
-GitHub Actions are green.
+The MTGJSON Provider Adapter v1 detects and validates v5 AllPrintings-style supplied files,
+generates provider metadata/manifests, and deterministically maps the bounded supported scope
+through the unchanged Phase 88 acquisition and review stages. It does not promote canonical
+facts, import the full corpus or MB2, or change Architecture v12. Merge recommendation remains
+withheld until GitHub Actions are green.
 
 ## Completed milestone — Phase 87
 
@@ -22,7 +22,7 @@ No dataset registration, import, promotion, or canonical mutation occurred.
 | --- | --- |
 | Architecture | v12, unchanged |
 | Latest merged phase | Phase 87 — evidence-blocked acquisition pilot |
-| Current milestone | Phase 88 — External Dataset Ingestion Framework |
+| Current milestone | Phase 89 — MTGJSON Provider Adapter v1 |
 | External formats | JSON, CSV, ZIP containing JSON/CSV |
 | Mystery Booster 2 dataset | Evidence-acquisition blocked; not imported |
 | Simulation | Not implemented |
@@ -31,7 +31,7 @@ No dataset registration, import, promotion, or canonical mutation occurred.
 
 ## Next milestone boundary
 
-Only Phase 88 review and CI are authorized. Future dataset formats or provider extensions
+Only Phase 89 review and CI are authorized. Future dataset formats or provider extensions
 must preserve the manifest, integrity, review, and promotion boundaries. MB2 population
 remains subject to its evidence gate. Simulation and Intelligence remain out of scope.
 
