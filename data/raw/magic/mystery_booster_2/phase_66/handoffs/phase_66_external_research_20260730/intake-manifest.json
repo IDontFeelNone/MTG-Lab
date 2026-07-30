@@ -1,0 +1,63 @@
+{
+  "template_version": "1",
+  "handoff_id": "phase_66_external_research_20260730",
+  "game": "magic",
+  "product_id": "mystery_booster_2",
+  "phase": 66,
+  "prepared_by": "OpenAI Codex external research session",
+  "prepared_at": "2026-07-30",
+  "reviewed_by": "pending",
+  "reviewed_at": "pending",
+  "scope_notes": "Research targeted the English-language 2024 Mystery Booster 2 MagicCon: Las Vegas / Festival in a Box product. No external artifact bytes were acquired because the web tool returned HTTP 401 and direct network requests returned HTTP 403. The empty artifacts array is intentional and supports no claim. See RESEARCH_SUMMARY.md for source leads, acquisition instructions, and unresolved claims.",
+  "artifacts": [],
+  "failed_leads": [
+    {
+      "source_title": "Mystery Booster 2 official product page",
+      "original_url": "https://magic.wizards.com/en/products/mystery-booster",
+      "attempt_date": "2026-07-30",
+      "failure": "Direct retrieval was blocked by the environment proxy with HTTP 403; no response artifact was preserved."
+    },
+    {
+      "source_title": "Mystery Booster 2 Card Image Gallery",
+      "original_url": "https://magic.wizards.com/en/products/mystery-booster/card-image-gallery",
+      "attempt_date": "2026-07-30",
+      "failure": "Direct retrieval was blocked by the environment proxy with HTTP 403; no response artifact was preserved."
+    },
+    {
+      "source_title": "Wizards Mystery Booster 2 news/collecting article",
+      "original_url": "https://magic.wizards.com/en/news",
+      "attempt_date": "2026-07-30",
+      "failure": "Search/retrieval was unavailable (HTTP 401 from the web service and HTTP 403 from direct network requests), so an exact article URL and content could not be verified."
+    },
+    {
+      "source_title": "Archived Wizards Mystery Booster 2 product page",
+      "original_url": "https://web.archive.org/web/*/https://magic.wizards.com/en/products/mystery-booster",
+      "attempt_date": "2026-07-30",
+      "failure": "Archive retrieval was unavailable from this environment; no replay or WARC bytes were preserved."
+    },
+    {
+      "source_title": "Scryfall Mystery Booster 2 set records",
+      "original_url": "https://scryfall.com/sets/mb2",
+      "attempt_date": "2026-07-30",
+      "failure": "External network retrieval was blocked; no API export or page bytes were preserved."
+    },
+    {
+      "source_title": "Mystery Booster 2 official packaging",
+      "original_url": "https://magic.wizards.com/en/products/mystery-booster",
+      "attempt_date": "2026-07-30",
+      "failure": "No physical package or content-complete packaging photographs were available for acquisition."
+    },
+    {
+      "source_title": "Well-documented Mystery Booster 2 collation research or opening dataset",
+      "original_url": "https://www.google.com/search?q=Mystery+Booster+2+collation+dataset",
+      "attempt_date": "2026-07-30",
+      "failure": "Search was unavailable and no local reproducible study with raw observations, methods, and product-version metadata was present."
+    }
+  ],
+  "handoff_notes": [
+    "This manifest is a completed draft with no supplied artifacts; it is not evidence and must fail any minimum-evidence sufficiency gate.",
+    "Do not add placeholder sizes or hashes. Add an artifact entry only after exact bytes exist in artifacts/ and their size and SHA-256 have been computed.",
+    "Do not copy this handoff into data/sources, data/intermediate, or data/canonical before controlled verification and explicit Phase 66 approval.",
+    "No equal weighting, independence, replacement behavior, pool completeness, physical print-sheet structure, universal collation, or gallery-to-slot eligibility is inferred."
+  ]
+}
