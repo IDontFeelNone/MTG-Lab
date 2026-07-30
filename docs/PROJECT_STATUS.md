@@ -124,3 +124,12 @@ requesting the next bounded milestone.
 5. **Historical/reference documents:** files explicitly bearing Historical,
    Superseded, Reference, or Vision status; these preserve context but do not override
    current documents.
+
+## Phase 80 — Canonical Card, Printing, Evidence, and Uncertainty Contract (2026-07-30)
+
+Phase 80 adds the compatible v3 Card/Printing and assertion-level evidence contract,
+explicit partial-knowledge semantics, deterministic promotion, legacy projections,
+and fail-closed simulation readiness. Historical canonical records remain unchanged;
+full Mystery Booster 2 population remains out of scope. See
+`docs/CANONICAL_CARD_PRINTING_EVIDENCE_CONTRACT.md`. Do not recommend merge until
+GitHub Actions are green.

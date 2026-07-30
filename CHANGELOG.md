@@ -100,3 +100,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   records, and twenty immutable approval audits.
 
 [Unreleased]: https://github.com/IDontFeelNone/MTG-Lab/compare/v0.0.0...HEAD
+
+## Phase 80 — Canonical Card, Printing, Evidence, and Uncertainty Contract (2026-07-30)
+
+Phase 80 adds the compatible v3 Card/Printing and assertion-level evidence contract,
+explicit partial-knowledge semantics, deterministic promotion, legacy projections,
+and fail-closed simulation readiness. Historical canonical records remain unchanged;
+full Mystery Booster 2 population remains out of scope. See
+`docs/CANONICAL_CARD_PRINTING_EVIDENCE_CONTRACT.md`. Do not recommend merge until
+GitHub Actions are green.

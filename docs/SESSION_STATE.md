@@ -113,3 +113,12 @@ population is not authorized while the blocker remains.
    their status banners; they do not override current-state documents.
 5. Verify the checkout, branch, working tree, objective, and acceptance criteria.
 6. Run the complete test suite and relevant validation before handing off work.
+
+## Phase 80 — Canonical Card, Printing, Evidence, and Uncertainty Contract (2026-07-30)
+
+Phase 80 adds the compatible v3 Card/Printing and assertion-level evidence contract,
+explicit partial-knowledge semantics, deterministic promotion, legacy projections,
+and fail-closed simulation readiness. Historical canonical records remain unchanged;
+full Mystery Booster 2 population remains out of scope. See
+`docs/CANONICAL_CARD_PRINTING_EVIDENCE_CONTRACT.md`. Do not recommend merge until
+GitHub Actions are green.

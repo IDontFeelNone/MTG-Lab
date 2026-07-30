@@ -13,7 +13,8 @@ from canonical import (Card, Finish, Game, PackDefinition, PackSlot, Printing,
                        Product, ProductComponent, ProductVersion, Rarity, Sheet, SheetEntry, Treatment)
 from repository.cards import load_card_repository
 from repository.products import load_product
-from repository.canonical_compatibility import legacy_product_graph, product_v2, sheet_v2, slot_v2
+from repository.canonical_compatibility import (card_v3, legacy_product_graph, printing_v3,
+                                                product_v2, sheet_v2, slot_v2)
 from validation import validate_document
 
 _ID = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
@@ -124,10 +125,8 @@ class CanonicalRepository:
         except ValueError as error:
             raise CanonicalRepositoryError(str(error)) from error
         return (
-            tuple(Card(str(x["id"]), dict(x.get("metadata", {})), str(x["game"]), str(x["name"])) for x in cards),
-            tuple(Printing(str(x["id"]), dict(x.get("metadata", {})), str(x["card_id"]),
-                           str(x["rarity"]), tuple(map(str, x.get("treatments", ()))),
-                           tuple(map(str, x.get("finishes", ())))) for x in printings),
+            tuple(card_v3(x) for x in cards),
+            tuple(printing_v3(x) for x in printings),
         )
 
     def _load_product_documents(self) -> tuple[Mapping[str, Any], ...]:
@@ -224,6 +223,16 @@ class CanonicalRepository:
                         f"{label} {record.id} references missing Game {record.game_id}"
                     )
         self._refs(self.printings, "card_id", self.cards, "Printing", "Card")
+        namespaces: set[tuple[str, str, str, str]] = set()
+        for printing in self.printings:
+            namespace = (printing.set_id, printing.language,
+                         str(printing.facts.get("collector_number_namespace", "default")),
+                         printing.collector_number)
+            if namespace in namespaces:
+                raise CanonicalRepositoryError(
+                    f"Duplicate collector number {printing.collector_number} in {namespace[:-1]}"
+                )
+            namespaces.add(namespace)
         self._refs(self.product_versions, "product_id", self.products, "ProductVersion", "Product")
         self._refs_many(self.products, "version_ids", self.product_versions, "Product", "ProductVersion")
         versions = {item.id: item for item in self.product_versions}

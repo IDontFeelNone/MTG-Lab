@@ -112,13 +112,17 @@ def _validate_provenance(
 ) -> None:
     root = Path(games_root) if games_root is not None else _DEFAULT_GAMES_ROOT
     covered_fields: set[str] = set()
-    for provenance in document["provenance"]:
+    evidence = document.get("assertions", document.get("provenance", ()))
+    for provenance in evidence:
         source_id = provenance["source_id"]
         source = _load(root / game / "sources" / f"{source_id}.json", "source-record")
         if source["id"] != source_id:
             raise CardRepositoryError("Source identifier does not match its canonical path")
-        covered_fields.update(provenance["field_paths"])
-    required_fields = set(document) - {"schema_version", "provenance", "metadata"}
+        covered_fields.update(provenance.get("field_paths", ()))
+        if "path" in provenance:
+            path = provenance["path"].lstrip("/").split("/", 1)[0]
+            covered_fields.add(path)
+    required_fields = set(document) - {"schema_version", "provenance", "assertions", "metadata"}
     unknown = covered_fields - required_fields - {"metadata"}
     if unknown:
         raise CardRepositoryError(
@@ -130,6 +134,14 @@ def _validate_provenance(
         raise CardRepositoryError(
             f"Canonical {document['id']} lacks field provenance for: {', '.join(sorted(missing))}"
         )
+    promoted: dict[str, object] = {}
+    for assertion in document.get("assertions", ()):
+        if assertion["status"] != "promoted":
+            continue
+        path = assertion["path"]
+        if path in promoted and promoted[path] != assertion["asserted_value"]:
+            raise CardRepositoryError(f"Canonical {document['id']} has contradictory promoted facts at {path}")
+        promoted[path] = assertion["asserted_value"]
 
 
 def _reject_duplicates(documents: tuple[Mapping[str, Any], ...], label: str) -> None:

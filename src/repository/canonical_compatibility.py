@@ -1,7 +1,38 @@
 """Pure adapters from retained v1 canonical records to the typed v2 contract."""
 from __future__ import annotations
 from typing import Any, Mapping
-from canonical import PackDefinition, PackSlot, Product, ProductComponent, ProductVersion, Sheet, SheetEntry
+from canonical import Card, Printing, PackDefinition, PackSlot, Product, ProductComponent, ProductVersion, Sheet, SheetEntry
+
+CARD_FACTS = ("mana_cost", "mana_value", "colors", "color_identity", "type_line", "supertypes",
+              "card_types", "subtypes", "oracle_text", "keywords", "power", "toughness",
+              "loyalty", "defense", "legalities", "legality_references", "related_cards")
+PRINTING_FACTS = ("rarity", "product_classification", "artist", "flavor_text", "printed_name",
+                  "printed_text", "printed_type_line", "frame", "border", "finishes", "treatments",
+                  "promotional_flags", "release_date", "external_identifiers", "image_references",
+                  "collector_number_namespace")
+
+
+def card_v3(document: Mapping[str, Any]) -> Card:
+    """Project retained v1 and native v3 Cards without mutating their bytes."""
+    return Card(id=str(document["id"]), metadata=dict(document.get("metadata", {})),
+                game_id=str(document["game"]), name=str(document["name"]),
+                normalized_name=str(document.get("normalized_name", document["name"])).casefold(),
+                layout=str(document.get("layout", "normal")), faces=tuple(document.get("faces", ())),
+                facts={key: document[key] for key in CARD_FACTS if key in document},
+                assertions=tuple(document.get("assertions", ())), schema_version="v3")
+
+
+def printing_v3(document: Mapping[str, Any]) -> Printing:
+    """Project retained v1 and native v3 Printings into the reconciled model."""
+    return Printing(id=str(document["id"]), metadata=dict(document.get("metadata", {})),
+                    card_id=str(document["card_id"]), rarity_id=str(document.get("rarity", "")),
+                    treatment_ids=tuple(map(str, document.get("treatments", ()))),
+                    finish_ids=tuple(map(str, document.get("finishes", ()))),
+                    set_id=str(document.get("set_id", document.get("set_code", ""))).casefold(),
+                    collector_number=str(document.get("collector_number", "")),
+                    language=str(document.get("language", "und")),
+                    facts={key: document[key] for key in PRINTING_FACTS if key in document},
+                    assertions=tuple(document.get("assertions", ())), schema_version="v3")
 
 
 def product_v2(document: Mapping[str, Any]) -> Product:

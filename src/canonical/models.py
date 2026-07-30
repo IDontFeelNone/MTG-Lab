@@ -67,6 +67,12 @@ class ProductVersion(Entity):
 class Card(Entity):
     game_id: str = ""
     name: str = ""
+    normalized_name: str = ""
+    layout: str = "normal"
+    faces: tuple[Mapping[str, Any], ...] = ()
+    facts: Mapping[str, Any] = field(default_factory=dict)
+    assertions: tuple[Mapping[str, Any], ...] = ()
+    schema_version: str = "v3"
 
 
 @dataclass(frozen=True)
@@ -75,6 +81,12 @@ class Printing(Entity):
     rarity_id: str = ""
     treatment_ids: tuple[str, ...] = ()
     finish_ids: tuple[str, ...] = ()
+    set_id: str = ""
+    collector_number: str = ""
+    language: str = ""
+    facts: Mapping[str, Any] = field(default_factory=dict)
+    assertions: tuple[Mapping[str, Any], ...] = ()
+    schema_version: str = "v3"
 
 
 @dataclass(frozen=True)

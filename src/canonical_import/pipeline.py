@@ -5,7 +5,7 @@ import csv
 import hashlib
 import json
 from abc import ABC, abstractmethod
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
@@ -57,6 +57,8 @@ class CSVSource(SourceAdapter):
 class ImportReport:
     game: str; source: str; source_version: str; dataset_hash: str
     created: int; updated: int; unchanged: int; applied: bool; validation_only: bool
+    coverage: Mapping[str, int] = field(default_factory=dict)
+    conflicts: tuple[str, ...] = ()
     def to_dict(self): return asdict(self)
 
 def _stable(value: Any) -> bytes:
@@ -68,7 +70,7 @@ def import_dataset(adapter: SourceAdapter, game: str, *, games_root: Path | None
     data = dict(adapter.load())
     for key in ("schema_version", "source", "source_version", "review_status"):
         if not data.get(key): raise ImportError(f"Dataset missing required field: {key}")
-    if data["schema_version"] != "v1": raise ImportError("Unsupported dataset schema_version")
+    if data["schema_version"] not in {"v1", "v3"}: raise ImportError("Unsupported dataset schema_version")
     if data["review_status"] != "reviewed": raise ImportError("Dataset is not reviewed")
     if data.get("game", game) != game: raise ImportError("Dataset game does not match requested game")
     dataset_hash = hashlib.sha256(_stable(data)).hexdigest()
@@ -84,7 +86,12 @@ def import_dataset(adapter: SourceAdapter, game: str, *, games_root: Path | None
         if not isinstance(rows, list): raise ImportError(f"{kind} must be an array")
         for raw in rows:
             if not isinstance(raw, dict): raise ImportError(f"{kind} records must be objects")
-            missing = [x for x in REQUIRED[kind] if x not in raw]
+            required = REQUIRED[kind]
+            if data["schema_version"] == "v3" and kind == "cards":
+                required = ("id", "game", "name", "normalized_name", "layout", "assertions")
+            elif data["schema_version"] == "v3" and kind == "printings":
+                required = ("id", "card_id", "set_id", "collector_number", "language", "assertions")
+            missing = [x for x in required if x not in raw]
             if missing: raise ImportError(f"Invalid {kind} record; missing: {', '.join(missing)}")
             identity = (kind, str(raw["id"]))
             if identity in seen: raise ImportError(f"Duplicate {kind} identifier: {raw['id']}")
@@ -94,16 +101,23 @@ def import_dataset(adapter: SourceAdapter, game: str, *, games_root: Path | None
             if kind in ("cards", "products"): record.setdefault("game", game)
             if kind in ("treatments", "finishes", "rarities"): record.setdefault("game_id", game)
             if kind == "cards":
-                record.setdefault("schema_version", "v1")
+                record.setdefault("schema_version", data["schema_version"])
                 fields = sorted(set(record) - {"schema_version", "provenance"})
-                record["provenance"] = [{"source_id": str(data["source"]), "field_paths": fields,
-                                          "claim": "Imported from reviewed canonical dataset."}]
+                if record["schema_version"] == "v1":
+                    record["provenance"] = [{"source_id": str(data["source"]), "field_paths": fields,
+                                              "claim": "Imported from reviewed canonical dataset."}]
+                elif "assertions" not in record:
+                    raise ImportError("v3 cards must preserve explicit assertions")
             if kind == "printings":
-                record.setdefault("schema_version", "v1")
-                record.setdefault("set_code", "UNKNOWN"); record.setdefault("collector_number", record["id"])
+                record.setdefault("schema_version", data["schema_version"])
+                if record["schema_version"] == "v1": record.setdefault("set_code", "UNKNOWN")
+                record.setdefault("collector_number", record["id"])
                 fields = sorted(set(record) - {"schema_version", "provenance", "metadata"})
-                record["provenance"] = [{"source_id": str(data["source"]), "field_paths": fields,
-                                          "claim": "Imported from reviewed canonical dataset."}]
+                if record["schema_version"] == "v1":
+                    record["provenance"] = [{"source_id": str(data["source"]), "field_paths": fields,
+                                              "claim": "Imported from reviewed canonical dataset."}]
+                elif "assertions" not in record:
+                    raise ImportError("v3 printings must preserve explicit assertions")
             if kind == "products":
                 record.setdefault("schema_version", "v1"); record.setdefault("lifecycle_status", "foundation"); record.setdefault("slot_ids", [])
                 record["provenance"] = [{"claim": "Imported from reviewed canonical dataset.", "source_classification": "internal",
@@ -122,7 +136,7 @@ def import_dataset(adapter: SourceAdapter, game: str, *, games_root: Path | None
         if (actual / game).exists(): shutil.copytree(actual / game, root / game)
         else: (root / game).mkdir()
         # Card provenance requires a source record. The reviewed dataset itself is its audit source.
-        if data.get("cards"):
+        if data.get("cards") or data.get("printings"):
             src = {"schema_version":"v1", "id":str(data["source"]), "title":str(data["source"]),
                    "source_classification":"internal", "provider":"Reviewed dataset", "source_location":str(data["source"]),
                    "access_date":imported_at[:10], "verification_status":"confirmed", "claims":["Reviewed canonical import."],
@@ -137,9 +151,27 @@ def import_dataset(adapter: SourceAdapter, game: str, *, games_root: Path | None
         if file.exists():
             try: existing[relative] = json.loads(file.read_text())
             except Exception: pass
+    identity_fields = {
+        "cards": ("game", "name"),
+        "printings": ("card_id", "set_id", "set_code", "collector_number", "language"),
+    }
+    for relative, prior in existing.items():
+        kind = relative.split("/", 1)[0]
+        for key in identity_fields.get(kind, ()):
+            if key in prior and key in paths[relative] and prior[key] != paths[relative][key]:
+                raise ImportError(
+                    f"Identity conflict for {relative}: {key} changes from {prior[key]!r} "
+                    f"to {paths[relative][key]!r}"
+                )
     created = sum(x not in existing for x in paths); updated = sum(x in existing and existing[x] != paths[x] for x in paths)
     unchanged = len(paths) - created - updated
     applied = not dry_run and not validation_only
     if applied: CanonicalRepository.apply_import(game, paths, games_root=actual_root)
+    conflicts = tuple(sorted(
+        f"{kind}/{row['id']}:{a['path']}" for kind in ("cards", "printings")
+        for row in data.get(kind, ()) for a in row.get("assertions", ())
+        if a.get("status") == "conflicting"
+    ))
+    coverage = {kind: len(data.get(kind, ())) for kind in KINDS}
     return ImportReport(game, str(data["source"]), str(data["source_version"]), dataset_hash,
-                        created, updated, unchanged, applied, validation_only)
+                        created, updated, unchanged, applied, validation_only, coverage, conflicts)
