@@ -1,14 +1,15 @@
 # Next Task
 
-> **Status: Current** — Phase 79 architectural blocker resolution gate.
+> **Status: Current** — Phase 81 evidence-acquisition gate.
 
 ## Current approved milestone
 
-**Phase 79 — Mystery Booster 2 Canonical Dataset v1 (blocked)**
+**Phase 81 — Mystery Booster 2 Canonical Dataset v1 (evidence-blocked)**
 
-Review `PHASE_79_PREIMPLEMENTATION_REVIEW.md`. Do not populate MB2 data or extend the
-importer until a separately approved, product-agnostic change can represent the
-required fields, assertion classes, and unknown collation without arbitrary metadata.
+Phase 80 resolved the Phase 79 contract/importer blockers without changing Architecture
+v12. Review `MYSTERY_BOOSTER_2_DATASET.md`. Do not promote a complete MB2 dataset until
+a content-complete, terms-compliant normalized source is retained and independently
+reviewed with explicit expected counts.
 
 ## Remaining approved actions
 
