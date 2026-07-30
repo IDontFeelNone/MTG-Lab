@@ -20,11 +20,12 @@ Current focus is establishing the canonical architecture and reference implement
 
 # Current Status
 
-**Current Phase:** Phase 77.1 — Repository Documentation Reconciliation
+**Current Phase:** Phase 79 — MB2 Canonical Dataset v1 (blocked at pre-implementation review)
 
-**Current Transition:** Repository-authoritative documentation reconciled locally;
-merge remains contingent on green GitHub Actions. Architecture v12 is unchanged, and
-no next implementation milestone is approved.
+**Current Transition:** The mandatory Phase 79 review found architectural contract and
+importer limitations. Dataset implementation has stopped; Architecture v12 is
+unchanged and resolution requires separately approved product-agnostic work. Merge of
+this review remains contingent on green GitHub Actions.
 
 **Current Version:** v0.x
 
@@ -33,6 +34,14 @@ no next implementation milestone is approved.
 ---
 
 # Completed Milestones
+
+## Phase 79 — Mystery Booster 2 Canonical Dataset v1 (blocked)
+
+The mandatory pre-implementation inventory is complete. It found that the existing
+closed Card/Printing schemas, assertion provenance, unknown-collation representation,
+and v1-only canonical importer cannot meet the milestone without architectural work.
+Per the stop condition, no dataset or importer implementation began. See
+`PHASE_79_PREIMPLEMENTATION_REVIEW.md`.
 
 ## Phase 68–76 — Foundational Backend Vertical Slice
 

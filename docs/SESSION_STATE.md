@@ -1,6 +1,6 @@
 # Session State
 
-> **Status: Current** — authoritative durable project-state handoff through Phase 77.1.
+> **Status: Current** — Phase 79 stopped at its mandatory architectural review.
 
 ## Current baseline
 
@@ -9,15 +9,16 @@
 | Last updated | 2026-07-30 |
 | Version | v0.x (pre-alpha, unreleased) |
 | Architecture | v12 (unchanged) |
-| Current phase | Phase 77.1 — Repository Documentation Reconciliation |
+| Current phase | Phase 79 — MB2 Canonical Dataset v1 (blocked before implementation) |
 | Last completed implementation phase | Phase 76 — Decision Engine v1 |
 | Last completed review phase | Phase 77 — Architecture Consolidation & Technical Debt Review |
-| Current change type | Documentation only |
+| Current change type | Pre-implementation review only |
 | Merge gate | GitHub Actions must be green |
 
-Phase 77.1 reconciles repository-authoritative documentation with the implementation
-merged through Phase 76 and the architecture assessment completed in Phase 77. It
-changes no runtime behavior, public API, schema, data model, or canonical data.
+Phase 79's mandatory inventory found that the current schemas and importer cannot
+faithfully represent required printing facts, assertion classes, or unknown collation.
+Implementation therefore stopped. No runtime behavior, public API, schema, model,
+fixture, importer, or canonical data changed. See `PHASE_79_PREIMPLEMENTATION_REVIEW.md`.
 
 ## Implemented backend baseline
 
@@ -54,7 +55,7 @@ Counts were re-derived from tracked repository content on 2026-07-30:
 | Python source files under `src/` | 74 |
 | Versioned JSON schemas | 16 |
 | Top-level test modules | 26 |
-| Passing tests | 137 |
+| Passing tests | 141 |
 | Promotion audits | 28 |
 | Canonical Cards | 15 |
 | Canonical Printings | 15 |
@@ -98,11 +99,10 @@ requires a separately approved, non-breaking milestone with characterization tes
 
 ## Current focus and next authorization
 
-Phase 77.1 is limited to documentation reconciliation and validation. After this pull
-request is green and merged, **no further implementation milestone is automatically
-authorized**. `NEXT_TASK.md` is the sole current next-action statement: verify this
-documentation-only change, wait for GitHub Actions, and obtain explicit approval before
-starting either a consolidation refactor or evidence-dependent MB2 work.
+Phase 79 is blocked before implementation. `NEXT_TASK.md` is the sole current
+next-action statement: review the blocker, wait for green GitHub Actions, and obtain
+explicit approval for a product-agnostic contract/importer resolution. Dataset
+population is not authorized while the blocker remains.
 
 ## Startup checklist
 

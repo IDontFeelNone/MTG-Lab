@@ -17,6 +17,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Phase 79 pre-implementation inventory and architectural-fit review. The review found
+  blocking Card/Printing field, assertion-provenance, unknown-collation, and v2 importer
+  limitations, so no MB2 dataset, fixture, canonical record, or collation claim was
+  added and Architecture v12 remains unchanged.
+
 - Phase 77.1 repository documentation reconciliation: current session state, executive
   dashboard, handoff, next task, documentation hierarchy, startup workflow, historical
   status labels, and implementation-versus-vision wording now describe one consistent
