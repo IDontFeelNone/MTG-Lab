@@ -1,8 +1,12 @@
 # Next Task
 
-> **Status: Current** — no implementation milestone is authorized.
+> **Status: Current** — Phase 84 is implemented; the next action is CI/review, not another milestone.
 
 ## Authorization boundary
+
+Do not begin canonical promotion or a subsequent milestone. Review the Phase 84 pull
+request and wait for green GitHub Actions. Promotion, complete MB2 population, Simulation,
+Intelligence Engine, market analysis, and AI recommendations remain out of scope.
 
 Phase 83 — Institutional Memory and Project Constitution is merged and complete. Phase 82
 — Raw Data Acquisition Framework remains the latest runtime milestone. Architecture v12

@@ -1,5 +1,11 @@
 # MTG Lab Project Inventory
 
+> **Phase 84 update:** `src/acquisition/knowledge.py` adds provider policy, dataset
+> identity, pre-review validation, reports, and deterministic review packages;
+> `data/fixtures/knowledge/` contains test-only reviewed collectible-card inputs;
+> `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
+> canonical storage are unchanged.
+
 > **Status: Current** — Phase 83 is merged and complete as of 2026-07-30; no prior pull-request merge gate is active.
 
 ## Phase 83 constitutional guidance

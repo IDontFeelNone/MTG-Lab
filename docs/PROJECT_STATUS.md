@@ -1,14 +1,17 @@
 # Project Status
 
-> **Status: Current** — Phase 83 is merged and complete; no prior pull-request gate is active.
+> **Status: Current** — Phase 84 implementation is complete locally; GitHub Actions are pending.
 
 ## Executive status
 
 MTG Lab remains a pre-alpha deterministic reference implementation on **Architecture v12
 (unchanged)**. **Phase 83 — Institutional Memory and Project Constitution** is the latest
-completed milestone. It was documentation-only. **Phase 82 — Raw Data Acquisition
-Framework** remains the latest runtime milestone, and the active test baseline is **154
-passing tests**.
+completed milestone on the default branch. It was documentation-only. **Phase 82 — Raw
+Data Acquisition Framework** is the latest merged runtime milestone.
+Phase 84 now adds a reusable, non-canonical Knowledge Acquisition Pipeline with provider
+policies, dataset identity, validation, deterministic reports, and review packages. The
+local baseline is **160 passing tests**. Architecture v12 remains unchanged, and merge is
+not recommended until GitHub Actions are green.
 
 The four Phase 83 Tier 0 documents remain authoritative and linked:
 
@@ -23,8 +26,8 @@ The four Phase 83 Tier 0 documents remain authoritative and linked:
   Sheets, Slots, complete pools, and product rules remain unpopulated.
 - Simulation is not implemented.
 - The Intelligence Engine is vision only and is not implemented.
-- Phase 83 authorized no follow-on implementation. Phase 84 or any other next milestone
-  requires explicit approval.
+- Phase 84 was explicitly authorized and is implemented on this branch. No subsequent
+  milestone or canonical promotion is authorized.
 
 ## Operational guidance
 

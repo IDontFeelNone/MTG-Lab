@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "id": "card-001",
+      "entity_type": "card",
+      "normalized": {"name": "Daybound Example", "faces": [{"name": "Day Face"}, {"name": "Night Face"}], "mana_value": 3},
+      "review_note": "multifaced test record"
+    },
+    {
+      "id": "printing-001",
+      "entity_type": "printing",
+      "normalized": {"card_id": "card-001", "set_code": "tst", "collector_number": "1", "finish": "nonfoil", "artist": null}
+    },
+    {
+      "id": "printing-002",
+      "entity_type": "printing",
+      "normalized": {"card_id": "card-001", "set_code": "tst", "collector_number": "1★", "finish": "foil", "artist": "Example Artist"}
+    }
+  ]
+}
