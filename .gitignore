@@ -63,6 +63,8 @@ data/canonical/*
 !data/canonical/games/**
 data/validation/*
 !data/validation/.gitkeep
+!data/validation/mystery_booster_2/
+!data/validation/mystery_booster_2/phase_81_coverage.json
 
 # IDE and OS files
 .vscode/

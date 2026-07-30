@@ -1,6 +1,6 @@
 # Session State
 
-> **Status: Current** — Phase 79 stopped at its mandatory architectural review.
+> **Status: Current** — Phase 81 stopped at its evidence-acquisition gate.
 
 ## Current baseline
 
@@ -9,16 +9,22 @@
 | Last updated | 2026-07-30 |
 | Version | v0.x (pre-alpha, unreleased) |
 | Architecture | v12 (unchanged) |
-| Current phase | Phase 79 — MB2 Canonical Dataset v1 (blocked before implementation) |
+| Current phase | Phase 81 — MB2 Canonical Dataset v1 (evidence-blocked before import) |
 | Last completed implementation phase | Phase 76 — Decision Engine v1 |
 | Last completed review phase | Phase 77 — Architecture Consolidation & Technical Debt Review |
-| Current change type | Pre-implementation review only |
+| Current change type | Pre-implementation review and machine-readable coverage snapshot |
 | Merge gate | GitHub Actions must be green |
 
 Phase 79's mandatory inventory found that the current schemas and importer cannot
 faithfully represent required printing facts, assertion classes, or unknown collation.
 Implementation therefore stopped. No runtime behavior, public API, schema, model,
 fixture, importer, or canonical data changed. See `PHASE_79_PREIMPLEMENTATION_REVIEW.md`.
+
+Phase 80 resolved those architectural gaps with compatible v3 contracts. Phase 81
+confirmed that no new architectural decision is needed, but the checkout contains
+only four bounded MB2 records and no complete reviewed source fixture. Canonical
+promotion stopped rather than fabricating completeness or provenance. See
+`MYSTERY_BOOSTER_2_DATASET.md` and the Phase 81 machine-readable coverage snapshot.
 
 ## Implemented backend baseline
 

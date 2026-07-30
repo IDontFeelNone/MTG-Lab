@@ -1,6 +1,6 @@
 # MTG Lab Project Status
 
-> **Status: Current** — executive dashboard at the Phase 79 stop gate.
+> **Status: Current** — executive dashboard at the Phase 81 evidence gate.
 > This summary is subordinate to Architecture v12 and the documentation authority
 > defined in `../PROJECT_INVENTORY.md`.
 
@@ -9,15 +9,15 @@
 | Status item | Current state |
 | --- | --- |
 | Architecture version | v12; unchanged |
-| Current phase | Phase 79 — MB2 Canonical Dataset v1 (blocked) |
+| Current phase | Phase 81 — MB2 Canonical Dataset v1 (evidence-blocked) |
 | Latest implementation milestone | Phase 76 — Decision Engine v1 |
 | Latest architecture milestone | Phase 77 — Architecture Consolidation & Technical Debt Review |
-| Current milestone scope | Mandatory pre-implementation inventory; no dataset/importer implementation |
+| Current milestone scope | Mandatory inventory and coverage snapshot; complete source absent |
 | Repository maturity | Pre-alpha deterministic local reference implementation |
 | Canonical rule status | MB2 rule population remains evidence-blocked and unauthorized |
 | Implemented downstream foundations | Observation, Market, External Mapping, Collection, Analytics, and Decision engines |
 | Unimplemented product layers | Probability, simulation, live providers, database-backed persistence, API, UI, and AI advisor |
-| Next implementation milestone | None approved; contract/importer resolution required |
+| Next implementation milestone | MB2 import after complete reviewed source acquisition |
 | Merge gate | Do not recommend merge until GitHub Actions are green |
 
 ## Verified repository statistics

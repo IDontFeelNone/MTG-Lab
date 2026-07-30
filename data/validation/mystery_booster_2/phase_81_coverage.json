@@ -1,0 +1,63 @@
+{
+  "schema_version": "v1",
+  "phase": 81,
+  "product_id": "mystery_booster_2",
+  "generated_at": "2026-07-30T00:00:00Z",
+  "status": "evidence_blocked",
+  "architecture_blocker": false,
+  "expected_card_count": {
+    "status": "unknown"
+  },
+  "expected_printing_count": {
+    "status": "unknown"
+  },
+  "canonical": {
+    "cards": 4,
+    "printings": 4,
+    "complete_metadata": 0,
+    "incomplete_metadata": 4,
+    "schema_versions": {
+      "v1": 8,
+      "v3": 0
+    },
+    "unique_card_identities": 4,
+    "unique_printing_identities": 4,
+    "unique_collector_number_keys": 4
+  },
+  "v3_assertions": {
+    "official": 0,
+    "authoritative_structured": 0,
+    "verified_community": 0,
+    "direct_observation": 0,
+    "derived": 0,
+    "inferred": 0,
+    "unknown": 0,
+    "conflicting": 0,
+    "unresolved_conflicts": 0
+  },
+  "external_identifier_coverage": {
+    "printings_with_any_identifier": 0,
+    "printings_total": 4
+  },
+  "collation": {
+    "canonical_sheets": 0,
+    "canonical_slots": 0,
+    "unknown_facts": [
+      "product_composition",
+      "slot_count_and_order",
+      "sheet_identities",
+      "sheet_completeness",
+      "sheet_memberships",
+      "entry_weights",
+      "replacement_behavior",
+      "conditionality",
+      "correlation",
+      "sequencing"
+    ],
+    "provisional_facts": []
+  },
+  "import": {
+    "performed": false,
+    "reason": "No content-complete reviewed source fixture is retained in the repository."
+  }
+}
