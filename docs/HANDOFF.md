@@ -1,8 +1,10 @@
 # Handoff
 
-> **Phase 96 pre-implementation assessment is awaiting review and green CI.**
+> **Phase 96A import-contract resolution is awaiting review and green CI.**
 
-Review `PHASE_96_PREIMPLEMENTATION_ASSESSMENT.md` and confirm the evidence and frozen-contract
-stop findings. No MB2 facts were invented, no canonical data or runtime changed, and Architecture
-v12 remains unchanged. Resume population only after the documented evidence and architect
-clarification gates are satisfied. Do not recommend merge until GitHub Actions are green.
+The merged Phase 96 assessment remains the evidence baseline. Review
+`PHASE_96A_IMPORT_CONTRACT_RESOLUTION.md`: it resolves the three contract questions through
+existing Architecture v12 mechanisms and defines the staged MB2 evidence plan and exact resume
+gates. No MB2 facts, canonical data, runtime, schema, or frozen contract changed. Project
+Architect approval is not required unless later work proposes a frozen-contract change. Do not
+recommend merge until GitHub Actions are green.

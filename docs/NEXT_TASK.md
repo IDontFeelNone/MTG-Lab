@@ -1,9 +1,10 @@
 # Next Task
 
-> **Status: Current — resolve the Phase 96 evidence and contract gates.**
+> **Status: Current — acquire and review Phase 96 evidence.**
 
-Supply and review a content-complete, immutable Mystery Booster 2 source and obtain Project
-Architect clarification for the Set/Language, unknown pack-topology, and uniform governance-field
-requirements described in `PHASE_96_PREIMPLEMENTATION_ASSESSMENT.md`. Do not fabricate records,
-bypass promotion, or redesign frozen contracts inside Phase 96. Merge only after Project
-Architect approval and green GitHub Actions.
+Follow the staged acquisition plan and resume criteria in
+`PHASE_96A_IMPORT_CONTRACT_RESOLUTION.md`. A declared bounded import may proceed only with a
+terms-compliant immutable source, field provenance, independent review, deterministic validation,
+and controlled promotion. Do not fabricate topology or redesign frozen contracts. Project
+Architect approval is required only if a later proposal changes a frozen contract; this
+documentation-only clarification does not require it. Merge only after green GitHub Actions.

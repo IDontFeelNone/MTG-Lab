@@ -1,10 +1,9 @@
 # Session State
 
-> **Status: Current — Phase 96 pre-implementation assessment; review and green CI pending.**
+> **Status: Current — Phase 96A documentation complete; review and green CI pending.**
 
-Merged Phase 95 is the baseline. Phase 96 stopped before implementation because the checkout has
-no complete reviewed Mystery Booster 2 source and the requested standalone Set/Language, unknown
-pack-topology, and uniform governance-field coverage cannot be expressed by the frozen canonical
-contracts without clarification or redesign. No canonical record, runtime, schema, or Architecture
-v12 contract changed. See `PHASE_96_PREIMPLEMENTATION_ASSESSMENT.md`; do not recommend merge until
-GitHub Actions are green.
+The Phase 96 blocker assessment is merged. Phase 96A selects the existing, non-breaking
+representation: Printing attributes for set/language, no PackDefinition until topology is
+established, and governance metadata in its existing architectural owners. No canonical record,
+runtime, schema, or Architecture v12 contract changed. Evidence acquisition remains the blocker.
+See `PHASE_96A_IMPORT_CONTRACT_RESOLUTION.md`; do not recommend merge until GitHub Actions are green.
