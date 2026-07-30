@@ -1,3 +1,15 @@
+## Phase 88 — External Dataset Ingestion Framework
+
+- Added provider-agnostic JSON, CSV, and ZIP ingestion with a canonical external dataset
+  manifest, checksum and structure validation, safe archive handling, deterministic
+  registration, duplicate detection, and extensible format adapters.
+- Composed verified supplied bytes into the unchanged raw acquisition and Knowledge Review
+  Package pipeline. Ingestion stops at human review and never invokes canonical promotion.
+- Added `ingest`, `ingest validate`, `ingest inspect`, and `ingest list` CLI operations,
+  comprehensive failure/idempotence tests, and the ingestion contract documentation.
+- Reconciled current-state documents to record Phase 87 as merged and evidence-blocked
+  before establishing Phase 88. Architecture v12 remains unchanged; no MB2 data was imported.
+
 ## Phase 87 — Mystery Booster 2 Acquisition Pilot (evidence-blocked)
 
 - Completed the pre-implementation source and Architecture v12 compatibility assessment.

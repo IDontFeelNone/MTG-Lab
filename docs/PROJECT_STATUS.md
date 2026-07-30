@@ -1,17 +1,14 @@
-> **Status: Current — Phase 87 stopped at evidence gate.** No admissible 25–50-card MB2 raw snapshot was available, so the governed lifecycle did not begin and canonical state is unchanged.
-
 # Project Status
 
-> **Status: Current — Phase 86 implementation submitted.** The complete reviewed-dataset governance lifecycle is implemented; merge remains contingent on green GitHub Actions.
+> **Status: Current — Phase 88 External Dataset Ingestion Framework submitted.**
 
-> **Status: Current — Phase 85 implementation submitted.**
+Phase 87 has been merged with its evidence-blocked outcome preserved. MTG Lab remains a
+pre-alpha deterministic Architecture v12 reference implementation. Externally supplied JSON,
+CSV, and ZIP datasets can now be manifest-validated, checksum-verified, registered,
+normalized, and prepared as Knowledge Review Packages without network access. Successful
+ingestion stops at `awaiting_human_review`; the existing controlled promotion engine remains
+the sole canonical writer.
 
-MTG Lab remains a pre-alpha deterministic Architecture v12 reference implementation.
-Phase 84 supplies the Knowledge Acquisition Pipeline; Phase 85 supplies its sole controlled
-canonical promotion boundary, including immutable audit/version history, rollback, and
-replay. Existing canonical data is unchanged and Mystery Booster 2 population remains out
-of scope. Simulation and the Intelligence Engine remain unimplemented; market analysis was
-not added.
-
-Phase 85 must receive Project Architect review and green GitHub Actions before merge. No
-merge recommendation is permitted while CI is pending or failing.
+No Mystery Booster 2 records were imported. Simulation and Intelligence remain unimplemented,
+and Phase 88 adds no Analytics capability. Merge recommendation is withheld until GitHub
+Actions are green.

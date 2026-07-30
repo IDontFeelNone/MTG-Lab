@@ -1,4 +1,6 @@
-> **Phase 87 update:** The MB2 acquisition pilot is evidence-blocked. No runtime, dataset registry, import session, or canonical record changed. See `docs/MYSTERY_BOOSTER_2_ACQUISITION_PILOT.md`.
+> **Phase 88 update:** `src/external_ingestion/` provides manifest-governed JSON, CSV,
+> and ZIP ingestion into the unchanged acquisition/review pipeline. Phase 87 is merged
+> with its evidence-blocked outcome; no MB2 data was imported.
 
 # MTG Lab Project Inventory
 
@@ -10,7 +12,7 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 85 is implemented and awaits Project Architect review and green GitHub Actions.
+> **Status: Current** — Phase 88 is implemented locally and awaits Project Architect review and green GitHub Actions.
 
 ## Phase 83 constitutional guidance
 
@@ -27,10 +29,10 @@ questions guide future proposals without authorizing them.
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Latest completed milestone:** Phase 84 — Knowledge Acquisition Pipeline v1
-- **Current runtime milestone:** Phase 85 — Canonical Promotion Engine v1
+- **Latest merged milestone:** Phase 87 — evidence-blocked MB2 acquisition pilot
+- **Current runtime milestone:** Phase 88 — External Dataset Ingestion Framework
 - **Maturity:** pre-alpha; deterministic local reference implementation
-- **Validation baseline:** 164 passing tests locally under the CI command
+- **Validation baseline:** 176 passing tests locally under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
   Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
   remain unpopulated
@@ -44,9 +46,10 @@ questions guide future proposals without authorizing them.
 | Canonical Repository | Typed game aggregate, specialized schema-backed repositories, deterministic snapshots, relationship validation, staged bulk apply | Operational v1; overlapping repository generations are consolidation debt |
 | Canonical Import Pipeline | Reviewed local JSON/CSV adapters, provenance, dry-run/validation-only modes, deterministic report, atomic game-tree replacement | Operational v1; local-only and single-writer |
 | Raw data acquisition | Immutable byte snapshots, provider adapters, normalized source records, assertion bridge, acquisition-run reports, offline CLI | Operational v1; no live providers or canonical promotion |
+| External dataset ingestion | Canonical supplied-dataset manifest, JSON/CSV/ZIP detection, integrity verification, registrations, extensible adapters, review-package handoff, CLI | Operational v1; stops before human review and promotion |
 | Evidence and candidate ingestion | Immutable evidence storage, parsers/normalizers, candidate validation, retained intermediate artifacts, population review | Operational for bounded reviewed workflows |
 | Evidence Repository and Review | Content-verified bundles, Source Record validation, external handoff integrity/provenance/completeness/conflict reports | Operational pre-promotion gate |
-| Canonical promotion | Legacy entity promotion plus Phase 85 review-package engine, deterministic versions, immutable success/failure audits, supersession, rollback, replay, and CLI | Operational v1; Phase 85 review/CI pending |
+| Canonical promotion | Legacy entity promotion plus Phase 85 review-package engine, deterministic versions, immutable success/failure audits, supersession, rollback, replay, and CLI | Operational v1; merged before Phase 87 |
 | Observation Engine | Immutable pack reports, verification records, descriptive box summaries, dated legacy valuation snapshots | Developing; strictly non-canonical |
 | Observation Import Pipeline | Plain-text multi-pack import, create-only allocation, manifest reconciliation, verification and derived summary refresh | Operational v1; single-writer multi-file workflow |
 | Market Framework | Provider abstraction, service/cache, normalized immutable snapshots, append-only repository, offline manual provider | Operational v1; no live provider |
@@ -69,12 +72,13 @@ questions guide future proposals without authorizing them.
 - `src/canonical`, `src/repository`, `src/canonical_import` — canonical model,
   persistence/validation, and reviewed bulk import
 - `src/acquisition` — source-agnostic raw snapshots, normalization, and assertion bridge
+- `src/external_ingestion` — supplied-file manifests, validation, adapters, and governed handoff
 - `src/ingestion`, `src/evidence_review` — evidence-to-candidate and handoff review
 - `src/observations`, `src/market`, `src/collection`, `src/analytics`,
   `src/decisions` — downstream domain engines
 - `src/mtglab` — command-line application namespaces
 - `src/schemas/v1`, `src/validation` — versioned JSON contracts and validation
-- `tests/` — 154 deterministic tests collected by the Python validation workflow
+- `tests/` — 176 deterministic tests collected by the Python validation workflow
 - `docs/` — Architecture v12, subsystem contracts, governance, status, and history
 
 ## Architecture constraints and known debt
@@ -130,12 +134,10 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-The repository is ready for a separately approved Phase 84, but no next milestone is
-currently authorized. Mystery Booster 2 remains evidence-acquisition blocked; Simulation
-is not implemented; and the Intelligence Engine is vision only. Earlier Phase 79 contract
-gaps were resolved by Phase 80, so `docs/PHASE_79_PREIMPLEMENTATION_REVIEW.md` is retained
-as **Historical reference**, not as the current authorization boundary. Prior Phase 82 and
-Phase 83 pull-request merge gates are satisfied and no longer active.
+Phase 88 review and green CI are the only active work. Mystery Booster 2 remains
+evidence-acquisition blocked; Simulation is not implemented; and the Intelligence Engine
+is vision only. Earlier milestone merge gates through Phase 87 are satisfied. No external
+dataset may bypass manifest integrity, human review, or controlled promotion.
 
 ## Phase 80 — Canonical fact and evidence contract
 

@@ -1,18 +1,13 @@
-> **Status: Current — Phase 87 evidence-gap handoff.** The pilot stopped before Raw Snapshot. Resume only after provider bytes, acquisition metadata, licensing, and attribution can be preserved and reviewed. No dataset or canonical import exists.
-
 # Handoff
 
-> **Status: Current — Phase 86 implementation handoff.** The pilot deterministically imports 35 of 39 records, rejects three, leaves one unresolved, and preserves acquisition/review/promotion audit. Do not recommend merge until GitHub Actions are green.
+> **Status: Current — Phase 88 implementation handoff; GitHub Actions pending.**
 
-> **Status: Current — Phase 85 implementation handoff.**
+Phase 87 is merged and its missing reproducible MB2 source remains an explicit evidence gap.
+Phase 88 introduces `src/external_ingestion/`, its CLI integration, tests, and
+`EXTERNAL_DATASET_INGESTION.md`. Start review at that contract, then inspect
+`external_ingestion/framework.py`, `mtglab/__main__.py`, and
+`test_external_dataset_ingestion.py`.
 
-Phase 85 adds the deterministic Canonical Promotion Engine consuming Phase 84 Knowledge
-Review Packages. Read `CANONICAL_PROMOTION_ENGINE.md`, then inspect
-`src/acquisition/promotion.py`, its acquisition CLI integration, and
-`tests/test_canonical_promotion_engine.py`. Architecture v12 and existing canonical records
-are unchanged. MB2 population, Simulation, Intelligence, and market analysis remain out of
-scope.
-
-The remaining work is Project Architect review and GitHub Actions. Do not recommend merge
-until Actions are green. If recommended after green CI, the Project Owner merges; that merge
-is acceptance and no post-merge approval message is expected.
+The framework validates and registers supplied bytes, invokes the existing acquisition and
+Knowledge Review Package functions, and stops at `awaiting_human_review`. It neither imports
+MB2 nor invokes canonical promotion. Do not recommend merge until GitHub Actions are green.

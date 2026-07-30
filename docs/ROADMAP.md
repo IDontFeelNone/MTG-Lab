@@ -1,60 +1,39 @@
-> **Phase 87:** The approved MB2 acquisition pilot stopped at the evidence gate because a reproducible, legally reviewed 25–50-card raw snapshot could not be acquired in the execution environment. No import or promotion occurred.
-
 # MTG Lab Roadmap
 
-> **Phase 86:** The governed canonical dataset import pilot is complete locally. Large-scale imports remain future work and must use the same gates.
+> **Status: Current — Phase 88 implemented locally; review and green CI pending.**
 
-> **Status: Current** — Phase 85 is implemented on the current branch and awaits green CI and review.
+## Current milestone — Phase 88
 
-## Phase 85 — Canonical Promotion Engine v1
+The External Dataset Ingestion Framework accepts manifest-governed JSON, CSV, and ZIP
+inputs, establishes integrity before registration, and composes supplied bytes into the
+unchanged acquisition and Knowledge Review Package stages. It does not promote canonical
+facts, import MB2, or change Architecture v12. Merge recommendation remains withheld until
+GitHub Actions are green.
 
-Phase 85 implements the only writer for reviewed knowledge: complete fail-closed validation, deterministic provenance-preserving versions, immutable audits (including rejected attempts), supersession chains, compensating rollback, replay, and CLI commands. It imports no MB2 dataset and changes no Architecture v12 contract. Merge requires Project Architect recommendation and green GitHub Actions.
+## Completed milestone — Phase 87
+
+The Mystery Booster 2 acquisition pilot is merged with an evidence-blocked result. It
+correctly stopped because no reproducible, legally reviewed source snapshot was available.
+No dataset registration, import, promotion, or canonical mutation occurred.
 
 ## Current baseline
 
 | Area | State |
 | --- | --- |
 | Architecture | v12, unchanged |
-| Latest completed phase | Phase 84 — Knowledge Acquisition Pipeline v1 |
-| Current milestone | Phase 85 — Canonical Promotion Engine v1 (implementation complete; CI pending) |
-| Test baseline | 164 passing tests locally |
-| Mystery Booster 2 dataset | Evidence-acquisition blocked |
+| Latest merged phase | Phase 87 — evidence-blocked acquisition pilot |
+| Current milestone | Phase 88 — External Dataset Ingestion Framework |
+| External formats | JSON, CSV, ZIP containing JSON/CSV |
+| Mystery Booster 2 dataset | Evidence-acquisition blocked; not imported |
 | Simulation | Not implemented |
 | Intelligence Engine | Vision only |
-| Prior merge gates | None active |
 | Merge recommendation | Withheld until GitHub Actions are green |
-
-## Current milestone — Phase 84
-
-Phase 84 composes Phase 82 raw acquisition into validated dataset identities, independent
-provider policies, deterministic reports, and integrity-addressed review packages. It
-performs no canonical promotion and leaves Architecture v12 frozen.
-
-## Completed milestone — Phase 83
-
-Phase 83 established the Tier 0 [`CONSTITUTION.md`](CONSTITUTION.md),
-[`ARCHITECTS_NOTEBOOK.md`](ARCHITECTS_NOTEBOOK.md),
-[`FUTURE_VISION.md`](FUTURE_VISION.md), and
-[`QUESTIONS_MTG_LAB_SHOULD_ANSWER.md`](QUESTIONS_MTG_LAB_SHOULD_ANSWER.md). The milestone
-added institutional memory and project governance only. It did not change runtime
-behavior, schemas, canonical data, providers, Simulation, the Intelligence Engine, or
-Architecture v12. Its pull request was merged after green GitHub Actions.
-
-## Latest runtime milestone — Phase 82
-
-Phase 82 implemented the generic Raw Data Acquisition Framework: immutable snapshots,
-provider abstractions, deterministic normalization, candidate-assertion bridging, change
-reports, resumable acquisition runs, security controls, an offline CLI, and tests. It did
-not add a live provider, canonical promotion, complete MB2 population, or simulation. Its
-pull request is merged; its former merge gate is **Historical and satisfied**.
 
 ## Next milestone boundary
 
-The repository is prepared for a separately approved Phase 84, but this roadmap does not
-authorize it. A proposal must have a bounded objective and explicit approval. It must
-preserve Architecture v12 unless a dedicated architectural decision is separately approved.
-MB2 population remains subject to its evidence gate. Simulation and Intelligence Engine
-implementation remain out of scope.
+Only Phase 88 review and CI are authorized. Future dataset formats or provider extensions
+must preserve the manifest, integrity, review, and promotion boundaries. MB2 population
+remains subject to its evidence gate. Simulation and Intelligence remain out of scope.
 
 ## Historical milestone summary
 
