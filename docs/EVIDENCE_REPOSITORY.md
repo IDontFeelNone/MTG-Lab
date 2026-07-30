@@ -11,6 +11,11 @@ repository archive through which later ingestion milestones load evidence.
 Neither location is canonical domain data, and archived evidence cannot bypass
 candidate review or controlled promotion.
 
+External deliveries are evaluated before archive admission by the generic
+[Evidence Review Engine](EVIDENCE_REVIEW_ENGINE.md). That engine can report an
+incomplete or inconsistent delivery without treating it as repository evidence;
+its recommendation is a review gate, never canonical approval.
+
 ## Layout
 
 Evidence bundles are game-scoped and use stable identifiers:

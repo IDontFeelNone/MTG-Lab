@@ -117,6 +117,13 @@ SHA-256, connect every artifact to canonical Source Records and explicit claims,
 and allow ingestion to load only path-safe, content-verified evidence. The
 [Evidence Repository](docs/EVIDENCE_REPOSITORY.md) defines this boundary.
 
+Before an external delivery enters that archive or the Rule Claim Matrix
+workflow, the product-agnostic [Evidence Review Engine](docs/EVIDENCE_REVIEW_ENGINE.md)
+checks metadata, source references, required artifacts, hashes, duplicate
+content, explicit claim conflicts, unsupported claims, and orphaned artifacts.
+It emits schema-validated deterministic JSON and Markdown reports but performs
+no rule inference or canonical promotion.
+
 Phase 65 adds a retained, schema-validated Mystery Booster 2 Rule Claim
 Matrix and evidence sufficiency report under the processed research boundary.
 The assessment confirms that preserved evidence remains insufficient for
