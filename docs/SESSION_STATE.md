@@ -71,6 +71,10 @@ PR #18 — Phase 66 external research handoff.
 - PR #18 adds a controlled raw Phase 66 research handoff with an empty-artifact
   manifest, an empty artifact directory, failed-access notes, and source leads.
   It adds no acquired external evidence and supports no new factual claim.
+- The product-agnostic Evidence Review Engine is complete. It reviews external
+  handoff manifests, hashes, artifact integrity, source references, provenance,
+  completeness, duplicate artifacts, and explicit claim conflicts and produces
+  versioned JSON and Markdown reports without inference or canonical writes.
 
 ## Completed Milestones
 
@@ -111,6 +115,9 @@ PR #18 — Phase 66 external research handoff.
   retains schema-validated classifications and expected repository count deltas.
 - Product-rule research now retains stable evidence classifications, explicit
   blockers, and an architectural sufficiency question without changing Tier 0.
+- Product-agnostic external evidence review is implemented with versioned
+  handoff and report schemas, deterministic recommendations, and comprehensive
+  tests. It is the automated review boundary before Rule Claim Matrix work.
 
 ## Current Focus
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## Evidence Review Engine
+
+- Added a product-agnostic pre-promotion engine for external evidence handoffs.
+- Added versioned handoff and review-report schemas, deterministic JSON and
+  Markdown renderers, integrity/provenance/completeness checks, duplicate and
+  explicit-claim conflict detection, and comprehensive unit coverage.
+- Preserved the Phase 66 evidence-waiting boundary: no product-specific logic,
+  canonical data, rules, generators, probabilities, or simulations were added.
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0/).

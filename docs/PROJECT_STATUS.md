@@ -14,6 +14,7 @@
 | Project phase | Phase 66 evidence-waiting state; processing has not begun |
 | Last completed phase | Phase 65 — MB2 Product-Rule Evidence Sufficiency Assessment |
 | Last merged repository baseline | PR #18 — Phase 66 external research handoff |
+| Latest completed repository capability | Product-agnostic Evidence Review Engine |
 | Phase 66 status | Research handoff structure exists; verification may begin only after the entry gate is satisfied |
 | Current critical-path blocker | No artifact-bearing, content-complete, independently reviewed raw handoff exists for the first evidence-backed MB2 booster |
 | Canonical rule status | Population unauthorized |
@@ -30,12 +31,12 @@ Counts below were derived directly from the repository on 2026-07-30.
 
 | Item | Count |
 | --- | ---: |
-| Tracked files after this recovery change | 202 |
-| Markdown documents | 28 |
-| Python source files under `src/` | 30 |
-| Versioned JSON schemas | 14 |
-| Test modules | 16 |
-| Passing automated tests | 77 |
+| Tracked files | 213 |
+| Markdown documents | 29 |
+| Python source files under `src/` | 37 |
+| Versioned JSON schemas | 16 |
+| Test modules | 17 |
+| Passing automated tests | 85 |
 | Promotion audits | 28 |
 
 ### Canonical entities
@@ -72,6 +73,10 @@ of any new product-rule claim.
 - Tier 0 data and Rules Engine architecture is approved and remains unchanged.
 - Canonical repository contracts, deterministic validation, evidence archival,
   candidate review, promotion audits, and rollback foundations are implemented.
+- The product-agnostic Evidence Review Engine is complete. It validates external
+  handoff metadata, provenance, artifact integrity, completeness, and internal
+  consistency and emits schema-validated JSON and Markdown reports before Rule
+  Claim Matrix processing.
 - Card and Printing lifecycle foundations are implemented but sparsely populated.
 - Print Sheet and Slot lifecycle foundations are implemented but unpopulated.
 - Research Log architecture is approved; implementation is deferred.

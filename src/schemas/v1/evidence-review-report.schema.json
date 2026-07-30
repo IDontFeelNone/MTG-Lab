@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.dev/schemas/v1/evidence-review-report.schema.json",
+  "title": "Evidence Review Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "handoff_id", "evidence_inventory", "supported_claims", "unsupported_claims", "conflicting_claims", "missing_evidence", "orphaned_artifacts", "duplicate_artifacts", "completeness_score", "provenance_summary", "validation_findings", "recommendation"],
+  "properties": {
+    "schema_version": {"const": "v1"},
+    "handoff_id": {"type": "string", "minLength": 1},
+    "evidence_inventory": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "path", "media_type", "integrity_verified", "source_ids"], "properties": {"id": {"type": "string"}, "path": {"type": "string"}, "media_type": {"type": "string"}, "integrity_verified": {"type": "boolean"}, "source_ids": {"$ref": "#/$defs/strings"}}}},
+    "supported_claims": {"$ref": "#/$defs/strings"},
+    "unsupported_claims": {"$ref": "#/$defs/strings"},
+    "conflicting_claims": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["topic", "claim_ids", "values"], "properties": {"topic": {"type": "string"}, "claim_ids": {"$ref": "#/$defs/strings"}, "values": {"$ref": "#/$defs/strings"}}}},
+    "missing_evidence": {"$ref": "#/$defs/strings"},
+    "orphaned_artifacts": {"$ref": "#/$defs/strings"},
+    "duplicate_artifacts": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["field", "value", "artifact_ids"], "properties": {"field": {"enum": ["id", "path", "sha256"]}, "value": {"type": "string"}, "artifact_ids": {"$ref": "#/$defs/strings"}}}},
+    "completeness_score": {"type": "integer", "minimum": 0, "maximum": 100},
+    "provenance_summary": {"type": "object", "additionalProperties": false, "required": ["declared_source_count", "referenced_source_ids"], "properties": {"declared_source_count": {"type": "integer", "minimum": 0}, "referenced_source_ids": {"$ref": "#/$defs/strings"}}},
+    "validation_findings": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["code", "severity", "detail"], "properties": {"code": {"type": "string"}, "severity": {"enum": ["warning", "critical"]}, "detail": {"type": "string"}}}},
+    "recommendation": {"enum": ["Ready for verification", "Needs additional evidence", "Reject"]}
+  },
+  "$defs": {"strings": {"type": "array", "items": {"type": "string"}}}
+}

@@ -80,6 +80,9 @@
 - Evidence-backed MB2 rule-claim research with stable claim identities, verified evidence references, explicit unknowns, blocker reporting, and a no-redesign architectural sufficiency assessment
 - Controlled Phase 66 raw-handoff structure and source-lead research summary,
   containing no acquired artifact bytes and authorizing no processing or inference
+- Product-agnostic Evidence Review Engine with versioned external-handoff and
+  report contracts, integrity and provenance checks, deterministic completeness
+  and consistency findings, and validated JSON and Markdown output
 
 ## Remaining Work
 - Broader reviewed Card and Printing evidence acquisition and population,
