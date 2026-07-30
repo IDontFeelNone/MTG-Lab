@@ -1,3 +1,11 @@
+## Phase 93 — Canonical Semantic Query Layer v1
+
+- Added immutable, schema-versioned semantic requests and responses plus deterministic operations
+  over the Canonical Query and Analytics engines, preserving snapshot identities and provenance.
+- Added five JSON semantic CLI groups, comprehensive unittest coverage, and architecture and
+  integration documentation. Architecture v12 and canonical contracts remain unchanged; AI
+  reasoning, language generation, simulation, and product-specific behavior remain out of scope.
+
 ## Phase 92 — Canonical Analytics Engine v1
 
 - Added deterministic, immutable, versioned analytics over content-addressed Canonical Query

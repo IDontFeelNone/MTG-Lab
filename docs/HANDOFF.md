@@ -1,9 +1,9 @@
 # Handoff
 
-> **Phase 92 Canonical Analytics Engine is awaiting review and green CI.**
+> **Phase 93 Canonical Semantic Query Layer is awaiting review and green CI.**
 
-Phase 91 is implemented. Review `src/analytics/canonical.py`, `docs/ANALYTICS_ENGINE.md`, CLI
-integration, and `tests/test_canonical_analytics_engine.py`. The engine is read-only, returns
-immutable versioned results, and identifies the exact content-addressed query snapshot.
+Review `src/semantic/`, `docs/CANONICAL_SEMANTIC_QUERY_LAYER.md`, CLI integration, and
+`tests/test_canonical_semantic_query_engine.py`. The layer is read-only, accepts structured
+requests, returns immutable results, preserves provenance, and identifies exact snapshots.
 Canonical state and Architecture v12 are unchanged. Do not recommend merge until GitHub
 Actions are green.
