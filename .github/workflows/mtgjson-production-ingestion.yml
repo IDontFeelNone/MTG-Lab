@@ -33,11 +33,32 @@ on:
 permissions:
   contents: read
 
+# Serialize dispatches so this workflow does not terminate an active ingestion.
+# The precise cause of the observed cancellation remains undetermined; possible
+# causes include external runner termination, memory or disk pressure,
+# concurrency behavior outside this workflow, or another signal.
+concurrency:
+  group: mtgjson-production-ingestion
+  cancel-in-progress: false
+
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # Preventive hardening only: the observed run was well below the former
+    # 90-minute limit. Leave 30 minutes after the bounded ingestion step for
+    # diagnostics and artifact upload if a future ingestion reaches its limit.
+    timeout-minutes: 360
     steps:
+      - name: Initialize diagnostics
+        run: |
+          mkdir -p "$RUNNER_TEMP/mtg-lab-diagnostics"
+          printf '%s\n' '{"canonical_write":false,"status":"initializing","valid":false}' > "$RUNNER_TEMP/run-result.json"
+          {
+            echo "initialized_at=$(date --utc --iso-8601=seconds)"
+            echo "runner=${RUNNER_NAME:-unknown}"
+            free -h
+            df -h "$RUNNER_TEMP" "$GITHUB_WORKSPACE"
+          } > "$RUNNER_TEMP/mtg-lab-diagnostics/job-initialization.log"
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
@@ -69,6 +90,8 @@ jobs:
           SOURCE_URL: ${{ inputs.source_url }}
         run: curl --fail --location --silent --show-error --retry 3 --output "$RUNNER_TEMP/AllPrintings.json" "$SOURCE_URL"
       - name: Plan corpus or promote one reviewed batch
+        # Keep this below the job timeout so timeout termination is diagnosable.
+        timeout-minutes: 330
         env:
           PYTHONPATH: src
           MODE: ${{ inputs.mode }}
@@ -79,14 +102,79 @@ jobs:
           REVIEW_REFERENCE: ${{ inputs.review_reference }}
         run: |
           mkdir -p "$RUNNER_TEMP/mtg-lab-state"
+          diagnostics="$RUNNER_TEMP/mtg-lab-diagnostics"
+          mkdir -p "$diagnostics"
+          result="$RUNNER_TEMP/run-result.json"
+          python_result="$diagnostics/python-result.json"
+          stderr_log="$diagnostics/python-stderr.log"
+
+          # Create uploadable, valid JSON before starting the memory- and
+          # disk-intensive process. Replace it atomically only after Python
+          # emits a complete result.
+          printf '%s\n' '{"canonical_write":false,"status":"started","valid":false}' > "$result"
+          {
+            echo "started_at=$(date --utc --iso-8601=seconds)"
+            echo "runner=${RUNNER_NAME:-unknown}"
+            free -h
+            df -h "$RUNNER_TEMP" "$GITHUB_WORKSPACE"
+          } > "$diagnostics/resources-before.log"
+
+          child=""
+          termination=""
+          record_exit() {
+            exit_code=$?
+            trap - EXIT INT TERM HUP
+            if [[ -n "$child" ]] && kill -0 "$child" 2>/dev/null; then
+              kill -TERM "$child" 2>/dev/null || true
+              wait "$child" 2>/dev/null || true
+            fi
+            {
+              echo "finished_at=$(date --utc --iso-8601=seconds)"
+              echo "exit_code=$exit_code"
+              echo "termination=${termination:-normal-exit}"
+              free -h
+              df -h "$RUNNER_TEMP" "$GITHUB_WORKSPACE"
+            } > "$diagnostics/resources-after.log"
+            if [[ -s "$python_result" ]] && python -m json.tool "$python_result" >/dev/null 2>&1; then
+              mv "$python_result" "$result"
+            else
+              RESULT="$result" EXIT_CODE="$exit_code" TERMINATION="${termination:-normal-exit}" python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          value = {
+              "canonical_write": False,
+              "error": "mtgjson_delivery.py did not emit a complete JSON result",
+              "exit_code": int(os.environ["EXIT_CODE"]),
+              "status": "terminated" if os.environ["TERMINATION"] != "normal-exit" else "failed",
+              "termination": os.environ["TERMINATION"],
+              "valid": False,
+          }
+          path = Path(os.environ["RESULT"])
+          temporary = path.with_suffix(".tmp")
+          temporary.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+          temporary.replace(path)
+          PY
+            fi
+            exit "$exit_code"
+          }
+          trap record_exit EXIT
+          trap 'termination=SIGINT; exit 130' INT
+          trap 'termination=SIGTERM; exit 143' TERM
+          trap 'termination=SIGHUP; exit 129' HUP
+
           args=(--data-root "$RUNNER_TEMP/mtg-lab-state" --batch-size "$BATCH_SIZE")
           if [[ "$MODE" == "dry-run" ]]; then
             selected=()
             if [[ -n "$BATCH" ]]; then selected=(--batch "$BATCH"); fi
-            python scripts/mtgjson_delivery.py "${args[@]}" plan --source "$RUNNER_TEMP/AllPrintings.json" --sha256 "$SHA256" "${selected[@]}" > "$RUNNER_TEMP/run-result.json"
+            python scripts/mtgjson_delivery.py "${args[@]}" plan --source "$RUNNER_TEMP/AllPrintings.json" --sha256 "$SHA256" "${selected[@]}" > "$python_result" 2> >(tee "$stderr_log" >&2) &
           else
-            python scripts/mtgjson_delivery.py "${args[@]}" promote --source "$RUNNER_TEMP/AllPrintings.json" --sha256 "$SHA256" --batch "$BATCH" --reviewer "$REVIEWER" --review-reference "$REVIEW_REFERENCE" > "$RUNNER_TEMP/run-result.json"
+            python scripts/mtgjson_delivery.py "${args[@]}" promote --source "$RUNNER_TEMP/AllPrintings.json" --sha256 "$SHA256" --batch "$BATCH" --reviewer "$REVIEWER" --review-reference "$REVIEW_REFERENCE" > "$python_result" 2> >(tee "$stderr_log" >&2) &
           fi
+          child=$!
+          wait "$child"
+          child=""
       - name: Write job summary
         if: always()
         run: |
@@ -96,6 +184,7 @@ jobs:
           echo '* No commit, pull request, or unselected batch promotion was performed.' >> "$GITHUB_STEP_SUMMARY"
       - name: Upload safe reports
         if: always()
+        timeout-minutes: 20
         uses: actions/upload-artifact@v4
         with:
           name: mtgjson-ingestion-${{ github.run_id }}
@@ -105,5 +194,6 @@ jobs:
             ${{ runner.temp }}/mtg-lab-state/evidence/mtgjson/production-batches/**/review-package.json
             ${{ runner.temp }}/mtg-lab-state/evidence/mtgjson/imports/**/identifier_quarantine.json
             ${{ runner.temp }}/run-result.json
+            ${{ runner.temp }}/mtg-lab-diagnostics/
           if-no-files-found: warn
           retention-days: 30
