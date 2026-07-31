@@ -1,10 +1,10 @@
 # MTG Lab Roadmap
 
-> **Status: Current — refreshed by the Phase 105 source-gate stop on 2026-07-31.**
+> **Status: Current — refreshed by Phase 105 Official Reference Dataset Acquisition on 2026-07-31.**
 
-Phase 105 targeted population is blocked before discovery solely because its caller-supplied
-immutable AllPrintings artifact is absent. This is an evidence/input gate, not an architectural
-defect. Phase 104 remains the implemented baseline and neither target is marked populated.
+Phase 105 automates acquisition of approved MTGJSON AllPrintings evidence into ignored local
+storage. It does not import provider candidates, review, promote, project, or populate targets.
+Phase 104 remains the merged baseline and neither target is marked populated.
 
 Phase 104 proves the complete governed pipeline on five MTGJSON-derived entities. The next
 scale milestone remains separately authorized work; no unattended full import or automatic

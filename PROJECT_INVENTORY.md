@@ -18,8 +18,8 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 105 stopped at its required source gate; Phase 104 remains the
-> implemented baseline.
+> **Status: Current** — Phase 105 implements official reference dataset acquisition over the
+> merged Phase 104 baseline; Architecture v12 remains unchanged.
 
 ## Phase 83 constitutional guidance
 
@@ -36,8 +36,8 @@ questions guide future proposals without authorizing them.
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Latest merged milestone:** Phase 100 — MTGJSON Reference Dataset Import Execution v1
-- **Current milestone:** Phase 105 — targeted MTGJSON set population (stopped: local artifact absent)
+- **Latest merged baseline:** Phase 104 — bounded MTGJSON canonical promotion
+- **Current milestone:** Phase 105 — Official Reference Dataset Acquisition
 - **Maturity:** pre-alpha; deterministic local reference implementation
 - **Validation baseline:** 253 tests passing locally
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
@@ -56,6 +56,7 @@ questions guide future proposals without authorizing them.
 | Canonical Import Pipeline | Reviewed local JSON/CSV adapters, provenance, dry-run/validation-only modes, deterministic report, atomic game-tree replacement | Operational v1; local-only and single-writer |
 | Raw data acquisition | Immutable byte snapshots, provider adapters, normalized source records, assertion bridge, acquisition-run reports, offline CLI | Operational v1; no live providers or canonical promotion |
 | Multi-source evidence acquisition | Immutable provider/source/dataset/artifact contracts, provider interface, deterministic reference registry, licensing gates, JSON CLI | Framework v1; no live providers, datasets, or promotion |
+| Official reference dataset acquisition | Configured official URLs, resumable streaming, checksum/SHA-256 and JSON/schema gates, local registration, JSON CLI | Operational for MTGJSON AllPrintings; acquisition only |
 | MTGJSON Reference Dataset Provider | Local v5 discovery, schema/artifact/dataset validation, deterministic candidate mapping, planning, JSON CLI | Operational v1; reference evidence only, no networking or promotion |
 | External dataset ingestion | Canonical supplied-dataset manifest, JSON/CSV/ZIP integrity, MTGJSON v5 provider detection/mapping, registrations, review-package handoff, CLI | Operational v1; stops before human review and promotion |
 | Evidence and candidate ingestion | Immutable evidence storage, parsers/normalizers, candidate validation, retained intermediate artifacts, population review | Operational for bounded reviewed workflows |
@@ -78,6 +79,7 @@ questions guide future proposals without authorizing them.
 
 - `data/canonical/` — authoritative game-scoped canonical records
 - `data/raw/<provider>/<dataset>/<snapshot-id>/` — generic immutable source snapshots
+- `data/local/reference-datasets/` — Git-ignored official artifacts, partial transfers, manifests, and non-canonical registrations
 - `data/sources/` and retained raw evidence paths — archived evidence and controlled handoffs
 - `data/intermediate/` — parsed, candidate, review, and research artifacts
 - `data/observations/` — immutable non-canonical opening reports

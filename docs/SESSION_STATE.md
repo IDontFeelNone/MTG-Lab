@@ -1,11 +1,11 @@
 # Session State
 
-> **Phase 105 stopped at its source gate; Phase 104 remains the implemented baseline.**
+> **Phase 105 Official Reference Dataset Acquisition is implemented over merged Phase 104.**
 
-The required caller-supplied immutable AllPrintings artifact was not present under `/workspace`
-or `/tmp`. No Phase 105 discovery, extraction, candidate review, promotion, projection, or
-downstream verification occurred, and no canonical state changed. The precise input request and
-bounded completeness declarations are in `TARGETED_MTGJSON_SET_POPULATION.md`.
+MTGJSON AllPrintings can now be downloaded, resumed, verified, and registered beneath ignored
+`data/local/` through JSON CLI commands. Tests mock all networking; no downloaded corpus is
+committed. No provider import, candidate review, promotion, projection, downstream execution, or
+canonical mutation is performed by this subsystem.
 
 The deterministic five-entity MTGJSON-derived corpus has completed acquisition, validation,
 independent review, promotion, typed projection, four read-layer consumers, non-executed AI

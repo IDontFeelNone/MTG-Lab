@@ -18,6 +18,7 @@ from providers.mtgjson import MTGJSONImportExecution
 from projection import ProjectionError, TypedCanonicalProjectionEngine
 from promotion import BoundedCorpusPromotion
 from acquisition import PromotionError
+from official_datasets import AcquisitionError, OfficialDatasetAcquisition
 
 
 def main(argv=None) -> int:
@@ -26,7 +27,10 @@ def main(argv=None) -> int:
     commands = parser.add_subparsers(dest="command", required=True)
     dataset = commands.add_parser("dataset"); dataset_commands = dataset.add_subparsers(dest="dataset_command", required=True)
     register = dataset_commands.add_parser("register"); register.add_argument("manifest", type=Path)
-    dataset_commands.add_parser("list")
+    listing = dataset_commands.add_parser("list"); listing.add_argument("--format", choices=("json",), default="json")
+    for name in ("download", "verify", "status"):
+        command = dataset_commands.add_parser(name); command.add_argument("dataset_name")
+        command.add_argument("--format", choices=("json",), default="json")
     run = commands.add_parser("import"); run.add_argument("targets", nargs="*")
     run.add_argument("--version"); run.add_argument("--source", type=Path); run.add_argument("--actor")
     run.add_argument("--timestamp"); run.add_argument("--require-complete", action="store_true")
@@ -286,7 +290,16 @@ def main(argv=None) -> int:
             if len(args.ingest_targets) != 1 or not args.timestamp: parser.error("ingest requires source and --timestamp")
             result = external.ingest(Path(args.ingest_targets[0]), args.manifest, timestamp=args.timestamp)
     elif args.command == "dataset":
-        result = registry.register(json.loads(args.manifest.read_text())) if args.dataset_command == "register" else registry.list()
+        if args.dataset_command == "register":
+            result = registry.register(json.loads(args.manifest.read_text()))
+        else:
+            acquisition = OfficialDatasetAcquisition(args.data_root)
+            try:
+                result = acquisition.list() if args.dataset_command == "list" else getattr(
+                    acquisition, args.dataset_command)(args.dataset_name)
+            except (AcquisitionError, OSError, ValueError) as error:
+                print(json.dumps({"valid": False, "error": str(error), "canonical_write": False},
+                                 indent=2, sort_keys=True)); return 2
     elif args.targets and args.targets[0] == "status": result = manager.status(args.targets[1])
     elif args.targets and args.targets[0] == "report": result = manager.report(args.targets[1])
     else:

@@ -1,4 +1,15 @@
-# Phase 105 handoff
+# Phase 105 Official Reference Dataset Acquisition handoff
+
+The acquisition-only subsystem is implemented. Use `dataset download mtgjson`, then `verify` and
+explicitly invoke the unchanged provider import only in a separately governed workflow. Local
+artifacts and registrations live under ignored `data/local/`. No download was committed, no
+canonical state changed, and merge remains withheld until GitHub Actions are green.
+
+Architecture v12, Canonical Repository authority, independent review, promotion, and typed
+projection remain unchanged. The prior targeted-population source-gate record below is retained
+as historical context; acquisition does not resume or authorize that promotion milestone.
+
+## Prior source-gate record
 
 Phase 105 stopped at its mandatory source gate: no caller-supplied immutable MTGJSON
 AllPrintings artifact exists under `/workspace` or `/tmp`. Do not substitute fixtures, download
