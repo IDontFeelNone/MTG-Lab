@@ -12,7 +12,8 @@ from semantic import CanonicalSemanticQueryEngine, SemanticRequest
 from reasoning import ReasoningContextBuilder, ReasoningContextError, ReasoningContextRequest
 from ai import AIProviderRegistry, SCHEMA_VERSION as AI_SCHEMA_VERSION
 from ai.errors import AIAdapterError
-from evidence import ProviderRegistry as EvidenceProviderRegistry, ReferenceDatasetRegistry
+from evidence import ReferenceDatasetRegistry
+from providers import MTGJSONProvider, provider_registry
 
 
 def main(argv=None) -> int:
@@ -94,12 +95,30 @@ def main(argv=None) -> int:
     for name in ("providers", "datasets", "artifacts", "validate"):
         command = evidence_commands.add_parser(name)
         command.add_argument("--format", choices=("json",), default="json")
+    provider = commands.add_parser("provider")
+    provider_names = provider.add_subparsers(dest="provider_name", required=True)
+    mtgjson = provider_names.add_parser("mtgjson")
+    mtgjson_commands = mtgjson.add_subparsers(dest="provider_command", required=True)
+    for name in ("validate", "inspect", "plan"):
+        command = mtgjson_commands.add_parser(name)
+        command.add_argument("source", type=Path)
+        command.add_argument("--format", choices=("json",), default="json")
+        if name == "validate":
+            command.add_argument("--sha256")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "evidence":
+    if args.command == "provider":
+        mtgjson_provider = MTGJSONProvider()
+        if args.provider_command == "validate":
+            result = mtgjson_provider.validate_local(args.source, args.sha256)
+        elif args.provider_command == "inspect":
+            result = mtgjson_provider.inspect(args.source)
+        else:
+            result = mtgjson_provider.plan_local(args.source)
+    elif args.command == "evidence":
         evidence_registry = ReferenceDatasetRegistry(args.data_root / "evidence" / "registry")
         if args.evidence_command == "providers":
-            providers = EvidenceProviderRegistry()
+            providers = provider_registry()
             result = {"schema_version": "1.0.0", "providers": [
                 provider.metadata().to_dict() for provider in providers.providers()]}
         elif args.evidence_command == "datasets":

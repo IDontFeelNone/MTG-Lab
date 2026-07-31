@@ -18,7 +18,7 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 95 is implemented and awaits review and
+> **Status: Current** — Phase 99 is implemented and awaits review and
 > green GitHub Actions.
 
 ## Phase 83 constitutional guidance
@@ -36,8 +36,8 @@ questions guide future proposals without authorizing them.
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Latest merged milestone:** Phase 90 — MB2 pilot evidence-gap outcome
-- **Current milestone:** Phase 95 — AI Model Adapter Framework v1
+- **Latest merged milestone:** Phase 98 — Multi-Source Evidence Acquisition Framework v1
+- **Current milestone:** Phase 99 — MTGJSON Reference Dataset Provider v1
 - **Maturity:** pre-alpha; deterministic local reference implementation
 - **Validation baseline:** 194 passing tests locally under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
@@ -56,6 +56,7 @@ questions guide future proposals without authorizing them.
 | Canonical Import Pipeline | Reviewed local JSON/CSV adapters, provenance, dry-run/validation-only modes, deterministic report, atomic game-tree replacement | Operational v1; local-only and single-writer |
 | Raw data acquisition | Immutable byte snapshots, provider adapters, normalized source records, assertion bridge, acquisition-run reports, offline CLI | Operational v1; no live providers or canonical promotion |
 | Multi-source evidence acquisition | Immutable provider/source/dataset/artifact contracts, provider interface, deterministic reference registry, licensing gates, JSON CLI | Framework v1; no live providers, datasets, or promotion |
+| MTGJSON Reference Dataset Provider | Local v5 discovery, schema/artifact/dataset validation, deterministic candidate mapping, planning, JSON CLI | Operational v1; reference evidence only, no networking or promotion |
 | External dataset ingestion | Canonical supplied-dataset manifest, JSON/CSV/ZIP integrity, MTGJSON v5 provider detection/mapping, registrations, review-package handoff, CLI | Operational v1; stops before human review and promotion |
 | Evidence and candidate ingestion | Immutable evidence storage, parsers/normalizers, candidate validation, retained intermediate artifacts, population review | Operational for bounded reviewed workflows |
 | Evidence Repository and Review | Content-verified bundles, Source Record validation, external handoff integrity/provenance/completeness/conflict reports | Operational pre-promotion gate |
@@ -86,6 +87,7 @@ questions guide future proposals without authorizing them.
 - `src/query` — provider-neutral canonical read contract and deterministic query facade
 - `src/acquisition` — source-agnostic raw snapshots, normalization, and assertion bridge
 - `src/external_ingestion` — supplied-file manifests, validation, MTGJSON provider adapter, and governed handoff
+- `src/providers/mtgjson` — concrete MTGJSON Reference Dataset provider over Phase 98 contracts
 - `src/ingestion`, `src/evidence_review` — evidence-to-candidate and handoff review
 - `src/observations`, `src/market`, `src/collection`, `src/analytics`,
   `src/decisions` — downstream domain engines
@@ -148,9 +150,9 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 93 review and green CI are the only active work. Future Analytics expansion, Simulation, REST,
-and AI consumers must use the Query Engine instead of repository storage internals. Mystery
-Booster 2 remains evidence-blocked; Simulation and Intelligence remain unimplemented.
+Phase 99 review and green CI are the active work. The provider accepts local evidence only and
+cannot promote it. Mystery Booster 2 remains evidence-blocked; Simulation and Intelligence
+remain unimplemented.
 
 ## Phase 80 — Canonical fact and evidence contract
 
@@ -169,3 +171,6 @@ Booster 2 remains evidence-blocked; Simulation and Intelligence remain unimpleme
 > provider capabilities and registration, and a deterministic non-canonical reference dataset
 > registry; `mtg-lab evidence` provides JSON inspection and validation. No provider networking,
 > dataset population, automatic promotion, canonical contract, or Architecture v12 change exists.
+> **Phase 99 update:** `src/providers/mtgjson/` implements the first concrete reference provider,
+> with local-only MTGJSON v5 validation, deterministic candidate mapping, planning, and JSON CLI.
+> No dataset was bundled, acquired, reviewed, promoted, or written to canonical storage.

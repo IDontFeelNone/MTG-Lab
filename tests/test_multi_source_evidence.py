@@ -103,7 +103,11 @@ class MultiSourceEvidenceTests(unittest.TestCase):
                 command = [sys.executable, "-m", "mtglab", "--data-root", directory,
                            "evidence", operation, "--format", "json"]
                 result = subprocess.run(command, check=True, capture_output=True, text=True)
-                self.assertEqual(json.loads(result.stdout)[key], [])
+                values = json.loads(result.stdout)[key]
+                if operation == "providers":
+                    self.assertEqual([item["provider_identifier"] for item in values], ["mtgjson"])
+                else:
+                    self.assertEqual(values, [])
             command = [sys.executable, "-m", "mtglab", "--data-root", directory,
                        "evidence", "validate", "--format", "json"]
             result = subprocess.run(command, check=True, capture_output=True, text=True)

@@ -1,9 +1,9 @@
 # Project Status
 
-> **Phase 98 — Multi-Source Evidence Acquisition Framework v1 implemented.**
+> **Phase 99 — MTGJSON Reference Dataset Provider v1 implemented.**
 
-Merged Phase 97 (`cccc4cd`) is the baseline. Phase 98 adds immutable provider-neutral evidence
-contracts, deterministic non-canonical dataset/artifact registration, fail-closed licensing,
-provider capabilities, and JSON evidence CLI inspection. Architecture v12, canonical state, and
-all canonical/query/analytics/semantic/reasoning/AI contracts are unchanged. No networking,
-new dataset, or automatic promotion was added. Merge remains withheld until GitHub Actions pass.
+Merged Phase 98 (`bac6318`) is the baseline. Phase 99 adds a concrete local-only MTGJSON v5
+Reference Dataset provider with deterministic validation, parsing, candidate mapping, planning,
+capabilities, and JSON CLI. Architecture v12, canonical state, and all downstream contracts are
+unchanged. No dataset, networking, automatic review, or promotion was added. Merge remains
+withheld until GitHub Actions pass.
