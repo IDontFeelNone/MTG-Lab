@@ -1,3 +1,7 @@
+# Phase 112B status — verified intake was not durably persisted
+
+The repository confirms merged Phase 113 at `b9941a6`. Run `30663562841` was normalized and Phase 111-verified twice, but the intended non-dry-run's Git and PR steps were skipped by the dry-run conditions, allowing a zero exit without durable state. Phase 112B replaces that control flow with fail-closed persistence and independent PR verification. The live retained run and evidence PR still do not exist; rerun is required after merge. No review, promotion, canonical write, or Architecture v12 change occurred.
+
 # Phase 113 status — Independent review stopped at retained-evidence gate
 
 The Production Evidence Repository contains neither run `30663562841` nor its deterministic
