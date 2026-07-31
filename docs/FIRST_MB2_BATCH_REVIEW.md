@@ -1,70 +1,59 @@
-# Phase 110B — First Mystery Booster 2 batch review
+# Phase 113 — First Mystery Booster 2 batch review
 
-> **Status:** stopped at retained-artifact gate — 2026-07-31
-> **Workflow run requested:** `30663562841`
-> **Expected selected batch:** `mb2-batch-000001-e32022126c07`
+> **Status:** stopped at retained-evidence gate — 2026-07-31
+>
+> **Requested production run:** `30663562841`
+>
 > **Canonical writes / promotions:** 0 / 0
 
-## Baseline and evidence boundary
+## Independent selection
 
-The review read the complete Tier 0 corpus, current project-state documents, and the five
-Phase 109–110 contracts named in the task. Architecture v12 and the canonical contracts remain
-unchanged. The repository checkout is based on merged Phase 110A (`e02422b`).
+The review began exclusively from the Production Evidence Repository at
+`data/production_runs/`. Its only retained entry is `.gitkeep`: there is no immutable run
+directory `data/production_runs/30663562841/` and no `index.json`. Therefore the repository
+cannot deterministically enumerate a first MB2 batch. The identifier
+`mb2-batch-000001-e32022126c07`, mentioned by the earlier failed review, is an expectation in
+documentation rather than retained production evidence and was not selected as if it were fact.
+No Marvel batch or candidate was inspected.
 
-The mandatory first verification failed closed. The repository contains no directory or file for
-run `30663562841`, and no file contains either that run identifier or the expected batch identifier
-`mb2-batch-000001-e32022126c07`. The only retained production-run evidence remains the summary for
-the earlier run `30649546787`. Consequently this document records an attempted review, not a
-review of absent bytes. The supplied expected batch identifier is not treated as repository
-evidence and cannot be confirmed from this checkout.
+## Complete verification result
 
-## Artifact verification
-
-| Required item | Result |
+| Required verification | Independent result |
 | --- | --- |
-| Candidate payload references and target candidate shard | Missing |
-| `candidate-ids.json` | Missing |
-| `dependency-closure.json` | Missing |
-| `manifest.json` | Missing |
-| `review-package.json` | Missing |
-| Finding and quarantine references | Missing |
-| Source checksum and dataset lineage | Missing |
-| Internal hashes and cross-references | Not recomputable because their inputs are missing |
+| Candidate payloads | Unavailable; no retained bundle or content-addressed payload references |
+| Candidate IDs | Unavailable; no `candidate-ids.json` or retained bundle |
+| Dependency closure | Unavailable; no `dependency-closure.json` or dependency report |
+| Provenance | Unavailable; no run manifest, metadata, lineage, or source digest |
+| Confidence | Unavailable; no candidate payloads to assess |
+| Validation state | Unavailable; no findings, quarantine, validation, or package state |
+| Identifiers | Unavailable; neither candidate nor external identifiers can be inspected |
+| Explicit unknowns | Unavailable; unknown fields cannot be reconstructed from absent bytes |
+| Review package integrity | Unverifiable; no package bytes, manifest inventory, or digests exist |
 
-Because required files are absent, no digest, MB2 isolation, candidate membership, dependency
-closure, eligibility state, pending review status, or source lineage can be independently
-verified. The gate therefore stops before candidate inspection.
+This is not a hash failure and does not allege that the upstream artifact is corrupt. It is a
+local retention failure: there are no repository bytes on which to recompute membership, hashes,
+cross-references, target isolation, closure, or lineage.
 
-## Candidate review and findings
+## Candidate classifications
 
-Candidate count is **unverified**. Approved, excluded, and additional-evidence counts are likewise
-**not determined** (not zero): no candidate was reviewed or classified. No identity conflict,
-duplicate, unsupported mapping, provenance defect, ambiguous identifier, incomplete dependency,
-schema mismatch, explicit unknown, or evidence need is invented from missing payloads. There are
-no reviewed source references to preserve because the selected batch source artifacts are absent.
+Candidate count is **undetermined**, not zero. Consequently approved, excluded, and requires-
+additional-evidence counts are each **undetermined**. No candidate classification is emitted:
+classifying invented identifiers would not be an independent review of exactly one retained MB2
+batch. In particular, the batch itself is not classified as a candidate.
 
-## Review decision
+## Immutable decision gate
 
-No immutable reviewed decision was created. Reviewer identity, durable review reference, reviewed
-timestamp, reviewed-package digest, and candidate classifications are all unavailable. This is a
-**pre-decision artifact-gate failure**, not an approval and not a pending-operator-signature
-decision: even a signature template would incorrectly imply that candidate review occurred.
+No immutable review decision is generated. A decision requires the selected package digest,
+complete candidate membership, one classification per candidate, reviewer identity, durable
+review reference, and reviewed timestamp. Creating a nominal “requires additional evidence”
+decision without those inputs would falsely claim that a candidate set was reviewed. The
+immutable outcome of this phase is this version-controlled, tested **pre-decision gate record**;
+it grants no approval and is not consumable by promotion.
 
-## Promotion readiness
+## Promotion boundary and next action
 
-The batch is **not ready** for bounded canonical promotion. Approved Card and Printing counts are
-not determined; exclusions and additional-evidence counts are not determined; closure after
-exclusions cannot be computed; and absence of orphaned Printings cannot be established. No
-canonical repository or promotion audit file was written.
-
-Exact blockers are the missing retained run directory/archive and every selected-batch artifact
-listed above, followed—only after those bytes pass verification—by candidate-by-candidate review
-and genuine operator-supplied reviewer identity and durable review reference.
-
-## Exact next operator step
-
-Retrieve the immutable artifact archive produced by GitHub Actions run `30663562841` and retain
-its bounded run evidence in the repository without altering bytes. Verify the archive checksum,
-then verify that its first MB2 batch is exactly `mb2-batch-000001-e32022126c07` and rerun Phase
-110B from the artifact-integrity gate. Do not sign, approve, exclude, or promote any candidate
-until that verification succeeds. Merge remains withheld until GitHub Actions are green.
+Promotion was not invoked and canonical state was not modified. The operator must first merge the
+verified, evidence-only intake for run `30663562841`, producing its immutable run directory and
+deterministic index. Then rerun Phase 113, select the first MB2 entry by the retained batch index,
+verify every referenced byte and digest, review every candidate exactly once, and create the
+separate immutable decision. Stop again before canonical promotion.

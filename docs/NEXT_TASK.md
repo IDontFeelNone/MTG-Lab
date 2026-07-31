@@ -1,4 +1,10 @@
-# Next task after Phase 112A
+# Next task after Phase 113
+
+Retain run `30663562841` through the verified Production Evidence Repository intake and merge its
+evidence-only pull request. Only then rerun the independent first-MB2-batch review and create a
+candidate-complete immutable decision. Do not review Marvel or promote canonical data.
+
+## Prior Phase 112A operation
 
 Run the GitHub **Production evidence intake** workflow for `30663562841` using the exact documented
 inputs and `dry_run: true`. Inspect the uploaded adapter report, generated root manifest,

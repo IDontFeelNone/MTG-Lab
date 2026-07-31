@@ -1,3 +1,10 @@
+## Phase 113 — retained MB2 review gate
+
+- Re-ran the independent review exclusively against the Production Evidence Repository and
+  recorded that run `30663562841` is not retained, so no deterministic MB2 batch exists to select.
+- Recorded every requested verification dimension as unavailable, left all classification counts
+  undetermined, and created no false review decision, Marvel review, canonical write, or promotion.
+
 ## Phase 112A — Native workflow artifact normalization
 
 - Added a deterministic, fail-closed adapter from the nested native MTGJSON Actions artifact to
