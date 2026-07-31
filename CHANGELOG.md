@@ -1,3 +1,12 @@
+## Phase 98 — Multi-Source Evidence Acquisition Framework v1
+
+- Added immutable provider-neutral evidence, source, dataset, artifact, acquisition, licensing,
+  and review contracts with deterministic JSON and SHA-256 identities.
+- Added deterministic reference dataset/artifact registration, duplicate detection, fail-closed
+  licensing validation, provider capabilities, and JSON evidence CLI commands.
+- Added no live provider, download, dataset population, product-specific behavior, or automatic
+  promotion; Architecture v12 and all canonical and downstream contracts remain unchanged.
+
 ## Phase 97 — Mystery Booster 2 Stage 2 card-list intake
 
 - Confirmed merged Phase 96B (`0c88825`), unchanged Architecture v12, and successful bounded

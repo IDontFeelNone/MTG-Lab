@@ -1,9 +1,8 @@
 # Session State
 
-> **Phase 97 intake complete; promotion blocked by missing evidence.**
+> **Phase 98 framework implemented; review and green CI pending.**
 
-The current branch starts from merged Phase 96B commit `0c88825`. Stage 1 promotion succeeded
-for bounded Product identity. Phase 97 adds only a generic deterministic Card/Printing package
-intake and tests. No complete MB2 card-list artifact is present, so zero canonical entities and
-zero promotion audits were added. Architecture v12, canonical contracts, and runtime behavior
-are unchanged. Merge remains withheld until GitHub Actions are green.
+The branch starts from merged Phase 97 commit `cccc4cd`. Phase 98 introduces only generic,
+non-canonical evidence acquisition contracts and registries plus JSON inspection/validation CLI.
+No live provider, dataset, download, or promotion exists. Architecture v12 and every downstream
+contract remain unchanged. Merge is withheld until GitHub Actions are green.

@@ -12,6 +12,7 @@ from semantic import CanonicalSemanticQueryEngine, SemanticRequest
 from reasoning import ReasoningContextBuilder, ReasoningContextError, ReasoningContextRequest
 from ai import AIProviderRegistry, SCHEMA_VERSION as AI_SCHEMA_VERSION
 from ai.errors import AIAdapterError
+from evidence import ProviderRegistry as EvidenceProviderRegistry, ReferenceDatasetRegistry
 
 
 def main(argv=None) -> int:
@@ -88,9 +89,26 @@ def main(argv=None) -> int:
     ai_validate.add_argument("--version")
     ai_validate.add_argument("--capability")
     ai_validate.add_argument("--format", choices=("json",), default="json")
+    evidence = commands.add_parser("evidence")
+    evidence_commands = evidence.add_subparsers(dest="evidence_command", required=True)
+    for name in ("providers", "datasets", "artifacts", "validate"):
+        command = evidence_commands.add_parser(name)
+        command.add_argument("--format", choices=("json",), default="json")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "ai":
+    if args.command == "evidence":
+        evidence_registry = ReferenceDatasetRegistry(args.data_root / "evidence" / "registry")
+        if args.evidence_command == "providers":
+            providers = EvidenceProviderRegistry()
+            result = {"schema_version": "1.0.0", "providers": [
+                provider.metadata().to_dict() for provider in providers.providers()]}
+        elif args.evidence_command == "datasets":
+            result = {"schema_version": "1.0.0", "datasets": evidence_registry.datasets()}
+        elif args.evidence_command == "artifacts":
+            result = {"schema_version": "1.0.0", "artifacts": evidence_registry.artifacts()}
+        else:
+            result = evidence_registry.validate()
+    elif args.command == "ai":
         providers = AIProviderRegistry()
         try:
             if args.ai_command == "providers":
