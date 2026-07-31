@@ -1,0 +1,200 @@
+{
+  "artifact_inventory_digest": "23bd48025557987442cedf5adb0f59bd811057a97d12e36923fd878f3caf5c42",
+  "batches": {
+    "count": 11,
+    "digest": "eaf1892bab8f335f4c865a87d2958d816d542d0dfe684e395c3935c615a449c8",
+    "items": [
+      {
+        "batch_id": "batch-000001-aba140070dfe",
+        "candidate_count": 999,
+        "candidate_ids_sha256": "aba140070dfed2295df1ffd4bda3a530dc236b4ff2fb327a6ee34aaa89b86f2d",
+        "entity_count": 999
+      },
+      {
+        "batch_id": "batch-000002-11158c8e130e",
+        "candidate_count": 1000,
+        "candidate_ids_sha256": "11158c8e130e8fa23a358b1f56f00dc978af4e23531369d037cdb7cf22d41eea",
+        "entity_count": 1000
+      },
+      {
+        "batch_id": "batch-000003-ae0238d18f12",
+        "candidate_count": 1000,
+        "candidate_ids_sha256": "ae0238d18f121b8491888c6a84f825484672b33e07508536000e06dc22139dd0",
+        "entity_count": 1000
+      },
+      {
+        "batch_id": "batch-000004-028eb2fa8dcb",
+        "candidate_count": 1000,
+        "candidate_ids_sha256": "028eb2fa8dcbe653a1b3ce1e68db638d1908a46f7b25106ceb9b0e7b368be6fe",
+        "entity_count": 1000
+      },
+      {
+        "batch_id": "batch-000005-d611b03c1a50",
+        "candidate_count": 1000,
+        "candidate_ids_sha256": "d611b03c1a505ae2e8b9b7fa6945059744f9dad19e91c833caaf976e6d74dcf7",
+        "entity_count": 1000
+      },
+      {
+        "batch_id": "batch-000006-14d741679dc8",
+        "candidate_count": 1000,
+        "candidate_ids_sha256": "14d741679dc801fa30867553326b00ac70ede9430bfb6d68c8b18e4f6ecbe369",
+        "entity_count": 1000
+      },
+      {
+        "batch_id": "batch-000007-bf44ac10d7b0",
+        "candidate_count": 1000,
+        "candidate_ids_sha256": "bf44ac10d7b0990b5e2654cd8aada15d2ca1bdf26de9e3e1c2a0b398f7b4984b",
+        "entity_count": 1000
+      },
+      {
+        "batch_id": "batch-000008-b3f2864a2dca",
+        "candidate_count": 1000,
+        "candidate_ids_sha256": "b3f2864a2dca2d96a0602cf1a6e1dff27d163b20394b7bff355a4753125b8b78",
+        "entity_count": 1000
+      },
+      {
+        "batch_id": "batch-000009-2202c983c418",
+        "candidate_count": 1000,
+        "candidate_ids_sha256": "2202c983c4180462f42a3f31801c141f54aa1121f135c1792ea88d1335d95366",
+        "entity_count": 1000
+      },
+      {
+        "batch_id": "batch-000010-1c38fa643002",
+        "candidate_count": 1000,
+        "candidate_ids_sha256": "1c38fa64300210a6b7b38741a3ee6928bc8ba5bd1d87c12147b824d59e545c0b",
+        "entity_count": 1000
+      },
+      {
+        "batch_id": "batch-000011-64334b86a100",
+        "candidate_count": 941,
+        "candidate_ids_sha256": "64334b86a100a47415f134e100dfc027a9134b5ebf4dcfa121fb11195abaa0ca",
+        "entity_count": 941
+      }
+    ],
+    "size": 1000
+  },
+  "checkpoint": {
+    "cards_processed": 862,
+    "completed_sets": 2,
+    "elapsed_seconds": 61.678,
+    "latest_set_code": "MSH",
+    "peak_memory_mib_observed": 191.88,
+    "schema_version": "mtgjson-streaming-ingestion-v1"
+  },
+  "dataset": {
+    "candidate_count": 10940,
+    "eligible_count": 10940,
+    "entity_counts": {
+      "card": 665,
+      "finish": 2,
+      "identifier": 9453,
+      "language": 1,
+      "printing": 813,
+      "rarity": 4,
+      "set": 2
+    },
+    "identifier": "mtgjson-allprintings-5.3.0+20260731-b47cc8360034",
+    "rejected_count": 0,
+    "unresolved_count": 0
+  },
+  "findings": {
+    "count": 117,
+    "counts": {
+      "by_namespace": {
+        "cardKingdomId": 5,
+        "cardsphereId": 5,
+        "deckboxId": 5,
+        "mcmId": 24,
+        "mtgArenaId": 5,
+        "mtgoId": 19,
+        "multiverseId": 5,
+        "scryfallCardBackId": 1,
+        "scryfallId": 24,
+        "tcgplayerProductId": 24
+      },
+      "by_severity": {
+        "error": 0,
+        "review-required": 117
+      },
+      "total": 117
+    },
+    "provider_valid": true
+  },
+  "limitations": [
+    "Candidate shard payload files referenced by the manifest were not included in the workflow artifact.",
+    "Per-batch review-package payload files referenced by the batch plan were not included in the workflow artifact.",
+    "Exact review-batch reconstruction therefore requires a new workflow run that uploads those bounded payloads."
+  ],
+  "performance": {
+    "cards_per_second": 7.53,
+    "maximum_retained_set_records": 1,
+    "peak_memory_mib_observed": 191.88,
+    "schema_version": "mtgjson-dataset-delivery-v1",
+    "seconds": 114.54340190600001,
+    "working_disk_bytes": 25795418
+  },
+  "run_result": {
+    "canonical_write": false,
+    "mode": "dry-run",
+    "promotion_performed": false
+  },
+  "schema_version": "phase109-run-evidence-summary-v1",
+  "shards": {
+    "candidate_shards": [
+      {
+        "byte_length": 7120316,
+        "path": "000334-mb2.json",
+        "sha256": "eb577c638fd74f4b45323370dcc179d925ac53492f29714c058a0f3276461995"
+      },
+      {
+        "byte_length": 8726511,
+        "path": "000373-msh.json",
+        "sha256": "5bdfbe0a4ee16d8468947976cc2e72aa0ba0429ca81bf0455b5b86144ec311aa"
+      }
+    ],
+    "finding_shard_count": 117,
+    "finding_shards_digest": "d16ce25b6fd1bb7509ca460dfaf7fe8a42324e45ce6532656676dd7cfd5cb9a6"
+  },
+  "source": {
+    "artifact_sha256": "b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09",
+    "byte_length": 170902200,
+    "checksum_valid": true,
+    "compressed": true
+  },
+  "source_archive": {
+    "byte_length": 1268127,
+    "name": "mtgjson-ingestion-30649546787.zip",
+    "sha256": "0e0cf3ddb8d87339d956f54b380b285b699d8afea892fb2e6674f7719ee1945d"
+  },
+  "targets": {
+    "completed_sets": {
+      "000334-mb2": {
+        "candidates": 5785,
+        "cards": 390,
+        "path": "/home/runner/work/_temp/mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/candidate-shards/000334-mb2.json",
+        "sha256": "eb577c638fd74f4b45323370dcc179d925ac53492f29714c058a0f3276461995"
+      },
+      "000373-msh": {
+        "candidates": 5638,
+        "cards": 472,
+        "path": "/home/runner/work/_temp/mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/candidate-shards/000373-msh.json",
+        "sha256": "5bdfbe0a4ee16d8468947976cc2e72aa0ba0429ca81bf0455b5b86144ec311aa"
+      }
+    },
+    "matches": [
+      {
+        "code": "MB2",
+        "name": "Mystery Booster 2"
+      },
+      {
+        "code": "MSH",
+        "name": "Marvel Super Heroes"
+      }
+    ],
+    "requested": [
+      "Mystery Booster 2",
+      "Marvel Super Heroes"
+    ]
+  },
+  "workflow_run_id": "30649546787"
+}
