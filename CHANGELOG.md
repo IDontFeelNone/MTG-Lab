@@ -1,3 +1,12 @@
+## Phase 105 — Official Reference Dataset Acquisition
+
+- Added configurable, resumable, fail-closed official dataset acquisition with deterministic local
+  storage, SHA-256/checksum, JSON/schema verification, and existing evidence registrations.
+- Added JSON `dataset download|verify|status mtgjson` and acquisition-aware `dataset list` commands;
+  all operations stop before provider import, review, promotion, projection, or canonical writes.
+- Added mocked-network unittest coverage and the official dataset operations/licensing contract.
+  Architecture v12 and canonical contracts remain unchanged.
+
 ## Phase 105 — Targeted MTGJSON Set Population (source-gated)
 
 - Confirmed merged Phase 104 (`79dbfe5`) and unchanged Architecture v12, canonical authority,

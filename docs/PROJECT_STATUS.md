@@ -1,11 +1,11 @@
 # Project Status
 
-> **Phase 105 stopped at the source gate — 2026-07-31. Phase 104 remains the implemented baseline.**
+> **Phase 105 Official Reference Dataset Acquisition implemented — 2026-07-31.**
 
-No caller-supplied immutable AllPrintings artifact was available, so Phase 105 performed no
-target discovery, extraction, review, promotion, projection, or canonical mutation. Neither
-Mystery Booster 2 nor Marvel Super Heroes is marked populated. The exact resumption request is
-recorded in `TARGETED_MTGJSON_SET_POPULATION.md`.
+Approved MTGJSON AllPrintings acquisition is now automated into `data/local/`, with resume,
+integrity, checksum/SHA-256, JSON/schema verification, and non-canonical evidence registration.
+Acquisition remains separate from provider import, review, promotion, and typed projection.
+Neither Mystery Booster 2 nor Marvel Super Heroes is marked populated.
 
 The complete governed pipeline has now been executed with a fixed MTGJSON-derived corpus:
 reviewed promotion, typed projection, all four read consumers, non-executed AI request,
@@ -16,7 +16,7 @@ and promotion governance are unchanged.
 - Overall maturity: pre-alpha with a beta-ready architectural shape.
 - Phase 100: merged; local MTGJSON execution stops at validated pending candidates.
 - Representative validation: the governed provider-to-AI-request path passes without model execution.
-- Validation baseline: 253 tests passing locally.
+- Validation baseline: 258 tests passing locally.
 - Full MTGJSON canonical import: not authorized pending batching, scale/recovery, and concurrency tests.
 - Canonical Promotion: Ready for bounded, controlled, single-writer workflows.
 - Large imports, Collection Intelligence, and Market Intelligence: Mostly Ready.
