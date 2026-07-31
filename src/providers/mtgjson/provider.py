@@ -12,6 +12,7 @@ from evidence import (AcquisitionRequest, EvidenceArtifact, EvidenceDataset, Evi
 
 from .mapper import map_dataset
 from .parser import parse_dataset
+from .validator import identifier_findings
 
 PROVIDER_IDENTIFIER = "mtgjson"
 ENTITY_TYPES = ("card", "finish", "identifier", "language", "printing", "rarity", "set")
@@ -19,6 +20,17 @@ LICENSE = LicensingMetadata(
     "Credit MTGJSON and comply with its dataset terms", "local reference use; no redistribution",
     "CC BY 4.0 dataset metadata reviewed for reference ingestion", "MTG Lab provider policy",
     "2026-07-31T00:00:00Z")
+
+
+def _finding_counts(findings: tuple[dict[str, Any], ...]) -> dict[str, Any]:
+    namespaces = sorted({item["identifier_namespace"] for item in findings})
+    return {"total": len(findings),
+            "affected_record_count": sum(len(item["affected_source_records"]) for item in findings),
+            "by_severity": {severity: sum(item["severity"] == severity for item in findings)
+                            for severity in ("error", "warning", "review-required")},
+            "by_namespace": {namespace: sum(item["identifier_namespace"] == namespace
+                                             for item in findings)
+                             for namespace in namespaces}}
 
 
 class MTGJSONProvider(EvidenceProviderAdapter):
@@ -48,10 +60,12 @@ class MTGJSONProvider(EvidenceProviderAdapter):
     def inspect(self, source: Path | str) -> dict[str, Any]:
         discovery = self.discover(source)
         records = map_dataset(parse_dataset(source))
+        findings = identifier_findings(parse_dataset(source))
         counts = {kind: sum(item["entity_type"] == kind for item in records)
                   for kind in ENTITY_TYPES}
         return {**discovery, "provider": PROVIDER_IDENTIFIER, "record_count": len(records),
-                "entity_counts": counts, "candidate_sha256": hashlib.sha256(
+                "entity_counts": counts, "identifier_findings": findings,
+                "identifier_finding_counts": _finding_counts(findings), "candidate_sha256": hashlib.sha256(
                     json.dumps(records, ensure_ascii=False, separators=(",", ":"),
                                sort_keys=True).encode()).hexdigest()}
 
@@ -110,7 +124,6 @@ class MTGJSONProvider(EvidenceProviderAdapter):
         if not artifact.licensing.is_supported():
             errors.append("artifact licensing metadata is unsupported")
         return tuple(sorted(errors))
-
     def validate_dataset(self, dataset: EvidenceDataset) -> Tuple[str, ...]:
         errors = []
         if dataset.provider_identifier != PROVIDER_IDENTIFIER:

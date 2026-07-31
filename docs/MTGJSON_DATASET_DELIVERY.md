@@ -1,5 +1,10 @@
 # MTGJSON Dataset Delivery and Production Run
 
+> **Phase 108A:** the first real workflow reached provider validation after official download and
+> checksum verification, then safely stopped on `deckboxId:2676`. The scope-policy fix preserves
+> all such third-party references and reports their collisions for review. Rerun the same dry-run
+> inputs; do not select a batch or promotion mode. Full-corpus planning is not yet claimed.
+
 > **Phase 107 — implemented 2026-07-31. Architecture v12 unchanged.**
 
 ## Assessment and authority

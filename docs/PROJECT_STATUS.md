@@ -1,5 +1,10 @@
 # Project Status
 
+> **Phase 108A implemented — 2026-07-31.** The first official dry run verified its artifact but
+> exposed the over-broad `deckboxId:2676` global-uniqueness check. Scope-aware findings now allow
+> valid third-party repeats to reach review without weakening strict identities. The official
+> artifact is not present here, so a successful full-corpus plan remains unconfirmed.
+
 > **Phase 107 reproducible MTGJSON delivery implemented — 2026-07-31.** The local command and
 > manual workflow fail closed on checksum and schema, stop before promotion by default, and allow
 > only one explicitly reviewed batch. Hosted Codex still receives HTTP 403, so the first real run

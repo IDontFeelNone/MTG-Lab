@@ -1,3 +1,12 @@
+## Phase 108A — External Identifier Validation Policy Fix
+
+- Corrected the real-corpus defect that treated every non-Oracle MTGJSON external identifier as
+  globally unique after the first official dry run stopped safely on `deckboxId:2676`.
+- Added deterministic error/review-required identifier findings with complete affected-record
+  provenance; retained strict MTGJSON UUID, global external, candidate, and internal uniqueness.
+- Exposed findings through provider inspection, import review queues, production manifests, and
+  delivery reports. No canonical write, promotion, Architecture v12 change, or corpus-pass claim.
+
 ## Phase 107 — MTGJSON Dataset Delivery and Production Ingestion Run
 
 - Added a fail-closed local delivery command and manually dispatched GitHub Actions workflow for

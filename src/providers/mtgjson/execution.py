@@ -14,6 +14,7 @@ from evidence.contracts import deterministic_json
 from .mapper import map_dataset
 from .parser import parse_dataset
 from .provider import ENTITY_TYPES, LICENSE, MTGJSONProvider, PROVIDER_IDENTIFIER
+from .validator import identifier_findings
 
 
 def _write_repeatable(path: Path, value: Any) -> None:
@@ -41,6 +42,7 @@ class MTGJSONImportExecution:
         # All fail-closed document and mapping validation happens before repository state changes.
         payload = path.read_bytes()
         document = parse_dataset(payload)
+        findings = identifier_findings(document)
         mapped = map_dataset(document)
         if not document["data"] or not mapped:
             raise ValueError("MTGJSON AllPrintings dataset is incomplete: at least one set and candidate are required")
@@ -72,7 +74,7 @@ class MTGJSONImportExecution:
                           "dataset_identifier": dataset_id, "candidates": candidates})
         _write_repeatable(import_root / "review_queue.json", {"schema_version": "1.0.0",
                           "dataset_identifier": dataset_id, "review_status": "pending",
-                          "candidates": candidates})
+                          "identifier_findings": findings, "candidates": candidates})
         counts = {kind: sum(item["entity_type"] == kind for item in candidates)
                   for kind in ENTITY_TYPES}
         return {"schema_version": "1.0.0", "status": "awaiting_human_review",
@@ -80,7 +82,8 @@ class MTGJSONImportExecution:
                 "artifact_identifier": artifact_id, "artifact_sha256": digest,
                 "candidate_sha256": hashlib.sha256(deterministic_json(candidates).encode()).hexdigest(),
                 "candidate_count": len(candidates), "entity_counts": counts,
-                "validation": {"valid": True, "errors": []},
+                "validation": {"valid": True, "errors": [], "identifier_findings": findings,
+                    "review_required": bool(findings)},
                 "review_queue": {"status": "pending", "count": len(candidates),
                                  "approved_count": 0},
                 "canonical_write": False, "promotion_performed": False}

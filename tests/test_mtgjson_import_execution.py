@@ -63,6 +63,34 @@ class MTGJSONImportExecutionTests(unittest.TestCase):
                                      sort_keys=True).encode()
                 self.assertEqual(supplied, hashlib.sha256(encoded).hexdigest())
 
+    def test_non_unique_external_references_are_preserved_for_review(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); value = json.loads(FIXTURE.read_text())
+            first = value["data"]["TST"]["cards"][0]
+            first["identifiers"]["deckboxId"] = "2676"
+            duplicate = dict(first); duplicate.update({
+                "uuid": "00000000-0000-4000-8000-000000000099", "number": "99",
+                "identifiers": {"deckboxId": "2676"}})
+            value["data"]["TST"]["cards"].append(duplicate)
+            source = root / "deckbox.json"; source.write_text(json.dumps(value))
+            result = MTGJSONImportExecution(root).import_dataset(source)
+            finding = result["validation"]["identifier_findings"][0]
+            self.assertEqual(finding["severity"], "review-required")
+            queued = MTGJSONImportExecution(root).review(result["dataset_identifier"])["imports"][0]
+            self.assertEqual(queued["identifier_findings"],
+                             list(result["validation"]["identifier_findings"]))
+            references = [item for item in queued["candidates"] if item["entity_type"] == "identifier"
+                          and item["mapped_fields"]["namespace"] == "deckboxId"]
+            self.assertEqual(len(references), 2)
+            self.assertEqual({item["mapped_fields"]["printing_uuid"] for item in references},
+                             {first["uuid"], duplicate["uuid"]})
+            self.assertFalse(result["canonical_write"])
+
+    def test_duplicate_deterministic_candidate_identifier_remains_fatal(self):
+        candidate = {"candidate_identifier": "same", "candidate_hash": "ignored"}
+        with self.assertRaisesRegex(ValueError, "duplicate deterministic identifier"):
+            MTGJSONImportExecution._validate_candidates((candidate, dict(candidate)))
+
     def test_cli_import_candidates_review_and_missing_source(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

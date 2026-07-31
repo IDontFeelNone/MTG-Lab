@@ -56,6 +56,26 @@ class DeliveryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "exactly one"):
             self.delivery.promote(self.source, self.sha, "all", reviewer="reviewer", review_reference="R-1")
 
+    def test_dry_run_reports_non_unique_external_reference_without_write(self):
+        value = json.loads(self.source.read_text())
+        first = value["data"]["TST"]["cards"][0]
+        first["identifiers"] = {"deckboxId": "2676"}
+        second = dict(first); second.update({
+            "uuid": "00000000-0000-0000-0000-000000000002", "number": "2",
+            "identifiers": {"deckboxId": "2676"}})
+        value["data"]["TST"]["cards"].append(second)
+        self.source.write_text(json.dumps(value)); self.sha = hashlib.sha256(self.source.read_bytes()).hexdigest()
+        result = self.delivery.plan(self.source, self.sha)
+        self.assertEqual(result["manifest"]["identifier_finding_count"], 1)
+        report = json.loads((self.root / "state/reports/mtgjson-delivery/provider-validation.json").read_text())
+        self.assertEqual(report["identifier_findings"][0]["identifier_namespace"], "deckboxId")
+        self.assertEqual(report["identifier_finding_counts"]["by_namespace"], {"deckboxId": 1})
+        package = json.loads(Path(result["manifest"]["batches"][0]["review_package"]).read_text())
+        self.assertEqual(package["acquisition_run"]["identifier_findings"][0]
+                         ["identifier_namespace"], "deckboxId")
+        self.assertFalse(result["canonical_write"])
+        self.assertFalse((self.root / "state/canonical/state.json").exists())
+
     def test_cli_defaults_to_plan_only_and_errors_are_json(self):
         with patch("builtins.print") as output:
             code = main(["--data-root", str(self.root / "cli"), "plan", "--source",

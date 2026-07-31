@@ -1,5 +1,11 @@
 # Session State
 
+> **Phase 108A implemented over merged Phase 107 (`4c7794d`).** Official download and checksum
+> verification succeeded externally, but provider validation safely stopped at `deckboxId:2676`.
+> The over-broad uniqueness assumption is corrected with deterministic scope-aware findings.
+> Architecture v12, canonical contracts, promotion governance, and strict identities are unchanged.
+> The official source artifact is unavailable in this environment, so the workflow rerun is pending.
+
 > **Phase 107 implemented over merged Phase 106 (`456f2df`).** Architecture v12 and canonical
 > authority are unchanged. A checksum-gated local command and manual workflow now deliver runner-
 > temporary AllPrintings bytes into existing production preparation, reporting, one-batch reviewed

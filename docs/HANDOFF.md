@@ -1,4 +1,9 @@
-# Phase 107 MTGJSON Dataset Delivery handoff
+# Phase 108A MTGJSON Identifier Policy handoff
+
+The first official workflow download and checksum verification succeeded, then provider validation
+failed closed on `deckboxId:2676`. Phase 108A corrects that policy generally: rerun the manual
+workflow in `dry-run`, using the same reviewed URL, SHA-256, and positive batch size. Inspect
+identifier findings and confirm deterministic planning before any independent batch review.
 
 Phase 107 composes Phase 105 acquisition/provider validation and Phase 106 ingestion through a
 local command and a manual, read-only GitHub workflow. Both require an explicit SHA-256, keep the

@@ -1,3 +1,7 @@
+> **Phase 108A update:** `src/providers/mtgjson/validator.py` now applies explicit namespace and
+> scope policy. Non-guaranteed external collisions are retained and surfaced for review throughout
+> the existing import/delivery path; strict and internal identities remain fail-closed.
+
 > **Phase 107 update:** `src/promotion/delivery.py`, `scripts/mtgjson_delivery.py`, and the manual
 > MTGJSON workflow deliver checksum-verified artifacts to the Phase 106 APIs, default to dry-run,
 > and bound reviewed promotion to one selected batch. Hosted official-URL access remains HTTP 403;
