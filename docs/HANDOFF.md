@@ -1,4 +1,15 @@
-# Phase 106 Production MTGJSON Dataset Ingestion handoff
+# Phase 107 MTGJSON Dataset Delivery handoff
+
+Phase 107 composes Phase 105 acquisition/provider validation and Phase 106 ingestion through a
+local command and a manual, read-only GitHub workflow. Both require an explicit SHA-256, keep the
+corpus out of Git, default to full-corpus planning without canonical writes, and restrict reviewed
+promotion to one exact deterministic batch with independent reviewer metadata. See
+`MTGJSON_DATASET_DELIVERY.md` for exact commands and workflow instructions.
+
+The official URL was attempted again from hosted Codex and returned HTTP 403. No substitute,
+corpus counts, or real promotion is claimed. Trigger the dry-run workflow, independently review
+one package, then trigger reviewed promotion only after the dry-run is green. Merge remains
+withheld until GitHub Actions are green. Architecture v12 is unchanged.
 
 The merged Phase 105 baseline (`43796c0`) was confirmed. Production ingestion orchestration and tests are complete without architecture changes. With official URL access, acquire AllPrintings through `OfficialDatasetAcquisition`, call `ProductionMTGJSONIngestion.prepare()` on the registered path, independently review one batch, promote it, and retain local verification/performance output. Do not approve the full corpus automatically. Merge remains withheld until GitHub Actions are green.
 

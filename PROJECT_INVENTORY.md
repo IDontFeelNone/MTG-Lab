@@ -1,4 +1,7 @@
-> **Phase 106 update:** `src/promotion/production.py` composes production-scale MTGJSON preparation, deterministic dependency-closed review batching, bounded promotion, typed projection, replay/rollback, downstream compatibility, and performance reporting. Full official-corpus execution remains pending official-URL access; Architecture v12 is unchanged.
+> **Phase 107 update:** `src/promotion/delivery.py`, `scripts/mtgjson_delivery.py`, and the manual
+> MTGJSON workflow deliver checksum-verified artifacts to the Phase 106 APIs, default to dry-run,
+> and bound reviewed promotion to one selected batch. Hosted official-URL access remains HTTP 403;
+> Architecture v12 is unchanged.
 
 > **Phase 94 update:** `src/reasoning/` deterministically packages public semantic responses into immutable provenance-backed AI reasoning contexts. It performs no AI inference or language generation and awaits review and green CI.
 

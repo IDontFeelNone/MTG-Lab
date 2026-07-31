@@ -1,3 +1,12 @@
+## Phase 107 — MTGJSON Dataset Delivery and Production Ingestion Run
+
+- Added a fail-closed local delivery command and manually dispatched GitHub Actions workflow for
+  checksum-verified, temporary-storage AllPrintings planning and exactly one independently
+  reviewed bounded promotion.
+- Added deterministic machine-readable delivery reports, rollback instructions, unittest
+  coverage, and operator documentation. The approved URL still returned HTTP 403 in hosted Codex;
+  no real corpus result or promotion is claimed. Architecture v12 remains unchanged.
+
 ## Phase 106 — Production MTGJSON Dataset Ingestion v1
 
 - Added deterministic dependency-closed review batches, explicit rejected/unresolved accounting, governed bounded promotion, typed projection, replay, rollback, downstream verification, and performance measurements.
