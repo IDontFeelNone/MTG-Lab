@@ -1,4 +1,12 @@
-# Phase 94 — AI Reasoning Context Layer v1 (implemented; review pending)
+# Phase 97 — MB2 Stage 2 card-list intake (evidence-blocked)
+
+The deterministic Stage 2 package interface is implemented, but the required complete,
+terms-compliant immutable MB2 list is absent. No Card or Printing was promoted. Acquisition and
+independent review of that artifact are the next gate; topology, Stage 3 attributes, simulation,
+and expected value remain unauthorized. Architecture v12 is unchanged and merge is withheld
+until GitHub Actions are green.
+
+# Phase 94 — AI Reasoning Context Layer v1 (historical)
 
 A deterministic, immutable, provenance-backed context package now bridges structured semantic responses to future reasoning consumers. LLM/provider integration, prompts, generated advice, embeddings, simulation, and subjective ranking remain excluded. Merge requires green GitHub Actions.
 

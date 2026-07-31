@@ -1,15 +1,9 @@
 # Session State
 
-> **Status: Current — Phase 96A documentation complete; review and green CI pending.**
+> **Phase 97 intake complete; promotion blocked by missing evidence.**
 
-The Phase 96 blocker assessment is merged. Phase 96A selects the existing, non-breaking
-representation: Printing attributes for set/language, no PackDefinition until topology is
-established, and governance metadata in its existing architectural owners. No canonical record,
-runtime, schema, or Architecture v12 contract changed. Evidence acquisition remains the blocker.
-See `PHASE_96A_IMPORT_CONTRACT_RESOLUTION.md`; do not recommend merge until GitHub Actions are green.
-# Phase 96B session state — implementation complete, review pending
-
-The official MB2 title capture is now a hashed, registered, independently reviewed Stage 1
-package. Controlled replay confirms one foundation Product and creates no ProductVersion,
-PackDefinition, Slot, PrintSheet, Card, or Printing. The next action is CI/review, then the
-evidence-gated Stage 2 card-list acquisition; merge is withheld until Actions are green.
+The current branch starts from merged Phase 96B commit `0c88825`. Stage 1 promotion succeeded
+for bounded Product identity. Phase 97 adds only a generic deterministic Card/Printing package
+intake and tests. No complete MB2 card-list artifact is present, so zero canonical entities and
+zero promotion audits were added. Architecture v12, canonical contracts, and runtime behavior
+are unchanged. Merge remains withheld until GitHub Actions are green.

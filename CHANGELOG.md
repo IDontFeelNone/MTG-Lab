@@ -1,3 +1,13 @@
+## Phase 97 — Mystery Booster 2 Stage 2 card-list intake
+
+- Confirmed merged Phase 96B (`0c88825`), unchanged Architecture v12, and successful bounded
+  Stage 1 Product confirmation.
+- Recorded the absence of a complete, terms-compliant immutable MB2 card-list source and
+  stopped with zero Card/Printing promotions rather than fabricating membership.
+- Added a deterministic, fail-closed Stage 2 package intake interface and unittest coverage;
+  it validates provenance, review, identity, completeness, relationships, and audit-plan
+  identity but cannot write canonical state.
+
 ## Phase 96B — Mystery Booster 2 Stage 1 evidence package
 
 - Retained and registered the narrow official MB2 title capture with hash, terms notes,

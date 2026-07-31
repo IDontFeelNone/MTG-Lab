@@ -161,3 +161,6 @@ Booster 2 remains evidence-blocked; Simulation and Intelligence remain unimpleme
 > independently reviewed product-identity packages and delegates canonical writes to the
 > existing promotion service. The retained MB2 Stage 1 package confirms one foundation
 > Product only; all packaging composition and topology remain unresolved.
+> **Phase 97 update:** `src/canonical_import/card_list_package.py` is the fail-closed Stage 2
+> intake interface. No qualifying MB2 list is retained, so canonical Card/Printing counts
+> remain unchanged and no promotion occurred. See `docs/MB2_STAGE_2_CARD_IMPORT.md`.
