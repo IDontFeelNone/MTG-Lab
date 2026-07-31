@@ -1,5 +1,11 @@
 # Production Dataset Ingestion
 
+> **Phase 108A operational correction:** the first official dry run downloaded and checksum-
+> verified AllPrintings but stopped on `duplicate external identifier deckboxId:2676`. Provider
+> validation now exposes non-guaranteed third-party collisions as deterministic review-required
+> findings in the manifest and review packages while strict and internal identities still fail.
+> No canonical write or promotion occurred, and Architecture v12 is unchanged.
+
 > **Phase 106 — implemented 2026-07-31. Architecture v12 unchanged.**
 
 ## Architecture assessment

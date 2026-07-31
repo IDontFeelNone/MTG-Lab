@@ -56,10 +56,13 @@ class MTGJSONDatasetDelivery:
                        "canonical_write": False}
         provider = {"schema_version": SCHEMA, "valid": True, "provider": "mtgjson",
                     "dataset_identifier": manifest["dataset_identifier"],
-                    "artifact_sha256": manifest["artifact_sha256"]}
+                    "artifact_sha256": manifest["artifact_sha256"],
+                    "identifier_findings": manifest["identifier_findings"],
+                    "identifier_finding_counts": manifest["identifier_finding_counts"]}
         summary = {key: manifest[key] for key in ("schema_version", "dataset_identifier",
                    "artifact_sha256", "entity_counts", "candidate_count", "eligible_count",
-                   "rejected_count", "unresolved_count")}
+                   "rejected_count", "unresolved_count", "identifier_findings",
+                   "identifier_finding_count", "identifier_finding_counts")}
         plan = {"schema_version": SCHEMA, "dataset_identifier": manifest["dataset_identifier"],
                 "batch_size": manifest["batch_size"], "batch_count": manifest["batch_count"],
                 "batches": manifest["batches"], "digest": hashlib.sha256(

@@ -1,6 +1,6 @@
 # MTGJSON Reference Dataset Provider v1
 
-**Status:** Phase 99 implemented; local reference evidence only
+**Status:** Phase 108A identifier-scope validation implemented; local reference evidence only
 **Architecture:** v12, unchanged
 
 ## Architecture and authority
@@ -52,6 +52,40 @@ Provider policy records MTGJSON attribution and CC BY 4.0 assessment while conse
 declaring local reference use and no redistribution. Operators remain responsible for verifying
 the terms applicable to the supplied artifact; incomplete or unsupported framework licensing
 metadata fails closed.
+
+### External-identifier scope policy (Phase 108A)
+
+The first official production dry run exposed the invalid former assumption that every non-Oracle
+external identifier was globally unique: validation stopped at `deckboxId:2676` after download and
+checksum verification, with `canonical_write: false`. Architecture v12 and canonical uniqueness
+were not implicated. The provider now treats MTGJSON `uuid` as the strict global Printing identity;
+`scryfallId` as an explicitly configured strict global external identity; `scryfallOracleId` and
+legacy `oracleId` as Card-scoped identities; and `scryfallIllustrationId` as illustration-scoped.
+All other and future namespaces default conservatively to non-unique external references.
+
+Every key below is read dynamically from `cards[].identifiers.<namespace>` and retained on both its
+Printing candidate and a distinct identifier candidate:
+
+| Namespace/provider | Source field | Scope/guarantee | Former behavior | Phase 108A behavior |
+|---|---|---|---|---|
+| MTGJSON | `cards[].uuid` | global Printing; strict | fatal duplicate | fatal duplicate |
+| Scryfall | `scryfallId` | global Printing; strict | fatal duplicate | fatal duplicate |
+| Scryfall | `scryfallOracleId`, `oracleId` | Card-scoped; repeats across Printings | allowed | allowed within Card semantics |
+| Scryfall | `scryfallIllustrationId` | illustration-scoped; art may repeat | fatal duplicate | allowed within illustration semantics |
+| Deckbox | `deckboxId` | uniqueness not guaranteed | fatal duplicate | deterministic `review-required` finding |
+| Card Kingdom | `cardKingdomId`, `cardKingdomFoilId`, `cardKingdomEtchedId` | uniqueness not guaranteed | fatal duplicate | deterministic `review-required` finding |
+| Cardsphere | `cardsphereId` | uniqueness not guaranteed | fatal duplicate | deterministic `review-required` finding |
+| Cardmarket | `mcmId`, `mcmMetaId` | uniqueness not guaranteed | fatal duplicate | deterministic `review-required` finding |
+| Magic Online | `mtgoId`, `mtgoFoilId` | uniqueness not guaranteed by this adapter | fatal duplicate | deterministic `review-required` finding |
+| Gatherer | `multiverseId` | uniqueness not guaranteed by this adapter | fatal duplicate | deterministic `review-required` finding |
+| Arena | `mtgArenaId` | uniqueness not guaranteed by this adapter | fatal duplicate | deterministic `review-required` finding |
+| TCGplayer | `tcgplayerProductId`, `tcgplayerEtchedProductId` | uniqueness not guaranteed | fatal duplicate | deterministic `review-required` finding |
+| Any unlisted third party | `cards[].identifiers.<namespace>` | unknown/not guaranteed | fatal duplicate | fail-safe `review-required` finding |
+
+Malformed names or values remain fatal. A non-fatal collision retains every value, Printing UUID,
+set code, collector number, and JSON source location. Findings carry severity, code, namespace,
+value, scope, affected records, dataset, explanation, and disposition. They are copied into the
+review queue and delivery reports. They never authorize ambiguous resolution or canonical mapping.
 
 ## CLI and future promotion
 

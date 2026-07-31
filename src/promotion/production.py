@@ -104,6 +104,10 @@ class ProductionMTGJSONIngestion:
                   "artifact_sha256": imported["artifact_sha256"],
                   "batch_size": self.batch_size, "batch_count": len(batch_reports),
                   "entity_counts": imported["entity_counts"],
+                  "identifier_findings": imported["validation"]["identifier_findings"],
+                  "identifier_finding_count": len(imported["validation"]["identifier_findings"]),
+                  "identifier_finding_counts": self._finding_counts(
+                      imported["validation"]["identifier_findings"]),
                   "candidate_count": len(candidates), "duplicate_count": 0,
                   "rejected_count": len(rejected), "unresolved_count": len(unresolved),
                   "eligible_count": len(eligible), "promoted_count": 0, "projection_count": 0,
@@ -135,7 +139,11 @@ class ProductionMTGJSONIngestion:
                "started_at": TIMESTAMP, "completed_at": TIMESTAMP, "status": "succeeded",
                "discovered_records": len(rows), "downloaded_snapshots": [],
                "unchanged_snapshots": [], "failures": [], "normalization_counts": {},
-               "assertion_counts": {}, "warnings": [], "report_location": "registered-artifact",
+               "assertion_counts": {},
+               "warnings": ["external identifier collisions require independent review"]
+                           if imported["validation"]["identifier_findings"] else [],
+               "identifier_findings": imported["validation"]["identifier_findings"],
+               "report_location": "registered-artifact",
                "resumable": True}
         package = build_review_package(run, [snapshot], [normalized], assertions, POLICY,
                                        imported["dataset_identifier"])
@@ -192,6 +200,18 @@ class ProductionMTGJSONIngestion:
                   "ai_request_without_provider": request.provider_identifier == "not-invoked"}
         return {"schema_version": SCHEMA, "valid": all(checks.values()), "checks": checks,
                 "replay_seconds": replay_seconds, "ai_model_request": request.to_dict()}
+
+    @staticmethod
+    def _finding_counts(findings: list[Mapping[str, Any]] | tuple[Mapping[str, Any], ...]) -> dict[str, Any]:
+        namespaces = sorted({str(item["identifier_namespace"]) for item in findings})
+        return {"total": len(findings),
+                "affected_record_count": sum(len(item["affected_source_records"])
+                                             for item in findings),
+                "by_namespace": {namespace: sum(item["identifier_namespace"] == namespace
+                                                 for item in findings)
+                                 for namespace in namespaces},
+                "by_severity": {severity: sum(item["severity"] == severity for item in findings)
+                                for severity in ("error", "warning", "review-required")}}
 
     @staticmethod
     def _write(path: Path, value: Mapping[str, Any]) -> None:

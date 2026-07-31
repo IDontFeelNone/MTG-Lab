@@ -1,5 +1,9 @@
 # MTG Lab Roadmap
 
+> **Phase 108A:** external identifier validation now distinguishes strict global, scoped, and
+> non-guaranteed namespaces after the official dry run exposed a valid Deckbox collision. The next
+> gate is a green rerun that reaches deterministic full-corpus planning; promotion remains separate.
+
 > **Phase 107:** reproducible checksum-verified local and GitHub Actions delivery now composes the
 > Phase 106 production path. Dry-run is default and promotion is limited to one independently
 > reviewed deterministic batch. Hosted Codex remains blocked by HTTP 403; automatic full-corpus

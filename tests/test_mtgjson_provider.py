@@ -9,7 +9,8 @@ from pathlib import Path
 from evidence import (AcquisitionMetadata, EvidenceArtifact, EvidenceDataset, ReviewMetadata)
 from mtglab.__main__ import main
 from providers import provider_registry
-from providers.mtgjson import MTGJSONProvider, MTGJSONValidationError, map_dataset, parse_dataset
+from providers.mtgjson import (MTGJSONProvider, MTGJSONValidationError, identifier_findings,
+                               map_dataset, parse_dataset, validate_document)
 from providers.mtgjson.provider import ENTITY_TYPES, LICENSE
 
 FIXTURE = Path(__file__).parent / "fixtures" / "mtgjson" / "AllPrintings.json"
@@ -39,8 +40,42 @@ class MTGJSONProviderTests(unittest.TestCase):
         duplicate = dict(value["data"]["TST"]["cards"][0])
         duplicate["uuid"] = "00000000-0000-4000-8000-000000000099"
         value["data"]["TST"]["cards"].append(duplicate)
-        with self.assertRaisesRegex(MTGJSONValidationError, "duplicate external identifier"):
+        with self.assertRaisesRegex(MTGJSONValidationError, "globally unique external identifier"):
             parse_dataset(json.dumps(value).encode())
+
+    def test_identifier_scope_policy_and_deckbox_collision_findings(self):
+        value = json.loads(FIXTURE.read_text())
+        first = value["data"]["TST"]["cards"][0]
+        first["identifiers"]["deckboxId"] = "2676"
+        duplicate = dict(first)
+        duplicate.update({"uuid": "00000000-0000-4000-8000-000000000099", "number": "99",
+                          "identifiers": {"deckboxId": "2676",
+                                          "scryfallOracleId": first["identifiers"]["scryfallOracleId"]}})
+        value["data"]["TWO"] = {"code": "TWO", "name": "Second", "cards": [duplicate]}
+        first_findings = validate_document(value)
+        second_findings = identifier_findings(value)
+        self.assertEqual(first_findings, second_findings)
+        self.assertEqual(json.dumps(first_findings, sort_keys=True),
+                         json.dumps(identifier_findings(value), sort_keys=True))
+        finding = next(item for item in first_findings
+                       if item["identifier_namespace"] == "deckboxId")
+        self.assertEqual(finding["severity"], "review-required")
+        self.assertEqual(finding["scope"], "not-guaranteed")
+        self.assertEqual(len(finding["affected_source_records"]), 2)
+        self.assertEqual({row["set_code"] for row in finding["affected_source_records"]},
+                         {"tst", "two"})
+        # Repeated card-scoped Oracle identities are expected across printings.
+        self.assertFalse(any(item["identifier_namespace"] == "scryfallOracleId"
+                             for item in first_findings))
+
+    def test_globally_unique_external_identifier_duplicate_remains_fatal(self):
+        value = json.loads(FIXTURE.read_text())
+        duplicate = dict(value["data"]["TST"]["cards"][0])
+        duplicate["uuid"] = "00000000-0000-4000-8000-000000000099"
+        duplicate["number"] = "99"
+        value["data"]["TST"]["cards"].append(duplicate)
+        with self.assertRaisesRegex(MTGJSONValidationError, "scryfallId"):
+            validate_document(value)
         value = json.loads(FIXTURE.read_text())
         value["data"]["TST"]["cards"].append(dict(value["data"]["TST"]["cards"][0]))
         with self.assertRaisesRegex(MTGJSONValidationError, "duplicate printing identifier"):

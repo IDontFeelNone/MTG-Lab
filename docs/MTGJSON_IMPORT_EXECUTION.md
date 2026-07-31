@@ -1,5 +1,10 @@
 # MTGJSON Import Execution
 
+> **Phase 108A:** validation is namespace- and scope-aware after the official corpus exposed a
+> valid repeated `deckboxId`. Strict MTGJSON UUID, deterministic candidate, and configured global
+> identities remain fail-closed. Non-guaranteed external duplicates are retained as deterministic
+> review-required findings in the import result and review queue; they are not canonical approval.
+
 > **Phase 100 — implemented. Architecture v12 remains unchanged.**
 
 ## Architecture assessment
