@@ -157,3 +157,7 @@ Booster 2 remains evidence-blocked; Simulation and Intelligence remain unimpleme
 - `src/canonical/evidence.py`: uncertainty, promotion, and fail-closed consumer API.
 - `docs/CANONICAL_CARD_PRINTING_EVIDENCE_CONTRACT.md`: authoritative v3 policy.
 - No Mystery Booster 2 dataset records were added or rewritten.
+> **Phase 96B update:** `src/canonical_import/evidence_package.py` verifies immutable,
+> independently reviewed product-identity packages and delegates canonical writes to the
+> existing promotion service. The retained MB2 Stage 1 package confirms one foundation
+> Product only; all packaging composition and topology remain unresolved.

@@ -1,3 +1,11 @@
+## Phase 96B — Mystery Booster 2 Stage 1 evidence package
+
+- Retained and registered the narrow official MB2 title capture with hash, terms notes,
+  supported fields, explicit unknowns, and an independent review record.
+- Added a generic reviewed-product evidence package importer and deterministic replay tests.
+- Confirmed the existing foundation Product through controlled promotion without creating
+  ProductVersion, PackDefinition, Slot, PrintSheet, Card, or Printing records.
+
 ## Phase 96 — Mystery Booster 2 Canonical Product Repository v1 (blocked assessment)
 
 - Confirmed merged Phase 95 as the baseline and Architecture v12 as unchanged.

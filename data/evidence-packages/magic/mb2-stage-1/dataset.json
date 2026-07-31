@@ -1,0 +1,14 @@
+{
+  "id": "mb2-official-product-identity-stage-1",
+  "publisher": "MTG Lab",
+  "registered_at": "2026-07-31T00:00:00Z",
+  "schema_version": "mb2-stage-1-dataset-v1",
+  "scope": "official product identity only",
+  "source_ids": [
+    "wizards-mystery-booster-2-product-overview"
+  ],
+  "supported_entity_types": [
+    "product"
+  ],
+  "version": "1.0.0"
+}

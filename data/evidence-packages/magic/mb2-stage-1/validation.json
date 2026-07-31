@@ -1,0 +1,17 @@
+{
+  "candidate_id": "mb2-product-candidate-6a80292f12183541",
+  "checks": [
+    "source_hash",
+    "cross_artifact_lineage",
+    "product_schema",
+    "field_provenance",
+    "bounded_completeness",
+    "explicit_unknowns",
+    "independent_review",
+    "absence_of_topology"
+  ],
+  "id": "mb2-stage-1-candidate-validation",
+  "schema_version": "mb2-stage-1-validation-v1",
+  "status": "valid",
+  "validated_at": "2026-07-31T00:00:00Z"
+}

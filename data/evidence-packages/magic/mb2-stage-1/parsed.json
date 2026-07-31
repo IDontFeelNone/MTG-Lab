@@ -1,0 +1,34 @@
+{
+  "acquisition_target_id": "mystery_booster_2_product_overview",
+  "artifact_version": "1",
+  "errors": [],
+  "id": "mb2-product-overview-6a80292f12183541",
+  "input_content_type": "text/html",
+  "parse_status": "succeeded",
+  "parsed_at": "2026-07-29T00:00:00Z",
+  "parser_id": "mystery_booster_2.product_page",
+  "parser_version": "1",
+  "product_id": "mystery_booster_2",
+  "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+  "record_count": 1,
+  "records": [
+    {
+      "errors": [],
+      "id": "mb2-product-overview-record-6a80292f12183541",
+      "raw_fields": {
+        "document_title": "Mystery Booster 2",
+        "open_graph_title": "Mystery Booster 2"
+      },
+      "record_type": "mystery_booster_2.product_overview",
+      "source_excerpt": {
+        "document_title": "Mystery Booster 2",
+        "open_graph_title": "Mystery Booster 2"
+      },
+      "source_location": "HTML head",
+      "warnings": []
+    }
+  ],
+  "schema_version": "v1",
+  "source_id": "official_product_page",
+  "warnings": []
+}
