@@ -1,3 +1,7 @@
+# Phase 106 Production MTGJSON Dataset Ingestion handoff
+
+The merged Phase 105 baseline (`43796c0`) was confirmed. Production ingestion orchestration and tests are complete without architecture changes. With official URL access, acquire AllPrintings through `OfficialDatasetAcquisition`, call `ProductionMTGJSONIngestion.prepare()` on the registered path, independently review one batch, promote it, and retain local verification/performance output. Do not approve the full corpus automatically. Merge remains withheld until GitHub Actions are green.
+
 # Phase 105 Official Reference Dataset Acquisition handoff
 
 The acquisition-only subsystem is implemented. Use `dataset download mtgjson`, then `verify` and
