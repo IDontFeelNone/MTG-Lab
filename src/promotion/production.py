@@ -109,6 +109,9 @@ class ProductionMTGJSONIngestion:
                   "identifier_finding_counts": self._finding_counts(
                       imported["validation"]["identifier_findings"]),
                   "candidate_count": len(candidates), "duplicate_count": 0,
+                  "quarantined_source_record_count": imported["quarantined_source_record_count"],
+                  "quarantined_candidate_count": imported["quarantined_candidate_count"],
+                  "quarantined_mtgjson_uuids": imported["quarantined_mtgjson_uuids"],
                   "rejected_count": len(rejected), "unresolved_count": len(unresolved),
                   "eligible_count": len(eligible), "promoted_count": 0, "projection_count": 0,
                   "batches": batch_reports,
@@ -210,6 +213,9 @@ class ProductionMTGJSONIngestion:
                 "by_namespace": {namespace: sum(item["identifier_namespace"] == namespace
                                                  for item in findings)
                                  for namespace in namespaces},
+                "by_disposition": {disposition: sum(item["disposition"] == disposition
+                    for item in findings) for disposition in sorted(
+                        {str(item["disposition"]) for item in findings})},
                 "by_severity": {severity: sum(item["severity"] == severity for item in findings)
                                 for severity in ("error", "warning", "review-required")}}
 

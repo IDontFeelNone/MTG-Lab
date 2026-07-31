@@ -91,6 +91,36 @@ class MTGJSONImportExecutionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "duplicate deterministic identifier"):
             MTGJSONImportExecution._validate_candidates((candidate, dict(candidate)))
 
+    def test_ambiguous_scryfall_collision_quarantines_only_dependency_closure(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); value = json.loads(FIXTURE.read_text())
+            first = value["data"]["TST"]["cards"][0]
+            first.update({"number": "7", "language": "English", "layout": "transform",
+                          "side": "a", "faceName": "Front"})
+            collision = "0001e77a-7fff-49d2-a55c-42f6fdf6db08"
+            first["identifiers"]["scryfallId"] = collision
+            second = json.loads(json.dumps(first)); second.update({
+                "uuid": "00000000-0000-4000-8000-000000000099", "side": "b",
+                "faceName": "Back"})
+            value["data"]["TST"]["cards"].append(second)
+            source = root / "collision.json"; source.write_text(json.dumps(value))
+            result = MTGJSONImportExecution(root).import_dataset(source)
+            self.assertEqual(result["quarantined_source_record_count"], 2)
+            self.assertGreater(result["candidate_count"], 0)
+            queued = MTGJSONImportExecution(root).review(
+                result["dataset_identifier"])["imports"][0]["candidates"]
+            self.assertFalse(any(item["entity_type"] == "printing" and
+                item["mapped_fields"]["uuid"] in result["quarantined_mtgjson_uuids"]
+                for item in queued))
+            quarantine = json.loads((root / "evidence/mtgjson/imports" /
+                result["dataset_identifier"] / "identifier_quarantine.json").read_text())
+            self.assertEqual(len(quarantine["mtgjson_uuids"]), 2)
+            self.assertTrue(all(item["validation_state"] == "quarantined"
+                                for item in quarantine["candidates"]))
+            self.assertTrue(all(item["review_status"] == "review-required"
+                                for item in quarantine["candidates"]))
+            self.assertFalse(result["canonical_write"])
+
     def test_cli_import_candidates_review_and_missing_source(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

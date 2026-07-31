@@ -1,3 +1,13 @@
+# Phase 108B Scryfall identifier-collision policy
+
+The official Phase 108A rerun advanced past Deckbox validation and reported `scryfallId` `0001e77a-7fff-49d2-a55c-42f6fdf6db08` more than once. The official artifact and its records are not available in this environment (direct access returned HTTP 403), so the only verified corpus evidence here is the workflow's namespace and value. Consequently, the collision is **classification 4: ambiguous or unsupported**, not a demonstrated exception to Scryfall global printing identity.
+
+Validation still treats `scryfallId` as globally unique. A collision across different set-code, collector-number, or language coordinates remains fatal and now serializes every colliding record into the diagnostic. When distinct MTGJSON UUID rows share all three coordinates, validation cannot safely decide whether they are faces, aliases, duplicate rows, or supersession: it quarantines only their printing and identifier candidate closure, retains the raw artifact and a content hash plus full source inventory for each row, and requires review. No value is special-cased and no row is silently overwritten or deduplicated. MTGJSON UUID uniqueness remains fatal.
+
+Each finding reports count, byte-identity by canonical source-record bytes, UUID difference, set/name/collector/language/rarity/finishes/layout/side/face/other-face fields, the complete identifiers object, source JSON path, hashes, disposition, and rationale. The next official dry run is the evidence gate for the actual records and may refine the classification in a later phase.
+
+---
+
 # MTGJSON Reference Dataset Provider v1
 
 **Status:** Phase 108A identifier-scope validation implemented; local reference evidence only

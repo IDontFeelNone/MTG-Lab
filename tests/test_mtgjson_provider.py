@@ -35,13 +35,14 @@ class MTGJSONProviderTests(unittest.TestCase):
         with self.assertRaisesRegex(MTGJSONValidationError, "number"):
             parse_dataset(json.dumps(value).encode())
 
-    def test_duplicate_identifiers_are_rejected(self):
+    def test_same_coordinates_duplicate_identifiers_require_review(self):
         value = json.loads(FIXTURE.read_text())
         duplicate = dict(value["data"]["TST"]["cards"][0])
         duplicate["uuid"] = "00000000-0000-4000-8000-000000000099"
         value["data"]["TST"]["cards"].append(duplicate)
-        with self.assertRaisesRegex(MTGJSONValidationError, "globally unique external identifier"):
-            parse_dataset(json.dumps(value).encode())
+        findings = validate_document(value)
+        self.assertEqual(findings[0]["severity"], "review-required")
+        self.assertEqual(findings[0]["collision_count"], 2)
 
     def test_identifier_scope_policy_and_deckbox_collision_findings(self):
         value = json.loads(FIXTURE.read_text())
@@ -80,6 +81,32 @@ class MTGJSONProviderTests(unittest.TestCase):
         value["data"]["TST"]["cards"].append(dict(value["data"]["TST"]["cards"][0]))
         with self.assertRaisesRegex(MTGJSONValidationError, "duplicate printing identifier"):
             parse_dataset(json.dumps(value).encode())
+
+    def test_real_shape_same_printing_scryfall_collision_is_quarantinable(self):
+        value = json.loads(FIXTURE.read_text())
+        first = value["data"]["TST"]["cards"][0]
+        first.update({"uuid": "aaaaaaaa-0000-4000-8000-000000000001",
+            "name": "Collision Card", "faceName": "Front", "number": "7",
+            "language": "English", "rarity": "rare", "finishes": ["nonfoil"],
+            "layout": "transform", "side": "a", "otherFaceIds": ["face-b"]})
+        first["identifiers"]["scryfallId"] = "0001e77a-7fff-49d2-a55c-42f6fdf6db08"
+        second = json.loads(json.dumps(first)); second.update({
+            "uuid": "bbbbbbbb-0000-4000-8000-000000000002", "faceName": "Back",
+            "side": "b", "otherFaceIds": ["face-a"]})
+        value["data"]["TST"]["cards"].append(second)
+        first_result = validate_document(value)
+        second_result = validate_document(value)
+        finding = next(item for item in first_result
+                       if item["identifier_namespace"] == "scryfallId")
+        self.assertEqual(finding["severity"], "review-required")
+        self.assertEqual(finding["code"], "ambiguous-global-external-identifier")
+        self.assertEqual(finding["collision_count"], 2)
+        self.assertFalse(finding["byte_identical"])
+        self.assertTrue(finding["mtgjson_uuids_differ"])
+        self.assertEqual({row["face_name"] for row in finding["affected_source_records"]},
+                         {"Front", "Back"})
+        self.assertEqual(json.dumps(first_result, sort_keys=True),
+                         json.dumps(second_result, sort_keys=True))
 
     def test_parsing_mapping_unknowns_and_identifiers_are_deterministic(self):
         first = map_dataset(parse_dataset(FIXTURE))

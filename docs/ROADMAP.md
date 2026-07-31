@@ -1,3 +1,5 @@
+> **Phase 108B:** preserve global Scryfall printing identity while quarantining evidence-limited same-coordinate collisions. The immediate gate is an official non-promoting rerun and inspection of every colliding source row; no later phase or promotion is authorized.
+
 # MTG Lab Roadmap
 
 > **Phase 108A:** external identifier validation now distinguishes strict global, scoped, and

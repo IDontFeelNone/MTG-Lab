@@ -1,3 +1,9 @@
+# Next task: Phase 108B official-corpus evidence gate
+
+After this PR is green (without merging it first if the branch workflow can be dispatched), rerun **MTGJSON production ingestion** with the same official URL, reviewed SHA-256, positive batch size, `mode=dry-run`, and blank promotion inputs. Record the complete colliding-record inventory and determine whether the rows are physical-printing duplicates, faces/components, aliases, supersession, source defects, or remain ambiguous. Success means provider validation completes and deterministic unaffected batches plus narrow quarantine are reported, or the next fatal issue is exposed. Do not promote and do not begin Phase 108C.
+
+---
+
 # Next task
 
 Rerun **Actions → MTGJSON production ingestion → Run workflow** with the same official source URL,

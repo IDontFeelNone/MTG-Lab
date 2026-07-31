@@ -103,6 +103,7 @@ jobs:
             ${{ runner.temp }}/mtg-lab-state/reports/
             ${{ runner.temp }}/mtg-lab-state/evidence/mtgjson/production-batches/**/manifest.json
             ${{ runner.temp }}/mtg-lab-state/evidence/mtgjson/production-batches/**/review-package.json
+            ${{ runner.temp }}/mtg-lab-state/evidence/mtgjson/imports/**/identifier_quarantine.json
             ${{ runner.temp }}/run-result.json
           if-no-files-found: warn
           retention-days: 30
