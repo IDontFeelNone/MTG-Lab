@@ -1,7 +1,7 @@
-# Phase 97 handoff
+# Phase 98 handoff
 
-Phase 96B is merged and Stage 1 is promoted within its official-product-identity scope. Phase
-97 found no qualifying complete MB2 card-list artifact and correctly stopped before canonical
-promotion. Supply the JSON package and metadata specified in `MB2_STAGE_2_CARD_IMPORT.md`, then
-run the deterministic intake, independent review, disposable replay, and existing promotion
-workflow. Do not infer membership or topology. Withhold merge until GitHub Actions are green.
+The provider-neutral evidence framework is implemented over merged Phase 97. Review
+`MULTI_SOURCE_EVIDENCE_FRAMEWORK.md`, the immutable contracts in `src/evidence`, registry failure
+behavior, CLI output, and tests. No provider networking or dataset population is authorized.
+Future adapters must retain licensing, capture, SHA-256, independent-review, and existing
+canonical-promotion gates. Withhold merge until GitHub Actions are green.

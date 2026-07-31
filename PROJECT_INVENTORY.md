@@ -55,6 +55,7 @@ questions guide future proposals without authorizing them.
 | Canonical Semantic Query Layer | Immutable structured operations, deterministic Query/Analytics delegation, snapshot identities, provenance, and JSON CLI | Operational v1; no AI reasoning or language generation |
 | Canonical Import Pipeline | Reviewed local JSON/CSV adapters, provenance, dry-run/validation-only modes, deterministic report, atomic game-tree replacement | Operational v1; local-only and single-writer |
 | Raw data acquisition | Immutable byte snapshots, provider adapters, normalized source records, assertion bridge, acquisition-run reports, offline CLI | Operational v1; no live providers or canonical promotion |
+| Multi-source evidence acquisition | Immutable provider/source/dataset/artifact contracts, provider interface, deterministic reference registry, licensing gates, JSON CLI | Framework v1; no live providers, datasets, or promotion |
 | External dataset ingestion | Canonical supplied-dataset manifest, JSON/CSV/ZIP integrity, MTGJSON v5 provider detection/mapping, registrations, review-package handoff, CLI | Operational v1; stops before human review and promotion |
 | Evidence and candidate ingestion | Immutable evidence storage, parsers/normalizers, candidate validation, retained intermediate artifacts, population review | Operational for bounded reviewed workflows |
 | Evidence Repository and Review | Content-verified bundles, Source Record validation, external handoff integrity/provenance/completeness/conflict reports | Operational pre-promotion gate |
@@ -164,3 +165,7 @@ Booster 2 remains evidence-blocked; Simulation and Intelligence remain unimpleme
 > **Phase 97 update:** `src/canonical_import/card_list_package.py` is the fail-closed Stage 2
 > intake interface. No qualifying MB2 list is retained, so canonical Card/Printing counts
 > remain unchanged and no promotion occurred. See `docs/MB2_STAGE_2_CARD_IMPORT.md`.
+> **Phase 98 update:** `src/evidence/` provides immutable multi-source acquisition contracts,
+> provider capabilities and registration, and a deterministic non-canonical reference dataset
+> registry; `mtg-lab evidence` provides JSON inspection and validation. No provider networking,
+> dataset population, automatic promotion, canonical contract, or Architecture v12 change exists.

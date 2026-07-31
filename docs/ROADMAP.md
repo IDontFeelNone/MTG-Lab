@@ -1,3 +1,11 @@
+# Phase 98 — Multi-Source Evidence Acquisition Framework v1
+
+The generic framework is implemented with immutable provider/source/dataset/artifact/acquisition
+contracts, deterministic reference registration, fail-closed licensing, provider capabilities,
+and JSON CLI inspection. It adds no live providers, populated datasets, product-specific logic,
+or promotion path. Architecture v12 is unchanged; merge awaits green GitHub Actions. Future
+provider implementations require separate approval.
+
 # Phase 97 — MB2 Stage 2 card-list intake (evidence-blocked)
 
 The deterministic Stage 2 package interface is implemented, but the required complete,
