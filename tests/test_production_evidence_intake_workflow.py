@@ -18,6 +18,9 @@ class ProductionEvidenceIntakeWorkflowTests(unittest.TestCase):
 
     def test_artifact_is_authenticated_and_phase_111_intake_is_reverified(self):
         self.assertIn("sha256sum --check --strict", self.workflow)
+        self.assertIn("normalize-workflow-artifact", self.workflow)
+        self.assertLess(self.workflow.index("sha256sum --check --strict"),
+                        self.workflow.index("normalize-workflow-artifact"))
         self.assertIn("evidence intake", self.workflow)
         self.assertGreaterEqual(self.workflow.count("evidence verify"), 2)
         self.assertIn("status\") != \"completed\"", self.workflow)
@@ -25,10 +28,19 @@ class ProductionEvidenceIntakeWorkflowTests(unittest.TestCase):
 
     def test_write_scope_is_noncanonical_and_pr_based(self):
         self.assertIn("grep -Ev '^data/production_runs/'", self.workflow)
-        self.assertIn('branch="production-evidence/run-$RUN_ID"', self.workflow)
+        self.assertIn('branch="$DESTINATION_BRANCH"', self.workflow)
+        self.assertIn('test "$branch" = "production-evidence/run-$RUN_ID"', self.workflow)
         self.assertIn("git diff --cached --quiet", self.workflow)
         self.assertIn("gh pr create", self.workflow)
         self.assertNotIn("reviewed-promotion", self.workflow)
+
+    def test_dry_run_uploads_adapter_contract_without_git_side_effects(self):
+        self.assertIn("dry_run:", self.workflow)
+        self.assertIn("if: ${{ !inputs.dry_run }}", self.workflow)
+        self.assertIn("normalized/adapter-report.json", self.workflow)
+        self.assertIn("normalized/manifest.json", self.workflow)
+        self.assertIn("normalized/normalized-inventory.json", self.workflow)
+        self.assertIn("verification-result.json", self.workflow)
 
 
 if __name__ == "__main__":

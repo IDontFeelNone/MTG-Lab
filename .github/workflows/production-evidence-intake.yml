@@ -14,6 +14,19 @@ on:
       archive_sha256:
         description: Independently obtained SHA-256 of the GitHub artifact ZIP
         required: true
+      destination_branch:
+        description: Dedicated evidence-only destination branch
+        required: true
+        default: production-evidence/run-30663562841
+      base_branch:
+        description: Reviewed pull-request base branch
+        required: true
+        default: main
+      dry_run:
+        description: Normalize and verify without creating a branch, commit, or pull request
+        required: true
+        type: boolean
+        default: true
 
 # The job reads one Actions artifact and writes only a review branch and PR.
 permissions:
@@ -33,6 +46,9 @@ jobs:
       RUN_ID: ${{ inputs.run_id }}
       ARTIFACT_NAME: ${{ inputs.artifact_name }}
       ARCHIVE_SHA256: ${{ inputs.archive_sha256 }}
+      DESTINATION_BRANCH: ${{ inputs.destination_branch }}
+      BASE_BRANCH: ${{ inputs.base_branch }}
+      DRY_RUN: ${{ inputs.dry_run }}
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
     steps:
@@ -118,9 +134,19 @@ jobs:
         run: |
           set -euo pipefail
           archive="$RUNNER_TEMP/production-evidence-intake/artifact.zip"
-          PYTHONPATH=src python -m mtglab --data-root data evidence intake "$archive" \
-            --sha256 "${ARCHIVE_SHA256,,}" --run-id "$RUN_ID" --format json
-          PYTHONPATH=src python -m mtglab --data-root data evidence verify "$RUN_ID" --format json
+          normalized="$RUNNER_TEMP/production-evidence-intake/normalized"
+          PYTHONPATH=src python -m mtglab evidence normalize-workflow-artifact "$archive" \
+            --sha256 "${ARCHIVE_SHA256,,}" --run-id "$RUN_ID" --artifact-name "$ARTIFACT_NAME" \
+            --repository "$GH_REPO" --commit-sha "${{ steps.artifact.outputs.head_sha }}" \
+            --output "$normalized" --format json \
+            | tee "$RUNNER_TEMP/production-evidence-intake/adapter-result.json"
+          normalized_archive="$normalized/normalized-intake.zip"
+          normalized_sha256="$(sha256sum "$normalized_archive" | awk '{print $1}')"
+          PYTHONPATH=src python -m mtglab --data-root data evidence intake "$normalized_archive" \
+            --sha256 "$normalized_sha256" --run-id "$RUN_ID" --format json \
+            | tee "$RUNNER_TEMP/production-evidence-intake/intake-result.json"
+          PYTHONPATH=src python -m mtglab --data-root data evidence verify "$RUN_ID" --format json \
+            | tee "$RUNNER_TEMP/production-evidence-intake/verification-result.json"
 
       - name: Enforce repository write boundary
         run: |
@@ -133,11 +159,13 @@ jobs:
           PYTHONPATH=src python -m mtglab --data-root data evidence verify "$RUN_ID" --format json
 
       - name: Commit verified evidence on dedicated branch
+        if: ${{ !inputs.dry_run }}
         env:
           HEAD_SHA: ${{ steps.artifact.outputs.head_sha }}
         run: |
           set -euo pipefail
-          branch="production-evidence/run-$RUN_ID"
+          branch="$DESTINATION_BRANCH"
+          test "$branch" = "production-evidence/run-$RUN_ID" || { echo 'Unexpected destination branch' >&2; exit 1; }
           if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
             echo "Dedicated intake branch already exists: $branch" >&2
             exit 1
@@ -154,9 +182,10 @@ jobs:
           git push origin "$branch"
 
       - name: Open evidence-only pull request
+        if: ${{ !inputs.dry_run }}
         run: |
           set -euo pipefail
-          branch="production-evidence/run-$RUN_ID"
+          branch="$DESTINATION_BRANCH"
           body="$RUNNER_TEMP/production-evidence-intake/pr-body.md"
           cat > "$body" <<EOF
           ## Summary
@@ -171,5 +200,19 @@ jobs:
           ## Validation
           - \`PYTHONPATH=src python -m mtglab --data-root data evidence verify $RUN_ID --format json\`
           EOF
-          gh pr create --base "${{ github.event.repository.default_branch }}" --head "$branch" \
+          gh pr create --base "$BASE_BRANCH" --head "$branch" \
             --title "Retain production evidence for run $RUN_ID" --body-file "$body"
+
+      - name: Upload dry-run normalization and verification evidence
+        if: ${{ always() && inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-evidence-normalization-${{ inputs.run_id }}
+          path: |
+            ${{ runner.temp }}/production-evidence-intake/normalized/adapter-report.json
+            ${{ runner.temp }}/production-evidence-intake/normalized/manifest.json
+            ${{ runner.temp }}/production-evidence-intake/normalized/normalized-inventory.json
+            ${{ runner.temp }}/production-evidence-intake/adapter-result.json
+            ${{ runner.temp }}/production-evidence-intake/intake-result.json
+            ${{ runner.temp }}/production-evidence-intake/verification-result.json
+          if-no-files-found: warn

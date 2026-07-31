@@ -1,4 +1,11 @@
-# Phase 112 handoff
+# Phase 112A handoff
+
+Phase 112 is merged at `188101b`. Run `30663562841`'s artifact was authenticated but correctly
+failed Phase 111 because the native workflow layout has no root intake `manifest.json`; this is not
+evidence corruption. Phase 112A adds deterministic normalization and dry-run reporting, then uses
+the unchanged intake/verify boundary. Dispatch the exact dry-run inputs in
+`GITHUB_PRODUCTION_EVIDENCE_INTAKE.md`. Do not use non-dry-run mode, review, approve, or promote
+until normalization and all GitHub Actions checks are green.
 
 The manually dispatched `Production evidence intake` workflow now performs the Phase 111 intake
 without transferring the ZIP to Codex. It validates the selected successful workflow and exact

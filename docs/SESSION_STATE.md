@@ -1,3 +1,10 @@
+> **Phase 112A implemented.** Merged Phase 112 (`188101b`) authenticated artifact
+> `mtgjson-ingestion-30663562841`, but Phase 111 rejected its native nested layout because it lacks
+> a root intake manifest. The deterministic adapter now validates and normalizes that evidence for
+> unchanged Phase 111 intake. The failure was not evidence corruption. Exact `dry_run: true`
+> validation remains next; no canonical write, review, approval, promotion, or Architecture v12
+> change occurred.
+
 > **Phase 112 complete.** A secure manually triggered GitHub-native workflow can download an
 > exact successful-run artifact, authenticate its caller-supplied digest, invoke Phase 111 intake
 > and verification, enforce the non-canonical path boundary, and open a dedicated evidence PR.
