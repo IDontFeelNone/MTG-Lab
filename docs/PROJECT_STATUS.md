@@ -41,3 +41,11 @@ and promotion governance are unchanged.
 - MB2 full population, Simulation, and AI Advisor: Not Ready.
 - Current implementation assessment: `PHASE_101_ARCHITECTURE_REVIEW.md`.
 - No subsequent implementation milestone is authorized by this status document.
+# Phase 108C update — 2026-07-31
+
+Production AllPrintings dry-run planning now uses resumable, one-set-at-a-time streaming shards
+and compact indexes, including compressed-byte verification, targeted discovery/extraction,
+cross-shard collision review/quarantine, and summary-only reporting. Architecture v12 remains
+unchanged. Fixture validation is complete; the official targeted workflow rerun and green GitHub
+Actions remain required, so resolution and merge are not claimed. See
+[`PHASE_108C_STREAMING_INGESTION.md`](PHASE_108C_STREAMING_INGESTION.md).

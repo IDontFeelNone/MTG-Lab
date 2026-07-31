@@ -11,6 +11,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-root", type=Path, required=True)
     parser.add_argument("--batch-size", type=int, default=1000)
+    parser.add_argument("--target", action="append", default=[],
+                        help="set name or discovered set code (repeatable; dry-run only)")
     commands = parser.add_subparsers(dest="command", required=True)
     for name in ("verify", "plan", "list", "promote"):
         command = commands.add_parser(name)
@@ -32,7 +34,8 @@ def main(argv=None):
     try:
         if args.command == "verify": result = delivery.verify(args.source, args.sha256)
         elif args.command in ("plan", "list"):
-            result = delivery.plan(args.source, args.sha256, args.batch)
+            result = delivery.plan(args.source, args.sha256, args.batch,
+                                   targets=tuple(args.target))
             if args.command == "list": result = result["manifest"]["batches"]
         elif args.command == "promote":
             result = delivery.promote(args.source, args.sha256, args.batch,
