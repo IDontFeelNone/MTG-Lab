@@ -1,3 +1,12 @@
+## Phase 112 — GitHub-native production artifact intake
+
+- Added a manually dispatched, least-privilege workflow that validates a successful repository
+  workflow run and its exact unexpired artifact before downloading it through the GitHub API.
+- Required an independently supplied archive SHA-256, applied the Phase 111 intake and verification
+  commands, and failed closed if any path outside `data/production_runs/` changed.
+- Added dedicated intake-branch commit and evidence-only pull-request creation; candidate review,
+  approval, promotion, and canonical writes remain explicitly out of scope.
+
 ## Phase 111 — production artifact intake and evidence repository
 
 - Added a permanent, non-canonical `data/production_runs/` repository with immutable verified run

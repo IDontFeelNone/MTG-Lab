@@ -1,8 +1,8 @@
-# Phase 111 status — Production Evidence Repository implemented
+# Phase 112 status — GitHub-native production evidence intake implemented
 
-Phase 111 adds verified, immutable, non-canonical production-run retention under
-`data/production_runs/`, deterministic indexing, and JSON CLI lookup and verification. It is now
-possible to commit successful workflow evidence for future sessions without an uploaded ZIP.
-No run artifact was supplied in this phase, so run `30663562841` and its expected MB2 batch remain
-absent and Phase 110B remains stopped at its artifact gate. Architecture v12, canonical contracts,
-canonical state, review decisions, and promotion state are unchanged.
+Phase 112 adds a manually dispatched GitHub workflow that downloads one exact artifact from a
+successful production-ingestion run, authenticates it with an independently supplied SHA-256,
+applies the Phase 111 intake and verification boundary, and opens a dedicated evidence-only pull
+request. No workflow was dispatched in this implementation phase, so run `30663562841` and its
+expected MB2 batch remain absent and Phase 110B remains stopped at its artifact gate. Architecture
+v12, canonical contracts, canonical state, review decisions, and promotion state are unchanged.

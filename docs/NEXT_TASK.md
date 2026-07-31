@@ -1,7 +1,7 @@
-# Next task after Phase 111
+# Next task after Phase 112
 
-Use the Phase 111 intake boundary to retain and verify successful run `30663562841`. Confirm the
-first MB2 batch identity from retained bytes, then perform the previously blocked independent
-Phase 110B review. Record real reviewer identity and a durable review reference only after full
-candidate, dependency, payload, finding, and lineage inspection. Promotion remains separately
-authorized and must not occur as part of evidence intake or review.
+Manually dispatch `Production evidence intake` with the independently obtained SHA-256 for
+artifact `mtgjson-ingestion-30663562841` from successful run `30663562841`, then review and merge
+the workflow-created evidence-only pull request. Only after the retained run verifies on the
+default branch may a separately authorized phase restart the blocked independent Phase 110B
+review. Intake must not review, approve, or promote candidates.
