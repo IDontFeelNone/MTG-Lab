@@ -64,8 +64,20 @@ class MTGJSONImportExecution:
         if artifact_errors or dataset_errors:
             raise ValueError("; ".join(artifact_errors + dataset_errors))
 
+        quarantined_uuids = {row["mtgjson_uuid"] for finding in findings
+            if finding["disposition"].startswith("quarantine")
+            for row in finding["affected_source_records"]}
+        eligible_mapped, quarantined_mapped = [], []
+        for record in mapped:
+            fields = record["mapped_fields"]
+            source_uuid = fields.get("uuid") or fields.get("printing_uuid")
+            (quarantined_mapped if source_uuid in quarantined_uuids else eligible_mapped).append(record)
         candidates = tuple(self._candidate(record, dataset_id, artifact_id, acquisition)
-                           for record in mapped)
+                           for record in eligible_mapped)
+        quarantined_candidates = tuple(
+            self._candidate(record, dataset_id, artifact_id, acquisition,
+                            validation_state="quarantined", review_status="review-required")
+            for record in quarantined_mapped)
         self._validate_candidates(candidates)
         provider.register_artifact(artifact)
         provider.register_dataset(dataset)
@@ -75,6 +87,10 @@ class MTGJSONImportExecution:
         _write_repeatable(import_root / "review_queue.json", {"schema_version": "1.0.0",
                           "dataset_identifier": dataset_id, "review_status": "pending",
                           "identifier_findings": findings, "candidates": candidates})
+        _write_repeatable(import_root / "identifier_quarantine.json", {
+            "schema_version": "1.0.0", "dataset_identifier": dataset_id,
+            "mtgjson_uuids": sorted(quarantined_uuids), "identifier_findings": findings,
+            "candidates": quarantined_candidates})
         counts = {kind: sum(item["entity_type"] == kind for item in candidates)
                   for kind in ENTITY_TYPES}
         return {"schema_version": "1.0.0", "status": "awaiting_human_review",
@@ -82,6 +98,9 @@ class MTGJSONImportExecution:
                 "artifact_identifier": artifact_id, "artifact_sha256": digest,
                 "candidate_sha256": hashlib.sha256(deterministic_json(candidates).encode()).hexdigest(),
                 "candidate_count": len(candidates), "entity_counts": counts,
+                "quarantined_source_record_count": len(quarantined_uuids),
+                "quarantined_candidate_count": len(quarantined_candidates),
+                "quarantined_mtgjson_uuids": sorted(quarantined_uuids),
                 "validation": {"valid": True, "errors": [], "identifier_findings": findings,
                     "review_required": bool(findings)},
                 "review_queue": {"status": "pending", "count": len(candidates),
@@ -90,10 +109,11 @@ class MTGJSONImportExecution:
 
     @staticmethod
     def _candidate(record: Mapping[str, Any], dataset_id: str, artifact_id: str,
-                   acquisition: AcquisitionMetadata) -> dict[str, Any]:
+                   acquisition: AcquisitionMetadata, *, validation_state: str = "validated",
+                   review_status: str = "pending") -> dict[str, Any]:
         value = {**record, "provenance": {"provider": PROVIDER_IDENTIFIER,
                  "artifact_identifier": artifact_id}, "source_dataset": dataset_id,
-                 "validation_state": "validated", "review_status": "pending",
+                 "validation_state": validation_state, "review_status": review_status,
                  "confidence": 1.0, "acquisition_metadata": acquisition.to_dict()}
         value["candidate_hash"] = hashlib.sha256(deterministic_json(value).encode()).hexdigest()
         return value

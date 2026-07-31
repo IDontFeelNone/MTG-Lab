@@ -1,3 +1,9 @@
+# Phase 108B delivery evidence
+
+The manual workflow uploads deterministic identifier-quarantine artifacts in addition to provider, batch, and review reports. Run **Actions → MTGJSON production ingestion → Run workflow** using the same approved URL and reviewed SHA-256, a positive maximum batch size, `mode=dry-run`, and blank batch/reviewer/reference fields. Download the `mtgjson-ingestion-<run-id>` artifact and inspect `provider-validation.json`, `dataset-summary.json`, `batch-plan.json`, every manifest/review package, and `identifier_quarantine.json`. Merge and promotion remain withheld until CI is green and this gate validates the real records.
+
+---
+
 # MTGJSON Dataset Delivery and Production Run
 
 > **Phase 108A:** the first real workflow reached provider validation after official download and

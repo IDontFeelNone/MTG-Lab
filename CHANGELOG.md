@@ -1,3 +1,10 @@
+## Phase 108B — Scryfall Identifier Collision Investigation
+
+- Classified the evidence-limited official `scryfallId` collision as ambiguous/unsupported rather than weakening global uniqueness.
+- Added complete deterministic collision inventories, fatal diagnostics, narrow dependency-closure quarantine, review-visible evidence, and unaffected batch continuation.
+- Preserved strict MTGJSON UUID and internal identity guarantees, the Phase 108A Deckbox policy, dry-run non-writing behavior, and reviewed promotion boundaries.
+- The official artifact is unavailable locally; an official GitHub dry run remains the resolution gate.
+
 ## Phase 108A — External Identifier Validation Policy Fix
 
 - Corrected the real-corpus defect that treated every non-Oracle MTGJSON external identifier as

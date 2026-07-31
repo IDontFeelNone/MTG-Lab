@@ -1,3 +1,5 @@
+> **Phase 108B update:** ambiguous same-printing-coordinate `scryfallId` collisions are now fully diagnosed and narrowly quarantined; different-coordinate collisions remain fatal. Unaffected records continue to deterministic planning, while quarantined records cannot be promoted. Official-corpus verification remains pending.
+
 > **Phase 108A update:** `src/providers/mtgjson/validator.py` now applies explicit namespace and
 > scope policy. Non-guaranteed external collisions are retained and surfaced for review throughout
 > the existing import/delivery path; strict and internal identities remain fail-closed.

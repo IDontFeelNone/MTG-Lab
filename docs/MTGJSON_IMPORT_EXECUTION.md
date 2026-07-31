@@ -1,3 +1,9 @@
+# Phase 108B ambiguous-identity quarantine
+
+Import now materializes `identifier_quarantine.json`. Printing and identifier candidates whose MTGJSON UUID participates in an ambiguous same-coordinate globally unique collision are excluded from the promotable review queue; all unaffected candidates continue. The quarantine retains deterministic findings, affected UUIDs, provenance through the immutable source artifact, and quarantined candidate hashes. Fatal different-coordinate collisions still fail before registration with complete row diagnostics. Dry-run and import remain `canonical_write: false`.
+
+---
+
 # MTGJSON Import Execution
 
 > **Phase 108A:** validation is namespace- and scope-aware after the official corpus exposed a

@@ -1,3 +1,9 @@
+# Phase 108B handoff
+
+Baseline `69b4feb` contains merged Phase 108A. Phase 108B adds generic, deterministic diagnostics and quarantine for ambiguous same-coordinate globally unique Scryfall collisions. The official corpus was not available, so the full inventory (count and record values) remains unknown rather than inferred. Rerun the manual workflow in dry-run with the same URL/SHA-256; inspect the uploaded quarantine and provider reports. Do not merge or promote until CI is green and the official run validates the decision. Stop after Phase 108B.
+
+---
+
 # Phase 108A MTGJSON Identifier Policy handoff
 
 The first official workflow download and checksum verification succeeded, then provider validation

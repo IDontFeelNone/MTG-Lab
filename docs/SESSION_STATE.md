@@ -1,3 +1,5 @@
+> **Phase 108B implemented over merged Phase 108A (`69b4feb`), official verification pending.** The reported Scryfall UUID collision cannot be classified from the unavailable corpus, so it is conservatively ambiguous/unsupported. Generic full-row diagnostics and narrow quarantine preserve all evidence and let unaffected planning continue. Architecture v12 and strict internal identities are unchanged. Merge/promotion are withheld pending green CI and an official dry run.
+
 # Session State
 
 > **Phase 108A implemented over merged Phase 107 (`4c7794d`).** Official download and checksum

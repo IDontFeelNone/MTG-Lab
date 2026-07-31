@@ -1,3 +1,9 @@
+# Phase 108B production gate
+
+Production preparation reports quarantined source/candidate counts, UUIDs, namespaces, severities, and dispositions. Quarantined candidates never enter dependency-closed batches and therefore cannot be promoted. Unaffected candidates continue deterministic planning. The official rerun has not occurred, so this change must not be described as resolving the corpus: rerun must complete provider validation or expose the next fatal issue.
+
+---
+
 # Production Dataset Ingestion
 
 > **Phase 108A operational correction:** the first official dry run downloaded and checksum-

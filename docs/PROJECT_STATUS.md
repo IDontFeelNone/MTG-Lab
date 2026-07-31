@@ -1,3 +1,9 @@
+# Phase 108B status — implementation complete, corpus verification pending
+
+Phase 108A is confirmed merged at `69b4feb` (including policy commit `b5ddbed`). The next official run exposed `scryfallId:0001e77a-7fff-49d2-a55c-42f6fdf6db08`. The artifact is unavailable locally, so no unsupported claim about the colliding records is made. Phase 108B conservatively classifies the evidence as ambiguous/unsupported, retains global uniqueness, quarantines only same-coordinate affected closures, and emits a full inventory on rerun. Architecture v12 is unchanged. Merge and promotion are withheld pending green CI and official dry-run validation.
+
+---
+
 # Project Status
 
 > **Phase 108A implemented — 2026-07-31.** The first official dry run verified its artifact but
