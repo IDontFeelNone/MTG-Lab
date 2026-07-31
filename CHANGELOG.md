@@ -1,3 +1,13 @@
+## Phase 105 — Targeted MTGJSON Set Population (source-gated)
+
+- Confirmed merged Phase 104 (`79dbfe5`) and unchanged Architecture v12, canonical authority,
+  independent-review promotion, and typed-projection boundaries.
+- No caller-supplied immutable AllPrintings artifact was available, so the milestone stopped
+  before discovery, extraction, review, promotion, or projection and recorded the exact local
+  artifact request in `docs/TARGETED_MTGJSON_SET_POPULATION.md`.
+- Added no runtime abstraction, fixture substitution, target-specific branch, canonical record,
+  automatic approval, or unattended promotion. Neither requested target is marked populated.
+
 ## Phase 104 — Bounded MTGJSON Canonical Promotion v1
 
 - Added a frozen five-entity MTGJSON-derived corpus and executed the complete governed

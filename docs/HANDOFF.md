@@ -1,4 +1,14 @@
-# Phase 104 handoff
+# Phase 105 handoff
+
+Phase 105 stopped at its mandatory source gate: no caller-supplied immutable MTGJSON
+AllPrintings artifact exists under `/workspace` or `/tmp`. Do not substitute fixtures, download
+data, infer set codes, or add importer infrastructure. Supply and validate the artifact exactly
+as requested in `TARGETED_MTGJSON_SET_POPULATION.md`, then resume deterministic discovery.
+
+No Phase 105 candidate, review, canonical, projection, or downstream artifact exists. Neither
+target is populated. Architecture v12 and the Phase 104 baseline remain unchanged.
+
+## Retained Phase 104 handoff
 
 Phase 104 executes the bounded, governed MTGJSON-derived promotion described in
 `BOUNDED_CANONICAL_PROMOTION.md`. Five reviewed entities reach typed canonical storage and

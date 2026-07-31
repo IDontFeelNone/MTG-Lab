@@ -18,7 +18,8 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 104 bounded MTGJSON canonical promotion complete.
+> **Status: Current** — Phase 105 stopped at its required source gate; Phase 104 remains the
+> implemented baseline.
 
 ## Phase 83 constitutional guidance
 
@@ -36,7 +37,7 @@ questions guide future proposals without authorizing them.
 
 - **Architecture:** v12 (unchanged)
 - **Latest merged milestone:** Phase 100 — MTGJSON Reference Dataset Import Execution v1
-- **Current milestone:** Phase 104 — Bounded MTGJSON Canonical Promotion v1 (complete)
+- **Current milestone:** Phase 105 — targeted MTGJSON set population (stopped: local artifact absent)
 - **Maturity:** pre-alpha; deterministic local reference implementation
 - **Validation baseline:** 253 tests passing locally
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
@@ -150,7 +151,8 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 103 is complete and no next implementation milestone is authorized. The provider accepts
+Phase 105 was authorized but stopped without implementation because the required caller-supplied
+AllPrintings artifact was absent. Phase 104 remains complete. The provider accepts
 local evidence only and cannot promote it. Representative validation composes the existing
 reviewed promotion boundary; full-corpus mapping and operations remain unproven. Mystery Booster
 2 remains evidence-blocked; Simulation and operational AI advice remain unimplemented.
