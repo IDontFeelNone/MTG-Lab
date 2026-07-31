@@ -1,3 +1,12 @@
+## Phase 104 — Bounded MTGJSON Canonical Promotion v1
+
+- Added a frozen five-entity MTGJSON-derived corpus and executed the complete governed
+  review, promotion, typed projection, consumer, replay, rollback, and restore workflow.
+- Added JSON `promote corpus|inspect|verify` commands, deterministic verification, rejected
+  candidate isolation, supersession, and a non-executed `AIModelRequest` demonstration.
+- Architecture v12 and canonical contracts remain unchanged; full or automatic promotion
+  remains prohibited.
+
 ## Phase 103 — Typed Canonical Projection Engine v1
 
 - Added a deterministic, idempotent, versioned projection registry and engine that maps

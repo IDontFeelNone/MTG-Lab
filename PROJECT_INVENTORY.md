@@ -18,7 +18,7 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 103 typed canonical projection complete.
+> **Status: Current** — Phase 104 bounded MTGJSON canonical promotion complete.
 
 ## Phase 83 constitutional guidance
 
@@ -36,9 +36,9 @@ questions guide future proposals without authorizing them.
 
 - **Architecture:** v12 (unchanged)
 - **Latest merged milestone:** Phase 100 — MTGJSON Reference Dataset Import Execution v1
-- **Current milestone:** Phase 103 — Typed Canonical Projection Engine v1 (complete)
+- **Current milestone:** Phase 104 — Bounded MTGJSON Canonical Promotion v1 (complete)
 - **Maturity:** pre-alpha; deterministic local reference implementation
-- **Validation baseline:** 248 passing tests and 17 passing subtests locally
+- **Validation baseline:** 253 tests passing locally
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
   Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
   remain unpopulated

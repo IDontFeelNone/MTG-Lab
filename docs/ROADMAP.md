@@ -1,10 +1,10 @@
 # MTG Lab Roadmap
 
-> **Status: Current — refreshed by Phase 103 on 2026-07-31.**
+> **Status: Current — refreshed by Phase 104 on 2026-07-31.**
 
-Phase 103 closes the typed canonical projection gap identified by the representative corpus.
-The next scale milestone remains separately authorized work; no unattended full import is
-authorized by this projection capability.
+Phase 104 proves the complete governed pipeline on five MTGJSON-derived entities. The next
+scale milestone remains separately authorized work; no unattended full import or automatic
+promotion is authorized by this bounded result.
 > **Architecture:** v12 unchanged.
 > **Authority:** Recommendations only; no milestone below is implementation authorization.
 
@@ -27,10 +27,9 @@ establish complete-corpus operational readiness.
 
 ## Recommended next boundary
 
-Resolve the generic reviewed provider-to-typed-canonical mapping contract, then run a
-non-promoting full-corpus performance, interruption, resume, quarantine, and storage
-rehearsal. Promotion must remain bounded and independently reviewed. The work must not
-change Architecture v12 or add provider-shaped canonical entities.
+Run a non-promoting full-corpus performance, interruption, resume, quarantine, batching,
+and storage rehearsal. Promotion must remain bounded and independently reviewed. The work
+must not change Architecture v12 or add provider-shaped canonical entities.
 
 ## Top 10 remaining milestones, ranked by value
 

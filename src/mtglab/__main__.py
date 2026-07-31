@@ -16,6 +16,8 @@ from evidence import ReferenceDatasetRegistry
 from providers import MTGJSONProvider, provider_registry
 from providers.mtgjson import MTGJSONImportExecution
 from projection import ProjectionError, TypedCanonicalProjectionEngine
+from promotion import BoundedCorpusPromotion
+from acquisition import PromotionError
 
 
 def main(argv=None) -> int:
@@ -119,9 +121,21 @@ def main(argv=None) -> int:
         command.add_argument("--game", default="magic")
         command.add_argument("--format", choices=("json",), default="json")
         if name == "project": command.add_argument("--timestamp", required=True)
+    promote = commands.add_parser("promote")
+    promote_commands = promote.add_subparsers(dest="promote_command", required=True)
+    for name in ("corpus", "inspect", "verify"):
+        command = promote_commands.add_parser(name)
+        command.add_argument("--format", choices=("json",), default="json")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "projection":
+    if args.command == "promote":
+        corpus = Path(__file__).parents[2] / "data/reference/mtgjson/bounded-canonical-promotion-v1.json"
+        workflow = BoundedCorpusPromotion(args.data_root, corpus)
+        try: result = workflow.promote() if args.promote_command == "corpus" else getattr(
+            workflow, args.promote_command)()
+        except (OSError, ValueError, PromotionError, ProjectionError) as error:
+            print(json.dumps({"valid": False, "error": str(error)}, indent=2, sort_keys=True)); return 2
+    elif args.command == "projection":
         engine = TypedCanonicalProjectionEngine(args.data_root / "canonical",
             args.data_root / "canonical" / "games", args.data_root / "projection-audit", game=args.game)
         try:
