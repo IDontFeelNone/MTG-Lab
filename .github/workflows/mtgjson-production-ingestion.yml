@@ -203,6 +203,8 @@ jobs:
             ${{ runner.temp }}/mtg-lab-state/evidence/mtgjson/imports/**/identifier_quarantine.json
             ${{ runner.temp }}/mtg-lab-state/streaming/**/manifest.json
             ${{ runner.temp }}/mtg-lab-state/streaming/**/completed-sets.json
+            ${{ runner.temp }}/mtg-lab-state/streaming/**/candidate-shards/*.json
+            ${{ runner.temp }}/mtg-lab-state/streaming/**/review-indexes/**/review-package.json
             ${{ runner.temp }}/mtg-lab-state/streaming/**/performance-checkpoints/
             ${{ runner.temp }}/run-result.json
             ${{ runner.temp }}/mtg-lab-diagnostics/

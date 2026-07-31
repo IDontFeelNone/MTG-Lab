@@ -1,3 +1,9 @@
+# Phase 109 handoff
+
+The evidence summary for successful production dry run `30649546787` is validated and documented in `MTGJSON_FIRST_SUCCESSFUL_PRODUCTION_RUN.md`. Both requested sets were discovered and deterministic planning completed without canonical writes or promotion. Do not attempt review from the retained summary: candidate shards and all streaming per-batch review-index packages are missing. After this change is green, rerun the same targeted dry run so the corrected artifact upload retains both families. Inspect and independently verify that artifact in a later authorized phase; do not approve or promote anything as part of Phase 109. Merge remains withheld until GitHub Actions are green.
+
+---
+
 # Phase 108B handoff
 
 Baseline `69b4feb` contains merged Phase 108A. Phase 108B adds generic, deterministic diagnostics and quarantine for ambiguous same-coordinate globally unique Scryfall collisions. The official corpus was not available, so the full inventory (count and record values) remains unknown rather than inferred. Rerun the manual workflow in dry-run with the same URL/SHA-256; inspect the uploaded quarantine and provider reports. Do not merge or promote until CI is green and the official run validates the decision. Stop after Phase 108B.

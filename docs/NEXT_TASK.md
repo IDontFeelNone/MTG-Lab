@@ -1,3 +1,9 @@
+# Next task after Phase 109: repeat the targeted retention run
+
+After the Phase 109 pull request is green and merged, dispatch the same checksum-gated `dry-run` for `Mystery Booster 2,Marvel Super Heroes`. Confirm the workflow artifact contains both candidate shard payloads and all 11 `streaming/.../review-indexes/.../review-package.json` files, then verify their hashes and candidate-ID membership against the manifest. This is an evidence-retention rerun only: do not approve or promote a batch, and do not infer missing payloads from run `30649546787`.
+
+---
+
 # Next task: Phase 108B official-corpus evidence gate
 
 After this PR is green (without merging it first if the branch workflow can be dispatched), rerun **MTGJSON production ingestion** with the same official URL, reviewed SHA-256, positive batch size, `mode=dry-run`, and blank promotion inputs. Record the complete colliding-record inventory and determine whether the rows are physical-printing duplicates, faces/components, aliases, supersession, source defects, or remain ambiguous. Success means provider validation completes and deterministic unaffected batches plus narrow quarantine are reported, or the next fatal issue is exposed. Do not promote and do not begin Phase 108C.
