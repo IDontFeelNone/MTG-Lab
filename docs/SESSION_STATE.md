@@ -1,6 +1,10 @@
 # Session State
 
-> **Phase 102 representative corpus validation complete.**
+> **Phase 103 typed canonical projection complete.**
+
+Approved canonical assertions now have a deterministic, validated, audited path into the
+existing strongly typed repository and all four read-layer consumers. Architecture v12 and
+promotion governance remain unchanged.
 
 Architecture v12 is unchanged. A deterministic five-entity test corpus validates the
 governed provider-to-canonical-to-AI-request path, including unknown, conflict, failure,

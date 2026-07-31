@@ -1,3 +1,14 @@
+## Phase 103 — Typed Canonical Projection Engine v1
+
+- Added a deterministic, idempotent, versioned projection registry and engine that maps
+  approved canonical assertion state into existing typed canonical entities.
+- Added fail-closed completeness, conflict/duplicate, lifecycle, supported-combination,
+  schema, and repository validation plus immutable content-addressed projection audits.
+- Added JSON `projection validate`, `projection project`, and `projection inspect` CLI
+  commands and compatibility tests across Query, Analytics, Semantic, and Reasoning.
+- Architecture v12 and canonical contracts remain unchanged; projection cannot bypass
+  validation, independent review, or promotion.
+
 ## Phase 102 — Representative Corpus Validation
 
 - Added a deterministic two-Card, three-Printing corpus spanning sets, rarities, finishes,
