@@ -1,3 +1,8 @@
+> **Phase 112:** A manual GitHub-native workflow securely selects and authenticates a successful
+> Actions artifact, invokes Phase 111 intake and verification, confines changes to
+> `data/production_runs/`, and opens a dedicated evidence-only PR. No production archive is
+> committed yet; Phase 110B remains stopped at its artifact gate.
+>
 > **Phase 111:** Permanent production evidence storage, verified ZIP intake, deterministic indexes, and evidence CLI lookup are implemented. No production archive is committed; Phase 110B remains stopped at its artifact gate.
 
 > **Phase 110B:** `docs/FIRST_MB2_BATCH_REVIEW.md` records that run `30663562841` and expected batch `mb2-batch-000001-e32022126c07` have no retained artifacts in this checkout. Review and decision counts remain undetermined; canonical state is unchanged.

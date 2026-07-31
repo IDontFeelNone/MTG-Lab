@@ -1,0 +1,175 @@
+name: Production evidence intake
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: GitHub Actions run ID that produced the evidence artifact
+        required: true
+        default: "30663562841"
+      artifact_name:
+        description: Exact artifact name from the selected run
+        required: true
+        default: mtgjson-ingestion-30663562841
+      archive_sha256:
+        description: Independently obtained SHA-256 of the GitHub artifact ZIP
+        required: true
+
+# The job reads one Actions artifact and writes only a review branch and PR.
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: production-evidence-intake-${{ inputs.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      RUN_ID: ${{ inputs.run_id }}
+      ARTIFACT_NAME: ${{ inputs.artifact_name }}
+      ARCHIVE_SHA256: ${{ inputs.archive_sha256 }}
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Validate bounded request
+        run: |
+          python - <<'PY'
+          import os
+          import re
+
+          run_id = os.environ["RUN_ID"]
+          artifact_name = os.environ["ARTIFACT_NAME"]
+          digest = os.environ["ARCHIVE_SHA256"].lower()
+          if not re.fullmatch(r"[1-9][0-9]*", run_id):
+              raise SystemExit("run_id must be a positive decimal GitHub Actions run ID")
+          if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}", artifact_name):
+              raise SystemExit("artifact_name contains unsupported characters")
+          if artifact_name != f"mtgjson-ingestion-{run_id}":
+              raise SystemExit("artifact_name must identify the selected ingestion run")
+          if not re.fullmatch(r"[0-9a-f]{64}", digest):
+              raise SystemExit("archive_sha256 must be a lowercase or uppercase SHA-256")
+          PY
+
+      - name: Check selected run and artifact identity
+        id: artifact
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/production-evidence-intake"
+          run_json="$RUNNER_TEMP/production-evidence-intake/run.json"
+          artifacts_json="$RUNNER_TEMP/production-evidence-intake/artifacts.json"
+          gh api --header 'Accept: application/vnd.github+json' \
+            "/repos/$GH_REPO/actions/runs/$RUN_ID" > "$run_json"
+          gh api --paginate --slurp --header 'Accept: application/vnd.github+json' \
+            "/repos/$GH_REPO/actions/runs/$RUN_ID/artifacts?per_page=100" > "$artifacts_json"
+          RUN_JSON="$run_json" ARTIFACTS_JSON="$artifacts_json" python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          import os
+          from pathlib import Path
+
+          run = json.loads(Path(os.environ["RUN_JSON"]).read_text())
+          if run.get("repository", {}).get("full_name") != os.environ["GH_REPO"]:
+              raise SystemExit("selected run does not belong to this repository")
+          if run.get("name") != "MTGJSON production ingestion":
+              raise SystemExit("selected run has an unexpected workflow identity")
+          if run.get("status") != "completed" or run.get("conclusion") != "success":
+              raise SystemExit("selected workflow run did not complete successfully")
+          pages = json.loads(Path(os.environ["ARTIFACTS_JSON"]).read_text())
+          artifacts = [item for page in pages for item in page.get("artifacts", [])]
+          matches = [item for item in artifacts if item.get("name") == os.environ["ARTIFACT_NAME"]]
+          if len(matches) != 1:
+              raise SystemExit(f"expected exactly one named artifact, found {len(matches)}")
+          artifact = matches[0]
+          if artifact.get("expired"):
+              raise SystemExit("selected artifact has expired")
+          if str(artifact.get("workflow_run", {}).get("id")) != os.environ["RUN_ID"]:
+              raise SystemExit("artifact workflow-run identity mismatch")
+          print(f"artifact_id={artifact['id']}")
+          print(f"head_sha={run['head_sha']}")
+          PY
+
+      - name: Download and authenticate immutable ZIP
+        env:
+          ARTIFACT_ID: ${{ steps.artifact.outputs.artifact_id }}
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/production-evidence-intake/artifact.zip"
+          gh api --header 'Accept: application/vnd.github+json' \
+            "/repos/$GH_REPO/actions/artifacts/$ARTIFACT_ID/zip" > "$archive"
+          printf '%s  %s\n' "${ARCHIVE_SHA256,,}" "$archive" | sha256sum --check --strict
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: python -m pip install -r requirements.txt
+
+      - name: Intake and verify non-canonical evidence
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/production-evidence-intake/artifact.zip"
+          PYTHONPATH=src python -m mtglab --data-root data evidence intake "$archive" \
+            --sha256 "${ARCHIVE_SHA256,,}" --run-id "$RUN_ID" --format json
+          PYTHONPATH=src python -m mtglab --data-root data evidence verify "$RUN_ID" --format json
+
+      - name: Enforce repository write boundary
+        run: |
+          set -euo pipefail
+          changed="$(git status --short --untracked-files=all)"
+          test -n "$changed" || { echo 'Intake produced no evidence changes' >&2; exit 1; }
+          unexpected="$(printf '%s\n' "$changed" | awk '{print $2}' | grep -Ev '^data/production_runs/' || true)"
+          test -z "$unexpected" || { printf 'Unexpected paths changed:\n%s\n' "$unexpected" >&2; exit 1; }
+          test ! -e "data/production_runs/$RUN_ID/.git" || { echo 'Nested Git metadata is forbidden' >&2; exit 1; }
+          PYTHONPATH=src python -m mtglab --data-root data evidence verify "$RUN_ID" --format json
+
+      - name: Commit verified evidence on dedicated branch
+        env:
+          HEAD_SHA: ${{ steps.artifact.outputs.head_sha }}
+        run: |
+          set -euo pipefail
+          branch="production-evidence/run-$RUN_ID"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            echo "Dedicated intake branch already exists: $branch" >&2
+            exit 1
+          fi
+          git switch -c "$branch"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -- "data/production_runs/$RUN_ID" data/production_runs/index.json
+          git diff --cached --quiet && { echo 'No bounded evidence staged' >&2; exit 1; }
+          git commit -m "Retain production evidence for run $RUN_ID" \
+            -m "Artifact: $ARTIFACT_NAME" \
+            -m "Artifact-SHA256: ${ARCHIVE_SHA256,,}" \
+            -m "Source-Workflow-Commit: $HEAD_SHA"
+          git push origin "$branch"
+
+      - name: Open evidence-only pull request
+        run: |
+          set -euo pipefail
+          branch="production-evidence/run-$RUN_ID"
+          body="$RUNNER_TEMP/production-evidence-intake/pr-body.md"
+          cat > "$body" <<EOF
+          ## Summary
+          - downloads artifact \`$ARTIFACT_NAME\` from successful workflow run \`$RUN_ID\`
+          - authenticates the ZIP against caller-supplied SHA-256 \`${ARCHIVE_SHA256,,}\`
+          - installs and re-verifies only bounded non-canonical production evidence
+
+          ## Safety boundary
+          This PR performs evidence intake only. It does not review or approve candidates, create a
+          review decision, promote data, or write canonical state.
+
+          ## Validation
+          - \`PYTHONPATH=src python -m mtglab --data-root data evidence verify $RUN_ID --format json\`
+          EOF
+          gh pr create --base "${{ github.event.repository.default_branch }}" --head "$branch" \
+            --title "Retain production evidence for run $RUN_ID" --body-file "$body"
