@@ -1,3 +1,9 @@
+# Phase 110 failed-closed handoff
+
+The merged Phase 109 baseline is `bf696c5`. Do not invoke promotion from retained run `30649546787`: only its evidence summary is present. Candidate shards and per-batch review packages are absent, so candidate hashes, MB2-only membership, dependency closure, and reviewer approval cannot be independently verified. Phase 110 promoted zero Cards and zero Printings and made no canonical write. Obtain a corrected retained dry-run artifact and an independent approval for exactly one demonstrably MB2-only batch before resuming this same milestone. Do not promote Marvel.
+
+---
+
 # Phase 109 handoff
 
 The evidence summary for successful production dry run `30649546787` is validated and documented in `MTGJSON_FIRST_SUCCESSFUL_PRODUCTION_RUN.md`. Both requested sets were discovered and deterministic planning completed without canonical writes or promotion. Do not attempt review from the retained summary: candidate shards and all streaming per-batch review-index packages are missing. After this change is green, rerun the same targeted dry run so the corrected artifact upload retains both families. Inspect and independently verify that artifact in a later authorized phase; do not approve or promote anything as part of Phase 109. Merge remains withheld until GitHub Actions are green.

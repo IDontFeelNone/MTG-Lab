@@ -1,3 +1,5 @@
+> **Phase 110 gate:** The first real canonical promotion remains pending. Phase 110 failed closed because the sole retained successful-run summary cannot reconstruct candidate payloads, review packages, approval, dependency closure, or MB2-only membership. The next operational gate is corrected dry-run retention plus independent one-batch MB2 review; Architecture v12 remains unchanged.
+
 > **Phase 109:** targeted production dry run `30649546787` completed successfully with two discovered sets, 10,940 eligible candidates, 11 deterministic batches, and no write/promotion. Its artifact omitted candidate shards and streaming review-index packages, preventing independent reconstruction. The immediate gate is one new targeted dry run using the corrected retention globs; approval and promotion remain unauthorized.
 
 > **Phase 108B:** preserve global Scryfall printing identity while quarantining evidence-limited same-coordinate collisions. The immediate gate is an official non-promoting rerun and inspection of every colliding source row; no later phase or promotion is authorized.
