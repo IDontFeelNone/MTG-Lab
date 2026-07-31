@@ -1,3 +1,13 @@
+# Phase 112B persistence reconciliation
+
+The two reported dispatches authenticated and verified run `30663562841`, but neither established durable repository evidence. The first was intentionally dry-run. In the second, the workflow's effective `inputs.dry_run` still caused both conditional persistence steps to be skipped. Thus write-boundary validation was the last executed durability-related stage: Git configuration, branch creation, staging, commit, push, and PR creation did **not** run; they produced no command output and no exit status. Because skipped steps are not failures, the job exited zero. This is the exact workflow control-flow defect; it is not an intake-path, ignored-file, or Phase 111 verification defect.
+
+Phase 112B always invokes `scripts/production_evidence_persistence.py` and passes the displayed dry-run value as an explicit `true`/`false` argument. A false value must complete every named persistence stage and independently query the GitHub Pull Requests API. It confirms an open PR, requested head and base, exact head SHA, retained run path, and evidence-only changed-file boundary. Existing branches and PRs are reused only when the retained tree is byte-identical; conflicts, missing permissions, empty staging, push failures, missing PRs, and unverifiable PRs fail nonzero. The report exposes `intake_status`, `run_id`, `evidence_path`, `destination_branch`, `evidence_commit_sha`, `pull_request_number`, `pull_request_url`, `retained_file_count`, `retained_tree_digest`, `canonical_write: false`, and `promotion_performed: false`.
+
+## Exact rerun
+
+Dispatch **Production evidence intake** from merged Phase 112B with: run ID `30663562841`; artifact `mtgjson-ingestion-30663562841`; archive SHA-256 `2887ea307f07b58ddcf4f0179e99e54e79e072949542869e7c01b4275a1ee3ba`; destination `production-evidence/run-30663562841`; base `main`; and `dry_run: false`. Confirm the persistence artifact and workflow outputs contain a commit SHA and PR URL/number. Do not review, approve, promote, or merge evidence until all Actions checks are green.
+
 # GitHub production evidence intake
 
 > **Phase 112A — implemented 2026-07-31. Architecture v12 unchanged.**

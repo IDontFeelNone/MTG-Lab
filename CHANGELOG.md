@@ -1,3 +1,8 @@
+## Phase 112B — Fail-closed production-evidence persistence
+
+- Reconciled the reported non-dry-run intake: normalization, intake, Phase 111 verification, and the write boundary completed, but durable persistence was never established. The only repository workflow path that can finish successfully without a branch is the pair of `if: ${{ !inputs.dry_run }}` steps being skipped; therefore the effective dispatch context remained dry-run even though the operator intended false. No Git, push, or PR command ran, and skipped steps supplied no command output or exit status.
+- Replaced conditional Git/PR steps with an always-invoked persistence state machine. Non-dry-run now fails closed at named stages, verifies GitHub state independently, safely reuses only byte-identical existing evidence and one matching open PR, exposes persistence outputs, and uploads its structured report even on failure. No canonical, review, promotion, ingestion, or Architecture v12 logic changed.
+
 ## Phase 113 — retained MB2 review gate
 
 - Re-ran the independent review exclusively against the Production Evidence Repository and

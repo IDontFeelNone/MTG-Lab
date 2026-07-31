@@ -1,3 +1,7 @@
+# Phase 112B inventory update
+
+Production-evidence persistence is now a fail-closed Git/GitHub state machine in `scripts/production_evidence_persistence.py`, invoked unconditionally by the manual intake workflow. It reports every durable result, rejects ignored or empty staging and out-of-bound changes, never force-pushes, verifies the PR through GitHub APIs, and can reuse only byte-identical existing evidence. The live run is not claimed until that workflow is rerun successfully. Architecture v12 and all canonical/review/promotion behavior are unchanged.
+
 > **Phase 113:** The independent review was rerun exclusively against the Production Evidence
 > Repository. Run `30663562841` is still absent, so no MB2 batch or candidate could be selected,
 > classified, or signed; no Marvel review, promotion, or canonical write occurred.

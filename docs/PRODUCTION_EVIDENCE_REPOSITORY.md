@@ -1,3 +1,7 @@
+# Phase 112B durable-persistence gate
+
+Successful normalization and repository verification are necessary but not durable persistence. The reported false dispatch did not run any Git or pull-request stage, so run `30663562841` remains absent from the live Production Evidence Repository. Phase 112B makes success require a pushed, non-force-updated evidence commit plus an API-verified open PR whose changes are limited to the retained run and deterministic production-runs index. Existing remote state is reusable only when byte-identical. Canonical writes and promotion remain forbidden.
+
 # Production Evidence Repository
 
 > **Phase 111 — implemented 2026-07-31. Architecture v12 unchanged.**

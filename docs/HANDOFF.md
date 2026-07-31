@@ -1,3 +1,7 @@
+# Phase 112B handoff
+
+Merged Phase 113 (`b9941a6`) was the baseline. The successful verification did not prove persistence: both conditional Git/PR steps were skipped, so they emitted no output and no exit code and the job remained green. After Phase 112B is green and merged, rerun the exact non-dry-run dispatch documented in `GITHUB_PRODUCTION_EVIDENCE_INTAKE.md`; require populated commit and PR outputs plus the uploaded persistence report. Withhold evidence merge and all review/promotion until Actions are green.
+
 # Phase 112A handoff
 
 Phase 112 is merged at `188101b`. Run `30663562841`'s artifact was authenticated but correctly

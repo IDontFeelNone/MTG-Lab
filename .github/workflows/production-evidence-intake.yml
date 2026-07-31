@@ -40,6 +40,18 @@ concurrency:
 
 jobs:
   intake:
+    outputs:
+      intake_status: ${{ steps.persistence.outputs.intake_status }}
+      run_id: ${{ steps.persistence.outputs.run_id }}
+      evidence_path: ${{ steps.persistence.outputs.evidence_path }}
+      destination_branch: ${{ steps.persistence.outputs.destination_branch }}
+      evidence_commit_sha: ${{ steps.persistence.outputs.evidence_commit_sha }}
+      pull_request_number: ${{ steps.persistence.outputs.pull_request_number }}
+      pull_request_url: ${{ steps.persistence.outputs.pull_request_url }}
+      retained_file_count: ${{ steps.persistence.outputs.retained_file_count }}
+      retained_tree_digest: ${{ steps.persistence.outputs.retained_tree_digest }}
+      canonical_write: ${{ steps.persistence.outputs.canonical_write }}
+      promotion_performed: ${{ steps.persistence.outputs.promotion_performed }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -158,53 +170,33 @@ jobs:
           test ! -e "data/production_runs/$RUN_ID/.git" || { echo 'Nested Git metadata is forbidden' >&2; exit 1; }
           PYTHONPATH=src python -m mtglab --data-root data evidence verify "$RUN_ID" --format json
 
-      - name: Commit verified evidence on dedicated branch
-        if: ${{ !inputs.dry_run }}
-        env:
-          HEAD_SHA: ${{ steps.artifact.outputs.head_sha }}
+      # This step always runs. The original two conditional steps could both be skipped when the
+      # dispatch was interpreted as dry-run, leaving the successful verification as the job's last
+      # executed command. Persistence is now one fail-closed state machine with a durable report.
+      - name: Persist and independently verify branch, commit, and pull request
+        id: persistence
         run: |
           set -euo pipefail
-          branch="$DESTINATION_BRANCH"
-          test "$branch" = "production-evidence/run-$RUN_ID" || { echo 'Unexpected destination branch' >&2; exit 1; }
-          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
-            echo "Dedicated intake branch already exists: $branch" >&2
-            exit 1
-          fi
-          git switch -c "$branch"
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add -- "data/production_runs/$RUN_ID" data/production_runs/index.json
-          git diff --cached --quiet && { echo 'No bounded evidence staged' >&2; exit 1; }
-          git commit -m "Retain production evidence for run $RUN_ID" \
-            -m "Artifact: $ARTIFACT_NAME" \
-            -m "Artifact-SHA256: ${ARCHIVE_SHA256,,}" \
-            -m "Source-Workflow-Commit: $HEAD_SHA"
-          git push origin "$branch"
+          report="$RUNNER_TEMP/production-evidence-intake/persistence-report.json"
+          python scripts/production_evidence_persistence.py \
+            --run-id "$RUN_ID" --artifact-name "$ARTIFACT_NAME" \
+            --archive-sha256 "${ARCHIVE_SHA256,,}" --destination-branch "$DESTINATION_BRANCH" \
+            --base-branch "$BASE_BRANCH" --repository "$GH_REPO" --dry-run "$DRY_RUN" \
+            --report "$report"
+          REPORT="$report" python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          from pathlib import Path
+          report = json.loads(Path(os.environ["REPORT"]).read_text())
+          for key in ("intake_status", "run_id", "evidence_path", "destination_branch",
+                      "evidence_commit_sha", "pull_request_number", "pull_request_url",
+                      "retained_file_count", "retained_tree_digest", "canonical_write",
+                      "promotion_performed"):
+              value = report[key]
+              print(f"{key}={str(value).lower() if isinstance(value, bool) else value or ''}")
+          PY
 
-      - name: Open evidence-only pull request
-        if: ${{ !inputs.dry_run }}
-        run: |
-          set -euo pipefail
-          branch="$DESTINATION_BRANCH"
-          body="$RUNNER_TEMP/production-evidence-intake/pr-body.md"
-          cat > "$body" <<EOF
-          ## Summary
-          - downloads artifact \`$ARTIFACT_NAME\` from successful workflow run \`$RUN_ID\`
-          - authenticates the ZIP against caller-supplied SHA-256 \`${ARCHIVE_SHA256,,}\`
-          - installs and re-verifies only bounded non-canonical production evidence
-
-          ## Safety boundary
-          This PR performs evidence intake only. It does not review or approve candidates, create a
-          review decision, promote data, or write canonical state.
-
-          ## Validation
-          - \`PYTHONPATH=src python -m mtglab --data-root data evidence verify $RUN_ID --format json\`
-          EOF
-          gh pr create --base "$BASE_BRANCH" --head "$branch" \
-            --title "Retain production evidence for run $RUN_ID" --body-file "$body"
-
-      - name: Upload dry-run normalization and verification evidence
-        if: ${{ always() && inputs.dry_run }}
+      - name: Upload normalization, verification, and persistence report
+        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: production-evidence-normalization-${{ inputs.run_id }}
@@ -215,4 +207,5 @@ jobs:
             ${{ runner.temp }}/production-evidence-intake/adapter-result.json
             ${{ runner.temp }}/production-evidence-intake/intake-result.json
             ${{ runner.temp }}/production-evidence-intake/verification-result.json
+            ${{ runner.temp }}/production-evidence-intake/persistence-report.json
           if-no-files-found: warn
