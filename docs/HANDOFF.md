@@ -1,10 +1,11 @@
-# Phase 103 handoff
+# Phase 104 handoff
 
-Phase 103 implements the Typed Canonical Projection Engine described in
-`TYPED_CANONICAL_PROJECTION.md`. It closes the representative-corpus typed handoff gap
-without changing Architecture v12 or canonical contracts. The engine is local, fail-closed,
-idempotent, repository-validated, and audit-producing. Merge remains withheld until GitHub
-Actions are green.
+Phase 104 executes the bounded, governed MTGJSON-derived promotion described in
+`BOUNDED_CANONICAL_PROMOTION.md`. Five reviewed entities reach typed canonical storage and
+all downstream consumers; one conflicting candidate remains rejected. Replay, rollback,
+restore, deterministic identifiers, hashes, lineage, confidence, and unknown lifecycle are
+verified. Architecture v12 and canonical contracts are unchanged. Merge remains withheld
+until GitHub Actions are green.
 
 Read `PHASE_101_ARCHITECTURE_REVIEW.md`, `REPRESENTATIVE_CORPUS_VALIDATION.md`,
 `PROJECT_STATUS.md`, and `ROADMAP.md`. Architecture v12 remains unchanged. Phase 102 proves
