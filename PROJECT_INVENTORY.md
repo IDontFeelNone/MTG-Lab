@@ -18,8 +18,7 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 100 is implemented and awaits review and
-> green GitHub Actions.
+> **Status: Current** — Phase 101 architecture review and roadmap refresh complete.
 
 ## Phase 83 constitutional guidance
 
@@ -36,15 +35,15 @@ questions guide future proposals without authorizing them.
 ## Current state
 
 - **Architecture:** v12 (unchanged)
-- **Latest merged milestone:** Phase 98 — Multi-Source Evidence Acquisition Framework v1
-- **Current milestone:** Phase 100 — MTGJSON Reference Dataset Import Execution v1
+- **Latest merged milestone:** Phase 100 — MTGJSON Reference Dataset Import Execution v1
+- **Current milestone:** Phase 101 — Architecture Review and Roadmap Refresh (complete)
 - **Maturity:** pre-alpha; deterministic local reference implementation
-- **Validation baseline:** 194 passing tests locally under the CI command
+- **Validation baseline:** 246 passing tests and 17 passing subtests locally
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
   Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
   remain unpopulated
-- **Review authority:** `ARCHITECTURE_REVIEW_v1.md` records current maturity, debt,
-  risks, dependency direction, and non-breaking consolidation recommendations
+- **Review authority:** `docs/PHASE_101_ARCHITECTURE_REVIEW.md` records current maturity, debt,
+  risks, dependency direction, readiness, and roadmap recommendations
 
 ## Implemented subsystem inventory
 
@@ -109,8 +108,8 @@ questions guide future proposals without authorizing them.
   lineage reader.
 - Filesystem stores are deterministic and appropriate for current volume, but full-
   tree loading/copying, linear lookup, and single-writer assumptions limit scale.
-- The four defects recorded in `ARCHITECTURE_REVIEW_v1.md` are documentation findings;
-  Phase 77 intentionally changes no behavior.
+- The Phase 77 review is retained as historical evidence; the Phase 101 review is the
+  current assessment and changes no Architecture v12 boundary.
 
 ## Documentation hierarchy
 
@@ -126,7 +125,7 @@ Documentation status labels have the following consistent meaning:
 Tier 0 purpose and institutional memory are defined by `docs/CONSTITUTION.md`, `docs/ARCHITECTS_NOTEBOOK.md`, `docs/FUTURE_VISION.md`, and `docs/QUESTIONS_MTG_LAB_SHOULD_ANSWER.md`. Architecture and governance are defined by `docs/ARCHITECTURE.md`,
 `docs/DATA_MODEL.md`, `docs/DATA_REPOSITORY.md`, `docs/RULES_ENGINE.md`, and
 `docs/AI_CONTRIBUTING.md`. The current implementation assessment is
-`ARCHITECTURE_REVIEW_v1.md`. Implemented subsystem contracts include
+`docs/PHASE_101_ARCHITECTURE_REVIEW.md`; `ARCHITECTURE_REVIEW_v1.md` is historical. Implemented subsystem contracts include
 `docs/CANONICAL_IMPORT_PIPELINE.md`, `docs/MB2_OBSERVATION_INTELLIGENCE.md`,
 `docs/MARKET_PROVIDER_FRAMEWORK.md`, `docs/COLLECTION_ENGINE.md`,
 `docs/ANALYTICS_ENGINE.md`, and `docs/DECISION_ENGINE.md`. This inventory describes
@@ -139,9 +138,10 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Session startup workflow
 
-1. Read `docs/CONSTITUTION.md`, this inventory, and `ARCHITECTURE_REVIEW_v1.md`.
+1. Read `docs/CONSTITUTION.md`, this inventory, and
+   `docs/PHASE_101_ARCHITECTURE_REVIEW.md` (`ARCHITECTURE_REVIEW_v1.md` is historical).
 2. Read `docs/SESSION_STATE.md`, `docs/PROJECT_STATUS.md`, `docs/NEXT_TASK.md`, and
-   `docs/HANDOFF.md` for the sole current operational state.
+   `docs/HANDOFF.md` for the current operational state.
 3. Read `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, and
    `CHANGELOG.md` for architecture, authorization, and history.
 4. Treat Historical, Superseded, Reference, and Vision documents according to their
@@ -150,9 +150,9 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 100 review and green CI are the active work. The provider accepts local evidence only and
-cannot promote it. Mystery Booster 2 remains evidence-blocked; Simulation and Intelligence
-remain unimplemented.
+Phase 101 is complete and no next implementation milestone is authorized. The provider accepts
+local evidence only and cannot promote it. Mystery Booster 2 remains evidence-blocked; Simulation
+and operational AI advice remain unimplemented.
 
 ## Phase 80 — Canonical fact and evidence contract
 

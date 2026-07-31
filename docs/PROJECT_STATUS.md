@@ -1,10 +1,13 @@
 # Project Status
 
-> **Phase 100 — MTGJSON Reference Dataset Import Execution v1 implemented.**
+> **Phase 101 architecture review complete — 2026-07-31.**
 
-Merged Phase 99 (`5410619`) is the baseline. Phase 100 executes caller-supplied local AllPrintings
-data through validation, evidence registration, deterministic candidate generation, and the pending
-review queue. The fixture execution produces 46 candidates (10 Cards, 10 Printings, 1 Set,
-1 Language, 4 Rarities, 0 Finishes, and 20 Identifiers). Architecture v12 and canonical state are
-unchanged. No networking, automatic approval, or promotion exists. Merge remains withheld until
-GitHub Actions are green.
+- Architecture v12: reviewed, suitable, and unchanged.
+- Overall maturity: pre-alpha with a beta-ready architectural shape.
+- Phase 100: merged; local MTGJSON execution stops at validated pending candidates.
+- Validation baseline: 246 tests and 17 subtests passing locally.
+- Canonical Promotion: Ready for bounded, controlled, single-writer workflows.
+- Large imports, Collection Intelligence, and Market Intelligence: Mostly Ready.
+- MB2 full population, Simulation, and AI Advisor: Not Ready.
+- Current implementation assessment: `PHASE_101_ARCHITECTURE_REVIEW.md`.
+- No subsequent implementation milestone is authorized by this status document.
