@@ -1,3 +1,7 @@
+# Next task after the Phase 110B artifact-gate stop
+
+Retain the immutable GitHub Actions artifact for run `30663562841`; verify its archive checksum and every artifact for `mb2-batch-000001-e32022126c07`; then repeat the independent review. Obtain real reviewer identity and a durable review reference only after evidence review. Do not promote.
+
 # Next task after Phase 110A
 
 Execute the documented non-promoting GitHub Actions rerun for exact discovered sets `MB2` and `MSH`, verify every retained artifact and digest, and obtain genuine independent review later. Do not promote, manufacture approval, or merge until Actions are green. See `TARGET_SPECIFIC_REVIEW_ARTIFACTS.md`.

@@ -1,3 +1,8 @@
+## Phase 110B — independent MB2 review stopped at artifact gate
+
+- Recorded the fail-closed attempt to review run `30663562841` and expected batch `mb2-batch-000001-e32022126c07`: selected-run artifacts are absent, so no candidates were classified, no decision was created, and no canonical write or promotion occurred.
+- Added unittest coverage for the absent-evidence boundary and unchanged canonical state.
+
 ## Phase 110A — Retained Target-Specific Review Packages
 
 - Partitioned exact MTGJSON `MB2` and `MSH` identities before dependency-closed batching and added fail-closed cross-target verification.
