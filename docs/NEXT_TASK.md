@@ -25,3 +25,9 @@ After Phase 105 merges with green GitHub Actions, run an operator-controlled loc
 acquisition rehearsal and record its SHA-256 without committing `data/local/`. Provider import,
 target discovery, review, promotion, and projection remain separate work and require explicit
 authorization. Do not infer set codes or treat acquisition registration as canonical eligibility.
+# Immediate gate after Phase 108C
+
+Run the official compressed-artifact targeted dry run for `Mystery Booster 2,Marvel Super Heroes`
+using the reviewed checksum, inspect uploaded streaming ledgers/manifests and resource diagnostics,
+and require green checks. Only then run a blank-target full-corpus dry-run plan. Do not promote or
+claim the resource issue resolved before one official run completes.

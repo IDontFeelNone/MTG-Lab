@@ -46,9 +46,11 @@ class MTGJSONDatasetDelivery:
         return report
 
     def plan(self, source: Path | str, expected_sha256: str,
-             selected_batch: str | None = None) -> dict[str, Any]:
+             selected_batch: str | None = None, *, targets: tuple[str, ...] = ()) -> dict[str, Any]:
         checksum = self.verify(source, expected_sha256)
-        manifest = self.ingestion.prepare(Path(source).resolve())
+        manifest = self.ingestion.prepare_streaming(Path(source).resolve(),
+                                                     expected_sha256=expected_sha256,
+                                                     targets=targets)
         acquisition = {"schema_version": SCHEMA, "status": "caller_delivered_verified",
                        "artifact_sha256": checksum["actual_sha256"],
                        "byte_length": checksum["byte_length"], "storage": "operator_managed",
@@ -61,12 +63,11 @@ class MTGJSONDatasetDelivery:
                     "identifier_finding_counts": manifest["identifier_finding_counts"]}
         summary = {key: manifest[key] for key in ("schema_version", "dataset_identifier",
                    "artifact_sha256", "entity_counts", "candidate_count", "eligible_count",
-                   "rejected_count", "unresolved_count", "identifier_findings",
+                   "rejected_count", "unresolved_count",
                    "identifier_finding_count", "identifier_finding_counts")}
         plan = {"schema_version": SCHEMA, "dataset_identifier": manifest["dataset_identifier"],
                 "batch_size": manifest["batch_size"], "batch_count": manifest["batch_count"],
-                "batches": manifest["batches"], "digest": hashlib.sha256(
-                    deterministic_json(manifest["batches"]).encode()).hexdigest()}
+                "batches": manifest["batches"], "digest": manifest["batch_plan_digest"]}
         performance = {"schema_version": SCHEMA, **manifest["performance"]}
         rollback = {"schema_version": SCHEMA, "promotion_id": None,
                     "instruction": "Run rollback with the promotion_id after promotion.",
@@ -84,13 +85,17 @@ class MTGJSONDatasetDelivery:
             _write(self.reports / "selected-review-batch.json", {
                 "schema_version": SCHEMA, "review_status": "pending", "batch": selected[0]})
         return {"schema_version": SCHEMA, "mode": "dry-run", "canonical_write": False,
-                "manifest": manifest, "reports": str(self.reports)}
+                "promotion_performed": False, "manifest": manifest, "reports": str(self.reports)}
 
     def promote(self, source: Path | str, expected_sha256: str, batch_id: str,
                 *, reviewer: str, review_reference: str) -> dict[str, Any]:
         if not reviewer.strip() or not review_reference.strip():
             raise ValueError("independent reviewer and review reference are required")
-        planned = self.plan(source, expected_sha256, batch_id)
+        # Promotion deliberately uses the established review-package builder.  It is
+        # bounded to one independently selected batch and is never used by dry-run.
+        self.verify(source, expected_sha256)
+        manifest = self.ingestion.prepare(source)
+        planned = {"manifest": manifest}
         manifest = planned["manifest"]
         selected = [b for b in manifest["batches"] if b["batch_id"] == batch_id]
         if len(selected) != 1:

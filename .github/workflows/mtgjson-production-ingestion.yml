@@ -4,9 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       source_url:
-        description: Approved AllPrintings URL
+        description: Approved AllPrintings URL (.json.gz preferred; .json supported)
         required: true
-        default: https://mtgjson.com/api/v5/AllPrintings.json
+        default: https://mtgjson.com/api/v5/AllPrintings.json.gz
+      target_sets:
+        description: Optional comma-separated set names or discovered codes (blank means full corpus)
+        required: false
       expected_sha256:
         description: Reviewed SHA-256 (64 hexadecimal characters)
         required: true
@@ -85,10 +88,10 @@ jobs:
               os.environ[x].strip() for x in ("BATCH", "REVIEWER", "REVIEW_REFERENCE")):
               raise SystemExit("Promotion requires one batch, reviewer, and review reference")
           PY
-      - name: Download to runner temporary storage
+      - name: Download approved compressed bytes to runner temporary storage
         env:
           SOURCE_URL: ${{ inputs.source_url }}
-        run: curl --fail --location --silent --show-error --retry 3 --output "$RUNNER_TEMP/AllPrintings.json" "$SOURCE_URL"
+        run: curl --fail --location --silent --show-error --retry 3 --output "$RUNNER_TEMP/AllPrintings.json.gz" "$SOURCE_URL"
       - name: Plan corpus or promote one reviewed batch
         # Keep this below the job timeout so timeout termination is diagnosable.
         timeout-minutes: 330
@@ -100,6 +103,7 @@ jobs:
           BATCH: ${{ inputs.selected_batch }}
           REVIEWER: ${{ inputs.reviewer }}
           REVIEW_REFERENCE: ${{ inputs.review_reference }}
+          TARGET_SETS: ${{ inputs.target_sets }}
         run: |
           mkdir -p "$RUNNER_TEMP/mtg-lab-state"
           diagnostics="$RUNNER_TEMP/mtg-lab-diagnostics"
@@ -165,12 +169,16 @@ jobs:
           trap 'termination=SIGHUP; exit 129' HUP
 
           args=(--data-root "$RUNNER_TEMP/mtg-lab-state" --batch-size "$BATCH_SIZE")
+          if [[ -n "$TARGET_SETS" ]]; then
+            IFS=',' read -ra requested_targets <<< "$TARGET_SETS"
+            for target in "${requested_targets[@]}"; do args+=(--target "$target"); done
+          fi
           if [[ "$MODE" == "dry-run" ]]; then
             selected=()
             if [[ -n "$BATCH" ]]; then selected=(--batch "$BATCH"); fi
-            python scripts/mtgjson_delivery.py "${args[@]}" plan --source "$RUNNER_TEMP/AllPrintings.json" --sha256 "$SHA256" "${selected[@]}" > "$python_result" 2> >(tee "$stderr_log" >&2) &
+            python scripts/mtgjson_delivery.py "${args[@]}" plan --source "$RUNNER_TEMP/AllPrintings.json.gz" --sha256 "$SHA256" "${selected[@]}" > "$python_result" 2> >(tee "$stderr_log" >&2) &
           else
-            python scripts/mtgjson_delivery.py "${args[@]}" promote --source "$RUNNER_TEMP/AllPrintings.json" --sha256 "$SHA256" --batch "$BATCH" --reviewer "$REVIEWER" --review-reference "$REVIEW_REFERENCE" > "$python_result" 2> >(tee "$stderr_log" >&2) &
+            python scripts/mtgjson_delivery.py "${args[@]}" promote --source "$RUNNER_TEMP/AllPrintings.json.gz" --sha256 "$SHA256" --batch "$BATCH" --reviewer "$REVIEWER" --review-reference "$REVIEW_REFERENCE" > "$python_result" 2> >(tee "$stderr_log" >&2) &
           fi
           child=$!
           wait "$child"
@@ -193,6 +201,9 @@ jobs:
             ${{ runner.temp }}/mtg-lab-state/evidence/mtgjson/production-batches/**/manifest.json
             ${{ runner.temp }}/mtg-lab-state/evidence/mtgjson/production-batches/**/review-package.json
             ${{ runner.temp }}/mtg-lab-state/evidence/mtgjson/imports/**/identifier_quarantine.json
+            ${{ runner.temp }}/mtg-lab-state/streaming/**/manifest.json
+            ${{ runner.temp }}/mtg-lab-state/streaming/**/completed-sets.json
+            ${{ runner.temp }}/mtg-lab-state/streaming/**/performance-checkpoints/
             ${{ runner.temp }}/run-result.json
             ${{ runner.temp }}/mtg-lab-diagnostics/
           if-no-files-found: warn

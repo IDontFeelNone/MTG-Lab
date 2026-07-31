@@ -16,6 +16,7 @@ from analytics import CanonicalAnalyticsEngine
 from evidence.contracts import deterministic_json
 from projection import TypedCanonicalProjectionEngine
 from providers.mtgjson import MTGJSONImportExecution
+from providers.mtgjson.streaming import StreamingMTGJSONPlanner
 from query import CanonicalQueryEngine
 from reasoning import ReasoningContextBuilder, ReasoningContextRequest
 from semantic import CanonicalSemanticQueryEngine, SemanticRequest
@@ -120,6 +121,16 @@ class ProductionMTGJSONIngestion:
                      "peak_memory_mib": round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 2)}}
         self._write(manifest_path, report)
         return report
+
+    def prepare_streaming(self, source: Path | str, *, expected_sha256: str | None = None,
+                          targets: tuple[str, ...] = ()) -> dict[str, Any]:
+        """Plan without decoding or retaining the complete corpus.
+
+        This is the production dry-run path.  The legacy ``prepare`` entry point remains
+        available for compatibility with already reviewed bounded promotion packages.
+        """
+        return StreamingMTGJSONPlanner(self.root, batch_size=self.batch_size,
+                                       targets=targets).plan(source, expected_sha256)
 
     def _write_batch(self, imported: Mapping[str, Any], number: int,
                      rows: list[Mapping[str, Any]]) -> dict[str, Any]:
