@@ -19,6 +19,7 @@ from projection import ProjectionError, TypedCanonicalProjectionEngine
 from promotion import BoundedCorpusPromotion
 from acquisition import PromotionError
 from official_datasets import AcquisitionError, OfficialDatasetAcquisition
+from production_evidence import EvidenceError, ProductionEvidenceRepository
 
 
 def main(argv=None) -> int:
@@ -100,9 +101,18 @@ def main(argv=None) -> int:
     ai_validate.add_argument("--format", choices=("json",), default="json")
     evidence = commands.add_parser("evidence")
     evidence_commands = evidence.add_subparsers(dest="evidence_command", required=True)
-    for name in ("providers", "datasets", "artifacts", "validate"):
+    for name in ("providers", "datasets", "artifacts", "validate", "runs"):
         command = evidence_commands.add_parser(name)
         command.add_argument("--format", choices=("json",), default="json")
+    for name in ("inspect", "batches", "verify"):
+        command = evidence_commands.add_parser(name)
+        command.add_argument("run_id")
+        command.add_argument("--format", choices=("json",), default="json")
+    evidence_intake = evidence_commands.add_parser("intake")
+    evidence_intake.add_argument("archive", type=Path)
+    evidence_intake.add_argument("--sha256", required=True)
+    evidence_intake.add_argument("--run-id", required=True)
+    evidence_intake.add_argument("--format", choices=("json",), default="json")
     provider = commands.add_parser("provider")
     provider_names = provider.add_subparsers(dest="provider_name", required=True)
     mtgjson = provider_names.add_parser("mtgjson")
@@ -167,16 +177,26 @@ def main(argv=None) -> int:
                                  indent=2, sort_keys=True)); return 2
     elif args.command == "evidence":
         evidence_registry = ReferenceDatasetRegistry(args.data_root / "evidence" / "registry")
-        if args.evidence_command == "providers":
-            providers = provider_registry()
-            result = {"schema_version": "1.0.0", "providers": [
-                provider.metadata().to_dict() for provider in providers.providers()]}
-        elif args.evidence_command == "datasets":
-            result = {"schema_version": "1.0.0", "datasets": evidence_registry.datasets()}
-        elif args.evidence_command == "artifacts":
-            result = {"schema_version": "1.0.0", "artifacts": evidence_registry.artifacts()}
-        else:
-            result = evidence_registry.validate()
+        production_repository = ProductionEvidenceRepository(args.data_root)
+        try:
+            if args.evidence_command == "runs": result = production_repository.runs()
+            elif args.evidence_command == "inspect": result = production_repository.inspect(args.run_id)
+            elif args.evidence_command == "batches": result = production_repository.batches(args.run_id)
+            elif args.evidence_command == "verify": result = production_repository.verify(args.run_id)
+            elif args.evidence_command == "intake": result = production_repository.intake(
+                args.archive, args.sha256, args.run_id)
+            elif args.evidence_command == "providers":
+                providers = provider_registry()
+                result = {"schema_version": "1.0.0", "providers": [
+                    provider.metadata().to_dict() for provider in providers.providers()]}
+            elif args.evidence_command == "datasets":
+                result = {"schema_version": "1.0.0", "datasets": evidence_registry.datasets()}
+            elif args.evidence_command == "artifacts":
+                result = {"schema_version": "1.0.0", "artifacts": evidence_registry.artifacts()}
+            else:
+                result = evidence_registry.validate()
+        except (OSError, EvidenceError) as error:
+            print(json.dumps({"valid": False, "error": str(error)}, indent=2, sort_keys=True)); return 2
     elif args.command == "ai":
         providers = AIProviderRegistry()
         try:

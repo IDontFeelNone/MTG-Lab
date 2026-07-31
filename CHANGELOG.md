@@ -1,3 +1,13 @@
+## Phase 111 — production artifact intake and evidence repository
+
+- Added a permanent, non-canonical `data/production_runs/` repository with immutable verified run
+  directories and deterministic source, target, batch, workflow, and run lookup indexes.
+- Added fail-closed ZIP intake with archive SHA-256, workflow identity, exact internal inventory,
+  source lineage, bundle completeness, and digest validation; duplicates and modified, missing,
+  unsafe, full-dataset, or transient content are rejected before atomic installation.
+- Added JSON CLI commands for intake, run listing, inspection, batch lookup, and verification,
+  plus unittest coverage. Architecture v12, canonical contracts, review, and promotion are unchanged.
+
 ## Phase 110B — independent MB2 review stopped at artifact gate
 
 - Recorded the fail-closed attempt to review run `30663562841` and expected batch `mb2-batch-000001-e32022126c07`: selected-run artifacts are absent, so no candidates were classified, no decision was created, and no canonical write or promotion occurred.
