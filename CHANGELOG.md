@@ -76,6 +76,16 @@
 
 # Changelog
 
+## Phase 96A — Mystery Booster 2 import contract resolution
+
+- Confirmed the Phase 96 blocker assessment is merged and classified its Set/Language and
+  uniform-governance expectations as prompt-assumption errors rather than architecture defects.
+- Selected omission of PackDefinition until topology evidence exists, preserving unknown-versus-
+  absent semantics without changing frozen contracts.
+- Documented the governance metadata inventory, staged evidence acquisition plan, and exact
+  evidence/review/promotion gates for resuming bounded MB2 population.
+- Added no MB2 records and changed no runtime or Architecture v12 contract.
+
 ## Phase 86 — Canonical Dataset Import Framework (Pilot)
 
 - Added first-class dataset registration, deterministic entity resolution, governed import sessions, reporting, unified CLI commands, and a reviewed non-MB2 pilot.

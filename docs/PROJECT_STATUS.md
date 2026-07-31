@@ -1,10 +1,10 @@
 # Project Status
 
-> **Status: Current — Phase 96 stopped at its mandatory pre-implementation gate.**
+> **Status: Current — Phase 96A contract questions resolved; evidence acquisition pending.**
 
-The merged Phase 95 implementation is the baseline. Phase 96 found that no complete reviewed
-Mystery Booster 2 source exists in the checkout and that the requested standalone Set/Language
-and uniformly governed entity representation does not match the frozen canonical contracts.
-No canonical records, runtime behavior, or contracts changed. Architecture v12 and canonical
-authority remain unchanged. See `PHASE_96_PREIMPLEMENTATION_ASSESSMENT.md`. Merge of this
-assessment is withheld until GitHub Actions are green.
+The merged Phase 96 blocker assessment is present. Phase 96A resolves its contract questions
+without changing Architecture v12: set and language remain Printing attributes, unknown pack
+topology is represented by omitting a canonical PackDefinition, and governance stays with the
+existing assertion, evidence, dataset, validation, and promotion owners. No canonical records
+or runtime behavior changed. MB2 population remains evidence-gated. See
+`PHASE_96A_IMPORT_CONTRACT_RESOLUTION.md`.
