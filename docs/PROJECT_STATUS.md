@@ -1,3 +1,7 @@
+# Phase 110B status — stopped before independent review
+
+Run `30663562841` and expected MB2 batch `mb2-batch-000001-e32022126c07` are not retained in the repository. Artifact integrity, membership, and closure cannot be verified; no classification, decision, canonical write, or promotion occurred. See `FIRST_MB2_BATCH_REVIEW.md`.
+
 # Phase 110A status — target-specific review retention implemented
 
 Phase 110 remains a merged, failed-closed gate. Phase 110A implements a non-promoting rerun path that partitions exact discovered `MB2` and `MSH` identities before batching and retains independently verifiable review artifacts. A real GitHub Actions rerun has not yet established those artifacts. No approval, canonical write, or promotion occurred; Architecture v12 is unchanged. See `TARGET_SPECIFIC_REVIEW_ARTIFACTS.md`.

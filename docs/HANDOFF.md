@@ -1,3 +1,7 @@
+# Phase 110B handoff
+
+The independent MB2 review stopped at the mandatory artifact gate. Retain the immutable archive for run `30663562841`, verify its checksum and exact first MB2 batch identity, then restart Phase 110B. Do not treat the expected batch ID as evidence and do not approve or promote anything.
+
 # Phase 110A handoff
 
 Run the documented targeted production dry run and independently verify its retained exact-set packages. Do not claim artifacts before the green run, do not approve in Phase 110A, and do not promote or merge until GitHub Actions are green. Phase 110 remains failed closed and Architecture v12 is unchanged. See `TARGET_SPECIFIC_REVIEW_ARTIFACTS.md`.

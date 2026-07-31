@@ -1,3 +1,5 @@
+> **Phase 110B gate:** Independent review of the first MB2 batch remains blocked before candidate inspection because run `30663562841` is not retained locally. Artifact retention and verification precede review; promotion remains separately authorized.
+
 > **Phase 110A:** exact-set target partitioning and retained pending review packages are implemented. The next gate is a green official-source dry run and independent artifact verification; no approval or promotion has occurred.
 
 > **Phase 110 gate:** The first real canonical promotion remains pending. Phase 110 failed closed because the sole retained successful-run summary cannot reconstruct candidate payloads, review packages, approval, dependency closure, or MB2-only membership. The next operational gate is corrected dry-run retention plus independent one-batch MB2 review; Architecture v12 remains unchanged.
