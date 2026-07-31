@@ -1,4 +1,4 @@
-"""Phase 110B fail-closed repository evidence tests (unittest only)."""
+"""Phase 113 retained-evidence review gate tests (unittest only)."""
 import hashlib
 import unittest
 from pathlib import Path
@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RUN = "30663562841"
-BATCH = "mb2-batch-000001-e32022126c07"
+EVIDENCE = ROOT / "data" / "production_runs"
 
 
 def canonical_snapshot():
@@ -16,26 +16,28 @@ def canonical_snapshot():
 
 
 class FirstMB2BatchReviewGateTests(unittest.TestCase):
-    def test_retained_batch_integrity_fails_closed_when_run_is_absent(self):
-        matches = [path for path in (ROOT / "data").rglob("*")
-                   if path.is_file() and (RUN in str(path) or BATCH in str(path))]
-        self.assertEqual(matches, [])
+    def test_selected_run_is_not_in_production_evidence_repository(self):
+        self.assertFalse((EVIDENCE / RUN).exists())
+        self.assertFalse((EVIDENCE / "index.json").exists())
+        self.assertEqual([path.name for path in EVIDENCE.iterdir()], [".gitkeep"])
 
-    def test_no_review_decision_or_promotion_was_manufactured(self):
-        decision_files = [path for path in (ROOT / "data").rglob("*.json")
-                          if BATCH in path.read_text(errors="ignore")]
-        self.assertEqual(decision_files, [])
+    def test_no_immutable_decision_was_fabricated(self):
+        decisions = [path for path in (ROOT / "data").rglob("*.json")
+                     if RUN in path.read_text(errors="ignore") and "review_decision" in path.name]
+        self.assertEqual(decisions, [])
 
-    def test_documented_gate_is_deterministic_and_pending_operator_evidence(self):
+    def test_document_records_all_verification_dimensions_and_unknown_counts(self):
         text = (ROOT / "docs" / "FIRST_MB2_BATCH_REVIEW.md").read_text()
-        self.assertIn(RUN, text)
-        self.assertIn(BATCH, text)
-        self.assertIn("pre-decision artifact-gate failure", text)
-        self.assertIn("not ready", text)
+        for phrase in ("Candidate payloads", "Candidate IDs", "Dependency closure", "Provenance",
+                       "Confidence", "Validation state", "Identifiers", "Explicit unknowns",
+                       "Review package integrity"):
+            self.assertIn(phrase, text)
+        self.assertIn("each **undetermined**", text)
+        self.assertIn("No Marvel batch or candidate was inspected", text)
 
-    def test_gate_check_performs_no_canonical_writes_or_promotion(self):
+    def test_gate_performs_no_canonical_write_or_promotion(self):
         before = canonical_snapshot()
-        self.test_retained_batch_integrity_fails_closed_when_run_is_absent()
+        self.test_selected_run_is_not_in_production_evidence_repository()
         self.assertEqual(canonical_snapshot(), before)
 
 
