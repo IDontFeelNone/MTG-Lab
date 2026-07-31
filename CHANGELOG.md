@@ -1,3 +1,9 @@
+## Phase 110A — Retained Target-Specific Review Packages
+
+- Partitioned exact MTGJSON `MB2` and `MSH` identities before dependency-closed batching and added fail-closed cross-target verification.
+- Retained candidate payloads, ID lists, manifests, closure reports, pending review packages, findings, quarantine evidence, and workflow diagnostics without promotion.
+- Documented the independent reviewer boundary and exact non-promoting production rerun.
+
 ## Phase 110 — Canonical Promotion Failed-Closed Precondition Gate
 
 - Confirmed the merged Phase 109 baseline at `bf696c5` and inspected the only retained production evidence for run `30649546787`.
