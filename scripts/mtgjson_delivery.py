@@ -14,11 +14,11 @@ def main(argv=None):
     parser.add_argument("--target", action="append", default=[],
                         help="set name or discovered set code (repeatable; dry-run only)")
     commands = parser.add_subparsers(dest="command", required=True)
-    for name in ("verify", "plan", "list", "promote"):
+    for name in ("verify", "plan", "list", "verify-batch", "review-package", "promote"):
         command = commands.add_parser(name)
         command.add_argument("--source", type=Path, required=True)
         command.add_argument("--sha256", required=True)
-        if name in ("plan", "list"):
+        if name in ("plan", "list", "verify-batch", "review-package"):
             command.add_argument("--batch")
         if name == "promote":
             command.add_argument("--batch", required=True)
@@ -37,6 +37,14 @@ def main(argv=None):
             result = delivery.plan(args.source, args.sha256, args.batch,
                                    targets=tuple(args.target))
             if args.command == "list": result = result["manifest"]["batches"]
+        elif args.command == "verify-batch":
+            if not args.batch: raise ValueError("--batch is required")
+            result = delivery.verify_batch(args.source, args.sha256, args.batch,
+                                           targets=tuple(args.target))
+        elif args.command == "review-package":
+            if not args.batch: raise ValueError("--batch is required")
+            result = delivery.review_package(args.source, args.sha256, args.batch,
+                                              targets=tuple(args.target))
         elif args.command == "promote":
             result = delivery.promote(args.source, args.sha256, args.batch,
                                       reviewer=args.reviewer, review_reference=args.review_reference)

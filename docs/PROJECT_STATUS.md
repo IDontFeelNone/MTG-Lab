@@ -1,3 +1,7 @@
+# Phase 110A status — target-specific review retention implemented
+
+Phase 110 remains a merged, failed-closed gate. Phase 110A implements a non-promoting rerun path that partitions exact discovered `MB2` and `MSH` identities before batching and retains independently verifiable review artifacts. A real GitHub Actions rerun has not yet established those artifacts. No approval, canonical write, or promotion occurred; Architecture v12 is unchanged. See `TARGET_SPECIFIC_REVIEW_ARTIFACTS.md`.
+
 # Phase 110 status — promotion stopped at the mandatory evidence gate
 
 Merged Phase 109 is present at `bf696c5`. Phase 110 inspected the retained production evidence and failed closed before promotion: run `30649546787` has only a summary, while its candidate shards, review packages, independent reviewer identity/reference, and verifiable MB2-only dependency membership are absent. Cards promoted: 0. Printings promoted: 0. Projection, downstream, AIModelRequest, rollback, and replay were not run because no valid promotion existed. Architecture v12 and canonical state remain unchanged. See `FIRST_CANONICAL_PROMOTION.md`.

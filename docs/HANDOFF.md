@@ -1,3 +1,7 @@
+# Phase 110A handoff
+
+Run the documented targeted production dry run and independently verify its retained exact-set packages. Do not claim artifacts before the green run, do not approve in Phase 110A, and do not promote or merge until GitHub Actions are green. Phase 110 remains failed closed and Architecture v12 is unchanged. See `TARGET_SPECIFIC_REVIEW_ARTIFACTS.md`.
+
 # Phase 110 failed-closed handoff
 
 The merged Phase 109 baseline is `bf696c5`. Do not invoke promotion from retained run `30649546787`: only its evidence summary is present. Candidate shards and per-batch review packages are absent, so candidate hashes, MB2-only membership, dependency closure, and reviewer approval cannot be independently verified. Phase 110 promoted zero Cards and zero Printings and made no canonical write. Obtain a corrected retained dry-run artifact and an independent approval for exactly one demonstrably MB2-only batch before resuming this same milestone. Do not promote Marvel.

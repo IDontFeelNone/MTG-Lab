@@ -1,3 +1,7 @@
+# Next task after Phase 110A
+
+Execute the documented non-promoting GitHub Actions rerun for exact discovered sets `MB2` and `MSH`, verify every retained artifact and digest, and obtain genuine independent review later. Do not promote, manufacture approval, or merge until Actions are green. See `TARGET_SPECIFIC_REVIEW_ARTIFACTS.md`.
+
 # Next task after the Phase 110 failed-closed gate
 
 Produce and retain a corrected **non-promoting** production dry run containing the candidate-shard payloads, all per-batch review-index packages, manifests, and hash inventory. Independently verify candidate membership and approve exactly one dependency-closed MB2-only batch with a named reviewer and review reference. Then resume Phase 110; do not infer membership from run `30649546787`, do not promote Marvel, and do not begin another milestone.

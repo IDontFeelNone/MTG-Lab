@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from evidence.contracts import deterministic_json
+from providers.mtgjson.streaming import StreamingMTGJSONPlanner
 
 from .production import ProductionMTGJSONIngestion
 
@@ -51,6 +52,8 @@ class MTGJSONDatasetDelivery:
         manifest = self.ingestion.prepare_streaming(Path(source).resolve(),
                                                      expected_sha256=expected_sha256,
                                                      targets=targets)
+        batch_verifications = [StreamingMTGJSONPlanner.verify_batch(batch)
+                               for batch in manifest["batches"]]
         acquisition = {"schema_version": SCHEMA, "status": "caller_delivered_verified",
                        "artifact_sha256": checksum["actual_sha256"],
                        "byte_length": checksum["byte_length"], "storage": "operator_managed",
@@ -78,6 +81,9 @@ class MTGJSONDatasetDelivery:
                              "checks": ["checksum", "json", "provider-schema", "batch-plan"]}),
                             ("performance", performance), ("rollback", rollback)):
             _write(self.reports / f"{name}.json", value)
+        _write(self.reports / "batch-verification.json", {
+            "schema_version": SCHEMA, "valid": all(x["valid"] for x in batch_verifications),
+            "batches": batch_verifications, "canonical_write": False})
         if selected_batch:
             selected = [b for b in manifest["batches"] if b["batch_id"] == selected_batch]
             if len(selected) != 1:
@@ -86,6 +92,23 @@ class MTGJSONDatasetDelivery:
                 "schema_version": SCHEMA, "review_status": "pending", "batch": selected[0]})
         return {"schema_version": SCHEMA, "mode": "dry-run", "canonical_write": False,
                 "promotion_performed": False, "manifest": manifest, "reports": str(self.reports)}
+
+    def verify_batch(self, source: Path | str, expected_sha256: str, batch_id: str,
+                     *, targets: tuple[str, ...] = ()) -> dict[str, Any]:
+        manifest = self.plan(source, expected_sha256, targets=targets)["manifest"]
+        selected = [batch for batch in manifest["batches"] if batch["batch_id"] == batch_id]
+        if len(selected) != 1:
+            raise ValueError("batch identifier must select exactly one retained batch")
+        return StreamingMTGJSONPlanner.verify_batch(selected[0])
+
+    def review_package(self, source: Path | str, expected_sha256: str, batch_id: str,
+                       *, targets: tuple[str, ...] = ()) -> dict[str, Any]:
+        manifest = self.plan(source, expected_sha256, targets=targets)["manifest"]
+        selected = [batch for batch in manifest["batches"] if batch["batch_id"] == batch_id]
+        if len(selected) != 1:
+            raise ValueError("batch identifier must select exactly one retained batch")
+        StreamingMTGJSONPlanner.verify_batch(selected[0])
+        return json.loads(Path(selected[0]["review_package"]).read_text())
 
     def promote(self, source: Path | str, expected_sha256: str, batch_id: str,
                 *, reviewer: str, review_reference: str) -> dict[str, Any]:

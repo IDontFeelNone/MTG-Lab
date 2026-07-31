@@ -215,13 +215,72 @@ class StreamingMTGJSONPlanner:
                 "disposition": "excluded from every dependency-closed batch; review required"})
         batches = self._batch_index(connection, work / "batch-index.json")
         finding_references = self._finding_references(findings)
+        shard_inventory = self._inventory(shards)
         for batch in batches:
-            package_path = work / "review-indexes" / batch["batch_id"] / "review-package.json"
-            _atomic(package_path, {"schema_version": SCHEMA, "review_status": "pending",
+            batch_root = work / "review-batches" / batch["target_set_code"] / batch["batch_id"]
+            payloads = [item for item in shard_inventory
+                        if Path(item["path"]).stem == batch["source_unit"]]
+            if not payloads:
+                raise ValueError(f"missing candidate payload for batch {batch['batch_id']}")
+            ids_path = batch_root / "candidate-ids.json"
+            _atomic(ids_path, {"schema_version": SCHEMA,
+                "target_set_code": batch["target_set_code"],
+                "target_set_name": batch["target_set_name"],
                 "candidate_ids": batch["candidate_ids"],
+                "candidate_id_digest": batch["candidate_id_digest"]})
+            closure_path = batch_root / "dependency-closure.json"
+            _atomic(closure_path, {"schema_version": SCHEMA, "valid": True,
+                "target_set_code": batch["target_set_code"],
+                "candidate_ids": batch["candidate_ids"],
+                "dependency_closure_digest": batch["dependency_closure_digest"],
+                "rule": "each Printing and its Card remain in this exact target-only batch"})
+            package_body = {"schema_version": SCHEMA, "review_status": "pending",
+                "target_set_code": batch["target_set_code"],
+                "target_set_name": batch["target_set_name"],
+                "candidate_ids": batch["candidate_ids"],
+                "candidate_id_digest": batch["candidate_id_digest"],
+                "dependency_closure_digest": batch["dependency_closure_digest"],
+                "candidate_counts_by_entity_type": batch["entity_counts"],
+                "candidate_payload_references": payloads,
+                "candidate_id_list": str(ids_path),
+                "dependency_closure_report": str(closure_path),
+                "source_lineage": {"dataset_identifier": dataset_id,
+                    "source_sha256": source_hash, "source_version": meta["version"],
+                    "source_date": meta["date"], "source_set_unit": batch["source_unit"]},
+                "excluded_candidates": {"quarantined": sorted(quarantined_uuids),
+                    "rejected": [], "unresolved": [], "unsupported": []},
+                "identifier_findings": finding_references,
                 "acquisition_run": {"identifier_findings": finding_references},
-                "note": "Candidate payloads are content-addressed shards; this package is an index."})
-            batch["review_package"] = str(package_path)
+                "quarantine_references": ([str(work / "quarantine" / "records.json")]
+                    if quarantined_uuids else []),
+                "explicit_unknowns": [], "validation_state": "valid_pending_review",
+                "confidence": "provider_asserted_pending_independent_review",
+                "provenance": {"provider": "MTGJSON", "artifact_sha256": source_hash},
+                "canonical_write": False, "promotion_performed": False,
+                "approval_fields": {"independent_reviewer_identity": None,
+                    "immutable_review_reference": None, "reviewed_timestamp": None,
+                    "approved_candidate_ids": None, "excluded_candidate_ids": None,
+                    "approval_decision": None, "reviewer_notes": None,
+                    "reviewed_package_digest": None}}
+            package_id = "review-" + hashlib.sha256(deterministic_json({
+                "source_sha256": source_hash, "target_set_code": batch["target_set_code"],
+                "candidate_id_digest": batch["candidate_id_digest"],
+                "dependency_closure_digest": batch["dependency_closure_digest"]}).encode()).hexdigest()
+            package = {**package_body, "review_package_identifier": package_id}
+            package_path = batch_root / "review-package.json"
+            package_digest = _atomic(package_path, package)
+            manifest_body = {"schema_version": SCHEMA, **batch,
+                "candidate_payload_references": payloads, "candidate_id_list": str(ids_path),
+                "dependency_closure_report": str(closure_path),
+                "review_package": str(package_path), "review_package_identifier": package_id,
+                "review_package_sha256": package_digest, "canonical_write": False,
+                "promotion_performed": False}
+            manifest_path_for_batch = batch_root / "manifest.json"
+            _atomic(manifest_path_for_batch, manifest_body)
+            batch.update({"candidate_payload_references": payloads,
+                "candidate_id_list": str(ids_path), "dependency_closure_report": str(closure_path),
+                "review_package": str(package_path), "review_package_identifier": package_id,
+                "batch_manifest": str(manifest_path_for_batch)})
         counts = dict(connection.execute("SELECT entity_type, count(*) FROM candidates GROUP BY entity_type"))
         candidate_count = sum(counts.values())
         connection.close()
@@ -242,10 +301,12 @@ class StreamingMTGJSONPlanner:
                   "identifier_finding_count": finding_summary["total"],
                   "identifier_finding_counts": finding_summary,
                   "identifier_findings": finding_references,
-                  "finding_shards": self._inventory(findings), "candidate_shards": self._inventory(shards),
+                  "finding_shards": self._inventory(findings), "candidate_shards": shard_inventory,
                   "batch_size": self.batch_size, "batch_count": len(batches), "batches": batches,
-                  "batch_plan_digest": hashlib.sha256(deterministic_json([
-                      {k: v for k, v in batch.items() if k != "review_package"}
+                  "batch_plan_digest": hashlib.sha256(deterministic_json([{
+                      key: batch[key] for key in ("batch_id", "target_set_code", "target_set_name",
+                          "entity_count", "entity_counts", "candidate_ids", "candidate_id_digest",
+                          "dependency_closure_digest")}
                       for batch in batches]).encode()).hexdigest(),
                   "completed_units": len(completed), "remaining_units": 0,
                   "performance": {"seconds": elapsed, "cards_per_second": round(processed_cards / elapsed, 2),
@@ -255,6 +316,51 @@ class StreamingMTGJSONPlanner:
                   "work_root": str(work), "completed_set_ledger": str(ledger_path)}
         _atomic(manifest_path, report)
         return report
+
+    @staticmethod
+    def verify_batch(batch: Mapping[str, Any]) -> dict[str, Any]:
+        """Independently verify the retained, target-specific review boundary."""
+        required = ("target_set_code", "target_set_name", "candidate_ids",
+                    "candidate_id_digest", "dependency_closure_digest",
+                    "candidate_payload_references", "candidate_id_list",
+                    "dependency_closure_report", "review_package", "batch_manifest")
+        missing = [key for key in required if not batch.get(key)]
+        if missing:
+            raise ValueError("incomplete retained batch: " + ", ".join(missing))
+        ids = batch["candidate_ids"]
+        digest = hashlib.sha256(deterministic_json(ids).encode()).hexdigest()
+        if digest != batch["candidate_id_digest"]:
+            raise ValueError("candidate-ID digest mismatch")
+        paths = [batch["candidate_id_list"], batch["dependency_closure_report"],
+                 batch["review_package"], batch["batch_manifest"]]
+        paths.extend(item["path"] for item in batch["candidate_payload_references"])
+        if any(not Path(path).is_file() for path in paths):
+            raise ValueError("missing candidate payload or review package retained artifact")
+        payload_candidates = []
+        payload_codes = set()
+        for reference in batch["candidate_payload_references"]:
+            path = Path(reference["path"])
+            if hashlib.sha256(path.read_bytes()).hexdigest() != reference["sha256"]:
+                raise ValueError("candidate payload digest mismatch")
+            payload = json.loads(path.read_text())
+            payload_codes.add(payload["set_code"])
+            payload_candidates.extend(x["candidate_identifier"] for x in payload["candidates"])
+        if payload_codes != {batch["target_set_code"]}:
+            raise ValueError("cross-target contamination in retained batch")
+        if not set(ids).issubset(payload_candidates):
+            raise ValueError("candidate payload does not contain every batch candidate")
+        package = json.loads(Path(batch["review_package"]).read_text())
+        if package.get("review_status") != "pending" or package.get("candidate_ids") != ids:
+            raise ValueError("review package is missing, altered, or not pending")
+        if package.get("target_set_code") != batch["target_set_code"]:
+            raise ValueError("cross-target contamination in review package")
+        closure = json.loads(Path(batch["dependency_closure_report"]).read_text())
+        if not closure.get("valid") or closure.get("candidate_ids") != ids:
+            raise ValueError("dependency closure is invalid")
+        return {"schema_version": SCHEMA, "valid": True,
+                "batch_id": batch["batch_id"], "target_set_code": batch["target_set_code"],
+                "candidate_id_digest": digest, "canonical_write": False,
+                "promotion_performed": False}
 
     @staticmethod
     def _meta(path: Path) -> dict[str, Any]:
@@ -288,7 +394,8 @@ class StreamingMTGJSONPlanner:
     @staticmethod
     def _schema(db: sqlite3.Connection) -> None:
         db.executescript("""
-        CREATE TABLE IF NOT EXISTS candidates(id TEXT PRIMARY KEY, entity_type TEXT, card_id TEXT, unit TEXT, source_uuid TEXT);
+        CREATE TABLE IF NOT EXISTS candidates(id TEXT PRIMARY KEY, entity_type TEXT, card_id TEXT, unit TEXT, source_uuid TEXT,
+          set_code TEXT, set_name TEXT);
         CREATE TABLE IF NOT EXISTS identifiers(namespace TEXT, value TEXT, uuid TEXT, unit TEXT,
           set_code TEXT, set_name TEXT, collector TEXT, language TEXT, record_json TEXT,
           PRIMARY KEY(namespace,value,uuid,unit));
@@ -306,8 +413,9 @@ class StreamingMTGJSONPlanner:
             fields = candidate["mapped_fields"]
             cid = card_ids.get(str(fields.get("card_reference", "")).casefold())
             source_uuid = fields.get("uuid") or fields.get("printing_uuid")
-            db.execute("INSERT OR IGNORE INTO candidates VALUES(?,?,?,?,?)",
-                       (candidate["candidate_identifier"], candidate["entity_type"], cid, unit, source_uuid))
+            db.execute("INSERT OR IGNORE INTO candidates VALUES(?,?,?,?,?,?,?)",
+                       (candidate["candidate_identifier"], candidate["entity_type"], cid, unit,
+                        source_uuid, source_set["code"], source_set["name"]))
         for card in source_set["cards"]:
             record = {"mtgjson_uuid": card["uuid"].casefold(), "card_name": card["name"],
                       "set_code": source_set["code"].casefold(), "set_name": source_set["name"],
@@ -353,19 +461,32 @@ class StreamingMTGJSONPlanner:
                 quarantined, fatal)
 
     def _batch_index(self, db: sqlite3.Connection, path: Path) -> list[dict[str, Any]]:
-        groups: dict[str, list[str]] = {}
-        for identifier, kind, card_id in db.execute("SELECT id,entity_type,card_id FROM candidates ORDER BY id"):
+        groups: dict[tuple[str, str, str, str], list[tuple[str, str]]] = {}
+        for identifier, kind, card_id, unit, code, name in db.execute(
+                "SELECT id,entity_type,card_id,unit,set_code,set_name FROM candidates ORDER BY set_code,id"):
             key = hashlib.sha256(("card:" + identifier).encode()).hexdigest() if kind == "card" else card_id
-            groups.setdefault(key or identifier, []).append(identifier)
-        batches, current = [], []
-        for key in sorted(groups):
-            group = sorted(groups[key])
-            if current and len(current) + len(group) > self.batch_size:
-                batches.append(current); current = []
-            current.extend(group)
-        if current: batches.append(current)
-        result = [{"batch_id": f"batch-{i:06d}-{hashlib.sha256(deterministic_json(ids).encode()).hexdigest()[:12]}",
-                   "entity_count": len(ids), "candidate_ids": ids} for i, ids in enumerate(batches, 1)]
+            groups.setdefault((code, name, unit, key or identifier), []).append((identifier, kind))
+        batches: list[tuple[str, str, str, list[tuple[str, str]]]] = []
+        for code, name, unit in sorted({key[:3] for key in groups}):
+            current: list[tuple[str, str]] = []
+            for key in sorted(k for k in groups if k[:3] == (code, name, unit)):
+                group = sorted(groups[key])
+                if current and len(current) + len(group) > self.batch_size:
+                    batches.append((code, name, unit, current)); current = []
+                current.extend(group)
+            if current: batches.append((code, name, unit, current))
+        result = []
+        for i, (code, name, unit, members) in enumerate(batches, 1):
+            ids = [x[0] for x in members]
+            digest = hashlib.sha256(deterministic_json(ids).encode()).hexdigest()
+            entity_counts: dict[str, int] = {}
+            for _, kind in members: entity_counts[kind] = entity_counts.get(kind, 0) + 1
+            result.append({"batch_id": f"{code.casefold()}-batch-{i:06d}-{digest[:12]}",
+                "target_set_code": code, "target_set_name": name, "source_unit": unit,
+                "entity_count": len(ids), "entity_counts": entity_counts,
+                "candidate_ids": ids, "candidate_id_digest": digest,
+                "dependency_closure_digest": hashlib.sha256(
+                    deterministic_json({"target_set_code": code, "candidate_ids": ids}).encode()).hexdigest()})
         _atomic(path, {"schema_version": SCHEMA, "batches": result})
         return result
 
