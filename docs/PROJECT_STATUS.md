@@ -1,6 +1,9 @@
 # Project Status
 
-> **Phase 106 production ingestion capability implemented — 2026-07-31.**
+> **Phase 107 reproducible MTGJSON delivery implemented — 2026-07-31.** The local command and
+> manual workflow fail closed on checksum and schema, stop before promotion by default, and allow
+> only one explicitly reviewed batch. Hosted Codex still receives HTTP 403, so the first real run
+> awaits a GitHub runner or operator environment. Architecture v12 is unchanged.
 
 Deterministic MTGJSON review batches, bounded independent promotion, typed projection, replay, rollback, downstream checks, and performance instrumentation are implemented. Official full-corpus execution remains pending because the approved URL returned HTTP 403 in this environment; no substitute corpus was promoted.
 

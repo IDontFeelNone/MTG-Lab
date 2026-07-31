@@ -2,5 +2,6 @@
 
 from .corpus import BoundedCorpusPromotion
 from .production import ProductionMTGJSONIngestion
+from .delivery import MTGJSONDatasetDelivery
 
-__all__ = ["BoundedCorpusPromotion", "ProductionMTGJSONIngestion"]
+__all__ = ["BoundedCorpusPromotion", "ProductionMTGJSONIngestion", "MTGJSONDatasetDelivery"]

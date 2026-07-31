@@ -1,6 +1,9 @@
 # MTG Lab Roadmap
 
-> **Phase 106:** deterministic dependency-closed batches, governed bounded promotion, typed projection, downstream verification, replay/rollback, and measurement are implemented. Official full-corpus execution is pending configured-URL access. Automatic full-corpus promotion is not authorized.
+> **Phase 107:** reproducible checksum-verified local and GitHub Actions delivery now composes the
+> Phase 106 production path. Dry-run is default and promotion is limited to one independently
+> reviewed deterministic batch. Hosted Codex remains blocked by HTTP 403; automatic full-corpus
+> promotion is not authorized.
 
 > **Status: Current — refreshed by Phase 105 Official Reference Dataset Acquisition on 2026-07-31.**
 

@@ -1,6 +1,10 @@
 # Session State
 
-> **Phase 106 implemented over merged Phase 105 (`43796c0`).** Architecture v12 and canonical authority are unchanged. Production preparation, deterministic reviews, bounded promotion, projection, downstream checks, replay, rollback, and performance reporting are implemented. The official acquisition attempt returned HTTP 403, so full-corpus local execution remains pending and no substitute was represented as production evidence.
+> **Phase 107 implemented over merged Phase 106 (`456f2df`).** Architecture v12 and canonical
+> authority are unchanged. A checksum-gated local command and manual workflow now deliver runner-
+> temporary AllPrintings bytes into existing production preparation, reporting, one-batch reviewed
+> promotion, projection, verification, and rollback. Hosted Codex again received HTTP 403, so the
+> first real corpus run remains an explicit workflow operation and no substitute is claimed.
 
 > **Phase 105 Official Reference Dataset Acquisition is implemented over merged Phase 104.**
 

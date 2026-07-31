@@ -1,6 +1,10 @@
 # Next task
 
-After Phase 106 merges with green GitHub Actions, execute the retained full AllPrintings run where the configured official URL is reachable. Record checksum, batch/count report, and import/memory/projection/replay observations without committing `data/local/`. Independently approve only one dependency-closed batch and verify rollback before requesting broader incremental promotion.
+After Phase 107 merges with green GitHub Actions, trigger the manual MTGJSON production ingestion
+workflow in dry-run mode with the independently reviewed official SHA-256. Review its full-corpus
+counts and deterministic batches, then authorize at most one dependency-closed batch with named
+reviewer metadata. Verify projection, downstream checks, and rollback before considering any
+later incremental batch. Never commit the source corpus or temporary canonical state.
 
 ## Prior Phase 105 direction (superseded)
 
