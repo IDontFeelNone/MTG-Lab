@@ -18,7 +18,7 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 99 is implemented and awaits review and
+> **Status: Current** — Phase 100 is implemented and awaits review and
 > green GitHub Actions.
 
 ## Phase 83 constitutional guidance
@@ -37,7 +37,7 @@ questions guide future proposals without authorizing them.
 
 - **Architecture:** v12 (unchanged)
 - **Latest merged milestone:** Phase 98 — Multi-Source Evidence Acquisition Framework v1
-- **Current milestone:** Phase 99 — MTGJSON Reference Dataset Provider v1
+- **Current milestone:** Phase 100 — MTGJSON Reference Dataset Import Execution v1
 - **Maturity:** pre-alpha; deterministic local reference implementation
 - **Validation baseline:** 194 passing tests locally under the CI command
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
@@ -150,7 +150,7 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 99 review and green CI are the active work. The provider accepts local evidence only and
+Phase 100 review and green CI are the active work. The provider accepts local evidence only and
 cannot promote it. Mystery Booster 2 remains evidence-blocked; Simulation and Intelligence
 remain unimplemented.
 
@@ -174,3 +174,7 @@ remain unimplemented.
 > **Phase 99 update:** `src/providers/mtgjson/` implements the first concrete reference provider,
 > with local-only MTGJSON v5 validation, deterministic candidate mapping, planning, and JSON CLI.
 > No dataset was bundled, acquired, reviewed, promoted, or written to canonical storage.
+
+> **Phase 100 update:** `src/providers/mtgjson/execution.py` executes local AllPrintings evidence
+> through registration and deterministic candidate validation into a pending-only review queue.
+> No canonical write, automatic approval, networking, or promotion is available.

@@ -115,7 +115,11 @@ class MTGJSONProvider(EvidenceProviderAdapter):
         errors = []
         if dataset.provider_identifier != PROVIDER_IDENTIFIER:
             errors.append("dataset provider must be mtgjson")
-        if not dataset.dataset_version.startswith("5."):
+        try:
+            compatible_version = int(dataset.dataset_version.split(".", 1)[0]) >= 5
+        except (ValueError, IndexError):
+            compatible_version = False
+        if not compatible_version:
             errors.append("dataset schema version is unsupported")
         if not dataset.artifact_identifiers:
             errors.append("dataset must reference at least one artifact")

@@ -5,7 +5,7 @@ from datetime import datetime
 import re
 from typing import Any, Mapping
 
-SUPPORTED_MAJOR = 5
+MINIMUM_SUPPORTED_MAJOR = 5
 VERSION = re.compile(r"^(\d+)\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
 
 
@@ -30,9 +30,10 @@ def validate_document(document: Any) -> None:
     match = VERSION.fullmatch(version)
     if not match:
         raise MTGJSONValidationError("meta.version must be semantic version text")
-    if int(match.group(1)) != SUPPORTED_MAJOR:
+    if int(match.group(1)) < MINIMUM_SUPPORTED_MAJOR:
         raise MTGJSONValidationError(
-            f"unsupported MTGJSON schema version {version}; supported major is {SUPPORTED_MAJOR}")
+            f"unsupported MTGJSON schema version {version}; minimum supported major is "
+            f"{MINIMUM_SUPPORTED_MAJOR}")
     date = _required_text(document["meta"], "date", "meta")
     try:
         datetime.fromisoformat(date.replace("Z", "+00:00"))

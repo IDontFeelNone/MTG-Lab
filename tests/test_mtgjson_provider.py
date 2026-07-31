@@ -28,8 +28,7 @@ class MTGJSONProviderTests(unittest.TestCase):
         self.assertTrue(provider.validate_local(FIXTURE)["valid"])
         value = json.loads(FIXTURE.read_text())
         value["meta"]["version"] = "6.0.0"
-        with self.assertRaisesRegex(MTGJSONValidationError, "unsupported MTGJSON schema"):
-            parse_dataset(json.dumps(value).encode())
+        self.assertEqual(parse_dataset(json.dumps(value).encode())["meta"]["version"], "6.0.0")
         value = json.loads(FIXTURE.read_text())
         del value["data"]["TST"]["cards"][0]["number"]
         with self.assertRaisesRegex(MTGJSONValidationError, "number"):

@@ -1,9 +1,9 @@
 # Session State
 
-> **Phase 99 MTGJSON provider implemented; review and green CI pending.**
+> **Phase 100 MTGJSON import execution implemented; review and green CI pending.**
 
-The branch starts from merged Phase 98 commit `bac6318`. Phase 99 introduces the local-only,
-non-canonical MTGJSON v5 Reference Dataset provider, deterministic candidate mapping, validation,
-planning, registration, and JSON CLI. No dataset, download, automatic review, promotion, or
-canonical write exists. Architecture v12 and every downstream contract remain unchanged. Merge
-is withheld until GitHub Actions are green.
+The branch starts from merged Phase 99 commit `5410619`. The local-only AllPrintings executor
+validates and registers evidence, creates deterministic candidates for seven supported entity types,
+and stops with every candidate pending review. The synthetic fixture produces 46 candidates. No
+networking, canonical write, automatic approval, promotion, AI, simulation, or MB2-specific runtime
+behavior exists. Architecture v12 is unchanged.
