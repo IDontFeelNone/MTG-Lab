@@ -1,6 +1,10 @@
 # MTG Lab Roadmap
 
-> **Status: Current — refreshed by Phase 102 on 2026-07-31.**
+> **Status: Current — refreshed by Phase 103 on 2026-07-31.**
+
+Phase 103 closes the typed canonical projection gap identified by the representative corpus.
+The next scale milestone remains separately authorized work; no unattended full import is
+authorized by this projection capability.
 > **Architecture:** v12 unchanged.
 > **Authority:** Recommendations only; no milestone below is implementation authorization.
 

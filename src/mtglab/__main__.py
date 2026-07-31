@@ -15,6 +15,7 @@ from ai.errors import AIAdapterError
 from evidence import ReferenceDatasetRegistry
 from providers import MTGJSONProvider, provider_registry
 from providers.mtgjson import MTGJSONImportExecution
+from projection import ProjectionError, TypedCanonicalProjectionEngine
 
 
 def main(argv=None) -> int:
@@ -110,9 +111,26 @@ def main(argv=None) -> int:
         command = mtgjson_commands.add_parser(name)
         command.add_argument("--dataset")
         command.add_argument("--format", choices=("json",), default="json")
+    projection = commands.add_parser("projection")
+    projection_commands = projection.add_subparsers(dest="projection_command", required=True)
+    for name in ("validate", "project", "inspect"):
+        command = projection_commands.add_parser(name)
+        command.add_argument("projection_id", nargs="?" if name == "inspect" else None)
+        command.add_argument("--game", default="magic")
+        command.add_argument("--format", choices=("json",), default="json")
+        if name == "project": command.add_argument("--timestamp", required=True)
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "provider":
+    if args.command == "projection":
+        engine = TypedCanonicalProjectionEngine(args.data_root / "canonical",
+            args.data_root / "canonical" / "games", args.data_root / "projection-audit", game=args.game)
+        try:
+            if args.projection_command == "validate": result = engine.validate()
+            elif args.projection_command == "project": result = engine.project(args.timestamp)
+            else: result = engine.inspect(args.projection_id)
+        except ProjectionError as error:
+            print(json.dumps({"valid": False, "error": str(error)}, indent=2, sort_keys=True)); return 2
+    elif args.command == "provider":
         mtgjson_provider = MTGJSONProvider()
         if args.provider_command == "validate":
             result = mtgjson_provider.validate_local(args.source, args.sha256)

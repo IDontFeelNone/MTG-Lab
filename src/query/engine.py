@@ -175,6 +175,7 @@ class CanonicalQueryEngine:
         return raw
 
     def _build_results(self) -> Iterable[QueryResult]:
+        typed_identities: set[tuple[str, str]] = set()
         groups = {"game": (self._repository.game,), "card": self._repository.cards, "printing": self._repository.printings,
                   "product": self._repository.products, "product_version": self._repository.product_versions,
                   "pack_definition": self._repository.pack_definitions, "slot": self._repository.pack_slots,
@@ -182,6 +183,7 @@ class CanonicalQueryEngine:
                   "finish": self._repository.finishes, "rarity": self._repository.rarities}
         for kind, records in groups.items():
             for record in records:
+                typed_identities.add((kind, record.id))
                 values = _plain(record)
                 raw = self._raw.get(record.id, {})
                 evidence = raw.get("assertions", raw.get("provenance", values.get("assertions", [])))
@@ -209,6 +211,9 @@ class CanonicalQueryEngine:
             for kind, entities in sorted(state.items()):
                 if not isinstance(entities, Mapping): continue
                 for identifier, record in sorted(entities.items()):
+                    entity_type = str(record.get("entity_type", kind))
+                    if (entity_type, str(identifier)) in typed_identities:
+                        continue
                     evidence_ids = list(record.get("evidence_references", []))
                     audit = self._audit_records(promotion_id=record.get("promotion_id"))
                     package = audit[0].get("review_package", {}) if audit else {}
@@ -218,7 +223,7 @@ class CanonicalQueryEngine:
                         "dataset_identity": _plain(record.get("dataset_identity", [])),
                         "review_package_id": record.get("review_package_id"),
                         "provider_policy": _plain(package.get("provider")), "promotion_history": list(audit)}
-                    yield QueryResult(str(identifier), str(record.get("entity_type", kind)), _plain(record.get("values", {})),
+                    yield QueryResult(str(identifier), entity_type, _plain(record.get("values", {})),
                         provenance, record.get("confidence"), str(record.get("uncertainty_state", "unknown")),
                         "superseded" if record.get("superseded_status") else "current")
 
