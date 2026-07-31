@@ -1,3 +1,10 @@
+# Phase 99 — MTGJSON Reference Dataset Provider v1
+
+The first concrete Phase 98 provider is implemented for caller-supplied local MTGJSON v5
+artifacts. It validates and deterministically maps reference candidates, reports capabilities,
+and plans without networking or canonical writes. No dataset was acquired or promoted.
+Architecture v12 is unchanged; merge awaits green GitHub Actions.
+
 # Phase 98 — Multi-Source Evidence Acquisition Framework v1
 
 The generic framework is implemented with immutable provider/source/dataset/artifact/acquisition
@@ -40,8 +47,8 @@ external acquisition/review boundary without canonical authority.
 | Area | State |
 | --- | --- |
 | Architecture | v12, unchanged |
-| Latest merged phase | Phase 90 — MB2 pilot evidence-gap outcome |
-| Current milestone | Phase 93 — Canonical Semantic Query Layer v1 |
+| Latest merged phase | Phase 98 — Multi-Source Evidence Acquisition Framework v1 |
+| Current milestone | Phase 99 — MTGJSON Reference Dataset Provider v1 |
 | External formats | JSON, CSV, ZIP containing JSON/CSV |
 | Mystery Booster 2 dataset | Supplied-data evidence gap; not imported |
 | Simulation | Not implemented |

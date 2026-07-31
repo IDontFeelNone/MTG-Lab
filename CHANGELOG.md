@@ -1,3 +1,13 @@
+## Phase 99 — MTGJSON Reference Dataset Provider v1
+
+- Added the first concrete Phase 98 provider: network-free local MTGJSON v5 discovery,
+  validation, deterministic parsing/mapping, planning, capability reporting, and registration
+  support for Cards, Printings, Sets, Languages, Rarities, Finishes, and Identifiers.
+- Added `mtg-lab provider mtgjson validate|inspect|plan`, explicit retained unknown fields,
+  duplicate/hash/schema/licensing gates, provider documentation, and unittest coverage.
+- MTGJSON remains non-canonical reference evidence. No download, automatic review, promotion,
+  product-specific mapping, canonical mutation, or Architecture v12 change was introduced.
+
 ## Phase 98 — Multi-Source Evidence Acquisition Framework v1
 
 - Added immutable provider-neutral evidence, source, dataset, artifact, acquisition, licensing,
