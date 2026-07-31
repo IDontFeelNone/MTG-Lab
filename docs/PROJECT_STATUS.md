@@ -1,6 +1,11 @@
 # Project Status
 
-> **Phase 104 bounded MTGJSON canonical promotion complete — 2026-07-31.**
+> **Phase 105 stopped at the source gate — 2026-07-31. Phase 104 remains the implemented baseline.**
+
+No caller-supplied immutable AllPrintings artifact was available, so Phase 105 performed no
+target discovery, extraction, review, promotion, projection, or canonical mutation. Neither
+Mystery Booster 2 nor Marvel Super Heroes is marked populated. The exact resumption request is
+recorded in `TARGETED_MTGJSON_SET_POPULATION.md`.
 
 The complete governed pipeline has now been executed with a fixed MTGJSON-derived corpus:
 reviewed promotion, typed projection, all four read consumers, non-executed AI request,

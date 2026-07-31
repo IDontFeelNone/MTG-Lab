@@ -66,6 +66,9 @@ data/validation/*
 !data/validation/mystery_booster_2/
 !data/validation/mystery_booster_2/phase_81_coverage.json
 
+# Caller-supplied immutable datasets (never commit source corpora)
+data/local/
+
 # IDE and OS files
 .vscode/
 .idea/
