@@ -1,0 +1,169 @@
+{
+  "acquisition_target_id": "mystery_booster_2_product_overview",
+  "artifact_version": "1",
+  "candidate_count": 1,
+  "candidate_type": "product",
+  "candidates": [
+    {
+      "confidence": 1.0,
+      "entity_type": "product",
+      "errors": [],
+      "field_provenance": [
+        {
+          "acquisition_target_id": "mystery_booster_2_product_overview",
+          "confidence": 1.0,
+          "field_path": "schema_version",
+          "notes": "Existing frozen-contract value retained from the reviewed canonical foundation; not asserted by the captured page.",
+          "parsed_artifact_id": "mb2-product-overview-6a80292f12183541",
+          "parsed_record_id": "mb2-product-overview-record-6a80292f12183541",
+          "provenance_classification": "internal",
+          "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+          "source_id": "official_product_page",
+          "transformation_id": "mystery_booster_2.product_overview",
+          "transformation_version": "1",
+          "value_origin": "acquisition_target.product_id"
+        },
+        {
+          "acquisition_target_id": "mystery_booster_2_product_overview",
+          "confidence": 1.0,
+          "field_path": "id",
+          "notes": "Existing frozen-contract value retained from the reviewed canonical foundation; not asserted by the captured page.",
+          "parsed_artifact_id": "mb2-product-overview-6a80292f12183541",
+          "parsed_record_id": "mb2-product-overview-record-6a80292f12183541",
+          "provenance_classification": "internal",
+          "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+          "source_id": "official_product_page",
+          "transformation_id": "mystery_booster_2.product_overview",
+          "transformation_version": "1",
+          "value_origin": "acquisition_target.product_id"
+        },
+        {
+          "acquisition_target_id": "mystery_booster_2_product_overview",
+          "confidence": 1.0,
+          "field_path": "game",
+          "notes": "Existing frozen-contract value retained from the reviewed canonical foundation; not asserted by the captured page.",
+          "parsed_artifact_id": "mb2-product-overview-6a80292f12183541",
+          "parsed_record_id": "mb2-product-overview-record-6a80292f12183541",
+          "provenance_classification": "internal",
+          "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+          "source_id": "official_product_page",
+          "transformation_id": "mystery_booster_2.product_overview",
+          "transformation_version": "1",
+          "value_origin": "acquisition_target.product_id"
+        },
+        {
+          "acquisition_target_id": "mystery_booster_2_product_overview",
+          "confidence": 1.0,
+          "field_path": "name",
+          "notes": "Copied verbatim after trimming surrounding whitespace.",
+          "parsed_artifact_id": "mb2-product-overview-6a80292f12183541",
+          "parsed_record_id": "mb2-product-overview-record-6a80292f12183541",
+          "provenance_classification": "official",
+          "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+          "source_id": "official_product_page",
+          "transformation_id": "mystery_booster_2.product_overview",
+          "transformation_version": "1",
+          "value_origin": "open_graph_title"
+        },
+        {
+          "acquisition_target_id": "mystery_booster_2_product_overview",
+          "confidence": 1.0,
+          "field_path": "product_type",
+          "notes": "Existing frozen-contract value retained from the reviewed canonical foundation; not asserted by the captured page.",
+          "parsed_artifact_id": "mb2-product-overview-6a80292f12183541",
+          "parsed_record_id": "mb2-product-overview-record-6a80292f12183541",
+          "provenance_classification": "internal",
+          "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+          "source_id": "official_product_page",
+          "transformation_id": "mystery_booster_2.product_overview",
+          "transformation_version": "1",
+          "value_origin": "acquisition_target.product_id"
+        },
+        {
+          "acquisition_target_id": "mystery_booster_2_product_overview",
+          "confidence": 1.0,
+          "field_path": "lifecycle_status",
+          "notes": "Existing frozen-contract value retained from the reviewed canonical foundation; not asserted by the captured page.",
+          "parsed_artifact_id": "mb2-product-overview-6a80292f12183541",
+          "parsed_record_id": "mb2-product-overview-record-6a80292f12183541",
+          "provenance_classification": "internal",
+          "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+          "source_id": "official_product_page",
+          "transformation_id": "mystery_booster_2.product_overview",
+          "transformation_version": "1",
+          "value_origin": "acquisition_target.product_id"
+        },
+        {
+          "acquisition_target_id": "mystery_booster_2_product_overview",
+          "confidence": 1.0,
+          "field_path": "slot_ids",
+          "notes": "Existing frozen-contract value retained from the reviewed canonical foundation; not asserted by the captured page.",
+          "parsed_artifact_id": "mb2-product-overview-6a80292f12183541",
+          "parsed_record_id": "mb2-product-overview-record-6a80292f12183541",
+          "provenance_classification": "internal",
+          "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+          "source_id": "official_product_page",
+          "transformation_id": "mystery_booster_2.product_overview",
+          "transformation_version": "1",
+          "value_origin": "acquisition_target.product_id"
+        },
+        {
+          "acquisition_target_id": "mystery_booster_2_product_overview",
+          "confidence": 1.0,
+          "field_path": "provenance",
+          "notes": "Existing frozen-contract value retained from the reviewed canonical foundation; not asserted by the captured page.",
+          "parsed_artifact_id": "mb2-product-overview-6a80292f12183541",
+          "parsed_record_id": "mb2-product-overview-record-6a80292f12183541",
+          "provenance_classification": "internal",
+          "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+          "source_id": "official_product_page",
+          "transformation_id": "mystery_booster_2.product_overview",
+          "transformation_version": "1",
+          "value_origin": "acquisition_target.product_id"
+        }
+      ],
+      "id": "mb2-product-candidate-6a80292f12183541",
+      "parsed_record_ids": [
+        "mb2-product-overview-record-6a80292f12183541"
+      ],
+      "payload": {
+        "game": "magic",
+        "id": "mystery_booster_2",
+        "lifecycle_status": "foundation",
+        "name": "Mystery Booster 2",
+        "product_type": "sealed_product",
+        "provenance": [
+          {
+            "claim": "Mystery Booster 2 is a Magic: The Gathering product.",
+            "source_classification": "official",
+            "source_location": "https://magic.wizards.com/en/products/mystery-booster",
+            "verification_status": "confirmed"
+          },
+          {
+            "claim": "Card list, print sheets, slot definitions, collation, and probabilities are intentionally not recorded in this foundation product definition.",
+            "notes": "These require validated source evidence before they may be represented as canonical data.",
+            "source_classification": "internal",
+            "source_location": "MTG Lab canonical product foundation scope",
+            "verification_status": "unverified"
+          }
+        ],
+        "schema_version": "v1",
+        "slot_ids": []
+      },
+      "validation_state": "valid",
+      "warnings": []
+    }
+  ],
+  "errors": [],
+  "id": "mb2-product-candidates-6a80292f12183541",
+  "normalization_status": "succeeded",
+  "normalized_at": "2026-07-29T00:00:00Z",
+  "normalizer_id": "mystery_booster_2.product_overview",
+  "normalizer_version": "1",
+  "parsed_artifact_id": "mb2-product-overview-6a80292f12183541",
+  "product_id": "mystery_booster_2",
+  "raw_evidence_hash": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+  "schema_version": "v1",
+  "source_id": "official_product_page",
+  "warnings": []
+}

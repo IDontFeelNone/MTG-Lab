@@ -1,0 +1,25 @@
+{
+  "approved_fields": [
+    "product.name",
+    "product identity",
+    "official product association"
+  ],
+  "decision": "approved",
+  "id": "mb2-stage-1-independent-review",
+  "reason": "Hash, official origin, narrow terms posture, field provenance, explicit unknowns, and bounded scope verified independently.",
+  "rejected_or_unresolved_fields": [
+    "product code",
+    "release date",
+    "packaging type",
+    "pack count",
+    "contents",
+    "cards",
+    "printings",
+    "collation",
+    "slots",
+    "sheets"
+  ],
+  "reviewed_at": "2026-07-31T00:00:00Z",
+  "reviewer": "phase-96b-independent-reviewer",
+  "schema_version": "mb2-stage-1-review-v1"
+}

@@ -1,5 +1,9 @@
 # MTG Lab
 
+> **Phase 96B:** the immutable, independently reviewed Mystery Booster 2 Stage 1 package
+> confirms official product identity only. Packaging composition, card coverage, and pack
+> topology remain unknown or out of scope; merge is withheld pending green CI.
+
 > **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
 > **Status: Current Overview and Vision.** Statements labeled as vision or planned

@@ -76,3 +76,9 @@ requirement.
 The Tier 0 [`FUTURE_VISION.md`](FUTURE_VISION.md) describes collection, product, market,
 deck, portfolio, research, simulation, and intelligence horizons. These are target-state
 ideas only and do not authorize implementation.
+# Phase 96B — MB2 Stage 1 evidence package (implemented; review pending)
+
+Official product identity is retained, hashed, terms-assessed, independently reviewed, and
+confirmed through controlled promotion with deterministic replay. Full packaging, cards,
+Printings, and topology remain unknown or out of scope. Merge requires green Actions;
+Stage 2 requires a separately qualified complete card-list source.

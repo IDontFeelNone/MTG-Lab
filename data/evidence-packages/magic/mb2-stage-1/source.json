@@ -1,0 +1,33 @@
+{
+  "artifact_path": "artifacts/official-product-page-title.html",
+  "byte_size": 238,
+  "captured_at": "2026-07-29T00:00:00Z",
+  "captured_by": "phase-65-acquisition-operator",
+  "fields_not_supported": [
+    "product code",
+    "release date",
+    "packaging type",
+    "pack count",
+    "contents",
+    "cards",
+    "printings",
+    "collation",
+    "slots",
+    "sheets"
+  ],
+  "fields_supported": [
+    "product.name",
+    "product identity",
+    "official product association"
+  ],
+  "id": "wizards-mystery-booster-2-product-overview",
+  "media_type": "text/html",
+  "origin": "https://magic.wizards.com/en/products/mystery-booster",
+  "publisher": "Wizards of the Coast",
+  "review_record": "review.json",
+  "review_status": "approved",
+  "schema_version": "mb2-stage-1-source-v1",
+  "sha256": "6a80292f12183541168e5994e9d136b3cf8d4992f4c51eae0bcb0af83a6d3fac",
+  "source_type": "official_product_page_capture",
+  "terms_assessment": "Repository retains a narrow factual title capture for research, verification, and provenance; no license to redistribute broader page content is asserted. Preserve attribution and do not expand the capture without a fresh terms review."
+}

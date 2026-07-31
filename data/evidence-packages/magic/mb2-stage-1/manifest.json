@@ -1,0 +1,41 @@
+{
+  "bounded_completeness": {
+    "cards_and_printings": "out_of_scope",
+    "full_packaging_composition": false,
+    "official_product_identity_fields": true,
+    "pack_topology": "unresolved"
+  },
+  "candidate_artifact": "candidate.json",
+  "dataset_record": "dataset.json",
+  "entity_counts": {
+    "candidates": 1,
+    "datasets": 1,
+    "pack_definitions": 0,
+    "print_sheets": 0,
+    "product_versions": 0,
+    "products": 1,
+    "promotion_audits": 1,
+    "slots": 0,
+    "sources": 1,
+    "validation_records": 1
+  },
+  "explicit_unknowns": [
+    "product code",
+    "release date",
+    "packaging type",
+    "pack count",
+    "contents",
+    "cards",
+    "printings",
+    "collation",
+    "slots",
+    "sheets"
+  ],
+  "id": "mb2-stage-1-evidence-package",
+  "parsed_artifact": "parsed.json",
+  "promotion_audit_record": "promotion-audit.json",
+  "review_record": "review.json",
+  "schema_version": "mb2-stage-1-package-v1",
+  "source_record": "source.json",
+  "validation_record": "validation.json"
+}
