@@ -1,3 +1,9 @@
+# Phase 109 status — successful dry run recorded; review artifacts pending
+
+Run `30649546787` verified the checksum-gated targeted streaming path for Mystery Booster 2 (`MB2`) and Marvel Super Heroes (`MSH`): 862 cards, 10,940 eligible candidates, 117 review-required identifier findings, 11 deterministic batches, zero rejected/unresolved, and no canonical write or promotion. The retained artifact omitted candidate shards and streaming review-index packages, so batches are not independently reconstructable. The workflow retention fix is implemented; another targeted dry run and green GitHub Actions are required. No review, approval, or promotion occurred.
+
+---
+
 # Phase 108B status — implementation complete, corpus verification pending
 
 Phase 108A is confirmed merged at `69b4feb` (including policy commit `b5ddbed`). The next official run exposed `scryfallId:0001e77a-7fff-49d2-a55c-42f6fdf6db08`. The artifact is unavailable locally, so no unsupported claim about the colliding records is made. Phase 108B conservatively classifies the evidence as ambiguous/unsupported, retains global uniqueness, quarantines only same-coordinate affected closures, and emits a full inventory on rerun. Architecture v12 is unchanged. Merge and promotion are withheld pending green CI and official dry-run validation.

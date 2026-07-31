@@ -1,3 +1,5 @@
+> **Phase 109 update:** GitHub Actions run `30649546787` is the first verified successful targeted production dry run. Its retained summary records MB2 and MSH discovery, 10,940 eligible candidates and 11 deterministic batches without writes or promotion. Candidate payload shards and streaming review-index packages were not retained, so the workflow now uploads both; another targeted dry run is required for independently reconstructable review batches. See `docs/MTGJSON_FIRST_SUCCESSFUL_PRODUCTION_RUN.md`.
+
 > **Phase 108B update:** ambiguous same-printing-coordinate `scryfallId` collisions are now fully diagnosed and narrowly quarantined; different-coordinate collisions remain fatal. Unaffected records continue to deterministic planning, while quarantined records cannot be promoted. Official-corpus verification remains pending.
 
 > **Phase 108A update:** `src/providers/mtgjson/validator.py` now applies explicit namespace and

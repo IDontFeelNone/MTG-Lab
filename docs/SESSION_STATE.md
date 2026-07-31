@@ -1,3 +1,5 @@
+> **Phase 109 records the first successful production dry run (`30649546787`).** Verified summary evidence records exact MB2/MSH discovery, 862 cards, 10,940 eligible candidates, 117 review-required identifier findings, 11 bounded batches, zero rejected/unresolved, and no canonical write or promotion. Missing candidate shards and streaming review-index packages make the batches non-reconstructable. The minimal workflow retention fix is present; another targeted dry run and green Actions are required. Stop after Phase 109 and do not approve or promote.
+
 > **Phase 108B implemented over merged Phase 108A (`69b4feb`), official verification pending.** The reported Scryfall UUID collision cannot be classified from the unavailable corpus, so it is conservatively ambiguous/unsupported. Generic full-row diagnostics and narrow quarantine preserve all evidence and let unaffected planning continue. Architecture v12 and strict internal identities are unchanged. Merge/promotion are withheld pending green CI and an official dry run.
 
 # Session State
