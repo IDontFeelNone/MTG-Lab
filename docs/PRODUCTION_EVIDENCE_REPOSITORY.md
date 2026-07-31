@@ -2,6 +2,12 @@
 
 > **Phase 111 — implemented 2026-07-31. Architecture v12 unchanged.**
 
+> **Phase 112A adapter:** Native MTGJSON Actions artifacts use a nested streaming layout rather
+> than this repository's root intake envelope. The deterministic adapter documented in
+> `GITHUB_PRODUCTION_EVIDENCE_INTAKE.md` verifies and normalizes that retained evidence before
+> invoking this Phase 111 API unchanged. The observed missing-root-manifest failure was a layout
+> mismatch, not evidence corruption; no verification, review, or promotion boundary was weakened.
+
 ## Baseline confirmation
 
 The implementation baseline is merged Phase 110B at merge commit `f7989ba` (implementation

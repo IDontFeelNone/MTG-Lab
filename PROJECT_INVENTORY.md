@@ -1,3 +1,8 @@
+> **Phase 112A:** `src/production_evidence/adapter.py` now deterministically verifies and adapts the
+> native nested MTGJSON workflow artifact to the unchanged Phase 111 intake contract. The Phase 112
+> operational failure was a native-layout/root-contract mismatch, not corrupt evidence. Dry-run
+> intake remains non-canonical and non-promoting; Architecture v12 is unchanged.
+
 > **Phase 112:** A manual GitHub-native workflow securely selects and authenticates a successful
 > Actions artifact, invokes Phase 111 intake and verification, confines changes to
 > `data/production_runs/`, and opens a dedicated evidence-only PR. No production archive is

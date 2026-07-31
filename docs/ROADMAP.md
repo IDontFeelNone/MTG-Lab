@@ -1,3 +1,7 @@
+> **Phase 112A implemented:** The native MTGJSON artifact/root-intake mismatch is bridged by a
+> deterministic fail-closed adapter. Phase 111 remains unchanged. The immediate operational gate is
+> a green normalized dry run for `30663562841`; merge, review, and promotion remain withheld.
+
 > **Phase 112 complete:** Manually dispatched GitHub-native artifact intake now authenticates a selected successful-run artifact, applies the Phase 111 verification boundary, and proposes only bounded non-canonical evidence on a dedicated PR branch. Run `30663562841` remains absent until dispatch and human merge; review and promotion remain out of scope.
 >
 > **Phase 111 complete:** Verified production artifact intake and permanent non-canonical evidence retention are implemented. Run `30663562841` is still not present; intake and verification precede the blocked independent review, and promotion remains separately authorized.

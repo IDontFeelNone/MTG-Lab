@@ -19,7 +19,8 @@ from projection import ProjectionError, TypedCanonicalProjectionEngine
 from promotion import BoundedCorpusPromotion
 from acquisition import PromotionError
 from official_datasets import AcquisitionError, OfficialDatasetAcquisition
-from production_evidence import EvidenceError, ProductionEvidenceRepository
+from production_evidence import (EvidenceError, ProductionEvidenceRepository,
+                                 WorkflowArtifactAdapter)
 
 
 def main(argv=None) -> int:
@@ -113,6 +114,15 @@ def main(argv=None) -> int:
     evidence_intake.add_argument("--sha256", required=True)
     evidence_intake.add_argument("--run-id", required=True)
     evidence_intake.add_argument("--format", choices=("json",), default="json")
+    evidence_normalize = evidence_commands.add_parser("normalize-workflow-artifact")
+    evidence_normalize.add_argument("archive", type=Path)
+    evidence_normalize.add_argument("--run-id", required=True)
+    evidence_normalize.add_argument("--artifact-name", required=True)
+    evidence_normalize.add_argument("--output", type=Path, required=True)
+    evidence_normalize.add_argument("--sha256")
+    evidence_normalize.add_argument("--repository", default="unknown/unknown")
+    evidence_normalize.add_argument("--commit-sha", default="0" * 40)
+    evidence_normalize.add_argument("--format", choices=("json",), default="json")
     provider = commands.add_parser("provider")
     provider_names = provider.add_subparsers(dest="provider_name", required=True)
     mtgjson = provider_names.add_parser("mtgjson")
@@ -185,6 +195,11 @@ def main(argv=None) -> int:
             elif args.evidence_command == "verify": result = production_repository.verify(args.run_id)
             elif args.evidence_command == "intake": result = production_repository.intake(
                 args.archive, args.sha256, args.run_id)
+            elif args.evidence_command == "normalize-workflow-artifact":
+                result = WorkflowArtifactAdapter().normalize(args.archive, run_id=args.run_id,
+                    artifact_name=args.artifact_name, output=args.output,
+                    archive_sha256=args.sha256, repository=args.repository,
+                    commit_sha=args.commit_sha)
             elif args.evidence_command == "providers":
                 providers = provider_registry()
                 result = {"schema_version": "1.0.0", "providers": [

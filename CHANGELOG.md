@@ -1,3 +1,15 @@
+## Phase 112A — Native workflow artifact normalization
+
+- Added a deterministic, fail-closed adapter from the nested native MTGJSON Actions artifact to
+  the unchanged Phase 111 Production Evidence Repository contract, including complete source
+  inventory, lineage and internal-hash verification, target-isolated pending-review bundles, and
+  fixed-byte normalized ZIP output.
+- Updated GitHub intake to authenticate, normalize, intake, verify, and enforce the write boundary
+  in that order. Dry runs upload normalization evidence and never create a branch, commit, or PR.
+- Recorded that run `30663562841` failed Phase 111 because native layout has no root intake
+  manifest, not because its evidence was corrupt. No canonical write, review, approval, promotion,
+  full MTGJSON retention, or Architecture v12 change occurred.
+
 ## Phase 112 — GitHub-native production artifact intake
 
 - Added a manually dispatched, least-privilege workflow that validates a successful repository
