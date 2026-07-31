@@ -1,3 +1,9 @@
+# Next task after the Phase 110 failed-closed gate
+
+Produce and retain a corrected **non-promoting** production dry run containing the candidate-shard payloads, all per-batch review-index packages, manifests, and hash inventory. Independently verify candidate membership and approve exactly one dependency-closed MB2-only batch with a named reviewer and review reference. Then resume Phase 110; do not infer membership from run `30649546787`, do not promote Marvel, and do not begin another milestone.
+
+---
+
 # Next task after Phase 109: repeat the targeted retention run
 
 After the Phase 109 pull request is green and merged, dispatch the same checksum-gated `dry-run` for `Mystery Booster 2,Marvel Super Heroes`. Confirm the workflow artifact contains both candidate shard payloads and all 11 `streaming/.../review-indexes/.../review-package.json` files, then verify their hashes and candidate-ID membership against the manifest. This is an evidence-retention rerun only: do not approve or promote a batch, and do not infer missing payloads from run `30649546787`.
