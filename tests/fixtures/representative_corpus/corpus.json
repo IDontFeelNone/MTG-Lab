@@ -1,0 +1,29 @@
+{
+  "records": [
+    {
+      "id": "card-alpha",
+      "entity_type": "card",
+      "normalized": {"name": "Alpha Adept", "colors": ["U"], "layout": "normal"}
+    },
+    {
+      "id": "card-beta",
+      "entity_type": "card",
+      "normalized": {"name": "Beta Dragon", "colors": ["R"], "layout": "normal"}
+    },
+    {
+      "id": "printing-alpha-en",
+      "entity_type": "printing",
+      "normalized": {"card_id": "card-alpha", "set_id": "set-one", "collector_number": "1", "rarity_id": "common", "language": "en", "finishes": ["nonfoil"], "artist": "A. Artist"}
+    },
+    {
+      "id": "printing-alpha-ja",
+      "entity_type": "printing",
+      "normalized": {"card_id": "card-alpha", "set_id": "set-one", "collector_number": "1", "rarity_id": "common", "language": "ja", "finishes": ["foil"], "artist": null}
+    },
+    {
+      "id": "printing-beta-en",
+      "entity_type": "printing",
+      "normalized": {"card_id": "card-beta", "set_id": "set-two", "collector_number": "7", "rarity_id": "mythic", "language": "en", "finishes": ["foil", "nonfoil"], "artist": "B. Artist"}
+    }
+  ]
+}

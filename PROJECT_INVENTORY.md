@@ -18,7 +18,7 @@
 > `docs/KNOWLEDGE_ACQUISITION_PIPELINE.md` documents the lifecycle. Architecture v12 and
 > canonical storage are unchanged.
 
-> **Status: Current** — Phase 101 architecture review and roadmap refresh complete.
+> **Status: Current** — Phase 102 representative corpus validation complete.
 
 ## Phase 83 constitutional guidance
 
@@ -36,9 +36,9 @@ questions guide future proposals without authorizing them.
 
 - **Architecture:** v12 (unchanged)
 - **Latest merged milestone:** Phase 100 — MTGJSON Reference Dataset Import Execution v1
-- **Current milestone:** Phase 101 — Architecture Review and Roadmap Refresh (complete)
+- **Current milestone:** Phase 102 — Representative Corpus Validation (complete)
 - **Maturity:** pre-alpha; deterministic local reference implementation
-- **Validation baseline:** 246 passing tests and 17 passing subtests locally
+- **Validation baseline:** 248 passing tests and 17 passing subtests locally
 - **Canonical data:** 15 Cards and 15 Printings, including four Mystery Booster 2
   Printings; the MB2 Product is a foundation record; canonical Print Sheets and Slots
   remain unpopulated
@@ -150,9 +150,10 @@ plans explicitly marked Historical, Superseded, or Reference remain retained art
 
 ## Next-work boundary
 
-Phase 101 is complete and no next implementation milestone is authorized. The provider accepts
-local evidence only and cannot promote it. Mystery Booster 2 remains evidence-blocked; Simulation
-and operational AI advice remain unimplemented.
+Phase 102 is complete and no next implementation milestone is authorized. The provider accepts
+local evidence only and cannot promote it. Representative validation composes the existing
+reviewed promotion boundary; full-corpus mapping and operations remain unproven. Mystery Booster
+2 remains evidence-blocked; Simulation and operational AI advice remain unimplemented.
 
 ## Phase 80 — Canonical fact and evidence contract
 

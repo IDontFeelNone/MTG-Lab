@@ -1,6 +1,6 @@
-# Phase 101 handoff
+# Phase 102 handoff
 
-Read `PHASE_101_ARCHITECTURE_REVIEW.md`, `PROJECT_STATUS.md`, and `ROADMAP.md`. Architecture
-v12 remains unchanged and no new feature is authorized. Phase 100 is merged and stops at
-pending review. The full local suite passes 246 tests plus 17 subtests. Any next milestone
-must be explicitly approved; do not infer authorization from the ranked roadmap.
+Read `PHASE_101_ARCHITECTURE_REVIEW.md`, `REPRESENTATIVE_CORPUS_VALIDATION.md`,
+`PROJECT_STATUS.md`, and `ROADMAP.md`. Architecture v12 remains unchanged. Phase 102 proves
+the small governed path through a non-executed AI request and records why a full canonical
+MTGJSON import is not yet authorized. Any next milestone must be explicitly approved.

@@ -1,6 +1,6 @@
 # MTG Lab Roadmap
 
-> **Status: Current — refreshed by Phase 101 on 2026-07-31.**
+> **Status: Current — refreshed by Phase 102 on 2026-07-31.**
 > **Architecture:** v12 unchanged.
 > **Authority:** Recommendations only; no milestone below is implementation authorization.
 
@@ -8,7 +8,7 @@
 
 Phase 100 is merged. Local MTGJSON AllPrintings-style evidence can be validated,
 registered, deterministically mapped, and placed in a pending review queue. It cannot
-write canonical state or approve itself. The complete local suite passes 246 tests and
+write canonical state or approve itself. The complete local suite passes 248 tests and
 17 subtests. Mystery Booster 2 remains evidence-blocked beyond its bounded foundation;
 simulation and operational AI advice remain unimplemented.
 
@@ -17,13 +17,16 @@ The current implementation assessment is
 `../ARCHITECTURE_REVIEW_v1.md` only as a current-state assessment; the Phase 77 report
 remains historical architectural evidence.
 
+Phase 102 now validates the small representative path through canonical state, Query,
+Analytics, Semantic Query, Reasoning Context, and a non-executed AI request. It does not
+establish complete-corpus operational readiness.
+
 ## Recommended next boundary
 
-Before new feature authorization, validate the existing Phase 100 path at representative
-corpus scale and resolve the generic reviewed provider-to-canonical mapping contract.
-The work must remain non-promoting unless a separately reviewed evidence package satisfies
-the existing promotion boundary. It must not change Architecture v12 or add provider-shaped
-canonical entities.
+Resolve the generic reviewed provider-to-typed-canonical mapping contract, then run a
+non-promoting full-corpus performance, interruption, resume, quarantine, and storage
+rehearsal. Promotion must remain bounded and independently reviewed. The work must not
+change Architecture v12 or add provider-shaped canonical entities.
 
 ## Top 10 remaining milestones, ranked by value
 
