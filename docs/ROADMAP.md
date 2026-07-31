@@ -1,4 +1,10 @@
-# Phase 99 — MTGJSON Reference Dataset Provider v1
+# Phase 100 — MTGJSON Reference Dataset Import Execution v1
+
+Phase 100 executes the approved provider against caller-supplied local AllPrintings data, registers
+evidence, creates deterministic validated candidates, and stops in the pending review queue. No
+canonical promotion occurs. Architecture v12 is unchanged; merge awaits green GitHub Actions.
+
+## Phase 99 — MTGJSON Reference Dataset Provider v1
 
 The first concrete Phase 98 provider is implemented for caller-supplied local MTGJSON v5
 artifacts. It validates and deterministically maps reference candidates, reports capabilities,
@@ -48,7 +54,7 @@ external acquisition/review boundary without canonical authority.
 | --- | --- |
 | Architecture | v12, unchanged |
 | Latest merged phase | Phase 98 — Multi-Source Evidence Acquisition Framework v1 |
-| Current milestone | Phase 99 — MTGJSON Reference Dataset Provider v1 |
+| Current milestone | Phase 100 — MTGJSON Reference Dataset Import Execution v1 |
 | External formats | JSON, CSV, ZIP containing JSON/CSV |
 | Mystery Booster 2 dataset | Supplied-data evidence gap; not imported |
 | Simulation | Not implemented |

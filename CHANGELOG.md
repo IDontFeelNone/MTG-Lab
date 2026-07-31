@@ -1,3 +1,12 @@
+## Phase 100 — MTGJSON Reference Dataset Import Execution v1
+
+- Executed the approved local-only MTGJSON provider through validation, artifact and dataset
+  registration, deterministic candidate generation and hashing, and pending review-queue storage.
+- Added JSON `provider mtgjson import|candidates|review` commands, forward-compatible
+  AllPrintings-shape validation, fail-closed imports, documentation, and unittest coverage.
+- Created no canonical entities and performed no networking, approval, or promotion; Architecture
+  v12 and independent-review authority remain unchanged.
+
 ## Phase 99 — MTGJSON Reference Dataset Provider v1
 
 - Added the first concrete Phase 98 provider: network-free local MTGJSON v5 discovery,

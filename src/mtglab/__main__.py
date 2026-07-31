@@ -14,6 +14,7 @@ from ai import AIProviderRegistry, SCHEMA_VERSION as AI_SCHEMA_VERSION
 from ai.errors import AIAdapterError
 from evidence import ReferenceDatasetRegistry
 from providers import MTGJSONProvider, provider_registry
+from providers.mtgjson import MTGJSONImportExecution
 
 
 def main(argv=None) -> int:
@@ -99,12 +100,16 @@ def main(argv=None) -> int:
     provider_names = provider.add_subparsers(dest="provider_name", required=True)
     mtgjson = provider_names.add_parser("mtgjson")
     mtgjson_commands = mtgjson.add_subparsers(dest="provider_command", required=True)
-    for name in ("validate", "inspect", "plan"):
+    for name in ("validate", "inspect", "plan", "import"):
         command = mtgjson_commands.add_parser(name)
-        command.add_argument("source", type=Path)
+        command.add_argument("source", type=Path, nargs="?" if name == "import" else None)
         command.add_argument("--format", choices=("json",), default="json")
         if name == "validate":
             command.add_argument("--sha256")
+    for name in ("candidates", "review"):
+        command = mtgjson_commands.add_parser(name)
+        command.add_argument("--dataset")
+        command.add_argument("--format", choices=("json",), default="json")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
     if args.command == "provider":
@@ -113,8 +118,17 @@ def main(argv=None) -> int:
             result = mtgjson_provider.validate_local(args.source, args.sha256)
         elif args.provider_command == "inspect":
             result = mtgjson_provider.inspect(args.source)
-        else:
+        elif args.provider_command == "plan":
             result = mtgjson_provider.plan_local(args.source)
+        else:
+            execution = MTGJSONImportExecution(args.data_root)
+            try:
+                if args.provider_command == "import": result = execution.import_dataset(args.source)
+                elif args.provider_command == "candidates": result = execution.candidates(args.dataset)
+                else: result = execution.review(args.dataset)
+            except (OSError, ValueError) as error:
+                print(json.dumps({"valid": False, "error": str(error), "canonical_write": False},
+                                 indent=2, sort_keys=True)); return 2
     elif args.command == "evidence":
         evidence_registry = ReferenceDatasetRegistry(args.data_root / "evidence" / "registry")
         if args.evidence_command == "providers":
