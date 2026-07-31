@@ -62,6 +62,7 @@ def map_dataset(document: Mapping[str, Any]) -> tuple[dict[str, Any], ...]:
                 records.append(_record("card", source_card, {
                     "name": _text(source_card["name"]),
                     "normalized_name": _text(source_card["name"]).casefold(),
+                    "card_reference": card_key,
                     "layout": source_card.get("layout", _unknown()),
                     "colors": sorted(source_card["colors"]) if "colors" in source_card else _unknown(),
                     "mana_cost": source_card.get("manaCost", _unknown()),

@@ -1,5 +1,9 @@
 # Project Status
 
+> **Phase 106 production ingestion capability implemented — 2026-07-31.**
+
+Deterministic MTGJSON review batches, bounded independent promotion, typed projection, replay, rollback, downstream checks, and performance instrumentation are implemented. Official full-corpus execution remains pending because the approved URL returned HTTP 403 in this environment; no substitute corpus was promoted.
+
 > **Phase 105 Official Reference Dataset Acquisition implemented — 2026-07-31.**
 
 Approved MTGJSON AllPrintings acquisition is now automated into `data/local/`, with resume,

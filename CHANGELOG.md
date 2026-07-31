@@ -1,3 +1,8 @@
+## Phase 106 — Production MTGJSON Dataset Ingestion v1
+
+- Added deterministic dependency-closed review batches, explicit rejected/unresolved accounting, governed bounded promotion, typed projection, replay, rollback, downstream verification, and performance measurements.
+- Added production-shape unittest coverage and operator documentation. Official acquisition was attempted through the approved subsystem but blocked by HTTP 403 in this environment; no substitute result was claimed. Architecture v12 remains unchanged.
+
 ## Phase 105 — Official Reference Dataset Acquisition
 
 - Added configurable, resumable, fail-closed official dataset acquisition with deterministic local

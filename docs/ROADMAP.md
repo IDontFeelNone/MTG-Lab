@@ -1,5 +1,7 @@
 # MTG Lab Roadmap
 
+> **Phase 106:** deterministic dependency-closed batches, governed bounded promotion, typed projection, downstream verification, replay/rollback, and measurement are implemented. Official full-corpus execution is pending configured-URL access. Automatic full-corpus promotion is not authorized.
+
 > **Status: Current — refreshed by Phase 105 Official Reference Dataset Acquisition on 2026-07-31.**
 
 Phase 105 automates acquisition of approved MTGJSON AllPrintings evidence into ignored local
