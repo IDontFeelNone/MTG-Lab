@@ -1,9 +1,11 @@
 # Session State
 
-> **Phase 100 MTGJSON import execution implemented; review and green CI pending.**
+> **Phase 101 architecture review and roadmap refresh complete.**
 
-The branch starts from merged Phase 99 commit `5410619`. The local-only AllPrintings executor
-validates and registers evidence, creates deterministic candidates for seven supported entity types,
-and stops with every candidate pending review. The synthetic fixture produces 46 candidates. No
-networking, canonical write, automatic approval, promotion, AI, simulation, or MB2-specific runtime
-behavior exists. Architecture v12 is unchanged.
+Architecture v12 is unchanged. No feature, canonical data, or schema was added. The review
+found one test-harness portability defect and corrected it by declaring `tests/` as a
+package. The complete local baseline is 246 passing tests and 17 passing subtests.
+
+The repository should stop after this review. Future work requires explicit milestone
+approval; the recommended next boundary is representative-corpus scale validation and a
+generic reviewed provider-to-canonical mapping contract without automatic promotion.

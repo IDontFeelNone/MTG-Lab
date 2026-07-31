@@ -1,3 +1,14 @@
+## Phase 101 — Architecture Review and Roadmap Refresh
+
+- Completed a repository-wide post-Phase-100 review of Tier 0, current-state, subsystem,
+  source, dependency, data, test, and documentation boundaries. Architecture v12 remains
+  suitable and unchanged; no feature, canonical-data, or schema change was introduced.
+- Published the current health, debt, readiness, maturity, testing, documentation, and
+  ranked roadmap assessment in `docs/PHASE_101_ARCHITECTURE_REVIEW.md`; refreshed current
+  status and roadmap documents.
+- Fixed a genuine test-harness portability defect by declaring `tests/` as a package; the
+  complete baseline is 246 passing tests and 17 passing subtests.
+
 ## Phase 100 — MTGJSON Reference Dataset Import Execution v1
 
 - Executed the approved local-only MTGJSON provider through validation, artifact and dataset

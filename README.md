@@ -1,8 +1,8 @@
 # MTG Lab
 
-> **Phase 96B:** the immutable, independently reviewed Mystery Booster 2 Stage 1 package
-> confirms official product identity only. Packaging composition, card coverage, and pack
-> topology remain unknown or out of scope; merge is withheld pending green CI.
+> **Phase 101:** the post-Phase-100 architecture review is complete. Architecture v12 is
+> unchanged. The repository remains pre-alpha; no subsequent implementation milestone is
+> authorized by the review or roadmap.
 
 > **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
@@ -271,14 +271,15 @@ This organization allows multiple trading card games to share a common analytics
 
 **Status:** Active Development
 
-**Current Phase:** Phase 77.1 — Repository Documentation Reconciliation
+**Current Phase:** Phase 101 — Architecture Review and Roadmap Refresh (complete)
 
 **Reference Product:** Magic: The Gathering — Mystery Booster 2
 
 Mystery Booster 2 validates evidence, canonical, and observation boundaries. The
-generic Market, External Mapping, Collection, Analytics, and Decision foundations are
-also implemented. The repository does not yet contain an MB2 simulation framework,
-probability engine, or AI reasoning layer.
+generic Market, External Mapping, Collection, Analytics, Decision, Semantic Query,
+Reasoning Context, and AI Adapter foundations are also implemented. The repository does
+not yet contain an MB2 simulation framework, probability engine, model provider, or
+operational AI Advisor.
 
 ---
 

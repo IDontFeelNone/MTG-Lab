@@ -1,6 +1,5 @@
-# Next task — review and merge Phase 100
+# Next task
 
-Review local AllPrintings import validation, repeatable artifact/dataset registration, candidate
-identity and hashing, pending review-queue contents, CLI behavior, documentation, and unittest
-coverage. Merge only after GitHub Actions are green. Any approval or promotion must remain a
-separate independently reviewed operation.
+No implementation task is currently authorized. Phase 101 is complete. Await explicit
+approval for a new milestone. The recommended next boundary is documented in
+`PHASE_101_ARCHITECTURE_REVIEW.md` and `ROADMAP.md`; ranking does not grant authorization.
