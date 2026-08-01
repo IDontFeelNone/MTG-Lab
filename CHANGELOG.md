@@ -1,3 +1,11 @@
+## Phase 113A — State-aware retained-evidence gate
+
+- Replaced Phase 113's permanent run-absence assumptions with a dual-state gate: the historical
+  absent state remains fail-closed, while PR #86's retained state must prove run identity,
+  manifests/indexes, non-canonical flags, MB2/MSH isolation, pending packages, and the absence of
+  decisions or approval/promotion audits. No evidence, canonical state, review, or promotion was
+  changed.
+
 ## Phase 112B — Fail-closed production-evidence persistence
 
 - Reconciled the reported non-dry-run intake: normalization, intake, Phase 111 verification, and the write boundary completed, but durable persistence was never established. The only repository workflow path that can finish successfully without a branch is the pair of `if: ${{ !inputs.dry_run }}` steps being skipped; therefore the effective dispatch context remained dry-run even though the operator intended false. No Git, push, or PR command ran, and skipped steps supplied no command output or exit status.

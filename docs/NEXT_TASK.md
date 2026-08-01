@@ -1,3 +1,10 @@
+# Next task after Phase 113A
+
+Rerun PR #86 only after Phase 113A merges. Require its merge-result checks to validate retained
+run `30663562841` as non-canonical, target-isolated, and pending review. After #86 is green and
+merged, authorize a separate independent review of exactly one indexed MB2 batch; do not review
+MSH, approve, promote, or write canonical state during the intake transition.
+
 # Next task after Phase 112B
 
 Merge Phase 112B only after GitHub Actions are green, then perform the documented `dry_run: false` intake rerun for run `30663562841`. Verify the resulting branch, evidence-only commit, open PR, and persistence report. Merge remains withheld until checks are green. Do not restart Phase 113 review, approve candidates, promote, or write canonical state in Phase 112B.

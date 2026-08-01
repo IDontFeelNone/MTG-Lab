@@ -1,3 +1,10 @@
+# Phase 113A roadmap update
+
+The evidence gate now spans the transition from Phase 113's historically absent retained run to
+PR #86's verified present run. Merge this fix before rerunning #86. Once #86 is green and merged,
+the next gate is independent review of exactly one indexed MB2 batch; approval and promotion remain
+separate and unauthorized.
+
 # Phase 112B roadmap update
 
 Phase 112B reconciles the persistence gap discovered after Phase 113: verified local workflow evidence was mistakenly allowed to end successfully when conditional durable-write stages did not run. The repair makes remote branch/commit/PR confirmation a fail-closed gate. Operational rerun and evidence PR merge follow only after this change is green; review and promotion remain later, separately authorized work.

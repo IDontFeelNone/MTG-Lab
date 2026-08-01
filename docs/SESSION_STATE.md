@@ -1,3 +1,11 @@
+# Phase 113A session state
+
+Main contains Phase 113 but not PR #86. The gate is now conditional on repository state: absent
+evidence preserves the historical fail-closed outcome; present evidence must be run
+`30663562841`, manifest/index complete, MB2/MSH isolated, pending, and free of review decisions or
+approval/promotion audits. No evidence bytes, candidates, reviewer identity, canonical state, or
+promotion state were changed. Rerun #86 only after this fix merges.
+
 # Phase 112B session state
 
 Merged Phase 113 (`b9941a6`) is confirmed. The reported non-dry-run verified normalized evidence but did not execute Git configuration, branch creation, staging, commit, push, or PR creation because both persistence steps were skipped under the effective dry-run condition. Phase 112B implements an always-run, structured, independently verified persistence state machine. Run `30663562841` is still not retained and no evidence PR is claimed.
