@@ -59,3 +59,8 @@ After Phase 124 is reviewed and merged, scope a separate milestone for contract 
 larger synthetic collection/deck fixtures, and canonical color/identifier coverage. Pricing,
 market recommendations, live deck lists, simulations, dashboards, and AI providers remain
 unauthorized.
+# Next task after Phase 125
+
+Stop after Phase 125. After review and merge, scope a separate milestone for query contract
+hardening, packaging, and larger synthetic collection/deck coverage. Do not add pricing,
+market intelligence, simulations, recommendations, AI providers, products, or canonical data.

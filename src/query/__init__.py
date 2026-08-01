@@ -1,5 +1,7 @@
 """Stable read contract for canonical repository consumers."""
 
 from .engine import CanonicalQueryEngine, QueryError, QueryResult, QuerySnapshot
+from .service import CanonicalAnswer, CanonicalQueryService
 
-__all__ = ["CanonicalQueryEngine", "QueryError", "QueryResult", "QuerySnapshot"]
+__all__ = ["CanonicalAnswer", "CanonicalQueryEngine", "CanonicalQueryService",
+           "QueryError", "QueryResult", "QuerySnapshot"]

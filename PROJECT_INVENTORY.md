@@ -314,3 +314,9 @@ explicit canonical resolution outcomes, immutable collection snapshots, summarie
 completion, and explainable price-independent acquisition priorities. The synthetic deck
 fixture and focused contract document define validation and boundaries. Canonical production
 state remains Phase 119 only at digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
+# Phase 125 inventory update
+
+Added `src/query/service.py`, Phase 125 query tests, `docs/CANONICAL_QUERY_LAYER.md`, and
+canonical Card/Product/Printing plus collection JSON CLI surfaces. The layer reuses the
+existing canonical repository/query engine and Phase 124 collection/deck services. It adds
+no canonical data, product, provider, pricing, simulation, recommendation, or AI integration.

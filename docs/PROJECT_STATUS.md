@@ -66,3 +66,10 @@ canonical resolution with retained uncertainty, immutable snapshots, summaries, 
 completion, and explainable price-independent priorities. Architecture v12 and production
 canonical digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`
 are unchanged; Phase 119 remains the only production promotion.
+# Phase 125 status
+
+The first canonical intelligence query API is complete. It deterministically exposes
+existing Card, Printing, Product, collection, and deck-comparison facts through JSON without
+inference. Phase 124 is merged at `de12a6b`; Phase 119 remains the sole production promotion.
+Architecture v12, canonical contracts/data, generic automatic updates, and completed
+Collection Intelligence are unchanged. No pricing or AI-provider integration exists.

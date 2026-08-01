@@ -196,3 +196,8 @@ promotion occurred. Architecture v12 and canonical contracts are unchanged.
 Collection Intelligence v1 is complete as a deterministic downstream service. The next
 recommended milestone hardens import/deck contracts and canonical attribute coverage before
 any separately approved pricing or market-intelligence work. Architecture v12 is unchanged.
+# Phase 125 roadmap update
+
+The deterministic canonical query layer is complete. A later separately authorized phase
+may harden packaging and larger-corpus performance, but must preserve the exact-fact,
+provenance, unknown, and snapshot contracts. Market pricing and AI remain separate future work.
