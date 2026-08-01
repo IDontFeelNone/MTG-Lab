@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "candidate_payload": "evidence/candidates.json",
+    "promotion_audit": "audit/syn-batch-000001-4f2c.json",
+    "source_artifact": "evidence/source.json"
+  },
+  "canonical_identity_fields": {
+    "card": "card_reference",
+    "finish": "value",
+    "identifier": "value",
+    "printing": "uuid",
+    "set": "code"
+  },
+  "data_root": "data",
+  "integrity": {
+    "candidate_payload_sha256": "38815793d170e2db08ce5e88f458cf909073b22173b2a5021ec7a5976474ccad",
+    "canonical_pre_state_digest": "0364eb4514fca1d554c1d8ea0e3b6409a4abb879d5bad4f614bb623a813c2d04",
+    "expected_candidate_count": 8,
+    "source_sha256": "6b46783a3989ee71ff30a564a942866a76639c716efc8d63010f8a9480efee81"
+  },
+  "policy": {
+    "permitted_final_classifications": [
+      "approved"
+    ],
+    "trusted_providers": [
+      "synthetic-trusted-provider"
+    ]
+  },
+  "schema_version": "automatic-canonical-update-v1",
+  "synthetic_fixture_only": true,
+  "target": {
+    "base_branch": "main",
+    "batch_identifier": "syn-batch-000001-4f2c",
+    "candidate_digest": "b5da7553c846a82347f6bbe106aaf6d20fd843e831a883a14eace7c617b93925",
+    "destination_branch": "canonical-update/syn-batch-000001-4f2c",
+    "evidence_identity": "synthetic-retained-evidence-v1",
+    "expected_target_isolation": "SYN",
+    "game": "magic",
+    "promotion_policy": "trusted-deterministic-v1",
+    "source_artifact_or_workflow_run": "fixture-phase-121",
+    "source_dataset_identity": "synthetic-magic-set-2026-08-01",
+    "target_code": "SYN",
+    "target_name": "Synthetic Validation Set",
+    "trusted_provider": "synthetic-trusted-provider"
+  }
+}

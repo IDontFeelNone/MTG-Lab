@@ -1,3 +1,7 @@
+# Phase 121 roadmap milestone
+
+**Complete locally; protected merge pending green Actions.** The non-MB2 synthetic `SYN` fixture exercised all sixteen standard stages in an isolated root. Deterministic recovery, replay, conflict rejection, rollback planning, PR reuse/mismatch rejection, green-check gating, and no-force/no-bypass policy are covered. This establishes production readiness of the generic mechanism without authorizing a real-set update.
+
 # Phase 120 roadmap milestone
 
 **Implemented, awaiting protected green merge:** configuration-driven trusted-source updates now run intake through deterministic promotion, automatic PR creation, and auto-merge. Routine flow is signature-free; exceptional safety decisions remain human gates.

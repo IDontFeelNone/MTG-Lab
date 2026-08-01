@@ -21,9 +21,9 @@ class AutomaticUpdateTests(unittest.TestCase):
         (root / "data/canonical/state.json").write_text('{"card": {}, "finish": {}, "identifier": {}, "printing": {}}\n')
         candidates = classifications or [
             {"candidate_identifier": "card:1", "entity_type": "card", "validation_state": "validated",
-             "mapped_fields": {"card_reference": "c1", "set_code": code}},
+             "mapped_fields": {"card_reference": "c1", "set_code": code}, "provenance": {"provider": provider}},
             {"candidate_identifier": "printing:1", "entity_type": "printing", "validation_state": "validated",
-             "mapped_fields": {"uuid": "p1", "card_reference": "c1", "set_code": code}},
+             "mapped_fields": {"uuid": "p1", "card_reference": "c1", "set_code": code}, "provenance": {"provider": provider}},
         ]
         ids = [row["candidate_identifier"] for row in candidates]
         payload = {"candidate_ids": ids, "candidate_payloads": candidates, "target_set_code": code}
@@ -82,7 +82,7 @@ class AutomaticUpdateTests(unittest.TestCase):
         for case in cases:
             with self.subTest(case=case), tempfile.TemporaryDirectory() as temporary:
                 rows = None
-                if case == "quarantine": rows = [{"candidate_identifier": "x", "entity_type": "card", "final_classification": "quarantined", "mapped_fields": {"card_reference": "c", "set_code": "NEW"}}]
+                if case == "quarantine": rows = [{"candidate_identifier": "x", "entity_type": "card", "final_classification": "quarantined", "mapped_fields": {"card_reference": "c", "set_code": "NEW"}, "provenance": {"provider": "trusted"}}]
                 root, config = self.synthetic(temporary, provider="bad" if case == "trust" else "trusted", classifications=rows)
                 engine = AutomaticCanonicalUpdate(root, config)
                 if case == "isolation":

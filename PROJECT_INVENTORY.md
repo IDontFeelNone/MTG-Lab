@@ -1,3 +1,7 @@
+# Phase 121 inventory update
+
+Added `tests/fixtures/phase_121_synthetic/` (descriptor, retained source, eight ordered candidates, and empty isolated canonical state) and `tests/test_phase_121_synthetic_automatic_updates.py`. The generic engine now enforces payload checksum, nonempty unique inventory, provenance, immutable audit digest, and green-check auto-merge eligibility. The workflow derives its deterministic branch from the descriptor and safely reuses only an identical remote branch. No fixture artifact exists under production `data/`; Phase 119 remains its only completed promotion.
+
 # Phase 120 inventory update
 
 New inventory: `src/production_evidence/automatic_updates.py`, both automatic-update scripts, `config/automatic_updates/`, `.github/workflows/automatic-canonical-update.yml`, Phase 120 tests, and `docs/AUTOMATIC_CANONICAL_UPDATES.md`. Phase 119 canonical state/audit is unchanged; no second MB2 batch or MSH promotion occurred.

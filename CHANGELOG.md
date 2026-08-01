@@ -1,3 +1,7 @@
+# Phase 121 — synthetic automatic-update production-readiness validation
+
+Validated all sixteen generic stages with isolated set `SYN`: one Set, two Cards, two Printings, one Identifier, and two Finishes, including explicit provenance and unknowns. Added fail-closed payload inventory/checksum/provenance and audit-integrity gates, deterministic protected-branch persistence, full JSON CLI/recovery/replay/rollback coverage, and mocked PR/green-check auto-merge validation. Production canonical state remains exactly Phase 119; no second MB2 batch or MSH/Marvel data was promoted, and Architecture v12/canonical contracts are unchanged.
+
 # Phase 120 — Reusable automatic canonical update pipeline
 
 Added generic sixteen-stage fail-closed orchestration, a versioned descriptor, JSON CLI, atomic recovery, replay/status/rollback planning, a minimum-permission protected PR/auto-merge workflow, reference MB2 configuration, documentation, and unittest coverage. Phase 119 was not repeated; no second MB2 batch or MSH data was promoted; Architecture v12 and canonical contracts are unchanged.

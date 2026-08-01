@@ -1,0 +1,157 @@
+{
+  "candidate_ids": [
+    "set:syn",
+    "card:alpha",
+    "card:beta",
+    "printing:alpha",
+    "printing:beta",
+    "identifier:alpha",
+    "finish:foil",
+    "finish:nonfoil"
+  ],
+  "candidate_payloads": [
+    {
+      "candidate_identifier": "set:syn",
+      "conflict_state": "none",
+      "entity_type": "set",
+      "final_classification": "approved",
+      "mapped_fields": {
+        "code": "SYN",
+        "name": "Synthetic Validation Set",
+        "release_date": null,
+        "release_date_knowledge": "explicitly_unknown",
+        "set_code": "SYN"
+      },
+      "provenance": {
+        "provider": "synthetic-trusted-provider",
+        "source_record": "synthetic://phase-121/set:syn"
+      },
+      "validation_state": "validated"
+    },
+    {
+      "candidate_identifier": "card:alpha",
+      "conflict_state": "none",
+      "entity_type": "card",
+      "final_classification": "approved",
+      "mapped_fields": {
+        "card_reference": "syn-alpha",
+        "name": "Synthetic Alpha",
+        "oracle_text": null,
+        "oracle_text_knowledge": "explicitly_unknown",
+        "set_code": "SYN"
+      },
+      "provenance": {
+        "provider": "synthetic-trusted-provider",
+        "source_record": "synthetic://phase-121/card:alpha"
+      },
+      "validation_state": "validated"
+    },
+    {
+      "candidate_identifier": "card:beta",
+      "conflict_state": "none",
+      "entity_type": "card",
+      "final_classification": "approved",
+      "mapped_fields": {
+        "card_reference": "syn-beta",
+        "name": "Synthetic Beta",
+        "oracle_text": "Validation text.",
+        "set_code": "SYN"
+      },
+      "provenance": {
+        "provider": "synthetic-trusted-provider",
+        "source_record": "synthetic://phase-121/card:beta"
+      },
+      "validation_state": "validated"
+    },
+    {
+      "candidate_identifier": "printing:alpha",
+      "conflict_state": "none",
+      "entity_type": "printing",
+      "final_classification": "approved",
+      "mapped_fields": {
+        "card_reference": "syn-alpha",
+        "collector_number": "1",
+        "finish": "nonfoil",
+        "set_code": "SYN",
+        "uuid": "00000000-0000-4000-8000-000000000121"
+      },
+      "provenance": {
+        "provider": "synthetic-trusted-provider",
+        "source_record": "synthetic://phase-121/printing:alpha"
+      },
+      "validation_state": "validated"
+    },
+    {
+      "candidate_identifier": "printing:beta",
+      "conflict_state": "none",
+      "entity_type": "printing",
+      "final_classification": "approved",
+      "mapped_fields": {
+        "card_reference": "syn-beta",
+        "collector_number": "2",
+        "finish": "foil",
+        "set_code": "SYN",
+        "uuid": "00000000-0000-4000-8000-000000000122"
+      },
+      "provenance": {
+        "provider": "synthetic-trusted-provider",
+        "source_record": "synthetic://phase-121/printing:beta"
+      },
+      "validation_state": "validated"
+    },
+    {
+      "candidate_identifier": "identifier:alpha",
+      "conflict_state": "none",
+      "entity_type": "identifier",
+      "final_classification": "approved",
+      "mapped_fields": {
+        "printing_uuid": "00000000-0000-4000-8000-000000000121",
+        "scheme": "synthetic-id",
+        "set_code": "SYN",
+        "value": "SYN-001"
+      },
+      "provenance": {
+        "provider": "synthetic-trusted-provider",
+        "source_record": "synthetic://phase-121/identifier:alpha"
+      },
+      "validation_state": "validated"
+    },
+    {
+      "candidate_identifier": "finish:foil",
+      "conflict_state": "none",
+      "entity_type": "finish",
+      "final_classification": "approved",
+      "mapped_fields": {
+        "set_code": "SYN",
+        "value": "foil"
+      },
+      "provenance": {
+        "provider": "synthetic-trusted-provider",
+        "source_record": "synthetic://phase-121/finish:foil"
+      },
+      "validation_state": "validated"
+    },
+    {
+      "candidate_identifier": "finish:nonfoil",
+      "conflict_state": "none",
+      "entity_type": "finish",
+      "final_classification": "approved",
+      "mapped_fields": {
+        "set_code": "SYN",
+        "value": "nonfoil"
+      },
+      "provenance": {
+        "provider": "synthetic-trusted-provider",
+        "source_record": "synthetic://phase-121/finish:nonfoil"
+      },
+      "validation_state": "validated"
+    }
+  ],
+  "schema_version": "synthetic-retained-evidence-v1",
+  "target": {
+    "code": "SYN",
+    "game": "magic",
+    "name": "Synthetic Validation Set"
+  },
+  "target_set_code": "SYN"
+}

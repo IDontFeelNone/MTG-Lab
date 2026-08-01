@@ -1,3 +1,7 @@
+# Session state — Phase 121
+
+Baseline `7dcd9e1` confirms merged Phase 120; `5607e9c` contains merged Phase 119. Phase 121 validates `syn-batch-000001-4f2c` only in copied unittest/temporary roots. Every stage succeeds and the isolated post-state digest is `47abe0658ad434f6485148592559a973a6f8f14694455a89cb0cb29b5b8e9327`. Production canonical bytes/digest are unchanged, Phase 119 was not duplicated, and neither a second MB2 batch nor MSH/Marvel was promoted. Architecture v12 and canonical contracts remain unchanged. Merge is withheld until required GitHub Actions checks are green.
+
 # Session state — Phase 120
 
 Baseline `5607e9c` contains merged Phase 119 and the sole MB2 promotion. Phase 120 implementation is complete without canonical mutation, second MB2 batch, MSH promotion, Architecture v12 change, or canonical-contract change. Required Actions checks and protected auto-merge remain the merge gate.
