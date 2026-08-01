@@ -1,9 +1,10 @@
-# After Phase 127D
+# After Phase 127E
 
 After merge, manually dispatch **Market acquisition** once with `persist=false`. Inspect the
-uploaded report for a valid bounded official hostname, no URI rejection reason, exactly one
-payload download, valid JSON shape, and the MB2-only mapping census. Any failure is a hard
-stop, and Phase 127D does not authorize `persist=true`, canonical writes, or promotion.
+uploaded report for preserved `download_uri` schema/type facts, distinct provider/diagnostic
+objects, a valid bounded official hostname, no URI rejection reason, exactly one payload
+download, valid JSON shape, and the MB2-only mapping census. Require `canonical_write: false`
+and `promotion_performed: false`. Any failure is a hard stop; do not use `persist=true`.
 
 # Next task after Phase 126
 

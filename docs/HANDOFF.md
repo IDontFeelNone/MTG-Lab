@@ -1,3 +1,12 @@
+# Phase 127E handoff
+
+Phase 127D is merged at `7cfe964`. Its real dry run stopped at the combined `blank_uri`
+classification before URI security validation and made no writes. Phase 127E retains the exact
+selected provider descriptor for transport, separates value-free diagnostic projection, and
+reports exact field extraction reasons. Run exactly one post-merge `persist=false` dispatch and
+stop before persistence regardless of outcome. Coverage remains 0/379; canonical state and
+promotion are unchanged.
+
 # Phase 127D handoff
 
 Phase 127C is merged at `a837210`. Its real dry run established that the remaining failure

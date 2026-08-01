@@ -17,7 +17,7 @@ from market import MarketObservationRepository, MarketValidationError
 from market.scryfall import (ProviderAcquisitionError, ProviderRateLimitError,
     ScryfallMarketAdapter, canonical_json, load_payload, sha256_bytes)
 from scripts.scryfall_market_acquisition import (METADATA_URL, MAX_ATTEMPTS, fetch,
-    new_diagnostics, parse_bulk_metadata, run)
+    _select_bulk_descriptor, new_diagnostics, parse_bulk_metadata, run)
 
 ROOT = Path(__file__).parents[1]
 NOW = datetime(2026, 8, 1, 12, tzinfo=timezone.utc)
@@ -170,6 +170,27 @@ class Phase127Tests(unittest.TestCase):
                 self.assertEqual(diagnostic["selected_bulk_type"], "default_cards")
                 self.assertTrue(diagnostic["updated_at_present"])
                 self.assertTrue(diagnostic["download_uri_valid"])
+                self.assertTrue(diagnostic["download_uri_present"])
+                self.assertEqual(diagnostic["download_uri_runtime_type"], "str")
+                self.assertFalse(diagnostic["download_uri_blank_after_normalization"])
+                self.assertTrue(diagnostic["descriptor_selection_preserved_original_field"])
+                self.assertTrue(diagnostic["transport_and_diagnostic_objects_distinct"])
+                self.assertEqual(diagnostic["download_uri_field_extraction_reason"],
+                                 "download_uri_string_preserved")
+
+    def test_provider_descriptor_is_preserved_and_diagnostics_are_sanitized(self):
+        provider = self.metadata(provider_extension={"safe": True})
+        diagnostic = new_diagnostics()
+        selection = _select_bulk_descriptor(provider, diagnostic)
+        self.assertIs(selection.provider, provider)
+        self.assertIsNot(selection.provider, selection.diagnostic_projection)
+        self.assertIn("download_uri", selection.provider)
+        self.assertNotIn("download_uri", selection.diagnostic_projection)
+        self.assertEqual(selection.diagnostic_projection["value_types"]["download_uri"], "str")
+        self.assertEqual(diagnostic["metadata_top_level_keys"], sorted(provider))
+        self.assertEqual(diagnostic["selected_descriptor_keys"], sorted(provider))
+        self.assertNotIn(provider["download_uri"], json.dumps(diagnostic))
+        self.assertNotIn(provider["download_uri"], json.dumps(selection.diagnostic_projection))
 
     def test_metadata_match_cardinality_error_and_contract_fail_closed(self):
         invalid = [
@@ -186,8 +207,8 @@ class Phase127Tests(unittest.TestCase):
 
     def test_metadata_download_uri_boundary(self):
         invalid = [
-            (None, "blank_uri"), ("", "blank_uri"),
-            ("   ", "blank_uri"), ("not a uri", "scheme_not_https"),
+            (None, "download_uri_not_string"), ("", "download_uri_blank"),
+            ("   ", "download_uri_blank"), ("not a uri", "scheme_not_https"),
             ("http://data.scryfall.io/default-cards/test.json", "scheme_not_https"),
             ("https://api.scryfall.com/default-cards/test.json", "hostname_not_allowlisted"),
             ("https://scryfall.io.evil.example/test.json", "hostname_not_allowlisted"),
@@ -211,6 +232,25 @@ class Phase127Tests(unittest.TestCase):
             self.assertEqual(diagnostic["download_uri_rejection_reason"], reason)
             if uri and "/test.json" in uri:
                 self.assertNotIn(uri, json.dumps(diagnostic))
+
+    def test_missing_non_string_and_blank_download_uri_fail_closed_without_leakage(self):
+        cases = (("missing", "download_uri_absent", "NoneType", None),
+                 (17, "download_uri_not_string", "int", None),
+                 ("  ", "download_uri_blank", "str", True))
+        for value, reason, runtime_type, blank in cases:
+            descriptor = self.metadata()
+            if value == "missing":
+                descriptor.pop("download_uri")
+            else:
+                descriptor["download_uri"] = value
+            diagnostic = new_diagnostics()
+            with self.subTest(value=value), self.assertRaises(ProviderAcquisitionError):
+                parse_bulk_metadata(canonical_json(descriptor), diagnostic)
+            self.assertEqual(diagnostic["download_uri_field_extraction_reason"], reason)
+            self.assertEqual(diagnostic["download_uri_runtime_type"], runtime_type)
+            self.assertEqual(diagnostic["download_uri_blank_after_normalization"], blank)
+            self.assertFalse(diagnostic["bulk_payload_download_began"])
+            self.assertNotIn("https://", json.dumps(diagnostic))
 
     def test_official_static_hosts_normalization_port_and_query_policy(self):
         accepted = [
@@ -352,6 +392,9 @@ class Phase127Tests(unittest.TestCase):
         self.assertIn("actions/upload-artifact@v4", workflow)
         self.assertLess(workflow.index("Upload acquisition diagnostics"),
                         workflow.index("Verify dry run and optionally persist"))
+        hard_stop = "Phase 127E authorizes persist=false only"
+        self.assertIn(hard_stop, workflow)
+        self.assertLess(workflow.index(hard_stop), workflow.index("--persist"))
 
     def test_failed_cli_dry_run_writes_no_market_or_canonical_state(self):
         with tempfile.TemporaryDirectory() as temp:

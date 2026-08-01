@@ -1,5 +1,14 @@
 # Market Intelligence Foundation
 
+## Phase 127E acquisition status
+
+Phase 127D established that URI extraction produced `blank_uri` before security validation,
+but its combined check could not distinguish an absent field, a non-string field, or a blank
+string. Phase 127E preserves the full selected decoded provider descriptor for transport and
+creates a separate key/type-only diagnostic projection. Exact extraction reason codes and
+schema diagnostics remain value-free. The next and only operation is one `persist=false` dry
+run; persistence, canonical writes, and promotion remain prohibited, and coverage is 0/379.
+
 ## Phase 127D acquisition status
 
 The real post-127C dry run parsed the official direct descriptor and timestamp but rejected
