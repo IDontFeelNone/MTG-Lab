@@ -1,3 +1,7 @@
+# Phase 120 roadmap milestone
+
+**Implemented, awaiting protected green merge:** configuration-driven trusted-source updates now run intake through deterministic promotion, automatic PR creation, and auto-merge. Routine flow is signature-free; exceptional safety decisions remain human gates.
+
 # MTG Lab Roadmap through Phase 119
 
 

@@ -1,3 +1,7 @@
+# Phase 120 handoff
+
+Review the Phase 120 PR and allow protected auto-merge only after required Actions checks are green. Future routine trusted sets use retained evidence plus a descriptor, not engine edits or recurring signatures. Human action remains required for conflicts, ambiguity, validation failure, drift, contract change, destructive action, or rollback.
+
 # Phase 119 handoff
 
 

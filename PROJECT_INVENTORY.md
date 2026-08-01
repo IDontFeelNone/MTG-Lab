@@ -1,3 +1,7 @@
+# Phase 120 inventory update
+
+New inventory: `src/production_evidence/automatic_updates.py`, both automatic-update scripts, `config/automatic_updates/`, `.github/workflows/automatic-canonical-update.yml`, Phase 120 tests, and `docs/AUTOMATIC_CANONICAL_UPDATES.md`. Phase 119 canonical state/audit is unchanged; no second MB2 batch or MSH promotion occurred.
+
 # Phase 118 inventory update
 
 

@@ -1,3 +1,7 @@
+# Phase 120 — implementation complete
+
+The reusable pipeline, JSON CLI, MB2 completed-promotion reference, protected PR/auto-merge workflow, recovery rules, documentation, and tests are implemented. Phase 119 remains the only MB2 promotion: 1,000 candidates (384 Cards, 379 Printings, 235 Identifiers, 2 Finishes), post-state `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`. No MSH or second MB2 batch was promoted. Architecture v12/contracts are unchanged. Merge awaits green required Actions checks.
+
 # Project status after Phase 119
 
 

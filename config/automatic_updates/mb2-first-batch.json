@@ -1,0 +1,35 @@
+{
+  "schema_version": "automatic-canonical-update-v1",
+  "data_root": "data",
+  "target": {
+    "game": "magic",
+    "target_code": "MB2",
+    "target_name": "Mystery Booster 2",
+    "trusted_provider": "mtgjson",
+    "source_dataset_identity": "mtgjson-5.2.2-2026-07-30",
+    "source_artifact_or_workflow_run": "30663562841",
+    "evidence_identity": "30663562841-review-payload-v2",
+    "batch_identifier": "mb2-batch-000001-e32022126c07",
+    "candidate_digest": "e32022126c07036337f810d06dc29b5eead5afd850f7f3af0a26ad5b0d46e66e",
+    "expected_target_isolation": "MB2",
+    "promotion_policy": "trusted-deterministic-v1",
+    "destination_branch": "canonical-update/mb2-batch-000001-e32022126c07",
+    "base_branch": "main"
+  },
+  "artifacts": {
+    "source_artifact": "production_runs/30663562841-review-payload-v2/lineage/source.json",
+    "candidate_payload": "production_runs/30663562841-review-payload-v2/review_payloads/mb2/mb2-batch-000001-e32022126c07.json",
+    "promotion_audit": "audit/bounded_promotions/phase-119-mb2-batch-000001-e32022126c07.json"
+  },
+  "integrity": {
+    "source_sha256": "0b246ad2a4e6e691b0afe6dbba83526cdda4d35fad46a8f81558b05b92aa6fd6",
+    "expected_candidate_count": 1000,
+    "canonical_pre_state_digest": "0e5ead0d4693f1dc75c2f7b5e401f22e4fa302f93bb8eab59f0ddeefd0f680ba",
+    "canonical_post_state_digest": "793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f"
+  },
+  "policy": {
+    "trusted_providers": ["mtgjson"],
+    "permitted_final_classifications": ["approved"]
+  },
+  "reference_completed_promotion": true
+}

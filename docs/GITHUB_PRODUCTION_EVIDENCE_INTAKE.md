@@ -1,3 +1,5 @@
+> **Phase 120:** Permanent bounded intake now feeds [Automatic Canonical Updates](AUTOMATIC_CANONICAL_UPDATES.md), including routine signature-free PR creation and protected auto-merge.
+
 # Phase 114A intake revision
 
 The workflow redownloads and authenticates the same artifact, runs adapter `mtgjson-workflow-artifact-v2`, and intakes derived evidence identity `30663562841-review-payload-v2`; it never replaces `data/production_runs/30663562841/`. Its dedicated default branch is `production-evidence/run-30663562841-review-payload-v2`. Reports now include retained payload count and bounded serialized payload bytes as well as `canonical_write: false` and `promotion_performed: false`.

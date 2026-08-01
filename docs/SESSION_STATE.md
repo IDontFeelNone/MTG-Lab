@@ -1,3 +1,7 @@
+# Session state — Phase 120
+
+Baseline `5607e9c` contains merged Phase 119 and the sole MB2 promotion. Phase 120 implementation is complete without canonical mutation, second MB2 batch, MSH promotion, Architecture v12 change, or canonical-contract change. Required Actions checks and protected auto-merge remain the merge gate.
+
 # Phase 119 session state
 
 
