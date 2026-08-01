@@ -200,7 +200,7 @@ def resolve_first_mb2_identifiers(data_root: Path | str) -> dict:
         "dependency-closure-verification.json": closure,
     }
     artifact_digests = {name: _sha(value) for name, value in artifact_core.items()}
-    status = "blocked_fatal_conflict" if fatal else "blocked_additional_evidence" if unresolved else "pending_operator_signature"
+    status = "blocked_fatal_conflict" if fatal else "blocked_additional_evidence" if unresolved else "validation_complete"
     phase115_decision = _load(data_root / PHASE_115 / "pending-review-decision.json")
     decision_body = {
         "phase_115_decision_lineage": {"path": str(PHASE_115 / "pending-review-decision.json"),
@@ -211,9 +211,8 @@ def resolve_first_mb2_identifiers(data_root: Path | str) -> dict:
         "remaining_additional_evidence_candidate_ids": additional_ids,
         "quarantined_candidate_ids": quarantine_ids,
         "findings_digest": findings_digest, "dependency_closure_digest": closure_digest,
-        "status": status, "reviewer_identity": None, "review_reference": None,
-        "reviewed_timestamp": None, "operator_signature": None,
-        "immutable": True, "batch_approved": False, "promotion_authorized": False,
+        "status": status, "immutable": True,
+        "batch_approved": not (fatal or unresolved or quarantined or orphaned),
         "canonical_write": False,
     }
     decision_digest = _sha(decision_body)
@@ -221,15 +220,13 @@ def resolve_first_mb2_identifiers(data_root: Path | str) -> dict:
     type_counts = Counter(candidates[item]["entity_type"] for item in approved_ids)
     blockers = (["fatal_identifier_conflict"] if fatal else []) + (["additional_evidence_unresolved"] if unresolved else [])
     if orphaned: blockers.append("dependency_closure_invalid")
-    blockers += ["operator_signature_missing", "phase_116_prohibits_promotion"]
     readiness = {
         "approved_card_count": type_counts["card"], "approved_printing_count": type_counts["printing"],
         "approved_identifier_count": type_counts["identifier"], "approved_finish_count": type_counts["finish"],
         "excluded_count": excluded, "unresolved_count": unresolved, "quarantined_count": quarantined,
         "fatal_conflict_count": fatal, "orphaned_printing_count": len(orphaned),
         "dependency_closure_status": "valid" if closure["valid"] else "invalid",
-        "operator_signature_ready": not (fatal or unresolved or orphaned),
-        "promotion_ready": False, "blockers": blockers, "promotion_performed": False,
+        "promotion_ready": not blockers, "blockers": blockers, "promotion_performed": False,
         "canonical_write": False,
     }
     artifacts = {**artifact_core, "pending-review-decision.json": decision,

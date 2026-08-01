@@ -1,116 +1,46 @@
-# Phases 115–116 — first Mystery Booster 2 candidate review and resolution
+# Phases 115–118 — first Mystery Booster 2 candidate review and readiness
 
-> **Status:** identifier evidence resolved; pending genuine operator signature — 2026-08-01
-> **Evidence identity:** `30663562841-review-payload-v2` (source workflow run `30663562841`)
+> **Status:** validation complete; ready for separately invoked bounded promotion — 2026-08-01
+> **Evidence identity:** `30663562841-review-payload-v2`
 > **Selected batch:** `mb2-batch-000001-e32022126c07`
 > **Canonical writes / promotions:** 0 / 0
 
-## Evidence and scope gate
+## Evidence and scope
 
-Phase 114A is merged at `79a850d`; production evidence revision v2 is merged through PR #90 at
-`16ba374`. Before review, `ProductionEvidenceRepository.verify()` authenticated the immutable v2
-manifest inventory and every retained byte. The selected payload is the retained
-`review_payloads/mb2/mb2-batch-000001-e32022126c07.json` (SHA-256
-`007e69530bac92de3794089623f6fa1610f374ceb4f8f3c75a96502ddc6fba1d`, 4,078,034 bytes),
-not the unavailable original artifact. Exactly this first indexed MB2 batch was reviewed. No other
-MB2 batch and no MSH/Marvel payload or candidate was inspected.
+`ProductionEvidenceRepository.verify()` authenticates the immutable manifest, source checksum,
+and every retained evidence byte. Exactly one batch is selected: MB2 / Mystery Booster 2. No other
+MB2 batch and no MSH/Marvel payload or candidate was inspected. Target isolation also verifies that
+no MSH candidate enters the approved candidate set.
 
-## Candidate-level method and results
+## Candidate review and resolution
 
-All 1,000 retained candidates were evaluated individually and exactly once. The deterministic
-ledger verifies identity, entity relationships, source and acquisition provenance, collector
-numbers, external identifiers, rarity, finish, language, pending lifecycle, confidence, explicit
-unknown fields, validation state, and dependency closure. It contains 384 Card, 379 Printing, 235
-Identifier, and 2 Finish candidates.
+Phase 115 reviewed all 1,000 candidates for identity, relationships, provenance, collector number,
+identifiers, rarity, finish, language, lifecycle, confidence, explicit unknown handling, validation
+state, duplicate/conflict findings, and dependency closure.
 
 | Classification | Count | Finding |
 | --- | ---: | --- |
 | `approved` | 979 | All applicable review dimensions passed. |
-| `excluded` | 0 | No target contamination, unsupported entity, or invalid candidate was found. |
-| `requires_additional_evidence` | 21 | External Identifier values occur in retained collision findings and cannot yet be treated as unique mappings. |
+| `excluded` | 0 | No target contamination or invalid candidate was found. |
+| `requires_additional_evidence` | 21 | Non-unique external Identifier evidence required resolution. |
 
-The bundle contains 117 collision findings across the complete MB2 source unit; 21 correspond to
-Identifier candidates in this batch. Their precise candidate IDs and reason
-`non_unique_external_identifier` are retained in the ledger. Unknown source fields remain explicit
-rather than being silently discarded; their presence alone is not a defect in the bounded mapped
-contract.
+Phase 116 resolved those 21 findings as a shared non-unique card-back provider reference without
+weakening strict MTGJSON UUID identity. The final result is 1,000 approved candidates: 384 Cards,
+379 Printings, 235 Identifiers, and 2 Finishes. There are zero unresolved, quarantined, excluded,
+or fatal-conflict candidates, zero orphaned Printings, and valid dependency closure. The retained
+Phase 115 and Phase 116 artifacts remain immutable historical review records.
 
-## Produced records
+## Phase 118 promotion-readiness policy
 
-The immutable outputs are under
-`data/reviews/phase-115/mb2-batch-000001-e32022126c07/`:
+Operator signatures and authorization artifacts are not part of the active architecture. A batch
+from the approved trusted MTGJSON provider becomes technically promotion-ready when its evidence
+checksum, schema, complete candidate membership, exact one-batch scope, target isolation,
+dependency closure, unknown handling, duplicate/conflict resolution, and canonical pre-state all
+verify. Unresolved, quarantined, rejected, conflicting, incomplete, or non-isolated input fails
+closed.
 
-- `candidate-review-ledger.json` — 1,000 ordered classifications and source hashes;
-- `findings-report.json` — review statistics and all collision evidence considered;
-- `pending-review-decision.json` — ledger-bound decision with status
-  `awaiting_operator_signature` and a null signature;
-- `dependency-closure-verification.json` — confirms every Printing and its Card remain in this
-  exact target-only batch;
-- `promotion-readiness-report.json` — records that promotion is not ready or performed.
-
-## Remaining blockers and stop boundary
-
-The 21 ambiguous external Identifier mappings require additional evidence or an explicit future
-resolution. The operator signature is deliberately absent. Consequently the pending decision does
-not authorize promotion, and `canonical_write`, `promotion_authorized`, and
-`promotion_performed` remain false. Phase 115 stops here: no signing, promotion invocation, or
-canonical mutation occurred.
-
-## Phase 116 resolution overlay
-
-Phase 116 preserves every Phase 115 byte and resolves exactly its 21 additional-evidence
-Identifier candidates. All belong to one retained collision group:
-`scryfallCardBackId:0aeebaf5-8c7d-4636-9e82-8c27447861f7`. The finding contains 820 distinct
-MTGJSON UUIDs across 816 physical set/collector/language coordinates in MB2 and MSH source rows.
-This is a shared, non-unique card-back provider reference, not a global Printing identity. Each of
-the 21 candidates independently retains its MB2 Printing UUID and approved Card relationship;
-therefore all 21 are `approved_after_resolution`. Strict MTGJSON UUID uniqueness is unchanged.
-No duplicate, source defect, quarantine, fatal conflict, or unsupported case was found.
-
-The final batch totals are 979 unchanged approved plus 21 newly approved: 1,000 approved, zero
-excluded, unresolved, quarantined, or fatal. Approved entity totals are 384 Cards, 379 Printings,
-235 Identifiers, and 2 Finishes. Recomputed dependency closure is valid and deterministic with zero
-orphaned Printings; non-approved closure lists are empty and no MSH candidate is approved or
-reviewed. Source collision rows mentioning MSH were inspected only as required conflicting
-evidence, not as MSH candidates.
-
-Seven immutable overlay artifacts are retained under
-`data/reviews/phase-116/mb2-batch-000001-e32022126c07/`: the identifier-resolution ledger,
-collision analysis, updated classification ledger, updated findings, dependency closure, pending
-decision, and promotion-readiness report. The pending decision identity is
-`7a559f553e4b53c859efbdab542aefcb7e041170a55ace88d032c358e70cb23d` with status
-`pending_operator_signature`. Evidence and closure are ready for a genuine operator signature,
-but none was created. Promotion readiness is false because the signature is missing and Phase 116
-prohibits promotion. No canonical write or promotion occurred; Architecture v12 and canonical
-contracts remain unchanged.
-
-## Phase 117 operator-authorization boundary
-
-Phase 117 independently replays the retained production evidence plus the immutable Phase 115
-candidate review and Phase 116 identifier-resolution overlay for exactly
-`mb2-batch-000001-e32022126c07`. The verified result remains 1,000 approved MB2 candidates
-(384 Cards, 379 Printings, 235 Identifiers, and 2 Finishes), zero exclusions, additional-evidence
-items, quarantines, fatal conflicts, or orphaned Printings, and no MSH/Marvel candidate.
-
-The deterministic request digest is
-`4b281b3eb45b6a7e3e82a2309c271bffe1cb6c8cb939d46c5b8be059e0b6000d`; its candidate digest is
-`e32022126c07036337f810d06dc29b5eead5afd850f7f3af0a26ad5b0d46e66e`. A human must supply
-`operator_identity`, `operator_role`, `review_reference`, `reviewed_at`,
-`authorization_decision`, `operator_notes`, `signature_request_digest`, `authorized_batch_id`,
-and `authorized_candidate_digest`. No such metadata has been supplied. Authorization is distinct
-from later bounded promotion: no authorization, canonical write, or promotion occurred.
-
-## Phase 117A GitHub operating procedure
-
-After the Phase 117A implementation PR merges with green Actions, open **Actions → MB2 operator
-authorization → Run workflow**. First retain `dry_run: true` and the immutable digest, batch, and
-branch defaults. The human owner must personally enter a genuine identity and role, a durable
-namespaced review reference, an RFC 3339 timestamp with timezone, one offered decision, and
-non-placeholder notes. Review the uploaded chain, authorization, verification, and persistence
-reports; the dry run creates no branch, commit, PR, or repository authorization artifact.
-
-If and only if that report is valid, rerun with the same genuine values and `dry_run: false`. Review
-and merge the resulting authorization-only PR into `main`. GitHub's repository setting that allows
-Actions to create PRs may need enabling; on failure the report preserves the pushed branch and
-commit for manual PR creation. Stop after merging that PR. Do not invoke canonical promotion.
-Repeated byte-identical input is idempotent; conflicting input for the request fails closed.
+Normal pull-request review and green GitHub Actions provide human oversight. Readiness is not
+promotion: promotion remains an explicit, separate operation limited to this one verified batch.
+It must write deterministic audit records, retain source and membership lineage, guard canonical
+pre-state, support replay and rollback, and execute in dependency order. Phase 118 only creates a
+deterministic plan; it performs no canonical write or promotion.

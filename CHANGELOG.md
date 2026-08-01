@@ -1,3 +1,10 @@
+## Phase 118 — Remove operator authorization subsystem
+
+- Removed the Phase 117/117A authorization workflow, scripts, production module, tests, and current review artifacts; historical records remain available in Git history.
+- Replaced human signatures with trusted-provider, validation-gated readiness under normal pull-request review and green GitHub Actions.
+- Added deterministic readiness planning for exactly one verified MB2 batch with checksum, membership, isolation, closure, blocker, canonical-pre-state, audit, and rollback gates.
+- The 1,000-candidate MB2 batch is technically ready for a separate bounded promotion. No MSH candidate, canonical write, or promotion occurred. Architecture v12 is unchanged.
+
 ## Phase 117A — GitHub-native MB2 operator authorization
 
 - Added a manual, least-privilege workflow for genuine human submission of the immutable Phase 117 contract. It validates the Phase 115–117 chain and canonical pre-state, defaults to a non-persistent dry run, and rejects blank, placeholder, AI/automation, malformed, or mismatched input.

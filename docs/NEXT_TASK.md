@@ -1,12 +1,11 @@
-# Next task after Phase 117A
+# Next task after Phase 118
 
-Merge Phase 117A only after GitHub Actions are green. Then the genuine human owner must run **MB2 operator authorization** first with `dry_run: true`, entering all six non-default human fields without delegation or invention. After reviewing the uploaded reports, rerun the identical submission with `dry_run: false`, review and merge the authorization-only PR, and stop. Canonical promotion requires a later separately scoped phase and remains withheld; do not review another MB2 batch or MSH/Marvel.
+After Phase 118 merges with green GitHub Actions, design and execute the bounded canonical promotion
+of exactly `mb2-batch-000001-e32022126c07` from evidence
+`30663562841-review-payload-v2`. Reverify the trusted source, retained evidence, exact candidate
+membership, MB2-only isolation, dependency closure, zero unresolved/quarantined/conflicting input,
+and canonical pre-state immediately before writing.
 
-# Next task after Phase 117
-
-A genuine human operator may inspect the retained Phase 117 signature request and review chain,
-then supply every required field through `scripts/authorize_mb2_batch.py`. Do not infer identity,
-role, reference, time, notes, or decision. A rejection or return ends promotion eligibility. An
-`authorize_for_promotion` result only permits planning a separate bounded-promotion phase; it does
-not itself promote. Until genuine authorization exists, do not write canonical state, review
-another MB2 batch, or inspect/approve MSH.
+Promotion must be explicitly invoked, deterministic, audited, replayable, rollback capable, and
+reviewed through a normal pull request. Do not include MSH/Marvel, another MB2 batch, simulation,
+market analysis, or AI providers.

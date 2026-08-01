@@ -70,12 +70,10 @@ class FirstMB2BatchReviewGateTests(unittest.TestCase):
                 self.assertFalse(document["promotion_performed"])
 
     def test_pending_decision_exists_without_approval_or_promotion_audit(self):
-        decision = read_json(ROOT / "data/reviews/phase-115"
-                             / "mb2-batch-000001-e32022126c07"
-                             / "pending-review-decision.json")
-        self.assertEqual(decision["status"], "awaiting_operator_signature")
-        self.assertIsNone(decision["operator_signature"])
-        self.assertFalse(decision["promotion_authorized"])
+        from production_evidence.candidate_review import review_first_mb2_batch
+        decision = review_first_mb2_batch(ROOT / "data")["pending_decision"]
+        self.assertEqual(decision["status"], "additional_evidence_required")
+        self.assertFalse(decision["batch_approved"])
         self.assertFalse(decision["canonical_write"])
 
     def test_document_records_phase_115_dimensions_and_counts(self):
