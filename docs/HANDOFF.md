@@ -1,3 +1,7 @@
+# Phase 122 handoff
+
+Phase 122 stopped correctly at availability. Trusted retained MTGJSON evidence identity `mtgjson-allprintings-5.3.0+20260731-b47cc8360034` (source SHA-256 `b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09`) inventories only MB2 and MSH. It has no Hobbit match, so no exact code, new evidence/batch identity, candidates, descriptor, canonical run, rollback, or target PR exists. The next attempt requires a newer trusted checksum-verified MTGJSON snapshot; it must repeat the exact-one availability gate and must not substitute another product. Production remains unchanged and protected merges still require green checks.
+
 # Phase 121 handoff
 
 Review the synthetic-only validation and withhold merge until required GitHub Actions checks are green. `SYN` proved the standard engine without an MB2 branch: sixteen stages, interruption recovery, immutable audit, idempotent replay, conflicting-replay rejection, and non-executing rollback plan all passed in temporary roots. Before a live new set, retain licensed trusted-provider evidence, independently review its complete candidates and provenance, approve its bounded descriptor, confirm repository settings/required checks, and run through the protected workflow. Do not copy the synthetic fixture into production data.

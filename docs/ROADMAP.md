@@ -1,3 +1,7 @@
+# Phase 122 roadmap milestone
+
+The first requested real automatic-update target reached its availability gate but no farther. The retained MTGJSON snapshot has only MB2 and MSH and no Hobbit set; Phase 122 therefore adds the reusable availability boundary and report without selecting a code or creating candidates, a descriptor, or a promotion. A future snapshot may advance only after exactly one complete Hobbit target is established. Architecture v12/contracts remain frozen, Phase 119 remains the sole production promotion, and protected required-green-check merge remains mandatory.
+
 # Phase 121 roadmap milestone
 
 **Complete locally; protected merge pending green Actions.** The non-MB2 synthetic `SYN` fixture exercised all sixteen standard stages in an isolated root. Deterministic recovery, replay, conflict rejection, rollback planning, PR reuse/mismatch rejection, green-check gating, and no-force/no-bypass policy are covered. This establishes production readiness of the generic mechanism without authorizing a real-set update.

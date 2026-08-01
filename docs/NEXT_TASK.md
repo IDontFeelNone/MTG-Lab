@@ -1,3 +1,7 @@
+# Next task after Phase 122
+
+Stop after the fail-closed availability result. The next separately authorized task may acquire and retain a newer trusted MTGJSON snapshot, verify its checksum and lineage, and rerun exact-one set-level availability for **The Hobbit**. If there are zero or multiple matches, stop again. Do not guess a code or substitute another Lord-of-the-Rings product. Only a uniquely identifiable, complete target may proceed to evidence identity, candidates, descriptor, plan, verify, and protected automatic-update execution. No MB2 or MSH/Marvel work is included.
+
 # Next task after Phase 121
 
 Stop after this validation. After protected merge, the remaining live-update blockers are selection and approval of a real future set, terms-compliant trusted evidence acquisition/retention, complete candidate review and identifier/dependency resolution, a reviewed descriptor with exact current pre-state, and confirmation that repository auto-merge/required-check settings are enabled. A live dispatch is a separate phase. Do not process another MB2 batch or MSH/Marvel as part of Phase 121.

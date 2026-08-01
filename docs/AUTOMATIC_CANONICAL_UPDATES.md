@@ -1,5 +1,11 @@
 # Automatic Canonical Updates
 
+## Phase 122 first-real-target availability result
+
+The requested target was **The Hobbit**, with its code intentionally unknown until provider evidence established it. Inspection of retained trusted MTGJSON snapshot `mtgjson-allprintings-5.3.0+20260731-b47cc8360034` found exactly two set partitions, `MB2` and `MSH`, and zero set-level Hobbit matches. The immutable availability report is `data/automatic_updates/phase-122-hobbit-availability.json`. It classifies this provider snapshot as `not_yet_published_by_provider`; the repository-retained source summary and bounded payload inventory prove the snapshot's two-set scope, while the operator-managed source bytes are deliberately not retained.
+
+The gate stopped before target selection. No set code, evidence identity, batch, candidate membership digest, production descriptor, plan, verify, execution, audit, rollback, target branch, target PR, or auto-merge request exists. Candidate counts and classifications are zero, dependency closure was not run, and both `canonical_write` and `promotion_performed` are false. Supplying a newer checksum-verified trusted MTGJSON dataset is the only intervention that can establish whether the target has become uniquely available. MB2, MSH/Marvel, other Lord-of-the-Rings products, and every unrelated set remain excluded.
+
 > **Phase 120 · Architecture v12 compatible.** This orchestration composes existing evidence, review, promotion, query, and analytics boundaries. It changes no canonical contract or Tier 0 architecture.
 
 ## Standard lifecycle and safety

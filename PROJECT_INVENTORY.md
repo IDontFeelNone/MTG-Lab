@@ -1,3 +1,7 @@
+# Phase 122 inventory update
+
+The new `target_availability.py` boundary inventories set-level MTGJSON metadata, distinguishes zero/multiple/incomplete/unique/unsupported results, and permits deterministic bounded evidence only for one unique target. Phase 122's retained report records zero Hobbit matches in the trusted two-set (`MB2`, `MSH`) snapshot. No Hobbit identity, candidate, descriptor, automatic run, or canonical artifact was created. Production remains exactly at Phase 119 and digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`; Architecture v12 and canonical contracts are unchanged.
+
 # Phase 121 inventory update
 
 Added `tests/fixtures/phase_121_synthetic/` (descriptor, retained source, eight ordered candidates, and empty isolated canonical state) and `tests/test_phase_121_synthetic_automatic_updates.py`. The generic engine now enforces payload checksum, nonempty unique inventory, provenance, immutable audit digest, and green-check auto-merge eligibility. The workflow derives its deterministic branch from the descriptor and safely reuses only an identical remote branch. No fixture artifact exists under production `data/`; Phase 119 remains its only completed promotion.
