@@ -69,27 +69,25 @@ class FirstMB2BatchReviewGateTests(unittest.TestCase):
             if "promotion_performed" in document:
                 self.assertFalse(document["promotion_performed"])
 
-    def test_no_immutable_decision_approval_or_promotion_audit_exists(self):
-        files = [path for path in (ROOT / "data").rglob("*.json")
-                 if RUN in path.read_text(errors="ignore")]
-        decisions = [path for path in files
-                     if "review_decision" in path.name.lower().replace("-", "_")]
-        approval_audits = [path for path in files
-                           if "approval" in path.name.lower() and "audit" in path.name.lower()]
-        promotion_audits = [path for path in files
-                            if "promotion" in path.name.lower() and "audit" in path.name.lower()]
-        self.assertEqual(decisions, [])
-        self.assertEqual(approval_audits, [])
-        self.assertEqual(promotion_audits, [])
+    def test_pending_decision_exists_without_approval_or_promotion_audit(self):
+        decision = read_json(ROOT / "data/reviews/phase-115"
+                             / "mb2-batch-000001-e32022126c07"
+                             / "pending-review-decision.json")
+        self.assertEqual(decision["status"], "awaiting_operator_signature")
+        self.assertIsNone(decision["operator_signature"])
+        self.assertFalse(decision["promotion_authorized"])
+        self.assertFalse(decision["canonical_write"])
 
-    def test_document_records_all_verification_dimensions_and_unknown_counts(self):
+    def test_document_records_phase_115_dimensions_and_counts(self):
         text = (ROOT / "docs" / "FIRST_MB2_BATCH_REVIEW.md").read_text()
-        for phrase in ("Candidate payloads", "Candidate IDs", "Dependency closure", "Provenance",
-                       "Confidence", "Validation state", "Identifiers", "Explicit unknowns",
-                       "Review package integrity"):
-            self.assertIn(phrase, text)
-        self.assertIn("each **undetermined**", text)
-        self.assertIn("No Marvel batch or candidate was inspected", text)
+        for phrase in ("identity", "relationships", "provenance", "collector",
+                       "identifiers", "rarity", "finish", "language", "lifecycle",
+                       "confidence", "unknown", "dependency closure"):
+            self.assertIn(phrase, text.lower())
+        self.assertIn("`approved` | 979", text)
+        self.assertIn("`excluded` | 0", text)
+        self.assertIn("`requires_additional_evidence` | 21", text)
+        self.assertIn("no MSH/Marvel payload or candidate was inspected", text)
 
     def test_gate_performs_no_canonical_write_or_promotion(self):
         before = canonical_snapshot()

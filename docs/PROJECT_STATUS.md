@@ -1,41 +1,9 @@
-# Phase 114A status — reviewable payload retention implemented
+# Phase 115 status — first MB2 batch reviewed
 
-Main confirms Phase 113A, PR #86, and retained run `30663562841`. The retained v1 bundles lack referenced candidate-shard bytes, which is the exact field-review blocker. Adapter/repository schema v2 now retains only the exact candidates needed by each batch under derived identity `30663562841-review-payload-v2`. Operational rerun and evidence-revision PR remain pending; no candidate review, approval, promotion, canonical write, architecture change, or canonical-contract change occurred.
-
-# Phase 113A status — retained-evidence transition
-
-Main contains merged Phase 113 and not evidence-intake PR #86. Phase 113A removes the stale
-assumption that run `30663562841` must always be absent: absence still represents the historical
-fail-closed result, while presence must verify the retained manifest/index, run identity,
-non-canonical flags, MB2/MSH isolation, pending packages, and absence of decisions and audits.
-After this fix merges, rerun #86; independent review of exactly one MB2 batch follows only after
-#86 is green and merged. No candidate review, approval, promotion, or canonical write occurred.
-
-# Phase 112B status — verified intake was not durably persisted
-
-The repository confirms merged Phase 113 at `b9941a6`. Run `30663562841` was normalized and Phase 111-verified twice, but the intended non-dry-run's Git and PR steps were skipped by the dry-run conditions, allowing a zero exit without durable state. Phase 112B replaces that control flow with fail-closed persistence and independent PR verification. The live retained run and evidence PR still do not exist; rerun is required after merge. No review, promotion, canonical write, or Architecture v12 change occurred.
-
-# Phase 113 status — Independent review stopped at retained-evidence gate
-
-The Production Evidence Repository contains neither run `30663562841` nor its deterministic
-index. Phase 113 therefore cannot select exactly one MB2 batch, inspect or classify candidates, or
-create a truthful immutable review decision. All requested verification dimensions remain
-unavailable and classification counts are undetermined. Marvel was not reviewed; promotion and
-canonical writes remain zero. The verified evidence-only intake must be merged before review.
-
-## Phase 112A — Native production artifact adapter implemented
-
-Merged Phase 112 (`188101b`) is the confirmed baseline. Its authenticated download of run
-`30663562841` proved the archive digest but Phase 111 failed closed on missing root
-`manifest.json`. Phase 112A supplies the smallest adapter: it validates the native streaming
-evidence, emits a deterministic Phase 111 archive, and calls Phase 111 unchanged. The next action is
-the documented `dry_run: true` workflow dispatch; merge and non-dry-run intake remain withheld until
-GitHub Actions are green. No review, approval, promotion, canonical write, or Architecture v12
-change occurred.
-
-Phase 112 adds a manually dispatched GitHub workflow that downloads one exact artifact from a
-successful production-ingestion run, authenticates it with an independently supplied SHA-256,
-applies the Phase 111 intake and verification boundary, and opens a dedicated evidence-only pull
-request. No workflow was dispatched in this implementation phase, so run `30663562841` and its
-expected MB2 batch remain absent and Phase 110B remains stopped at its artifact gate. Architecture
-v12, canonical contracts, canonical state, review decisions, and promotion state are unchanged.
+Merged Phase 114A (`79a850d`) and evidence revision v2 / PR #90 (`16ba374`) are present. Repository
+verification succeeds for `30663562841-review-payload-v2`, derived from production run
+`30663562841`. Phase 115 used its retained payload bytes to review exactly batch
+`mb2-batch-000001-e32022126c07`: 1,000 individual classifications comprise 979 approved, 0
+excluded, and 21 requiring additional evidence for non-unique external identifiers. Dependency
+closure passes. The immutable decision remains `awaiting_operator_signature`; promotion readiness
+is false. No Marvel, second MB2 batch, canonical write, signature, or promotion is included.

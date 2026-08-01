@@ -1,0 +1,608 @@
+{
+  "batch_id": "mb2-batch-000001-e32022126c07",
+  "evidence_identity": "30663562841-review-payload-v2",
+  "findings": {
+    "details": [
+      {
+        "collision_count": 3,
+        "namespace": "cardKingdomId",
+        "value": "301211"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "cardKingdomId",
+        "value": "301222"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "cardKingdomId",
+        "value": "301249"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "cardKingdomId",
+        "value": "301254"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "cardKingdomId",
+        "value": "301294"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "cardsphereId",
+        "value": "129150"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "cardsphereId",
+        "value": "129151"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "cardsphereId",
+        "value": "129201"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "cardsphereId",
+        "value": "129218"
+      },
+      {
+        "collision_count": 3,
+        "namespace": "cardsphereId",
+        "value": "129245"
+      },
+      {
+        "collision_count": 3,
+        "namespace": "deckboxId",
+        "value": "95355"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "deckboxId",
+        "value": "95366"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "deckboxId",
+        "value": "95393"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "deckboxId",
+        "value": "95398"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "deckboxId",
+        "value": "95438"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "783822"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "783827"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "783849"
+      },
+      {
+        "collision_count": 3,
+        "namespace": "mcmId",
+        "value": "783940"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "783943"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "886596"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890544"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890554"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890581"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890658"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890666"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890667"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890668"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890671"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890677"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890682"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890691"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890700"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890702"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "890705"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "891150"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "891189"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "891190"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mcmId",
+        "value": "891191"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgArenaId",
+        "value": "104909"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgArenaId",
+        "value": "104915"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgArenaId",
+        "value": "104942"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgArenaId",
+        "value": "104974"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgArenaId",
+        "value": "105114"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152215"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152227"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152281"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152345"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152625"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152793"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152797"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152805"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152815"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152837"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152927"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152933"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152939"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152955"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152991"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "152999"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "153029"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "153033"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "mtgoId",
+        "value": "153043"
+      },
+      {
+        "collision_count": 3,
+        "namespace": "multiverseId",
+        "value": "677593"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "multiverseId",
+        "value": "677604"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "multiverseId",
+        "value": "677633"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "multiverseId",
+        "value": "677638"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "multiverseId",
+        "value": "677677"
+      },
+      {
+        "collision_count": 820,
+        "namespace": "scryfallCardBackId",
+        "value": "0aeebaf5-8c7d-4636-9e82-8c27447861f7"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "062bb64d-b256-48c9-8159-8146bc0549ef"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "0ccb6a0e-a8aa-413d-8e6d-f25447800ed4"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "0e99dad7-b3ca-4e89-8d9f-8f8f43195537"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "294fed54-63a7-40f2-a924-c07b3554adb2"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "32a96916-9356-4e46-ba74-296670c6e865"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "3f995518-b12a-4623-9ab3-b79a5cef3cba"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "481166c5-6a16-469c-91bd-abf291b5db49"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "4cea42fd-035e-4b8f-8b1d-ff363b694f14"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "58bf75bd-83c9-4281-a108-bf5aa31d70e5"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "61237530-ad49-469c-a952-67c92315708e"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "7a85467d-5693-4cf7-b38d-d42c57242f48"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "7be20870-ccdc-4285-920d-739cafb60465"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "81eaf2ee-edeb-4026-81bb-8766ffa61f0d"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "8d4ad5a7-bb3e-47ef-ba33-018b18248bd0"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "add7d3ce-aa58-4da0-8c2a-cfd01c3a8975"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "b51282a9-1132-4c93-a216-148d1e7bb007"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "c9c1e5c2-8706-4c46-8b25-b045020a3a7f"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "d1d8391c-dacc-4f21-a40e-5ca53a787f0d"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "e0dbbdcf-84e1-494f-8b8c-0a094f603fa9"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "eb2d2d35-4956-42fa-94e0-b241ed666683"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "eec216e1-971b-490f-aba7-2d5bd5085023"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "eeedc3a9-e5c0-4234-8653-1a005df095e1"
+      },
+      {
+        "collision_count": 3,
+        "namespace": "scryfallId",
+        "value": "f04cceef-c65e-44e0-b0b6-8616b2bc0234"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "scryfallId",
+        "value": "feb9e3c1-4d66-49a2-8a67-eebd0d272fc3"
+      },
+      {
+        "collision_count": 3,
+        "namespace": "tcgplayerProductId",
+        "value": "563992"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "564003"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "564029"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "564034"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "564076"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "668460"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "668478"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696258"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696265"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696268"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696279"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696284"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696286"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696287"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696289"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696290"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696324"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696335"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696336"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696340"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696535"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696539"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696540"
+      },
+      {
+        "collision_count": 2,
+        "namespace": "tcgplayerProductId",
+        "value": "696542"
+      }
+    ],
+    "identifier_collisions_considered": 117
+  },
+  "schema_version": "phase-115-candidate-review-v1",
+  "statistics": {
+    "classifications": {
+      "approved": 979,
+      "excluded": 0,
+      "requires_additional_evidence": 21
+    },
+    "entity_types": {
+      "card": 384,
+      "finish": 2,
+      "identifier": 235,
+      "printing": 379
+    }
+  }
+}

@@ -1,3 +1,13 @@
+# Phase 115 session state
+
+Phase 115 verified merged Phase 114A and retained production evidence revision v2, then reviewed
+all 1,000 candidates in exactly the first retained MB2 batch from the retained payload bytes.
+Results are 979 approved, 0 excluded, and 21 requiring additional evidence because their external
+Identifier values collide. Dependency closure is valid. Five immutable, reproducible review
+records are retained under `data/reviews/phase-115/`; the decision awaits operator signature and
+promotion readiness is false. No Marvel or second MB2 batch was reviewed. No canonical write,
+signature, approval authorization, or promotion occurred; Architecture v12 is unchanged.
+
 # Phase 114A session state
 
 Baseline: merged Phase 113A, merged PR #86, retained run `30663562841`. Root cause: v1 retained a candidate-shard reference but not its 7,120,316 payload bytes. Implemented state: deterministic adapter/repository schema v2 with exact bounded payload extraction and derived immutable evidence identity. Pending external state: workflow rerun and evidence-revision PR. Canonical writes, promotions, approvals, and candidate reviews remain zero in this phase; Architecture v12 is unchanged.

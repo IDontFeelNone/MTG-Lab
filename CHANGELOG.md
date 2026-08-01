@@ -1,3 +1,9 @@
+## Phase 115 — Review first Mystery Booster 2 batch
+
+- Verified retained evidence identity `30663562841-review-payload-v2` and reviewed all 1,000 candidates in exactly the first MB2 batch from retained payload bytes.
+- Retained a deterministic ledger with 979 approved, 0 excluded, and 21 additional-evidence classifications, plus findings and dependency-closure reports.
+- Created an immutable unsigned pending decision and not-ready promotion report; no Marvel review, canonical write, signature, or promotion occurred.
+
 ## Phase 114A — Retain reviewable candidate payloads
 
 - Added adapter v2 bounded extraction of exact ordered per-batch candidate payloads, source-shard authentication, deterministic payload identity/mapping, target isolation, dependency resolution, provenance, and complete manifest inventory.

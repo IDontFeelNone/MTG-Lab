@@ -1,0 +1,13 @@
+{
+  "approved_candidates": 979,
+  "batch_id": "mb2-batch-000001-e32022126c07",
+  "blockers": [
+    "operator_signature_missing",
+    "candidates_require_additional_evidence"
+  ],
+  "canonical_write": false,
+  "evidence_identity": "30663562841-review-payload-v2",
+  "promotion_performed": false,
+  "ready": false,
+  "schema_version": "phase-115-candidate-review-v1"
+}

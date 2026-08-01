@@ -1,3 +1,7 @@
+# Phase 115 roadmap update
+
+The first true retained-payload MB2 candidate review is complete. Resolve its 21 ambiguous Identifier mappings before operator signature; signature and promotion remain separate gates. No second MB2 batch or Marvel review is authorized.
+
 # Phase 114A roadmap update
 
 Bounded, independently reviewable candidate retention is implemented without duplicating the source corpus. The next gate is a green authenticated intake revision for run `30663562841` and review of its evidence-only PR. Only after that revision is merged may a separately authorized phase inspect one MB2 batch; approval and promotion remain later gates.
