@@ -1,11 +1,14 @@
 """Phase 122 availability gate; production stops because retained evidence has no Hobbit set."""
 import copy
+import gzip
 import hashlib
 import json
 from pathlib import Path
 import unittest
 
-from production_evidence.target_availability import bounded_target_evidence, inspect_mtgjson_target
+from production_evidence.target_availability import (
+    bounded_target_evidence, inspect_mtgjson_target, register_trusted_snapshot,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -16,6 +19,25 @@ def dataset(*sets):
 
 
 class Phase122HobbitAvailabilityTests(unittest.TestCase):
+    def test_refreshed_snapshot_checksum_immutability_and_replay(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = root / "AllPrintings.json.gz"
+            raw = gzip.compress(json.dumps(dataset({"code": "AAA", "name": "Unrelated"})).encode(), mtime=0)
+            source.write_bytes(raw)
+            digest = hashlib.sha256(raw).hexdigest()
+            manifest = register_trusted_snapshot(source, digest, root / "evidence")
+            self.assertTrue(manifest["checksum_verified"])
+            self.assertEqual(manifest, register_trusted_snapshot(source, digest, root / "evidence"))
+            retained = root / "evidence" / manifest["evidence_identity"] / "AllPrintings.json.gz"
+            self.assertEqual(retained.read_bytes(), raw)
+            with self.assertRaisesRegex(ValueError, "checksum"):
+                register_trusted_snapshot(source, "0" * 64, root / "evidence")
+            retained.write_bytes(b"changed")
+            with self.assertRaisesRegex(FileExistsError, "collision"):
+                register_trusted_snapshot(source, digest, root / "evidence")
+
     def test_zero_matching_targets(self):
         report = inspect_mtgjson_target(dataset({"code": "LTR", "name": "Other Middle-earth Set", "cards": []}), "The Hobbit")
         self.assertEqual(report["status"], "not_yet_published_by_provider")

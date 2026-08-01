@@ -1,3 +1,7 @@
+# Next task — future trusted provider refresh
+
+Acquire the newest terms-compliant MTGJSON AllPrintings publication and trusted checksum from an environment with provider access. Register it immutably through `register_trusted_snapshot`, verify retained bytes, and rerun the unchanged Phase 122 exact-one set-metadata gate for “The Hobbit.” Do not add Hobbit-specific logic or proceed to candidates/promotion unless exactly one complete target is established.
+
 # Next task after Phase 122
 
 Stop after the fail-closed availability result. The next separately authorized task may acquire and retain a newer trusted MTGJSON snapshot, verify its checksum and lineage, and rerun exact-one set-level availability for **The Hobbit**. If there are zero or multiple matches, stop again. Do not guess a code or substitute another Lord-of-the-Rings product. Only a uniquely identifiable, complete target may proceed to evidence identity, candidates, descriptor, plan, verify, and protected automatic-update execution. No MB2 or MSH/Marvel work is included.

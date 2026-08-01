@@ -1,3 +1,7 @@
+# Phase 123 refresh intake stop
+
+The approved provider endpoints were inaccessible through the execution proxy (HTTP 403). Therefore Phase 123 did not create an evidence branch, evidence PR, automatic-update branch, promotion PR, checks run, or auto-merge request. The retained Phase 122 evidence and Phase 119 canonical promotion are unchanged. The new registration boundary can routinely retain checksum-authenticated caller-acquired bytes without signatures or manual hash copying once the trusted delivery path supplies the artifact and digest.
+
 # Phase 122 availability stop
 
 The retained MTGJSON production snapshot inventories only `MB2` and `MSH`; it contains no independently identifiable set named The Hobbit. Phase 122 retained only the structured availability report and performed no evidence intake. Consequently there is no Hobbit evidence identity or batch identity, no bounded candidate payload, no descriptor, and no production target branch/PR/auto-merge request. This is a provider-snapshot availability blocker, not a GitHub credential failure. A future attempt must retain and checksum a newer trusted source, repeat exact-one selection, and still use protected required-green-check PR merge.

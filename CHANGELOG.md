@@ -1,3 +1,9 @@
+# Phase 123 — trusted MTGJSON refresh blocked (2026-08-01)
+
+- Added checksum-verifying, immutable, idempotent AllPrintings snapshot registration.
+- Recorded the provider refresh attempt; the environment returned HTTP 403 before publication identity or bytes could be acquired.
+- Created no evidence identity, Hobbit result, candidates, descriptor, branch, PR, promotion, or canonical write. Phase 119 remains the sole production promotion and Architecture v12/contracts remain unchanged.
+
 # Phase 122 — The Hobbit availability gate stopped fail-closed
 
 Inspected retained trusted MTGJSON snapshot `5.3.0+20260731`: its complete retained target inventory is MB2 and MSH, with zero independently identifiable Hobbit target. Added a generic set-level availability/bounded-extraction gate, immutable structured report, and unittest coverage for zero, ambiguous, unique, incomplete, unsupported, isolation, checksum-addressed identity, and explicit unknown cases. No target code was guessed; evidence intake, candidate review, descriptor creation, plan/verify/execution, promotion, audit, rollback, and target PR were correctly not performed. Canonical digest remains `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`; Phase 119 remains the only promotion. No MB2, MSH/Marvel, or unrelated data was promoted, and Architecture v12 and canonical contracts remain unchanged.
