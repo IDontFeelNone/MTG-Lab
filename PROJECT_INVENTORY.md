@@ -1,3 +1,10 @@
+# Phase 113A inventory update
+
+Phase 113A makes the retained-evidence gate valid both before and after evidence-intake PR #86.
+The historical absence remains accepted on main; the present state validates run `30663562841`,
+target-isolated pending MB2/MSH packages, and non-canonical/no-promotion boundaries. Independent
+candidate review remains the next gate after #86 merges.
+
 # Phase 112B inventory update
 
 Production-evidence persistence is now a fail-closed Git/GitHub state machine in `scripts/production_evidence_persistence.py`, invoked unconditionally by the manual intake workflow. It reports every durable result, rejects ignored or empty staging and out-of-bound changes, never force-pushes, verifies the PR through GitHub APIs, and can reuse only byte-identical existing evidence. The live run is not claimed until that workflow is rerun successfully. Architecture v12 and all canonical/review/promotion behavior are unchanged.

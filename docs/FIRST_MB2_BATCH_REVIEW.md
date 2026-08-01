@@ -1,12 +1,12 @@
-# Phase 113 — First Mystery Booster 2 batch review
+# Phase 113A — Retained Mystery Booster 2 evidence gate
 
-> **Status:** stopped at retained-evidence gate — 2026-07-31
+> **Status:** retained-evidence transition; independent review still pending — 2026-08-01
 >
 > **Requested production run:** `30663562841`
 >
 > **Canonical writes / promotions:** 0 / 0
 
-## Independent selection
+## Historical Phase 113 result
 
 The review began exclusively from the Production Evidence Repository at
 `data/production_runs/`. Its only retained entry is `.gitkeep`: there is no immutable run
@@ -15,6 +15,20 @@ cannot deterministically enumerate a first MB2 batch. The identifier
 `mb2-batch-000001-e32022126c07`, mentioned by the earlier failed review, is an expectation in
 documentation rather than retained production evidence and was not selected as if it were fact.
 No Marvel batch or candidate was inspected.
+
+That absence statement records what Phase 113 observed on 2026-07-31; it is not a permanent
+repository invariant. Phase 113 correctly failed closed at that time.
+
+## Current Phase 113A transition
+
+Evidence-intake PR #86 introduces the immutable run directory and deterministic repository index.
+This gate is state-aware: before #86 merges it accepts the historical absent state; against #86's
+merge result it requires run identity `30663562841`, manifest and index integrity, MB2/MSH target
+isolation, at least one indexed MB2 batch, and pending review packages. Retention remains strictly
+non-canonical: `canonical_write` and `promotion_performed` are false, no immutable review decision
+exists, and no approval or promotion audit exists. Phase 113A neither inspects nor classifies a
+candidate, creates reviewer identity, approves a package, promotes data, nor changes canonical
+repository files.
 
 ## Complete verification result
 
@@ -52,8 +66,9 @@ it grants no approval and is not consumable by promotion.
 
 ## Promotion boundary and next action
 
-Promotion was not invoked and canonical state was not modified. The operator must first merge the
-verified, evidence-only intake for run `30663562841`, producing its immutable run directory and
-deterministic index. Then rerun Phase 113, select the first MB2 entry by the retained batch index,
-verify every referenced byte and digest, review every candidate exactly once, and create the
-separate immutable decision. Stop again before canonical promotion.
+Promotion was not invoked and canonical state was not modified. First merge Phase 113A, then rerun
+PR #86 so its merge-result checks exercise the evidence-present branch. After #86 is green and
+merged, the next separately authorized gate is independent review of **exactly one** MB2 batch
+selected from the retained batch index: verify every referenced byte and digest, review every
+candidate exactly once, and create a separate immutable decision. Stop again before canonical
+promotion. No MSH/Marvel batch may be inspected in that review.

@@ -1,3 +1,12 @@
+# Phase 113A status — retained-evidence transition
+
+Main contains merged Phase 113 and not evidence-intake PR #86. Phase 113A removes the stale
+assumption that run `30663562841` must always be absent: absence still represents the historical
+fail-closed result, while presence must verify the retained manifest/index, run identity,
+non-canonical flags, MB2/MSH isolation, pending packages, and absence of decisions and audits.
+After this fix merges, rerun #86; independent review of exactly one MB2 batch follows only after
+#86 is green and merged. No candidate review, approval, promotion, or canonical write occurred.
+
 # Phase 112B status — verified intake was not durably persisted
 
 The repository confirms merged Phase 113 at `b9941a6`. Run `30663562841` was normalized and Phase 111-verified twice, but the intended non-dry-run's Git and PR steps were skipped by the dry-run conditions, allowing a zero exit without durable state. Phase 112B replaces that control flow with fail-closed persistence and independent PR verification. The live retained run and evidence PR still do not exist; rerun is required after merge. No review, promotion, canonical write, or Architecture v12 change occurred.
