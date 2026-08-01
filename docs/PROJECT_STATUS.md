@@ -86,3 +86,11 @@ The execution environment's proxy returned HTTP 403 before the official API resp
 no provider payload, production observation, or collection valuation was retained.
 Coverage is exactly 0/379 promoted MB2 Printings. Architecture v12/contracts and Phase
 119 canonical state remain unchanged; there is no recommendation engine or AI provider.
+
+# Phase 127A status — operationally blocked
+
+Phase 127 is merged (`ad0797e`). The repository has no retained production market
+observations and therefore 0/379 queryable MB2 coverage. The existing GitHub Actions path is
+still the required next operation. Its first run could not be audited from this execution
+environment because outbound GitHub and Scryfall CONNECT requests returned proxy HTTP 403.
+Architecture v12, canonical contracts/data, and Phase 119-only promotion remain unchanged.

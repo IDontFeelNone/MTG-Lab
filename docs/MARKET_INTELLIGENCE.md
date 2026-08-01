@@ -47,3 +47,11 @@ Valuation reports total market value, acquisition cost, unrealized gain/loss, an
 ## Future recommendation engine
 
 This foundation may supply inputs to a separately approved downstream recommendation engine. Phase 126 does **not** recommend purchases or sales, rank investments, analyze portfolios, or add AI reasoning. A future engine must explain policy and uncertainty, use these read-only contracts, and never promote market observations into canonical facts.
+
+## Phase 127A operational state
+
+Provider adapter availability is not a successful dry run, a successful dry run is not
+persisted production history, and persisted history is not complete queryable coverage.
+At this checkout those states are respectively **available**, **unverified**, **absent**, and
+**0/379**. Phase 127A adds explicit acquisition census fields and state-aware verification;
+it does not add market facts or change analytics, canonical data, or recommendations.

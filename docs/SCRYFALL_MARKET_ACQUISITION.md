@@ -84,3 +84,20 @@ All envelopes expose provider, observation timestamp, currency, confidence, prov
 canonical snapshot identity, and known/unknown status. Refreshes append new observations;
 they never edit history. Full MB2 value coverage must not be claimed until all 379
 promoted Printings have valid retained observations for the required finish.
+
+## Phase 127A operational audit (2026-08-01)
+
+Phase 127 is merged at `ad0797e`. This checkout contains zero files below
+`data/market/observations` and no retained acquisition manifest, so it contains no genuine
+Scryfall observation and queryable coverage is still 0/379. The execution environment
+rejected both GitHub API and official Scryfall connections at its outbound CONNECT proxy;
+therefore the first Actions run's artifacts, dry-run result, branch, PR, checks, and
+persistence state could not be independently inspected here. No provider payload was
+substituted and no production persistence was attempted.
+
+`market-acquisition-run-v1` now reports the total source records inspected, MB2 source
+records selected, unique promoted Printings matched, known-price observations, and explicit
+missing-price observations in addition to mapping outcome counts. These fields make a future
+retained run sufficient to state exact coverage without deriving it from workflow logs.
+Lifecycle tests accept either an empty production store or a store whose retained files pass
+content/path verification and the Scryfall/printing/USD boundary.

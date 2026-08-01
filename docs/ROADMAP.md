@@ -212,3 +212,11 @@ access was blocked locally before response. The next bounded milestone is succes
 MB2-only dry-run and verified append-only persistence through the existing workflow.
 Scheduling may be considered only after that manual run proves stable. Production coverage
 is 0/379; Phase 119 and Architecture v12 remain unchanged.
+
+# Phase 127A operational blocker
+
+The repository-side census and lifecycle verification are ready, but production completion
+remains blocked on access to the retained GitHub Actions diagnostics (and, if no successful
+payload exists, official Scryfall). Current retained/queryable coverage is 0/379. Completion
+requires one genuine payload, exact dry-run/persistence digest equality, an append-only
+market-only PR, required green checks, and safe auto-merge where enabled.

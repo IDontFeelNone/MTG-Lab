@@ -77,3 +77,11 @@ Inspect diagnostics before a separate `persist=true` dispatch. Current productio
 coverage is 0/379 due to the documented outbound-proxy HTTP 403. Do not claim prices,
 collection value, or full coverage until the Action retains and verifies them. No secret
 is required; enable Actions PR creation and optional repository auto-merge.
+
+# Phase 127A handoff
+
+Resume workflow-first: inspect the retained `market-acquisition-*` artifact for the first
+Phase 127 Actions run before dispatching anything else. If its dry run is valid, persist the
+exact retained payload once; if persistence already exists, reuse it idempotently. This
+checkout has zero production observations and cannot supply price, history, or collection
+value proof. Do not replace missing access with fixtures or zero prices.
