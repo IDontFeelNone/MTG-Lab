@@ -102,6 +102,11 @@ class Phase127Tests(unittest.TestCase):
             before = hashlib.sha256((root/"canonical/state.json").read_bytes()).hexdigest()
             result = run(root, payload_path=payload, retrieved_at=NOW, persist=True, run_id="one")
             self.assertEqual(result["observation_count"], 1)
+            self.assertEqual(result["source_record_count"], 1)
+            self.assertEqual(result["mb2_record_count"], 1)
+            self.assertEqual(result["matched_printing_count"], 1)
+            self.assertEqual(result["known_price_observation_count"], 1)
+            self.assertEqual(result["missing_price_observation_count"], 0)
             self.assertFalse(result["canonical_write"]); self.assertFalse(result["promotion_performed"])
             normalized = (root/"market/acquisitions/one/normalized.json").read_bytes()
             self.assertEqual(result["normalized_sha256"], sha256_bytes(normalized))
@@ -124,8 +129,21 @@ class Phase127Tests(unittest.TestCase):
         output = json.loads(completed.stdout)
         for key in ("provider","observation_timestamp","currency","confidence","provenance","canonical_snapshot_identity","status"):
             self.assertIn(key, output)
-        self.assertEqual(output["status"], "unknown")
+        production_observations = tuple((ROOT / "data/market/observations").glob("*/*/*/*.json"))
+        self.assertEqual(output["status"], "known" if production_observations else "unknown")
         self.assertNotIn("recommend", json.dumps(output).lower())
+
+    def test_production_lifecycle_state_is_internally_valid(self):
+        """Production may legitimately be empty or contain only verified observations."""
+        root = ROOT / "data/market/observations"
+        paths = tuple(root.glob("*/*/*/*.json")) if root.exists() else ()
+        repository = MarketObservationRepository(root)
+        for path in paths:
+            observation = repository.load(path)
+            self.assertEqual(observation.provider, "scryfall")
+            self.assertEqual(observation.entity_type, "printing")
+            self.assertEqual(observation.currency, "USD")
+            self.assertIn(observation.entity_id, self.state["printing"])
 
 
 if __name__ == "__main__": unittest.main()

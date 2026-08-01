@@ -61,6 +61,11 @@ def run(data_root: Path, *, payload_path: Path | None, retrieved_at: datetime,
     normalized = canonical_json([item.to_dict() for item in observations])
     counts = {status: sum(item["status"] == status for item in mappings)
               for status in ("matched", "unmatched", "ambiguous", "rejected")}
+    selected_records = [item for item in records
+                        if str(item.get("set", "")).lower() == "mb2"]
+    observed_printings = {item.entity_id for item in observations}
+    known_prices = sum(item.price is not None for item in observations)
+    missing_prices = len(observations) - known_prices
     result = {"schema_version": "market-acquisition-run-v1", "run_id": run_id,
         "provider": PROVIDER, "source_dataset": SOURCE_DATASET, "source_url": source_url,
         "retrieved_at": retrieved_at.isoformat().replace("+00:00", "Z"),
@@ -68,6 +73,10 @@ def run(data_root: Path, *, payload_path: Path | None, retrieved_at: datetime,
         "currency": "USD", "target": {"set": "MB2", "promoted_only": True},
         "source_sha256": source_digest, "normalized_sha256": sha256_bytes(normalized),
         "canonical_snapshot_identity": canonical_identity, "mapping_counts": counts,
+        "source_record_count": len(records), "mb2_record_count": len(selected_records),
+        "matched_printing_count": len(observed_printings),
+        "known_price_observation_count": known_prices,
+        "missing_price_observation_count": missing_prices,
         "observation_count": len(observations), "canonical_write": False,
         "promotion_performed": False, "persisted": persist}
     if persist:
@@ -75,8 +84,7 @@ def run(data_root: Path, *, payload_path: Path | None, retrieved_at: datetime,
         run_root.mkdir(parents=True, exist_ok=False)
         # Retain only the bounded MB2 source subset; the workflow artifact retains
         # the fetched source for diagnostics without growing Git indefinitely.
-        bounded = [item for item in records if str(item.get("set", "")).lower() == "mb2"]
-        (run_root / "source-mb2.json").write_bytes(canonical_json(bounded))
+        (run_root / "source-mb2.json").write_bytes(canonical_json(selected_records))
         (run_root / "normalized.json").write_bytes(normalized)
         (run_root / "mappings.json").write_bytes(canonical_json(list(mappings)))
         repository = MarketObservationRepository(data_root / "market" / "observations")

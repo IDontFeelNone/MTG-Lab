@@ -74,3 +74,11 @@ Stop after Phase 127. Review and merge this adapter/workflow without changing Ar
 v12 or canonical contracts. The next operational action is a dry-run Scryfall acquisition
 from GitHub Actions, followed only after inspection by persistence. Do not add another
 provider, set, recommendation behavior, or AI layer.
+
+# After Phase 127A audit
+
+The only remaining task is operational completion through the existing Market acquisition
+Action. First obtain the actual run artifact and verify its identities and counts. Do not
+modify acquisition behavior until retained diagnostics establish a failure. Then persist the
+same validated payload, verify the bounded branch/PR/checks, and demonstrate queries and an
+isolated collection valuation. No second provider or recommendation work is authorized.

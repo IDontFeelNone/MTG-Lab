@@ -332,3 +332,11 @@ The outbound proxy blocked official API access with HTTP 403, so no production m
 observation or collection valuation was retained. Coverage is 0/379 promoted MB2
 Printings. Phase 119, canonical digest, Architecture v12, canonical contracts, and the
 absence of recommendation/AI providers remain unchanged.
+
+# Phase 127A inventory (2026-08-01)
+
+The Phase 127 adapter remains the sole provider adapter. Acquisition manifests now inventory
+source records, MB2 records, unique matched promoted Printings, known prices, and explicit
+missing prices. The checked-out production observation store remains empty; no provider
+payload, acquisition directory, persistence branch, or PR is present in repository state.
+External GitHub run state was not reachable from this environment and is not claimed.

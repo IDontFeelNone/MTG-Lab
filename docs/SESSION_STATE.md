@@ -94,3 +94,13 @@ Implementation and tests are present, but the local outbound proxy rejected the 
 endpoint with HTTP 403 before provider response. No production market files exist and
 coverage is 0/379. Canonical writes and promotion are false; no recommendation or AI
 provider was added. See `SCRYFALL_MARKET_ACQUISITION.md` for operation and recovery.
+
+# Session state — Phase 127A audit
+
+Baseline `ad0797e` confirms Phase 127 merged. Before Phase 127A this checkout had zero files
+under `data/market/observations`, no acquisition manifest, and no local persistence branch.
+The GitHub API, repository remote, and Scryfall endpoint were unreachable through the
+execution proxy (HTTP 403), so workflow run/dry-run/PR/check state remains unverified and no
+provider payload was fabricated. Production observations remain 0; coverage remains 0/379.
+Architecture v12/canonical contracts, canonical bytes, Phase 119 promotion authority,
+provider selection, and recommendation logic are unchanged.

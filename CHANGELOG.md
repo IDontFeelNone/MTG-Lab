@@ -549,3 +549,12 @@ no pricing, market intelligence, simulation, recommendation, AI provider, or pro
   append-only acquisition manifests, integrity/replay verification, and manual acquisition
   workflow. Official provider access was blocked by the environment before response, so
   production coverage remains 0/379 and no live price was retained.
+
+# Phase 127A — 2026-08-01
+
+- Audited the merged Phase 127 repository state and confirmed zero retained production market
+  observations. GitHub/Scryfall outbound access was unavailable in this environment, so no
+  workflow outcome or provider response was invented and production coverage remains 0/379.
+- Added explicit source, MB2-selection, unique-matched-Printing, known-price, and missing-price
+  counts to acquisition manifests, plus lifecycle-aware production observation tests. No
+  canonical state, Architecture v12 contract, provider selection, or recommendation changed.
