@@ -1,0 +1,28 @@
+{
+  "approved_card_count": 384,
+  "approved_finish_count": 2,
+  "approved_identifier_count": 235,
+  "approved_printing_count": 379,
+  "batch_id": "mb2-batch-000001-e32022126c07",
+  "blockers": [
+    "operator_signature_missing",
+    "phase_116_prohibits_promotion"
+  ],
+  "canonical_write": false,
+  "dependency_closure_status": "valid",
+  "evidence_identity": "30663562841-review-payload-v2",
+  "excluded_count": 0,
+  "fatal_conflict_count": 0,
+  "operator_signature_ready": true,
+  "orphaned_printing_count": 0,
+  "promotion_performed": false,
+  "promotion_ready": false,
+  "quarantined_count": 0,
+  "review_scope": {
+    "candidate_count": 21,
+    "marvel_candidates_reviewed": 0,
+    "other_mb2_batches_reviewed": 0
+  },
+  "schema_version": "phase-116-identifier-resolution-v1",
+  "unresolved_count": 0
+}

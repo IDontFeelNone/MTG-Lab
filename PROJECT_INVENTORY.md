@@ -1,3 +1,7 @@
+# Phase 116 inventory update
+
+`src/production_evidence/identifier_resolution.py` and `tests/test_phase_116_identifier_resolution.py` implement and verify an immutable Phase 116 overlay over the unchanged Phase 115 review. Seven artifacts under `data/reviews/phase-116/mb2-batch-000001-e32022126c07/` retain the 21-candidate resolution ledger, the complete 820-record collision group, updated 1,000-candidate classifications, findings, dependency closure, pending decision, and readiness report. All 1,000 candidates are approved by evidence classification; signature readiness is true, while signature and promotion remain absent and promotion readiness is false.
+
 # Phase 115 inventory update
 
 The repository now retains a reproducible candidate-level review of exactly the first MB2 batch from production evidence revision v2: 1,000 ledger entries, findings, valid dependency closure, an immutable unsigned pending decision, and a not-ready promotion report. Counts are 979 approved, 0 excluded, and 21 requiring additional evidence. Canonical state and Architecture v12 are unchanged.

@@ -1,0 +1,28 @@
+{
+  "baseline": {
+    "approved": 979,
+    "excluded": 0,
+    "requires_additional_evidence": 21
+  },
+  "batch_id": "mb2-batch-000001-e32022126c07",
+  "evidence_identity": "30663562841-review-payload-v2",
+  "findings_digest": "7db72f1f94563ad29f8fef2879a7f64c32f5fab8df50fe1035e709c0a5fcb8b3",
+  "review_scope": {
+    "candidate_count": 21,
+    "marvel_candidates_reviewed": 0,
+    "other_mb2_batches_reviewed": 0
+  },
+  "schema_version": "phase-116-identifier-resolution-v1",
+  "summary": {
+    "excluded": 0,
+    "fatal_conflicts": 0,
+    "final_classifications": {
+      "approved": 1000
+    },
+    "newly_approved": 21,
+    "quarantined": 0,
+    "requires_additional_evidence": 0,
+    "total": 1000,
+    "unchanged_approved": 979
+  }
+}
