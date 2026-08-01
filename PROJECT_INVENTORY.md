@@ -1,3 +1,7 @@
+# Phase 117A inventory update
+
+`.github/workflows/mb2-operator-authorization.yml` accepts the twelve required operator and immutable-scope inputs; `scripts/mb2_authorization_persistence.py` provides authorization-only durable Git/GitHub persistence; and `verify_authorization_artifact()` independently authenticates a retained result. Tests cover the workflow contract, safe dry run, immutable scope, authorization validation/replay/conflict, canonical isolation, and persistence boundary. Phase 117 remains unauthorized and unpromoted.
+
 # Phase 116 inventory update
 
 `src/production_evidence/identifier_resolution.py` and `tests/test_phase_116_identifier_resolution.py` implement and verify an immutable Phase 116 overlay over the unchanged Phase 115 review. Seven artifacts under `data/reviews/phase-116/mb2-batch-000001-e32022126c07/` retain the 21-candidate resolution ledger, the complete 820-record collision group, updated 1,000-candidate classifications, findings, dependency closure, pending decision, and readiness report. All 1,000 candidates are approved by evidence classification; signature readiness is true, while signature and promotion remain absent and promotion readiness is false.

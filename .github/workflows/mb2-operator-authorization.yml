@@ -1,0 +1,223 @@
+name: MB2 operator authorization
+
+on:
+  workflow_dispatch:
+    inputs:
+      operator_identity:
+        description: Genuine human operator identity
+        required: true
+        type: string
+      operator_role:
+        description: Human operator role
+        required: true
+        type: string
+      review_reference:
+        description: Durable namespaced review reference
+        required: true
+        type: string
+      reviewed_at:
+        description: RFC 3339 review timestamp with timezone
+        required: true
+        type: string
+      authorization_decision:
+        description: Operator decision
+        required: true
+        type: choice
+        options: [authorize_for_promotion, reject, return_for_additional_review]
+      operator_notes:
+        description: Genuine human review notes
+        required: true
+        type: string
+      signature_request_digest:
+        description: Immutable Phase 117 signature-request digest
+        required: true
+        type: string
+        default: 4b281b3eb45b6a7e3e82a2309c271bffe1cb6c8cb939d46c5b8be059e0b6000d
+      authorized_batch_id:
+        description: Exact reviewed MB2 batch
+        required: true
+        type: string
+        default: mb2-batch-000001-e32022126c07
+      authorized_candidate_digest:
+        description: Exact approved-candidate digest
+        required: true
+        type: string
+        default: e32022126c07036337f810d06dc29b5eead5afd850f7f3af0a26ad5b0d46e66e
+      destination_branch:
+        description: Dedicated authorization-only branch
+        required: true
+        type: string
+        default: operator-authorization/mb2-batch-000001-e32022126c07
+      base_branch:
+        description: Exact reviewed base branch
+        required: true
+        type: string
+        default: main
+      dry_run:
+        description: Validate and report without branch, commit, or pull request
+        required: true
+        type: boolean
+        default: true
+
+# Repository Settings > Actions > General may need "Allow GitHub Actions to create and
+# approve pull requests" enabled. If PR creation is unavailable, the persistence report
+# retains the already-pushed branch and commit so a human can open the PR manually.
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: mb2-operator-authorization
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPERATOR_IDENTITY: ${{ inputs.operator_identity }}
+      OPERATOR_ROLE: ${{ inputs.operator_role }}
+      REVIEW_REFERENCE: ${{ inputs.review_reference }}
+      REVIEWED_AT: ${{ inputs.reviewed_at }}
+      AUTHORIZATION_DECISION: ${{ inputs.authorization_decision }}
+      OPERATOR_NOTES: ${{ inputs.operator_notes }}
+      SIGNATURE_REQUEST_DIGEST: ${{ inputs.signature_request_digest }}
+      AUTHORIZED_BATCH_ID: ${{ inputs.authorized_batch_id }}
+      AUTHORIZED_CANDIDATE_DIGEST: ${{ inputs.authorized_candidate_digest }}
+      DESTINATION_BRANCH: ${{ inputs.destination_branch }}
+      BASE_BRANCH: ${{ inputs.base_branch }}
+      DRY_RUN: ${{ inputs.dry_run }}
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Check out exact requested base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.base_branch }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate immutable dispatch scope
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os, re
+          expected = {
+              "SIGNATURE_REQUEST_DIGEST": "4b281b3eb45b6a7e3e82a2309c271bffe1cb6c8cb939d46c5b8be059e0b6000d",
+              "AUTHORIZED_BATCH_ID": "mb2-batch-000001-e32022126c07",
+              "AUTHORIZED_CANDIDATE_DIGEST": "e32022126c07036337f810d06dc29b5eead5afd850f7f3af0a26ad5b0d46e66e",
+              "DESTINATION_BRANCH": "operator-authorization/mb2-batch-000001-e32022126c07",
+              "BASE_BRANCH": "main",
+          }
+          for key in ("OPERATOR_IDENTITY", "OPERATOR_ROLE", "REVIEW_REFERENCE", "REVIEWED_AT",
+                      "AUTHORIZATION_DECISION", "OPERATOR_NOTES"):
+              if not os.environ[key].strip(): raise SystemExit(f"{key.lower()} must not be blank")
+          for key, value in expected.items():
+              if os.environ[key] != value: raise SystemExit(f"{key.lower()} is outside immutable MB2 scope")
+          identity = os.environ["OPERATOR_IDENTITY"]
+          if re.search(r"\b(ai|codex|chatgpt|openai|automation|bot|workflow|artificial intelligence)\b", identity, re.I):
+              raise SystemExit("operator_identity must identify a genuine human")
+          if os.environ["DRY_RUN"] not in ("true", "false"): raise SystemExit("dry_run must be boolean")
+          PY
+          test "$(git branch --show-current)" = "$BASE_BRANCH"
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/$BASE_BRANCH)"
+
+      - name: Verify Phase 115 through Phase 117 and canonical pre-state
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/mb2-authorization/reports"
+          PYTHONPATH=src python - <<'PY'
+          import json
+          from pathlib import Path
+          from production_evidence.operator_authorization import build_signature_request
+          request, chain, contract, readiness = build_signature_request("data")
+          expected = "0e5ead0d4693f1dc75c2f7b5e401f22e4fa302f93bb8eab59f0ddeefd0f680ba"
+          if chain["canonical_pre_state_digest"] != expected: raise SystemExit("canonical pre-state drift")
+          if chain["target_isolation_status"] != "MB2_only" or chain["approved_candidate_count"] != 1000:
+              raise SystemExit("exact one-batch MB2 scope failed")
+          retained = Path("data/reviews/phase-117/mb2-batch-000001-e32022126c07")
+          for name, expected_value in (("signature-request.json", request),
+                                       ("review-chain-verification.json", chain),
+                                       ("authorization-contract.json", contract),
+                                       ("promotion-readiness-report.json", readiness)):
+              if json.loads((retained / name).read_text()) != expected_value:
+                  raise SystemExit(f"immutable Phase 117 artifact mismatch: {name}")
+          out = Path("${{ runner.temp }}/mb2-authorization/reports")
+          (out / "review-chain-verification.json").write_text(json.dumps(chain, indent=2, sort_keys=True) + "\n")
+          PY
+
+      - name: Construct private operator input and validate authorization
+        id: authorization
+        run: |
+          set -euo pipefail
+          workspace="$GITHUB_WORKSPACE"
+          work_data="data"
+          if [[ "$DRY_RUN" == true ]]; then
+            work_data="$RUNNER_TEMP/mb2-authorization/data"
+            cp -a data "$work_data"
+          fi
+          INPUT="$RUNNER_TEMP/mb2-authorization/operator-input.json" python - <<'PY'
+          import json, os
+          from pathlib import Path
+          keys = ("operator_identity", "operator_role", "review_reference", "reviewed_at",
+                  "authorization_decision", "operator_notes", "signature_request_digest",
+                  "authorized_batch_id", "authorized_candidate_digest")
+          value = {key: os.environ[key.upper()] for key in keys}
+          Path(os.environ["INPUT"]).write_text(json.dumps(value, sort_keys=True) + "\n")
+          PY
+          PYTHONPATH=src python scripts/authorize_mb2_batch.py \
+            "$RUNNER_TEMP/mb2-authorization/operator-input.json" --data-root "$work_data" \
+            > "$RUNNER_TEMP/mb2-authorization/reports/authorization-result.json"
+          DATA_ROOT="$work_data" PYTHONPATH=src python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from production_evidence.operator_authorization import verify_authorization_artifact
+          artifact = verify_authorization_artifact(os.environ["DATA_ROOT"])
+          report = {"valid": True, "authorization_digest": artifact["authorization_digest"],
+                    "canonical_write": False, "promotion_performed": False}
+          Path(os.environ["RUNNER_TEMP"] + "/mb2-authorization/reports/verification-report.json").write_text(
+              json.dumps(report, indent=2, sort_keys=True) + "\n")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              print("authorization_digest=" + artifact["authorization_digest"], file=output)
+          PY
+          rm -f "$RUNNER_TEMP/mb2-authorization/operator-input.json"
+
+      - name: Enforce non-canonical changed-file boundary
+        run: |
+          set -euo pipefail
+          if [[ "$DRY_RUN" == true ]]; then
+            test -z "$(git status --short --untracked-files=all)"
+          else
+            changed="$(git status --short --untracked-files=all | awk '{print $2}')"
+            test "$changed" = "data/reviews/phase-117/mb2-batch-000001-e32022126c07/operator-authorization.json"
+          fi
+          git diff --quiet -- data/canonical
+
+      - name: Persist and durably verify authorization-only pull request
+        run: |
+          set -euo pipefail
+          python scripts/mb2_authorization_persistence.py \
+            --destination-branch "$DESTINATION_BRANCH" --base-branch "$BASE_BRANCH" \
+            --repository "$GH_REPO" --authorization-digest "${{ steps.authorization.outputs.authorization_digest }}" \
+            --dry-run "$DRY_RUN" --report "$RUNNER_TEMP/mb2-authorization/reports/persistence-report.json"
+
+      - name: Report non-promoting result
+        if: always()
+        run: |
+          {
+            echo '## MB2 operator authorization'
+            echo '* canonical_write: `false`'
+            echo '* promotion_performed: `false`'
+            echo '* Canonical promotion remains a separate, withheld operation.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload authorization and verification reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mb2-operator-authorization-${{ github.run_id }}
+          path: ${{ runner.temp }}/mb2-authorization/reports/
+          if-no-files-found: warn
+          retention-days: 30

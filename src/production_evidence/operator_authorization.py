@@ -172,7 +172,8 @@ def _validate_human_fields(fields: dict, request: dict) -> None:
         value = fields[key]
         if not isinstance(value, str) or not value.strip() or value.strip().lower() in PLACEHOLDERS:
             raise EvidenceError(f"invalid or placeholder {key}")
-    if re.search(r"\b(ai|codex|chatgpt|openai|artificial intelligence)\b", fields["operator_identity"], re.I):
+    if re.search(r"\b(ai|codex|chatgpt|openai|automation|bot|workflow|artificial intelligence)\b",
+                 fields["operator_identity"], re.I):
         raise EvidenceError("AI systems cannot be operators")
     if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_.-]{1,31}:[A-Za-z0-9][A-Za-z0-9_./-]{2,127}", fields["review_reference"]):
         raise EvidenceError("review_reference must be a durable namespaced identifier")
@@ -182,7 +183,9 @@ def _validate_human_fields(fields: dict, request: dict) -> None:
         raise EvidenceError("reviewed_at must be RFC 3339") from exc
     if timestamp.tzinfo is None: raise EvidenceError("reviewed_at must include timezone")
     if fields["authorization_decision"] not in DECISIONS: raise EvidenceError("invalid authorization_decision")
-    if not isinstance(fields["operator_notes"], str): raise EvidenceError("operator_notes must be text")
+    if (not isinstance(fields["operator_notes"], str) or not fields["operator_notes"].strip() or
+            fields["operator_notes"].strip().lower() in PLACEHOLDERS):
+        raise EvidenceError("operator_notes must be genuine non-placeholder text")
     if fields["signature_request_digest"] != request["signature_request_digest"]: raise EvidenceError("signature request digest mismatch")
     if fields["authorized_batch_id"] != BATCH_ID: raise EvidenceError("authorized batch mismatch")
     if fields["authorized_candidate_digest"] != request["final_candidate_id_digest"]: raise EvidenceError("authorized candidate digest mismatch")
@@ -217,4 +220,31 @@ def record_authorization(data_root: Path | str, fields: dict) -> dict:
     path.write_text(rendered)
     if _load(path) != artifact or _sha({k: v for k, v in artifact.items() if k != "authorization_digest"}) != artifact["authorization_digest"]:
         raise EvidenceError("written authorization failed verification")
+    return artifact
+
+
+def verify_authorization_artifact(data_root: Path | str) -> dict:
+    """Verify the retained authorization against the live immutable request and chain."""
+    data_root = Path(data_root)
+    path = data_root / PHASE_117 / "operator-authorization.json"
+    if not path.is_file():
+        raise EvidenceError("operator authorization is missing")
+    artifact = _load(path)
+    digest = artifact.get("authorization_digest")
+    body = {key: value for key, value in artifact.items() if key != "authorization_digest"}
+    if not isinstance(digest, str) or _sha(body) != digest:
+        raise EvidenceError("authorization digest mismatch")
+    request, chain, _, _ = build_signature_request(data_root)
+    fields = {key: artifact.get(key) for key in HUMAN_FIELDS}
+    _validate_human_fields(fields, request)
+    expected_lineage = {key: chain[key] for key in ("evidence_identity", "workflow_run_id",
+        "source_artifact_identity", "source_sha256", "archive_sha256", "phase_115_decision_id",
+        "phase_115_decision_digest", "phase_116_decision_id", "phase_116_decision_digest",
+        "findings_digest", "dependency_closure_digest", "final_candidate_id_digest")}
+    if artifact.get("review_chain_lineage") != expected_lineage:
+        raise EvidenceError("authorization review-chain lineage mismatch")
+    if artifact.get("prior_canonical_state_digest") != request["canonical_pre_state_digest"]:
+        raise EvidenceError("authorization canonical pre-state mismatch")
+    if artifact.get("canonical_write") is not False or artifact.get("promotion_performed") is not False:
+        raise EvidenceError("authorization reports a canonical write or promotion")
     return artifact

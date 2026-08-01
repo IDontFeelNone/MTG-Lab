@@ -68,3 +68,13 @@ batch, candidate-membership, and canonical pre-state digests can make it eligibl
 future bounded-promotion phase. `reject` and `return_for_additional_review` block promotion.
 Phase 117 never invokes a canonical writer or promotion operation, and an authorization artifact
 must never be interpreted as promotion itself.
+
+## Phase 117A authorization workflow remains pre-promotion
+
+The manual **MB2 operator authorization** workflow is not a canonical writer. The owner must run it
+with `dry_run: true` and genuine human fields, inspect its uploaded validation reports, then rerun
+identical values with `dry_run: false` only if satisfied. The resulting PR may contain only
+`data/reviews/phase-117/mb2-batch-000001-e32022126c07/operator-authorization.json`; review and merge
+that authorization-only PR, then stop. Even an `authorize_for_promotion` decision merely satisfies
+a prerequisite for a separately designed and authorized promotion phase. It performs no canonical
+write and supplies no authority to start promotion during Phase 117A.
