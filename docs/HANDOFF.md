@@ -1,3 +1,12 @@
+# Phase 127D handoff
+
+Phase 127C is merged at `a837210`. Its real dry run established that the remaining failure
+was the exact-host URI policy after successful direct metadata selection and timestamp
+validation. Phase 127D admits only label-aware official static subdomains beneath
+`scryfall.io` with the remaining secure URL constraints and sanitized diagnostics. Coverage
+is still 0/379. Run one post-merge `persist=false` workflow dispatch, inspect it, and stop;
+do not persist observations or alter canonical state in this phase.
+
 # Phase 126 handoff
 
 Start with `docs/MARKET_INTELLIGENCE.md`, `src/market/intelligence.py`, and `src/market/query.py`. Observations are append-only and separate from canonical facts; queries preserve unknowns. Phase 125 is merged, Architecture v12 is unchanged, and Phase 119 remains the sole production promotion. No live feed, recommendation engine, portfolio analysis, or AI reasoning was added.

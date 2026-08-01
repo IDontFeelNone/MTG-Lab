@@ -1,3 +1,13 @@
+# Phase 127D session state
+
+Main contains merged Phase 127C (`a837210`). Its latest real dry run reached Scryfall,
+parsed the direct `bulk_data` descriptor, found exactly one `default_cards` match and valid
+timestamp, then stopped before download because an official static `scryfall.io` subdomain
+did not equal the hard-coded `data.scryfall.io` host. Phase 127D repairs that bounded,
+label-aware validation and adds URI-property/reason-code diagnostics without URI leakage.
+No market observation, canonical write, or promotion occurred; coverage is 0/379. After
+merge, run exactly one manual `persist=false` dry run and stop before persistence.
+
 # Phase 126 session state
 
 - Baseline: merged Phase 125 (`b71f961`).

@@ -150,7 +150,7 @@ class Phase127Tests(unittest.TestCase):
             root=Path(temp); (root/"canonical").mkdir(); (root/"canonical/state.json").write_bytes(self.canonical_bytes)
             report = run(root, payload_path=None, retrieved_at=NOW, persist=False, run_id="dry")
         self.assertEqual(opened.call_count, 2)
-        self.assertEqual(report["source_url"], "https://data.scryfall.io/default-cards/test.json")
+        self.assertEqual(report["source_url"], "scryfall:default_cards")
         self.assertTrue(report["acquisition_diagnostics"]["download_uri_obtained"])
         self.assertTrue(report["acquisition_diagnostics"]["bulk_payload_download_began"])
 
@@ -185,18 +185,75 @@ class Phase127Tests(unittest.TestCase):
                 parse_bulk_metadata(canonical_json(value), new_diagnostics())
 
     def test_metadata_download_uri_boundary(self):
-        invalid = [None, "", "   ", "not a uri",
-                   "http://data.scryfall.io/default-cards/test.json",
-                   "https://api.scryfall.com/default-cards/test.json",
-                   "https://data.scryfall.io.evil.invalid/test.json",
-                   "https://user@data.scryfall.io/test.json"]
-        for uri in invalid:
+        invalid = [
+            (None, "blank_uri"), ("", "blank_uri"),
+            ("   ", "blank_uri"), ("not a uri", "scheme_not_https"),
+            ("http://data.scryfall.io/default-cards/test.json", "scheme_not_https"),
+            ("https://api.scryfall.com/default-cards/test.json", "hostname_not_allowlisted"),
+            ("https://scryfall.io.evil.example/test.json", "hostname_not_allowlisted"),
+            ("https://evil-scryfall.io/test.json", "hostname_not_allowlisted"),
+            ("https://data.scryfall.io.evil.example/test.json", "hostname_not_allowlisted"),
+            ("https://127.0.0.1/test.json", "ip_address_hostname"),
+            ("https://[::1]/test.json", "ip_address_hostname"),
+            ("https://localhost/test.json", "localhost_hostname"),
+            ("https://user:password@data.scryfall.io/test.json", "userinfo_present"),
+            ("https://data.scryfall.io:444/test.json", "nondefault_port"),
+            ("https:///test.json", "hostname_missing"),
+            ("https://data.scryfall.io", "absolute_path_missing"),
+            ("https://data.scryfall.io/test.json#section", "fragment_present")]
+        for uri, reason in invalid:
             diagnostic = new_diagnostics()
             with self.subTest(uri=uri), self.assertRaises(ProviderAcquisitionError) as caught:
                 parse_bulk_metadata(canonical_json(self.metadata(download_uri=uri)), diagnostic)
             self.assertEqual(caught.exception.diagnostics["failing_stage"],
                              "download_uri_extraction")
             self.assertFalse(diagnostic["download_uri_valid"])
+            self.assertEqual(diagnostic["download_uri_rejection_reason"], reason)
+            if uri and "/test.json" in uri:
+                self.assertNotIn(uri, json.dumps(diagnostic))
+
+    def test_official_static_hosts_normalization_port_and_query_policy(self):
+        accepted = [
+            "https://data.scryfall.io/default-cards/test.json",
+            "https://static-files.scryfall.io/default-cards/test.json",
+            "https://DATA.SCRYFALL.IO.:443/default-cards/test.json",
+            "https://data.scryfall.io/default-cards/test.json?download=1"]
+        for uri in accepted:
+            with self.subTest(uri=uri):
+                diagnostic = new_diagnostics()
+                selected, _ = parse_bulk_metadata(
+                    canonical_json(self.metadata(download_uri=uri)), diagnostic)
+                self.assertEqual(selected, uri)
+                self.assertTrue(diagnostic["download_uri_valid"])
+                self.assertTrue(diagnostic["download_uri_hostname_allowlisted"])
+                self.assertEqual(diagnostic["download_uri_effective_port"], 443)
+                self.assertIsNone(diagnostic["download_uri_rejection_reason"])
+                self.assertNotIn(uri, json.dumps(diagnostic))
+        self.assertEqual(diagnostic["download_uri_hostname"], "data.scryfall.io")
+        query_diagnostic = new_diagnostics()
+        parse_bulk_metadata(canonical_json(self.metadata(
+            download_uri=accepted[-1])), query_diagnostic)
+        self.assertTrue(query_diagnostic["download_uri_has_query"])
+
+    def test_valid_dry_run_census_has_no_persistence_or_canonical_write(self):
+        metadata = canonical_json(self.metadata(
+            download_uri="https://static-files.scryfall.io/default-cards/test.json?key=secret"))
+        with tempfile.TemporaryDirectory() as temp, patch("urllib.request.urlopen",
+                side_effect=[Response(metadata), Response(canonical_json([self.record]))]) as opened:
+            root = Path(temp); (root/"canonical").mkdir()
+            canonical = root/"canonical/state.json"; canonical.write_bytes(self.canonical_bytes)
+            before = canonical.read_bytes()
+            report = run(root, payload_path=None, retrieved_at=NOW, persist=False, run_id="dry")
+            self.assertEqual(opened.call_count, 2)
+            self.assertEqual(report["source_record_count"], 1)
+            self.assertEqual(report["mb2_record_count"], 1)
+            self.assertEqual(report["matched_printing_count"], 1)
+            self.assertFalse(report["persisted"])
+            self.assertFalse(report["canonical_write"])
+            self.assertFalse(report["promotion_performed"])
+            self.assertEqual(canonical.read_bytes(), before)
+            self.assertFalse((root/"market").exists())
+            self.assertNotIn("key=secret", json.dumps(report))
 
     def test_metadata_updated_at_required_and_well_formed_before_download(self):
         for updated_at in (None, "", "not-a-timestamp", "2026-08-01"):

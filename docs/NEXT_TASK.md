@@ -1,3 +1,10 @@
+# After Phase 127D
+
+After merge, manually dispatch **Market acquisition** once with `persist=false`. Inspect the
+uploaded report for a valid bounded official hostname, no URI rejection reason, exactly one
+payload download, valid JSON shape, and the MB2-only mapping census. Any failure is a hard
+stop, and Phase 127D does not authorize `persist=true`, canonical writes, or promotion.
+
 # Next task after Phase 126
 
 Stop after Phase 126. Review and merge its observation, analytics, query, CLI, and valuation contracts. Do not connect live providers or add recommendations, advice, investment rankings, portfolio analysis, or AI reasoning without a separate phase. Preserve Architecture v12 and Phase 119-only production state.
