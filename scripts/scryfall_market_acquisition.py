@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 from market import MarketObservationRepository, MarketValidationError
@@ -26,7 +27,10 @@ def new_diagnostics() -> dict:
             "http_status": None, "response_content_type": None,
             "metadata_fetched": False, "download_uri_obtained": False,
             "bulk_payload_download_began": False, "payload_bytes_retained": False,
-            "attempts": 0}
+            "metadata_root_object_type": None, "metadata_parsing_shape": None,
+            "bulk_entries_inspected": 0, "default_cards_matches": 0,
+            "selected_bulk_type": None, "updated_at_present": False,
+            "download_uri_valid": False, "attempts": 0}
 
 
 def _fail(message: str, diagnostics: dict, stage: str, *, status: int | None = None,
@@ -57,7 +61,11 @@ def fetch(url: str, *, diagnostics: dict | None = None, endpoint_category: str =
                 diagnostic.update(http_status=status, response_content_type=content_type)
                 if endpoint_category == "scryfall_bulk_payload":
                     diagnostic["bulk_payload_download_began"] = True
-                if content_type not in {"application/json", "application/octet-stream"}:
+                accepted_types = ({"application/json"} if endpoint_category == "scryfall_bulk_metadata"
+                                  else {"application/json", "application/octet-stream"})
+                if content_type not in accepted_types and not (
+                        endpoint_category == "scryfall_bulk_metadata"
+                        and content_type and content_type.endswith("+json")):
                     _fail("Scryfall returned an invalid response content type", diagnostic,
                           stage, status=status, content_type=content_type)
                 return response.read()
@@ -78,6 +86,72 @@ def fetch(url: str, *, diagnostics: dict | None = None, endpoint_category: str =
     raise AssertionError("unreachable")
 
 
+def parse_bulk_metadata(metadata_bytes: bytes, diagnostics: dict) -> tuple[str, datetime]:
+    """Select and validate the one official default-cards bulk descriptor."""
+    try:
+        metadata = json.loads(metadata_bytes)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        _fail("Scryfall bulk metadata was malformed JSON", diagnostics, "metadata_parse")
+    if not isinstance(metadata, dict):
+        diagnostics["metadata_root_object_type"] = type(metadata).__name__
+        _fail("Scryfall bulk metadata root was not an object", diagnostics, "metadata_validation")
+
+    root_type = metadata.get("object")
+    diagnostics["metadata_root_object_type"] = root_type if isinstance(root_type, str) else None
+    if root_type == "error":
+        _fail("Scryfall returned an error metadata object", diagnostics, "metadata_validation")
+
+    if root_type == "bulk_data":
+        diagnostics["metadata_parsing_shape"] = "direct_object"
+        entries = [metadata]
+    elif root_type == "list" and isinstance(metadata.get("data"), list):
+        diagnostics["metadata_parsing_shape"] = "list_object"
+        entries = metadata["data"]
+    else:
+        _fail("Scryfall bulk metadata had no supported response shape",
+              diagnostics, "metadata_validation")
+
+    diagnostics["bulk_entries_inspected"] = len(entries)
+    matches = [entry for entry in entries
+               if isinstance(entry, dict) and entry.get("type") == "default_cards"]
+    diagnostics["default_cards_matches"] = len(matches)
+    if len(matches) != 1:
+        _fail("Scryfall bulk metadata must contain exactly one default_cards entry",
+              diagnostics, "metadata_validation")
+    selected = matches[0]
+    diagnostics["selected_bulk_type"] = selected.get("type")
+    if selected.get("object") != "bulk_data" or selected.get("type") != "default_cards":
+        _fail("Scryfall default_cards metadata entry had an invalid contract",
+              diagnostics, "metadata_validation")
+
+    updated_at = selected.get("updated_at")
+    diagnostics["updated_at_present"] = updated_at is not None
+    try:
+        observed_at = datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
+        if observed_at.tzinfo is None:
+            raise ValueError
+    except (AttributeError, ValueError, TypeError):
+        _fail("Scryfall bulk metadata had an invalid updated_at", diagnostics,
+              "metadata_validation")
+
+    download_uri = selected.get("download_uri")
+    try:
+        parsed = urllib.parse.urlsplit(download_uri)
+        valid_uri = (isinstance(download_uri, str) and bool(download_uri.strip())
+                     and parsed.scheme == "https" and parsed.hostname == "data.scryfall.io"
+                     and parsed.port in (None, 443) and parsed.username is None
+                     and parsed.password is None and bool(parsed.path)
+                     and parsed.fragment == "")
+    except (TypeError, ValueError):
+        valid_uri = False
+    diagnostics["download_uri_valid"] = valid_uri
+    if not valid_uri:
+        _fail("Scryfall bulk metadata lacked a permitted secure download URI", diagnostics,
+              "download_uri_extraction")
+    diagnostics["download_uri_obtained"] = True
+    return download_uri, observed_at
+
+
 def run(data_root: Path, *, payload_path: Path | None, retrieved_at: datetime,
         persist: bool, run_id: str, retain_payload: Path | None = None,
         observed_at_override: datetime | None = None,
@@ -95,27 +169,11 @@ def run(data_root: Path, *, payload_path: Path | None, retrieved_at: datetime,
                                endpoint_category="scryfall_bulk_metadata",
                                stage="metadata_response")
         diagnostic["metadata_fetched"] = True
-        try:
-            metadata = json.loads(metadata_bytes)
-        except (json.JSONDecodeError, UnicodeDecodeError):
-            _fail("Scryfall bulk metadata was malformed JSON", diagnostic, "metadata_parse")
-        if metadata.get("object") != "bulk_data" or metadata.get("type") != "default_cards":
-            _fail("Scryfall bulk metadata did not match the default_cards contract",
-                  diagnostic, "metadata_validation")
-        download_uri = metadata.get("download_uri")
-        if not isinstance(download_uri, str) or not download_uri.startswith("https://"):
-            _fail("Scryfall bulk metadata lacked a secure download URI", diagnostic,
-                  "download_uri_extraction")
-        diagnostic["download_uri_obtained"] = True
+        download_uri, observed_at = parse_bulk_metadata(metadata_bytes, diagnostic)
         source_url = download_uri
         payload = fetch(source_url, diagnostics=diagnostic,
                         endpoint_category="scryfall_bulk_payload",
                         stage="bulk_payload_response")
-        try:
-            observed_at = datetime.fromisoformat(str(metadata["updated_at"]).replace("Z", "+00:00"))
-        except (KeyError, ValueError, TypeError):
-            _fail("Scryfall bulk metadata had an invalid updated_at", diagnostic,
-                  "metadata_validation")
         if retain_payload:
             retain_payload.write_bytes(payload)
             diagnostic["payload_bytes_retained"] = True

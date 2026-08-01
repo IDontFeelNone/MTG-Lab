@@ -90,3 +90,7 @@ acquisition dry run and inspect the retained structured report. Proceed to a sep
 `persist=true` dispatch only if the official payload, identities, counts, MB2 isolation, and
 digests validate. Any nonzero acquisition status or failed check is a hard stop before
 persistence. Do not substitute data, add a provider, or write canonical state.
+
+# After Phase 127C
+
+After merge, manually dispatch **Market acquisition** once with `persist=false`. Inspect the always-uploaded diagnostics and require a successful metadata parse, validated download URI, payload-download start, deterministic identities/counts, and MB2 isolation. Any nonzero status is a hard stop. Do not dispatch persistence, add a provider, or modify canonical state as part of Phase 127C.

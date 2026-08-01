@@ -115,3 +115,7 @@ preserving the command status. Permanent 4xx responses except 429 are not retrie
 transient 5xx, timeout, and transport failures have three bounded attempts. No persistence,
 market observation, canonical mutation, provider substitution, or authorization process was
 performed.
+
+# Session state — Phase 127C
+
+Baseline `21f9b6e` confirms Phase 127B merged. Its corrected metadata endpoint reached Scryfall successfully and returned acceptable JSON, but the GitHub-hosted run failed closed at `download_uri_extraction`: metadata was fetched, no download URI was obtained, no bulk download began, and no observation, canonical write, or promotion followed. Phase 127C repairs direct/list metadata selection and secure URI validation. Production market coverage remains 0/379. Next: merge, then dispatch one nonpersistent dry run and inspect its artifact.

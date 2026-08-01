@@ -17,7 +17,7 @@ from market import MarketObservationRepository, MarketValidationError
 from market.scryfall import (ProviderAcquisitionError, ProviderRateLimitError,
     ScryfallMarketAdapter, canonical_json, load_payload, sha256_bytes)
 from scripts.scryfall_market_acquisition import (METADATA_URL, MAX_ATTEMPTS, fetch,
-    new_diagnostics, run)
+    new_diagnostics, parse_bulk_metadata, run)
 
 ROOT = Path(__file__).parents[1]
 NOW = datetime(2026, 8, 1, 12, tzinfo=timezone.utc)
@@ -47,6 +47,13 @@ class Phase127Tests(unittest.TestCase):
 
     def adapter(self, state=None):
         return ScryfallMarketAdapter(state or self.state, "sha256:canonical")
+
+    def metadata(self, **changes):
+        value = {"object":"bulk_data", "type":"default_cards",
+            "download_uri":"https://data.scryfall.io/default-cards/test.json",
+            "updated_at":"2026-08-01T10:00:00Z"}
+        value.update(changes)
+        return value
 
     def test_payload_validation_and_source_digest(self):
         raw = canonical_json([self.record])
@@ -147,6 +154,79 @@ class Phase127Tests(unittest.TestCase):
         self.assertTrue(report["acquisition_diagnostics"]["download_uri_obtained"])
         self.assertTrue(report["acquisition_diagnostics"]["bulk_payload_download_began"])
 
+    def test_direct_and_list_metadata_shapes(self):
+        for value, shape, inspected in (
+                (self.metadata(), "direct_object", 1),
+                ({"object":"list", "data":[self.metadata(type="oracle_cards"),
+                                              self.metadata()]}, "list_object", 2)):
+            with self.subTest(shape=shape):
+                diagnostic = new_diagnostics()
+                uri, updated = parse_bulk_metadata(canonical_json(value), diagnostic)
+                self.assertEqual(uri, "https://data.scryfall.io/default-cards/test.json")
+                self.assertEqual(updated, datetime(2026, 8, 1, 10, tzinfo=timezone.utc))
+                self.assertEqual(diagnostic["metadata_parsing_shape"], shape)
+                self.assertEqual(diagnostic["bulk_entries_inspected"], inspected)
+                self.assertEqual(diagnostic["default_cards_matches"], 1)
+                self.assertEqual(diagnostic["selected_bulk_type"], "default_cards")
+                self.assertTrue(diagnostic["updated_at_present"])
+                self.assertTrue(diagnostic["download_uri_valid"])
+
+    def test_metadata_match_cardinality_error_and_contract_fail_closed(self):
+        invalid = [
+            {"object":"list", "data":[self.metadata(type="oracle_cards")]},
+            {"object":"list", "data":[self.metadata(), self.metadata()]},
+            {"object":"list", "data":[self.metadata(object="card")]},
+            {"object":"error", "code":"not_found", "details":"provider body"},
+            [],
+            {"object":"catalog", "data":[]},
+        ]
+        for value in invalid:
+            with self.subTest(value=value), self.assertRaises(ProviderAcquisitionError):
+                parse_bulk_metadata(canonical_json(value), new_diagnostics())
+
+    def test_metadata_download_uri_boundary(self):
+        invalid = [None, "", "   ", "not a uri",
+                   "http://data.scryfall.io/default-cards/test.json",
+                   "https://api.scryfall.com/default-cards/test.json",
+                   "https://data.scryfall.io.evil.invalid/test.json",
+                   "https://user@data.scryfall.io/test.json"]
+        for uri in invalid:
+            diagnostic = new_diagnostics()
+            with self.subTest(uri=uri), self.assertRaises(ProviderAcquisitionError) as caught:
+                parse_bulk_metadata(canonical_json(self.metadata(download_uri=uri)), diagnostic)
+            self.assertEqual(caught.exception.diagnostics["failing_stage"],
+                             "download_uri_extraction")
+            self.assertFalse(diagnostic["download_uri_valid"])
+
+    def test_metadata_updated_at_required_and_well_formed_before_download(self):
+        for updated_at in (None, "", "not-a-timestamp", "2026-08-01"):
+            value = self.metadata()
+            if updated_at is None:
+                value.pop("updated_at")
+            else:
+                value["updated_at"] = updated_at
+            with self.subTest(updated_at=updated_at), tempfile.TemporaryDirectory() as temp, \
+                    patch("urllib.request.urlopen", return_value=Response(canonical_json(value))) as opened:
+                root=Path(temp); (root/"canonical").mkdir()
+                (root/"canonical/state.json").write_bytes(self.canonical_bytes)
+                with self.assertRaises(ProviderAcquisitionError) as caught:
+                    run(root, payload_path=None, retrieved_at=NOW, persist=False, run_id="dry")
+                self.assertEqual(opened.call_count, 1)
+                self.assertFalse(caught.exception.diagnostics["bulk_payload_download_began"])
+
+    def test_structural_metadata_failure_is_not_retried_or_persisted(self):
+        with tempfile.TemporaryDirectory() as temp, patch("urllib.request.urlopen",
+                return_value=Response(canonical_json({"object":"list", "data":[]}))) as opened:
+            root=Path(temp); (root/"canonical").mkdir()
+            canonical = root/"canonical/state.json"; canonical.write_bytes(self.canonical_bytes)
+            before = canonical.read_bytes()
+            with self.assertRaises(ProviderAcquisitionError) as caught:
+                run(root, payload_path=None, retrieved_at=NOW, persist=True, run_id="failed")
+            self.assertEqual(opened.call_count, 1)
+            self.assertEqual(canonical.read_bytes(), before)
+            self.assertFalse((root/"market").exists())
+            self.assertFalse(caught.exception.diagnostics["bulk_payload_download_began"])
+
     def test_redirects_are_accepted_by_default_opener(self):
         # urlopen normally consumes redirects; a final redirected response is transparent to fetch.
         with patch("urllib.request.urlopen", return_value=Response(b"[]")) as opened:
@@ -184,6 +264,12 @@ class Phase127Tests(unittest.TestCase):
         diagnostic = caught.exception.diagnostics
         self.assertEqual(diagnostic["response_content_type"], "text/html")
         self.assertNotIn("provider body", json.dumps(diagnostic))
+        with patch("urllib.request.urlopen", return_value=Response(b"{}", "application/octet-stream")):
+            with self.assertRaises(ProviderAcquisitionError) as caught:
+                fetch(METADATA_URL, diagnostics=new_diagnostics(),
+                      endpoint_category="scryfall_bulk_metadata", stage="metadata_response")
+        self.assertEqual(caught.exception.diagnostics["response_content_type"],
+                         "application/octet-stream")
 
     def test_invalid_metadata_is_sanitized_and_retains_no_payload(self):
         with tempfile.TemporaryDirectory() as temp, patch("urllib.request.urlopen", return_value=Response(b"{}")):
@@ -196,6 +282,9 @@ class Phase127Tests(unittest.TestCase):
         self.assertTrue(report["metadata_fetched"])
         self.assertFalse(report["download_uri_obtained"])
         self.assertFalse(report["payload_bytes_retained"])
+        serialized = json.dumps(report)
+        self.assertNotIn("https://", serialized)
+        self.assertNotIn("provider body", serialized)
 
     def test_workflow_reports_original_exit_and_always_uploads_artifact(self):
         workflow = (ROOT/".github/workflows/market-acquisition.yml").read_text()
