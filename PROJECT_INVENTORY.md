@@ -324,3 +324,11 @@ Added `src/query/service.py`, Phase 125 query tests, `docs/CANONICAL_QUERY_LAYER
 canonical Card/Product/Printing plus collection JSON CLI surfaces. The layer reuses the
 existing canonical repository/query engine and Phase 124 collection/deck services. It adds
 no canonical data, product, provider, pricing, simulation, recommendation, or AI integration.
+# Phase 127 inventory (2026-08-01)
+
+Added `src/market/scryfall.py`, `scripts/scryfall_market_acquisition.py`, the manual
+`market-acquisition.yml` workflow, Phase 127 tests, and focused Scryfall documentation.
+The outbound proxy blocked official API access with HTTP 403, so no production market
+observation or collection valuation was retained. Coverage is 0/379 promoted MB2
+Printings. Phase 119, canonical digest, Architecture v12, canonical contracts, and the
+absence of recommendation/AI providers remain unchanged.
