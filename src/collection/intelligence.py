@@ -283,3 +283,47 @@ def acquisition_priorities(comparisons: Iterable[Mapping[str, Any]]) -> dict:
                        "explanation":"missing copies + completion unlocked + shared decks + partial/playset bonuses - unresolved-evidence penalty"})
     output.sort(key=lambda x:(-Decimal(x["score"]),x["card_id"]))
     return {"schema_version":"acquisition-priorities-v1","price_independent":True,"priorities":output}
+
+
+def collection_value(snapshot: Mapping[str, Any], resolver: CanonicalCollectionResolver,
+                     market_repository) -> dict:
+    """Value holdings while preserving incomplete price and acquisition-cost coverage."""
+    dimensions = {name: {} for name in ("set", "rarity", "finish", "storage_location")}
+    market_known = Decimal(0); cost_known = Decimal(0)
+    market_missing = cost_missing = 0; providers = set(); timestamps = []; confidences = []
+    for item in snapshot.get("resolved_holdings", []):
+        row = item["row"]; quantity = int(row["quantity"]); printing = resolver.printings[item["printing_id"]]
+        candidates = market_repository.observations(entity_type="printing", entity_id=item["printing_id"])
+        matching = [x for x in candidates if x.finish in (None, row.get("finish"))]
+        observation = sorted(matching, key=lambda x: (x.observed_at, x.observation_id))[-1] if matching else None
+        value = observation.price * quantity if observation and observation.price is not None else None
+        cost = Decimal(str(row["acquisition_price"])) * quantity if row.get("acquisition_price") is not None else None
+        if value is None: market_missing += quantity
+        else:
+            market_known += value; providers.add(observation.provider); timestamps.append(observation.observed_at)
+            if observation.provider_confidence is not None: confidences.append(observation.provider_confidence)
+        if cost is None: cost_missing += quantity
+        else: cost_known += cost
+        labels = {"set": printing.get("set_code") or "unknown", "rarity": printing.get("rarity") or "unknown",
+                  "finish": row.get("finish") or "unknown", "storage_location": row.get("storage_location") or "unknown"}
+        for dimension, label in labels.items():
+            bucket = dimensions[dimension].setdefault(label, {"known": Decimal(0), "missing": 0})
+            if value is None: bucket["missing"] += quantity
+            else: bucket["known"] += value
+    def amount(known, missing):
+        return {"status": "unknown" if missing else "known", "amount": None if missing else format(known, "f"),
+                "known_amount": format(known, "f"), "currency": "USD", "missing_quantity": missing}
+    groups = {dimension: {label: amount(bucket["known"], bucket["missing"])
+        for label, bucket in sorted(values.items())} for dimension, values in dimensions.items()}
+    gain_known = market_known - cost_known
+    gain = ({"status": "unknown", "amount": None, "known_component": format(gain_known, "f"), "currency": "USD",
+             "missing_market_quantity": market_missing, "missing_cost_quantity": cost_missing}
+            if market_missing or cost_missing else
+            {"status": "known", "amount": format(gain_known, "f"), "currency": "USD"})
+    return {"schema_version": "collection-market-value-v1", "snapshot_id": snapshot.get("snapshot_id"),
+        "total_market_value": amount(market_known, market_missing), "acquisition_cost": amount(cost_known, cost_missing),
+        "unrealized_gain_loss": gain, "value_by_set": groups["set"], "value_by_rarity": groups["rarity"],
+        "value_by_finish": groups["finish"], "value_by_storage_location": groups["storage_location"],
+        "provider": sorted(providers), "timestamp": max(timestamps).isoformat().replace("+00:00", "Z") if timestamps else None,
+        "confidence": format(min(confidences), "f") if confidences else None,
+        "provenance": [{"observation_store": str(market_repository.root), "append_only": True}], "canonical_write": False}

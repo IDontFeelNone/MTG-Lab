@@ -1,3 +1,7 @@
+# Phase 126 — Market Intelligence Foundation (2026-08-01)
+
+Added provider-neutral immutable market observations, separate append-only history, deterministic Decimal analytics, read-only market queries, collection valuation, and JSON CLI commands. Phase 125 is merged; Architecture v12 and canonical bytes/contracts are unchanged; Phase 119 remains the sole production promotion. No recommendation, purchase/sale advice, investment ranking, portfolio analysis, AI reasoning, provider-specific analytics, or fabricated price was added.
+
 # Phase 123 — trusted MTGJSON refresh blocked (2026-08-01)
 
 - Added checksum-verifying, immutable, idempotent AllPrintings snapshot registration.

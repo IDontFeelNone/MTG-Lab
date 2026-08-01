@@ -1,3 +1,7 @@
+# Phase 126 roadmap update
+
+The market data and analytics foundation is complete. Any future recommendation policy requires separate approval and must remain downstream and read-only. Phase 126 contains no recommendations, investment rankings, portfolio analysis, or AI reasoning.
+
 # Phase 123 roadmap update
 
 Phase 123 implemented the generic immutable snapshot-registration seam but the live provider refresh is blocked by HTTP 403 in the execution environment. The immediate roadmap item remains a future trusted provider refresh and exact-one availability rerun. Automatic promotion remains conditional on one complete target and every existing generic gate; Architecture v12 is unchanged.

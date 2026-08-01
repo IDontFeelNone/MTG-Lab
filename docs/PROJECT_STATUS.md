@@ -1,3 +1,7 @@
+# Phase 126 status
+
+Market Intelligence Foundation is implemented. Phase 125 is merged at `b71f961`; Phase 119 remains the sole production promotion at digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`. Architecture v12, canonical facts/contracts, Canonical Query Layer, Collection Intelligence, and generic automatic updates remain unchanged. Canonical facts still have no pricing. No recommendation engine, portfolio analysis, advice, or AI reasoning exists.
+
 # Phase 123 status — provider acquisition blocked
 
 Main contains merged Phase 122. Phase 119 remains the sole production canonical promotion and canonical digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f` is unchanged. The newest trusted provider version could not be determined because all approved MTGJSON endpoints returned HTTP 403. Consequently no refreshed checksum, evidence identity, target result, candidate, batch, descriptor, promotion, branch, PR, checks, or auto-merge state exists. Architecture v12 and canonical contracts remain unchanged.
