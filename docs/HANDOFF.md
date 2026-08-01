@@ -1,3 +1,7 @@
+# Phase 114A handoff
+
+After this PR is green and merged, dispatch the exact dry run in `GITHUB_PRODUCTION_EVIDENCE_INTAKE.md`, inspect payload counts/digests and both false authority flags, then dispatch non-dry-run to create the dedicated evidence-revision PR. Do not overwrite run `30663562841`; do not review candidates or merge the evidence revision until its Actions are green. Review, approval, and promotion remain separately authorized future work.
+
 # Phase 113A handoff
 
 Merge this state-aware gate first, then rerun evidence-intake PR #86. The tests accept main's

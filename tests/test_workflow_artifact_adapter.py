@@ -34,10 +34,16 @@ class WorkflowArtifactAdapterTests(unittest.TestCase):
         members, batches = {}, []
         for code, name, unit in (("MB2", "Mystery Booster 2", "000334-mb2"),
                                  ("MSH", "Marvel Super Heroes", "000373-msh")):
-            candidate_ids = [f"candidate-{code.lower()}"]
+            candidate_ids = [f"card-{code.lower()}", f"printing-{code.lower()}"]
             digest = identity(candidate_ids)
+            card_reference = f"oracle-{code.lower()}"
             shard = encoded({"set_code": code, "candidates": [
-                {"candidate_identifier": candidate_ids[0]}]})
+                {"candidate_identifier": candidate_ids[0], "entity_type": "card",
+                 "mapped_fields": {"card_reference": card_reference}},
+                {"candidate_identifier": candidate_ids[1], "entity_type": "printing",
+                 "mapped_fields": {"card_reference": card_reference, "set_code": code.lower()}},
+                {"candidate_identifier": f"unrelated-{code.lower()}", "entity_type": "finish",
+                 "mapped_fields": {"value": "foil"}}]})
             shard_path = f"{root}/candidate-shards/{unit}.json"
             members[shard_path] = shard
             batch_id = f"{code.lower()}-batch-000001"
@@ -110,6 +116,11 @@ class WorkflowArtifactAdapterTests(unittest.TestCase):
         self.assertFalse(manifest["canonical_write"])
         self.assertFalse(manifest["promotion_performed"])
         self.assertTrue(all(x.startswith("review_batches/") for x in manifest["review_bundle_paths"]))
+        self.assertEqual(manifest["retained_payload_count"], 4)
+        payload = json.loads((self.root / "one/review_payloads/mb2/mb2-batch-000001.json").read_text())
+        self.assertEqual([item["candidate_identifier"] for item in payload["candidate_payloads"]],
+                         payload["candidate_ids"])
+        self.assertNotIn("unrelated-mb2", str(payload))
 
     def test_normalized_output_passes_unchanged_phase_111_intake_and_is_idempotent(self):
         archive = self.fixture()
@@ -118,10 +129,12 @@ class WorkflowArtifactAdapterTests(unittest.TestCase):
         digest = hashlib.sha256(normalized.read_bytes()).hexdigest()
         for name in ("repo-one", "repo-two"):
             repository = ProductionEvidenceRepository(self.root / name)
-            repository.intake(normalized, digest, RUN)
-            self.assertTrue(repository.verify(RUN)["valid"])
+            identity_value = f"{RUN}-review-payload-v2"
+            repository.intake(normalized, digest, identity_value)
+            self.assertTrue(repository.verify(identity_value)["valid"])
         with self.assertRaisesRegex(EvidenceError, "duplicate production run"):
-            ProductionEvidenceRepository(self.root / "repo-one").intake(normalized, digest, RUN)
+            ProductionEvidenceRepository(self.root / "repo-one").intake(
+                normalized, digest, f"{RUN}-review-payload-v2")
 
     def test_safe_unique_paths_are_required(self):
         archive = self.fixture()
@@ -175,6 +188,34 @@ class WorkflowArtifactAdapterTests(unittest.TestCase):
         with self.assertRaisesRegex(EvidenceError, "internal hash mismatch"):
             self.normalize(self.fixture(altered), "altered-shard")
 
+    def test_missing_duplicate_and_unresolved_payloads_fail_closed(self):
+        def edit_shard(members, root, edit):
+            path = f"{root}/candidate-shards/000334-mb2.json"
+            value = json.loads(members[path]); edit(value["candidates"]); members[path] = encoded(value)
+            ledger_path = f"{root}/completed-sets.json"
+            ledger = json.loads(members[ledger_path])
+            ledger["sets"]["000334-mb2"]["sha256"] = hashlib.sha256(members[path]).hexdigest()
+            members[ledger_path] = encoded(ledger)
+            package_path = next(p for p in members if p.endswith("/MB2/mb2-batch-000001/review-package.json"))
+            package = json.loads(members[package_path])
+            package["candidate_payload_references"][0].update(
+                sha256=hashlib.sha256(members[path]).hexdigest(), byte_length=len(members[path]))
+            members[package_path] = encoded(package)
+            native_manifest = package_path.replace("review-package.json", "manifest.json")
+            native = json.loads(members[native_manifest])
+            native["review_package_sha256"] = hashlib.sha256(members[package_path]).hexdigest()
+            members[native_manifest] = encoded(native)
+        cases = [
+            (lambda values: values.pop(0), "lacks a payload"),
+            (lambda values: values.append(dict(values[0])), "duplicate candidate payload"),
+            (lambda values: values[1]["mapped_fields"].__setitem__("card_reference", "missing"),
+             "cannot be resolved"),
+        ]
+        for index, (edit, message) in enumerate(cases):
+            def mutation(members, batches, root, selected=edit): edit_shard(members, root, selected)
+            with self.subTest(case=index), self.assertRaisesRegex(EvidenceError, message):
+                self.normalize(self.fixture(mutation), f"payload-failure-{index}")
+
     def test_pending_status_and_target_isolation_are_required(self):
         def edit_package(members, root, edit):
             path = next(path for path in members if path.endswith("/MB2/mb2-batch-000001/review-package.json"))
@@ -204,9 +245,10 @@ class WorkflowArtifactAdapterTests(unittest.TestCase):
         self.assertNotEqual(first["normalized_zip_sha256"], second["normalized_zip_sha256"])
         repository = ProductionEvidenceRepository(self.root / "collision-repo")
         first_path, second_path = Path(first["normalized_archive"]), Path(second["normalized_archive"])
-        repository.intake(first_path, hashlib.sha256(first_path.read_bytes()).hexdigest(), RUN)
+        evidence_id = f"{RUN}-review-payload-v2"
+        repository.intake(first_path, hashlib.sha256(first_path.read_bytes()).hexdigest(), evidence_id)
         with self.assertRaisesRegex(EvidenceError, "production run identity collision"):
-            repository.intake(second_path, hashlib.sha256(second_path.read_bytes()).hexdigest(), RUN)
+            repository.intake(second_path, hashlib.sha256(second_path.read_bytes()).hexdigest(), evidence_id)
 
 
 if __name__ == "__main__":

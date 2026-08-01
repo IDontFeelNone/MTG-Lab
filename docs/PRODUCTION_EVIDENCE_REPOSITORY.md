@@ -1,3 +1,9 @@
+# Phase 114A — review-complete evidence revisions
+
+Main contains merged Phase 113A (`911d944`), merged intake PR #86 (`4d5389d`), and immutable retained run `30663562841`. That v1 run is not overwritten. Adapter v2 creates the derived identity `30663562841-review-payload-v2`, tied to the authenticated archive, workflow run, source digest, adapter version, and normalized lineage digest. Identical repeated intake is rejected as an already-retained identity; different bytes collide and fail closed.
+
+Each v2 batch has a separate `review_payloads/<target>/<batch>.json` containing only its candidate records in candidate-ID order, an ID-to-array-index map, payload digest, exact source-shard path/digest/size, target code/name, entity types in the records, dependency closure, source lineage, provenance/original source locators, and false write/promotion flags. Both the root manifest and batch index inventory payload path, size, and SHA-256. The repository independently checks those values and one-to-one membership. No full corpus or SQLite state is allowed. Architecture v12 and canonical contracts are unchanged.
+
 # Phase 112B durable-persistence gate
 
 Successful normalization and repository verification are necessary but not durable persistence. The reported false dispatch did not run any Git or pull-request stage, so run `30663562841` remains absent from the live Production Evidence Repository. Phase 112B makes success require a pushed, non-force-updated evidence commit plus an API-verified open PR whose changes are limited to the retained run and deterministic production-runs index. Existing remote state is reusable only when byte-identical. Canonical writes and promotion remain forbidden.

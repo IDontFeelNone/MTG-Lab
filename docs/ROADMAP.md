@@ -1,3 +1,7 @@
+# Phase 114A roadmap update
+
+Bounded, independently reviewable candidate retention is implemented without duplicating the source corpus. The next gate is a green authenticated intake revision for run `30663562841` and review of its evidence-only PR. Only after that revision is merged may a separately authorized phase inspect one MB2 batch; approval and promotion remain later gates.
+
 # Phase 113A roadmap update
 
 The evidence gate now spans the transition from Phase 113's historically absent retained run to

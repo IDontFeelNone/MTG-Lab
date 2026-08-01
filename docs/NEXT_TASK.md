@@ -1,3 +1,7 @@
+# Next task after Phase 114A
+
+Rerun authenticated production-evidence intake for workflow run `30663562841` into derived identity `30663562841-review-payload-v2`. Verify exact bounded MB2/MSH payload coverage and the evidence-only PR. Withhold merge until GitHub Actions are green. Candidate review, approval, promotion, and canonical writes are not part of that rerun.
+
 # Next task after Phase 113A
 
 Rerun PR #86 only after Phase 113A merges. Require its merge-result checks to validate retained

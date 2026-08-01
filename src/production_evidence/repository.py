@@ -30,11 +30,11 @@ def _read_json(path: Path) -> dict:
 class ProductionEvidenceRepository:
     """Repository-owned immutable evidence, deliberately separate from canonical data."""
 
-    SCHEMA_VERSION = "1.0.0"
+    SCHEMA_VERSION = "2.0.0"
     REQUIRED = {"metadata.json", "batch_index.json", "lineage/source.json"}
     ALLOWED_TOP_LEVEL = {
         "metadata.json", "batch_index.json", "review_batches", "findings",
-        "dependency_reports", "lineage", "summaries",
+        "dependency_reports", "lineage", "summaries", "review_payloads",
     }
 
     def __init__(self, data_root: Path | str = Path("data")):
@@ -71,11 +71,14 @@ class ProductionEvidenceRepository:
             manifest = json.loads(members["manifest.json"])
         except (UnicodeDecodeError, json.JSONDecodeError) as error:
             raise EvidenceError(f"invalid manifest: {error}") from error
-        if not isinstance(manifest, dict) or manifest.get("schema_version") != self.SCHEMA_VERSION:
+        if not isinstance(manifest, dict) or manifest.get("schema_version") not in {"1.0.0", self.SCHEMA_VERSION}:
             raise EvidenceError("unsupported or missing evidence manifest schema_version")
         workflow = manifest.get("workflow")
-        if not isinstance(workflow, dict) or str(workflow.get("run_id")) != str(run_id):
+        if not isinstance(workflow, dict):
             raise EvidenceError("workflow run identity mismatch")
+        evidence_identity = manifest.get("evidence_identity", workflow.get("run_id"))
+        if str(evidence_identity) != str(run_id):
+            raise EvidenceError("production evidence run identity mismatch")
         if not workflow.get("workflow_name") or not workflow.get("repository") or not workflow.get("commit_sha"):
             raise EvidenceError("incomplete workflow identity")
         source = manifest.get("source")
@@ -117,7 +120,7 @@ class ProductionEvidenceRepository:
             metadata = _read_json(staging / "metadata.json")
             batches = _read_json(staging / "batch_index.json")
             lineage = _read_json(staging / "lineage/source.json")
-            if str(metadata.get("run_id")) != str(run_id):
+            if str(metadata.get("run_id")) != str(workflow.get("run_id")):
                 raise EvidenceError("metadata workflow run identity mismatch")
             if metadata.get("source_dataset_id") != source["dataset_id"] or metadata.get("source_sha256") != source["sha256"]:
                 raise EvidenceError("metadata source lineage mismatch")
@@ -126,6 +129,7 @@ class ProductionEvidenceRepository:
             entries = batches.get("batches")
             if not isinstance(entries, list):
                 raise EvidenceError("batch index batches list is required")
+            referenced_payloads = set()
             for batch in entries:
                 required = {"batch_id", "target_product", "candidate_ids_sha256", "bundle_path", "bundle_sha256"}
                 if not isinstance(batch, dict) or not required <= set(batch):
@@ -144,6 +148,49 @@ class ProductionEvidenceRepository:
                     "deterministic_digests"}
                 if not isinstance(bundle, dict) or not bundle_fields <= set(bundle):
                     raise EvidenceError(f"incomplete review bundle: {bundle_path}")
+                if manifest.get("schema_version") == self.SCHEMA_VERSION:
+                    payload_path = str(batch.get("payload_path", ""))
+                    referenced_payloads.add(payload_path)
+                    reference = bundle.get("review_payload")
+                    if payload_path not in members or not isinstance(reference, dict):
+                        raise EvidenceError("missing retained review payload")
+                    payload_bytes = members[payload_path]
+                    if (reference != {"path": payload_path, "sha256": _digest(payload_bytes),
+                                      "size": len(payload_bytes)}
+                            or batch.get("payload_sha256") != _digest(payload_bytes)
+                            or batch.get("payload_size") != len(payload_bytes)):
+                        raise EvidenceError("candidate payload digest mismatch")
+                    payload = json.loads(payload_bytes)
+                    ids, records = payload.get("candidate_ids"), payload.get("candidate_payloads")
+                    if not isinstance(ids, list) or not isinstance(records, list):
+                        raise EvidenceError("invalid retained review payload")
+                    actual_ids = [item.get("candidate_identifier") for item in records]
+                    if len(set(ids)) != len(ids) or actual_ids != ids:
+                        raise EvidenceError("candidate-ID/payload correspondence mismatch")
+                    expected_map = {identifier: index for index, identifier in enumerate(ids)}
+                    if payload.get("candidate_id_to_payload_index") != expected_map:
+                        raise EvidenceError("candidate payload deterministic mapping mismatch")
+                    if _digest(json.dumps(records, sort_keys=True, separators=(",", ":"),
+                                          ensure_ascii=False).encode()) != payload.get("candidate_payload_digest"):
+                        raise EvidenceError("candidate payload digest mismatch")
+                    if (payload.get("target_set_code") != batch.get("target_product")
+                            or not payload.get("target_set_name")):
+                        raise EvidenceError("target contamination in retained payload")
+                    if not payload.get("source_candidate_shards") or not payload.get("source_lineage") \
+                            or not payload.get("provenance"):
+                        raise EvidenceError("payload provenance is missing")
+                    if payload.get("canonical_write") is not False \
+                            or payload.get("promotion_performed") is not False:
+                        raise EvidenceError("retained payload grants write or promotion authority")
+                    card_refs = {item.get("mapped_fields", {}).get("card_reference") for item in records
+                                 if item.get("entity_type") == "card"}
+                    if any(item.get("mapped_fields", {}).get("card_reference") not in card_refs
+                           for item in records if item.get("entity_type") == "printing"):
+                        raise EvidenceError("Card-to-Printing reference cannot be resolved")
+            if manifest.get("schema_version") == self.SCHEMA_VERSION:
+                payload_members = {name for name in members if name.startswith("review_payloads/")}
+                if payload_members != referenced_payloads:
+                    raise EvidenceError("extra or missing retained review payload")
 
             destination = self.root / str(run_id)
             tree_digest = self._tree_digest(staging)

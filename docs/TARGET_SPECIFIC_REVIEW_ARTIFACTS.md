@@ -1,3 +1,7 @@
+# Phase 114A — bounded candidate payload contract
+
+A target batch is independently reviewable only when its retained payload contains exactly the ordered candidate-ID list—no missing, duplicate, extra, or cross-target records—and authenticates the source shard before extracting the subset. Card and Printing candidates retain their exact mapped fields and Printing `card_reference` must resolve to a retained Card. Payload provenance, original JSON locators carried by the source package, dependencies, entity type, source lineage, and exact target identity are preserved without inference. Full candidate shards are verified but not copied.
+
 # Phase 110A — Target-specific review artifacts
 
 ## Baseline and boundary
