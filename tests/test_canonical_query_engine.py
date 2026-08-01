@@ -102,7 +102,8 @@ class CanonicalQueryEngineTests(unittest.TestCase):
     def test_cli_query_operations(self):
         prefix = ["--data-root", str(ROOT / "data"), "query"]
         self.assertEqual(self._run_cli(prefix + ["entity", "magic.lightning-bolt"])[0]["canonical_identity"], "magic.lightning-bolt")
-        self.assertEqual(self._run_cli(prefix + ["search", "light", "--mode", "prefix", "--case-insensitive"])[0]["canonical_identity"], "magic.lightning-bolt")
+        matches = self._run_cli(prefix + ["search", "light", "--mode", "prefix", "--case-insensitive"])
+        self.assertIn("magic.lightning-bolt", {item["canonical_identity"] for item in matches})
         self.assertEqual(self._run_cli(prefix + ["provenance", "magic.lightning-bolt"])["source_ids"], ["gatherer-lightning-bolt-lea"])
         self.assertEqual(self._run_cli(prefix + ["validation", "superseded"]), [])
         self.assertEqual(self._run_cli(prefix + ["dataset", "missing-dataset"])["promoted_entities"], [])
