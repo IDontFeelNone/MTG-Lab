@@ -1,3 +1,7 @@
+# Phase 121 — synthetic validation complete
+
+All sixteen automatic-update stages succeeded for isolated synthetic target `SYN`; the resulting fixture-only state contained 1 Set, 2 Cards, 2 Printings, 1 Identifier, and 2 Finishes and digest `47abe0658ad434f6485148592559a973a6f8f14694455a89cb0cb29b5b8e9327`. Recovery resumed eight authenticated checkpoints, replay was byte-idempotent, conflicting replay failed closed, and rollback planning was non-executing and human-gated. All requested negative and mocked GitHub persistence cases pass. The real production digest remains `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`; Phase 119 is still the sole promotion, with no second MB2 batch or MSH/Marvel data. Architecture v12/contracts remain unchanged.
+
 # Phase 120 — implementation complete
 
 The reusable pipeline, JSON CLI, MB2 completed-promotion reference, protected PR/auto-merge workflow, recovery rules, documentation, and tests are implemented. Phase 119 remains the only MB2 promotion: 1,000 candidates (384 Cards, 379 Printings, 235 Identifiers, 2 Finishes), post-state `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`. No MSH or second MB2 batch was promoted. Architecture v12/contracts are unchanged. Merge awaits green required Actions checks.

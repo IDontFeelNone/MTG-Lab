@@ -1,3 +1,7 @@
+# Next task after Phase 121
+
+Stop after this validation. After protected merge, the remaining live-update blockers are selection and approval of a real future set, terms-compliant trusted evidence acquisition/retention, complete candidate review and identifier/dependency resolution, a reviewed descriptor with exact current pre-state, and confirmation that repository auto-merge/required-check settings are enabled. A live dispatch is a separate phase. Do not process another MB2 batch or MSH/Marvel as part of Phase 121.
+
 # Next task after Phase 120
 
 After a green protected merge, operate the standard lifecycle for the next bounded trusted set: retain evidence, add its descriptor, dispatch the workflow, and observe checks/auto-merge. Stop on conflict, ambiguity, failed validation, drift, architecture/contract questions, destructive work, or rollback.

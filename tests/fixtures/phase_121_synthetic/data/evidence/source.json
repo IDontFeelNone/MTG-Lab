@@ -1,0 +1,7 @@
+{
+  "dataset_identity": "synthetic-magic-set-2026-08-01",
+  "immutable": true,
+  "provider": "synthetic-trusted-provider",
+  "records": 8,
+  "schema_version": "synthetic-source-v1"
+}

@@ -1,3 +1,7 @@
+# Phase 121 handoff
+
+Review the synthetic-only validation and withhold merge until required GitHub Actions checks are green. `SYN` proved the standard engine without an MB2 branch: sixteen stages, interruption recovery, immutable audit, idempotent replay, conflicting-replay rejection, and non-executing rollback plan all passed in temporary roots. Before a live new set, retain licensed trusted-provider evidence, independently review its complete candidates and provenance, approve its bounded descriptor, confirm repository settings/required checks, and run through the protected workflow. Do not copy the synthetic fixture into production data.
+
 # Phase 120 handoff
 
 Review the Phase 120 PR and allow protected auto-merge only after required Actions checks are green. Future routine trusted sets use retained evidence plus a descriptor, not engine edits or recurring signatures. Human action remains required for conflicts, ambiguity, validation failure, drift, contract change, destructive action, or rollback.

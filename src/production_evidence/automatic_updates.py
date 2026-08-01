@@ -184,6 +184,13 @@ class AutomaticCanonicalUpdate:
     def _stage_evidence_normalization(self, c):
         path, payload, raw = self._payload(); candidates = payload["candidate_payloads"]
         ids = payload.get("candidate_ids", [x["candidate_identifier"] for x in candidates])
+        expected_payload = self.config["integrity"].get("candidate_payload_sha256")
+        if expected_payload and digest(raw) != expected_payload:
+            raise EvidenceError("candidate payload checksum mismatch")
+        if not ids or any(not isinstance(value, str) or not value for value in ids):
+            raise EvidenceError("candidate inventory contains a missing candidate")
+        if len(ids) != len(set(ids)):
+            raise EvidenceError("candidate inventory contains a duplicate candidate")
         if ids != [x["candidate_identifier"] for x in candidates]: raise EvidenceError("candidate inventory/order mismatch")
         if digest(ids) != self.descriptor.candidate_digest: raise EvidenceError("candidate digest mismatch")
         return {"payload": str(path.relative_to(self.root)), "payload_sha256": digest(raw), "candidate_count": len(ids)}
@@ -209,6 +216,8 @@ class AutomaticCanonicalUpdate:
     def _stage_candidate_review(self, c):
         _, payload, _ = self._payload(); counts = {}
         for row in payload["candidate_payloads"]:
+            if not row.get("provenance"):
+                raise EvidenceError("candidate is missing explicit provenance")
             state = row.get("final_classification", "approved" if row.get("validation_state") == "validated" else "unresolved")
             counts[state] = counts.get(state, 0) + 1
         forbidden = set(counts) - set(self.config["policy"]["permitted_final_classifications"])
@@ -282,6 +291,9 @@ class AutomaticCanonicalUpdate:
     def _stage_immutable_promotion_audit(self, c):
         path = self.data / self.config["artifacts"]["promotion_audit"]
         if not path.is_file(): raise EvidenceError("immutable promotion audit missing")
+        value = json.loads(path.read_text()); supplied = value.get("audit_digest")
+        body = {key: item for key, item in value.items() if key != "audit_digest"}
+        if not supplied or supplied != digest(body): raise EvidenceError("immutable audit digest mismatch")
         return {"path": str(path.relative_to(self.root)), "sha256": digest(path.read_bytes()), "immutable": True}
 
     def _stage_canonical_post_state_verification(self, c):
@@ -320,3 +332,18 @@ class GitHubPersistence:
                 return {"reused": True, "url": value["url"]}
             if result.returncode: raise EvidenceError(f"persistence command failed: {' '.join(command)}")
         return {"created": True}
+
+    def enable_auto_merge(self, pr: str, branch: str, base: str, head_oid: str) -> dict:
+        """Verify the protected PR boundary and required checks before requesting auto-merge."""
+        command = ["gh", "pr", "view", pr, "--json", "headRefName,baseRefName,headRefOid,statusCheckRollup"]
+        result = self.run(command, check=True, text=True, capture_output=True)
+        value = json.loads(result.stdout)
+        if (value.get("headRefName"), value.get("baseRefName"), value.get("headRefOid")) != (branch, base, head_oid):
+            raise EvidenceError("pull request merge boundary mismatch")
+        checks = value.get("statusCheckRollup") or []
+        if not checks or any(check.get("conclusion") != "SUCCESS" for check in checks):
+            raise EvidenceError("required checks are not green")
+        merge = ["gh", "pr", "merge", pr, "--auto", "--squash", "--delete-branch=false"]
+        completed = self.run(merge, check=False, text=True, capture_output=True)
+        if completed.returncode: raise EvidenceError("auto-merge request failed")
+        return {"auto_merge_requested": True, "eligible": True, "branch_protection_bypass": False}
