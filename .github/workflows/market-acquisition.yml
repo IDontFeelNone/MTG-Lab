@@ -37,7 +37,23 @@ jobs:
           RUN_ID="scryfall-mb2-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           printf '%s' "$STAMP" > market-acquisition-stamp.txt
           printf '%s' "$RUN_ID" > market-acquisition-run-id.txt
+          set +e
           python scripts/scryfall_market_acquisition.py --data-root data --retrieved-at "$STAMP" --run-id "$RUN_ID" --retain-payload market-acquisition-source.json > market-acquisition-dry-run.json
+          STATUS=$?
+          set -e
+          cat market-acquisition-dry-run.json
+          exit "$STATUS"
+      - name: Upload acquisition diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-acquisition-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            market-acquisition-dry-run.json
+            market-acquisition-stamp.txt
+            market-acquisition-run-id.txt
+          if-no-files-found: warn
+          retention-days: 14
       - name: Verify dry run and optionally persist
         env:
           PYTHONPATH: src

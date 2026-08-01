@@ -11,14 +11,26 @@ from datetime import datetime, timezone
 from decimal import Decimal
 from unittest.mock import patch
 import urllib.error
+from email.message import Message
 
 from market import MarketObservationRepository, MarketValidationError
 from market.scryfall import (ProviderAcquisitionError, ProviderRateLimitError,
     ScryfallMarketAdapter, canonical_json, load_payload, sha256_bytes)
-from scripts.scryfall_market_acquisition import fetch, run
+from scripts.scryfall_market_acquisition import (METADATA_URL, MAX_ATTEMPTS, fetch,
+    new_diagnostics, run)
 
 ROOT = Path(__file__).parents[1]
 NOW = datetime(2026, 8, 1, 12, tzinfo=timezone.utc)
+
+
+class Response:
+    def __init__(self, payload=b"{}", content_type="application/json", status=200):
+        self.payload, self.status = payload, status
+        self.headers = Message(); self.headers["Content-Type"] = content_type
+    def __enter__(self): return self
+    def __exit__(self, *args): return False
+    def getcode(self): return self.status
+    def read(self): return self.payload
 
 
 class Phase127Tests(unittest.TestCase):
@@ -115,11 +127,97 @@ class Phase127Tests(unittest.TestCase):
                 MarketObservationRepository(root/"market/observations").load(path)
 
     def test_provider_failure_rate_limit_and_secret_redaction(self):
-        with patch("urllib.request.urlopen", side_effect=urllib.error.HTTPError("https://x?token=SECRET",429,"",{},None)):
+        with patch("urllib.request.urlopen", side_effect=urllib.error.HTTPError("https://x?token=SECRET",429,"",{},None)), patch("time.sleep"):
             with self.assertRaisesRegex(ProviderRateLimitError, "429"): fetch("https://x?token=SECRET")
-        with patch("urllib.request.urlopen", side_effect=urllib.error.URLError("token=SECRET")):
+        with patch("urllib.request.urlopen", side_effect=urllib.error.URLError("token=SECRET")), patch("time.sleep"):
             with self.assertRaises(ProviderAcquisitionError) as caught: fetch("https://x?token=SECRET")
         self.assertNotIn("SECRET", str(caught.exception))
+
+    def test_official_metadata_contract_and_download_uri(self):
+        self.assertEqual(METADATA_URL, "https://api.scryfall.com/bulk-data/default_cards")
+        metadata = canonical_json({"object":"bulk_data", "type":"default_cards",
+            "download_uri":"https://data.scryfall.io/default-cards/test.json",
+            "updated_at":"2026-08-01T10:00:00Z"})
+        with tempfile.TemporaryDirectory() as temp, patch("urllib.request.urlopen",
+                side_effect=[Response(metadata), Response(canonical_json([self.record]))]) as opened:
+            root=Path(temp); (root/"canonical").mkdir(); (root/"canonical/state.json").write_bytes(self.canonical_bytes)
+            report = run(root, payload_path=None, retrieved_at=NOW, persist=False, run_id="dry")
+        self.assertEqual(opened.call_count, 2)
+        self.assertEqual(report["source_url"], "https://data.scryfall.io/default-cards/test.json")
+        self.assertTrue(report["acquisition_diagnostics"]["download_uri_obtained"])
+        self.assertTrue(report["acquisition_diagnostics"]["bulk_payload_download_began"])
+
+    def test_redirects_are_accepted_by_default_opener(self):
+        # urlopen normally consumes redirects; a final redirected response is transparent to fetch.
+        with patch("urllib.request.urlopen", return_value=Response(b"[]")) as opened:
+            self.assertEqual(fetch("https://api.scryfall.com/x", sleep=lambda _: None), b"[]")
+        self.assertEqual(opened.call_count, 1)
+
+    def test_permanent_403_and_404_are_not_retried(self):
+        for status in (403, 404):
+            diagnostic = new_diagnostics()
+            error = urllib.error.HTTPError("https://secret.invalid/?token=x", status, "", {}, None)
+            with self.subTest(status=status), patch("urllib.request.urlopen", side_effect=error) as opened:
+                with self.assertRaises(ProviderAcquisitionError) as caught:
+                    fetch("https://secret.invalid/?token=x", diagnostics=diagnostic, sleep=lambda _: None)
+            self.assertEqual(opened.call_count, 1)
+            self.assertEqual(caught.exception.diagnostics["http_status"], status)
+
+    def test_transient_5xx_retries_then_succeeds_or_exhausts(self):
+        failure = urllib.error.HTTPError("https://api.scryfall.com/x", 503, "", {}, None)
+        with patch("urllib.request.urlopen", side_effect=[failure, Response(b"[]")]) as opened:
+            self.assertEqual(fetch("https://api.scryfall.com/x", sleep=lambda _: None), b"[]")
+        self.assertEqual(opened.call_count, 2)
+        with patch("urllib.request.urlopen", side_effect=failure) as opened:
+            with self.assertRaises(ProviderAcquisitionError) as caught:
+                fetch("https://api.scryfall.com/x", sleep=lambda _: None)
+        self.assertEqual(opened.call_count, MAX_ATTEMPTS)
+        self.assertEqual(caught.exception.diagnostics["attempts"], MAX_ATTEMPTS)
+
+    def test_timeout_and_invalid_content_type_diagnostics(self):
+        with patch("urllib.request.urlopen", side_effect=TimeoutError), self.assertRaises(ProviderAcquisitionError) as caught:
+            fetch("https://api.scryfall.com/x", sleep=lambda _: None)
+        self.assertIsNone(caught.exception.diagnostics["http_status"])
+        with patch("urllib.request.urlopen", return_value=Response(b"provider body", "text/html")):
+            with self.assertRaises(ProviderAcquisitionError) as caught:
+                fetch("https://api.scryfall.com/x", sleep=lambda _: None)
+        diagnostic = caught.exception.diagnostics
+        self.assertEqual(diagnostic["response_content_type"], "text/html")
+        self.assertNotIn("provider body", json.dumps(diagnostic))
+
+    def test_invalid_metadata_is_sanitized_and_retains_no_payload(self):
+        with tempfile.TemporaryDirectory() as temp, patch("urllib.request.urlopen", return_value=Response(b"{}")):
+            root=Path(temp); (root/"canonical").mkdir(); (root/"canonical/state.json").write_bytes(self.canonical_bytes)
+            diagnostic = new_diagnostics()
+            with self.assertRaises(ProviderAcquisitionError) as caught:
+                run(root, payload_path=None, retrieved_at=NOW, persist=False, run_id="dry", diagnostics=diagnostic)
+        report = caught.exception.diagnostics
+        self.assertEqual(report["failing_stage"], "metadata_validation")
+        self.assertTrue(report["metadata_fetched"])
+        self.assertFalse(report["download_uri_obtained"])
+        self.assertFalse(report["payload_bytes_retained"])
+
+    def test_workflow_reports_original_exit_and_always_uploads_artifact(self):
+        workflow = (ROOT/".github/workflows/market-acquisition.yml").read_text()
+        self.assertIn("STATUS=$?", workflow)
+        self.assertIn('exit "$STATUS"', workflow)
+        self.assertIn("cat market-acquisition-dry-run.json", workflow)
+        self.assertIn("if: always()", workflow)
+        self.assertIn("actions/upload-artifact@v4", workflow)
+        self.assertLess(workflow.index("Upload acquisition diagnostics"),
+                        workflow.index("Verify dry run and optionally persist"))
+
+    def test_failed_cli_dry_run_writes_no_market_or_canonical_state(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp); (root/"canonical").mkdir(); (root/"canonical/state.json").write_bytes(self.canonical_bytes)
+            before=(root/"canonical/state.json").read_bytes()
+            with patch("urllib.request.urlopen", return_value=Response(b"{}")):
+                diagnostic = new_diagnostics()
+                with self.assertRaises(ProviderAcquisitionError):
+                    run(root, payload_path=None, retrieved_at=NOW, persist=False,
+                        run_id="failed", diagnostics=diagnostic)
+            self.assertEqual((root/"canonical/state.json").read_bytes(), before)
+            self.assertFalse((root/"market").exists())
 
     def test_cli_unknown_contract_and_no_recommendation_behavior(self):
         command = [sys.executable,"-m","mtglab","--data-root","data","market","printing",self.printing_id]

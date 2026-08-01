@@ -82,3 +82,11 @@ Action. First obtain the actual run artifact and verify its identities and count
 modify acquisition behavior until retained diagnostics establish a failure. Then persist the
 same validated payload, verify the bounded branch/PR/checks, and demonstrate queries and an
 isolated collection valuation. No second provider or recommendation work is authorized.
+
+# After Phase 127B
+
+Stop after Phase 127B. After review and merge, manually dispatch a nonpersistent Market
+acquisition dry run and inspect the retained structured report. Proceed to a separate
+`persist=true` dispatch only if the official payload, identities, counts, MB2 isolation, and
+digests validate. Any nonzero acquisition status or failed check is a hard stop before
+persistence. Do not substitute data, add a provider, or write canonical state.

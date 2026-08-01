@@ -104,3 +104,14 @@ execution proxy (HTTP 403), so workflow run/dry-run/PR/check state remains unver
 provider payload was fabricated. Production observations remain 0; coverage remains 0/379.
 Architecture v12/canonical contracts, canonical bytes, Phase 119 promotion authority,
 provider selection, and recommendation logic are unchanged.
+
+# Session state — Phase 127B
+
+Baseline `fc9a041` confirms Phase 127A merged. The concrete production failure was our
+hyphenated Scryfall metadata endpoint, which returned HTTP 404; it was neither a GitHub
+failure nor a Scryfall outage. Acquisition now uses only the official underscore endpoint
+and emits sanitized response-stage diagnostics through an always-uploaded artifact while
+preserving the command status. Permanent 4xx responses except 429 are not retried; 429,
+transient 5xx, timeout, and transport failures have three bounded attempts. No persistence,
+market observation, canonical mutation, provider substitution, or authorization process was
+performed.

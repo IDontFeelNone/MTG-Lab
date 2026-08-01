@@ -1,13 +1,13 @@
 # Scryfall MB2 Market Acquisition
 
-**Phase 127 status:** implementation complete; live acquisition blocked before response on
-2026-08-01. No production market observation was retained.
+**Phase 127B status:** provider acquisition and failure reporting repaired. No production
+market observation was fabricated or retained by this repair.
 
 ## Selection and access assessment
 
 Scryfall `default_cards` bulk data is the sole selected source. It is publicly accessible
 without credentials, explicitly downloadable through the official
-`https://api.scryfall.com/bulk-data/default-cards` endpoint, supplies stable card UUIDs,
+`https://api.scryfall.com/bulk-data/default_cards` endpoint, supplies stable card UUIDs,
 set/collector/language/finish fields, USD price fields, and an `updated_at` timestamp.
 Scryfall's API documentation requires clients to use the bulk endpoint for large
 downloads, identify their client, avoid excessive requests, link users back to Scryfall,
@@ -22,9 +22,13 @@ were not selected because the repository's approved endpoints are currently retu
 HTTP 403 and Scryfall gives a direct exact identifier already present on promoted MB2
 Printings. No page scraping is performed.
 
-The current container's outbound proxy rejected the official Scryfall API connection
-with HTTP 403 before an origin response. Therefore access was not fabricated or routed
-through an unofficial mirror. Exact retained coverage is **0 priced observations / 379
+Phase 127/127A used the incorrect path `bulk-data/default-cards` (hyphen). Scryfall's
+documented `type` and official endpoint path use `default_cards` (underscore), so the
+GitHub-hosted dry run reached Scryfall but received a permanent HTTP 404 before metadata.
+The root cause was our implementation, not GitHub Actions and not a Scryfall outage. The
+earlier local CONNECT-proxy HTTP 403 was an environment limitation and obscured this path
+error; it was not the GitHub-hosted response. No access was fabricated or routed through an
+unofficial mirror. Exact retained coverage is **0 priced observations / 379
 promoted MB2 Printings (0%)**, with zero matched, unmatched, ambiguous, or rejected live
 records because no provider payload was received. Collection valuation was not run:
 there are insufficient real retained prices. The CLI proofs consequently report
@@ -50,10 +54,22 @@ Run a dry run first:
 
 ```bash
 PYTHONPATH=src python scripts/scryfall_market_acquisition.py \
-  --data-root data --retrieved-at 2026-08-01T12:00:00Z --run-id scryfall-mb2-example
+  --data-root data --retrieved-at 2026-08-01T12:00:00Z \
+  --run-id scryfall-mb2-example \
+  --retain-payload market-acquisition-source.json \
+  > market-acquisition-dry-run.json
+STATUS=$?
+cat market-acquisition-dry-run.json
+exit "$STATUS"
 ```
 
-After inspecting it, rerun through the manual **Market acquisition** Action with
+The report contains only endpoint categories and response-stage facts—never request
+secrets, query strings, response bodies, or the provider payload. The Action captures the
+exit status, prints this JSON, uploads it under `if: always()`, then exits with the original
+status. Consequently a failed fetch cannot enter verification or persistence.
+
+Only after a successful report has been inspected should the manual **Market acquisition**
+Action be rerun with
 `persist=true`. One fetched payload is reused between dry-run and persistence. The
 workflow verifies schema, digests, mappings, MB2/promoted isolation, the complete test
 suite, changed-file boundaries, and every written observation. It retains diagnostics
@@ -101,3 +117,17 @@ missing-price observations in addition to mapping outcome counts. These fields m
 retained run sufficient to state exact coverage without deriving it from workflow logs.
 Lifecycle tests accept either an empty production store or a store whose retained files pass
 content/path verification and the Scryfall/printing/USD boundary.
+
+
+## Phase 127B retry and stop contract
+
+Redirects are handled by the standard HTTP opener. HTTP 429, 5xx responses, timeouts, and
+transport failures receive at most three total attempts with deterministic one- then
+ two-second backoff. Other 4xx responses are permanent and receive no retry. Metadata and
+payload responses require an accepted JSON/octet-stream content type. The diagnostic reports
+the failing stage, endpoint category, status/content type when available, metadata and URI
+progress, download start, and byte retention without including response bodies.
+
+A dry run must stop before persistence whenever its process status is nonzero, its report is
+invalid, the official metadata lacks a secure `download_uri`, or an integrity/isolation check
+fails. Phase 127B performs no live persistence, canonical write, valuation, or promotion.
