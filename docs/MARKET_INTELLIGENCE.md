@@ -1,5 +1,16 @@
 # Market Intelligence Foundation
 
+## Phase 127D acquisition status
+
+The real post-127C dry run parsed the official direct descriptor and timestamp but rejected
+the download before transfer. Its exact-host validator allowed only `data.scryfall.io`, while
+the selected official descriptor used another true `scryfall.io` static-file subdomain.
+Phase 127D uses a label-aware, official-metadata-derived `scryfall.io` subdomain boundary plus
+HTTPS/default-port/no-userinfo/absolute-path/no-fragment constraints and safe property-only
+diagnostics. Query presence is permitted only from the selected official descriptor and its
+contents are never logged. The next operation is one `persist=false` Action dry run;
+production observations, canonical data, promotion, and MB2 coverage remain unchanged at 0/379.
+
 ## Phase 127C acquisition status
 
 Phase 127B's endpoint correction reached Scryfall and received JSON metadata, confirming the remaining failure was local response-shape parsing rather than access or authorization. Phase 127C accepts the official direct and list bulk-metadata forms and still fails closed before persistence. No live payload, price observation, canonical write, or promotion has occurred; MB2 coverage remains 0/379. The next operation is one reviewed nonpersistent workflow dry run after merge.

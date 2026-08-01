@@ -1,22 +1,28 @@
 # Scryfall MB2 Market Acquisition
 
-**Phase 127C status:** metadata-shape parsing repaired. No production market observation
-was fabricated or retained by this repair.
+**Phase 127D status:** bounded official bulk-download URI validation repaired. No
+production market observation was fabricated or retained by this repair.
 
-Phase 127B's endpoint repair succeeded in GitHub Actions: the official request reached
-Scryfall, returned HTTP JSON metadata, and set `metadata_fetched: true`. The run then stopped
-at `download_uri_extraction` because the implementation expected only a direct `bulk_data`
-object while the received official response used the supported list envelope. It obtained no
-download URI, began no bulk-payload download, retained no observation, and performed no
-canonical write or promotion. Coverage therefore remains **0/379**.
+The latest real Phase 127C GitHub Actions dry run reached Scryfall and parsed one direct
+`bulk_data` object, inspected one entry, selected exactly one `default_cards` descriptor,
+and validated `updated_at`. It then stopped before payload download with
+`Scryfall bulk metadata lacked a permitted secure download URI`; it wrote no market or
+canonical data and performed no promotion. Coverage remains **0/379**.
 
-Phase 127C accepts either a direct `bulk_data` descriptor for `default_cards` or a Scryfall
-`list` whose `data` contains exactly one such descriptor. It rejects error objects, malformed
-roots and timestamps, zero/duplicate matches, and invalid selected contracts. Download URLs
-must be HTTPS URLs on the exact `data.scryfall.io` host boundary, without credentials or
-fragments. Diagnostics expose only the root object type, parsing shape, inspected/match
-counts, selected type, timestamp presence, URI-validation result, HTTP status, and content
-type; they never expose the URI, body, payload, headers, or query string.
+The root cause was Phase 127C's exact `data.scryfall.io` hostname comparison: the official
+metadata supplied a different true `scryfall.io` static-file subdomain. Phase 127D does not
+record or guess the full returned URI. Because the descriptor comes from the official
+metadata endpoint, it derives the static hostname from that selected descriptor and permits
+it only when normalized DNS labels form a true subdomain of `scryfall.io`. HTTPS, no
+userinfo, effective port 443, a nonempty absolute path, no fragment, and a non-IP,
+non-localhost hostname remain mandatory. This rejects suffix lookalikes and does not permit
+arbitrary hosts. A query is accepted only when supplied in that official descriptor and is
+passed unchanged to the one download; it is never logged or retained in the report.
+
+Safe diagnostics report scheme, normalized hostname, effective port, userinfo/query/fragment
+booleans, path presence, hostname-allowlist result, and a stable exact rejection reason code.
+They never report the URI, path contents, query contents, payload, headers, or response body.
+Successful reports use the stable `scryfall:default_cards` label rather than the transport URI.
 
 ## Selection and access assessment
 

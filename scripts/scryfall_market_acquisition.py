@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime, timezone
+import ipaddress
 import json
 from pathlib import Path
 import time
@@ -30,7 +31,12 @@ def new_diagnostics() -> dict:
             "metadata_root_object_type": None, "metadata_parsing_shape": None,
             "bulk_entries_inspected": 0, "default_cards_matches": 0,
             "selected_bulk_type": None, "updated_at_present": False,
-            "download_uri_valid": False, "attempts": 0}
+            "download_uri_valid": False, "download_uri_scheme": None,
+            "download_uri_hostname": None, "download_uri_effective_port": None,
+            "download_uri_has_userinfo": False, "download_uri_has_query": False,
+            "download_uri_has_fragment": False, "download_uri_path_nonempty": False,
+            "download_uri_hostname_allowlisted": False,
+            "download_uri_rejection_reason": None, "attempts": 0}
 
 
 def _fail(message: str, diagnostics: dict, stage: str, *, status: int | None = None,
@@ -135,16 +141,58 @@ def parse_bulk_metadata(metadata_bytes: bytes, diagnostics: dict) -> tuple[str, 
               "metadata_validation")
 
     download_uri = selected.get("download_uri")
+    reason = None
     try:
+        if not isinstance(download_uri, str) or not download_uri.strip():
+            diagnostics["download_uri_rejection_reason"] = "blank_uri"
+            _fail("Scryfall bulk metadata lacked a permitted secure download URI", diagnostics,
+                  "download_uri_extraction")
         parsed = urllib.parse.urlsplit(download_uri)
-        valid_uri = (isinstance(download_uri, str) and bool(download_uri.strip())
-                     and parsed.scheme == "https" and parsed.hostname == "data.scryfall.io"
-                     and parsed.port in (None, 443) and parsed.username is None
-                     and parsed.password is None and bool(parsed.path)
-                     and parsed.fragment == "")
+        hostname = (parsed.hostname or "").lower().removesuffix(".")
+        try:
+            ipaddress.ip_address(hostname)
+            is_ip_address = True
+        except ValueError:
+            is_ip_address = False
+        labels = hostname.split(".")
+        allowlisted = (not is_ip_address and len(labels) >= 3
+                       and labels[-2:] == ["scryfall", "io"]
+                       and all(labels))
+        effective_port = parsed.port if parsed.port is not None else (
+            443 if parsed.scheme.lower() == "https" else None)
+        diagnostics.update(
+            download_uri_scheme=parsed.scheme.lower() or None,
+            download_uri_hostname=hostname or None,
+            download_uri_effective_port=effective_port,
+            download_uri_has_userinfo=(parsed.username is not None or parsed.password is not None),
+            download_uri_has_query=bool(parsed.query),
+            download_uri_has_fragment=bool(parsed.fragment),
+            download_uri_path_nonempty=bool(parsed.path),
+            download_uri_hostname_allowlisted=allowlisted)
+        if parsed.scheme.lower() != "https":
+            reason = "scheme_not_https"
+        elif parsed.username is not None or parsed.password is not None:
+            reason = "userinfo_present"
+        elif parsed.port not in (None, 443):
+            reason = "nondefault_port"
+        elif not hostname:
+            reason = "hostname_missing"
+        elif is_ip_address:
+            reason = "ip_address_hostname"
+        elif hostname == "localhost":
+            reason = "localhost_hostname"
+        elif not allowlisted:
+            reason = "hostname_not_allowlisted"
+        elif not parsed.path or not parsed.path.startswith("/"):
+            reason = "absolute_path_missing"
+        elif parsed.fragment:
+            reason = "fragment_present"
+        valid_uri = reason is None
     except (TypeError, ValueError):
         valid_uri = False
+        reason = "malformed_uri"
     diagnostics["download_uri_valid"] = valid_uri
+    diagnostics["download_uri_rejection_reason"] = reason
     if not valid_uri:
         _fail("Scryfall bulk metadata lacked a permitted secure download URI", diagnostics,
               "download_uri_extraction")
@@ -170,8 +218,10 @@ def run(data_root: Path, *, payload_path: Path | None, retrieved_at: datetime,
                                stage="metadata_response")
         diagnostic["metadata_fetched"] = True
         download_uri, observed_at = parse_bulk_metadata(metadata_bytes, diagnostic)
-        source_url = download_uri
-        payload = fetch(source_url, diagnostics=diagnostic,
+        # The validated URI is transport-only.  Reports and normalized provenance use a
+        # stable dataset identifier so paths and query strings are never printed.
+        source_url = "scryfall:default_cards"
+        payload = fetch(download_uri, diagnostics=diagnostic,
                         endpoint_category="scryfall_bulk_payload",
                         stage="bulk_payload_response")
         if retain_payload:
