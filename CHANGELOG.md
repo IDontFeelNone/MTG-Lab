@@ -1,3 +1,7 @@
+# Phase 122 — The Hobbit availability gate stopped fail-closed
+
+Inspected retained trusted MTGJSON snapshot `5.3.0+20260731`: its complete retained target inventory is MB2 and MSH, with zero independently identifiable Hobbit target. Added a generic set-level availability/bounded-extraction gate, immutable structured report, and unittest coverage for zero, ambiguous, unique, incomplete, unsupported, isolation, checksum-addressed identity, and explicit unknown cases. No target code was guessed; evidence intake, candidate review, descriptor creation, plan/verify/execution, promotion, audit, rollback, and target PR were correctly not performed. Canonical digest remains `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`; Phase 119 remains the only promotion. No MB2, MSH/Marvel, or unrelated data was promoted, and Architecture v12 and canonical contracts remain unchanged.
+
 # Phase 121 — synthetic automatic-update production-readiness validation
 
 Validated all sixteen generic stages with isolated set `SYN`: one Set, two Cards, two Printings, one Identifier, and two Finishes, including explicit provenance and unknowns. Added fail-closed payload inventory/checksum/provenance and audit-integrity gates, deterministic protected-branch persistence, full JSON CLI/recovery/replay/rollback coverage, and mocked PR/green-check auto-merge validation. Production canonical state remains exactly Phase 119; no second MB2 batch or MSH/Marvel data was promoted, and Architecture v12/canonical contracts are unchanged.

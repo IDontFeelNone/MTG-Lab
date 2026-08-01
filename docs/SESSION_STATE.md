@@ -1,3 +1,7 @@
+# Session state — Phase 122
+
+Baseline `68a348c` contains merged Phase 121. Retained trusted MTGJSON snapshot `mtgjson-allprintings-5.3.0+20260731-b47cc8360034` / SHA-256 `b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09` has exactly MB2 and MSH partitions and zero Hobbit matches. Phase 122 status is `not_yet_published_by_provider`; no set code can be stated. No evidence/batch identity, candidates, classifications, dependency result, descriptor, plan/verify/execution, canonical audit/rollback, target branch/PR/check/auto-merge state exists. Canonical pre/post digest is unchanged at `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`; Phase 119 is still the only production promotion. No MB2/MSH/Marvel/unrelated data, Architecture v12, or canonical contract changed. Required green checks remain the merge gate.
+
 # Session state — Phase 121
 
 Baseline `7dcd9e1` confirms merged Phase 120; `5607e9c` contains merged Phase 119. Phase 121 validates `syn-batch-000001-4f2c` only in copied unittest/temporary roots. Every stage succeeds and the isolated post-state digest is `47abe0658ad434f6485148592559a973a6f8f14694455a89cb0cb29b5b8e9327`. Production canonical bytes/digest are unchanged, Phase 119 was not duplicated, and neither a second MB2 batch nor MSH/Marvel was promoted. Architecture v12 and canonical contracts remain unchanged. Merge is withheld until required GitHub Actions checks are green.

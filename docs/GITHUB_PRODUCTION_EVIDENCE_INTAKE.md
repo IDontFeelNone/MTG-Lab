@@ -1,3 +1,7 @@
+# Phase 122 availability stop
+
+The retained MTGJSON production snapshot inventories only `MB2` and `MSH`; it contains no independently identifiable set named The Hobbit. Phase 122 retained only the structured availability report and performed no evidence intake. Consequently there is no Hobbit evidence identity or batch identity, no bounded candidate payload, no descriptor, and no production target branch/PR/auto-merge request. This is a provider-snapshot availability blocker, not a GitHub credential failure. A future attempt must retain and checksum a newer trusted source, repeat exact-one selection, and still use protected required-green-check PR merge.
+
 > **Phase 120:** Permanent bounded intake now feeds [Automatic Canonical Updates](AUTOMATIC_CANONICAL_UPDATES.md), including routine signature-free PR creation and protected auto-merge.
 
 # Phase 114A intake revision

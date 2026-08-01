@@ -1,0 +1,33 @@
+{
+  "acquisition_metadata": {
+    "inspection_date": "2026-08-01",
+    "method": "retained trusted provider evidence inventory",
+    "network_evidence_used": false
+  },
+  "blockers": [
+    "The retained checksum-verified MTGJSON production evidence contains only independently identified MB2 and MSH target partitions.",
+    "The full source artifact is operator-managed and is not retained in the repository, so provider availability for The Hobbit cannot be established from trusted retained bytes.",
+    "No exact set code may be determined and no candidate, descriptor, plan, verify, execution, branch, or pull request may be created for the target."
+  ],
+  "canonical_write": false,
+  "inspected_evidence": {
+    "artifact_sha256": "b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09",
+    "dataset_identity": "mtgjson-allprintings-5.3.0+20260731-b47cc8360034",
+    "retained_revision": "30663562841-review-payload-v2",
+    "retained_scope": "bounded target payloads only",
+    "source_artifact_retained": false
+  },
+  "inspected_set_codes": [
+    "MB2",
+    "MSH"
+  ],
+  "matches": [],
+  "plausible_target_count": 0,
+  "promotion_performed": false,
+  "provider": "MTGJSON",
+  "provider_version": "5.3.0+20260731",
+  "requested_game": "Magic: The Gathering",
+  "requested_name": "The Hobbit",
+  "schema_version": "mtgjson-target-availability-v1",
+  "status": "not_yet_published_by_provider"
+}

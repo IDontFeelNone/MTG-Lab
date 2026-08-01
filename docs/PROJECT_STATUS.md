@@ -1,3 +1,7 @@
+# Phase 122 — requested real target unavailable in retained provider snapshot
+
+The retained checksum-identified MTGJSON snapshot contains exactly MB2 and MSH and zero set-level matches for The Hobbit. Availability stopped fail-closed before a code or target could be selected. Counts are zero for every candidate entity and classification; dependency closure, descriptor creation, plan, verify, execution, promotion, audit, rollback, target branch, target PR, checks, and auto-merge are not applicable. Production digest remains `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`, with Phase 119 the sole promotion. Required green checks continue to protect merges. No MB2/MSH/Marvel/unrelated data, Architecture v12, or canonical contract changed.
+
 # Phase 121 — synthetic validation complete
 
 All sixteen automatic-update stages succeeded for isolated synthetic target `SYN`; the resulting fixture-only state contained 1 Set, 2 Cards, 2 Printings, 1 Identifier, and 2 Finishes and digest `47abe0658ad434f6485148592559a973a6f8f14694455a89cb0cb29b5b8e9327`. Recovery resumed eight authenticated checkpoints, replay was byte-idempotent, conflicting replay failed closed, and rollback planning was non-executing and human-gated. All requested negative and mocked GitHub persistence cases pass. The real production digest remains `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`; Phase 119 is still the sole promotion, with no second MB2 batch or MSH/Marvel data. Architecture v12/contracts remain unchanged.
