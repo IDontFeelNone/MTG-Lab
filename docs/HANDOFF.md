@@ -69,3 +69,11 @@ canonical and collection facts. Review `docs/CANONICAL_QUERY_LAYER.md` for opera
 limitations. Phase 124 baseline `de12a6b` is merged; production remains solely Phase 119 at
 digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
 Canonical data/contracts and Architecture v12 were not modified. Stop after Phase 125.
+# Phase 127 handoff
+
+Review and merge the Scryfall acquisition boundary. Then manually dispatch **Market
+acquisition** with `persist=false` in an environment that can reach `api.scryfall.com`.
+Inspect diagnostics before a separate `persist=true` dispatch. Current production market
+coverage is 0/379 due to the documented outbound-proxy HTTP 403. Do not claim prices,
+collection value, or full coverage until the Action retains and verifies them. No secret
+is required; enable Actions PR creation and optional repository auto-merge.

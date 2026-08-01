@@ -87,3 +87,10 @@ requirements. No canonical state changed and no promotion ran.
   `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
 - Architecture v12/contracts, automatic updates, and Collection Intelligence: unchanged.
 - Pricing, market intelligence, simulations, recommendations, AI providers, and new products: none.
+# Session state — Phase 127
+
+Phase 126 is merged (`30db5d4`). Scryfall was selected as the only Phase 127 provider.
+Implementation and tests are present, but the local outbound proxy rejected the official
+endpoint with HTTP 403 before provider response. No production market files exist and
+coverage is 0/379. Canonical writes and promotion are false; no recommendation or AI
+provider was added. See `SCRYFALL_MARKET_ACQUISITION.md` for operation and recovery.

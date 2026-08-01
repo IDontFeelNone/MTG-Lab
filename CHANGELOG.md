@@ -543,3 +543,9 @@ facts, plus structured JSON CLI commands and unittest coverage. Every service an
 provenance, confidence, canonical identifiers, explicit not-found handling, and canonical
 snapshot identity. Architecture v12/contracts and Phase 119 canonical bytes are unchanged;
 no pricing, market intelligence, simulation, recommendation, AI provider, or product was added.
+# Phase 127 — 2026-08-01
+
+- Added the versioned Scryfall bulk-data adapter, deterministic MB2 identifier resolution,
+  append-only acquisition manifests, integrity/replay verification, and manual acquisition
+  workflow. Official provider access was blocked by the environment before response, so
+  production coverage remains 0/379 and no live price was retained.

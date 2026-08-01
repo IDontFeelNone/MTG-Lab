@@ -5,6 +5,8 @@ from .models import MarketSnapshot, MarketValidationError, PriceValues, Provider
 from .providers import ManualMarketProvider, MappedMarketProvider, MarketProvider
 from .repository import MarketSnapshotRepository
 from .service import MarketService
+from .scryfall import (ADAPTER_VERSION as SCRYFALL_ADAPTER_VERSION,
+    ProviderAcquisitionError, ProviderRateLimitError, ScryfallMarketAdapter)
 from .intelligence import (ANALYTICS_VERSION, SCHEMA_VERSION, MarketAnalytics,
                            MarketObservation, MarketObservationRepository)
 from .query import MarketQueryService

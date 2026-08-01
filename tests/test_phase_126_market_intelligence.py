@@ -44,7 +44,7 @@ class Phase126MarketIntelligenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             repo = MarketObservationRepository(Path(directory)); first = observation(1, "2")
             path = repo.append(first); original = path.read_bytes()
-            with self.assertRaisesRegex(MarketValidationError, "already exists"): repo.append(first)
+            self.assertEqual(repo.append(first), path)  # byte-identical replay is safe
             repo.append(observation(0, "7", provider="beta"))
             self.assertEqual(len(repo.observations(provider="alpha")), 1)
             self.assertEqual(len(repo.observations(provider="beta")), 1)

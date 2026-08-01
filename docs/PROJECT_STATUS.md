@@ -77,3 +77,12 @@ existing Card, Printing, Product, collection, and deck-comparison facts through 
 inference. Phase 124 is merged at `de12a6b`; Phase 119 remains the sole production promotion.
 Architecture v12, canonical contracts/data, generic automatic updates, and completed
 Collection Intelligence are unchanged. No pricing or AI-provider integration exists.
+# Phase 127 — acquisition boundary implemented; live access blocked
+
+Phase 126 is merged at `30db5d4`. Scryfall default-card bulk data is the sole selected
+production market source. Its adapter, deterministic exact identifier resolver, bounded
+append-only persistence, workflow, query envelope completeness, and tests are implemented.
+The execution environment's proxy returned HTTP 403 before the official API responded;
+no provider payload, production observation, or collection valuation was retained.
+Coverage is exactly 0/379 promoted MB2 Printings. Architecture v12/contracts and Phase
+119 canonical state remain unchanged; there is no recommendation engine or AI provider.

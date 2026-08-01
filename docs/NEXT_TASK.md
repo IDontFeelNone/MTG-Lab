@@ -68,3 +68,9 @@ unauthorized.
 Stop after Phase 125. After review and merge, scope a separate milestone for query contract
 hardening, packaging, and larger synthetic collection/deck coverage. Do not add pricing,
 market intelligence, simulations, recommendations, AI providers, products, or canonical data.
+# After Phase 127
+
+Stop after Phase 127. Review and merge this adapter/workflow without changing Architecture
+v12 or canonical contracts. The next operational action is a dry-run Scryfall acquisition
+from GitHub Actions, followed only after inspection by persistence. Do not add another
+provider, set, recommendation behavior, or AI layer.

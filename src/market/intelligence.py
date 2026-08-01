@@ -139,7 +139,12 @@ class MarketObservationRepository:
         path.parent.mkdir(parents=True, exist_ok=True)
         content = json.dumps(observation.to_dict(), indent=2, sort_keys=True) + "\n"
         try: fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o644)
-        except FileExistsError as error: raise MarketValidationError("historical observation already exists") from error
+        except FileExistsError as error:
+            # A retry may safely reuse an identity only when the complete serialized
+            # bytes are identical.  Tampering or identity reuse fails closed.
+            if path.read_bytes() == content.encode("utf-8"):
+                return path
+            raise MarketValidationError("observation identity exists with different bytes") from error
         with os.fdopen(fd, "w", encoding="utf-8") as stream: stream.write(content)
         return path
 

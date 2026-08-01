@@ -1,6 +1,12 @@
 # Market Intelligence Foundation
 
-**Status:** Phase 126 complete. **Architecture:** v12 unchanged. **Contracts:** `market-observation-v1`, `market-analytics-v1`, and `market-query-v1`.
+**Status:** Phase 127 acquisition boundary complete; live access blocked. **Architecture:** v12 unchanged. **Contracts:** `market-observation-v1`, `market-analytics-v1`, and `market-query-v1`.
+
+Phase 127 selects only Scryfall default-card bulk data and adds a versioned adapter outside
+analytics. The local proxy blocked the official endpoint before response, so no production
+observation was retained and promoted MB2 coverage remains exactly 0/379. See
+[`SCRYFALL_MARKET_ACQUISITION.md`](SCRYFALL_MARKET_ACQUISITION.md). Query envelopes now
+explicitly expose currency and observation timestamp even when their status is unknown.
 
 ## Baseline and architecture review
 

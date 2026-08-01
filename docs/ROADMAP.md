@@ -205,3 +205,10 @@ any separately approved pricing or market-intelligence work. Architecture v12 is
 The deterministic canonical query layer is complete. A later separately authorized phase
 may harden packaging and larger-corpus performance, but must preserve the exact-fact,
 provenance, unknown, and snapshot contracts. Market pricing and AI remain separate future work.
+# Phase 127 market acquisition gate
+
+The first real-source adapter and GitHub Actions boundary are ready, but official Scryfall
+access was blocked locally before response. The next bounded milestone is successful
+MB2-only dry-run and verified append-only persistence through the existing workflow.
+Scheduling may be considered only after that manual run proves stable. Production coverage
+is 0/379; Phase 119 and Architecture v12 remain unchanged.

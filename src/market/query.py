@@ -15,9 +15,12 @@ class MarketQueryService:
     def _envelope(self, operation: str, identifier: str, observations: Iterable[MarketObservation],
                   *, providers: list[dict[str, Any]] | None = None) -> dict[str, Any]:
         values = list(observations); summary = self.analytics.summarize(values)
+        currencies = sorted({value.currency for value in values})
         return {"schema_version": "market-query-v1", "query": {"operation": operation, "identifier": identifier},
             "status": summary["status"], "answer": summary if providers is None else providers,
             "provider": summary["provider"], "timestamp": summary["timestamp"],
+            "observation_timestamp": summary["timestamp"],
+            "currency": currencies[0] if len(currencies) == 1 else None,
             "confidence": summary["confidence"], "provenance": summary["provenance"],
             "canonical_snapshot_identity": self.canonical.snapshot_identity}
 
@@ -50,6 +53,9 @@ class MarketQueryService:
             "buylist_price": None if x.buylist_price is None else format(x.buylist_price, "f"), "currency": x.currency,
             "provider": x.provider, "timestamp": x.observed_at.isoformat().replace("+00:00", "Z"),
             "confidence": None if x.provider_confidence is None else format(x.provider_confidence, "f"),
+            "observation_timestamp": x.observed_at.isoformat().replace("+00:00", "Z"),
+            "status": "known" if x.price is not None else "unknown",
+            "canonical_snapshot_identity": self.canonical.snapshot_identity,
             "provenance": x.to_dict()["provenance"]} for x in values]
         envelope = self._envelope("history", identifier, values, providers=points)
         envelope["status"] = "known" if points else "unknown"

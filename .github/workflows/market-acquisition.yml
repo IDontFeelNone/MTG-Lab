@@ -1,0 +1,103 @@
+name: Market acquisition
+
+on:
+  workflow_dispatch:
+    inputs:
+      persist:
+        description: Persist verified observations on an update PR
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: market-acquisition-scryfall-mb2
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch Scryfall bulk data
+        env:
+          PYTHONPATH: src
+        run: |
+          STAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          RUN_ID="scryfall-mb2-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          printf '%s' "$STAMP" > market-acquisition-stamp.txt
+          printf '%s' "$RUN_ID" > market-acquisition-run-id.txt
+          python scripts/scryfall_market_acquisition.py --data-root data --retrieved-at "$STAMP" --run-id "$RUN_ID" --retain-payload market-acquisition-source.json > market-acquisition-dry-run.json
+      - name: Verify dry run and optionally persist
+        env:
+          PYTHONPATH: src
+          PERSIST: ${{ inputs.persist }}
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open('market-acquisition-dry-run.json'))
+          assert x['provider']=='scryfall' and x['currency']=='USD'
+          assert x['target']=={'set':'MB2','promoted_only':True}
+          assert not x['canonical_write'] and not x['promotion_performed']
+          PY
+          if [ "$PERSIST" = true ]; then
+            OBSERVED="$(python -c "import json; print(json.load(open('market-acquisition-dry-run.json'))['source_observed_at'])")"
+            SOURCE_URL="$(python -c "import json; print(json.load(open('market-acquisition-dry-run.json'))['source_url'])")"
+            python scripts/scryfall_market_acquisition.py --data-root data --payload market-acquisition-source.json --source-url "$SOURCE_URL" --observed-at "$OBSERVED" --retrieved-at "$(cat market-acquisition-stamp.txt)" --run-id "$(cat market-acquisition-run-id.txt)" --persist > market-acquisition-persist.json
+            python - <<'PY'
+          import json
+          dry=json.load(open('market-acquisition-dry-run.json'))
+          saved=json.load(open('market-acquisition-persist.json'))
+          assert dry['source_sha256']==saved['source_sha256']
+          assert dry['normalized_sha256']==saved['normalized_sha256']
+          assert dry['mapping_counts']==saved['mapping_counts']
+          PY
+          fi
+      - name: Validate repository and changed-file boundary
+        env:
+          PYTHONPATH: src
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py' -v
+          python -m compileall -q src tests scripts
+          git diff --check
+          test -z "$(git diff --name-only | grep -v '^data/market/' || true)"
+          test -z "$(git status --short | awk '{print $2}' | grep '^data/canonical/' || true)"
+      - name: Create or safely reuse update PR
+        if: inputs.persist
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BRANCH="automation/scryfall-mb2-market"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git switch -c "$BRANCH"
+          git add data/market
+          git commit -m 'Acquire Scryfall MB2 market observations'
+          if git fetch origin "$BRANCH"; then
+            git diff --quiet "origin/$BRANCH" HEAD || { echo 'existing branch differs' >&2; exit 1; }
+            git reset --hard "origin/$BRANCH"
+          else
+            git push origin "$BRANCH"
+          fi
+          PR="$(gh pr list --head "$BRANCH" --json url --jq '.[0].url')"
+          [ -n "$PR" ] || PR="$(gh pr create --head "$BRANCH" --title 'Acquire Scryfall MB2 market snapshot' --body 'Automated, bounded Scryfall MB2 acquisition.')"
+          printf '%s\n' "$PR" > market-acquisition-pr.txt
+          test "$(gh pr checks "$PR" --required --json state --jq 'all(.[]; .state == "SUCCESS")')" = true
+          gh pr merge "$PR" --auto --squash --delete-branch=false
+      - name: Retain diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-acquisition-${{ github.run_id }}-${{ github.run_attempt }}
+          path: market-acquisition-*
+          if-no-files-found: warn
