@@ -11,7 +11,8 @@ from typing import Any
 from .repository import EvidenceError, ProductionEvidenceRepository
 
 
-ADAPTER_VERSION = "mtgjson-workflow-artifact-v1"
+ADAPTER_VERSION = "mtgjson-workflow-artifact-v2"
+SCHEMA_VERSION = "2.0.0"
 
 
 def _canonical(value: Any) -> bytes:
@@ -107,13 +108,22 @@ class WorkflowArtifactAdapter:
             raise EvidenceError("streaming manifest contains no review batches")
         batch_records, targets = [], {}
         for batch in sorted(batches, key=lambda item: str(item.get("batch_id", ""))):
-            record, bundle, dependencies = self._bundle(members, streaming, source_hash, batch)
+            record, bundle, dependencies, payload = self._bundle(
+                members, streaming, source_hash, batch)
             bundle_path = f"review_batches/{record['target_product'].lower()}/{record['batch_id']}.json"
+            payload_path = f"review_payloads/{record['target_product'].lower()}/{record['batch_id']}.json"
+            payload_bytes = _canonical(payload)
+            normalized[payload_path] = payload_bytes
+            bundle["review_payload"] = self._record(payload_path, payload_bytes)
             bundle_bytes = _canonical(bundle)
             normalized[bundle_path] = bundle_bytes
             dependency_path = f"dependency_reports/{record['target_product'].lower()}/{record['batch_id']}.json"
             normalized[dependency_path] = dependencies
-            record.update(bundle_path=bundle_path, bundle_sha256=_sha(bundle_bytes))
+            record.update(bundle_path=bundle_path, bundle_sha256=_sha(bundle_bytes),
+                          payload_path=payload_path, payload_sha256=_sha(payload_bytes),
+                          payload_size=len(payload_bytes),
+                          retained_payload_count=len(payload["candidate_payloads"]),
+                          retained_payload_bytes=len(payload_bytes))
             batch_records.append(record)
             identity = bundle["review_package"]["target_set_name"]
             previous = targets.setdefault(record["target_product"], identity)
@@ -142,7 +152,9 @@ class WorkflowArtifactAdapter:
             "dataset_id": dataset_id, "sha256": source_hash,
             "native_manifest_path": retained_manifest_path,
         })
-        normalized["batch_index.json"] = _canonical({"batches": batch_records})
+        normalized["batch_index.json"] = _canonical({"batches": batch_records,
+            "retained_payload_count": sum(x["retained_payload_count"] for x in batch_records),
+            "retained_payload_bytes": sum(x["retained_payload_bytes"] for x in batch_records)})
         content_inventory = [self._record(path, data) for path, data in sorted(normalized.items())]
         normalized_digest = _sha(_canonical(content_inventory))
         dispositions = {item["source_path"]: item for item in copied}
@@ -154,7 +166,7 @@ class WorkflowArtifactAdapter:
                 "source_path": item["native_bundle_path"], "destination_path": item["bundle_path"]}
                 for item in batch_records)
         top_manifest = {
-            "schema_version": "1.0.0",
+            "schema_version": SCHEMA_VERSION,
             "workflow": {"run_id": str(run_id), "workflow_name": "MTGJSON production ingestion",
                          "repository": repository, "commit_sha": commit_sha.lower()},
             "source": {"dataset_id": dataset_id, "sha256": source_hash},
@@ -165,6 +177,10 @@ class WorkflowArtifactAdapter:
             "review_bundle_paths": [item["bundle_path"] for item in batch_records],
             "canonical_write": False, "promotion_performed": False,
             "adapter_version": ADAPTER_VERSION,
+            "revision_policy": "derived-production-evidence-identity",
+            "evidence_identity": f"{run_id}-review-payload-v2",
+            "retained_payload_count": sum(x["retained_payload_count"] for x in batch_records),
+            "retained_payload_bytes": sum(x["retained_payload_bytes"] for x in batch_records),
             "normalized_archive_sha256": normalized_digest,
             "normalized_digest_scope": "canonical inventory of all normalized members except manifest.json",
             "transformations": transformations,
@@ -179,10 +195,13 @@ class WorkflowArtifactAdapter:
         zip_path = output / "normalized-intake.zip"
         self._write_zip(zip_path, normalized)
         (output / "normalized-inventory.json").write_bytes(_canonical({
-            "schema_version": "1.0.0", "files": content_inventory,
+            "schema_version": SCHEMA_VERSION, "files": content_inventory,
             "normalized_archive_sha256": normalized_digest}))
-        report = {"schema_version": "1.0.0", "valid": True, "adapter_version": ADAPTER_VERSION,
+        report = {"schema_version": SCHEMA_VERSION, "valid": True, "adapter_version": ADAPTER_VERSION,
                   "run_id": str(run_id), "artifact_name": artifact_name,
+                  "evidence_identity": f"{run_id}-review-payload-v2",
+                  "retained_payload_count": sum(x["retained_payload_count"] for x in batch_records),
+                  "retained_payload_bytes": sum(x["retained_payload_bytes"] for x in batch_records),
                   "original_archive_sha256": source_digest,
                   "normalized_archive_sha256": normalized_digest,
                   "normalized_zip_sha256": _sha(zip_path.read_bytes()),
@@ -221,7 +240,7 @@ class WorkflowArtifactAdapter:
         return paths[0]
 
     def _bundle(self, members: dict[str, bytes], root: str, source_hash: str,
-                batch: dict) -> tuple[dict, dict, bytes]:
+                batch: dict) -> tuple[dict, dict, bytes, dict]:
         batch_id, code = batch.get("batch_id"), batch.get("target_set_code")
         if not batch_id or not code:
             raise EvidenceError("target identity is ambiguous")
@@ -264,7 +283,7 @@ class WorkflowArtifactAdapter:
         if not isinstance(payloads, list) or not payloads:
             raise EvidenceError("missing candidate shard reference")
         payload_refs = []
-        payload_candidates, payload_codes = set(), set()
+        payload_by_id, payload_codes = {}, set()
         for reference in payloads:
             unit = PurePosixPath(str(reference.get("path", ""))).stem
             matches = [path for path in members if path == f"{root}/candidate-shards/{unit}.json"]
@@ -276,22 +295,59 @@ class WorkflowArtifactAdapter:
                 raise EvidenceError("internal hash mismatch: candidate shard")
             shard = _object(data, matches[0])
             payload_codes.add(shard.get("set_code"))
-            payload_candidates.update(item.get("candidate_identifier") for item in shard.get("candidates", []))
+            candidates = shard.get("candidates")
+            if not isinstance(candidates, list):
+                raise EvidenceError("candidate shard candidates list is required")
+            for item in candidates:
+                if not isinstance(item, dict) or not item.get("candidate_identifier"):
+                    raise EvidenceError("candidate payload identity is missing")
+                identifier = item["candidate_identifier"]
+                if identifier in payload_by_id:
+                    raise EvidenceError("duplicate candidate payload")
+                payload_by_id[identifier] = item
             payload_refs.append({"source_path": matches[0], "sha256": _sha(data), "size": len(data)})
-        if payload_codes != {code} or not set(candidate_ids).issubset(payload_candidates):
-            raise EvidenceError("cross-target contamination or unresolved candidate shard reference")
+        if payload_codes != {code}:
+            raise EvidenceError("cross-target contamination in candidate payload")
+        missing = [identifier for identifier in candidate_ids if identifier not in payload_by_id]
+        if missing:
+            raise EvidenceError("candidate ID lacks a payload")
+        selected = [payload_by_id[identifier] for identifier in candidate_ids]
+        if [item["candidate_identifier"] for item in selected] != candidate_ids:
+            raise EvidenceError("candidate payload order or identity differs from candidate-ID list")
+        selected_ids = set(candidate_ids)
+        if len(selected_ids) != len(candidate_ids):
+            raise EvidenceError("duplicate candidate ID")
+        card_refs = {item.get("mapped_fields", {}).get("card_reference") for item in selected
+                     if item.get("entity_type") == "card"}
+        for item in selected:
+            if item.get("entity_type") == "printing" and item.get("mapped_fields", {}).get(
+                    "card_reference") not in card_refs:
+                raise EvidenceError("Card-to-Printing reference cannot be resolved")
+        if not isinstance(package.get("provenance"), dict) or not package["provenance"]:
+            raise EvidenceError("payload provenance is missing")
+        payload_digest = _identity(selected)
+        payload = {"schema_version": SCHEMA_VERSION, "batch_id": batch_id,
+            "target_set_code": code, "target_set_name": package.get("target_set_name"),
+            "candidate_ids": candidate_ids, "candidate_id_digest": candidate_digest,
+            "candidate_payloads": selected,
+            "candidate_payload_digest": payload_digest,
+            "candidate_id_to_payload_index": {identifier: index for index, identifier in enumerate(candidate_ids)},
+            "source_candidate_shards": payload_refs, "source_lineage": lineage,
+            "provenance": package["provenance"], "dependency_references": closure,
+            "canonical_write": False, "promotion_performed": False}
         bundle = {"review_package": package, "candidate_ids": candidate_ids,
                   "dependency_closure": closure, "payload_references": payload_refs,
                   "provenance": package.get("provenance", {}),
                   "findings": package.get("identifier_findings", []),
                   "lineage": lineage, "deterministic_digests": {
                       "candidate_ids_sha256": candidate_digest,
+                      "candidate_payloads_sha256": payload_digest,
                       "dependency_closure_sha256": batch.get("dependency_closure_digest"),
                       "review_package_sha256": _sha(members[paths["review-package"]])},
                   "native_paths": paths}
         record = {"batch_id": batch_id, "target_product": code,
                   "candidate_ids_sha256": candidate_digest, "native_bundle_path": native}
-        return record, bundle, members[paths["dependency-closure"]]
+        return record, bundle, members[paths["dependency-closure"]], payload
 
     @staticmethod
     def _permitted_relative(path: str, streaming: str) -> str | None:

@@ -1,3 +1,7 @@
+# Phase 114A session state
+
+Baseline: merged Phase 113A, merged PR #86, retained run `30663562841`. Root cause: v1 retained a candidate-shard reference but not its 7,120,316 payload bytes. Implemented state: deterministic adapter/repository schema v2 with exact bounded payload extraction and derived immutable evidence identity. Pending external state: workflow rerun and evidence-revision PR. Canonical writes, promotions, approvals, and candidate reviews remain zero in this phase; Architecture v12 is unchanged.
+
 # Phase 113A session state
 
 Main contains Phase 113 but not PR #86. The gate is now conditional on repository state: absent

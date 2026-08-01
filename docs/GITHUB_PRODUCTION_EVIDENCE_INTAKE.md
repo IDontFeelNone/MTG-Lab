@@ -1,3 +1,9 @@
+# Phase 114A intake revision
+
+The workflow redownloads and authenticates the same artifact, runs adapter `mtgjson-workflow-artifact-v2`, and intakes derived evidence identity `30663562841-review-payload-v2`; it never replaces `data/production_runs/30663562841/`. Its dedicated default branch is `production-evidence/run-30663562841-review-payload-v2`. Reports now include retained payload count and bounded serialized payload bytes as well as `canonical_write: false` and `promotion_performed: false`.
+
+Exact rerun inputs: `run_id: 30663562841`, `artifact_name: mtgjson-ingestion-30663562841`, `archive_sha256: 2887ea307f07b58ddcf4f0179e99e54e79e072949542869e7c01b4275a1ee3ba`, `destination_branch: production-evidence/run-30663562841-review-payload-v2`, `base_branch: main`, and initially `dry_run: true`; after that run and this implementation are green, dispatch `dry_run: false` to create the evidence-revision PR. Merge remains withheld until all GitHub Actions checks are green.
+
 # Phase 112B persistence reconciliation
 
 The two reported dispatches authenticated and verified run `30663562841`, but neither established durable repository evidence. The first was intentionally dry-run. In the second, the workflow's effective `inputs.dry_run` still caused both conditional persistence steps to be skipped. Thus write-boundary validation was the last executed durability-related stage: Git configuration, branch creation, staging, commit, push, and PR creation did **not** run; they produced no command output and no exit status. Because skipped steps are not failures, the job exited zero. This is the exact workflow control-flow defect; it is not an intake-path, ignored-file, or Phase 111 verification defect.

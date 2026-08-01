@@ -1,3 +1,7 @@
+# Phase 114A inventory update
+
+`src/production_evidence/adapter.py` now emits schema 2 review payloads; `src/production_evidence/repository.py` verifies and stores them under a derived immutable evidence identity. The manual intake workflow targets a dedicated revision branch and reports payload count/bytes. Tests cover exact extraction, isolation, integrity, missing/duplicate payloads, unresolved Card-to-Printing dependencies, immutable collisions, idempotent normalization, and no canonical/promotion authority. The original retained run is unchanged.
+
 # Phase 113A inventory update
 
 Phase 113A makes the retained-evidence gate valid both before and after evidence-intake PR #86.

@@ -1,3 +1,8 @@
+## Phase 114A — Retain reviewable candidate payloads
+
+- Added adapter v2 bounded extraction of exact ordered per-batch candidate payloads, source-shard authentication, deterministic payload identity/mapping, target isolation, dependency resolution, provenance, and complete manifest inventory.
+- Added immutable derived evidence identities so the retained v1 run is never overwritten, and updated intake reporting/branch policy. No review, promotion, canonical write, Architecture v12, or canonical-contract change occurred.
+
 ## Phase 113A — State-aware retained-evidence gate
 
 - Replaced Phase 113's permanent run-absence assumptions with a dual-state gate: the historical

@@ -1,3 +1,7 @@
+# Phase 114A — payload-retention finding
+
+The merged retained run now proves the first MB2 batch membership and digests, but its bundle only references `streaming/<source-sha256>/candidate-shards/000334-mb2.json`; the referenced 7,120,316 bytes are absent below `data/production_runs/30663562841/`. Therefore Phase 114 could not inspect fields and necessarily classified all 1,000 candidates as `requires_additional_evidence`. Phase 114A fixes future normalized retention through a new evidence identity only. It does not revisit those classifications, review a candidate, approve a package, promote data, or modify canonical state.
+
 # Phase 113A — Retained Mystery Booster 2 evidence gate
 
 > **Status:** retained-evidence transition; independent review still pending — 2026-08-01

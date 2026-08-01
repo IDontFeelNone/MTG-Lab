@@ -1,3 +1,7 @@
+# Phase 114A status — reviewable payload retention implemented
+
+Main confirms Phase 113A, PR #86, and retained run `30663562841`. The retained v1 bundles lack referenced candidate-shard bytes, which is the exact field-review blocker. Adapter/repository schema v2 now retains only the exact candidates needed by each batch under derived identity `30663562841-review-payload-v2`. Operational rerun and evidence-revision PR remain pending; no candidate review, approval, promotion, canonical write, architecture change, or canonical-contract change occurred.
+
 # Phase 113A status — retained-evidence transition
 
 Main contains merged Phase 113 and not evidence-intake PR #86. Phase 113A removes the stale
