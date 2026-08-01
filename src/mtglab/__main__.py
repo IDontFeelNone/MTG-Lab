@@ -23,7 +23,8 @@ from production_evidence import (EvidenceError, ProductionEvidenceRepository,
                                  WorkflowArtifactAdapter)
 from collection import (CanonicalCollectionResolver, CollectionIntelligenceError,
     acquisition_priorities, collection_summary, compare_deck, create_snapshot,
-    read_import, verify_snapshot)
+    collection_value, read_import, verify_snapshot)
+from market import MarketObservationRepository, MarketQueryService
 
 
 def main(argv=None) -> int:
@@ -35,7 +36,7 @@ def main(argv=None) -> int:
     collection_import = collection_commands.add_parser("import")
     collection_import.add_argument("--input", type=Path, required=True)
     collection_import.add_argument("--snapshot-id"); collection_import.add_argument("--game", default="magic")
-    for name in ("verify", "summary", "duplicates", "owned", "missing", "unique", "unresolved", "acquisitions"):
+    for name in ("verify", "summary", "value", "duplicates", "owned", "missing", "unique", "unresolved", "acquisitions"):
         command = collection_commands.add_parser(name); command.add_argument("--snapshot", required=True)
         command.add_argument("--game", default="magic")
     deck = commands.add_parser("deck")
@@ -43,6 +44,17 @@ def main(argv=None) -> int:
     for name in ("compare", "missing", "acquisition-priorities"):
         command = deck_commands.add_parser(name); command.add_argument("--snapshot", required=True)
         command.add_argument("--deck", type=Path, action="append", required=True); command.add_argument("--game", default="magic")
+    market = commands.add_parser("market")
+    market_commands = market.add_subparsers(dest="market_command", required=True)
+    for name in ("card", "printing", "product"):
+        command = market_commands.add_parser(name); command.add_argument("identifier")
+        command.add_argument("--provider"); command.add_argument("--game", default="magic")
+    history = market_commands.add_parser("history"); history.add_argument("identifier")
+    history.add_argument("--entity-type", choices=("card", "printing", "product"), default="printing")
+    history.add_argument("--provider"); history.add_argument("--game", default="magic")
+    comparison = market_commands.add_parser("providers"); comparison.add_argument("identifier")
+    comparison.add_argument("--entity-type", choices=("card", "printing", "product"), default="printing")
+    comparison.add_argument("--game", default="magic")
     dataset = commands.add_parser("dataset"); dataset_commands = dataset.add_subparsers(dest="dataset_command", required=True)
     register = dataset_commands.add_parser("register"); register.add_argument("manifest", type=Path)
     listing = dataset_commands.add_parser("list"); listing.add_argument("--format", choices=("json",), default="json")
@@ -191,6 +203,8 @@ def main(argv=None) -> int:
                     summary = collection_summary(snapshot, resolver)
                     if args.command == "collection":
                         if args.collection_command == "summary": result = summary
+                        elif args.collection_command == "value": result = collection_value(
+                            snapshot, resolver, MarketObservationRepository(args.data_root / "market" / "observations"))
                         elif args.collection_command == "duplicates": result = {
                             "schema_version":"collection-duplicates-v1", "snapshot_id":args.snapshot,
                             "duplicates":summary["duplicates"], "duplicate_count":summary["duplicate_count"]}
@@ -209,6 +223,18 @@ def main(argv=None) -> int:
                         else: result = acquisition_priorities(comparisons)
         except (CollectionIntelligenceError, OSError, ValueError, KeyError, json.JSONDecodeError) as error:
             print(json.dumps({"valid":False,"error":str(error)}, indent=2, sort_keys=True)); return 2
+    elif args.command == "market":
+        engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games", data_root=args.data_root)
+        service = MarketQueryService(CanonicalQueryService(engine),
+            MarketObservationRepository(args.data_root / "market" / "observations"))
+        try:
+            if args.market_command in {"card", "printing", "product"}:
+                result = getattr(service, args.market_command)(args.identifier, provider=args.provider)
+            elif args.market_command == "history":
+                result = service.history(args.entity_type, args.identifier, provider=args.provider)
+            else: result = service.provider_comparison(args.entity_type, args.identifier)
+        except (QueryError, ValueError, OSError) as error:
+            print(json.dumps({"valid": False, "error": str(error)}, indent=2, sort_keys=True)); return 2
     elif args.command == "promote":
         corpus = Path(__file__).parents[2] / "data/reference/mtgjson/bounded-canonical-promotion-v1.json"
         workflow = BoundedCorpusPromotion(args.data_root, corpus)

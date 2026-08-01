@@ -1,3 +1,11 @@
+# Phase 126 session state
+
+- Baseline: merged Phase 125 (`b71f961`).
+- Production: Phase 119 only; digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
+- Added provider-neutral append-only observations, deterministic analytics, read-only market query/CLI contracts, and unknown-preserving valuation.
+- Architecture v12, canonical bytes/contracts, Collection Intelligence, Canonical Query Layer, and generic automatic updates remain unchanged; canonical data contains no prices.
+- No recommendation, investment ranking, portfolio analysis, purchase/sale advice, or AI reasoning.
+
 # Phase 123 session state
 
 - Baseline: merged Phase 122 on main (`04f68c9`).

@@ -1,3 +1,7 @@
+# Phase 126 inventory update
+
+Added `src/market/intelligence.py`, `src/market/query.py`, Canonical Query Service market methods, collection valuation, unified JSON CLI routes, `tests/test_phase_126_market_intelligence.py`, and `docs/MARKET_INTELLIGENCE.md`. Observations are separate under `data/market/observations`; no production observation or canonical price fact was added. Architecture v12 and Phase 119 canonical state are unchanged.
+
 # Phase 123 inventory update
 
 `register_trusted_snapshot` is the generic checksum and immutable-byte registration boundary for refreshed AllPrintings evidence. `data/automatic_updates/phase-123-mtgjson-refresh.json` records the fail-closed HTTP 403 acquisition stop. No new production snapshot exists; the historical MB2/MSH evidence is unchanged. Phase 119 remains the sole completed production promotion at canonical digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`. Architecture v12 and canonical contracts are unchanged.

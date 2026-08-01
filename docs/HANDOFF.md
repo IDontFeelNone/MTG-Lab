@@ -1,3 +1,7 @@
+# Phase 126 handoff
+
+Start with `docs/MARKET_INTELLIGENCE.md`, `src/market/intelligence.py`, and `src/market/query.py`. Observations are append-only and separate from canonical facts; queries preserve unknowns. Phase 125 is merged, Architecture v12 is unchanged, and Phase 119 remains the sole production promotion. No live feed, recommendation engine, portfolio analysis, or AI reasoning was added.
+
 # Phase 123 handoff
 
 Phase 123 stopped fail-closed at trusted acquisition. Retry the approved MTGJSON acquisition path in an environment that can reach the provider and supplies its trusted SHA-256; pass those bytes and digest to `register_trusted_snapshot`, then run the unchanged exact-one set-metadata gate. Never reuse the Phase 122 identity, infer a Hobbit code, inspect card text, or substitute LTR/Commander/scene/Secret Lair products. If zero matches remain, retain the new result and stop; only one complete match may enter the generic automatic-update pipeline.

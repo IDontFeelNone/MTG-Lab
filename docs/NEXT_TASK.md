@@ -1,3 +1,7 @@
+# Next task after Phase 126
+
+Stop after Phase 126. Review and merge its observation, analytics, query, CLI, and valuation contracts. Do not connect live providers or add recommendations, advice, investment rankings, portfolio analysis, or AI reasoning without a separate phase. Preserve Architecture v12 and Phase 119-only production state.
+
 # Next task — future trusted provider refresh
 
 Acquire the newest terms-compliant MTGJSON AllPrintings publication and trusted checksum from an environment with provider access. Register it immutably through `register_trusted_snapshot`, verify retained bytes, and rerun the unchanged Phase 122 exact-one set-metadata gate for “The Hobbit.” Do not add Hobbit-specific logic or proceed to candidates/promotion unless exactly one complete target is established.

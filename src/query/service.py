@@ -34,11 +34,33 @@ class CanonicalQueryService:
     CARD_FILTERS = {"name", "type", "color", "rarity", "set", "mana_value",
                     "keyword", "legality", "identifier"}
 
-    def __init__(self, engine: CanonicalQueryEngine):
+    def __init__(self, engine: CanonicalQueryEngine, market_repository=None):
         self.engine = engine
         snapshot = engine.snapshot()
         self.snapshot_identity = snapshot.snapshot_id
         self.entities = snapshot.entities
+        self.market_repository = market_repository
+
+    def _market(self):
+        if self.market_repository is None:
+            raise QueryError("market observation repository is not configured")
+        from market.query import MarketQueryService
+        return MarketQueryService(self, self.market_repository)
+
+    def card_market(self, identifier: str, *, provider: str | None = None) -> Mapping[str, Any]:
+        return self._market().card(identifier, provider=provider)
+
+    def printing_market(self, identifier: str, *, provider: str | None = None) -> Mapping[str, Any]:
+        return self._market().printing(identifier, provider=provider)
+
+    def product_market(self, identifier: str, *, provider: str | None = None) -> Mapping[str, Any]:
+        return self._market().product(identifier, provider=provider)
+
+    def market_history(self, entity_type: str, identifier: str, *, provider: str | None = None) -> Mapping[str, Any]:
+        return self._market().history(entity_type, identifier, provider=provider)
+
+    def market_provider_comparison(self, entity_type: str, identifier: str) -> Mapping[str, Any]:
+        return self._market().provider_comparison(entity_type, identifier)
 
     def cards(self, **filters: Any) -> CanonicalAnswer:
         supplied = {key: value for key, value in filters.items() if value is not None}
