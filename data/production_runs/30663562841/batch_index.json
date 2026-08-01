@@ -1,0 +1,100 @@
+{
+  "batches": [
+    {
+      "batch_id": "mb2-batch-000001-e32022126c07",
+      "bundle_path": "review_batches/mb2/mb2-batch-000001-e32022126c07.json",
+      "bundle_sha256": "deb9d1a64fb8ffb67d74e0ed1a63be40e24966032cf20398902c593484e97169",
+      "candidate_ids_sha256": "e32022126c07036337f810d06dc29b5eead5afd850f7f3af0a26ad5b0d46e66e",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MB2/mb2-batch-000001-e32022126c07",
+      "target_product": "MB2"
+    },
+    {
+      "batch_id": "mb2-batch-000002-cd46ea5cd526",
+      "bundle_path": "review_batches/mb2/mb2-batch-000002-cd46ea5cd526.json",
+      "bundle_sha256": "91e34a41a7f911f5d26e2b8637989718ef50d39f226c4f399c447b761bf6e57f",
+      "candidate_ids_sha256": "cd46ea5cd526f315bd3b68121b7effd4f21b2a6f19b01d33d00463e728bc9721",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MB2/mb2-batch-000002-cd46ea5cd526",
+      "target_product": "MB2"
+    },
+    {
+      "batch_id": "mb2-batch-000003-e84c2220aeb5",
+      "bundle_path": "review_batches/mb2/mb2-batch-000003-e84c2220aeb5.json",
+      "bundle_sha256": "95e08ec30c5da14f20546d3a5d0fc9561b24c149a41a604412f8b015c154d6e3",
+      "candidate_ids_sha256": "e84c2220aeb59e77439266633f5af026180f1e25e52f4839fb23f7a98615f7f3",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MB2/mb2-batch-000003-e84c2220aeb5",
+      "target_product": "MB2"
+    },
+    {
+      "batch_id": "mb2-batch-000004-3c10640c884e",
+      "bundle_path": "review_batches/mb2/mb2-batch-000004-3c10640c884e.json",
+      "bundle_sha256": "ffdb71c39981600c58395277844d3788e7227f07cd8c4d58d2ff6dd10ab839b0",
+      "candidate_ids_sha256": "3c10640c884e0bba64e68bb0ae9c24343620f81d146c7320d3d374ed340b657b",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MB2/mb2-batch-000004-3c10640c884e",
+      "target_product": "MB2"
+    },
+    {
+      "batch_id": "mb2-batch-000005-c986647781fe",
+      "bundle_path": "review_batches/mb2/mb2-batch-000005-c986647781fe.json",
+      "bundle_sha256": "05b9eddd21f1a6868c5bd0265d2823f7fc847cc0f6d7b7918bc95135765eb263",
+      "candidate_ids_sha256": "c986647781febd56309b5b7f6398fc96426d56ab513af383048e09838f3dd7b4",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MB2/mb2-batch-000005-c986647781fe",
+      "target_product": "MB2"
+    },
+    {
+      "batch_id": "mb2-batch-000006-31954d26dcbe",
+      "bundle_path": "review_batches/mb2/mb2-batch-000006-31954d26dcbe.json",
+      "bundle_sha256": "a3251ebe443dc1a1bde9e9d564bee5634037b730a4019e58d0494cf1752f6947",
+      "candidate_ids_sha256": "31954d26dcbe7058c271244974cf54ab656a5ed416d0f3794141c43d312c0fbf",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MB2/mb2-batch-000006-31954d26dcbe",
+      "target_product": "MB2"
+    },
+    {
+      "batch_id": "msh-batch-000007-ccfe8f698500",
+      "bundle_path": "review_batches/msh/msh-batch-000007-ccfe8f698500.json",
+      "bundle_sha256": "07472507fac913ea125445b3bd165b8bbfbfd2867a8fdb33a6eea80b8b6b8b68",
+      "candidate_ids_sha256": "ccfe8f69850046b5a9437b509b6a23876e518c235d672fb2bed91ef508701c62",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MSH/msh-batch-000007-ccfe8f698500",
+      "target_product": "MSH"
+    },
+    {
+      "batch_id": "msh-batch-000008-7415ef6a5dfc",
+      "bundle_path": "review_batches/msh/msh-batch-000008-7415ef6a5dfc.json",
+      "bundle_sha256": "4524d09bcd2f2d2240a6fd7fec6f6fe473b55e798cdc05062ee612be3bc70037",
+      "candidate_ids_sha256": "7415ef6a5dfc82055e080cb9839fa447e7e6b2e79e9b4589e9bb599b6b3b15b6",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MSH/msh-batch-000008-7415ef6a5dfc",
+      "target_product": "MSH"
+    },
+    {
+      "batch_id": "msh-batch-000009-5d18541dc5d2",
+      "bundle_path": "review_batches/msh/msh-batch-000009-5d18541dc5d2.json",
+      "bundle_sha256": "376ba8ff93e2aa72b548dff0d9c6e35f11ce083807bb5cd0ae54f560bfde220c",
+      "candidate_ids_sha256": "5d18541dc5d2e76e671370a54576d7a7d2641ef7e458a7a97e4ccb9e2f62e880",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MSH/msh-batch-000009-5d18541dc5d2",
+      "target_product": "MSH"
+    },
+    {
+      "batch_id": "msh-batch-000010-7e9147e46711",
+      "bundle_path": "review_batches/msh/msh-batch-000010-7e9147e46711.json",
+      "bundle_sha256": "c35d1369f8ca5f172a1f3b4672faedbd109b7d982695787e06f5cfbfbeb9b226",
+      "candidate_ids_sha256": "7e9147e46711a2380593d0f2bf7635bf0e3519a1bdaa76410be6d99b972f1cab",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MSH/msh-batch-000010-7e9147e46711",
+      "target_product": "MSH"
+    },
+    {
+      "batch_id": "msh-batch-000011-9d0b8d81354a",
+      "bundle_path": "review_batches/msh/msh-batch-000011-9d0b8d81354a.json",
+      "bundle_sha256": "1bce89c3d8d1895f5675e387c9f51078847c61e1ebfc7c97d9f20da5d0def932",
+      "candidate_ids_sha256": "9d0b8d81354a9be7a498852de45c43017134679260fd4cfd328a52f71af34a91",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MSH/msh-batch-000011-9d0b8d81354a",
+      "target_product": "MSH"
+    },
+    {
+      "batch_id": "msh-batch-000012-472b58eb45b3",
+      "bundle_path": "review_batches/msh/msh-batch-000012-472b58eb45b3.json",
+      "bundle_sha256": "958fb6601dcd0310482368bd1a3906a5ebcc1601f74a87f2277708f466dd5c4a",
+      "candidate_ids_sha256": "472b58eb45b30665fb737ba28ea129455f08702985ce29b558b1d10c757e0604",
+      "native_bundle_path": "mtg-lab-state/streaming/b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09/review-batches/MSH/msh-batch-000012-472b58eb45b3",
+      "target_product": "MSH"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "by_source_sha256": {
+    "b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09": [
+      "30663562841"
+    ]
+  },
+  "by_target_product": {
+    "MB2": [
+      "30663562841"
+    ],
+    "MSH": [
+      "30663562841"
+    ]
+  },
+  "by_workflow_identity": {
+    "IDontFeelNone/MTG-Lab:MTGJSON production ingestion:e02422bd7ab29fbe7b887dd4d501561a46d5cd26": [
+      "30663562841"
+    ]
+  },
+  "runs": [
+    {
+      "batch_ids": [
+        "mb2-batch-000001-e32022126c07",
+        "mb2-batch-000002-cd46ea5cd526",
+        "mb2-batch-000003-e84c2220aeb5",
+        "mb2-batch-000004-3c10640c884e",
+        "mb2-batch-000005-c986647781fe",
+        "mb2-batch-000006-31954d26dcbe",
+        "msh-batch-000007-ccfe8f698500",
+        "msh-batch-000008-7415ef6a5dfc",
+        "msh-batch-000009-5d18541dc5d2",
+        "msh-batch-000010-7e9147e46711",
+        "msh-batch-000011-9d0b8d81354a",
+        "msh-batch-000012-472b58eb45b3"
+      ],
+      "run_id": "30663562841",
+      "source": {
+        "dataset_id": "mtgjson-allprintings-5.3.0+20260731-b47cc8360034",
+        "sha256": "b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09"
+      },
+      "target_products": [
+        "MB2",
+        "MSH"
+      ],
+      "tree_sha256": "b924d70e4f7d41f7356643f8ab7c1c65cc54e4b5627434aab598acf5caee7f49",
+      "workflow": {
+        "commit_sha": "e02422bd7ab29fbe7b887dd4d501561a46d5cd26",
+        "repository": "IDontFeelNone/MTG-Lab",
+        "run_id": "30663562841",
+        "workflow_name": "MTGJSON production ingestion"
+      }
+    }
+  ],
+  "schema_version": "1.0.0"
+}
