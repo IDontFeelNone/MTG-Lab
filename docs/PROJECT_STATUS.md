@@ -1,3 +1,9 @@
+# Phase 116 status — ambiguous MB2 identifiers resolved
+
+Merged Phase 115 (`975cc33`) reviewed exactly production evidence `30663562841-review-payload-v2`, batch `mb2-batch-000001-e32022126c07`: 979 approved, 0 excluded, and 21 additional-evidence Identifier candidates. Phase 116 matched that exact retained scope and classified the single collision group as a non-unique provider alias: `scryfallCardBackId:0aeebaf5-8c7d-4636-9e82-8c27447861f7` is shared across 820 distinct UUID-addressed physical coordinates and is never substituted for strict MTGJSON Printing identity.
+
+The overlay totals are 1,000 approved, 0 excluded, 0 unresolved, 0 quarantined, and 0 fatal conflicts. Dependency closure is valid with no orphaned Printing. Decision `7a559f553e4b53c859efbdab542aefcb7e041170a55ace88d032c358e70cb23d` is `pending_operator_signature`; operator-signature readiness is true, promotion readiness is false. No MSH candidate or second MB2 batch was reviewed, no signature was invented, and no canonical write or promotion occurred. Architecture v12 and canonical contracts remain unchanged.
+
 # Phase 115 status — first MB2 batch reviewed
 
 Merged Phase 114A (`79a850d`) and evidence revision v2 / PR #90 (`16ba374`) are present. Repository

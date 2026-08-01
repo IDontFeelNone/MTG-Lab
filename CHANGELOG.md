@@ -1,3 +1,9 @@
+## Phase 116 — Resolve ambiguous MB2 identifiers
+
+- Resolved the exact 21 Phase 115 candidates as non-unique `scryfallCardBackId` aliases after retained collision evidence established one shared card-back reference across 820 distinct UUID-addressed printings.
+- Recomputed the batch to 1,000 approved candidates (384 Cards, 379 Printings, 235 Identifiers, 2 Finishes), zero exclusions, unresolved candidates, quarantines, fatal conflicts, or orphaned Printings.
+- Retained seven deterministic overlay artifacts and an unsigned `pending_operator_signature` decision. Operator-signature readiness is true, but promotion readiness remains false; no signature, canonical write, Marvel/second-batch review, or promotion occurred. Architecture v12 and canonical contracts are unchanged.
+
 ## Phase 115 — Review first Mystery Booster 2 batch
 
 - Verified retained evidence identity `30663562841-review-payload-v2` and reviewed all 1,000 candidates in exactly the first MB2 batch from retained payload bytes.

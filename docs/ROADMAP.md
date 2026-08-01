@@ -1,3 +1,7 @@
+# Phase 116 roadmap update
+
+The exact 21 Phase 115 Identifier ambiguities are deterministically resolved as a retained non-unique card-back alias group. The first MB2 batch now has 1,000 approved evidence classifications and valid dependency closure. The immediate separate gate is genuine operator signature metadata; promotion remains false and unauthorized. No second MB2 batch or Marvel review occurred.
+
 # Phase 115 roadmap update
 
 The first true retained-payload MB2 candidate review is complete. Resolve its 21 ambiguous Identifier mappings before operator signature; signature and promotion remain separate gates. No second MB2 batch or Marvel review is authorized.

@@ -1,6 +1,6 @@
-# Phase 115 — first Mystery Booster 2 candidate review
+# Phases 115–116 — first Mystery Booster 2 candidate review and resolution
 
-> **Status:** candidate review complete; awaiting additional evidence and operator signature — 2026-08-01
+> **Status:** identifier evidence resolved; pending genuine operator signature — 2026-08-01
 > **Evidence identity:** `30663562841-review-payload-v2` (source workflow run `30663562841`)
 > **Selected batch:** `mb2-batch-000001-e32022126c07`
 > **Canonical writes / promotions:** 0 / 0
@@ -55,3 +55,31 @@ resolution. The operator signature is deliberately absent. Consequently the pend
 not authorize promotion, and `canonical_write`, `promotion_authorized`, and
 `promotion_performed` remain false. Phase 115 stops here: no signing, promotion invocation, or
 canonical mutation occurred.
+
+## Phase 116 resolution overlay
+
+Phase 116 preserves every Phase 115 byte and resolves exactly its 21 additional-evidence
+Identifier candidates. All belong to one retained collision group:
+`scryfallCardBackId:0aeebaf5-8c7d-4636-9e82-8c27447861f7`. The finding contains 820 distinct
+MTGJSON UUIDs across 816 physical set/collector/language coordinates in MB2 and MSH source rows.
+This is a shared, non-unique card-back provider reference, not a global Printing identity. Each of
+the 21 candidates independently retains its MB2 Printing UUID and approved Card relationship;
+therefore all 21 are `approved_after_resolution`. Strict MTGJSON UUID uniqueness is unchanged.
+No duplicate, source defect, quarantine, fatal conflict, or unsupported case was found.
+
+The final batch totals are 979 unchanged approved plus 21 newly approved: 1,000 approved, zero
+excluded, unresolved, quarantined, or fatal. Approved entity totals are 384 Cards, 379 Printings,
+235 Identifiers, and 2 Finishes. Recomputed dependency closure is valid and deterministic with zero
+orphaned Printings; non-approved closure lists are empty and no MSH candidate is approved or
+reviewed. Source collision rows mentioning MSH were inspected only as required conflicting
+evidence, not as MSH candidates.
+
+Seven immutable overlay artifacts are retained under
+`data/reviews/phase-116/mb2-batch-000001-e32022126c07/`: the identifier-resolution ledger,
+collision analysis, updated classification ledger, updated findings, dependency closure, pending
+decision, and promotion-readiness report. The pending decision identity is
+`7a559f553e4b53c859efbdab542aefcb7e041170a55ace88d032c358e70cb23d` with status
+`pending_operator_signature`. Evidence and closure are ready for a genuine operator signature,
+but none was created. Promotion readiness is false because the signature is missing and Phase 116
+prohibits promotion. No canonical write or promotion occurred; Architecture v12 and canonical
+contracts remain unchanged.
