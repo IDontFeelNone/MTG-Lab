@@ -531,3 +531,11 @@ promotion occurred. Architecture v12 and canonical contracts are unchanged.
   immutable snapshots, collection summaries, deck completion, acquisition priorities, and CLI.
 - Added synthetic validation fixture and collection-intelligence contract documentation.
 - Made no canonical production update, pricing/market integration, AI provider, or architecture change.
+# Phase 125 — Canonical Query & Intelligence API
+
+Added a deterministic, explainable canonical query service for Card attributes and
+identifiers, Card-to-Printing traversal, Printing lookup, Product summaries, and collection
+facts, plus structured JSON CLI commands and unittest coverage. Every service answer carries
+provenance, confidence, canonical identifiers, explicit not-found handling, and canonical
+snapshot identity. Architecture v12/contracts and Phase 119 canonical bytes are unchanged;
+no pricing, market intelligence, simulation, recommendation, AI provider, or product was added.

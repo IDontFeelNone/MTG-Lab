@@ -71,3 +71,11 @@ requirements. No canonical state changed and no promotion ran.
   `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
 - No Hobbit substitution, MSH/Marvel promotion, operator signatures, authorization workflow,
   pricing, market feed, AI provider, dashboard, simulation, or Architecture v12 change.
+# Phase 125 session state
+
+- Baseline: Phase 124 merged (`de12a6b`).
+- Canonical query service and structured JSON CLI: implemented and deterministic.
+- Production canonical state: unchanged; Phase 119 only at digest
+  `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
+- Architecture v12/contracts, automatic updates, and Collection Intelligence: unchanged.
+- Pricing, market intelligence, simulations, recommendations, AI providers, and new products: none.

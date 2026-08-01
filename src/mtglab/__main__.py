@@ -6,7 +6,7 @@ from pathlib import Path
 from dataset_import import DatasetRegistry, ImportManager
 from external_ingestion import (AdapterRegistry, ExternalDatasetIngestor, MTGJSONAdapter,
                                 detect_mtgjson, generate_manifest)
-from query import CanonicalQueryEngine
+from query import CanonicalQueryEngine, CanonicalQueryService, QueryError
 from analytics import CanonicalAnalyticsEngine
 from semantic import CanonicalSemanticQueryEngine, SemanticRequest
 from reasoning import ReasoningContextBuilder, ReasoningContextError, ReasoningContextRequest
@@ -35,7 +35,7 @@ def main(argv=None) -> int:
     collection_import = collection_commands.add_parser("import")
     collection_import.add_argument("--input", type=Path, required=True)
     collection_import.add_argument("--snapshot-id"); collection_import.add_argument("--game", default="magic")
-    for name in ("verify", "summary", "duplicates"):
+    for name in ("verify", "summary", "duplicates", "owned", "missing", "unique", "unresolved", "acquisitions"):
         command = collection_commands.add_parser(name); command.add_argument("--snapshot", required=True)
         command.add_argument("--game", default="magic")
     deck = commands.add_parser("deck")
@@ -62,6 +62,13 @@ def main(argv=None) -> int:
         if name == "normalize": command.add_argument("--timestamp", required=True)
     query = commands.add_parser("query")
     query_commands = query.add_subparsers(dest="query_command", required=True)
+    card_query = query_commands.add_parser("card"); card_query.add_argument("name", nargs="?")
+    card_query.add_argument("--game", default="magic"); card_query.add_argument("--type")
+    card_query.add_argument("--color"); card_query.add_argument("--rarity"); card_query.add_argument("--set", dest="set_name")
+    card_query.add_argument("--mana-value"); card_query.add_argument("--keyword"); card_query.add_argument("--legality")
+    card_query.add_argument("--identifier"); card_query.add_argument("--printings", action="store_true")
+    product_query = query_commands.add_parser("product"); product_query.add_argument("identifier"); product_query.add_argument("--game", default="magic")
+    printing_query = query_commands.add_parser("printing"); printing_query.add_argument("identifier"); printing_query.add_argument("--game", default="magic")
     entity = query_commands.add_parser("entity")
     entity.add_argument("identifier", nargs="?")
     entity.add_argument("--game", default="magic"); entity.add_argument("--type")
@@ -183,9 +190,15 @@ def main(argv=None) -> int:
                     snapshot = json.loads(snapshot_path.read_text())
                     summary = collection_summary(snapshot, resolver)
                     if args.command == "collection":
-                        result = summary if args.collection_command == "summary" else {
+                        if args.collection_command == "summary": result = summary
+                        elif args.collection_command == "duplicates": result = {
                             "schema_version":"collection-duplicates-v1", "snapshot_id":args.snapshot,
                             "duplicates":summary["duplicates"], "duplicate_count":summary["duplicate_count"]}
+                        else:
+                            query_engine = CanonicalQueryEngine(args.game,
+                                games_root=args.data_root / "canonical" / "games", data_root=args.data_root)
+                            result = CanonicalQueryService(query_engine).collection(
+                                snapshot, args.collection_command).as_dict()
                     else:
                         decks = [json.loads(path.read_text()) for path in args.deck]
                         comparisons = [compare_deck(snapshot, item, resolver) for item in decks]
@@ -331,19 +344,34 @@ def main(argv=None) -> int:
     elif args.command == "query":
         engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games",
                                       data_root=args.data_root)
-        if args.query_command == "entity":
-            result = engine.entities(canonical_id=args.identifier, provider_id=args.provider_id,
-                external_id=args.external_id, entity_type=args.type, card_name=args.name,
-                normalized_name=args.normalized_name, printing_id=args.printing_id, set_id=args.set_id)
-            result = [item.as_dict() for item in result]
-        elif args.query_command == "search":
-            result = [item.as_dict() for item in engine.search(args.text, mode=args.mode,
-                                                               case_insensitive=args.case_insensitive)]
-        elif args.query_command == "dataset": result = engine.dataset(args.identifier)
-        elif args.query_command == "provenance": result = engine.provenance(args.identifier)
-        else:
-            result = [item.as_dict() if hasattr(item, "as_dict") else item
-                      for item in engine.validation(args.state)]
+        service = CanonicalQueryService(engine)
+        try:
+            if args.query_command == "card":
+                if args.printings:
+                    identity = args.identifier or args.name
+                    if not identity: raise QueryError("card --printings requires a name or identifier")
+                    result = service.printings_for_card(identity).as_dict()
+                else:
+                    result = service.cards(name=args.name, type=args.type, color=args.color,
+                        rarity=args.rarity, set=args.set_name, mana_value=args.mana_value,
+                        keyword=args.keyword, legality=args.legality, identifier=args.identifier).as_dict()
+            elif args.query_command == "product": result = service.product(args.identifier).as_dict()
+            elif args.query_command == "printing": result = service.printing(args.identifier).as_dict()
+            elif args.query_command == "entity":
+                result = engine.entities(canonical_id=args.identifier, provider_id=args.provider_id,
+                    external_id=args.external_id, entity_type=args.type, card_name=args.name,
+                    normalized_name=args.normalized_name, printing_id=args.printing_id, set_id=args.set_id)
+                result = [item.as_dict() for item in result]
+            elif args.query_command == "search":
+                result = [item.as_dict() for item in engine.search(args.text, mode=args.mode,
+                                                                   case_insensitive=args.case_insensitive)]
+            elif args.query_command == "dataset": result = engine.dataset(args.identifier)
+            elif args.query_command == "provenance": result = engine.provenance(args.identifier)
+            else:
+                result = [item.as_dict() if hasattr(item, "as_dict") else item
+                          for item in engine.validation(args.state)]
+        except QueryError as error:
+            print(json.dumps({"valid":False,"error":str(error)}, indent=2, sort_keys=True)); return 2
     elif args.command == "adapter":
         if args.adapter_command == "detect": result = detect_mtgjson(args.source)
         else:

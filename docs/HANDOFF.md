@@ -58,3 +58,10 @@ write or promotion occurred in Phase 118.
 Review and merge the Collection Intelligence Foundation. It is downstream-only and needs no
 authorization form. Do not begin pricing or market intelligence before review. The next useful
 boundary is collection/deck contract hardening and richer canonical attribute coverage.
+# Phase 125 handoff
+
+Phase 125 adds the first high-level `canonical-query-v1` service and JSON CLI over existing
+canonical and collection facts. Review `docs/CANONICAL_QUERY_LAYER.md` for operations and
+limitations. Phase 124 baseline `de12a6b` is merged; production remains solely Phase 119 at
+digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
+Canonical data/contracts and Architecture v12 were not modified. Stop after Phase 125.
