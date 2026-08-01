@@ -1,0 +1,14 @@
+{
+  "acceptable_printing_policy": "any",
+  "deck_id": "synthetic-phase-124-validation-only",
+  "format": "synthetic-test-format",
+  "requirements": [
+    {"card_id": "magic.lightning-bolt", "quantity": 4, "section": "main"},
+    {"card_id": "magic.sol-ring", "quantity": 1, "section": "sideboard"}
+  ],
+  "schema_version": "deck-requirement-v1",
+  "snapshot_date": "2026-08-01",
+  "source": {"name": "Phase 124 synthetic repository fixture", "type": "synthetic"},
+  "substitution_policy": "none",
+  "version": "1"
+}

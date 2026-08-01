@@ -191,3 +191,8 @@ A human must supply identity, role, durable review reference, RFC 3339 review ti
 decision, notes, and matching request/batch/candidate digests. No authorization exists and
 promotion readiness is false. Authorization and promotion remain separate; no canonical write or
 promotion occurred. Architecture v12 and canonical contracts are unchanged.
+# Phase 124 roadmap update
+
+Collection Intelligence v1 is complete as a deterministic downstream service. The next
+recommended milestone hardens import/deck contracts and canonical attribute coverage before
+any separately approved pricing or market-intelligence work. Architecture v12 is unchanged.

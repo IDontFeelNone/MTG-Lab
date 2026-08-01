@@ -53,3 +53,9 @@ and canonical pre-state immediately before writing.
 Promotion must be explicitly invoked, deterministic, audited, replayable, rollback capable, and
 reviewed through a normal pull request. Do not include MSH/Marvel, another MB2 batch, simulation,
 market analysis, or AI providers.
+# Next task after Phase 124
+
+After Phase 124 is reviewed and merged, scope a separate milestone for contract hardening,
+larger synthetic collection/deck fixtures, and canonical color/identifier coverage. Pricing,
+market recommendations, live deck lists, simulations, dashboards, and AI providers remain
+unauthorized.

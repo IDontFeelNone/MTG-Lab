@@ -1,8 +1,8 @@
 # MTG Lab
 
-> **Phase 101:** the post-Phase-100 architecture review is complete. Architecture v12 is
-> unchanged. The repository remains pre-alpha; no subsequent implementation milestone is
-> authorized by the review or roadmap.
+> **Phase 124:** the Collection Intelligence Foundation connects deterministic collection
+> import, canonical resolution, immutable snapshots, summaries, deck completion, and
+> price-independent acquisition priorities. Architecture v12 remains unchanged.
 
 > **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
@@ -271,7 +271,7 @@ This organization allows multiple trading card games to share a common analytics
 
 **Status:** Active Development
 
-**Current Phase:** Phase 101 — Architecture Review and Roadmap Refresh (complete)
+**Current Phase:** Phase 124 — Collection Intelligence Foundation (complete)
 
 **Reference Product:** Magic: The Gathering — Mystery Booster 2
 

@@ -59,3 +59,10 @@ The batch is technically ready for a separately invoked bounded canonical promot
 still explicit, exactly-one-batch, target-isolated, canonical-pre-state guarded, deterministic,
 audited, and rollback capable. Phase 118 performed no canonical write or promotion and includes no
 MSH/Marvel candidate.
+# Phase 124 status
+
+Collection Intelligence v1 is implemented: deterministic JSON/CSV collection import,
+canonical resolution with retained uncertainty, immutable snapshots, summaries, deck
+completion, and explainable price-independent priorities. Architecture v12 and production
+canonical digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`
+are unchanged; Phase 119 remains the only production promotion.

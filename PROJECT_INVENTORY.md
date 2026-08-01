@@ -307,3 +307,10 @@ A human must supply identity, role, durable review reference, RFC 3339 review ti
 decision, notes, and matching request/batch/candidate digests. No authorization exists and
 promotion readiness is false. Authorization and promotion remain separate; no canonical write or
 promotion occurred. Architecture v12 and canonical contracts are unchanged.
+# Phase 124 inventory update
+
+`src/collection/intelligence.py` and the unified CLI now provide versioned JSON/CSV import,
+explicit canonical resolution outcomes, immutable collection snapshots, summaries, deck
+completion, and explainable price-independent acquisition priorities. The synthetic deck
+fixture and focused contract document define validation and boundaries. Canonical production
+state remains Phase 119 only at digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
