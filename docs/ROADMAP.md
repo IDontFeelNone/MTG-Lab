@@ -1,3 +1,7 @@
+# Phase 117A roadmap update
+
+The GitHub-native human authorization submission gate is implemented, but has not been operated. After a green implementation merge, run dry-run first with genuine human values, inspect reports, rerun non-dry, and merge only the authorization artifact PR. Stop before canonical promotion. Another MB2 batch, MSH/Marvel, Architecture v12, canonical contracts, and AI/provider simulation remain out of scope.
+
 # Phase 116 roadmap update
 
 The exact 21 Phase 115 Identifier ambiguities are deterministically resolved as a retained non-unique card-back alias group. The first MB2 batch now has 1,000 approved evidence classifications and valid dependency closure. The immediate separate gate is genuine operator signature metadata; promotion remains false and unauthorized. No second MB2 batch or Marvel review occurred.

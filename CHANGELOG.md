@@ -1,3 +1,8 @@
+## Phase 117A — GitHub-native MB2 operator authorization
+
+- Added a manual, least-privilege workflow for genuine human submission of the immutable Phase 117 contract. It validates the Phase 115–117 chain and canonical pre-state, defaults to a non-persistent dry run, and rejects blank, placeholder, AI/automation, malformed, or mismatched input.
+- Added independent immutable-artifact verification and fail-closed authorization-only branch/commit/PR persistence. No operator values, authorization artifact, canonical write, promotion, MSH scope, Architecture v12 change, or canonical-contract change is included.
+
 ## Phase 116 — Resolve ambiguous MB2 identifiers
 
 - Resolved the exact 21 Phase 115 candidates as non-unique `scryfallCardBackId` aliases after retained collision evidence established one shared card-back reference across 820 distinct UUID-addressed printings.

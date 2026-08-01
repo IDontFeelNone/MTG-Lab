@@ -99,3 +99,18 @@ The deterministic request digest is
 `authorization_decision`, `operator_notes`, `signature_request_digest`, `authorized_batch_id`,
 and `authorized_candidate_digest`. No such metadata has been supplied. Authorization is distinct
 from later bounded promotion: no authorization, canonical write, or promotion occurred.
+
+## Phase 117A GitHub operating procedure
+
+After the Phase 117A implementation PR merges with green Actions, open **Actions → MB2 operator
+authorization → Run workflow**. First retain `dry_run: true` and the immutable digest, batch, and
+branch defaults. The human owner must personally enter a genuine identity and role, a durable
+namespaced review reference, an RFC 3339 timestamp with timezone, one offered decision, and
+non-placeholder notes. Review the uploaded chain, authorization, verification, and persistence
+reports; the dry run creates no branch, commit, PR, or repository authorization artifact.
+
+If and only if that report is valid, rerun with the same genuine values and `dry_run: false`. Review
+and merge the resulting authorization-only PR into `main`. GitHub's repository setting that allows
+Actions to create PRs may need enabling; on failure the report preserves the pushed branch and
+commit for manual PR creation. Stop after merging that PR. Do not invoke canonical promotion.
+Repeated byte-identical input is idempotent; conflicting input for the request fails closed.

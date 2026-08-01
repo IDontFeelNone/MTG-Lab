@@ -1,3 +1,7 @@
+# Phase 117A status — GitHub-native authorization workflow implemented
+
+Main contains merged Phase 117 (`b7cee97`). The immutable scope is evidence `30663562841-review-payload-v2`, batch `mb2-batch-000001-e32022126c07`, MB2 / Mystery Booster 2, 1,000 approved candidates, request digest `4b281b3eb45b6a7e3e82a2309c271bffe1cb6c8cb939d46c5b8be059e0b6000d`, candidate digest `e32022126c07036337f810d06dc29b5eead5afd850f7f3af0a26ad5b0d46e66e`, and canonical pre-state `0e5ead0d4693f1dc75c2f7b5e401f22e4fa302f93bb8eab59f0ddeefd0f680ba`. Phase 117A adds only the manual authorization workflow and its validation/persistence support. No authorization exists, no canonical write or promotion occurred, and no MSH/Marvel data is included. Architecture v12 and canonical contracts are unchanged.
+
 # Phase 116 status — ambiguous MB2 identifiers resolved
 
 Merged Phase 115 (`975cc33`) reviewed exactly production evidence `30663562841-review-payload-v2`, batch `mb2-batch-000001-e32022126c07`: 979 approved, 0 excluded, and 21 additional-evidence Identifier candidates. Phase 116 matched that exact retained scope and classified the single collision group as a non-unique provider alias: `scryfallCardBackId:0aeebaf5-8c7d-4636-9e82-8c27447861f7` is shared across 820 distinct UUID-addressed physical coordinates and is never substituted for strict MTGJSON Printing identity.

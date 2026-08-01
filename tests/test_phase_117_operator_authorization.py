@@ -8,7 +8,7 @@ import unittest
 
 from production_evidence.operator_authorization import (
     BATCH_ID, build_signature_request, canonical_state_digest, record_authorization,
-    verify_review_chain, write_phase117_artifacts,
+    verify_authorization_artifact, verify_review_chain, write_phase117_artifacts,
 )
 from production_evidence.repository import EvidenceError
 
@@ -60,7 +60,8 @@ class Phase117AuthorizationTests(unittest.TestCase):
         self.assertFalse((RETAINED / "operator-authorization.json").exists())
 
     def test_blank_placeholder_and_ai_identity_rejected(self):
-        for identity in ("", "placeholder", "Codex", "ChatGPT operator", "OpenAI", "AI"):
+        for identity in ("", "placeholder", "Codex", "ChatGPT operator", "OpenAI", "AI",
+                         "automation bot", "workflow identity"):
             with self.subTest(identity=identity), tempfile.TemporaryDirectory() as tmp:
                 root = self.copied_data(tmp); fields = self.valid_fields(); fields["operator_identity"] = identity
                 with self.assertRaises(EvidenceError): record_authorization(root, fields)
@@ -84,11 +85,21 @@ class Phase117AuthorizationTests(unittest.TestCase):
             first = record_authorization(root, self.valid_fields())
             second = record_authorization(root, self.valid_fields())
             self.assertEqual(first, second)
+            self.assertEqual(verify_authorization_artifact(root), first)
             self.assertEqual(first["status"], "authorized_for_later_promotion")
             self.assertFalse(first["canonical_write"]); self.assertFalse(first["promotion_performed"])
             self.assertEqual(before, canonical_state_digest(root))
             conflicting = self.valid_fields(); conflicting["operator_notes"] = "Different"
             with self.assertRaises(EvidenceError): record_authorization(root, conflicting)
+
+    def test_authorization_artifact_digest_is_independently_verified(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self.copied_data(tmp)
+            record_authorization(root, self.valid_fields())
+            path = root / "reviews/phase-117" / BATCH_ID / "operator-authorization.json"
+            artifact = json.loads(path.read_text()); artifact["operator_role"] = "Changed"
+            path.write_text(json.dumps(artifact))
+            with self.assertRaises(EvidenceError): verify_authorization_artifact(root)
 
     def test_rejection_and_return_block_later_promotion(self):
         for decision, status in (("reject", "rejected"),

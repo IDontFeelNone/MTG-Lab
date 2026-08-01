@@ -1,3 +1,7 @@
+# Phase 117A handoff
+
+After this implementation PR merges green, the human project owner should dispatch **MB2 operator authorization** with `dry_run: true`, supply genuine identity, role, durable namespaced reference, RFC 3339 timestamp, decision, and notes, and retain the immutable defaults. Inspect the uploaded verification reports. If valid, rerun byte-identical values with `dry_run: false`; review and merge the resulting authorization-only PR into `main`. Repository Settings > Actions > General may need permission for Actions to create PRs; if unavailable, use the reported pushed branch and commit to open it manually. Stop after the authorization PR: do not run canonical promotion.
+
 # Phase 116 handoff
 
 The exact 21 Phase 115 ambiguous Identifiers are resolved from retained evidence as shared `scryfallCardBackId` aliases, bringing the first MB2 batch to 1,000 approved evidence classifications with valid dependency closure and no exclusions, unresolved candidates, quarantines, fatal conflicts, or orphaned Printings. The seven Phase 116 overlay artifacts are immutable and Phase 115 remains byte-for-byte unchanged.

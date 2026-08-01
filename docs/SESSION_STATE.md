@@ -1,3 +1,7 @@
+# Phase 117A session state
+
+Merged Phase 117 is confirmed at `b7cee97`. Phase 117A implements only a manual GitHub Actions authorization boundary with exact immutable MB2 scope, safe dry-run reports, artifact verification, and authorization-only persistence. The retained repository still contains no operator authorization. Canonical digest remains `0e5ead0d4693f1dc75c2f7b5e401f22e4fa302f93bb8eab59f0ddeefd0f680ba`; canonical writes and promotions remain false. No MSH/Marvel scope, second batch, Architecture v12 change, or canonical-contract change occurred.
+
 # Phase 116 session state
 
 Phase 116 confirmed merged Phase 115 (`975cc33`) and its immutable 979/0/21 baseline, then resolved exactly those 21 Identifier candidates from the retained 820-record `scryfallCardBackId` collision. All represent a shared non-unique card-back reference attached to distinct strict UUID Printing identities. Final classifications reconcile to 1,000 approved (384 Card, 379 Printing, 235 Identifier, 2 Finish), with zero excluded, unresolved, quarantined, fatal, or orphaned candidates.
