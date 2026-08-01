@@ -1,0 +1,11 @@
+{
+  "batch_id": "mb2-batch-000001-e32022126c07",
+  "canonical_write": false,
+  "evidence_identity": "30663562841-review-payload-v2",
+  "immutable": true,
+  "ledger_sha256": "cf892ad484f2f09331103f4f0107428bb18b81a409d61249d49f5cc132f28f8f",
+  "operator_signature": null,
+  "promotion_authorized": false,
+  "schema_version": "phase-115-candidate-review-v1",
+  "status": "awaiting_operator_signature"
+}

@@ -1,0 +1,8 @@
+{
+  "batch_id": "mb2-batch-000001-e32022126c07",
+  "digest": "6f6520a114581430ef3650215a4b5b1f5024d5476ec58b0d1dd32a3a418d244d",
+  "evidence_identity": "30663562841-review-payload-v2",
+  "rule": "each Printing and its Card remain in this exact target-only batch",
+  "schema_version": "phase-115-candidate-review-v1",
+  "valid": true
+}

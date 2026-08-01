@@ -1,3 +1,7 @@
+# Phase 115 inventory update
+
+The repository now retains a reproducible candidate-level review of exactly the first MB2 batch from production evidence revision v2: 1,000 ledger entries, findings, valid dependency closure, an immutable unsigned pending decision, and a not-ready promotion report. Counts are 979 approved, 0 excluded, and 21 requiring additional evidence. Canonical state and Architecture v12 are unchanged.
+
 # Phase 114A inventory update
 
 `src/production_evidence/adapter.py` now emits schema 2 review payloads; `src/production_evidence/repository.py` verifies and stores them under a derived immutable evidence identity. The manual intake workflow targets a dedicated revision branch and reports payload count/bytes. Tests cover exact extraction, isolation, integrity, missing/duplicate payloads, unresolved Card-to-Printing dependencies, immutable collisions, idempotent normalization, and no canonical/promotion authority. The original retained run is unchanged.
