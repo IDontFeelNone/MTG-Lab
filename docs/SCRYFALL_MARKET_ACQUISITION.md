@@ -1,7 +1,29 @@
 # Scryfall MB2 Market Acquisition
 
-**Phase 127D status:** bounded official bulk-download URI validation repaired. No
-production market observation was fabricated or retained by this repair.
+**Phase 127E status:** provider-descriptor field preservation is explicit. No production
+market observation was fabricated or retained by this repair.
+
+The real post-127D dry run reached the official endpoint, decoded a direct `bulk_data`
+object, inspected and selected exactly one `default_cards` descriptor, and accepted its
+`updated_at`. It then reported `blank_uri` before security validation, began no payload
+download, and wrote neither market nor canonical state. It performed no promotion; production
+MB2 market coverage remains **0/379**.
+
+Code-level review found that Phase 127D did not actually establish that the provider returned
+a blank string: one `selected.get("download_uri")` branch collapsed an absent field, every
+non-string value, and a whitespace-only string into the same `blank_uri` result. Selection
+used the decoded mapping directly, but this fact was neither represented nor regression-tested,
+so the report could not distinguish provider schema from a future projection or sanitization
+loss. Phase 127E keeps the exact decoded, validated provider descriptor as the transport
+object through URI extraction. A separate value-free diagnostic projection contains only
+sorted key names and runtime type names and cannot replace or mutate that transport object.
+
+Diagnostics now distinguish `download_uri_absent`, `download_uri_not_string`,
+`download_uri_blank`, and `download_uri_string_preserved`; report top-level and selected key
+names, field presence/type/normalized blankness, original-field preservation, and object
+separation. URI values, paths, query contents, bodies, headers, and payload contents remain
+excluded. URI security policy is unchanged and every extraction/schema/security failure stops
+before download.
 
 The latest real Phase 127C GitHub Actions dry run reached Scryfall and parsed one direct
 `bulk_data` object, inspected one entry, selected exactly one `default_cards` descriptor,
@@ -154,10 +176,11 @@ invalid, the official metadata lacks a secure `download_uri`, or an integrity/is
 fails. Phase 127B performs no live persistence, canonical write, valuation, or promotion.
 
 
-## Phase 127C post-merge operation
+## Phase 127E post-merge operation
 
-After Phase 127C merges, manually dispatch **Market acquisition** exactly once with
-`persist=false`. Download the always-retained diagnostics artifact and verify metadata and
-payload stages, identities, counts, MB2 isolation, and digests. Stop on any nonzero status or
-failed check. A persistent dispatch is outside Phase 127C and must not occur until that dry
-run has been reviewed.
+After Phase 127E merges, manually dispatch **Market acquisition** exactly once with
+`persist=false`. Confirm `download_uri_string_preserved`, descriptor/diagnostic object
+separation, a successful unchanged URI-policy result, exactly one payload download, valid
+payload shape, and the MB2-only mapping census. Confirm `canonical_write: false` and
+`promotion_performed: false`. Stop on any nonzero status or failed check; `persist=true` is a
+hard stop and is not authorized by Phase 127E.

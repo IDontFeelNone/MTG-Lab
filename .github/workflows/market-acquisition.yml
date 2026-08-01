@@ -67,6 +67,10 @@ jobs:
           assert not x['canonical_write'] and not x['promotion_performed']
           PY
           if [ "$PERSIST" = true ]; then
+            echo 'Phase 127E authorizes persist=false only; persistence is a hard stop.' >&2
+            exit 2
+          fi
+          if [ "$PERSIST" = true ]; then
             OBSERVED="$(python -c "import json; print(json.load(open('market-acquisition-dry-run.json'))['source_observed_at'])")"
             SOURCE_URL="$(python -c "import json; print(json.load(open('market-acquisition-dry-run.json'))['source_url'])")"
             python scripts/scryfall_market_acquisition.py --data-root data --payload market-acquisition-source.json --source-url "$SOURCE_URL" --observed-at "$OBSERVED" --retrieved-at "$(cat market-acquisition-stamp.txt)" --run-id "$(cat market-acquisition-run-id.txt)" --persist > market-acquisition-persist.json

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import dataclass
 from datetime import datetime, timezone
 import ipaddress
 import json
@@ -29,8 +30,14 @@ def new_diagnostics() -> dict:
             "metadata_fetched": False, "download_uri_obtained": False,
             "bulk_payload_download_began": False, "payload_bytes_retained": False,
             "metadata_root_object_type": None, "metadata_parsing_shape": None,
+            "metadata_top_level_keys": [], "selected_descriptor_keys": [],
             "bulk_entries_inspected": 0, "default_cards_matches": 0,
             "selected_bulk_type": None, "updated_at_present": False,
+            "download_uri_present": False, "download_uri_runtime_type": None,
+            "download_uri_blank_after_normalization": None,
+            "descriptor_selection_preserved_original_field": False,
+            "transport_and_diagnostic_objects_distinct": False,
+            "download_uri_field_extraction_reason": None,
             "download_uri_valid": False, "download_uri_scheme": None,
             "download_uri_hostname": None, "download_uri_effective_port": None,
             "download_uri_has_userinfo": False, "download_uri_has_query": False,
@@ -47,6 +54,54 @@ def _fail(message: str, diagnostics: dict, stage: str, *, status: int | None = N
     error = error_type(message)
     error.diagnostics = dict(diagnostics)
     raise error
+
+
+@dataclass(frozen=True)
+class SelectedBulkDescriptor:
+    """Keep provider transport data separate from its value-free diagnostic view."""
+    provider: dict
+    diagnostic_projection: dict
+
+
+def _select_bulk_descriptor(metadata: dict, diagnostics: dict) -> SelectedBulkDescriptor:
+    """Select the provider object without projecting away transport-only fields."""
+    diagnostics["metadata_top_level_keys"] = sorted(str(key) for key in metadata)
+    root_type = metadata.get("object")
+    diagnostics["metadata_root_object_type"] = root_type if isinstance(root_type, str) else None
+    if root_type == "error":
+        _fail("Scryfall returned an error metadata object", diagnostics, "metadata_validation")
+
+    if root_type == "bulk_data":
+        diagnostics["metadata_parsing_shape"] = "direct_object"
+        entries = [metadata]
+    elif root_type == "list" and isinstance(metadata.get("data"), list):
+        diagnostics["metadata_parsing_shape"] = "list_object"
+        entries = metadata["data"]
+    else:
+        _fail("Scryfall bulk metadata had no supported response shape",
+              diagnostics, "metadata_validation")
+
+    diagnostics["bulk_entries_inspected"] = len(entries)
+    matches = [entry for entry in entries
+               if isinstance(entry, dict) and entry.get("type") == "default_cards"]
+    diagnostics["default_cards_matches"] = len(matches)
+    if len(matches) != 1:
+        _fail("Scryfall bulk metadata must contain exactly one default_cards entry",
+              diagnostics, "metadata_validation")
+
+    # This is the exact decoded provider mapping, not a whitelist projection.  In
+    # particular, download_uri remains present for the subsequent transport step.
+    provider = matches[0]
+    keys = sorted(str(key) for key in provider)
+    projection = {"keys": keys,
+                  "value_types": {str(key): type(value).__name__
+                                  for key, value in provider.items()}}
+    diagnostics["selected_descriptor_keys"] = keys
+    diagnostics["transport_and_diagnostic_objects_distinct"] = provider is not projection
+    diagnostics["descriptor_selection_preserved_original_field"] = (
+        ("download_uri" in provider) == ("download_uri" in matches[0])
+        and provider.get("download_uri") is matches[0].get("download_uri"))
+    return SelectedBulkDescriptor(provider=provider, diagnostic_projection=projection)
 
 
 def fetch(url: str, *, diagnostics: dict | None = None, endpoint_category: str = "scryfall_bulk_payload",
@@ -102,29 +157,8 @@ def parse_bulk_metadata(metadata_bytes: bytes, diagnostics: dict) -> tuple[str, 
         diagnostics["metadata_root_object_type"] = type(metadata).__name__
         _fail("Scryfall bulk metadata root was not an object", diagnostics, "metadata_validation")
 
-    root_type = metadata.get("object")
-    diagnostics["metadata_root_object_type"] = root_type if isinstance(root_type, str) else None
-    if root_type == "error":
-        _fail("Scryfall returned an error metadata object", diagnostics, "metadata_validation")
-
-    if root_type == "bulk_data":
-        diagnostics["metadata_parsing_shape"] = "direct_object"
-        entries = [metadata]
-    elif root_type == "list" and isinstance(metadata.get("data"), list):
-        diagnostics["metadata_parsing_shape"] = "list_object"
-        entries = metadata["data"]
-    else:
-        _fail("Scryfall bulk metadata had no supported response shape",
-              diagnostics, "metadata_validation")
-
-    diagnostics["bulk_entries_inspected"] = len(entries)
-    matches = [entry for entry in entries
-               if isinstance(entry, dict) and entry.get("type") == "default_cards"]
-    diagnostics["default_cards_matches"] = len(matches)
-    if len(matches) != 1:
-        _fail("Scryfall bulk metadata must contain exactly one default_cards entry",
-              diagnostics, "metadata_validation")
-    selected = matches[0]
+    selection = _select_bulk_descriptor(metadata, diagnostics)
+    selected = selection.provider
     diagnostics["selected_bulk_type"] = selected.get("type")
     if selected.get("object") != "bulk_data" or selected.get("type") != "default_cards":
         _fail("Scryfall default_cards metadata entry had an invalid contract",
@@ -143,10 +177,23 @@ def parse_bulk_metadata(metadata_bytes: bytes, diagnostics: dict) -> tuple[str, 
     download_uri = selected.get("download_uri")
     reason = None
     try:
-        if not isinstance(download_uri, str) or not download_uri.strip():
-            diagnostics["download_uri_rejection_reason"] = "blank_uri"
+        present = "download_uri" in selected
+        diagnostics["download_uri_present"] = present
+        diagnostics["download_uri_runtime_type"] = type(download_uri).__name__
+        diagnostics["download_uri_blank_after_normalization"] = (
+            not download_uri.strip() if isinstance(download_uri, str) else None)
+        if not present:
+            reason = "download_uri_absent"
+        elif not isinstance(download_uri, str):
+            reason = "download_uri_not_string"
+        elif not download_uri.strip():
+            reason = "download_uri_blank"
+        if reason is not None:
+            diagnostics["download_uri_field_extraction_reason"] = reason
+            diagnostics["download_uri_rejection_reason"] = reason
             _fail("Scryfall bulk metadata lacked a permitted secure download URI", diagnostics,
                   "download_uri_extraction")
+        diagnostics["download_uri_field_extraction_reason"] = "download_uri_string_preserved"
         parsed = urllib.parse.urlsplit(download_uri)
         hostname = (parsed.hostname or "").lower().removesuffix(".")
         try:
