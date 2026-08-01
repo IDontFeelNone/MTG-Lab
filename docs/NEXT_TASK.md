@@ -1,3 +1,7 @@
+# Next task after Phase 120
+
+After a green protected merge, operate the standard lifecycle for the next bounded trusted set: retain evidence, add its descriptor, dispatch the workflow, and observe checks/auto-merge. Stop on conflict, ambiguity, failed validation, drift, architecture/contract questions, destructive work, or rollback.
+
 # Phase 119 stop boundary
 
 

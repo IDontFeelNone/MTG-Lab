@@ -1,3 +1,5 @@
+> **Phase 120:** Routine exact-batch promotions now use the reusable configuration-driven lifecycle in [Automatic Canonical Updates](AUTOMATIC_CANONICAL_UPDATES.md). Phase 119 remains the immutable first production instance and was not rerun.
+
 # Bounded MTGJSON Canonical Promotion v1
 
 

@@ -1,0 +1,78 @@
+name: Automatic canonical update
+
+on:
+  workflow_dispatch:
+    inputs:
+      config:
+        description: Versioned update configuration
+        required: true
+        default: config/automatic_updates/mb2-first-batch.json
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: automatic-canonical-update-${{ inputs.config }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Plan and execute exact batch
+        env:
+          PYTHONPATH: src
+        run: |
+          python scripts/automatic_canonical_update.py plan --config "${{ inputs.config }}" > automatic-update-plan.json
+          python scripts/automatic_canonical_update.py execute --config "${{ inputs.config }}" > automatic-update-result.json
+          python scripts/automatic_canonical_update.py verify --config "${{ inputs.config }}" > automatic-update-verification.json
+      - name: Complete integrity suite
+        env:
+          PYTHONPATH: src
+        run: |
+          python -m unittest discover -s tests -p "test_*.py" -v
+          python -m compileall -q src tests scripts
+          git diff --check
+      - name: Verify changed-file boundary
+        run: |
+          python scripts/verify_automatic_update_boundary.py --base "${{ github.event.repository.default_branch }}"
+      - name: Create branch and pull request without force
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CONFIG: ${{ inputs.config }}
+        run: |
+          BRANCH="canonical-update/run-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git switch -c "$BRANCH"
+          git add data/automatic_updates automatic-update-*.json
+          git commit -m "Apply trusted canonical update"
+          git push origin "$BRANCH"
+          PR="$(gh pr list --head "$BRANCH" --base "${{ github.event.repository.default_branch }}" --json url --jq '.[0].url')"
+          if [ -z "$PR" ]; then
+            PR="$(gh pr create --head "$BRANCH" --base "${{ github.event.repository.default_branch }}" --title "Automatic canonical update" --body "Automated trusted-source update from \`$CONFIG\`.")"
+          fi
+          printf '%s\n' "$PR" > automatic-update-pr-url.txt
+      - name: Independently verify PR and enable auto-merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PR="$(cat automatic-update-pr-url.txt)"
+          test "$(gh pr view "$PR" --json baseRefName --jq .baseRefName)" = "${{ github.event.repository.default_branch }}"
+          test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$(git rev-parse HEAD)"
+          python scripts/verify_automatic_update_boundary.py --base "${{ github.event.repository.default_branch }}"
+          gh pr merge "$PR" --auto --squash --delete-branch=false
+      - name: Retain diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: automatic-canonical-update-${{ github.run_id }}-${{ github.run_attempt }}
+          path: automatic-update-*.json
+          if-no-files-found: warn
