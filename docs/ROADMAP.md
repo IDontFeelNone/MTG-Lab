@@ -1,3 +1,7 @@
+# Phase 123 roadmap update
+
+Phase 123 implemented the generic immutable snapshot-registration seam but the live provider refresh is blocked by HTTP 403 in the execution environment. The immediate roadmap item remains a future trusted provider refresh and exact-one availability rerun. Automatic promotion remains conditional on one complete target and every existing generic gate; Architecture v12 is unchanged.
+
 # Phase 122 roadmap milestone
 
 The first requested real automatic-update target reached its availability gate but no farther. The retained MTGJSON snapshot has only MB2 and MSH and no Hobbit set; Phase 122 therefore adds the reusable availability boundary and report without selecting a code or creating candidates, a descriptor, or a promotion. A future snapshot may advance only after exactly one complete Hobbit target is established. Architecture v12/contracts remain frozen, Phase 119 remains the sole production promotion, and protected required-green-check merge remains mandatory.

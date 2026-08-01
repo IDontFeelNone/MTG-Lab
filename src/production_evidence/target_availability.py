@@ -1,15 +1,64 @@
 """Fail-closed target discovery and bounded retention for MTGJSON evidence."""
 from __future__ import annotations
 
+import gzip
 import hashlib
 import json
+from pathlib import Path
 from typing import Any, Mapping
 
 SCHEMA = "mtgjson-target-availability-v1"
+SNAPSHOT_SCHEMA = "mtgjson-trusted-snapshot-v1"
 
 
 def canonical_json(value: object) -> bytes:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def register_trusted_snapshot(source: Path, expected_sha256: str, repository: Path) -> dict:
+    """Checksum and immutably retain caller-acquired AllPrintings bytes.
+
+    Acquisition is deliberately separate: the expected digest must come from the trusted
+    delivery path.  Existing evidence is reusable only when both its manifest and bytes are
+    identical; an identity collision fails closed.
+    """
+    raw = source.read_bytes()
+    actual = hashlib.sha256(raw).hexdigest()
+    if len(expected_sha256) != 64 or actual != expected_sha256.casefold():
+        raise ValueError("source checksum verification failed")
+    try:
+        payload = gzip.decompress(raw) if source.name.endswith(".gz") else raw
+        document = json.loads(payload)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ValueError("source is not a readable MTGJSON document") from error
+    if not isinstance(document, Mapping) or not isinstance(document.get("meta"), Mapping) \
+            or not isinstance(document.get("data"), Mapping):
+        raise ValueError("expected AllPrintings meta and data objects")
+    meta = document["meta"]
+    version, publication_date = meta.get("version"), meta.get("date")
+    if not isinstance(version, str) or not version or not isinstance(publication_date, str) or not publication_date:
+        raise ValueError("provider publication identity is incomplete")
+    identity = f"mtgjson-allprintings-{version}+{publication_date.replace('-', '')}-{actual[:12]}"
+    destination = repository / identity
+    artifact_name = "AllPrintings.json.gz" if source.name.endswith(".gz") else "AllPrintings.json"
+    manifest = {
+        "schema_version": SNAPSHOT_SCHEMA, "evidence_identity": identity,
+        "provider": "MTGJSON", "provider_version": version, "provider_date": publication_date,
+        "source_sha256": actual, "retained_artifact": artifact_name,
+        "retained_byte_length": len(raw), "checksum_verified": True,
+        "canonical_write": False, "promotion_performed": False,
+    }
+    manifest_bytes = canonical_json(manifest) + b"\n"
+    if destination.exists():
+        artifact = destination / artifact_name
+        if not artifact.is_file() or artifact.read_bytes() != raw \
+                or (destination / "manifest.json").read_bytes() != manifest_bytes:
+            raise FileExistsError("immutable evidence identity collision")
+        return manifest
+    destination.mkdir(parents=True)
+    (destination / artifact_name).write_bytes(raw)
+    (destination / "manifest.json").write_bytes(manifest_bytes)
+    return manifest
 
 
 def _contains(value: Any, needle: str) -> bool:

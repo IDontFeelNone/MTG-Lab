@@ -1,3 +1,16 @@
+# Phase 123 session state
+
+- Baseline: merged Phase 122 on main (`04f68c9`).
+- Production canonical state: Phase 119 only; digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
+- Historical trusted inventory: MB2 and MSH only; unchanged.
+- Refresh: attempted 2026-08-01; approved metadata/checksum/dataset endpoints returned HTTP 403.
+- New provider version/checksum/evidence identity: unavailable; none created.
+- Hobbit availability: not rerun because no refreshed trusted bytes were available; Phase 122 remains `not_yet_published_by_provider`.
+- Candidates/entities/canonical writes: zero; pre/post digest unchanged.
+- Branch/PR/checks/auto-merge: none.
+- Next action: future trusted provider refresh.
+- Architecture v12 and canonical contracts: unchanged.
+
 # Session state — Phase 122
 
 Baseline `68a348c` contains merged Phase 121. Retained trusted MTGJSON snapshot `mtgjson-allprintings-5.3.0+20260731-b47cc8360034` / SHA-256 `b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09` has exactly MB2 and MSH partitions and zero Hobbit matches. Phase 122 status is `not_yet_published_by_provider`; no set code can be stated. No evidence/batch identity, candidates, classifications, dependency result, descriptor, plan/verify/execution, canonical audit/rollback, target branch/PR/check/auto-merge state exists. Canonical pre/post digest is unchanged at `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`; Phase 119 is still the only production promotion. No MB2/MSH/Marvel/unrelated data, Architecture v12, or canonical contract changed. Required green checks remain the merge gate.

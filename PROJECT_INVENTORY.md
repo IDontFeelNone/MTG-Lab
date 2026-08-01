@@ -1,3 +1,7 @@
+# Phase 123 inventory update
+
+`register_trusted_snapshot` is the generic checksum and immutable-byte registration boundary for refreshed AllPrintings evidence. `data/automatic_updates/phase-123-mtgjson-refresh.json` records the fail-closed HTTP 403 acquisition stop. No new production snapshot exists; the historical MB2/MSH evidence is unchanged. Phase 119 remains the sole completed production promotion at canonical digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`. Architecture v12 and canonical contracts are unchanged.
+
 # Phase 122 inventory update
 
 The new `target_availability.py` boundary inventories set-level MTGJSON metadata, distinguishes zero/multiple/incomplete/unique/unsupported results, and permits deterministic bounded evidence only for one unique target. Phase 122's retained report records zero Hobbit matches in the trusted two-set (`MB2`, `MSH`) snapshot. No Hobbit identity, candidate, descriptor, automatic run, or canonical artifact was created. Production remains exactly at Phase 119 and digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`; Architecture v12 and canonical contracts are unchanged.

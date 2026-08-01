@@ -1,3 +1,7 @@
+# Phase 123 trusted refresh attempt
+
+Phase 123 added an immutable, checksum-first MTGJSON snapshot registration boundary. Registration requires a caller-supplied trusted SHA-256, complete provider publication metadata, and exact retained bytes; replay is idempotent and any identity collision fails closed. The approved MTGJSON metadata, checksum, and dataset endpoints all returned HTTP 403 from this execution environment, so no refreshed bytes or evidence identity could honestly be registered and the Phase 122 gate was not run against untrusted or stale input. No descriptor, candidates, plan, execution, or canonical write was created. A future provider refresh remains the next task.
+
 # Automatic Canonical Updates
 
 ## Phase 122 first-real-target availability result

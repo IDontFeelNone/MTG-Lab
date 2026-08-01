@@ -1,3 +1,7 @@
+# Phase 123 status — provider acquisition blocked
+
+Main contains merged Phase 122. Phase 119 remains the sole production canonical promotion and canonical digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f` is unchanged. The newest trusted provider version could not be determined because all approved MTGJSON endpoints returned HTTP 403. Consequently no refreshed checksum, evidence identity, target result, candidate, batch, descriptor, promotion, branch, PR, checks, or auto-merge state exists. Architecture v12 and canonical contracts remain unchanged.
+
 # Phase 122 — requested real target unavailable in retained provider snapshot
 
 The retained checksum-identified MTGJSON snapshot contains exactly MB2 and MSH and zero set-level matches for The Hobbit. Availability stopped fail-closed before a code or target could be selected. Counts are zero for every candidate entity and classification; dependency closure, descriptor creation, plan, verify, execution, promotion, audit, rollback, target branch, target PR, checks, and auto-merge are not applicable. Production digest remains `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`, with Phase 119 the sole promotion. Required green checks continue to protect merges. No MB2/MSH/Marvel/unrelated data, Architecture v12, or canonical contract changed.
