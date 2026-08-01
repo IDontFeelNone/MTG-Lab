@@ -1,5 +1,9 @@
 # Market Intelligence Foundation
 
+## Phase 127C acquisition status
+
+Phase 127B's endpoint correction reached Scryfall and received JSON metadata, confirming the remaining failure was local response-shape parsing rather than access or authorization. Phase 127C accepts the official direct and list bulk-metadata forms and still fails closed before persistence. No live payload, price observation, canonical write, or promotion has occurred; MB2 coverage remains 0/379. The next operation is one reviewed nonpersistent workflow dry run after merge.
+
 **Status:** Phase 127 acquisition boundary complete; live access blocked. **Architecture:** v12 unchanged. **Contracts:** `market-observation-v1`, `market-analytics-v1`, and `market-query-v1`.
 
 Phase 127 selects only Scryfall default-card bulk data and adds a versioned adapter outside

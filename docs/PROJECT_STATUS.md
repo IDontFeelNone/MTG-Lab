@@ -104,3 +104,7 @@ The official endpoint, descriptive request headers, bounded transient-only retri
 validation, sanitized stage diagnostics, always-retained workflow artifact, and original
 exit-status propagation are now implemented. A provider failure stops before persistence.
 No market observation or canonical data was written; coverage remains 0/379.
+
+# Phase 127C status — Scryfall metadata parser repaired
+
+Phase 127B is merged at `21f9b6e`, and its official endpoint repair succeeded: GitHub Actions reached Scryfall and received JSON metadata. The authoritative diagnostics stopped at `download_uri_extraction` before any payload download because the parser did not handle the official list envelope. Phase 127C defensively supports both official metadata shapes and validates the exact secure Scryfall data-host boundary. No live payload or price was retained, coverage remains 0/379, and no canonical write or promotion occurred. The next operation is one post-merge `persist=false` workflow dispatch.

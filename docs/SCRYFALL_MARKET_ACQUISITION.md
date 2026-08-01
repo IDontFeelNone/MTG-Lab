@@ -1,7 +1,22 @@
 # Scryfall MB2 Market Acquisition
 
-**Phase 127B status:** provider acquisition and failure reporting repaired. No production
-market observation was fabricated or retained by this repair.
+**Phase 127C status:** metadata-shape parsing repaired. No production market observation
+was fabricated or retained by this repair.
+
+Phase 127B's endpoint repair succeeded in GitHub Actions: the official request reached
+Scryfall, returned HTTP JSON metadata, and set `metadata_fetched: true`. The run then stopped
+at `download_uri_extraction` because the implementation expected only a direct `bulk_data`
+object while the received official response used the supported list envelope. It obtained no
+download URI, began no bulk-payload download, retained no observation, and performed no
+canonical write or promotion. Coverage therefore remains **0/379**.
+
+Phase 127C accepts either a direct `bulk_data` descriptor for `default_cards` or a Scryfall
+`list` whose `data` contains exactly one such descriptor. It rejects error objects, malformed
+roots and timestamps, zero/duplicate matches, and invalid selected contracts. Download URLs
+must be HTTPS URLs on the exact `data.scryfall.io` host boundary, without credentials or
+fragments. Diagnostics expose only the root object type, parsing shape, inspected/match
+counts, selected type, timestamp presence, URI-validation result, HTTP status, and content
+type; they never expose the URI, body, payload, headers, or query string.
 
 ## Selection and access assessment
 
@@ -131,3 +146,12 @@ progress, download start, and byte retention without including response bodies.
 A dry run must stop before persistence whenever its process status is nonzero, its report is
 invalid, the official metadata lacks a secure `download_uri`, or an integrity/isolation check
 fails. Phase 127B performs no live persistence, canonical write, valuation, or promotion.
+
+
+## Phase 127C post-merge operation
+
+After Phase 127C merges, manually dispatch **Market acquisition** exactly once with
+`persist=false`. Download the always-retained diagnostics artifact and verify metadata and
+payload stages, identities, counts, MB2 isolation, and digests. Stop on any nonzero status or
+failed check. A persistent dispatch is outside Phase 127C and must not occur until that dry
+run has been reviewed.
