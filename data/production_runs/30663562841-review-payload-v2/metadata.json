@@ -1,0 +1,10 @@
+{
+  "adapter_version": "mtgjson-workflow-artifact-v2",
+  "artifact_name": "mtgjson-ingestion-30663562841",
+  "canonical_write": false,
+  "original_archive_sha256": "2887ea307f07b58ddcf4f0179e99e54e79e072949542869e7c01b4275a1ee3ba",
+  "promotion_performed": false,
+  "run_id": "30663562841",
+  "source_dataset_id": "mtgjson-allprintings-5.3.0+20260731-b47cc8360034",
+  "source_sha256": "b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09"
+}
