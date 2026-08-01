@@ -21,12 +21,28 @@ from acquisition import PromotionError
 from official_datasets import AcquisitionError, OfficialDatasetAcquisition
 from production_evidence import (EvidenceError, ProductionEvidenceRepository,
                                  WorkflowArtifactAdapter)
+from collection import (CanonicalCollectionResolver, CollectionIntelligenceError,
+    acquisition_priorities, collection_summary, compare_deck, create_snapshot,
+    read_import, verify_snapshot)
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="mtg-lab")
     parser.add_argument("--data-root", type=Path, default=Path("data"))
     commands = parser.add_subparsers(dest="command", required=True)
+    collection = commands.add_parser("collection")
+    collection_commands = collection.add_subparsers(dest="collection_command", required=True)
+    collection_import = collection_commands.add_parser("import")
+    collection_import.add_argument("--input", type=Path, required=True)
+    collection_import.add_argument("--snapshot-id"); collection_import.add_argument("--game", default="magic")
+    for name in ("verify", "summary", "duplicates"):
+        command = collection_commands.add_parser(name); command.add_argument("--snapshot", required=True)
+        command.add_argument("--game", default="magic")
+    deck = commands.add_parser("deck")
+    deck_commands = deck.add_subparsers(dest="deck_command", required=True)
+    for name in ("compare", "missing", "acquisition-priorities"):
+        command = deck_commands.add_parser(name); command.add_argument("--snapshot", required=True)
+        command.add_argument("--deck", type=Path, action="append", required=True); command.add_argument("--game", default="magic")
     dataset = commands.add_parser("dataset"); dataset_commands = dataset.add_subparsers(dest="dataset_command", required=True)
     register = dataset_commands.add_parser("register"); register.add_argument("manifest", type=Path)
     listing = dataset_commands.add_parser("list"); listing.add_argument("--format", choices=("json",), default="json")
@@ -152,7 +168,35 @@ def main(argv=None) -> int:
         command.add_argument("--format", choices=("json",), default="json")
     args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
-    if args.command == "promote":
+    if args.command in {"collection", "deck"}:
+        try:
+            resolver = CanonicalCollectionResolver(args.game, args.data_root)
+            snapshots = args.data_root / "collections" / "snapshots"
+            if args.command == "collection" and args.collection_command == "import":
+                imported = read_import(args.input); resolution = resolver.resolve(imported)
+                result = create_snapshot(imported, resolution, snapshots, args.snapshot_id)
+            else:
+                snapshot_path = snapshots / f"{args.snapshot}.json"
+                if args.command == "collection" and args.collection_command == "verify":
+                    result = verify_snapshot(snapshot_path)
+                else:
+                    snapshot = json.loads(snapshot_path.read_text())
+                    summary = collection_summary(snapshot, resolver)
+                    if args.command == "collection":
+                        result = summary if args.collection_command == "summary" else {
+                            "schema_version":"collection-duplicates-v1", "snapshot_id":args.snapshot,
+                            "duplicates":summary["duplicates"], "duplicate_count":summary["duplicate_count"]}
+                    else:
+                        decks = [json.loads(path.read_text()) for path in args.deck]
+                        comparisons = [compare_deck(snapshot, item, resolver) for item in decks]
+                        if args.deck_command == "compare": result = comparisons[0] if len(comparisons)==1 else comparisons
+                        elif args.deck_command == "missing":
+                            result = {"schema_version":"deck-missing-v1", "deck_id":comparisons[0]["deck_id"],
+                                      "requirements":[x for x in comparisons[0]["requirements"] if x["missing_quantity"]]}
+                        else: result = acquisition_priorities(comparisons)
+        except (CollectionIntelligenceError, OSError, ValueError, KeyError, json.JSONDecodeError) as error:
+            print(json.dumps({"valid":False,"error":str(error)}, indent=2, sort_keys=True)); return 2
+    elif args.command == "promote":
         corpus = Path(__file__).parents[2] / "data/reference/mtgjson/bounded-canonical-promotion-v1.json"
         workflow = BoundedCorpusPromotion(args.data_root, corpus)
         try: result = workflow.promote() if args.promote_command == "corpus" else getattr(

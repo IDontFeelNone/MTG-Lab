@@ -53,3 +53,8 @@ candidates, valid dependency closure, MB2-only isolation, verified evidence, and
 pre-state. It is technically ready, not promoted. The next phase is an explicitly invoked bounded
 canonical promotion of this one batch with deterministic audit and rollback support. No canonical
 write or promotion occurred in Phase 118.
+# Phase 124 handoff
+
+Review and merge the Collection Intelligence Foundation. It is downstream-only and needs no
+authorization form. Do not begin pricing or market intelligence before review. The next useful
+boundary is collection/deck contract hardening and richer canonical attribute coverage.

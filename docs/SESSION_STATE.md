@@ -62,3 +62,12 @@ trusted MTGJSON provenance, the deterministic Phase 116 review resolution, exact
 scope, MSH exclusion, 1,000 approved candidates, zero blockers, dependency closure, and the frozen
 canonical pre-state. It emits a deterministic non-executing plan with audit and rollback
 requirements. No canonical state changed and no promotion ran.
+# Phase 124 session state
+
+- Baseline: merged Phase 123 (`1d3339e`).
+- Collection foundation: JSON/CSV import, resolution, snapshots, summaries, deck comparison,
+  and price-independent priorities implemented.
+- Production canonical state: unchanged; Phase 119 only, digest
+  `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`.
+- No Hobbit substitution, MSH/Marvel promotion, operator signatures, authorization workflow,
+  pricing, market feed, AI provider, dashboard, simulation, or Architecture v12 change.
