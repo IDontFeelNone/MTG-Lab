@@ -47,8 +47,20 @@ def evaluate_review_gate(*, approved: int, unresolved: int, quarantined: int,
 def build_promotion_plan(data_root: Path | str) -> dict:
     """Verify retained evidence and create a non-executing, one-batch promotion plan."""
     data_root = Path(data_root)
-    if canonical_state_digest(data_root) != EXPECTED_CANONICAL_PRE_STATE:
-        raise EvidenceError("canonical pre-state drift")
+    current_digest = canonical_state_digest(data_root)
+    if current_digest != EXPECTED_CANONICAL_PRE_STATE:
+        audit_path = (data_root / "audit" / "bounded_promotions" /
+                      "phase-119-mb2-batch-000001-e32022126c07.json")
+        try:
+            completed = json.loads(audit_path.read_text())
+        except (OSError, json.JSONDecodeError):
+            raise EvidenceError("canonical pre-state drift") from None
+        audit_digest = completed.pop("audit_digest", None)
+        if (audit_digest != _sha(completed) or
+                completed.get("promotion_id") != "phase-119-mb2-batch-000001-e32022126c07" or
+                completed.get("canonical_pre_state_digest") != EXPECTED_CANONICAL_PRE_STATE or
+                completed.get("canonical_post_state_digest") != current_digest):
+            raise EvidenceError("canonical pre-state drift")
 
     verification = ProductionEvidenceRepository(data_root).verify(EVIDENCE_ID)
     if not verification["valid"]:
@@ -89,6 +101,8 @@ def build_promotion_plan(data_root: Path | str) -> dict:
     )
     if blockers:
         raise EvidenceError("promotion readiness blocked: " + ", ".join(blockers))
+    if findings.get("excluded", 0):
+        raise EvidenceError("promotion readiness blocked: excluded_candidates_present")
 
     counts = Counter(row["entity_type"] for row in approved_rows)
     body = {
@@ -99,6 +113,8 @@ def build_promotion_plan(data_root: Path | str) -> dict:
         "entity_counts": dict(sorted(counts.items())), "unresolved_count": 0,
         "quarantined_count": 0, "fatal_conflict_count": 0,
         "dependency_closure": "valid", "target_isolation": "MB2_only",
+        "findings_digest": generated["updated-findings-report.json"]["findings_digest"],
+        "dependency_digest": closure["digest"],
         "canonical_pre_state_digest": EXPECTED_CANONICAL_PRE_STATE,
         "promotion_ready": True, "explicit_invocation_required": True,
         "promotion_performed": False, "canonical_write": False,
