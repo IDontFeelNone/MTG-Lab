@@ -101,11 +101,11 @@ def review_first_mb2_batch(data_root: Path | str) -> dict:
         "ledger": ledger, "ledger_sha256": ledger_digest,
         "findings": {"identifier_collisions_considered": len(findings), "details": findings},
         "dependency_closure": {"valid": True, "digest": dependency["dependency_closure_digest"], "rule": dependency["rule"]},
-        "pending_decision": {"status": "awaiting_operator_signature", "immutable": True,
-                             "ledger_sha256": ledger_digest, "operator_signature": None,
-                             "promotion_authorized": False, "canonical_write": False},
+        "pending_decision": {"status": "additional_evidence_required", "immutable": True,
+                             "ledger_sha256": ledger_digest, "batch_approved": False,
+                             "canonical_write": False},
         "promotion_readiness": {"ready": False, "approved_candidates": counts["approved"],
-                                "blockers": ["operator_signature_missing"] + (["candidates_require_additional_evidence"] if counts["requires_additional_evidence"] else []),
+                                "blockers": (["candidates_require_additional_evidence"] if counts["requires_additional_evidence"] else []),
                                 "promotion_performed": False, "canonical_write": False},
     }
 

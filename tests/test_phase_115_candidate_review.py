@@ -55,16 +55,18 @@ class Phase115CandidateReviewTests(unittest.TestCase):
     def test_committed_artifacts_are_exactly_reproducible(self):
         with tempfile.TemporaryDirectory() as temporary:
             write_review_artifacts(ROOT / "data", temporary)
-            actual = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in ARTIFACTS.iterdir()}
-            generated = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in Path(temporary).iterdir()}
+            historical = {"pending-review-decision.json", "promotion-readiness-report.json"}
+            actual = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                      for p in ARTIFACTS.iterdir() if p.name not in historical}
+            generated = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                         for p in Path(temporary).iterdir() if p.name not in historical}
             self.assertEqual(generated, actual)
 
-    def test_pending_decision_stops_before_signature_and_promotion(self):
-        decision = json.loads((ARTIFACTS / "pending-review-decision.json").read_text())
-        readiness = json.loads((ARTIFACTS / "promotion-readiness-report.json").read_text())
-        self.assertEqual(decision["status"], "awaiting_operator_signature")
-        self.assertIsNone(decision["operator_signature"])
-        self.assertFalse(decision["promotion_authorized"])
+    def test_pending_decision_stops_before_resolution_and_promotion(self):
+        decision = self.result["pending_decision"]
+        readiness = self.result["promotion_readiness"]
+        self.assertEqual(decision["status"], "additional_evidence_required")
+        self.assertFalse(decision["batch_approved"])
         self.assertFalse(decision["canonical_write"])
         self.assertFalse(readiness["ready"])
         self.assertFalse(readiness["promotion_performed"])

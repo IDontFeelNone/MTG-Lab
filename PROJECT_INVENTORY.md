@@ -1,3 +1,9 @@
+# Phase 118 inventory update
+
+The active authorization workflow, persistence scripts, authorization production module, Phase 117/117A tests, and current Phase 117 review artifacts are removed. `production_evidence.promotion_readiness` now computes a non-executing plan from trusted immutable evidence and Phase 115/116 review results. Operator signatures do not control readiness; normal PR review and green CI provide oversight. The exact first MB2 batch is technically ready, while promotion remains explicit, audited, rollback capable, and not performed.
+
+Earlier Phase 117/117A inventory entries below are historical and no longer describe active architecture.
+
 # Phase 117A inventory update
 
 `.github/workflows/mb2-operator-authorization.yml` accepts the twelve required operator and immutable-scope inputs; `scripts/mb2_authorization_persistence.py` provides authorization-only durable Git/GitHub persistence; and `verify_authorization_artifact()` independently authenticates a retained result. Tests cover the workflow contract, safe dry run, immutable scope, authorization validation/replay/conflict, canonical isolation, and persistence boundary. Phase 117 remains unauthorized and unpromoted.

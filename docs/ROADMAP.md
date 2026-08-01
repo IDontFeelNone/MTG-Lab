@@ -1,3 +1,9 @@
+# Phase 118 roadmap update
+
+The operator-authorization subsystem is retired. Trusted-provider batches become technically ready only after all evidence, schema, membership, isolation, dependency, unknown, duplicate/conflict, quarantine, and canonical-pre-state gates pass. The next task is separately invoked bounded canonical promotion of exactly the first verified MB2 batch, with normal PR review, green CI, audit, and rollback. No promotion or canonical write occurred in Phase 118.
+
+Earlier Phase 117/117A roadmap entries below are historical and no longer impose authorization prerequisites.
+
 # Phase 117A roadmap update
 
 The GitHub-native human authorization submission gate is implemented, but has not been operated. After a green implementation merge, run dry-run first with genuine human values, inspect reports, rerun non-dry, and merge only the authorization artifact PR. Stop before canonical promotion. Another MB2 batch, MSH/Marvel, Architecture v12, canonical contracts, and AI/provider simulation remain out of scope.

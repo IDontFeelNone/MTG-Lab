@@ -60,21 +60,16 @@ promotion remains blocked on independently reviewed batching/mapping, performanc
 recovery measurements, concurrency/generation controls, and operational retention policy.
 Unattended or automatic promotion remains prohibited.
 
-## Phase 117 prerequisite for the first MB2 batch
+## Phase 118 trusted-source promotion gate
 
-The first MB2 batch now has an immutable, non-canonical signature request, not an authorization.
-Only a genuine human `authorize_for_promotion` decision recorded against the exact request,
-batch, candidate-membership, and canonical pre-state digests can make it eligible for a separate
-future bounded-promotion phase. `reject` and `return_for_additional_review` block promotion.
-Phase 117 never invokes a canonical writer or promotion operation, and an authorization artifact
-must never be interpreted as promotion itself.
+Operator signatures and authorization-only pull requests are no longer part of the active
+promotion architecture. A candidate batch from an approved trusted provider may become ready after
+source checksums, immutable evidence, schemas, exact candidate membership, target isolation,
+dependency closure, duplicates/conflicts, explicit unknowns, quarantine state, and canonical
+pre-state all validate. Normal pull-request review and green GitHub Actions provide human oversight.
 
-## Phase 117A authorization workflow remains pre-promotion
-
-The manual **MB2 operator authorization** workflow is not a canonical writer. The owner must run it
-with `dry_run: true` and genuine human fields, inspect its uploaded validation reports, then rerun
-identical values with `dry_run: false` only if satisfied. The resulting PR may contain only
-`data/reviews/phase-117/mb2-batch-000001-e32022126c07/operator-authorization.json`; review and merge
-that authorization-only PR, then stop. Even an `authorize_for_promotion` decision merely satisfies
-a prerequisite for a separately designed and authorized promotion phase. It performs no canonical
-write and supplies no authority to start promotion during Phase 117A.
+Readiness never writes canonical state. Promotion remains separately and explicitly invoked, limited
+to exactly one verified batch, deterministic, audited with source/membership and pre/post-state
+lineage, replayable, and rollback capable. Any unresolved, quarantined, rejected, conflicting,
+incomplete, non-isolated, or drifted state fails closed. The first MB2 batch satisfies the technical
+readiness gates, but Phase 118 does not promote it.

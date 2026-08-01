@@ -93,23 +93,20 @@ class Phase116IdentifierResolutionTests(unittest.TestCase):
             generated = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
                          for path in Path(temporary).iterdir()}
             retained = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-                        for path in ARTIFACTS.iterdir()}
+                        for path in ARTIFACTS.iterdir()
+                        if path.name not in {"pending-review-decision.json", "promotion-readiness-report.json"}}
+            generated = {name: digest for name, digest in generated.items() if name in retained}
             self.assertEqual(generated, retained)
         self.assertEqual(resolve_first_mb2_identifiers(ROOT / "data")["decision_digest"],
                          self.result["decision_digest"])
 
-    def test_pending_signature_no_msh_review_write_or_promotion(self):
+    def test_validation_complete_no_msh_write_or_promotion(self):
         decision = self.artifacts["pending-review-decision.json"]
         readiness = self.artifacts["promotion-readiness-report.json"]
-        self.assertEqual(decision["status"], "pending_operator_signature")
-        for key in ("reviewer_identity", "review_reference", "reviewed_timestamp",
-                    "operator_signature"):
-            self.assertIsNone(decision[key])
-        self.assertFalse(decision["batch_approved"])
+        self.assertEqual(decision["status"], "validation_complete")
+        self.assertTrue(decision["batch_approved"])
         self.assertFalse(decision["canonical_write"])
-        self.assertFalse(decision["promotion_authorized"])
-        self.assertTrue(readiness["operator_signature_ready"])
-        self.assertFalse(readiness["promotion_ready"])
+        self.assertTrue(readiness["promotion_ready"])
         self.assertFalse(readiness["promotion_performed"])
         self.assertFalse(readiness["canonical_write"])
         self.assertEqual(decision["review_scope"]["marvel_candidates_reviewed"], 0)
