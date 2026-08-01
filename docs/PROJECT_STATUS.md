@@ -94,3 +94,13 @@ observations and therefore 0/379 queryable MB2 coverage. The existing GitHub Act
 still the required next operation. Its first run could not be audited from this execution
 environment because outbound GitHub and Scryfall CONNECT requests returned proxy HTTP 403.
 Architecture v12, canonical contracts/data, and Phase 119-only promotion remain unchanged.
+
+# Phase 127B status — acquisition diagnostics repaired
+
+Phase 127A is merged at `fc9a041`. The failed GitHub-hosted dry run exposed an
+implementation error: the metadata request used `default-cards`, while Scryfall's official
+bulk-data type/path is `default_cards`; Scryfall therefore returned permanent HTTP 404.
+The official endpoint, descriptive request headers, bounded transient-only retries, response
+validation, sanitized stage diagnostics, always-retained workflow artifact, and original
+exit-status propagation are now implemented. A provider failure stops before persistence.
+No market observation or canonical data was written; coverage remains 0/379.
