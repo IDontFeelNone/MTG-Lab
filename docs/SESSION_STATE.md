@@ -46,3 +46,15 @@ Merged Phase 113 (`b9941a6`) is confirmed. The reported non-dry-run verified nor
 > storage, deterministic indexing, verification, and JSON CLI lookup are implemented. No production
 > ZIP was provided or retained, so Phase 110B still stops before review. Architecture v12,
 > canonical state, review decisions, and promotion state are unchanged.
+
+## Phase 117 — First MB2 operator-authorization gate (2026-08-01)
+
+Phase 115 reviewed the exact first MB2 batch and Phase 116 resolved its 21 identifier findings,
+leaving 1,000 approved candidates (384 Cards, 379 Printings, 235 Identifiers, 2 Finishes) with
+valid dependency closure and no MSH candidates. Phase 117 reverified that complete immutable
+chain and retained a deterministic signature request, authorization contract, verification, and
+promotion-readiness report under `data/reviews/phase-117/mb2-batch-000001-e32022126c07/`.
+A human must supply identity, role, durable review reference, RFC 3339 review time, one allowed
+decision, notes, and matching request/batch/candidate digests. No authorization exists and
+promotion readiness is false. Authorization and promotion remain separate; no canonical write or
+promotion occurred. Architecture v12 and canonical contracts are unchanged.

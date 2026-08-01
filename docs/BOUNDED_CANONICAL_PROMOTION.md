@@ -59,3 +59,12 @@ readiness for small, bounded, explicitly reviewed MTGJSON-derived batches only. 
 promotion remains blocked on independently reviewed batching/mapping, performance and
 recovery measurements, concurrency/generation controls, and operational retention policy.
 Unattended or automatic promotion remains prohibited.
+
+## Phase 117 prerequisite for the first MB2 batch
+
+The first MB2 batch now has an immutable, non-canonical signature request, not an authorization.
+Only a genuine human `authorize_for_promotion` decision recorded against the exact request,
+batch, candidate-membership, and canonical pre-state digests can make it eligible for a separate
+future bounded-promotion phase. `reject` and `return_for_additional_review` block promotion.
+Phase 117 never invokes a canonical writer or promotion operation, and an authorization artifact
+must never be interpreted as promotion itself.

@@ -83,3 +83,19 @@ decision, and promotion-readiness report. The pending decision identity is
 but none was created. Promotion readiness is false because the signature is missing and Phase 116
 prohibits promotion. No canonical write or promotion occurred; Architecture v12 and canonical
 contracts remain unchanged.
+
+## Phase 117 operator-authorization boundary
+
+Phase 117 independently replays the retained production evidence plus the immutable Phase 115
+candidate review and Phase 116 identifier-resolution overlay for exactly
+`mb2-batch-000001-e32022126c07`. The verified result remains 1,000 approved MB2 candidates
+(384 Cards, 379 Printings, 235 Identifiers, and 2 Finishes), zero exclusions, additional-evidence
+items, quarantines, fatal conflicts, or orphaned Printings, and no MSH/Marvel candidate.
+
+The deterministic request digest is
+`4b281b3eb45b6a7e3e82a2309c271bffe1cb6c8cb939d46c5b8be059e0b6000d`; its candidate digest is
+`e32022126c07036337f810d06dc29b5eead5afd850f7f3af0a26ad5b0d46e66e`. A human must supply
+`operator_identity`, `operator_role`, `review_reference`, `reviewed_at`,
+`authorization_decision`, `operator_notes`, `signature_request_digest`, `authorized_batch_id`,
+and `authorized_candidate_digest`. No such metadata has been supplied. Authorization is distinct
+from later bounded promotion: no authorization, canonical write, or promotion occurred.
