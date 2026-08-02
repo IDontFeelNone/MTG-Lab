@@ -16,9 +16,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      actions: write
-      checks: read
-      statuses: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -126,55 +123,24 @@ jobs:
             git push origin "HEAD:refs/heads/$BRANCH"
           fi
           HEAD_SHA="$(git rev-parse HEAD)"
-          mapfile -t PRS < <(gh pr list --state all --head "$BRANCH" --base "$BASE" --json number --jq '.[].number')
+          TITLE='Phase 127I: Persist successful market acquisition evidence'
+          mapfile -t PRS < <(gh pr list --state all --head "$BRANCH" --json number --jq '.[].number')
           test "${#PRS[@]}" -le 1 || { echo 'multiple matching pull requests' >&2; exit 1; }
           if test "${#PRS[@]}" -eq 0; then
-            PR="$(gh pr create --head "$BRANCH" --base "$BASE" --title 'Phase 127I: Persist successful market acquisition evidence' --body "Automated retention of verified, MB2-only, nonpersistent acquisition evidence for $RUN_ID. No canonical or market-observation data is written.")"
+            PR="$(gh pr create --head "$BRANCH" --base "$BASE" --title "$TITLE" --body "Automated retention of verified, MB2-only, nonpersistent acquisition evidence for $RUN_ID. No canonical or market-observation data is written.")"
           else
             PR="${PRS[0]}"
           fi
           test "$(gh pr view "$PR" --json baseRefName --jq .baseRefName)" = "$BASE"
           test "$(gh pr view "$PR" --json headRefName --jq .headRefName)" = "$BRANCH"
           test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$HEAD_SHA"
-          test "$(gh pr view "$PR" --json title --jq .title)" = 'Phase 127I: Persist successful market acquisition evidence'
+          test "$(gh pr view "$PR" --json title --jq .title)" = "$TITLE"
+          PR_URL="$(gh pr view "$PR" --json url --jq .url)"
+          test -n "$PR_URL"
           printf '%s\n' "$PR" > market-acquisition-pr.txt
+          printf '%s\n' "$PR_URL" > market-acquisition-pr-url.txt
           printf '%s\n' "$BRANCH" > market-acquisition-branch.txt
           printf '%s\n' "$HEAD_SHA" > market-acquisition-head-sha.txt
-      - name: Register required pull-request checks
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          PR="$(cat market-acquisition-pr.txt)"
-          BRANCH="$(cat market-acquisition-branch.txt)"
-          HEAD_SHA="$(cat market-acquisition-head-sha.txt)"
-          # Pushes and pull requests created with GITHUB_TOKEN do not start another
-          # workflow run. Explicitly dispatch the required validation on the exact
-          # evidence head, then wait until GitHub has registered its check suite.
-          gh workflow run python-validation.yml --ref "$BRANCH"
-          for ATTEMPT in {1..30}; do
-            CHECK_COUNT="$(gh pr checks "$PR" --required --json name 2>/dev/null --jq 'length' || true)"
-            if test "${CHECK_COUNT:-0}" -gt 0; then
-              break
-            fi
-            if test "$ATTEMPT" -eq 30; then
-              echo "required checks were not registered for $BRANCH at $HEAD_SHA" >&2
-              exit 1
-            fi
-            sleep 10
-          done
-          test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$HEAD_SHA"
-      - name: Require checks and request auto-merge
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          PR="$(cat market-acquisition-pr.txt)"
-          HEAD_SHA="$(cat market-acquisition-head-sha.txt)"
-          gh pr checks "$PR" --required --watch --fail-fast
-          test "$(gh pr checks "$PR" --required --json state --jq 'length > 0 and all(.[]; .state == "SUCCESS")')" = true
-          test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$HEAD_SHA"
-          gh pr merge "$PR" --auto --squash --delete-branch=false
       - name: Retain diagnostics
         if: always()
         uses: actions/upload-artifact@v4

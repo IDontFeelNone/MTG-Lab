@@ -1,3 +1,9 @@
+# Phase 127M status — manual evidence-PR completion
+
+Main contains merged Phase 127L at `4d07036`. The latest real Market acquisition reached Scryfall, downloaded and validated the official gzip JSONL payload, produced the bounded MB2-only dry-run census, retained exactly three durable evidence files, passed all 415 repository tests, committed and pushed deterministic branch `market-acquisition/scryfall-mb2-30730690426-1` at `a94288b`, and created its evidence pull request. It stopped only while waiting for required checks that are not configured: the repository has no branch ruleset and no required status-check set. No production observation or canonical data changed, no promotion occurred, and MB2 market coverage remains 0/379.
+
+Phase 127M removes required-workflow dispatch, required-check polling, branch-protection inspection, and auto-merge orchestration. After acquisition and validation, the workflow safely creates or byte-identically reuses the deterministic branch, commits exactly the unchanged three-file evidence boundary, pushes without force, creates or safely reuses exactly one PR, verifies its base, head, head SHA, and title, records its identifier and URL, and exits successfully. The open evidence PR is now intentionally reviewed and merged by a user. Observation import remains a separately authorized later phase.
+
 # Phase 127L status — evidence PR check registration repaired
 
 Main contains merged Phase 127K at `eb09a13`. The latest real Market acquisition successfully

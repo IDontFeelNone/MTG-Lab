@@ -110,29 +110,37 @@ class Phase127IEvidenceTests(unittest.TestCase):
         self.assertEqual(branch_name(self.run_id), "market-acquisition/" + self.run_id)
         workflow = (ROOT / ".github/workflows/market-acquisition.yml").read_text()
         for required in ("branch collision or conflicting evidence identity", "git diff --name-only",
-                         "gh pr list --state all", "baseRefName", "headRefName", "headRefOid",
-                         "gh pr checks", "--required --watch",
-                         "gh workflow run python-validation.yml --ref \"$BRANCH\"",
-                         "required checks were not registered",
-                         "length > 0 and all(.[]; .state == \"SUCCESS\")",
-                         "gh pr merge \"$PR\" --auto"):
+                         "gh pr list --state all --head \"$BRANCH\"", "baseRefName",
+                         "headRefName", "headRefOid", "--json title", "--json url"):
             self.assertIn(required, workflow)
-        self.assertNotIn("branches/$BASE/protection", workflow)
-        self.assertNotIn("branch-protection.json", workflow)
-        self.assertNotIn("--force", workflow)
-        self.assertNotIn("--admin", workflow)
+        for prohibited in ("python-validation.yml", "gh pr checks", "--required",
+                           "branches/$BASE/protection", "branch-protection.json",
+                           "gh pr merge", "--force", "--admin"):
+            self.assertNotIn(prohibited, workflow)
 
-    def test_required_checks_are_explicitly_registered_before_the_gate(self):
+    def test_verified_pr_is_the_successful_terminal_operation(self):
         workflow = (ROOT / ".github/workflows/market-acquisition.yml").read_text()
-        register = workflow.index("Register required pull-request checks")
-        gate = workflow.index("Require checks and request auto-merge")
-        self.assertLess(register, gate)
-        section = workflow[register:gate]
-        self.assertIn("actions: write", workflow)
-        self.assertIn("gh workflow run python-validation.yml --ref \"$BRANCH\"", section)
-        self.assertIn("gh pr checks \"$PR\" --required --json name", section)
-        self.assertIn("if test \"${CHECK_COUNT:-0}\" -gt 0", section)
-        self.assertIn("headRefOid", section)
+        operation = workflow[workflow.index("Create or safely reuse evidence branch"):
+                             workflow.index("- name: Retain diagnostics")]
+        for verification in ("baseRefName", "headRefName", "headRefOid", "--json title"):
+            self.assertIn(verification, operation)
+        self.assertIn("test -n \"$PR_URL\"", operation)
+        self.assertIn("market-acquisition-pr-url.txt", operation)
+        self.assertNotIn("sleep ", operation)
+        self.assertNotIn("gh workflow run", operation)
+        self.assertNotIn("gh pr merge", operation)
+
+    def test_exact_commit_boundary_and_fail_closed_pr_reuse_remain(self):
+        workflow = (ROOT / ".github/workflows/market-acquisition.yml").read_text()
+        operation = workflow[workflow.index("Create or safely reuse evidence branch"):
+                             workflow.index("- name: Retain diagnostics")]
+        self.assertIn('git add -- "$EVIDENCE"', operation)
+        self.assertIn("--boundary commit", operation)
+        self.assertIn("multiple matching pull requests", operation)
+        self.assertNotIn('--base "$BASE" --json number', operation)
+        for transient in ("market-acquisition-dry-run.json", "market-acquisition-run-id.txt",
+                          "market-acquisition-source-mb2.json", "market-acquisition-stamp.txt"):
+            self.assertNotIn('git add -- "' + transient + '"', operation)
 
     def test_failure_diagnostics_remain_always_uploaded(self):
         workflow = (ROOT / ".github/workflows/market-acquisition.yml").read_text()

@@ -1,3 +1,7 @@
+# After Phase 127M
+
+After this implementation PR merges, safely rerun **Market acquisition** to reuse the existing deterministic evidence branch and exact pull request for `scryfall-mb2-30730690426-1`; do not reacquire under a different identity. Confirm the workflow verifies the PR base, head, head SHA, and title, records its URL, and exits successfully while the PR remains open. Then manually review and merge that evidence PR. After merge, verify its directory contains exactly `manifest.json`, `dry-run-report.json`, and `source-mb2.json` with valid deterministic digests. Stop before observation import: do not write production observations or canonical data, promote anything, add a provider, or create a repository ruleset. Coverage remains 0/379 until a later authorized observation-import phase.
+
 # After Phase 127L
 
 After this repair merges, dispatch the required Python validation for the existing
