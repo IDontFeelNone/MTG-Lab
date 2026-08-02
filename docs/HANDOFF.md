@@ -28,6 +28,13 @@ Start with `docs/MARKET_INTELLIGENCE.md`, `src/market/intelligence.py`, and `src
 
 Phase 123 stopped fail-closed at trusted acquisition. Retry the approved MTGJSON acquisition path in an environment that can reach the provider and supplies its trusted SHA-256; pass those bytes and digest to `register_trusted_snapshot`, then run the unchanged exact-one set-metadata gate. Never reuse the Phase 122 identity, infer a Hobbit code, inspect card text, or substitute LTR/Commander/scene/Secret Lair products. If zero matches remain, retain the new result and stop; only one complete match may enter the generic automatic-update pipeline.
 
+# Phase 127J handoff
+
+Review and merge the changed-file verification repair, then rerun Market acquisition once. The
+pre-branch status must contain exactly three durable evidence paths plus four workflow diagnostic
+paths; only the three evidence files may be staged and committed. Allow protected checks and
+auto-merge to govern the evidence PR, then stop before observation import or canonical changes.
+
 # Phase 122 handoff
 
 Phase 122 stopped correctly at availability. Trusted retained MTGJSON evidence identity `mtgjson-allprintings-5.3.0+20260731-b47cc8360034` (source SHA-256 `b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09`) inventories only MB2 and MSH. It has no Hobbit match, so no exact code, new evidence/batch identity, candidates, descriptor, canonical run, rollback, or target PR exists. The next attempt requires a newer trusted checksum-verified MTGJSON snapshot; it must repeat the exact-one availability gate and must not substitute another product. Production remains unchanged and protected merges still require green checks.

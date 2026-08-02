@@ -1,3 +1,12 @@
+# Phase 127J session state
+
+Main contains merged Phase 127I (`dd84f94`). Its first real workflow run completed acquisition,
+evidence generation, and 404 tests, but the changed-file assertion omitted four intentional
+untracked diagnostic files. Phase 127J supplies a reusable structured verifier for the exact
+seven-path working tree and three-path staged commit, including adversarial path/status and
+run/manifest identity cases. Canonical and observation state are unchanged,
+promotion remains false, and production MB2 market coverage remains 0/379.
+
 # Phase 127I session state
 
 Baseline `8cf298f` contains merged Phase 127H. The latest post-merge Market acquisition run

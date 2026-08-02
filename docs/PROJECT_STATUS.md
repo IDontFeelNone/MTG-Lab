@@ -1,3 +1,15 @@
+# Phase 127J status — evidence changed-file verification repaired
+
+Main contains merged Phase 127I at `dd84f94`. The first real Phase 127I acquisition completed
+the official download, evidence generation, and all 404 repository tests, then stopped at the
+working-tree assertion because its four intentional untracked workflow diagnostics were absent
+from the expected path list. Phase 127J adds a reusable NUL-delimited porcelain parser and
+structured JSON verifier for the exact seven-path pre-commit boundary and three-path commit
+boundary, including file placement, symlink, run/manifest identity, status, rename/deletion,
+canonical, and observation isolation checks.
+No acquisition, evidence fabrication, observation import, canonical write, or promotion occurs
+in this repair; production market coverage remains 0/379.
+
 # Phase 127H status — deterministic workflow dependency installation
 
 Main contains merged Phase 127G at `32b6ad4`. The latest real Market acquisition run

@@ -250,3 +250,28 @@ deterministic run branch, never force-pushes, verifies the exact PR base/head/SH
 closed on collisions or path violations. It requests auto-merge only after branch protection is
 present and every required check is green. This is evidence retention, not observation import;
 coverage remains 0/379 until a later phase imports retained evidence.
+
+## Phase 127J changed-file verification repair
+
+The repository-validation step checks the complete working-tree status before it creates an
+evidence branch. That status intentionally contains the three durable evidence files plus these
+four exact untracked (`??`) paths: `market-acquisition-dry-run.json`,
+`market-acquisition-run-id.txt`, `market-acquisition-source-mb2.json`, and
+`market-acquisition-stamp.txt`. Phase 127I's initial assertion listed only the durable files, so
+its three-path expectation could not equal the real seven-path status.
+
+`scripts/verify_market_evidence_boundary.py` parses NUL-delimited porcelain v1 rather than
+whitespace-oriented display output. Its `market-evidence-changed-file-verification-v1` JSON
+contains `expected_durable_paths`, `permitted_transient_paths`, `actual_changed_paths`,
+`path_statuses` (each with `path`, `status`, and, for renames, `original_path`),
+`missing_durable_paths`, `unexpected_paths`, `canonical_paths`,
+`market_observation_paths`, `unsafe_paths`, `staged_paths`, `failure_reason_codes`, and
+`valid`. A valid pre-commit example has seven path statuses, all `??`, no failure reasons, and
+`valid: true`. A valid commit-boundary example has the same four transient `??` statuses and
+exactly three durable `A ` statuses/staged paths.
+
+The verifier also checks safe run identity, exact non-symlink regular-file placement, manifest
+run identity, deletion/rename/status semantics, and explicit canonical/observation isolation.
+The workflow prints ordinary status and the JSON report before propagating failure, and its
+always-run diagnostic upload retains both reports. Only the three durable files below
+`data/market/acquisitions/<acquisition-run-id>/` may enter the evidence commit.
