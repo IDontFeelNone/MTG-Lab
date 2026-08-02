@@ -1,0 +1,43 @@
+{
+  "acquisition_run_id": "scryfall-mb2-30754638264-1",
+  "canonical_snapshot_identity": "sha256:89a86f9037b74434ac1954e8dc5a3de156107a0157bb33bdf27a0c83fd12d464",
+  "canonical_write": false,
+  "files": {
+    "dry-run-report.json": {
+      "bytes": 3533,
+      "sha256": "db61d1831c687c6ee05e79b9448f418483354554806342ad8eef8c511de5b9be"
+    },
+    "source-mb2.json": {
+      "bytes": 2278127,
+      "sha256": "c112a379a2356632f37c89f6486cd2f921eccf7a5413113d13d863383c236d47"
+    }
+  },
+  "manifest_content_sha256": "947294276553dd0b24a9ea3c97ea55beb26326713ea3e13e9c9fda5029fcb88c",
+  "mapping_counts": {
+    "ambiguous": 0,
+    "matched": 478,
+    "rejected": 0,
+    "unmatched": 6
+  },
+  "mb2_record_count": 385,
+  "normalized_sha256": "2cbef9f02ebe7c76ecbac7cae584efeb26c717db0287152d9a02054e82f418a5",
+  "observations_persisted": false,
+  "price_census": {
+    "known": 478,
+    "missing": 0,
+    "observations": 478
+  },
+  "promotion_performed": false,
+  "provider": "scryfall",
+  "provider_source_sha256": "03a2c4e4eace87db24fcab615def32445ef4c82129cae6fc5cda7edaf6cb688f",
+  "retrieved_at": "2026-08-02T15:34:06Z",
+  "schema_version": "market-acquisition-evidence-v1",
+  "source_dataset": "scryfall-default-cards",
+  "source_observed_at": "2026-08-02T09:09:45.851000Z",
+  "source_record_count": 116490,
+  "source_url": "scryfall:default_cards",
+  "target": {
+    "promoted_only": true,
+    "set": "MB2"
+  }
+}
