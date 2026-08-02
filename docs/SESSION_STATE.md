@@ -1,3 +1,13 @@
+# Phase 127K session state
+
+Main contains merged Phase 127J (`b76110f`). Real acquisition run
+`scryfall-mb2-30730690426-1` successfully validated the official Scryfall payload, retained
+exactly three durable evidence files, passed its commit boundary and all 415 tests, created
+commit `a94288b`, pushed the deterministic evidence branch, and created its PR. It wrote no
+observations or canonical data and performed no promotion. Only the unsupported branch-protection
+REST read failed. Phase 127K removes that redundant API dependency while preserving the
+nonempty, all-success required-check gate and repository-governed auto-merge.
+
 # Phase 127J session state
 
 Main contains merged Phase 127I (`dd84f94`). Its first real workflow run completed acquisition,

@@ -111,9 +111,12 @@ class Phase127IEvidenceTests(unittest.TestCase):
         workflow = (ROOT / ".github/workflows/market-acquisition.yml").read_text()
         for required in ("branch collision or conflicting evidence identity", "git diff --name-only",
                          "gh pr list --state all", "baseRefName", "headRefName", "headRefOid",
-                         "branch-protection.json", "gh pr checks", "--required --watch",
+                         "gh pr checks", "--required --watch",
+                         "length > 0 and all(.[]; .state == \"SUCCESS\")",
                          "gh pr merge \"$PR\" --auto"):
             self.assertIn(required, workflow)
+        self.assertNotIn("branches/$BASE/protection", workflow)
+        self.assertNotIn("branch-protection.json", workflow)
         self.assertNotIn("--force", workflow)
         self.assertNotIn("--admin", workflow)
 

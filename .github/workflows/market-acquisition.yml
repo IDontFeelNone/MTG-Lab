@@ -137,15 +137,12 @@ jobs:
           test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$HEAD_SHA"
           test "$(gh pr view "$PR" --json title --jq .title)" = 'Phase 127I: Persist successful market acquisition evidence'
           printf '%s\n' "$PR" > market-acquisition-pr.txt
-      - name: Require protected checks and request auto-merge
+      - name: Require checks and request auto-merge
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           PR="$(cat market-acquisition-pr.txt)"
-          BASE="${{ github.event.repository.default_branch }}"
-          gh api --header 'Accept: application/vnd.github+json' "/repos/${{ github.repository }}/branches/$BASE/protection" > branch-protection.json
-          test "$(python -c 'import json; print(bool(json.load(open("branch-protection.json")).get("required_status_checks")))')" = True
           gh pr checks "$PR" --required --watch --fail-fast
           test "$(gh pr checks "$PR" --required --json state --jq 'length > 0 and all(.[]; .state == "SUCCESS")')" = true
           gh pr merge "$PR" --auto --squash --delete-branch=false

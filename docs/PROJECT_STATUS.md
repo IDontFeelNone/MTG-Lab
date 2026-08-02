@@ -1,3 +1,13 @@
+# Phase 127K status — unsupported branch-protection API dependency removed
+
+Main contains merged Phase 127J at `b76110f`. The latest real Market acquisition completed the
+official payload acquisition and validation, retained exactly three durable files, passed the
+commit boundary and all 415 tests, committed as `a94288b`, pushed branch
+`market-acquisition/scryfall-mb2-30730690426-1`, and created the evidence PR. No observations or
+canonical data were written and no promotion occurred. Its sole failure was an unavailable,
+redundant branch-protection REST read. Phase 127K relies on the existing PR-specific nonempty
+required-check success assertion before requesting repository-governed auto-merge.
+
 # Phase 127J status — evidence changed-file verification repaired
 
 Main contains merged Phase 127I at `dd84f94`. The first real Phase 127I acquisition completed

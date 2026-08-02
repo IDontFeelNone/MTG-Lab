@@ -1,3 +1,10 @@
+# After Phase 127K
+
+After this repair merges, rerun or safely reuse the existing evidence branch and exact pull
+request for `scryfall-mb2-30730690426-1`. Require the PR's required-check set to be nonempty and
+entirely successful, then allow repository-governed auto-merge. Stop before observation import,
+canonical writes, promotion, another provider, or recommendation behavior.
+
 # After Phase 127J
 
 After this repair merges, rerun the failed Market acquisition workflow once. Require the full
