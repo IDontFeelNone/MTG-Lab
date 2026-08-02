@@ -240,7 +240,7 @@ class Phase127GTests(unittest.TestCase):
 
     def test_workflow_is_dry_run_only_and_retains_bounded_projection(self):
         workflow=(ROOT/".github/workflows/market-acquisition.yml").read_text()
-        self.assertIn("Phase 127G authorizes persist=false only",workflow)
+        self.assertIn("Acquisition is nonpersistent",workflow)
         self.assertIn("market-acquisition-source-mb2.json",workflow)
         self.assertNotIn(" --persist",workflow)
 

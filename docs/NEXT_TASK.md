@@ -1,3 +1,19 @@
+# After Phase 127I
+
+After this implementation PR merges, manually dispatch **Market acquisition** exactly once.
+That single operation performs the verified nonpersistent Scryfall download and automatically
+retains only its bounded MB2 evidence on deterministic branch
+`market-acquisition/scryfall-mb2-<github-run-id>-<run-attempt>`, creates or safely reuses the
+exact PR, waits for protected required checks, and requests auto-merge. Do not create or merge
+the evidence PR manually during normal success.
+
+After the evidence PR auto-merges, verify that its directory contains exactly `manifest.json`,
+`dry-run-report.json`, and `source-mb2.json` and that the manifest/file digests and canonical
+snapshot identity verify. Stop after Phase 127I. Observation import is a separate future phase:
+do not import prices, dispatch persistence, change canonical state, add a provider or
+recommendation logic, or reintroduce operator authorization. Production coverage remains 0/379
+until retained evidence is both merged and separately imported by a future authorized phase.
+
 # After Phase 127H
 
 Merge the dependency-installation repair through the normal required checks, then dispatch

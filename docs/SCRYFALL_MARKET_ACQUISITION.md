@@ -231,3 +231,22 @@ input and the implementation rejects `persist=true`. Inspect the dry-run artifac
 known/missing-price census, deterministic digests, `canonical_write: false`,
 `promotion_performed: false`, and `persisted: false`. Any failure or unexpected census is a
 hard stop before a separately authorized future persistence phase.
+
+## Phase 127I durable successful-run evidence
+
+A temporary Actions artifact is diagnostic transport, not institutional memory: retention expiry
+makes a successful acquisition unavailable to later sessions and repository consumers. A
+successful run therefore retains only the bounded, verified handoff at
+`data/market/acquisitions/<acquisition-run-id>/`. `source-mb2.json` is the MB2-only provider
+projection, `dry-run-report.json` is the unchanged acquisition report, and `manifest.json`
+binds those two files by SHA-256 and byte length while recording run identity, timestamps,
+provider provenance, source/normalized digests, mapping/price censuses, and the exact canonical
+snapshot used for identifier mapping. The manifest states `canonical_write: false`,
+`promotion_performed: false`, and `observations_persisted: false`.
+
+The complete bulk dataset, normalized observations, and any non-MB2 record are excluded. The
+workflow accepts only byte-identical replay, commits only the three evidence files on the
+deterministic run branch, never force-pushes, verifies the exact PR base/head/SHA, and fails
+closed on collisions or path violations. It requests auto-merge only after branch protection is
+present and every required check is green. This is evidence retention, not observation import;
+coverage remains 0/379 until a later phase imports retained evidence.

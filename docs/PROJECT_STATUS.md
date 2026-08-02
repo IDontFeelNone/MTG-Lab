@@ -130,3 +130,28 @@ descriptor but proved that Scryfall supplies `jsonl_download_uri`, not the assum
 JSONL/gzip validation, duplicate rejection, MB2-only retention, safe format diagnostics,
 and deterministic source/normalized digests. Persistence is prohibited. No production market
 or canonical data changed, no promotion occurred, and MB2 market coverage remains 0/379.
+
+# Phase 127I status — automatic durable acquisition evidence
+
+Phase 127H is merged at `8cf298f`. Its post-merge Market acquisition workflow completed
+successfully: the official bounded Scryfall acquisition passed, retained an MB2-only provider
+projection and dry-run report as a 14-day Actions artifact, and performed no canonical write,
+promotion, or market-observation persistence. Consequently production MB2 market coverage is
+still 0/379. The successful evidence is not copied into this implementation branch and no data
+was reacquired or fabricated.
+
+Phase 127I makes the repository the durable handoff boundary. Every subsequent successful run
+validates the dry-run report and MB2 projection, then creates
+`data/market/acquisitions/<acquisition-run-id>/manifest.json`, `dry-run-report.json`, and
+`source-mb2.json`. The manifest records run/timestamp/provenance, provider and normalized
+digests, mapping and price censuses, the mapping canonical snapshot identity, explicit false
+write flags, and SHA-256/byte length bindings for both retained payload files. The complete
+Scryfall bulk dataset and normalized observations are never retained.
+
+Automation uses deterministic branch `market-acquisition/<acquisition-run-id>`, commits exactly
+those three files, pushes without force, creates or safely reuses the exact Phase 127I PR,
+independently verifies base/head/SHA and the changed-file boundary, requires actual base-branch
+protection and all required checks to succeed, and only then requests squash auto-merge. Replay
+is byte-idempotent; branch collisions, conflicting evidence, absent protection, changed-file
+boundary violations, or failed checks stop closed. The always-uploaded diagnostic artifact
+remains available for failures.
