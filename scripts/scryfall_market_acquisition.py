@@ -22,10 +22,12 @@ from market.scryfall import (PROVIDER, SOURCE_DATASET, ProviderAcquisitionError,
     ProviderRateLimitError, ScryfallMarketAdapter, canonical_json, load_payload, sha256_bytes)
 
 METADATA_URL = "https://api.scryfall.com/bulk-data/default_cards"
-USER_AGENT = "MTG-Lab market acquisition/127F (+https://github.com/IDontFeelNone/MTG-Lab)"
+USER_AGENT = "MTG-Lab market acquisition/127G (+https://github.com/IDontFeelNone/MTG-Lab)"
 MAX_ATTEMPTS = 3
 JSONL_MEDIA_TYPES = frozenset(("application/json", "application/jsonl",
     "application/jsonlines", "application/x-ndjson", "application/octet-stream"))
+GZIP_MEDIA_TYPES = frozenset(("application/gzip", "application/x-gzip"))
+MAX_RETAINED_MB2_RECORDS = 1_000
 
 
 def new_diagnostics() -> dict:
@@ -48,9 +50,13 @@ def new_diagnostics() -> dict:
         "transport_uri_has_userinfo": False, "transport_uri_has_query": False,
         "transport_uri_has_fragment": False, "transport_uri_path_nonempty": False,
         "transport_uri_hostname_allowlisted": False, "transport_uri_rejection_reason": None,
-        "compression_mode": None, "bytes_downloaded": 0, "total_lines": 0,
+        "compression_mode": None, "declared_content_length": None,
+        "bytes_downloaded": 0, "compressed_bytes_read": 0,
+        "decompressed_bytes_processed": 0, "gzip_framing_valid": False,
+        "stream_completed": False, "total_lines": 0,
         "records_decoded": 0, "malformed_record_count": 0,
-        "selected_mb2_record_count": 0, "duplicate_record_count": 0, "attempts": 0}
+        "selected_mb2_record_count": 0, "duplicate_record_count": 0,
+        "duplicate_identity_count": 0, "attempts": 0}
 
 
 def _fail(message, diagnostics, stage, *, status=None, media_type=None, rate_limited=False):
@@ -221,29 +227,56 @@ def parse_bulk_metadata(metadata_bytes: bytes, diagnostics: dict) -> Transport:
 
 
 class _HashingReader(io.RawIOBase):
-    def __init__(self, raw): self.raw, self.digest, self.count = raw, hashlib.sha256(), 0
+    def __init__(self, raw, diagnostics):
+        self.raw, self.digest, self.count = raw, hashlib.sha256(), 0
+        self.diagnostics = diagnostics
     def readable(self): return True
     def readinto(self, target):
         chunk = self.raw.read(len(target))
         if not chunk: return 0
         target[:len(chunk)] = chunk; self.digest.update(chunk); self.count += len(chunk)
+        self.diagnostics["bytes_downloaded"] = self.count
+        self.diagnostics["compressed_bytes_read"] = self.count
         return len(chunk)
 
 
-def _parse_jsonl_stream(raw, diagnostics: dict, *, content_encoding=None) -> ParsedPayload:
-    hashing = _HashingReader(raw); buffered = io.BufferedReader(hashing)
+class _CountingReader(io.RawIOBase):
+    """Count decompressed bytes without retaining them."""
+    def __init__(self, raw, diagnostics): self.raw, self.diagnostics = raw, diagnostics
+    def readable(self): return True
+    def readinto(self, target):
+        chunk = self.raw.read(len(target))
+        if not chunk: return 0
+        target[:len(chunk)] = chunk
+        self.diagnostics["decompressed_bytes_processed"] += len(chunk)
+        return len(chunk)
+
+
+def _parse_jsonl_stream(raw, diagnostics: dict, *, content_encoding=None,
+                        compression_mode=None) -> ParsedPayload:
+    hashing = _HashingReader(raw, diagnostics); buffered = io.BufferedReader(hashing)
     encoding = (content_encoding or "").lower().strip()
     if encoding not in ("", "identity", "gzip"):
         diagnostics["compression_mode"] = encoding
         _fail("Scryfall payload used unsupported compression", diagnostics, "payload_decompression")
+    requested = compression_mode or ("gzip" if encoding == "gzip" else "identity")
     magic_gzip = buffered.peek(2)[:2] == b"\x1f\x8b"
-    if encoding == "gzip" or magic_gzip:
-        diagnostics["compression_mode"] = "gzip"; binary = gzip.GzipFile(fileobj=buffered)
+    if requested == "gzip":
+        diagnostics["compression_mode"] = "gzip"
+        diagnostics["gzip_framing_valid"] = magic_gzip
+        if not magic_gzip:
+            _fail("Scryfall gzip payload had invalid framing", diagnostics,
+                  "payload_decompression")
+        binary = gzip.GzipFile(fileobj=buffered)
     else:
+        if magic_gzip:
+            _fail("Scryfall JSONL compression was not declared unambiguously", diagnostics,
+                  "payload_decompression")
         diagnostics["compression_mode"] = "identity"; binary = buffered
+    counted = io.BufferedReader(_CountingReader(binary, diagnostics))
     selected, seen = [], set()
     try:
-        text = io.TextIOWrapper(binary, encoding="utf-8", errors="strict", newline=None)
+        text = io.TextIOWrapper(counted, encoding="utf-8", errors="strict", newline=None)
         for number, line in enumerate(text, 1):
             diagnostics["total_lines"] = number
             if not line.strip(): continue
@@ -264,17 +297,22 @@ def _parse_jsonl_stream(raw, diagnostics: dict, *, content_encoding=None) -> Par
                 _fail("Scryfall JSONL record had an invalid identity", diagnostics, "payload_jsonl_validation")
             if identity in seen:
                 diagnostics["duplicate_record_count"] += 1
+                diagnostics["duplicate_identity_count"] += 1
                 _fail("Scryfall JSONL contained a duplicate record identity", diagnostics,
                       "payload_jsonl_validation")
             seen.add(identity); diagnostics["records_decoded"] += 1
-            if str(record["set"]).lower() == "mb2": selected.append(record)
+            if str(record["set"]).lower() == "mb2":
+                if len(selected) >= MAX_RETAINED_MB2_RECORDS:
+                    _fail("Scryfall MB2 projection exceeded its retention bound", diagnostics,
+                          "payload_jsonl_validation")
+                selected.append(record)
         text.detach()
     except UnicodeDecodeError:
         _fail("Scryfall JSONL was not valid UTF-8", diagnostics, "payload_utf8_validation")
     except (gzip.BadGzipFile, EOFError, OSError):
         _fail("Scryfall payload decompression failed or stream was incomplete", diagnostics,
               "payload_decompression")
-    diagnostics["bytes_downloaded"] = hashing.count
+    diagnostics["stream_completed"] = True
     diagnostics["selected_mb2_record_count"] = len(selected)
     return ParsedPayload(tuple(selected), hashing.digest.hexdigest(), diagnostics["records_decoded"])
 
@@ -291,16 +329,28 @@ def download_jsonl(uri: str, diagnostics: dict) -> ParsedPayload:
             status = getattr(response, "status", None) or response.getcode()
             media = response.headers.get_content_type()
             diagnostics.update(http_status=status, response_media_type=media)
-            if media not in JSONL_MEDIA_TYPES:
+            if not 200 <= status < 300:
+                _fail("Scryfall payload request was not successful", diagnostics,
+                      "bulk_payload_response", status=status, media_type=media)
+            if media not in JSONL_MEDIA_TYPES and media not in GZIP_MEDIA_TYPES:
                 _fail("Scryfall returned an unsupported payload media type", diagnostics,
                       "payload_content_type", status=status, media_type=media)
-            parsed = _parse_jsonl_stream(response, diagnostics,
-                content_encoding=response.headers.get("Content-Encoding"))
             length = response.headers.get("Content-Length")
             try: expected = int(length) if length is not None else None
             except ValueError:
                 _fail("Scryfall payload had an invalid content length", diagnostics,
                       "payload_stream_completion")
+            if expected is not None and expected < 0:
+                _fail("Scryfall payload had an invalid content length", diagnostics,
+                      "payload_stream_completion")
+            diagnostics["declared_content_length"] = expected
+            content_encoding = response.headers.get("Content-Encoding")
+            if media in GZIP_MEDIA_TYPES and (content_encoding or "").lower().strip() not in ("", "identity"):
+                _fail("Scryfall gzip payload had ambiguous content encoding", diagnostics,
+                      "payload_decompression")
+            parsed = _parse_jsonl_stream(response, diagnostics,
+                content_encoding=content_encoding,
+                compression_mode="gzip" if media in GZIP_MEDIA_TYPES else None)
             if expected is not None and expected != diagnostics["bytes_downloaded"]:
                 _fail("Scryfall payload stream was incomplete", diagnostics,
                       "payload_stream_completion")
@@ -352,6 +402,9 @@ def run(data_root: Path, *, payload_path: Path | None, retrieved_at: datetime,
     counts = {s: sum(x["status"] == s for x in mappings)
               for s in ("matched", "unmatched", "ambiguous", "rejected")}
     known = sum(x.price is not None for x in observations)
+    diagnostic.update(mapping_census=counts,
+        known_price_count=known,
+        explicit_missing_price_count=len(observations)-known)
     result = {"schema_version":"market-acquisition-run-v1", "run_id":run_id,
         "provider":PROVIDER, "source_dataset":SOURCE_DATASET, "source_url":"scryfall:default_cards",
         "retrieved_at":retrieved_at.isoformat().replace("+00:00","Z"),

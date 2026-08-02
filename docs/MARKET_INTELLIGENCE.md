@@ -1,3 +1,7 @@
+# Phase 127G gzip transport boundary
+
+The latest Phase 127F dry run reached the official metadata endpoint, selected `jsonl_download_uri`, validated the JSONL URI, reached `data.scryfall.io`, and received HTTP 200 `application/gzip`. It stopped before reading payload bytes because gzip was not an accepted payload media type. No provider or MB2 record was decoded, and coverage remains 0/379. Phase 127G treats the response as gzip—not plain JSONL—requires valid framing and complete incremental decompression, validates UTF-8 JSONL line by line, and reports only safe counts/digests. Exactly one post-merge dry run is next; persistence, canonical writes, and promotion remain prohibited.
+
 # Market Intelligence Foundation
 
 ## Phase 127E acquisition status

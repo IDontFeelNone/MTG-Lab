@@ -61,7 +61,7 @@ jobs:
           assert not x['canonical_write'] and not x['promotion_performed']
           assert not x['persisted']
           PY
-          echo 'Phase 127F authorizes persist=false only; persistence is a hard stop.'
+          echo 'Phase 127G authorizes persist=false only; persistence is a hard stop.'
       - name: Validate repository and changed-file boundary
         env:
           PYTHONPATH: src

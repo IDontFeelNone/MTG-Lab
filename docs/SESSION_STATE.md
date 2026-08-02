@@ -1,3 +1,7 @@
+# Phase 127G session state
+
+Main contains merged Phase 127F (`d64b1b2`). The latest real Actions dry run selected and validated the official `jsonl_download_uri`, reached `data.scryfall.io`, and received HTTP 200 with `application/gzip`; it then stopped at `payload_content_type` with zero bytes read. Phase 127G accepts that media type only as a gzip stream, validates framing, incrementally decompresses UTF-8 JSONL, and retains only a bounded MB2 projection. No records were decoded or selected by that failed run, no observations or canonical data changed, no promotion occurred, and production coverage remains 0/379. Next: merge, dispatch exactly one dry run, inspect artifacts, and stop before persistence.
+
 # Phase 127D session state
 
 Main contains merged Phase 127C (`a837210`). Its latest real dry run reached Scryfall,

@@ -1,4 +1,4 @@
-"""Phase 127F Scryfall JSONL transport and bounded dry-run tests."""
+"""Phase 127G streaming gzip JSONL transport and bounded dry-run tests."""
 import gzip
 import hashlib
 import io
@@ -30,7 +30,7 @@ class Response(io.BytesIO):
     def getcode(self): return self.status
 
 
-class Phase127FTests(unittest.TestCase):
+class Phase127GTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.canonical = (ROOT/"data/canonical/state.json").read_bytes()
@@ -132,10 +132,42 @@ class Phase127FTests(unittest.TestCase):
 
     def test_gzip_supported_and_decompression_failure(self):
         payload=self.lines(self.record); compressed=gzip.compress(payload)
-        parsed,d=self.parse(compressed,content_encoding="gzip")
+        parsed,d=self.parse(compressed,compression_mode="gzip")
         self.assertEqual(parsed.records,(self.record,)); self.assertEqual(d["compression_mode"],"gzip")
-        with self.assertRaises(ProviderAcquisitionError): self.parse(b"\x1f\x8b broken",content_encoding="gzip")
+        self.assertTrue(d["gzip_framing_valid"]); self.assertTrue(d["stream_completed"])
+        self.assertEqual(d["compressed_bytes_read"],len(compressed))
+        self.assertEqual(d["decompressed_bytes_processed"],len(payload))
+        with self.assertRaises(ProviderAcquisitionError): self.parse(b"not gzip",compression_mode="gzip")
+        with self.assertRaises(ProviderAcquisitionError): self.parse(b"\x1f\x8b broken",compression_mode="gzip")
+        with self.assertRaises(ProviderAcquisitionError): self.parse(compressed[:-4],compression_mode="gzip")
         with self.assertRaises(ProviderAcquisitionError): self.parse(payload,content_encoding="br")
+
+    def test_real_phase_127f_regression_application_gzip_decodes(self):
+        raw=self.lines(self.record); compressed=gzip.compress(raw,mtime=0)
+        diagnostics=new_diagnostics()
+        with patch("urllib.request.urlopen",return_value=Response(
+                compressed,"application/gzip",length=len(compressed))) as opened:
+            parsed=download_jsonl("https://data.scryfall.io/redacted",diagnostics)
+        self.assertEqual(opened.call_count,1)
+        self.assertEqual(parsed.records,(self.record,))
+        self.assertEqual(parsed.source_digest,hashlib.sha256(compressed).hexdigest())
+        self.assertEqual(diagnostics["response_media_type"],"application/gzip")
+        self.assertEqual(diagnostics["compression_mode"],"gzip")
+        self.assertEqual(diagnostics["records_decoded"],1)
+
+    def test_gzip_content_length_utf8_json_and_nonobject_fail_closed(self):
+        cases=(b"\xff\n",b'{"bad"\n',b'[]\n')
+        for raw in cases:
+            compressed=gzip.compress(raw,mtime=0)
+            with self.subTest(raw=raw), patch("urllib.request.urlopen",return_value=Response(
+                    compressed,"application/gzip")):
+                with self.assertRaises(ProviderAcquisitionError):
+                    download_jsonl("https://data.scryfall.io/redacted",new_diagnostics())
+        compressed=gzip.compress(self.lines(self.record),mtime=0)
+        with patch("urllib.request.urlopen",return_value=Response(
+                compressed,"application/gzip",length=len(compressed)+1)):
+            with self.assertRaises(ProviderAcquisitionError):
+                download_jsonl("https://data.scryfall.io/redacted",new_diagnostics())
 
     def test_content_type_and_exactly_one_download(self):
         payload=self.lines(self.record)
@@ -157,6 +189,22 @@ class Phase127FTests(unittest.TestCase):
         parsed,d=self.parse(payload.getvalue())
         self.assertEqual(len(parsed.records),1); self.assertEqual(parsed.source_record_count,20001)
         self.assertEqual(d["selected_mb2_record_count"],1)
+
+    def test_large_gzip_stream_is_incremental_and_retains_only_mb2(self):
+        other=dict(self.record); other["set"]="neo"
+        raw=b"".join(self.lines(dict(other,id=f"other-{number}")) for number in range(25000))
+        raw+=self.lines(self.record); compressed=gzip.compress(raw,mtime=0)
+        class BoundedResponse(Response):
+            def read(self,size=-1):
+                if size < 0 or size > 131072: raise AssertionError("unbounded compressed read")
+                return super().read(size)
+        diagnostics=new_diagnostics()
+        with patch("urllib.request.urlopen",return_value=BoundedResponse(
+                compressed,"application/gzip")):
+            parsed=download_jsonl("https://data.scryfall.io/redacted",diagnostics)
+        self.assertEqual(parsed.records,(self.record,))
+        self.assertEqual(parsed.source_record_count,25001)
+        self.assertEqual(diagnostics["decompressed_bytes_processed"],len(raw))
 
     def test_complete_dry_run_census_known_missing_no_writes_and_digests(self):
         missing=dict(self.record); missing["id"]="missing-id"; missing["collector_number"]="unmatched"
@@ -192,7 +240,7 @@ class Phase127FTests(unittest.TestCase):
 
     def test_workflow_is_dry_run_only_and_retains_bounded_projection(self):
         workflow=(ROOT/".github/workflows/market-acquisition.yml").read_text()
-        self.assertIn("Phase 127F authorizes persist=false only",workflow)
+        self.assertIn("Phase 127G authorizes persist=false only",workflow)
         self.assertIn("market-acquisition-source-mb2.json",workflow)
         self.assertNotIn(" --persist",workflow)
 

@@ -1,3 +1,11 @@
+# Phase 127G streaming gzip JSONL contract
+
+Main includes Phase 127F (`d64b1b2`). Its latest real dry run reached the official metadata endpoint, selected `jsonl_download_uri`, classified JSONL, validated the URI, reached `data.scryfall.io`, and received HTTP 200 with `application/gzip`. Decisive diagnostics were `bulk_payload_download_began: true`, `bytes_downloaded: 0`, `compression_mode: null`, and `failing_stage: payload_content_type`. Thus no provider records were decoded, no MB2 records selected, no observations or canonical bytes written, and no promotion performed; coverage is 0/379.
+
+Phase 127G accepts `application/gzip` (and tested legacy `application/x-gzip`) for JSONL only as gzip. It verifies magic framing independently, streams compressed bytes through gzip and incremental strict UTF-8 decoding, parses exactly one object per nonblank line, and requires successful EOF plus any declared content-length match. Invalid framing, truncation, decompression/UTF-8/JSON failures, non-objects, duplicate identities, unsupported media, ambiguity, or partial streams fail closed. Compressed and decompressed byte counts, line/record/malformed/duplicate/MB2 counts, mapping census, known/missing-price census, stream completion, framing status, and deterministic compressed-source/normalized digests are safe diagnostics. URI values, paths, queries, headers, bodies, and records are never logged. Only at most 1,000 MB2 records are retained; unrelated records are counted then discarded.
+
+After merge, dispatch **Market acquisition** exactly once and inspect the diagnostics plus bounded MB2 projection. Require `persisted`, `canonical_write`, and `promotion_performed` all false. This is the hard stop: Phase 127G has no persistence input and authorizes no subsequent persistence operation.
+
 # Scryfall MB2 Market Acquisition
 
 **Phase 127E status:** provider-descriptor field preservation is explicit. No production
