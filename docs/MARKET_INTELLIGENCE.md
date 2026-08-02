@@ -10,6 +10,47 @@ The latest real acquisition reached the official Scryfall source, validated and 
 
 The latest Phase 127F dry run reached the official metadata endpoint, selected `jsonl_download_uri`, validated the JSONL URI, reached `data.scryfall.io`, and received HTTP 200 `application/gzip`. It stopped before reading payload bytes because gzip was not an accepted payload media type. No provider or MB2 record was decoded, and coverage remains 0/379. Phase 127G treats the response as gzip—not plain JSONL—requires valid framing and complete incremental decompression, validates UTF-8 JSONL line by line, and reports only safe counts/digests. Exactly one post-merge dry run is next; persistence, canonical writes, and promotion remain prohibited.
 
+# Phase 130 read-only historical CLI
+
+Run commands with `PYTHONPATH=src:.`:
+
+```bash
+python -m market.cli observations list --provider scryfall --limit 100
+python -m market.cli observations latest --printing-id 0110702e-0151-574a-af73-7259033dcc4e
+python -m market.cli observations first --acquisition-run-id scryfall-mb2-30754638264-1
+python -m market.cli observations count --finish foil --language en --currency USD --price-type market
+python -m market.cli printing-history 0110702e-0151-574a-af73-7259033dcc4e
+python -m market.cli coverage --product mystery-booster-2
+python -m market.cli acquisition-summary scryfall-mb2-30754638264-1
+python -m market.cli snapshot --as-of 2026-08-02T09:09:45.851000Z
+```
+
+`market-history-report-v1` is the primary deterministic JSON contract. Every success identifies
+the report, normalized filters, canonical snapshot where applicable, returned result count,
+truncation, ordering keys, explicit empty state, and data with complete observation provenance.
+Errors use `market-history-error-v1`, emit `valid: false`, and exit 2. Supported filters are exact
+canonical Printing ID, provider, acquisition run ID, finish, language, currency, and price type,
+plus inclusive `--observed-from`, `--observed-to`, and `--as-of` source timestamps. Timestamps must
+be timezone-aware ISO 8601. Values not supported by retained/canonical data and unknown Printing
+IDs are rejected rather than treated as empty.
+
+Lists sort by source timestamp, retrieval timestamp, provider, and observation identity; the
+default limit is 100 and maximum is 500. First/latest return one exact retained record or an
+explicit empty result. Count is untruncated. Printing history returns the complete selected series.
+As-of snapshots select the latest retained record independently for each Printing, provider,
+finish, language, currency, and price-type tuple and exclude every newer source observation.
+Explicit null prices remain observations.
+
+MB2 coverage compares observed Printing IDs with the 379 promoted canonical records whose set is
+MB2, and reports covered/uncovered/total, observations, providers, acquisitions, earliest/latest
+source time, and latest retrieval time. Acquisition summary reads the retained manifest and reports
+provider/timestamps, observation and Printing counts, dimension counts, known/null price counts,
+canonical snapshot, and available provider-source, retained-source, and normalized digests.
+
+The facade has no write method. It does not acquire, import, append, replace, delete, promote,
+calculate product EV, recommend, or start a workflow. `data/canonical/`, retained acquisition
+evidence, observation history, and import reports are strictly read-only inputs.
+
 # Market Intelligence Foundation
 
 ## Phase 127E acquisition status

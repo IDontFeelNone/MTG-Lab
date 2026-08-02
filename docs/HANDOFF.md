@@ -1,3 +1,20 @@
+# Phase 130 historical-query handoff
+
+Baseline `73fb1de` contains Phase 129 and the unchanged Phase 128 production corpus: 478 immutable
+Scryfall observations, one retained acquisition, and 379/379 MB2 Printing coverage. Phase 130 adds
+only `market-history-report-v1` read paths. Use `PYTHONPATH=src:. python -m market.cli --help` for
+the inventory and `--data-root` for an alternate retained tree. Listing is chronological, defaults
+to 100, and rejects limits outside 1..500. First/latest never synthesize an observation; count is
+exact; time ranges and as-of are inclusive source-observation timestamps; snapshot chooses the last
+observation per Printing/provider/finish/language/currency/price-type dimension without collapsing
+dimensions. Coverage is promoted canonical MB2 coverage. Acquisition summary binds its observation
+census to retained manifest timestamps, canonical identity, and source/normalized digests.
+
+All successful responses contain schema version, report type, normalized filters, canonical
+snapshot identity when applicable, result count, truncation, ordering, explicit empty state, and
+retained observation provenance. Invalid filters return `market-history-error-v1` and exit 2.
+No command has an acquisition, append, import, canonical-write, or promotion path.
+
 # Phase 128 handoff
 
 Phase 128 imported exactly `scryfall-mb2-30754638264-1`. Evidence remains the unchanged three-file acquisition directory. Production now contains 478 append-only `market-observation-v1` files and one deterministic import report: 379 matched printings, six unmatched finish mappings, zero ambiguous/rejected/duplicate/unsupported mappings, 478 known prices, and zero missing prices. Replay accepts only identical report and observation bytes; conflict fails closed. Complete validation precedes staging, and injected partial-write failure removes staging without publication. Coverage is 379/379 from 0/379. Canonical data and promotion state are unchanged.

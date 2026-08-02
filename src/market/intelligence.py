@@ -164,7 +164,8 @@ class MarketObservationRepository:
                      acquisition_run_id: str | None = None,
                      language: str | None = None,
                      observed_on: date | None = None,
-                     observed_at_or_before: datetime | None = None) -> tuple[MarketObservation, ...]:
+                     observed_at_or_before: datetime | None = None,
+                     observed_at_or_after: datetime | None = None) -> tuple[MarketObservation, ...]:
         values = (self.load(p) for p in sorted(self.root.glob("*/*/*/*.json")))
         filtered = [x for x in values if (entity_type is None or x.entity_type == entity_type)
             and (entity_id is None or x.entity_id == entity_id) and (provider is None or x.provider == provider)
@@ -173,7 +174,8 @@ class MarketObservationRepository:
             and (acquisition_run_id is None or x.provenance.get("acquisition_run_id") == acquisition_run_id)
             and (language is None or x.provenance.get("language") == language.lower())
             and (observed_on is None or x.observed_at.date() == observed_on)
-            and (observed_at_or_before is None or x.observed_at <= normalize_timestamp(observed_at_or_before))]
+            and (observed_at_or_before is None or x.observed_at <= normalize_timestamp(observed_at_or_before))
+            and (observed_at_or_after is None or x.observed_at >= normalize_timestamp(observed_at_or_after))]
         return tuple(sorted(filtered, key=lambda x: (x.observed_at, x.recorded_at, x.provider, x.observation_id)))
 
     def first(self, **filters: Any) -> MarketObservation | None:

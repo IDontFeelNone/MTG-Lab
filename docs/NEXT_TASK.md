@@ -1,3 +1,11 @@
+# Next task after Phase 130
+
+After review and merge, verify every `python -m market.cli` command against the retained Phase 128
+run. Recommended Phase 131 scope is contract hardening for pagination/cursors and multi-acquisition
+fixtures, plus optional human-readable rendering that remains derived from the JSON contract.
+Do not acquire or import data, mutate retained history or canonical facts, compute product EV,
+promote market facts, add recurring workflows, or introduce trends/recommendations.
+
 # Next task after Phase 129
 
 After review and merge, import the next independently reviewed retained acquisition with

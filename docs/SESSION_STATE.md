@@ -1,3 +1,13 @@
+# Phase 130 session state
+
+- Baseline: Phase 129 merged at `73fb1de`; Phase 128 observations remain 478/379 printings.
+- Interface: `python -m market.cli`, response contract `market-history-report-v1`, error contract
+  `market-history-error-v1`.
+- Reports: observation list/latest/first/count, complete Printing history, MB2 coverage, retained
+  acquisition summary, and latest exact-dimension snapshot at an inclusive as-of instant.
+- Safety: read-only; acquisitions, imports, observations, and canonical data are unchanged;
+  promotion is false and Architecture v12 is unchanged.
+
 # Phase 128 session state
 
 Baseline `244b2d7` contains merged Phase 127M and the sole retained acquisition `scryfall-mb2-30754638264-1`, with exactly `manifest.json`, `dry-run-report.json`, and `source-mb2.json`. Phase 128 verified its identities, file bindings, false-write flags, MB2 scope, and canonical snapshot, then persisted 478 production observations for 379/379 MB2 printings under the existing market boundary. Census: 385 retained records; 478 matched finish mappings; six unmatched; zero ambiguous/rejected/duplicate/unsupported; 478 known and zero missing prices. The report is under `data/market/imports/`. Canonical bytes and Architecture v12 are unchanged; no promotion occurred.
