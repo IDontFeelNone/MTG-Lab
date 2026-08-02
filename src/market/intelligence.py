@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation, ROUND_HALF_EVEN, localcontext
 import hashlib
 import json
@@ -160,13 +160,32 @@ class MarketObservationRepository:
 
     def observations(self, *, entity_type: str | None = None, entity_id: str | None = None,
                      provider: str | None = None, currency: str | None = None,
-                     price_type: str | None = None, finish: str | None = None) -> tuple[MarketObservation, ...]:
+                     price_type: str | None = None, finish: str | None = None,
+                     acquisition_run_id: str | None = None,
+                     language: str | None = None,
+                     observed_on: date | None = None,
+                     observed_at_or_before: datetime | None = None) -> tuple[MarketObservation, ...]:
         values = (self.load(p) for p in sorted(self.root.glob("*/*/*/*.json")))
         filtered = [x for x in values if (entity_type is None or x.entity_type == entity_type)
             and (entity_id is None or x.entity_id == entity_id) and (provider is None or x.provider == provider)
             and (currency is None or x.currency == currency.upper()) and (price_type is None or x.price_type == price_type)
-            and (finish is None or x.finish == finish)]
+            and (finish is None or x.finish == finish)
+            and (acquisition_run_id is None or x.provenance.get("acquisition_run_id") == acquisition_run_id)
+            and (language is None or x.provenance.get("language") == language.lower())
+            and (observed_on is None or x.observed_at.date() == observed_on)
+            and (observed_at_or_before is None or x.observed_at <= normalize_timestamp(observed_at_or_before))]
         return tuple(sorted(filtered, key=lambda x: (x.observed_at, x.recorded_at, x.provider, x.observation_id)))
+
+    def first(self, **filters: Any) -> MarketObservation | None:
+        values = self.observations(**filters)
+        return values[0] if values else None
+
+    def latest(self, **filters: Any) -> MarketObservation | None:
+        values = self.observations(**filters)
+        return values[-1] if values else None
+
+    def count(self, **filters: Any) -> int:
+        return len(self.observations(**filters))
 
 
 class MarketAnalytics:

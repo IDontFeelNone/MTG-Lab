@@ -1,4 +1,14 @@
-# Next task after Phase 128
+# Next task after Phase 129
+
+After review and merge, import the next independently reviewed retained acquisition with
+`scripts/import_market_observations.py`. Verify its report shows the prior historical count,
+the exact appended count, preserved coverage, successful append/replay checks, and complete
+lineage. Then exercise date, acquisition, as-of, first, and latest lookups. A recommended
+Phase 130 may add a read-only CLI/report command over this history. Do not reacquire evidence
+in tests, overwrite an observation, modify `data/canonical/`, promote market facts, or begin
+recommendations/trends.
+
+# Previous task after Phase 128
 
 After review and merge, verify the retained acquisition, all 478 observation files, the import report, and 379/379 MB2 query coverage using the commands in `docs/SCRYFALL_MARKET_ACQUISITION.md`. A later separately scoped phase may harden multi-acquisition atomic append behavior or import another retained snapshot. Do not reacquire this run, alter canonical data, promote pack EV, add recurring acquisition, or begin trends/recommendations.
 

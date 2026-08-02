@@ -91,3 +91,25 @@ persisted production history, and persisted history is not complete queryable co
 At this checkout those states are respectively **available**, **unverified**, **absent**, and
 **0/379**. Phase 127A adds explicit acquisition census fields and state-aware verification;
 it does not add market facts or change analytics, canonical data, or recommendations.
+# Phase 129 append-only historical lifecycle
+
+The production observation root is a multi-run historical database. An observation's
+content-derived identity includes its provider assertion, observed/source time, recorded/retrieval
+time, printing, finish, currency, price type, and provenance. Import enrichment binds the
+acquisition run, provider identifier, language, source digest, normalized digest, resolution,
+and source URL. Thus a later acquisition creates new immutable identities rather than updating
+prices in place.
+
+An acquisition is validated and normalized completely in a private staging directory. Publication
+uses exclusive destinations and verifies every byte before writing the immutable run report, which
+acts as its commit marker. Failure before that marker removes only newly published files. Existing
+history is not touched. A completed run may be replayed only when its report lineage and all
+observation bytes are identical; conflicts fail closed.
+
+`MarketObservationRepository.observations` provides stable chronological history and filters for
+acquisition, provider, printing/entity, finish, language-bearing provenance, currency, price type,
+UTC date, and as-of timestamp. `first`, `latest`, and `count` use the same filters. Existing Market
+Intelligence summaries remain compatible and naturally select the newest priced observation.
+Per-run deterministic reports record acquisition summary, observation/coverage growth, total
+historical count, append and replay assertions, and import lineage. These are market-only facts:
+canonical writes and promotion remain prohibited.

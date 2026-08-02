@@ -133,3 +133,23 @@ Phase 127 Actions run before dispatching anything else. If its dry run is valid,
 exact retained payload once; if persistence already exists, reuse it idempotently. This
 checkout has zero production observations and cannot supply price, history, or collection
 value proof. Do not replace missing access with fixtures or zero prices.
+# Phase 129 multi-acquisition handoff
+
+Phase 128 is merged at `7f5ce36`, and the production retained MB2 import is complete: 478
+immutable observations cover 379/379 MB2 Printings. Phase 129 removes the former empty-store
+restriction. Every run is independently revalidated from its retained three-file evidence,
+normalized with acquisition provenance, staged, then appended under content-derived observation
+identities. Existing files are never replaced. The import report is the run commit marker.
+
+Replay reloads and verifies the immutable report plus every expected observation byte. An
+identical replay returns the retained report; altered reports, altered observations, reused run
+identity with different lineage, or destination collisions fail closed. Before the commit marker
+is installed, any publication failure unlinks only paths published by that attempt, preserving
+all earlier runs. Repository queries support acquisition, UTC observation date, as-of instant,
+ordered printing history, first/latest observation, and counts.
+
+Run `PYTHONPATH=src:. python -m unittest tests.test_phase_129_market_history` before importing
+another retained run. No test performs acquisition. Canonical state is read only and guarded by
+its snapshot digest; reports continue to state `canonical_write: false` and
+`promotion_performed: false`. Architecture v12 is unchanged. Phase 130 should expose these
+history/report capabilities through a read-only operator CLI, without trend inference.

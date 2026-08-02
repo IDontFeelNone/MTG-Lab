@@ -1,3 +1,15 @@
+# Phase 129 status — multi-acquisition market history
+
+Phase 128 is merged at `7f5ce36`; the retained production MB2 acquisition completed and its
+478 observations cover 379/379 canonical MB2 Printings. The observation store now accepts
+independent retained acquisitions into one append-only history. Imports stage completely,
+publish only new immutable observation identities, verify published bytes, and remove only
+the new run's files on failure. Byte-identical replay succeeds, report or observation conflicts
+fail closed, and acquisition/date/as-of/first/latest/count queries are deterministic. Import
+reports include observation and coverage growth, historical count, append/replay verification,
+and lineage. Canonical bytes remain unchanged, `canonical_write` and `promotion_performed`
+remain false, and Architecture v12 remains frozen.
+
 # Phase 128 status — first production MB2 market snapshot imported
 
 Retained acquisition `scryfall-mb2-30754638264-1` was verified and imported without reacquisition. Its 385 MB2 source records produced 478 immutable Scryfall/USD/market observations covering all 379 production MB2 printings; 478 prices are known, zero are explicitly missing, six finish mappings are unmatched, and zero are ambiguous, rejected, duplicate, conflicting, or unsupported. Observations use `market-observation-v1` under `data/market/observations/`; the deterministic census is `data/market/imports/scryfall-mb2-30754638264-1/import-report.json`. Canonical coverage moved from 0/379 to 379/379. Canonical bytes remain unchanged, `canonical_write` and `promotion_performed` are false, and Architecture v12 remains frozen.

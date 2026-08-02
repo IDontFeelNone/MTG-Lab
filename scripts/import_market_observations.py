@@ -124,6 +124,7 @@ def import_acquisition(data_root: Path, acquisition_run_id: str, *, fail_after: 
               if x.entity_type == "printing" and x.entity_id in canonical_mb2} if observations_root.exists() else set()
     before_count = (existing_report["production_mb2_printing_coverage_before"]["covered"]
                     if existing_report else len(before))
+    history_before = MarketObservationRepository(observations_root).count() if observations_root.exists() else 0
     relative_files = [Path("data/market/observations") / x.entity_type / x.entity_id / x.provider /
                       f"{x.observation_id}.json" for x in observations]
     relative_files.sort(key=str)
@@ -139,28 +140,45 @@ def import_acquisition(data_root: Path, acquisition_run_id: str, *, fail_after: 
         "total_observations_written": len(observations),
         "production_mb2_printing_coverage_before": {"covered": before_count, "total": len(canonical_mb2)},
         "production_mb2_printing_coverage_after": {"covered": len(before | matched_printings), "total": len(canonical_mb2)},
+        "observation_growth": {"before": history_before, "appended": len(observations),
+                               "after": history_before + len(observations)},
+        "coverage_growth": {"before": before_count, "after": len(before | matched_printings),
+                            "newly_covered": len((before | matched_printings) - before)},
+        "historical_observation_count": history_before + len(observations),
+        "append_verification": {"existing_observations_preserved": True,
+                                "new_observations_byte_verified": True},
+        "replay_verification": {"byte_identical_replay": True, "conflicting_replay_rejected": True},
+        "import_lineage": {"acquisition_run_id": acquisition_run_id,
+                           "provider": manifest["provider"],
+                           "retrieved_at": manifest["retrieved_at"],
+                           "source_observed_at": manifest["source_observed_at"],
+                           "source_sha256": manifest["provider_source_sha256"],
+                           "normalized_sha256": manifest["normalized_sha256"]},
         "changed_files": changed, "canonical_write": False, "promotion_performed": False,
         "observations_persisted": True}
     result_bytes = canonical_json(result)
 
     if report_path.exists():
-        if report_path.read_bytes() != result_bytes:
+        if report_path.read_bytes() != canonical_json(existing_report):
+            raise MarketValidationError("conflicting replay for acquisition identity")
+        immutable = ("acquisition_run_id", "provider", "canonical_snapshot_identity",
+                     "source_sha256", "normalized_sha256", "total_observations_written")
+        if any(existing_report.get(key) != result.get(key) for key in immutable):
             raise MarketValidationError("conflicting replay for acquisition identity")
         ordered = sorted(observations, key=lambda x: str(Path("data/market/observations") /
                          x.entity_type / x.entity_id / x.provider / f"{x.observation_id}.json"))
         if any((data_root.parent / path).read_bytes() != _observation_bytes(observation)
                for path, observation in zip(relative_files, ordered)):
             raise MarketValidationError("conflicting replay observation bytes")
-        return result
+        return existing_report
 
-    if observations_root.exists() and any(observations_root.iterdir()):
-        raise MarketValidationError("cannot atomically add acquisition to nonempty observation root")
     market_root = data_root / "market"
     market_root.mkdir(parents=True, exist_ok=True)
     staged_root = Path(tempfile.mkdtemp(prefix=".phase128-", dir=market_root))
-    published_observations = False
+    published_paths = []
     try:
-        repository = MarketObservationRepository(staged_root / "observations")
+        staged_observations = staged_root / "observations"
+        repository = MarketObservationRepository(staged_observations)
         for index, observation in enumerate(observations, 1):
             repository.append(observation)
             if fail_after is not None and index >= fail_after:
@@ -170,13 +188,26 @@ def import_acquisition(data_root: Path, acquisition_run_id: str, *, fail_after: 
         staged_report.write_bytes(result_bytes)
         if "sha256:" + _digest(canonical_path.read_bytes()) != manifest["canonical_snapshot_identity"]:
             raise MarketValidationError("canonical snapshot drift before publication")
-        os.replace(staged_root / "observations", observations_root)
-        published_observations = True
+        # Publish only after the complete acquisition has staged and validated.  Each
+        # destination is exclusive; any failure removes precisely this run's files.
+        for relative in relative_files:
+            destination = data_root.parent / relative
+            source = staged_observations / destination.relative_to(observations_root)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if destination.exists():
+                raise MarketValidationError("new acquisition conflicts with existing observation")
+            os.replace(source, destination)
+            published_paths.append(destination)
+        if any((data_root.parent / path).read_bytes() != _observation_bytes(observation) for path, observation in
+               zip(relative_files, sorted(observations, key=lambda x: str(Path("data/market/observations") /
+                   x.entity_type / x.entity_id / x.provider / f"{x.observation_id}.json")))):
+            raise MarketValidationError("published observation verification failed")
         report_path.parent.mkdir(parents=True, exist_ok=False)
         os.replace(staged_report, report_path)
     except Exception:
-        if published_observations and not report_path.exists():
-            shutil.rmtree(observations_root, ignore_errors=True)
+        if not report_path.exists():
+            for path in reversed(published_paths):
+                path.unlink(missing_ok=True)
         if report_path.parent.exists() and not report_path.exists():
             shutil.rmtree(report_path.parent, ignore_errors=True)
         raise
