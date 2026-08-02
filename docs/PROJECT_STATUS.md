@@ -1,3 +1,18 @@
+# Phase 130 status — read-only historical market query CLI and reporting
+
+Phase 129 is merged at `73fb1de`. The versioned `market-history-report-v1` reporting facade and
+`python -m market.cli` now expose deterministic observation list/latest/first/count, printing
+history, MB2 coverage, acquisition summary, and exact-dimension as-of snapshot reports. Filters
+cover canonical Printing ID, provider, acquisition, finish, language, currency, price type,
+inclusive source-time range, and inclusive as-of cutoff. Listing defaults to 100 results and is
+bounded at 500 with explicit truncation; complete printing history remains chronologically ordered.
+Unknown Printing IDs and unsupported dimensions fail closed, while valid empty queries are explicit.
+
+The commands only read the existing 478 immutable observations from retained acquisition
+`scryfall-mb2-30754638264-1`, covering 379/379 MB2 Printings. No acquisition, import, observation
+write, canonical write, promotion, EV calculation, recommendation, or workflow was performed.
+Architecture v12 remains frozen.
+
 # Phase 129 status — multi-acquisition market history
 
 Phase 128 is merged at `7f5ce36`; the retained production MB2 acquisition completed and its
