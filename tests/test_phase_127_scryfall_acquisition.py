@@ -1,436 +1,204 @@
-"""Phase 127 Scryfall acquisition, isolation, integrity, and failure tests."""
+"""Phase 127F Scryfall JSONL transport and bounded dry-run tests."""
+import gzip
 import hashlib
+import io
 import json
-import os
 from pathlib import Path
-import subprocess
-import sys
 import tempfile
 import unittest
 from datetime import datetime, timezone
-from decimal import Decimal
-from unittest.mock import patch
-import urllib.error
 from email.message import Message
+from unittest.mock import patch
 
-from market import MarketObservationRepository, MarketValidationError
-from market.scryfall import (ProviderAcquisitionError, ProviderRateLimitError,
-    ScryfallMarketAdapter, canonical_json, load_payload, sha256_bytes)
-from scripts.scryfall_market_acquisition import (METADATA_URL, MAX_ATTEMPTS, fetch,
-    _select_bulk_descriptor, new_diagnostics, parse_bulk_metadata, run)
+from market import MarketValidationError
+from market.scryfall import ProviderAcquisitionError, canonical_json, sha256_bytes
+from scripts.scryfall_market_acquisition import (_parse_jsonl_stream,
+    _select_bulk_descriptor, download_jsonl, new_diagnostics, parse_bulk_metadata, run)
 
 ROOT = Path(__file__).parents[1]
 NOW = datetime(2026, 8, 1, 12, tzinfo=timezone.utc)
 
 
-class Response:
-    def __init__(self, payload=b"{}", content_type="application/json", status=200):
-        self.payload, self.status = payload, status
-        self.headers = Message(); self.headers["Content-Type"] = content_type
+class Response(io.BytesIO):
+    def __init__(self, payload, content_type="application/x-ndjson", encoding=None, length=None):
+        super().__init__(payload); self.status = 200; self.headers = Message()
+        self.headers["Content-Type"] = content_type
+        if encoding: self.headers["Content-Encoding"] = encoding
+        if length is not None: self.headers["Content-Length"] = str(length)
     def __enter__(self): return self
-    def __exit__(self, *args): return False
+    def __exit__(self, *args): self.close(); return False
     def getcode(self): return self.status
-    def read(self): return self.payload
 
 
-class Phase127Tests(unittest.TestCase):
+class Phase127FTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.canonical_bytes = (ROOT / "data/canonical/state.json").read_bytes()
-        cls.state = json.loads(cls.canonical_bytes)
-        cls.printing_id, cls.printing = next(iter(cls.state["printing"].items()))
-        values = cls.printing["values"]
+        cls.canonical = (ROOT/"data/canonical/state.json").read_bytes()
+        state = json.loads(cls.canonical)
+        cls.printing_id, printing = next(iter(state["printing"].items()))
+        values = printing["values"]
         cls.record = {"object":"card", "id":values["identifiers"]["scryfallId"],
             "set":"mb2", "collector_number":values["collector_number"], "lang":"en",
             "finishes":[values["finish_ids"][0]],
-            "prices":{"usd":"1.2300", "usd_foil":None, "usd_etched":None}}
+            "prices":{"usd":"1.23", "usd_foil":None, "usd_etched":None}}
 
-    def adapter(self, state=None):
-        return ScryfallMarketAdapter(state or self.state, "sha256:canonical")
+    def descriptor(self, **changes):
+        value = {"compressed_size":123, "description":"Default cards", "id":"safe-id",
+            "jsonl_download_uri":"https://data.scryfall.io/default-cards/test.jsonl",
+            "name":"Default Cards", "object":"bulk_data", "type":"default_cards",
+            "updated_at":"2026-08-01T10:00:00Z", "uri":"https://api.scryfall.com/bulk-data/x"}
+        value.update(changes); return value
 
-    def metadata(self, **changes):
-        value = {"object":"bulk_data", "type":"default_cards",
-            "download_uri":"https://data.scryfall.io/default-cards/test.json",
-            "updated_at":"2026-08-01T10:00:00Z"}
-        value.update(changes)
-        return value
+    def lines(self, *records):
+        return b"".join(json.dumps(x, sort_keys=True).encode()+b"\n" for x in records)
 
-    def test_payload_validation_and_source_digest(self):
-        raw = canonical_json([self.record])
-        self.assertEqual(load_payload(raw)[0]["id"], self.record["id"])
-        self.assertEqual(sha256_bytes(raw), hashlib.sha256(raw).hexdigest())
-        with self.assertRaises(MarketValidationError): load_payload(b"{}")
-        with self.assertRaises(MarketValidationError): self.adapter().validate_record({"id":"x"})
+    def parse(self, payload, **kwargs):
+        diagnostics = new_diagnostics()
+        result = _parse_jsonl_stream(io.BytesIO(payload), diagnostics, **kwargs)
+        return result, diagnostics
 
-    def test_exact_identifier_mapping_normalization_decimal_and_missing(self):
-        observations, mappings = self.adapter().normalize([self.record], observed_at=NOW,
-            retrieved_at=NOW, source_url="fixture", source_digest="a"*64)
-        self.assertEqual(mappings[0]["mapping_method"], "canonical_external_identifier")
-        self.assertEqual(observations[0].entity_id, self.printing_id)
-        self.assertEqual(observations[0].price, Decimal("1.2300"))
-        missing = dict(self.record); missing["prices"] = {"usd":None,"usd_foil":None,"usd_etched":None}
-        values, _ = self.adapter().normalize([missing], observed_at=NOW, retrieved_at=NOW,
-            source_url="fixture", source_digest="b"*64)
-        self.assertIsNone(values[0].price)
+    def root(self, temp):
+        root=Path(temp); (root/"canonical").mkdir(); (root/"canonical/state.json").write_bytes(self.canonical)
+        return root
 
-    def test_deterministic_normalization_and_currency(self):
-        a, _ = self.adapter().normalize([self.record], observed_at=NOW, retrieved_at=NOW,
-            source_url="fixture", source_digest="a"*64)
-        b, _ = self.adapter().normalize([self.record], observed_at=NOW, retrieved_at=NOW,
-            source_url="fixture", source_digest="a"*64)
-        self.assertEqual(a[0].to_dict(), b[0].to_dict())
-        self.assertEqual(a[0].currency, "USD")
+    def test_exact_real_descriptor_key_shape_and_jsonl_selection(self):
+        descriptor=self.descriptor(); diagnostic=new_diagnostics()
+        transport=parse_bulk_metadata(canonical_json(descriptor),diagnostic)
+        self.assertEqual(sorted(descriptor), ["compressed_size","description","id",
+            "jsonl_download_uri","name","object","type","updated_at","uri"])
+        self.assertEqual(transport.field,"jsonl_download_uri"); self.assertEqual(transport.format,"jsonl")
+        self.assertFalse(diagnostic["download_uri_present"])
+        self.assertEqual(diagnostic["transport_field_extraction_reason"],"jsonl_transport_selected")
+        self.assertFalse(diagnostic["legacy_compatibility_used"])
 
-    def test_tuple_mapping_language_finish_isolation_unmatched(self):
-        record = dict(self.record); record["id"] = "00000000-0000-4000-8000-000000000000"
-        resolution = self.adapter().resolve(record, self.record["finishes"][0])
-        self.assertEqual(resolution.method, "set_collector_language_finish")
-        wrong = dict(record); wrong["lang"] = "fr"
-        self.assertEqual(self.adapter().resolve(wrong, self.record["finishes"][0]).status, "unmatched")
-        self.assertEqual(self.adapter().resolve(record, "foil" if self.record["finishes"][0] != "foil" else "nonfoil").status, "unmatched")
+    def test_descriptor_preserved_and_diagnostics_safe(self):
+        descriptor=self.descriptor(); diagnostic=new_diagnostics()
+        selection=_select_bulk_descriptor(descriptor,diagnostic)
+        self.assertIs(selection.provider,descriptor); self.assertIsNot(selection.provider,selection.diagnostic_projection)
+        serialized=json.dumps({"d":diagnostic,"p":selection.diagnostic_projection})
+        self.assertNotIn(descriptor["jsonl_download_uri"],serialized)
+        self.assertNotIn(descriptor["uri"],serialized)
+        self.assertTrue(diagnostic["descriptor_selection_preserved_original_field"])
+        self.assertTrue(diagnostic["transport_and_diagnostic_objects_distinct"])
 
-    def test_ambiguous_and_conflicting_mapping(self):
-        state = json.loads(self.canonical_bytes)
-        duplicate = json.loads(json.dumps(self.printing)); state["printing"]["duplicate-printing"] = duplicate
-        resolution = self.adapter(state).resolve(self.record, self.record["finishes"][0])
-        self.assertEqual(resolution.status, "ambiguous")
-        adapter = ScryfallMarketAdapter(self.state, "sha256:x", {self.record["id"]:"missing"})
-        self.assertEqual(adapter.resolve(self.record, self.record["finishes"][0]).status, "rejected")
+    def test_transport_field_boundaries(self):
+        cases=(({},"supported_transport_field_absent"),
+            ({"jsonl_download_uri":17},"selected_transport_not_string"),
+            ({"jsonl_download_uri":"  "},"selected_transport_blank"),
+            ({"download_uri":"https://data.scryfall.io/other.json"},"conflicting_transport_fields"))
+        for changes, reason in cases:
+            descriptor=self.descriptor(**changes)
+            if changes == {}: descriptor.pop("jsonl_download_uri")
+            diagnostic=new_diagnostics()
+            with self.subTest(reason=reason), self.assertRaises(ProviderAcquisitionError):
+                parse_bulk_metadata(canonical_json(descriptor),diagnostic)
+            self.assertEqual(diagnostic["transport_field_extraction_reason"],reason)
+            self.assertNotIn("https://",json.dumps(diagnostic))
 
-    def test_mb2_only_target_isolation(self):
-        other = dict(self.record); other["set"] = "msh"; other["id"] = "other"
-        observations, mappings = self.adapter().normalize([other], observed_at=NOW,
-            retrieved_at=NOW, source_url="fixture", source_digest="a"*64)
-        self.assertFalse(observations); self.assertEqual(mappings[0]["status"], "rejected")
+    def test_equal_dual_field_is_unambiguous_and_legacy_fixture_supported(self):
+        uri="https://data.scryfall.io/default-cards/test.jsonl"
+        transport=parse_bulk_metadata(canonical_json(self.descriptor(download_uri=uri)),new_diagnostics())
+        self.assertEqual(transport.field,"jsonl_download_uri")
+        legacy=self.descriptor(download_uri="https://data.scryfall.io/default-cards/test.json")
+        legacy.pop("jsonl_download_uri"); diagnostic=new_diagnostics()
+        self.assertEqual(parse_bulk_metadata(canonical_json(legacy),diagnostic).format,"json-array")
+        self.assertTrue(diagnostic["legacy_compatibility_used"])
 
-    def test_append_replay_conflict_and_tamper_detection(self):
-        observation = self.adapter().normalize([self.record], observed_at=NOW, retrieved_at=NOW,
-            source_url="fixture", source_digest="a"*64)[0][0]
+    def test_uri_security_policy(self):
+        invalid=("http://data.scryfall.io/a", "https://api.scryfall.com/a",
+            "https://scryfall.io.evil.test/a", "https://127.0.0.1/a",
+            "https://localhost/a", "https://u:p@data.scryfall.io/a",
+            "https://data.scryfall.io:444/a", "https://data.scryfall.io", "https://data.scryfall.io/a#x")
+        for uri in invalid:
+            with self.subTest(uri=uri), self.assertRaises(ProviderAcquisitionError):
+                parse_bulk_metadata(canonical_json(self.descriptor(jsonl_download_uri=uri)),new_diagnostics())
+
+    def test_valid_jsonl_blank_lines_and_deterministic_digest(self):
+        payload=b"\n"+self.lines(self.record)+b"  \n"
+        parsed,d=self.parse(payload)
+        self.assertEqual(parsed.records,(self.record,)); self.assertEqual(parsed.source_digest,hashlib.sha256(payload).hexdigest())
+        self.assertEqual(d["total_lines"],3); self.assertEqual(d["records_decoded"],1)
+        self.assertEqual(d["selected_mb2_record_count"],1)
+
+    def test_malformed_nonobject_invalid_utf8_and_shape_rejected(self):
+        cases=(b'{"bad"\n', b'[]\n', b'"scalar"\n', b'\xff\n', b'{"id":"x"}\n')
+        for payload in cases:
+            with self.subTest(payload=payload), self.assertRaises(ProviderAcquisitionError): self.parse(payload)
+
+    def test_duplicate_provider_identity_rejected(self):
+        with self.assertRaises(ProviderAcquisitionError) as caught:
+            self.parse(self.lines(self.record,self.record))
+        self.assertEqual(caught.exception.diagnostics["duplicate_record_count"],1)
+
+    def test_gzip_supported_and_decompression_failure(self):
+        payload=self.lines(self.record); compressed=gzip.compress(payload)
+        parsed,d=self.parse(compressed,content_encoding="gzip")
+        self.assertEqual(parsed.records,(self.record,)); self.assertEqual(d["compression_mode"],"gzip")
+        with self.assertRaises(ProviderAcquisitionError): self.parse(b"\x1f\x8b broken",content_encoding="gzip")
+        with self.assertRaises(ProviderAcquisitionError): self.parse(payload,content_encoding="br")
+
+    def test_content_type_and_exactly_one_download(self):
+        payload=self.lines(self.record)
+        for media in ("application/x-ndjson","application/jsonl","application/octet-stream","application/json"):
+            with self.subTest(media=media), patch("urllib.request.urlopen",return_value=Response(payload,media)) as opened:
+                self.assertEqual(download_jsonl("https://data.scryfall.io/a",new_diagnostics()).source_record_count,1)
+                self.assertEqual(opened.call_count,1)
+        with patch("urllib.request.urlopen",return_value=Response(payload,"text/html")):
+            with self.assertRaises(ProviderAcquisitionError): download_jsonl("https://data.scryfall.io/a",new_diagnostics())
+        with patch("urllib.request.urlopen",return_value=Response(payload,length=len(payload)+1)):
+            with self.assertRaises(ProviderAcquisitionError): download_jsonl("https://data.scryfall.io/a",new_diagnostics())
+
+    def test_bounded_mb2_only_selection_large_stream(self):
+        other=dict(self.record); other["set"]="neo"
+        payload=io.BytesIO()
+        for number in range(20000):
+            item=dict(other); item["id"]=f"other-{number}"; payload.write(self.lines(item))
+        payload.write(self.lines(self.record))
+        parsed,d=self.parse(payload.getvalue())
+        self.assertEqual(len(parsed.records),1); self.assertEqual(parsed.source_record_count,20001)
+        self.assertEqual(d["selected_mb2_record_count"],1)
+
+    def test_complete_dry_run_census_known_missing_no_writes_and_digests(self):
+        missing=dict(self.record); missing["id"]="missing-id"; missing["collector_number"]="unmatched"
+        missing["prices"]={"usd":None,"usd_foil":None,"usd_etched":None}
+        payload=self.lines(self.record,missing)
         with tempfile.TemporaryDirectory() as temp:
-            repository = MarketObservationRepository(Path(temp))
-            path = repository.append(observation)
-            self.assertEqual(path, repository.append(observation))
-            path.write_text(path.read_text().replace('"1.2300"', '"9.99"'))
-            with self.assertRaises(MarketValidationError): repository.load(path)
-            with self.assertRaises(MarketValidationError): repository.append(observation)
-
-    def test_run_manifest_digests_verification_and_no_canonical_write(self):
-        with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp); (root/"canonical").mkdir(); (root/"canonical/state.json").write_bytes(self.canonical_bytes)
-            payload = root/"payload.json"; payload.write_bytes(canonical_json([self.record]))
-            before = hashlib.sha256((root/"canonical/state.json").read_bytes()).hexdigest()
-            result = run(root, payload_path=payload, retrieved_at=NOW, persist=True, run_id="one")
-            self.assertEqual(result["observation_count"], 1)
-            self.assertEqual(result["source_record_count"], 1)
-            self.assertEqual(result["mb2_record_count"], 1)
-            self.assertEqual(result["matched_printing_count"], 1)
-            self.assertEqual(result["known_price_observation_count"], 1)
-            self.assertEqual(result["missing_price_observation_count"], 0)
-            self.assertFalse(result["canonical_write"]); self.assertFalse(result["promotion_performed"])
-            normalized = (root/"market/acquisitions/one/normalized.json").read_bytes()
-            self.assertEqual(result["normalized_sha256"], sha256_bytes(normalized))
-            self.assertEqual(before, hashlib.sha256((root/"canonical/state.json").read_bytes()).hexdigest())
-            for path in (root/"market/observations").glob("*/*/*/*.json"):
-                MarketObservationRepository(root/"market/observations").load(path)
-
-    def test_provider_failure_rate_limit_and_secret_redaction(self):
-        with patch("urllib.request.urlopen", side_effect=urllib.error.HTTPError("https://x?token=SECRET",429,"",{},None)), patch("time.sleep"):
-            with self.assertRaisesRegex(ProviderRateLimitError, "429"): fetch("https://x?token=SECRET")
-        with patch("urllib.request.urlopen", side_effect=urllib.error.URLError("token=SECRET")), patch("time.sleep"):
-            with self.assertRaises(ProviderAcquisitionError) as caught: fetch("https://x?token=SECRET")
-        self.assertNotIn("SECRET", str(caught.exception))
-
-    def test_official_metadata_contract_and_download_uri(self):
-        self.assertEqual(METADATA_URL, "https://api.scryfall.com/bulk-data/default_cards")
-        metadata = canonical_json({"object":"bulk_data", "type":"default_cards",
-            "download_uri":"https://data.scryfall.io/default-cards/test.json",
-            "updated_at":"2026-08-01T10:00:00Z"})
-        with tempfile.TemporaryDirectory() as temp, patch("urllib.request.urlopen",
-                side_effect=[Response(metadata), Response(canonical_json([self.record]))]) as opened:
-            root=Path(temp); (root/"canonical").mkdir(); (root/"canonical/state.json").write_bytes(self.canonical_bytes)
-            report = run(root, payload_path=None, retrieved_at=NOW, persist=False, run_id="dry")
-        self.assertEqual(opened.call_count, 2)
-        self.assertEqual(report["source_url"], "scryfall:default_cards")
-        self.assertTrue(report["acquisition_diagnostics"]["download_uri_obtained"])
-        self.assertTrue(report["acquisition_diagnostics"]["bulk_payload_download_began"])
-
-    def test_direct_and_list_metadata_shapes(self):
-        for value, shape, inspected in (
-                (self.metadata(), "direct_object", 1),
-                ({"object":"list", "data":[self.metadata(type="oracle_cards"),
-                                              self.metadata()]}, "list_object", 2)):
-            with self.subTest(shape=shape):
-                diagnostic = new_diagnostics()
-                uri, updated = parse_bulk_metadata(canonical_json(value), diagnostic)
-                self.assertEqual(uri, "https://data.scryfall.io/default-cards/test.json")
-                self.assertEqual(updated, datetime(2026, 8, 1, 10, tzinfo=timezone.utc))
-                self.assertEqual(diagnostic["metadata_parsing_shape"], shape)
-                self.assertEqual(diagnostic["bulk_entries_inspected"], inspected)
-                self.assertEqual(diagnostic["default_cards_matches"], 1)
-                self.assertEqual(diagnostic["selected_bulk_type"], "default_cards")
-                self.assertTrue(diagnostic["updated_at_present"])
-                self.assertTrue(diagnostic["download_uri_valid"])
-                self.assertTrue(diagnostic["download_uri_present"])
-                self.assertEqual(diagnostic["download_uri_runtime_type"], "str")
-                self.assertFalse(diagnostic["download_uri_blank_after_normalization"])
-                self.assertTrue(diagnostic["descriptor_selection_preserved_original_field"])
-                self.assertTrue(diagnostic["transport_and_diagnostic_objects_distinct"])
-                self.assertEqual(diagnostic["download_uri_field_extraction_reason"],
-                                 "download_uri_string_preserved")
-
-    def test_provider_descriptor_is_preserved_and_diagnostics_are_sanitized(self):
-        provider = self.metadata(provider_extension={"safe": True})
-        diagnostic = new_diagnostics()
-        selection = _select_bulk_descriptor(provider, diagnostic)
-        self.assertIs(selection.provider, provider)
-        self.assertIsNot(selection.provider, selection.diagnostic_projection)
-        self.assertIn("download_uri", selection.provider)
-        self.assertNotIn("download_uri", selection.diagnostic_projection)
-        self.assertEqual(selection.diagnostic_projection["value_types"]["download_uri"], "str")
-        self.assertEqual(diagnostic["metadata_top_level_keys"], sorted(provider))
-        self.assertEqual(diagnostic["selected_descriptor_keys"], sorted(provider))
-        self.assertNotIn(provider["download_uri"], json.dumps(diagnostic))
-        self.assertNotIn(provider["download_uri"], json.dumps(selection.diagnostic_projection))
-
-    def test_metadata_match_cardinality_error_and_contract_fail_closed(self):
-        invalid = [
-            {"object":"list", "data":[self.metadata(type="oracle_cards")]},
-            {"object":"list", "data":[self.metadata(), self.metadata()]},
-            {"object":"list", "data":[self.metadata(object="card")]},
-            {"object":"error", "code":"not_found", "details":"provider body"},
-            [],
-            {"object":"catalog", "data":[]},
-        ]
-        for value in invalid:
-            with self.subTest(value=value), self.assertRaises(ProviderAcquisitionError):
-                parse_bulk_metadata(canonical_json(value), new_diagnostics())
-
-    def test_metadata_download_uri_boundary(self):
-        invalid = [
-            (None, "download_uri_not_string"), ("", "download_uri_blank"),
-            ("   ", "download_uri_blank"), ("not a uri", "scheme_not_https"),
-            ("http://data.scryfall.io/default-cards/test.json", "scheme_not_https"),
-            ("https://api.scryfall.com/default-cards/test.json", "hostname_not_allowlisted"),
-            ("https://scryfall.io.evil.example/test.json", "hostname_not_allowlisted"),
-            ("https://evil-scryfall.io/test.json", "hostname_not_allowlisted"),
-            ("https://data.scryfall.io.evil.example/test.json", "hostname_not_allowlisted"),
-            ("https://127.0.0.1/test.json", "ip_address_hostname"),
-            ("https://[::1]/test.json", "ip_address_hostname"),
-            ("https://localhost/test.json", "localhost_hostname"),
-            ("https://user:password@data.scryfall.io/test.json", "userinfo_present"),
-            ("https://data.scryfall.io:444/test.json", "nondefault_port"),
-            ("https:///test.json", "hostname_missing"),
-            ("https://data.scryfall.io", "absolute_path_missing"),
-            ("https://data.scryfall.io/test.json#section", "fragment_present")]
-        for uri, reason in invalid:
-            diagnostic = new_diagnostics()
-            with self.subTest(uri=uri), self.assertRaises(ProviderAcquisitionError) as caught:
-                parse_bulk_metadata(canonical_json(self.metadata(download_uri=uri)), diagnostic)
-            self.assertEqual(caught.exception.diagnostics["failing_stage"],
-                             "download_uri_extraction")
-            self.assertFalse(diagnostic["download_uri_valid"])
-            self.assertEqual(diagnostic["download_uri_rejection_reason"], reason)
-            if uri and "/test.json" in uri:
-                self.assertNotIn(uri, json.dumps(diagnostic))
-
-    def test_missing_non_string_and_blank_download_uri_fail_closed_without_leakage(self):
-        cases = (("missing", "download_uri_absent", "NoneType", None),
-                 (17, "download_uri_not_string", "int", None),
-                 ("  ", "download_uri_blank", "str", True))
-        for value, reason, runtime_type, blank in cases:
-            descriptor = self.metadata()
-            if value == "missing":
-                descriptor.pop("download_uri")
-            else:
-                descriptor["download_uri"] = value
-            diagnostic = new_diagnostics()
-            with self.subTest(value=value), self.assertRaises(ProviderAcquisitionError):
-                parse_bulk_metadata(canonical_json(descriptor), diagnostic)
-            self.assertEqual(diagnostic["download_uri_field_extraction_reason"], reason)
-            self.assertEqual(diagnostic["download_uri_runtime_type"], runtime_type)
-            self.assertEqual(diagnostic["download_uri_blank_after_normalization"], blank)
-            self.assertFalse(diagnostic["bulk_payload_download_began"])
-            self.assertNotIn("https://", json.dumps(diagnostic))
-
-    def test_official_static_hosts_normalization_port_and_query_policy(self):
-        accepted = [
-            "https://data.scryfall.io/default-cards/test.json",
-            "https://static-files.scryfall.io/default-cards/test.json",
-            "https://DATA.SCRYFALL.IO.:443/default-cards/test.json",
-            "https://data.scryfall.io/default-cards/test.json?download=1"]
-        for uri in accepted:
-            with self.subTest(uri=uri):
-                diagnostic = new_diagnostics()
-                selected, _ = parse_bulk_metadata(
-                    canonical_json(self.metadata(download_uri=uri)), diagnostic)
-                self.assertEqual(selected, uri)
-                self.assertTrue(diagnostic["download_uri_valid"])
-                self.assertTrue(diagnostic["download_uri_hostname_allowlisted"])
-                self.assertEqual(diagnostic["download_uri_effective_port"], 443)
-                self.assertIsNone(diagnostic["download_uri_rejection_reason"])
-                self.assertNotIn(uri, json.dumps(diagnostic))
-        self.assertEqual(diagnostic["download_uri_hostname"], "data.scryfall.io")
-        query_diagnostic = new_diagnostics()
-        parse_bulk_metadata(canonical_json(self.metadata(
-            download_uri=accepted[-1])), query_diagnostic)
-        self.assertTrue(query_diagnostic["download_uri_has_query"])
-
-    def test_valid_dry_run_census_has_no_persistence_or_canonical_write(self):
-        metadata = canonical_json(self.metadata(
-            download_uri="https://static-files.scryfall.io/default-cards/test.json?key=secret"))
-        with tempfile.TemporaryDirectory() as temp, patch("urllib.request.urlopen",
-                side_effect=[Response(metadata), Response(canonical_json([self.record]))]) as opened:
-            root = Path(temp); (root/"canonical").mkdir()
-            canonical = root/"canonical/state.json"; canonical.write_bytes(self.canonical_bytes)
-            before = canonical.read_bytes()
-            report = run(root, payload_path=None, retrieved_at=NOW, persist=False, run_id="dry")
-            self.assertEqual(opened.call_count, 2)
-            self.assertEqual(report["source_record_count"], 1)
-            self.assertEqual(report["mb2_record_count"], 1)
-            self.assertEqual(report["matched_printing_count"], 1)
-            self.assertFalse(report["persisted"])
-            self.assertFalse(report["canonical_write"])
-            self.assertFalse(report["promotion_performed"])
-            self.assertEqual(canonical.read_bytes(), before)
-            self.assertFalse((root/"market").exists())
-            self.assertNotIn("key=secret", json.dumps(report))
-
-    def test_metadata_updated_at_required_and_well_formed_before_download(self):
-        for updated_at in (None, "", "not-a-timestamp", "2026-08-01"):
-            value = self.metadata()
-            if updated_at is None:
-                value.pop("updated_at")
-            else:
-                value["updated_at"] = updated_at
-            with self.subTest(updated_at=updated_at), tempfile.TemporaryDirectory() as temp, \
-                    patch("urllib.request.urlopen", return_value=Response(canonical_json(value))) as opened:
-                root=Path(temp); (root/"canonical").mkdir()
-                (root/"canonical/state.json").write_bytes(self.canonical_bytes)
-                with self.assertRaises(ProviderAcquisitionError) as caught:
-                    run(root, payload_path=None, retrieved_at=NOW, persist=False, run_id="dry")
-                self.assertEqual(opened.call_count, 1)
-                self.assertFalse(caught.exception.diagnostics["bulk_payload_download_began"])
-
-    def test_structural_metadata_failure_is_not_retried_or_persisted(self):
-        with tempfile.TemporaryDirectory() as temp, patch("urllib.request.urlopen",
-                return_value=Response(canonical_json({"object":"list", "data":[]}))) as opened:
-            root=Path(temp); (root/"canonical").mkdir()
-            canonical = root/"canonical/state.json"; canonical.write_bytes(self.canonical_bytes)
-            before = canonical.read_bytes()
-            with self.assertRaises(ProviderAcquisitionError) as caught:
-                run(root, payload_path=None, retrieved_at=NOW, persist=True, run_id="failed")
-            self.assertEqual(opened.call_count, 1)
-            self.assertEqual(canonical.read_bytes(), before)
-            self.assertFalse((root/"market").exists())
-            self.assertFalse(caught.exception.diagnostics["bulk_payload_download_began"])
-
-    def test_redirects_are_accepted_by_default_opener(self):
-        # urlopen normally consumes redirects; a final redirected response is transparent to fetch.
-        with patch("urllib.request.urlopen", return_value=Response(b"[]")) as opened:
-            self.assertEqual(fetch("https://api.scryfall.com/x", sleep=lambda _: None), b"[]")
-        self.assertEqual(opened.call_count, 1)
-
-    def test_permanent_403_and_404_are_not_retried(self):
-        for status in (403, 404):
-            diagnostic = new_diagnostics()
-            error = urllib.error.HTTPError("https://secret.invalid/?token=x", status, "", {}, None)
-            with self.subTest(status=status), patch("urllib.request.urlopen", side_effect=error) as opened:
-                with self.assertRaises(ProviderAcquisitionError) as caught:
-                    fetch("https://secret.invalid/?token=x", diagnostics=diagnostic, sleep=lambda _: None)
-            self.assertEqual(opened.call_count, 1)
-            self.assertEqual(caught.exception.diagnostics["http_status"], status)
-
-    def test_transient_5xx_retries_then_succeeds_or_exhausts(self):
-        failure = urllib.error.HTTPError("https://api.scryfall.com/x", 503, "", {}, None)
-        with patch("urllib.request.urlopen", side_effect=[failure, Response(b"[]")]) as opened:
-            self.assertEqual(fetch("https://api.scryfall.com/x", sleep=lambda _: None), b"[]")
-        self.assertEqual(opened.call_count, 2)
-        with patch("urllib.request.urlopen", side_effect=failure) as opened:
-            with self.assertRaises(ProviderAcquisitionError) as caught:
-                fetch("https://api.scryfall.com/x", sleep=lambda _: None)
-        self.assertEqual(opened.call_count, MAX_ATTEMPTS)
-        self.assertEqual(caught.exception.diagnostics["attempts"], MAX_ATTEMPTS)
-
-    def test_timeout_and_invalid_content_type_diagnostics(self):
-        with patch("urllib.request.urlopen", side_effect=TimeoutError), self.assertRaises(ProviderAcquisitionError) as caught:
-            fetch("https://api.scryfall.com/x", sleep=lambda _: None)
-        self.assertIsNone(caught.exception.diagnostics["http_status"])
-        with patch("urllib.request.urlopen", return_value=Response(b"provider body", "text/html")):
-            with self.assertRaises(ProviderAcquisitionError) as caught:
-                fetch("https://api.scryfall.com/x", sleep=lambda _: None)
-        diagnostic = caught.exception.diagnostics
-        self.assertEqual(diagnostic["response_content_type"], "text/html")
-        self.assertNotIn("provider body", json.dumps(diagnostic))
-        with patch("urllib.request.urlopen", return_value=Response(b"{}", "application/octet-stream")):
-            with self.assertRaises(ProviderAcquisitionError) as caught:
-                fetch(METADATA_URL, diagnostics=new_diagnostics(),
-                      endpoint_category="scryfall_bulk_metadata", stage="metadata_response")
-        self.assertEqual(caught.exception.diagnostics["response_content_type"],
-                         "application/octet-stream")
-
-    def test_invalid_metadata_is_sanitized_and_retains_no_payload(self):
-        with tempfile.TemporaryDirectory() as temp, patch("urllib.request.urlopen", return_value=Response(b"{}")):
-            root=Path(temp); (root/"canonical").mkdir(); (root/"canonical/state.json").write_bytes(self.canonical_bytes)
-            diagnostic = new_diagnostics()
-            with self.assertRaises(ProviderAcquisitionError) as caught:
-                run(root, payload_path=None, retrieved_at=NOW, persist=False, run_id="dry", diagnostics=diagnostic)
-        report = caught.exception.diagnostics
-        self.assertEqual(report["failing_stage"], "metadata_validation")
-        self.assertTrue(report["metadata_fetched"])
-        self.assertFalse(report["download_uri_obtained"])
-        self.assertFalse(report["payload_bytes_retained"])
-        serialized = json.dumps(report)
-        self.assertNotIn("https://", serialized)
-        self.assertNotIn("provider body", serialized)
-
-    def test_workflow_reports_original_exit_and_always_uploads_artifact(self):
-        workflow = (ROOT/".github/workflows/market-acquisition.yml").read_text()
-        self.assertIn("STATUS=$?", workflow)
-        self.assertIn('exit "$STATUS"', workflow)
-        self.assertIn("cat market-acquisition-dry-run.json", workflow)
-        self.assertIn("if: always()", workflow)
-        self.assertIn("actions/upload-artifact@v4", workflow)
-        self.assertLess(workflow.index("Upload acquisition diagnostics"),
-                        workflow.index("Verify dry run and optionally persist"))
-        hard_stop = "Phase 127E authorizes persist=false only"
-        self.assertIn(hard_stop, workflow)
-        self.assertLess(workflow.index(hard_stop), workflow.index("--persist"))
-
-    def test_failed_cli_dry_run_writes_no_market_or_canonical_state(self):
-        with tempfile.TemporaryDirectory() as temp:
-            root=Path(temp); (root/"canonical").mkdir(); (root/"canonical/state.json").write_bytes(self.canonical_bytes)
+            root=self.root(temp); source=root/"source.jsonl"; source.write_bytes(payload)
             before=(root/"canonical/state.json").read_bytes()
-            with patch("urllib.request.urlopen", return_value=Response(b"{}")):
-                diagnostic = new_diagnostics()
-                with self.assertRaises(ProviderAcquisitionError):
-                    run(root, payload_path=None, retrieved_at=NOW, persist=False,
-                        run_id="failed", diagnostics=diagnostic)
-            self.assertEqual((root/"canonical/state.json").read_bytes(), before)
+            report=run(root,payload_path=source,retrieved_at=NOW,persist=False,run_id="dry")
+            again=run(root,payload_path=source,retrieved_at=NOW,persist=False,run_id="again")
+            self.assertEqual(report["source_record_count"],2); self.assertEqual(report["mb2_record_count"],2)
+            self.assertEqual(report["mapping_counts"],{"matched":1,"unmatched":1,"ambiguous":0,"rejected":0})
+            self.assertEqual(report["known_price_observation_count"],1)
+            self.assertEqual(report["missing_price_observation_count"],0)
+            self.assertEqual(report["source_sha256"],sha256_bytes(payload))
+            self.assertEqual(report["normalized_sha256"],again["normalized_sha256"])
+            self.assertFalse(report["canonical_write"]); self.assertFalse(report["promotion_performed"])
+            self.assertFalse(report["persisted"]); self.assertEqual(before,(root/"canonical/state.json").read_bytes())
             self.assertFalse((root/"market").exists())
 
-    def test_cli_unknown_contract_and_no_recommendation_behavior(self):
-        command = [sys.executable,"-m","mtglab","--data-root","data","market","printing",self.printing_id]
-        completed = subprocess.run(command, cwd=ROOT, env={**os.environ,"PYTHONPATH":"src"},
-            capture_output=True, text=True)
-        self.assertEqual(completed.returncode, 0, completed.stderr)
-        output = json.loads(completed.stdout)
-        for key in ("provider","observation_timestamp","currency","confidence","provenance","canonical_snapshot_identity","status"):
-            self.assertIn(key, output)
-        production_observations = tuple((ROOT / "data/market/observations").glob("*/*/*/*.json"))
-        self.assertEqual(output["status"], "known" if production_observations else "unknown")
-        self.assertNotIn("recommend", json.dumps(output).lower())
+    def test_explicit_missing_price_observation(self):
+        missing=json.loads(json.dumps(self.record)); missing["prices"]["usd"]=None
+        with tempfile.TemporaryDirectory() as temp:
+            root=self.root(temp); source=root/"source.jsonl"; source.write_bytes(self.lines(missing))
+            report=run(root,payload_path=source,retrieved_at=NOW,persist=False,run_id="dry")
+        self.assertEqual(report["missing_price_observation_count"],1)
 
-    def test_production_lifecycle_state_is_internally_valid(self):
-        """Production may legitimately be empty or contain only verified observations."""
-        root = ROOT / "data/market/observations"
-        paths = tuple(root.glob("*/*/*/*.json")) if root.exists() else ()
-        repository = MarketObservationRepository(root)
-        for path in paths:
-            observation = repository.load(path)
-            self.assertEqual(observation.provider, "scryfall")
-            self.assertEqual(observation.entity_type, "printing")
-            self.assertEqual(observation.currency, "USD")
-            self.assertIn(observation.entity_id, self.state["printing"])
+    def test_persist_true_is_prohibited(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=self.root(temp)
+            with self.assertRaisesRegex(MarketValidationError,"prohibits persist=true"):
+                run(root,payload_path=None,retrieved_at=NOW,persist=True,run_id="no")
+
+    def test_workflow_is_dry_run_only_and_retains_bounded_projection(self):
+        workflow=(ROOT/".github/workflows/market-acquisition.yml").read_text()
+        self.assertIn("Phase 127F authorizes persist=false only",workflow)
+        self.assertIn("market-acquisition-source-mb2.json",workflow)
+        self.assertNotIn(" --persist",workflow)
+
+    def test_production_coverage_remains_zero(self):
+        observations=tuple((ROOT/"data/market/observations").glob("*/*/*/*.json"))
+        self.assertEqual(len(observations),0)
 
 
 if __name__ == "__main__": unittest.main()

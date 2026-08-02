@@ -102,3 +102,12 @@ persistence. Do not substitute data, add a provider, or write canonical state.
 # After Phase 127C
 
 After merge, manually dispatch **Market acquisition** once with `persist=false`. Inspect the always-uploaded diagnostics and require a successful metadata parse, validated download URI, payload-download start, deterministic identities/counts, and MB2 isolation. Any nonzero status is a hard stop. Do not dispatch persistence, add a provider, or modify canonical state as part of Phase 127C.
+
+# After Phase 127F
+
+After merge, manually dispatch **Market acquisition** exactly once. It is a `persist=false`
+dry run only. Verify the JSONL transport/format diagnostics, complete decoded and MB2 mapping
+census, known and explicit missing-price counts, bounded MB2 source projection, deterministic
+digests, and all three false write flags. Any acquisition, validation, census, or integrity
+failure is a hard stop. Persistence requires a separate future phase; do not add a provider,
+modify canonical state, fabricate prices, or perform promotion.
