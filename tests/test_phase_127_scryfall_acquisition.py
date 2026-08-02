@@ -251,9 +251,33 @@ class Phase127GTests(unittest.TestCase):
         self.assertLess(workflow.index(install),workflow.index(
             "python scripts/scryfall_market_acquisition.py"))
 
-    def test_production_coverage_remains_zero(self):
-        observations=tuple((ROOT/"data/market/observations").glob("*/*/*/*.json"))
-        self.assertEqual(len(observations),0)
+    def test_acquisition_remains_nonpersistent_after_authorized_import(self):
+        """Phase 127 isolation is compatible with later Phase 128 persistence."""
+        with tempfile.TemporaryDirectory() as temp:
+            root=self.root(temp); source=root/"source.jsonl"; source.write_bytes(self.lines(self.record))
+            observations=root/"market/observations"
+            sentinel=observations/"existing-authorized-observation.json"
+            sentinel.parent.mkdir(parents=True); sentinel.write_bytes(b"authorized-later-phase\n")
+            canonical_before=(root/"canonical/state.json").read_bytes()
+            observation_before={path.relative_to(observations):path.read_bytes()
+                                for path in observations.rglob("*") if path.is_file()}
+
+            report=run(root,payload_path=source,retrieved_at=NOW,persist=False,run_id="dry")
+
+            self.assertFalse(report["persisted"])
+            self.assertFalse(report["canonical_write"])
+            self.assertFalse(report["promotion_performed"])
+            self.assertEqual(canonical_before,(root/"canonical/state.json").read_bytes())
+            self.assertEqual(observation_before,{path.relative_to(observations):path.read_bytes()
+                                                for path in observations.rglob("*") if path.is_file()})
+
+        production=tuple((ROOT/"data/market/observations").glob("*/*/*/*.json"))
+        import_report=json.loads((ROOT/"data/market/imports/scryfall-mb2-30754638264-1/"
+                                  "import-report.json").read_text())
+        self.assertEqual(len(production),478)
+        self.assertTrue(import_report["observations_persisted"])
+        self.assertFalse(import_report["canonical_write"])
+        self.assertFalse(import_report["promotion_performed"])
 
 
 if __name__ == "__main__": unittest.main()

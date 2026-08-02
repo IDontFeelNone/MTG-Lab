@@ -1,3 +1,7 @@
+# Phase 128 handoff
+
+Phase 128 imported exactly `scryfall-mb2-30754638264-1`. Evidence remains the unchanged three-file acquisition directory. Production now contains 478 append-only `market-observation-v1` files and one deterministic import report: 379 matched printings, six unmatched finish mappings, zero ambiguous/rejected/duplicate/unsupported mappings, 478 known prices, and zero missing prices. Replay accepts only identical report and observation bytes; conflict fails closed. Complete validation precedes staging, and injected partial-write failure removes staging without publication. Coverage is 379/379 from 0/379. Canonical data and promotion state are unchanged.
+
 # Phase 127L handoff
 
 Review and merge the explicit required-check registration repair. The existing successful

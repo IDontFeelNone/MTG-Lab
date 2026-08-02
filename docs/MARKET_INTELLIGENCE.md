@@ -1,3 +1,7 @@
+# Phase 128 production snapshot
+
+The first production snapshot is retained acquisition `scryfall-mb2-30754638264-1`. It uses the existing `market-observation-v1` printing-level model and `data/market/observations/<entity-type>/<printing-id>/<provider>/<observation-id>.json` repository. Provider ID, printing ID, finish, language, USD currency, market price type, source/retrieval timestamps, acquisition ID, both source identities, mapping method, and canonical snapshot identity are preserved. Null price remains an explicit observation; this run contains zero null prices. The import report is stored separately under `data/market/imports/<run-id>/import-report.json`. Canonical data is never a market destination.
+
 # Phase 127M evidence-PR completion boundary
 
 The latest real acquisition reached the official Scryfall source, validated and streamed its gzip JSONL payload, completed the MB2-only dry-run census, and retained exactly three durable evidence files without importing observations, changing canonical data, or promoting. Its deterministic branch and evidence PR exist; the run stopped only because it waited for required checks even though this repository has no ruleset or configured required status checks. Phase 127M removes that nonexistent-check and auto-merge orchestration. The workflow now verifies and records the exact PR and succeeds, leaving manual review and merge as the next operation. The hard stop before observation import is unchanged, so production MB2 coverage remains 0/379.

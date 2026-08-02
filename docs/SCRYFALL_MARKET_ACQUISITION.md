@@ -1,3 +1,22 @@
+# Phase 128 retained-evidence import
+
+Import (or byte-identically verify replay) with:
+
+```bash
+PYTHONPATH=src:. python scripts/import_market_observations.py scryfall-mb2-30754638264-1
+```
+
+The importer reads only the exact three regular files in the retained evidence directory, verifies the manifest/file/canonical identities and acquisition isolation flags, re-normalizes all MB2 records, and checks the retained normalized digest and censuses before staging. It publishes 478 observation files and the import report transactionally; a pre-publication failure removes staging, and a publication failure rolls back newly published observations. An existing run is accepted only when its report and every observation are byte-identical. The completed run covers 379/379 MB2 printings (previously 0/379), with 478 known and zero missing prices, six unmatched mappings, and no ambiguity, rejection, duplication, unsupported values, canonical write, or promotion.
+
+Post-merge verification:
+
+```bash
+PYTHONPATH=src:. python scripts/market_acquisition_evidence.py verify --evidence data/market/acquisitions/scryfall-mb2-30754638264-1 --canonical data/canonical/state.json
+PYTHONPATH=src:. python scripts/import_market_observations.py scryfall-mb2-30754638264-1
+PYTHONPATH=src:. python -m unittest tests.test_phase_128_market_import
+python -m json.tool data/market/imports/scryfall-mb2-30754638264-1/import-report.json >/dev/null
+```
+
 # Phase 127M manual evidence-PR completion
 
 Main contains merged Phase 127L at `4d07036`. The latest real Market acquisition reached Scryfall, downloaded and fully validated the official gzip JSONL payload, produced the MB2-only dry-run census, created exactly `dry-run-report.json`, `manifest.json`, and `source-mb2.json`, passed all 415 repository tests, committed `a94288b`, pushed `market-acquisition/scryfall-mb2-30730690426-1` without force, and created the evidence PR. It stopped only because it waited for required checks that do not exist. The exact root cause is repository configuration: there is no branch ruleset and no configured required status-check set.
