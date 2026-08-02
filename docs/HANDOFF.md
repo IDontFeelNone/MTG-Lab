@@ -1,3 +1,11 @@
+# Phase 127L handoff
+
+Review and merge the explicit required-check registration repair. The existing successful
+`scryfall-mb2-30730690426-1` evidence branch and PR must be preserved: dispatch Python validation
+on that exact head, wait for GitHub to register at least one required check, require all required
+checks to succeed, and let repository rules govern auto-merge. Do not reacquire, import market
+observations, change canonical data, or promote.
+
 # Phase 127K handoff
 
 Review and merge the removal of the unsupported branch-protection REST read. The successful

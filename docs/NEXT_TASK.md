@@ -1,3 +1,12 @@
+# After Phase 127L
+
+After this repair merges, dispatch the required Python validation for the existing
+`market-acquisition/scryfall-mb2-30730690426-1` evidence head (or safely resume the exact
+evidence PR). Verify that GitHub registers a nonempty required-check set, every required check
+succeeds, the PR head remains unchanged, and repository-governed auto-merge completes. Do not
+reacquire evidence under a different identity, import observations, write canonical data, or
+perform promotion.
+
 # After Phase 127K
 
 After this repair merges, rerun or safely reuse the existing evidence branch and exact pull
