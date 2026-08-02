@@ -244,6 +244,13 @@ class Phase127GTests(unittest.TestCase):
         self.assertIn("market-acquisition-source-mb2.json",workflow)
         self.assertNotIn(" --persist",workflow)
 
+    def test_workflow_installs_declared_dependencies_before_execution(self):
+        workflow=(ROOT/".github/workflows/market-acquisition.yml").read_text()
+        install="python -m pip install -r requirements.txt"
+        self.assertIn(install,workflow)
+        self.assertLess(workflow.index(install),workflow.index(
+            "python scripts/scryfall_market_acquisition.py"))
+
     def test_production_coverage_remains_zero(self):
         observations=tuple((ROOT/"data/market/observations").glob("*/*/*/*.json"))
         self.assertEqual(len(observations),0)
