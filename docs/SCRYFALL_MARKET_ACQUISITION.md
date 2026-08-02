@@ -184,3 +184,42 @@ separation, a successful unchanged URI-policy result, exactly one payload downlo
 payload shape, and the MB2-only mapping census. Confirm `canonical_write: false` and
 `promotion_performed: false`. Stop on any nonzero status or failed check; `persist=true` is a
 hard stop and is not authorized by Phase 127E.
+
+## Phase 127F JSONL provider contract
+
+The latest real Phase 127E Actions dry run reached the official endpoint and selected one
+direct `bulk_data` descriptor for `default_cards`. Its retained safe key inventory was
+exactly `compressed_size`, `description`, `id`, `jsonl_download_uri`, `name`, `object`,
+`type`, `updated_at`, and `uri`; `download_uri_present` was false. Extraction therefore
+stopped with `download_uri_absent`. The unchanged provider descriptor and separate safe
+diagnostic projection prove that no field was dropped or sanitized. Payload download never
+began, no observation or canonical bytes were written, no promotion occurred, and production
+coverage remains **0/379**.
+
+The exact defect was the consumer's unsupported `download_uri` assumption. Phase 127F
+selects `jsonl_download_uri` as the current JSON Lines transport. It retains `download_uri`
+only as unambiguous legacy JSON-array compatibility: neither field, a non-string or blank
+selection, or conflicting values fails closed. The metadata `uri` remains API identity and
+is never considered a payload location. The existing HTTPS/default-port/no-credentials,
+label-aware static `scryfall.io` host, absolute-path, no-fragment policy is unchanged.
+
+The JSONL download occurs exactly once and is decoded incrementally. Blank lines are
+permitted; every nonblank line must be valid UTF-8 JSON containing one supported card object.
+Malformed JSON, arrays, scalars, unsupported shapes, duplicate provider identities,
+unsupported compression, decompression failure, and incomplete streams stop the whole run.
+Only MB2 records are retained in the bounded source projection. SHA-256 is accumulated over
+the transport bytes while streaming, and provider-neutral normalized output receives its own
+deterministic digest. Identity or gzip compression is detected from validated response
+metadata and gzip framing, not a filename.
+
+Safe diagnostics contain only the selected field name, format, legacy-use boolean, field
+presence/runtime types, exact reason code, response media type, compression mode, byte/line/
+record counts, malformed/duplicate counts, and selected MB2 count. They never contain either
+URI value, URI path/query, headers, body, or provider record contents.
+
+After merge, dispatch **Market acquisition** exactly once. Phase 127F has no persistence
+input and the implementation rejects `persist=true`. Inspect the dry-run artifact and bounded
+`market-acquisition-source-mb2.json` projection for the complete decoded/selected/mapping and
+known/missing-price census, deterministic digests, `canonical_write: false`,
+`promotion_performed: false`, and `persisted: false`. Any failure or unexpected census is a
+hard stop before a separately authorized future persistence phase.

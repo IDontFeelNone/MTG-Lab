@@ -108,3 +108,12 @@ No market observation or canonical data was written; coverage remains 0/379.
 # Phase 127C status — Scryfall metadata parser repaired
 
 Phase 127B is merged at `21f9b6e`, and its official endpoint repair succeeded: GitHub Actions reached Scryfall and received JSON metadata. The authoritative diagnostics stopped at `download_uri_extraction` before any payload download because the parser did not handle the official list envelope. Phase 127C defensively supports both official metadata shapes and validates the exact secure Scryfall data-host boundary. No live payload or price was retained, coverage remains 0/379, and no canonical write or promotion occurred. The next operation is one post-merge `persist=false` workflow dispatch.
+
+# Phase 127F status — official JSONL transport supported
+
+Baseline `ba8f8c3` contains merged Phase 127E. Its real dry run preserved the exact official
+descriptor but proved that Scryfall supplies `jsonl_download_uri`, not the assumed
+`download_uri`. Phase 127F implements fail-closed transport selection, bounded streaming
+JSONL/gzip validation, duplicate rejection, MB2-only retention, safe format diagnostics,
+and deterministic source/normalized digests. Persistence is prohibited. No production market
+or canonical data changed, no promotion occurred, and MB2 market coverage remains 0/379.
