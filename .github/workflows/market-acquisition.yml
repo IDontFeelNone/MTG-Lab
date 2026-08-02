@@ -16,6 +16,8 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      checks: read
+      statuses: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -65,7 +67,15 @@ jobs:
           assert not x['canonical_write'] and not x['promotion_performed']
           assert not x['persisted']
           PY
-          echo 'Phase 127G authorizes persist=false only; persistence is a hard stop.'
+          echo 'Acquisition is nonpersistent; only bounded evidence may be retained.'
+      - name: Retain and verify bounded acquisition evidence
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          RUN_ID="$(cat market-acquisition-run-id.txt)"
+          python scripts/market_acquisition_evidence.py retain --report market-acquisition-dry-run.json --source market-acquisition-source-mb2.json --data-root data
+          python scripts/market_acquisition_evidence.py verify --evidence "data/market/acquisitions/$RUN_ID" --canonical data/canonical/state.json
       - name: Validate repository and changed-file boundary
         env:
           PYTHONPATH: src
@@ -73,8 +83,60 @@ jobs:
           python -m unittest discover -s tests -p 'test_*.py' -v
           python -m compileall -q src tests scripts
           git diff --check
-          test -z "$(git diff --name-only | grep -v '^data/market/' || true)"
+          RUN_ID="$(cat market-acquisition-run-id.txt)"
+          test "$(git status --short --untracked-files=all | awk '{print $2}' | sort)" = "$(printf '%s\n' "data/market/acquisitions/$RUN_ID/dry-run-report.json" "data/market/acquisitions/$RUN_ID/manifest.json" "data/market/acquisitions/$RUN_ID/source-mb2.json" | sort)"
           test -z "$(git status --short | awk '{print $2}' | grep '^data/canonical/' || true)"
+          test -z "$(git status --short | awk '{print $2}' | grep '^data/market/observations/' || true)"
+      - name: Create or safely reuse evidence branch and exact pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          RUN_ID="$(cat market-acquisition-run-id.txt)"
+          BRANCH="market-acquisition/$RUN_ID"
+          BASE="${{ github.event.repository.default_branch }}"
+          EVIDENCE="data/market/acquisitions/$RUN_ID"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          if git fetch origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"; then
+            test "$(git diff --name-only "origin/$BASE...origin/$BRANCH" | sort)" = "$(printf '%s\n' "$EVIDENCE/dry-run-report.json" "$EVIDENCE/manifest.json" "$EVIDENCE/source-mb2.json" | sort)" || { echo 'branch changed-file boundary violation' >&2; exit 1; }
+            for NAME in manifest.json dry-run-report.json source-mb2.json; do
+              git show "origin/$BRANCH:$EVIDENCE/$NAME" | cmp --silent - "$EVIDENCE/$NAME" || { echo 'branch collision or conflicting evidence identity' >&2; exit 1; }
+            done
+            rm -rf -- "$EVIDENCE"
+            git switch --detach "origin/$BRANCH"
+          else
+            git switch -c "$BRANCH"
+            git add -- "$EVIDENCE"
+            test "$(git diff --cached --name-only | wc -l)" -eq 3
+            git commit -m "Retain successful MB2 market acquisition $RUN_ID"
+            git push origin "HEAD:refs/heads/$BRANCH"
+          fi
+          HEAD_SHA="$(git rev-parse HEAD)"
+          mapfile -t PRS < <(gh pr list --state all --head "$BRANCH" --base "$BASE" --json number --jq '.[].number')
+          test "${#PRS[@]}" -le 1 || { echo 'multiple matching pull requests' >&2; exit 1; }
+          if test "${#PRS[@]}" -eq 0; then
+            PR="$(gh pr create --head "$BRANCH" --base "$BASE" --title 'Phase 127I: Persist successful market acquisition evidence' --body "Automated retention of verified, MB2-only, nonpersistent acquisition evidence for $RUN_ID. No canonical or market-observation data is written.")"
+          else
+            PR="${PRS[0]}"
+          fi
+          test "$(gh pr view "$PR" --json baseRefName --jq .baseRefName)" = "$BASE"
+          test "$(gh pr view "$PR" --json headRefName --jq .headRefName)" = "$BRANCH"
+          test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$HEAD_SHA"
+          test "$(gh pr view "$PR" --json title --jq .title)" = 'Phase 127I: Persist successful market acquisition evidence'
+          printf '%s\n' "$PR" > market-acquisition-pr.txt
+      - name: Require protected checks and request auto-merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          PR="$(cat market-acquisition-pr.txt)"
+          BASE="${{ github.event.repository.default_branch }}"
+          gh api --header 'Accept: application/vnd.github+json' "/repos/${{ github.repository }}/branches/$BASE/protection" > branch-protection.json
+          test "$(python -c 'import json; print(bool(json.load(open("branch-protection.json")).get("required_status_checks")))')" = True
+          gh pr checks "$PR" --required --watch --fail-fast
+          test "$(gh pr checks "$PR" --required --json state --jq 'length > 0 and all(.[]; .state == "SUCCESS")')" = true
+          gh pr merge "$PR" --auto --squash --delete-branch=false
       - name: Retain diagnostics
         if: always()
         uses: actions/upload-artifact@v4

@@ -1,3 +1,19 @@
+# Phase 127I session state
+
+Baseline `8cf298f` contains merged Phase 127H. The latest post-merge Market acquisition run
+completed successfully, but its bounded MB2 projection and report exist only in a temporary
+14-day GitHub Actions artifact. No production market observation was imported, no canonical
+byte changed, no promotion occurred, and production MB2 coverage remains 0/379.
+
+Phase 127I adds automatic durable evidence retention without reacquisition. Successful runs
+write exactly three repository files beneath
+`data/market/acquisitions/<acquisition-run-id>/`: a digest-binding manifest, the dry-run report,
+and the MB2-only provider projection. They never retain the complete provider payload or write
+canonical/observation state. A deterministic collision-safe branch/PR flow uses non-force push,
+verifies base/head/SHA and changed paths, requires protected green checks, and requests
+squash auto-merge. Failure diagnostics remain a temporary artifact. After merge, dispatch
+**Market acquisition** once and allow that automation to complete; then stop before import.
+
 # Phase 127G session state
 
 Main contains merged Phase 127F (`d64b1b2`). The latest real Actions dry run selected and validated the official `jsonl_download_uri`, reached `data.scryfall.io`, and received HTTP 200 with `application/gzip`; it then stopped at `payload_content_type` with zero bytes read. Phase 127G accepts that media type only as a gzip stream, validates framing, incrementally decompresses UTF-8 JSONL, and retains only a bounded MB2 projection. No records were decoded or selected by that failed run, no observations or canonical data changed, no promotion occurred, and production coverage remains 0/379. Next: merge, dispatch exactly one dry run, inspect artifacts, and stop before persistence.
