@@ -1,3 +1,7 @@
+# Phase 128 session state
+
+Baseline `244b2d7` contains merged Phase 127M and the sole retained acquisition `scryfall-mb2-30754638264-1`, with exactly `manifest.json`, `dry-run-report.json`, and `source-mb2.json`. Phase 128 verified its identities, file bindings, false-write flags, MB2 scope, and canonical snapshot, then persisted 478 production observations for 379/379 MB2 printings under the existing market boundary. Census: 385 retained records; 478 matched finish mappings; six unmatched; zero ambiguous/rejected/duplicate/unsupported; 478 known and zero missing prices. The report is under `data/market/imports/`. Canonical bytes and Architecture v12 are unchanged; no promotion occurred.
+
 # Phase 127L session state
 
 Main contains merged Phase 127K (`eb09a13`). The latest real acquisition validated the official

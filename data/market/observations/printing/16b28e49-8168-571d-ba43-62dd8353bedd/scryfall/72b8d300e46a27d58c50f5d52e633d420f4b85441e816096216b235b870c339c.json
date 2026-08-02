@@ -1,0 +1,30 @@
+{
+  "buylist_price": null,
+  "currency": "USD",
+  "entity_id": "16b28e49-8168-571d-ba43-62dd8353bedd",
+  "entity_type": "printing",
+  "finish": "nonfoil",
+  "listing_count": null,
+  "observation_id": "72b8d300e46a27d58c50f5d52e633d420f4b85441e816096216b235b870c339c",
+  "observed_at": "2026-08-02T09:09:45.851000Z",
+  "price": "2.20",
+  "price_type": "market",
+  "provenance": {
+    "acquisition_run_id": "scryfall-mb2-30754638264-1",
+    "adapter": "scryfall-market-adapter-v1",
+    "canonical_snapshot_identity": "sha256:89a86f9037b74434ac1954e8dc5a3de156107a0157bb33bdf27a0c83fd12d464",
+    "language": "en",
+    "mapping_method": "canonical_external_identifier",
+    "normalized_sha256": "2cbef9f02ebe7c76ecbac7cae584efeb26c717db0287152d9a02054e82f418a5",
+    "source_dataset": "scryfall-default-cards",
+    "source_provider_identifier": "8f6a631b-e3e7-4647-825e-c0b6aeff76df",
+    "source_sha256": "03a2c4e4eace87db24fcab615def32445ef4c82129cae6fc5cda7edaf6cb688f",
+    "source_url": "scryfall:default_cards"
+  },
+  "provider": "scryfall",
+  "provider_confidence": "1",
+  "recorded_at": "2026-08-02T15:34:06Z",
+  "sales_count": null,
+  "schema_version": "market-observation-v1",
+  "spread": null
+}

@@ -1,3 +1,7 @@
+# Phase 128 status — first production MB2 market snapshot imported
+
+Retained acquisition `scryfall-mb2-30754638264-1` was verified and imported without reacquisition. Its 385 MB2 source records produced 478 immutable Scryfall/USD/market observations covering all 379 production MB2 printings; 478 prices are known, zero are explicitly missing, six finish mappings are unmatched, and zero are ambiguous, rejected, duplicate, conflicting, or unsupported. Observations use `market-observation-v1` under `data/market/observations/`; the deterministic census is `data/market/imports/scryfall-mb2-30754638264-1/import-report.json`. Canonical coverage moved from 0/379 to 379/379. Canonical bytes remain unchanged, `canonical_write` and `promotion_performed` are false, and Architecture v12 remains frozen.
+
 # Phase 127M status — manual evidence-PR completion
 
 Main contains merged Phase 127L at `4d07036`. The latest real Market acquisition reached Scryfall, downloaded and validated the official gzip JSONL payload, produced the bounded MB2-only dry-run census, retained exactly three durable evidence files, passed all 415 repository tests, committed and pushed deterministic branch `market-acquisition/scryfall-mb2-30730690426-1` at `a94288b`, and created its evidence pull request. It stopped only while waiting for required checks that are not configured: the repository has no branch ruleset and no required status-check set. No production observation or canonical data changed, no promotion occurred, and MB2 market coverage remains 0/379.
