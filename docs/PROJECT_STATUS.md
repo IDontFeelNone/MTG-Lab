@@ -1,3 +1,14 @@
+# Phase 127L status — evidence PR check registration repaired
+
+Main contains merged Phase 127K at `eb09a13`. The latest real Market acquisition successfully
+validated the official Scryfall payload, retained exactly three durable evidence files, pushed
+the deterministic branch, and created or reused its exact pull request without writing canonical
+data or observations or performing promotion. Finalization then found no checks on the evidence
+head because GitHub-token-created pushes and pull requests do not recursively start workflows.
+Phase 127L explicitly dispatches the required Python validation on the exact evidence branch,
+waits for a nonempty registered required-check set, revalidates the immutable head SHA, and only
+then enters the existing all-success gate and repository-governed auto-merge request.
+
 # Phase 127K status — unsupported branch-protection API dependency removed
 
 Main contains merged Phase 127J at `b76110f`. The latest real Market acquisition completed the

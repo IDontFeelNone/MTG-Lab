@@ -112,6 +112,8 @@ class Phase127IEvidenceTests(unittest.TestCase):
         for required in ("branch collision or conflicting evidence identity", "git diff --name-only",
                          "gh pr list --state all", "baseRefName", "headRefName", "headRefOid",
                          "gh pr checks", "--required --watch",
+                         "gh workflow run python-validation.yml --ref \"$BRANCH\"",
+                         "required checks were not registered",
                          "length > 0 and all(.[]; .state == \"SUCCESS\")",
                          "gh pr merge \"$PR\" --auto"):
             self.assertIn(required, workflow)
@@ -119,6 +121,18 @@ class Phase127IEvidenceTests(unittest.TestCase):
         self.assertNotIn("branch-protection.json", workflow)
         self.assertNotIn("--force", workflow)
         self.assertNotIn("--admin", workflow)
+
+    def test_required_checks_are_explicitly_registered_before_the_gate(self):
+        workflow = (ROOT / ".github/workflows/market-acquisition.yml").read_text()
+        register = workflow.index("Register required pull-request checks")
+        gate = workflow.index("Require checks and request auto-merge")
+        self.assertLess(register, gate)
+        section = workflow[register:gate]
+        self.assertIn("actions: write", workflow)
+        self.assertIn("gh workflow run python-validation.yml --ref \"$BRANCH\"", section)
+        self.assertIn("gh pr checks \"$PR\" --required --json name", section)
+        self.assertIn("if test \"${CHECK_COUNT:-0}\" -gt 0", section)
+        self.assertIn("headRefOid", section)
 
     def test_failure_diagnostics_remain_always_uploaded(self):
         workflow = (ROOT / ".github/workflows/market-acquisition.yml").read_text()

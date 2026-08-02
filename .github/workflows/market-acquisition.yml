@@ -16,6 +16,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      actions: write
       checks: read
       statuses: read
     steps:
@@ -137,14 +138,42 @@ jobs:
           test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$HEAD_SHA"
           test "$(gh pr view "$PR" --json title --jq .title)" = 'Phase 127I: Persist successful market acquisition evidence'
           printf '%s\n' "$PR" > market-acquisition-pr.txt
+          printf '%s\n' "$BRANCH" > market-acquisition-branch.txt
+          printf '%s\n' "$HEAD_SHA" > market-acquisition-head-sha.txt
+      - name: Register required pull-request checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          PR="$(cat market-acquisition-pr.txt)"
+          BRANCH="$(cat market-acquisition-branch.txt)"
+          HEAD_SHA="$(cat market-acquisition-head-sha.txt)"
+          # Pushes and pull requests created with GITHUB_TOKEN do not start another
+          # workflow run. Explicitly dispatch the required validation on the exact
+          # evidence head, then wait until GitHub has registered its check suite.
+          gh workflow run python-validation.yml --ref "$BRANCH"
+          for ATTEMPT in {1..30}; do
+            CHECK_COUNT="$(gh pr checks "$PR" --required --json name 2>/dev/null --jq 'length' || true)"
+            if test "${CHECK_COUNT:-0}" -gt 0; then
+              break
+            fi
+            if test "$ATTEMPT" -eq 30; then
+              echo "required checks were not registered for $BRANCH at $HEAD_SHA" >&2
+              exit 1
+            fi
+            sleep 10
+          done
+          test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$HEAD_SHA"
       - name: Require checks and request auto-merge
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           PR="$(cat market-acquisition-pr.txt)"
+          HEAD_SHA="$(cat market-acquisition-head-sha.txt)"
           gh pr checks "$PR" --required --watch --fail-fast
           test "$(gh pr checks "$PR" --required --json state --jq 'length > 0 and all(.[]; .state == "SUCCESS")')" = true
+          test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$HEAD_SHA"
           gh pr merge "$PR" --auto --squash --delete-branch=false
       - name: Retain diagnostics
         if: always()

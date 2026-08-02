@@ -1,3 +1,14 @@
+# Phase 127L session state
+
+Main contains merged Phase 127K (`eb09a13`). The latest real acquisition validated the official
+Scryfall payload, retained exactly three durable files, created commit `a94288b`, pushed
+`market-acquisition/scryfall-mb2-30730690426-1`, and created or reused its exact evidence PR.
+It wrote no observations or canonical data and performed no promotion. Finalization failed with
+`no checks reported` because token-authored repository events do not recursively start the
+required workflow. Phase 127L explicitly dispatches Python validation on the evidence branch,
+polls until its required check is registered, pins the PR head SHA across validation, preserves
+the nonempty all-success assertion, and leaves merge eligibility to repository rules.
+
 # Phase 127K session state
 
 Main contains merged Phase 127J (`b76110f`). Real acquisition run

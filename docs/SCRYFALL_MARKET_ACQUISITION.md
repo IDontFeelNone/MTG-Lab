@@ -294,3 +294,19 @@ commands. The workflow now waits on `gh pr checks --required --watch --fail-fast
 the returned required-check set to be nonempty and entirely successful before requesting
 auto-merge. Repository rules still decide merge eligibility; there is no admin bypass, force
 merge, direct base-branch write, or weakening of the evidence boundary.
+
+## Phase 127L required-check registration and auto-merge gate
+
+GitHub deliberately prevents pushes and pull requests authenticated by the workflow's
+`GITHUB_TOKEN` from recursively starting ordinary `push` or `pull_request` workflow runs. The
+evidence workflow therefore created the correct immutable branch and PR but reached finalization
+before any required check suite existed, producing `no checks reported`.
+
+The workflow now has narrowly scoped `actions: write` permission and explicitly dispatches
+`python-validation.yml` on the already-validated evidence branch. It polls only for registration
+of a nonempty PR-required check set; after registration, the existing fail-fast watch still waits
+for completion and the independent query still requires every required state to be `SUCCESS`.
+The recorded PR head SHA is checked after registration and again immediately before the
+auto-merge request. Dispatch does not bypass branch protection, manufacture a successful status,
+or merge directly: the required workflow executes the repository suite and repository rules
+remain the final merge authority.
