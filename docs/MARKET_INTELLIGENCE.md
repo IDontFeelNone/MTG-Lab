@@ -1,3 +1,7 @@
+# Phase 127M evidence-PR completion boundary
+
+The latest real acquisition reached the official Scryfall source, validated and streamed its gzip JSONL payload, completed the MB2-only dry-run census, and retained exactly three durable evidence files without importing observations, changing canonical data, or promoting. Its deterministic branch and evidence PR exist; the run stopped only because it waited for required checks even though this repository has no ruleset or configured required status checks. Phase 127M removes that nonexistent-check and auto-merge orchestration. The workflow now verifies and records the exact PR and succeeds, leaving manual review and merge as the next operation. The hard stop before observation import is unchanged, so production MB2 coverage remains 0/379.
+
 # Phase 127G gzip transport boundary
 
 The latest Phase 127F dry run reached the official metadata endpoint, selected `jsonl_download_uri`, validated the JSONL URI, reached `data.scryfall.io`, and received HTTP 200 `application/gzip`. It stopped before reading payload bytes because gzip was not an accepted payload media type. No provider or MB2 record was decoded, and coverage remains 0/379. Phase 127G treats the response as gzip—not plain JSONL—requires valid framing and complete incremental decompression, validates UTF-8 JSONL line by line, and reports only safe counts/digests. Exactly one post-merge dry run is next; persistence, canonical writes, and promotion remain prohibited.
