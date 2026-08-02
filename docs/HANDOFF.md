@@ -1,3 +1,10 @@
+# Phase 127K handoff
+
+Review and merge the removal of the unsupported branch-protection REST read. The successful
+`scryfall-mb2-30730690426-1` evidence branch and PR already exist; rerun or safely reuse them,
+wait for a nonempty all-green required-check set, and let repository rules govern auto-merge.
+Do not import observations, write canonical data, promote, or reacquire under a different run ID.
+
 # Phase 127G handoff
 
 Phase 127F is merged (`d64b1b2`). Its real dry run proved the official metadata, `jsonl_download_uri`, URI validation, and data-host connection path, then received HTTP 200 `application/gzip` and correctly retained nothing because that media type was unsupported. Phase 127G streams and validates the gzip JSONL response without changing metadata selection or URI policy. Merge, run one dry-run-only dispatch, inspect diagnostics and the bounded MB2 artifact, and stop before persistence. Production observations remain empty, canonical state remains Phase 119 only, no promotion occurred, and MB2 market coverage is 0/379.

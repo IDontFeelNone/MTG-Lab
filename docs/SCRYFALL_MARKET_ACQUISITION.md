@@ -247,9 +247,12 @@ snapshot used for identifier mapping. The manifest states `canonical_write: fals
 The complete bulk dataset, normalized observations, and any non-MB2 record are excluded. The
 workflow accepts only byte-identical replay, commits only the three evidence files on the
 deterministic run branch, never force-pushes, verifies the exact PR base/head/SHA, and fails
-closed on collisions or path violations. It requests auto-merge only after branch protection is
-present and every required check is green. This is evidence retention, not observation import;
-coverage remains 0/379 until a later phase imports retained evidence.
+closed on collisions or path violations. It uses `gh pr checks --required` to wait for the PR's
+required checks, independently requires a nonempty all-success result, and then requests
+auto-merge, whose eligibility remains governed by repository rules. It does not query the
+branch-protection REST endpoint, which is unnecessary for this gate and is unavailable to the
+workflow token. This is evidence retention, not observation import; coverage remains 0/379
+until a later phase imports retained evidence.
 
 ## Phase 127J changed-file verification repair
 
@@ -275,3 +278,19 @@ run identity, deletion/rename/status semantics, and explicit canonical/observati
 The workflow prints ordinary status and the JSON report before propagating failure, and its
 always-run diagnostic upload retains both reports. Only the three durable files below
 `data/market/acquisitions/<acquisition-run-id>/` may enter the evidence commit.
+
+
+## Phase 127K unsupported branch-protection API removal
+
+Main contains merged Phase 127J. The real acquisition run
+`scryfall-mb2-30730690426-1` acquired and validated the official payload, retained exactly the
+three durable evidence files, passed the changed-file boundary and all 415 repository tests,
+created commit `a94288b`, pushed its deterministic branch, and created the evidence PR. It wrote
+no market observations or canonical data and performed no promotion. The workflow failed only
+when its token attempted to read the branch-protection REST endpoint.
+
+That endpoint probe supplied no safety property beyond the existing PR-specific required-check
+commands. The workflow now waits on `gh pr checks --required --watch --fail-fast`, then requires
+the returned required-check set to be nonempty and entirely successful before requesting
+auto-merge. Repository rules still decide merge eligibility; there is no admin bypass, force
+merge, direct base-branch write, or weakening of the evidence boundary.

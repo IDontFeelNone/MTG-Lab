@@ -1,3 +1,10 @@
+# Phase 127K — Remove unsupported branch-protection API dependency (2026-08-02)
+
+- Removed the redundant branch-protection REST probe from Market acquisition while retaining
+  PR-specific waiting and explicit nonempty, all-success validation of required checks.
+- Recorded the successful `scryfall-mb2-30730690426-1` acquisition baseline and preserved
+  repository-governed auto-merge, evidence isolation, and the no-promotion boundary.
+
 # Phase 127J — Market evidence changed-file verification repair (2026-08-02)
 
 - Accounted for the four intentional untracked acquisition diagnostics in the exact pre-branch
