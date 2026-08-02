@@ -1,3 +1,12 @@
+# Phase 127H status — deterministic workflow dependency installation
+
+Main contains merged Phase 127G at `32b6ad4`. The latest real Market acquisition run
+successfully passed the focused gzip/JSONL tests but the repository-wide suite stopped with
+53 `jsonschema` import errors because that workflow did not install the repository's declared
+dependencies. Phase 127H restores the same `requirements.txt` installation boundary used by
+the standard Python validation workflow before acquisition or validation executes. Provider,
+parser, persistence, canonical, promotion, and production-coverage behavior are unchanged.
+
 # Phase 127G status — official gzip JSONL streaming
 
 Phase 127F is merged at `d64b1b2`. Its real dry run successfully completed the official metadata and secure JSONL URI path, but rejected the HTTP 200 `application/gzip` payload before reading bytes. Phase 127G repairs only that defect: gzip media requires independently valid framing and successful streaming decompression; decompressed UTF-8 JSONL is validated one record per nonblank line, while compressed/decompressed counts and deterministic digests are accumulated. The workflow remains dry-run-only. Observations and canonical bytes are unchanged, promotion is false, and coverage remains 0/379.

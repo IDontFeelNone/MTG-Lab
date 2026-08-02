@@ -1,3 +1,12 @@
+# After Phase 127H
+
+Merge the dependency-installation repair through the normal required checks, then dispatch
+**Market acquisition** exactly once. Confirm the workflow installs `requirements.txt` before
+the acquisition script and that the complete repository suite runs without dependency import
+errors. Inspect the retained dry-run diagnostics and bounded MB2 projection, require
+`persisted`, `canonical_write`, and `promotion_performed` to remain false, and stop before
+persistence. No adapter, parser, canonical, or promotion change is authorized.
+
 # After Phase 127G
 
 After merge, dispatch **Market acquisition** exactly once. Require HTTP success, `application/gzip`, valid gzip framing, completed decompression, matching declared/compressed byte counts, complete line/record and MB2 mapping census, known/missing-price counts, deterministic digests, bounded MB2-only projection, and all write flags false. Any failure is a hard stop. Do not dispatch persistence, change canonical state, promote, fabricate prices, or add a provider.
