@@ -1,3 +1,11 @@
+# After Phase 127J
+
+After this repair merges, rerun the failed Market acquisition workflow once. Require the full
+suite and seven-path pre-branch working-tree allowlist to pass, then allow automation to commit
+only `manifest.json`, `dry-run-report.json`, and `source-mb2.json` on its deterministic evidence
+branch. Verify protected required checks and auto-merge complete. Stop before observation import,
+canonical writes, promotion, another provider, or recommendation behavior.
+
 # After Phase 127I
 
 After this implementation PR merges, manually dispatch **Market acquisition** exactly once.

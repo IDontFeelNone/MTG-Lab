@@ -124,6 +124,20 @@ class Phase127IEvidenceTests(unittest.TestCase):
         self.assertIn("if: always()", workflow[upload:upload + 500])
         self.assertIn("retention-days: 14", workflow[upload:upload + 500])
 
+    def test_changed_file_boundary_accounts_for_workflow_diagnostics(self):
+        workflow = (ROOT / ".github/workflows/market-acquisition.yml").read_text()
+        validation = workflow[workflow.index("Validate repository and changed-file boundary"):
+                              workflow.index("Create or safely reuse evidence branch")]
+        self.assertIn("scripts/verify_market_evidence_boundary.py", validation)
+        self.assertIn("--boundary pre-commit", validation)
+        self.assertIn("git status --short --untracked-files=all", validation)
+        verifier = (ROOT / "scripts/verify_market_evidence_boundary.py").read_text()
+        for transient in ("market-acquisition-dry-run.json",
+                          "market-acquisition-run-id.txt",
+                          "market-acquisition-source-mb2.json",
+                          "market-acquisition-stamp.txt"):
+            self.assertIn(transient, verifier)
+
 
 if __name__ == "__main__":
     unittest.main()
