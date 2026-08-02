@@ -1,3 +1,7 @@
+# Phase 127G status — official gzip JSONL streaming
+
+Phase 127F is merged at `d64b1b2`. Its real dry run successfully completed the official metadata and secure JSONL URI path, but rejected the HTTP 200 `application/gzip` payload before reading bytes. Phase 127G repairs only that defect: gzip media requires independently valid framing and successful streaming decompression; decompressed UTF-8 JSONL is validated one record per nonblank line, while compressed/decompressed counts and deterministic digests are accumulated. The workflow remains dry-run-only. Observations and canonical bytes are unchanged, promotion is false, and coverage remains 0/379.
+
 # Phase 126 status
 
 Market Intelligence Foundation is implemented. Phase 125 is merged at `b71f961`; Phase 119 remains the sole production promotion at digest `793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`. Architecture v12, canonical facts/contracts, Canonical Query Layer, Collection Intelligence, and generic automatic updates remain unchanged. Canonical facts still have no pricing. No recommendation engine, portfolio analysis, advice, or AI reasoning exists.

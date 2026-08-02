@@ -1,3 +1,7 @@
+# After Phase 127G
+
+After merge, dispatch **Market acquisition** exactly once. Require HTTP success, `application/gzip`, valid gzip framing, completed decompression, matching declared/compressed byte counts, complete line/record and MB2 mapping census, known/missing-price counts, deterministic digests, bounded MB2-only projection, and all write flags false. Any failure is a hard stop. Do not dispatch persistence, change canonical state, promote, fabricate prices, or add a provider.
+
 # After Phase 127E
 
 After merge, manually dispatch **Market acquisition** once with `persist=false`. Inspect the

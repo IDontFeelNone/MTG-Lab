@@ -1,3 +1,7 @@
+# Phase 127G handoff
+
+Phase 127F is merged (`d64b1b2`). Its real dry run proved the official metadata, `jsonl_download_uri`, URI validation, and data-host connection path, then received HTTP 200 `application/gzip` and correctly retained nothing because that media type was unsupported. Phase 127G streams and validates the gzip JSONL response without changing metadata selection or URI policy. Merge, run one dry-run-only dispatch, inspect diagnostics and the bounded MB2 artifact, and stop before persistence. Production observations remain empty, canonical state remains Phase 119 only, no promotion occurred, and MB2 market coverage is 0/379.
+
 # Phase 127E handoff
 
 Phase 127D is merged at `7cfe964`. Its real dry run stopped at the combined `blank_uri`
