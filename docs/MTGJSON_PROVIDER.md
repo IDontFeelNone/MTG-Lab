@@ -136,3 +136,20 @@ and atomic rename. Exact replay is accepted without overwriting; changed bytes u
 identity fail closed. Download, parse, validation, or publication failure removes staging and
 leaves an existing directory untouched. This evidence does not authorize promotion: Phase 134
 must be retried separately through its bounded review and promotion controls.
+
+## Phase 135A hosted execution
+
+After this implementation is merged, an operator manually dispatches **Pilot printing acquisition**
+on `main` exactly once. The workflow uses run identity `mtgjson-pilot-<github-run-id>-<attempt>`,
+invokes the Phase 135 CLI once, and never retains the complete `AllPrintings.json.gz` corpus in Git
+or artifacts. Temporary provider bytes live outside the working tree and are removed by the
+retention component. Durable output is only `acquisition-report.json`, `manifest.json`, and
+`source-pilot-printings.json` beneath that run directory.
+
+Before pushing, the workflow verifies ten-name scope, positive coverage for every name, non-MB2
+rows, stable provider Printing UUIDs, zero missing/ambiguous/malformed/unsupported census values,
+and false canonical-write, promotion, and fact-creation flags. It pushes a deterministic branch
+without force, safely accepts only a byte-identical replay, and creates or reuses one exact open PR.
+The PR remains open for manual census review and merge. Hosted network execution is intentionally
+separate from Codex Cloud implementation; inability of the task shell to reach the provider does
+not weaken or invalidate these controls. Merging retained evidence does not authorize promotion.

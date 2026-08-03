@@ -230,3 +230,12 @@ census, known and explicit missing-price counts, bounded MB2 source projection, 
 digests, and all three false write flags. Any acquisition, validation, census, or integrity
 failure is a hard stop. Persistence requires a separate future phase; do not add a provider,
 modify canonical state, fabricate prices, or perform promotion.
+
+# Next operation after Phase 135A
+
+After merging Phase 135A, manually dispatch **Pilot printing acquisition** once on `main`. Review
+that its evidence PR adds only `data/evidence/phase-135/<run-id>/{acquisition-report.json,manifest.json,source-pilot-printings.json}`.
+Review the per-card census and Printing counts, then merge that PR manually and stop. Do not merge
+a workflow result with missing, ambiguous, malformed, unsupported, MB2, unrelated, or unstable-ID
+records. The following phase may retry bounded Printing promotion and Phase 133 supersession using
+only the merged retained evidence; it must not reacquire and this phase grants no promotion authority.

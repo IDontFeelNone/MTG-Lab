@@ -226,3 +226,19 @@ not write facts or treat them as generated conclusions.
 Canonical data, acquisitions, the 478 retained observations and import report are unchanged. Phase
 119 remains the sole promotion, market and knowledge promotion are false, and Architecture v12 is
 still frozen.
+
+# Phase 135A handoff
+
+The production acquisition is deliberately delegated to a manually dispatched GitHub-hosted job
+with approved network access. It checks out the triggering SHA, runs the full suite before its
+single `retain_pilot_printings.py` invocation, and keeps the complete provider gzip only in the
+retention component's temporary directory. That staging directory is deleted; diagnostics contain
+only logs, source/normalized digest summaries, boundary reports, run/branch identity, PR identity,
+and a failure marker. The durable boundary is exactly three JSON files in one new run directory.
+
+The job rejects incomplete ten-name coverage, zero retained rows, MB2/unrelated rows, invalid
+provider Printing UUIDs, missing/ambiguous/conflicting/malformed/unsupported records, or any
+canonical write, promotion, or fact creation. It creates or byte-verifies the deterministic
+`pilot-printing-acquisition/<run-id>` branch without force, creates or reuses at most one exact open
+PR, and verifies base, head, title, and SHA. An operator must review and merge it manually, then stop
+before canonical promotion. Codex Cloud network availability is not an implementation prerequisite.

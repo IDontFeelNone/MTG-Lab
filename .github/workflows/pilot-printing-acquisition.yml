@@ -1,0 +1,114 @@
+name: Pilot printing acquisition
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pilot-printing-acquisition-${{ github.run_id }}-${{ github.run_attempt }}
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+      - name: Install repository dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Validate before acquisition
+        env:
+          PYTHONPATH: src:.
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py' -v
+          python -m compileall -q src tests scripts
+          git diff --check
+      - name: Define bounded run identity
+        run: |
+          set -euo pipefail
+          RUN_ID="mtgjson-pilot-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          BRANCH="pilot-printing-acquisition/$RUN_ID"
+          printf '%s\n' "$RUN_ID" > "$RUNNER_TEMP/run-id.txt"
+          printf '%s\n' "$BRANCH" > "$RUNNER_TEMP/evidence-branch.txt"
+      - name: Acquire bounded pilot printing evidence
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          RUN_ID="$(cat "$RUNNER_TEMP/run-id.txt")"
+          SNAPSHOT="sha256:$(sha256sum data/canonical/state.json | cut -d' ' -f1)"
+          python scripts/retain_pilot_printings.py --run-id "$RUN_ID" --canonical-snapshot "$SNAPSHOT" --acquired-at "${{ github.run_started_at }}" > "$RUNNER_TEMP/acquisition.log"
+      - name: Verify census and changed-file boundary
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          RUN_ID="$(cat "$RUNNER_TEMP/run-id.txt")"
+          python scripts/verify_pilot_printing_evidence_boundary.py --run-id "$RUN_ID" --boundary pre-commit --output "$RUNNER_TEMP/changed-file-verification.json"
+          python - "$RUN_ID" "$RUNNER_TEMP/digest-summary.json" <<'PY'
+          import json, pathlib, sys
+          manifest=json.loads(pathlib.Path(f'data/evidence/phase-135/{sys.argv[1]}/manifest.json').read_text())
+          pathlib.Path(sys.argv[2]).write_text(json.dumps({k:manifest[k] for k in ('source_sha256','normalized_projection_sha256','source_byte_count','normalized_projection_byte_count')}, sort_keys=True, indent=2)+'\n')
+          PY
+      - name: Create or safely reuse exact evidence pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          RUN_ID="$(cat "$RUNNER_TEMP/run-id.txt")"; BRANCH="$(cat "$RUNNER_TEMP/evidence-branch.txt")"
+          BASE="${{ github.event.repository.default_branch }}"; EVIDENCE="data/evidence/phase-135/$RUN_ID"
+          TITLE="Phase 135A: Retain verified pilot printing evidence $RUN_ID"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          if git fetch origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"; then
+            test "$(git diff --name-only "origin/$BASE...origin/$BRANCH" | sort)" = "$(printf '%s\n' "$EVIDENCE/acquisition-report.json" "$EVIDENCE/manifest.json" "$EVIDENCE/source-pilot-printings.json" | sort)"
+            for NAME in acquisition-report.json manifest.json source-pilot-printings.json; do git show "origin/$BRANCH:$EVIDENCE/$NAME" | cmp --silent - "$EVIDENCE/$NAME"; done
+            rm -rf -- "$EVIDENCE"; git switch --detach "origin/$BRANCH"
+          else
+            git switch -c "$BRANCH"; git add -- "$EVIDENCE"
+            python scripts/verify_pilot_printing_evidence_boundary.py --run-id "$RUN_ID" --boundary commit --output "$RUNNER_TEMP/changed-file-verification-commit.json"
+            git commit -m "Retain pilot printing evidence $RUN_ID"
+            git push origin "HEAD:refs/heads/$BRANCH"
+          fi
+          HEAD_SHA="$(git rev-parse HEAD)"
+          mapfile -t PRS < <(gh pr list --state all --head "$BRANCH" --base "$BASE" --json number --jq '.[].number')
+          test "${#PRS[@]}" -le 1
+          if test "${#PRS[@]}" -eq 0; then PR="$(gh pr create --head "$BRANCH" --base "$BASE" --title "$TITLE" --body "Bounded Phase 135 evidence only. Manual review and merge required; no canonical promotion or facts.")"; else PR="${PRS[0]}"; fi
+          PR_JSON="$(gh pr view "$PR" --json number,url,state,baseRefName,headRefName,headRefOid,title)"
+          test "$(jq -r .state <<<"$PR_JSON")" = OPEN
+          test "$(jq -r .baseRefName <<<"$PR_JSON")" = "$BASE"; test "$(jq -r .headRefName <<<"$PR_JSON")" = "$BRANCH"
+          test "$(jq -r .headRefOid <<<"$PR_JSON")" = "$HEAD_SHA"; test "$(jq -r .title <<<"$PR_JSON")" = "$TITLE"
+          printf '%s\n' "$PR_JSON" > "$RUNNER_TEMP/pull-request.json"
+          printf '%s\n' "$HEAD_SHA" > "$RUNNER_TEMP/head-sha.txt"
+      - name: Record failure diagnostic
+        if: failure()
+        run: printf '%s\n' 'A workflow step failed; inspect job logs and bounded diagnostics.' > "$RUNNER_TEMP/failure-reason.txt"
+      - name: Always retain bounded diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pilot-printing-acquisition-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/acquisition.log
+            ${{ runner.temp }}/changed-file-verification*.json
+            ${{ runner.temp }}/digest-summary.json
+            ${{ runner.temp }}/run-id.txt
+            ${{ runner.temp }}/evidence-branch.txt
+            ${{ runner.temp }}/pull-request.json
+            ${{ runner.temp }}/head-sha.txt
+            ${{ runner.temp }}/failure-reason.txt
+          if-no-files-found: warn
+          retention-days: 14

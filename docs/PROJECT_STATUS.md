@@ -287,3 +287,14 @@ protection and all required checks to succeed, and only then requests squash aut
 is byte-idempotent; branch collisions, conflicting evidence, absent protection, changed-file
 boundary violations, or failed checks stop closed. The always-uploaded diagnostic artifact
 remains available for failures.
+
+# Phase 135A status — production execution path ready
+
+Phase 135 is merged at `a8a21a8`. Phase 135A adds a manual-only GitHub Actions path for the
+existing bounded retention component. A dispatch validates the complete repository, derives
+`mtgjson-pilot-<github-run-id>-<attempt>`, downloads once, enforces the ten-card non-MB2 census,
+and offers exactly the three Phase 135 evidence files on a deterministic branch and open PR.
+Codex Cloud need not reach MTGJSON or GitHub: provider access belongs to the post-merge hosted
+workflow, so local network failure cannot invalidate this implementation. No acquisition was run
+here. Canonical data, 478 market observations, Phase 132/133 facts, and Architecture v12 remain
+unchanged. Manual review and merge of the evidence PR is mandatory; canonical promotion is a hard stop.
