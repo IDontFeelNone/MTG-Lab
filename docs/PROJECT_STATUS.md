@@ -1,3 +1,13 @@
+# Phase 135B status — production transport repair ready
+
+Phase 135A's GitHub-hosted run failed because the minimal urllib request was rejected with HTTP
+403 and the workflow expanded an unavailable `github.run_started_at` expression to an empty
+`--acquired-at` value. Phase 135B adds an identified, explicitly negotiated HTTPS request, safe
+redirect/final-URL enforcement, one published SHA-256 sidecar request, checksum and response
+validation, and bounded failure diagnostics. The workflow now creates and validates one UTC RFC
+3339 shell timestamp and passes that exact value to acquisition and diagnostics. It has not run an
+acquisition; production evidence, canonical, market, and knowledge bytes remain unchanged.
+
 # Phase 135 status — implementation ready; acquisition transport blocked
 
 Phase 134 is merged at `7453469`. Its retained-evidence report confirms zero supported non-MB2 pilot Printings. The 90 Phase 132 facts, ten Phase 133 superseding facts, ten incomplete active histories, one MB2 Printing per pilot Card, and 478 Phase 128 observations remain unchanged. Architecture v12 remains frozen.

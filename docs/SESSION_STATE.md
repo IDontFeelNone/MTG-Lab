@@ -1,3 +1,12 @@
+# Phase 135B session state — production download repaired, rerun pending
+
+The Phase 135A GitHub-hosted acquisition failed with HTTP 403 before evidence publication and
+passed `--acquired-at ""`. Phase 135B keeps the approved MTGJSON source and exact retention model,
+but adds explicit request identity/negotiation, HTTPS approved-host redirect enforcement, official
+SHA-256 sidecar verification, final response validation, and corpus-free structured diagnostics.
+The workflow now generates and validates a UTC RFC 3339 timestamp. No acquisition was executed and
+canonical, market, evidence, and knowledge production data remain byte-unchanged.
+
 # Phase 135 session state — acquisition transport blocked
 
 Baseline merge `7453469` satisfies the Phase 134 preconditions. Implementation lives in `src/production_evidence/pilot_printings.py`, the operator entry point is `scripts/retain_pilot_printings.py`, and focused coverage is in `tests/test_phase_135_pilot_printings.py`. The 2026-08-03 official MTGJSON request failed at the network proxy with HTTP 403, so source bytes were not received and no production manifest, projection, or report was published. Protected data remains unchanged.

@@ -40,16 +40,27 @@ jobs:
           set -euo pipefail
           RUN_ID="mtgjson-pilot-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           BRANCH="pilot-printing-acquisition/$RUN_ID"
+          ACQUIRED_AT="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          python - "$ACQUIRED_AT" <<'PY'
+          from datetime import datetime, timezone
+          import sys
+          value = sys.argv[1]
+          parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+          if not value or not value.endswith("Z") or parsed.tzinfo != timezone.utc:
+              raise SystemExit("invalid UTC RFC 3339 acquisition timestamp")
+          PY
           printf '%s\n' "$RUN_ID" > "$RUNNER_TEMP/run-id.txt"
           printf '%s\n' "$BRANCH" > "$RUNNER_TEMP/evidence-branch.txt"
+          printf '%s\n' "$ACQUIRED_AT" > "$RUNNER_TEMP/acquired-at.txt"
       - name: Acquire bounded pilot printing evidence
         env:
           PYTHONPATH: src
         run: |
           set -euo pipefail
           RUN_ID="$(cat "$RUNNER_TEMP/run-id.txt")"
+          ACQUIRED_AT="$(cat "$RUNNER_TEMP/acquired-at.txt")"
           SNAPSHOT="sha256:$(sha256sum data/canonical/state.json | cut -d' ' -f1)"
-          python scripts/retain_pilot_printings.py --run-id "$RUN_ID" --canonical-snapshot "$SNAPSHOT" --acquired-at "${{ github.run_started_at }}" > "$RUNNER_TEMP/acquisition.log"
+          python scripts/retain_pilot_printings.py --run-id "$RUN_ID" --canonical-snapshot "$SNAPSHOT" --acquired-at "$ACQUIRED_AT" --diagnostics "$RUNNER_TEMP/transport-diagnostic.json" > "$RUNNER_TEMP/acquisition.log"
       - name: Verify census and changed-file boundary
         env:
           PYTHONPATH: src
@@ -106,6 +117,8 @@ jobs:
             ${{ runner.temp }}/changed-file-verification*.json
             ${{ runner.temp }}/digest-summary.json
             ${{ runner.temp }}/run-id.txt
+            ${{ runner.temp }}/acquired-at.txt
+            ${{ runner.temp }}/transport-diagnostic.json
             ${{ runner.temp }}/evidence-branch.txt
             ${{ runner.temp }}/pull-request.json
             ${{ runner.temp }}/head-sha.txt

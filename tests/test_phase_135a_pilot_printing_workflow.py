@@ -34,6 +34,13 @@ class Phase135AWorkflowTests(unittest.TestCase):
         self.assertIn('> "$RUNNER_TEMP/acquisition.log"', self.text)
         self.assertNotIn("AllPrintings.json.gz\n", self.text)
 
+    def test_generated_valid_timestamp_is_passed_and_diagnosed(self):
+        self.assertIn("ACQUIRED_AT=\"$(date -u +'%Y-%m-%dT%H:%M:%SZ')\"", self.text)
+        self.assertIn('printf \'%s\\n\' "$ACQUIRED_AT" > "$RUNNER_TEMP/acquired-at.txt"', self.text)
+        self.assertIn('--acquired-at "$ACQUIRED_AT"', self.text)
+        self.assertIn('--diagnostics "$RUNNER_TEMP/transport-diagnostic.json"', self.text)
+        self.assertNotIn("github.run_started_at", self.text)
+
     def test_exact_files_branch_replay_pr_and_diagnostics(self):
         for name in FILES: self.assertIn(f'$EVIDENCE/{name}', self.text)
         self.assertIn('pilot-printing-acquisition/$RUN_ID', self.text)
