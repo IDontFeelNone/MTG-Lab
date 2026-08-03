@@ -1,3 +1,13 @@
+# Phase 133 session state
+
+Baseline `ef2606c` merges Phase 132: ten Cards, 90 facts, and ten explicit unknown
+`printing.reprint_history` assertions. Phase 131 append-only storage/query contracts and Phase 128's
+478 observations remain intact. Phase 133 appends ten deterministic known aggregates with valid
+forward supersession and preserves historical queries. Evidence is limited to the Phase 119
+canonical MB2 state and retained Phase 128 MB2-only Scryfall projection. Every printing history is
+incomplete; demand, deck usage, popularity, scarcity, catalysts, and historical price movement
+remain evidence gaps. No external access, inference, promotion, or protected-data write occurred.
+
 # Phase 130 session state
 
 - Baseline: Phase 129 merged at `73fb1de`; Phase 128 observations remain 478/379 printings.

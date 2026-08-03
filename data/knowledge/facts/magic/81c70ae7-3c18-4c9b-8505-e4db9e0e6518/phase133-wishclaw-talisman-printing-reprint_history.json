@@ -1,0 +1,81 @@
+{
+  "confidence": null,
+  "effective_at": "2024-08-02T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Canonical snapshot contains 1 MB2 Printing for Wishclaw Talisman; its Card assertion lists 4 set memberships.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f;card=81c70ae7-3c18-4c9b-8505-e4db9e0e6518;printings=afa5e761-735f-5d33-8058-76a11e5151e8;set_codes=MB2",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    },
+    {
+      "claim": "Retained MB2 projection explicitly supplies date, finish, language, treatment, promo, and reprint fields for Wishclaw Talisman.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json#oracle_id=81c70ae7-3c18-4c9b-8505-e4db9e0e6518;printing_ids=9da15685-69c4-4517-b5a7-cf929e2788ba;dates=2024-08-02..2024-08-02",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_acquisition"
+    }
+  ],
+  "fact_id": "phase133-wishclaw-talisman-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-04T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase132-wishclaw-talisman-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "afa5e761-735f-5d33-8058-76a11e5151e8"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_code_count": 1,
+      "distinct_canonical_set_codes": [
+        "MB2"
+      ],
+      "earliest_known_canonical_printing_date": "2024-08-02",
+      "known_finishes": [
+        "nonfoil"
+      ],
+      "known_languages": [
+        "en"
+      ],
+      "known_set_membership_count": 4,
+      "known_set_memberships_from_card_assertion": [
+        "ELD",
+        "FDN",
+        "MB2",
+        "PELD"
+      ],
+      "known_treatments": {
+        "frames": [
+          "2015"
+        ],
+        "full_art": false,
+        "oversized": false,
+        "textless": false,
+        "variation": false
+      },
+      "latest_known_canonical_printing_date": "2024-08-02",
+      "promotional_status": {
+        "promo": false
+      },
+      "reprint_count": 0,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "scope_note": "Counts and date boundaries cover retained canonical MB2 printings only; set memberships are a separate retained Card assertion and do not prove one printing per set.",
+      "source_assertions": {
+        "is_reprint": true
+      },
+      "total_known_canonical_printings": 1,
+      "unsupported_dimensions": [],
+      "years_between_known_date_boundaries": 0
+    },
+    "status": "known"
+  }
+}

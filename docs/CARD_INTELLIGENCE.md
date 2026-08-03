@@ -1,3 +1,27 @@
+# Phase 133 verified printing-history intelligence
+
+Phase 133 uses the same ten-card Phase 132 pilot and appends ten known
+`printing.reprint_history` facts. Each aggregate cites the exact Phase 119 canonical Card and MB2
+Printing IDs and the matching record in retained acquisition `scryfall-mb2-30754638264-1`. It
+reports the canonical Printing count and IDs, canonical set codes, separately asserted historical
+set memberships, earliest/latest retained canonical Printing dates, finishes, languages, explicit
+treatment and promotional fields, and evidence coverage.
+
+Reprint count means **`max(total distinct canonical printings - 1, 0)`**. The current canonical
+snapshot contains one MB2 Printing for each pilot Card, so every bounded count is zero. This does
+not contradict the retained source assertion that each MB2 record is a reprint: the canonical
+repository does not contain the older Printing identities. Set membership codes are not fabricated
+into Printings. Consequently all ten histories are known within their MB2 boundary but incomplete
+globally, and confidence remains null because arithmetic success is not evidence completeness.
+
+The Phase 132 unknown remains byte-unchanged and is named in `supersedes`; active printing-history
+queries return only the later known fact, while full-history queries return both. Invalid subject,
+predicate, reference, or recording chronology fails closed through the Phase 131 repository.
+Printing count is not supply quantity. Reprint history alone does not establish scarcity,
+collectibility, popularity, demand, deck usage, catalysts, historical price movement, price
+direction, investment quality, or value. Unsupported archetype and catalyst queries remain
+explicitly empty. The deterministic review is `data/reviews/phase-133/pilot-review.json`.
+
 # Card Intelligence
 
 ## Phase 132 reviewed pilot

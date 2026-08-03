@@ -1,0 +1,150 @@
+{
+  "confidence": null,
+  "effective_at": "2024-08-02T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Canonical snapshot contains 1 MB2 Printing for Swords to Plowshares; its Card assertion lists 72 set memberships.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f;card=b1544f21-7e98-461b-aed5-e748b0168c52;printings=4049d45f-34ab-5001-b086-efab6a908a53;set_codes=MB2",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    },
+    {
+      "claim": "Retained MB2 projection explicitly supplies date, finish, language, treatment, promo, and reprint fields for Swords to Plowshares.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json#oracle_id=b1544f21-7e98-461b-aed5-e748b0168c52;printing_ids=b635680a-12ae-49f8-a3d7-7254cb0962ec;dates=2024-08-02..2024-08-02",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_acquisition"
+    }
+  ],
+  "fact_id": "phase133-swords-to-plowshares-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-04T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase132-swords-to-plowshares-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "4049d45f-34ab-5001-b086-efab6a908a53"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_code_count": 1,
+      "distinct_canonical_set_codes": [
+        "MB2"
+      ],
+      "earliest_known_canonical_printing_date": "2024-08-02",
+      "known_finishes": [
+        "foil",
+        "nonfoil"
+      ],
+      "known_languages": [
+        "en"
+      ],
+      "known_set_membership_count": 72,
+      "known_set_memberships_from_card_assertion": [
+        "2ED",
+        "30A",
+        "3ED",
+        "40K",
+        "4BB",
+        "4ED",
+        "A25",
+        "AFC",
+        "ATH",
+        "BBD",
+        "BLC",
+        "BRB",
+        "BRC",
+        "C16",
+        "C17",
+        "CED",
+        "CEI",
+        "CMM",
+        "CMR",
+        "CNS",
+        "CST",
+        "DDF",
+        "DMR",
+        "DRC",
+        "DSC",
+        "EMA",
+        "EOC",
+        "F01",
+        "FBB",
+        "FIC",
+        "GN3",
+        "ICE",
+        "IMA",
+        "J13",
+        "J21",
+        "LCC",
+        "LEA",
+        "LEB",
+        "LTC",
+        "M3C",
+        "MB2",
+        "ME2",
+        "ME4",
+        "MIC",
+        "MKC",
+        "MOC",
+        "MSC",
+        "NCC",
+        "NEC",
+        "OLEP",
+        "ONC",
+        "PF25",
+        "PIP",
+        "PLST",
+        "PMEI",
+        "PRM",
+        "PTC",
+        "SCD",
+        "SLD",
+        "SLP",
+        "SOC",
+        "SPG",
+        "STA",
+        "SUM",
+        "TD0",
+        "TDC",
+        "V13",
+        "VMA",
+        "VOC",
+        "WC97",
+        "WHO",
+        "WOC"
+      ],
+      "known_treatments": {
+        "frames": [
+          "future"
+        ],
+        "full_art": false,
+        "oversized": false,
+        "textless": false,
+        "variation": false
+      },
+      "latest_known_canonical_printing_date": "2024-08-02",
+      "promotional_status": {
+        "promo": false
+      },
+      "reprint_count": 0,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "scope_note": "Counts and date boundaries cover retained canonical MB2 printings only; set memberships are a separate retained Card assertion and do not prove one printing per set.",
+      "source_assertions": {
+        "is_reprint": true
+      },
+      "total_known_canonical_printings": 1,
+      "unsupported_dimensions": [],
+      "years_between_known_date_boundaries": 0
+    },
+    "status": "known"
+  }
+}

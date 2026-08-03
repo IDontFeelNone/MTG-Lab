@@ -1,3 +1,12 @@
+# Next task after Phase 133
+
+After review and merge, a recommended Phase 134 may retain and review a bounded, approved dataset
+that supplies printing identities and release dates beyond MB2, or one predicate-specific demand or
+usage dataset. It must preserve Phase 133's incomplete coverage state until the evidence proves a
+complete boundary. Do not infer supply quantity from printing counts or infer scarcity, popularity,
+demand, catalysts, price movement, or value from reprint history. No acquisition, canonical or
+market mutation, promotion, recommendation, or recurring workflow is implied.
+
 # Next task after Phase 132
 
 After review and merge, a recommended Phase 133 may retain and review one bounded dataset that
