@@ -120,6 +120,15 @@ while the complete downloaded corpus remains staging-only and must not enter Git
 exactly the ten names in `PILOT`, resolved with provider printing UUIDs and oracle identifiers;
 MB2 and unrelated records are excluded.
 
+Phase 135B repairs the production transport without changing that retention boundary. The client
+identifies `MTG-Lab/Phase-135B (GitHub-Actions bounded printing acquisition)`, requests gzip or
+octet-stream source bytes with identity content encoding, and separately requests the small
+official `AllPrintings.json.gz.sha256` text sidecar once. It permits at most five HTTPS redirects
+and only between `mtgjson.com` and `www.mtgjson.com`, then revalidates the final URL, HTTP 200,
+media type, nonempty gzip framing, and SHA-256. The large dataset is requested exactly once and is
+never included in diagnostics or artifacts; malformed sidecars, unsafe redirects, mismatch, 403,
+timeout, and transport failures stop the run with bounded structured metadata.
+
 Run from a provider-accessible environment, substituting an independently computed canonical
 snapshot identity and the actual UTC acquisition instant:
 

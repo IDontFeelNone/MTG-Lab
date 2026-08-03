@@ -7,6 +7,7 @@ import os
 import re
 import shutil
 import tempfile
+from datetime import datetime, timezone
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Callable, Mapping
@@ -64,6 +65,12 @@ class PilotPrintingRetention:
             raise ValueError("unsafe acquisition run identity")
         if self.repository.is_symlink() or any(parent.is_symlink() for parent in self.repository.parents):
             raise ValueError("symlink evidence path is forbidden")
+        try:
+            parsed_acquired_at = datetime.fromisoformat(acquired_at.replace("Z", "+00:00"))
+        except (AttributeError, ValueError):
+            raise ValueError("acquisition timestamp must be UTC RFC 3339") from None
+        if not acquired_at.endswith("Z") or parsed_acquired_at.tzinfo != timezone.utc:
+            raise ValueError("acquisition timestamp must be UTC RFC 3339")
         destination = self.repository / run_id
         staging = Path(tempfile.mkdtemp(prefix=f".{run_id}.", dir=self.repository.parent))
         source = staging / "AllPrintings.json.gz"
@@ -76,6 +83,12 @@ class PilotPrintingRetention:
                 raise ValueError("unexpected provider content type")
             if source.read_bytes()[:2] != b"\x1f\x8b":
                 raise ValueError("expected gzip-compressed provider source")
+            if source.stat().st_size == 0:
+                raise ValueError("empty provider source")
+            source_digest = sha256_file(source)
+            expected_digest = transport.get("expected_sha256")
+            if expected_digest is not None and source_digest != expected_digest:
+                raise ValueError("provider checksum verification failed")
             result = self.retain(source=source, run_id=run_id, source_url=source_url,
                                  canonical_snapshot=canonical_snapshot, acquired_at=acquired_at,
                                  transport=transport, destination=staging / "publication")

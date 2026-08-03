@@ -1,3 +1,13 @@
+# Phase 135B handoff
+
+The Phase 135A production run received HTTP 403 and also passed an empty acquisition timestamp.
+The repaired transport uses an explicit MTG Lab GitHub Actions User-Agent, explicit Accept and
+Accept-Encoding headers, HTTPS-only approved-host redirects, final-response validation, and the
+official SHA-256 sidecar. Diagnostics contain only safe descriptors and response/failure metadata,
+never corpus bytes. The workflow generates and validates one UTC timestamp. No acquisition was
+executed while implementing this repair. After merge, manually rerun **Pilot printing
+acquisition** exactly once and review the resulting evidence PR.
+
 # Phase 135 handoff
 
 The bounded retention implementation is complete and tested, but production acquisition is blocked by the environment's HTTP 403 proxy response. MTGJSON AllPrintings v5 gzip is the approved source; CC BY 4.0 permits retaining the attributed bounded projection. The source is downloaded once to staging, verified as HTTP 200 with gzip media/magic, hashed, incrementally scanned one set at a time, projected to the exact pilot excluding MB2, and atomically renamed. A byte-identical run is accepted; an identity conflict fails closed; staging is removed after every result.

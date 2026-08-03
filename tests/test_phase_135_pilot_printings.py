@@ -87,7 +87,9 @@ class Phase135Tests(unittest.TestCase):
                 run_id=unsafe, source_url="x", canonical_snapshot="x", acquired_at="x")
         def bad_type(url, target): target.write_bytes(self.source.read_bytes()); return {"status": 200, "content_type": "text/html"}
         with self.assertRaisesRegex(ValueError, "content type"): PilotPrintingRetention(repo, bad_type).acquire(
-            run_id="bad-type", source_url="x", canonical_snapshot="x", acquired_at="x")
+            run_id="bad-type", source_url="x", canonical_snapshot="x", acquired_at="2026-08-03T00:00:00Z")
+        with self.assertRaisesRegex(ValueError, "UTC RFC 3339"): PilotPrintingRetention(repo, self.downloader).acquire(
+            run_id="bad-time", source_url="x", canonical_snapshot="x", acquired_at="")
         self.assertFalse((self.root / "data/canonical").exists())
         self.assertFalse((self.root / "data/knowledge").exists())
         self.assertFalse((self.root / "data/market").exists())
