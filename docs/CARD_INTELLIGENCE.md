@@ -1,3 +1,17 @@
+# Phase 134 retained-evidence gap
+
+Phase 134 did not append Card Intelligence facts. The retained reviewed MTGJSON payload boundary
+contains the ten pilot MB2 Printings but no non-MB2 Printing identity for any pilot Card; its MSH
+records do not match the pilot. Set-membership assertions cannot substitute for printing-level
+records, and the unretained source bytes cannot be reconstructed from lineage or conversational
+memory. Active queries therefore still return the incomplete Phase 133 aggregate, and full-history
+queries still return only the Phase 132 unknown and Phase 133 bounded MB2 assertion.
+
+Printing count remains `max(total distinct canonical printings - 1, 0)` for reprint-count purposes,
+and does not measure supply. The retained evidence still cannot establish complete global history,
+demand, deck usage, popularity, scarcity, catalysts, historical price movement, valuation, price
+predictions, or recommendations. See `data/reviews/phase-134/evidence-gap-report.json`.
+
 # Phase 133 verified printing-history intelligence
 
 Phase 133 uses the same ten-card Phase 132 pilot and appends ten known

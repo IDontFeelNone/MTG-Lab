@@ -1,3 +1,14 @@
+# Phase 134 evidence-gap handoff
+
+The requested baseline passed, but the mandatory source gate did not. Review
+`data/reviews/phase-134/evidence-gap-report.json`: all twelve retained reviewed MTGJSON payloads
+are checksum-bound and limited to MB2/MSH. Across 10,940 candidates they supply zero non-MB2
+Printing records for the ten pilot Cards. The source AllPrintings bytes named by lineage are not
+retained, so no safe reconstruction is possible. Phase 134 correctly performed no promotion and
+created no facts; Phase 132 and Phase 133 remain the full three-layer-intelligence history available
+only through the first two layers (unknown, then bounded MB2). Acquire nothing implicitly and do
+not resume until an approved printing-level artifact is actually retained.
+
 # Phase 133 handoff
 
 Pilot `phase-133-mb2-printing-history-v1` retains the Phase 132 ten-card scope and adds one known,

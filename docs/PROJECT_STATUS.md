@@ -1,3 +1,22 @@
+# Phase 134 status — stopped at retained-evidence gap
+
+Phase 133 is merged at `ca5756c`. Baseline verification found the ten-card Phase 132/133
+pilot, 90 Phase 132 facts, ten active incomplete Phase 133 histories, one canonical MB2 Printing
+per pilot Card, 478 market observations, and frozen Architecture v12 intact. The only retained,
+reviewed MTGJSON candidate boundary is dataset
+`mtgjson-allprintings-5.3.0+20260731-b47cc8360034` (source SHA-256
+`b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09`). Its twelve retained
+payloads contain only MB2 and MSH candidates: 10,940 entities, including 813 Printings. They
+contain the ten existing pilot MB2 Printings and zero non-MB2 Printing records for the pilot.
+The original AllPrintings bytes are not retained.
+
+Phase 134 therefore stopped before candidate creation, review, canonical promotion, audit,
+rollback, or fact supersession. Canonical digest remains
+`793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`; all pilot counts remain
+one Printing and zero bounded reprints with incomplete coverage. No external acquisition,
+inference, market/acquisition mutation, or prior-fact mutation occurred. The deterministic
+evidence-gap report is `data/reviews/phase-134/evidence-gap-report.json`.
+
 # Phase 133 status — verified bounded printing history
 
 Phase 132 is merged at `ef2606c` with exactly ten pilot Cards and 90 reviewed facts. Phase 133

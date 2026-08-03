@@ -1,0 +1,211 @@
+{
+  "architecture_version": "12",
+  "audit_identity": null,
+  "candidate_census": {
+    "accepted_non_mb2_printing_candidates": 0,
+    "ambiguous": 0,
+    "conflicting": 0,
+    "duplicate": 0,
+    "incomplete": 0,
+    "promoted_printings": 0,
+    "rejected": 0,
+    "unresolved_required_printing_records": 10
+  },
+  "canonical_digest_after": "793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f",
+  "canonical_digest_before": "793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f",
+  "canonical_write": false,
+  "changed_files": [
+    "data/reviews/phase-134/evidence-gap-report.json",
+    "docs/CARD_INTELLIGENCE.md",
+    "docs/HANDOFF.md",
+    "docs/NEXT_TASK.md",
+    "docs/PROJECT_STATUS.md",
+    "docs/SESSION_STATE.md",
+    "tests/test_phase_134_evidence_gap.py"
+  ],
+  "coverage_by_card": [
+    {
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "coverage_state": "incomplete",
+      "name": "Brainstorm",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    },
+    {
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "coverage_state": "incomplete",
+      "name": "Command Tower",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "coverage_state": "incomplete",
+      "name": "Counterspell",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    },
+    {
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "coverage_state": "incomplete",
+      "name": "Goblin Charbelcher",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    },
+    {
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "coverage_state": "incomplete",
+      "name": "Goblin King",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "coverage_state": "incomplete",
+      "name": "Sol Ring",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "coverage_state": "incomplete",
+      "name": "Swords to Plowshares",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "coverage_state": "incomplete",
+      "name": "Treasure Cruise",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    },
+    {
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "coverage_state": "incomplete",
+      "name": "Walking Ballista",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "coverage_state": "incomplete",
+      "name": "Wishclaw Talisman",
+      "printing_count_after": 1,
+      "printing_count_before": 1,
+      "reprint_count_after": 0,
+      "reprint_count_before": 0
+    }
+  ],
+  "dataset": {
+    "dataset_id": "mtgjson-allprintings-5.3.0+20260731-b47cc8360034",
+    "provenance": "MTGJSON AllPrintings, locally streamed 2026-07-31; repository retains reviewed candidate payloads only",
+    "source_sha256": "b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09"
+  },
+  "evidence_boundary": {
+    "candidate_entities_reviewed": 10940,
+    "entity_census": {
+      "card": 665,
+      "finish": 2,
+      "identifier": 9453,
+      "language": 1,
+      "printing": 813,
+      "rarity": 4,
+      "set": 2
+    },
+    "pilot_mb2_printing_records": 10,
+    "pilot_non_mb2_printing_records": 0,
+    "retained_set_codes": [
+      "MB2",
+      "MSH"
+    ],
+    "review_payload_count": 12
+  },
+  "external_acquisition_performed": false,
+  "inference_performed": false,
+  "phase": 134,
+  "promoted_printing_ids": [],
+  "promotion_performed": false,
+  "reason": "The retained reviewed payload boundary contains only MB2 and MSH. It contains the ten existing pilot MB2 Printings and no non-MB2 Printing record for any pilot Card. The original AllPrintings bytes are not retained, so broader source content cannot be reconstructed or safely promoted.",
+  "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+  "rollback_plan": "Not applicable: no canonical write or promotion was performed.",
+  "schema_version": "phase-134-evidence-gap-report-v1",
+  "source_artifacts": [
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/mb2/mb2-batch-000001-e32022126c07.json",
+      "sha256": "007e69530bac92de3794089623f6fa1610f374ceb4f8f3c75a96502ddc6fba1d"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/mb2/mb2-batch-000002-cd46ea5cd526.json",
+      "sha256": "da5b28ae8b899dce33a29d514a4759f45598463b0c2996ed0c71d06b01870536"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/mb2/mb2-batch-000003-e84c2220aeb5.json",
+      "sha256": "9784dc7e252b61a0c485002ddbc3ff3d4f30ef0ca66d37fec9268c1f06e43d09"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/mb2/mb2-batch-000004-3c10640c884e.json",
+      "sha256": "90403ef7433c653ab17a53752030fe3d9ed8c5395a9c545418a7cd37ff5428fe"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/mb2/mb2-batch-000005-c986647781fe.json",
+      "sha256": "a8b2a116a58853d239f2d49abf922b83e11547eae707e185dd43bd9d5deaf8ab"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/mb2/mb2-batch-000006-31954d26dcbe.json",
+      "sha256": "7e48ff624b41c2eaedbd73e91fb6c9492158eca460266b434880e2a358a5a19f"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/msh/msh-batch-000007-ccfe8f698500.json",
+      "sha256": "827ab404efde935a6c7e36d7a06818fdb2f72786dc8e0c2aae2876a55f2ac3e1"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/msh/msh-batch-000008-7415ef6a5dfc.json",
+      "sha256": "28644c3b3ce2161804c44381a8fde802c46e34d2cd537eb447fc703385e80b2f"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/msh/msh-batch-000009-5d18541dc5d2.json",
+      "sha256": "b598a7fd1d79f2ea723e84fd9a9c884404b4241d8fa7e9ead3a82967565dfd51"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/msh/msh-batch-000010-7e9147e46711.json",
+      "sha256": "e72b0e315748c03952b11cf5118a76fb4b05db428acebee4a7cf34e6743a7b8c"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/msh/msh-batch-000011-9d0b8d81354a.json",
+      "sha256": "692c63364e15071587773a3bed820517284e4c8a4e743c8fa29ca768c055d26d"
+    },
+    {
+      "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/msh/msh-batch-000012-472b58eb45b3.json",
+      "sha256": "90803f556967b3d166cbf863135a4e391356e83fcee4b38767177022f46aab34"
+    }
+  ],
+  "status": "blocked_retained_evidence_gap",
+  "unsupported_claims_excluded": [
+    "complete_global_history",
+    "demand",
+    "scarcity",
+    "supply_quantity",
+    "valuation",
+    "price_prediction",
+    "recommendation"
+  ]
+}
