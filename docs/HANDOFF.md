@@ -1,3 +1,19 @@
+# Phase 137 — explainable Card Value evidence engine handoff
+
+The ten-card pilot now has deterministic `card-value-explanation-v1` reports generated directly from
+read-only canonical, active knowledge, and market-observation repositories. Run with `PYTHONPATH=src:.`
+and either `python -m card_intelligence.cli explain Sol Ring` or
+`python -m card_intelligence.cli explain --card-id 6ad8011d-3471-4369-9d68-b264cc027487`.
+The command emits stable, schema-valid JSON and fails closed outside the pilot.
+
+Supported presentation categories are retained Printing History, market coverage (not price
+interpretation), reviewed Rules/mechanical roles/legalities/product membership, and Evidence Quality.
+Commander usage, tournament results, inventory, demand, global printing completeness, scarcity,
+popularity, value conclusions, scores, rankings, forecasts, and recommendations are unsupported and
+explicitly disclosed. Future work must first retain and review new evidence; the explanation engine
+must remain a consumer and must never create facts. The 913 Printings, 534 promoted pilot Printings,
+478 observations, ten Phase 136 histories, and Architecture v12 remain protected.
+
 # Phase 137 — pilot Printing-history audit complete
 
 Phase 137 performed a deterministic, read-only audit of the Phase 136 pilot history. The baseline is

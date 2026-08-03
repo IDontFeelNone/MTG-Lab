@@ -1,3 +1,34 @@
+# Phase 137 explainable Card Value evidence layer
+
+`CardValueExplanationEngine` is a read-only presentation layer over three existing sources: the frozen
+canonical snapshot, active asserted Card Intelligence facts, and retained immutable market
+observations. It supports only the ten Phase 132/136 pilot Cards and emits
+`card-value-explanation-v1`. A report identifies the Card and canonical snapshot, then separates:
+
+* **Printing History:** retained printing/reprint counts, date bounds, distinct sets, finishes,
+  treatments, promotional states, and bounded/incomplete coverage.
+* **Market:** observation count and time span plus providers and currencies; observed price amounts are
+  intentionally not exposed or interpreted.
+* **Rules:** reviewed oracle text, mechanical roles, format legality, and product membership.
+* **Evidence Quality:** sorted known and unknown predicates and explicit incomplete and unsupported
+  categories.
+
+The generation timestamp is the latest recording timestamp among selected retained inputs. This makes
+repeated output byte-identical while accurately describing the evidence snapshot rather than the wall
+clock. Provenance lists active knowledge fact IDs, knowledge evidence sources, market observation IDs,
+and the canonical identity.
+
+The engine explicitly states that this repository has no reviewed Commander usage, tournament results,
+retained inventory, or demand evidence. It does not treat legality as usage, printing count as supply,
+finish as collectibility, or an observation as a value explanation. It cannot infer demand, scarcity,
+popularity, value, or price direction and produces no recommendation, score, ranking, or forecast.
+
+Future categories may be displayed only after their evidence is separately retained, reviewed, and
+asserted through the existing append-only knowledge boundary. Broader Card coverage requires an
+explicitly approved scope phase. Explanation remains downstream and read-only; it must never acquire
+data, promote canonical entities, append facts, or modify observations. Architecture v12 remains
+frozen.
+
 # Phase 137 — pilot Printing-history audit complete
 
 Phase 137 performed a deterministic, read-only audit of the Phase 136 pilot history. The baseline is
