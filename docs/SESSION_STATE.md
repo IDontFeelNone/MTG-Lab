@@ -216,3 +216,13 @@ performed.
 # Session state — Phase 127C
 
 Baseline `21f9b6e` confirms Phase 127B merged. Its corrected metadata endpoint reached Scryfall successfully and returned acceptable JSON, but the GitHub-hosted run failed closed at `download_uri_extraction`: metadata was fetched, no download URI was obtained, no bulk download began, and no observation, canonical write, or promotion followed. Phase 127C repairs direct/list metadata selection and secure URI validation. Production market coverage remains 0/379. Next: merge, then dispatch one nonpersistent dry run and inspect its artifact.
+
+# Session state — Phase 135A
+
+Baseline Phase 135 is merged (`a8a21a8`); its retention module, CLI, and focused tests are present,
+and no production `data/evidence/phase-135/<run-id>` exists. Phase 134 remains blocked only on
+verified non-MB2 Printing evidence. The ten Phase 132 cards and Phase 132/133 facts are untouched.
+Canonical digest/state, all 478 Phase 128 market observations, and frozen Architecture v12 are
+untouched. Phase 135A implements but does not execute the manual GitHub Actions acquisition. Its
+result must be a reviewed three-file evidence PR. No promotion, fact supersession, inference,
+market import, schedule, force push, or automatic merge is introduced.

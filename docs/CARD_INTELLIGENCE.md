@@ -77,3 +77,12 @@ The deterministic review artifact is
 `data/reviews/phase-132/pilot-review.json`. Production facts remain append-only beneath
 `data/knowledge/facts/magic/<card-id>/<fact-id>.json`; neither the review artifact nor querying
 promotes facts into canonical or market data.
+
+# Phase 135A operational boundary
+
+The manual Pilot printing acquisition workflow can retain evidence but cannot create or supersede
+Card Intelligence facts. Its census requires all ten approved names, at least one supported non-MB2
+Printing UUID per name, and zero missing, ambiguous, malformed, conflicting, or unsupported records.
+The evidence PR must be manually reviewed and merged. Processing stops there: a later phase must
+separately review retained evidence before any bounded Printing promotion or Phase 133 supersession.
+No history, demand, scarcity, value, popularity, supply, or recommendation is inferred.
