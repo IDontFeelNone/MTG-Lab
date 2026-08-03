@@ -1,0 +1,137 @@
+{
+  "confidence": null,
+  "effective_at": "2024-08-02T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Canonical snapshot contains 1 MB2 Printing for Command Tower; its Card assertion lists 60 set memberships.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f;card=0895c9b7-ae7d-4bb3-af17-3b75deb50a25;printings=e1a2139f-241f-59a3-86d6-4f3c070b52a8;set_codes=MB2",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    },
+    {
+      "claim": "Retained MB2 projection explicitly supplies date, finish, language, treatment, promo, and reprint fields for Command Tower.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json#oracle_id=0895c9b7-ae7d-4bb3-af17-3b75deb50a25;printing_ids=99eed556-06b8-4063-8d72-24f010dd372e;dates=2024-08-02..2024-08-02",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_acquisition"
+    }
+  ],
+  "fact_id": "phase133-command-tower-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-04T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase132-command-tower-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "e1a2139f-241f-59a3-86d6-4f3c070b52a8"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_code_count": 1,
+      "distinct_canonical_set_codes": [
+        "MB2"
+      ],
+      "earliest_known_canonical_printing_date": "2024-08-02",
+      "known_finishes": [
+        "foil"
+      ],
+      "known_languages": [
+        "en"
+      ],
+      "known_set_membership_count": 60,
+      "known_set_memberships_from_card_assertion": [
+        "40K",
+        "AFC",
+        "ANB",
+        "BLC",
+        "BRC",
+        "C13",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19",
+        "C20",
+        "C21",
+        "CC1",
+        "CC2",
+        "CLB",
+        "CM1",
+        "CM2",
+        "CMA",
+        "CMD",
+        "CMM",
+        "CMR",
+        "DMC",
+        "DRC",
+        "DSC",
+        "ECC",
+        "ELD",
+        "EOC",
+        "FDC",
+        "FIC",
+        "J12",
+        "KHC",
+        "LCC",
+        "LTC",
+        "M3C",
+        "MB2",
+        "MIC",
+        "MKC",
+        "MOC",
+        "MSC",
+        "NCC",
+        "NEC",
+        "ONC",
+        "OTC",
+        "PIP",
+        "PLST",
+        "PMEI",
+        "PRM",
+        "PW25",
+        "PZ1",
+        "REX",
+        "SCD",
+        "SLD",
+        "SOC",
+        "TDC",
+        "TMC",
+        "VOC",
+        "WHO",
+        "WOC",
+        "ZNC"
+      ],
+      "known_treatments": {
+        "frames": [
+          "future"
+        ],
+        "full_art": false,
+        "oversized": false,
+        "textless": false,
+        "variation": false
+      },
+      "latest_known_canonical_printing_date": "2024-08-02",
+      "promotional_status": {
+        "promo": false
+      },
+      "reprint_count": 0,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "scope_note": "Counts and date boundaries cover retained canonical MB2 printings only; set memberships are a separate retained Card assertion and do not prove one printing per set.",
+      "source_assertions": {
+        "is_reprint": true
+      },
+      "total_known_canonical_printings": 1,
+      "unsupported_dimensions": [],
+      "years_between_known_date_boundaries": 0
+    },
+    "status": "known"
+  }
+}

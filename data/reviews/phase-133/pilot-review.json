@@ -1,0 +1,238 @@
+{
+  "canonical_snapshot_identity": "sha256:793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f",
+  "canonical_write": false,
+  "cards_with_incomplete_printing_history_evidence": [
+    {
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "name": "Brainstorm"
+    },
+    {
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "name": "Command Tower"
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "name": "Counterspell"
+    },
+    {
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "name": "Goblin Charbelcher"
+    },
+    {
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "name": "Goblin King"
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "name": "Sol Ring"
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "name": "Swords to Plowshares"
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "name": "Treasure Cruise"
+    },
+    {
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "name": "Walking Ballista"
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "name": "Wishclaw Talisman"
+    }
+  ],
+  "changed_files": [
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase133-command-tower-printing-reprint_history.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase133-brainstorm-printing-reprint_history.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase133-walking-ballista-printing-reprint_history.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase133-treasure-cruise-printing-reprint_history.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase133-sol-ring-printing-reprint_history.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase133-wishclaw-talisman-printing-reprint_history.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase133-swords-to-plowshares-printing-reprint_history.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase133-goblin-charbelcher-printing-reprint_history.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase133-counterspell-printing-reprint_history.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase133-goblin-king-printing-reprint_history.json",
+    "data/reviews/phase-133/pilot-review.json",
+    "docs/CARD_INTELLIGENCE.md",
+    "docs/HANDOFF.md",
+    "docs/NEXT_TASK.md",
+    "docs/PROJECT_STATUS.md",
+    "docs/SESSION_STATE.md",
+    "src/card_intelligence/query.py",
+    "tests/test_phase_132_card_intelligence_pilot.py",
+    "tests/test_phase_133_printing_history.py"
+  ],
+  "evidence_scope": "Retained Phase 119 canonical MB2 Card and Printing records plus the retained Phase 128 MB2-only Scryfall projection; no global printing-history completeness is asserted.",
+  "external_acquisition_performed": false,
+  "facts_by_knowledge_kind": {
+    "reprint_history": 10
+  },
+  "facts_by_predicate": {
+    "printing.reprint_history": 10
+  },
+  "inference_performed": false,
+  "phase": "133",
+  "pilot_id": "phase-133-mb2-printing-history-v1",
+  "printing_census": [
+    {
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Brainstorm",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    },
+    {
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Command Tower",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Counterspell",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    },
+    {
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Goblin Charbelcher",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    },
+    {
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Goblin King",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Sol Ring",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Swords to Plowshares",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Treasure Cruise",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    },
+    {
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Walking Ballista",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "earliest_known_printing_date": "2024-08-02",
+      "latest_known_printing_date": "2024-08-02",
+      "name": "Wishclaw Talisman",
+      "printing_history_evidence_state": "incomplete",
+      "reprint_count": 0,
+      "total_known_canonical_printings": 1
+    }
+  ],
+  "promotion_performed": false,
+  "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+  "schema_version": "card-intelligence-review-v1",
+  "selected_cards": [
+    {
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "name": "Brainstorm",
+      "selection_rationale": "Exercises deck_role using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "name": "Command Tower",
+      "selection_rationale": "Exercises deck_role using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "name": "Counterspell",
+      "selection_rationale": "Exercises deck_role using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "name": "Goblin Charbelcher",
+      "selection_rationale": "Exercises deck_role using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "name": "Goblin King",
+      "selection_rationale": "Exercises tribal_theme using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "name": "Sol Ring",
+      "selection_rationale": "Exercises mana_acceleration using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "name": "Swords to Plowshares",
+      "selection_rationale": "Exercises removal using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "name": "Treasure Cruise",
+      "selection_rationale": "Exercises card_advantage using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "name": "Walking Ballista",
+      "selection_rationale": "Exercises removal using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "name": "Wishclaw Talisman",
+      "selection_rationale": "Exercises tutor using retained rules text; selection does not use price."
+    }
+  ],
+  "superseded_unknown_fact_count": 10,
+  "total_new_facts": 10,
+  "unsupported_assertions_excluded": [
+    "collectibility",
+    "demand",
+    "investment_quality",
+    "market_prediction",
+    "price_direction",
+    "reprint_risk",
+    "scarcity",
+    "supply_quantity",
+    "value"
+  ]
+}

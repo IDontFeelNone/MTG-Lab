@@ -33,7 +33,8 @@ class Phase132PilotTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.repo = KnowledgeRepository(KNOWLEDGE)
-        cls.facts = cls.repo.validate()
+        # Phase-specific assertions remain stable when later phases append facts.
+        cls.facts = tuple(x for x in cls.repo.validate() if x.fact_id.startswith("phase132-"))
         cls.report_bytes = REPORT.read_bytes()
         cls.report = json.loads(cls.report_bytes)
 
@@ -70,11 +71,16 @@ class Phase132PilotTests(unittest.TestCase):
         for selected in self.report["selected_cards"]:
             card_id = selected["card_id"]
             all_facts = query.explain("magic", card_id)
+            all_facts["facts"] = [x for x in all_facts["facts"]
+                                  if x["fact_id"].startswith("phase132-")]
+            all_facts["count"] = len(all_facts["facts"])
             self.assertEqual(all_facts["count"], 9)
             self.assertFalse(all_facts["empty"])
             self.assertTrue(all_facts["evidence_sources"])
-            self.assertEqual(len(all_facts["confidence_values"]), 9)
-            self.assertEqual(query.value_drivers("magic", card_id)["count"], 2)
+            self.assertEqual(sum(x["fact_id"].startswith("phase132-")
+                                 for x in all_facts["confidence_values"]), 9)
+            value_drivers = query.value_drivers("magic", card_id)["facts"]
+            self.assertEqual(sum(x["fact_id"].startswith("phase132-") for x in value_drivers), 2)
             self.assertEqual(query.competitive_formats("magic", card_id)["count"], 1)
             for empty in (query.archetypes("magic", card_id), query.market_catalysts("magic", card_id)):
                 self.assertEqual(empty["facts"], [])
@@ -87,7 +93,8 @@ class Phase132PilotTests(unittest.TestCase):
             copy = Path(temporary) / "knowledge"
             shutil.copytree(KNOWLEDGE, copy)
             replay = KnowledgeRepository(copy)
-            self.assertEqual(tuple(serialize_fact(x) for x in replay.validate()),
+            replay_facts = (x for x in replay.validate() if x.fact_id.startswith("phase132-"))
+            self.assertEqual(tuple(serialize_fact(x) for x in replay_facts),
                              tuple(serialize_fact(x) for x in self.facts))
             with self.assertRaisesRegex(KnowledgeValidationError, "duplicate fact_id"):
                 replay.append(self.facts[0])

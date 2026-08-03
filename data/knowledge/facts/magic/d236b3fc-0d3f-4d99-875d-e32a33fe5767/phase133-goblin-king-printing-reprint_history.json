@@ -1,0 +1,99 @@
+{
+  "confidence": null,
+  "effective_at": "2024-08-02T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Canonical snapshot contains 1 MB2 Printing for Goblin King; its Card assertion lists 21 set memberships.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f;card=d236b3fc-0d3f-4d99-875d-e32a33fe5767;printings=a271ba4e-172c-561b-8a18-da839e94ecf9;set_codes=MB2",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    },
+    {
+      "claim": "Retained MB2 projection explicitly supplies date, finish, language, treatment, promo, and reprint fields for Goblin King.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json#oracle_id=d236b3fc-0d3f-4d99-875d-e32a33fe5767;printing_ids=6524a705-d6b0-405d-a10c-d3e46224e8fb;dates=2024-08-02..2024-08-02",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_acquisition"
+    }
+  ],
+  "fact_id": "phase133-goblin-king-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-04T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase132-goblin-king-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "a271ba4e-172c-561b-8a18-da839e94ecf9"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_code_count": 1,
+      "distinct_canonical_set_codes": [
+        "MB2"
+      ],
+      "earliest_known_canonical_printing_date": "2024-08-02",
+      "known_finishes": [
+        "foil",
+        "nonfoil"
+      ],
+      "known_languages": [
+        "en"
+      ],
+      "known_set_membership_count": 21,
+      "known_set_memberships_from_card_assertion": [
+        "10E",
+        "2ED",
+        "30A",
+        "3ED",
+        "4BB",
+        "4ED",
+        "5ED",
+        "6ED",
+        "7ED",
+        "8ED",
+        "9ED",
+        "ATH",
+        "CED",
+        "CEI",
+        "FBB",
+        "LEA",
+        "LEB",
+        "MB2",
+        "PW24",
+        "SLD",
+        "SUM"
+      ],
+      "known_treatments": {
+        "frames": [
+          "future"
+        ],
+        "full_art": false,
+        "oversized": false,
+        "textless": false,
+        "variation": false
+      },
+      "latest_known_canonical_printing_date": "2024-08-02",
+      "promotional_status": {
+        "promo": false
+      },
+      "reprint_count": 0,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "scope_note": "Counts and date boundaries cover retained canonical MB2 printings only; set memberships are a separate retained Card assertion and do not prove one printing per set.",
+      "source_assertions": {
+        "is_reprint": true
+      },
+      "total_known_canonical_printings": 1,
+      "unsupported_dimensions": [],
+      "years_between_known_date_boundaries": 0
+    },
+    "status": "known"
+  }
+}

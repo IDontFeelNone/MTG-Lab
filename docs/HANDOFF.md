@@ -1,3 +1,13 @@
+# Phase 133 handoff
+
+Pilot `phase-133-mb2-printing-history-v1` retains the Phase 132 ten-card scope and adds one known,
+evidence-bound reprint-history aggregate per Card. Active queries return the Phase 133 fact; full
+history returns it alongside the unchanged Phase 132 unknown. Counts cover canonical MB2 Printing
+records only, while the separate set-code list is reported as an asserted membership list and never
+converted into fabricated Printing identities. All ten coverage states are incomplete. Review
+`data/reviews/phase-133/pilot-review.json`; do not interpret the zero bounded reprint count as no
+historical reprints or as a supply statement. Architecture v12 and protected data remain frozen.
+
 # Phase 132 handoff — first reviewed Card Intelligence facts
 
 Phase 131 is merged at `0e2b89c`. The Phase 132 pilot adds exactly 90 append-only production facts

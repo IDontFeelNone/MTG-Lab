@@ -1,3 +1,17 @@
+# Phase 133 status — verified bounded printing history
+
+Phase 132 is merged at `ef2606c` with exactly ten pilot Cards and 90 reviewed facts. Phase 133
+appends ten known `printing.reprint_history` facts that supersede, but do not alter, the ten Phase
+132 unknown assertions. The retained Phase 119 canonical snapshot contains exactly one MB2
+Printing per pilot Card; therefore the bounded reprint count is zero under `max(total distinct
+canonical printings - 1, 0)`. Retained Card assertions list additional historical set memberships,
+so all ten histories are explicitly incomplete rather than globally complete. The retained Phase 128
+MB2 projection supplies the 2024-08-02 date, English language, finishes, treatment fields, and
+promo/reprint flags. Printing count is not supply quantity, and history alone does not determine
+scarcity, demand, price direction, or value. Canonical data, retained evidence, 478 market
+observations, Architecture v12, and all 90 Phase 132 fact bytes remain unchanged. No acquisition,
+inference, promotion, or canonical write occurred.
+
 # Phase 132 status — first reviewed Card Intelligence facts
 
 Phase 131 is merged at `0e2b89c`. Pilot `phase-132-mb2-reviewed-pilot-v1` adds 90 reviewed,

@@ -1,0 +1,136 @@
+{
+  "confidence": null,
+  "effective_at": "2024-08-02T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Canonical snapshot contains 1 MB2 Printing for Counterspell; its Card assertion lists 58 set memberships.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f;card=cc187110-1148-4090-bbb8-e205694a39f5;printings=d5bfe686-da3c-5a8d-9dd5-4a1fe5aaef3d;set_codes=MB2",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    },
+    {
+      "claim": "Retained MB2 projection explicitly supplies date, finish, language, treatment, promo, and reprint fields for Counterspell.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json#oracle_id=cc187110-1148-4090-bbb8-e205694a39f5;printing_ids=976f36ce-57b0-4364-9009-b3bbf5763050;dates=2024-08-02..2024-08-02",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_acquisition"
+    }
+  ],
+  "fact_id": "phase133-counterspell-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-04T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase132-counterspell-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "d5bfe686-da3c-5a8d-9dd5-4a1fe5aaef3d"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_code_count": 1,
+      "distinct_canonical_set_codes": [
+        "MB2"
+      ],
+      "earliest_known_canonical_printing_date": "2024-08-02",
+      "known_finishes": [
+        "foil",
+        "nonfoil"
+      ],
+      "known_languages": [
+        "en"
+      ],
+      "known_set_membership_count": 58,
+      "known_set_memberships_from_card_assertion": [
+        "2ED",
+        "30A",
+        "3ED",
+        "4BB",
+        "4ED",
+        "5ED",
+        "6ED",
+        "7ED",
+        "A25",
+        "BRB",
+        "BTD",
+        "CED",
+        "CEI",
+        "CMM",
+        "CMR",
+        "DD2",
+        "DMR",
+        "DSC",
+        "EMA",
+        "F05",
+        "FBB",
+        "FCA",
+        "G00",
+        "GN3",
+        "ICE",
+        "JVC",
+        "LEA",
+        "LEB",
+        "MAR",
+        "MB2",
+        "ME2",
+        "ME4",
+        "MH2",
+        "MMQ",
+        "MP2",
+        "OMB",
+        "PF24",
+        "PF26",
+        "PLGM",
+        "PLST",
+        "PMEI",
+        "PRM",
+        "PTC",
+        "PURL",
+        "S99",
+        "SCD",
+        "SLD",
+        "SS1",
+        "STA",
+        "SUM",
+        "TMP",
+        "TPR",
+        "VMA",
+        "WC00",
+        "WC01",
+        "WC02",
+        "WC97",
+        "WC98"
+      ],
+      "known_treatments": {
+        "frames": [
+          "future"
+        ],
+        "full_art": false,
+        "oversized": false,
+        "textless": false,
+        "variation": false
+      },
+      "latest_known_canonical_printing_date": "2024-08-02",
+      "promotional_status": {
+        "promo": false
+      },
+      "reprint_count": 0,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "scope_note": "Counts and date boundaries cover retained canonical MB2 printings only; set memberships are a separate retained Card assertion and do not prove one printing per set.",
+      "source_assertions": {
+        "is_reprint": true
+      },
+      "total_known_canonical_printings": 1,
+      "unsupported_dimensions": [],
+      "years_between_known_date_boundaries": 0
+    },
+    "status": "known"
+  }
+}
