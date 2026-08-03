@@ -1,0 +1,2678 @@
+{
+  "acquisition_run_id": "mtgjson-pilot-30786023976-1",
+  "architecture_version": "12",
+  "canonical_digest_audited": "881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+  "canonical_printing_inventory": 913,
+  "canonical_write": false,
+  "changed_files": [
+    "data/reviews/phase-137/printing-history-audit.json",
+    "docs/CARD_INTELLIGENCE.md",
+    "docs/HANDOFF.md",
+    "docs/MTGJSON_PROVIDER.md",
+    "docs/NEXT_TASK.md",
+    "docs/PROJECT_STATUS.md",
+    "docs/SESSION_STATE.md",
+    "scripts/audit_pilot_printing_history.py",
+    "src/card_intelligence/__init__.py",
+    "src/card_intelligence/printing_history_audit.py",
+    "tests/test_phase_137_printing_history_audit.py"
+  ],
+  "corrections_made": [],
+  "detected_defects": [],
+  "external_acquisition_performed": false,
+  "fact_to_canonical_reconciliation": [
+    {
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "card_name": "Brainstorm",
+      "fact_id": "phase136-brainstorm-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    },
+    {
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "card_name": "Command Tower",
+      "fact_id": "phase136-command-tower-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "card_name": "Counterspell",
+      "fact_id": "phase136-counterspell-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    },
+    {
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "card_name": "Goblin Charbelcher",
+      "fact_id": "phase136-goblin-charbelcher-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    },
+    {
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "card_name": "Goblin King",
+      "fact_id": "phase136-goblin-king-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "card_name": "Sol Ring",
+      "fact_id": "phase136-sol-ring-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "card_name": "Swords to Plowshares",
+      "fact_id": "phase136-swords-to-plowshares-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "card_name": "Treasure Cruise",
+      "fact_id": "phase136-treasure-cruise-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    },
+    {
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "card_name": "Walking Ballista",
+      "fact_id": "phase136-walking-ballista-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "card_name": "Wishclaw Talisman",
+      "fact_id": "phase136-wishclaw-talisman-printing-reprint_history",
+      "mismatched_fields": [],
+      "result": "matched"
+    }
+  ],
+  "field_classification_census": {
+    "border_indicators": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 0,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 534
+    },
+    "canonical_card_id": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "canonical_printing_id": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "collector_number": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "field_level_provenance": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 0,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 534
+    },
+    "finishes": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "frame": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "language": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "paper_digital_state": {
+      "conflicting": 0,
+      "explicitly_unknown": 500,
+      "inconsistent": 0,
+      "known": 34,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "promotional_status": {
+      "conflicting": 0,
+      "explicitly_unknown": 487,
+      "inconsistent": 0,
+      "known": 47,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "provider_printing_uuid": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "rarity": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "release_date": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "reprint_status": {
+      "conflicting": 0,
+      "explicitly_unknown": 11,
+      "inconsistent": 0,
+      "known": 523,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "set_code": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "set_name": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "source_acquisition_run": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "source_record_identity": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    },
+    "treatments": {
+      "conflicting": 0,
+      "explicitly_unknown": 0,
+      "inconsistent": 0,
+      "known": 534,
+      "malformed": 0,
+      "missing_required": 0,
+      "unsupported_by_provider": 0
+    }
+  },
+  "finish_census": [
+    {
+      "printing_count": 9,
+      "value": "etched"
+    },
+    {
+      "printing_count": 262,
+      "value": "foil"
+    },
+    {
+      "printing_count": 445,
+      "value": "nonfoil"
+    },
+    {
+      "printing_count": 21,
+      "value": "signed"
+    }
+  ],
+  "finish_combination_census": [
+    {
+      "printing_count": 2,
+      "value": "etched"
+    },
+    {
+      "printing_count": 7,
+      "value": "etched+foil+nonfoil"
+    },
+    {
+      "printing_count": 87,
+      "value": "foil"
+    },
+    {
+      "printing_count": 168,
+      "value": "foil+nonfoil"
+    },
+    {
+      "printing_count": 249,
+      "value": "nonfoil"
+    },
+    {
+      "printing_count": 21,
+      "value": "nonfoil+signed"
+    }
+  ],
+  "inference_performed": false,
+  "language_census": [
+    {
+      "printing_count": 517,
+      "value": "English"
+    },
+    {
+      "printing_count": 4,
+      "value": "French"
+    },
+    {
+      "printing_count": 4,
+      "value": "Japanese"
+    },
+    {
+      "printing_count": 6,
+      "value": "Quenya"
+    },
+    {
+      "printing_count": 3,
+      "value": "Spanish"
+    }
+  ],
+  "limitations": [
+    "The retained history is bounded to the retained Phase 135 projection and existing pilot MB2 Printings.",
+    "Global printing-history completeness is not proven.",
+    "Printing count is not supply quantity.",
+    "No demand, popularity, scarcity, supply, value, recommendation, or market-trend conclusion follows from Printing count alone."
+  ],
+  "paper_digital_state_census": [
+    {
+      "printing_count": 34,
+      "value": "digital"
+    },
+    {
+      "printing_count": 500,
+      "value": "unknown"
+    }
+  ],
+  "per_card": [
+    {
+      "canonical_printing_count": 48,
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "card_name": "Brainstorm",
+      "distinct_set_count": 34,
+      "earliest_date": "1995-06-03",
+      "elapsed_days": 11234,
+      "latest_date": "2026-03-06",
+      "promoted_printing_count": 47,
+      "reprint_count_definition": 47,
+      "set_inventory": [
+        {
+          "code": "2XM",
+          "name": "Double Masters"
+        },
+        {
+          "code": "40K",
+          "name": "Warhammer 40,000 Commander"
+        },
+        {
+          "code": "5ED",
+          "name": "Fifth Edition"
+        },
+        {
+          "code": "A25",
+          "name": "Masters 25"
+        },
+        {
+          "code": "AFC",
+          "name": "Forgotten Realms Commander"
+        },
+        {
+          "code": "BTD",
+          "name": "Beatdown Box Set"
+        },
+        {
+          "code": "C15",
+          "name": "Commander 2015"
+        },
+        {
+          "code": "C18",
+          "name": "Commander 2018"
+        },
+        {
+          "code": "C21",
+          "name": "Commander 2021"
+        },
+        {
+          "code": "CMD",
+          "name": "Commander 2011"
+        },
+        {
+          "code": "CNS",
+          "name": "Conspiracy"
+        },
+        {
+          "code": "CST",
+          "name": "Coldsnap Theme Decks"
+        },
+        {
+          "code": "DDJ",
+          "name": "Duel Decks: Izzet vs. Golgari"
+        },
+        {
+          "code": "DSC",
+          "name": "Duskmourn: House of Horror Commander"
+        },
+        {
+          "code": "EMA",
+          "name": "Eternal Masters"
+        },
+        {
+          "code": "F04",
+          "name": "Friday Night Magic 2004"
+        },
+        {
+          "code": "FCA",
+          "name": "Final Fantasy: Through the Ages"
+        },
+        {
+          "code": "ICE",
+          "name": "Ice Age"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "ME2",
+          "name": "Masters Edition II"
+        },
+        {
+          "code": "MKC",
+          "name": "Murders at Karlov Manor Commander"
+        },
+        {
+          "code": "MMQ",
+          "name": "Mercadian Masques"
+        },
+        {
+          "code": "OLGC",
+          "name": "Legacy Championship"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "PZ1",
+          "name": "Legendary Cube Prize Pack"
+        },
+        {
+          "code": "PZA",
+          "name": "Teenage Mutant Ninja Turtles Source Material"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SLP",
+          "name": "Secret Lair Promo"
+        },
+        {
+          "code": "SS1",
+          "name": "Signature Spellbook: Jace"
+        },
+        {
+          "code": "STA",
+          "name": "Strixhaven Mystical Archive"
+        },
+        {
+          "code": "TLE",
+          "name": "Avatar: The Last Airbender Eternal"
+        },
+        {
+          "code": "VMA",
+          "name": "Vintage Masters"
+        },
+        {
+          "code": "WC00",
+          "name": "World Championship Decks 2000"
+        }
+      ]
+    },
+    {
+      "canonical_printing_count": 111,
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "card_name": "Command Tower",
+      "distinct_set_count": 59,
+      "earliest_date": "1995-01-01",
+      "elapsed_days": 11499,
+      "latest_date": "2026-06-26",
+      "promoted_printing_count": 110,
+      "reprint_count_definition": 110,
+      "set_inventory": [
+        {
+          "code": "40K",
+          "name": "Warhammer 40,000 Commander"
+        },
+        {
+          "code": "AFC",
+          "name": "Forgotten Realms Commander"
+        },
+        {
+          "code": "ANB",
+          "name": "Arena Beginner Set"
+        },
+        {
+          "code": "BLC",
+          "name": "Bloomburrow Commander"
+        },
+        {
+          "code": "BRC",
+          "name": "The Brothers' War Commander"
+        },
+        {
+          "code": "C13",
+          "name": "Commander 2013"
+        },
+        {
+          "code": "C15",
+          "name": "Commander 2015"
+        },
+        {
+          "code": "C16",
+          "name": "Commander 2016"
+        },
+        {
+          "code": "C17",
+          "name": "Commander 2017"
+        },
+        {
+          "code": "C18",
+          "name": "Commander 2018"
+        },
+        {
+          "code": "C19",
+          "name": "Commander 2019"
+        },
+        {
+          "code": "C20",
+          "name": "Commander 2020"
+        },
+        {
+          "code": "C21",
+          "name": "Commander 2021"
+        },
+        {
+          "code": "CC1",
+          "name": "Commander Collection: Green"
+        },
+        {
+          "code": "CC2",
+          "name": "Commander Collection: Black"
+        },
+        {
+          "code": "CLB",
+          "name": "Commander Legends: Battle for Baldur's Gate"
+        },
+        {
+          "code": "CM1",
+          "name": "Commander's Arsenal"
+        },
+        {
+          "code": "CM2",
+          "name": "Commander Anthology Volume II"
+        },
+        {
+          "code": "CMA",
+          "name": "Commander Anthology"
+        },
+        {
+          "code": "CMD",
+          "name": "Commander 2011"
+        },
+        {
+          "code": "CMM",
+          "name": "Commander Masters"
+        },
+        {
+          "code": "CMR",
+          "name": "Commander Legends"
+        },
+        {
+          "code": "DMC",
+          "name": "Dominaria United Commander"
+        },
+        {
+          "code": "DRC",
+          "name": "Aetherdrift Commander"
+        },
+        {
+          "code": "DSC",
+          "name": "Duskmourn: House of Horror Commander"
+        },
+        {
+          "code": "ECC",
+          "name": "Lorwyn Eclipsed Commander"
+        },
+        {
+          "code": "ELD",
+          "name": "Throne of Eldraine"
+        },
+        {
+          "code": "EOC",
+          "name": "Edge of Eternities Commander"
+        },
+        {
+          "code": "FDC",
+          "name": "Foundations Commander"
+        },
+        {
+          "code": "FIC",
+          "name": "Final Fantasy Commander"
+        },
+        {
+          "code": "J12",
+          "name": "Judge Gift Cards 2012"
+        },
+        {
+          "code": "KHC",
+          "name": "Kaldheim Commander"
+        },
+        {
+          "code": "LCC",
+          "name": "The Lost Caverns of Ixalan Commander"
+        },
+        {
+          "code": "LTC",
+          "name": "Tales of Middle-earth Commander"
+        },
+        {
+          "code": "M3C",
+          "name": "Modern Horizons 3 Commander"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "MIC",
+          "name": "Midnight Hunt Commander"
+        },
+        {
+          "code": "MKC",
+          "name": "Murders at Karlov Manor Commander"
+        },
+        {
+          "code": "MOC",
+          "name": "March of the Machine Commander"
+        },
+        {
+          "code": "MSC",
+          "name": "Marvel Super Heroes Commander"
+        },
+        {
+          "code": "NCC",
+          "name": "New Capenna Commander"
+        },
+        {
+          "code": "NEC",
+          "name": "Neon Dynasty Commander"
+        },
+        {
+          "code": "ONC",
+          "name": "Phyrexia: All Will Be One Commander"
+        },
+        {
+          "code": "OTC",
+          "name": "Outlaws of Thunder Junction Commander"
+        },
+        {
+          "code": "PIP",
+          "name": "Fallout"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "PMEI",
+          "name": "Media and Collaboration Promos"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "PW25",
+          "name": "Wizards Play Network 2025"
+        },
+        {
+          "code": "PZ1",
+          "name": "Legendary Cube Prize Pack"
+        },
+        {
+          "code": "SCD",
+          "name": "Starter Commander Decks"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SOC",
+          "name": "Secrets of Strixhaven Commander"
+        },
+        {
+          "code": "TDC",
+          "name": "Tarkir: Dragonstorm Commander"
+        },
+        {
+          "code": "TMC",
+          "name": "Teenage Mutant Ninja Turtles Eternal"
+        },
+        {
+          "code": "VOC",
+          "name": "Crimson Vow Commander"
+        },
+        {
+          "code": "WHO",
+          "name": "Doctor Who"
+        },
+        {
+          "code": "WOC",
+          "name": "Wilds of Eldraine Commander"
+        },
+        {
+          "code": "ZNC",
+          "name": "Zendikar Rising Commander"
+        }
+      ]
+    },
+    {
+      "canonical_printing_count": 84,
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "card_name": "Counterspell",
+      "distinct_set_count": 58,
+      "earliest_date": "1993-08-05",
+      "elapsed_days": 11837,
+      "latest_date": "2026-01-01",
+      "promoted_printing_count": 83,
+      "reprint_count_definition": 83,
+      "set_inventory": [
+        {
+          "code": "2ED",
+          "name": "Unlimited Edition"
+        },
+        {
+          "code": "30A",
+          "name": "30th Anniversary Edition"
+        },
+        {
+          "code": "3ED",
+          "name": "Revised Edition"
+        },
+        {
+          "code": "4BB",
+          "name": "Fourth Edition Foreign Black Border"
+        },
+        {
+          "code": "4ED",
+          "name": "Fourth Edition"
+        },
+        {
+          "code": "5ED",
+          "name": "Fifth Edition"
+        },
+        {
+          "code": "6ED",
+          "name": "Classic Sixth Edition"
+        },
+        {
+          "code": "7ED",
+          "name": "Seventh Edition"
+        },
+        {
+          "code": "A25",
+          "name": "Masters 25"
+        },
+        {
+          "code": "BRB",
+          "name": "Battle Royale Box Set"
+        },
+        {
+          "code": "BTD",
+          "name": "Beatdown Box Set"
+        },
+        {
+          "code": "CED",
+          "name": "Collectors' Edition"
+        },
+        {
+          "code": "CEI",
+          "name": "Intl. Collectors' Edition"
+        },
+        {
+          "code": "CMM",
+          "name": "Commander Masters"
+        },
+        {
+          "code": "CMR",
+          "name": "Commander Legends"
+        },
+        {
+          "code": "DD2",
+          "name": "Duel Decks: Jace vs. Chandra"
+        },
+        {
+          "code": "DMR",
+          "name": "Dominaria Remastered"
+        },
+        {
+          "code": "DSC",
+          "name": "Duskmourn: House of Horror Commander"
+        },
+        {
+          "code": "EMA",
+          "name": "Eternal Masters"
+        },
+        {
+          "code": "F05",
+          "name": "Friday Night Magic 2005"
+        },
+        {
+          "code": "FBB",
+          "name": "Foreign Black Border"
+        },
+        {
+          "code": "FCA",
+          "name": "Final Fantasy: Through the Ages"
+        },
+        {
+          "code": "G00",
+          "name": "Judge Gift Cards 2000"
+        },
+        {
+          "code": "GN3",
+          "name": "Game Night: Free-for-All"
+        },
+        {
+          "code": "ICE",
+          "name": "Ice Age"
+        },
+        {
+          "code": "JVC",
+          "name": "Duel Decks Anthology: Jace vs. Chandra"
+        },
+        {
+          "code": "LEA",
+          "name": "Limited Edition Alpha"
+        },
+        {
+          "code": "LEB",
+          "name": "Limited Edition Beta"
+        },
+        {
+          "code": "MAR",
+          "name": "Marvel Universe"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "ME2",
+          "name": "Masters Edition II"
+        },
+        {
+          "code": "ME4",
+          "name": "Masters Edition IV"
+        },
+        {
+          "code": "MH2",
+          "name": "Modern Horizons 2"
+        },
+        {
+          "code": "MMQ",
+          "name": "Mercadian Masques"
+        },
+        {
+          "code": "MP2",
+          "name": "Amonkhet Invocations"
+        },
+        {
+          "code": "OMB",
+          "name": "Through the Omenpaths Bonus Sheet"
+        },
+        {
+          "code": "PF24",
+          "name": "MagicFest 2024"
+        },
+        {
+          "code": "PF26",
+          "name": "MagicFest 2026"
+        },
+        {
+          "code": "PLGM",
+          "name": "DCI Legend Membership"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "PMEI",
+          "name": "Media and Collaboration Promos"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "PTC",
+          "name": "Pro Tour Collector Set"
+        },
+        {
+          "code": "PURL",
+          "name": "URL/Convention Promos"
+        },
+        {
+          "code": "S99",
+          "name": "Starter 1999"
+        },
+        {
+          "code": "SCD",
+          "name": "Starter Commander Decks"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SS1",
+          "name": "Signature Spellbook: Jace"
+        },
+        {
+          "code": "STA",
+          "name": "Strixhaven Mystical Archive"
+        },
+        {
+          "code": "SUM",
+          "name": "Summer Magic / Edgar"
+        },
+        {
+          "code": "TMP",
+          "name": "Tempest"
+        },
+        {
+          "code": "TPR",
+          "name": "Tempest Remastered"
+        },
+        {
+          "code": "VMA",
+          "name": "Vintage Masters"
+        },
+        {
+          "code": "WC00",
+          "name": "World Championship Decks 2000"
+        },
+        {
+          "code": "WC01",
+          "name": "World Championship Decks 2001"
+        },
+        {
+          "code": "WC02",
+          "name": "World Championship Decks 2002"
+        },
+        {
+          "code": "WC97",
+          "name": "World Championship Decks 1997"
+        },
+        {
+          "code": "WC98",
+          "name": "World Championship Decks 1998"
+        }
+      ]
+    },
+    {
+      "canonical_printing_count": 9,
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "card_name": "Goblin Charbelcher",
+      "distinct_set_count": 7,
+      "earliest_date": "2003-10-02",
+      "elapsed_days": 7610,
+      "latest_date": "2024-08-02",
+      "promoted_printing_count": 8,
+      "reprint_count_definition": 8,
+      "set_inventory": [
+        {
+          "code": "BRR",
+          "name": "The Brothers' War Retro Artifacts"
+        },
+        {
+          "code": "DDT",
+          "name": "Duel Decks: Merfolk vs. Goblins"
+        },
+        {
+          "code": "EMA",
+          "name": "Eternal Masters"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "MRD",
+          "name": "Mirrodin"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "WC04",
+          "name": "World Championship Decks 2004"
+        }
+      ]
+    },
+    {
+      "canonical_printing_count": 27,
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "card_name": "Goblin King",
+      "distinct_set_count": 21,
+      "earliest_date": "1993-08-05",
+      "elapsed_days": 11320,
+      "latest_date": "2024-08-02",
+      "promoted_printing_count": 26,
+      "reprint_count_definition": 26,
+      "set_inventory": [
+        {
+          "code": "10E",
+          "name": "Tenth Edition"
+        },
+        {
+          "code": "2ED",
+          "name": "Unlimited Edition"
+        },
+        {
+          "code": "30A",
+          "name": "30th Anniversary Edition"
+        },
+        {
+          "code": "3ED",
+          "name": "Revised Edition"
+        },
+        {
+          "code": "4BB",
+          "name": "Fourth Edition Foreign Black Border"
+        },
+        {
+          "code": "4ED",
+          "name": "Fourth Edition"
+        },
+        {
+          "code": "5ED",
+          "name": "Fifth Edition"
+        },
+        {
+          "code": "6ED",
+          "name": "Classic Sixth Edition"
+        },
+        {
+          "code": "7ED",
+          "name": "Seventh Edition"
+        },
+        {
+          "code": "8ED",
+          "name": "Eighth Edition"
+        },
+        {
+          "code": "9ED",
+          "name": "Ninth Edition"
+        },
+        {
+          "code": "ATH",
+          "name": "Anthologies"
+        },
+        {
+          "code": "CED",
+          "name": "Collectors' Edition"
+        },
+        {
+          "code": "CEI",
+          "name": "Intl. Collectors' Edition"
+        },
+        {
+          "code": "FBB",
+          "name": "Foreign Black Border"
+        },
+        {
+          "code": "LEA",
+          "name": "Limited Edition Alpha"
+        },
+        {
+          "code": "LEB",
+          "name": "Limited Edition Beta"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "PW24",
+          "name": "Wizards Play Network 2024"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SUM",
+          "name": "Summer Magic / Edgar"
+        }
+      ]
+    },
+    {
+      "canonical_printing_count": 136,
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "card_name": "Sol Ring",
+      "distinct_set_count": 73,
+      "earliest_date": "1993-08-05",
+      "elapsed_days": 12013,
+      "latest_date": "2026-06-26",
+      "promoted_printing_count": 135,
+      "reprint_count_definition": 135,
+      "set_inventory": [
+        {
+          "code": "2ED",
+          "name": "Unlimited Edition"
+        },
+        {
+          "code": "30A",
+          "name": "30th Anniversary Edition"
+        },
+        {
+          "code": "3ED",
+          "name": "Revised Edition"
+        },
+        {
+          "code": "40K",
+          "name": "Warhammer 40,000 Commander"
+        },
+        {
+          "code": "AFC",
+          "name": "Forgotten Realms Commander"
+        },
+        {
+          "code": "BLC",
+          "name": "Bloomburrow Commander"
+        },
+        {
+          "code": "BRC",
+          "name": "The Brothers' War Commander"
+        },
+        {
+          "code": "C13",
+          "name": "Commander 2013"
+        },
+        {
+          "code": "C14",
+          "name": "Commander 2014"
+        },
+        {
+          "code": "C15",
+          "name": "Commander 2015"
+        },
+        {
+          "code": "C16",
+          "name": "Commander 2016"
+        },
+        {
+          "code": "C17",
+          "name": "Commander 2017"
+        },
+        {
+          "code": "C18",
+          "name": "Commander 2018"
+        },
+        {
+          "code": "C19",
+          "name": "Commander 2019"
+        },
+        {
+          "code": "C20",
+          "name": "Commander 2020"
+        },
+        {
+          "code": "C21",
+          "name": "Commander 2021"
+        },
+        {
+          "code": "CC1",
+          "name": "Commander Collection: Green"
+        },
+        {
+          "code": "CC2",
+          "name": "Commander Collection: Black"
+        },
+        {
+          "code": "CED",
+          "name": "Collectors' Edition"
+        },
+        {
+          "code": "CEI",
+          "name": "Intl. Collectors' Edition"
+        },
+        {
+          "code": "CLB",
+          "name": "Commander Legends: Battle for Baldur's Gate"
+        },
+        {
+          "code": "CM2",
+          "name": "Commander Anthology Volume II"
+        },
+        {
+          "code": "CMA",
+          "name": "Commander Anthology"
+        },
+        {
+          "code": "CMD",
+          "name": "Commander 2011"
+        },
+        {
+          "code": "CMM",
+          "name": "Commander Masters"
+        },
+        {
+          "code": "CMR",
+          "name": "Commander Legends"
+        },
+        {
+          "code": "DMC",
+          "name": "Dominaria United Commander"
+        },
+        {
+          "code": "DRC",
+          "name": "Aetherdrift Commander"
+        },
+        {
+          "code": "DSC",
+          "name": "Duskmourn: House of Horror Commander"
+        },
+        {
+          "code": "ECC",
+          "name": "Lorwyn Eclipsed Commander"
+        },
+        {
+          "code": "EOC",
+          "name": "Edge of Eternities Commander"
+        },
+        {
+          "code": "FBB",
+          "name": "Foreign Black Border"
+        },
+        {
+          "code": "FDC",
+          "name": "Foundations Commander"
+        },
+        {
+          "code": "FIC",
+          "name": "Final Fantasy Commander"
+        },
+        {
+          "code": "G05",
+          "name": "Judge Gift Cards 2005"
+        },
+        {
+          "code": "KHC",
+          "name": "Kaldheim Commander"
+        },
+        {
+          "code": "LCC",
+          "name": "The Lost Caverns of Ixalan Commander"
+        },
+        {
+          "code": "LEA",
+          "name": "Limited Edition Alpha"
+        },
+        {
+          "code": "LEB",
+          "name": "Limited Edition Beta"
+        },
+        {
+          "code": "LTC",
+          "name": "Tales of Middle-earth Commander"
+        },
+        {
+          "code": "M3C",
+          "name": "Modern Horizons 3 Commander"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "ME4",
+          "name": "Masters Edition IV"
+        },
+        {
+          "code": "MIC",
+          "name": "Midnight Hunt Commander"
+        },
+        {
+          "code": "MKC",
+          "name": "Murders at Karlov Manor Commander"
+        },
+        {
+          "code": "MOC",
+          "name": "March of the Machine Commander"
+        },
+        {
+          "code": "MPS",
+          "name": "Kaladesh Inventions"
+        },
+        {
+          "code": "MSC",
+          "name": "Marvel Super Heroes Commander"
+        },
+        {
+          "code": "NCC",
+          "name": "New Capenna Commander"
+        },
+        {
+          "code": "NEC",
+          "name": "Neon Dynasty Commander"
+        },
+        {
+          "code": "ONC",
+          "name": "Phyrexia: All Will Be One Commander"
+        },
+        {
+          "code": "OTC",
+          "name": "Outlaws of Thunder Junction Commander"
+        },
+        {
+          "code": "PF19",
+          "name": "MagicFest 2019"
+        },
+        {
+          "code": "PFDN",
+          "name": "Foundations Promos"
+        },
+        {
+          "code": "PIP",
+          "name": "Fallout"
+        },
+        {
+          "code": "PLG22",
+          "name": "Love Your LGS 2022"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "PZ1",
+          "name": "Legendary Cube Prize Pack"
+        },
+        {
+          "code": "SCD",
+          "name": "Starter Commander Decks"
+        },
+        {
+          "code": "SLC",
+          "name": "Secret Lair Countdown"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SOC",
+          "name": "Secrets of Strixhaven Commander"
+        },
+        {
+          "code": "SUM",
+          "name": "Summer Magic / Edgar"
+        },
+        {
+          "code": "TDC",
+          "name": "Tarkir: Dragonstorm Commander"
+        },
+        {
+          "code": "TLE",
+          "name": "Avatar: The Last Airbender Eternal"
+        },
+        {
+          "code": "TMC",
+          "name": "Teenage Mutant Ninja Turtles Eternal"
+        },
+        {
+          "code": "V10",
+          "name": "From the Vault: Relics"
+        },
+        {
+          "code": "VMA",
+          "name": "Vintage Masters"
+        },
+        {
+          "code": "VOC",
+          "name": "Crimson Vow Commander"
+        },
+        {
+          "code": "WHO",
+          "name": "Doctor Who"
+        },
+        {
+          "code": "WOC",
+          "name": "Wilds of Eldraine Commander"
+        },
+        {
+          "code": "ZNC",
+          "name": "Zendikar Rising Commander"
+        }
+      ]
+    },
+    {
+      "canonical_printing_count": 97,
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "card_name": "Swords to Plowshares",
+      "distinct_set_count": 72,
+      "earliest_date": "1993-08-05",
+      "elapsed_days": 12013,
+      "latest_date": "2026-06-26",
+      "promoted_printing_count": 96,
+      "reprint_count_definition": 96,
+      "set_inventory": [
+        {
+          "code": "2ED",
+          "name": "Unlimited Edition"
+        },
+        {
+          "code": "30A",
+          "name": "30th Anniversary Edition"
+        },
+        {
+          "code": "3ED",
+          "name": "Revised Edition"
+        },
+        {
+          "code": "40K",
+          "name": "Warhammer 40,000 Commander"
+        },
+        {
+          "code": "4BB",
+          "name": "Fourth Edition Foreign Black Border"
+        },
+        {
+          "code": "4ED",
+          "name": "Fourth Edition"
+        },
+        {
+          "code": "A25",
+          "name": "Masters 25"
+        },
+        {
+          "code": "AFC",
+          "name": "Forgotten Realms Commander"
+        },
+        {
+          "code": "ATH",
+          "name": "Anthologies"
+        },
+        {
+          "code": "BBD",
+          "name": "Battlebond"
+        },
+        {
+          "code": "BLC",
+          "name": "Bloomburrow Commander"
+        },
+        {
+          "code": "BRB",
+          "name": "Battle Royale Box Set"
+        },
+        {
+          "code": "BRC",
+          "name": "The Brothers' War Commander"
+        },
+        {
+          "code": "C16",
+          "name": "Commander 2016"
+        },
+        {
+          "code": "C17",
+          "name": "Commander 2017"
+        },
+        {
+          "code": "CED",
+          "name": "Collectors' Edition"
+        },
+        {
+          "code": "CEI",
+          "name": "Intl. Collectors' Edition"
+        },
+        {
+          "code": "CMM",
+          "name": "Commander Masters"
+        },
+        {
+          "code": "CMR",
+          "name": "Commander Legends"
+        },
+        {
+          "code": "CNS",
+          "name": "Conspiracy"
+        },
+        {
+          "code": "CST",
+          "name": "Coldsnap Theme Decks"
+        },
+        {
+          "code": "DDF",
+          "name": "Duel Decks: Elspeth vs. Tezzeret"
+        },
+        {
+          "code": "DMR",
+          "name": "Dominaria Remastered"
+        },
+        {
+          "code": "DRC",
+          "name": "Aetherdrift Commander"
+        },
+        {
+          "code": "DSC",
+          "name": "Duskmourn: House of Horror Commander"
+        },
+        {
+          "code": "EMA",
+          "name": "Eternal Masters"
+        },
+        {
+          "code": "EOC",
+          "name": "Edge of Eternities Commander"
+        },
+        {
+          "code": "F01",
+          "name": "Friday Night Magic 2001"
+        },
+        {
+          "code": "FBB",
+          "name": "Foreign Black Border"
+        },
+        {
+          "code": "FIC",
+          "name": "Final Fantasy Commander"
+        },
+        {
+          "code": "GN3",
+          "name": "Game Night: Free-for-All"
+        },
+        {
+          "code": "ICE",
+          "name": "Ice Age"
+        },
+        {
+          "code": "IMA",
+          "name": "Iconic Masters"
+        },
+        {
+          "code": "J13",
+          "name": "Judge Gift Cards 2013"
+        },
+        {
+          "code": "J21",
+          "name": "Jumpstart: Historic Horizons"
+        },
+        {
+          "code": "LCC",
+          "name": "The Lost Caverns of Ixalan Commander"
+        },
+        {
+          "code": "LEA",
+          "name": "Limited Edition Alpha"
+        },
+        {
+          "code": "LEB",
+          "name": "Limited Edition Beta"
+        },
+        {
+          "code": "LTC",
+          "name": "Tales of Middle-earth Commander"
+        },
+        {
+          "code": "M3C",
+          "name": "Modern Horizons 3 Commander"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "ME2",
+          "name": "Masters Edition II"
+        },
+        {
+          "code": "ME4",
+          "name": "Masters Edition IV"
+        },
+        {
+          "code": "MIC",
+          "name": "Midnight Hunt Commander"
+        },
+        {
+          "code": "MKC",
+          "name": "Murders at Karlov Manor Commander"
+        },
+        {
+          "code": "MOC",
+          "name": "March of the Machine Commander"
+        },
+        {
+          "code": "MSC",
+          "name": "Marvel Super Heroes Commander"
+        },
+        {
+          "code": "NCC",
+          "name": "New Capenna Commander"
+        },
+        {
+          "code": "NEC",
+          "name": "Neon Dynasty Commander"
+        },
+        {
+          "code": "OLEP",
+          "name": "Oversized League Prizes"
+        },
+        {
+          "code": "ONC",
+          "name": "Phyrexia: All Will Be One Commander"
+        },
+        {
+          "code": "PF25",
+          "name": "MagicFest 2025"
+        },
+        {
+          "code": "PIP",
+          "name": "Fallout"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "PMEI",
+          "name": "Media and Collaboration Promos"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "PTC",
+          "name": "Pro Tour Collector Set"
+        },
+        {
+          "code": "SCD",
+          "name": "Starter Commander Decks"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SLP",
+          "name": "Secret Lair Promo"
+        },
+        {
+          "code": "SOC",
+          "name": "Secrets of Strixhaven Commander"
+        },
+        {
+          "code": "SPG",
+          "name": "Special Guests"
+        },
+        {
+          "code": "STA",
+          "name": "Strixhaven Mystical Archive"
+        },
+        {
+          "code": "SUM",
+          "name": "Summer Magic / Edgar"
+        },
+        {
+          "code": "TD0",
+          "name": "Magic Online Theme Decks"
+        },
+        {
+          "code": "TDC",
+          "name": "Tarkir: Dragonstorm Commander"
+        },
+        {
+          "code": "V13",
+          "name": "From the Vault: Twenty"
+        },
+        {
+          "code": "VMA",
+          "name": "Vintage Masters"
+        },
+        {
+          "code": "VOC",
+          "name": "Crimson Vow Commander"
+        },
+        {
+          "code": "WC97",
+          "name": "World Championship Decks 1997"
+        },
+        {
+          "code": "WHO",
+          "name": "Doctor Who"
+        },
+        {
+          "code": "WOC",
+          "name": "Wilds of Eldraine Commander"
+        }
+      ]
+    },
+    {
+      "canonical_printing_count": 15,
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "card_name": "Treasure Cruise",
+      "distinct_set_count": 15,
+      "earliest_date": "2014-09-26",
+      "elapsed_days": 4228,
+      "latest_date": "2026-04-24",
+      "promoted_printing_count": 14,
+      "reprint_count_definition": 14,
+      "set_inventory": [
+        {
+          "code": "C16",
+          "name": "Commander 2016"
+        },
+        {
+          "code": "C21",
+          "name": "Commander 2021"
+        },
+        {
+          "code": "CM2",
+          "name": "Commander Anthology Volume II"
+        },
+        {
+          "code": "KTK",
+          "name": "Khans of Tarkir"
+        },
+        {
+          "code": "M3C",
+          "name": "Modern Horizons 3 Commander"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "NCC",
+          "name": "New Capenna Commander"
+        },
+        {
+          "code": "OTC",
+          "name": "Outlaws of Thunder Junction Commander"
+        },
+        {
+          "code": "PEWK",
+          "name": "Eternal Weekend"
+        },
+        {
+          "code": "PIO",
+          "name": "Pioneer Masters"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "SOC",
+          "name": "Secrets of Strixhaven Commander"
+        },
+        {
+          "code": "TDC",
+          "name": "Tarkir: Dragonstorm Commander"
+        },
+        {
+          "code": "TSR",
+          "name": "Time Spiral Remastered"
+        },
+        {
+          "code": "UMA",
+          "name": "Ultimate Masters"
+        }
+      ]
+    },
+    {
+      "canonical_printing_count": 11,
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "card_name": "Walking Ballista",
+      "distinct_set_count": 9,
+      "earliest_date": "2002-06-24",
+      "elapsed_days": 8390,
+      "latest_date": "2025-06-13",
+      "promoted_printing_count": 10,
+      "reprint_count_definition": 10,
+      "set_inventory": [
+        {
+          "code": "2XM",
+          "name": "Double Masters"
+        },
+        {
+          "code": "AER",
+          "name": "Aether Revolt"
+        },
+        {
+          "code": "FIC",
+          "name": "Final Fantasy Commander"
+        },
+        {
+          "code": "J22",
+          "name": "Jumpstart 2022"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "PAER",
+          "name": "Aether Revolt Promos"
+        },
+        {
+          "code": "PIP",
+          "name": "Fallout"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        }
+      ]
+    },
+    {
+      "canonical_printing_count": 6,
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "card_name": "Wishclaw Talisman",
+      "distinct_set_count": 4,
+      "earliest_date": "2019-10-04",
+      "elapsed_days": 1869,
+      "latest_date": "2024-11-15",
+      "promoted_printing_count": 5,
+      "reprint_count_definition": 5,
+      "set_inventory": [
+        {
+          "code": "ELD",
+          "name": "Throne of Eldraine"
+        },
+        {
+          "code": "FDN",
+          "name": "Foundations"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "PELD",
+          "name": "Throne of Eldraine Promos"
+        }
+      ]
+    }
+  ],
+  "pilot_card_count": 10,
+  "pilot_card_scope": [
+    "Brainstorm",
+    "Command Tower",
+    "Counterspell",
+    "Goblin Charbelcher",
+    "Goblin King",
+    "Sol Ring",
+    "Swords to Plowshares",
+    "Treasure Cruise",
+    "Walking Ballista",
+    "Wishclaw Talisman"
+  ],
+  "promoted_printing_scope": 534,
+  "promotion_audit_identity": "phase-136-mtgjson-pilot-30786023976-1",
+  "promotion_performed": false,
+  "promotional_state_census": [
+    {
+      "printing_count": 47,
+      "value": "true"
+    },
+    {
+      "printing_count": 487,
+      "value": "unknown"
+    }
+  ],
+  "protected_boundaries": {
+    "market_observation_count": 478,
+    "market_observations_tree_sha256": "7ecc2c6064856e4921802813e186d34ccafb0ca6daf6a59b0b6c1dd11ad999f8",
+    "phase135_evidence_tree_sha256": "9057e7761e134d0983f13f26d7840769ebbbf739816d9b2f1221d8a9f2896504",
+    "prior_fact_files_sha256": "dd352a9790d77ddcdb110bef6c5f0a4fc43b707e29d1458089fb1c3ac30bc5e4"
+  },
+  "provider_completeness": {
+    "global_state": "incomplete_global_printing_history",
+    "state": "bounded_complete_for_retained_phase_135_projection",
+    "unknown_semantics": "provider_field_unknown",
+    "unsupported_semantics": "provider_field_unsupported"
+  },
+  "reprint_state_census": [
+    {
+      "printing_count": 523,
+      "value": "true"
+    },
+    {
+      "printing_count": 11,
+      "value": "unknown"
+    }
+  ],
+  "schema_version": "phase-137-printing-history-audit-v1",
+  "set_inventory": [
+    {
+      "code": "10E",
+      "name": "Tenth Edition"
+    },
+    {
+      "code": "2ED",
+      "name": "Unlimited Edition"
+    },
+    {
+      "code": "2XM",
+      "name": "Double Masters"
+    },
+    {
+      "code": "30A",
+      "name": "30th Anniversary Edition"
+    },
+    {
+      "code": "3ED",
+      "name": "Revised Edition"
+    },
+    {
+      "code": "40K",
+      "name": "Warhammer 40,000 Commander"
+    },
+    {
+      "code": "4BB",
+      "name": "Fourth Edition Foreign Black Border"
+    },
+    {
+      "code": "4ED",
+      "name": "Fourth Edition"
+    },
+    {
+      "code": "5ED",
+      "name": "Fifth Edition"
+    },
+    {
+      "code": "6ED",
+      "name": "Classic Sixth Edition"
+    },
+    {
+      "code": "7ED",
+      "name": "Seventh Edition"
+    },
+    {
+      "code": "8ED",
+      "name": "Eighth Edition"
+    },
+    {
+      "code": "9ED",
+      "name": "Ninth Edition"
+    },
+    {
+      "code": "A25",
+      "name": "Masters 25"
+    },
+    {
+      "code": "AER",
+      "name": "Aether Revolt"
+    },
+    {
+      "code": "AFC",
+      "name": "Forgotten Realms Commander"
+    },
+    {
+      "code": "ANB",
+      "name": "Arena Beginner Set"
+    },
+    {
+      "code": "ATH",
+      "name": "Anthologies"
+    },
+    {
+      "code": "BBD",
+      "name": "Battlebond"
+    },
+    {
+      "code": "BLC",
+      "name": "Bloomburrow Commander"
+    },
+    {
+      "code": "BRB",
+      "name": "Battle Royale Box Set"
+    },
+    {
+      "code": "BRC",
+      "name": "The Brothers' War Commander"
+    },
+    {
+      "code": "BRR",
+      "name": "The Brothers' War Retro Artifacts"
+    },
+    {
+      "code": "BTD",
+      "name": "Beatdown Box Set"
+    },
+    {
+      "code": "C13",
+      "name": "Commander 2013"
+    },
+    {
+      "code": "C14",
+      "name": "Commander 2014"
+    },
+    {
+      "code": "C15",
+      "name": "Commander 2015"
+    },
+    {
+      "code": "C16",
+      "name": "Commander 2016"
+    },
+    {
+      "code": "C17",
+      "name": "Commander 2017"
+    },
+    {
+      "code": "C18",
+      "name": "Commander 2018"
+    },
+    {
+      "code": "C19",
+      "name": "Commander 2019"
+    },
+    {
+      "code": "C20",
+      "name": "Commander 2020"
+    },
+    {
+      "code": "C21",
+      "name": "Commander 2021"
+    },
+    {
+      "code": "CC1",
+      "name": "Commander Collection: Green"
+    },
+    {
+      "code": "CC2",
+      "name": "Commander Collection: Black"
+    },
+    {
+      "code": "CED",
+      "name": "Collectors' Edition"
+    },
+    {
+      "code": "CEI",
+      "name": "Intl. Collectors' Edition"
+    },
+    {
+      "code": "CLB",
+      "name": "Commander Legends: Battle for Baldur's Gate"
+    },
+    {
+      "code": "CM1",
+      "name": "Commander's Arsenal"
+    },
+    {
+      "code": "CM2",
+      "name": "Commander Anthology Volume II"
+    },
+    {
+      "code": "CMA",
+      "name": "Commander Anthology"
+    },
+    {
+      "code": "CMD",
+      "name": "Commander 2011"
+    },
+    {
+      "code": "CMM",
+      "name": "Commander Masters"
+    },
+    {
+      "code": "CMR",
+      "name": "Commander Legends"
+    },
+    {
+      "code": "CNS",
+      "name": "Conspiracy"
+    },
+    {
+      "code": "CST",
+      "name": "Coldsnap Theme Decks"
+    },
+    {
+      "code": "DD2",
+      "name": "Duel Decks: Jace vs. Chandra"
+    },
+    {
+      "code": "DDF",
+      "name": "Duel Decks: Elspeth vs. Tezzeret"
+    },
+    {
+      "code": "DDJ",
+      "name": "Duel Decks: Izzet vs. Golgari"
+    },
+    {
+      "code": "DDT",
+      "name": "Duel Decks: Merfolk vs. Goblins"
+    },
+    {
+      "code": "DMC",
+      "name": "Dominaria United Commander"
+    },
+    {
+      "code": "DMR",
+      "name": "Dominaria Remastered"
+    },
+    {
+      "code": "DRC",
+      "name": "Aetherdrift Commander"
+    },
+    {
+      "code": "DSC",
+      "name": "Duskmourn: House of Horror Commander"
+    },
+    {
+      "code": "ECC",
+      "name": "Lorwyn Eclipsed Commander"
+    },
+    {
+      "code": "ELD",
+      "name": "Throne of Eldraine"
+    },
+    {
+      "code": "EMA",
+      "name": "Eternal Masters"
+    },
+    {
+      "code": "EOC",
+      "name": "Edge of Eternities Commander"
+    },
+    {
+      "code": "F01",
+      "name": "Friday Night Magic 2001"
+    },
+    {
+      "code": "F04",
+      "name": "Friday Night Magic 2004"
+    },
+    {
+      "code": "F05",
+      "name": "Friday Night Magic 2005"
+    },
+    {
+      "code": "FBB",
+      "name": "Foreign Black Border"
+    },
+    {
+      "code": "FCA",
+      "name": "Final Fantasy: Through the Ages"
+    },
+    {
+      "code": "FDC",
+      "name": "Foundations Commander"
+    },
+    {
+      "code": "FDN",
+      "name": "Foundations"
+    },
+    {
+      "code": "FIC",
+      "name": "Final Fantasy Commander"
+    },
+    {
+      "code": "G00",
+      "name": "Judge Gift Cards 2000"
+    },
+    {
+      "code": "G05",
+      "name": "Judge Gift Cards 2005"
+    },
+    {
+      "code": "GN3",
+      "name": "Game Night: Free-for-All"
+    },
+    {
+      "code": "ICE",
+      "name": "Ice Age"
+    },
+    {
+      "code": "IMA",
+      "name": "Iconic Masters"
+    },
+    {
+      "code": "J12",
+      "name": "Judge Gift Cards 2012"
+    },
+    {
+      "code": "J13",
+      "name": "Judge Gift Cards 2013"
+    },
+    {
+      "code": "J21",
+      "name": "Jumpstart: Historic Horizons"
+    },
+    {
+      "code": "J22",
+      "name": "Jumpstart 2022"
+    },
+    {
+      "code": "JVC",
+      "name": "Duel Decks Anthology: Jace vs. Chandra"
+    },
+    {
+      "code": "KHC",
+      "name": "Kaldheim Commander"
+    },
+    {
+      "code": "KTK",
+      "name": "Khans of Tarkir"
+    },
+    {
+      "code": "LCC",
+      "name": "The Lost Caverns of Ixalan Commander"
+    },
+    {
+      "code": "LEA",
+      "name": "Limited Edition Alpha"
+    },
+    {
+      "code": "LEB",
+      "name": "Limited Edition Beta"
+    },
+    {
+      "code": "LTC",
+      "name": "Tales of Middle-earth Commander"
+    },
+    {
+      "code": "M3C",
+      "name": "Modern Horizons 3 Commander"
+    },
+    {
+      "code": "MAR",
+      "name": "Marvel Universe"
+    },
+    {
+      "code": "ME2",
+      "name": "Masters Edition II"
+    },
+    {
+      "code": "ME4",
+      "name": "Masters Edition IV"
+    },
+    {
+      "code": "MH2",
+      "name": "Modern Horizons 2"
+    },
+    {
+      "code": "MIC",
+      "name": "Midnight Hunt Commander"
+    },
+    {
+      "code": "MKC",
+      "name": "Murders at Karlov Manor Commander"
+    },
+    {
+      "code": "MMQ",
+      "name": "Mercadian Masques"
+    },
+    {
+      "code": "MOC",
+      "name": "March of the Machine Commander"
+    },
+    {
+      "code": "MP2",
+      "name": "Amonkhet Invocations"
+    },
+    {
+      "code": "MPS",
+      "name": "Kaladesh Inventions"
+    },
+    {
+      "code": "MRD",
+      "name": "Mirrodin"
+    },
+    {
+      "code": "MSC",
+      "name": "Marvel Super Heroes Commander"
+    },
+    {
+      "code": "NCC",
+      "name": "New Capenna Commander"
+    },
+    {
+      "code": "NEC",
+      "name": "Neon Dynasty Commander"
+    },
+    {
+      "code": "OLEP",
+      "name": "Oversized League Prizes"
+    },
+    {
+      "code": "OLGC",
+      "name": "Legacy Championship"
+    },
+    {
+      "code": "OMB",
+      "name": "Through the Omenpaths Bonus Sheet"
+    },
+    {
+      "code": "ONC",
+      "name": "Phyrexia: All Will Be One Commander"
+    },
+    {
+      "code": "OTC",
+      "name": "Outlaws of Thunder Junction Commander"
+    },
+    {
+      "code": "PAER",
+      "name": "Aether Revolt Promos"
+    },
+    {
+      "code": "PELD",
+      "name": "Throne of Eldraine Promos"
+    },
+    {
+      "code": "PEWK",
+      "name": "Eternal Weekend"
+    },
+    {
+      "code": "PF19",
+      "name": "MagicFest 2019"
+    },
+    {
+      "code": "PF24",
+      "name": "MagicFest 2024"
+    },
+    {
+      "code": "PF25",
+      "name": "MagicFest 2025"
+    },
+    {
+      "code": "PF26",
+      "name": "MagicFest 2026"
+    },
+    {
+      "code": "PFDN",
+      "name": "Foundations Promos"
+    },
+    {
+      "code": "PIO",
+      "name": "Pioneer Masters"
+    },
+    {
+      "code": "PIP",
+      "name": "Fallout"
+    },
+    {
+      "code": "PLG22",
+      "name": "Love Your LGS 2022"
+    },
+    {
+      "code": "PLGM",
+      "name": "DCI Legend Membership"
+    },
+    {
+      "code": "PLST",
+      "name": "The List"
+    },
+    {
+      "code": "PMEI",
+      "name": "Media and Collaboration Promos"
+    },
+    {
+      "code": "PRM",
+      "name": "Magic Online Promos"
+    },
+    {
+      "code": "PTC",
+      "name": "Pro Tour Collector Set"
+    },
+    {
+      "code": "PURL",
+      "name": "URL/Convention Promos"
+    },
+    {
+      "code": "PW24",
+      "name": "Wizards Play Network 2024"
+    },
+    {
+      "code": "PW25",
+      "name": "Wizards Play Network 2025"
+    },
+    {
+      "code": "PZ1",
+      "name": "Legendary Cube Prize Pack"
+    },
+    {
+      "code": "PZA",
+      "name": "Teenage Mutant Ninja Turtles Source Material"
+    },
+    {
+      "code": "S99",
+      "name": "Starter 1999"
+    },
+    {
+      "code": "SCD",
+      "name": "Starter Commander Decks"
+    },
+    {
+      "code": "SLC",
+      "name": "Secret Lair Countdown"
+    },
+    {
+      "code": "SLD",
+      "name": "Secret Lair Drop"
+    },
+    {
+      "code": "SLP",
+      "name": "Secret Lair Promo"
+    },
+    {
+      "code": "SOC",
+      "name": "Secrets of Strixhaven Commander"
+    },
+    {
+      "code": "SPG",
+      "name": "Special Guests"
+    },
+    {
+      "code": "SS1",
+      "name": "Signature Spellbook: Jace"
+    },
+    {
+      "code": "STA",
+      "name": "Strixhaven Mystical Archive"
+    },
+    {
+      "code": "SUM",
+      "name": "Summer Magic / Edgar"
+    },
+    {
+      "code": "TD0",
+      "name": "Magic Online Theme Decks"
+    },
+    {
+      "code": "TDC",
+      "name": "Tarkir: Dragonstorm Commander"
+    },
+    {
+      "code": "TLE",
+      "name": "Avatar: The Last Airbender Eternal"
+    },
+    {
+      "code": "TMC",
+      "name": "Teenage Mutant Ninja Turtles Eternal"
+    },
+    {
+      "code": "TMP",
+      "name": "Tempest"
+    },
+    {
+      "code": "TPR",
+      "name": "Tempest Remastered"
+    },
+    {
+      "code": "TSR",
+      "name": "Time Spiral Remastered"
+    },
+    {
+      "code": "UMA",
+      "name": "Ultimate Masters"
+    },
+    {
+      "code": "V10",
+      "name": "From the Vault: Relics"
+    },
+    {
+      "code": "V13",
+      "name": "From the Vault: Twenty"
+    },
+    {
+      "code": "VMA",
+      "name": "Vintage Masters"
+    },
+    {
+      "code": "VOC",
+      "name": "Crimson Vow Commander"
+    },
+    {
+      "code": "WC00",
+      "name": "World Championship Decks 2000"
+    },
+    {
+      "code": "WC01",
+      "name": "World Championship Decks 2001"
+    },
+    {
+      "code": "WC02",
+      "name": "World Championship Decks 2002"
+    },
+    {
+      "code": "WC04",
+      "name": "World Championship Decks 2004"
+    },
+    {
+      "code": "WC97",
+      "name": "World Championship Decks 1997"
+    },
+    {
+      "code": "WC98",
+      "name": "World Championship Decks 1998"
+    },
+    {
+      "code": "WHO",
+      "name": "Doctor Who"
+    },
+    {
+      "code": "WOC",
+      "name": "Wilds of Eldraine Commander"
+    },
+    {
+      "code": "ZNC",
+      "name": "Zendikar Rising Commander"
+    }
+  ],
+  "supersession_chain_reconciliation": [
+    {
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "card_name": "Brainstorm",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    },
+    {
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "card_name": "Command Tower",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "card_name": "Counterspell",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    },
+    {
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "card_name": "Goblin Charbelcher",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    },
+    {
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "card_name": "Goblin King",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "card_name": "Sol Ring",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "card_name": "Swords to Plowshares",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "card_name": "Treasure Cruise",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    },
+    {
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "card_name": "Walking Ballista",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "card_name": "Wishclaw Talisman",
+      "phases": [
+        "phase132",
+        "phase133",
+        "phase136"
+      ],
+      "result": "matched"
+    }
+  ],
+  "treatment_census": [
+    {
+      "printing_count": 51,
+      "value": "1993"
+    },
+    {
+      "printing_count": 66,
+      "value": "1997"
+    },
+    {
+      "printing_count": 36,
+      "value": "2003"
+    },
+    {
+      "printing_count": 381,
+      "value": "2015"
+    }
+  ]
+}
