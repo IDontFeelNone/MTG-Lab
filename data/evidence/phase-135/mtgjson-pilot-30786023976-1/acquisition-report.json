@@ -1,0 +1,14 @@
+{
+  "canonical_write": false,
+  "facts_created": false,
+  "manifest_sha256": "c082e8338b4e5c940d713c6d7ef620049bc587a67ef1f475edf552e5a28bdae4",
+  "market_write": false,
+  "promotion_performed": false,
+  "retained_file_inventory": [
+    "acquisition-report.json",
+    "manifest.json",
+    "source-pilot-printings.json"
+  ],
+  "schema_version": "mtgjson-pilot-printing-retention-v1",
+  "status": "retained"
+}
