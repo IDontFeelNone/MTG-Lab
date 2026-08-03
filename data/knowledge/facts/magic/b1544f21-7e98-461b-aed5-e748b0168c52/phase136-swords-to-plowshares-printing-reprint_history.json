@@ -1,0 +1,471 @@
+{
+  "confidence": null,
+  "effective_at": "2026-06-26T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Retained Phase 135 evidence supplies 96 supported non-MB2 Printing records for Swords to Plowshares.",
+      "observed_at": "2026-08-03T05:05:31Z",
+      "reference": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/source-pilot-printings.json#card_id=b1544f21-7e98-461b-aed5-e748b0168c52;normalized_sha256=493df83312c8d9271e84a143ed288767d7fbf53d7b4a23bfc2f72af514bc67e6",
+      "source_id": "mtgjson-pilot-30786023976-1",
+      "source_type": "retained_acquisition"
+    },
+    {
+      "claim": "Post-promotion canonical snapshot contains 97 bounded Printings for Swords to Plowshares.",
+      "observed_at": "2026-08-05T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077;card=b1544f21-7e98-461b-aed5-e748b0168c52;printings=97",
+      "source_id": "phase-136-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase136-swords-to-plowshares-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-05T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase133-swords-to-plowshares-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "008f142f-f9c0-507b-802f-5f2d4b715cad",
+        "0590be09-b330-5ebe-b4bb-4fa5d2b3906d",
+        "062d75ae-db25-5b08-8d77-07d34da02ea6",
+        "0751a35f-1f8a-5767-aff1-fe0c5a779ee0",
+        "0a7e5a59-bd85-5d4f-917d-f0e3a68d9192",
+        "0ae2f7d8-e043-54ea-98cc-70d5463d2335",
+        "0b4fee10-53b9-5da7-8c27-fdc67b9409c3",
+        "0ba51819-42ff-5cd3-9242-2ec04dd7f0be",
+        "0cf76a4a-e14f-5a62-b53a-175fc1374f53",
+        "0d4ac31b-d554-5794-9af1-e9a8e38900f5",
+        "0f44164d-a241-59cc-9e07-0846b24fbac5",
+        "10a18fb5-d803-5b9e-8a7e-6252b00e6709",
+        "12a1b1ab-1a98-5018-a14f-b25c160563a5",
+        "12f5d21c-39f4-5c18-8e70-67a3ab299266",
+        "13f8f02e-4790-5862-83b9-440e6de052bf",
+        "180e0fad-c02a-5bb9-84f1-52fe617504fd",
+        "1eede542-39ab-54ef-913d-6772b2be168d",
+        "1f56bb70-91d3-591c-95d7-6d7103dd7f0a",
+        "1f8ea226-550c-59df-ac54-ae49b84716dd",
+        "2366d212-39a9-5cf9-86a9-89b63870328b",
+        "29e3742b-d20b-5744-9da9-f2408ae91aea",
+        "2a1d6926-fb4d-5ea1-b13c-c6c3b6b0c489",
+        "2a626429-defc-5125-9e63-47743bbc1906",
+        "2bc3fd8b-8f58-517f-858e-83bd754fa21e",
+        "3446870d-6a0a-571d-a095-827be3f67801",
+        "363bda57-158a-5f12-a8ae-0f5ee7e0632a",
+        "3758b46f-948f-5d2f-93a6-10ad40d474e7",
+        "3a0fa447-ff3f-5f3e-89db-c1d0926b9b2a",
+        "3ca8b34b-b0a1-5c5c-829d-f5cdf82ca56a",
+        "3f325854-b587-5354-ae31-e48537490bb1",
+        "4049d45f-34ab-5001-b086-efab6a908a53",
+        "424dc6e3-27f4-55cb-af11-6e2a7b94bbd0",
+        "44c8b8e7-8094-59fe-bf99-8dcddf99bc7a",
+        "44dee604-adb7-5a93-8376-9d9ebbac2568",
+        "47625486-de46-5437-b032-e2d1f55f6ee1",
+        "47fc1d01-d42a-567a-850e-26a9b723a148",
+        "488fa58a-db5b-520e-84ae-0c79a2988f48",
+        "4de36700-b684-5e69-a81c-b7f545d5f579",
+        "52de52c3-bc52-58d2-b2d1-f7ac4143e644",
+        "54146218-c228-5e3f-b7de-58fe8df5aabd",
+        "545d6490-df91-5d62-af72-3f40bd0e4cef",
+        "54f7abde-61ea-54ca-9cee-a408169d176d",
+        "562d772a-96c5-5217-b70f-fe1adb24fa32",
+        "583037a1-969c-5ccd-9a58-2169316f6601",
+        "5c1bc4cb-a06f-52c0-9365-bb2f69d3830e",
+        "5fc934ca-4aa8-5e2a-9e87-da9cb756877a",
+        "5feec087-0137-5171-b1b8-fdc92b3240c1",
+        "60ddf678-ee96-57a9-8cb3-ec45d12703ef",
+        "6221685c-1864-58ac-b873-295852f2b70b",
+        "64653315-998f-5ab7-9eb7-e82acc57526f",
+        "682e082e-dec6-5896-9e1e-2a4c9a7eddce",
+        "6c789760-0018-5c69-b36a-5cb819c80706",
+        "72fcab08-bfac-51dc-a97a-801a4bd32dc6",
+        "75f44cb7-ade9-5892-8972-510ec7ea09b0",
+        "7a656251-8b3b-5d92-84b9-e708f6a23b0e",
+        "7af4b517-5b1b-5d0b-a63b-cd2673ea4f4d",
+        "80f09f14-6a88-5e5d-be22-d268c29f3955",
+        "84ae6d00-9edc-5295-9093-181da3345f7b",
+        "86eb4c3b-9f04-5eec-887e-0aae87fcf5e3",
+        "884602a8-7f3f-5c9f-8c05-38402833eba9",
+        "903e8cd2-af78-5b7d-abd7-813b50a92a07",
+        "91885f51-1007-5ea8-b7ee-e0eab2ea7a63",
+        "91d79714-3347-501b-9fee-879f825e9459",
+        "92c30360-e72a-5eb6-8148-44eba77bbe1a",
+        "9913643e-1f1f-50ad-95cb-b0f3dedec982",
+        "a42271e0-2a27-5cc3-973e-4e8374e72c45",
+        "a450d39a-468f-54f0-9330-46e9b053f464",
+        "a72b2b40-af9a-5567-8518-bc42dcb380cc",
+        "a8db6dc7-6523-5ace-a317-cd0890a42256",
+        "b117cc2b-9096-5e1f-a1f0-3a2c42c243af",
+        "b3fbddd6-14b8-57a2-9451-8b03c6bc0c63",
+        "b4b45b0e-c7ab-599f-b23b-886a8a9fa27c",
+        "b979650c-8092-58f3-ad86-0fbaba7dcb5a",
+        "bea30cf1-257a-5a8f-b645-d4dbf88ac9b5",
+        "c3a1ecdf-5c99-5e4f-9594-e204152318c1",
+        "c3cf378c-7bf6-5c87-b446-01e8db41737a",
+        "c4100878-b071-5d59-a5eb-cb98428e6611",
+        "c518b909-5935-5e9d-ae66-d30289c22d4f",
+        "c6595586-d749-52e5-b872-51b953cd677d",
+        "c83c9425-6c5a-5aef-a408-75da0d6dbe8f",
+        "c9c2eaa3-ab5b-51d9-bb5d-8acd02600b7a",
+        "d05d55bd-94bd-5f80-a9bb-266bce5f2ac0",
+        "d6c6a1d3-aec1-5c08-9fe0-d7cab8b3e87c",
+        "d92ce913-2122-5181-b276-e4e6dd31b9e5",
+        "dbda40fb-7de7-5b85-8aaa-34e5c561e308",
+        "df3af59f-4ff1-5a64-85d9-c0c61efe714b",
+        "df437efe-fff4-56a4-b7f3-31edc2b57cfa",
+        "e33e9885-2c08-5a7d-a89a-73ff53f1929a",
+        "e411a1e9-bc7a-58bb-b436-b0b45b37f27a",
+        "e6120841-e4f8-5321-aeb0-44eba948637e",
+        "ed8a0c79-e338-5d0b-8a26-7a4ccb639bfe",
+        "eed6da3e-91f8-58e4-ae7e-cb16a2c9fbed",
+        "f8ceeea0-6323-59b0-9c56-0b706b270567",
+        "f9e55728-2502-5087-a67a-06822df67186",
+        "facd54dd-5ba6-5eb8-a0ea-42902f1b503d",
+        "fbb6ef81-c47d-5266-9149-20d29ebac909",
+        "fbc4c508-84f1-578d-a2a3-4f5c79d31641"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_count": 72,
+      "earliest_known_canonical_printing_date": "1993-08-05",
+      "elapsed_days_between_known_date_boundaries": 12013,
+      "evidence_completeness_state": "bounded_phase_135_retained_projection_plus_existing_mb2",
+      "known_finishes": [
+        "etched",
+        "foil",
+        "nonfoil",
+        "signed"
+      ],
+      "known_languages": [
+        "English",
+        "French",
+        "Japanese",
+        "Spanish"
+      ],
+      "known_treatments": [
+        "1993",
+        "1997",
+        "2003",
+        "2015",
+        "future"
+      ],
+      "latest_known_canonical_printing_date": "2026-06-26",
+      "limitations": [
+        "The retained projection is bounded to ten card names and does not prove globally complete printing history.",
+        "Printing count is not supply quantity.",
+        "Unknown promotional and paper-or-digital values remain unknown."
+      ],
+      "post_promotion_canonical_snapshot_identity": "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+      "promotional_dimensions": {
+        "known_nonpromotional_mb2_printing_count": 1,
+        "known_promotional_printing_count": 7,
+        "unknown_promotional_printing_count": 89
+      },
+      "reprint_count": 96,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "set_codes_and_names": [
+        {
+          "code": "2ED",
+          "name": "Unlimited Edition"
+        },
+        {
+          "code": "30A",
+          "name": "30th Anniversary Edition"
+        },
+        {
+          "code": "3ED",
+          "name": "Revised Edition"
+        },
+        {
+          "code": "40K",
+          "name": "Warhammer 40,000 Commander"
+        },
+        {
+          "code": "4BB",
+          "name": "Fourth Edition Foreign Black Border"
+        },
+        {
+          "code": "4ED",
+          "name": "Fourth Edition"
+        },
+        {
+          "code": "A25",
+          "name": "Masters 25"
+        },
+        {
+          "code": "AFC",
+          "name": "Forgotten Realms Commander"
+        },
+        {
+          "code": "ATH",
+          "name": "Anthologies"
+        },
+        {
+          "code": "BBD",
+          "name": "Battlebond"
+        },
+        {
+          "code": "BLC",
+          "name": "Bloomburrow Commander"
+        },
+        {
+          "code": "BRB",
+          "name": "Battle Royale Box Set"
+        },
+        {
+          "code": "BRC",
+          "name": "The Brothers' War Commander"
+        },
+        {
+          "code": "C16",
+          "name": "Commander 2016"
+        },
+        {
+          "code": "C17",
+          "name": "Commander 2017"
+        },
+        {
+          "code": "CED",
+          "name": "Collectors' Edition"
+        },
+        {
+          "code": "CEI",
+          "name": "Intl. Collectors' Edition"
+        },
+        {
+          "code": "CMM",
+          "name": "Commander Masters"
+        },
+        {
+          "code": "CMR",
+          "name": "Commander Legends"
+        },
+        {
+          "code": "CNS",
+          "name": "Conspiracy"
+        },
+        {
+          "code": "CST",
+          "name": "Coldsnap Theme Decks"
+        },
+        {
+          "code": "DDF",
+          "name": "Duel Decks: Elspeth vs. Tezzeret"
+        },
+        {
+          "code": "DMR",
+          "name": "Dominaria Remastered"
+        },
+        {
+          "code": "DRC",
+          "name": "Aetherdrift Commander"
+        },
+        {
+          "code": "DSC",
+          "name": "Duskmourn: House of Horror Commander"
+        },
+        {
+          "code": "EMA",
+          "name": "Eternal Masters"
+        },
+        {
+          "code": "EOC",
+          "name": "Edge of Eternities Commander"
+        },
+        {
+          "code": "F01",
+          "name": "Friday Night Magic 2001"
+        },
+        {
+          "code": "FBB",
+          "name": "Foreign Black Border"
+        },
+        {
+          "code": "FIC",
+          "name": "Final Fantasy Commander"
+        },
+        {
+          "code": "GN3",
+          "name": "Game Night: Free-for-All"
+        },
+        {
+          "code": "ICE",
+          "name": "Ice Age"
+        },
+        {
+          "code": "IMA",
+          "name": "Iconic Masters"
+        },
+        {
+          "code": "J13",
+          "name": "Judge Gift Cards 2013"
+        },
+        {
+          "code": "J21",
+          "name": "Jumpstart: Historic Horizons"
+        },
+        {
+          "code": "LCC",
+          "name": "The Lost Caverns of Ixalan Commander"
+        },
+        {
+          "code": "LEA",
+          "name": "Limited Edition Alpha"
+        },
+        {
+          "code": "LEB",
+          "name": "Limited Edition Beta"
+        },
+        {
+          "code": "LTC",
+          "name": "Tales of Middle-earth Commander"
+        },
+        {
+          "code": "M3C",
+          "name": "Modern Horizons 3 Commander"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "ME2",
+          "name": "Masters Edition II"
+        },
+        {
+          "code": "ME4",
+          "name": "Masters Edition IV"
+        },
+        {
+          "code": "MIC",
+          "name": "Midnight Hunt Commander"
+        },
+        {
+          "code": "MKC",
+          "name": "Murders at Karlov Manor Commander"
+        },
+        {
+          "code": "MOC",
+          "name": "March of the Machine Commander"
+        },
+        {
+          "code": "MSC",
+          "name": "Marvel Super Heroes Commander"
+        },
+        {
+          "code": "NCC",
+          "name": "New Capenna Commander"
+        },
+        {
+          "code": "NEC",
+          "name": "Neon Dynasty Commander"
+        },
+        {
+          "code": "OLEP",
+          "name": "Oversized League Prizes"
+        },
+        {
+          "code": "ONC",
+          "name": "Phyrexia: All Will Be One Commander"
+        },
+        {
+          "code": "PF25",
+          "name": "MagicFest 2025"
+        },
+        {
+          "code": "PIP",
+          "name": "Fallout"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "PMEI",
+          "name": "Media and Collaboration Promos"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "PTC",
+          "name": "Pro Tour Collector Set"
+        },
+        {
+          "code": "SCD",
+          "name": "Starter Commander Decks"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SLP",
+          "name": "Secret Lair Promo"
+        },
+        {
+          "code": "SOC",
+          "name": "Secrets of Strixhaven Commander"
+        },
+        {
+          "code": "SPG",
+          "name": "Special Guests"
+        },
+        {
+          "code": "STA",
+          "name": "Strixhaven Mystical Archive"
+        },
+        {
+          "code": "SUM",
+          "name": "Summer Magic / Edgar"
+        },
+        {
+          "code": "TD0",
+          "name": "Magic Online Theme Decks"
+        },
+        {
+          "code": "TDC",
+          "name": "Tarkir: Dragonstorm Commander"
+        },
+        {
+          "code": "V13",
+          "name": "From the Vault: Twenty"
+        },
+        {
+          "code": "VMA",
+          "name": "Vintage Masters"
+        },
+        {
+          "code": "VOC",
+          "name": "Crimson Vow Commander"
+        },
+        {
+          "code": "WC97",
+          "name": "World Championship Decks 1997"
+        },
+        {
+          "code": "WHO",
+          "name": "Doctor Who"
+        },
+        {
+          "code": "WOC",
+          "name": "Wilds of Eldraine Commander"
+        }
+      ],
+      "special_printing_dimensions": {
+        "digital_printing_count": 8,
+        "source_reprint_false_count": 0,
+        "source_reprint_true_count": 95,
+        "unknown_paper_or_digital_count": 88
+      },
+      "total_known_canonical_printings": 97
+    },
+    "status": "known"
+  }
+}

@@ -96,8 +96,11 @@ class KnowledgeRepository:
                     raise KnowledgeValidationError("supersession must preserve subject and predicate")
                 if old.recorded_at >= fact.recorded_at:
                     raise KnowledgeValidationError("supersession must move forward in recorded time")
-        return tuple(sorted(facts, key=lambda x: (x.game_id, x.card_id, x.effective_at,
-                                                  x.recorded_at, x.kind, x.predicate, x.fact_id)))
+        # Recording order is the stable append-only history order.  Effective
+        # dates describe the asserted subject and may legitimately move
+        # backwards when a later evidence set adds an older Printing.
+        return tuple(sorted(facts, key=lambda x: (x.game_id, x.card_id, x.recorded_at,
+                                                  x.effective_at, x.kind, x.predicate, x.fact_id)))
 
     def validate(self) -> tuple[KnowledgeFact, ...]:
         facts = self.all(); graph = {x.fact_id: x.supersedes for x in facts}

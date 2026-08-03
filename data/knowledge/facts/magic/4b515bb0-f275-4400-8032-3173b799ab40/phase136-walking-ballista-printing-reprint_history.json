@@ -1,0 +1,125 @@
+{
+  "confidence": null,
+  "effective_at": "2025-06-13T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Retained Phase 135 evidence supplies 10 supported non-MB2 Printing records for Walking Ballista.",
+      "observed_at": "2026-08-03T05:05:31Z",
+      "reference": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/source-pilot-printings.json#card_id=4b515bb0-f275-4400-8032-3173b799ab40;normalized_sha256=493df83312c8d9271e84a143ed288767d7fbf53d7b4a23bfc2f72af514bc67e6",
+      "source_id": "mtgjson-pilot-30786023976-1",
+      "source_type": "retained_acquisition"
+    },
+    {
+      "claim": "Post-promotion canonical snapshot contains 11 bounded Printings for Walking Ballista.",
+      "observed_at": "2026-08-05T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077;card=4b515bb0-f275-4400-8032-3173b799ab40;printings=11",
+      "source_id": "phase-136-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase136-walking-ballista-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-05T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase133-walking-ballista-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "08e03340-461f-5eda-aa25-3f0fafea8b8d",
+        "1a30afa7-78cf-54ea-8ca9-f74c8b5d929b",
+        "1a7455eb-28cb-5ffc-9339-2a3b95fd3c95",
+        "5f5d5c97-d7fb-5947-85c6-ac94de27044e",
+        "67b10c80-d3a8-5289-977d-ef88fd681283",
+        "718b099b-ef4e-5bcf-87ca-49f49065e7a2",
+        "b1f6b291-19de-505c-827d-8a96bf48b7d3",
+        "b717cefd-3ff8-5f60-a490-4bac5c44f3e3",
+        "d8d7fd94-eea3-5a82-a31a-bea222538380",
+        "e71364dd-0c57-5dbd-aa07-e754b0192884",
+        "f9e17610-a7f2-5943-bd29-626453de5ae8"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_count": 9,
+      "earliest_known_canonical_printing_date": "2002-06-24",
+      "elapsed_days_between_known_date_boundaries": 8390,
+      "evidence_completeness_state": "bounded_phase_135_retained_projection_plus_existing_mb2",
+      "known_finishes": [
+        "foil",
+        "nonfoil"
+      ],
+      "known_languages": [
+        "English"
+      ],
+      "known_treatments": [
+        "2015",
+        "future"
+      ],
+      "latest_known_canonical_printing_date": "2025-06-13",
+      "limitations": [
+        "The retained projection is bounded to ten card names and does not prove globally complete printing history.",
+        "Printing count is not supply quantity.",
+        "Unknown promotional and paper-or-digital values remain unknown."
+      ],
+      "post_promotion_canonical_snapshot_identity": "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+      "promotional_dimensions": {
+        "known_nonpromotional_mb2_printing_count": 1,
+        "known_promotional_printing_count": 2,
+        "unknown_promotional_printing_count": 8
+      },
+      "reprint_count": 10,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "set_codes_and_names": [
+        {
+          "code": "2XM",
+          "name": "Double Masters"
+        },
+        {
+          "code": "AER",
+          "name": "Aether Revolt"
+        },
+        {
+          "code": "FIC",
+          "name": "Final Fantasy Commander"
+        },
+        {
+          "code": "J22",
+          "name": "Jumpstart 2022"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "PAER",
+          "name": "Aether Revolt Promos"
+        },
+        {
+          "code": "PIP",
+          "name": "Fallout"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        }
+      ],
+      "special_printing_dimensions": {
+        "digital_printing_count": 1,
+        "source_reprint_false_count": 0,
+        "source_reprint_true_count": 9,
+        "unknown_paper_or_digital_count": 9
+      },
+      "total_known_canonical_printings": 11
+    },
+    "status": "known"
+  }
+}

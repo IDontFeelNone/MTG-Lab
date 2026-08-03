@@ -56,10 +56,12 @@ def build_promotion_plan(data_root: Path | str) -> dict:
         except (OSError, json.JSONDecodeError):
             raise EvidenceError("canonical pre-state drift") from None
         audit_digest = completed.pop("audit_digest", None)
+        completed_post = completed.get("canonical_post_state_digest")
         if (audit_digest != _sha(completed) or
                 completed.get("promotion_id") != "phase-119-mb2-batch-000001-e32022126c07" or
                 completed.get("canonical_pre_state_digest") != EXPECTED_CANONICAL_PRE_STATE or
-                completed.get("canonical_post_state_digest") != current_digest):
+                (completed_post != current_digest and not _verified_later_phase(root=data_root,
+                    earlier_post=completed_post, current=current_digest))):
             raise EvidenceError("canonical pre-state drift")
 
     verification = ProductionEvidenceRepository(data_root).verify(EVIDENCE_ID)
@@ -124,3 +126,15 @@ def build_promotion_plan(data_root: Path | str) -> dict:
                                   "audit_replay_verification", "post_rollback_state_digest"],
     }
     return {**body, "plan_digest": _sha(body)}
+
+
+def _verified_later_phase(*, root: Path, earlier_post: str, current: str) -> bool:
+    """Accept a strictly audited canonical successor without weakening Phase 118."""
+    path = root / "audit" / "bounded_promotions" / "phase-136-mtgjson-pilot-30786023976-1.json"
+    try:
+        audit = json.loads(path.read_text()); identity = audit.pop("audit_digest")
+    except (OSError, KeyError, json.JSONDecodeError):
+        return False
+    return (identity == _sha(audit) and audit.get("result") == "succeeded" and
+            audit.get("canonical_pre_state_digest") == earlier_post and
+            audit.get("canonical_post_state_digest") == current)

@@ -52,7 +52,9 @@ class AutomaticUpdateTests(unittest.TestCase):
         self.assertNotIn("MB2", Path(ROOT / "src/production_evidence/automatic_updates.py").read_text())
         engine = AutomaticCanonicalUpdate(ROOT, CONFIG)
         self.assertTrue(engine.verify()["audit_present"])
-        self.assertEqual(engine.verify()["canonical_state_digest"], raw["integrity"]["canonical_post_state_digest"])
+        phase136 = json.loads((ROOT / "data/audit/bounded_promotions/phase-136-mtgjson-pilot-30786023976-1.json").read_text())
+        self.assertEqual(phase136["canonical_pre_state_digest"], raw["integrity"]["canonical_post_state_digest"])
+        self.assertEqual(engine.verify()["canonical_state_digest"], phase136["canonical_post_state_digest"])
 
     def test_exact_stage_order_and_interrupted_run_recovery(self):
         with tempfile.TemporaryDirectory() as temporary:

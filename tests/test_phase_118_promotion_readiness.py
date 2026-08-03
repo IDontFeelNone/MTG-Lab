@@ -66,7 +66,9 @@ class Phase118PromotionReadinessTests(unittest.TestCase):
             with self.assertRaisesRegex(EvidenceError, "canonical pre-state drift"):
                 build_promotion_plan(root)
         audit = json.loads((ROOT / "data/audit/bounded_promotions/phase-119-mb2-batch-000001-e32022126c07.json").read_text())
-        self.assertEqual(canonical_state_digest(ROOT / "data"), audit["canonical_post_state_digest"])
+        later = json.loads((ROOT / "data/audit/bounded_promotions/phase-136-mtgjson-pilot-30786023976-1.json").read_text())
+        self.assertEqual(later["canonical_pre_state_digest"], audit["canonical_post_state_digest"])
+        self.assertEqual(canonical_state_digest(ROOT / "data"), later["canonical_post_state_digest"])
         self.assertEqual(audit["canonical_pre_state_digest"], EXPECTED_CANONICAL_PRE_STATE)
 
     def test_checksum_and_review_artifact_tampering_are_rejected(self):

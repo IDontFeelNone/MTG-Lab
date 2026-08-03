@@ -33,7 +33,9 @@ class Phase119BoundedPromotionTests(unittest.TestCase):
         self.assertEqual(audit["candidate_id_digest"], EXPECTED_CANDIDATE_DIGEST)
         self.assertEqual(audit["entity_counts"], ENTITY_COUNTS)
         self.assertEqual(audit["excluded_targets"], ["MSH", "all_other_batches"])
-        self.assertEqual(canonical_state_digest(ROOT / "data"), audit["canonical_post_state_digest"])
+        phase136 = json.loads((ROOT / "data/audit/bounded_promotions/phase-136-mtgjson-pilot-30786023976-1.json").read_text())
+        self.assertEqual(phase136["canonical_pre_state_digest"], audit["canonical_post_state_digest"])
+        self.assertEqual(canonical_state_digest(ROOT / "data"), phase136["canonical_post_state_digest"])
         self.assertEqual(audit, json.loads(audit_path.read_text()))
 
     def test_preflight_and_output_are_deterministic(self):
@@ -103,10 +105,12 @@ class Phase119BoundedPromotionTests(unittest.TestCase):
 
     def test_dependency_references_and_query_analytics_compatibility(self):
         state = json.loads((ROOT / "data/canonical/state.json").read_text())
-        self.assertEqual({kind: len(rows) for kind, rows in state.items()}, ENTITY_COUNTS)
+        self.assertEqual({kind: len(rows) for kind, rows in state.items() if kind != "printing"},
+                         {kind: count for kind, count in ENTITY_COUNTS.items() if kind != "printing"})
+        self.assertEqual(len(state["printing"]), 913)
         cards = set(state["card"])
         self.assertTrue(all(row["values"]["card_id"] in cards for row in state["printing"].values()))
-        self.assertTrue(all(row["values"]["set_id"] == "mb2" for row in state["printing"].values()))
+        self.assertEqual(sum(row["values"]["set_id"] == "mb2" for row in state["printing"].values()), 379)
         query = CanonicalQueryEngine(data_root=ROOT / "data")
         summary = CanonicalAnalyticsEngine(query).summary().data
         self.assertGreaterEqual(summary["entity_counts_by_type"]["card"], 384)

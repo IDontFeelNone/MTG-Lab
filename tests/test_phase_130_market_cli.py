@@ -22,7 +22,7 @@ class Phase130MarketCliTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.reports = MarketHistoryReports(ROOT / "data")
-        cls.printing = sorted(cls.reports.printings)[0]
+        cls.printing = cls.reports.all_observations[0].entity_id
 
     def invoke(self, *arguments):
         output = StringIO()
