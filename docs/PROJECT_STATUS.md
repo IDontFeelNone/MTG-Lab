@@ -1,3 +1,14 @@
+# Phase 135C status — genuine checksum syntax repaired
+
+The Phase 135B hosted run observed MTGJSON's digest-only 64-hex sidecar and stopped because the old
+parser required a filename field. It made zero large-source requests and no production writes.
+Phase 135C accepts the genuine form plus standard GNU text/binary and BSD forms, while requiring
+the exact `AllPrintings.json.gz` basename whenever a filename is present. Unsafe paths and unrelated
+names fail before download. Corpus-free diagnostics bind the sidecar by byte count and SHA-256 and
+report escaped bounded text, syntax, filename candidate, and exact reason. Streamed source bytes
+remain SHA-256 verified. Canonical, market, evidence, and knowledge data are unchanged; no
+production acquisition or promotion ran in this task.
+
 # Phase 135B status — production transport repair ready
 
 Phase 135A's GitHub-hosted run failed because the minimal urllib request was rejected with HTTP

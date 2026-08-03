@@ -1,3 +1,19 @@
+# Phase 135C handoff
+
+The Phase 135B attempt reached the official checksum endpoint with HTTP 200 and observed a bare
+64-hex digest. The old two-field parser rejected it and correctly stopped at
+`checksum_requests: 1`, `source_requests: 0`; no evidence or protected data changed. Phase 135C
+accepts digest-only, standard GNU text/binary-marker, and BSD SHA256 records. Filename-bearing
+records must use exactly `AllPrintings.json.gz`; URLs, credentials, absolute/relative paths,
+traversal, and alternate basenames remain forbidden.
+
+Sidecars are strict UTF-8, at most 1,024 bytes, single-line with at most one final newline, and must
+contain exactly one digest. Diagnostics add byte count, sidecar SHA-256, bounded escaped text,
+syntax, filename candidate, and exact reason without corpus bytes. A valid parse only permits the
+one source request; its streamed bytes must still match the digest. After merge, rerun **Pilot
+printing acquisition** exactly once and review its three-file evidence PR. Do not promote,
+supersede Card Intelligence facts, or write market data.
+
 # Phase 135B handoff
 
 The Phase 135A production run received HTTP 403 and also passed an empty acquisition timestamp.

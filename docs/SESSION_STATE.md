@@ -1,3 +1,13 @@
+# Phase 135C session state — checksum parser repaired, rerun pending
+
+The Phase 135B hosted attempt observed a bare 64-hex MTGJSON checksum. Its two-field parser rejected
+the genuine representation and stopped before the large source (`checksum_requests: 1`,
+`source_requests: 0`). Phase 135C adds a strict bounded parser for digest-only, GNU text/binary, and
+BSD forms, exact-basename validation, and corpus-free digest-bound diagnostics. Source checksum
+comparison and every retention/protected-data boundary are unchanged. This task ran no production
+acquisition; canonical, market, evidence, and knowledge data remain unchanged. Next: merge and
+rerun **Pilot printing acquisition** exactly once.
+
 # Phase 135B session state — production download repaired, rerun pending
 
 The Phase 135A GitHub-hosted acquisition failed with HTTP 403 before evidence publication and
