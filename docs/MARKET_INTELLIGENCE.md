@@ -1,3 +1,9 @@
+# Phase 138 read-only price evidence reporting
+
+The explanation facade now renders existing `market-observation-v1` assertions without changing the Market repository. Amounts are canonical decimal strings; null provider values are explicit unavailability rather than zero. Summaries count observations, known/missing values, covered Printings and distinct dimensions, timestamps, history span, uncovered retained Printings, and latest observation IDs per exact dimension. Minimum, maximum, and median are calculated only inside one Printing/provider/finish/language/currency/price-type group.
+
+The retained production history contains one acquisition snapshot. An observation is a provider assertion rather than proof of a completed sale, and a displayed market price is not guaranteed realizable value. MB2 coverage does not price all 913 retained Printings. There is no retained inventory, sales velocity, buylist, demand, or usage evidence and no prediction or recommendation. Additional history must be retained later through the existing separately authorized acquisition and immutable import path; the explanation engine must remain downstream and read-only.
+
 # Phase 132 Card Intelligence market boundary
 
 The ten-card reviewed pilot records only whether existing immutable USD/market observation

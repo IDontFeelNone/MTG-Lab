@@ -15,10 +15,13 @@ def main(argv=None) -> int:
     explain = commands.add_parser("explain")
     explain.add_argument("name", nargs="?")
     explain.add_argument("--card-id")
+    explain.add_argument("--include-observed-prices", action="store_true",
+                         help="opt in to card-value-explanation-v2 retained price evidence")
     args = parser.parse_args(argv)
     try:
         result = CardValueExplanationEngine(args.data_root).explain(
-            name=args.name, card_id=args.card_id)
+            name=args.name, card_id=args.card_id,
+            include_observed_prices=args.include_observed_prices)
     except (ExplanationError, OSError, ValueError, KeyError, json.JSONDecodeError) as error:
         print(json.dumps({"schema_version": ERROR_VERSION, "valid": False,
                           "error": str(error)}, indent=2, sort_keys=True))

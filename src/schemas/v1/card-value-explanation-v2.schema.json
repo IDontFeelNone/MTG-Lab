@@ -1,0 +1,338 @@
+{
+  "$id": "https://mtg-lab.local/schemas/v1/card-value-explanation-v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonical_snapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "card": {
+          "type": "object"
+        },
+        "identity": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "path": {
+          "const": "data/canonical/state.json"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "identity",
+        "path",
+        "sha256",
+        "card"
+      ],
+      "type": "object"
+    },
+    "card_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "card_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "game_id": {
+          "const": "magic"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "game_id",
+        "card_id",
+        "name"
+      ],
+      "type": "object"
+    },
+    "evidence_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "object"
+    },
+    "evidence_sections": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_quality": {
+          "additionalProperties": false,
+          "properties": {
+            "explicitly_unavailable": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "incomplete": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "known": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "unknown": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "unsupported": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "known",
+            "unknown",
+            "incomplete",
+            "unsupported",
+            "explicitly_unavailable"
+          ],
+          "type": "object"
+        },
+        "market": {
+          "additionalProperties": false,
+          "properties": {
+            "first_observation": {
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "latest_observation": {
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "observation_count": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "observation_span": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "provider_coverage": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            },
+            "supported_currencies": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "observation_count",
+            "first_observation",
+            "latest_observation",
+            "provider_coverage",
+            "supported_currencies",
+            "observation_span"
+          ],
+          "type": "object"
+        },
+        "observed_price_evidence": {
+          "additionalProperties": false,
+          "properties": {
+            "compatible_dimension_summaries": {
+              "items": {
+                "required": [
+                  "dimension",
+                  "observation_count",
+                  "known_price_count",
+                  "explicit_missing_price_count",
+                  "minimum_amount",
+                  "maximum_amount",
+                  "median_amount",
+                  "statistic_observation_count",
+                  "history_state",
+                  "latest_observation_id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "observations": {
+              "items": {
+                "required": [
+                  "canonical_printing_id",
+                  "canonical_card_id",
+                  "set_code",
+                  "collector_number",
+                  "finish",
+                  "language",
+                  "provider",
+                  "provider_record_id",
+                  "currency",
+                  "price_type",
+                  "price",
+                  "source_timestamp",
+                  "retrieval_timestamp",
+                  "acquisition_run_id",
+                  "observation_id",
+                  "provenance",
+                  "history_position"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "ordering": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "summary": {
+              "required": [
+                "total_observation_count",
+                "known_price_observation_count",
+                "explicit_missing_price_observation_count",
+                "distinct_covered_printing_count",
+                "distinct_provider_count",
+                "distinct_finish_count",
+                "distinct_language_count",
+                "distinct_currency_count",
+                "distinct_price_type_count",
+                "earliest_source_timestamp",
+                "latest_source_timestamp",
+                "latest_retrieval_timestamp",
+                "observation_history_span",
+                "covered_printing_ids",
+                "uncovered_retained_printing_count",
+                "latest_observation_for_each_exact_dimension"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "ordering",
+            "summary",
+            "observations",
+            "compatible_dimension_summaries"
+          ],
+          "type": "object"
+        },
+        "printing_history": {
+          "required": [
+            "total_retained_printings",
+            "total_retained_reprints",
+            "first_retained_printing",
+            "latest_retained_printing",
+            "distinct_retained_sets",
+            "finishes",
+            "treatments",
+            "promotional_variants",
+            "coverage_state",
+            "evidence_completeness_state"
+          ],
+          "type": "object"
+        },
+        "rules": {
+          "additionalProperties": false,
+          "properties": {
+            "legality": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "mechanical_roles": {
+              "type": "array"
+            },
+            "oracle_text": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "product_membership": {
+              "type": "array"
+            }
+          },
+          "required": [
+            "oracle_text",
+            "mechanical_roles",
+            "legality",
+            "product_membership"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "printing_history",
+        "market",
+        "rules",
+        "evidence_quality",
+        "observed_price_evidence"
+      ],
+      "type": "object"
+    },
+    "explanation_generated_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "provenance": {
+      "properties": {
+        "input_only": {
+          "const": true
+        }
+      },
+      "required": [
+        "canonical",
+        "knowledge_fact_ids",
+        "knowledge_evidence_source_ids",
+        "market_observation_ids",
+        "input_only"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "card-value-explanation-v2"
+    }
+  },
+  "required": [
+    "schema_version",
+    "explanation_generated_at",
+    "card_identity",
+    "canonical_snapshot",
+    "evidence_sections",
+    "evidence_counts",
+    "limitations",
+    "provenance"
+  ],
+  "title": "Card Value Explanation v2",
+  "type": "object"
+}

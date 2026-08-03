@@ -1,3 +1,9 @@
+# Phase 138 observed-price explanation extension
+
+`CardValueExplanationEngine.explain(..., include_observed_prices=True)` returns `card-value-explanation-v2`; omission of the flag preserves v1. The extension is limited to the existing ten-card pilot. It joins observations to Cards only by first selecting that Card's exact canonical Printing identities. Thus MB2 observations never value another Printing, and finish, language, provider, currency, and price type remain separate.
+
+Evidence quality now separates known observed amounts and provenance, explicitly unavailable provider prices, incomplete one-acquisition/MB2-only history, and unsupported completed-sale velocity, inventory, usage, demand, buylist spread, fair value, and future direction. Printing count is not supply. No recommendation is produced.
+
 # Phase 137 explainable Card Value evidence layer
 
 `CardValueExplanationEngine` is a read-only presentation layer over three existing sources: the frozen
