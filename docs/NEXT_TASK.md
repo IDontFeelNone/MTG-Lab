@@ -1,4 +1,13 @@
-# Next task after Phase 130
+# Next task after Phase 131
+
+After review and merge, populate Card Intelligence only through a separately approved,
+source-reviewed evidence workflow. A future phase may integrate the read-only
+`card-knowledge-query-v1` report with an AI retrieval boundary, but AI must remain a consumer: it
+must not silently create, replace, or promote knowledge facts. Preserve explicit unknowns,
+provenance, confidence, append-only history, and supersession. Do not compute value, EV, predictions,
+or recommendations, and do not acquire or scrape data without separate authorization.
+
+# Historical next task after Phase 130
 
 After review and merge, verify every `python -m market.cli` command against the retained Phase 128
 run. Recommended Phase 131 scope is contract hardening for pagination/cursors and multi-acquisition

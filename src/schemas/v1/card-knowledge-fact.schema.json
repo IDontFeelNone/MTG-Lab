@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "card-knowledge-fact-v1",
+  "title": "Card knowledge fact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "fact_id", "subject", "kind", "predicate", "value", "confidence", "effective_at", "recorded_at", "evidence", "supersedes"],
+  "properties": {
+    "schema_version": {"const": "card-knowledge-fact-v1"},
+    "fact_id": {"$ref": "#/$defs/id"},
+    "subject": {"type": "object", "additionalProperties": false, "required": ["game_id", "card_id"], "properties": {"game_id": {"$ref": "#/$defs/id"}, "card_id": {"$ref": "#/$defs/id"}}},
+    "kind": {"enum": ["legality", "archetype_usage", "popularity", "reprint_history", "reserved_status", "product_exclusivity", "scarcity", "supply", "demand", "synergy", "mechanical_theme", "tribal_theme", "combo", "tutor", "infinite_combo", "mana_acceleration", "removal", "card_advantage", "win_condition", "staple", "deck_role", "market_catalyst"]},
+    "predicate": {"$ref": "#/$defs/id"},
+    "value": {"oneOf": [
+      {"type": "object", "additionalProperties": false, "required": ["status", "data"], "properties": {"status": {"const": "unknown"}, "data": {"type": "null"}}},
+      {"type": "object", "additionalProperties": false, "required": ["status", "data"], "properties": {"status": {"const": "known"}, "data": {"not": {"type": "null"}}}}
+    ]},
+    "confidence": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^(0(\\.[0-9]+)?|1(\\.0+)?)$"}]},
+    "effective_at": {"type": "string", "format": "date-time"},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}},
+    "supersedes": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
+    "evidence": {"type": "object", "additionalProperties": false, "required": ["source_id", "source_type", "reference", "observed_at", "claim"], "properties": {"source_id": {"$ref": "#/$defs/id"}, "source_type": {"$ref": "#/$defs/id"}, "reference": {"type": "string", "minLength": 1}, "observed_at": {"type": "string", "format": "date-time"}, "claim": {"type": "string", "minLength": 1}}}
+  }
+}

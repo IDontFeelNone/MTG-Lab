@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "card-knowledge-query-v1",
+  "title": "Card knowledge query v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "subject", "selection", "count", "empty", "facts", "evidence_sources", "confidence_values"],
+  "properties": {
+    "schema_version": {"const": "card-knowledge-query-v1"},
+    "subject": {"type": "object"}, "selection": {"type": "string"},
+    "count": {"type": "integer", "minimum": 0}, "empty": {"type": "boolean"},
+    "facts": {"type": "array"}, "evidence_sources": {"type": "array", "items": {"type": "string"}},
+    "confidence_values": {"type": "array", "items": {"type": "object"}}
+  }
+}

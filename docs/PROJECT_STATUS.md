@@ -1,3 +1,16 @@
+# Phase 131 status — Card Intelligence Knowledge Layer foundation
+
+Phase 130 is merged at `4e34eaf`. Card Intelligence v1 adds a game-agnostic, deterministic
+repository of immutable asserted facts. Versioned JSON contracts represent the subject, knowledge
+kind and predicate, known or explicitly unknown value, confidence, effective/recording dates,
+multiple evidence sources, and supersession lineage. Strict loading, canonical serialization,
+append-only persistence, repository replay validation, and read-only card queries are implemented.
+
+The layer stores supplied knowledge and never infers, scores, recommends, predicts, calculates card
+value or EV, or invokes AI. No production knowledge facts were added. The 478 Phase 128 market
+observations, Phase 129 history, Phase 130 reporting, acquisitions, canonical data, sole Phase 119
+promotion, and frozen Architecture v12 remain unchanged.
+
 # Phase 130 status — read-only historical market query CLI and reporting
 
 Phase 129 is merged at `73fb1de`. The versioned `market-history-report-v1` reporting facade and

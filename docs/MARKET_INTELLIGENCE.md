@@ -1,3 +1,15 @@
+# Phase 131 Card Intelligence boundary
+
+Card Intelligence is a separate knowledge repository, not a market observation store. Its facts may
+record asserted supply, demand, scarcity, or market-catalyst knowledge with evidence, confidence,
+effective date, explicit unknowns, and supersession, but the engine does not translate those facts
+into a price, forecast, EV, or recommendation. It does not copy, alter, promote, or infer from market
+observations. Future AI integration is limited to consuming deterministic read-only knowledge query
+contracts alongside independently provenance-bearing market reports.
+
+Phase 131 added no production facts and did not touch the retained acquisition, 478 immutable
+observations, append-only Phase 129 history, or Phase 130 reporting behavior.
+
 # Phase 128 production snapshot
 
 The first production snapshot is retained acquisition `scryfall-mb2-30754638264-1`. It uses the existing `market-observation-v1` printing-level model and `data/market/observations/<entity-type>/<printing-id>/<provider>/<observation-id>.json` repository. Provider ID, printing ID, finish, language, USD currency, market price type, source/retrieval timestamps, acquisition ID, both source identities, mapping method, and canonical snapshot identity are preserved. Null price remains an explicit observation; this run contains zero null prices. The import report is stored separately under `data/market/imports/<run-id>/import-report.json`. Canonical data is never a market destination.

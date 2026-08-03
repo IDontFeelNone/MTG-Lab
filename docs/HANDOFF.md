@@ -170,3 +170,23 @@ another retained run. No test performs acquisition. Canonical state is read only
 its snapshot digest; reports continue to state `canonical_write: false` and
 `promotion_performed: false`. Architecture v12 is unchanged. Phase 130 should expose these
 history/report capabilities through a read-only operator CLI, without trend inference.
+# Phase 131 handoff — deterministic Card Intelligence foundation
+
+Baseline `4e34eaf` contains merged Phase 130. The new `src/card_intelligence/` package contains
+immutable contracts, strict parsing, canonical serialization, an append-only repository loader,
+cross-record supersession validation, and read-only query projections. Canonical JSON schemas are
+`src/schemas/v1/card-knowledge-fact.schema.json` and
+`src/schemas/v1/card-knowledge-query.schema.json`. A future populated repository uses
+`data/knowledge/facts/<game-id>/<card-id>/<fact-id>.json`; Phase 131 intentionally adds no facts.
+
+Safety boundary: all records require evidence, provenance, effective time, and an explicit known or
+unknown value. Confidence may itself be unknown. Corrections append a later record naming the prior
+fact in `supersedes`; bytes are never replaced, and replay/load verifies canonical bytes, paths,
+identities, references, chronological direction, and cycles. Query results deterministically expose
+all facts, active facts, value drivers, competitive formats, archetypes, catalysts, sources, and
+confidence values. The engine performs no inference. Future AI may retrieve these reports but may
+not write facts or treat them as generated conclusions.
+
+Canonical data, acquisitions, the 478 retained observations and import report are unchanged. Phase
+119 remains the sole promotion, market and knowledge promotion are false, and Architecture v12 is
+still frozen.
