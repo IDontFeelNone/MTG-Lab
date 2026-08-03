@@ -1,3 +1,9 @@
+# Phase 135 handoff
+
+The bounded retention implementation is complete and tested, but production acquisition is blocked by the environment's HTTP 403 proxy response. MTGJSON AllPrintings v5 gzip is the approved source; CC BY 4.0 permits retaining the attributed bounded projection. The source is downloaded once to staging, verified as HTTP 200 with gzip media/magic, hashed, incrementally scanned one set at a time, projected to the exact pilot excluding MB2, and atomically renamed. A byte-identical run is accepted; an identity conflict fails closed; staging is removed after every result.
+
+No production evidence directory exists yet. Never substitute fixture data or reconstruct printings from the Phase 134 MB2/MSH payloads. Execute the command in `docs/MTGJSON_PROVIDER.md`, then verify the exact three-file inventory before recommending the Phase 134 retry.
+
 # Phase 134 evidence-gap handoff
 
 The requested baseline passed, but the mandatory source gate did not. Review

@@ -1,3 +1,7 @@
+# Next task — execute Phase 135 acquisition, then retry Phase 134
+
+Run `scripts/retain_pilot_printings.py` against the official MTGJSON `AllPrintings.json.gz` endpoint in an environment with provider access. Review the three-file bounded projection, census, source and projection hashes, and exact ten-card coverage. Do not commit the full source corpus. Once this verified retained dataset is merged, retry bounded Phase 134 promotion using only it; retain the existing review, promotion, and fact controls. Do not infer demand, scarcity, value, or global completeness.
+
 # Next task after the blocked Phase 134 assessment
 
 A future separately authorized phase may retain a checksum-verified, approved printing-level
