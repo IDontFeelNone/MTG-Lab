@@ -1,0 +1,100 @@
+{
+  "confidence": null,
+  "effective_at": "2024-11-15T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Retained Phase 135 evidence supplies 5 supported non-MB2 Printing records for Wishclaw Talisman.",
+      "observed_at": "2026-08-03T05:05:31Z",
+      "reference": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/source-pilot-printings.json#card_id=81c70ae7-3c18-4c9b-8505-e4db9e0e6518;normalized_sha256=493df83312c8d9271e84a143ed288767d7fbf53d7b4a23bfc2f72af514bc67e6",
+      "source_id": "mtgjson-pilot-30786023976-1",
+      "source_type": "retained_acquisition"
+    },
+    {
+      "claim": "Post-promotion canonical snapshot contains 6 bounded Printings for Wishclaw Talisman.",
+      "observed_at": "2026-08-05T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077;card=81c70ae7-3c18-4c9b-8505-e4db9e0e6518;printings=6",
+      "source_id": "phase-136-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase136-wishclaw-talisman-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-05T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase133-wishclaw-talisman-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "126156cd-d51f-5f9d-a154-607538a16b24",
+        "50b9af8d-eba0-5f8c-909e-49e16a726fd3",
+        "628f1173-87ee-5b2f-a20d-9df587f09e73",
+        "9fdcf8d5-7752-5ed9-aaf5-df0ea0032b22",
+        "afa5e761-735f-5d33-8058-76a11e5151e8",
+        "d91beabb-c09e-5f8c-a603-56beb2cf74e2"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_count": 4,
+      "earliest_known_canonical_printing_date": "2019-10-04",
+      "elapsed_days_between_known_date_boundaries": 1869,
+      "evidence_completeness_state": "bounded_phase_135_retained_projection_plus_existing_mb2",
+      "known_finishes": [
+        "foil",
+        "nonfoil"
+      ],
+      "known_languages": [
+        "English"
+      ],
+      "known_treatments": [
+        "2015",
+        "future"
+      ],
+      "latest_known_canonical_printing_date": "2024-11-15",
+      "limitations": [
+        "The retained projection is bounded to ten card names and does not prove globally complete printing history.",
+        "Printing count is not supply quantity.",
+        "Unknown promotional and paper-or-digital values remain unknown."
+      ],
+      "post_promotion_canonical_snapshot_identity": "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+      "promotional_dimensions": {
+        "known_nonpromotional_mb2_printing_count": 1,
+        "known_promotional_printing_count": 2,
+        "unknown_promotional_printing_count": 3
+      },
+      "reprint_count": 5,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "set_codes_and_names": [
+        {
+          "code": "ELD",
+          "name": "Throne of Eldraine"
+        },
+        {
+          "code": "FDN",
+          "name": "Foundations"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "PELD",
+          "name": "Throne of Eldraine Promos"
+        }
+      ],
+      "special_printing_dimensions": {
+        "digital_printing_count": 0,
+        "source_reprint_false_count": 0,
+        "source_reprint_true_count": 3,
+        "unknown_paper_or_digital_count": 5
+      },
+      "total_known_canonical_printings": 6
+    },
+    "status": "known"
+  }
+}

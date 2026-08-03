@@ -1,0 +1,427 @@
+{
+  "confidence": null,
+  "effective_at": "2026-06-26T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Retained Phase 135 evidence supplies 110 supported non-MB2 Printing records for Command Tower.",
+      "observed_at": "2026-08-03T05:05:31Z",
+      "reference": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/source-pilot-printings.json#card_id=0895c9b7-ae7d-4bb3-af17-3b75deb50a25;normalized_sha256=493df83312c8d9271e84a143ed288767d7fbf53d7b4a23bfc2f72af514bc67e6",
+      "source_id": "mtgjson-pilot-30786023976-1",
+      "source_type": "retained_acquisition"
+    },
+    {
+      "claim": "Post-promotion canonical snapshot contains 111 bounded Printings for Command Tower.",
+      "observed_at": "2026-08-05T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077;card=0895c9b7-ae7d-4bb3-af17-3b75deb50a25;printings=111",
+      "source_id": "phase-136-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase136-command-tower-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-05T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase133-command-tower-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "08ad2985-6440-5139-9fa5-5b478bb15369",
+        "0bd7bca4-2839-5824-a392-c38178dc16b3",
+        "0e89fd1a-a23a-59af-9f34-37144f2c636d",
+        "104c46d9-014c-54b6-8e4c-6823f208ed27",
+        "10f9f952-bd68-5fd1-a9b9-792da3f05994",
+        "115f2a1c-b6aa-5312-8702-3bf38c817312",
+        "1312565a-2b52-5b55-8993-56ca0a57db34",
+        "14253164-b9e3-5069-9fa2-b2a76337f5c1",
+        "1430f065-c050-56c6-aa19-d905bae5de95",
+        "16de25b9-44d4-5a2a-906b-39b7036a1e5f",
+        "17b2e338-989d-5e8d-b4c6-c3a28a08e5cb",
+        "17e39625-f897-5697-b687-6cf7adce3f85",
+        "188825fa-e31a-5481-8363-a2f903fa7ffa",
+        "1c8ce858-e858-537f-9b85-8825c19a0592",
+        "21a7fa32-2c48-52c4-9b70-b09a1744c838",
+        "230586ba-0437-58f7-843a-2c89fc6b27cb",
+        "2552fe1b-e837-5035-9fe8-cf0af253f7bc",
+        "281d6739-4145-551a-8dd0-ca09d30e875d",
+        "2972b089-a5a7-5f98-a565-9266e960fc2b",
+        "2981c7d5-32d1-5a21-bafe-a027aed183fc",
+        "2a60c795-b818-5ca6-9471-6316d5daaaa8",
+        "2b08a295-f9b1-592f-9746-0f0157a2593a",
+        "2b5d0c76-b82a-51d2-bb0b-fb74c5b36d24",
+        "2c57ec2f-0b3d-5dba-9a34-2d11e698cba2",
+        "2cd4fbb8-4382-59aa-a513-78384b4f400f",
+        "337d72f7-7a87-582a-b655-414bff057144",
+        "33a3057d-67f9-5df6-87c7-90ad1d0acad8",
+        "34447e9f-3b26-5c28-b78e-dbe6c817e611",
+        "349a88da-bd02-53d7-a711-3e4a0140e49b",
+        "3862b50f-f3a3-5073-9ba6-3f8128ae0216",
+        "3d746924-163a-566b-ad6c-ce6747dbffa9",
+        "42a48bb1-1f32-517f-91b1-a921621430be",
+        "445b6d2a-be40-5ef0-8dfa-35f330c1f575",
+        "484cbb6b-e7b6-53e7-a3cf-945a5515b994",
+        "5048c684-b47e-5a8e-b572-4928b63c349e",
+        "526b0eb3-b173-5a73-91a1-269a51778042",
+        "52a54e4b-68c3-58ad-a106-3ed5f9ba31f2",
+        "546d086f-5d42-5800-b336-be97cbccdeea",
+        "55e1a059-35c3-5ee8-9908-a7a5d6d18907",
+        "594f0e3b-7fc7-53a3-b222-42162734eb6d",
+        "5a203043-56db-5e59-bbc0-2a1a9653edff",
+        "61d314a9-b2b3-5a9c-b2af-568a890d5f32",
+        "620533da-9b3d-5344-a2f3-dc83ac8095f2",
+        "6224a86c-bef4-53be-ae31-f856a4f0f0e5",
+        "66d05619-189f-5197-b3a6-0d747f9e6fe0",
+        "66de903f-5291-5311-b4be-1a1917984fee",
+        "66f47e9a-a1f3-549c-b449-1871333316f7",
+        "67814a63-4556-57bd-bc00-195866159dfb",
+        "69316fca-bc35-5c58-994a-9da89b02f977",
+        "6c0557e1-a266-52fb-bfe3-38a216596d71",
+        "6e89faee-4ec5-52cf-b2bb-9a82be40dc5d",
+        "6fcb8abc-9a7d-5c03-8440-7c9bfc6f863e",
+        "701897ff-0771-5c77-a8e5-2f5a3c9a0421",
+        "7866f4e4-ed56-5a43-9870-9852547ae358",
+        "7927d120-2c30-5158-8457-cf1376994d2a",
+        "79ede020-3979-591c-80d7-4f4cc051f2a7",
+        "7d9df13d-45ba-5f72-8111-9b4e33fbde3f",
+        "7e4fa375-3236-549e-974a-74c7e2c79953",
+        "7ef9710f-7074-5cf9-96c9-a70964d28641",
+        "7f3943c3-1026-56e3-b07d-b26333187b74",
+        "8343b607-9a9f-53c0-acf3-1f60baeb8241",
+        "870c8178-c895-5961-8278-eaeebeb6bf27",
+        "8cf2c7b6-02b6-5f5f-887a-ee18d0c390b4",
+        "8dcdfb83-896c-541d-8d12-846a6c67c7ac",
+        "8eedf36e-aca4-5087-b6d5-3b87c29ea60c",
+        "8fc7a497-9211-5a33-b5e9-a28972a49923",
+        "96cba9e7-8106-5308-a0bd-96544d991078",
+        "97d78327-de65-5b66-a434-94c807b92b20",
+        "9a05461b-1617-53e0-8535-fc86965901e0",
+        "a05717ef-8c3d-5001-9398-2cf1071db042",
+        "a274cb0b-7f3c-5793-9e21-f9f38e297cec",
+        "a2d0371d-ca9e-542e-a5bc-331e0e89188f",
+        "a45a4e2c-1437-51dd-837a-5e62520c3e2d",
+        "a5df3193-fc16-5299-ad20-feb9ebb2356f",
+        "a8afbeea-6b71-5565-98ce-287d32b9ccf9",
+        "a91eb46c-88e7-578f-97c6-71bbc1c816ba",
+        "acde66cb-3be2-5a9d-93d5-da1f83353c09",
+        "adf27287-c24b-5c50-95a2-1bdb4c998b05",
+        "b0a404b0-7664-5ae6-a1fd-aebdd97db098",
+        "b15e263f-6952-5472-9a60-1a4e006e9c2e",
+        "b172af5b-5be9-5179-97b5-7bea4884ad53",
+        "b4df2d4e-6988-5aef-8651-b1812f933273",
+        "bdaf694e-4a34-5098-863a-1aa8bcd13e0e",
+        "be7781ac-9d47-5c08-ac6b-f429bc08d8bc",
+        "bee693b7-7e34-53c1-aba3-69c0614a53e0",
+        "bffcebef-8cf7-5851-85cc-628a0f8da4e2",
+        "c9e1aec9-1d9a-594e-a31a-1afd4ac3a457",
+        "cc47d604-f081-5339-ba3a-ee1059c7b9eb",
+        "d0d8e204-7951-522c-80b9-a39c995bbc8a",
+        "d10f4df1-8e7a-5aa3-8d90-f2bd793c00d8",
+        "d611b1f0-c268-50d4-9cf0-0e177a90ec1d",
+        "d6d8df83-6867-5a62-b9ce-ea4a147b89e6",
+        "da0b0413-d5ab-58ca-a6f5-a4ee9b6dca65",
+        "db18bb8d-bf98-582c-b3ce-2f263f68c72a",
+        "ded472a2-fe23-5178-940f-e5e21b97f302",
+        "e1a2139f-241f-59a3-86d6-4f3c070b52a8",
+        "e4e89e65-534f-5585-9118-6844088c7f72",
+        "e530eca8-25cf-558c-ad8a-657e7b7e1a9e",
+        "e79ff60b-de6f-5615-80b1-c5aad27c18c3",
+        "e8ec1b41-575c-5b66-a86f-6ca74e4285f9",
+        "e93f698b-5d46-54cc-ad04-6ba93a3bca57",
+        "ebd009a3-8828-5fe6-b4a3-b8c5b665b7e3",
+        "ed72bf05-8bf4-502e-8ea4-c891a5e02627",
+        "ed82d32a-22f7-543b-9479-d93d3be5c253",
+        "ee62cb16-20a1-578a-83de-235e169d24ce",
+        "f0a9205c-2dc6-5b9b-875b-97ec7169b869",
+        "f687b482-1165-5a65-9efe-8c0042bf05b7",
+        "f7e02f73-64db-578b-bf1f-1c8aa2412126",
+        "f9e0648b-d83a-5894-87a0-fc2ee2de91a8",
+        "fa52c594-a58a-544a-918a-5fc1489215b4",
+        "fe3f9b13-076c-5e3c-8392-ca72b064590e"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_count": 59,
+      "earliest_known_canonical_printing_date": "1995-01-01",
+      "elapsed_days_between_known_date_boundaries": 11499,
+      "evidence_completeness_state": "bounded_phase_135_retained_projection_plus_existing_mb2",
+      "known_finishes": [
+        "foil",
+        "nonfoil"
+      ],
+      "known_languages": [
+        "English"
+      ],
+      "known_treatments": [
+        "1997",
+        "2003",
+        "2015",
+        "future"
+      ],
+      "latest_known_canonical_printing_date": "2026-06-26",
+      "limitations": [
+        "The retained projection is bounded to ten card names and does not prove globally complete printing history.",
+        "Printing count is not supply quantity.",
+        "Unknown promotional and paper-or-digital values remain unknown."
+      ],
+      "post_promotion_canonical_snapshot_identity": "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+      "promotional_dimensions": {
+        "known_nonpromotional_mb2_printing_count": 1,
+        "known_promotional_printing_count": 6,
+        "unknown_promotional_printing_count": 104
+      },
+      "reprint_count": 110,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "set_codes_and_names": [
+        {
+          "code": "40K",
+          "name": "Warhammer 40,000 Commander"
+        },
+        {
+          "code": "AFC",
+          "name": "Forgotten Realms Commander"
+        },
+        {
+          "code": "ANB",
+          "name": "Arena Beginner Set"
+        },
+        {
+          "code": "BLC",
+          "name": "Bloomburrow Commander"
+        },
+        {
+          "code": "BRC",
+          "name": "The Brothers' War Commander"
+        },
+        {
+          "code": "C13",
+          "name": "Commander 2013"
+        },
+        {
+          "code": "C15",
+          "name": "Commander 2015"
+        },
+        {
+          "code": "C16",
+          "name": "Commander 2016"
+        },
+        {
+          "code": "C17",
+          "name": "Commander 2017"
+        },
+        {
+          "code": "C18",
+          "name": "Commander 2018"
+        },
+        {
+          "code": "C19",
+          "name": "Commander 2019"
+        },
+        {
+          "code": "C20",
+          "name": "Commander 2020"
+        },
+        {
+          "code": "C21",
+          "name": "Commander 2021"
+        },
+        {
+          "code": "CC1",
+          "name": "Commander Collection: Green"
+        },
+        {
+          "code": "CC2",
+          "name": "Commander Collection: Black"
+        },
+        {
+          "code": "CLB",
+          "name": "Commander Legends: Battle for Baldur's Gate"
+        },
+        {
+          "code": "CM1",
+          "name": "Commander's Arsenal"
+        },
+        {
+          "code": "CM2",
+          "name": "Commander Anthology Volume II"
+        },
+        {
+          "code": "CMA",
+          "name": "Commander Anthology"
+        },
+        {
+          "code": "CMD",
+          "name": "Commander 2011"
+        },
+        {
+          "code": "CMM",
+          "name": "Commander Masters"
+        },
+        {
+          "code": "CMR",
+          "name": "Commander Legends"
+        },
+        {
+          "code": "DMC",
+          "name": "Dominaria United Commander"
+        },
+        {
+          "code": "DRC",
+          "name": "Aetherdrift Commander"
+        },
+        {
+          "code": "DSC",
+          "name": "Duskmourn: House of Horror Commander"
+        },
+        {
+          "code": "ECC",
+          "name": "Lorwyn Eclipsed Commander"
+        },
+        {
+          "code": "ELD",
+          "name": "Throne of Eldraine"
+        },
+        {
+          "code": "EOC",
+          "name": "Edge of Eternities Commander"
+        },
+        {
+          "code": "FDC",
+          "name": "Foundations Commander"
+        },
+        {
+          "code": "FIC",
+          "name": "Final Fantasy Commander"
+        },
+        {
+          "code": "J12",
+          "name": "Judge Gift Cards 2012"
+        },
+        {
+          "code": "KHC",
+          "name": "Kaldheim Commander"
+        },
+        {
+          "code": "LCC",
+          "name": "The Lost Caverns of Ixalan Commander"
+        },
+        {
+          "code": "LTC",
+          "name": "Tales of Middle-earth Commander"
+        },
+        {
+          "code": "M3C",
+          "name": "Modern Horizons 3 Commander"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "MIC",
+          "name": "Midnight Hunt Commander"
+        },
+        {
+          "code": "MKC",
+          "name": "Murders at Karlov Manor Commander"
+        },
+        {
+          "code": "MOC",
+          "name": "March of the Machine Commander"
+        },
+        {
+          "code": "MSC",
+          "name": "Marvel Super Heroes Commander"
+        },
+        {
+          "code": "NCC",
+          "name": "New Capenna Commander"
+        },
+        {
+          "code": "NEC",
+          "name": "Neon Dynasty Commander"
+        },
+        {
+          "code": "ONC",
+          "name": "Phyrexia: All Will Be One Commander"
+        },
+        {
+          "code": "OTC",
+          "name": "Outlaws of Thunder Junction Commander"
+        },
+        {
+          "code": "PIP",
+          "name": "Fallout"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "PMEI",
+          "name": "Media and Collaboration Promos"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "PW25",
+          "name": "Wizards Play Network 2025"
+        },
+        {
+          "code": "PZ1",
+          "name": "Legendary Cube Prize Pack"
+        },
+        {
+          "code": "SCD",
+          "name": "Starter Commander Decks"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SOC",
+          "name": "Secrets of Strixhaven Commander"
+        },
+        {
+          "code": "TDC",
+          "name": "Tarkir: Dragonstorm Commander"
+        },
+        {
+          "code": "TMC",
+          "name": "Teenage Mutant Ninja Turtles Eternal"
+        },
+        {
+          "code": "VOC",
+          "name": "Crimson Vow Commander"
+        },
+        {
+          "code": "WHO",
+          "name": "Doctor Who"
+        },
+        {
+          "code": "WOC",
+          "name": "Wilds of Eldraine Commander"
+        },
+        {
+          "code": "ZNC",
+          "name": "Zendikar Rising Commander"
+        }
+      ],
+      "special_printing_dimensions": {
+        "digital_printing_count": 4,
+        "source_reprint_false_count": 0,
+        "source_reprint_true_count": 109,
+        "unknown_paper_or_digital_count": 106
+      },
+      "total_known_canonical_printings": 111
+    },
+    "status": "known"
+  }
+}

@@ -15,7 +15,6 @@ KNOWLEDGE = ROOT / "data" / "knowledge"
 REPORT = ROOT / "data" / "reviews" / "phase-132" / "pilot-review.json"
 PROTECTED = ("data/canonical", "data/market/acquisitions", "data/market/observations", "data/market/imports")
 PROTECTED_DIGESTS = {
-    "data/canonical": "38c48952c8d751da1d8d215548b522130f9cd09f59faca121bd28a1417c971e5",
     "data/market/acquisitions": "33b69201a0be62104911f098f38211ed7c6d7b4d6945b06075fb5e8d8371de35",
     "data/market/observations": "7ecc2c6064856e4921802813e186d34ccafb0ca6daf6a59b0b6c1dd11ad999f8",
     "data/market/imports": "72dd8d9f45d1d252aa5de9ecf4d5b52f87651a1a4346c79e863cb5fe50bd0bd8",

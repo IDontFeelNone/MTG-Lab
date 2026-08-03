@@ -1,0 +1,268 @@
+{
+  "confidence": null,
+  "effective_at": "2026-03-06T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Retained Phase 135 evidence supplies 47 supported non-MB2 Printing records for Brainstorm.",
+      "observed_at": "2026-08-03T05:05:31Z",
+      "reference": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/source-pilot-printings.json#card_id=36cd2364-d113-47d1-b2c4-b088d9eb88dd;normalized_sha256=493df83312c8d9271e84a143ed288767d7fbf53d7b4a23bfc2f72af514bc67e6",
+      "source_id": "mtgjson-pilot-30786023976-1",
+      "source_type": "retained_acquisition"
+    },
+    {
+      "claim": "Post-promotion canonical snapshot contains 48 bounded Printings for Brainstorm.",
+      "observed_at": "2026-08-05T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077;card=36cd2364-d113-47d1-b2c4-b088d9eb88dd;printings=48",
+      "source_id": "phase-136-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase136-brainstorm-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-05T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase133-brainstorm-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "01948fd2-486a-5127-aa63-b0ec58c0cba0",
+        "0262b2a0-7b13-50f8-bc9b-8559ff72a105",
+        "0681ed0f-8b2e-5045-b88e-de744b3f494a",
+        "08b34342-8386-5545-ae6f-511931dbc8a0",
+        "08db41aa-4895-5b3a-9369-0b8781a29a4e",
+        "0a3a6730-c14d-5060-a96f-5d5374e7ec2e",
+        "134abd6d-ce3b-51f8-b990-a7b39b809f2b",
+        "176b81b9-c634-5695-a59e-c9fa2d3f251e",
+        "196972e8-9afd-5128-9154-0925917405e5",
+        "1cab0378-a281-5daa-b20c-2fd0e046926a",
+        "1dcca5b4-1cff-519b-acd3-a6405f855a03",
+        "2666c1d9-caa9-57b5-8d8d-86dc7d09bff9",
+        "2819fa50-5740-52fd-92ea-a82a2180e745",
+        "31423e29-7aa1-5fe4-8c92-57dfc075b656",
+        "4c0adaec-7589-5d8b-8331-cd130946f1f8",
+        "5013e019-bf84-53c9-b13a-70043673a95c",
+        "52894677-7541-55da-acd3-76ced43c680b",
+        "52da4241-c9d2-5c6b-b03a-110ca36ee437",
+        "57d450b8-47c4-544f-94c2-e618247d2480",
+        "5e4bc734-2cd5-5dc3-b367-4cf5b8da6f69",
+        "630e95e8-1006-5be7-a798-f83448bc65f8",
+        "64329194-cb04-530b-9763-6c331596a1ad",
+        "643ac4ac-8cd9-5010-ac2a-26de0422e4af",
+        "6e30c494-b858-5162-b532-4fea10269ca8",
+        "6fad7cd6-fbea-57e0-97c2-7f77b380462c",
+        "7c29c77b-f3e0-5dd1-bd0e-b4b3b812e562",
+        "7c4f6e14-cd26-5959-8d10-a36051efb51c",
+        "7e817647-c2b3-5c38-9a75-e43bfa905f42",
+        "81804f37-fb5c-5679-80fb-28fbc8820140",
+        "85041861-3d64-544b-8aa2-97619186a8d0",
+        "8c45184f-2b35-5e4b-abcc-4423bff915f4",
+        "8c8d7cad-2284-57d9-bbf9-d629e5fe3544",
+        "981141a6-ded8-5ed1-ad8f-4cab7d52c5ca",
+        "9dc1f75f-5d1c-518e-9d82-de179d825263",
+        "9e8e87be-236d-5b78-8ff7-320c767b4f41",
+        "9f2cf21b-e242-5e61-a530-2344e7168151",
+        "a4443404-0f7d-5711-9354-5a44dbc4aeef",
+        "a7633923-9e3e-50be-9a12-6a74aea549bb",
+        "b45bc70f-7b32-5d0d-8a9a-bb0c9cfe4d7c",
+        "baa76f04-4212-5aa5-a5cc-9b0810add79a",
+        "c1683c57-1795-53bd-98a9-8e0a05c5a406",
+        "ca755309-6af6-58f4-aa3b-46c39e59a94c",
+        "ca93c747-084d-5211-978c-dd507daa9d52",
+        "de91326d-b96c-5b5d-a357-efd949296c4a",
+        "e2369917-66a1-5c65-a5e3-e2e0567ef293",
+        "e5952095-4e6d-522b-b4b6-7bde781d7529",
+        "f554957d-c601-5a2d-8f30-d6045b4174a9",
+        "fae27cd4-77d3-50ef-9405-a574dc9310cb"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_count": 34,
+      "earliest_known_canonical_printing_date": "1995-06-03",
+      "elapsed_days_between_known_date_boundaries": 11234,
+      "evidence_completeness_state": "bounded_phase_135_retained_projection_plus_existing_mb2",
+      "known_finishes": [
+        "etched",
+        "foil",
+        "nonfoil",
+        "signed"
+      ],
+      "known_languages": [
+        "English",
+        "Japanese"
+      ],
+      "known_treatments": [
+        "1993",
+        "1997",
+        "2003",
+        "2015",
+        "future"
+      ],
+      "latest_known_canonical_printing_date": "2026-03-06",
+      "limitations": [
+        "The retained projection is bounded to ten card names and does not prove globally complete printing history.",
+        "Printing count is not supply quantity.",
+        "Unknown promotional and paper-or-digital values remain unknown."
+      ],
+      "post_promotion_canonical_snapshot_identity": "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+      "promotional_dimensions": {
+        "known_nonpromotional_mb2_printing_count": 1,
+        "known_promotional_printing_count": 5,
+        "unknown_promotional_printing_count": 42
+      },
+      "reprint_count": 47,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "set_codes_and_names": [
+        {
+          "code": "2XM",
+          "name": "Double Masters"
+        },
+        {
+          "code": "40K",
+          "name": "Warhammer 40,000 Commander"
+        },
+        {
+          "code": "5ED",
+          "name": "Fifth Edition"
+        },
+        {
+          "code": "A25",
+          "name": "Masters 25"
+        },
+        {
+          "code": "AFC",
+          "name": "Forgotten Realms Commander"
+        },
+        {
+          "code": "BTD",
+          "name": "Beatdown Box Set"
+        },
+        {
+          "code": "C15",
+          "name": "Commander 2015"
+        },
+        {
+          "code": "C18",
+          "name": "Commander 2018"
+        },
+        {
+          "code": "C21",
+          "name": "Commander 2021"
+        },
+        {
+          "code": "CMD",
+          "name": "Commander 2011"
+        },
+        {
+          "code": "CNS",
+          "name": "Conspiracy"
+        },
+        {
+          "code": "CST",
+          "name": "Coldsnap Theme Decks"
+        },
+        {
+          "code": "DDJ",
+          "name": "Duel Decks: Izzet vs. Golgari"
+        },
+        {
+          "code": "DSC",
+          "name": "Duskmourn: House of Horror Commander"
+        },
+        {
+          "code": "EMA",
+          "name": "Eternal Masters"
+        },
+        {
+          "code": "F04",
+          "name": "Friday Night Magic 2004"
+        },
+        {
+          "code": "FCA",
+          "name": "Final Fantasy: Through the Ages"
+        },
+        {
+          "code": "ICE",
+          "name": "Ice Age"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "ME2",
+          "name": "Masters Edition II"
+        },
+        {
+          "code": "MKC",
+          "name": "Murders at Karlov Manor Commander"
+        },
+        {
+          "code": "MMQ",
+          "name": "Mercadian Masques"
+        },
+        {
+          "code": "OLGC",
+          "name": "Legacy Championship"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "PZ1",
+          "name": "Legendary Cube Prize Pack"
+        },
+        {
+          "code": "PZA",
+          "name": "Teenage Mutant Ninja Turtles Source Material"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SLP",
+          "name": "Secret Lair Promo"
+        },
+        {
+          "code": "SS1",
+          "name": "Signature Spellbook: Jace"
+        },
+        {
+          "code": "STA",
+          "name": "Strixhaven Mystical Archive"
+        },
+        {
+          "code": "TLE",
+          "name": "Avatar: The Last Airbender Eternal"
+        },
+        {
+          "code": "VMA",
+          "name": "Vintage Masters"
+        },
+        {
+          "code": "WC00",
+          "name": "World Championship Decks 2000"
+        }
+      ],
+      "special_printing_dimensions": {
+        "digital_printing_count": 6,
+        "source_reprint_false_count": 0,
+        "source_reprint_true_count": 46,
+        "unknown_paper_or_digital_count": 41
+      },
+      "total_known_canonical_printings": 48
+    },
+    "status": "known"
+  }
+}

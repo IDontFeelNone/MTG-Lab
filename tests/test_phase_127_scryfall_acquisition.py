@@ -35,7 +35,8 @@ class Phase127GTests(unittest.TestCase):
     def setUpClass(cls):
         cls.canonical = (ROOT/"data/canonical/state.json").read_bytes()
         state = json.loads(cls.canonical)
-        cls.printing_id, printing = next(iter(state["printing"].items()))
+        cls.printing_id, printing = next((key, value) for key, value in state["printing"].items()
+                                         if "identifiers" in value["values"])
         values = printing["values"]
         cls.record = {"object":"card", "id":values["identifiers"]["scryfallId"],
             "set":"mb2", "collector_number":values["collector_number"], "lang":"en",

@@ -19,7 +19,11 @@ class Phase128MarketImportTests(unittest.TestCase):
     def copy_data(self, temporary):
         target = Path(temporary) / "data"
         (target / "canonical").mkdir(parents=True)
-        shutil.copy2(ROOT / "data/canonical/state.json", target / "canonical/state.json")
+        state = json.loads((ROOT / "data/canonical/state.json").read_text())
+        audit = json.loads((ROOT / "data/audit/bounded_promotions/phase-136-mtgjson-pilot-30786023976-1.json").read_text())
+        for identity in audit["promoted_printing_ids"]: state["printing"].pop(identity)
+        (target / "canonical/state.json").write_text(json.dumps(state, indent=2, sort_keys=True,
+                                                     ensure_ascii=False) + "\n")
         shutil.copytree(ROOT / "data/market/acquisitions", target / "market/acquisitions")
         return target
 

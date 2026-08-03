@@ -1,0 +1,154 @@
+{
+  "confidence": null,
+  "effective_at": "2026-04-24T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Retained Phase 135 evidence supplies 14 supported non-MB2 Printing records for Treasure Cruise.",
+      "observed_at": "2026-08-03T05:05:31Z",
+      "reference": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/source-pilot-printings.json#card_id=5b6bdf5a-2742-4851-92cd-a857a3852836;normalized_sha256=493df83312c8d9271e84a143ed288767d7fbf53d7b4a23bfc2f72af514bc67e6",
+      "source_id": "mtgjson-pilot-30786023976-1",
+      "source_type": "retained_acquisition"
+    },
+    {
+      "claim": "Post-promotion canonical snapshot contains 15 bounded Printings for Treasure Cruise.",
+      "observed_at": "2026-08-05T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077;card=5b6bdf5a-2742-4851-92cd-a857a3852836;printings=15",
+      "source_id": "phase-136-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase136-treasure-cruise-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-05T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase133-treasure-cruise-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "0e012068-d993-562b-9e48-de1f3197af61",
+        "1b0b818f-83b8-533f-9c81-0026d441c22d",
+        "2a112a05-961c-5898-a9db-b9750dd3e63b",
+        "61fda89e-aaa0-5dbe-ba17-714876581301",
+        "63126e99-a7b5-597b-873e-c6687b7b9601",
+        "90a92698-0b3e-5db3-8df6-1d8fd8168771",
+        "940aa25c-9d02-53d5-b08c-66ba27df68a3",
+        "9e6fe2da-2f73-55cc-9fcb-3672b73b3d93",
+        "b2677be9-2208-5e9d-af6c-5504c666111e",
+        "b6d4cf93-51b9-5498-a5b9-06f2442f5ba7",
+        "b91cbb75-4a9d-5714-900e-464da5f2f58a",
+        "be203d5b-ff93-5bea-9b36-fe27ced6688a",
+        "d681279e-e597-56e3-8d29-984965a1dfe9",
+        "dcb6023f-386d-5c76-acbc-9b28c77fdbec",
+        "ea6d3e62-f06c-54e3-ad7d-862dd200227e"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_count": 15,
+      "earliest_known_canonical_printing_date": "2014-09-26",
+      "elapsed_days_between_known_date_boundaries": 4228,
+      "evidence_completeness_state": "bounded_phase_135_retained_projection_plus_existing_mb2",
+      "known_finishes": [
+        "foil",
+        "nonfoil"
+      ],
+      "known_languages": [
+        "English"
+      ],
+      "known_treatments": [
+        "1997",
+        "2015",
+        "future"
+      ],
+      "latest_known_canonical_printing_date": "2026-04-24",
+      "limitations": [
+        "The retained projection is bounded to ten card names and does not prove globally complete printing history.",
+        "Printing count is not supply quantity.",
+        "Unknown promotional and paper-or-digital values remain unknown."
+      ],
+      "post_promotion_canonical_snapshot_identity": "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+      "promotional_dimensions": {
+        "known_nonpromotional_mb2_printing_count": 1,
+        "known_promotional_printing_count": 1,
+        "unknown_promotional_printing_count": 13
+      },
+      "reprint_count": 14,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "set_codes_and_names": [
+        {
+          "code": "C16",
+          "name": "Commander 2016"
+        },
+        {
+          "code": "C21",
+          "name": "Commander 2021"
+        },
+        {
+          "code": "CM2",
+          "name": "Commander Anthology Volume II"
+        },
+        {
+          "code": "KTK",
+          "name": "Khans of Tarkir"
+        },
+        {
+          "code": "M3C",
+          "name": "Modern Horizons 3 Commander"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "NCC",
+          "name": "New Capenna Commander"
+        },
+        {
+          "code": "OTC",
+          "name": "Outlaws of Thunder Junction Commander"
+        },
+        {
+          "code": "PEWK",
+          "name": "Eternal Weekend"
+        },
+        {
+          "code": "PIO",
+          "name": "Pioneer Masters"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "SOC",
+          "name": "Secrets of Strixhaven Commander"
+        },
+        {
+          "code": "TDC",
+          "name": "Tarkir: Dragonstorm Commander"
+        },
+        {
+          "code": "TSR",
+          "name": "Time Spiral Remastered"
+        },
+        {
+          "code": "UMA",
+          "name": "Ultimate Masters"
+        }
+      ],
+      "special_printing_dimensions": {
+        "digital_printing_count": 1,
+        "source_reprint_false_count": 0,
+        "source_reprint_true_count": 13,
+        "unknown_paper_or_digital_count": 13
+      },
+      "total_known_canonical_printings": 15
+    },
+    "status": "known"
+  }
+}

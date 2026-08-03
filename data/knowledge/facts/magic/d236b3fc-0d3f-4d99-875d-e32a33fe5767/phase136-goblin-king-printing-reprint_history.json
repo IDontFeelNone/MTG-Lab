@@ -1,0 +1,194 @@
+{
+  "confidence": null,
+  "effective_at": "2024-08-02T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Retained Phase 135 evidence supplies 26 supported non-MB2 Printing records for Goblin King.",
+      "observed_at": "2026-08-03T05:05:31Z",
+      "reference": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/source-pilot-printings.json#card_id=d236b3fc-0d3f-4d99-875d-e32a33fe5767;normalized_sha256=493df83312c8d9271e84a143ed288767d7fbf53d7b4a23bfc2f72af514bc67e6",
+      "source_id": "mtgjson-pilot-30786023976-1",
+      "source_type": "retained_acquisition"
+    },
+    {
+      "claim": "Post-promotion canonical snapshot contains 27 bounded Printings for Goblin King.",
+      "observed_at": "2026-08-05T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077;card=d236b3fc-0d3f-4d99-875d-e32a33fe5767;printings=27",
+      "source_id": "phase-136-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase136-goblin-king-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-05T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase133-goblin-king-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "0001e0d0-2dcd-5640-aadc-a84765cf5fc9",
+        "03518f51-fcd0-5891-b365-99f74c0672ec",
+        "07cf806d-907b-5545-a64b-7e90836085f5",
+        "1a29853f-9a3a-5d87-81f6-2f308c4c1583",
+        "1c1b0acd-4006-5bb2-960a-9f9b1a7e2656",
+        "2af24f79-08c5-54bc-a7de-03a19669bc00",
+        "2d03c702-bc5a-599b-a976-8c47708043f9",
+        "2dfa58ac-0663-5f60-9e4f-1e0f9b52ae66",
+        "35b1d6b5-888e-5523-8275-9779ebed31b9",
+        "43d45036-682d-5aa6-acec-84f81ef17308",
+        "514b3f03-d72c-5fd1-afe7-3706b9f3803d",
+        "671b3464-7145-5409-92e7-d7b779a9cff3",
+        "6d4d2d26-dd6f-5f32-9b5e-d6b1cc14e998",
+        "807f5631-3a0f-579e-ac6c-307140903bf2",
+        "9075708d-9c83-519c-aa81-465d35078747",
+        "96f4c588-5cd9-594d-8f30-be4180c80266",
+        "9f46f238-4cb3-5658-922f-772dcc7f0ba2",
+        "a271ba4e-172c-561b-8a18-da839e94ecf9",
+        "a34ac1b3-3e3e-5ccd-849d-ab32c4d72f07",
+        "cb5b435f-d561-55cc-862d-c2082ad96eac",
+        "d29f31ab-7032-5f9b-b218-0062b31db6b3",
+        "d89debde-dec9-5078-8a38-a63031fa9fc7",
+        "dde409a5-9a3a-568b-8612-4d3ff1915f89",
+        "dfe6a29c-f71d-58cb-b478-f57a9393bc66",
+        "e8650f78-41cc-562b-b18a-b20207d716e5",
+        "f02469e5-d2f8-5840-8eed-692ffd481d3a",
+        "f64b7285-28e3-555b-87bd-490d2112e747"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_count": 21,
+      "earliest_known_canonical_printing_date": "1993-08-05",
+      "elapsed_days_between_known_date_boundaries": 11320,
+      "evidence_completeness_state": "bounded_phase_135_retained_projection_plus_existing_mb2",
+      "known_finishes": [
+        "foil",
+        "nonfoil"
+      ],
+      "known_languages": [
+        "English",
+        "French",
+        "Spanish"
+      ],
+      "known_treatments": [
+        "1993",
+        "1997",
+        "2003",
+        "2015",
+        "future"
+      ],
+      "latest_known_canonical_printing_date": "2024-08-02",
+      "limitations": [
+        "The retained projection is bounded to ten card names and does not prove globally complete printing history.",
+        "Printing count is not supply quantity.",
+        "Unknown promotional and paper-or-digital values remain unknown."
+      ],
+      "post_promotion_canonical_snapshot_identity": "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+      "promotional_dimensions": {
+        "known_nonpromotional_mb2_printing_count": 1,
+        "known_promotional_printing_count": 1,
+        "unknown_promotional_printing_count": 25
+      },
+      "reprint_count": 26,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "set_codes_and_names": [
+        {
+          "code": "10E",
+          "name": "Tenth Edition"
+        },
+        {
+          "code": "2ED",
+          "name": "Unlimited Edition"
+        },
+        {
+          "code": "30A",
+          "name": "30th Anniversary Edition"
+        },
+        {
+          "code": "3ED",
+          "name": "Revised Edition"
+        },
+        {
+          "code": "4BB",
+          "name": "Fourth Edition Foreign Black Border"
+        },
+        {
+          "code": "4ED",
+          "name": "Fourth Edition"
+        },
+        {
+          "code": "5ED",
+          "name": "Fifth Edition"
+        },
+        {
+          "code": "6ED",
+          "name": "Classic Sixth Edition"
+        },
+        {
+          "code": "7ED",
+          "name": "Seventh Edition"
+        },
+        {
+          "code": "8ED",
+          "name": "Eighth Edition"
+        },
+        {
+          "code": "9ED",
+          "name": "Ninth Edition"
+        },
+        {
+          "code": "ATH",
+          "name": "Anthologies"
+        },
+        {
+          "code": "CED",
+          "name": "Collectors' Edition"
+        },
+        {
+          "code": "CEI",
+          "name": "Intl. Collectors' Edition"
+        },
+        {
+          "code": "FBB",
+          "name": "Foreign Black Border"
+        },
+        {
+          "code": "LEA",
+          "name": "Limited Edition Alpha"
+        },
+        {
+          "code": "LEB",
+          "name": "Limited Edition Beta"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "PW24",
+          "name": "Wizards Play Network 2024"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SUM",
+          "name": "Summer Magic / Edgar"
+        }
+      ],
+      "special_printing_dimensions": {
+        "digital_printing_count": 0,
+        "source_reprint_false_count": 0,
+        "source_reprint_true_count": 25,
+        "unknown_paper_or_digital_count": 26
+      },
+      "total_known_canonical_printings": 27
+    },
+    "status": "known"
+  }
+}

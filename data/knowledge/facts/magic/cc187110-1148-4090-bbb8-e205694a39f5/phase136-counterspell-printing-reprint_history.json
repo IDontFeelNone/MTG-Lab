@@ -1,0 +1,402 @@
+{
+  "confidence": null,
+  "effective_at": "2026-01-01T00:00:00Z",
+  "evidence": [
+    {
+      "claim": "Retained Phase 135 evidence supplies 83 supported non-MB2 Printing records for Counterspell.",
+      "observed_at": "2026-08-03T05:05:31Z",
+      "reference": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/source-pilot-printings.json#card_id=cc187110-1148-4090-bbb8-e205694a39f5;normalized_sha256=493df83312c8d9271e84a143ed288767d7fbf53d7b4a23bfc2f72af514bc67e6",
+      "source_id": "mtgjson-pilot-30786023976-1",
+      "source_type": "retained_acquisition"
+    },
+    {
+      "claim": "Post-promotion canonical snapshot contains 84 bounded Printings for Counterspell.",
+      "observed_at": "2026-08-05T00:00:00Z",
+      "reference": "data/canonical/state.json#sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077;card=cc187110-1148-4090-bbb8-e205694a39f5;printings=84",
+      "source_id": "phase-136-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase136-counterspell-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-05T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase133-counterspell-printing-reprint_history"
+  ],
+  "value": {
+    "data": {
+      "canonical_printing_ids": [
+        "03debc19-ddaa-5ff2-9474-f2bb9e3210f4",
+        "058b2835-bb69-5d0e-8ca9-182f88c9a0a6",
+        "05dba0c3-4a47-5886-aa9e-9e47a41ffed5",
+        "092a644c-ec10-5544-8caa-b351d694ac59",
+        "10b49a0f-9aa0-5bd5-9258-6ba2519fc5b2",
+        "130c8133-055a-543d-96b4-d59f4d50b4da",
+        "249a6454-e7d4-5bca-a7b6-f59645eeeaa9",
+        "2792b518-6e45-5354-b11c-368a23ce9c9c",
+        "30b90630-2945-5fc0-ac1d-643a19086498",
+        "33ae707b-b9ae-556e-ad6a-943ee2ef3094",
+        "340bc5b9-5ffb-5236-a465-7ea6a02ec0db",
+        "34aa9451-0ad3-5906-a995-915a797737cd",
+        "38dfead8-36ec-50cc-b4f1-6387ad02bc57",
+        "3969b158-16a4-56c5-b07f-09503709f61f",
+        "3e5f449f-1b20-53e9-a562-b0bc2cd46fc0",
+        "401e8986-c5d1-5d58-a8af-5e4986281bc2",
+        "40470d4d-f834-59ae-9af3-de01926a221a",
+        "406b39be-799b-5da8-bc24-e1a8fa056680",
+        "415c4c61-bdbb-5a3e-9670-612c672fc358",
+        "43164596-7a42-5909-b9dc-e6de2ea5cec1",
+        "43a4c626-e28a-58a9-a724-de287a1bd7db",
+        "457b1a1b-f3d6-5376-a350-e51e50f8439c",
+        "4736417b-4bc8-54e6-9323-d31ed922d93e",
+        "4a9061a6-d637-5d18-a9ef-6f53823c9ceb",
+        "4b20eacd-04cc-576e-a439-04b919f70cb6",
+        "4e375944-e89e-5caf-960d-d005c1ca7fb5",
+        "4e5f706e-e67b-5cc9-bf93-dc853d738d13",
+        "4fa6922b-c257-5683-9076-0fecfb45b459",
+        "526fa8a1-efc6-546a-8c4d-0a0df2b5fbad",
+        "52a69744-be41-5c9e-a814-d3794f8726d3",
+        "59aa0dc0-a1eb-5d8e-ae15-5d1f6d0a844b",
+        "61128a5c-452c-5d56-902d-7d8e6770515f",
+        "62bb67cb-120f-5262-815c-39d8228bc1ea",
+        "6301ba5b-4a4e-5074-9e65-7d42388f01a4",
+        "63608db0-7800-524e-ab45-75250a45a7c9",
+        "63c55c67-d47f-5d9f-8718-a9cc8a67e2eb",
+        "64849db6-5f46-53c3-a52c-613fc5ec81a5",
+        "69bb7083-72b6-52b9-b15e-fc01a4b17b59",
+        "760c431b-d372-5165-8b41-f320286e0afa",
+        "779fc0e1-db60-5251-b9ca-63129b00a7ba",
+        "7a264584-27b5-5ba0-b1ee-1a4671ec2d3b",
+        "7b1ef751-82d0-5318-8a19-3e159c8ab41a",
+        "7b37205d-7e17-523f-afaa-a51244b00d4c",
+        "7e5a9e38-b62b-5b60-a095-e672d31a4667",
+        "88311bfc-078e-5c14-b1fd-71d1258b66ab",
+        "a2e27348-8dc9-55cc-87c7-d7a1b5a9d675",
+        "a3b1904e-7d51-5bfe-83fa-1be9b20cbc43",
+        "a3ce1d58-9a0d-5c3c-a0fe-a32e7d47f0ff",
+        "a431d592-5825-5ed3-8201-cd7571860083",
+        "a4941073-a383-563c-82c1-11c661b40172",
+        "a9aec861-8e43-5240-b720-2f48fc4d0731",
+        "b2860b41-ceb3-5ea8-b9ca-17b49b167c2e",
+        "b2c2798e-7bbb-5bef-b35a-11d69c0ef03d",
+        "b3bc7636-77a5-5b57-8251-b60b5b6d13db",
+        "b40a855d-6dcb-5225-8888-421f680a03af",
+        "b74c119e-ad22-5ee0-b04f-cd4df171ff86",
+        "b9deb2bb-c641-54a1-b5f5-5eedfe2a2f00",
+        "bb993a43-6973-5bb7-9ecf-8f4365ea188c",
+        "c60a22de-3f2f-5615-8132-68c93ae0ab62",
+        "c68ed14f-f240-502d-bcca-5a761119f6ce",
+        "c7821295-c4ce-5909-bc00-b4e8296bcf36",
+        "c789d679-f9d7-5f57-ada8-d2540e63124b",
+        "ca9ea15a-862b-5343-baa8-ef27230a4614",
+        "ccedcb38-723e-54c1-936b-7b1ad7200c67",
+        "cdb44c69-b167-50ec-8837-9838960001bb",
+        "d11327bf-5cb6-525f-b5c0-1e7ff11cd84d",
+        "d3589c39-2013-5910-8d03-ff6a53f87483",
+        "d4b95cdb-1704-5939-b4e7-c0dca75555a6",
+        "d5bfe686-da3c-5a8d-9dd5-4a1fe5aaef3d",
+        "d900decd-5c4c-5d38-87aa-de6d9014a4dd",
+        "db8cc3c0-15c1-5334-ab5d-43801f9387dd",
+        "dc8bb2d4-2d9b-5397-9009-d7438aea2572",
+        "dedf6fef-61b7-5c98-bc42-b8302bc3308c",
+        "e5280460-9949-5bf9-95ce-b1a4be15b1ef",
+        "e555abc7-47d6-5fed-b063-27b319b44b8c",
+        "e8dfca3d-b578-5b55-ac4a-a7e5ea447789",
+        "ea54c194-9696-5a50-b6b8-f8ed687fc664",
+        "ec278a69-306d-5fa8-830e-0d3a8ebaa97c",
+        "ecc0b2f0-259e-516d-9eba-b19bccf0135f",
+        "ed07da55-3e1f-55a7-8d64-f5093c3c1239",
+        "ee6896d4-1cb0-5d17-ab97-2ea3233040c9",
+        "f174a5e5-a8f2-526d-a3cf-98f0ee4381cd",
+        "f8f3f292-1437-5172-a0cd-aeca689365b2",
+        "feed4411-8557-5cb7-bd1a-ac34e2afa460"
+      ],
+      "coverage_state": "incomplete",
+      "distinct_canonical_set_count": 58,
+      "earliest_known_canonical_printing_date": "1993-08-05",
+      "elapsed_days_between_known_date_boundaries": 11837,
+      "evidence_completeness_state": "bounded_phase_135_retained_projection_plus_existing_mb2",
+      "known_finishes": [
+        "etched",
+        "foil",
+        "nonfoil",
+        "signed"
+      ],
+      "known_languages": [
+        "English",
+        "French",
+        "Japanese",
+        "Spanish"
+      ],
+      "known_treatments": [
+        "1993",
+        "1997",
+        "2003",
+        "2015",
+        "future"
+      ],
+      "latest_known_canonical_printing_date": "2026-01-01",
+      "limitations": [
+        "The retained projection is bounded to ten card names and does not prove globally complete printing history.",
+        "Printing count is not supply quantity.",
+        "Unknown promotional and paper-or-digital values remain unknown."
+      ],
+      "post_promotion_canonical_snapshot_identity": "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+      "promotional_dimensions": {
+        "known_nonpromotional_mb2_printing_count": 1,
+        "known_promotional_printing_count": 13,
+        "unknown_promotional_printing_count": 70
+      },
+      "reprint_count": 83,
+      "reprint_count_definition": "max(total distinct canonical printings - 1, 0)",
+      "set_codes_and_names": [
+        {
+          "code": "2ED",
+          "name": "Unlimited Edition"
+        },
+        {
+          "code": "30A",
+          "name": "30th Anniversary Edition"
+        },
+        {
+          "code": "3ED",
+          "name": "Revised Edition"
+        },
+        {
+          "code": "4BB",
+          "name": "Fourth Edition Foreign Black Border"
+        },
+        {
+          "code": "4ED",
+          "name": "Fourth Edition"
+        },
+        {
+          "code": "5ED",
+          "name": "Fifth Edition"
+        },
+        {
+          "code": "6ED",
+          "name": "Classic Sixth Edition"
+        },
+        {
+          "code": "7ED",
+          "name": "Seventh Edition"
+        },
+        {
+          "code": "A25",
+          "name": "Masters 25"
+        },
+        {
+          "code": "BRB",
+          "name": "Battle Royale Box Set"
+        },
+        {
+          "code": "BTD",
+          "name": "Beatdown Box Set"
+        },
+        {
+          "code": "CED",
+          "name": "Collectors' Edition"
+        },
+        {
+          "code": "CEI",
+          "name": "Intl. Collectors' Edition"
+        },
+        {
+          "code": "CMM",
+          "name": "Commander Masters"
+        },
+        {
+          "code": "CMR",
+          "name": "Commander Legends"
+        },
+        {
+          "code": "DD2",
+          "name": "Duel Decks: Jace vs. Chandra"
+        },
+        {
+          "code": "DMR",
+          "name": "Dominaria Remastered"
+        },
+        {
+          "code": "DSC",
+          "name": "Duskmourn: House of Horror Commander"
+        },
+        {
+          "code": "EMA",
+          "name": "Eternal Masters"
+        },
+        {
+          "code": "F05",
+          "name": "Friday Night Magic 2005"
+        },
+        {
+          "code": "FBB",
+          "name": "Foreign Black Border"
+        },
+        {
+          "code": "FCA",
+          "name": "Final Fantasy: Through the Ages"
+        },
+        {
+          "code": "G00",
+          "name": "Judge Gift Cards 2000"
+        },
+        {
+          "code": "GN3",
+          "name": "Game Night: Free-for-All"
+        },
+        {
+          "code": "ICE",
+          "name": "Ice Age"
+        },
+        {
+          "code": "JVC",
+          "name": "Duel Decks Anthology: Jace vs. Chandra"
+        },
+        {
+          "code": "LEA",
+          "name": "Limited Edition Alpha"
+        },
+        {
+          "code": "LEB",
+          "name": "Limited Edition Beta"
+        },
+        {
+          "code": "MAR",
+          "name": "Marvel Universe"
+        },
+        {
+          "code": "MB2",
+          "name": "Mystery Booster 2"
+        },
+        {
+          "code": "ME2",
+          "name": "Masters Edition II"
+        },
+        {
+          "code": "ME4",
+          "name": "Masters Edition IV"
+        },
+        {
+          "code": "MH2",
+          "name": "Modern Horizons 2"
+        },
+        {
+          "code": "MMQ",
+          "name": "Mercadian Masques"
+        },
+        {
+          "code": "MP2",
+          "name": "Amonkhet Invocations"
+        },
+        {
+          "code": "OMB",
+          "name": "Through the Omenpaths Bonus Sheet"
+        },
+        {
+          "code": "PF24",
+          "name": "MagicFest 2024"
+        },
+        {
+          "code": "PF26",
+          "name": "MagicFest 2026"
+        },
+        {
+          "code": "PLGM",
+          "name": "DCI Legend Membership"
+        },
+        {
+          "code": "PLST",
+          "name": "The List"
+        },
+        {
+          "code": "PMEI",
+          "name": "Media and Collaboration Promos"
+        },
+        {
+          "code": "PRM",
+          "name": "Magic Online Promos"
+        },
+        {
+          "code": "PTC",
+          "name": "Pro Tour Collector Set"
+        },
+        {
+          "code": "PURL",
+          "name": "URL/Convention Promos"
+        },
+        {
+          "code": "S99",
+          "name": "Starter 1999"
+        },
+        {
+          "code": "SCD",
+          "name": "Starter Commander Decks"
+        },
+        {
+          "code": "SLD",
+          "name": "Secret Lair Drop"
+        },
+        {
+          "code": "SS1",
+          "name": "Signature Spellbook: Jace"
+        },
+        {
+          "code": "STA",
+          "name": "Strixhaven Mystical Archive"
+        },
+        {
+          "code": "SUM",
+          "name": "Summer Magic / Edgar"
+        },
+        {
+          "code": "TMP",
+          "name": "Tempest"
+        },
+        {
+          "code": "TPR",
+          "name": "Tempest Remastered"
+        },
+        {
+          "code": "VMA",
+          "name": "Vintage Masters"
+        },
+        {
+          "code": "WC00",
+          "name": "World Championship Decks 2000"
+        },
+        {
+          "code": "WC01",
+          "name": "World Championship Decks 2001"
+        },
+        {
+          "code": "WC02",
+          "name": "World Championship Decks 2002"
+        },
+        {
+          "code": "WC97",
+          "name": "World Championship Decks 1997"
+        },
+        {
+          "code": "WC98",
+          "name": "World Championship Decks 1998"
+        }
+      ],
+      "special_printing_dimensions": {
+        "digital_printing_count": 9,
+        "source_reprint_false_count": 0,
+        "source_reprint_true_count": 82,
+        "unknown_paper_or_digital_count": 74
+      },
+      "total_known_canonical_printings": 84
+    },
+    "status": "known"
+  }
+}

@@ -13,7 +13,6 @@ ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "data" / "knowledge"
 REPORT = ROOT / "data" / "reviews" / "phase-133" / "pilot-review.json"
 PROTECTED_DIGESTS = {
-    "data/canonical": "38c48952c8d751da1d8d215548b522130f9cd09f59faca121bd28a1417c971e5",
     "data/market/acquisitions": "33b69201a0be62104911f098f38211ed7c6d7b4d6945b06075fb5e8d8371de35",
     "data/market/observations": "7ecc2c6064856e4921802813e186d34ccafb0ca6daf6a59b0b6c1dd11ad999f8",
     "data/market/imports": "72dd8d9f45d1d252aa5de9ecf4d5b52f87651a1a4346c79e863cb5fe50bd0bd8",
@@ -75,11 +74,13 @@ class Phase133PrintingHistoryTests(unittest.TestCase):
             history = query.printing_history("magic", card["card_id"], include_superseded=True)
             self.assertEqual(active["count"], 1)
             self.assertEqual(active["facts"][0]["value"]["status"], "known")
-            self.assertEqual(history["count"], 2)
+            self.assertEqual(active["facts"][0]["fact_id"].split("-", 1)[0], "phase136")
+            self.assertEqual(history["count"], 3)
             self.assertEqual(Counter(x["value"]["status"] for x in history["facts"]),
-                             {"unknown": 1, "known": 1})
-            self.assertEqual(active["evidence_sources"],
-                             ["phase-119-canonical-state", "scryfall-mb2-30754638264-1"])
+                             {"unknown": 1, "known": 2})
+            phase133 = [x for x in history["facts"] if x["fact_id"].startswith("phase133-")]
+            self.assertEqual(len(phase133), 1)
+            self.assertEqual(len(phase133[0]["value"]["data"]["canonical_printing_ids"]), 1)
 
     def test_invalid_supersession_duplicate_and_replay_fail_closed(self):
         with tempfile.TemporaryDirectory() as temporary:
