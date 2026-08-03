@@ -1,3 +1,7 @@
+# Phase 135 printing evidence retention boundary
+
+Phase 135 is evidence acquisition only. It creates no Card Intelligence fact and does not supersede the ten Phase 133 incomplete reprint-history facts. Its bounded MTGJSON projection preserves provider printing UUID, oracle ID when supplied, card/set coordinates, date, language, finishes, rarity, frame/treatment, promo/reprint/digital flags, source identity, and publication timestamp. Missing provider fields are the literal `unknown`; nothing is guessed. Production acquisition remains pending because the official endpoint was inaccessible from this environment.
+
 # Phase 134 retained-evidence gap
 
 Phase 134 did not append Card Intelligence facts. The retained reviewed MTGJSON payload boundary

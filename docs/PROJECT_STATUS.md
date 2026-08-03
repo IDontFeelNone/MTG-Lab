@@ -1,3 +1,9 @@
+# Phase 135 status — implementation ready; acquisition transport blocked
+
+Phase 134 is merged at `7453469`. Its retained-evidence report confirms zero supported non-MB2 pilot Printings. The 90 Phase 132 facts, ten Phase 133 superseding facts, ten incomplete active histories, one MB2 Printing per pilot Card, and 478 Phase 128 observations remain unchanged. Architecture v12 remains frozen.
+
+Phase 135 adds a fail-closed MTGJSON AllPrintings gzip acquisition and bounded-retention implementation. The official provider request was attempted on 2026-08-03 but the execution proxy returned HTTP 403 before a source response. Consequently no acquisition run identity or retained production directory was fabricated, and canonical, knowledge, and market data were not changed. Re-run the documented command where the approved endpoint is reachable.
+
 # Phase 134 status — stopped at retained-evidence gap
 
 Phase 133 is merged at `ca5756c`. Baseline verification found the ten-card Phase 132/133

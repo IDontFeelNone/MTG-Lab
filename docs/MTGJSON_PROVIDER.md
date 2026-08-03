@@ -110,3 +110,29 @@ mtg-lab provider mtgjson plan PATH [--format json]
 Future promotion, if separately authorized, must register immutable artifacts and datasets,
 complete validation and independent review, create a promotion candidate, and use the existing
 Canonical Promotion Engine. Provider output can never promote itself.
+
+## Phase 135 bounded pilot retention
+
+The approved Phase 135 source is the official `https://mtgjson.com/api/v5/AllPrintings.json.gz`
+publication (MTGJSON v5, gzip, `application/gzip` or `application/octet-stream`). MTGJSON is
+attributed and assessed as CC BY 4.0; retaining the small attributed projection is compatible,
+while the complete downloaded corpus remains staging-only and must not enter Git. The target is
+exactly the ten names in `PILOT`, resolved with provider printing UUIDs and oracle identifiers;
+MB2 and unrelated records are excluded.
+
+Run from a provider-accessible environment, substituting an independently computed canonical
+snapshot identity and the actual UTC acquisition instant:
+
+```bash
+PYTHONPATH=src python scripts/retain_pilot_printings.py \
+  --run-id phase-135-mtgjson-YYYYMMDD-DIGEST \
+  --canonical-snapshot sha256:DIGEST \
+  --acquired-at YYYY-MM-DDTHH:MM:SSZ
+```
+
+The run retains exactly `acquisition-report.json`, `manifest.json`, and
+`source-pilot-printings.json` under `data/evidence/phase-135/<run-id>/`. Publication uses staging
+and atomic rename. Exact replay is accepted without overwriting; changed bytes under an existing
+identity fail closed. Download, parse, validation, or publication failure removes staging and
+leaves an existing directory untouched. This evidence does not authorize promotion: Phase 134
+must be retried separately through its bounded review and promotion controls.

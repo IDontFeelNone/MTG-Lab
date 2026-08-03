@@ -1,3 +1,7 @@
+# Phase 135 session state — acquisition transport blocked
+
+Baseline merge `7453469` satisfies the Phase 134 preconditions. Implementation lives in `src/production_evidence/pilot_printings.py`, the operator entry point is `scripts/retain_pilot_printings.py`, and focused coverage is in `tests/test_phase_135_pilot_printings.py`. The 2026-08-03 official MTGJSON request failed at the network proxy with HTTP 403, so source bytes were not received and no production manifest, projection, or report was published. Protected data remains unchanged.
+
 # Phase 134 session state — evidence gate blocked
 
 Baseline `ca5756c` merges Phase 133. The retained MTGJSON lineage identifies version 5.3.0,
