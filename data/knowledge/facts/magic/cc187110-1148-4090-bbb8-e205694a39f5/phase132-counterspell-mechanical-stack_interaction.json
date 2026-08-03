@@ -1,0 +1,29 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Retained MB2 record for Counterspell.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase132-counterspell-mechanical-stack_interaction",
+  "kind": "deck_role",
+  "predicate": "mechanical.stack_interaction",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "claim": "Counters a target spell."
+    },
+    "status": "known"
+  }
+}

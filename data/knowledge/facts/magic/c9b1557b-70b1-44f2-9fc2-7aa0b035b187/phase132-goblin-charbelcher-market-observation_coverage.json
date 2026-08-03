@@ -1,0 +1,34 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Goblin Charbelcher.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/ae50d6ba-a87e-5f9e-a786-a19e41245daf",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-goblin-charbelcher-market-observation_coverage",
+  "kind": "market_observation_coverage",
+  "predicate": "market.observation_coverage",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "count": 2,
+      "observation_ids": [
+        "a180ae5805535802104b3f9b37320cf179b503751d9760ba4b2b8072db8addd0",
+        "b3276a20b603ca5edb97aae6a8f3009f71b6042a73edcc9352410b9e2f14221b"
+      ],
+      "printing_id": "ae50d6ba-a87e-5f9e-a786-a19e41245daf"
+    },
+    "status": "known"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Canonical Card and MB2 Printing records for Counterspell.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase132-counterspell-product-mystery_booster_2",
+  "kind": "product_membership",
+  "predicate": "product.mystery_booster_2",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "printing_id": "d5bfe686-da3c-5a8d-9dd5-4a1fe5aaef3d",
+      "product_id": "mystery_booster_2",
+      "set_code": "MB2"
+    },
+    "status": "known"
+  }
+}

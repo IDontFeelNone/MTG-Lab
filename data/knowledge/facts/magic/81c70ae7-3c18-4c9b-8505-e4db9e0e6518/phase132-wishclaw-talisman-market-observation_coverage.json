@@ -1,0 +1,33 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Wishclaw Talisman.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/afa5e761-735f-5d33-8058-76a11e5151e8",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-wishclaw-talisman-market-observation_coverage",
+  "kind": "market_observation_coverage",
+  "predicate": "market.observation_coverage",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "count": 1,
+      "observation_ids": [
+        "f96ad2424b14cfa299f60870f09a5fc728271727c9f66e791d2c1dbf9dc18404"
+      ],
+      "printing_id": "afa5e761-735f-5d33-8058-76a11e5151e8"
+    },
+    "status": "known"
+  }
+}

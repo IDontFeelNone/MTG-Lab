@@ -1,0 +1,34 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Swords to Plowshares.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/4049d45f-34ab-5001-b086-efab6a908a53",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-swords-to-plowshares-market-observation_coverage",
+  "kind": "market_observation_coverage",
+  "predicate": "market.observation_coverage",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "count": 2,
+      "observation_ids": [
+        "1585124a681bc8bad1d40fc991876db54cee0f8bca3fb8c75af8b4cdaa8bcad9",
+        "c0609914b7d67bba241bbd2c1d2aaa83aeabe76603827b4ccbe95fb616d27191"
+      ],
+      "printing_id": "4049d45f-34ab-5001-b086-efab6a908a53"
+    },
+    "status": "known"
+  }
+}

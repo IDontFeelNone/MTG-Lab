@@ -1,0 +1,38 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Counterspell.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/d5bfe686-da3c-5a8d-9dd5-4a1fe5aaef3d",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-counterspell-market-usd_market_dimensions",
+  "kind": "market_price_availability",
+  "predicate": "market.usd_market_dimensions",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": [
+      {
+        "currency": "USD",
+        "finish": "foil",
+        "price_type": "market"
+      },
+      {
+        "currency": "USD",
+        "finish": "nonfoil",
+        "price_type": "market"
+      }
+    ],
+    "status": "known"
+  }
+}

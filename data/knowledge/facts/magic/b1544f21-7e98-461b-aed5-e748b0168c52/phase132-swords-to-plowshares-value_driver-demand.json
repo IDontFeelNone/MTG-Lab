@@ -1,0 +1,27 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Retained MB2 record for Swords to Plowshares.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase132-swords-to-plowshares-value_driver-demand",
+  "kind": "demand",
+  "predicate": "value_driver.demand",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": null,
+    "status": "unknown"
+  }
+}

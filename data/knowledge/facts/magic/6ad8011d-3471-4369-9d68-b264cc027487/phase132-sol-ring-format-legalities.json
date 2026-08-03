@@ -1,0 +1,51 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Retained MB2 record for Sol Ring.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase132-sol-ring-format-legalities",
+  "kind": "legality",
+  "predicate": "format.legalities",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "alchemy": "not_legal",
+      "brawl": "not_legal",
+      "commander": "legal",
+      "competitivebrawl": "not_legal",
+      "duel": "banned",
+      "future": "not_legal",
+      "gladiator": "not_legal",
+      "historic": "not_legal",
+      "legacy": "banned",
+      "modern": "not_legal",
+      "oathbreaker": "banned",
+      "oldschool": "not_legal",
+      "pauper": "not_legal",
+      "paupercommander": "not_legal",
+      "penny": "not_legal",
+      "pioneer": "not_legal",
+      "predh": "legal",
+      "premodern": "not_legal",
+      "standard": "not_legal",
+      "standardbrawl": "not_legal",
+      "timeless": "not_legal",
+      "tlr": "banned",
+      "vintage": "restricted"
+    },
+    "status": "known"
+  }
+}

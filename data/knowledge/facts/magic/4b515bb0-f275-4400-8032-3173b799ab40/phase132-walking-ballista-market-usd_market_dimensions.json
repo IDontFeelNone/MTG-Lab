@@ -1,0 +1,38 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Walking Ballista.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/1a7455eb-28cb-5ffc-9339-2a3b95fd3c95",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-walking-ballista-market-usd_market_dimensions",
+  "kind": "market_price_availability",
+  "predicate": "market.usd_market_dimensions",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": [
+      {
+        "currency": "USD",
+        "finish": "foil",
+        "price_type": "market"
+      },
+      {
+        "currency": "USD",
+        "finish": "nonfoil",
+        "price_type": "market"
+      }
+    ],
+    "status": "known"
+  }
+}

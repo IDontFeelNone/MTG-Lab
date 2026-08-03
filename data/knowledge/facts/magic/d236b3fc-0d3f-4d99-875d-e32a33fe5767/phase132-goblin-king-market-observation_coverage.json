@@ -1,0 +1,34 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Goblin King.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/a271ba4e-172c-561b-8a18-da839e94ecf9",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-goblin-king-market-observation_coverage",
+  "kind": "market_observation_coverage",
+  "predicate": "market.observation_coverage",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "count": 2,
+      "observation_ids": [
+        "3bf71adc3af2e196c60965a2a99fbb417baa7df421c8b41598e51fb1b9829c3f",
+        "65154cd11b4a290bf73900a545261d2c2dde098cd2debd9c82e608c775fea753"
+      ],
+      "printing_id": "a271ba4e-172c-561b-8a18-da839e94ecf9"
+    },
+    "status": "known"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Retained MB2 record for Sol Ring.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase132-sol-ring-mechanical-mana_acceleration",
+  "kind": "mana_acceleration",
+  "predicate": "mechanical.mana_acceleration",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "claim": "Produces two colorless mana when tapped."
+    },
+    "status": "known"
+  }
+}

@@ -1,3 +1,11 @@
+# Next task after Phase 132
+
+After review and merge, a recommended Phase 133 may retain and review one bounded dataset that
+directly supports currently unknown Card Intelligence predicates, such as printing/reprint history.
+It must append evidence-bound facts without scraping in tests, inference, scoring, recommendations,
+canonical or market mutation, or promotion. Competitive usage, Commander demand, supply, and
+market-catalyst claims must remain unknown or absent until predicate-specific evidence is retained.
+
 # Next task after Phase 131
 
 After review and merge, populate Card Intelligence only through a separately approved,

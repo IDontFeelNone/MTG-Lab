@@ -18,7 +18,9 @@ _KINDS = frozenset({"legality", "archetype_usage", "popularity", "reprint_histor
     "reserved_status", "product_exclusivity", "scarcity", "supply", "demand",
     "synergy", "mechanical_theme", "tribal_theme", "combo", "tutor",
     "infinite_combo", "mana_acceleration", "removal", "card_advantage",
-    "win_condition", "staple", "deck_role", "market_catalyst"})
+    "win_condition", "staple", "deck_role", "market_catalyst",
+    "product_membership", "treatment_availability", "market_price_availability",
+    "market_observation_coverage", "evidence_gap"})
 
 
 class KnowledgeValidationError(ValueError):

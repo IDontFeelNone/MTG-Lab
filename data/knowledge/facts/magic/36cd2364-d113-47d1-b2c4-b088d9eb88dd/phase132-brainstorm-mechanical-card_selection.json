@@ -1,0 +1,29 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Retained MB2 record for Brainstorm.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase132-brainstorm-mechanical-card_selection",
+  "kind": "deck_role",
+  "predicate": "mechanical.card_selection",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "claim": "Draws three cards, then returns two cards from hand to the library."
+    },
+    "status": "known"
+  }
+}

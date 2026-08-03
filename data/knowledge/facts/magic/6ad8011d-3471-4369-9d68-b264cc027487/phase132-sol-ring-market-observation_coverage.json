@@ -1,0 +1,34 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Sol Ring.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/b43c646f-797d-5b5f-8ade-142486708c88",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-sol-ring-market-observation_coverage",
+  "kind": "market_observation_coverage",
+  "predicate": "market.observation_coverage",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "count": 2,
+      "observation_ids": [
+        "07ac74f0fe4793452fa5995b607e9c1cb7be5b8e6a669174a702061083a50b8f",
+        "0d22e98000432ac62efec1e98feb613e8e63555fb7cc81bc4f62be7754924f4d"
+      ],
+      "printing_id": "b43c646f-797d-5b5f-8ade-142486708c88"
+    },
+    "status": "known"
+  }
+}

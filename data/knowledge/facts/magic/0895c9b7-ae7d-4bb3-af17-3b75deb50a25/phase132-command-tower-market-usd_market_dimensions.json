@@ -1,0 +1,33 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Command Tower.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/e1a2139f-241f-59a3-86d6-4f3c070b52a8",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-command-tower-market-usd_market_dimensions",
+  "kind": "market_price_availability",
+  "predicate": "market.usd_market_dimensions",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": [
+      {
+        "currency": "USD",
+        "finish": "foil",
+        "price_type": "market"
+      }
+    ],
+    "status": "known"
+  }
+}

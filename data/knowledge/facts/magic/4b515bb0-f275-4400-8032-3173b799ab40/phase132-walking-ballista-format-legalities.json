@@ -1,0 +1,51 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Retained MB2 record for Walking Ballista.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/acquisitions/scryfall-mb2-30754638264-1/source-mb2.json",
+      "source_id": "scryfall-mb2-30754638264-1",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase132-walking-ballista-format-legalities",
+  "kind": "legality",
+  "predicate": "format.legalities",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "alchemy": "not_legal",
+      "brawl": "not_legal",
+      "commander": "legal",
+      "competitivebrawl": "not_legal",
+      "duel": "legal",
+      "future": "not_legal",
+      "gladiator": "not_legal",
+      "historic": "not_legal",
+      "legacy": "legal",
+      "modern": "legal",
+      "oathbreaker": "legal",
+      "oldschool": "not_legal",
+      "pauper": "not_legal",
+      "paupercommander": "not_legal",
+      "penny": "not_legal",
+      "pioneer": "banned",
+      "predh": "not_legal",
+      "premodern": "not_legal",
+      "standard": "not_legal",
+      "standardbrawl": "not_legal",
+      "timeless": "not_legal",
+      "tlr": "legal",
+      "vintage": "legal"
+    },
+    "status": "known"
+  }
+}
