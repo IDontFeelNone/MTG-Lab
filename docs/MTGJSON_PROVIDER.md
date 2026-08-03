@@ -1,3 +1,22 @@
+# Phase 135C MTGJSON checksum-sidecar repair
+
+The official MTGJSON `AllPrintings.json.gz.sha256` response observed by the hosted pilot uses the
+digest-only convention: one 64-hex SHA-256 value with an optional final newline, not a
+filename-bearing record. Phase 135B required exactly two whitespace fields, so it misreported the
+genuine one-field response as an unexpected filename. That run made one checksum request, zero
+source requests, and no production write.
+
+The bounded parser accepts digest-only, GNU text (`digest  AllPrintings.json.gz`), GNU binary
+(`digest *AllPrintings.json.gz`), and BSD (`SHA256 (AllPrintings.json.gz) = digest`) forms. A
+presented filename must be exactly `AllPrintings.json.gz`; URLs, credentials, absolute paths,
+relative prefixes (including `./`), traversal, and alternate basenames are rejected. UTF-8 is
+strict, the maximum is 1,024 bytes, and controls, NUL, extra lines, multiple digests, and malformed
+syntax fail closed. Diagnostics retain only byte count, sidecar SHA-256, detected syntax, bounded
+escaped text, candidate filename, and reason code—never corpus bytes. Source download remains after
+parsing, and streamed source bytes must match the parsed SHA-256 before processing or retention.
+
+---
+
 # Phase 108B Scryfall identifier-collision policy
 
 The official Phase 108A rerun advanced past Deckbox validation and reported `scryfallId` `0001e77a-7fff-49d2-a55c-42f6fdf6db08` more than once. The official artifact and its records are not available in this environment (direct access returned HTTP 403), so the only verified corpus evidence here is the workflow's namespace and value. Consequently, the collision is **classification 4: ambiguous or unsupported**, not a demonstrated exception to Scryfall global printing identity.

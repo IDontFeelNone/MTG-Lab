@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import socket
 import ssl
@@ -29,6 +30,72 @@ CHECKSUM_HEADERS = {
 }
 ALLOWED_HOSTS = frozenset({"mtgjson.com", "www.mtgjson.com"})
 MAX_REDIRECTS = 5
+MAX_CHECKSUM_SIDECAR_BYTES = 1024
+CHECKSUM_DIAGNOSTIC_TEXT_BYTES = 256
+SHA256_RE = re.compile(r"[0-9A-Fa-f]{64}")
+GNU_CHECKSUM_RE = re.compile(r"([0-9A-Fa-f]{64}) ( ([^\r\n]+)|\*([^\r\n]+))")
+BSD_CHECKSUM_RE = re.compile(r"SHA256 \(([^\r\n]+)\) = ([0-9A-Fa-f]{64})")
+
+
+def _checksum_failure(reason: str, message: str, metadata: dict[str, object]):
+    raise AcquisitionTransportError(
+        "malformed_checksum", message, {**metadata, "checksum_failure_reason": reason})
+
+
+def _validate_checksum_filename(filename: str, metadata: dict[str, object]) -> None:
+    metadata["checksum_filename_candidate"] = filename
+    # A checksum filename is an identifier, not a location.  Keeping this boundary
+    # to one exact basename avoids URL, credential, traversal and path ambiguity.
+    if filename != "AllPrintings.json.gz":
+        _checksum_failure("unsafe_or_unexpected_filename", "checksum sidecar named an unexpected file", metadata)
+
+
+def parse_checksum_sidecar(payload: bytes) -> tuple[str, dict[str, object]]:
+    """Parse one bounded, conventional SHA-256 sidecar, failing closed."""
+    metadata: dict[str, object] = {
+        "checksum_sidecar_byte_count": len(payload),
+        "checksum_sidecar_sha256": hashlib.sha256(payload).hexdigest(),
+        "checksum_sidecar_text_escaped": ascii(payload[:CHECKSUM_DIAGNOSTIC_TEXT_BYTES]),
+        "checksum_sidecar_text_truncated": len(payload) > CHECKSUM_DIAGNOSTIC_TEXT_BYTES,
+    }
+    if len(payload) > MAX_CHECKSUM_SIDECAR_BYTES:
+        _checksum_failure("sidecar_too_large", "checksum sidecar was too large", metadata)
+    if b"\x00" in payload:
+        _checksum_failure("nul_byte", "checksum sidecar contained a NUL byte", metadata)
+    try:
+        text = payload.decode("utf-8", errors="strict")
+    except UnicodeDecodeError:
+        _checksum_failure("invalid_utf8", "checksum sidecar was not valid UTF-8", metadata)
+    if any(ord(character) < 32 and character not in "\n" for character in text) or "\x7f" in text:
+        _checksum_failure("control_character", "checksum sidecar contained a control character", metadata)
+    if text.endswith("\n"):
+        text = text[:-1]
+    if "\n" in text:
+        _checksum_failure("extra_line", "checksum sidecar contained extra lines", metadata)
+
+    candidates = SHA256_RE.findall(text)
+    if len(candidates) > 1:
+        _checksum_failure("multiple_digests", "checksum sidecar contained multiple SHA-256 digests", metadata)
+
+    filename = None
+    if SHA256_RE.fullmatch(text):
+        syntax, digest = "digest_only", text
+    elif match := GNU_CHECKSUM_RE.fullmatch(text):
+        digest = match.group(1)
+        if match.group(3) is not None:
+            syntax, filename = "gnu_text", match.group(3)
+        else:
+            syntax, filename = "gnu_binary", match.group(4)
+    elif match := BSD_CHECKSUM_RE.fullmatch(text):
+        syntax, filename, digest = "bsd", match.group(1), match.group(2)
+    else:
+        metadata["checksum_syntax"] = "unknown"
+        reason = "malformed_digest" if len(candidates) != 1 else "unsupported_syntax"
+        _checksum_failure(reason, "checksum sidecar did not use a supported SHA-256 syntax", metadata)
+    metadata["checksum_syntax"] = syntax
+    if filename is not None:
+        _validate_checksum_filename(filename, metadata)
+    return digest.lower(), metadata
 
 
 def safe_url_descriptor(url: str) -> str:
@@ -133,20 +200,13 @@ class MTGJSONDownloader:
                 raise AcquisitionTransportError("timeout", f"{kind} request timed out") from None
             raise AcquisitionTransportError("transport_error", f"{kind} transport failed") from None
 
-    @staticmethod
-    def parse_checksum(payload: bytes) -> str:
-        if len(payload) > 4096:
-            raise AcquisitionTransportError("malformed_checksum", "checksum sidecar was too large")
+    def parse_checksum(self, payload: bytes) -> str:
         try:
-            line = payload.decode("ascii").strip()
-        except UnicodeDecodeError:
-            raise AcquisitionTransportError("malformed_checksum", "checksum sidecar was not ASCII") from None
-        fields = line.split()
-        if len(fields) != 2 or fields[1].lstrip("*") != "AllPrintings.json.gz":
-            raise AcquisitionTransportError("malformed_checksum", "checksum sidecar named an unexpected file")
-        digest = fields[0].lower()
-        if len(digest) != 64 or any(character not in "0123456789abcdef" for character in digest):
-            raise AcquisitionTransportError("malformed_checksum", "checksum sidecar did not contain a SHA-256")
+            digest, metadata = parse_checksum_sidecar(payload)
+        except AcquisitionTransportError as error:
+            self.diagnostic.update(error.metadata)
+            raise
+        self.diagnostic.update(metadata)
         return digest
 
     def __call__(self, url: str, target: Path) -> dict:
@@ -154,7 +214,7 @@ class MTGJSONDownloader:
         self.diagnostic.update({"requested_source_descriptor": safe_url_descriptor(url),
                                 "checksum_descriptor": safe_url_descriptor(checksum_url)})
         with self._request(checksum_url, CHECKSUM_HEADERS, "checksum") as response:
-            expected = self.parse_checksum(response.read(4097))
+            expected = self.parse_checksum(response.read(MAX_CHECKSUM_SIDECAR_BYTES + 1))
         digest = hashlib.sha256()
         byte_count = 0
         with self._request(url, SOURCE_HEADERS, "source") as response, target.open("xb") as output:

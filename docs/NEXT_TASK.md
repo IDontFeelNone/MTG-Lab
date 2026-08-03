@@ -1,4 +1,11 @@
-# Next task — manually rerun repaired Phase 135 acquisition exactly once
+# Next task — rerun the repaired Phase 135C pilot acquisition exactly once
+
+After Phase 135C merges, manually dispatch **Pilot printing acquisition** exactly once. Confirm the
+diagnostic reports `digest_only`, one checksum request, and one checksum-verified source request;
+then review the exact three-file evidence PR. Stop before canonical promotion, Card Intelligence
+supersession, or market writes.
+
+# Historical Phase 135B instruction
 
 After Phase 135B merges, manually dispatch **Pilot printing acquisition** exactly once. Review the
 bounded transport diagnostic and the resulting evidence PR; do not automatically merge it. The
