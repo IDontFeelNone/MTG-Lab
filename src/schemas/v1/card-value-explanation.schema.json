@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.local/schemas/v1/card-value-explanation.schema.json",
+  "title": "Card Value Explanation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "explanation_generated_at", "card_identity", "canonical_snapshot", "evidence_sections", "evidence_counts", "limitations", "provenance"],
+  "properties": {
+    "schema_version": {"const": "card-value-explanation-v1"},
+    "explanation_generated_at": {"type": "string", "format": "date-time"},
+    "card_identity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["game_id", "card_id", "name"],
+      "properties": {"game_id": {"const": "magic"}, "card_id": {"type": "string", "minLength": 1}, "name": {"type": "string", "minLength": 1}}
+    },
+    "canonical_snapshot": {"type": "object", "required": ["identity", "path", "sha256", "card"], "additionalProperties": false,
+      "properties": {"identity": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}, "path": {"const": "data/canonical/state.json"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "card": {"type": "object"}}},
+    "evidence_sections": {"type": "object", "additionalProperties": false,
+      "required": ["printing_history", "market", "rules", "evidence_quality"],
+      "properties": {
+        "printing_history": {"type": "object", "required": ["total_retained_printings", "total_retained_reprints", "first_retained_printing", "latest_retained_printing", "distinct_retained_sets", "finishes", "treatments", "promotional_variants", "coverage_state", "evidence_completeness_state"]},
+        "market": {"type": "object", "additionalProperties": false, "required": ["observation_count", "first_observation", "latest_observation", "provider_coverage", "supported_currencies", "observation_span"], "properties": {"observation_count": {"type": "integer", "minimum": 0}, "first_observation": {"type": ["string", "null"], "format": "date-time"}, "latest_observation": {"type": ["string", "null"], "format": "date-time"}, "provider_coverage": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}, "supported_currencies": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}, "observation_span": {"type": ["object", "null"]}}},
+        "rules": {"type": "object", "additionalProperties": false, "required": ["oracle_text", "mechanical_roles", "legality", "product_membership"], "properties": {"oracle_text": {"type": ["string", "null"]}, "mechanical_roles": {"type": "array"}, "legality": {"type": ["object", "null"]}, "product_membership": {"type": "array"}}},
+        "evidence_quality": {"type": "object", "additionalProperties": false, "required": ["known", "unknown", "incomplete", "unsupported"], "properties": {"known": {"type": "array", "items": {"type": "string"}}, "unknown": {"type": "array", "items": {"type": "string"}}, "incomplete": {"type": "array", "items": {"type": "string"}}, "unsupported": {"type": "array", "items": {"type": "string"}}}}
+      }
+    },
+    "evidence_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "provenance": {"type": "object", "required": ["canonical", "knowledge_fact_ids", "knowledge_evidence_source_ids", "market_observation_ids", "input_only"], "properties": {"input_only": {"const": true}}}
+  }
+}

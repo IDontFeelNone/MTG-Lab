@@ -1,3 +1,17 @@
+# Phase 137 — explainable Card Value evidence engine complete
+
+Current state: `card-value-explanation-v1` is available for exactly Brainstorm, Command Tower,
+Counterspell, Goblin Charbelcher, Goblin King, Sol Ring, Swords to Plowshares, Treasure Cruise,
+Walking Ballista, and Wishclaw Talisman. The engine reads canonical state, active reviewed facts, and
+market observations and emits deterministic evidence summaries with provenance and explicit quality
+states. Its timestamp is derived from retained recording timestamps, not wall-clock time.
+
+Protected state remains 913 canonical Printings, 534 promoted non-MB2 pilot Printings, 478 immutable
+market observations, and ten complete active Phase 136 histories at canonical digest
+`881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077`. No acquisition,
+canonical/market/knowledge write, inference, value score, price prediction, ranking, or recommendation
+occurred. Architecture v12 is unchanged.
+
 # Phase 137 — pilot Printing-history audit complete
 
 Phase 137 performed a deterministic, read-only audit of the Phase 136 pilot history. The baseline is

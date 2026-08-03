@@ -1,3 +1,22 @@
+# Phase 137 — explainable Card Value evidence engine complete
+
+Phase 137 adds the first deterministic, read-only explanation layer for exactly the ten reviewed pilot
+Cards. `card-value-explanation-v1` combines the canonical snapshot, active reviewed Card Intelligence
+facts, and retained market-observation coverage into Printing History, Market, Rules, and Evidence
+Quality sections. It reports counts, dates, dimensions, explicit unknown/incomplete/unsupported states,
+limitations, and exact input provenance. Its generation timestamp is the latest retained input recording
+time, so identical repositories produce byte-identical JSON.
+
+The CLI supports `python -m card_intelligence.cli explain Sol Ring` and `explain --card-id <id>`.
+It rejects non-pilot Cards and ambiguous input. It never reports observed price amounts, calculates a
+numeric value or score, ranks Cards, predicts prices, infers demand/popularity/scarcity, or recommends
+an action. There is no writer or network path.
+
+Baseline protection is confirmed: 913 canonical Printings, 534 promoted non-MB2 pilot Printings, 478
+market observations, and ten complete active Phase 136 printing-history facts. Canonical identity
+`881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077` and Architecture v12
+remain frozen. Canonical, knowledge, market, and retained evidence inputs are unchanged.
+
 # Phase 137 — pilot Printing-history audit complete
 
 Phase 137 performed a deterministic, read-only audit of the Phase 136 pilot history. The baseline is

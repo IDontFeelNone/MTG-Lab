@@ -1,5 +1,13 @@
 # Next task — Phase 138
 
+Phase 137's read-only explainable Card Value evidence engine is complete for the ten-card pilot. Owner
+review should select Phase 138. A safe expansion path is to add separately retained and reviewed
+Commander usage, tournament results, inventory, or demand evidence to the knowledge layer before
+teaching explanations to present those categories. Do not infer missing evidence, expand card coverage,
+score value, predict prices, rank cards, or recommend actions. Architecture v12 remains frozen.
+
+# Next task — Phase 138
+
 Phase 137 is complete. Select the next evidence-quality phase through owner review. A recommended
 Phase 138 is a read-only design and gap assessment for provider-supported border/treatment and
 field-level provenance presentation, without acquisition, canonical expansion, promotion, new facts,
