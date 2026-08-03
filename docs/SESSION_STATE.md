@@ -1,3 +1,12 @@
+# Phase 134 session state — evidence gate blocked
+
+Baseline `ca5756c` merges Phase 133. The retained MTGJSON lineage identifies version 5.3.0,
+2026-07-31, source digest `b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09`,
+but the repository retains only twelve reviewed MB2/MSH candidate payloads rather than the source
+bytes. Deterministic inspection found no non-MB2 pilot Printing. Promotion and Phase 134 fact
+supersession were prohibited by the user's evidence gate. Canonical, market, acquisition, Phase
+132, and Phase 133 bytes remain unchanged; inference and external acquisition are false.
+
 # Phase 133 session state
 
 Baseline `ef2606c` merges Phase 132: ten Cards, 90 facts, and ten explicit unknown

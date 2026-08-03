@@ -1,3 +1,13 @@
+# Next task after the blocked Phase 134 assessment
+
+A future separately authorized phase may retain a checksum-verified, approved printing-level
+dataset whose actual bytes include non-MB2 records for exactly the ten pilot Cards. It must then
+use the existing candidate/review/promotion controls and re-run Phase 134 from canonical pre-state
+`793a364794e12002dd561a47a42333332ae7dd64a958fc18903b0cc2381de27f`. Do not treat the current
+MB2/MSH candidate payloads as the full AllPrintings dataset, derive Printings from set membership,
+or infer missing coordinates. Until adequate bytes are retained, do not promote or supersede the
+Phase 133 histories.
+
 # Next task after Phase 133
 
 After review and merge, a recommended Phase 134 may retain and review a bounded, approved dataset
