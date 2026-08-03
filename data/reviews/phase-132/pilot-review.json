@@ -1,0 +1,376 @@
+{
+  "canonical_write": false,
+  "cards_with_incomplete_evidence": [
+    {
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Brainstorm"
+    },
+    {
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Command Tower"
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Counterspell"
+    },
+    {
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Goblin Charbelcher"
+    },
+    {
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Goblin King"
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Sol Ring"
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Swords to Plowshares"
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Treasure Cruise"
+    },
+    {
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Walking Ballista"
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "gaps": [
+        "demand",
+        "reprint_history"
+      ],
+      "name": "Wishclaw Talisman"
+    }
+  ],
+  "changed_files": [
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase132-command-tower-format-legalities.json",
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase132-command-tower-market-observation_coverage.json",
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase132-command-tower-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase132-command-tower-mechanical-mana_fixing.json",
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase132-command-tower-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase132-command-tower-printing-finishes.json",
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase132-command-tower-printing-reprint_history.json",
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase132-command-tower-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/0895c9b7-ae7d-4bb3-af17-3b75deb50a25/phase132-command-tower-value_driver-demand.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase132-brainstorm-format-legalities.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase132-brainstorm-market-observation_coverage.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase132-brainstorm-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase132-brainstorm-mechanical-card_selection.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase132-brainstorm-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase132-brainstorm-printing-finishes.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase132-brainstorm-printing-reprint_history.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase132-brainstorm-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/36cd2364-d113-47d1-b2c4-b088d9eb88dd/phase132-brainstorm-value_driver-demand.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase132-walking-ballista-format-legalities.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase132-walking-ballista-market-observation_coverage.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase132-walking-ballista-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase132-walking-ballista-mechanical-direct_damage.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase132-walking-ballista-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase132-walking-ballista-printing-finishes.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase132-walking-ballista-printing-reprint_history.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase132-walking-ballista-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/4b515bb0-f275-4400-8032-3173b799ab40/phase132-walking-ballista-value_driver-demand.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase132-treasure-cruise-format-legalities.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase132-treasure-cruise-market-observation_coverage.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase132-treasure-cruise-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase132-treasure-cruise-mechanical-draw_three.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase132-treasure-cruise-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase132-treasure-cruise-printing-finishes.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase132-treasure-cruise-printing-reprint_history.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase132-treasure-cruise-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/5b6bdf5a-2742-4851-92cd-a857a3852836/phase132-treasure-cruise-value_driver-demand.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase132-sol-ring-format-legalities.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase132-sol-ring-market-observation_coverage.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase132-sol-ring-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase132-sol-ring-mechanical-mana_acceleration.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase132-sol-ring-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase132-sol-ring-printing-finishes.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase132-sol-ring-printing-reprint_history.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase132-sol-ring-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/6ad8011d-3471-4369-9d68-b264cc027487/phase132-sol-ring-value_driver-demand.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase132-wishclaw-talisman-format-legalities.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase132-wishclaw-talisman-market-observation_coverage.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase132-wishclaw-talisman-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase132-wishclaw-talisman-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase132-wishclaw-talisman-mechanical-unrestricted_tutor.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase132-wishclaw-talisman-printing-finishes.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase132-wishclaw-talisman-printing-reprint_history.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase132-wishclaw-talisman-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/81c70ae7-3c18-4c9b-8505-e4db9e0e6518/phase132-wishclaw-talisman-value_driver-demand.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase132-swords-to-plowshares-format-legalities.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase132-swords-to-plowshares-market-observation_coverage.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase132-swords-to-plowshares-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase132-swords-to-plowshares-mechanical-creature_removal.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase132-swords-to-plowshares-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase132-swords-to-plowshares-printing-finishes.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase132-swords-to-plowshares-printing-reprint_history.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase132-swords-to-plowshares-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/b1544f21-7e98-461b-aed5-e748b0168c52/phase132-swords-to-plowshares-value_driver-demand.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase132-goblin-charbelcher-format-legalities.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase132-goblin-charbelcher-market-observation_coverage.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase132-goblin-charbelcher-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase132-goblin-charbelcher-mechanical-damage_source.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase132-goblin-charbelcher-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase132-goblin-charbelcher-printing-finishes.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase132-goblin-charbelcher-printing-reprint_history.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase132-goblin-charbelcher-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/c9b1557b-70b1-44f2-9fc2-7aa0b035b187/phase132-goblin-charbelcher-value_driver-demand.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase132-counterspell-format-legalities.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase132-counterspell-market-observation_coverage.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase132-counterspell-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase132-counterspell-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase132-counterspell-mechanical-stack_interaction.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase132-counterspell-printing-finishes.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase132-counterspell-printing-reprint_history.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase132-counterspell-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/cc187110-1148-4090-bbb8-e205694a39f5/phase132-counterspell-value_driver-demand.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase132-goblin-king-format-legalities.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase132-goblin-king-market-observation_coverage.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase132-goblin-king-market-usd_market_dimensions.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase132-goblin-king-mechanical-oracle_text.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase132-goblin-king-printing-finishes.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase132-goblin-king-printing-reprint_history.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase132-goblin-king-product-mystery_booster_2.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase132-goblin-king-tribal-goblin.json",
+    "data/knowledge/facts/magic/d236b3fc-0d3f-4d99-875d-e32a33fe5767/phase132-goblin-king-value_driver-demand.json",
+    "data/reviews/phase-132/pilot-review.json",
+    "docs/CARD_INTELLIGENCE.md",
+    "docs/HANDOFF.md",
+    "docs/MARKET_INTELLIGENCE.md",
+    "docs/NEXT_TASK.md",
+    "docs/PROJECT_STATUS.md",
+    "src/card_intelligence/models.py",
+    "src/schemas/v1/card-knowledge-fact.schema.json",
+    "tests/test_phase_132_card_intelligence_pilot.py"
+  ],
+  "evidence_source_count": 3,
+  "evidence_sources": [
+    "phase-119-canonical-state",
+    "phase-128-market-observations",
+    "scryfall-mb2-30754638264-1"
+  ],
+  "explicit_unknown_count": 20,
+  "fact_count_by_knowledge_kind": {
+    "card_advantage": 1,
+    "deck_role": 4,
+    "demand": 10,
+    "legality": 10,
+    "mana_acceleration": 1,
+    "market_observation_coverage": 10,
+    "market_price_availability": 10,
+    "mechanical_theme": 10,
+    "product_membership": 10,
+    "removal": 2,
+    "reprint_history": 10,
+    "treatment_availability": 10,
+    "tribal_theme": 1,
+    "tutor": 1
+  },
+  "fact_ids": [
+    "phase132-command-tower-mechanical-mana_fixing",
+    "phase132-command-tower-value_driver-demand",
+    "phase132-command-tower-format-legalities",
+    "phase132-command-tower-market-observation_coverage",
+    "phase132-command-tower-market-usd_market_dimensions",
+    "phase132-command-tower-mechanical-oracle_text",
+    "phase132-command-tower-product-mystery_booster_2",
+    "phase132-command-tower-printing-reprint_history",
+    "phase132-command-tower-printing-finishes",
+    "phase132-brainstorm-mechanical-card_selection",
+    "phase132-brainstorm-value_driver-demand",
+    "phase132-brainstorm-format-legalities",
+    "phase132-brainstorm-market-observation_coverage",
+    "phase132-brainstorm-market-usd_market_dimensions",
+    "phase132-brainstorm-mechanical-oracle_text",
+    "phase132-brainstorm-product-mystery_booster_2",
+    "phase132-brainstorm-printing-reprint_history",
+    "phase132-brainstorm-printing-finishes",
+    "phase132-walking-ballista-value_driver-demand",
+    "phase132-walking-ballista-format-legalities",
+    "phase132-walking-ballista-market-observation_coverage",
+    "phase132-walking-ballista-market-usd_market_dimensions",
+    "phase132-walking-ballista-mechanical-oracle_text",
+    "phase132-walking-ballista-product-mystery_booster_2",
+    "phase132-walking-ballista-mechanical-direct_damage",
+    "phase132-walking-ballista-printing-reprint_history",
+    "phase132-walking-ballista-printing-finishes",
+    "phase132-treasure-cruise-mechanical-draw_three",
+    "phase132-treasure-cruise-value_driver-demand",
+    "phase132-treasure-cruise-format-legalities",
+    "phase132-treasure-cruise-market-observation_coverage",
+    "phase132-treasure-cruise-market-usd_market_dimensions",
+    "phase132-treasure-cruise-mechanical-oracle_text",
+    "phase132-treasure-cruise-product-mystery_booster_2",
+    "phase132-treasure-cruise-printing-reprint_history",
+    "phase132-treasure-cruise-printing-finishes",
+    "phase132-sol-ring-value_driver-demand",
+    "phase132-sol-ring-format-legalities",
+    "phase132-sol-ring-mechanical-mana_acceleration",
+    "phase132-sol-ring-market-observation_coverage",
+    "phase132-sol-ring-market-usd_market_dimensions",
+    "phase132-sol-ring-mechanical-oracle_text",
+    "phase132-sol-ring-product-mystery_booster_2",
+    "phase132-sol-ring-printing-reprint_history",
+    "phase132-sol-ring-printing-finishes",
+    "phase132-wishclaw-talisman-value_driver-demand",
+    "phase132-wishclaw-talisman-format-legalities",
+    "phase132-wishclaw-talisman-market-observation_coverage",
+    "phase132-wishclaw-talisman-market-usd_market_dimensions",
+    "phase132-wishclaw-talisman-mechanical-oracle_text",
+    "phase132-wishclaw-talisman-product-mystery_booster_2",
+    "phase132-wishclaw-talisman-printing-reprint_history",
+    "phase132-wishclaw-talisman-printing-finishes",
+    "phase132-wishclaw-talisman-mechanical-unrestricted_tutor",
+    "phase132-swords-to-plowshares-value_driver-demand",
+    "phase132-swords-to-plowshares-format-legalities",
+    "phase132-swords-to-plowshares-market-observation_coverage",
+    "phase132-swords-to-plowshares-market-usd_market_dimensions",
+    "phase132-swords-to-plowshares-mechanical-oracle_text",
+    "phase132-swords-to-plowshares-product-mystery_booster_2",
+    "phase132-swords-to-plowshares-mechanical-creature_removal",
+    "phase132-swords-to-plowshares-printing-reprint_history",
+    "phase132-swords-to-plowshares-printing-finishes",
+    "phase132-goblin-charbelcher-mechanical-damage_source",
+    "phase132-goblin-charbelcher-value_driver-demand",
+    "phase132-goblin-charbelcher-format-legalities",
+    "phase132-goblin-charbelcher-market-observation_coverage",
+    "phase132-goblin-charbelcher-market-usd_market_dimensions",
+    "phase132-goblin-charbelcher-mechanical-oracle_text",
+    "phase132-goblin-charbelcher-product-mystery_booster_2",
+    "phase132-goblin-charbelcher-printing-reprint_history",
+    "phase132-goblin-charbelcher-printing-finishes",
+    "phase132-counterspell-mechanical-stack_interaction",
+    "phase132-counterspell-value_driver-demand",
+    "phase132-counterspell-format-legalities",
+    "phase132-counterspell-market-observation_coverage",
+    "phase132-counterspell-market-usd_market_dimensions",
+    "phase132-counterspell-mechanical-oracle_text",
+    "phase132-counterspell-product-mystery_booster_2",
+    "phase132-counterspell-printing-reprint_history",
+    "phase132-counterspell-printing-finishes",
+    "phase132-goblin-king-value_driver-demand",
+    "phase132-goblin-king-format-legalities",
+    "phase132-goblin-king-market-observation_coverage",
+    "phase132-goblin-king-market-usd_market_dimensions",
+    "phase132-goblin-king-mechanical-oracle_text",
+    "phase132-goblin-king-product-mystery_booster_2",
+    "phase132-goblin-king-printing-reprint_history",
+    "phase132-goblin-king-printing-finishes",
+    "phase132-goblin-king-tribal-goblin"
+  ],
+  "inference_performed": false,
+  "known_fact_count": 70,
+  "limitations": "The pilot is a bounded evidence inventory, not a complete explanation of demand or card value.",
+  "pilot_id": "phase-132-mb2-reviewed-pilot-v1",
+  "promotion_performed": false,
+  "schema_version": "card-intelligence-pilot-review-v1",
+  "selected_cards": [
+    {
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "name": "Brainstorm",
+      "selection_rationale": "Exercises deck_role using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "name": "Command Tower",
+      "selection_rationale": "Exercises deck_role using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "name": "Counterspell",
+      "selection_rationale": "Exercises deck_role using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "name": "Goblin Charbelcher",
+      "selection_rationale": "Exercises deck_role using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "name": "Goblin King",
+      "selection_rationale": "Exercises tribal_theme using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "name": "Sol Ring",
+      "selection_rationale": "Exercises mana_acceleration using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "name": "Swords to Plowshares",
+      "selection_rationale": "Exercises removal using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "name": "Treasure Cruise",
+      "selection_rationale": "Exercises card_advantage using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "name": "Walking Ballista",
+      "selection_rationale": "Exercises removal using retained rules text; selection does not use price."
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "name": "Wishclaw Talisman",
+      "selection_rationale": "Exercises tutor using retained rules text; selection does not use price."
+    }
+  ],
+  "selection_method": "Fixed ascending card-name list chosen to span distinct rules-text-supported roles; price was not a selection input.",
+  "total_facts_created": 90,
+  "unsupported_assertions_deliberately_excluded": [
+    "archetype placement",
+    "collectibility",
+    "combo participation",
+    "competitive staple status",
+    "Commander demand or staple status",
+    "investment merit",
+    "market catalysts",
+    "popularity",
+    "price-based value conclusion",
+    "scarcity",
+    "supply",
+    "tournament usage",
+    "undervaluation"
+  ]
+}

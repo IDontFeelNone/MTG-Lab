@@ -9,7 +9,7 @@
     "schema_version": {"const": "card-knowledge-fact-v1"},
     "fact_id": {"$ref": "#/$defs/id"},
     "subject": {"type": "object", "additionalProperties": false, "required": ["game_id", "card_id"], "properties": {"game_id": {"$ref": "#/$defs/id"}, "card_id": {"$ref": "#/$defs/id"}}},
-    "kind": {"enum": ["legality", "archetype_usage", "popularity", "reprint_history", "reserved_status", "product_exclusivity", "scarcity", "supply", "demand", "synergy", "mechanical_theme", "tribal_theme", "combo", "tutor", "infinite_combo", "mana_acceleration", "removal", "card_advantage", "win_condition", "staple", "deck_role", "market_catalyst"]},
+    "kind": {"enum": ["legality", "archetype_usage", "popularity", "reprint_history", "reserved_status", "product_exclusivity", "scarcity", "supply", "demand", "synergy", "mechanical_theme", "tribal_theme", "combo", "tutor", "infinite_combo", "mana_acceleration", "removal", "card_advantage", "win_condition", "staple", "deck_role", "market_catalyst", "product_membership", "treatment_availability", "market_price_availability", "market_observation_coverage", "evidence_gap"]},
     "predicate": {"$ref": "#/$defs/id"},
     "value": {"oneOf": [
       {"type": "object", "additionalProperties": false, "required": ["status", "data"], "properties": {"status": {"const": "unknown"}, "data": {"type": "null"}}},

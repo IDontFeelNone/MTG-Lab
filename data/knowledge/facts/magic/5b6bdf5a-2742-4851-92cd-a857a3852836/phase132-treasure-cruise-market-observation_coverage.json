@@ -1,0 +1,33 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Treasure Cruise.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/0e012068-d993-562b-9e48-de1f3197af61",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-treasure-cruise-market-observation_coverage",
+  "kind": "market_observation_coverage",
+  "predicate": "market.observation_coverage",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "count": 1,
+      "observation_ids": [
+        "1b7fb742448f9859c4070482fcb181f241fa6259d60baf4f799f2e65f79fafc3"
+      ],
+      "printing_id": "0e012068-d993-562b-9e48-de1f3197af61"
+    },
+    "status": "known"
+  }
+}

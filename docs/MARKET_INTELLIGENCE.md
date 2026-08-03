@@ -1,3 +1,11 @@
+# Phase 132 Card Intelligence market boundary
+
+The ten-card reviewed pilot records only whether existing immutable USD/market observation
+dimensions are available and the exact observation coverage for each selected MB2 Printing. It does
+not interpret price, calculate value, infer demand, identify a catalyst, rank a card, or recommend an
+action. Every card's demand predicate is explicitly unknown. The 478 Phase 128 observations and
+all acquisition/import evidence remain byte-unchanged.
+
 # Phase 131 Card Intelligence boundary
 
 Card Intelligence is a separate knowledge repository, not a market observation store. Its facts may

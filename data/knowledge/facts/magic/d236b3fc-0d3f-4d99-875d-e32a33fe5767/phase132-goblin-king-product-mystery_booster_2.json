@@ -1,0 +1,31 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Canonical Card and MB2 Printing records for Goblin King.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase132-goblin-king-product-mystery_booster_2",
+  "kind": "product_membership",
+  "predicate": "product.mystery_booster_2",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "printing_id": "a271ba4e-172c-561b-8a18-da839e94ecf9",
+      "product_id": "mystery_booster_2",
+      "set_code": "MB2"
+    },
+    "status": "known"
+  }
+}

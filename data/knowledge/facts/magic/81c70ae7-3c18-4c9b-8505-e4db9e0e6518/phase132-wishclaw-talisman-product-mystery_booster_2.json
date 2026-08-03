@@ -1,0 +1,31 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Canonical Card and MB2 Printing records for Wishclaw Talisman.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase132-wishclaw-talisman-product-mystery_booster_2",
+  "kind": "product_membership",
+  "predicate": "product.mystery_booster_2",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "printing_id": "afa5e761-735f-5d33-8058-76a11e5151e8",
+      "product_id": "mystery_booster_2",
+      "set_code": "MB2"
+    },
+    "status": "known"
+  }
+}

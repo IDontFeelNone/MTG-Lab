@@ -1,0 +1,31 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Canonical Card and MB2 Printing records for Sol Ring.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase132-sol-ring-product-mystery_booster_2",
+  "kind": "product_membership",
+  "predicate": "product.mystery_booster_2",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "printing_id": "b43c646f-797d-5b5f-8ade-142486708c88",
+      "product_id": "mystery_booster_2",
+      "set_code": "MB2"
+    },
+    "status": "known"
+  }
+}

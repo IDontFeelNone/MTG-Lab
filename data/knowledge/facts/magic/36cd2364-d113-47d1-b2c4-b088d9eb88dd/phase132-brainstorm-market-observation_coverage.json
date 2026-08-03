@@ -1,0 +1,34 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Immutable market observations for the MB2 printing of Brainstorm.",
+      "observed_at": "2026-08-02T09:09:45.851000Z",
+      "reference": "data/market/observations/printing/643ac4ac-8cd9-5010-ac2a-26de0422e4af",
+      "source_id": "phase-128-market-observations",
+      "source_type": "observation_repository"
+    }
+  ],
+  "fact_id": "phase132-brainstorm-market-observation_coverage",
+  "kind": "market_observation_coverage",
+  "predicate": "market.observation_coverage",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "count": 2,
+      "observation_ids": [
+        "8f0df03ec3cded9b5d1c640439326314be158202f05a173aa52639574fd9f873",
+        "a444986bb7c273ddb6b472ad846082dcd6f89d854ddd529ae4eabf0c4fa71ed9"
+      ],
+      "printing_id": "643ac4ac-8cd9-5010-ac2a-26de0422e4af"
+    },
+    "status": "known"
+  }
+}

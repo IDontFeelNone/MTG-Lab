@@ -1,0 +1,27 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-02T09:09:45.851000Z",
+  "evidence": [
+    {
+      "claim": "Canonical Card and MB2 Printing records for Walking Ballista.",
+      "observed_at": "2026-08-01T00:00:00Z",
+      "reference": "data/canonical/state.json",
+      "source_id": "phase-119-canonical-state",
+      "source_type": "canonical_snapshot"
+    }
+  ],
+  "fact_id": "phase132-walking-ballista-printing-reprint_history",
+  "kind": "reprint_history",
+  "predicate": "printing.reprint_history",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": null,
+    "status": "unknown"
+  }
+}

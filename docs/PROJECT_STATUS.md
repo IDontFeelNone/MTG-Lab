@@ -1,3 +1,13 @@
+# Phase 132 status — first reviewed Card Intelligence facts
+
+Phase 131 is merged at `0e2b89c`. Pilot `phase-132-mb2-reviewed-pilot-v1` adds 90 reviewed,
+evidence-bound facts for ten deterministic MB2 Cards: 70 known assertions and 20 explicit
+unknowns. The facts cover retained rules text and mechanical roles, legalities, product membership,
+finishes, market dimension availability, and observation coverage; demand and reprint history remain
+unknown. No staple, popularity, scarcity, collectibility, combo, archetype, catalyst, valuation, or
+recommendation claim is made. Canonical data and the 478 market observations are unchanged, no
+inference or promotion occurred, and Architecture v12 remains frozen.
+
 # Phase 131 status — Card Intelligence Knowledge Layer foundation
 
 Phase 130 is merged at `4e34eaf`. Card Intelligence v1 adds a game-agnostic, deterministic

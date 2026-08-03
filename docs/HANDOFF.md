@@ -1,3 +1,12 @@
+# Phase 132 handoff — first reviewed Card Intelligence facts
+
+Phase 131 is merged at `0e2b89c`. The Phase 132 pilot adds exactly 90 append-only production facts
+for ten alphabetically ordered MB2 Cards, with 70 known values and 20 explicit unknowns. Use the
+existing `CardKnowledgeQuery` projections to inspect all/active, value-driver, legality, archetype,
+catalyst, evidence-source, and confidence results. Archetype and catalyst results are intentionally
+empty. The deterministic review is `data/reviews/phase-132/pilot-review.json`. Canonical data,
+acquisitions, imports, and all 478 observations are unchanged; inference and promotion are false.
+
 # Phase 130 historical-query handoff
 
 Baseline `73fb1de` contains Phase 129 and the unchanged Phase 128 production corpus: 478 immutable
