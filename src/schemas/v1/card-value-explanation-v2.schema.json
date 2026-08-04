@@ -159,6 +159,10 @@
         "observed_price_evidence": {
           "additionalProperties": false,
           "properties": {
+            "history_readiness": {
+              "type": "object",
+              "required": ["acquisition_count", "comparable_dimension_count", "single_snapshot_dimension_count", "multi_snapshot_dimension_count", "readiness_state", "supports_descriptive_movement", "readiness_statement"]
+            },
             "compatible_dimension_summaries": {
               "items": {
                 "required": [
@@ -235,6 +239,7 @@
             "summary",
             "observations",
             "compatible_dimension_summaries"
+            ,"history_readiness"
           ],
           "type": "object"
         },

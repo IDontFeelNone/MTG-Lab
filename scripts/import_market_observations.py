@@ -145,6 +145,8 @@ def import_acquisition(data_root: Path, acquisition_run_id: str, *, fail_after: 
         "coverage_growth": {"before": before_count, "after": len(before | matched_printings),
                             "newly_covered": len((before | matched_printings) - before)},
         "historical_observation_count": history_before + len(observations),
+        "observation_inventory_digest": _digest(canonical_json(sorted(
+            x.observation_id for x in observations))),
         "append_verification": {"existing_observations_preserved": True,
                                 "new_observations_byte_verified": True},
         "replay_verification": {"byte_identical_replay": True, "conflicting_replay_rejected": True},

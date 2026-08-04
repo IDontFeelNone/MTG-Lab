@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from market.intelligence import MarketObservationRepository
+from market.reporting import history_readiness
 
 from .repository import KnowledgeRepository
 
@@ -239,7 +240,8 @@ class CardValueExplanationEngine:
         return {"ordering": ["canonical_printing_id", "provider", "finish", "language",
                              "currency", "price_type", "source_timestamp", "observation_id"],
                 "summary": summary, "observations": rendered,
-                "compatible_dimension_summaries": dimension_summaries}
+                "compatible_dimension_summaries": dimension_summaries,
+                "history_readiness": history_readiness(list(observations))}
 
     @staticmethod
     def _price_quality(base: dict[str, Any], observations) -> dict[str, Any]:

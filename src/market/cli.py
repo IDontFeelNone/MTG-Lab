@@ -35,6 +35,8 @@ def main(argv=None) -> int:
         if name == "list": command.add_argument("--limit", type=int, default=DEFAULT_LIMIT,
                                                   help=f"result limit (1-{MAX_LIMIT}; default {DEFAULT_LIMIT})")
     history = commands.add_parser("printing-history"); history.add_argument("printing_id"); _filters(history, printing=False)
+    readiness = commands.add_parser("history-readiness")
+    readiness.add_argument("--printing-id", required=True); _filters(readiness, printing=False)
     coverage = commands.add_parser("coverage"); coverage.add_argument("--product", required=True)
     acquisition = commands.add_parser("acquisition-summary"); acquisition.add_argument("run_id")
     snapshot = commands.add_parser("snapshot"); _filters(snapshot, as_of=False); snapshot.add_argument("--as-of", required=True)
@@ -43,6 +45,7 @@ def main(argv=None) -> int:
         reports = MarketHistoryReports(args.data_root)
         if args.command == "observations": result = reports.observations(args.operation, _values(args), getattr(args, "limit", DEFAULT_LIMIT))
         elif args.command == "printing-history": result = reports.printing_history(args.printing_id, _values(args))
+        elif args.command == "history-readiness": result = reports.history_readiness(args.printing_id, _values(args))
         elif args.command == "coverage": result = reports.coverage(args.product)
         elif args.command == "acquisition-summary": result = reports.acquisition_summary(args.run_id)
         else: result = reports.snapshot(_values(args))
