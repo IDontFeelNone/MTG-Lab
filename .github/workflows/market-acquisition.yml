@@ -33,6 +33,10 @@ jobs:
         run: |
           STAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           RUN_ID="scryfall-mb2-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          case "${GITHUB_RUN_ID}:${GITHUB_RUN_ATTEMPT}" in
+            *[!0-9:]*|:*|*:|*:*:*) echo 'unsafe acquisition run identity' >&2; exit 1 ;;
+            *) ;;
+          esac
           printf '%s' "$STAMP" > market-acquisition-stamp.txt
           printf '%s' "$RUN_ID" > market-acquisition-run-id.txt
           set +e
@@ -123,11 +127,12 @@ jobs:
             git push origin "HEAD:refs/heads/$BRANCH"
           fi
           HEAD_SHA="$(git rev-parse HEAD)"
-          TITLE='Phase 127I: Persist successful market acquisition evidence'
+          TITLE="Retain verified MB2 market acquisition $RUN_ID"
+          BODY="Retains exactly three verified, MB2-only, nonpersistent evidence files for $RUN_ID. No canonical or market-observation data is written. Review and merge remain manual."
           mapfile -t PRS < <(gh pr list --state all --head "$BRANCH" --json number --jq '.[].number')
           test "${#PRS[@]}" -le 1 || { echo 'multiple matching pull requests' >&2; exit 1; }
           if test "${#PRS[@]}" -eq 0; then
-            PR="$(gh pr create --head "$BRANCH" --base "$BASE" --title "$TITLE" --body "Automated retention of verified, MB2-only, nonpersistent acquisition evidence for $RUN_ID. No canonical or market-observation data is written.")"
+            PR="$(gh pr create --head "$BRANCH" --base "$BASE" --title "$TITLE" --body "$BODY")"
           else
             PR="${PRS[0]}"
           fi
@@ -135,6 +140,7 @@ jobs:
           test "$(gh pr view "$PR" --json headRefName --jq .headRefName)" = "$BRANCH"
           test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$HEAD_SHA"
           test "$(gh pr view "$PR" --json title --jq .title)" = "$TITLE"
+          test "$(gh pr view "$PR" --json body --jq .body)" = "$BODY"
           PR_URL="$(gh pr view "$PR" --json url --jq .url)"
           test -n "$PR_URL"
           printf '%s\n' "$PR" > market-acquisition-pr.txt

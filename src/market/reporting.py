@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 from typing import Any
+from decimal import Decimal
 
 from .intelligence import MarketObservation, MarketObservationRepository
 from .models import MarketValidationError, normalize_timestamp, validate_identifier
@@ -14,6 +15,73 @@ REPORT_VERSION = "market-history-report-v1"
 DEFAULT_LIMIT = 100
 MAX_LIMIT = 500
 ORDERING = ["observed_at", "recorded_at", "provider", "observation_id"]
+READINESS_VERSION = "market-history-readiness-v1"
+
+
+def _dimension(value: MarketObservation) -> tuple[str, str, str, str, str, str]:
+    """The only identity across which historical prices may be compared."""
+    return (value.entity_id, value.provider, value.finish or "",
+            str(value.provenance.get("language", "")), value.currency, value.price_type)
+
+
+def history_readiness(observations: tuple[MarketObservation, ...] | list[MarketObservation]) -> dict[str, Any]:
+    """Describe retained history without interpreting it as a trend or forecast."""
+    values = sorted(observations, key=lambda x: (x.observed_at, x.recorded_at, x.observation_id))
+    groups: dict[tuple[str, ...], list[MarketObservation]] = {}
+    for value in values:
+        groups.setdefault(_dimension(value), []).append(value)
+    dimensions = []
+    movement = []
+    for key in sorted(groups):
+        items = groups[key]
+        timestamps = {x.observed_at for x in items}
+        priced = [x for x in items if x.price is not None]
+        priced_times = {x.observed_at for x in priced}
+        rendered = {"canonical_printing_id": key[0], "provider": key[1],
+                    "finish": key[2] or None, "language": key[3] or None,
+                    "currency": key[4], "price_type": key[5]}
+        dimensions.append({"dimension": rendered, "observation_count": len(items),
+                           "distinct_source_timestamp_count": len(timestamps),
+                           "known_price_count": len(priced),
+                           "explicit_missing_price_count": len(items) - len(priced)})
+        if len(priced_times) >= 2:
+            first, latest = priced[0], priced[-1]
+            change = latest.price - first.price
+            percent = None if first.price == 0 else change / first.price * Decimal(100)
+            movement.append({"label": "descriptive_historical_movement",
+                "dimension": rendered, "first_amount": format(first.price, "f"),
+                "latest_amount": format(latest.price, "f"), "absolute_change": format(change, "f"),
+                "percentage_change": None if percent is None else format(percent.quantize(Decimal("0.000001")), "f"),
+                "elapsed_seconds": int((latest.observed_at - first.observed_at).total_seconds()),
+                "observation_count": len(priced),
+                "statement": "Descriptive historical movement only; not a prediction, trend strength, or recommendation."})
+    source_times = {x.observed_at for x in values}
+    acquisitions = {str(x.provenance.get("acquisition_run_id")) for x in values
+                    if x.provenance.get("acquisition_run_id")}
+    if not values:
+        state = "no_observations"
+    elif len(source_times) == 1:
+        state = "single_snapshot_only"
+    elif not movement:
+        state = "insufficient_comparable_dimensions"
+    else:
+        state = "multiple_snapshots_descriptive_only"
+    earliest, latest = (min(source_times), max(source_times)) if source_times else (None, None)
+    return {"schema_version": READINESS_VERSION, "acquisition_count": len(acquisitions),
+        "distinct_source_timestamp_count": len(source_times), "observation_count": len(values),
+        "exact_market_dimensions": dimensions,
+        "earliest_source_timestamp": stamp(earliest), "latest_source_timestamp": stamp(latest),
+        "elapsed_history_span_seconds": None if earliest is None else int((latest - earliest).total_seconds()),
+        "single_snapshot_dimension_count": sum(x["distinct_source_timestamp_count"] == 1 for x in dimensions),
+        "multi_snapshot_dimension_count": sum(x["distinct_source_timestamp_count"] >= 2 for x in dimensions),
+        "comparable_dimension_count": len(movement),
+        "dimensions_with_missing_observations": [x["dimension"] for x in dimensions
+                                                  if x["explicit_missing_price_count"]],
+        "readiness_state": state,
+        "supports_descriptive_movement": bool(movement),
+        "readiness_statement": ("Current retained history supports descriptive historical movement only."
+                                if movement else "Current retained history does not support descriptive price movement."),
+        "descriptive_historical_movements": movement}
 
 
 def parse_timestamp(value: str, name: str) -> datetime:
@@ -112,6 +180,11 @@ class MarketHistoryReports:
         filters = {**filters, "printing_id": printing_id}
         normalized, selected = self._select(filters)
         return self._envelope("printing-history", normalized, [self._observation(x) for x in selected],
+                              len(selected), ordering=ORDERING)
+
+    def history_readiness(self, printing_id: str, filters: dict[str, Any] | None = None) -> dict[str, Any]:
+        normalized, selected = self._select({**(filters or {}), "printing_id": printing_id})
+        return self._envelope("history-readiness", normalized, history_readiness(list(selected)),
                               len(selected), ordering=ORDERING)
 
     def snapshot(self, filters: dict[str, Any]) -> dict[str, Any]:
