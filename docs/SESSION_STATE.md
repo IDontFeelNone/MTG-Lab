@@ -1,3 +1,9 @@
+# Session state — Phase 138 complete
+
+The repository remains at 913 canonical Printings and canonical digest `881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077`. Exactly 478 immutable observations from `scryfall-mb2-30754638264-1` cover 379/379 canonical MB2 Printings. The ten Phase 136 histories and Phase 135 evidence are unchanged. Architecture v12 is frozen.
+
+Phase 138 changed only downstream explanation code, a v2 schema, focused tests, and documentation. No external request, acquisition, import, promotion, canonical/fact/observation write, prediction, score, rank, or recommendation occurred.
+
 # Phase 137 — explainable Card Value evidence engine complete
 
 Current state: `card-value-explanation-v1` is available for exactly Brainstorm, Command Tower,

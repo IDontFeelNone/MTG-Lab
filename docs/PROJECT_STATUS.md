@@ -1,3 +1,9 @@
+# Phase 138 — observed price evidence explanations complete
+
+Phase 138 adds opt-in `card-value-explanation-v2` output for the same ten reviewed pilot Cards. The read-only engine now exposes the actual 478-file repository observations that resolve through each Card's exact canonical MB2 Printing. Every value retains Printing, finish, language, provider, currency, price type, timestamps, acquisition, provider-record, observation, and digest provenance. The default remains byte-compatible v1.
+
+The deterministic summary distinguishes known and explicitly unavailable prices, counts exact coverage, identifies latest observations per exact dimension, and computes minimum, maximum, and median only within compatible dimensions. The retained data is one Scryfall snapshot, not completed sales or a trend; it does not price the other retained historical Printings. No acquisition, promotion, scoring, prediction, ranking, recommendation, demand, inventory, or sales-velocity inference occurred. Canonical identity and Architecture v12 remain frozen.
+
 # Phase 137 — explainable Card Value evidence engine complete
 
 Phase 137 adds the first deterministic, read-only explanation layer for exactly the ten reviewed pilot

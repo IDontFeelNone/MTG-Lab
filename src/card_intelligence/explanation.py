@@ -6,6 +6,7 @@ forecast, ranking, or recommendation.
 from __future__ import annotations
 
 from collections import Counter
+from decimal import Decimal
 import hashlib
 import json
 from pathlib import Path
@@ -17,6 +18,7 @@ from .repository import KnowledgeRepository
 
 
 SCHEMA_VERSION = "card-value-explanation-v1"
+PRICE_SCHEMA_VERSION = "card-value-explanation-v2"
 ERROR_VERSION = "card-value-explanation-error-v1"
 CANONICAL_IDENTITY = "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077"
 
@@ -61,7 +63,8 @@ class CardValueExplanationEngine:
             raise ExplanationError("card name is not in the ten-card pilot")
         return self.names[normalized]
 
-    def explain(self, *, name: str | None = None, card_id: str | None = None) -> dict[str, Any]:
+    def explain(self, *, name: str | None = None, card_id: str | None = None,
+                include_observed_prices: bool = False) -> dict[str, Any]:
         selected_id = self.resolve(name=name, card_id=card_id)
         card = self.cards[selected_id]
         printings = sorted((item for item in self.printings.values()
@@ -99,7 +102,7 @@ class CardValueExplanationEngine:
             },
         }
         evidence_ids = sorted({e.source_id for fact in active for e in fact.evidence})
-        return {
+        document = {
             "schema_version": SCHEMA_VERSION,
             "explanation_generated_at": generated_at,
             "card_identity": {"game_id": "magic", "card_id": selected_id,
@@ -135,6 +138,141 @@ class CardValueExplanationEngine:
                 "input_only": True,
             },
         }
+        if include_observed_prices:
+            document["schema_version"] = PRICE_SCHEMA_VERSION
+            document["evidence_sections"]["observed_price_evidence"] = \
+                self._observed_price_evidence(selected_id, printings, observations)
+            document["evidence_sections"]["evidence_quality"] = self._price_quality(
+                document["evidence_sections"]["evidence_quality"], observations)
+            document["limitations"] = self._price_limitations()
+        return document
+
+    @staticmethod
+    def _dimension(item) -> tuple[str, str, str, str, str, str]:
+        return (item.entity_id, item.provider, item.finish or "",
+                str(item.provenance.get("language", "")), item.currency, item.price_type)
+
+    def _observed_price_evidence(self, card_id: str, printings: list[dict[str, Any]],
+                                 observations) -> dict[str, Any]:
+        """Render retained assertions without combining exact market dimensions."""
+        stamp = lambda value: value.isoformat().replace("+00:00", "Z")
+        by_id = {item["values"]["uuid"]: item["values"] for item in printings}
+        dimensions: dict[tuple[str, ...], list[Any]] = {}
+        for item in observations:
+            dimensions.setdefault(self._dimension(item), []).append(item)
+        rendered = []
+        dimension_summaries = []
+        for key in sorted(dimensions):
+            values = sorted(dimensions[key], key=lambda item: (
+                item.observed_at, item.recorded_at, item.observation_id))
+            known = [item.price for item in values if item.price is not None]
+            for index, item in enumerate(values):
+                printing = by_id[item.entity_id]
+                rendered.append({
+                    "canonical_printing_id": item.entity_id,
+                    "canonical_card_id": card_id,
+                    "set_code": printing.get("set_id"),
+                    "collector_number": printing.get("collector_number"),
+                    "finish": item.finish,
+                    "language": item.provenance.get("language"),
+                    "provider": item.provider,
+                    "provider_record_id": item.provenance.get("source_provider_identifier"),
+                    "currency": item.currency,
+                    "price_type": item.price_type,
+                    "price": {"state": "known" if item.price is not None else "explicitly_unavailable",
+                              "amount": None if item.price is None else format(item.price, "f")},
+                    "source_timestamp": stamp(item.observed_at),
+                    "retrieval_timestamp": stamp(item.recorded_at),
+                    "acquisition_run_id": item.provenance.get("acquisition_run_id"),
+                    "observation_id": item.observation_id,
+                    "provenance": {
+                        "source_url": item.provenance.get("source_url"),
+                        "source_sha256": item.provenance.get("source_sha256"),
+                        "normalized_sha256": item.provenance.get("normalized_sha256"),
+                    },
+                    "history_position": {"first": index == 0, "latest": index == len(values) - 1,
+                                         "only": len(values) == 1},
+                })
+            ordered = sorted(known)
+            median = None
+            if ordered:
+                middle = len(ordered) // 2
+                median = ordered[middle] if len(ordered) % 2 else \
+                    (ordered[middle - 1] + ordered[middle]) / Decimal(2)
+            dimension_summaries.append({
+                "dimension": {"canonical_printing_id": key[0], "provider": key[1],
+                              "finish": key[2] or None, "language": key[3] or None,
+                              "currency": key[4], "price_type": key[5]},
+                "observation_count": len(values), "known_price_count": len(known),
+                "explicit_missing_price_count": len(values) - len(known),
+                "minimum_amount": None if not ordered else format(ordered[0], "f"),
+                "maximum_amount": None if not ordered else format(ordered[-1], "f"),
+                "median_amount": None if median is None else format(median, "f"),
+                "statistic_observation_count": len(known),
+                "history_state": "single_observation_no_trend" if len(values) == 1 else "multiple_observations",
+                "latest_observation_id": values[-1].observation_id,
+            })
+        covered = sorted({item.entity_id for item in observations})
+        source_times = [item.observed_at for item in observations]
+        retrieval_times = [item.recorded_at for item in observations]
+        summary = {
+            "total_observation_count": len(observations),
+            "known_price_observation_count": sum(item.price is not None for item in observations),
+            "explicit_missing_price_observation_count": sum(item.price is None for item in observations),
+            "distinct_covered_printing_count": len(covered),
+            "distinct_provider_count": len({item.provider for item in observations}),
+            "distinct_finish_count": len({item.finish for item in observations}),
+            "distinct_language_count": len({item.provenance.get("language") for item in observations}),
+            "distinct_currency_count": len({item.currency for item in observations}),
+            "distinct_price_type_count": len({item.price_type for item in observations}),
+            "earliest_source_timestamp": None if not source_times else stamp(min(source_times)),
+            "latest_source_timestamp": None if not source_times else stamp(max(source_times)),
+            "latest_retrieval_timestamp": None if not retrieval_times else stamp(max(retrieval_times)),
+            "observation_history_span": None if not source_times else {
+                "from": stamp(min(source_times)), "to": stamp(max(source_times)),
+                "seconds": int((max(source_times) - min(source_times)).total_seconds())},
+            "covered_printing_ids": covered,
+            "uncovered_retained_printing_count": len(printings) - len(covered),
+            "latest_observation_for_each_exact_dimension": [item["latest_observation_id"]
+                                                            for item in dimension_summaries],
+        }
+        return {"ordering": ["canonical_printing_id", "provider", "finish", "language",
+                             "currency", "price_type", "source_timestamp", "observation_id"],
+                "summary": summary, "observations": rendered,
+                "compatible_dimension_summaries": dimension_summaries}
+
+    @staticmethod
+    def _price_quality(base: dict[str, Any], observations) -> dict[str, Any]:
+        return {"known": sorted(set(base["known"] + [
+                    "observed price amount", "provider", "finish", "currency", "price type",
+                    "source timestamp", "retrieval timestamp", "observation provenance"])),
+                "unknown": base["unknown"],
+                "explicitly_unavailable": (["provider price value"]
+                    if any(item.price is None for item in observations) else []),
+                "incomplete": sorted(set(base["incomplete"] + [
+                    "only one retained acquisition", "market coverage is limited to retained MB2 Printings",
+                    "no time series sufficient to establish price movement",
+                    "market coverage is incomplete across 913 canonical Printings"])),
+                "unsupported": sorted(set(base["unsupported"] + [
+                    "completed-sale velocity", "inventory depth", "Commander demand",
+                    "tournament demand", "buylist spread", "future price direction",
+                    "fair-value estimate"]))}
+
+    @staticmethod
+    def _price_limitations() -> list[str]:
+        return [
+            "One retained snapshot does not establish a price trend.",
+            "An observation is a provider assertion, not a completed sale.",
+            "A market price is not guaranteed realizable value.",
+            "MB2 price coverage does not price every retained historical Printing.",
+            "Different finishes and Printings are not interchangeable.",
+            "Printing count does not equal supply quantity.",
+            "No inventory or sales-velocity evidence is retained.",
+            "No buylist evidence is retained.",
+            "No demand, Commander usage, or tournament usage evidence is retained.",
+            "No price prediction is produced.",
+            "No recommendation is produced.",
+        ]
 
     @staticmethod
     def _printing_history(history: dict[str, Any], printings: list[dict[str, Any]]) -> dict[str, Any]:

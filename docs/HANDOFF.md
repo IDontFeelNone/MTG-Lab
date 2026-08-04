@@ -1,3 +1,9 @@
+# Phase 138 handoff
+
+Use `PYTHONPATH=src:. python -m card_intelligence.cli explain "Sol Ring"` for unchanged v1 coverage output. Add `--include-observed-prices` to opt into v2 actual retained prices. V2 reads only immutable market observations and resolves them through canonical Printing IDs; it never substitutes Card identity or carries MB2 prices to historical Printings.
+
+All numeric amounts are decimal strings. Observation and dimension ordering is explicit. A one-observation dimension is labeled `single_observation_no_trend`. Future snapshots should enter only through the existing separately authorized Market acquisition and import process; the explanation layer requires no writer.
+
 # Phase 137 — explainable Card Value evidence engine handoff
 
 The ten-card pilot now has deterministic `card-value-explanation-v1` reports generated directly from
