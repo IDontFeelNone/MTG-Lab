@@ -8,14 +8,18 @@ import unittest
 
 from card_intelligence import CardKnowledgeQuery, KnowledgeRepository, KnowledgeValidationError
 from card_intelligence.repository import serialize_fact
+from scripts.market_acquisition_evidence import retain
 
 ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "data" / "knowledge"
 REPORT = ROOT / "data" / "reviews" / "phase-133" / "pilot-review.json"
 PROTECTED_DIGESTS = {
-    "data/market/acquisitions": "33b69201a0be62104911f098f38211ed7c6d7b4d6945b06075fb5e8d8371de35",
+    "data/canonical": "e3fa0240c17516cfd64e92e17cefcab92a55be8a5d27edb2df439c21a0068e19",
     "data/market/observations": "7ecc2c6064856e4921802813e186d34ccafb0ca6daf6a59b0b6c1dd11ad999f8",
     "data/market/imports": "72dd8d9f45d1d252aa5de9ecf4d5b52f87651a1a4346c79e863cb5fe50bd0bd8",
+}
+RETAINED_ACQUISITION_DIGESTS = {
+    "scryfall-mb2-30754638264-1": "33b69201a0be62104911f098f38211ed7c6d7b4d6945b06075fb5e8d8371de35",
 }
 PHASE132_DIGEST = "2be71f5dddc86bb63868fc556ea683d45ca43c085826fdde9f7df99017f67b62"
 
@@ -120,6 +124,22 @@ class Phase133PrintingHistoryTests(unittest.TestCase):
         self.assertEqual(digest_files(old), PHASE132_DIGEST)
         for path, expected in PROTECTED_DIGESTS.items():
             self.assertEqual(tree_digest(path), expected, path)
+        acquisitions = ROOT / "data/market/acquisitions"
+        self.assertTrue(RETAINED_ACQUISITION_DIGESTS.keys() <=
+                        {path.name for path in acquisitions.iterdir() if path.is_dir()})
+        for run_id, expected in RETAINED_ACQUISITION_DIGESTS.items():
+            files = (path for path in (acquisitions / run_id).rglob("*") if path.is_file())
+            self.assertEqual(digest_files(files, acquisitions), expected, run_id)
+        for directory in (path for path in acquisitions.iterdir() if path.is_dir()):
+            before = {path.name: path.read_bytes() for path in directory.iterdir()}
+            manifest = retain(directory / "dry-run-report.json",
+                              directory / "source-mb2.json", ROOT / "data")
+            for name, identity in manifest["files"].items():
+                payload = (directory / name).read_bytes()
+                self.assertEqual(hashlib.sha256(payload).hexdigest(), identity["sha256"])
+                self.assertEqual(len(payload), identity["bytes"])
+            self.assertEqual(before, {path.name: path.read_bytes()
+                                      for path in directory.iterdir()})
         for flag in ("canonical_write", "promotion_performed", "inference_performed",
                      "external_acquisition_performed"):
             self.assertFalse(self.report[flag])
