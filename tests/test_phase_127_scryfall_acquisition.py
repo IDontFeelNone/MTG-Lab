@@ -12,7 +12,7 @@ from unittest.mock import patch
 
 from market import MarketValidationError
 from market.scryfall import ProviderAcquisitionError, canonical_json, sha256_bytes
-from scripts.scryfall_market_acquisition import (_parse_jsonl_stream,
+from scripts.scryfall_market_acquisition import (MAX_JSONL_LINE_BYTES, _parse_jsonl_stream,
     _select_bulk_descriptor, download_jsonl, new_diagnostics, parse_bulk_metadata, run)
 
 ROOT = Path(__file__).parents[1]
@@ -125,6 +125,58 @@ class Phase127GTests(unittest.TestCase):
         cases=(b'{"bad"\n', b'[]\n', b'"scalar"\n', b'\xff\n', b'{"id":"x"}\n')
         for payload in cases:
             with self.subTest(payload=payload), self.assertRaises(ProviderAcquisitionError): self.parse(payload)
+
+    def test_unsupported_shape_diagnostic_contract_is_safe_and_bounded(self):
+        unsafe={"object":"card", "id":"bad-id", "name":"Safe name", "set":"mb2",
+            "set_type":"funny", "layout":"normal", "lang":"en",
+            "collector_number":"1", "finishes":["nonfoil"], "prices":"not-object",
+            "oracle_text":"secret-token should not be copied",
+            "image_uris":{"normal":"https://img.scryfall.example/card.jpg?token=secret"},
+            "purchase_uris":{"tcgplayer":"https://shop.example/card?token=secret"}}
+        raw=json.dumps(unsafe,sort_keys=True).encode()+b"\n"
+        with self.assertRaises(ProviderAcquisitionError) as caught:
+            self.parse(raw)
+        diag=caught.exception.diagnostics["unsupported_record_diagnostic"]
+        self.assertEqual(diag["line_number"],1)
+        self.assertEqual(diag["raw_record_byte_count"],len(raw))
+        self.assertEqual(diag["raw_record_sha256"],hashlib.sha256(raw).hexdigest())
+        self.assertEqual(diag["decoded_top_level_json_type"],"object")
+        self.assertEqual(diag["rejection_reason_code"],"prices_not_object")
+        self.assertEqual(diag["records_decoded_before_failure"],0)
+        self.assertTrue(all(diag["required_card_identity_fields_present"].values()))
+        self.assertEqual(diag["structural_fields"]["object"],"card")
+        serialized=json.dumps(diag,sort_keys=True)
+        self.assertIn("oracle_text",diag["top_level_keys"])
+        self.assertIn("image_uris",diag["top_level_keys"])
+        self.assertIn("purchase_uris",diag["top_level_keys"])
+        self.assertNotIn("secret-token",serialized)
+        self.assertNotIn("https://",serialized)
+        self.assertNotIn("token=secret",serialized)
+
+    def test_diagnostic_reason_codes_for_missing_unknown_nonobject_malformed_and_utf8(self):
+        cases=((b'{"id":"x"}\n',"missing_required_card_identity_fields:object,set,collector_number,lang,finishes,prices","object"),
+            (json.dumps({"object":"ruling","id":"r1","name":"N","set":"mb2","layout":"normal",
+                "lang":"en","collector_number":"1","finishes":["nonfoil"],"prices":{}}).encode()+b"\n",
+                "unsupported_object_type:ruling","object"),
+            (b'[]\n',"top_level_not_object","array"),
+            (b'{"bad"\n',"malformed_json","null"),
+            (b'\xff\n',"invalid_utf8","null"))
+        for payload, reason, json_type in cases:
+            with self.subTest(reason=reason), self.assertRaises(ProviderAcquisitionError) as caught:
+                self.parse(payload)
+            diag=caught.exception.diagnostics["unsupported_record_diagnostic"]
+            self.assertEqual(diag["rejection_reason_code"],reason)
+            self.assertEqual(diag["decoded_top_level_json_type"],json_type)
+
+    def test_oversized_line_fails_closed_with_hash_only_not_raw_record(self):
+        payload=b'{"id":"' + (b'a' * MAX_JSONL_LINE_BYTES) + b'"}\n'
+        with self.assertRaises(ProviderAcquisitionError) as caught:
+            self.parse(payload)
+        diag=caught.exception.diagnostics["unsupported_record_diagnostic"]
+        self.assertEqual(diag["rejection_reason_code"],"line_too_large")
+        self.assertEqual(diag["raw_record_byte_count"],len(payload))
+        self.assertEqual(diag["raw_record_sha256"],hashlib.sha256(payload).hexdigest())
+        self.assertNotIn("raw_record",diag)
 
     def test_duplicate_provider_identity_rejected(self):
         with self.assertRaises(ProviderAcquisitionError) as caught:
