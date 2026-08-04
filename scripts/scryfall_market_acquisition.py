@@ -28,6 +28,10 @@ JSONL_MEDIA_TYPES = frozenset(("application/json", "application/jsonl",
     "application/jsonlines", "application/x-ndjson", "application/octet-stream"))
 GZIP_MEDIA_TYPES = frozenset(("application/gzip", "application/x-gzip"))
 MAX_RETAINED_MB2_RECORDS = 1_000
+MAX_JSONL_LINE_BYTES = 2_000_000
+STRUCTURAL_DIAGNOSTIC_FIELDS = ("object", "id", "name", "set", "set_type", "layout", "lang")
+REQUIRED_CARD_IDENTITY_FIELDS = ("id", "object", "set", "collector_number", "lang", "finishes", "prices")
+MAX_DIAGNOSTIC_VALUE_CHARS = 160
 
 
 def new_diagnostics() -> dict:
@@ -56,7 +60,7 @@ def new_diagnostics() -> dict:
         "stream_completed": False, "total_lines": 0,
         "records_decoded": 0, "malformed_record_count": 0,
         "selected_mb2_record_count": 0, "duplicate_record_count": 0,
-        "duplicate_identity_count": 0, "attempts": 0}
+        "duplicate_identity_count": 0, "attempts": 0, "unsupported_record_diagnostic": None}
 
 
 def _fail(message, diagnostics, stage, *, status=None, media_type=None, rate_limited=False):
@@ -252,6 +256,72 @@ class _CountingReader(io.RawIOBase):
         return len(chunk)
 
 
+def _json_type(value) -> str:
+    if value is None:
+        return "null"
+    if isinstance(value, bool):
+        return "boolean"
+    if isinstance(value, dict):
+        return "object"
+    if isinstance(value, list):
+        return "array"
+    if isinstance(value, str):
+        return "string"
+    if isinstance(value, (int, float)):
+        return "number"
+    return type(value).__name__
+
+
+def _safe_diagnostic_value(value):
+    if value is None or isinstance(value, (bool, int, float)):
+        return value
+    if isinstance(value, str):
+        return value if len(value) <= MAX_DIAGNOSTIC_VALUE_CHARS else value[:MAX_DIAGNOSTIC_VALUE_CHARS] + "…"
+    if isinstance(value, list):
+        return {"type": "array", "count": len(value)}
+    if isinstance(value, dict):
+        return {"type": "object", "keys": sorted(str(key) for key in value)[:MAX_DIAGNOSTIC_VALUE_CHARS]}
+    return {"type": type(value).__name__}
+
+
+def _record_shape_diagnostic(diagnostics: dict, *, line_number: int, raw_line: bytes,
+                             decoded=None, reason_code: str) -> None:
+    identity_present = {field: False for field in REQUIRED_CARD_IDENTITY_FIELDS}
+    structural = {}
+    top_keys = []
+    if isinstance(decoded, dict):
+        top_keys = sorted(str(key) for key in decoded)
+        identity_present = {field: field in decoded for field in REQUIRED_CARD_IDENTITY_FIELDS}
+        structural = {field: _safe_diagnostic_value(decoded.get(field))
+                      for field in STRUCTURAL_DIAGNOSTIC_FIELDS if field in decoded}
+    diagnostics["unsupported_record_diagnostic"] = {
+        "line_number": line_number,
+        "raw_record_byte_count": len(raw_line),
+        "raw_record_sha256": hashlib.sha256(raw_line).hexdigest(),
+        "decoded_top_level_json_type": _json_type(decoded),
+        "top_level_keys": top_keys,
+        "structural_fields": structural,
+        "required_card_identity_fields_present": identity_present,
+        "rejection_reason_code": reason_code,
+        "records_decoded_before_failure": diagnostics["records_decoded"],
+    }
+
+
+def _record_validation_reason(record: dict) -> str | None:
+    missing = [field for field in REQUIRED_CARD_IDENTITY_FIELDS if field not in record]
+    if missing:
+        return "missing_required_card_identity_fields:" + ",".join(missing)
+    if record["object"] != "card":
+        return "unsupported_object_type:" + str(record["object"])
+    if not isinstance(record["prices"], dict):
+        return "prices_not_object"
+    if not isinstance(record["finishes"], list):
+        return "finishes_not_array"
+    if not record["finishes"]:
+        return "finishes_empty"
+    return None
+
+
 def _parse_jsonl_stream(raw, diagnostics: dict, *, content_encoding=None,
                         compression_mode=None) -> ParsedPayload:
     hashing = _HashingReader(raw, diagnostics); buffered = io.BufferedReader(hashing)
@@ -276,28 +346,57 @@ def _parse_jsonl_stream(raw, diagnostics: dict, *, content_encoding=None,
     counted = io.BufferedReader(_CountingReader(binary, diagnostics))
     selected, seen = [], set()
     try:
-        text = io.TextIOWrapper(counted, encoding="utf-8", errors="strict", newline=None)
-        for number, line in enumerate(text, 1):
+        for number, raw_line in enumerate(counted, 1):
             diagnostics["total_lines"] = number
-            if not line.strip(): continue
-            try: record = json.loads(line)
+            if len(raw_line) > MAX_JSONL_LINE_BYTES:
+                diagnostics["malformed_record_count"] += 1
+                _record_shape_diagnostic(diagnostics, line_number=number, raw_line=raw_line,
+                                         decoded=None, reason_code="line_too_large")
+                _fail("Scryfall JSONL record exceeded maximum line size", diagnostics,
+                      "payload_jsonl_validation")
+            if not raw_line.strip():
+                continue
+            try:
+                line = raw_line.decode("utf-8")
+            except UnicodeDecodeError:
+                _record_shape_diagnostic(diagnostics, line_number=number, raw_line=raw_line,
+                                         decoded=None, reason_code="invalid_utf8")
+                _fail("Scryfall JSONL was not valid UTF-8", diagnostics, "payload_utf8_validation")
+            try:
+                record = json.loads(line)
             except json.JSONDecodeError:
                 diagnostics["malformed_record_count"] += 1
+                _record_shape_diagnostic(diagnostics, line_number=number, raw_line=raw_line,
+                                         decoded=None, reason_code="malformed_json")
                 _fail("Scryfall JSONL contained malformed JSON", diagnostics, "payload_jsonl_validation")
             if not isinstance(record, dict):
                 diagnostics["malformed_record_count"] += 1
+                _record_shape_diagnostic(diagnostics, line_number=number, raw_line=raw_line,
+                                         decoded=record, reason_code="top_level_not_object")
                 _fail("Scryfall JSONL record was not an object", diagnostics, "payload_jsonl_validation")
+            reason = _record_validation_reason(record)
+            if reason is not None:
+                diagnostics["malformed_record_count"] += 1
+                _record_shape_diagnostic(diagnostics, line_number=number, raw_line=raw_line,
+                                         decoded=record, reason_code=reason)
+                _fail("Scryfall JSONL record had an unsupported shape", diagnostics, "payload_jsonl_validation")
             try: ScryfallMarketAdapter.validate_record(record)
             except MarketValidationError:
                 diagnostics["malformed_record_count"] += 1
+                _record_shape_diagnostic(diagnostics, line_number=number, raw_line=raw_line,
+                                         decoded=record, reason_code="adapter_validation_failed")
                 _fail("Scryfall JSONL record had an unsupported shape", diagnostics, "payload_jsonl_validation")
             identity = record["id"]
             if not isinstance(identity, str) or not identity.strip():
                 diagnostics["malformed_record_count"] += 1
+                _record_shape_diagnostic(diagnostics, line_number=number, raw_line=raw_line,
+                                         decoded=record, reason_code="invalid_provider_identity")
                 _fail("Scryfall JSONL record had an invalid identity", diagnostics, "payload_jsonl_validation")
             if identity in seen:
                 diagnostics["duplicate_record_count"] += 1
                 diagnostics["duplicate_identity_count"] += 1
+                _record_shape_diagnostic(diagnostics, line_number=number, raw_line=raw_line,
+                                         decoded=record, reason_code="duplicate_provider_identity")
                 _fail("Scryfall JSONL contained a duplicate record identity", diagnostics,
                       "payload_jsonl_validation")
             seen.add(identity); diagnostics["records_decoded"] += 1
@@ -306,9 +405,6 @@ def _parse_jsonl_stream(raw, diagnostics: dict, *, content_encoding=None,
                     _fail("Scryfall MB2 projection exceeded its retention bound", diagnostics,
                           "payload_jsonl_validation")
                 selected.append(record)
-        text.detach()
-    except UnicodeDecodeError:
-        _fail("Scryfall JSONL was not valid UTF-8", diagnostics, "payload_utf8_validation")
     except (gzip.BadGzipFile, EOFError, OSError):
         _fail("Scryfall payload decompression failed or stream was incomplete", diagnostics,
               "payload_decompression")
