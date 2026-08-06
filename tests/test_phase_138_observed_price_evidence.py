@@ -44,16 +44,17 @@ class Phase138ObservedPriceEvidenceTests(unittest.TestCase):
     def test_actual_sol_ring_prices_exact_printing_and_provenance(self):
         report = self.engine.explain(name="Sol Ring", include_observed_prices=True)
         evidence = report["evidence_sections"]["observed_price_evidence"]
-        self.assertEqual(["3.98", "64.18"], sorted(x["price"]["amount"] for x in evidence["observations"]))
+        self.assertEqual(["3.63", "3.98", "64.04", "64.18"], sorted(x["price"]["amount"] for x in evidence["observations"]))
         self.assertEqual(["b43c646f-797d-5b5f-8ade-142486708c88"],
                          evidence["summary"]["covered_printing_ids"])
         self.assertEqual(135, evidence["summary"]["uncovered_retained_printing_count"])
         for item in evidence["observations"]:
             self.assertEqual("6ad8011d-3471-4369-9d68-b264cc027487", item["canonical_card_id"])
-            self.assertEqual("scryfall-mb2-30754638264-1", item["acquisition_run_id"])
+            self.assertIn(item["acquisition_run_id"], {"scryfall-mb2-30754638264-1", "scryfall-mb2-30959813191-1"})
             self.assertTrue(item["observation_id"] and item["provider_record_id"])
             self.assertTrue(item["provenance"]["source_sha256"])
-            self.assertEqual({"first": True, "latest": True, "only": True}, item["history_position"])
+            self.assertFalse(item["history_position"]["only"])
+            self.assertNotEqual(item["history_position"]["first"], item["history_position"]["latest"])
 
     def test_dimensions_are_isolated_missing_is_explicit_and_statistics_are_decimal(self):
         values = [observation(price="1.00", record="one"),

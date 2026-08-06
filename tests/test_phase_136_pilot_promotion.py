@@ -111,9 +111,9 @@ class Phase136PromotionTests(unittest.TestCase):
             self.assertIn("Printing count is not supply quantity.", value["limitations"])
 
     def test_protected_boundaries_and_deterministic_artifacts(self):
-        self.assertEqual(len(list((DATA / "market/observations").glob("*/*/*/*.json"))), 478)
+        self.assertEqual(len(list((DATA / "market/observations").glob("*/*/*/*.json"))), 956)
         self.assertEqual(tree_digest("data/market/observations"),
-                         "7ecc2c6064856e4921802813e186d34ccafb0ca6daf6a59b0b6c1dd11ad999f8")
+                         "34c880d24b3eb6251ce513ad53d682ee5ee1ed11554ce3f2ba8cf7287a5269c9")
         self.assertEqual(len(list((DATA / "knowledge/facts").glob("*/*/phase132-*.json"))), 90)
         self.assertEqual(len(list((DATA / "knowledge/facts").glob("*/*/phase133-*.json"))), 10)
         expected = (json.dumps(self.report, indent=2, sort_keys=True,

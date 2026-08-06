@@ -46,7 +46,7 @@ class Phase130MarketCliTests(unittest.TestCase):
             status, result, _ = self.invoke("observations", operation, "--acquisition-run-id", RUN,
                 "--observed-from", source, "--observed-to", source, "--as-of", source)
             self.assertEqual(status, 0); self.assertFalse(result["empty_result"])
-        self.assertEqual(self.invoke("observations", "count", "--finish", "foil")[1]["data"]["count"], 121)
+        self.assertEqual(self.invoke("observations", "count", "--finish", "foil")[1]["data"]["count"], 242)
 
     def test_history_snapshot_coverage_and_acquisition_summary(self):
         history = self.invoke("printing-history", self.printing)[1]

@@ -13,6 +13,7 @@ import tempfile
 from datetime import datetime
 
 from market.intelligence import MarketObservationRepository
+from market.reporting import history_readiness
 from market.models import MarketValidationError
 from market.scryfall import ScryfallMarketAdapter, canonical_json, load_payload
 from scripts.market_acquisition_evidence import verify
@@ -120,11 +121,18 @@ def import_acquisition(data_root: Path, acquisition_run_id: str, *, fail_after: 
     canonical_mb2 = {key for key, item in canonical.get("printing", {}).items()
                      if item.get("values", {}).get("set_id", "").lower() == "mb2"}
     existing_report = _load_object(report_path) if report_path.exists() else None
-    before = {x.entity_id for x in MarketObservationRepository(observations_root).observations()
-              if x.entity_type == "printing" and x.entity_id in canonical_mb2} if observations_root.exists() else set()
+    existing_observations = MarketObservationRepository(observations_root).observations() if observations_root.exists() else ()
+    before = {x.entity_id for x in existing_observations
+              if x.entity_type == "printing" and x.entity_id in canonical_mb2}
     before_count = (existing_report["production_mb2_printing_coverage_before"]["covered"]
                     if existing_report else len(before))
-    history_before = MarketObservationRepository(observations_root).count() if observations_root.exists() else 0
+    history_before = len(existing_observations)
+    readiness_before = history_readiness(list(existing_observations))
+    readiness_after = history_readiness([*existing_observations, *observations])
+    acquisitions_before = {str(x.provenance.get("acquisition_run_id")) for x in existing_observations
+                           if x.provenance.get("acquisition_run_id")}
+    acquisitions_after = {str(x.provenance.get("acquisition_run_id")) for x in [*existing_observations, *observations]
+                          if x.provenance.get("acquisition_run_id")}
     relative_files = [Path("data/market/observations") / x.entity_type / x.entity_id / x.provider /
                       f"{x.observation_id}.json" for x in observations]
     relative_files.sort(key=str)
@@ -137,6 +145,7 @@ def import_acquisition(data_root: Path, acquisition_run_id: str, *, fail_after: 
         "matched_printing_count": len(matched_printings), **{f"{k}_count": v for k, v in counts.items()},
         "known_price_observation_count": known, "explicit_missing_price_observation_count": missing,
         "duplicate_count": 0, "unsupported_currency_or_price_type_count": 0,
+        "observations_written_for_this_acquisition": len(observations),
         "total_observations_written": len(observations),
         "production_mb2_printing_coverage_before": {"covered": before_count, "total": len(canonical_mb2)},
         "production_mb2_printing_coverage_after": {"covered": len(before | matched_printings), "total": len(canonical_mb2)},
@@ -145,8 +154,25 @@ def import_acquisition(data_root: Path, acquisition_run_id: str, *, fail_after: 
         "coverage_growth": {"before": before_count, "after": len(before | matched_printings),
                             "newly_covered": len((before | matched_printings) - before)},
         "historical_observation_count": history_before + len(observations),
+        "total_historical_observations_before": history_before,
+        "total_historical_observations_after": history_before + len(observations),
+        "covered_mb2_printings_before": before_count,
+        "covered_mb2_printings_after": len(before | matched_printings),
+        "acquisition_count_before": len(acquisitions_before),
+        "acquisition_count_after": len(acquisitions_after),
+        "distinct_source_timestamp_count_before": readiness_before["distinct_source_timestamp_count"],
+        "distinct_source_timestamp_count_after": readiness_after["distinct_source_timestamp_count"],
+        "readiness_state_before": readiness_before["readiness_state"],
+        "readiness_state_after": readiness_after["readiness_state"],
+        "descriptive_movement_readiness_state": readiness_after["readiness_state"],
+        "comparable_exact_dimension_count": readiness_after["comparable_dimension_count"],
+        "single_snapshot_dimension_count": readiness_after["single_snapshot_dimension_count"],
+        "multi_snapshot_dimension_count": readiness_after["multi_snapshot_dimension_count"],
+        "explicit_missing_dimension_count": len(readiness_after["dimensions_with_missing_observations"]),
+        "descriptive_historical_movement_count": len(readiness_after["descriptive_historical_movements"]),
+        "descriptive_historical_movements": readiness_after["descriptive_historical_movements"],
         "observation_inventory_digest": _digest(canonical_json(sorted(
-            x.observation_id for x in observations))),
+            x.observation_id for x in [*existing_observations, *observations]))),
         "append_verification": {"existing_observations_preserved": True,
                                 "new_observations_byte_verified": True},
         "replay_verification": {"byte_identical_replay": True, "conflicting_replay_rejected": True},

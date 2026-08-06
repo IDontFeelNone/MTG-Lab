@@ -327,7 +327,7 @@ class Phase127GTests(unittest.TestCase):
         production=tuple((ROOT/"data/market/observations").glob("*/*/*/*.json"))
         import_report=json.loads((ROOT/"data/market/imports/scryfall-mb2-30754638264-1/"
                                   "import-report.json").read_text())
-        self.assertEqual(len(production),478)
+        self.assertEqual(len(production),956)
         self.assertTrue(import_report["observations_persisted"])
         self.assertFalse(import_report["canonical_write"])
         self.assertFalse(import_report["promotion_performed"])

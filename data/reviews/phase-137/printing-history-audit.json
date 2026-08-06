@@ -1915,8 +1915,8 @@
     }
   ],
   "protected_boundaries": {
-    "market_observation_count": 478,
-    "market_observations_tree_sha256": "7ecc2c6064856e4921802813e186d34ccafb0ca6daf6a59b0b6c1dd11ad999f8",
+    "market_observation_count": 956,
+    "market_observations_tree_sha256": "34c880d24b3eb6251ce513ad53d682ee5ee1ed11554ce3f2ba8cf7287a5269c9",
     "phase135_evidence_tree_sha256": "9057e7761e134d0983f13f26d7840769ebbbf739816d9b2f1221d8a9f2896504",
     "prior_fact_files_sha256": "dd352a9790d77ddcdb110bef6c5f0a4fc43b707e29d1458089fb1c3ac30bc5e4"
   },
