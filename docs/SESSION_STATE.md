@@ -1,3 +1,13 @@
+# Phase 140 — second production MB2 market snapshot imported
+
+Phase 140 imported retained acquisition `scryfall-mb2-30959813191-1` from `data/market/acquisitions/scryfall-mb2-30959813191-1/` without provider contact or reacquisition. The retained boundary remains exactly `manifest.json`, `dry-run-report.json`, and `source-mb2.json`; verification binds manifest identities, source and normalized digests, byte counts, timestamps, canonical snapshot identity, MB2-only scope, and false write/promotion flags.
+
+The import appended 478 immutable Scryfall/USD/market observations under `data/market/observations/printing/<printing-id>/scryfall/` and published `data/market/imports/scryfall-mb2-30959813191-1/import-report.json` last. Historical observations grew from 478 to 956; retained acquisition count grew from one to two; MB2 coverage remained 379/379. Mapping census is 385 retained source records, 379 matched canonical Printings, 478 matched observation dimensions, six unmatched finish mappings, and zero ambiguous, rejected, duplicate, unsupported, or explicit-missing price observations.
+
+History readiness moved from `single_snapshot_only` to `multiple_snapshots_descriptive_only`: distinct source timestamps grew from one to two, all 478 exact Printing/provider/finish/language/currency/price-type dimensions are comparable multi-snapshot dimensions, and zero dimensions contain explicit missing prices. Descriptive historical movement is available only inside those exact dimensions and is not a prediction, reliable trend, momentum signal, valuation, ranking, recommendation, or expected return.
+
+Replay is byte-identical and idempotent; conflicting report or observation bytes fail closed. Atomic rollback removes only files created by the current attempt before report publication. The first acquisition's observation bytes are preserved, canonical data and Card Intelligence facts are unchanged, `canonical_write` is false, `promotion_performed` is false, and Architecture v12 remains frozen.
+
 # Session state — Phase 138 complete
 
 The repository remains at 913 canonical Printings and canonical digest `881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077`. Exactly 478 immutable observations from `scryfall-mb2-30754638264-1` cover 379/379 canonical MB2 Printings. The ten Phase 136 histories and Phase 135 evidence are unchanged. Architecture v12 is frozen.

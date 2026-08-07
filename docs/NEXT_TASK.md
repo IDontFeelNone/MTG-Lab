@@ -1,3 +1,7 @@
+# Next task after Phase 140
+
+Phase 140 is complete. Recommended Phase 141: audit and present bounded multi-snapshot market-history explanations for the ten-card pilot using only the two retained MB2 snapshots. Keep movement descriptive, exact-dimension-only, and explicitly non-predictive; do not add acquisition, promotion, canonical changes, fact mutation, demand/usage inference, rankings, valuation, expected returns, or recommendations.
+
 # Next task after Phase 138
 
 Phase 138 is complete. A recommended Phase 139 is a read-only, owner-scoped design for admitting a later independently retained market snapshot into explanation history. It should reuse the existing acquisition/import boundary, preserve exact Printing/provider/finish/language/currency/price-type dimensions, and require separately authorized acquisition and import. It must not infer a trend until sufficient compatible observations actually exist.

@@ -48,7 +48,7 @@ class Phase134EvidenceGapTests(unittest.TestCase):
         for path in phase133:
             self.assertEqual(json.loads(path.read_bytes())["value"]["data"]["coverage_state"],
                              "incomplete")
-        self.assertEqual(len(list((ROOT / "data/market/observations").glob("*/*/*/*.json"))), 478)
+        self.assertEqual(len(list((ROOT / "data/market/observations").glob("*/*/*/*.json"))), 956)
 
     def test_deterministic_report_and_unsupported_claim_exclusion(self):
         expected = (json.dumps(self.report, indent=2, sort_keys=True,

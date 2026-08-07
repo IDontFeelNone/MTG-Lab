@@ -16,8 +16,8 @@ KNOWLEDGE = ROOT / "data" / "knowledge"
 REPORT = ROOT / "data" / "reviews" / "phase-132" / "pilot-review.json"
 PROTECTED_DIGESTS = {
     "data/canonical": "e3fa0240c17516cfd64e92e17cefcab92a55be8a5d27edb2df439c21a0068e19",
-    "data/market/observations": "7ecc2c6064856e4921802813e186d34ccafb0ca6daf6a59b0b6c1dd11ad999f8",
-    "data/market/imports": "72dd8d9f45d1d252aa5de9ecf4d5b52f87651a1a4346c79e863cb5fe50bd0bd8",
+    "data/market/observations": "34c880d24b3eb6251ce513ad53d682ee5ee1ed11554ce3f2ba8cf7287a5269c9",
+    "data/market/imports": "7daaeb8a031a10c1f4143026a0f57c3873ef3cbbd1500674b6e0b7fdb7a3e0df",
 }
 RETAINED_ACQUISITION_DIGESTS = {
     "scryfall-mb2-30754638264-1": "33b69201a0be62104911f098f38211ed7c6d7b4d6945b06075fb5e8d8371de35",
