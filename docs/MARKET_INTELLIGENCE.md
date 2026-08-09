@@ -1,3 +1,7 @@
+# Phase 142 market boundary
+
+Reviewed Scryfall `edhrec_rank` evidence is retained under Card Intelligence, outside canonical data and the Market observation store. It does not derive from price and does not alter either retained MB2 acquisition, any of the 956 immutable market observations, or import reports. Market prices and historical movement are not used to infer demand; printing and reprint counts are likewise excluded. Architecture v12 remains frozen.
+
 ## Phase 141 — explanation presentation of retained history
 
 Card explanations may now present first/latest movement for known prices at two or more distinct source timestamps, but only within the exact tuple canonical Printing ID, provider, finish, language, currency, and price type. The contract preserves observation IDs, acquisition lineage, provider-native Printing ID, source and normalized digests, Decimal changes, elapsed time, and explicit missing/noncomparable counts. Classification is only the sign-derived `increased`, `decreased`, or `unchanged`; it is descriptive history, not momentum, trend strength, prediction, valuation, ranking, or recommendation. Production data remains unchanged at two acquisitions, 956 observations, 379/379 MB2 coverage, and 478 comparable dimensions.

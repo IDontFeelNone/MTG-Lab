@@ -1,3 +1,9 @@
+# Phase 142 — reviewed demand and usage evidence complete
+
+Phase 142 retains a bounded ten-record projection of Scryfall `edhrec_rank` from the already retained `scryfall-default-cards` dataset timestamp `2026-08-04T21:10:15.879000Z`. Exact canonical Card/oracle and MB2 provider-Printing identities are retained with the provider-source digest. Ten known `value_driver.demand` facts supersede exactly the ten Phase 132 unknown demand facts; each reports the literal provider ordinal and explicitly remains incomplete for deck counts, methodology, archetypes, and competitive usage.
+
+Opt-in `card-value-explanation-v3` exposes each provider-specific fact, exact value, timestamp, evidence-source ID, null confidence, completeness, and limitations. The default and v2 paths remain available. No score, provider combination, valuation, recommendation, prediction, popularity conclusion, scarcity inference, or price/reprint-driven demand inference was added. Canonical data, two retained market acquisitions, 956 immutable observations, imports, Phase 135 evidence, and ten Phase 136 histories remain unchanged; Architecture v12 remains frozen.
+
 # Phase 141 — multi-snapshot historical card explanations complete
 
 Phase 141 extends opt-in `card-value-explanation-v2` with authoritative `historical_price_evidence` for the ten-card pilot. It compares only canonical Printing/provider/finish/language/currency/price-type dimensions with known prices at two distinct source timestamps. Production remains two retained acquisitions, 956 observations (478 each), 379/379 MB2 coverage, 478 globally comparable dimensions, zero explicit-missing dimensions, and `multiple_snapshots_descriptive_only`.

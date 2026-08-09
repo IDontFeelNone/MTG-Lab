@@ -1,0 +1,42 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-04T21:10:15.879000Z",
+  "evidence": [
+    {
+      "claim": "Scryfall default-cards supplies edhrec_rank 16 for the exactly mapped Counterspell Card.",
+      "observed_at": "2026-08-04T21:10:15.879000Z",
+      "reference": "data/card_intelligence/demand/phase-142/scryfall-edhrec-rank.json",
+      "source_id": "phase-142-scryfall-edhrec-rank",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase142-counterspell-value_driver-demand",
+  "kind": "demand",
+  "predicate": "value_driver.demand",
+  "recorded_at": "2026-08-09T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase132-counterspell-value_driver-demand"
+  ],
+  "value": {
+    "data": {
+      "canonical_oracle_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "completeness_state": "complete_for_exact_card_metric_at_dataset_timestamp",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "limitations": [
+        "Ordinal rank is not a deck count.",
+        "No high/low demand conclusion is asserted.",
+        "No competitive usage or archetype association is supplied."
+      ],
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "976f36ce-57b0-4364-9009-b3bbf5763050",
+      "rank": 16
+    },
+    "status": "known"
+  }
+}

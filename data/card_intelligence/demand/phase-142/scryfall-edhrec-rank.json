@@ -1,0 +1,128 @@
+{
+  "completeness": {
+    "limitations": [
+      "One provider and one dataset timestamp.",
+      "Ordinal rank is not a deck count.",
+      "The retained projection does not expose EDHREC methodology, represented-deck count, format archetypes, or competitive usage."
+    ],
+    "state": "complete_for_exact_ten_card_projection_at_dataset_timestamp"
+  },
+  "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+  "evidence_source_id": "phase-142-scryfall-edhrec-rank",
+  "identity_mapping": "Exact card name plus Scryfall oracle_id mapped to the existing canonical Card; Scryfall id retains the exact MB2 provider Printing.",
+  "license_considerations": {
+    "api_terms": "https://scryfall.com/docs/api",
+    "bulk_data_docs": "https://scryfall.com/docs/api/bulk-data",
+    "notice": "Only ten factual rank values and identity fields already retained in the reviewed Scryfall acquisition are projected. Scryfall imagery is not copied. EDHREC is the upstream basis named by the field; no independent EDHREC corpus or license is asserted."
+  },
+  "metric_semantics": "Scryfall edhrec_rank: the card-level rank supplied in default-cards and described by Scryfall as based on deck usage in EDHREC; a smaller ordinal is not converted into a demand conclusion.",
+  "provider": "scryfall",
+  "records": [
+    {
+      "canonical_oracle_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "card_name": "Brainstorm",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "2890c2ee-e989-43e5-ac4b-683c52bd6527",
+      "rank": 72
+    },
+    {
+      "canonical_oracle_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "card_name": "Command Tower",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "99eed556-06b8-4063-8d72-24f010dd372e",
+      "rank": 2
+    },
+    {
+      "canonical_oracle_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "card_name": "Counterspell",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "976f36ce-57b0-4364-9009-b3bbf5763050",
+      "rank": 16
+    },
+    {
+      "canonical_oracle_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "card_name": "Goblin Charbelcher",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "1a825f83-0f7b-4ecd-857f-a232f225b274",
+      "rank": 10146
+    },
+    {
+      "canonical_oracle_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "card_name": "Goblin King",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "6524a705-d6b0-405d-a10c-d3e46224e8fb",
+      "rank": 3325
+    },
+    {
+      "canonical_oracle_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "card_name": "Sol Ring",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "d1d8d32d-ebb2-46c2-b909-b7f71d33159e",
+      "rank": 1
+    },
+    {
+      "canonical_oracle_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "card_name": "Swords to Plowshares",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "b635680a-12ae-49f8-a3d7-7254cb0962ec",
+      "rank": 11
+    },
+    {
+      "canonical_oracle_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "card_name": "Treasure Cruise",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "a6e97db4-f447-46c3-8be7-66f22bb349b4",
+      "rank": 623
+    },
+    {
+      "canonical_oracle_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "card_name": "Walking Ballista",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "0db963e2-38df-4036-a312-35854dc3521c",
+      "rank": 439
+    },
+    {
+      "canonical_oracle_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "card_name": "Wishclaw Talisman",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "9da15685-69c4-4517-b5a7-cf929e2788ba",
+      "rank": 515
+    }
+  ],
+  "records_sha256": "aabcac681f1ff7fbe9afd2f417c3c2e938a4af146148021cc0f7890e780d6105",
+  "retrieved_at": "2026-08-04T23:23:26Z",
+  "schema_version": "card-demand-evidence-v1",
+  "source_dataset": "scryfall-default-cards",
+  "source_endpoint": "https://api.scryfall.com/bulk-data/default-cards",
+  "source_sha256": "9e64d0b9f9852d9ab83dd3ba194ed577a44c352cf0079381244dea709dac0ec8"
+}

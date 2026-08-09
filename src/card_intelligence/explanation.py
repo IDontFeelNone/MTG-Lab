@@ -16,10 +16,12 @@ from market.intelligence import MarketObservationRepository
 from market.reporting import history_readiness
 
 from .repository import KnowledgeRepository
+from .demand_review import load_reviewed_demand
 
 
 SCHEMA_VERSION = "card-value-explanation-v1"
 PRICE_SCHEMA_VERSION = "card-value-explanation-v2"
+DEMAND_SCHEMA_VERSION = "card-value-explanation-v3"
 ERROR_VERSION = "card-value-explanation-error-v1"
 CANONICAL_IDENTITY = "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077"
 
@@ -66,7 +68,8 @@ class CardValueExplanationEngine:
 
     def explain(self, *, name: str | None = None, card_id: str | None = None,
                 include_observed_prices: bool = False,
-                include_historical_movement: bool = False) -> dict[str, Any]:
+                include_historical_movement: bool = False,
+                include_demand_evidence: bool = False) -> dict[str, Any]:
         # Historical movement is defined entirely in terms of observed prices, so
         # opting into history deterministically opts into the complete v2 evidence.
         include_observed_prices = include_observed_prices or include_historical_movement
@@ -75,7 +78,8 @@ class CardValueExplanationEngine:
         printings = sorted((item for item in self.printings.values()
                             if item.get("values", {}).get("card_id") == selected_id),
                            key=lambda item: item["values"]["uuid"])
-        facts = [fact for fact in self.facts if fact.card_id == selected_id]
+        facts = [fact for fact in self.facts if fact.card_id == selected_id and
+                 (include_demand_evidence or not fact.fact_id.startswith("phase142-"))]
         superseded = {old for fact in facts for old in fact.supersedes}
         active = sorted((fact for fact in facts if fact.fact_id not in superseded),
                         key=lambda fact: fact.fact_id)
@@ -154,7 +158,35 @@ class CardValueExplanationEngine:
                 document["evidence_sections"]["historical_price_evidence"] = \
                     self._historical_price_evidence(selected_id, printings, observations)
                 document["limitations"] = self._historical_limitations()
+        if include_demand_evidence:
+            demand_facts = [fact for fact in active if fact.kind == "demand" and
+                            fact.predicate == "value_driver.demand"]
+            document["schema_version"] = DEMAND_SCHEMA_VERSION
+            document["evidence_sections"]["demand_usage_evidence"] = self._demand_evidence(demand_facts)
+            document["evidence_sections"]["evidence_quality"]["unsupported"] = [
+                item for item in document["evidence_sections"]["evidence_quality"]["unsupported"]
+                if item != "demand evidence"]
+            document["limitations"] = [item for item in document["limitations"]
+                                       if item != "This repository currently contains no demand evidence."]
+            document["limitations"] = sorted(set(document["limitations"] + [
+                "EDHREC rank is a provider-supplied popularity ordering, not a deck count or demand score.",
+                "No valuation, recommendation, prediction, scarcity, or price-driven demand inference is produced."]))
         return document
+
+    def _demand_evidence(self, facts) -> dict[str, Any]:
+        retained = load_reviewed_demand(self.data_root / "card_intelligence/demand/phase-142/scryfall-edhrec-rank.json")
+        values = []
+        for fact in sorted(facts, key=lambda item: item.fact_id):
+            value = fact.to_dict()["value"]["data"]
+            values.append({"fact_id": fact.fact_id, "predicate": fact.predicate,
+                           "exact_retained_value": value, "provider": value["provider"],
+                           "dataset_timestamp": value["dataset_timestamp"],
+                           "evidence_source_id": fact.evidence[0].source_id,
+                           "confidence": None, "completeness_state": value["completeness_state"],
+                           "limitations": value["limitations"]})
+        return {"provider_isolation": True, "provider": retained["provider"],
+                "metric_semantics": retained["metric_semantics"], "facts": values,
+                "fact_count": len(values)}
 
     @staticmethod
     def _dimension(item) -> tuple[str, str, str, str, str, str]:

@@ -1,0 +1,42 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-04T21:10:15.879000Z",
+  "evidence": [
+    {
+      "claim": "Scryfall default-cards supplies edhrec_rank 2 for the exactly mapped Command Tower Card.",
+      "observed_at": "2026-08-04T21:10:15.879000Z",
+      "reference": "data/card_intelligence/demand/phase-142/scryfall-edhrec-rank.json",
+      "source_id": "phase-142-scryfall-edhrec-rank",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase142-command-tower-value_driver-demand",
+  "kind": "demand",
+  "predicate": "value_driver.demand",
+  "recorded_at": "2026-08-09T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase132-command-tower-value_driver-demand"
+  ],
+  "value": {
+    "data": {
+      "canonical_oracle_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "completeness_state": "complete_for_exact_card_metric_at_dataset_timestamp",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "limitations": [
+        "Ordinal rank is not a deck count.",
+        "No high/low demand conclusion is asserted.",
+        "No competitive usage or archetype association is supplied."
+      ],
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "99eed556-06b8-4063-8d72-24f010dd372e",
+      "rank": 2
+    },
+    "status": "known"
+  }
+}

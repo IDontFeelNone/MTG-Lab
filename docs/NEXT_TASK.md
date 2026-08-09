@@ -1,3 +1,7 @@
+# Next task after Phase 142
+
+Phase 142 is complete. Recommended Phase 143: owner review of the demand-evidence contract and a separately authorized, bounded deck-inclusion acquisition design capable of retaining represented-deck counts and format/archetype context. Preserve the exact ten-card pilot, provider isolation, append-only facts, explicit incompleteness, and the hard stop before scoring, prediction, ranking, or recommendations.
+
 # Next task after Phase 141
 
 Phase 141 is complete. Recommended Phase 142: owner review of explanation ergonomics and contract consumers without acquiring data or widening inference. Preserve exact-dimension identity, authoritative JSON, immutable retained evidence, canonical and knowledge boundaries, and descriptive-only semantics.
