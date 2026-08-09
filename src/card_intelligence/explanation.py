@@ -17,11 +17,13 @@ from market.reporting import history_readiness
 
 from .repository import KnowledgeRepository
 from .demand_review import load_reviewed_demand
+from .deck_usage import load_deck_usage
 
 
 SCHEMA_VERSION = "card-value-explanation-v1"
 PRICE_SCHEMA_VERSION = "card-value-explanation-v2"
 DEMAND_SCHEMA_VERSION = "card-value-explanation-v3"
+USAGE_SCHEMA_VERSION = "card-value-explanation-v4"
 ERROR_VERSION = "card-value-explanation-error-v1"
 CANONICAL_IDENTITY = "sha256:881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077"
 
@@ -171,6 +173,21 @@ class CardValueExplanationEngine:
             document["limitations"] = sorted(set(document["limitations"] + [
                 "EDHREC rank is a provider-supplied popularity ordering, not a deck count or demand score.",
                 "No valuation, recommendation, prediction, scarcity, or price-driven demand inference is produced."]))
+            usage_path = self.data_root / "card_intelligence/demand/phase-143/mtgjson-decks.json"
+            if usage_path.exists():
+                document["schema_version"] = USAGE_SCHEMA_VERSION
+                usage = load_deck_usage(usage_path)
+                record = next(x for x in usage["records"] if x["card_id"] == selected_id)
+                document["evidence_sections"]["deck_usage_evidence"] = {
+                    "state": "known", "provider": usage["provider"],
+                    "provider_dataset": usage["provider_dataset"],
+                    "provider_native_metric": record["metric"],
+                    "numerator": record["numerator"], "denominator": record["denominator"],
+                    "dataset_timestamp": record["dataset_timestamp"],
+                    "evidence_source_id": usage["evidence_source_id"],
+                    "formats": record["formats"],
+                    "archetype_associations": record["deck_associations"],
+                    "completeness": record["completeness"], "limitations": record["limitations"]}
         return document
 
     def _demand_evidence(self, facts) -> dict[str, Any]:

@@ -1,0 +1,45 @@
+name: Bounded deck usage acquisition
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Retain exact ten-card MTGJSON deck projection
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          STAMP="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          python scripts/acquire_deck_usage.py --dataset-timestamp "$STAMP" --retrieved-at "$STAMP" --output data/card_intelligence/demand/phase-143/mtgjson-decks.json
+          python -c 'from pathlib import Path; from card_intelligence.deck_usage import load_deck_usage; load_deck_usage(Path("data/card_intelligence/demand/phase-143/mtgjson-decks.json"))'
+      - name: Create bounded evidence pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          FILE=data/card_intelligence/demand/phase-143/mtgjson-decks.json
+          BRANCH=deck-usage-acquisition/mtgjson-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}
+          git diff --name-only | diff -u <(printf '%s\n' "$FILE") -
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git switch -c "$BRANCH"
+          git add -- "$FILE"
+          git commit -m "Retain bounded MTGJSON deck usage evidence"
+          git push origin "HEAD:refs/heads/$BRANCH"
+          gh pr create --head "$BRANCH" --title "Phase 143: Retain bounded MTGJSON deck usage evidence" --body "Exact ten-card evidence projection only. Manual review and merge required; no facts, canonical writes, valuation, or recommendations."
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase-143-mtgjson-deck-projection-${{ github.run_id }}-${{ github.run_attempt }}
+          path: data/card_intelligence/demand/phase-143/mtgjson-decks.json
+          if-no-files-found: error

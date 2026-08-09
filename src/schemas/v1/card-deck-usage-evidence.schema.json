@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.local/schemas/v1/card-deck-usage-evidence.schema.json",
+  "type": "object",
+  "required": ["schema_version", "evidence_source_id", "provider", "provider_dataset", "source_endpoint", "dataset_timestamp", "retrieved_at", "source_sha256", "source_byte_count", "population_semantics", "identity_mapping", "license_considerations", "retention_boundary", "records", "records_sha256"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "card-deck-usage-evidence-v1"},
+    "evidence_source_id": {"type": "string"}, "provider": {"const": "mtgjson"},
+    "provider_dataset": {"const": "AllDeckFiles.zip"}, "source_endpoint": {"type": "string", "format": "uri"},
+    "dataset_timestamp": {"type": "string", "format": "date-time"}, "retrieved_at": {"type": "string", "format": "date-time"},
+    "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "source_byte_count": {"type": "integer", "minimum": 1},
+    "population_semantics": {"type": "string"}, "identity_mapping": {"type": "string"},
+    "license_considerations": {"type": "object"}, "retention_boundary": {"type": "string"},
+    "records_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "records": {"type": "array", "minItems": 10, "maxItems": 10, "items": {"type": "object"}}
+  }
+}

@@ -444,3 +444,19 @@ After human review and manual evidence-PR merge, an owner imports that run with 
 Readiness compares only the exact tuple canonical Printing ID, provider, finish, language, currency, and price type. States are `no_observations`, `single_snapshot_only`, `insufficient_comparable_dimensions`, and `multiple_snapshots_descriptive_only`. Missing prices remain explicit. Two priced source timestamps in the same exact dimension may yield Decimal first/latest amounts, absolute/percentage change, elapsed seconds, and count labelled **descriptive historical movement**. This is not statistical trend reliability, momentum, prediction, valuation, ranking, or recommendation.
 
 Production still contains only acquisition `scryfall-mb2-30754638264-1` and therefore remains `single_snapshot_only`: one snapshot is not a trend and no descriptive movement can be established. The hard stop remains in force before prediction or recommendation work. To acquire the next real snapshot after merge: open GitHub Actions, choose **Market acquisition**, click **Run workflow** once, review the three-file evidence PR and checks, merge it manually, then separately run the importer for the displayed run identity and review that import change before merge.
+# Phase 143 — bounded deck-usage acquisition path ready; production evidence pending
+
+Phase 143 reviewed structured provider options and selected the MTGJSON `AllDeckFiles.zip` snapshot as
+the smallest reliable single-provider source for auditable represented-deck, board, deck-name, and
+provider deck-type evidence. Direct provider acquisition was unavailable in the Codex Cloud task
+environment, so no production values or facts were fabricated. A manually dispatched GitHub Actions
+workflow now downloads the corpus transiently and retains only ten digest-bound Card aggregates plus
+the matching provider deck identities needed to reproduce each numerator. The denominator is every
+distinct decoded deck file in that exact snapshot; a Card is counted at most once per deck even if it
+appears on multiple boards. Provider deck `type` is normalized by case-folding and is presented as a
+provider format label; deck names are literal associations, not inferred archetypes.
+
+Until a resulting artifact is reviewed and merged, the retained production census is zero usage
+records, zero new facts, zero supersessions, and all ten Cards remain unknown for deck inclusion.
+Phase 142's ten Scryfall ranks and exactly ten known demand facts remain intact. Canonical data, 956
+market observations, Phase 135 evidence, Phase 136 histories, and Architecture v12 are unchanged.

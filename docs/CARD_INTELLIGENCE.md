@@ -229,3 +229,18 @@ After human review and manual evidence-PR merge, an owner imports that run with 
 Readiness compares only the exact tuple canonical Printing ID, provider, finish, language, currency, and price type. States are `no_observations`, `single_snapshot_only`, `insufficient_comparable_dimensions`, and `multiple_snapshots_descriptive_only`. Missing prices remain explicit. Two priced source timestamps in the same exact dimension may yield Decimal first/latest amounts, absolute/percentage change, elapsed seconds, and count labelled **descriptive historical movement**. This is not statistical trend reliability, momentum, prediction, valuation, ranking, or recommendation.
 
 Production still contains only acquisition `scryfall-mb2-30754638264-1` and therefore remains `single_snapshot_only`: one snapshot is not a trend and no descriptive movement can be established. The hard stop remains in force before prediction or recommendation work. To acquire the next real snapshot after merge: open GitHub Actions, choose **Market acquisition**, click **Run workflow** once, review the three-file evidence PR and checks, merge it manually, then separately run the importer for the displayed run identity and review that import change before merge.
+# Phase 143 bounded deck inclusion contract
+
+The approved provider is MTGJSON `AllDeckFiles.zip`. Acquisition is manual because direct access was
+unavailable during implementation. The full ZIP is never retained: the projection stores exactly ten
+records, each exact canonical Card mapping, represented-deck numerator, full-snapshot deck-file
+denominator, timestamp, source digest/bytes, normalized provider deck types, and matching deck
+identities/names/boards. Exact provider Card names are mapped to exact canonical names. Duplicate deck
+IDs, conflicting identities, malformed counts, absent timestamps, unsupported fields, and digest drift
+fail closed.
+
+MTGJSON decks are a curated provider population, not all played decks. A deck file contributes at most
+one count per Card. Deck `type` is a provider label rather than independently verified format legality;
+deck name is a literal association rather than an inferred strategic archetype. Missing production
+acquisition remains unknown and creates no fact. Once reviewed evidence is retained, explanation v4
+can expose it beside the provider-isolated Phase 142 Scryfall rank. It does not label demand high/low.
