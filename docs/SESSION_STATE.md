@@ -1,3 +1,7 @@
+# Phase 141 session state
+
+Implementation is complete and read-only. Baseline: acquisitions `scryfall-mb2-30754638264-1` and `scryfall-mb2-30959813191-1`; two completed import reports; 956 observations split 478/478; MB2 379/379; 478 global exact comparable dimensions; zero explicit-missing dimensions; readiness `multiple_snapshots_descriptive_only`. Pilot census: 17 comparable dimensions (0 increased, 9 decreased, 8 unchanged). Protected data and Architecture v12 remain unchanged.
+
 # Phase 140 — second production MB2 market snapshot imported
 
 Phase 140 imported retained acquisition `scryfall-mb2-30959813191-1` from `data/market/acquisitions/scryfall-mb2-30959813191-1/` without provider contact or reacquisition. The retained boundary remains exactly `manifest.json`, `dry-run-report.json`, and `source-mb2.json`; verification binds manifest identities, source and normalized digests, byte counts, timestamps, canonical snapshot identity, MB2-only scope, and false write/promotion flags.

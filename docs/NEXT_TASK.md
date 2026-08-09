@@ -1,3 +1,7 @@
+# Next task after Phase 141
+
+Phase 141 is complete. Recommended Phase 142: owner review of explanation ergonomics and contract consumers without acquiring data or widening inference. Preserve exact-dimension identity, authoritative JSON, immutable retained evidence, canonical and knowledge boundaries, and descriptive-only semantics.
+
 # Next task after Phase 140
 
 Phase 140 is complete. Recommended Phase 141: audit and present bounded multi-snapshot market-history explanations for the ten-card pilot using only the two retained MB2 snapshots. Keep movement descriptive, exact-dimension-only, and explicitly non-predictive; do not add acquisition, promotion, canonical changes, fact mutation, demand/usage inference, rankings, valuation, expected returns, or recommendations.

@@ -1,3 +1,7 @@
+## Phase 141 — Card Value Explanation historical evidence
+
+`card-value-explanation-v2` optionally includes `historical_price_evidence` through `--include-historical-movement`, which automatically enables Phase 138 observed prices. The authoritative JSON includes readiness and coverage counts, date/span bounds, exact descriptive entries, and a retained-MB2-only card summary. `--human-readable` is a derivative renderer. The pilot's 17 MB2 dimensions classify as 0 increased, 9 decreased, and 8 unchanged. These labels reflect only exact observed change signs and do not imply demand, popularity, scarcity, liquidity, fair value, future direction, investment quality, or advice.
+
 # Phase 140 — second production MB2 market snapshot imported
 
 Phase 140 imported retained acquisition `scryfall-mb2-30959813191-1` from `data/market/acquisitions/scryfall-mb2-30959813191-1/` without provider contact or reacquisition. The retained boundary remains exactly `manifest.json`, `dry-run-report.json`, and `source-mb2.json`; verification binds manifest identities, source and normalized digests, byte counts, timestamps, canonical snapshot identity, MB2-only scope, and false write/promotion flags.
