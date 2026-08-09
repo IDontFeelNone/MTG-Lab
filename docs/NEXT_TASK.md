@@ -70,3 +70,9 @@ Readiness compares only the exact tuple canonical Printing ID, provider, finish,
 Production still contains only acquisition `scryfall-mb2-30754638264-1` and therefore remains `single_snapshot_only`: one snapshot is not a trend and no descriptive movement can be established. The hard stop remains in force before prediction or recommendation work. To acquire the next real snapshot after merge: open GitHub Actions, choose **Market acquisition**, click **Run workflow** once, review the three-file evidence PR and checks, merge it manually, then separately run the importer for the displayed run identity and review that import change before merge.
 
 The recommended Phase 140 is the separately authorized review and append-only import of a genuinely acquired later MB2 evidence snapshot. It must not begin prediction, scoring, ranking, or recommendation work.
+# Next task after Phase 143 implementation
+
+Manually dispatch **Bounded deck usage acquisition**, review the single ten-record artifact and its
+source digest/timestamps/census, and merge it only if MTGJSON identity, population, format, and license
+semantics remain valid. Then authorize append-only `demand.deck_inclusion` and `format.usage` facts
+only for supported records and activate explanation v4. Do not score, rank, value, predict, or recommend.

@@ -390,3 +390,16 @@ After human review and manual evidence-PR merge, an owner imports that run with 
 Readiness compares only the exact tuple canonical Printing ID, provider, finish, language, currency, and price type. States are `no_observations`, `single_snapshot_only`, `insufficient_comparable_dimensions`, and `multiple_snapshots_descriptive_only`. Missing prices remain explicit. Two priced source timestamps in the same exact dimension may yield Decimal first/latest amounts, absolute/percentage change, elapsed seconds, and count labelled **descriptive historical movement**. This is not statistical trend reliability, momentum, prediction, valuation, ranking, or recommendation.
 
 Production still contains only acquisition `scryfall-mb2-30754638264-1` and therefore remains `single_snapshot_only`: one snapshot is not a trend and no descriptive movement can be established. The hard stop remains in force before prediction or recommendation work. To acquire the next real snapshot after merge: open GitHub Actions, choose **Market acquisition**, click **Run workflow** once, review the three-file evidence PR and checks, merge it manually, then separately run the importer for the displayed run identity and review that import change before merge.
+# Phase 143 handoff — acquisition required before production facts
+
+The implementation selects MTGJSON `https://mtgjson.com/api/v5/AllDeckFiles.zip` (CC BY-SA 4.0
+project-data terms; underlying Wizards data remains owned by its respective owners). The workflow is
+manual and retains only the exact pilot projection, not the ZIP. Numerator means distinct provider deck
+files containing the exact Card name on commander, main, or side board; denominator means all distinct
+decoded deck files in the snapshot. Deck type is case-folded, board identity is preserved, and deck
+names are not converted into inferred archetypes. Completeness is bounded to MTGJSON's curated deck
+products and is not global played-deck coverage.
+
+No acquisition artifact exists in this checkout because provider network access was unavailable.
+Consequently there are no Phase 143 production usage records, facts, or supersessions. Run the manual
+workflow, review the artifact, and only then admit evidence/facts. Phase 142 and all protected data are unchanged.

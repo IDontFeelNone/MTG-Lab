@@ -363,3 +363,11 @@ After human review and manual evidence-PR merge, an owner imports that run with 
 Readiness compares only the exact tuple canonical Printing ID, provider, finish, language, currency, and price type. States are `no_observations`, `single_snapshot_only`, `insufficient_comparable_dimensions`, and `multiple_snapshots_descriptive_only`. Missing prices remain explicit. Two priced source timestamps in the same exact dimension may yield Decimal first/latest amounts, absolute/percentage change, elapsed seconds, and count labelled **descriptive historical movement**. This is not statistical trend reliability, momentum, prediction, valuation, ranking, or recommendation.
 
 Production still contains only acquisition `scryfall-mb2-30754638264-1` and therefore remains `single_snapshot_only`: one snapshot is not a trend and no descriptive movement can be established. The hard stop remains in force before prediction or recommendation work. To acquire the next real snapshot after merge: open GitHub Actions, choose **Market acquisition**, click **Run workflow** once, review the three-file evidence PR and checks, merge it manually, then separately run the importer for the displayed run identity and review that import change before merge.
+# Phase 143 session state
+
+- Baseline confirmed at merged Phase 142 (`8d39021`); exact ten-card pilot unchanged.
+- Selected provider: MTGJSON; dataset: `AllDeckFiles.zip`; transient full download, bounded retained projection.
+- Production acquisition unavailable in Codex Cloud: retained usage records 0; known 0, unknown 10,
+  incomplete 0, unsupported 0 for the new represented-deck metric; facts added 0; superseded 0.
+- Phase 142 rank facts (10), Phase 141 observations (956), Phase 136 histories (10), canonical data,
+  acquisitions/imports, and Phase 135 evidence remain unchanged. Architecture v12 remains frozen.
