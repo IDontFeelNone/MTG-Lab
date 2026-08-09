@@ -1,3 +1,7 @@
+# Phase 141 — historical explanation handoff
+
+Run `PYTHONPATH=src:. python -m card_intelligence.cli explain "Sol Ring" --include-observed-prices --include-historical-movement` for authoritative JSON. The historical flag automatically enables observed-price evidence. Add `--human-readable` only for a rendering derived from that contract. Comparisons never cross Printing, provider, finish, language, currency, or price type. The output describes two retained MB2 snapshots only and is not completed-sales evidence, fair value, prediction, trend strength, score, ranking, or recommendation. The 956 observations, both three-file acquisitions, both import reports, canonical state, and knowledge facts are unchanged.
+
 # Phase 140 — second production MB2 market snapshot imported
 
 Phase 140 imported retained acquisition `scryfall-mb2-30959813191-1` from `data/market/acquisitions/scryfall-mb2-30959813191-1/` without provider contact or reacquisition. The retained boundary remains exactly `manifest.json`, `dry-run-report.json`, and `source-mb2.json`; verification binds manifest identities, source and normalized digests, byte counts, timestamps, canonical snapshot identity, MB2-only scope, and false write/promotion flags.

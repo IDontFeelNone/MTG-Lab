@@ -65,7 +65,11 @@ class CardValueExplanationEngine:
         return self.names[normalized]
 
     def explain(self, *, name: str | None = None, card_id: str | None = None,
-                include_observed_prices: bool = False) -> dict[str, Any]:
+                include_observed_prices: bool = False,
+                include_historical_movement: bool = False) -> dict[str, Any]:
+        # Historical movement is defined entirely in terms of observed prices, so
+        # opting into history deterministically opts into the complete v2 evidence.
+        include_observed_prices = include_observed_prices or include_historical_movement
         selected_id = self.resolve(name=name, card_id=card_id)
         card = self.cards[selected_id]
         printings = sorted((item for item in self.printings.values()
@@ -146,6 +150,10 @@ class CardValueExplanationEngine:
             document["evidence_sections"]["evidence_quality"] = self._price_quality(
                 document["evidence_sections"]["evidence_quality"], observations)
             document["limitations"] = self._price_limitations()
+            if include_historical_movement:
+                document["evidence_sections"]["historical_price_evidence"] = \
+                    self._historical_price_evidence(selected_id, printings, observations)
+                document["limitations"] = self._historical_limitations()
         return document
 
     @staticmethod
@@ -243,6 +251,97 @@ class CardValueExplanationEngine:
                 "compatible_dimension_summaries": dimension_summaries,
                 "history_readiness": history_readiness(list(observations))}
 
+    def _historical_price_evidence(self, card_id: str, printings: list[dict[str, Any]],
+                                   observations) -> dict[str, Any]:
+        """Expose exact-dimension first/latest movement without interpretation."""
+        stamp = lambda value: value.isoformat().replace("+00:00", "Z")
+        by_id = {item["values"]["uuid"]: item["values"] for item in printings}
+        source_records: dict[str, dict[str, Any]] = {}
+        for path in sorted((self.data_root / "market/acquisitions").glob("*/source-mb2.json")):
+            for record in json.loads(path.read_text(encoding="utf-8")):
+                source_records.setdefault(str(record.get("id")), record)
+        groups: dict[tuple[str, ...], list[Any]] = {}
+        for item in observations:
+            groups.setdefault(self._dimension(item), []).append(item)
+        movements = []
+        noncomparable = 0
+        missing_dimensions = 0
+        for key in sorted(groups):
+            values = sorted(groups[key], key=lambda item: (
+                item.observed_at, item.recorded_at, item.observation_id))
+            priced = [item for item in values if item.price is not None]
+            if any(item.price is None for item in values):
+                missing_dimensions += 1
+            if len({item.observed_at for item in priced}) < 2:
+                noncomparable += 1
+                continue
+            first, latest = priced[0], priced[-1]
+            change = latest.price - first.price
+            percentage = None if first.price == 0 else (change / first.price * Decimal(100))
+            printing = by_id[first.entity_id]
+            provider_id = str(first.provenance.get("source_provider_identifier"))
+            source = source_records.get(provider_id, {})
+            movements.append({
+                "label": "descriptive_historical_movement",
+                "classification": "increased" if change > 0 else "decreased" if change < 0 else "unchanged",
+                "canonical_card_id": card_id,
+                "canonical_printing_id": first.entity_id,
+                "set_code": str(source.get("set", printing.get("set_id", ""))).upper(),
+                "set_name": source.get("set_name"),
+                "collector_number": printing.get("collector_number"),
+                "provider": first.provider,
+                "provider_native_printing_id": provider_id,
+                "finish": first.finish,
+                "language": first.provenance.get("language"),
+                "currency": first.currency,
+                "price_type": first.price_type,
+                "first_observation_id": first.observation_id,
+                "latest_observation_id": latest.observation_id,
+                "first_source_timestamp": stamp(first.observed_at),
+                "latest_source_timestamp": stamp(latest.observed_at),
+                "first_amount": format(first.price, "f"),
+                "latest_amount": format(latest.price, "f"),
+                "absolute_change": format(change, "f"),
+                "percentage_change": None if percentage is None else format(
+                    percentage.quantize(Decimal("0.000001")), "f"),
+                "elapsed_seconds": int((latest.observed_at - first.observed_at).total_seconds()),
+                "priced_observation_count": len(priced),
+                "acquisition_run_ids": sorted({str(x.provenance.get("acquisition_run_id")) for x in priced}),
+                "source_digests": [x.provenance.get("source_sha256") for x in (first, latest)],
+                "normalized_digests": [x.provenance.get("normalized_sha256") for x in (first, latest)],
+            })
+        source_times = sorted({x.observed_at for x in observations})
+        acquisitions = sorted({str(x.provenance.get("acquisition_run_id")) for x in observations})
+        counts = Counter(x["classification"] for x in movements)
+        earliest = source_times[0] if source_times else None
+        latest = source_times[-1] if source_times else None
+        summary = {
+            "dimensions_increased": counts["increased"],
+            "dimensions_decreased": counts["decreased"],
+            "dimensions_unchanged": counts["unchanged"],
+            "dimensions_noncomparable": noncomparable,
+            "first_retained_observation_date": None if earliest is None else earliest.date().isoformat(),
+            "latest_retained_observation_date": None if latest is None else latest.date().isoformat(),
+            "observed_history_span_seconds": None if earliest is None else int((latest - earliest).total_seconds()),
+            "scope_statement": "Summary covers retained MB2 market dimensions only.",
+        }
+        return {
+            "history_readiness_state": history_readiness(list(observations))["readiness_state"],
+            "acquisition_count": len(acquisitions),
+            "distinct_source_timestamp_count": len(source_times),
+            "total_observation_count": len(observations),
+            "comparable_dimension_count": len(movements),
+            "noncomparable_dimension_count": noncomparable,
+            "explicit_missing_price_dimension_count": missing_dimensions,
+            "earliest_source_timestamp": None if earliest is None else stamp(earliest),
+            "latest_source_timestamp": None if latest is None else stamp(latest),
+            "elapsed_historical_span_seconds": None if earliest is None else int((latest - earliest).total_seconds()),
+            "exact_comparison_tuple": ["canonical_printing_id", "provider", "finish", "language", "currency", "price_type"],
+            "ordering": ["canonical_printing_id", "provider", "finish", "language", "currency", "price_type"],
+            "card_level_summary": summary,
+            "descriptive_movement_entries": movements,
+        }
+
     @staticmethod
     def _price_quality(base: dict[str, Any], observations) -> dict[str, Any]:
         return {"known": sorted(set(base["known"] + [
@@ -274,6 +373,19 @@ class CardValueExplanationEngine:
             "No demand, Commander usage, or tournament usage evidence is retained.",
             "No price prediction is produced.",
             "No recommendation is produced.",
+        ]
+
+    @staticmethod
+    def _historical_limitations() -> list[str]:
+        return [
+            "This is retained descriptive history; it is not a prediction.",
+            "An observation is a provider assertion, not completed-sales evidence.",
+            "Historical movement is not a recommendation and does not establish fair value.",
+            "Movement is compared only within an exact Printing, provider, finish, language, currency, and price-type dimension.",
+            "Two retained snapshots do not establish momentum, trend strength, or future direction.",
+            "MB2 price coverage does not price every retained historical Printing.",
+            "No demand, popularity, scarcity, liquidity, inventory, or sales-velocity inference is produced.",
+            "No score, ranking, prediction, or recommendation is produced.",
         ]
 
     @staticmethod
@@ -329,3 +441,20 @@ class CardValueExplanationEngine:
 
 def explanation_bytes(document: dict[str, Any]) -> bytes:
     return (json.dumps(document, indent=2, sort_keys=True, separators=(",", ": ")) + "\n").encode()
+
+
+def render_historical_explanation(document: dict[str, Any]) -> str:
+    """Render only fields from the authoritative historical JSON contract."""
+    evidence = document.get("evidence_sections", {}).get("historical_price_evidence")
+    if evidence is None:
+        raise ExplanationError("human-readable history requires --include-historical-movement")
+    lines = [document["card_identity"]["name"] + " — retained descriptive history"]
+    for item in evidence["descriptive_movement_entries"]:
+        lines.append(
+            f'{item["set_code"]} {item["finish"]} {item["currency"]} {item["price_type"]} '
+            f'observation changed from {item["first_amount"]} to {item["latest_amount"]} '
+            f'between {item["first_source_timestamp"][:10]} and {item["latest_source_timestamp"][:10]} '
+            f'({item["classification"]}).')
+    lines.append("This is retained descriptive history; it is not a prediction, completed-sales evidence, "
+                 "a recommendation, or evidence of fair value.")
+    return "\n".join(lines) + "\n"

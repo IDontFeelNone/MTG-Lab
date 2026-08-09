@@ -1,3 +1,7 @@
+## Phase 141 — explanation presentation of retained history
+
+Card explanations may now present first/latest movement for known prices at two or more distinct source timestamps, but only within the exact tuple canonical Printing ID, provider, finish, language, currency, and price type. The contract preserves observation IDs, acquisition lineage, provider-native Printing ID, source and normalized digests, Decimal changes, elapsed time, and explicit missing/noncomparable counts. Classification is only the sign-derived `increased`, `decreased`, or `unchanged`; it is descriptive history, not momentum, trend strength, prediction, valuation, ranking, or recommendation. Production data remains unchanged at two acquisitions, 956 observations, 379/379 MB2 coverage, and 478 comparable dimensions.
+
 # Phase 140 — second production MB2 market snapshot imported
 
 Phase 140 imported retained acquisition `scryfall-mb2-30959813191-1` from `data/market/acquisitions/scryfall-mb2-30959813191-1/` without provider contact or reacquisition. The retained boundary remains exactly `manifest.json`, `dry-run-report.json`, and `source-mb2.json`; verification binds manifest identities, source and normalized digests, byte counts, timestamps, canonical snapshot identity, MB2-only scope, and false write/promotion flags.

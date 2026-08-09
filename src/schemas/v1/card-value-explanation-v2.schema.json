@@ -104,6 +104,122 @@
           ],
           "type": "object"
         },
+        "historical_price_evidence": {
+          "additionalProperties": false,
+          "properties": {
+            "acquisition_count": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "card_level_summary": {
+              "type": "object"
+            },
+            "comparable_dimension_count": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "descriptive_movement_entries": {
+              "items": {
+                "required": [
+                  "label",
+                  "classification",
+                  "canonical_card_id",
+                  "canonical_printing_id",
+                  "set_code",
+                  "set_name",
+                  "collector_number",
+                  "provider",
+                  "provider_native_printing_id",
+                  "finish",
+                  "language",
+                  "currency",
+                  "price_type",
+                  "first_observation_id",
+                  "latest_observation_id",
+                  "first_source_timestamp",
+                  "latest_source_timestamp",
+                  "first_amount",
+                  "latest_amount",
+                  "absolute_change",
+                  "percentage_change",
+                  "elapsed_seconds",
+                  "priced_observation_count",
+                  "acquisition_run_ids",
+                  "source_digests",
+                  "normalized_digests"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "distinct_source_timestamp_count": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "earliest_source_timestamp": {
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "elapsed_historical_span_seconds": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "exact_comparison_tuple": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "explicit_missing_price_dimension_count": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "history_readiness_state": {
+              "type": "string"
+            },
+            "latest_source_timestamp": {
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "noncomparable_dimension_count": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "ordering": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "total_observation_count": {
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "history_readiness_state",
+            "acquisition_count",
+            "distinct_source_timestamp_count",
+            "total_observation_count",
+            "comparable_dimension_count",
+            "noncomparable_dimension_count",
+            "explicit_missing_price_dimension_count",
+            "earliest_source_timestamp",
+            "latest_source_timestamp",
+            "elapsed_historical_span_seconds",
+            "exact_comparison_tuple",
+            "ordering",
+            "card_level_summary",
+            "descriptive_movement_entries"
+          ],
+          "type": "object"
+        },
         "market": {
           "additionalProperties": false,
           "properties": {
@@ -159,10 +275,6 @@
         "observed_price_evidence": {
           "additionalProperties": false,
           "properties": {
-            "history_readiness": {
-              "type": "object",
-              "required": ["acquisition_count", "comparable_dimension_count", "single_snapshot_dimension_count", "multi_snapshot_dimension_count", "readiness_state", "supports_descriptive_movement", "readiness_statement"]
-            },
             "compatible_dimension_summaries": {
               "items": {
                 "required": [
@@ -180,6 +292,18 @@
                 "type": "object"
               },
               "type": "array"
+            },
+            "history_readiness": {
+              "required": [
+                "acquisition_count",
+                "comparable_dimension_count",
+                "single_snapshot_dimension_count",
+                "multi_snapshot_dimension_count",
+                "readiness_state",
+                "supports_descriptive_movement",
+                "readiness_statement"
+              ],
+              "type": "object"
             },
             "observations": {
               "items": {
@@ -238,8 +362,8 @@
             "ordering",
             "summary",
             "observations",
-            "compatible_dimension_summaries"
-            ,"history_readiness"
+            "compatible_dimension_summaries",
+            "history_readiness"
           ],
           "type": "object"
         },
