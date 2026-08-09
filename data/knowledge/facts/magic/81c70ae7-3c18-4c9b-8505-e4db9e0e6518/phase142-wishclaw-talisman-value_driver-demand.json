@@ -1,0 +1,42 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-04T21:10:15.879000Z",
+  "evidence": [
+    {
+      "claim": "Scryfall default-cards supplies edhrec_rank 515 for the exactly mapped Wishclaw Talisman Card.",
+      "observed_at": "2026-08-04T21:10:15.879000Z",
+      "reference": "data/card_intelligence/demand/phase-142/scryfall-edhrec-rank.json",
+      "source_id": "phase-142-scryfall-edhrec-rank",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase142-wishclaw-talisman-value_driver-demand",
+  "kind": "demand",
+  "predicate": "value_driver.demand",
+  "recorded_at": "2026-08-09T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase132-wishclaw-talisman-value_driver-demand"
+  ],
+  "value": {
+    "data": {
+      "canonical_oracle_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "completeness_state": "complete_for_exact_card_metric_at_dataset_timestamp",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "limitations": [
+        "Ordinal rank is not a deck count.",
+        "No high/low demand conclusion is asserted.",
+        "No competitive usage or archetype association is supplied."
+      ],
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "9da15685-69c4-4517-b5a7-cf929e2788ba",
+      "rank": 515
+    },
+    "status": "known"
+  }
+}

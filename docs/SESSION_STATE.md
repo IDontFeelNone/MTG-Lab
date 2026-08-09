@@ -1,3 +1,9 @@
+# Session state — Phase 142 complete
+
+Phase 141 was merged at `52a4793`. Phase 142 uses no new network acquisition: it projects only ten `edhrec_rank` fields from the second already retained Scryfall default-cards snapshot. Retention and review are deterministic, digest-verified, exact-scope, and provider-specific. Ten append-only known facts supersede the ten Phase 132 unknown demand facts. `card-value-explanation-v3` is opt-in through `--include-demand-evidence`.
+
+Current production remains 913 Printings, 956 immutable market observations, two retained MB2 snapshots, ten active complete Phase 136 printing-history facts, and ten active reviewed demand-rank facts. Canonical, market, imports, acquisitions, Phase 135 evidence, and prior knowledge bytes were not mutated. Architecture v12 is frozen. No score, recommendation, forecast, scarcity statement, or demand inference from price/printing history exists.
+
 # Phase 141 session state
 
 Implementation is complete and read-only. Baseline: acquisitions `scryfall-mb2-30754638264-1` and `scryfall-mb2-30959813191-1`; two completed import reports; 956 observations split 478/478; MB2 379/379; 478 global exact comparable dimensions; zero explicit-missing dimensions; readiness `multiple_snapshots_descriptive_only`. Pilot census: 17 comparable dimensions (0 increased, 9 decreased, 8 unchanged). Protected data and Architecture v12 remain unchanged.

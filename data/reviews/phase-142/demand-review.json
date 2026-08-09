@@ -1,0 +1,89 @@
+{
+  "canonical_write": false,
+  "cards_without_rank": [],
+  "evidence_records_sha256": "aabcac681f1ff7fbe9afd2f417c3c2e938a4af146148021cc0f7890e780d6105",
+  "facts_added": 10,
+  "inference_performed": false,
+  "limitations": [
+    "One provider and one dataset timestamp.",
+    "Ordinal rank is not a deck count.",
+    "The retained projection does not expose EDHREC methodology, represented-deck count, format archetypes, or competitive usage."
+  ],
+  "market_write": false,
+  "pilot_cards": [
+    {
+      "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+      "name": "Brainstorm",
+      "rank": 72
+    },
+    {
+      "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "name": "Command Tower",
+      "rank": 2
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "name": "Counterspell",
+      "rank": 16
+    },
+    {
+      "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+      "name": "Goblin Charbelcher",
+      "rank": 10146
+    },
+    {
+      "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+      "name": "Goblin King",
+      "rank": 3325
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "name": "Sol Ring",
+      "rank": 1
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "name": "Swords to Plowshares",
+      "rank": 11
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "name": "Treasure Cruise",
+      "rank": 623
+    },
+    {
+      "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "name": "Walking Ballista",
+      "rank": 439
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "name": "Wishclaw Talisman",
+      "rank": 515
+    }
+  ],
+  "predicate_counts": {
+    "value_driver.demand": 10
+  },
+  "provider": "scryfall",
+  "retained_record_count": 10,
+  "schema_version": "phase-142-demand-review-v1",
+  "states": {
+    "incomplete": 10,
+    "known": 10,
+    "unknown": 0,
+    "unsupported": 20
+  },
+  "superseded_fact_ids": [
+    "phase132-brainstorm-value_driver-demand",
+    "phase132-command-tower-value_driver-demand",
+    "phase132-counterspell-value_driver-demand",
+    "phase132-goblin-charbelcher-value_driver-demand",
+    "phase132-goblin-king-value_driver-demand",
+    "phase132-sol-ring-value_driver-demand",
+    "phase132-swords-to-plowshares-value_driver-demand",
+    "phase132-treasure-cruise-value_driver-demand",
+    "phase132-walking-ballista-value_driver-demand",
+    "phase132-wishclaw-talisman-value_driver-demand"
+  ]
+}

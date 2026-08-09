@@ -1,3 +1,17 @@
+# Phase 142 — reviewed provider demand/usage evidence
+
+## Provider and retained boundary
+
+The sole provider is Scryfall, endpoint/dataset `https://api.scryfall.com/bulk-data/default-cards` / `scryfall-default-cards`. Phase 142 makes no provider request and retains only a ten-record projection from acquisition `scryfall-mb2-30959813191-1`, dataset timestamp `2026-08-04T21:10:15.879000Z`. The retained fields are canonical Card ID, Card name, Scryfall oracle ID, exact MB2 Scryfall Printing ID, provider, metric name, ordinal rank, and timestamp, plus dataset/source identity, retrieval timestamp, source digest, metric semantics, mapping rule, completeness, and a records digest. The full provider corpus is not duplicated.
+
+Scryfall's API and bulk-data documentation URLs are retained with the evidence. No imagery is copied. `edhrec_rank` names EDHREC as its upstream basis; MTG Lab does not claim an independent EDHREC dataset or license. The retained rank is an ordinal supplied by Scryfall and described as based on EDHREC deck usage. It is not a represented-deck count, percentile, score, or MTG Lab conclusion, and the retained projection cannot audit the upstream methodology or global corpus completeness.
+
+## Facts and interpretation
+
+Exactly ten known `value_driver.demand` facts were appended—one for Brainstorm, Command Tower, Counterspell, Goblin Charbelcher, Goblin King, Sol Ring, Swords to Plowshares, Treasure Cruise, Walking Ballista, and Wishclaw Talisman. Ranks respectively are 72, 2, 16, 10146, 3325, 1, 11, 623, 439, and 515. Every fact supersedes only its same-Card Phase 132 unknown predicate. Known=10, unknown=0 for the predicate, incomplete=10 because rank is the only supported metric, and unsupported=20 across competitive usage and archetype/deck-inclusion dimensions. No Card lacks this evidence.
+
+Opt-in `card-value-explanation-v3` preserves the exact value, provider, dataset timestamp, evidence-source ID, explicit null confidence, completeness state, and limitations. Providers are never combined into an opaque score. No rank interpretation, high/low-demand label, valuation, recommendation, prediction, scarcity inference, or inference from price, printing count, or reprint count is performed.
+
 ## Phase 141 — Card Value Explanation historical evidence
 
 `card-value-explanation-v2` optionally includes `historical_price_evidence` through `--include-historical-movement`, which automatically enables Phase 138 observed prices. The authoritative JSON includes readiness and coverage counts, date/span bounds, exact descriptive entries, and a retained-MB2-only card summary. `--human-readable` is a derivative renderer. The pilot's 17 MB2 dimensions classify as 0 increased, 9 decreased, and 8 unchanged. These labels reflect only exact observed change signs and do not imply demand, popularity, scarcity, liquidity, fair value, future direction, investment quality, or advice.

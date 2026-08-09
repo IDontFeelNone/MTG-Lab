@@ -1,0 +1,42 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-04T21:10:15.879000Z",
+  "evidence": [
+    {
+      "claim": "Scryfall default-cards supplies edhrec_rank 439 for the exactly mapped Walking Ballista Card.",
+      "observed_at": "2026-08-04T21:10:15.879000Z",
+      "reference": "data/card_intelligence/demand/phase-142/scryfall-edhrec-rank.json",
+      "source_id": "phase-142-scryfall-edhrec-rank",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase142-walking-ballista-value_driver-demand",
+  "kind": "demand",
+  "predicate": "value_driver.demand",
+  "recorded_at": "2026-08-09T00:00:00Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+    "game_id": "magic"
+  },
+  "supersedes": [
+    "phase132-walking-ballista-value_driver-demand"
+  ],
+  "value": {
+    "data": {
+      "canonical_oracle_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+      "completeness_state": "complete_for_exact_card_metric_at_dataset_timestamp",
+      "dataset_timestamp": "2026-08-04T21:10:15.879000Z",
+      "limitations": [
+        "Ordinal rank is not a deck count.",
+        "No high/low demand conclusion is asserted.",
+        "No competitive usage or archetype association is supplied."
+      ],
+      "metric": "edhrec_rank",
+      "provider": "scryfall",
+      "provider_printing_id": "0db963e2-38df-4036-a312-35854dc3521c",
+      "rank": 439
+    },
+    "status": "known"
+  }
+}

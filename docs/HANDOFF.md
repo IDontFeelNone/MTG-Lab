@@ -1,3 +1,11 @@
+# Phase 142 handoff — reviewed demand evidence
+
+The exact ten pilot Cards now have one reviewed provider observation each: Scryfall `edhrec_rank` from the retained default-cards snapshot observed at `2026-08-04T21:10:15.879000Z`. The bounded evidence is `data/card_intelligence/demand/phase-142/scryfall-edhrec-rank.json`; its ten records are digest-bound and deterministically mapped by canonical Card/Scryfall oracle ID and exact MB2 Scryfall Printing ID.
+
+Ten Phase 142 `value_driver.demand` facts supersede only their corresponding Phase 132 unknowns. Known=10; unknown=0 for this predicate; all ten remain incomplete beyond the exact ordinal; competitive usage and archetype/deck inclusion are unsupported (20 card-dimensions). No pilot Card lacks the retained rank. Run `PYTHONPATH=src:. python -m card_intelligence.cli explain "Sol Ring" --include-demand-evidence` for opt-in v3 output. The rank is evidence, not a high/low-demand judgment or valuation input.
+
+Protected boundaries are unchanged: 913 canonical Printings, 956 market observations across two retained snapshots, ten active Phase 136 histories, immutable Phase 132 history, retained Phase 135 evidence, and Architecture v12. Next, consider a separately reviewed deck-count provider acquisition without expanding the pilot.
+
 # Phase 141 — historical explanation handoff
 
 Run `PYTHONPATH=src:. python -m card_intelligence.cli explain "Sol Ring" --include-observed-prices --include-historical-movement` for authoritative JSON. The historical flag automatically enables observed-price evidence. Add `--human-readable` only for a rendering derived from that contract. Comparisons never cross Printing, provider, finish, language, currency, or price type. The output describes two retained MB2 snapshots only and is not completed-sales evidence, fair value, prediction, trend strength, score, ranking, or recommendation. The 956 observations, both three-file acquisitions, both import reports, canonical state, and knowledge facts are unchanged.

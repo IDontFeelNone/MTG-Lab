@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "card-demand-evidence-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "evidence_source_id", "provider", "source_dataset", "source_endpoint", "dataset_timestamp", "retrieved_at", "source_sha256", "license_considerations", "metric_semantics", "identity_mapping", "completeness", "records", "records_sha256"],
+  "properties": {
+    "schema_version": {"const": "card-demand-evidence-v1"},
+    "evidence_source_id": {"const": "phase-142-scryfall-edhrec-rank"},
+    "provider": {"const": "scryfall"},
+    "source_dataset": {"const": "scryfall-default-cards"},
+    "source_endpoint": {"type": "string", "format": "uri"},
+    "dataset_timestamp": {"type": "string", "format": "date-time"},
+    "retrieved_at": {"type": "string", "format": "date-time"},
+    "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "license_considerations": {"type": "object"},
+    "metric_semantics": {"type": "string", "minLength": 1},
+    "identity_mapping": {"type": "string", "minLength": 1},
+    "completeness": {"type": "object"},
+    "records_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "records": {
+      "type": "array", "minItems": 10, "maxItems": 10,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["card_id", "card_name", "canonical_oracle_id", "provider_printing_id", "metric", "rank", "dataset_timestamp", "provider"],
+        "properties": {
+          "card_id": {"type": "string", "format": "uuid"},
+          "card_name": {"type": "string", "minLength": 1},
+          "canonical_oracle_id": {"type": "string", "format": "uuid"},
+          "provider_printing_id": {"type": "string", "format": "uuid"},
+          "metric": {"const": "edhrec_rank"},
+          "rank": {"type": "integer", "minimum": 1},
+          "dataset_timestamp": {"type": "string", "format": "date-time"},
+          "provider": {"const": "scryfall"}
+        }
+      }
+    }
+  }
+}
