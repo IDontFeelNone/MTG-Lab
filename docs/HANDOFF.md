@@ -412,3 +412,12 @@ global uniqueness. The corrected projection treats `code` as optional provider i
 ZIP member path as exact source-record identity. Run **Bounded deck usage acquisition** on `main`
 exactly once after this repair merges, then review its ten-record PR. Do not run it from this checkout and
 do not create usage facts during the acquisition.
+# Phase 143 publication-boundary repair handoff
+
+The first hosted acquisition reached publication and wrote the expected evidence file, but the old
+tracked-diff-only check missed that untracked file and stopped before branch creation, commit, push, or
+PR creation. The workflow now uses a NUL-delimited Git porcelain parser before and after staging. Its
+only pre-commit state is `?? data/card_intelligence/demand/phase-143/mtgjson-decks.json`; its only
+staged state is `A  data/card_intelligence/demand/phase-143/mtgjson-decks.json`. The strict loader runs
+before publication. After merge, manually rerun **Bounded deck usage acquisition** exactly once and
+manually review the resulting evidence PR. No production evidence PR exists from this repair.

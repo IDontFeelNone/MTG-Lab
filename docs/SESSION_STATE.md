@@ -381,3 +381,10 @@ Production still contains only acquisition `scryfall-mb2-30754638264-1` and ther
 - Provider `code` is now nullable metadata. Full ZIP path is source-record identity; path-derived retained
   ID and member-byte digest preserve exact records and explicit aliases.
 - Protected data and ten-card scope are unchanged; usage/value inference remains prohibited.
+# Session state — Phase 143 publication boundary repaired
+
+The failure was confined to Git-state verification: `git diff --name-only` omitted the newly created
+untracked evidence document. The replacement verifier includes all staged, unstaged, untracked,
+deleted, renamed, and copied states and accepts only the exact evidence file in its expected pre-stage
+or staged status. This session did not contact MTGJSON or create production evidence. Canonical,
+market, knowledge, Phase 135 evidence, and all other protected production data remain unchanged.

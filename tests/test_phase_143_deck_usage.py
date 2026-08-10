@@ -2,6 +2,7 @@ import hashlib
 import io
 import json
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 import warnings
@@ -9,6 +10,7 @@ import zipfile
 
 from card_intelligence.deck_usage import (DeckUsageEvidenceError, PILOT_NAMES, canonical_bytes,
                                           decode_deck_archive, load_deck_usage, project_decks)
+from scripts.verify_deck_usage_boundary import EVIDENCE_PATH, verify
 
 IDS = {name: f"card-{index}" for index, name in enumerate(PILOT_NAMES)}
 KWARGS = {"dataset_timestamp": "2026-08-09T00:00:00Z",
@@ -129,6 +131,114 @@ class Phase143DeckUsageTests(unittest.TestCase):
         text = canonical_bytes(self.document()).decode().lower()
         for forbidden in ("demand_score", "buy this", "undervalued", "price_prediction", "scarcity_score"):
             self.assertNotIn(forbidden, text)
+
+    def test_strict_loader_checks_timestamps_source_and_retained_identities(self):
+        original = self.document()
+        mutations = (
+            lambda value: value.update(retrieved_at="not-a-timestamp"),
+            lambda value: value.update(source_sha256="invalid"),
+            lambda value: value.update(population_semantics="all decks, somehow"),
+            lambda value: value["records"][0].update(denominator=999),
+            lambda value: value["records"][5]["deck_associations"][0].update(
+                retained_record_id="not-path-derived"),
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "evidence.json"
+            for mutate in mutations:
+                value = json.loads(json.dumps(original)); mutate(value)
+                value["records_sha256"] = hashlib.sha256(canonical_bytes(value["records"])).hexdigest()
+                path.write_bytes(canonical_bytes(value))
+                with self.assertRaises(DeckUsageEvidenceError):
+                    load_deck_usage(path)
+
+
+class Phase143PublicationBoundaryTests(unittest.TestCase):
+    def make_repository(self):
+        temporary = tempfile.TemporaryDirectory()
+        root = Path(temporary.name)
+        subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+        subprocess.run(["git", "config", "user.email", "test@example.invalid"], cwd=root, check=True)
+        subprocess.run(["git", "config", "user.name", "Test"], cwd=root, check=True)
+        (root / "baseline.txt").write_text("baseline\n")
+        protected = root / "data/canonical/snapshot.json"
+        protected.parent.mkdir(parents=True); protected.write_text("{}\n")
+        subprocess.run(["git", "add", "."], cwd=root, check=True)
+        subprocess.run(["git", "commit", "-qm", "baseline"], cwd=root, check=True)
+        return temporary, root
+
+    @staticmethod
+    def write_evidence(root):
+        evidence = root / EVIDENCE_PATH
+        evidence.parent.mkdir(parents=True, exist_ok=True)
+        evidence.write_text("{}\n")
+        return evidence
+
+    def test_hosted_failure_untracked_file_is_seen_and_accepted(self):
+        temporary, root = self.make_repository()
+        with temporary:
+            self.write_evidence(root)
+            old = subprocess.run(["git", "diff", "--name-only"], cwd=root, check=True,
+                                 text=True, capture_output=True)
+            self.assertEqual(old.stdout, "")
+            report = verify(root, "pre-commit")
+            self.assertTrue(report["valid"])
+            self.assertEqual(report["actual_paths"], [EVIDENCE_PATH])
+            self.assertEqual(report["path_statuses"][0]["status"], "??")
+
+    def test_extra_untracked_tracked_modification_and_protected_change_fail(self):
+        for changed_path in ("extra.txt", "baseline.txt", "data/canonical/snapshot.json"):
+            with self.subTest(path=changed_path):
+                temporary, root = self.make_repository()
+                with temporary:
+                    self.write_evidence(root)
+                    (root / changed_path).write_text("changed\n")
+                    report = verify(root, "pre-commit")
+                    self.assertFalse(report["valid"])
+                    self.assertIn(changed_path, report["unexpected_paths"])
+
+    def test_unrelated_staged_file_deletion_and_rename_fail(self):
+        actions = (
+            lambda root: subprocess.run(["git", "add", "baseline.txt"], cwd=root, check=True),
+            lambda root: (root / "baseline.txt").unlink(),
+            lambda root: subprocess.run(["git", "mv", "baseline.txt", "renamed.txt"], cwd=root, check=True),
+        )
+        for action in actions:
+            temporary, root = self.make_repository()
+            with temporary:
+                self.write_evidence(root)
+                (root / "baseline.txt").write_text("modified\n")
+                action(root)
+                self.assertFalse(verify(root, "pre-commit")["valid"])
+
+    def test_symlink_and_absent_expected_file_fail(self):
+        temporary, root = self.make_repository()
+        with temporary:
+            self.assertIn("evidence_file_absent", verify(root, "pre-commit")["failure_reason_codes"])
+            evidence = root / EVIDENCE_PATH; evidence.parent.mkdir(parents=True)
+            evidence.symlink_to(root / "baseline.txt")
+            self.assertIn("evidence_symlink", verify(root, "pre-commit")["failure_reason_codes"])
+
+    def test_exact_staged_boundary_succeeds(self):
+        temporary, root = self.make_repository()
+        with temporary:
+            self.write_evidence(root)
+            subprocess.run(["git", "add", "--", EVIDENCE_PATH], cwd=root, check=True)
+            report = verify(root, "staged")
+            self.assertTrue(report["valid"])
+            self.assertEqual(report["staged_paths"], [EVIDENCE_PATH])
+            self.assertEqual(report["path_statuses"][0]["status"], "A ")
+
+    def test_workflow_publication_remains_manual_and_bounded(self):
+        workflow = (Path(__file__).parents[1] /
+                    ".github/workflows/deck-usage-acquisition.yml").read_text()
+        self.assertIn("verify_deck_usage_boundary.py --boundary pre-commit", workflow)
+        self.assertIn("verify_deck_usage_boundary.py --boundary staged", workflow)
+        self.assertIn('git add -- "$FILE"', workflow)
+        self.assertIn('git push origin "HEAD:refs/heads/$BRANCH"', workflow)
+        self.assertNotIn("git diff --name-only", workflow)
+        self.assertNotIn("--force", workflow)
+        self.assertNotIn("--auto", workflow)
+        self.assertNotIn("gh pr merge", workflow)
 
 
 if __name__ == "__main__": unittest.main()

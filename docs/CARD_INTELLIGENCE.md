@@ -254,3 +254,13 @@ and exposes byte-identical aliases without merging them. Missing or repeated pro
 A repeated source path is invalid and fails with a bounded reason code, path/path digest, and structural
 context rather than deck contents. This preserves the metric: every distinct decoded provider file is in
 the denominator and every matching file contributes at most one numerator count per pilot Card.
+# Phase 143 bounded deck-usage publication boundary
+
+The manual GitHub-hosted workflow retains exactly
+`data/card_intelligence/demand/phase-143/mtgjson-decks.json`. Publication now fails closed through a
+NUL-delimited Git porcelain inventory: the pre-commit boundary is exactly one untracked regular,
+non-symlink evidence file, and the staged boundary is exactly that one added file. Tracked changes,
+extra untracked or staged paths, deletions, renames, copies, and protected-data changes are rejected.
+The strict loader verifies the exact ten-card scope, deterministic record/source digests, dataset and
+retrieval timestamps, population semantics, source member identities, and path-derived retained IDs.
+Nullable or repeated provider codes remain valid and do not replace ZIP member identity.
