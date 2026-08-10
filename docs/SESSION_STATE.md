@@ -371,3 +371,13 @@ Production still contains only acquisition `scryfall-mb2-30754638264-1` and ther
   incomplete 0, unsupported 0 for the new represented-deck metric; facts added 0; superseded 0.
 - Phase 142 rank facts (10), Phase 141 observations (956), Phase 136 histories (10), canonical data,
   acquisitions/imports, and Phase 135 evidence remain unchanged. Architecture v12 remains frozen.
+
+## Phase 143 identity-repair state
+
+- The real hosted run reached and decoded `AllDeckFiles.zip`; no production projection was retained.
+- Root cause: `project_decks()` used `code or fileName` and enforced global uniqueness, although `code`
+  is not a documented unique key for ZIP members; because the decoder always supplied `fileName`, the
+  observed generic failure identifies a repeated non-empty `code`, not transport or an absent fallback.
+- Provider `code` is now nullable metadata. Full ZIP path is source-record identity; path-derived retained
+  ID and member-byte digest preserve exact records and explicit aliases.
+- Protected data and ten-card scope are unchanged; usage/value inference remains prohibited.

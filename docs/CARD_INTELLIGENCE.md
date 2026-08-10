@@ -244,3 +244,13 @@ one count per Card. Deck `type` is a provider label rather than independently ve
 deck name is a literal association rather than an inferred strategic archetype. Missing production
 acquisition remains unknown and creates no fact. Once reviewed evidence is retained, explanation v4
 can expose it beside the provider-isolated Phase 142 Scryfall rank. It does not label demand high/low.
+
+## Phase 143 deck identity correction
+
+MTGJSON Deck `code` is retained as optional provider-native metadata, not asserted to be a corpus-wide
+record key. The `AllDeckFiles.zip` member path identifies the decoded source record; an MTG Lab retained
+record ID is the SHA-256-derived namespace of that path, while the member-content SHA-256 binds bytes
+and exposes byte-identical aliases without merging them. Missing or repeated provider codes are valid.
+A repeated source path is invalid and fails with a bounded reason code, path/path digest, and structural
+context rather than deck contents. This preserves the metric: every distinct decoded provider file is in
+the denominator and every matching file contributes at most one numerator count per pilot Card.

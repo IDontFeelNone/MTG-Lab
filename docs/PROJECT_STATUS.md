@@ -460,3 +460,21 @@ Until a resulting artifact is reviewed and merged, the retained production censu
 records, zero new facts, zero supersessions, and all ten Cards remain unknown for deck inclusion.
 Phase 142's ten Scryfall ranks and exactly ten known demand facts remain intact. Canonical data, 956
 market observations, Phase 135 evidence, Phase 136 histories, and Architecture v12 are unchanged.
+
+## Phase 143 repair — source-record identity separated from provider code
+
+The first hosted acquisition reached the real ZIP and proved the transport path, but projection rejected
+legitimate repeated MTGJSON `code` values. The decoder had populated a filename fallback, yet
+`project_decks()` preferred any non-empty `code` and incorrectly treated that provider field as a
+mandatory globally unique deck-file key. MTGJSON's Deck model documents `code` as deck-associated
+provider data; it does not state that `code` is present and globally unique across every member of
+`AllDeckFiles.zip`. The downloadable member path, rather than name, type, or code, is the retained
+coordinate for the exact provider file.
+
+The repair therefore keeps optional `code` as `provider_deck_identity` (null when unavailable), uses the
+full ZIP member path as `source_record_identity`, derives `retained_record_id` from that path, and binds
+the record to its member-byte SHA-256. Code/name/type collisions never collapse files. Duplicate member
+paths fail closed; the diagnostic distinguishes identical duplicate entries from the same path carrying
+conflicting bytes. Byte-identical content at different paths remains two explicit aliases with equal
+content digests. Numerator and denominator remain counts of distinct member paths, and no production
+artifact was created by this repair.

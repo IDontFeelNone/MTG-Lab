@@ -403,3 +403,12 @@ products and is not global played-deck coverage.
 No acquisition artifact exists in this checkout because provider network access was unavailable.
 Consequently there are no Phase 143 production usage records, facts, or supersessions. Run the manual
 workflow, review the artifact, and only then admit evidence/facts. Phase 142 and all protected data are unchanged.
+
+## Phase 143 repaired acquisition handoff
+
+The hosted failure was a projection identity defect, not acquisition failure: a repeated non-empty Deck
+`code` was preferred over the decoder's filename coordinate and rejected as though MTGJSON promised
+global uniqueness. The corrected projection treats `code` as optional provider identity and the complete
+ZIP member path as exact source-record identity. Run **Bounded deck usage acquisition** on `main`
+exactly once after this repair merges, then review its ten-record PR. Do not run it from this checkout and
+do not create usage facts during the acquisition.
