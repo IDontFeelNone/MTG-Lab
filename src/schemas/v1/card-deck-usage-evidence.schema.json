@@ -13,6 +13,17 @@
     "population_semantics": {"type": "string"}, "identity_mapping": {"type": "string"},
     "license_considerations": {"type": "object"}, "retention_boundary": {"type": "string"},
     "records_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "records": {"type": "array", "minItems": 10, "maxItems": 10, "items": {"type": "object"}}
+    "records": {"type": "array", "minItems": 10, "maxItems": 10, "items": {
+      "type": "object",
+      "properties": {
+        "deck_associations": {"type": "array", "items": {
+          "oneOf": [
+            {"type": "object", "required": ["deck_id", "deck_name", "format", "boards"]},
+            {"type": "object", "required": ["provider_deck_identity", "source_record_identity", "retained_record_id", "source_content_sha256", "deck_name", "format", "boards"],
+             "properties": {"provider_deck_identity": {"type": ["string", "null"]}, "source_record_identity": {"type": "string", "minLength": 1}, "retained_record_id": {"type": "string", "minLength": 1}, "source_content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}
+          ]
+        }}
+      }
+    }}
   }
 }

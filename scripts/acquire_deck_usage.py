@@ -4,13 +4,11 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import io
 import json
 from pathlib import Path
 from urllib.request import Request, urlopen
-import zipfile
 
-from card_intelligence.deck_usage import canonical_bytes, project_decks
+from card_intelligence.deck_usage import canonical_bytes, decode_deck_archive, project_decks
 
 
 def main() -> int:
@@ -28,16 +26,7 @@ def main() -> int:
             payload = response.read()
     else:
         payload = Path(args.source).read_bytes()
-    decks = []
-    with zipfile.ZipFile(io.BytesIO(payload)) as archive:
-        names = sorted(n for n in archive.namelist() if n.endswith(".json") and not n.endswith("/"))
-        for name in names:
-            value = json.loads(archive.read(name))
-            deck = value.get("data", value)
-            if not isinstance(deck, dict):
-                raise ValueError(f"invalid deck document: {name}")
-            deck = dict(deck); deck.setdefault("fileName", Path(name).stem)
-            decks.append(deck)
+    decks = decode_deck_archive(payload)
     canonical = json.loads(args.canonical.read_text())
     mapping = {v["values"]["name"]: k for k, v in canonical["card"].items()
                if v["values"]["name"] in __import__("card_intelligence.deck_usage", fromlist=["PILOT_NAMES"]).PILOT_NAMES}

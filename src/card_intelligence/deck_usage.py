@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 from pathlib import Path
 from typing import Any
+import zipfile
 
 SCHEMA = "card-deck-usage-evidence-v1"
 PILOT_NAMES = ("Brainstorm", "Command Tower", "Counterspell", "Goblin Charbelcher",
@@ -21,6 +23,45 @@ class DeckUsageEvidenceError(ValueError):
 
 def canonical_bytes(value: Any) -> bytes:
     return (json.dumps(value, indent=2, sort_keys=True, separators=(",", ": ")) + "\n").encode()
+
+
+def decode_deck_archive(payload: bytes) -> list[dict[str, Any]]:
+    """Decode every JSON member while retaining its provider source coordinate."""
+    decks: list[dict[str, Any]] = []
+    seen: dict[str, str] = {}
+    with zipfile.ZipFile(io.BytesIO(payload)) as archive:
+        members = sorted(
+            (info for info in archive.infolist()
+             if info.filename.endswith(".json") and not info.is_dir()),
+            key=lambda info: info.filename,
+        )
+        for info in members:
+            member_path = info.filename
+            member_bytes = archive.read(info)
+            content_sha256 = hashlib.sha256(member_bytes).hexdigest()
+            if member_path in seen:
+                reason = ("conflicting_source_record_content" if seen[member_path] != content_sha256
+                          else "duplicate_source_record_identity")
+                raise DeckUsageEvidenceError(
+                    f"{reason}: member_path={member_path!r} "
+                    f"member_path_sha256={hashlib.sha256(member_path.encode()).hexdigest()}"
+                )
+            seen[member_path] = content_sha256
+            try:
+                value = json.loads(member_bytes)
+            except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+                raise DeckUsageEvidenceError(
+                    f"malformed_deck_json: member_path={member_path!r}"
+                ) from exc
+            deck = value.get("data", value) if isinstance(value, dict) else value
+            if not isinstance(deck, dict):
+                raise DeckUsageEvidenceError(
+                    f"malformed_deck_object: member_path={member_path!r}"
+                )
+            decks.append({"source_record_identity": member_path,
+                          "source_content_sha256": content_sha256,
+                          "deck": deck})
+    return decks
 
 
 def load_deck_usage(path: Path) -> dict[str, Any]:
@@ -49,11 +90,26 @@ def load_deck_usage(path: Path) -> dict[str, Any]:
         if record["metric"] != "represented_deck_count" or record["dataset_timestamp"] != document["dataset_timestamp"]:
             raise DeckUsageEvidenceError("invalid metric or conflicting timestamp")
         decks = record["deck_associations"]
-        if not isinstance(decks, list) or len(decks) != numerator or len({x["deck_id"] for x in decks}) != len(decks):
+        if not isinstance(decks, list) or not all(isinstance(x, dict) for x in decks):
+            raise DeckUsageEvidenceError("duplicate or inconsistent deck associations")
+        identities = [x.get("source_record_identity", x.get("deck_id")) for x in decks]
+        if len(decks) != numerator or None in identities or len(set(identities)) != len(decks):
             raise DeckUsageEvidenceError("duplicate or inconsistent deck associations")
         for deck in decks:
-            if set(deck) != {"deck_id", "deck_name", "format", "boards"} or not isinstance(deck["boards"], list):
+            legacy = {"deck_id", "deck_name", "format", "boards"}
+            current = {"provider_deck_identity", "source_record_identity", "retained_record_id",
+                       "source_content_sha256", "deck_name", "format", "boards"}
+            if set(deck) not in (legacy, current) or not isinstance(deck["boards"], list):
                 raise DeckUsageEvidenceError("malformed deck association")
+            if set(deck) == current and (deck["provider_deck_identity"] is not None and
+                                         not isinstance(deck["provider_deck_identity"], str)):
+                raise DeckUsageEvidenceError("malformed provider deck identity")
+            if set(deck) == current and (
+                    not isinstance(deck["source_record_identity"], str) or
+                    not isinstance(deck["retained_record_id"], str) or
+                    not isinstance(deck["source_content_sha256"], str) or
+                    len(deck["source_content_sha256"]) != 64):
+                raise DeckUsageEvidenceError("malformed source-record identity")
         formats = record["formats"]
         if not isinstance(formats, list) or sum(x["deck_count"] for x in formats) != numerator:
             raise DeckUsageEvidenceError("format counts do not isolate the represented decks")
@@ -68,27 +124,61 @@ def project_decks(decks: list[dict[str, Any]], card_ids: dict[str, str], *, data
     if set(card_ids) != set(PILOT_NAMES):
         raise DeckUsageEvidenceError("canonical mapping must contain the exact pilot")
     population: list[dict[str, Any]] = []
-    seen = set()
-    for raw in decks:
-        deck_id = str(raw.get("code") or raw.get("fileName") or "").strip()
+    seen_sources: dict[str, str] = {}
+    for decoded in decks:
+        if not isinstance(decoded, dict) or set(decoded) != {"source_record_identity", "source_content_sha256", "deck"}:
+            raise DeckUsageEvidenceError("malformed_decoded_deck: required source coordinate unavailable")
+        raw = decoded["deck"]
+        source_identity = decoded["source_record_identity"]
+        content_sha256 = decoded["source_content_sha256"]
+        if (not isinstance(raw, dict) or not isinstance(source_identity, str) or not source_identity or
+                not isinstance(content_sha256, str) or len(content_sha256) != 64 or
+                any(character not in "0123456789abcdef" for character in content_sha256)):
+            raise DeckUsageEvidenceError("malformed_decoded_deck: invalid source coordinate or content digest")
+        if source_identity in seen_sources:
+            reason = ("conflicting_source_record_content" if seen_sources[source_identity] != content_sha256
+                      else "duplicate_source_record_identity")
+            raise DeckUsageEvidenceError(
+                f"{reason}: member_path={source_identity!r} "
+                f"member_path_sha256={hashlib.sha256(source_identity.encode()).hexdigest()}"
+            )
+        seen_sources[source_identity] = content_sha256
+        provider_identity_value = raw.get("code")
+        provider_identity = (str(provider_identity_value).strip()
+                             if provider_identity_value is not None else None)
+        provider_identity = provider_identity or None
         name = str(raw.get("name") or "").strip(); fmt = str(raw.get("type") or "unknown").strip().casefold()
-        if not deck_id or not name or deck_id in seen:
-            raise DeckUsageEvidenceError("missing or duplicate provider deck identity")
-        seen.add(deck_id); matches: dict[str, set[str]] = {}
+        if not name:
+            raise DeckUsageEvidenceError(
+                f"missing_deck_name: member_path={source_identity!r} "
+                f"provider_id_present={provider_identity is not None} "
+                f"top_level_keys={sorted(map(str, raw))[:20]}"
+            )
+        matches: dict[str, set[str]] = {}
         for board in ("commander", "mainBoard", "sideBoard"):
             cards = raw.get(board, [])
-            if not isinstance(cards, list): raise DeckUsageEvidenceError("malformed provider board")
+            if not isinstance(cards, list):
+                raise DeckUsageEvidenceError(
+                    f"malformed_provider_board: member_path={source_identity!r} board={board}"
+                )
             for card in cards:
                 card_name = card.get("name") if isinstance(card, dict) else None
                 if card_name in card_ids: matches.setdefault(card_name, set()).add(board)
-        population.append({"deck_id": deck_id, "deck_name": name, "format": fmt,
-                           "matches": matches})
+        population.append({"provider_deck_identity": provider_identity,
+                           "source_record_identity": source_identity,
+                           "retained_record_id": "mtgjson-deck-" + hashlib.sha256(source_identity.encode()).hexdigest(),
+                           "source_content_sha256": content_sha256,
+                           "deck_name": name, "format": fmt, "matches": matches})
     records = []
     for card_name in PILOT_NAMES:
-        associations = [{"deck_id": d["deck_id"], "deck_name": d["deck_name"],
+        associations = [{"provider_deck_identity": d["provider_deck_identity"],
+                         "source_record_identity": d["source_record_identity"],
+                         "retained_record_id": d["retained_record_id"],
+                         "source_content_sha256": d["source_content_sha256"],
+                         "deck_name": d["deck_name"],
                          "format": d["format"], "boards": sorted(d["matches"][card_name])}
                         for d in population if card_name in d["matches"]]
-        associations.sort(key=lambda x: (x["format"], x["deck_id"]))
+        associations.sort(key=lambda x: (x["format"], x["source_record_identity"]))
         format_counts = [{"format": f, "deck_count": sum(x["format"] == f for x in associations)}
                          for f in sorted({x["format"] for x in associations})]
         records.append({"card_id": card_ids[card_name], "card_name": card_name,
@@ -105,7 +195,7 @@ def project_decks(decks: list[dict[str, Any]], card_ids: dict[str, str], *, data
             "dataset_timestamp": dataset_timestamp, "retrieved_at": retrieved_at,
             "source_sha256": source_sha256, "source_byte_count": source_byte_count,
             "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
-            "identity_mapping": "Exact MTGJSON card name mapped to the existing canonical Card name and ID.",
+            "identity_mapping": "Exact MTGJSON card name maps to canonical Card identity. MTGJSON code is optional provider identity; ZIP member path is source-record identity; a path-derived MTG Lab ID retains records without merging code collisions.",
             "license_considerations": {"license": "MTGJSON project data is distributed under CC BY-SA 4.0; Wizards card data remains subject to its owners.", "url": "https://mtgjson.com/license/"},
-            "retention_boundary": "Only ten aggregate records and their matching deck identities, formats, and boards are retained; the ZIP is transient.",
+            "retention_boundary": "Only ten aggregate records and matching provider/source identities, content digests, literal names, formats, and boards are retained; the ZIP is transient.",
             "records": records, "records_sha256": hashlib.sha256(canonical_bytes(records)).hexdigest()}
