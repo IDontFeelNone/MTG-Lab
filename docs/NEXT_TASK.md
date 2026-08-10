@@ -1,4 +1,4 @@
-# Next task after Phase 143 identity repair
+# Next task after Phase 143 publication-boundary repair
 
 After this repair is merged, go to **GitHub → Actions → Bounded deck usage acquisition → Run workflow**, select
 `main`, and click **Run workflow** exactly once. Review the generated ten-record evidence PR, including

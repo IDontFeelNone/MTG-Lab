@@ -478,3 +478,17 @@ paths fail closed; the diagnostic distinguishes identical duplicate entries from
 conflicting bytes. Byte-identical content at different paths remains two explicit aliases with equal
 content digests. Numerator and denominator remain counts of distinct member paths, and no production
 artifact was created by this repair.
+# Phase 143 — publication boundary repair ready
+
+The hosted bounded deck-usage acquisition created the exact evidence path as an ordinary untracked
+file, but the publication step used `git diff --name-only`, which inventories tracked diffs and
+therefore returned no path. A deterministic porcelain-v1 `-z` verifier now inventories staged,
+unstaged, untracked, deleted, renamed, and copied paths. Before staging it permits exactly one `??`
+regular non-symlink file; after staging it permits exactly one `A ` file, always at
+`data/card_intelligence/demand/phase-143/mtgjson-decks.json`. Every other Git state fails closed.
+
+The strict evidence loader additionally binds both UTC timestamps, source digest and byte count, the
+ten-record digest and exact pilot, and path-derived retained record identities. Provider deck identity
+remains nullable and non-unique; ZIP member paths remain unique source identities and denominator
+units. No provider acquisition was run during this repair, and no canonical, market, knowledge, Phase
+135 evidence, or other production data changed.

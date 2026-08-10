@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 import zipfile
@@ -15,6 +16,26 @@ PILOT_NAMES = ("Brainstorm", "Command Tower", "Counterspell", "Goblin Charbelche
 ALLOWED_RECORD = {"card_id", "card_name", "provider_card_name", "metric", "numerator",
                   "denominator", "dataset_timestamp", "formats", "deck_associations",
                   "completeness", "limitations"}
+HEX_DIGITS = frozenset("0123456789abcdef")
+POPULATION_SEMANTICS = ("All distinct provider deck files decoded from the snapshot; numerator is "
+                        "distinct files containing the exact card name and denominator is all decoded files.")
+IDENTITY_MAPPING = ("Exact MTGJSON card name maps to canonical Card identity. MTGJSON code is optional "
+                    "provider identity; ZIP member path is source-record identity; a path-derived MTG Lab "
+                    "ID retains records without merging code collisions.")
+
+
+def _is_sha256(value: object) -> bool:
+    return isinstance(value, str) and len(value) == 64 and set(value) <= HEX_DIGITS
+
+
+def _is_utc_timestamp(value: object) -> bool:
+    if not isinstance(value, str) or not value.endswith("Z"):
+        return False
+    try:
+        datetime.fromisoformat(value[:-1] + "+00:00")
+    except ValueError:
+        return False
+    return True
 
 
 class DeckUsageEvidenceError(ValueError):
@@ -74,17 +95,23 @@ def load_deck_usage(path: Path) -> dict[str, Any]:
         raise DeckUsageEvidenceError("invalid deck usage evidence envelope")
     if document["provider"] != "mtgjson" or document["provider_dataset"] != "AllDeckFiles.zip":
         raise DeckUsageEvidenceError("unsupported provider identity")
-    if not isinstance(document["dataset_timestamp"], str) or not document["dataset_timestamp"].endswith("Z"):
-        raise DeckUsageEvidenceError("missing or malformed dataset timestamp")
+    if (document["population_semantics"] != POPULATION_SEMANTICS or
+            document["identity_mapping"] != IDENTITY_MAPPING):
+        raise DeckUsageEvidenceError("unsupported population or identity semantics")
+    if not _is_utc_timestamp(document["dataset_timestamp"]) or not _is_utc_timestamp(document["retrieved_at"]):
+        raise DeckUsageEvidenceError("missing or malformed evidence timestamp")
+    if not _is_sha256(document["source_sha256"]) or isinstance(document["source_byte_count"], bool) or not isinstance(document["source_byte_count"], int) or document["source_byte_count"] <= 0:
+        raise DeckUsageEvidenceError("missing or malformed deterministic source identity")
     records = document["records"]
     if not isinstance(records, list) or len(records) != 10 or hashlib.sha256(canonical_bytes(records)).hexdigest() != document["records_sha256"]:
         raise DeckUsageEvidenceError("deck usage evidence must contain ten digest-bound records")
-    names, ids = [], []
+    names, ids, denominators = [], [], []
     for record in records:
         if not isinstance(record, dict) or set(record) != ALLOWED_RECORD:
             raise DeckUsageEvidenceError("record has missing or unsupported fields")
         names.append(record["card_name"]); ids.append(record["card_id"])
         numerator, denominator = record["numerator"], record["denominator"]
+        denominators.append(denominator)
         if any(isinstance(v, bool) or not isinstance(v, int) for v in (numerator, denominator)) or not 0 <= numerator <= denominator:
             raise DeckUsageEvidenceError("invalid numerator or denominator")
         if record["metric"] != "represented_deck_count" or record["dataset_timestamp"] != document["dataset_timestamp"]:
@@ -108,13 +135,19 @@ def load_deck_usage(path: Path) -> dict[str, Any]:
                     not isinstance(deck["source_record_identity"], str) or
                     not isinstance(deck["retained_record_id"], str) or
                     not isinstance(deck["source_content_sha256"], str) or
-                    len(deck["source_content_sha256"]) != 64):
+                    not _is_sha256(deck["source_content_sha256"])):
                 raise DeckUsageEvidenceError("malformed source-record identity")
+            if set(deck) == current and deck["retained_record_id"] != (
+                    "mtgjson-deck-" + hashlib.sha256(
+                        deck["source_record_identity"].encode()).hexdigest()):
+                raise DeckUsageEvidenceError("retained record identity does not match source path")
         formats = record["formats"]
         if not isinstance(formats, list) or sum(x["deck_count"] for x in formats) != numerator:
             raise DeckUsageEvidenceError("format counts do not isolate the represented decks")
     if tuple(names) != PILOT_NAMES or len(ids) != len(set(ids)):
         raise DeckUsageEvidenceError("records must map the exact ten-card pilot once")
+    if len(set(denominators)) != 1:
+        raise DeckUsageEvidenceError("records must share one decoded-member denominator")
     return document
 
 
@@ -194,8 +227,8 @@ def project_decks(decks: list[dict[str, Any]], card_ids: dict[str, str], *, data
             "source_endpoint": "https://mtgjson.com/api/v5/AllDeckFiles.zip",
             "dataset_timestamp": dataset_timestamp, "retrieved_at": retrieved_at,
             "source_sha256": source_sha256, "source_byte_count": source_byte_count,
-            "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
-            "identity_mapping": "Exact MTGJSON card name maps to canonical Card identity. MTGJSON code is optional provider identity; ZIP member path is source-record identity; a path-derived MTG Lab ID retains records without merging code collisions.",
+            "population_semantics": POPULATION_SEMANTICS,
+            "identity_mapping": IDENTITY_MAPPING,
             "license_considerations": {"license": "MTGJSON project data is distributed under CC BY-SA 4.0; Wizards card data remains subject to its owners.", "url": "https://mtgjson.com/license/"},
             "retention_boundary": "Only ten aggregate records and matching provider/source identities, content digests, literal names, formats, and boards are retained; the ZIP is transient.",
             "records": records, "records_sha256": hashlib.sha256(canonical_bytes(records)).hexdigest()}
