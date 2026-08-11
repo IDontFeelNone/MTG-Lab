@@ -1,0 +1,226 @@
+{
+  "active_census": {
+    "archetype.inference": {
+      "incomplete": 0,
+      "known": 0,
+      "unknown": 0,
+      "unsupported": 10
+    },
+    "demand.deck_inclusion": {
+      "incomplete": 10,
+      "known": 10,
+      "unknown": 0,
+      "unsupported": 0
+    },
+    "format.usage": {
+      "incomplete": 10,
+      "known": 10,
+      "unknown": 0,
+      "unsupported": 0
+    }
+  },
+  "admission": {
+    "by_predicate": {
+      "demand.deck_inclusion": 10,
+      "format.usage": 10
+    },
+    "cards_lacking_evidence": [],
+    "facts_added": 20,
+    "facts_left_unchanged": 120,
+    "facts_superseded": 0,
+    "previous_fact_generation": null
+  },
+  "artifact_sha256": "5f944acfaf47b01f5876c149ac707326b22b97dee47ed1492e7d43344bdf4e34",
+  "evidence_identity": {
+    "dataset_timestamp": "2026-08-10T22:23:35Z",
+    "identity_mapping": "Exact MTGJSON card name maps to canonical Card identity. MTGJSON code is optional provider identity; ZIP member path is source-record identity; a path-derived MTG Lab ID retains records without merging code collisions.",
+    "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
+    "provider": "mtgjson",
+    "provider_dataset": "AllDeckFiles.zip",
+    "records_sha256": "6f1dfb55554b145062b958a0655e5f43385d0d2a8fbfa9377e254b3928b14248",
+    "retrieved_at": "2026-08-10T22:23:35Z",
+    "schema_version": "card-deck-usage-evidence-v1",
+    "source_byte_count": 259140526,
+    "source_sha256": "41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1"
+  },
+  "integrity": {
+    "append_only": true,
+    "denominator_consistent": true,
+    "exact_ten_card_scope": true,
+    "immutable_observation_count": 956,
+    "phase142_facts_intact": true,
+    "strict_loader_passed": true,
+    "unsupported_claims_absent": true
+  },
+  "phase": 144,
+  "reviewed_artifact": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+  "schema_version": "card-deck-usage-review-v1",
+  "scope": {
+    "card_count": 10,
+    "cards": [
+      {
+        "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+        "card_name": "Brainstorm",
+        "denominator": 3004,
+        "format_labels": [
+          "box set",
+          "commander deck",
+          "dandan deck",
+          "duel deck",
+          "jumpstart",
+          "secret lair drop",
+          "theme deck",
+          "world championship deck"
+        ],
+        "literal_deck_association_count": 23,
+        "represented_deck_count": 23,
+        "represented_percentage": "0.765646"
+      },
+      {
+        "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+        "card_name": "Command Tower",
+        "denominator": 3004,
+        "format_labels": [
+          "box set",
+          "brawl deck",
+          "commander deck",
+          "historic brawl precon deck",
+          "secret lair drop"
+        ],
+        "literal_deck_association_count": 205,
+        "represented_deck_count": 205,
+        "represented_percentage": "6.824234"
+      },
+      {
+        "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+        "card_name": "Counterspell",
+        "denominator": 3004,
+        "format_labels": [
+          "advanced deck",
+          "advanced pack",
+          "box set",
+          "commander deck",
+          "duel deck",
+          "enhanced deck",
+          "game night deck",
+          "mtgo redemption",
+          "pro tour deck",
+          "secret lair drop",
+          "shandalar enemy deck",
+          "starter deck",
+          "theme deck",
+          "world championship deck"
+        ],
+        "literal_deck_association_count": 63,
+        "represented_deck_count": 63,
+        "represented_percentage": "2.097204"
+      },
+      {
+        "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+        "card_name": "Goblin Charbelcher",
+        "denominator": 3004,
+        "format_labels": [
+          "duel deck",
+          "mtgo redemption",
+          "world championship deck"
+        ],
+        "literal_deck_association_count": 4,
+        "represented_deck_count": 4,
+        "represented_percentage": "0.133156"
+      },
+      {
+        "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+        "card_name": "Goblin King",
+        "denominator": 3004,
+        "format_labels": [
+          "box set",
+          "mtgo redemption",
+          "secret lair drop",
+          "shandalar enemy deck",
+          "theme deck"
+        ],
+        "literal_deck_association_count": 17,
+        "represented_deck_count": 17,
+        "represented_percentage": "0.565912"
+      },
+      {
+        "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+        "card_name": "Sol Ring",
+        "denominator": 3004,
+        "format_labels": [
+          "box set",
+          "commander deck",
+          "secret lair drop",
+          "shandalar enemy deck"
+        ],
+        "literal_deck_association_count": 241,
+        "represented_deck_count": 241,
+        "represented_percentage": "8.022636"
+      },
+      {
+        "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+        "card_name": "Swords to Plowshares",
+        "denominator": 3004,
+        "format_labels": [
+          "box set",
+          "commander deck",
+          "duel deck",
+          "game night deck",
+          "mtgo commander deck",
+          "mtgo theme deck",
+          "pro tour deck",
+          "secret lair drop",
+          "shandalar enemy deck",
+          "theme deck",
+          "world championship deck"
+        ],
+        "literal_deck_association_count": 78,
+        "represented_deck_count": 78,
+        "represented_percentage": "2.596538"
+      },
+      {
+        "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+        "card_name": "Treasure Cruise",
+        "denominator": 3004,
+        "format_labels": [
+          "clash pack",
+          "commander deck",
+          "intro pack",
+          "mtgo redemption",
+          "pioneer challenger deck"
+        ],
+        "literal_deck_association_count": 15,
+        "represented_deck_count": 15,
+        "represented_percentage": "0.499334"
+      },
+      {
+        "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+        "card_name": "Walking Ballista",
+        "denominator": 3004,
+        "format_labels": [
+          "challenger deck",
+          "commander deck",
+          "jumpstart",
+          "mtgo redemption",
+          "secret lair drop"
+        ],
+        "literal_deck_association_count": 8,
+        "represented_deck_count": 8,
+        "represented_percentage": "0.266312"
+      },
+      {
+        "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+        "card_name": "Wishclaw Talisman",
+        "denominator": 3004,
+        "format_labels": [
+          "box set",
+          "mtgo redemption"
+        ],
+        "literal_deck_association_count": 3,
+        "represented_deck_count": 3,
+        "represented_percentage": "0.099867"
+      }
+    ],
+    "decoded_deck_file_denominator": 3004
+  }
+}

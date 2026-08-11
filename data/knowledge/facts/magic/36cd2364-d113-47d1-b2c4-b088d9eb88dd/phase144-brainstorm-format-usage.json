@@ -1,0 +1,260 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-10T22:23:35Z",
+  "evidence": [
+    {
+      "claim": "MTGJSON AllDeckFiles.zip represents Brainstorm in 23 of 3004 decoded deck files.",
+      "observed_at": "2026-08-10T22:23:35Z",
+      "reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_id": "phase-143-mtgjson-decks",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase144-brainstorm-format-usage",
+  "kind": "format_usage",
+  "predicate": "format.usage",
+  "recorded_at": "2026-08-10T22:23:35Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "36cd2364-d113-47d1-b2c4-b088d9eb88dd",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "completeness_state": "complete_for_provider_deck_snapshot",
+      "dataset_timestamp": "2026-08-10T22:23:35Z",
+      "evidence_source_id": "phase-143-mtgjson-decks",
+      "formats": [
+        {
+          "deck_count": 1,
+          "format": "box set"
+        },
+        {
+          "deck_count": 10,
+          "format": "commander deck"
+        },
+        {
+          "deck_count": 1,
+          "format": "dandan deck"
+        },
+        {
+          "deck_count": 1,
+          "format": "duel deck"
+        },
+        {
+          "deck_count": 1,
+          "format": "jumpstart"
+        },
+        {
+          "deck_count": 6,
+          "format": "secret lair drop"
+        },
+        {
+          "deck_count": 2,
+          "format": "theme deck"
+        },
+        {
+          "deck_count": 1,
+          "format": "world championship deck"
+        }
+      ],
+      "limitations": [
+        "MTGJSON deck files are provider-curated deck products, not all played decks.",
+        "A represented deck is counted once even when a card occurs on multiple boards."
+      ],
+      "literal_associations": [
+        {
+          "deck_name": "Signature Spellbook: Jace",
+          "format": "box set",
+          "provider_deck_identity": "SS1",
+          "retained_record_id": "mtgjson-deck-c9025b5b83f3a023cd192f19ac373ce33b42dfaa92eed3ef82e7c1453aae4cd2",
+          "source_content_sha256": "c220b66684f6092557f727bf5c25b85a2ca88364518c4a748420a76aaeb6dc77",
+          "source_record_identity": "AllDeckFiles/SignatureSpellbookJace_SS1.json"
+        },
+        {
+          "deck_name": "Aura of Courage",
+          "format": "commander deck",
+          "provider_deck_identity": "AFC",
+          "retained_record_id": "mtgjson-deck-a56852fe5724dbb605584a862bd89dd49682f0a421c07d696da3be083b8b1dc0",
+          "source_content_sha256": "4f37b94ed515627798bfc57b0572a62a296881c7ffc6349ab492d3805fae660c",
+          "source_record_identity": "AllDeckFiles/AuraOfCourage_AFC.json"
+        },
+        {
+          "deck_name": "Miracle Worker",
+          "format": "commander deck",
+          "provider_deck_identity": "DSC",
+          "retained_record_id": "mtgjson-deck-863335e44448a879c0c2bb96a78fc27db2be9803edc950999f593f6756ae686d",
+          "source_content_sha256": "8ddf55603d7fc380e2790e968f6ce212e3e9477f08b06ec76ade684178be6a3d",
+          "source_record_identity": "AllDeckFiles/MiracleWorker_DSC.json"
+        },
+        {
+          "deck_name": "Mirror Mastery",
+          "format": "commander deck",
+          "provider_deck_identity": "CMD",
+          "retained_record_id": "mtgjson-deck-8dc68a37f6673282ba98eb77facbf4711b741a247bb838d59dde23592c578089",
+          "source_content_sha256": "5b171031437f6d5c67844355fa88dd61927b0fe783115958d929c551d7f43067",
+          "source_record_identity": "AllDeckFiles/MirrorMastery_CMD.json"
+        },
+        {
+          "deck_name": "Political Puppets",
+          "format": "commander deck",
+          "provider_deck_identity": "CMD",
+          "retained_record_id": "mtgjson-deck-d6b91b82cbfbeef6f81db3c0eafa12af67c80bb9ad74ad13a5127b02d4a76580",
+          "source_content_sha256": "34f6016ff7d4108c610d71110a68a9c20a42b97d8811a44596fedffdba5bd545",
+          "source_record_identity": "AllDeckFiles/PoliticalPuppets_CMD.json"
+        },
+        {
+          "deck_name": "Prismari Performance",
+          "format": "commander deck",
+          "provider_deck_identity": "C21",
+          "retained_record_id": "mtgjson-deck-026c2c0968bbb5147ff2f636e6b115b2c81c2f6c39d72dbe255210cd38d59cb9",
+          "source_content_sha256": "a52858e7afffafcdea3b7003e44b1f86538e2d552612ef9fe59829f9b8413f19",
+          "source_record_identity": "AllDeckFiles/PrismariPerformance_C21.json"
+        },
+        {
+          "deck_name": "Revenant Recon",
+          "format": "commander deck",
+          "provider_deck_identity": "MKC",
+          "retained_record_id": "mtgjson-deck-4bcdfa055ddd7e6aeab43c2c1f734119dabd0663ec9b12782c99a515d0ac9b9b",
+          "source_content_sha256": "b54c060034c448bcf41a28bc1318203d31d8737521c0265ecec63aef704bf6af",
+          "source_record_identity": "AllDeckFiles/RevenantRecon_MKC.json"
+        },
+        {
+          "deck_name": "Seize Control",
+          "format": "commander deck",
+          "provider_deck_identity": "C15",
+          "retained_record_id": "mtgjson-deck-fb9fc418acd2584dbf5678602d54e09becf688801a4f85158be646977923a045",
+          "source_content_sha256": "2eaf59393615b9f66b2a779fd1cb39ab926fa84286250e38d5b251527e6e028d",
+          "source_record_identity": "AllDeckFiles/SeizeControl_C15.json"
+        },
+        {
+          "deck_name": "Subjective Reality",
+          "format": "commander deck",
+          "provider_deck_identity": "C18",
+          "retained_record_id": "mtgjson-deck-866af2c728c179f453b99dee3a96eecca3ec767c26b29e5444d1841b39041b15",
+          "source_content_sha256": "306a39fc135b219c97eb2d8e88f24f24ae42b5b706764a42887b29a6a5e28891",
+          "source_record_identity": "AllDeckFiles/SubjectiveReality_C18.json"
+        },
+        {
+          "deck_name": "The Ruinous Powers Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "40K",
+          "retained_record_id": "mtgjson-deck-b4a5830e489dc1e8c9b0da4c69edd9b8d4fbb236bd56b081ae039f61694a9bd7",
+          "source_content_sha256": "9897485b592467a04f774586882391760c0984e950c8f452f373c818d13c4451",
+          "source_record_identity": "AllDeckFiles/TheRuinousPowersCollectorSEdition_40K.json"
+        },
+        {
+          "deck_name": "The Ruinous Powers",
+          "format": "commander deck",
+          "provider_deck_identity": "40K",
+          "retained_record_id": "mtgjson-deck-8ab464b92910a6643a8c09b3df169497d64c685270aa764729c60ea0c54841b9",
+          "source_content_sha256": "aab9d268397a6df0276f5804226c72078fd0dec267d7ecee908e730f83086489",
+          "source_record_identity": "AllDeckFiles/TheRuinousPowers_40K.json"
+        },
+        {
+          "deck_name": "Dand\u00e2n Deck",
+          "format": "dandan deck",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-435d1cf7daadc8aa2ffd0ee988d30dfe55f0fd81923ce1a9834dbddae025bff7",
+          "source_content_sha256": "418d2de8cd25e282ea3184c13cda6577777578f68cc619dc4b9d8032d7e9b744",
+          "source_record_identity": "AllDeckFiles/Dand\u00e2nDeck_SLD.json"
+        },
+        {
+          "deck_name": "Izzet",
+          "format": "duel deck",
+          "provider_deck_identity": "DDJ",
+          "retained_record_id": "mtgjson-deck-fee16f43e622507136a29553b92923cf1924daf9863ad45989b30f113f244856",
+          "source_content_sha256": "eab36a3ac0269dd20bea62a71c2422296fdf42753c22d181df8c45287c1e4ad9",
+          "source_record_identity": "AllDeckFiles/Izzet_DDJ.json"
+        },
+        {
+          "deck_name": "Librarian",
+          "format": "jumpstart",
+          "provider_deck_identity": "TLE",
+          "retained_record_id": "mtgjson-deck-c283cdf4a6ed210240a9e1f2cb67671c496c993f2ed171ef8dfc610fa7d0dd33",
+          "source_content_sha256": "8b542fd666140a14ac526bc7c59ec87589dba02d4dc12175e8ec2af88375f835",
+          "source_record_identity": "AllDeckFiles/Librarian_TLE.json"
+        },
+        {
+          "deck_name": "Artist Series: John Avon Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-9d7c2edf3ebcbb6b3edbb496cdeffe325daa00b5f0e9bde5cafe8e349762e73f",
+          "source_content_sha256": "5431aab5750aa5dd34b89c83daf3454154243eac7690eeebd71f1c0dea2f9044",
+          "source_record_identity": "AllDeckFiles/ArtistSeriesJohnAvonFoilEdition_SLD.json"
+        },
+        {
+          "deck_name": "Artist Series: John Avon",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-0533db49c94f4ee4a30bafc0b7e4748d0ad9cd0318d0ab7feead9782ec78df25",
+          "source_content_sha256": "903a1c9f834b46a139ecacd24193b1f99af478de89d6a51b3ed6d73528693e9b",
+          "source_record_identity": "AllDeckFiles/ArtistSeriesJohnAvon_SLD.json"
+        },
+        {
+          "deck_name": "Artist Series: Mark Poole Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-9a8b511158d264c3fd0d5605a792fe0ddb990a1c9b232ac20889fb458a7349d2",
+          "source_content_sha256": "1e7f9d41d8068ce07ba64c3421ae2828897c3b407e28267e9acd4bc96faa5d22",
+          "source_record_identity": "AllDeckFiles/ArtistSeriesMarkPooleFoilEdition_SLD.json"
+        },
+        {
+          "deck_name": "Artist Series: Mark Poole",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-a4e8782eaf9109641b139d00e57583ca52635e8c1b498675aa739bfa316c80ff",
+          "source_content_sha256": "f0aec7c22ee488fc1cef034bc11221ef7e7bea683b68391c460951fc4afaf7ea",
+          "source_record_identity": "AllDeckFiles/ArtistSeriesMarkPoole_SLD.json"
+        },
+        {
+          "deck_name": "Dungeons & Dragons: Gale's Ambition Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-eb7aa5199727423785542c6a447ec58bfd38c7fe92cc015b590fd4f57a378990",
+          "source_content_sha256": "3e5c06575f3ca62308ac179c976e925b07b89e8e05b1a92343353336097a22c8",
+          "source_record_identity": "AllDeckFiles/DungeonsDragonsGaleSAmbitionFoilEdition_SLD.json"
+        },
+        {
+          "deck_name": "Dungeons & Dragons: Gale's Ambition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-ceca063734b61d089f1c8a08e898b86c343954312f30238448d24f9a6037339f",
+          "source_content_sha256": "f86374e88dbc0f63de97662e31d05ad6639bc471506de35cd97cbee1d620afa3",
+          "source_record_identity": "AllDeckFiles/DungeonsDragonsGaleSAmbition_SLD.json"
+        },
+        {
+          "deck_name": "Aerodoom",
+          "format": "theme deck",
+          "provider_deck_identity": "BTD",
+          "retained_record_id": "mtgjson-deck-c2e65b62094efe7229ccb23d94845d201ce3a5cd80b55fd4e2e562e3a8c5939a",
+          "source_content_sha256": "c97d63b4f8347a0a4d8f916e2e2ef52c7ad8c87980b6b3dd19f5a305794ceceb",
+          "source_record_identity": "AllDeckFiles/Aerodoom_BTD.json"
+        },
+        {
+          "deck_name": "Kjeldoran Cunning",
+          "format": "theme deck",
+          "provider_deck_identity": "CSP",
+          "retained_record_id": "mtgjson-deck-f4e772a343ea40791d1870707700f76f6093c5acde9988bb32cbfbc2adb443cd",
+          "source_content_sha256": "79008ecdd67bcd6533e20fa89ecd2659e0255c0a1d52e7bcc2995c19b95349e4",
+          "source_record_identity": "AllDeckFiles/KjeldoranCunning_CSP.json"
+        },
+        {
+          "deck_name": "Jon Finkel - Mono-Blue Tinker",
+          "format": "world championship deck",
+          "provider_deck_identity": "WC00",
+          "retained_record_id": "mtgjson-deck-ebe48a61bf7f7bfedea6602df8a0f63e93234b129fba146a590aec6dd29f96dd",
+          "source_content_sha256": "10e16e61f84d7f2336d7228b45747c56f2b0a97928647501a6837b0496c4560f",
+          "source_record_identity": "AllDeckFiles/JonFinkelMonoBlueTinker_WC00.json"
+        }
+      ],
+      "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
+      "provider": "mtgjson",
+      "provider_dataset": "AllDeckFiles.zip",
+      "source_reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_sha256": "41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1"
+    },
+    "status": "known"
+  }
+}

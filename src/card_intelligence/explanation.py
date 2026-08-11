@@ -74,6 +74,12 @@ class CardValueExplanationEngine:
                 include_demand_evidence: bool = False) -> dict[str, Any]:
         # Historical movement is defined entirely in terms of observed prices, so
         # opting into history deterministically opts into the complete v2 evidence.
+        usage_path = self.data_root / "card_intelligence/demand/phase-143/mtgjson-decks.json"
+        include_usage = include_demand_evidence and usage_path.exists()
+        # Production v4 is the complete evidence-first view.  Earlier repositories
+        # without reviewed usage preserve the exact v1/v2/v3 opt-in behavior.
+        if include_usage:
+            include_observed_prices = include_historical_movement = True
         include_observed_prices = include_observed_prices or include_historical_movement
         selected_id = self.resolve(name=name, card_id=card_id)
         card = self.cards[selected_id]
@@ -81,7 +87,7 @@ class CardValueExplanationEngine:
                             if item.get("values", {}).get("card_id") == selected_id),
                            key=lambda item: item["values"]["uuid"])
         facts = [fact for fact in self.facts if fact.card_id == selected_id and
-                 (include_demand_evidence or not fact.fact_id.startswith("phase142-"))]
+                 (include_demand_evidence or not fact.fact_id.startswith(("phase142-", "phase144-")))]
         superseded = {old for fact in facts for old in fact.supersedes}
         active = sorted((fact for fact in facts if fact.fact_id not in superseded),
                         key=lambda fact: fact.fact_id)
@@ -173,11 +179,11 @@ class CardValueExplanationEngine:
             document["limitations"] = sorted(set(document["limitations"] + [
                 "EDHREC rank is a provider-supplied popularity ordering, not a deck count or demand score.",
                 "No valuation, recommendation, prediction, scarcity, or price-driven demand inference is produced."]))
-            usage_path = self.data_root / "card_intelligence/demand/phase-143/mtgjson-decks.json"
-            if usage_path.exists():
+            if include_usage:
                 document["schema_version"] = USAGE_SCHEMA_VERSION
                 usage = load_deck_usage(usage_path)
                 record = next(x for x in usage["records"] if x["card_id"] == selected_id)
+                usage_facts = [fact for fact in active if fact.fact_id.startswith("phase144-")]
                 document["evidence_sections"]["deck_usage_evidence"] = {
                     "state": "known", "provider": usage["provider"],
                     "provider_dataset": usage["provider_dataset"],
@@ -185,9 +191,19 @@ class CardValueExplanationEngine:
                     "numerator": record["numerator"], "denominator": record["denominator"],
                     "dataset_timestamp": record["dataset_timestamp"],
                     "evidence_source_id": usage["evidence_source_id"],
+                    "source_sha256": usage["source_sha256"],
+                    "source_reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
                     "formats": record["formats"],
-                    "archetype_associations": record["deck_associations"],
+                    "literal_deck_associations": record["deck_associations"],
+                    "fact_ids": [fact.fact_id for fact in usage_facts],
+                    "population_semantics": usage["population_semantics"],
                     "completeness": record["completeness"], "limitations": record["limitations"]}
+                quality = document["evidence_sections"]["evidence_quality"]
+                quality["unsupported"] = [x for x in quality["unsupported"]
+                                          if x not in ("Commander usage",)]
+                document["limitations"] = sorted(set(document["limitations"] + [
+                    "Represented deck count covers decoded MTGJSON deck files, not global decks or players.",
+                    "Literal provider format and deck names are associations, not inferred archetypes."]))
         return document
 
     def _demand_evidence(self, facts) -> dict[str, Any]:

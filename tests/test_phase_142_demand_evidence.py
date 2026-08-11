@@ -69,7 +69,10 @@ class Phase142DemandEvidenceTests(unittest.TestCase):
         query = CardKnowledgeQuery(repo)
         for fact in phase142:
             active = query.by_kind("magic", fact.card_id, "demand", include_superseded=False)
-            self.assertEqual([x["fact_id"] for x in active["facts"]], [fact.fact_id])
+            # MTGJSON deck inclusion is an independent demand dimension; selecting
+            # the Scryfall predicate still returns the unchanged Phase 142 chain.
+            self.assertEqual([x["fact_id"] for x in active["facts"]
+                              if x["predicate"] == "value_driver.demand"], [fact.fact_id])
 
     def test_explanation_v3_is_literal_and_provider_specific(self):
         # Phase 142's version contract applies when the later Phase 143 artifact is absent.

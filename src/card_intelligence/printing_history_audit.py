@@ -61,7 +61,7 @@ def build_phase137_audit(data_root):
  # This historical audit binds only facts that existed through Phase 136; later
  # append-only knowledge must not retroactively change its deterministic bytes.
  prior_facts = [p for p in (root/'knowledge/facts').glob('*/*/*.json')
-                if not p.name.startswith('phase142-')]
+                if not p.name.startswith(('phase142-', 'phase144-'))]
  prior_digest=hashlib.sha256()
  for p in sorted(prior_facts):
   prior_digest.update(p.relative_to(root/'knowledge/facts').as_posix().encode()+b'\0');prior_digest.update(p.read_bytes())

@@ -1,0 +1,604 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-10T22:23:35Z",
+  "evidence": [
+    {
+      "claim": "MTGJSON AllDeckFiles.zip represents Counterspell in 63 of 3004 decoded deck files.",
+      "observed_at": "2026-08-10T22:23:35Z",
+      "reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_id": "phase-143-mtgjson-decks",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase144-counterspell-format-usage",
+  "kind": "format_usage",
+  "predicate": "format.usage",
+  "recorded_at": "2026-08-10T22:23:35Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "completeness_state": "complete_for_provider_deck_snapshot",
+      "dataset_timestamp": "2026-08-10T22:23:35Z",
+      "evidence_source_id": "phase-143-mtgjson-decks",
+      "formats": [
+        {
+          "deck_count": 5,
+          "format": "advanced deck"
+        },
+        {
+          "deck_count": 1,
+          "format": "advanced pack"
+        },
+        {
+          "deck_count": 3,
+          "format": "box set"
+        },
+        {
+          "deck_count": 4,
+          "format": "commander deck"
+        },
+        {
+          "deck_count": 3,
+          "format": "duel deck"
+        },
+        {
+          "deck_count": 5,
+          "format": "enhanced deck"
+        },
+        {
+          "deck_count": 1,
+          "format": "game night deck"
+        },
+        {
+          "deck_count": 2,
+          "format": "mtgo redemption"
+        },
+        {
+          "deck_count": 2,
+          "format": "pro tour deck"
+        },
+        {
+          "deck_count": 12,
+          "format": "secret lair drop"
+        },
+        {
+          "deck_count": 6,
+          "format": "shandalar enemy deck"
+        },
+        {
+          "deck_count": 2,
+          "format": "starter deck"
+        },
+        {
+          "deck_count": 10,
+          "format": "theme deck"
+        },
+        {
+          "deck_count": 7,
+          "format": "world championship deck"
+        }
+      ],
+      "limitations": [
+        "MTGJSON deck files are provider-curated deck products, not all played decks.",
+        "A represented deck is counted once even when a card occurs on multiple boards."
+      ],
+      "literal_associations": [
+        {
+          "deck_name": "Deep Freeze - Advanced Deck",
+          "format": "advanced deck",
+          "provider_deck_identity": "TMP",
+          "retained_record_id": "mtgjson-deck-b832170f2d8841030e547b823da49070aedadc425f36f1637405408a76f32e3c",
+          "source_content_sha256": "492fbd6c7a723ece261f210df3a1ae358219cec1516d7dce54cc9ceb38811782",
+          "source_record_identity": "AllDeckFiles/DeepFreezeAdvancedDeck_TMP.json"
+        },
+        {
+          "deck_name": "Dominator - Advanced Deck",
+          "format": "advanced deck",
+          "provider_deck_identity": "EXO",
+          "retained_record_id": "mtgjson-deck-8e073efdca4f6d307b9f2fe5525179aeeb2f174add255b51514827be0e287317",
+          "source_content_sha256": "28eb58280cc34d12ac746d4a525dc68375bd181aae5c28fb1656680e26e7859e",
+          "source_record_identity": "AllDeckFiles/DominatorAdvancedDeck_EXO.json"
+        },
+        {
+          "deck_name": "The Slivers - Advanced Deck",
+          "format": "advanced deck",
+          "provider_deck_identity": "TMP",
+          "retained_record_id": "mtgjson-deck-8967fb276bbe3c688666e113542e6f5ad0461a87bc577ab7824a8d7c208a619e",
+          "source_content_sha256": "6f54be996d289abd9cb17e0cb5c92549f8fe77fb2de8a8b629efade419d163ef",
+          "source_record_identity": "AllDeckFiles/TheSliversAdvancedDeck_TMP.json"
+        },
+        {
+          "deck_name": "The Sparkler - Advanced Deck",
+          "format": "advanced deck",
+          "provider_deck_identity": "STH",
+          "retained_record_id": "mtgjson-deck-0e5a761635ad53f8e4905487d5bfce32e96564bb628fd0f0578a79f255c57db7",
+          "source_content_sha256": "559fe149c363145c0d1a64846774dbbc6ac97b4d30833d6e78c4acc516a95fbd",
+          "source_record_identity": "AllDeckFiles/TheSparklerAdvancedDeck_STH.json"
+        },
+        {
+          "deck_name": "Widowmaker - Advanced Deck",
+          "format": "advanced deck",
+          "provider_deck_identity": "EXO",
+          "retained_record_id": "mtgjson-deck-f8b312120e4810e1c6d4d40e645bbde270f118482d831572f10fbd506e2ea447",
+          "source_content_sha256": "ed5df26d280b76b42dff56648276cc085e15558d6195dc01b12a7567ccfc141c",
+          "source_record_identity": "AllDeckFiles/WidowmakerAdvancedDeck_EXO.json"
+        },
+        {
+          "deck_name": "Player B's advanced pack",
+          "format": "advanced pack",
+          "provider_deck_identity": "S00",
+          "retained_record_id": "mtgjson-deck-0f3b439fb163f6d594add90756788cb6741de565eee51939d9ffd3e8cf5ca10e",
+          "source_content_sha256": "5f348076743519d684a92ec18e3396797b5d533f33e9f620746a37e7993c559a",
+          "source_record_identity": "AllDeckFiles/PlayerBSAdvancedPack_S00.json"
+        },
+        {
+          "deck_name": "Collectors' Edition",
+          "format": "box set",
+          "provider_deck_identity": "CED",
+          "retained_record_id": "mtgjson-deck-4723b6062911fbafe498efb626b85409ca6b4823b8d0f81ede95b1a982097d3a",
+          "source_content_sha256": "9d48bdebf0ff442bfc5e4511dbe0c368f6bd2464d4c6d4024e04f8c3904a8ee4",
+          "source_record_identity": "AllDeckFiles/CollectorsEdition_CED.json"
+        },
+        {
+          "deck_name": "Intl. Collectors' Edition",
+          "format": "box set",
+          "provider_deck_identity": "CEI",
+          "retained_record_id": "mtgjson-deck-5e94a558413defc465e4c9ddc715e881290b7c24f4c3286f10fd794449881d61",
+          "source_content_sha256": "abbdb031e70574150224b453ef95f56ea0f44ea084373d239bec5435f9766993",
+          "source_record_identity": "AllDeckFiles/IntlCollectorsEdition_CEI.json"
+        },
+        {
+          "deck_name": "Signature Spellbook: Jace",
+          "format": "box set",
+          "provider_deck_identity": "SS1",
+          "retained_record_id": "mtgjson-deck-c9025b5b83f3a023cd192f19ac373ce33b42dfaa92eed3ef82e7c1453aae4cd2",
+          "source_content_sha256": "c220b66684f6092557f727bf5c25b85a2ca88364518c4a748420a76aaeb6dc77",
+          "source_record_identity": "AllDeckFiles/SignatureSpellbookJace_SS1.json"
+        },
+        {
+          "deck_name": "First Flight",
+          "format": "commander deck",
+          "provider_deck_identity": "SCD",
+          "retained_record_id": "mtgjson-deck-2c33d40948f13c04cd7fc51ca3cb15ecd508a7ec8c38e28d81a9cd5273f908f8",
+          "source_content_sha256": "5de9d97541959bc306ab812c1353dd61e9ff30b211fc4ecc6beff1ee230ee17f",
+          "source_record_identity": "AllDeckFiles/FirstFlight_SCD.json"
+        },
+        {
+          "deck_name": "Heads I Win, Tails You Lose",
+          "format": "commander deck",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-d7ba8ad4022606c25c935ad1f9ad9611a27440c9cbe48e8d3c9f62fb5341531d",
+          "source_content_sha256": "157c14ad054f6aa813aafcc6a5c4c742f327f881729b04310b00477c92a8a9a3",
+          "source_record_identity": "AllDeckFiles/HeadsIWinTailsYouLose_SLD.json"
+        },
+        {
+          "deck_name": "Jump Scare!",
+          "format": "commander deck",
+          "provider_deck_identity": "DSC",
+          "retained_record_id": "mtgjson-deck-906b13dad102ef4c9bfafac1f41adc67d9da97dbdb76370696b8562bf85d2b7c",
+          "source_content_sha256": "3136a8159c29a57b22001d4bee44176445bd5602737660a860eb3d6d24c6ce9b",
+          "source_record_identity": "AllDeckFiles/JumpScare_DSC.json"
+        },
+        {
+          "deck_name": "Reap the Tides",
+          "format": "commander deck",
+          "provider_deck_identity": "CMR",
+          "retained_record_id": "mtgjson-deck-5067590af6151abf1be512dca27b8279b3defc5550831d3dd0e2c30ca78d2c3c",
+          "source_content_sha256": "640ef3dbfc8284b99d251f44f852e42cce551f2f4aae7a3923e6ce0246d3f1b4",
+          "source_record_identity": "AllDeckFiles/ReapTheTides_CMR.json"
+        },
+        {
+          "deck_name": "Jace Japanese",
+          "format": "duel deck",
+          "provider_deck_identity": "DD2",
+          "retained_record_id": "mtgjson-deck-2fa624edbd447176ac183ccae047449483ec99dedd6059bc1e4678c6bc944e77",
+          "source_content_sha256": "3c7b573c57ad0f857b98e022f668b546137955359e1e8379324db95563cb7271",
+          "source_record_identity": "AllDeckFiles/JaceJapanese_DD2.json"
+        },
+        {
+          "deck_name": "Jace",
+          "format": "duel deck",
+          "provider_deck_identity": "DD2",
+          "retained_record_id": "mtgjson-deck-eee789911bcf71861eb3fb339bfc18e85b1ff62efca01f100b93bb1d79a8588d",
+          "source_content_sha256": "1f004e5c0c9767950cb1fc0143bc634ba9c76db1dc84f91c7683144c80330112",
+          "source_record_identity": "AllDeckFiles/Jace_DD2.json"
+        },
+        {
+          "deck_name": "Jace",
+          "format": "duel deck",
+          "provider_deck_identity": "JVC",
+          "retained_record_id": "mtgjson-deck-1a2b88eddd59a9a32ff5a6c0910c40ed511587027b7ff243063b4d3412ff158a",
+          "source_content_sha256": "5022fb4ab988679b5d5c8606148f05ae992b74dfb7ff4e31fcd7434d1fbc1c6d",
+          "source_record_identity": "AllDeckFiles/Jace_JVC.json"
+        },
+        {
+          "deck_name": "Enchanter - Enhanced Deck",
+          "format": "enhanced deck",
+          "provider_deck_identity": "UDS",
+          "retained_record_id": "mtgjson-deck-138abb3db4995ed8a66e0d998dba3007e1bdf884d06afb1598efce49bba6162c",
+          "source_content_sha256": "3669034ce289fa485dcf8bf5f861b91ba2567892045ca338455da4315276a251",
+          "source_record_identity": "AllDeckFiles/EnchanterEnhancedDeck_UDS.json"
+        },
+        {
+          "deck_name": "Radiant's Revenge - Enhanced Deck",
+          "format": "enhanced deck",
+          "provider_deck_identity": "ULG",
+          "retained_record_id": "mtgjson-deck-f7a33ccec905bcae849b66fab0d0938d49656ec550d9530a9a571d43f245a6eb",
+          "source_content_sha256": "370266748d945f42724552f8212e3dd3ca635932a388cd0d3771b162fe5d05a1",
+          "source_record_identity": "AllDeckFiles/RadiantSRevengeEnhancedDeck_ULG.json"
+        },
+        {
+          "deck_name": "Tidal Mastery - Enhanced Deck",
+          "format": "enhanced deck",
+          "provider_deck_identity": "MMQ",
+          "retained_record_id": "mtgjson-deck-09cb8973a147887bb89756cc23c29e32540db80b5cd8bfa603c9eba9480ccf76",
+          "source_content_sha256": "14bd70175cd663d18d820ab3940e9176448902d3c2289550f5c0310d1510aec2",
+          "source_record_identity": "AllDeckFiles/TidalMasteryEnhancedDeck_MMQ.json"
+        },
+        {
+          "deck_name": "Time Drain - Enhanced Deck",
+          "format": "enhanced deck",
+          "provider_deck_identity": "ULG",
+          "retained_record_id": "mtgjson-deck-8576d0fd41b872e47b782d5f8833a81b9a4dac90ccf83f721ce9b72e573aa403",
+          "source_content_sha256": "bcc325d653374fa0fd70b89c794d4f2b7fb16c7490540b85388c2697c9104d31",
+          "source_record_identity": "AllDeckFiles/TimeDrainEnhancedDeck_ULG.json"
+        },
+        {
+          "deck_name": "Tombstone - Enhanced Deck",
+          "format": "enhanced deck",
+          "provider_deck_identity": "USG",
+          "retained_record_id": "mtgjson-deck-b5482ac3fb5b79280b29bf7c2ae03d0ba14e39c56850111c35093022c8e1e248",
+          "source_content_sha256": "e8e56db8414183a6b462ac58c68ae92f637fabf5a958ddd98333c6e479e313b6",
+          "source_record_identity": "AllDeckFiles/TombstoneEnhancedDeck_USG.json"
+        },
+        {
+          "deck_name": "Political Trickery",
+          "format": "game night deck",
+          "provider_deck_identity": "GN3",
+          "retained_record_id": "mtgjson-deck-68341ebd853cd6dd145c9e230b995b0ef7de110d025d4c2ec6c0c300bb26eee6",
+          "source_content_sha256": "614c974389d76c4a3118cb297f4e8768b62714d05fea28ad8f0296d7c76fa90e",
+          "source_record_identity": "AllDeckFiles/PoliticalTrickery_GN3.json"
+        },
+        {
+          "deck_name": "Seventh Edition Foil Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "7ED",
+          "retained_record_id": "mtgjson-deck-d4c1315169f542572f3f346362cdff6b0eb49866853d0e0db13888cf019ce5d1",
+          "source_content_sha256": "e0d2b0a2710528bf224a21b0a1eee7790e307faff95c64656873f1545861b4c4",
+          "source_record_identity": "AllDeckFiles/SeventhEditionFoilRedemption_7ED.json"
+        },
+        {
+          "deck_name": "Seventh Edition Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "7ED",
+          "retained_record_id": "mtgjson-deck-a2eb74be7ffecd029892810f2e3f98634d7265dc473f7c158c09a5756cc485a6",
+          "source_content_sha256": "6240276d021fd8de29615905e27d39c98161053ecaba8eb062596017e50ec14b",
+          "source_record_identity": "AllDeckFiles/SeventhEditionRedemption_7ED.json"
+        },
+        {
+          "deck_name": "Michael Loconto, Champion",
+          "format": "pro tour deck",
+          "provider_deck_identity": "PTC",
+          "retained_record_id": "mtgjson-deck-b91d0b6113746ce630832869b002c1113a4011dea5945f321c4a6cf473a05776",
+          "source_content_sha256": "9459d2b7e092f2bae0a9e868aec462aa3a48fb0b77d411a4e07fae9937a93381",
+          "source_record_identity": "AllDeckFiles/MichaelLocontoChampion_PTC.json"
+        },
+        {
+          "deck_name": "Shawn Hammer Regnier, Quarterfinalist",
+          "format": "pro tour deck",
+          "provider_deck_identity": "PTC",
+          "retained_record_id": "mtgjson-deck-8fb740886c7520b767b95a5f9153f3075a1ed74c116dc2cfbd71ca19b75e76a4",
+          "source_content_sha256": "b05b13a90db799c465d2bf554c248b70c518e21d396dca2f4fac764ae8970713",
+          "source_record_identity": "AllDeckFiles/ShawnHammerRegnierQuarterfinalist_PTC.json"
+        },
+        {
+          "deck_name": "Artist Series: Mark Poole Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-9a8b511158d264c3fd0d5605a792fe0ddb990a1c9b232ac20889fb458a7349d2",
+          "source_content_sha256": "1e7f9d41d8068ce07ba64c3421ae2828897c3b407e28267e9acd4bc96faa5d22",
+          "source_record_identity": "AllDeckFiles/ArtistSeriesMarkPooleFoilEdition_SLD.json"
+        },
+        {
+          "deck_name": "Artist Series: Mark Poole",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-a4e8782eaf9109641b139d00e57583ca52635e8c1b498675aa739bfa316c80ff",
+          "source_content_sha256": "f0aec7c22ee488fc1cef034bc11221ef7e7bea683b68391c460951fc4afaf7ea",
+          "source_record_identity": "AllDeckFiles/ArtistSeriesMarkPoole_SLD.json"
+        },
+        {
+          "deck_name": "Dungeons & Dragons: Whispers in Candlekeep Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-42f2c8406848deb5433ef55f55eb04ad9debe2b8a9d0d81b2a50fb1ea3e77858",
+          "source_content_sha256": "cf4d1a6d2828c8647a3d4a7439db7030264e5489d57a534b75380c51e352b287",
+          "source_record_identity": "AllDeckFiles/DungeonsDragonsWhispersInCandlekeepFoilEdition_SLD.json"
+        },
+        {
+          "deck_name": "Dungeons & Dragons: Whispers in Candlekeep",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-f496dccdef7a9d5078f8487567c71cd673b959bc83254867885dffd0450d43ed",
+          "source_content_sha256": "3143f73431f72f9dff32533aaec0e50257d34fa2fae5284e6332a9980d8f7013",
+          "source_record_identity": "AllDeckFiles/DungeonsDragonsWhispersInCandlekeep_SLD.json"
+        },
+        {
+          "deck_name": "Far Out, Man Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-45cbc891fdcea9161a217c591f4f1a73d411f00526451b37fcb9bd43db72c2b6",
+          "source_content_sha256": "6aaaedf42d1650553f4aba874bc85bbfbafdf2c13d71a7b40c01a4d7cee775fd",
+          "source_record_identity": "AllDeckFiles/FarOutManFoilEdition_SLD.json"
+        },
+        {
+          "deck_name": "Far Out, Man",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-1530ab649877142a59f08d06189137acef3b3a13f20c1e97ea60c528ae00c51b",
+          "source_content_sha256": "ea60fc02ebdd503dbbb9ef41e0b601393c24f989f532ad5af8a72eadaaa2da54",
+          "source_record_identity": "AllDeckFiles/FarOutMan_SLD.json"
+        },
+        {
+          "deck_name": "Garfield: As Intended Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-7f8fe756cb7e10fe7584532c5570ac667dc7b9b1c1624ba4f1cd9fc39b67e9e8",
+          "source_content_sha256": "90c0b9fdf1cd6683750bd3e852029048fe065851ca8debc74b6a0e1ac3373aa0",
+          "source_record_identity": "AllDeckFiles/GarfieldAsIntendedFoilEdition_SLD.json"
+        },
+        {
+          "deck_name": "Garfield: As Intended",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-eb5bea765a3d94fa893dfb3ccb38484f6606487c0a1229dd67cfb56c76800b09",
+          "source_content_sha256": "4dcd0e33d962a9d49d235df2494794a5755a397f38bf4e3e026549c85e6b3728",
+          "source_record_identity": "AllDeckFiles/GarfieldAsIntended_SLD.json"
+        },
+        {
+          "deck_name": "Hatsune Miku: Winter Diva Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-ba4a0a64823a185d59fd5800788d0dce07ecf3484d7059c68c3bc1f1c4afdde9",
+          "source_content_sha256": "70f5c5519dba24b3d0082727f36eb985586bc2f6f5f236575d6be9b3e800089a",
+          "source_record_identity": "AllDeckFiles/HatsuneMikuWinterDivaFoilEdition_SLD.json"
+        },
+        {
+          "deck_name": "Hatsune Miku: Winter Diva",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-8d909c7c1e98d262264f8246b59147abe2064fb34f1e7e9340d1ef4066b1c82b",
+          "source_content_sha256": "10b7c680b30ca67fd8ecafa0a9a0c81dbd5b7472d2a4782702abb91ed7fe9d93",
+          "source_record_identity": "AllDeckFiles/HatsuneMikuWinterDiva_SLD.json"
+        },
+        {
+          "deck_name": "SpongeBob SquarePants: Internet Sensation Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-6852486040c847d3d089ad1c3ad5290a2de5d5c2183f5928d67bd01bd2d62e0a",
+          "source_content_sha256": "512df2e58a541f03484ee7b28cc482fb99eb6a4e843b14c071a3edb40d0d54c0",
+          "source_record_identity": "AllDeckFiles/SpongebobSquarepantsInternetSensationFoilEdition_SLD.json"
+        },
+        {
+          "deck_name": "SpongeBob SquarePants: Internet Sensation",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-7cb3160d82f4c1853658ed9e8b61dc7bec61869e71c85ccbd32c939928a780e3",
+          "source_content_sha256": "1881efdce1cf3657e457d1bfbfd41632e3b6d817cda8c95ed6b8fb38ccee1d12",
+          "source_record_identity": "AllDeckFiles/SpongebobSquarepantsInternetSensation_SLD.json"
+        },
+        {
+          "deck_name": "Astral Visionary",
+          "format": "shandalar enemy deck",
+          "provider_deck_identity": "PAST",
+          "retained_record_id": "mtgjson-deck-03934eaa301401a2da15546e8ab6a4709d4702b172e580d7e9d6e60c641b6ff0",
+          "source_content_sha256": "a3c42efefb972657afefabe1b64dc64a8647f1cac19ecee09c3f0f25a3ffc75a",
+          "source_record_identity": "AllDeckFiles/AstralVisionary_PAST.json"
+        },
+        {
+          "deck_name": "Conjurer",
+          "format": "shandalar enemy deck",
+          "provider_deck_identity": "PAST",
+          "retained_record_id": "mtgjson-deck-a101b6da109aa3027fa7b5ba229302f4cc00d74eb0fe4e39c3b1a1e4f2c67c1e",
+          "source_content_sha256": "393db8f797675be4bf1bc17f48290a2a9c94ff3dc99887a5473181b297696c0f",
+          "source_record_identity": "AllDeckFiles/Conjurer_PAST.json"
+        },
+        {
+          "deck_name": "Queltosh",
+          "format": "shandalar enemy deck",
+          "provider_deck_identity": "PAST",
+          "retained_record_id": "mtgjson-deck-549b1d9f8fa1d1c520b26ed5b98c527c691fd66d3faef3128471a7f96f4dd88f",
+          "source_content_sha256": "e5032624573fd98a47ddf7dead6e72e227e597b2e6ee5c58a9440fe4a7879b81",
+          "source_record_identity": "AllDeckFiles/Queltosh_PAST.json"
+        },
+        {
+          "deck_name": "Sea Drake",
+          "format": "shandalar enemy deck",
+          "provider_deck_identity": "PAST",
+          "retained_record_id": "mtgjson-deck-d8755984a77d21f835accc608f4cf7bd18af8ba652f4f0a99bdac91dfaaf4316",
+          "source_content_sha256": "b2474a9e2552bf4c9f50314bb29531d77df28af2c76040aa01b07ef0fd4856d5",
+          "source_record_identity": "AllDeckFiles/SeaDrake_PAST.json"
+        },
+        {
+          "deck_name": "Seer",
+          "format": "shandalar enemy deck",
+          "provider_deck_identity": "PAST",
+          "retained_record_id": "mtgjson-deck-9ed2dded147d89ef3be711f22fb0a0171a53d04832d3e3ad04fc2ac85a51c681",
+          "source_content_sha256": "85c5eb0564c84e12a480b6fc6df4dd3bfddcc1aff6a756a5dac8845e123cf111",
+          "source_record_identity": "AllDeckFiles/Seer_PAST.json"
+        },
+        {
+          "deck_name": "Winged Stallion",
+          "format": "shandalar enemy deck",
+          "provider_deck_identity": "PAST",
+          "retained_record_id": "mtgjson-deck-a36dfe2f083f87a44a13d3a4d13c1ebd6143d014255f4364a96027006a5ce830",
+          "source_content_sha256": "3e2f7cad7b47b5f1e08b40a21eb258619e03566b9bb2a1c189b6515014f30a1c",
+          "source_record_identity": "AllDeckFiles/WingedStallion_PAST.json"
+        },
+        {
+          "deck_name": "Deck B",
+          "format": "starter deck",
+          "provider_deck_identity": "5ED",
+          "retained_record_id": "mtgjson-deck-6cf8fdd227ef1d1f6f5558afd47a3df097dbd97f8a241b6d9585c6f989d47767",
+          "source_content_sha256": "d5020fdd6e8b52394462d06378526597c9386df6d929620460251c0e48c43dc5",
+          "source_record_identity": "AllDeckFiles/DeckB_5ED.json"
+        },
+        {
+          "deck_name": "Deck B",
+          "format": "starter deck",
+          "provider_deck_identity": "6ED",
+          "retained_record_id": "mtgjson-deck-4b4ad0f442ca7c4f592d426f3efa28750e5311702821d22dad27e6a0b61864de",
+          "source_content_sha256": "cda3bf96913ff179bf451c6b9b1c2a0991aaeaa829f23afc463a39d830ae49ea",
+          "source_record_identity": "AllDeckFiles/DeckB_6ED.json"
+        },
+        {
+          "deck_name": "Aerodoom",
+          "format": "theme deck",
+          "provider_deck_identity": "BTD",
+          "retained_record_id": "mtgjson-deck-c2e65b62094efe7229ccb23d94845d201ce3a5cd80b55fd4e2e562e3a8c5939a",
+          "source_content_sha256": "c97d63b4f8347a0a4d8f916e2e2ef52c7ad8c87980b6b3dd19f5a305794ceceb",
+          "source_record_identity": "AllDeckFiles/Aerodoom_BTD.json"
+        },
+        {
+          "deck_name": "Bomber",
+          "format": "theme deck",
+          "provider_deck_identity": "7ED",
+          "retained_record_id": "mtgjson-deck-5e9f2869f25d5dc1c1f42142ebcb94418acb7777cf41b698dac9ece6edd97c9b",
+          "source_content_sha256": "abd986d3661ba12102c1470e84dfac7d1f706092bd513db16890259af333304a",
+          "source_record_identity": "AllDeckFiles/Bomber_7ED.json"
+        },
+        {
+          "deck_name": "Deep Freeze",
+          "format": "theme deck",
+          "provider_deck_identity": "TMP",
+          "retained_record_id": "mtgjson-deck-0596f82c67c51c539a3b8fd8e230ebdd5bf0962fe1a5d66b73e5536cc1f42750",
+          "source_content_sha256": "9126f624f67683fd10fdc8aac188326fe5c7b060dcc2000557d7bbaadf314921",
+          "source_record_identity": "AllDeckFiles/DeepFreeze_TMP.json"
+        },
+        {
+          "deck_name": "Dominator - Basic Deck",
+          "format": "theme deck",
+          "provider_deck_identity": "EXO",
+          "retained_record_id": "mtgjson-deck-e648736f226c7b779ba9210ca0b7d5b1e95ca107f0844472b8fcf92e6a848ab2",
+          "source_content_sha256": "46d20e06e717d5adf80db92c3f4637545b007bda0e84918066535602ba6c6523",
+          "source_record_identity": "AllDeckFiles/DominatorBasicDeck_EXO.json"
+        },
+        {
+          "deck_name": "Spirit Gale",
+          "format": "theme deck",
+          "provider_deck_identity": "BRB",
+          "retained_record_id": "mtgjson-deck-63a5868359c43b42e04f81602ccfc7fdce0e2180437b4d507aa77a0b793f733b",
+          "source_content_sha256": "266ebdc1d49bfdeb880d26e720d4174ddbf40946bc186dbd1cab5cfa937de193",
+          "source_record_identity": "AllDeckFiles/SpiritGale_BRB.json"
+        },
+        {
+          "deck_name": "The Slivers",
+          "format": "theme deck",
+          "provider_deck_identity": "TMP",
+          "retained_record_id": "mtgjson-deck-0a9f16e685c918beaf64acc124864b31287e586405f9da1faf6de8ec4bf0168f",
+          "source_content_sha256": "731eccb9e7e7e412f65cd261cf0491295624fc10452cf71f3021bbda5a1ca798",
+          "source_record_identity": "AllDeckFiles/TheSlivers_TMP.json"
+        },
+        {
+          "deck_name": "The Sparkler",
+          "format": "theme deck",
+          "provider_deck_identity": "STH",
+          "retained_record_id": "mtgjson-deck-1c2c9cf716492453d0d0f1c5675868e3edb4f90a3f4d1176bd2fefdf3b8fdcbf",
+          "source_content_sha256": "f1200372e46f4b7295f38826ecf06603014a4a5fd9c3a66b902c542c000f0666",
+          "source_record_identity": "AllDeckFiles/TheSparkler_STH.json"
+        },
+        {
+          "deck_name": "Tidal Mastery",
+          "format": "theme deck",
+          "provider_deck_identity": "MMQ",
+          "retained_record_id": "mtgjson-deck-c90877324aa3576f5d642fa697bed263ac78b344cbf9f5d2661a067486208381",
+          "source_content_sha256": "a7794378fe9da343f80083eb0ac0ac7b146a34e75a2c774e1582bdd2e249ae15",
+          "source_record_identity": "AllDeckFiles/TidalMastery_MMQ.json"
+        },
+        {
+          "deck_name": "Time Curse",
+          "format": "theme deck",
+          "provider_deck_identity": "S99",
+          "retained_record_id": "mtgjson-deck-dae0d653a9f14b7fefce1a7c9bc7cdaef0b5d94959a6ecc9fdac00be33d02b73",
+          "source_content_sha256": "917d85de4fdb47d26fdbb3f3e6d21fd267260b57ac9722fbf6783c0b16604f22",
+          "source_record_identity": "AllDeckFiles/TimeCurse_S99.json"
+        },
+        {
+          "deck_name": "Widowmaker - Basic Deck",
+          "format": "theme deck",
+          "provider_deck_identity": "EXO",
+          "retained_record_id": "mtgjson-deck-135e79fcbadbd7baf340c1756de87448691c6a1e12e8eab2065aace4c6fbe3c6",
+          "source_content_sha256": "02a5ded8d6835d7e01516b80871275d4764542ecfc0b2d45c0ba0046057ca2ed",
+          "source_record_identity": "AllDeckFiles/WidowmakerBasicDeck_EXO.json"
+        },
+        {
+          "deck_name": "Alex Borteh - Merfolk Opposition",
+          "format": "world championship deck",
+          "provider_deck_identity": "WC01",
+          "retained_record_id": "mtgjson-deck-04b90d82ce7d7737a367e42c8f9de514bfb61087815cdb21f01530b0deac5063",
+          "source_content_sha256": "174a5c7efe2e1fe0543e70894abb23da9c66e0bf4f95540ec852a02cc78e667f",
+          "source_record_identity": "AllDeckFiles/AlexBortehMerfolkOpposition_WC01.json"
+        },
+        {
+          "deck_name": "Antoine Ruel - Blue-Black-Red Nether-Go",
+          "format": "world championship deck",
+          "provider_deck_identity": "WC01",
+          "retained_record_id": "mtgjson-deck-89d109d6149f040896bc60c409ded9660e11eb87b673660b7ba166cd1b9888ff",
+          "source_content_sha256": "306475aa4e93aec9ff4a6ae2319612785ee957aa5a510c483b0d56ba7066e244",
+          "source_record_identity": "AllDeckFiles/AntoineRuelBlueBlackRedNetherGo_WC01.json"
+        },
+        {
+          "deck_name": "Carlos Rom\u00e3o - Psychatog",
+          "format": "world championship deck",
+          "provider_deck_identity": "WC02",
+          "retained_record_id": "mtgjson-deck-b12718f156ced3ffd1ffc61e19e3913db78cdb3337ee0fa2d7b29fd4f805bfd7",
+          "source_content_sha256": "f51af4632f6200b2f7787f628073f4d72fc13c9b291cff941c6406ab736ec926",
+          "source_record_identity": "AllDeckFiles/CarlosRom\u00e3oPsychatog_WC02.json"
+        },
+        {
+          "deck_name": "Janosch K\u00fchn - Red-White-Blue Speed Control",
+          "format": "world championship deck",
+          "provider_deck_identity": "WC97",
+          "retained_record_id": "mtgjson-deck-5d3c2a6a0cdd1545b32905d6c74368f037bf8748c07586b80cf8e825af93cf0d",
+          "source_content_sha256": "041fc5e01296501e729922382960898df238d011b9fd49ee154987345d72e98f",
+          "source_record_identity": "AllDeckFiles/JanoschK\u00fchnRedWhiteBlueSpeedControl_WC97.json"
+        },
+        {
+          "deck_name": "Paul McCabe - Red-Blue Aggro Control",
+          "format": "world championship deck",
+          "provider_deck_identity": "WC97",
+          "retained_record_id": "mtgjson-deck-9e957774412df3f062eb1b81d9ee7d862dd9f7035ddeb11742649b670567679d",
+          "source_content_sha256": "1229f7934dbe668b31447223058e43b51461c320ddb379c60ce3ef3f3b6b13d5",
+          "source_record_identity": "AllDeckFiles/PaulMccabeRedBlueAggroControl_WC97.json"
+        },
+        {
+          "deck_name": "Randy Buehler - Draw, Go",
+          "format": "world championship deck",
+          "provider_deck_identity": "WC98",
+          "retained_record_id": "mtgjson-deck-2be4b120a9a407a428a1428ec58f67ea56d5ec36f310e1e4f72a157f340a926f",
+          "source_content_sha256": "026774b786dc2d39406fff6a9a443d5eb27a6bb309294b0bdd697ef9861adeb4",
+          "source_record_identity": "AllDeckFiles/RandyBuehlerDrawGo_WC98.json"
+        },
+        {
+          "deck_name": "Tom van de Logt - Replenish",
+          "format": "world championship deck",
+          "provider_deck_identity": "WC00",
+          "retained_record_id": "mtgjson-deck-f54f859d03c38a4d170815ca8bb9eeefbed85b3ecf5b703f7bb6a6ba4ce07a3e",
+          "source_content_sha256": "920de4b11cf67e4a3d844b6c78153b23031b2ac2aa27704433ca1d5ccc3dff50",
+          "source_record_identity": "AllDeckFiles/TomVanDeLogtReplenish_WC00.json"
+        }
+      ],
+      "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
+      "provider": "mtgjson",
+      "provider_dataset": "AllDeckFiles.zip",
+      "source_reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_sha256": "41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1"
+    },
+    "status": "known"
+  }
+}

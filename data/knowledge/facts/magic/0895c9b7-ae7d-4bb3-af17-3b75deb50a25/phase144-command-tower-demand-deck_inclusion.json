@@ -1,0 +1,2300 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-10T22:23:35Z",
+  "evidence": [
+    {
+      "claim": "MTGJSON AllDeckFiles.zip represents Command Tower in 205 of 3004 decoded deck files.",
+      "observed_at": "2026-08-10T22:23:35Z",
+      "reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_id": "phase-143-mtgjson-decks",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase144-command-tower-demand-deck_inclusion",
+  "kind": "demand",
+  "predicate": "demand.deck_inclusion",
+  "recorded_at": "2026-08-10T22:23:35Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "completeness_state": "complete_for_provider_deck_snapshot",
+      "dataset_timestamp": "2026-08-10T22:23:35Z",
+      "deck_associations": [
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Commander Collection Black Premium",
+          "format": "box set",
+          "provider_deck_identity": "CC2",
+          "retained_record_id": "mtgjson-deck-3bc8ed9a9419320c6f5752e2936f6c5ff8bc3fd576590e324b20dedccc4d8d3c",
+          "source_content_sha256": "db3d99b8dfc15aeb790db24e9c4fd1947ba410ac23076398771256aaf851a9ba",
+          "source_record_identity": "AllDeckFiles/CommanderCollectionBlackPremium_CC2.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Commander Collection Black",
+          "format": "box set",
+          "provider_deck_identity": "CC2",
+          "retained_record_id": "mtgjson-deck-817ea38b60b43186e5abf356770d1b622c59d7ae7a1f897b120cc66c6129ed95",
+          "source_content_sha256": "e23f3a213054d094a5a6deaa6f5b586c6ab450b8bb82c3b9aeb7d0dbfd349730",
+          "source_record_identity": "AllDeckFiles/CommanderCollectionBlack_CC2.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Commander Collection: Green - Premium",
+          "format": "box set",
+          "provider_deck_identity": "CC1",
+          "retained_record_id": "mtgjson-deck-df8e433c87f80021948ab493eef74013aa5f306ac21aac556dd62b55915900c9",
+          "source_content_sha256": "2b715c1a20f0dcb6724e0f6133d42d6f5e70f5addd1f2b814d8a95395ee22218",
+          "source_record_identity": "AllDeckFiles/CommanderCollectionGreenPremium_CC1.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Commander Collection: Green",
+          "format": "box set",
+          "provider_deck_identity": "CC1",
+          "retained_record_id": "mtgjson-deck-d1298170a0a6bc7d9b966463a84911fcb68491f1adbbbf9e8bd788d155d57327",
+          "source_content_sha256": "ce7ec411a6cf45ceff12cb1e7f049560f754540f2cb432e5853d0875b6743c17",
+          "source_record_identity": "AllDeckFiles/CommanderCollectionGreen_CC1.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Commander's Arsenal",
+          "format": "box set",
+          "provider_deck_identity": "CM1",
+          "retained_record_id": "mtgjson-deck-c75e44ff5c0ebc6096be9abc14d30b39c03402c52a379548bc30e598f1e6c2b0",
+          "source_content_sha256": "67b4ce52933287072bae023cfa33de102aabb8e900affa46c6efa98f7a72b547",
+          "source_record_identity": "AllDeckFiles/CommanderSArsenal_CM1.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Starter Collection",
+          "format": "box set",
+          "provider_deck_identity": "FDN",
+          "retained_record_id": "mtgjson-deck-0995bb726c0bfa8e5098cd10849451a33bf65bff53599fcc68d789e1dd8cfd4a",
+          "source_content_sha256": "f0c69d003f7022cd88917a1faf426332bcbe4ddb327139ebb37b54f037d1dc06",
+          "source_record_identity": "AllDeckFiles/StarterCollection_FDN.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Faerie Schemes",
+          "format": "brawl deck",
+          "provider_deck_identity": "ELD",
+          "retained_record_id": "mtgjson-deck-08183a1e3287216a5cb8237ded495f832359285871043c0cbf3fc918bab60160",
+          "source_content_sha256": "1d3bf2a5def94b38f292a67ab43a19cade29fb7959da89ee6c84c89b00fef844",
+          "source_record_identity": "AllDeckFiles/FaerieSchemes_ELD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Knights' Charge",
+          "format": "brawl deck",
+          "provider_deck_identity": "ELD",
+          "retained_record_id": "mtgjson-deck-83c12add16a6e0021421df4b34ca115f838f6aa3fc487a0451bc3b3466450732",
+          "source_content_sha256": "634e99047f15a5828b531e13966d5b3a9fa4d6a1831a762cb02b8457d9027cbe",
+          "source_record_identity": "AllDeckFiles/KnightsCharge_ELD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Savage Hunger",
+          "format": "brawl deck",
+          "provider_deck_identity": "ELD",
+          "retained_record_id": "mtgjson-deck-d79259aabebce9f0e43b3805629840d820c2e5536788e8f92efd78a3a010c050",
+          "source_content_sha256": "1238a80edc70bda9bef662d0b4e318e5cd1443a02ca3f316c18cfd33c04f9089",
+          "source_record_identity": "AllDeckFiles/SavageHunger_ELD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Wild Bounty",
+          "format": "brawl deck",
+          "provider_deck_identity": "ELD",
+          "retained_record_id": "mtgjson-deck-2bedcccb92404ece563ab2473f528066cfcbe9d02356817c951667c0f158c2b4",
+          "source_content_sha256": "ec159ffe72f25253a65bf7da3ac57ad137d2add2a4ace87886d483f9433586ea",
+          "source_record_identity": "AllDeckFiles/WildBounty_ELD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "20 Ways to Win",
+          "format": "commander deck",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-60f1fc5a72c07cc8ab6d41a500811515415922549849a69c35e024dc4e74a275",
+          "source_content_sha256": "f348c3c086cbd8b2e8e22aa25279cd0fdd96649054a09c01bed3b99f783acd97",
+          "source_record_identity": "AllDeckFiles/20WaysToWin_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Abzan Armor",
+          "format": "commander deck",
+          "provider_deck_identity": "TDC",
+          "retained_record_id": "mtgjson-deck-ba4e292bad550973340beef4f4709fc96465abf8c6b9d5e69b10afce6eda31b1",
+          "source_content_sha256": "cf07a386250d767e28245fc2cc5977bc980942b99596a99d91f29f444c7e4e0d",
+          "source_record_identity": "AllDeckFiles/AbzanArmor_TDC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Adaptive Enchantment",
+          "format": "commander deck",
+          "provider_deck_identity": "C18",
+          "retained_record_id": "mtgjson-deck-addb213dfe40fd780fb291438e6a4446e9bb1b0c27c57f9efef35eff6d6284e9",
+          "source_content_sha256": "1cc3efccaa96f2dc51095fe59d79e99c2a6abf20373ececa06a7b8170e1b50b7",
+          "source_record_identity": "AllDeckFiles/AdaptiveEnchantment_C18.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Ahoy Mateys",
+          "format": "commander deck",
+          "provider_deck_identity": "LCC",
+          "retained_record_id": "mtgjson-deck-e231d1c8031313255f6d5be3b8b3f28be9cbffc322c8cc99512748af0c1f582a",
+          "source_content_sha256": "11df34ff3a81fc7518cd279316fd0c52f1afde7f8d2712e47fb5704cf2f09f6c",
+          "source_record_identity": "AllDeckFiles/AhoyMateys_LCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Animated Army",
+          "format": "commander deck",
+          "provider_deck_identity": "BLC",
+          "retained_record_id": "mtgjson-deck-4a3e7a9abacfb7ee18203e73407cba06d7b2e194f9c246d648cb9070716ca024",
+          "source_content_sha256": "5d8d52d985eec73766ae353e66b2e5c72651cd5889236dfe52c9856fc60d4d44",
+          "source_record_identity": "AllDeckFiles/AnimatedArmy_BLC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Arcane Maelstrom",
+          "format": "commander deck",
+          "provider_deck_identity": "C20",
+          "retained_record_id": "mtgjson-deck-9b904f52c8c722acc53d5be87157c6d8d641bf1bbe71a6b6a18142828f1dad9a",
+          "source_content_sha256": "17b15a08f2d9efefb22e6fb53116fc74b39acb945ffa18583e2339ec0202bf89",
+          "source_record_identity": "AllDeckFiles/ArcaneMaelstrom_C20.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Arcane Wizardry",
+          "format": "commander deck",
+          "provider_deck_identity": "C17",
+          "retained_record_id": "mtgjson-deck-009310ee307bbafd05193ea58ea8cfaf37431897d18fae40a32a3a7996145619",
+          "source_content_sha256": "2476375db2a5240978aac44273f16393d8e5e90f681b6900c1783bf8f0d9028e",
+          "source_record_identity": "AllDeckFiles/ArcaneWizardry_C17.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Arm for Battle",
+          "format": "commander deck",
+          "provider_deck_identity": "CMR",
+          "retained_record_id": "mtgjson-deck-e545c407cf0f160e6486b85c0f3039ed0c843270e76db8b81dc35df21951e908",
+          "source_content_sha256": "7c386d91eb0d5fc17a2160f1ddad2d78e0d0df020a37f1d0b71547131c19cac7",
+          "source_record_identity": "AllDeckFiles/ArmForBattle_CMR.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Aura of Courage",
+          "format": "commander deck",
+          "provider_deck_identity": "AFC",
+          "retained_record_id": "mtgjson-deck-a56852fe5724dbb605584a862bd89dd49682f0a421c07d696da3be083b8b1dc0",
+          "source_content_sha256": "4f37b94ed515627798bfc57b0572a62a296881c7ffc6349ab492d3805fae660c",
+          "source_record_identity": "AllDeckFiles/AuraOfCourage_AFC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Avengers Assemble Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "MSC",
+          "retained_record_id": "mtgjson-deck-86eaa1647af3f9035aff5d65b7049a9aaa63b98ea2f432cf3d9cbee6eb0e3706",
+          "source_content_sha256": "efedfc70d73d34cce181d712cb5e60e40d7c635fae60cd72603895a3027229ec",
+          "source_record_identity": "AllDeckFiles/AvengersAssembleCollectorSEdition_MSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Avengers Assemble",
+          "format": "commander deck",
+          "provider_deck_identity": "MSC",
+          "retained_record_id": "mtgjson-deck-47b3451185e1c7de2310e1fdf9387c54423fa75520652527037e59a70f43a12f",
+          "source_content_sha256": "d2f9364ce608dd9eb2efba16518554d51442a7fd7a6177b2db5e0c9163327a85",
+          "source_record_identity": "AllDeckFiles/AvengersAssemble_MSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Bedecked Brokers",
+          "format": "commander deck",
+          "provider_deck_identity": "NCC",
+          "retained_record_id": "mtgjson-deck-97deb796e56b87117d49bf83c7aadae1b40fe4dfc5b14671c7e22d84eee11672",
+          "source_content_sha256": "cfa958ce6636aec08072851f6337368970fb75a195bd9e9dce05538f437ed1cf",
+          "source_record_identity": "AllDeckFiles/BedeckedBrokers_NCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Blame Game",
+          "format": "commander deck",
+          "provider_deck_identity": "MKC",
+          "retained_record_id": "mtgjson-deck-4b798e6c3d8196d016a33da2cb5d6bb5ea3e5891719880a626dcc4603bd59892",
+          "source_content_sha256": "5fe43bae79f0cda27b39b630cc7b6eebde371d60f09711c8a11f6093bd063c66",
+          "source_record_identity": "AllDeckFiles/BlameGame_MKC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Blast from the Past",
+          "format": "commander deck",
+          "provider_deck_identity": "WHO",
+          "retained_record_id": "mtgjson-deck-c53fc1e8e3a786ef5cdb53621f30adb38001d172625c7e66d7254b28e7d108f5",
+          "source_content_sha256": "b8fc2825dab03edf8b29f95a2ba3a55f0e7ce24bc645a0b2b761096e0c2ae81d",
+          "source_record_identity": "AllDeckFiles/BlastFromThePast_WHO.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Blight Curse",
+          "format": "commander deck",
+          "provider_deck_identity": "ECC",
+          "retained_record_id": "mtgjson-deck-cccf16ff299029e994e02ced281238d28cccbaf1a3bb3ed0912a588377ffbab1",
+          "source_content_sha256": "5c1dbb8deba79609c9e729e18e7d73740ef051cb2a421335f070b09836b1abc8",
+          "source_record_identity": "AllDeckFiles/BlightCurse_ECC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Blood Rites",
+          "format": "commander deck",
+          "provider_deck_identity": "LCC",
+          "retained_record_id": "mtgjson-deck-4755ef4df3ea90aa23722092229cd9b257ca05d3c03a780afe7b2b02882faf89",
+          "source_content_sha256": "668a8b5f86e5dca5eebbfc647375acf1aa5a6d0cef9e091f67c0b36c85104885",
+          "source_record_identity": "AllDeckFiles/BloodRites_LCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Breed Lethality",
+          "format": "commander deck",
+          "provider_deck_identity": "C16",
+          "retained_record_id": "mtgjson-deck-8a9d20221bdc5ab2f43940d5f49ef1b4b33405c82c4a8683b51f52c7aebb67d7",
+          "source_content_sha256": "ce13f108a0928aaed958de2ac5a00d2e4e9449ff32da18866387002a135dbc03",
+          "source_record_identity": "AllDeckFiles/BreedLethality_C16.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Breed Lethality",
+          "format": "commander deck",
+          "provider_deck_identity": "CM2",
+          "retained_record_id": "mtgjson-deck-4e921163da2e89dd395e13a544e414eea3a9b5ab62c4e397303f584c7cb3b388",
+          "source_content_sha256": "4c82b17e7e174122ee15279ca13677595a642d728fc7fe2f4dfee58e75862e2e",
+          "source_record_identity": "AllDeckFiles/BreedLethality_CM2.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Buckle Up",
+          "format": "commander deck",
+          "provider_deck_identity": "NEC",
+          "retained_record_id": "mtgjson-deck-dfdfaaa4ebab01195ab320b3966f6203f30b0a6b7d91749241ef13758f046ee6",
+          "source_content_sha256": "4e952d38291575bac0b3643121459f3ac96852a7070eec9fea82ee9e4e5ca9f8",
+          "source_record_identity": "AllDeckFiles/BuckleUp_NEC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Cabaretti Cacophony",
+          "format": "commander deck",
+          "provider_deck_identity": "NCC",
+          "retained_record_id": "mtgjson-deck-f2f058c0df34bef175e280b5b1d0675bca3feaa07714e447b287e8679d81a4c8",
+          "source_content_sha256": "0b03a1ead73490d7415a44669c50180e5c898656431d1796a713f87f44d48950",
+          "source_record_identity": "AllDeckFiles/CabarettiCacophony_NCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Call for Backup",
+          "format": "commander deck",
+          "provider_deck_identity": "MOC",
+          "retained_record_id": "mtgjson-deck-599f6b919649c197deb86379ce01614a7e7a5a580c55792aefa4a5993da5dc5c",
+          "source_content_sha256": "81ad9d68cb59e177fd64b60cf7af310a0017d3f68e1ff1d7374792a6656eaccc",
+          "source_record_identity": "AllDeckFiles/CallForBackup_MOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Call the Spirits",
+          "format": "commander deck",
+          "provider_deck_identity": "C15",
+          "retained_record_id": "mtgjson-deck-8fa397ba205d37b76b132ff20fd10c5d69ebb62b07b7c8f66da0e10990b59e2b",
+          "source_content_sha256": "7ba57f95ae25f4bb54b8f540324a54c838375dc307909fda867101a5c561c1f4",
+          "source_record_identity": "AllDeckFiles/CallTheSpirits_C15.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Cavalry Charge",
+          "format": "commander deck",
+          "provider_deck_identity": "MOC",
+          "retained_record_id": "mtgjson-deck-27813f6f03dab5ca7b79aed6c946a9a76e8d3caade33737df0ce43800c7c8cb4",
+          "source_content_sha256": "38a935aa30cb0ecf95cf59d46884c0580e36bdb2b6b1834ff6baecec59084363",
+          "source_record_identity": "AllDeckFiles/CavalryCharge_MOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Chaos Incarnate",
+          "format": "commander deck",
+          "provider_deck_identity": "SCD",
+          "retained_record_id": "mtgjson-deck-8bfdfd8723f0a30c9a8ef431f9d445ab82ab09eaad9b385cce4eef48a0c020b1",
+          "source_content_sha256": "a5cbd5bb060da530fe3abcc244caa56720b6210baabea56d8730f6c26b4a442b",
+          "source_record_identity": "AllDeckFiles/ChaosIncarnate_SCD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Corrupting Influence",
+          "format": "commander deck",
+          "provider_deck_identity": "ONC",
+          "retained_record_id": "mtgjson-deck-42e17f2dca405001b4b97f1a37a9e6adeae7679bd5740de8800098845a08b183",
+          "source_content_sha256": "dd21f362bdfa2bd89e4b6f681aeaf954f96c6ba3e359ba0c4d34f112a01f2ddb",
+          "source_record_identity": "AllDeckFiles/CorruptingInfluence_ONC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Counter Blitz Collector's Edition (FINAL FANTASY X)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-4bdbec1998c1e826f84a4fed1ecc73cfd355d0503c2ae586a636b6c3366532bb",
+          "source_content_sha256": "d5a827384c81b38158f5806562fba7ba2907d495aedc398c91ff25da5f5e15db",
+          "source_record_identity": "AllDeckFiles/CounterBlitzCollectorSEditionFinalFantasyX_FIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Counter Blitz (FINAL FANTASY X)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-4769d969cc79c4a12417a8e09c2f3d2a6e06183f00dce59a1e8336eddee282c8",
+          "source_content_sha256": "85e297e3d01b15e3df291e21e0885e488df78a2b7e89221e877676d925d1e8dc",
+          "source_record_identity": "AllDeckFiles/CounterBlitzFinalFantasyX_FIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Counter Intelligence",
+          "format": "commander deck",
+          "provider_deck_identity": "EOC",
+          "retained_record_id": "mtgjson-deck-9a99a7af426c217a36edfdde82f7b8200e24f4eec71cc77f8e01499458eba240",
+          "source_content_sha256": "b5d5bf9845485f41b3e51735737c325517bdfcf26c5a4228cf9b620cd011f049",
+          "source_record_identity": "AllDeckFiles/CounterIntelligence_EOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Counterpunch",
+          "format": "commander deck",
+          "provider_deck_identity": "CMD",
+          "retained_record_id": "mtgjson-deck-825588f609b4c03648922c54b3e9f55b2410f0a914c480e99d6b0336a47a4b2c",
+          "source_content_sha256": "18b1ba25f1dd76c45d42154a70f27fe9b0b5db88b6aae39949139bd7e6972db3",
+          "source_record_identity": "AllDeckFiles/Counterpunch_CMD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Coven Counters",
+          "format": "commander deck",
+          "provider_deck_identity": "MIC",
+          "retained_record_id": "mtgjson-deck-28c869d8dfc441c0ad389da053fc0f121ddb30938b30ca58e4c902771ce0ccfe",
+          "source_content_sha256": "5da3c439eb3be102c5aebc416a020f1a7e29c14df63b49e275d7edf2b6661bce",
+          "source_record_identity": "AllDeckFiles/CovenCounters_MIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Creative Energy Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-b00da7a3b827166143ec3c69765dd6d392454061eebf5f600293f90dff4a760f",
+          "source_content_sha256": "d9cf1ba8373ce84702a455af7bed0149b0cb949af849ce12519d51a08b4329b2",
+          "source_record_identity": "AllDeckFiles/CreativeEnergyCollectorSEdition_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Creative Energy",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-ee13032585e4431366f5c0bab657dd1f25ba2ee17a42ab5116583ea7190f02eb",
+          "source_content_sha256": "4a207441e3d73e72aa03f1212a49a25bbb00c7059de82c8ae9ee2db7db947d60",
+          "source_record_identity": "AllDeckFiles/CreativeEnergy_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Dance of the Elements",
+          "format": "commander deck",
+          "provider_deck_identity": "ECC",
+          "retained_record_id": "mtgjson-deck-309f87323b681d4bed6b45c602843b70218a9d5d3fb147ce0dd7f0bf53c31f33",
+          "source_content_sha256": "6fefe407593c7b8aad03e53a6a160f08463bc36dc1e527251f1801c545a85bf9",
+          "source_record_identity": "AllDeckFiles/DanceOfTheElements_ECC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Deadly Disguise",
+          "format": "commander deck",
+          "provider_deck_identity": "MKC",
+          "retained_record_id": "mtgjson-deck-e2810a1e3cdf74b3b76657bbe53f7202e5c9aca77b0132673afa18a967846e32",
+          "source_content_sha256": "8f5ce26a18cd7ddd260c2c419e1b55fb0bea0241d01bf35a2814faffdf1dd355",
+          "source_record_identity": "AllDeckFiles/DeadlyDisguise_MKC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Death Toll",
+          "format": "commander deck",
+          "provider_deck_identity": "DSC",
+          "retained_record_id": "mtgjson-deck-ba1ddadf9d84a1a82546b20b1c6ab66658df582c0e89805fe41536fb44450e27",
+          "source_content_sha256": "4a8ae85cd7f1e9737d38983abdbbb90a93bf62710826a574394371e0c7869046",
+          "source_record_identity": "AllDeckFiles/DeathToll_DSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Deep Clue Sea",
+          "format": "commander deck",
+          "provider_deck_identity": "MKC",
+          "retained_record_id": "mtgjson-deck-96e1e4c56af9219c4a5aefefe3e85cbf296171469f1238ee9dfb99b67a032904",
+          "source_content_sha256": "3d965cf3ae4b33c6f10529c6f71aa749d4989e8edef7f92f275d26948fafd173",
+          "source_record_identity": "AllDeckFiles/DeepClueSea_MKC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Desert Bloom",
+          "format": "commander deck",
+          "provider_deck_identity": "OTC",
+          "retained_record_id": "mtgjson-deck-8ac761cb6bc97a5565802109ba777b5e5d87f6bb41d7305c37b78367723e5156",
+          "source_content_sha256": "6739220a9d15b22cf3ac746a7797cd69e0810a54d9bde952cb2d77c77cc5a634",
+          "source_record_identity": "AllDeckFiles/DesertBloom_OTC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Devour for Power",
+          "format": "commander deck",
+          "provider_deck_identity": "CM2",
+          "retained_record_id": "mtgjson-deck-1bdad9ad1e86e617fd9ca7752e10f688585102d656dbbdf7a5fce439001a6400",
+          "source_content_sha256": "972f1710e49d72235dd3ee955d09d7f84faa9ae792f3aa816beeecd4525cd08f",
+          "source_record_identity": "AllDeckFiles/DevourForPower_CM2.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Devour for Power",
+          "format": "commander deck",
+          "provider_deck_identity": "CMD",
+          "retained_record_id": "mtgjson-deck-5a3f53c19a73426d8baff2edfacfce7c62f581e9eef10f2b559b6466aae946d7",
+          "source_content_sha256": "c1684d3cf2c889f4d1389fe60da2acabe6e371bf7b2b4137e496bc43fe6bdfb1",
+          "source_record_identity": "AllDeckFiles/DevourForPower_CMD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Divine Convocation",
+          "format": "commander deck",
+          "provider_deck_identity": "MOC",
+          "retained_record_id": "mtgjson-deck-99ea0fa0c5c0486750a5fe0ea0096cf500df66bc2b8ecd6acd87560317278e18",
+          "source_content_sha256": "3a8df593c922cc15f4af58e2f9cacaa2e9ec8b93fd383c68c6bde14baf2dc12e",
+          "source_record_identity": "AllDeckFiles/DivineConvocation_MOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Doom Prevails Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "MSC",
+          "retained_record_id": "mtgjson-deck-962ac2d4be3df9ee7a7da594e5f1ba2753a6886311e05302064f88bb66f0f1eb",
+          "source_content_sha256": "c5eac58d4d423f0435ff28aa23046dc622ac69bbee7f145bb2907ee8748885c1",
+          "source_record_identity": "AllDeckFiles/DoomPrevailsCollectorSEdition_MSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Doom Prevails",
+          "format": "commander deck",
+          "provider_deck_identity": "MSC",
+          "retained_record_id": "mtgjson-deck-c49f4a0b67b07dfac73ae805074294597eec7aa39c1b564843a13a3cfec8822d",
+          "source_content_sha256": "b9c507222da2d99e851b5ab408aba670d006bd73706dd2aad84d25eb84b6b448",
+          "source_record_identity": "AllDeckFiles/DoomPrevails_MSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Draconic Destruction",
+          "format": "commander deck",
+          "provider_deck_identity": "SCD",
+          "retained_record_id": "mtgjson-deck-c80d9127b21008590f6a1db33e616fdb7f288fe35c63ee243701ac7aaaeb5ab7",
+          "source_content_sha256": "4397d5fbd346f2efeb11146393e3f05f620682ed45704314dc856bb51fa5d0c1",
+          "source_record_identity": "AllDeckFiles/DraconicDestruction_SCD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Draconic Dissent",
+          "format": "commander deck",
+          "provider_deck_identity": "CLB",
+          "retained_record_id": "mtgjson-deck-4da14909331bf778ae7d288064b1726de318225942250b81799ad0cb49beb51e",
+          "source_content_sha256": "250da25ea91ebf37e693a24648abb9c2d4857893f79bc4bec193649f32d45f2b",
+          "source_record_identity": "AllDeckFiles/DraconicDissent_CLB.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Draconic Domination",
+          "format": "commander deck",
+          "provider_deck_identity": "C17",
+          "retained_record_id": "mtgjson-deck-9941d5622ea10e79fd0b56088716efaedc44e7244c0ce804ad727c8a24738943",
+          "source_content_sha256": "18d266e43b62e2c6b110fb0843fcd49493f33eb10b5d2b42a5cefe60ccfb5a5c",
+          "source_record_identity": "AllDeckFiles/DraconicDomination_C17.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Draconic Rage",
+          "format": "commander deck",
+          "provider_deck_identity": "AFC",
+          "retained_record_id": "mtgjson-deck-f8608d2a2b1b077fda32e54b1720b66e02c5103db60776b5c918b595d1791b73",
+          "source_content_sha256": "09e53014e765a08d3a467932a3260fec24fe21c471f406fddf4839545727db19",
+          "source_record_identity": "AllDeckFiles/DraconicRage_AFC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Dungeons of Death",
+          "format": "commander deck",
+          "provider_deck_identity": "AFC",
+          "retained_record_id": "mtgjson-deck-7dcc5f881d192ab7edb57c96153187849137545f65261efa2b5223a7d440c6bd",
+          "source_content_sha256": "48452e5724f30b1a46357485a195e155a581a2e1206f5fa692142500f8f029f9",
+          "source_record_identity": "AllDeckFiles/DungeonsOfDeath_AFC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Eldrazi Incursion Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-d5d16bae2de040333ee9408f69f4a766863c7991f8c8c23251a7a7d32a7b0548",
+          "source_content_sha256": "b5f0b0bb61ed48c3c5adc2a435bab8864d166ae484a5a36271a0c8d434b97690",
+          "source_record_identity": "AllDeckFiles/EldraziIncursionCollectorSEdition_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Eldrazi Incursion",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-863b4b14bef5ff178e1eeddbc0d0cf18a5be59e7f6b4f57852d07ffeaf1e60c8",
+          "source_content_sha256": "aa5431102b2d90306200cdf39ab13bf4e99fa47209e1666b7a0ca7fa97cbc6e2",
+          "source_record_identity": "AllDeckFiles/EldraziIncursion_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Elven Council",
+          "format": "commander deck",
+          "provider_deck_identity": "LTC",
+          "retained_record_id": "mtgjson-deck-498e467dbc5349ebc2804e8ffd9a55a77bee48e6c25c91aa99d3aa0ac0f42cf5",
+          "source_content_sha256": "a3b3c09754cb885a91f5a12f35a845783dff86d7f787e364225792f06a2f3f9e",
+          "source_record_identity": "AllDeckFiles/ElvenCouncil_LTC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Elven Empire",
+          "format": "commander deck",
+          "provider_deck_identity": "KHC",
+          "retained_record_id": "mtgjson-deck-5f84a39ce5d1dbea9947521537702478215ec0e9d2af60485f58602c0fca9c5a",
+          "source_content_sha256": "f853775010db03108ca62099e4ae5e057de219ec96de0c94b1ef5c48ca4311f6",
+          "source_record_identity": "AllDeckFiles/ElvenEmpire_KHC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Endless Punishment",
+          "format": "commander deck",
+          "provider_deck_identity": "DSC",
+          "retained_record_id": "mtgjson-deck-f6fc52a07624e1d2381470738bcbb1c7f9508c6ee939f597e4f21112f782e221",
+          "source_content_sha256": "f3c3e789e2a63b039a8eaa2f658e41fe893bf1f1bf94c996ae19c2d04e943b40",
+          "source_record_identity": "AllDeckFiles/EndlessPunishment_DSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Enduring Enchantments",
+          "format": "commander deck",
+          "provider_deck_identity": "CMM",
+          "retained_record_id": "mtgjson-deck-726da853783483a08eee164b53bd7cf3c88faabdd78f808f6e1e7f49067de4a3",
+          "source_content_sha256": "928d22891203da12599d29ae0421d982bdb2cebad2d8f19d9c025bcd541f80a5",
+          "source_record_identity": "AllDeckFiles/EnduringEnchantments_CMM.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Enhanced Evolution",
+          "format": "commander deck",
+          "provider_deck_identity": "C20",
+          "retained_record_id": "mtgjson-deck-c63116065375aea846a7c8b9d5c53907d1a37017b4840c8fce68d29ca05e978c",
+          "source_content_sha256": "6229966d6f6247252cb3abfd7053222c7a26e3a1c962e7c3bfa507baa9d8d1a0",
+          "source_record_identity": "AllDeckFiles/EnhancedEvolution_C20.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Entropic Uprising",
+          "format": "commander deck",
+          "provider_deck_identity": "C16",
+          "retained_record_id": "mtgjson-deck-1b4d6659772b8c2d13f6a045d077eb1af92a5d9fad153db451ca770b60776b58",
+          "source_content_sha256": "2ec76868b8342577068218ac754348d40a2867c5981910bb0707bee487179cb9",
+          "source_record_identity": "AllDeckFiles/EntropicUprising_C16.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Eternal Bargain",
+          "format": "commander deck",
+          "provider_deck_identity": "C13",
+          "retained_record_id": "mtgjson-deck-3e0f89d9c3f21fe9d1e9e0542502a5798edd3b9a7e5dae4ffa07c2ace618cfb7",
+          "source_content_sha256": "9b8b07d672d2cdebdd2b0925ea13489294a34b521b145660eb7aec67ea650b0c",
+          "source_record_identity": "AllDeckFiles/EternalBargain_C13.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Eternal Might",
+          "format": "commander deck",
+          "provider_deck_identity": "DRC",
+          "retained_record_id": "mtgjson-deck-bed2328d5e3f04b69786d2bcae9977de27718bf3674f20664870c547aa27dec4",
+          "source_content_sha256": "343a0f4a1a2fe14e8eecdfeb392bf44fe3159472426a29400bd262c40aa45d1d",
+          "source_record_identity": "AllDeckFiles/EternalMight_DRC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Evasive Maneuvers",
+          "format": "commander deck",
+          "provider_deck_identity": "C13",
+          "retained_record_id": "mtgjson-deck-8e8c2978409b58dca96d951c194d0abef2bd0d7dbd473b323e5678429c6640b9",
+          "source_content_sha256": "81eb846a5dc847e0745883856d351cea0051f61342629f4baf69cd506ef8e649",
+          "source_record_identity": "AllDeckFiles/EvasiveManeuvers_C13.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Evasive Maneuvers",
+          "format": "commander deck",
+          "provider_deck_identity": "CMA",
+          "retained_record_id": "mtgjson-deck-864f1b0a4d61dc5fad660ada5347c63ea363ba4fea4199667fd013f5a15265d2",
+          "source_content_sha256": "7fa8c435099a6ed38de69c61e9c0b5ce92f79167e60e8d644cea667aec522303",
+          "source_record_identity": "AllDeckFiles/EvasiveManeuvers_CMA.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Everyone's Invited!",
+          "format": "commander deck",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-3f85fea3a6af55bf87c9c153e30c182279729cdb280c54a667cf43f2bbfb3408",
+          "source_content_sha256": "aa44ec0e940ef907ea08552c680a42b8755aab25b8fb229e63ce63179bf24786",
+          "source_record_identity": "AllDeckFiles/EveryoneSInvited_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Exit from Exile",
+          "format": "commander deck",
+          "provider_deck_identity": "CLB",
+          "retained_record_id": "mtgjson-deck-db6c9099fb61855b2f42c3d9bb1bf645bcf2097c9d36724732135dbb84663218",
+          "source_content_sha256": "851582fbde9fbe0c5ad54620eeedce544db8fda0198f2f4c91a6d363d4f67ad3",
+          "source_record_identity": "AllDeckFiles/ExitFromExile_CLB.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Explorers of the Deep",
+          "format": "commander deck",
+          "provider_deck_identity": "LCC",
+          "retained_record_id": "mtgjson-deck-9d87faae72da4416b233bd52cdd24039b15b75c1b5e5b15981405a8cc230ff5a",
+          "source_content_sha256": "4a2c2e8595db754bb10d5a398c984a3c8f091fce1259e2d0e5fc8d78230f40e3",
+          "source_record_identity": "AllDeckFiles/ExplorersOfTheDeep_LCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Exquisite Invention",
+          "format": "commander deck",
+          "provider_deck_identity": "C18",
+          "retained_record_id": "mtgjson-deck-dba0942f6de3d19b8380ea5d14f8820590d7b86d5207aedf14b0b66201792dbb",
+          "source_content_sha256": "c9d25575c90ed3f05ae35da063fba5b91a188779284327b4c983405d28f6c420",
+          "source_record_identity": "AllDeckFiles/ExquisiteInvention_C18.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Faceless Menace",
+          "format": "commander deck",
+          "provider_deck_identity": "C19",
+          "retained_record_id": "mtgjson-deck-1759e9ccfd41b00fcd2df3b371841d80802dc69f9ed196f935e44356a85c7446",
+          "source_content_sha256": "270823460875da4a3f366a166410743db5419bb28034b4b90d681791c0bb11b3",
+          "source_record_identity": "AllDeckFiles/FacelessMenace_C19.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Fae Dominion",
+          "format": "commander deck",
+          "provider_deck_identity": "WOC",
+          "retained_record_id": "mtgjson-deck-9929c48e0c90e9bda97cdd129374be3a2772efa6867aed4a2b3cf45fd255c53d",
+          "source_content_sha256": "8c12f28626485c4a5ab109b101653616f89b871fdf471e64b088a38241733536",
+          "source_record_identity": "AllDeckFiles/FaeDominion_WOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Family Matters",
+          "format": "commander deck",
+          "provider_deck_identity": "BLC",
+          "retained_record_id": "mtgjson-deck-671cc849de6517c978c5f9b115877f61f6e81d0706a15136d0b0f7df3fab1f77",
+          "source_content_sha256": "a37f9ad3133b77f9b6b5d9bac1f50fc784fb571ae07a4d3e932578f6ab65be35",
+          "source_record_identity": "AllDeckFiles/FamilyMatters_BLC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Feline Ferocity",
+          "format": "commander deck",
+          "provider_deck_identity": "C17",
+          "retained_record_id": "mtgjson-deck-8e9295e4641adfee07a1a78f755007817d825c282c0b7ab36b6fbd7700c57615",
+          "source_content_sha256": "1bf93d368dee46ffeb95786af5e331fbdac7be0460ed828efb96d113c123585b",
+          "source_record_identity": "AllDeckFiles/FelineFerocity_C17.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "First Flight",
+          "format": "commander deck",
+          "provider_deck_identity": "SCD",
+          "retained_record_id": "mtgjson-deck-2c33d40948f13c04cd7fc51ca3cb15ecd508a7ec8c38e28d81a9cd5273f908f8",
+          "source_content_sha256": "5de9d97541959bc306ab812c1353dd61e9ff30b211fc4ecc6beff1ee230ee17f",
+          "source_record_identity": "AllDeckFiles/FirstFlight_SCD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Food and Fellowship",
+          "format": "commander deck",
+          "provider_deck_identity": "LTC",
+          "retained_record_id": "mtgjson-deck-b1708fa1c91a28e556ab758ec60da08db5fde08692dec0665db6cfe624746a9c",
+          "source_content_sha256": "508b80e19acd530c13fda27d3c3aa458e33afec8abef54faa089b8fc07609311",
+          "source_record_identity": "AllDeckFiles/FoodAndFellowship_LTC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Forces of the Imperium Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "40K",
+          "retained_record_id": "mtgjson-deck-dab4809196ddabf4a8ed11768c5e54f97ca8e532a3b4a55ce13f5052843b492f",
+          "source_content_sha256": "27c0d9447ec2fe5e49197a98287ee35375f7a1eb841975cadaa6866216fd4dc0",
+          "source_record_identity": "AllDeckFiles/ForcesOfTheImperiumCollectorSEdition_40K.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Forces of the Imperium",
+          "format": "commander deck",
+          "provider_deck_identity": "40K",
+          "retained_record_id": "mtgjson-deck-46b2571294f6ea1206f684724697d8b30f4a7466fbaf90650a93da6133e177a1",
+          "source_content_sha256": "b24ee333ddc944f8d0caf6b88fdad621fbd46f7b74e965f0edf12df95b469f93",
+          "source_record_identity": "AllDeckFiles/ForcesOfTheImperium_40K.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "From Cute to Brute",
+          "format": "commander deck",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-4e8be6ed55b5614866ad83d9691596963430ee79447378930bba39ae70187194",
+          "source_content_sha256": "2ba2bfe7e222c6dec4ee35c4426a046a820a1e42c24da9d6de370e15fe4af02e",
+          "source_record_identity": "AllDeckFiles/FromCuteToBrute_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Grand Larceny",
+          "format": "commander deck",
+          "provider_deck_identity": "OTC",
+          "retained_record_id": "mtgjson-deck-d86adc4f5ba54600e8094573c714ab1337c12887ced94c0acefdeb9ab62d1ac2",
+          "source_content_sha256": "4c3c918b9a25b76e7420f63919e56defcc67e12d01cece43d894d1fd8ba3f935",
+          "source_record_identity": "AllDeckFiles/GrandLarceny_OTC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Grave Danger",
+          "format": "commander deck",
+          "provider_deck_identity": "SCD",
+          "retained_record_id": "mtgjson-deck-b0c29f69f664cb333adf141f22632277e0e27d53eb9efbdd910cfbeb1a0a0e3b",
+          "source_content_sha256": "3aa900c88abb5f1e8674889f7cc17e8cbb2c9f0fdd1289f0670add9c21557608",
+          "source_record_identity": "AllDeckFiles/GraveDanger_SCD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Graveyard Overdrive Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-647d5830a61877f3e690ce42d3bd9a2e0d40c9c4506996a8edb620266a45b3f5",
+          "source_content_sha256": "e232d01697b02d815caa921a71085c6a28593eea37e0d33b42eb27983906f068",
+          "source_record_identity": "AllDeckFiles/GraveyardOverdriveCollectorSEdition_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Graveyard Overdrive",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-1e4c13a06761df0ac1154696a315a6279a720d9ec558fe2f661f6b3d2866faaf",
+          "source_content_sha256": "ea29b053b7065e72de0e0ddf5c15bbaaad0fbf11b40ddd363bf7035d66e9ecc2",
+          "source_record_identity": "AllDeckFiles/GraveyardOverdrive_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Growing Threat",
+          "format": "commander deck",
+          "provider_deck_identity": "MOC",
+          "retained_record_id": "mtgjson-deck-91e40567f297365ea9dc1e8fa2fd14a57cc92993e627f298a49e76b021009cf3",
+          "source_content_sha256": "17d150c49e1bc11688939c1d0c1c008f9605d30258804195f8966643a663efaf",
+          "source_record_identity": "AllDeckFiles/GrowingThreat_MOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Hail, Caesar",
+          "format": "commander deck",
+          "provider_deck_identity": "PIP",
+          "retained_record_id": "mtgjson-deck-a251344f9c7369e896cc9b5aabaf746aae2ad982d3bebf166b01c0b676f9ede1",
+          "source_content_sha256": "46b4142cdf57ceaa4626f5b4f4c40b72f589162f0d1f59f32d779b7bd66eb0bf",
+          "source_record_identity": "AllDeckFiles/HailCaesar_PIP.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Heads I Win, Tails You Lose",
+          "format": "commander deck",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-d7ba8ad4022606c25c935ad1f9ad9611a27440c9cbe48e8d3c9f62fb5341531d",
+          "source_content_sha256": "157c14ad054f6aa813aafcc6a5c4c742f327f881729b04310b00477c92a8a9a3",
+          "source_record_identity": "AllDeckFiles/HeadsIWinTailsYouLose_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Heavenly Inferno",
+          "format": "commander deck",
+          "provider_deck_identity": "CMA",
+          "retained_record_id": "mtgjson-deck-53758ed76b9f5c7f9563c1f82c615f4169f2e575c0a1133377ae4a13b87caa9d",
+          "source_content_sha256": "e3018f505fb1741a770a0fc04f16155b3af4a6231962d1777925d740184ebcdd",
+          "source_record_identity": "AllDeckFiles/HeavenlyInferno_CMA.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Heavenly Inferno",
+          "format": "commander deck",
+          "provider_deck_identity": "CMD",
+          "retained_record_id": "mtgjson-deck-41ad43ed437a9b6c58b779953928cb5b08e9fd8e12b31a3f9e509abffa45868e",
+          "source_content_sha256": "ff717b473766caa4a6663710fa6a39f720ba57bf7f218fa5c02c7d469163dced",
+          "source_record_identity": "AllDeckFiles/HeavenlyInferno_CMD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Invent Superiority",
+          "format": "commander deck",
+          "provider_deck_identity": "C16",
+          "retained_record_id": "mtgjson-deck-65e43b678bbf51a244ada213a171ce3e60d1a48c620f5f93cfeedd1bfa1f2b58",
+          "source_content_sha256": "dc7ce1494a85ef4448bd99aea56c8915aef89e2420b111340e3fc31d118adaf8",
+          "source_record_identity": "AllDeckFiles/InventSuperiority_C16.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Jeskai Striker",
+          "format": "commander deck",
+          "provider_deck_identity": "TDC",
+          "retained_record_id": "mtgjson-deck-a28326b3dbf2c23f24f09a2c4c954f7129b98b77711d02667f4b8f45cf325b00",
+          "source_content_sha256": "19302118d61df4640b34bb3e3d9f3ec419ddcdc115bcd96d5bef7b55a1a320f0",
+          "source_record_identity": "AllDeckFiles/JeskaiStriker_TDC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Jump Scare!",
+          "format": "commander deck",
+          "provider_deck_identity": "DSC",
+          "retained_record_id": "mtgjson-deck-906b13dad102ef4c9bfafac1f41adc67d9da97dbdb76370696b8562bf85d2b7c",
+          "source_content_sha256": "3136a8159c29a57b22001d4bee44176445bd5602737660a860eb3d6d24c6ce9b",
+          "source_record_identity": "AllDeckFiles/JumpScare_DSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Land's Wrath",
+          "format": "commander deck",
+          "provider_deck_identity": "ZNC",
+          "retained_record_id": "mtgjson-deck-d2a78811733d3ff3aa4ecf196db9ec6916a39f8eefdbfced8f4e7501c0570683",
+          "source_content_sha256": "0909b40621cab21e2c3926c6b731e1f809074869bc13c3988930d787671f0a12",
+          "source_record_identity": "AllDeckFiles/LandSWrath_ZNC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Legends' Legacy",
+          "format": "commander deck",
+          "provider_deck_identity": "DMC",
+          "retained_record_id": "mtgjson-deck-bd190bd6303b606cdbf7ee407a49f9da6e7f67401a063df3a05b93f2c5013195",
+          "source_content_sha256": "100afcfb45d0359590f71e839a0e358505ac9998d96aa651d1cad5f27de0df4f",
+          "source_record_identity": "AllDeckFiles/LegendsLegacy_DMC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Limit Break Collector's Edition (FINAL FANTASY VII)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-04690b3c6b3888d83e97e22d1966025ed2bfbb3a54185746b89959ad72717270",
+          "source_content_sha256": "6a7cd7162e60c9cca8445e106b1eecabbf40c7bd1fb02a55a10de905f442282e",
+          "source_record_identity": "AllDeckFiles/LimitBreakCollectorSEditionFinalFantasyVii_FIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Limit Break (FINAL FANTASY VII)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-4802409aa3548ec674b595a69f5369960d6caa05510a1388fd257bbc56ffac4b",
+          "source_content_sha256": "904e72cb070cebe8413eab7461ef12801d1f401e82f95cfd1af80a6e3c23ea0b",
+          "source_record_identity": "AllDeckFiles/LimitBreakFinalFantasyVii_FIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Living Energy",
+          "format": "commander deck",
+          "provider_deck_identity": "DRC",
+          "retained_record_id": "mtgjson-deck-f5f71da6725abf22fc61479884d81f2300d417250b312f17f26bb8d47f857a7b",
+          "source_content_sha256": "3301627a9272f06b7c48d9acec086493263f561aba44c9c475147dbe88d5f50d",
+          "source_record_identity": "AllDeckFiles/LivingEnergy_DRC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Lorehold Legacies",
+          "format": "commander deck",
+          "provider_deck_identity": "C21",
+          "retained_record_id": "mtgjson-deck-16098afeeb772365901cde93e4867e94b8db3ee669d588f9a231c68e9c9790d3",
+          "source_content_sha256": "379bf68750ab6ae5f311aca4528663e7363f742b94d74b0808cf4c5ddff8a2d1",
+          "source_record_identity": "AllDeckFiles/LoreholdLegacies_C21.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Lorehold Spirit",
+          "format": "commander deck",
+          "provider_deck_identity": "SOC",
+          "retained_record_id": "mtgjson-deck-e7a7d1afa7e1788ded367a6b8fba1fb3a1cd7723ffb78f45c88d2ad1e593f17c",
+          "source_content_sha256": "1444e50bd97e763d45d7444b04ec11c6ca97cd0dbe530182d7f2530c8f624be2",
+          "source_record_identity": "AllDeckFiles/LoreholdSpirit_SOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Maestros Massacre",
+          "format": "commander deck",
+          "provider_deck_identity": "NCC",
+          "retained_record_id": "mtgjson-deck-d2311c4dc3de051197dd2bf892ad89eb7a70fac1d7bc83993020d8c8f675774d",
+          "source_content_sha256": "2fb8be73960f5551acf6dddfc19823a2c6ccf8c5e1951080c22adffb2cd70169",
+          "source_record_identity": "AllDeckFiles/MaestrosMassacre_NCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Mardu Surge",
+          "format": "commander deck",
+          "provider_deck_identity": "TDC",
+          "retained_record_id": "mtgjson-deck-f2cf060ca6c8b5de82be7308db4a8acb76699ef267a853f1aa7cd42cb58799be",
+          "source_content_sha256": "bf66a32b82aa3746b392e3d2cd25c988d131668e81fe7be9d88b436f05e13b35",
+          "source_record_identity": "AllDeckFiles/MarduSurge_TDC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Masters of Evil",
+          "format": "commander deck",
+          "provider_deck_identity": "WHO",
+          "retained_record_id": "mtgjson-deck-6d0f59cda5ac8c8fa6163f587cb6dad07b79b5693364631948a8a10f139fe3bd",
+          "source_content_sha256": "d3ba2a476e5a1e9fc862843ec9cc5dd6a15e36617d4e41dd68c59d55c0ce2326",
+          "source_record_identity": "AllDeckFiles/MastersOfEvil_WHO.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Merciless Rage",
+          "format": "commander deck",
+          "provider_deck_identity": "C19",
+          "retained_record_id": "mtgjson-deck-986f54d26f7e00e5906b1233d759076fe902e57f01eef0c7959bfaa96e1b2ede",
+          "source_content_sha256": "e115d31b7f3d2ff4f2c9476a10fd014ede3634eaab44dddefd0346871539874f",
+          "source_record_identity": "AllDeckFiles/MercilessRage_C19.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Mind Flayarrrs",
+          "format": "commander deck",
+          "provider_deck_identity": "CLB",
+          "retained_record_id": "mtgjson-deck-75303a574aeda80dce7c541e1bb865cd80942878b9145b86c02e9637b45840d7",
+          "source_content_sha256": "9ba9144e50808ed10909acc76257fa3421d49b66e11952a6cd6fd8c586ad6586",
+          "source_record_identity": "AllDeckFiles/MindFlayarrrs_CLB.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Mind Seize",
+          "format": "commander deck",
+          "provider_deck_identity": "C13",
+          "retained_record_id": "mtgjson-deck-e0401f5d6eaa077382136d744ecfd73ebbf2bf779cabaa3d34e08ca749f2cc9d",
+          "source_content_sha256": "02c15955773165ae93051e906d83351d784e268f6b51db77594a7b0afde18a35",
+          "source_record_identity": "AllDeckFiles/MindSeize_C13.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Miracle Worker",
+          "format": "commander deck",
+          "provider_deck_identity": "DSC",
+          "retained_record_id": "mtgjson-deck-863335e44448a879c0c2bb96a78fc27db2be9803edc950999f593f6756ae686d",
+          "source_content_sha256": "8ddf55603d7fc380e2790e968f6ce212e3e9477f08b06ec76ade684178be6a3d",
+          "source_record_identity": "AllDeckFiles/MiracleWorker_DSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Mirror Mastery",
+          "format": "commander deck",
+          "provider_deck_identity": "CMD",
+          "retained_record_id": "mtgjson-deck-8dc68a37f6673282ba98eb77facbf4711b741a247bb838d59dde23592c578089",
+          "source_content_sha256": "5b171031437f6d5c67844355fa88dd61927b0fe783115958d929c551d7f43067",
+          "source_record_identity": "AllDeckFiles/MirrorMastery_CMD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Mishra's Burnished Banner",
+          "format": "commander deck",
+          "provider_deck_identity": "BRC",
+          "retained_record_id": "mtgjson-deck-2464e2c5b37182f2da4cad3061e1b275d82a4819f961f5eeda8bceb2a6872ae6",
+          "source_content_sha256": "e8703469a51da60578ad5b05023bfbc063751f31a96073b317233c3347db26b6",
+          "source_record_identity": "AllDeckFiles/MishraSBurnishedBanner_BRC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Most Wanted",
+          "format": "commander deck",
+          "provider_deck_identity": "OTC",
+          "retained_record_id": "mtgjson-deck-c661752dd5cd76af37a7b9d598bf655bab96278217304d1c7d8e348a8d9d1403",
+          "source_content_sha256": "96615cce21ffcf664285ed1de1ab71a72905e254d62804ec0d01e491a5dda62a",
+          "source_record_identity": "AllDeckFiles/MostWanted_OTC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Mutant Menace",
+          "format": "commander deck",
+          "provider_deck_identity": "PIP",
+          "retained_record_id": "mtgjson-deck-33d9431631dd798bdd36a625085c824d355af52fbda0af21e9d3bf79843b90b3",
+          "source_content_sha256": "d57240329c76cf06d216b6871b91d8cfc35ebe07ea77149a245eae0e12dff957",
+          "source_record_identity": "AllDeckFiles/MutantMenace_PIP.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Mystic Intellect",
+          "format": "commander deck",
+          "provider_deck_identity": "C19",
+          "retained_record_id": "mtgjson-deck-2b4f114dcc23153eeb036904b3885e5ef15181459c3c1627ad3afadb98d88825",
+          "source_content_sha256": "4561b5ea7b85e3d9854ab783fe6a01048151b685bf384546834de3d4102d70ab",
+          "source_record_identity": "AllDeckFiles/MysticIntellect_C19.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Nature of the Beast",
+          "format": "commander deck",
+          "provider_deck_identity": "C13",
+          "retained_record_id": "mtgjson-deck-d0529adb0256fa6bb5b5ea6003d889dcc296de16b0065960ad37d45ef158a723",
+          "source_content_sha256": "2a11e34ef4e5cec8f8de7efdd10bad05dfb7fbe9c42419973ee1ed24d974d15d",
+          "source_record_identity": "AllDeckFiles/NatureOfTheBeast_C13.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Nature's Vengeance",
+          "format": "commander deck",
+          "provider_deck_identity": "C18",
+          "retained_record_id": "mtgjson-deck-633dfbbe3a954a0250e8fa4ee7b5c7c1730ba61b5cca9bd21f0a45eb9fbbc2ee",
+          "source_content_sha256": "fc37f49f13a3937b957d6f3f827d6ab4c4186cc8e60512eaa0e30d1683630cc2",
+          "source_record_identity": "AllDeckFiles/NatureSVengeance_C18.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Obscura Operation",
+          "format": "commander deck",
+          "provider_deck_identity": "NCC",
+          "retained_record_id": "mtgjson-deck-e09a6e6f2ce42fb65de2ee275f77142d37ff34aa72b20a7119f2cbceb6c1b46e",
+          "source_content_sha256": "b44b7f766f87d842a7cc1210e8bdc277e81e21077518b954c71d0b5470f8ba92",
+          "source_record_identity": "AllDeckFiles/ObscuraOperation_NCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Open Hostility",
+          "format": "commander deck",
+          "provider_deck_identity": "C16",
+          "retained_record_id": "mtgjson-deck-1d43bc3f1b7f971e002be26c9280963c6aec654f66eb73688dd5b2f77ffc5453",
+          "source_content_sha256": "e05a5f1638f43d5f7dfa9a76e71ac4358639a987a19db17c5952a631f284c33a",
+          "source_record_identity": "AllDeckFiles/OpenHostility_C16.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Painbow",
+          "format": "commander deck",
+          "provider_deck_identity": "DMC",
+          "retained_record_id": "mtgjson-deck-c72c7b46f4e8446e36d6019b7546ebaec75a6b96ae34e86f07c2681adce0aa36",
+          "source_content_sha256": "9e2167223acac35f41ab57f9006cae3ad36c380c0fd130d04457a9ca02e460de",
+          "source_record_identity": "AllDeckFiles/Painbow_DMC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Paradox Power",
+          "format": "commander deck",
+          "provider_deck_identity": "WHO",
+          "retained_record_id": "mtgjson-deck-f3042de25dcea50edffa0ddd8df3ae65cdaa3bb38c5251aeb2d5dbb497a6bb4b",
+          "source_content_sha256": "7129f901a177fa5c9aa46b591ee6e64d939eb55eaa26668a0efb2d0e8afe160b",
+          "source_record_identity": "AllDeckFiles/ParadoxPower_WHO.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Party Time",
+          "format": "commander deck",
+          "provider_deck_identity": "CLB",
+          "retained_record_id": "mtgjson-deck-498be6435f1469bf339952f13e35787c171bcafc895023f217b015a314f9647d",
+          "source_content_sha256": "f3f396d8dd6c3b8a67d0b8862156c18d9e6382bc8e29ce5192488ef7a1036080",
+          "source_record_identity": "AllDeckFiles/PartyTime_CLB.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Peace Offering",
+          "format": "commander deck",
+          "provider_deck_identity": "BLC",
+          "retained_record_id": "mtgjson-deck-2422c301fd50865dc99c95007f23a4ea10ab9bb7b1477afdda015b8f77d58995",
+          "source_content_sha256": "3bcdb33181b5e201114577c9ea64f8c9b2be09d77d2ce05a277d33bfce4feaef",
+          "source_record_identity": "AllDeckFiles/PeaceOffering_BLC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Phantom Premonition",
+          "format": "commander deck",
+          "provider_deck_identity": "KHC",
+          "retained_record_id": "mtgjson-deck-fb2ebbed7bafd70a70e57b0bb566f1f809b504994ab4836002dddd35c93cea03",
+          "source_content_sha256": "8cc09b90e16307fa20e2fca698747803f91b238846b6397fd83c0ccc32a1dbf1",
+          "source_record_identity": "AllDeckFiles/PhantomPremonition_KHC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Planar Portal",
+          "format": "commander deck",
+          "provider_deck_identity": "AFC",
+          "retained_record_id": "mtgjson-deck-cfa5f99722602e7b91cf49ad147c2d5b3d038be45fe65b2e0dfbec4b40a5ae27",
+          "source_content_sha256": "8ac50088a9a7a642110817d17275f8d73e4c16332eb2a42e138f0febedbf5d61",
+          "source_record_identity": "AllDeckFiles/PlanarPortal_AFC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Planeswalker Party",
+          "format": "commander deck",
+          "provider_deck_identity": "CMM",
+          "retained_record_id": "mtgjson-deck-d6472dbf501fa084fcde77102d42acfb86512872026a26aeae71703671eb88dc",
+          "source_content_sha256": "8ade3b72494f3dc73e280be8e853e41ca3d1bbbced5ec1c4464cc29a801fe7a9",
+          "source_record_identity": "AllDeckFiles/PlaneswalkerParty_CMM.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Plunder the Graves",
+          "format": "commander deck",
+          "provider_deck_identity": "C15",
+          "retained_record_id": "mtgjson-deck-4f85e322327814f46af9a9d20c75ae54ff81222d47dc61fce3c52e5215d68dc2",
+          "source_content_sha256": "024ef7cec762c854e0f78cf1c2be805a480b150d7095171fe1c869db7829ace7",
+          "source_record_identity": "AllDeckFiles/PlunderTheGraves_C15.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Plunder the Graves",
+          "format": "commander deck",
+          "provider_deck_identity": "CMA",
+          "retained_record_id": "mtgjson-deck-43a5772aa1f1481f26b664a9d4bd4d00724c4a39e20420c6d9a4e768cc99311d",
+          "source_content_sha256": "75db328b88cb561ce8cdee857a03a20ccffae659e9d1fa88290f53a88ee77c1c",
+          "source_record_identity": "AllDeckFiles/PlunderTheGraves_CMA.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Political Puppets",
+          "format": "commander deck",
+          "provider_deck_identity": "CMD",
+          "retained_record_id": "mtgjson-deck-d6b91b82cbfbeef6f81db3c0eafa12af67c80bb9ad74ad13a5127b02d4a76580",
+          "source_content_sha256": "34f6016ff7d4108c610d71110a68a9c20a42b97d8811a44596fedffdba5bd545",
+          "source_record_identity": "AllDeckFiles/PoliticalPuppets_CMD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Power Hungry",
+          "format": "commander deck",
+          "provider_deck_identity": "C13",
+          "retained_record_id": "mtgjson-deck-be18a1e9d9f71de8bfe10071fc3809e8b2846078a08fc97e36ab2e22df60b3be",
+          "source_content_sha256": "cbb0e896e594c187faad5d6726dd626e09c9a3f6cb4876fb681054a7e76b5116",
+          "source_record_identity": "AllDeckFiles/PowerHungry_C13.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Primal Genesis",
+          "format": "commander deck",
+          "provider_deck_identity": "C19",
+          "retained_record_id": "mtgjson-deck-d7997ef9ef3a36fe0dc3365873340dfbd57c0dc6615e4dc4cbb982cc2650cef5",
+          "source_content_sha256": "a6ebcb7278964bf9ae6588931fb4aec1117393726b89ffcaaaf9bc969f1373cb",
+          "source_record_identity": "AllDeckFiles/PrimalGenesis_C19.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Prismari Artistry",
+          "format": "commander deck",
+          "provider_deck_identity": "SOC",
+          "retained_record_id": "mtgjson-deck-8992ca38f83b3c4ced69f3f6e78d993a0b9cd26b414b095496fb1b2ae115176d",
+          "source_content_sha256": "668d7c7e9bf0f10f0dccad308f4a0ed4e4e68036b7d0922c8f0903c030ec81c8",
+          "source_record_identity": "AllDeckFiles/PrismariArtistry_SOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Prismari Performance",
+          "format": "commander deck",
+          "provider_deck_identity": "C21",
+          "retained_record_id": "mtgjson-deck-026c2c0968bbb5147ff2f636e6b115b2c81c2f6c39d72dbe255210cd38d59cb9",
+          "source_content_sha256": "a52858e7afffafcdea3b7003e44b1f86538e2d552612ef9fe59829f9b8413f19",
+          "source_record_identity": "AllDeckFiles/PrismariPerformance_C21.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Quandrix Unlimited",
+          "format": "commander deck",
+          "provider_deck_identity": "SOC",
+          "retained_record_id": "mtgjson-deck-7f5448756c1313c790cc68a3d873c8dd8efc5769a0199db8aefc5e9fe4478323",
+          "source_content_sha256": "9760ce8c856f2b8301b62f73d1db29e68f6f7e86bb4cbd7e1ad71935e52d53c4",
+          "source_record_identity": "AllDeckFiles/QuandrixUnlimited_SOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Quantum Quandrix",
+          "format": "commander deck",
+          "provider_deck_identity": "C21",
+          "retained_record_id": "mtgjson-deck-46d14fa6673ffc33f39210dde3c47ef8b7300250588f81f00c8ff17d35c96ce7",
+          "source_content_sha256": "9e62bd013b132a47c5ee5eee28115ed42fd77735907aea1e2fdaf372154b73e1",
+          "source_record_identity": "AllDeckFiles/QuantumQuandrix_C21.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Quick Draw",
+          "format": "commander deck",
+          "provider_deck_identity": "OTC",
+          "retained_record_id": "mtgjson-deck-b789194ac938b85e1c45590720d9897901c5bb6ca5091945e33f79737d6a6262",
+          "source_content_sha256": "a4a4fd226e91164b448213af80e1aab3aab8f98035fc2a4194f5bef1c4a5e289",
+          "source_record_identity": "AllDeckFiles/QuickDraw_OTC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Raining Cats and Dogs",
+          "format": "commander deck",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-b50ca5f9b0bbc56f507ca35ba770fe36f93340b9137d4dd61d1d6087b5355547",
+          "source_content_sha256": "ceb1f554e73c8164afe9f6e2267d7a7e2f917c54b9942323275c7e4107b64a9f",
+          "source_record_identity": "AllDeckFiles/RainingCatsAndDogs_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Reap the Tides",
+          "format": "commander deck",
+          "provider_deck_identity": "CMR",
+          "retained_record_id": "mtgjson-deck-5067590af6151abf1be512dca27b8279b3defc5550831d3dd0e2c30ca78d2c3c",
+          "source_content_sha256": "640ef3dbfc8284b99d251f44f852e42cce551f2f4aae7a3923e6ce0246d3f1b4",
+          "source_record_identity": "AllDeckFiles/ReapTheTides_CMR.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Rebellion Rising",
+          "format": "commander deck",
+          "provider_deck_identity": "ONC",
+          "retained_record_id": "mtgjson-deck-d28c5f84c3e1f074c4f25994a5df2525abb02335546b02fd3e43ab32bfca66f5",
+          "source_content_sha256": "16cf127691d78f92cb78e96eb5aa8d905977ae07d5fcf5ea87791d2266eab104",
+          "source_record_identity": "AllDeckFiles/RebellionRising_ONC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Revenant Recon",
+          "format": "commander deck",
+          "provider_deck_identity": "MKC",
+          "retained_record_id": "mtgjson-deck-4bcdfa055ddd7e6aeab43c2c1f734119dabd0663ec9b12782c99a515d0ac9b9b",
+          "source_content_sha256": "b54c060034c448bcf41a28bc1318203d31d8737521c0265ecec63aef704bf6af",
+          "source_record_identity": "AllDeckFiles/RevenantRecon_MKC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Revival Trance Collector's Edition (FINAL FANTASY VI)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-df26cb0749fa9e2d48846195da31ac8b1840544dd492a4bde04dadd92ba31868",
+          "source_content_sha256": "a8337e5114dffd0a31e50f291df27c2676288a6a293ee259fbbdd4819213507a",
+          "source_record_identity": "AllDeckFiles/RevivalTranceCollectorSEditionFinalFantasyVi_FIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Revival Trance (FINAL FANTASY VI)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-36ff5ae02470a173ff236763684c6890fb8a78a3c53bdd622a4b49a9d5072616",
+          "source_content_sha256": "aac2c26bc2e0504ea5a3cd13c99832122b0b84c7446f27036a6c81056d0544ed",
+          "source_record_identity": "AllDeckFiles/RevivalTranceFinalFantasyVi_FIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Riders of Rohan",
+          "format": "commander deck",
+          "provider_deck_identity": "LTC",
+          "retained_record_id": "mtgjson-deck-25a3b6c847c0958185cca899aa3a18450735134c60a788827c12c07db31eb7ec",
+          "source_content_sha256": "c7c4d50c4fccf7c1695f5fb4d2e428c79d906bdf3b9a09c0ec66947a291a9248",
+          "source_record_identity": "AllDeckFiles/RidersOfRohan_LTC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Riveteers Rampage",
+          "format": "commander deck",
+          "provider_deck_identity": "NCC",
+          "retained_record_id": "mtgjson-deck-42e14d6a4c2fdb3dd336fc50a61b46138c94a6601b86bf1fc1c052fb570b698c",
+          "source_content_sha256": "760c7091f57e898baa7ccb28198b08ab3b552ad08574a088bce9ff8f450d44aa",
+          "source_record_identity": "AllDeckFiles/RiveteersRampage_NCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Ruthless Regiment",
+          "format": "commander deck",
+          "provider_deck_identity": "C20",
+          "retained_record_id": "mtgjson-deck-153ada3d804bfb7c350a06c6fff7471e781f524d8395b945c3c87a7f8ce1e316",
+          "source_content_sha256": "fe99aa41b8a6b1b5f13c79a2a58e837d4cedf6526a4a79416cd03cdd3032e72d",
+          "source_record_identity": "AllDeckFiles/RuthlessRegiment_C20.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Science!",
+          "format": "commander deck",
+          "provider_deck_identity": "PIP",
+          "retained_record_id": "mtgjson-deck-92d3d116e23176d6218b58204e39389ebfef046f5a8176c48fe9221bf2303942",
+          "source_content_sha256": "49ec8a628abdc696cbe5b11c66b0bca6c1f427eee2f9972c3dce46328754a0cb",
+          "source_record_identity": "AllDeckFiles/Science_PIP.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Scions & Spellcraft Collector's Edition (FINAL FANTASY XIV)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-8d669a67ad93cc9fa73f1cbde438d826c192d5de6791e81577b4267164385dcd",
+          "source_content_sha256": "a9bd195a7e9fc0efe84d4dedee632c75716ec6dbf708c026015d1e6d94a541fc",
+          "source_record_identity": "AllDeckFiles/ScionsSpellcraftCollectorSEditionFinalFantasyXiv_FIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Scions & Spellcraft (FINAL FANTASY XIV)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-db0d0b3615e368396bb693bf93fa0aff592b590241ac4a557606067600562b1f",
+          "source_content_sha256": "5a429e565f332cd0bde114b1007cabc96573a6bc09b5697471532d680e8ffac7",
+          "source_record_identity": "AllDeckFiles/ScionsSpellcraftFinalFantasyXiv_FIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Scrappy Survivors",
+          "format": "commander deck",
+          "provider_deck_identity": "PIP",
+          "retained_record_id": "mtgjson-deck-82fc22b0ad631cf2f98cfb4845428087c84f842977fa036cd5b5c8cc129b1b6d",
+          "source_content_sha256": "ed77520b5b691b82fd546a2425cdd79cafe4403da5e7c0f2c107f5faf12425bb",
+          "source_record_identity": "AllDeckFiles/ScrappySurvivors_PIP.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Seize Control",
+          "format": "commander deck",
+          "provider_deck_identity": "C15",
+          "retained_record_id": "mtgjson-deck-fb9fc418acd2584dbf5678602d54e09becf688801a4f85158be646977923a045",
+          "source_content_sha256": "2eaf59393615b9f66b2a779fd1cb39ab926fa84286250e38d5b251527e6e028d",
+          "source_record_identity": "AllDeckFiles/SeizeControl_C15.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Silverquill Influence",
+          "format": "commander deck",
+          "provider_deck_identity": "SOC",
+          "retained_record_id": "mtgjson-deck-521c8ff905e647a5adfa30b49b7cc5cd3aa294cc19a695ae2093467aceafb056",
+          "source_content_sha256": "3706a3792c110e18db5edce62dc7803739dffbd2e85e241aa174197a6fc712bc",
+          "source_record_identity": "AllDeckFiles/SilverquillInfluence_SOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Silverquill Statement",
+          "format": "commander deck",
+          "provider_deck_identity": "C21",
+          "retained_record_id": "mtgjson-deck-542a29cd654621dbca291abaac635c535eaeea3d7f7e23f517cb108408853d17",
+          "source_content_sha256": "9c9d6351527610fba93824ee856c5254bc712f910f50f0fc75366d67803eaf6e",
+          "source_record_identity": "AllDeckFiles/SilverquillStatement_C21.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Sliver Swarm",
+          "format": "commander deck",
+          "provider_deck_identity": "CMM",
+          "retained_record_id": "mtgjson-deck-edc7fb23a32804f477389282d43cc04ac0ecc9af79e4f6f529174dc45bfda683",
+          "source_content_sha256": "8023d8aad2964ee591853c9e14449a64290d94031ab28db34292d78ca3579d2e",
+          "source_record_identity": "AllDeckFiles/SliverSwarm_CMM.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Sneak Attack",
+          "format": "commander deck",
+          "provider_deck_identity": "ZNC",
+          "retained_record_id": "mtgjson-deck-15f87a2303a87c2caaa2a96e569130f50ec7ef9cbd41edc874cf7902b19babd3",
+          "source_content_sha256": "2bfff70cd4d67df872f4c8838a7703e379529970f1062009a7e194908618b602",
+          "source_record_identity": "AllDeckFiles/SneakAttack_ZNC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Spirit Squadron",
+          "format": "commander deck",
+          "provider_deck_identity": "VOC",
+          "retained_record_id": "mtgjson-deck-1d172957b786acf6cfb704c5f6b26f9567127fe535b1e865dde12a8b93f17180",
+          "source_content_sha256": "727e671322d87203b64549ccf97f13130cae03e4cbcb502dc79718629a721d71",
+          "source_record_identity": "AllDeckFiles/SpiritSquadron_VOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Squirreled Away",
+          "format": "commander deck",
+          "provider_deck_identity": "BLC",
+          "retained_record_id": "mtgjson-deck-45b9bd49dbc1f03405bbe3d5df9d2cdae3daed43aed7a837b5c6093539ea1caa",
+          "source_content_sha256": "5ee4559b840597116037d1088a648e45d5901bae24d8733515506b595b75b1c9",
+          "source_record_identity": "AllDeckFiles/SquirreledAway_BLC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Stalwart Unity",
+          "format": "commander deck",
+          "provider_deck_identity": "C16",
+          "retained_record_id": "mtgjson-deck-cf8cee4488097690b9ca8ca9fbddaa8d440c9e2c736d194fd84cb66ffc98d13a",
+          "source_content_sha256": "e773d23daceff2bb80c88531c03f06aff69e75b5d49788528c42426108b6673d",
+          "source_record_identity": "AllDeckFiles/StalwartUnity_C16.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Subjective Reality",
+          "format": "commander deck",
+          "provider_deck_identity": "C18",
+          "retained_record_id": "mtgjson-deck-866af2c728c179f453b99dee3a96eecca3ec767c26b29e5444d1841b39041b15",
+          "source_content_sha256": "306a39fc135b219c97eb2d8e88f24f24ae42b5b706764a42887b29a6a5e28891",
+          "source_record_identity": "AllDeckFiles/SubjectiveReality_C18.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Sultai Arisen",
+          "format": "commander deck",
+          "provider_deck_identity": "TDC",
+          "retained_record_id": "mtgjson-deck-7c6577c36167b97b03d9339810359de039c0f1376a67db7c9d1629be0489dfbf",
+          "source_content_sha256": "56f8b7f31b7b057c1946aa8c52f37725badee4d01502abd4bcb896dbf4bb4d85",
+          "source_record_identity": "AllDeckFiles/SultaiArisen_TDC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Swell the Host",
+          "format": "commander deck",
+          "provider_deck_identity": "C15",
+          "retained_record_id": "mtgjson-deck-bc9e387c1a08ec0feae86f914395c7dc37300176f0797a4fff8cf4894ff0d68a",
+          "source_content_sha256": "28ac5c9623f04b23b2dff2e371b866de18ac29c228f6979fcac449de5ec77df5",
+          "source_record_identity": "AllDeckFiles/SwellTheHost_C15.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Symbiotic Swarm",
+          "format": "commander deck",
+          "provider_deck_identity": "C20",
+          "retained_record_id": "mtgjson-deck-54ad807c51313d0bd24346069a81375eab801b1728b77e89227402421eb46982",
+          "source_content_sha256": "fed9919cad55308f4c99edba0d3f8bd56130796aa973e958712e7da0e9982fa1",
+          "source_record_identity": "AllDeckFiles/SymbioticSwarm_C20.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Temur Roar",
+          "format": "commander deck",
+          "provider_deck_identity": "TDC",
+          "retained_record_id": "mtgjson-deck-0e76e5e7d0e23af6d1e8b70b842906f45ec29b6f38ec4efe32f404357ef1240e",
+          "source_content_sha256": "f544f48c53ad9c615d6ea2b6fb3329196257cd23757f14543a4d0dcaa7ceecd6",
+          "source_record_identity": "AllDeckFiles/TemurRoar_TDC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "The Fantastic Four Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "MSC",
+          "retained_record_id": "mtgjson-deck-6b5aa8acdb1366500b5b64cb8aa1df9b05e3f17cca47f70d898054eea1413cc1",
+          "source_content_sha256": "59fcbbc85525bcff7a74bd6513571d9ba7f4ef9adb4749fb6c3c55666a073ca0",
+          "source_record_identity": "AllDeckFiles/TheFantasticFourCollectorSEdition_MSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "The Fantastic Four",
+          "format": "commander deck",
+          "provider_deck_identity": "MSC",
+          "retained_record_id": "mtgjson-deck-a2f5b5fe450efcc4544d711a032ab6d5c29901756e2790577da88b0f8b75b475",
+          "source_content_sha256": "d51fb5abc34e2a2f0193b924efedba8b74fad6da2cb7485b80177b01d8579f5c",
+          "source_record_identity": "AllDeckFiles/TheFantasticFour_MSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "The Hosts of Mordor",
+          "format": "commander deck",
+          "provider_deck_identity": "LTC",
+          "retained_record_id": "mtgjson-deck-12b55bc807362df0da7debe5298f02a21ca16962f7b8eca85834468581b53dc8",
+          "source_content_sha256": "b6ed85435fffc8ac74cdd8f848092528b0bbc6add246187bdeb7c09aa8887356",
+          "source_record_identity": "AllDeckFiles/TheHostsOfMordor_LTC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "The Ruinous Powers Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "40K",
+          "retained_record_id": "mtgjson-deck-b4a5830e489dc1e8c9b0da4c69edd9b8d4fbb236bd56b081ae039f61694a9bd7",
+          "source_content_sha256": "9897485b592467a04f774586882391760c0984e950c8f452f373c818d13c4451",
+          "source_record_identity": "AllDeckFiles/TheRuinousPowersCollectorSEdition_40K.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "The Ruinous Powers",
+          "format": "commander deck",
+          "provider_deck_identity": "40K",
+          "retained_record_id": "mtgjson-deck-8ab464b92910a6643a8c09b3df169497d64c685270aa764729c60ea0c54841b9",
+          "source_content_sha256": "aab9d268397a6df0276f5804226c72078fd0dec267d7ecee908e730f83086489",
+          "source_record_identity": "AllDeckFiles/TheRuinousPowers_40K.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Timeless Wisdom",
+          "format": "commander deck",
+          "provider_deck_identity": "C20",
+          "retained_record_id": "mtgjson-deck-0fc4d6ab144cec162ef81149075721ec13c45a731b951d49bcb7bd8c824f212d",
+          "source_content_sha256": "ef276b63036c539eab027548a7b4d80d912e6155b543f4aeb6f678d6f6bf4c53",
+          "source_record_identity": "AllDeckFiles/TimelessWisdom_C20.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Timey-Wimey",
+          "format": "commander deck",
+          "provider_deck_identity": "WHO",
+          "retained_record_id": "mtgjson-deck-659a6445c55dc7c1ea0ca1c05c5c86742ea6d837dea93ba39c1ee077cabe5314",
+          "source_content_sha256": "8b2354ca6b820ff26f93f04adfadcdf635b88032285a0ad2adda225f8f2ba0af",
+          "source_record_identity": "AllDeckFiles/TimeyWimey_WHO.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Tinker Time",
+          "format": "commander deck",
+          "provider_deck_identity": "MOC",
+          "retained_record_id": "mtgjson-deck-5223065765181528400fac9d1940065b521d821db45bb683d7c9bdc4c0b43bad",
+          "source_content_sha256": "f078aae1fa6515f4bf2469a7246142569261a8ded17f869433963a8e4d74e819",
+          "source_record_identity": "AllDeckFiles/TinkerTime_MOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Token Triumph",
+          "format": "commander deck",
+          "provider_deck_identity": "SCD",
+          "retained_record_id": "mtgjson-deck-d14a9bbaf8d55d96930573aaab1ee7e8a77ab7c461f534b88ac8b1c5b4f08dd5",
+          "source_content_sha256": "8e7b1f180716830ac74335403aa276cc4d80b07ae8f517ba759bf8026198ca3b",
+          "source_record_identity": "AllDeckFiles/TokenTriumph_SCD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Tricky Terrain Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-83f5d9649a8981bfc6c5fdb443da77b6e5cf8b00ff5c252ce15112575001a2b2",
+          "source_content_sha256": "f64d9e399eb96e74fdbad539adb66009aa96a3d572d79da9a193afdf30849b20",
+          "source_record_identity": "AllDeckFiles/TrickyTerrainCollectorSEdition_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Tricky Terrain",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-a6f08e14b151c697b8acb3aebed17cee05df02324e034669324803ebc430652a",
+          "source_content_sha256": "f9ba9775c75cdca37e354e12c9fdb87e4b575ba55f457592882b6fb1c45aa993",
+          "source_record_identity": "AllDeckFiles/TrickyTerrain_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Turtle Power!",
+          "format": "commander deck",
+          "provider_deck_identity": "TMC",
+          "retained_record_id": "mtgjson-deck-b88abdf26eddb3a8d5dff2779959d049437beae30aaf35527f5effacde72fcbb",
+          "source_content_sha256": "3a6406908bb895f25a98124871de68d6107c976a9bf0e72368f2721c3541c7b4",
+          "source_record_identity": "AllDeckFiles/TurtlePower_TMC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Tyranid Swarm Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "40K",
+          "retained_record_id": "mtgjson-deck-3dc0aa89814aa68fe249fcb587c2666d478cd36bb8e8ac1f53cc8452f8825e99",
+          "source_content_sha256": "cc80e44ac440676db9d28de8c21f36046cd10a13df6708e607aea343b14f8847",
+          "source_record_identity": "AllDeckFiles/TyranidSwarmCollectorSEdition_40K.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Tyranid Swarm",
+          "format": "commander deck",
+          "provider_deck_identity": "40K",
+          "retained_record_id": "mtgjson-deck-ec177097ba1f1e59f35fe60dc82eec1fb2118a08fc2b70df2dd07a075a480ea4",
+          "source_content_sha256": "e569a8686602915416532b05dfcb342ed5d24f503008f47e627e05a4cecc57d0",
+          "source_record_identity": "AllDeckFiles/TyranidSwarm_40K.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Undead Unleashed",
+          "format": "commander deck",
+          "provider_deck_identity": "MIC",
+          "retained_record_id": "mtgjson-deck-38f13c99e740eec0f9b9ce964b53afc2a61c7ab58d0317b90e53361b449fca34",
+          "source_content_sha256": "0afdc9611fccb3bbf862a362f1f2bd2bc61aad794861dcb62788ff0e5e7f97e4",
+          "source_record_identity": "AllDeckFiles/UndeadUnleashed_MIC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Upgrades Unleashed",
+          "format": "commander deck",
+          "provider_deck_identity": "NEC",
+          "retained_record_id": "mtgjson-deck-de3bac131b15f6106d1630e8ab2e5f1bc77b000342bb36573fcdbf005ee7761d",
+          "source_content_sha256": "8502563933f1ff1090bb06ed54a4d801e16384b2fd1f88d5c4245602313edc7a",
+          "source_record_identity": "AllDeckFiles/UpgradesUnleashed_NEC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Urza's Iron Alliance",
+          "format": "commander deck",
+          "provider_deck_identity": "BRC",
+          "retained_record_id": "mtgjson-deck-977f303ebc4994b5ed6c68763d918280176def458cf96c0efa693759bf8d223c",
+          "source_content_sha256": "8ac3a62e87e682f1538b92bfdd933795b260d45d71888bd3a7659800ced1276f",
+          "source_record_identity": "AllDeckFiles/UrzaSIronAlliance_BRC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Vampiric Bloodline",
+          "format": "commander deck",
+          "provider_deck_identity": "VOC",
+          "retained_record_id": "mtgjson-deck-a5cf7334c747009087c8eac99a95cfa977a23f1cf21098631c6a22cf1182ff70",
+          "source_content_sha256": "a8abd4b9a19fa91331e09be31865edea5811bd118c095fb77381b754767ab1be",
+          "source_record_identity": "AllDeckFiles/VampiricBloodline_VOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Vampiric Bloodlust",
+          "format": "commander deck",
+          "provider_deck_identity": "C17",
+          "retained_record_id": "mtgjson-deck-8918af7015ff9b776dcd0b5e23b05d9758e8a0de923e8e1812b3e6328ea2d96b",
+          "source_content_sha256": "d35746ae3b370e97f700db122fdcbf4f4074662ced26d73d635352ee66495b85",
+          "source_record_identity": "AllDeckFiles/VampiricBloodlust_C17.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Veloci-Ramp-Tor",
+          "format": "commander deck",
+          "provider_deck_identity": "LCC",
+          "retained_record_id": "mtgjson-deck-12bf70538d65bc3c9e93a30c8e781f93020b9cde06b236d5b66d8ae37c39151a",
+          "source_content_sha256": "81f2f843eeddcc8d0aea9a342c3712f580060b08466f6bdb4144bf164edb7aab",
+          "source_record_identity": "AllDeckFiles/VelociRampTor_LCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Virtue and Valor",
+          "format": "commander deck",
+          "provider_deck_identity": "WOC",
+          "retained_record_id": "mtgjson-deck-2b8a2d138c8cdc910bc31a23df373c6500229d383492e26ff7a481a34defb1ab",
+          "source_content_sha256": "398e4762001cd58d2ab45d4d071b0644bd2cc2f107b311985d6076e4bfae373a",
+          "source_record_identity": "AllDeckFiles/VirtueAndValor_WOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Wade into Battle",
+          "format": "commander deck",
+          "provider_deck_identity": "C15",
+          "retained_record_id": "mtgjson-deck-60012a2b6fbc3b3703761c02e6d26aef2707edd78df86624d85be9d59e1db256",
+          "source_content_sha256": "ba5f7582a5f579b0812c940c3ea8a3ccbb4592db483855484c1db75a640c7c37",
+          "source_record_identity": "AllDeckFiles/WadeIntoBattle_C15.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Wade into Battle",
+          "format": "commander deck",
+          "provider_deck_identity": "CM2",
+          "retained_record_id": "mtgjson-deck-948d944af6804218dc63b378f35a427de71fd543a8f9b617b24ce48c5fba6ff8",
+          "source_content_sha256": "d5238a2fa59e6a1648012861ce43755e8208b09cdd548681110fbe1f17025574",
+          "source_record_identity": "AllDeckFiles/WadeIntoBattle_CM2.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Wakanda Forever Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "MSC",
+          "retained_record_id": "mtgjson-deck-0e7663867941e52a91f605bd78eca0794ca71d446954b613b8f5126f69bbd2ed",
+          "source_content_sha256": "43e55dab01c1cbed555ad20025322cf7c4d5e0eca24eea538388424a54a9bd86",
+          "source_record_identity": "AllDeckFiles/WakandaForeverCollectorSEdition_MSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Wakanda Forever",
+          "format": "commander deck",
+          "provider_deck_identity": "MSC",
+          "retained_record_id": "mtgjson-deck-0b2a3dff6c787579286ffe80bfb1bcbf9deff8a70a996be1c7fbc583b62cb965",
+          "source_content_sha256": "1b7b0979c75c26170e92c0265a0a7f0132aacf00767221c3a94ebb5e0e2aa106",
+          "source_record_identity": "AllDeckFiles/WakandaForever_MSC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Witherbloom Pestilence",
+          "format": "commander deck",
+          "provider_deck_identity": "SOC",
+          "retained_record_id": "mtgjson-deck-4905d84963897f5b1bf9474dfd71491cf81ff2e4b924d43610239c61ebdf9f0d",
+          "source_content_sha256": "768b6bfb1c0677a95b4667a60d86ea34f4b29cb5c83f5b38a98f28043edbe78b",
+          "source_record_identity": "AllDeckFiles/WitherbloomPestilence_SOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Witherbloom Witchcraft",
+          "format": "commander deck",
+          "provider_deck_identity": "C21",
+          "retained_record_id": "mtgjson-deck-958647d0aca3cc5fd2c532fa9cfab43b6126d546f443f32223e7cb162aa11264",
+          "source_content_sha256": "aa43f074d3bc352b80f7c3c1e75952989310a938cedd4c3fbdc8ac01749930fd",
+          "source_record_identity": "AllDeckFiles/WitherbloomWitchcraft_C21.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "World Shaper",
+          "format": "commander deck",
+          "provider_deck_identity": "EOC",
+          "retained_record_id": "mtgjson-deck-053734f92230f92efd8c7c1940bd69d7adeb01e8871f5e09ba17a41a33baff85",
+          "source_content_sha256": "db98b4ff25be42fe1cb5ebdde7fca4e054ce3f4b9a8e94a043a7d43deef7c4e7",
+          "source_record_identity": "AllDeckFiles/WorldShaper_EOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Braaains",
+          "format": "historic brawl precon deck",
+          "provider_deck_identity": "MOM",
+          "retained_record_id": "mtgjson-deck-2bdbb019902b1db2279888218d7e25b02b5bbfe061874915544158943d3433b5",
+          "source_content_sha256": "c4ce4b94ea6f9387e6e3d78a2042b1c241621c87fa3c851af819598220df2cd6",
+          "source_record_identity": "AllDeckFiles/Braaains_MOM.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Collateral Damage",
+          "format": "historic brawl precon deck",
+          "provider_deck_identity": "MOM",
+          "retained_record_id": "mtgjson-deck-f5f08829e2cfa6b1ae194c74c0011c56f39f83761454525ca74fe03fbcf52f57",
+          "source_content_sha256": "6345a78b21929d4b277af1e003995eb47aaaee05c8b2d5960395dce1ffff1d7c",
+          "source_record_identity": "AllDeckFiles/CollateralDamage_MOM.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Flashy Fliers",
+          "format": "historic brawl precon deck",
+          "provider_deck_identity": "MOM",
+          "retained_record_id": "mtgjson-deck-2d7fac0a793a10f1f8f772b573e5c9fa41f457345eef97c535170783544d6f5a",
+          "source_content_sha256": "60c55a6afba41827f65d9209c831f47d00172879dead49a369de345d5c6636e3",
+          "source_record_identity": "AllDeckFiles/FlashyFliers_MOM.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Lightly Armored",
+          "format": "historic brawl precon deck",
+          "provider_deck_identity": "MOM",
+          "retained_record_id": "mtgjson-deck-5124867fb9201e72aca3aaf1e3322c1a6e3a353742a587a425894b1e8a08067c",
+          "source_content_sha256": "32470fd354695e65085cb03867112c9932617e15fd5f7efc91f1d53ff517e164",
+          "source_record_identity": "AllDeckFiles/LightlyArmored_MOM.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Smashing Stampede",
+          "format": "historic brawl precon deck",
+          "provider_deck_identity": "MOM",
+          "retained_record_id": "mtgjson-deck-c59e316c862ebf47135414556ba92d9cbc61fbe38c12fbd98ad6d0d280317408",
+          "source_content_sha256": "3ac5a821baffd1672755513cc5a6338fc7ffc4ccd79e8e72efee6a9bc54b368d",
+          "source_record_identity": "AllDeckFiles/SmashingStampede_MOM.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Brain Dead: Staples Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-743b9b9fdd1031b4444a8c7321050d6aa1e8c31c1fdb103a5245fb535d19c9c4",
+          "source_content_sha256": "77f52f9130954af62af7dbad9f9a420e68c2260cba4f33dd158ddad2e0a2fc7b",
+          "source_record_identity": "AllDeckFiles/BrainDeadStaplesFoilEdition_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Brain Dead: Staples",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-e54336d7a2da3af37671cee76193738990e9745b27c1eb81edd1d9d1298fc53e",
+          "source_content_sha256": "cca0edaca8f6e762bcbc54b0e61d66ebee27147e8e5ecf7af26fb0a87d9a2860",
+          "source_record_identity": "AllDeckFiles/BrainDeadStaples_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Marvel's Spider-Man: Heroic Deeds Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-c17c97e7714b9ceb6535563e93ca8e648e8b30a151406221acb510ba07cf96d5",
+          "source_content_sha256": "155b8b71531c9401467bfd262ac1e027ca7649e54cae165ba3892ee20fee92bb",
+          "source_record_identity": "AllDeckFiles/MarvelSSpiderManHeroicDeedsFoilEdition_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Marvel's Spider-Man: Heroic Deeds",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-e10020a918db72ae4320f84a9c24d4a5981ff5a7bb10ea142609902ec967e3c7",
+          "source_content_sha256": "c22919d62f421e9810d6db29fcc2d0a1fcd0b42f4f48eefefde57a32f256e811",
+          "source_record_identity": "AllDeckFiles/MarvelSSpiderManHeroicDeeds_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Marvel's Spider-Man: Villainous Plots Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-9651f4129d0d89c17e8599d133205625994284ccec8ae0a95b85a456e6bdfa65",
+          "source_content_sha256": "ef812a5db6b6e618a9b92919d674aed2c5d9d22c9d407ed47c68cbdcfcd4bfbc",
+          "source_record_identity": "AllDeckFiles/MarvelSSpiderManVillainousPlotsFoilEdition_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Marvel's Spider-Man: Villainous Plots",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-e1ad7c9b4457a61e3c2c9c1f8c42912dfb8fac4e843a44454b268398dc6e79fd",
+          "source_content_sha256": "7b56d5c22e01284aa5d32b2531be0e75df37a857e535e613a4b90bca4ba24462",
+          "source_record_identity": "AllDeckFiles/MarvelSSpiderManVillainousPlots_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Sheldon's Spellbook Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-1352fc530267d93cca0b78f76f26c20935f0cc49e90050e98f7c9bdd0a6f5e64",
+          "source_content_sha256": "6d7111ba1afea010a90d6f7c7278ff6440484a1de568b592542ced28bbea5785",
+          "source_record_identity": "AllDeckFiles/SheldonSSpellbookFoilEdition_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Sheldon's Spellbook",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-fac8138ea58b333590bf9589f49bac65a858a3ce3455cb3409d907049ea7cf49",
+          "source_content_sha256": "53a86c86122c6a4b8032eeead7f1c836e9609c326dc9ff653819562219ec3535",
+          "source_record_identity": "AllDeckFiles/SheldonSSpellbook_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Stardew Valley: Life in Pelican Town Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-0adc3e7be3ccfc8084ac03cc41a3aad0eaf75d1bad7c387d9002d8cf5a9137ab",
+          "source_content_sha256": "f777274fd61b9647e3a9bdb17c092c57e48962c2161f6c653f259183439a88b7",
+          "source_record_identity": "AllDeckFiles/StardewValleyLifeInPelicanTownFoilEdition_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Stardew Valley: Life in Pelican Town",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-be5135521842c213cd03f68eaf7526fa231c071dfc4cd61e3d6e75c454aaa88e",
+          "source_content_sha256": "59019196de416112d0b967e04fab082b16a203ce7294e65bde34a16c63b1e8e8",
+          "source_record_identity": "AllDeckFiles/StardewValleyLifeInPelicanTown_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Through the Wormhole Galaxy Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-d3ac2f4086db32888296f8e57fc3910b4b90b45a91694eedd160b70341fabf63",
+          "source_content_sha256": "9fce9782bbecd228ab50eb01e1ef1af521f026b3dded1aec907a659dfdcfa6e4",
+          "source_record_identity": "AllDeckFiles/ThroughTheWormholeGalaxyFoilEdition_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Through the Wormhole",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-f6c1439a2fbd5fce802b967e9788a87c7d4b001aa2c1707b544be67756ca2629",
+          "source_content_sha256": "d5f2ff6570379118cc355b5bece6c36b6f39d992942db416eff7c9b987109716",
+          "source_record_identity": "AllDeckFiles/ThroughTheWormhole_SLD.json"
+        }
+      ],
+      "denominator": 3004,
+      "evidence_source_id": "phase-143-mtgjson-decks",
+      "limitations": [
+        "MTGJSON deck files are provider-curated deck products, not all played decks.",
+        "A represented deck is counted once even when a card occurs on multiple boards."
+      ],
+      "metric": "represented_deck_count",
+      "numerator": 205,
+      "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
+      "provider": "mtgjson",
+      "provider_dataset": "AllDeckFiles.zip",
+      "source_reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_sha256": "41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1"
+    },
+    "status": "known"
+  }
+}

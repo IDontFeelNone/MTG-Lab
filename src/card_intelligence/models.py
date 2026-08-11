@@ -14,7 +14,7 @@ import re
 
 FACT_SCHEMA = "card-knowledge-fact-v1"
 _ID = re.compile(r"^[a-z0-9][a-z0-9._:-]*$")
-_KINDS = frozenset({"legality", "archetype_usage", "popularity", "reprint_history",
+_KINDS = frozenset({"legality", "archetype_usage", "format_usage", "popularity", "reprint_history",
     "reserved_status", "product_exclusivity", "scarcity", "supply", "demand",
     "synergy", "mechanical_theme", "tribal_theme", "combo", "tutor",
     "infinite_combo", "mana_acceleration", "removal", "card_advantage",

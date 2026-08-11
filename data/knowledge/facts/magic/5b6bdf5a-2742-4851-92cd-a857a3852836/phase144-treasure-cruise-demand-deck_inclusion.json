@@ -1,0 +1,210 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-10T22:23:35Z",
+  "evidence": [
+    {
+      "claim": "MTGJSON AllDeckFiles.zip represents Treasure Cruise in 15 of 3004 decoded deck files.",
+      "observed_at": "2026-08-10T22:23:35Z",
+      "reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_id": "phase-143-mtgjson-decks",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase144-treasure-cruise-demand-deck_inclusion",
+  "kind": "demand",
+  "predicate": "demand.deck_inclusion",
+  "recorded_at": "2026-08-10T22:23:35Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "completeness_state": "complete_for_provider_deck_snapshot",
+      "dataset_timestamp": "2026-08-10T22:23:35Z",
+      "deck_associations": [
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Power",
+          "format": "clash pack",
+          "provider_deck_identity": "FRF",
+          "retained_record_id": "mtgjson-deck-9997853d6c8e976557e3bfba9206fbbbe9729521b1c8aab0e8e9a29eade6e055",
+          "source_content_sha256": "671ed261eb49982a3803e8355ebcf20cf808c0920c9f24a4fa02f718c64c2e9e",
+          "source_record_identity": "AllDeckFiles/Power_FRF.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Breed Lethality",
+          "format": "commander deck",
+          "provider_deck_identity": "C16",
+          "retained_record_id": "mtgjson-deck-8a9d20221bdc5ab2f43940d5f49ef1b4b33405c82c4a8683b51f52c7aebb67d7",
+          "source_content_sha256": "ce13f108a0928aaed958de2ac5a00d2e4e9449ff32da18866387002a135dbc03",
+          "source_record_identity": "AllDeckFiles/BreedLethality_C16.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Breed Lethality",
+          "format": "commander deck",
+          "provider_deck_identity": "CM2",
+          "retained_record_id": "mtgjson-deck-4e921163da2e89dd395e13a544e414eea3a9b5ab62c4e397303f584c7cb3b388",
+          "source_content_sha256": "4c82b17e7e174122ee15279ca13677595a642d728fc7fe2f4dfee58e75862e2e",
+          "source_record_identity": "AllDeckFiles/BreedLethality_CM2.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Entropic Uprising",
+          "format": "commander deck",
+          "provider_deck_identity": "C16",
+          "retained_record_id": "mtgjson-deck-1b4d6659772b8c2d13f6a045d077eb1af92a5d9fad153db451ca770b60776b58",
+          "source_content_sha256": "2ec76868b8342577068218ac754348d40a2867c5981910bb0707bee487179cb9",
+          "source_record_identity": "AllDeckFiles/EntropicUprising_C16.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Obscura Operation",
+          "format": "commander deck",
+          "provider_deck_identity": "NCC",
+          "retained_record_id": "mtgjson-deck-e09a6e6f2ce42fb65de2ee275f77142d37ff34aa72b20a7119f2cbceb6c1b46e",
+          "source_content_sha256": "b44b7f766f87d842a7cc1210e8bdc277e81e21077518b954c71d0b5470f8ba92",
+          "source_record_identity": "AllDeckFiles/ObscuraOperation_NCC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Prismari Artistry",
+          "format": "commander deck",
+          "provider_deck_identity": "SOC",
+          "retained_record_id": "mtgjson-deck-8992ca38f83b3c4ced69f3f6e78d993a0b9cd26b414b095496fb1b2ae115176d",
+          "source_content_sha256": "668d7c7e9bf0f10f0dccad308f4a0ed4e4e68036b7d0922c8f0903c030ec81c8",
+          "source_record_identity": "AllDeckFiles/PrismariArtistry_SOC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Prismari Performance",
+          "format": "commander deck",
+          "provider_deck_identity": "C21",
+          "retained_record_id": "mtgjson-deck-026c2c0968bbb5147ff2f636e6b115b2c81c2f6c39d72dbe255210cd38d59cb9",
+          "source_content_sha256": "a52858e7afffafcdea3b7003e44b1f86538e2d552612ef9fe59829f9b8413f19",
+          "source_record_identity": "AllDeckFiles/PrismariPerformance_C21.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Quick Draw",
+          "format": "commander deck",
+          "provider_deck_identity": "OTC",
+          "retained_record_id": "mtgjson-deck-b789194ac938b85e1c45590720d9897901c5bb6ca5091945e33f79737d6a6262",
+          "source_content_sha256": "a4a4fd226e91164b448213af80e1aab3aab8f98035fc2a4194f5bef1c4a5e289",
+          "source_record_identity": "AllDeckFiles/QuickDraw_OTC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Sultai Arisen",
+          "format": "commander deck",
+          "provider_deck_identity": "TDC",
+          "retained_record_id": "mtgjson-deck-7c6577c36167b97b03d9339810359de039c0f1376a67db7c9d1629be0489dfbf",
+          "source_content_sha256": "56f8b7f31b7b057c1946aa8c52f37725badee4d01502abd4bcb896dbf4bb4d85",
+          "source_record_identity": "AllDeckFiles/SultaiArisen_TDC.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Tricky Terrain Collector's Edition",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-83f5d9649a8981bfc6c5fdb443da77b6e5cf8b00ff5c252ce15112575001a2b2",
+          "source_content_sha256": "f64d9e399eb96e74fdbad539adb66009aa96a3d572d79da9a193afdf30849b20",
+          "source_record_identity": "AllDeckFiles/TrickyTerrainCollectorSEdition_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Tricky Terrain",
+          "format": "commander deck",
+          "provider_deck_identity": "M3C",
+          "retained_record_id": "mtgjson-deck-a6f08e14b151c697b8acb3aebed17cee05df02324e034669324803ebc430652a",
+          "source_content_sha256": "f9ba9775c75cdca37e354e12c9fdb87e4b575ba55f457592882b6fb1c45aa993",
+          "source_record_identity": "AllDeckFiles/TrickyTerrain_M3C.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Sultai Schemers",
+          "format": "intro pack",
+          "provider_deck_identity": "KTK",
+          "retained_record_id": "mtgjson-deck-a392823b0b9bb8a2e0427552afb34c1748c223d074a9cd7de0b2a6e683c513fe",
+          "source_content_sha256": "1dcdb82b4c0d47a051238afe53f0a4803ac537a8e2de0203c1eda9dab8e7efb1",
+          "source_record_identity": "AllDeckFiles/SultaiSchemers_KTK.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Khans of Tarkir Foil Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "KTK",
+          "retained_record_id": "mtgjson-deck-f992a4ae688ce611bd2076c14a215c290c85ebc730b1e4461586b4bddfc94e5e",
+          "source_content_sha256": "fa023f593271dd49c3fa901fe8fed22467fd8c4b42d323ec171ad70cf27d1138",
+          "source_record_identity": "AllDeckFiles/KhansOfTarkirFoilRedemption_KTK.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Khans of Tarkir Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "KTK",
+          "retained_record_id": "mtgjson-deck-90f9d4a4b5ce571348875bbc64aa4d9b1ac2d2c64fe5679d83613046500286ce",
+          "source_content_sha256": "5d81d71d99fac239fa7294b61317a482460274f29501a9d48500fe7e3b675e19",
+          "source_record_identity": "AllDeckFiles/KhansOfTarkirRedemption_KTK.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Izzet Phoenix",
+          "format": "pioneer challenger deck",
+          "provider_deck_identity": "Q08",
+          "retained_record_id": "mtgjson-deck-ed0897d83a1005b0ffe79183d6e791320c2eead4e1b03a61083f346ccaadd62b",
+          "source_content_sha256": "48c53f6c6152e13f6659f790c7f14024bd200ca87a6a8f3a8f9f1e0a1976fe07",
+          "source_record_identity": "AllDeckFiles/IzzetPhoenix_Q08.json"
+        }
+      ],
+      "denominator": 3004,
+      "evidence_source_id": "phase-143-mtgjson-decks",
+      "limitations": [
+        "MTGJSON deck files are provider-curated deck products, not all played decks.",
+        "A represented deck is counted once even when a card occurs on multiple boards."
+      ],
+      "metric": "represented_deck_count",
+      "numerator": 15,
+      "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
+      "provider": "mtgjson",
+      "provider_dataset": "AllDeckFiles.zip",
+      "source_reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_sha256": "41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1"
+    },
+    "status": "known"
+  }
+}

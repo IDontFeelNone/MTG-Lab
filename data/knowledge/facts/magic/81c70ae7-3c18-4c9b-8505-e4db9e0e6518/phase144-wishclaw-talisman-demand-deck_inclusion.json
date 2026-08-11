@@ -1,0 +1,78 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-10T22:23:35Z",
+  "evidence": [
+    {
+      "claim": "MTGJSON AllDeckFiles.zip represents Wishclaw Talisman in 3 of 3004 decoded deck files.",
+      "observed_at": "2026-08-10T22:23:35Z",
+      "reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_id": "phase-143-mtgjson-decks",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase144-wishclaw-talisman-demand-deck_inclusion",
+  "kind": "demand",
+  "predicate": "demand.deck_inclusion",
+  "recorded_at": "2026-08-10T22:23:35Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "completeness_state": "complete_for_provider_deck_snapshot",
+      "dataset_timestamp": "2026-08-10T22:23:35Z",
+      "deck_associations": [
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Starter Collection",
+          "format": "box set",
+          "provider_deck_identity": "FDN",
+          "retained_record_id": "mtgjson-deck-0995bb726c0bfa8e5098cd10849451a33bf65bff53599fcc68d789e1dd8cfd4a",
+          "source_content_sha256": "f0c69d003f7022cd88917a1faf426332bcbe4ddb327139ebb37b54f037d1dc06",
+          "source_record_identity": "AllDeckFiles/StarterCollection_FDN.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Throne of Eldraine Foil Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "ELD",
+          "retained_record_id": "mtgjson-deck-fec11c6080cb973d985bf2a87fb40743783550c87eb9cf3e82ed0621aa1cda4a",
+          "source_content_sha256": "8a85ec6b16073647d89cd438338835c0e29c561ddbc1de6438094b1ff3822f17",
+          "source_record_identity": "AllDeckFiles/ThroneOfEldraineFoilRedemption_ELD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Throne of Eldraine Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "ELD",
+          "retained_record_id": "mtgjson-deck-3c6dd5e83812c1d3caa37f9ad66fc2d26939c8bdef1728809ea929ee637aeead",
+          "source_content_sha256": "e68900969c96be352eb49f904cbe4fa286732540b3a28dff0d52f4ea5025e82f",
+          "source_record_identity": "AllDeckFiles/ThroneOfEldraineRedemption_ELD.json"
+        }
+      ],
+      "denominator": 3004,
+      "evidence_source_id": "phase-143-mtgjson-decks",
+      "limitations": [
+        "MTGJSON deck files are provider-curated deck products, not all played decks.",
+        "A represented deck is counted once even when a card occurs on multiple boards."
+      ],
+      "metric": "represented_deck_count",
+      "numerator": 3,
+      "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
+      "provider": "mtgjson",
+      "provider_dataset": "AllDeckFiles.zip",
+      "source_reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_sha256": "41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1"
+    },
+    "status": "known"
+  }
+}
