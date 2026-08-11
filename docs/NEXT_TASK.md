@@ -1,3 +1,11 @@
+# Next task after Phase 145
+
+Phase 145 completed the competitive/actual-play evidence gap and contract assessment without acquiring
+or admitting data. The next operation is a human legal/API review of the conditional TopDeck.gg pilot
+described in `PHASE_145_COMPETITIVE_EVIDENCE_GAP.md`. Do not enable acquisition until retention rights,
+stable identities, pagination, completeness, and denominator semantics are documented and approved.
+Stop before Phase 146.
+
 # Next task after Phase 144
 
 Phase 144 is complete. Recommended Phase 145: design and review a bounded, provider-independent gap assessment for actual play/tournament deck evidence, because MTGJSON currently proves only inclusion in 3,004 provider-curated deck-product files and literal labels. Do not infer archetypes, competitive usage, global popularity, valuation, or recommendations from the admitted facts. Any acquisition requires a separately reviewed contract and must preserve the Scryfall/MTGJSON provider boundary.

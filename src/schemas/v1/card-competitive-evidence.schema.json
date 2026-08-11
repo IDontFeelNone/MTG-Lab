@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.local/schemas/v1/card-competitive-evidence.schema.json",
+  "title": "Bounded competitive / actual-play evidence snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "snapshot_id", "provider", "source_dataset", "source_endpoint", "dataset_timestamp", "retrieved_at", "source_sha256", "source_byte_count", "license_review", "retention_boundary", "population", "completeness", "provenance", "explicit_unknowns", "records", "records_sha256"],
+  "properties": {
+    "schema_version": {"const": "card-competitive-evidence-v1"},
+    "snapshot_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$"},
+    "provider": {"type": "string", "minLength": 1},
+    "source_dataset": {"type": "string", "minLength": 1},
+    "source_endpoint": {"type": "string", "format": "uri"},
+    "dataset_timestamp": {"type": "string", "format": "date-time"},
+    "retrieved_at": {"type": "string", "format": "date-time"},
+    "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_byte_count": {"type": "integer", "minimum": 1},
+    "license_review": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "terms_url", "reviewed_at", "retention_permitted", "notes"],
+      "properties": {
+        "status": {"enum": ["approved", "unverified"]},
+        "terms_url": {"type": "string", "format": "uri"},
+        "reviewed_at": {"type": "string", "format": "date-time"},
+        "retention_permitted": {"type": "boolean"},
+        "notes": {"type": "string", "minLength": 1}
+      }
+    },
+    "retention_boundary": {"type": "string", "minLength": 1},
+    "population": {
+      "type": "object", "additionalProperties": false,
+      "required": ["deck_denominator", "event_denominator", "qualifying_event_definition", "deck_population_definition", "denominator_complete"],
+      "properties": {
+        "deck_denominator": {"type": ["integer", "null"], "minimum": 0},
+        "event_denominator": {"type": ["integer", "null"], "minimum": 0},
+        "qualifying_event_definition": {"type": ["string", "null"]},
+        "deck_population_definition": {"type": ["string", "null"]},
+        "denominator_complete": {"type": "boolean"}
+      }
+    },
+    "completeness": {"enum": ["complete_provider_snapshot", "bounded_projection", "partial", "unknown"]},
+    "provenance": {"type": "string", "minLength": 1},
+    "explicit_unknowns": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "records_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "records": {
+      "type": "array", "maxItems": 10, "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "record": {
+      "type": "object", "additionalProperties": false,
+      "required": ["card_identity", "source_record_identity", "event_identity", "event_date", "format", "provider_deck_name", "provider_archetype", "player_identity", "placement", "result", "mainboard_count", "sideboard_count", "event_size", "source_record_sha256", "explicit_unknowns"],
+      "properties": {
+        "card_identity": {
+          "type": "object", "additionalProperties": false,
+          "required": ["game_id", "card_id", "name"],
+          "properties": {"game_id": {"const": "magic"}, "card_id": {"type": "string", "format": "uuid"}, "name": {"type": "string", "minLength": 1}}
+        },
+        "source_record_identity": {"type": "string", "minLength": 1},
+        "event_identity": {"type": ["string", "null"]},
+        "event_date": {"type": ["string", "null"], "format": "date"},
+        "format": {"type": ["string", "null"]},
+        "provider_deck_name": {"type": ["string", "null"]},
+        "provider_archetype": {"type": ["string", "null"]},
+        "player_identity": {"type": "null", "description": "Phase 145 forbids player retention; reconsider only with explicit approval."},
+        "placement": {"type": ["integer", "null"], "minimum": 1},
+        "result": {"type": ["string", "null"]},
+        "mainboard_count": {"type": ["integer", "null"], "minimum": 0},
+        "sideboard_count": {"type": ["integer", "null"], "minimum": 0},
+        "event_size": {"type": ["integer", "null"], "minimum": 1},
+        "source_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "explicit_unknowns": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}
