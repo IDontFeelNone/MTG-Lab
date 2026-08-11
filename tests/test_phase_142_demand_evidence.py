@@ -1,16 +1,20 @@
 import hashlib
+import io
 import json
 from pathlib import Path
 import shutil
 import tempfile
 import unittest
+from contextlib import contextmanager, redirect_stdout
 from jsonschema import Draft202012Validator, FormatChecker
 
 from card_intelligence import CardKnowledgeQuery, CardValueExplanationEngine, KnowledgeRepository
+from card_intelligence.cli import main as explanation_cli
 from card_intelligence.demand_review import DemandEvidenceError, load_reviewed_demand
 
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "data/card_intelligence/demand/phase-142/scryfall-edhrec-rank.json"
+DECK_USAGE_EVIDENCE = ROOT / "data/card_intelligence/demand/phase-143/mtgjson-decks.json"
 NAMES = ["Brainstorm", "Command Tower", "Counterspell", "Goblin Charbelcher", "Goblin King",
          "Sol Ring", "Swords to Plowshares", "Treasure Cruise", "Walking Ballista", "Wishclaw Talisman"]
 
@@ -20,6 +24,16 @@ def tree_digest(path):
     for item in sorted(x for x in base.rglob("*") if x.is_file()):
         digest.update(item.relative_to(base).as_posix().encode() + b"\0"); digest.update(item.read_bytes())
     return digest.hexdigest()
+
+
+@contextmanager
+def data_without_phase143_usage():
+    """Present the production repository with only the later opt-in artifact absent."""
+    with tempfile.TemporaryDirectory() as temporary:
+        data = Path(temporary) / "data"
+        shutil.copytree(ROOT / "data", data, ignore=lambda path, names: (
+            {"phase-143"} if Path(path) == ROOT / "data/card_intelligence/demand" else set()))
+        yield data
 
 
 class Phase142DemandEvidenceTests(unittest.TestCase):
@@ -58,8 +72,20 @@ class Phase142DemandEvidenceTests(unittest.TestCase):
             self.assertEqual([x["fact_id"] for x in active["facts"]], [fact.fact_id])
 
     def test_explanation_v3_is_literal_and_provider_specific(self):
-        document = CardValueExplanationEngine(ROOT / "data").explain(
-            name="Sol Ring", include_demand_evidence=True)
+        # Phase 142's version contract applies when the later Phase 143 artifact is absent.
+        with data_without_phase143_usage() as data:
+            engine = CardValueExplanationEngine(data)
+            document = engine.explain(name="Sol Ring", include_demand_evidence=True)
+            self.assertEqual(engine.explain(name="Sol Ring")["schema_version"],
+                             "card-value-explanation-v1")
+            self.assertEqual(engine.explain(name="Sol Ring", include_observed_prices=True)
+                             ["schema_version"], "card-value-explanation-v2")
+            stdout = io.StringIO()
+            with redirect_stdout(stdout):
+                result = explanation_cli(["--data-root", str(data), "explain", "Sol Ring",
+                                          "--include-demand-evidence"])
+            self.assertEqual(result, 0)
+            self.assertEqual(json.loads(stdout.getvalue()), document)
         self.assertEqual(document["schema_version"], "card-value-explanation-v3")
         evidence = document["evidence_sections"]["demand_usage_evidence"]
         self.assertEqual(evidence["provider"], "scryfall"); self.assertEqual(evidence["fact_count"], 1)
@@ -67,6 +93,27 @@ class Phase142DemandEvidenceTests(unittest.TestCase):
         serialized = json.dumps(document, sort_keys=True).lower()
         for forbidden in ('"demand_score"', '"recommendation" :', '"price_prediction"', '"scarcity_inference"'):
             self.assertNotIn(forbidden, serialized)
+
+    def test_retained_phase143_usage_upgrades_v3_to_v4_without_changing_demand(self):
+        if not DECK_USAGE_EVIDENCE.exists():
+            self.skipTest("retained Phase 143 artifact is supplied by PR #149")
+
+        engine = CardValueExplanationEngine(ROOT / "data")
+        v4 = engine.explain(name="Sol Ring", include_demand_evidence=True)
+        self.assertEqual(v4["schema_version"], "card-value-explanation-v4")
+        demand = v4["evidence_sections"]["demand_usage_evidence"]
+        self.assertTrue(demand["provider_isolation"])
+        self.assertEqual((demand["provider"], demand["fact_count"]), ("scryfall", 1))
+        self.assertEqual(demand["facts"][0]["exact_retained_value"]["rank"], 1)
+        self.assertEqual(v4["evidence_sections"]["deck_usage_evidence"]["provider"], "mtgjson")
+
+        stdout = io.StringIO()
+        with redirect_stdout(stdout):
+            result = explanation_cli(["--data-root", str(ROOT / "data"), "explain", "Sol Ring",
+                                      "--include-demand-evidence"])
+        self.assertEqual(result, 0)
+        cli_document = json.loads(stdout.getvalue())
+        self.assertEqual(cli_document, v4)
 
     def test_deterministic_serialization_and_protected_boundaries(self):
         first = CardValueExplanationEngine(ROOT / "data").explain(name="Brainstorm", include_demand_evidence=True)
