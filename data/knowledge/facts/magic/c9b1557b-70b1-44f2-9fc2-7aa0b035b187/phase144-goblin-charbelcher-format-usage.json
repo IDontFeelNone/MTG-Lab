@@ -1,0 +1,88 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-10T22:23:35Z",
+  "evidence": [
+    {
+      "claim": "MTGJSON AllDeckFiles.zip represents Goblin Charbelcher in 4 of 3004 decoded deck files.",
+      "observed_at": "2026-08-10T22:23:35Z",
+      "reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_id": "phase-143-mtgjson-decks",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase144-goblin-charbelcher-format-usage",
+  "kind": "format_usage",
+  "predicate": "format.usage",
+  "recorded_at": "2026-08-10T22:23:35Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "c9b1557b-70b1-44f2-9fc2-7aa0b035b187",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "completeness_state": "complete_for_provider_deck_snapshot",
+      "dataset_timestamp": "2026-08-10T22:23:35Z",
+      "evidence_source_id": "phase-143-mtgjson-decks",
+      "formats": [
+        {
+          "deck_count": 1,
+          "format": "duel deck"
+        },
+        {
+          "deck_count": 2,
+          "format": "mtgo redemption"
+        },
+        {
+          "deck_count": 1,
+          "format": "world championship deck"
+        }
+      ],
+      "limitations": [
+        "MTGJSON deck files are provider-curated deck products, not all played decks.",
+        "A represented deck is counted once even when a card occurs on multiple boards."
+      ],
+      "literal_associations": [
+        {
+          "deck_name": "Goblins",
+          "format": "duel deck",
+          "provider_deck_identity": "DDT",
+          "retained_record_id": "mtgjson-deck-5f14461773681a4372b78457422e969819214a639c103e2d9bb6faf60383e840",
+          "source_content_sha256": "6343a7f6f9df80ecc7e1aea6c71ba617ea65459b6fd4ac38ce1f5f16c78d1980",
+          "source_record_identity": "AllDeckFiles/Goblins_DDT.json"
+        },
+        {
+          "deck_name": "Mirrodin Foil Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "MRD",
+          "retained_record_id": "mtgjson-deck-716907b53a00616e2e7c2f0e0f79c946116fd484a8819f8799f85e02eb50c1d5",
+          "source_content_sha256": "3265d9ad78a86d687f5a623dad817cede0b4028f99372fec1b2065f09a259b2e",
+          "source_record_identity": "AllDeckFiles/MirrodinFoilRedemption_MRD.json"
+        },
+        {
+          "deck_name": "Mirrodin Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "MRD",
+          "retained_record_id": "mtgjson-deck-1dc14e4e4e5d21f2791a92050634f10fb6941ad4578c10991a2db0aa4f529bde",
+          "source_content_sha256": "da2fd7bd79dbdd56f1f6253fb29471470deb4db126a20eee295a3146cda95080",
+          "source_record_identity": "AllDeckFiles/MirrodinRedemption_MRD.json"
+        },
+        {
+          "deck_name": "Manuel Bevand - Myr Incubator Combo",
+          "format": "world championship deck",
+          "provider_deck_identity": "WC04",
+          "retained_record_id": "mtgjson-deck-6d75fa28b999608f20a0fe3a521fca0f5cc1e776ad76be684cbfcb8c9403536f",
+          "source_content_sha256": "eafe4bb03ae2c4010f37733c5535c3c875e928f2a42070181a30f688d6cb0f5d",
+          "source_record_identity": "AllDeckFiles/ManuelBevandMyrIncubatorCombo_WC04.json"
+        }
+      ],
+      "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
+      "provider": "mtgjson",
+      "provider_dataset": "AllDeckFiles.zip",
+      "source_reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_sha256": "41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1"
+    },
+    "status": "known"
+  }
+}

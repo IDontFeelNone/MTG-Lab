@@ -1,3 +1,24 @@
+# Phase 144 — reviewed MTGJSON deck usage admitted
+
+Phase 144 strictly reviewed `data/card_intelligence/demand/phase-143/mtgjson-decks.json` and admitted its literal ten-Card projection. The artifact is `card-deck-usage-evidence-v1`, provider `mtgjson`, dataset `AllDeckFiles.zip`, source SHA-256 `41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1`, 259,140,526 source bytes, dataset/retrieval timestamp `2026-08-10T22:23:35Z`, and records SHA-256 `6f1dfb55554b145062b958a0655e5f43385d0d2a8fbfa9377e254b3928b14248`. Its denominator is exactly 3,004 distinct decoded provider deck files, not global decks, players, or the Magic population.
+
+| Card | represented decks | denominator | represented % | literal formats | associations |
+|---|---:|---:|---:|---|---:|
+| Brainstorm | 23 | 3004 | 0.765646% | box set; commander deck; dandan deck; duel deck; jumpstart; secret lair drop; theme deck; world championship deck | 23 |
+| Command Tower | 205 | 3004 | 6.824234% | box set; brawl deck; commander deck; historic brawl precon deck; secret lair drop | 205 |
+| Counterspell | 63 | 3004 | 2.097204% | advanced deck; advanced pack; box set; commander deck; duel deck; enhanced deck; game night deck; mtgo redemption; pro tour deck; secret lair drop; shandalar enemy deck; starter deck; theme deck; world championship deck | 63 |
+| Goblin Charbelcher | 4 | 3004 | 0.133156% | duel deck; mtgo redemption; world championship deck | 4 |
+| Goblin King | 17 | 3004 | 0.565912% | box set; mtgo redemption; secret lair drop; shandalar enemy deck; theme deck | 17 |
+| Sol Ring | 241 | 3004 | 8.022636% | box set; commander deck; secret lair drop; shandalar enemy deck | 241 |
+| Swords to Plowshares | 78 | 3004 | 2.596538% | box set; commander deck; duel deck; game night deck; mtgo commander deck; mtgo theme deck; pro tour deck; secret lair drop; shandalar enemy deck; theme deck; world championship deck | 78 |
+| Treasure Cruise | 15 | 3004 | 0.499334% | clash pack; commander deck; intro pack; mtgo redemption; pioneer challenger deck | 15 |
+| Walking Ballista | 8 | 3004 | 0.266312% | challenger deck; commander deck; jumpstart; mtgo redemption; secret lair drop | 8 |
+| Wishclaw Talisman | 3 | 3004 | 0.099867% | box set; mtgo redemption | 3 |
+
+Admission appended 10 known `demand.deck_inclusion` and 10 known `format.usage` facts. No exact-predicate unknown existed, so zero facts were superseded and all 120 earlier facts were unchanged. Both predicates have known=10, unknown=0, incomplete=10, unsupported=0; inferred archetype remains unsupported for all ten Cards. Source ZIP-member path—not nullable or repeated provider deck code—is record identity. Literal deck names/formats remain associations only.
+
+Opt-in `card-value-explanation-v4` now exposes Printing history, both retained MB2 price snapshots and descriptive history, independent Scryfall EDHREC rank, independent MTGJSON represented-deck evidence, literal associations, quality, provenance, and limitations. It adds no scores, valuation, prediction, popularity/scarcity conclusion, or recommendation. The ten Phase 142 facts, ten Phase 136 histories, Phase 135 evidence, canonical data, two MB2 acquisitions/imports, and 956 observations are unchanged. Architecture v12 remains frozen.
+
 # Phase 142 — reviewed demand and usage evidence complete
 
 Phase 142 retains a bounded ten-record projection of Scryfall `edhrec_rank` from the already retained `scryfall-default-cards` dataset timestamp `2026-08-04T21:10:15.879000Z`. Exact canonical Card/oracle and MB2 provider-Printing identities are retained with the provider-source digest. Ten known `value_driver.demand` facts supersede exactly the ten Phase 132 unknown demand facts; each reports the literal provider ordinal and explicitly remains incomplete for deck counts, methodology, archetypes, and competitive usage.

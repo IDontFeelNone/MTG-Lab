@@ -1,0 +1,128 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-10T22:23:35Z",
+  "evidence": [
+    {
+      "claim": "MTGJSON AllDeckFiles.zip represents Walking Ballista in 8 of 3004 decoded deck files.",
+      "observed_at": "2026-08-10T22:23:35Z",
+      "reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_id": "phase-143-mtgjson-decks",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase144-walking-ballista-format-usage",
+  "kind": "format_usage",
+  "predicate": "format.usage",
+  "recorded_at": "2026-08-10T22:23:35Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "4b515bb0-f275-4400-8032-3173b799ab40",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "completeness_state": "complete_for_provider_deck_snapshot",
+      "dataset_timestamp": "2026-08-10T22:23:35Z",
+      "evidence_source_id": "phase-143-mtgjson-decks",
+      "formats": [
+        {
+          "deck_count": 1,
+          "format": "challenger deck"
+        },
+        {
+          "deck_count": 2,
+          "format": "commander deck"
+        },
+        {
+          "deck_count": 1,
+          "format": "jumpstart"
+        },
+        {
+          "deck_count": 2,
+          "format": "mtgo redemption"
+        },
+        {
+          "deck_count": 2,
+          "format": "secret lair drop"
+        }
+      ],
+      "limitations": [
+        "MTGJSON deck files are provider-curated deck products, not all played decks.",
+        "A represented deck is counted once even when a card occurs on multiple boards."
+      ],
+      "literal_associations": [
+        {
+          "deck_name": "Counter Surge",
+          "format": "challenger deck",
+          "provider_deck_identity": "Q01",
+          "retained_record_id": "mtgjson-deck-0a2d0f218b5b284a22d81c34a9c20e20c888ab19359ea6a112b2f7609aebbcea",
+          "source_content_sha256": "d6982e4f3b37fbf0a04e431db190922dfa22b81ffade48d725f84112d97af782",
+          "source_record_identity": "AllDeckFiles/CounterSurge_Q01.json"
+        },
+        {
+          "deck_name": "Counter Blitz Collector's Edition (FINAL FANTASY X)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-4bdbec1998c1e826f84a4fed1ecc73cfd355d0503c2ae586a636b6c3366532bb",
+          "source_content_sha256": "d5a827384c81b38158f5806562fba7ba2907d495aedc398c91ff25da5f5e15db",
+          "source_record_identity": "AllDeckFiles/CounterBlitzCollectorSEditionFinalFantasyX_FIC.json"
+        },
+        {
+          "deck_name": "Counter Blitz (FINAL FANTASY X)",
+          "format": "commander deck",
+          "provider_deck_identity": "FIC",
+          "retained_record_id": "mtgjson-deck-4769d969cc79c4a12417a8e09c2f3d2a6e06183f00dce59a1e8336eddee282c8",
+          "source_content_sha256": "85e297e3d01b15e3df291e21e0885e488df78a2b7e89221e877676d925d1e8dc",
+          "source_record_identity": "AllDeckFiles/CounterBlitzFinalFantasyX_FIC.json"
+        },
+        {
+          "deck_name": "Urza's",
+          "format": "jumpstart",
+          "provider_deck_identity": "J22",
+          "retained_record_id": "mtgjson-deck-5de0e48d05f93613e90622729a488697e345c467d99451e17ba8da7739bb3266",
+          "source_content_sha256": "cd3fc23d92c47a6219f10c1e7ffff4ff607f1e538a171c16830c25fd35ab60e7",
+          "source_record_identity": "AllDeckFiles/UrzaS_J22.json"
+        },
+        {
+          "deck_name": "Aether Revolt Foil Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "AER",
+          "retained_record_id": "mtgjson-deck-dd777116160afff972bc45f391299563cb9b75b23865cb78bbb838c415abe3fa",
+          "source_content_sha256": "e5863eebff2b8ac66825f9849af4e8e55df9bd66cdda647fa669c16a01f28f79",
+          "source_record_identity": "AllDeckFiles/AetherRevoltFoilRedemption_AER.json"
+        },
+        {
+          "deck_name": "Aether Revolt Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "AER",
+          "retained_record_id": "mtgjson-deck-c71462fba8682d08125195a8d09fac54d0582ac2be2a117a407b348e1fb509f9",
+          "source_content_sha256": "05656c3df1b8c4c55c3053b7445bcc0409832771b5f365923b020841c05cab35",
+          "source_record_identity": "AllDeckFiles/AetherRevoltRedemption_AER.json"
+        },
+        {
+          "deck_name": "Can You Feel With A Heart of Steel?",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-e2ec89ef4cc0fe3ae159bb5f0fbf5c1c442cf11d75b2663e3670ad85e01624a1",
+          "source_content_sha256": "fcfbaad686a93fa97a9a11f936a29076e08cef156f0761dbad7573fdb601a31b",
+          "source_record_identity": "AllDeckFiles/CanYouFeelWithAHeartOfSteel_SLD.json"
+        },
+        {
+          "deck_name": "Showcase: March of the Machine Vol. 1",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-a24f7c266b3693f8b2e2c23a31b7771bbe7b4897bbb68b20c68ba05712bf2f26",
+          "source_content_sha256": "f03b520881968b0aa4ffab66b6dce9730484ea0823e2c58d36ae0bdfca9b2112",
+          "source_record_identity": "AllDeckFiles/ShowcaseMarchOfTheMachineVol1_SLD.json"
+        }
+      ],
+      "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
+      "provider": "mtgjson",
+      "provider_dataset": "AllDeckFiles.zip",
+      "source_reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_sha256": "41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1"
+    },
+    "status": "known"
+  }
+}

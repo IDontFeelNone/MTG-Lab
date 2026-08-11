@@ -1,0 +1,232 @@
+{
+  "confidence": null,
+  "effective_at": "2026-08-10T22:23:35Z",
+  "evidence": [
+    {
+      "claim": "MTGJSON AllDeckFiles.zip represents Goblin King in 17 of 3004 decoded deck files.",
+      "observed_at": "2026-08-10T22:23:35Z",
+      "reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_id": "phase-143-mtgjson-decks",
+      "source_type": "retained_dataset"
+    }
+  ],
+  "fact_id": "phase144-goblin-king-demand-deck_inclusion",
+  "kind": "demand",
+  "predicate": "demand.deck_inclusion",
+  "recorded_at": "2026-08-10T22:23:35Z",
+  "schema_version": "card-knowledge-fact-v1",
+  "subject": {
+    "card_id": "d236b3fc-0d3f-4d99-875d-e32a33fe5767",
+    "game_id": "magic"
+  },
+  "supersedes": [],
+  "value": {
+    "data": {
+      "completeness_state": "complete_for_provider_deck_snapshot",
+      "dataset_timestamp": "2026-08-10T22:23:35Z",
+      "deck_associations": [
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Collectors' Edition",
+          "format": "box set",
+          "provider_deck_identity": "CED",
+          "retained_record_id": "mtgjson-deck-4723b6062911fbafe498efb626b85409ca6b4823b8d0f81ede95b1a982097d3a",
+          "source_content_sha256": "9d48bdebf0ff442bfc5e4511dbe0c368f6bd2464d4c6d4024e04f8c3904a8ee4",
+          "source_record_identity": "AllDeckFiles/CollectorsEdition_CED.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Intl. Collectors' Edition",
+          "format": "box set",
+          "provider_deck_identity": "CEI",
+          "retained_record_id": "mtgjson-deck-5e94a558413defc465e4c9ddc715e881290b7c24f4c3286f10fd794449881d61",
+          "source_content_sha256": "abbdb031e70574150224b453ef95f56ea0f44ea084373d239bec5435f9766993",
+          "source_record_identity": "AllDeckFiles/IntlCollectorsEdition_CEI.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Eighth Edition Foil Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "8ED",
+          "retained_record_id": "mtgjson-deck-041d71e2bbdd8a46c5d77166edfd70773577fb16283b96f6e27bbcd71fa1dbe5",
+          "source_content_sha256": "df23873682d53f87c216736d8df0023ff6e1952d14f829ce443316b88a39afaf",
+          "source_record_identity": "AllDeckFiles/EighthEditionFoilRedemption_8ED.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Eighth Edition Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "8ED",
+          "retained_record_id": "mtgjson-deck-3141fdc1cbdf20508be55254f8e4c662ddccdc912d78aa5ff0e177597621158f",
+          "source_content_sha256": "6ac1b83f5bd2815e55760a949a1dbc6baa90f1356bf877eb4e94d2fe342a9234",
+          "source_record_identity": "AllDeckFiles/EighthEditionRedemption_8ED.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Ninth Edition Foil Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "9ED",
+          "retained_record_id": "mtgjson-deck-698eb3a1af218037b3c0f2659d8faa8e9af71b96e6c644e79c73cc828fcc8c2b",
+          "source_content_sha256": "2353ffc9dad2835563d838bbfa60d9ac75b9a231ebf59478e5335f2d6d52f3d5",
+          "source_record_identity": "AllDeckFiles/NinthEditionFoilRedemption_9ED.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Ninth Edition Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "9ED",
+          "retained_record_id": "mtgjson-deck-dc656b597084c355be2f4e9832450bd247cf257d139a2a1d43407435996291b1",
+          "source_content_sha256": "c7e56b70ee80a89f8091ec9ee1249fee3f1888c91c4b2b5e35ddede7d808ea30",
+          "source_record_identity": "AllDeckFiles/NinthEditionRedemption_9ED.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Seventh Edition Foil Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "7ED",
+          "retained_record_id": "mtgjson-deck-d4c1315169f542572f3f346362cdff6b0eb49866853d0e0db13888cf019ce5d1",
+          "source_content_sha256": "e0d2b0a2710528bf224a21b0a1eee7790e307faff95c64656873f1545861b4c4",
+          "source_record_identity": "AllDeckFiles/SeventhEditionFoilRedemption_7ED.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Seventh Edition Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "7ED",
+          "retained_record_id": "mtgjson-deck-a2eb74be7ffecd029892810f2e3f98634d7265dc473f7c158c09a5756cc485a6",
+          "source_content_sha256": "6240276d021fd8de29615905e27d39c98161053ecaba8eb062596017e50ec14b",
+          "source_record_identity": "AllDeckFiles/SeventhEditionRedemption_7ED.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Tenth Edition Foil Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "10E",
+          "retained_record_id": "mtgjson-deck-c7ad4b9e838393c248a667e6bb05c9bc2bcb14de629bf2ae15707ec2db9d6512",
+          "source_content_sha256": "af64a14e44b9f7e8971ad0d00450f343325727b4c039cfc0eff8095b794ee7bf",
+          "source_record_identity": "AllDeckFiles/TenthEditionFoilRedemption_10E.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Tenth Edition Redemption",
+          "format": "mtgo redemption",
+          "provider_deck_identity": "10E",
+          "retained_record_id": "mtgjson-deck-66da51cff0c0d93144d4f18e45023df04ce802ec365d5f34e41010df9adb6f2a",
+          "source_content_sha256": "1639e0697856b58a83835cf4597795017e490dc587bb3a7af809d7907017e713",
+          "source_record_identity": "AllDeckFiles/TenthEditionRedemption_10E.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "explosion sounds",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-539d71902bb13b4a24975364c8a0d130bf21eda6c000c7352fa4b7cd32697307",
+          "source_content_sha256": "ed3198714222cd62403a244bee12da1cba401d1ea82da697100e8095abb91739",
+          "source_record_identity": "AllDeckFiles/ExplosionSounds_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Poker Faces Foil Edition",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-c39bb15d6f1d14e3c6dbce4c42acab08269c1b53fa3c07c03e0b2516fd3e5047",
+          "source_content_sha256": "e9a5cccb434abd4003ca0f83db8ebfcad1b9a3ca6e47fd74ebc06312d0786663",
+          "source_record_identity": "AllDeckFiles/PokerFacesFoilEdition_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Poker Faces",
+          "format": "secret lair drop",
+          "provider_deck_identity": "SLD",
+          "retained_record_id": "mtgjson-deck-71d42a25fcffb322ada55b12b37cd7852063a7a48047743f4c7fe1dddd6923c0",
+          "source_content_sha256": "e8d4f935a4915daadd0098c8a6e994a02581dd9bc549fde4ed22295885f5961e",
+          "source_record_identity": "AllDeckFiles/PokerFaces_SLD.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Goblin Warlord",
+          "format": "shandalar enemy deck",
+          "provider_deck_identity": "PAST",
+          "retained_record_id": "mtgjson-deck-fb1d28cbc534bc2707205b358bed671f580e70d833a20b216de8b663aa3a2b32",
+          "source_content_sha256": "c23f7ac7c22e6b9080032926189ea5e7fb852e314d2779bab5bcdf62ccead9dc",
+          "source_record_identity": "AllDeckFiles/GoblinWarlord_PAST.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Dark Alliance",
+          "format": "theme deck",
+          "provider_deck_identity": "ATH",
+          "retained_record_id": "mtgjson-deck-f696102fedb2e05afc42b057fd98fcda5cacc9c5b1c95210b795a6ac9d0a648a",
+          "source_content_sha256": "fa2b31be34e57f5696b36f04800d3213c172bf740162f7a21e0ef41fe52dc69e",
+          "source_record_identity": "AllDeckFiles/DarkAlliance_ATH.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Infestation",
+          "format": "theme deck",
+          "provider_deck_identity": "7ED",
+          "retained_record_id": "mtgjson-deck-dfe07c7af7affcd9ef84542a1cf3ee8839c8547115d09cbb36ebef65be22afe7",
+          "source_content_sha256": "1165b800cc19f0fbf8f09b702769bdbaebeb8c26f5c788e51ac5ee86405dad88",
+          "source_record_identity": "AllDeckFiles/Infestation_7ED.json"
+        },
+        {
+          "boards": [
+            "mainBoard"
+          ],
+          "deck_name": "Speed Scorch",
+          "format": "theme deck",
+          "provider_deck_identity": "8ED",
+          "retained_record_id": "mtgjson-deck-2da3bc7815e0a7cc3531424f7f1943bef2c648944d003fd4237c76a1b2758ef2",
+          "source_content_sha256": "b6b9acbd9f001198f381eed210e4abbfaaf9e98f1baf66a587bc83273b8ec932",
+          "source_record_identity": "AllDeckFiles/SpeedScorch_8ED.json"
+        }
+      ],
+      "denominator": 3004,
+      "evidence_source_id": "phase-143-mtgjson-decks",
+      "limitations": [
+        "MTGJSON deck files are provider-curated deck products, not all played decks.",
+        "A represented deck is counted once even when a card occurs on multiple boards."
+      ],
+      "metric": "represented_deck_count",
+      "numerator": 17,
+      "population_semantics": "All distinct provider deck files decoded from the snapshot; numerator is distinct files containing the exact card name and denominator is all decoded files.",
+      "provider": "mtgjson",
+      "provider_dataset": "AllDeckFiles.zip",
+      "source_reference": "data/card_intelligence/demand/phase-143/mtgjson-decks.json",
+      "source_sha256": "41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1"
+    },
+    "status": "known"
+  }
+}
