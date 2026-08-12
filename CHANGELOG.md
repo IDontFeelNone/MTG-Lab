@@ -572,3 +572,11 @@ no pricing, market intelligence, simulation, recommendation, AI provider, or pro
 - Added explicit source, MB2-selection, unique-matched-Printing, known-price, and missing-price
   counts to acquisition manifests, plus lifecycle-aware production observation tests. No
   canonical state, Architecture v12 contract, provider selection, or recommendation changed.
+# Roadmap reconciliation — 2026-08-12
+
+- Reconciled the inspected mainline baseline at `bf2976c0c42153f11756bd362767356f23671cfc`,
+  distinguishing project Phase 147 from GitHub PR #154.
+- Parked Competitive Intelligence as a known, non-critical-path gap and prohibited further
+  competitive acquisition absent a future explicit authorization and complete dependency chain.
+- Re-ranked the critical path around a generic Product Intelligence evidence-to-decision vertical;
+  reserved the domain for separate requirements without implementation or Architecture v12 changes.

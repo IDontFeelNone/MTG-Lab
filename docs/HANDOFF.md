@@ -1,3 +1,17 @@
+# Roadmap reconciliation handoff
+
+The inspected mainline baseline was `bf2976c0c42153f11756bd362767356f23671cfc`: project Phase 147
+is merged through GitHub PR #154 and is the highest project phase present. Competitive Intelligence
+is now **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**, with tournament evidence allowed to
+remain unknown and no further acquisition authorized. Existing provider-neutral validation,
+fail-closed gates, legal unknowns, and transport-free adapter are sufficient preparation.
+
+Wait for the separate Product Intelligence requirement. The next recommended major capability is a
+generic, collection-aware, provenance-rich acquisition-decision vertical—not another evidence source.
+No implementation, provider contact, secrets, evidence, facts, protected production data, or
+Architecture v12 changes belong to this reconciliation. See
+`ROADMAP_RECONCILIATION_2026_08_12.md` for the exact competitive resumption chain and capability gaps.
+
 # Phase 146 handoff — no competitive acquisition authorized
 
 All five candidates remain unverified because provider-controlled sources were unreachable (research service HTTP 401; HTTPS proxy HTTP 403). Licensing and retention are hard gates, so TopDeck.gg is no longer a conditional selection: no provider is approved. No production competitive evidence, facts, client, or workflow exists; the schema and explanation v1/v2/v3/v4 remain unchanged. See `PHASE_146_PROVIDER_VERIFICATION.md` for the source-attempt and gate matrices and the invariant bounded design.
