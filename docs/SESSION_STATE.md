@@ -1,3 +1,7 @@
+# Phase 146 — provider verification failed closed
+
+Current authoritative API and legal materials for TopDeck.gg, Wizards / Magic.gg, Melee, MTGTop8, and MTGGoldfish could not be reached (web service HTTP 401; direct HTTPS proxy HTTP 403). Every provider therefore fails the hard licensing/retention gate and remains unknown on technical, identity, pagination, reproducibility, and denominator properties. No provider, acquisition, production evidence, facts, client, workflow, schema change, or explanation change resulted. Architecture v12 and protected data remain unchanged.
+
 # Phase 145 — competitive / actual-play evidence gap assessed
 
 Repository census found no retained tournament, event-result, placement, match-result, or competitive

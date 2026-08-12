@@ -1,3 +1,7 @@
+# Next task after Phase 146
+
+Phase 146 did not authorize a competitive provider. Phase 147 should be a verification-only review from an environment able to reach current provider-controlled API documentation and legal terms. Obtain explicit retention/redistribution permission where terms are silent and perform only a non-retaining metadata probe. Approve at most one provider; otherwise fail closed. Do not acquire decklists or create competitive facts.
+
 # Next task after Phase 145
 
 Phase 145 completed the competitive/actual-play evidence gap and contract assessment without acquiring

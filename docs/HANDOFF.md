@@ -1,3 +1,7 @@
+# Phase 146 handoff — no competitive acquisition authorized
+
+All five candidates remain unverified because provider-controlled sources were unreachable (research service HTTP 401; HTTPS proxy HTTP 403). Licensing and retention are hard gates, so TopDeck.gg is no longer a conditional selection: no provider is approved. No production competitive evidence, facts, client, or workflow exists; the schema and explanation v1/v2/v3/v4 remain unchanged. See `PHASE_146_PROVIDER_VERIFICATION.md` for the source-attempt and gate matrices and the invariant bounded design.
+
 # Phase 145 handoff — competitive evidence acquisition remains blocked
 
 The retained-data census found no actual-play tournament evidence. Phase 145 adds only the
