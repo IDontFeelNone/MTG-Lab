@@ -1,3 +1,13 @@
+# Phase 147 — TopDeck.gg non-retaining provider probe implemented; retention blocked
+
+The transport-free adapter validates exact-ten-Card projection, provider tournament/deck identity,
+dates, formats, event size, placement, W/L/D, board copy counts, deterministic replay, literal metrics,
+and permanent player-identity exclusion against synthetic records. Official TopDeck documentation was
+still unreachable (browser 401; direct proxy 403), and no API key was present, so no live request or
+provider-data retention occurred. API, storage, historical retention, redistribution, and attribution
+terms remain unverified; production acquisition remains blocked. Protected data, facts,
+`card-competitive-evidence-v1`, and Architecture v12 are unchanged.
+
 # Phase 146 — competitive provider verification failed closed
 
 No evaluated provider has verified current automation and retained-evidence permission. Provider-controlled sources were unreachable (web service HTTP 401; direct proxy HTTP 403), so all legal, API, identity, completeness, and denominator gates remain unknown. No provider was selected, no production acquisition was executed, and competitive evidence/facts remain zero. The v1 contract and explanation v1/v2/v3/v4 are unchanged.

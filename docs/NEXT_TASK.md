@@ -1,3 +1,11 @@
+# Next task after Phase 147
+
+Obtain current provider-controlled TopDeck API/terms documents and written clarification covering
+permanent bounded retention, historical storage, redistribution, and attribution for stored/derived
+data. Then supply `TOPDECK_API_KEY` as a secret and perform exactly one bounded, non-retaining Magic
+tournament metadata probe with redacted structural diagnostics. Do not start Phase 148 until API and
+retention gates are both verified allowed.
+
 # Next task after Phase 146
 
 Phase 146 did not authorize a competitive provider. Phase 147 should be a verification-only review from an environment able to reach current provider-controlled API documentation and legal terms. Obtain explicit retention/redistribution permission where terms are silent and perform only a non-retaining metadata probe. Approve at most one provider; otherwise fail closed. Do not acquire decklists or create competitive facts.
