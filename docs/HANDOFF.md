@@ -455,3 +455,10 @@ only pre-commit state is `?? data/card_intelligence/demand/phase-143/mtgjson-dec
 staged state is `A  data/card_intelligence/demand/phase-143/mtgjson-decks.json`. The strict loader runs
 before publication. After merge, manually rerun **Bounded deck usage acquisition** exactly once and
 manually review the resulting evidence PR. No production evidence PR exists from this repair.
+# Phase 147 handoff — TopDeck probe infrastructure only
+
+Phase 147 added a transport-free TopDeck tournament projector and synthetic regression coverage. It
+cannot make network or repository writes. No live probe occurred: official documents were blocked and
+`TOPDECK_API_KEY` was absent. Permanent retention, historical storage, redistribution, and attribution
+for stored/derived output require human/provider clarification. Keep production acquisition, Phase 148,
+and fact creation blocked until both API and retention authorization are verified.

@@ -1,3 +1,12 @@
+# Phase 147 — TopDeck adapter ready; legal and live-probe gates remain closed
+
+The exact production baseline is unchanged: ten pilot Cards, 140 facts, ten active Phase 136 printing
+histories, ten Phase 142 demand facts, twenty Phase 144 usage facts, 956 observations, and zero
+competitive evidence/facts. A transport-free, non-retaining TopDeck response projector and literal
+metric summarizer are tested against synthetic inputs. Official sources remained inaccessible and no
+`TOPDECK_API_KEY` was available, so no live request occurred. Retention, historical storage,
+redistribution, and stored/derived-data attribution remain unverified. Architecture v12 is unchanged.
+
 # Phase 146 — provider verification failed closed
 
 Current authoritative API and legal materials for TopDeck.gg, Wizards / Magic.gg, Melee, MTGTop8, and MTGGoldfish could not be reached (web service HTTP 401; direct HTTPS proxy HTTP 403). Every provider therefore fails the hard licensing/retention gate and remains unknown on technical, identity, pagination, reproducibility, and denominator properties. No provider, acquisition, production evidence, facts, client, workflow, schema change, or explanation change resulted. Architecture v12 and protected data remain unchanged.
