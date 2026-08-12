@@ -1,5 +1,10 @@
 # Roadmap reconciliation — 2026-08-12
 
+> **Superseded recommendation:** The baseline and competitive disposition below remain authoritative,
+> but the later cross-domain assessment in `DECISION_INTELLIGENCE_ASSESSMENT_2026_08_12.md` refines
+> the next milestone to a shared Decision Intelligence Contract Foundation before the first Product
+> Intelligence vertical. No phase number has been assigned to either capability.
+
 ## Authoritative baseline
 
 The baseline inspected for this reconciliation is the repository's checked-out mainline merge commit
@@ -97,4 +102,3 @@ This is preferable to another acquisition phase because it moves MTG Lab from �
 have?” to “Given the evidence, what should the user do, and why?” No project phase number or A/B
 suffix is assigned here. The next requirement, not this document, determines the authorized phase
 scope.
-

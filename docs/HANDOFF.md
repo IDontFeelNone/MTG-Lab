@@ -1,4 +1,17 @@
-# Roadmap reconciliation handoff
+# Decision Intelligence assessment handoff
+
+The checked-out baseline is merge commit `1574f7778cc0748b14544ead631b4c906eedcd41`
+(GitHub PR #155); Phase 147 remains the highest merged project phase. Phase numbers and PR numbers are
+independent. The assessment in `DECISION_INTELLIGENCE_ASSESSMENT_2026_08_12.md` found no Architecture
+v12 defect. Product and Deck Intelligence should share a generic Decision Intelligence contract, with
+a thin acquisition orchestrator over domain analytics and the existing Decision Engine.
+
+The next recommended implementation milestone, only when authorized, is a synthetic-only Decision
+Intelligence Contract Foundation. Product Intelligence follows as the first vertical; Deck
+Intelligence follows over the same seam. Neither domain, live provider integration, nor ChatGPT
+provider was implemented. Competitive Intelligence remains parked.
+
+# Roadmap reconciliation handoff (historical)
 
 The inspected mainline baseline was `bf2976c0c42153f11756bd362767356f23671cfc`: project Phase 147
 is merged through GitHub PR #154 and is the highest project phase present. Competitive Intelligence
