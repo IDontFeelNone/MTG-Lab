@@ -1,3 +1,7 @@
+# Phase 146 — no competitive provider is approved
+
+Current provider verification failed closed: the research service returned HTTP 401 and the HTTPS proxy returned HTTP 403 before provider-controlled terms or API documentation could be inspected. TopDeck.gg, Wizards / Magic.gg, Melee, MTGTop8, and MTGGoldfish therefore have unverified automation, retention, redistribution, identity, pagination, and denominator semantics. No acquisition, retained competitive evidence, fact, workflow, schema change, or explanation change was made. See `PHASE_146_PROVIDER_VERIFICATION.md`. Architecture v12 remains frozen.
+
 # Phase 145 — competitive / actual-play evidence remains a documented gap
 
 No retained competitive event, tournament decklist, placement, or match-result evidence exists.
