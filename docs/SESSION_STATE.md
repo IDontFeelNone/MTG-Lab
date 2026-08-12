@@ -1,3 +1,13 @@
+# Current session — roadmap reset only
+
+Repository inspection establishes `bf2976c0c42153f11756bd362767356f23671cfc` as the mainline
+baseline before this reconciliation: project Phase 147 is merged via GitHub PR #154 and is the highest
+project phase present. Competitive Intelligence is **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL
+PATH**. No new evidence, secrets, acquisition, runtime implementation, facts, protected-data changes,
+or Architecture v12 changes occurred. Product Intelligence is reserved for separate requirements and
+authorization. The current decision and resumption boundaries are in
+`ROADMAP_RECONCILIATION_2026_08_12.md`.
+
 # Phase 147 — TopDeck adapter ready; legal and live-probe gates remain closed
 
 The exact production baseline is unchanged: ten pilot Cards, 140 facts, ten active Phase 136 printing

@@ -1,3 +1,21 @@
+# Roadmap priority reset — 2026-08-12
+
+The authoritative baseline before this reconciliation is mainline merge
+`bf2976c0c42153f11756bd362767356f23671cfc`: project Phase 147 is present and arrived through GitHub
+PR #154. Project phases and PR numbers are separate sequences.
+
+Competitive Intelligence is **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. Tournament
+evidence may remain explicitly unknown; no Phase 148A, Phase 148B, TopDeck acquisition, secrets, live
+provider work, or follow-on competitive integration is authorized. Product Intelligence is reserved
+as the next major domain to assess after separate requirements arrive. The recommended next major
+capability is a generic Product Intelligence evidence-to-decision vertical that integrates product,
+collection, market, provenance, scenarios, and explicit unknowns into an acquisition action and
+explanation. This reconciliation assigns no new phase number and implements none of that domain.
+
+The complete current capability assessment, domain reservation, and conditional competitive
+resumption chain are in `ROADMAP_RECONCILIATION_2026_08_12.md`. Older roadmap entries below are
+historical and do not authorize work that conflicts with this reset.
+
 # Phase 126 roadmap update
 
 The market data and analytics foundation is complete. Any future recommendation policy requires separate approval and must remain downstream and read-only. Phase 126 contains no recommendations, investment rankings, portfolio analysis, or AI reasoning.

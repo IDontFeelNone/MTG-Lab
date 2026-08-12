@@ -1,3 +1,15 @@
+# Next task after roadmap reconciliation
+
+Wait for the separate Product Intelligence requirement. The recommended next major capability is a
+generic Product Intelligence evidence-to-acquisition-decision vertical, beginning with an assessment
+and contract only when explicitly authorized. Do not implement Product Intelligence from the reserved
+concept list alone and do not design product-specific Crack-the-Plates logic.
+
+Competitive Intelligence is **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. No further
+competitive acquisition phase is authorized. Do not begin Phase 148A, Phase 148B, another TopDeck
+phase, provider acquisition, secret setup, or competitive-fact integration. The exact future gates are
+recorded in `ROADMAP_RECONCILIATION_2026_08_12.md`.
+
 # Next task after Phase 147
 
 Obtain current provider-controlled TopDeck API/terms documents and written clarification covering

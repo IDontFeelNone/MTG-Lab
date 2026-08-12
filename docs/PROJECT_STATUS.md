@@ -1,3 +1,13 @@
+# Roadmap reconciliation — competitive evidence parked
+
+The authoritative inspected mainline baseline is `bf2976c0c42153f11756bd362767356f23671cfc`,
+which merged project Phase 147 through GitHub PR #154. Phase and PR numbers are independent. Phase
+147 is the highest merged project phase. Competitive Intelligence is now **PARKED / KNOWN GAP / NOT
+ON CURRENT CRITICAL PATH**; no competitive acquisition or follow-on phase is authorized. Product
+Intelligence is reserved as the next major domain to assess, with the recommended next capability a
+generic evidence-to-acquisition-decision vertical after a separate requirement and authorization. See
+`ROADMAP_RECONCILIATION_2026_08_12.md` for the capability assessment and exact resumption gates.
+
 # Phase 147 — TopDeck.gg non-retaining provider probe implemented; retention blocked
 
 The transport-free adapter validates exact-ten-Card projection, provider tournament/deck identity,
