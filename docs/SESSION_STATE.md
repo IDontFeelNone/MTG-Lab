@@ -1,3 +1,12 @@
+# Phase 145 — competitive / actual-play evidence gap assessed
+
+Repository census found no retained tournament, event-result, placement, match-result, or competitive
+decklist evidence. A provider-neutral `card-competitive-evidence-v1` envelope and local fail-closed
+validator define the minimum future boundary, but no provider acquisition, workflow, snapshot, fact,
+or explanation change is enabled. Network research failed closed (browser 401; proxy 403), leaving
+TopDeck.gg as a conditional one-provider pilot pending human licensing/API/denominator verification.
+Architecture v12 and all Phase 144 protected identities remain unchanged.
+
 # Phase 144 — reviewed MTGJSON deck usage admitted
 
 Phase 144 strictly reviewed `data/card_intelligence/demand/phase-143/mtgjson-decks.json` and admitted its literal ten-Card projection. The artifact is `card-deck-usage-evidence-v1`, provider `mtgjson`, dataset `AllDeckFiles.zip`, source SHA-256 `41b5c64a0a5797518cfb0d0584c5b2cba320ec955f775c40b4bbecfd66a298b1`, 259,140,526 source bytes, dataset/retrieval timestamp `2026-08-10T22:23:35Z`, and records SHA-256 `6f1dfb55554b145062b958a0655e5f43385d0d2a8fbfa9377e254b3928b14248`. Its denominator is exactly 3,004 distinct decoded provider deck files, not global decks, players, or the Magic population.
