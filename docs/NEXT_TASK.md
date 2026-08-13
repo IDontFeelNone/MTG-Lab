@@ -1,18 +1,24 @@
-# Next task after Decision Intelligence assessment
+# Next milestone candidate — Fixed-Content Product Intelligence Foundation
 
-When separately authorized, implement one major **Decision Intelligence Contract Foundation**
-milestone using synthetic inputs only: shared request, alternative, domain-analysis, policy,
-recommendation, uncertainty/abstention, sensitivity, provenance, thin-orchestration and
-reasoning-context contracts. Do not begin Product or Deck Intelligence analytics in that milestone.
-Product Intelligence is the first later vertical; Deck Intelligence must reuse the same contract.
-See `DECISION_INTELLIGENCE_ASSESSMENT_2026_08_12.md`.
+The synthetic-only shared Decision Intelligence Contract Foundation is complete. The next candidate
+is a separately authorized, generic Fixed-Content Product Intelligence Foundation that supplies
+domain-analysis envelopes to the shared engine. It must not add named-product logic or allow domain
+analytics to select recommendations. Prerequisites are in `DECISION_INTELLIGENCE.md`. Deck
+Intelligence remains later; Competitive Intelligence remains **PARKED / KNOWN GAP / NOT ON CURRENT
+CRITICAL PATH**.
+
+# Historical next task after Decision Intelligence assessment (completed)
+
+This historical task is complete. The synthetic contract, policy, abstention, provenance,
+thin-orchestration, and reasoning-context boundary is described in `DECISION_INTELLIGENCE.md`.
+Product and Deck Intelligence were not begun.
 
 Competitive Intelligence is **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. No further
 competitive acquisition phase is authorized. Do not begin Phase 148A, Phase 148B, another TopDeck
 phase, provider acquisition, secret setup, or competitive-fact integration. The exact future gates are
 recorded in `ROADMAP_RECONCILIATION_2026_08_12.md`.
 
-# Next task after Phase 147
+# Historical next task after Phase 147 (superseded)
 
 Obtain current provider-controlled TopDeck API/terms documents and written clarification covering
 permanent bounded retention, historical storage, redistribution, and attribution for stored/derived

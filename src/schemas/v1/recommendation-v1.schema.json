@@ -1,0 +1,194 @@
+{
+  "$id": "https://mtg-lab.local/schemas/v1/recommendation-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "abstention_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "counterarguments": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "alternative_id": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "factor_id": {
+            "type": "string"
+          },
+          "metric_id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "factor_id",
+          "alternative_id",
+          "metric_id",
+          "statement",
+          "evidence_ids"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "decision_change_conditions": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "evidence_references": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "content_digest": {
+            "pattern": "^sha256:",
+            "type": "string"
+          },
+          "evidence_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "locator": {
+            "type": "string"
+          },
+          "recorded_at": {
+            "type": "string"
+          },
+          "source_identity": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence_id",
+          "source_identity",
+          "content_digest"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "input_snapshot_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "outcome": {
+      "enum": [
+        "selected",
+        "abstain"
+      ]
+    },
+    "policy": {
+      "type": "object"
+    },
+    "rationale": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "recommendation_id": {
+      "pattern": "^recommendation-sha256:",
+      "type": "string"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "recommendation-v1"
+    },
+    "selected_alternative_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supporting_factors": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "alternative_id": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "factor_id": {
+            "type": "string"
+          },
+          "metric_id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "factor_id",
+          "alternative_id",
+          "metric_id",
+          "statement",
+          "evidence_ids"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "uncertainties": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "recommendation_id",
+    "request_id",
+    "outcome",
+    "selected_alternative_id",
+    "policy",
+    "rationale",
+    "evidence_references",
+    "supporting_factors",
+    "counterarguments",
+    "uncertainties",
+    "assumptions",
+    "limitations",
+    "decision_change_conditions",
+    "input_snapshot_ids",
+    "abstention_reasons"
+  ],
+  "title": "recommendation-v1",
+  "type": "object"
+}

@@ -1,3 +1,16 @@
+# Decision Intelligence Contract Foundation implemented — synthetic only
+
+The authoritative merged baseline reconciled before implementation is `19b69c2` (GitHub PR #156),
+which contains the approved assessment. The highest merged project milestone remains **Phase 147**;
+it arrived through PR #154. Project phases and GitHub PR numbers are independent. The additive,
+game-neutral contracts, deterministic policy evaluator, fail-closed abstention, thin stateless
+orchestration, and reasoning-context projection are implemented with synthetic fixtures. Architecture
+v12 and all production data remain unchanged. See `DECISION_INTELLIGENCE.md`.
+
+Competitive Intelligence remains **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. Product and
+Deck Intelligence are not implemented. The recommended next milestone is the Fixed-Content Product
+Intelligence Foundation; do not begin it without separate authorization.
+
 # Roadmap reconciliation — competitive evidence parked
 
 The authoritative inspected mainline baseline is `bf2976c0c42153f11756bd362767356f23671cfc`,

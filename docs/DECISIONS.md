@@ -255,6 +255,24 @@ Approving the architecture establishes the Research Log's responsibilities and b
 
 ---
 
+## Decision 014 — Deterministic Shared Decision Contracts
+
+**Status:** Accepted
+
+Domain analytics provide opaque, versioned evidence envelopes to one game-neutral deterministic
+policy boundary. The shared layer owns explicit requests, alternatives, policy evaluation,
+structured recommendations, abstention, provenance, replay identities, and the AI-facing projection;
+domains own metric and action semantics. Missing, unsupported, incomplete, contradictory, or tied
+required evidence fails closed. An LLM may explain the completed recommendation but may not calculate
+or change it. This is an additive refinement within frozen Architecture v12.
+
+### Reasoning
+
+One reproducible substrate prevents domain recommendation silos, preserves unknowns and provenance,
+and lets future collectible-game domains evolve without embedding their semantics in shared code.
+
+---
+
 ## Future Decisions
 
 Future architectural decisions will be added as MTG Lab evolves.
