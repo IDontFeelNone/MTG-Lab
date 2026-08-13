@@ -1,9 +1,11 @@
-# Next task after roadmap reconciliation
+# Next task after Decision Intelligence assessment
 
-Wait for the separate Product Intelligence requirement. The recommended next major capability is a
-generic Product Intelligence evidence-to-acquisition-decision vertical, beginning with an assessment
-and contract only when explicitly authorized. Do not implement Product Intelligence from the reserved
-concept list alone and do not design product-specific Crack-the-Plates logic.
+When separately authorized, implement one major **Decision Intelligence Contract Foundation**
+milestone using synthetic inputs only: shared request, alternative, domain-analysis, policy,
+recommendation, uncertainty/abstention, sensitivity, provenance, thin-orchestration and
+reasoning-context contracts. Do not begin Product or Deck Intelligence analytics in that milestone.
+Product Intelligence is the first later vertical; Deck Intelligence must reuse the same contract.
+See `DECISION_INTELLIGENCE_ASSESSMENT_2026_08_12.md`.
 
 Competitive Intelligence is **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. No further
 competitive acquisition phase is authorized. Do not begin Phase 148A, Phase 148B, another TopDeck
