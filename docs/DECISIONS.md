@@ -273,6 +273,18 @@ and lets future collectible-game domains evolve without embedding their semantic
 
 ---
 
+## Decision 015 — Product Intelligence Owns Descriptive Fixed-Content Economics
+
+**Status:** Accepted
+
+Product Intelligence owns immutable fixed-content manifests, sealed acquisition-cost contracts, thin bindings to supplied Market Intelligence observations, and deterministic descriptive aggregation. Exact comparisons fail closed across incomplete contents or incompatible currency, provider, time, price-type, printing, finish, language, or treatment dimensions. Acquisition objectives and action selection remain in Decision Intelligence. Intrinsic component value, presale scarcity premium, and sealed collectible premium remain separate concepts; unsupported premiums or risks are not fabricated.
+
+### Reasoning
+
+This minimum boundary supports reusable collectible-product analysis without duplicating Market, Card, Collection, or Decision Intelligence and without creating an open-ended product infrastructure thread. It is an additive refinement within Architecture v12.
+
+---
+
 ## Future Decisions
 
 Future architectural decisions will be added as MTG Lab evolves.

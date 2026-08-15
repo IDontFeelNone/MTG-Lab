@@ -1,3 +1,7 @@
+# Fixed-Content Product Intelligence Foundation complete
+
+The second roadmap item from the Decision Intelligence assessment is implemented as a bounded, synthetic-only Product Intelligence domain. It provides generic manifests, acquisition offers, thin market bindings, descriptive fixed-content economics, fail-closed comparison, and Decision Intelligence envelope compatibility without recommendations. The next candidate is one bounded synthetic sealed-versus-singles decision vertical, not another open-ended infrastructure phase. Architecture v12 is unchanged and Competitive Intelligence remains parked. See `PRODUCT_INTELLIGENCE.md`.
+
 # Decision Intelligence Contract Foundation complete
 
 The first roadmap item approved by the 2026-08-12 assessment is implemented as a synthetic-only,

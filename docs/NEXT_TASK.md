@@ -1,3 +1,7 @@
+# Next milestone candidate — bounded sealed-versus-singles decision vertical
+
+The Product Intelligence foundation is complete. The recommended next milestone is a separately authorized, synthetic-first Decision Intelligence request/policy vertical for fixed-content sealed-versus-singles acquisition objectives. It should reuse Product Intelligence facts, add no product-specific logic, and remain fail-closed for unevaluated scarcity, collectibility, compression, supply, and demand evidence. Reassess the evidence needed before any production dataset or acquisition. Do not begin automatically. Competitive Intelligence remains parked.
+
 # Next milestone candidate — Fixed-Content Product Intelligence Foundation
 
 The synthetic-only shared Decision Intelligence Contract Foundation is complete. The next candidate
