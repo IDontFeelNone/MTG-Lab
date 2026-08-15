@@ -1,3 +1,7 @@
+# Fixed-Content Product Intelligence Foundation implemented — synthetic only
+
+The authoritative baseline is `64410189479fc2cc1dae9decf8588c7c115f7613`, the merge of GitHub PR #157. Generic versioned fixed-content manifests, sealed acquisition offers, thin MarketObservation valuation bindings, deterministic descriptive economics, explicit comparability/coverage states, and a synthetic Decision Intelligence envelope are implemented. No production data, recommendation, provider acquisition, or Architecture v12 change occurred. Competitive Intelligence remains **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. See `PRODUCT_INTELLIGENCE.md`.
+
 # Decision Intelligence Contract Foundation implemented — synthetic only
 
 The authoritative merged baseline reconciled before implementation is `19b69c2` (GitHub PR #156),

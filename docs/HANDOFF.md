@@ -1,3 +1,7 @@
+# Fixed-Content Product Intelligence Foundation handoff
+
+Baseline `64410189479fc2cc1dae9decf8588c7c115f7613` (merged PR #157) now has a synthetic-only, game-neutral Product Intelligence domain. It reuses immutable Market observations and projects descriptive facts into the shared Decision Intelligence envelope. Exact totals/deltas require complete manifests, priced components, and compatible dimensions; otherwise results remain incomplete with known subtotals and coverage. Unsupported future premiums/risks remain explicit. Production repositories and Architecture v12 are unchanged. Continue with `PRODUCT_INTELLIGENCE.md`; do not automatically start the next vertical. Competitive Intelligence remains parked.
+
 # Decision Intelligence Contract Foundation handoff
 
 The checked baseline was `19b69c2` / PR #156, with Phase 147 still the highest merged project phase.
