@@ -1,0 +1,59 @@
+{
+  "$id": "https://mtg-lab.local/schemas/v1/decision-policy-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "criteria": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "direction": {
+            "enum": [
+              "maximize",
+              "minimize"
+            ]
+          },
+          "metric_id": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "metric_id",
+          "direction",
+          "required"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "policy_id": {
+      "type": "string"
+    },
+    "require_analysis_state_known": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "decision-policy-v1"
+    },
+    "tie_behavior": {
+      "const": "abstain"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "policy_id",
+    "version",
+    "criteria",
+    "tie_behavior",
+    "require_analysis_state_known"
+  ],
+  "title": "decision-policy-v1",
+  "type": "object"
+}

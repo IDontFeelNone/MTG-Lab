@@ -1,0 +1,153 @@
+{
+  "$id": "https://mtg-lab.local/schemas/v1/decision-analysis-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alternative_id": {
+      "type": "string"
+    },
+    "assumptions": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "domain_id": {
+      "type": "string"
+    },
+    "domain_version": {
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "content_digest": {
+            "pattern": "^sha256:",
+            "type": "string"
+          },
+          "evidence_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "locator": {
+            "type": "string"
+          },
+          "recorded_at": {
+            "type": "string"
+          },
+          "source_identity": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence_id",
+          "source_identity",
+          "content_digest"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "input_snapshot_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "metrics": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "metric_id": {
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "known",
+              "unknown",
+              "incomplete",
+              "unsupported"
+            ]
+          },
+          "uncertainty": {
+            "type": "object"
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean",
+              "null",
+              "array",
+              "object"
+            ]
+          }
+        },
+        "required": [
+          "metric_id",
+          "state",
+          "value",
+          "unit",
+          "uncertainty",
+          "evidence_ids"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "decision-analysis-v1"
+    },
+    "sensitivity_inputs": {
+      "type": "object"
+    },
+    "state": {
+      "enum": [
+        "known",
+        "unknown",
+        "incomplete",
+        "unsupported"
+      ]
+    },
+    "uncertainty": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "domain_id",
+    "domain_version",
+    "alternative_id",
+    "state",
+    "metrics",
+    "evidence",
+    "assumptions",
+    "limitations",
+    "uncertainty",
+    "sensitivity_inputs",
+    "input_snapshot_ids"
+  ],
+  "title": "decision-analysis-v1",
+  "type": "object"
+}

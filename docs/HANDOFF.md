@@ -1,4 +1,14 @@
-# Decision Intelligence assessment handoff
+# Decision Intelligence Contract Foundation handoff
+
+The checked baseline was `19b69c2` / PR #156, with Phase 147 still the highest merged project phase.
+The foundation is an additive Architecture-v12 implementation: five versioned contracts and schemas,
+a deterministic ordered-criteria policy, stateless orchestration, first-class abstention,
+reproducible identities, and a complete recommendation projection for downstream explanation. All
+validation is synthetic-only and production repositories were not modified. Continue with
+`DECISION_INTELLIGENCE.md`; stop before Product Intelligence unless separately authorized.
+Competitive Intelligence remains parked.
+
+# Historical Decision Intelligence assessment handoff (implemented)
 
 The checked-out baseline is merge commit `1574f7778cc0748b14544ead631b4c906eedcd41`
 (GitHub PR #155); Phase 147 remains the highest merged project phase. Phase numbers and PR numbers are
@@ -6,10 +16,9 @@ independent. The assessment in `DECISION_INTELLIGENCE_ASSESSMENT_2026_08_12.md` 
 v12 defect. Product and Deck Intelligence should share a generic Decision Intelligence contract, with
 a thin acquisition orchestrator over domain analytics and the existing Decision Engine.
 
-The next recommended implementation milestone, only when authorized, is a synthetic-only Decision
-Intelligence Contract Foundation. Product Intelligence follows as the first vertical; Deck
-Intelligence follows over the same seam. Neither domain, live provider integration, nor ChatGPT
-provider was implemented. Competitive Intelligence remains parked.
+The assessment's synthetic-only Decision Intelligence Contract Foundation is now implemented.
+Neither domain, live provider integration, nor ChatGPT provider was implemented. Competitive
+Intelligence remains parked.
 
 # Roadmap reconciliation handoff (historical)
 

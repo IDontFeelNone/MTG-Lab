@@ -1,0 +1,136 @@
+{
+  "$id": "https://mtg-lab.local/schemas/v1/decision-request-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alternatives": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "alternative_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object"
+          },
+          "schema_version": {
+            "const": "decision-alternative-v1"
+          },
+          "subject_references": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "schema_version",
+          "alternative_id",
+          "action",
+          "subject_references",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "constraints": {
+      "type": "object"
+    },
+    "domain_inputs": {
+      "type": "object"
+    },
+    "evidence_references": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "content_digest": {
+            "pattern": "^sha256:",
+            "type": "string"
+          },
+          "evidence_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "locator": {
+            "type": "string"
+          },
+          "recorded_at": {
+            "type": "string"
+          },
+          "source_identity": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence_id",
+          "source_identity",
+          "content_digest"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "input_snapshot_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "objective": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "policy": {
+      "additionalProperties": false,
+      "properties": {
+        "policy_id": {
+          "type": "string"
+        },
+        "policy_version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "policy_id",
+        "policy_version"
+      ],
+      "type": "object"
+    },
+    "preferences": {
+      "type": "object"
+    },
+    "request_id": {
+      "pattern": "^request-sha256:",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "decision-request-v1"
+    },
+    "uncertainty": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "objective",
+    "alternatives",
+    "constraints",
+    "preferences",
+    "domain_inputs",
+    "evidence_references",
+    "policy",
+    "uncertainty",
+    "input_snapshot_ids"
+  ],
+  "title": "decision-request-v1",
+  "type": "object"
+}

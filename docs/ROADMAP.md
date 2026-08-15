@@ -1,3 +1,11 @@
+# Decision Intelligence Contract Foundation complete
+
+The first roadmap item approved by the 2026-08-12 assessment is implemented as a synthetic-only,
+shared, game-neutral substrate. It extends the existing Decision Engine direction without changing
+Architecture v12. The next candidate is the **Fixed-Content Product Intelligence Foundation**, then
+later collection-aware expansion and Deck Intelligence. Competitive Intelligence remains **PARKED /
+KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. See `DECISION_INTELLIGENCE.md`.
+
 # Roadmap priority reset — 2026-08-12
 
 The authoritative baseline before this reconciliation is mainline merge

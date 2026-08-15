@@ -1,0 +1,36 @@
+{
+  "$id": "https://mtg-lab.local/schemas/v1/decision-alternative-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "alternative_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "attributes": {
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "decision-alternative-v1"
+    },
+    "subject_references": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "alternative_id",
+    "action",
+    "subject_references",
+    "attributes"
+  ],
+  "title": "decision-alternative-v1",
+  "type": "object"
+}
