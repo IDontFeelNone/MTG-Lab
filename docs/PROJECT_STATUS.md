@@ -1,3 +1,14 @@
+# Synthetic sealed-versus-singles acquisition decision vertical implemented
+
+The authoritative implementation baseline is `87e8f025fe3f1eb843fc11963bc45236d8059da0`,
+the merge of GitHub PR #158. The first complete synthetic Product Intelligence → Decision
+Intelligence → reasoning-context vertical deterministically selects `BUY_SEALED_NOW` or
+`BUY_SINGLES_NOW` under current comparable acquisition cost, or abstains fail-closed. It supports
+only `minimize_acquisition_cost_for_guaranteed_contents` and `acquire_guaranteed_contents_now`.
+Future-price, scarcity, collectible-premium, liquidity, demand, reprint, and comparable-history
+dimensions remain explicitly unevaluated. No production evidence, protected repository, provider,
+LLM, or Architecture v12 change occurred. Competitive Intelligence remains parked.
+
 # Fixed-Content Product Intelligence Foundation implemented — synthetic only
 
 The authoritative baseline is `64410189479fc2cc1dae9decf8588c7c115f7613`, the merge of GitHub PR #157. Generic versioned fixed-content manifests, sealed acquisition offers, thin MarketObservation valuation bindings, deterministic descriptive economics, explicit comparability/coverage states, and a synthetic Decision Intelligence envelope are implemented. No production data, recommendation, provider acquisition, or Architecture v12 change occurred. Competitive Intelligence remains **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. See `PRODUCT_INTELLIGENCE.md`.

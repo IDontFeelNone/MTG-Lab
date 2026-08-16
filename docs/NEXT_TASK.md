@@ -1,3 +1,13 @@
+# Next milestone candidate — governed production fixed-content evidence packet
+
+The synthetic sealed-versus-singles vertical is complete. The single highest-value next milestone is
+to define and review one bounded, generic production evidence packet sufficient to evaluate a real
+fixed-content product: a complete guaranteed-content manifest, one timestamped sealed effective-cost
+offer, complete dimension-compatible singles observations, explicit singles transaction costs, and
+their provenance/snapshot identities. Stop before acquisition or evaluation unless that packet and
+the target are separately authorized. No additional Product Intelligence framework, forecasting,
+collectible-premium model, or Competitive Intelligence work is implied.
+
 # Next milestone candidate — bounded sealed-versus-singles decision vertical
 
 The Product Intelligence foundation is complete. The recommended next milestone is a separately authorized, synthetic-first Decision Intelligence request/policy vertical for fixed-content sealed-versus-singles acquisition objectives. It should reuse Product Intelligence facts, add no product-specific logic, and remain fail-closed for unevaluated scarcity, collectibility, compression, supply, and demand evidence. Reassess the evidence needed before any production dataset or acquisition. Do not begin automatically. Competitive Intelligence remains parked.

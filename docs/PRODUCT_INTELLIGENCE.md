@@ -1,5 +1,21 @@
 # Fixed-Content Product Intelligence Foundation
 
+## Acquisition decision adapter
+
+The first synthetic end-to-end vertical adds a thin Product Intelligence adapter without changing
+the descriptive analysis contract. It projects product/game/manifest/offer/analysis identity,
+current costs and deltas, coverage and unknown counts, comparability, component contributions,
+anchor concentration, evidence/timestamps, assumptions, limitations, unsupported dimensions, and
+input snapshots into generic Decision Intelligence requests and alternative envelopes.
+
+Decision Intelligence—not the descriptive analyzer—interprets the explicit objective and applies
+versioned current-cost policy `fixed-content-current-acquisition-cost` `1.0.0`. The only evaluated
+routes are `BUY_SEALED_NOW` and `BUY_SINGLES_NOW`; singles transaction costs must be supplied.
+Selected output includes the exact current cost difference and algebraic break-even thresholds.
+Anchor concentration remains descriptive explanatory context and never becomes a price-collapse
+forecast. Future `WAIT`, sealed-collectible, and sell/rebuy vocabulary requires new governed evidence
+and policy support and currently causes abstention.
+
 ## Status and scope
 
 Implemented from baseline `64410189479fc2cc1dae9decf8588c7c115f7613` (merged GitHub PR #157).
@@ -53,8 +69,9 @@ prediction, fair-value, investment, recommendation, or product-specific formulas
 
 ## Bounded future path
 
-The first useful future vertical should supply reviewed fixed-content manifest/offer/market evidence,
-then define a separately approved Decision Intelligence request and policy for sealed-now versus
-wait/singles alternatives. It must preserve the three-way distinction among intrinsic component value,
-temporary presale scarcity premium, and sealed collectible premium, and fail closed where the latter
-concepts lack evidence. This milestone stops before that policy, production data, acquisition, or UI.
+The next useful boundary is one reviewed production evidence packet containing a complete manifest,
+sealed offer/effective cost, complete comparable singles observations, explicit transaction costs,
+and provenance/snapshot identity. A real evaluation must preserve the distinction among component
+acquisition cost, presale scarcity premium, and sealed collectible premium and fail closed where the
+latter concepts lack evidence. No production target, acquisition, premium model, forecast, or UI is
+authorized by the synthetic vertical.

@@ -1,3 +1,22 @@
+# Synthetic sealed-versus-singles acquisition vertical handoff
+
+Implementation began from mainline merge `87e8f025fe3f1eb843fc11963bc45236d8059da0`
+(GitHub PR #158). A Product-owned adapter now preserves fixed-content analysis identity, product/game
+identity, evidence and timestamps, completeness, assumptions, limitations, unsupported dimensions,
+constraints, preferences, and alternatives in a generic `DecisionRequest`. Versioned policy
+`fixed-content-current-acquisition-cost` `1.0.0` minimizes exact normalized current comparable cost
+for `BUY_SEALED_NOW` and `BUY_SINGLES_NOW` under either supported acquisition objective. Singles
+transaction cost is explicit; missing or invalid decision-critical support abstains.
+
+The recommendation carries the objective, exact cost difference, leading component and descriptive
+anchor concentration, evidence-quality uncertainty, assumptions, limitations, algebraic thresholds,
+snapshot identity, and unsupported intelligence gaps into the existing reasoning context. It makes
+no fair-value, forecast, investment, scarcity, premium, or price-compression claim. `WAIT`,
+`BUY_SEALED_AND_KEEP_SEALED`, and `SELL_EARLY_REBUY_LATER` are reserved vocabulary only and abstain
+when requested. No LLM, live/production data, protected-data mutation, or Architecture v12 change
+occurred. The next bounded candidate is one governed production evidence packet; do not begin it
+automatically. Competitive Intelligence remains parked.
+
 # Fixed-Content Product Intelligence Foundation handoff
 
 Baseline `64410189479fc2cc1dae9decf8588c7c115f7613` (merged PR #157) now has a synthetic-only, game-neutral Product Intelligence domain. It reuses immutable Market observations and projects descriptive facts into the shared Decision Intelligence envelope. Exact totals/deltas require complete manifests, priced components, and compatible dimensions; otherwise results remain incomplete with known subtotals and coverage. Unsupported future premiums/risks remain explicit. Production repositories and Architecture v12 are unchanged. Continue with `PRODUCT_INTELLIGENCE.md`; do not automatically start the next vertical. Competitive Intelligence remains parked.

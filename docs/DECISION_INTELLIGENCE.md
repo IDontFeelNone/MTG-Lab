@@ -1,5 +1,32 @@
 # Decision Intelligence Contract Foundation
 
+## First domain vertical
+
+The synthetic fixed-content acquisition adapter is the first end-to-end use of these contracts. It
+builds a request from a `FixedContentProductAnalysis`, caller-supplied constraints/preferences, and
+explicit alternatives. Supported objectives are
+`minimize_acquisition_cost_for_guaranteed_contents` and `acquire_guaranteed_contents_now`; both mean
+that the guaranteed contents are the acquisition subject and only supported present routes are being
+compared. Supported actions are `BUY_SEALED_NOW` and `BUY_SINGLES_NOW`. `WAIT`, sealed collecting,
+and sell/rebuy actions are reserved but analytically unsupported.
+
+Policy `fixed-content-current-acquisition-cost` version `1.0.0` minimizes current comparable cost.
+Sealed cost is Product Intelligence's effective offer cost; singles cost is the complete guaranteed-
+component acquisition total plus an explicitly supplied singles transaction cost. Decimal values are
+normalized to a shared exact integer scale for the generic numeric policy comparison. A tie abstains.
+The recommendation records exact display costs/difference, objective, factors, descriptive anchor
+concentration, evidence-quality state, gaps, and algebraic change thresholds. No confidence
+probability was added: existing completeness, uncertainty, and decision-support states carry the
+appropriate semantics.
+
+Domain preflight also abstains for incomplete manifests, unknown values/costs, incompatible currency
+or market dimensions, contradictory economics, provenance conflict, missing singles transaction
+cost, unsupported objective, or unsupported alternative. Potential presale scarcity premium,
+post-release compression, sealed collectible premium, future supply, liquidity/listing depth,
+collector/IP demand, reprint risk, and historical comparables remain explicit `not_evaluated`
+limitations. ChatGPT receives the completed recommendation through the existing reasoning context
+and may explain, but neither recalculate nor override, it.
+
 ## Status and boundary
 
 The additive Decision Intelligence foundation approved by the 2026-08-12 assessment is implemented
@@ -56,15 +83,14 @@ it is not required or permitted to reconstruct the calculation from raw evidence
 
 ## Future domain integration and prerequisites
 
-Future Product Intelligence will validate guaranteed-content manifests and offers, compute its own
-domain analytics, and supply alternative envelopes without selecting the action. Future Deck
+Product Intelligence now validates guaranteed-content manifests and offers, computes its own
+domain analytics, and supplies alternative envelopes without selecting the action. Future Deck
 Intelligence will similarly own governed list, legality, collection-overlap, cost, and optional
 gameplay analytics. Both use the same shared contracts and policy boundary; neither is implemented
 here. The shared package contains no game, card, product, set, deck, format, booster, collectible, or
 tournament semantics.
 
-The recommended next milestone is the **Fixed-Content Product Intelligence Foundation**. It still
-requires governed guaranteed-content manifests, offer/effective-time evidence, comparable exact
-market dimensions, transaction-cost inputs, and explicit unknown handling. It must remain a generic
-domain analytics producer and must not bypass the shared recommendation policy. Deck Intelligence
-comes later and competitive evidence may remain unknown without reopening the parked work.
+Before a real product can be evaluated, one governed packet must supply a complete guaranteed-content
+manifest, timestamped sealed effective-cost evidence, complete compatible singles observations,
+explicit transaction costs, and provenance/snapshot identity. Deck Intelligence remains later and
+competitive evidence may remain unknown without reopening the parked work.
