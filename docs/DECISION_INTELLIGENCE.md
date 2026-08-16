@@ -94,3 +94,13 @@ Before a real product can be evaluated, one governed packet must supply a comple
 manifest, timestamped sealed effective-cost evidence, complete compatible singles observations,
 explicit transaction costs, and provenance/snapshot identity. Deck Intelligence remains later and
 competitive evidence may remain unknown without reopening the parked work.
+
+## Production evidence admission boundary
+
+Decision Intelligence does not evaluate a production fixed-content request directly from ad hoc
+inputs. A human-reviewed `fixed-content-acquisition-evidence-v1` packet must first return
+`READY_FOR_EVALUATION`. `NOT_READY_FOR_EVALUATION` is an admission failure, not an abstaining or buy
+recommendation. The evidence review owns manifest, market-dimension, currency, timestamp, effective-
+cost, transaction-cost, unknown, and provenance sufficiency checks; the existing policy remains
+unchanged and runs only after Product Intelligence produces its descriptive analysis. Optional
+future-evidence classes do not satisfy or alter the current-cost policy.
