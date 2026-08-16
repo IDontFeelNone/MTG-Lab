@@ -1,3 +1,14 @@
+# First synthetic acquisition decision vertical complete
+
+The Product and Decision foundations are now connected through one bounded, game-neutral
+sealed-versus-singles vertical. It compares only supplied current acquisition costs for guaranteed
+contents, supports two immediate/current-cost objectives, and selects sealed, selects singles, or
+abstains. Exact thresholds describe when the arithmetic ordering changes; they are not forecasts.
+The existing recommendation reasoning context is sufficient for downstream explanation without an
+LLM recomputing economics. The single next candidate is a governed production fixed-content evidence
+packet, not another infrastructure sequence. Architecture v12 is unchanged; Competitive
+Intelligence remains **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**.
+
 # Fixed-Content Product Intelligence Foundation complete
 
 The second roadmap item from the Decision Intelligence assessment is implemented as a bounded, synthetic-only Product Intelligence domain. It provides generic manifests, acquisition offers, thin market bindings, descriptive fixed-content economics, fail-closed comparison, and Decision Intelligence envelope compatibility without recommendations. The next candidate is one bounded synthetic sealed-versus-singles decision vertical, not another open-ended infrastructure phase. Architecture v12 is unchanged and Competitive Intelligence remains parked. See `PRODUCT_INTELLIGENCE.md`.
