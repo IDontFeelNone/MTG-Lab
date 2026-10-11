@@ -1,3 +1,15 @@
+# Governed production evidence boundary complete
+
+The generic evidence packet and binary human-review gate now form the complete boundary between
+retained production inputs and the existing fixed-content current-cost vertical. This is one bounded
+milestone, not the start of another infrastructure sequence. The shortest remaining path is one pilot
+packet → manual `READY_FOR_EVALUATION` review → existing Product Intelligence analysis → existing
+Decision Intelligence policy → downstream ChatGPT explanation. Commander Collection: Black
+(non-premium) is the provisional bounded pilot because the repository already retains a provider deck
+record and its small fixed contents are architecturally useful; it is not implemented in shared code,
+and it still requires exact reviewed production evidence. Architecture v12 is unchanged and
+Competitive Intelligence remains parked.
+
 # First synthetic acquisition decision vertical complete
 
 The Product and Decision foundations are now connected through one bounded, game-neutral

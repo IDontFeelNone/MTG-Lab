@@ -1,3 +1,14 @@
+# Single next step — assemble and manually review one pilot packet
+
+The evidence contract milestone is complete. The single next highest-value step, requiring separate
+authorization, is to assemble one real `fixed-content-acquisition-evidence-v1` packet for the
+provisional **Commander Collection: Black (non-premium)** pilot and perform the governed human review.
+Do not run Product or Decision Intelligence unless that review returns `READY_FOR_EVALUATION`.
+Confirm the complete official contents, exact canonical Printings, current compatible singles
+observations, one current sealed offer, and explicit transaction costs; stop on any gap. No new
+acquisition subsystem, named-product code, forecast, premium model, or Competitive Intelligence work
+is authorized.
+
 # Next milestone candidate — governed production fixed-content evidence packet
 
 The synthetic sealed-versus-singles vertical is complete. The single highest-value next milestone is

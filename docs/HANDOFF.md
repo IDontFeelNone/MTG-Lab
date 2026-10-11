@@ -1,3 +1,21 @@
+# Governed fixed-content production evidence handoff
+
+Baseline `2186a55d56284993e7807b1398299ba962de1a85` now has the additive,
+game-neutral `fixed-content-acquisition-evidence-v1` boundary. It embeds the existing immutable
+Product Intelligence contracts, binds Market observations without copying or mutating market
+history, and adds strict retained-source identity/digests, independently preserved publication,
+retrieval, observation, effective, and assembly timestamps, explicit unpriced components and cost
+states, deterministic canonical bytes/identity, conflict rejection, and manual READY/NOT_READY
+review. Future evidence classes are reference-only and unevaluated.
+
+No production packet or recommendation exists. The repository's retained Commander Collection:
+Black deck record makes the non-premium product a bounded provisional pilot, but exact content
+publication provenance, canonical Printing coverage, a current sealed offer, current compatible
+singles observations, and reviewed transaction costs still must be obtained. The shortest authorized
+future path is: assemble packet → human review → existing Product analysis → existing Decision policy
+→ ChatGPT explanation. Stop after review unless evaluation is separately authorized. Architecture
+v12 and protected data are unchanged; Competitive Intelligence remains parked.
+
 # Synthetic sealed-versus-singles acquisition vertical handoff
 
 Implementation began from mainline merge `87e8f025fe3f1eb843fc11963bc45236d8059da0`

@@ -301,3 +301,20 @@ Examples include:
 - Performance optimization
 - Security model
 - Multi-game schema boundaries
+
+## Decision 016 — Production Fixed-Content Evaluation Requires a Reviewed Evidence Packet
+
+**Status:** Accepted
+
+Production fixed-content inputs cross a versioned, immutable, deterministic evidence boundary before
+Product or Decision Intelligence runs. The packet composes existing Product and Market contracts,
+adds retained source identity and integrity, explicit unknown/completeness and transaction-cost
+states, and preserves independent evidence timestamps. A separate human review returns only
+`READY_FOR_EVALUATION` or `NOT_READY_FOR_EVALUATION`; it never selects an acquisition action.
+Production evaluation is prohibited unless the packet is READY.
+
+### Reasoning
+
+This fail-closed admission boundary makes real inputs reconstructable and auditable without
+transferring recommendation ownership, duplicating Market history, mutating canonical data, or adding
+a named-product acquisition subsystem. It is additive within frozen Architecture v12.

@@ -1,0 +1,21 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Governed fixed-content acquisition evidence packet",
+  "type":"object","additionalProperties":false,
+  "required":["schema_version","packet_id","assembled_at","manifest","sealed_offer","sealed_cost_input_states","availability_state","availability_source_ids","valuations","unpriced_component_ids","transaction_costs","sources","future_evidence"],
+  "properties":{
+    "schema_version":{"const":"fixed-content-acquisition-evidence-v1"},
+    "packet_id":{"type":"string","pattern":"^fixed-content-evidence-sha256:[0-9a-f]{64}$"},
+    "assembled_at":{"type":"string"},
+    "manifest":{"type":"object"},"sealed_offer":{"type":"object"},
+    "sealed_cost_input_states":{"type":"object","additionalProperties":false,"required":["shipping","tax","fees","discounts"],"properties":{"shipping":{"$ref":"#/$defs/state"},"tax":{"$ref":"#/$defs/state"},"fees":{"$ref":"#/$defs/state"},"discounts":{"$ref":"#/$defs/state"}}},
+    "availability_state":{"enum":["available","unavailable","unknown"]},
+    "availability_source_ids":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "valuations":{"type":"array","items":{"type":"object"}},
+    "unpriced_component_ids":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "transaction_costs":{"type":"object","additionalProperties":false,"required":["currency","shipping","marketplace_fees","other_costs","total","completeness","evidence_source_ids","seller_order_assumptions"],"properties":{"currency":{"type":"string","pattern":"^[A-Z]{3}$"},"shipping":{"type":"string"},"marketplace_fees":{"type":"string"},"other_costs":{"type":"string"},"total":{"type":"string"},"completeness":{"enum":["complete","incomplete","unknown"]},"evidence_source_ids":{"type":"array","items":{"type":"string"}},"seller_order_assumptions":{"type":"array","items":{"type":"string"}}}},
+    "sources":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["source_id","provider","record_identity","content_digest","evidence_state","locator","published_at","retrieved_at","canonical_references"],"properties":{"source_id":{"type":"string"},"provider":{"type":"string"},"record_identity":{"type":"string"},"content_digest":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},"evidence_state":{"$ref":"#/$defs/state"},"locator":{"type":["string","null"]},"published_at":{"type":["string","null"]},"retrieved_at":{"type":"string"},"canonical_references":{"type":"array","items":{"type":"string"}}}}},
+    "future_evidence":{"type":"object","additionalProperties":false,"properties":{"presale_observations":{"$ref":"#/$defs/refs"},"post_release_observations":{"$ref":"#/$defs/refs"},"supply_availability":{"$ref":"#/$defs/refs"},"listing_depth_liquidity":{"$ref":"#/$defs/refs"},"historical_comparable_products":{"$ref":"#/$defs/refs"},"sealed_collectible_premium":{"$ref":"#/$defs/refs"},"collector_ip_demand":{"$ref":"#/$defs/refs"},"reprint_risk":{"$ref":"#/$defs/refs"}}}
+  },
+  "$defs":{"state":{"enum":["known","unknown","incomplete","not_applicable"]},"refs":{"type":"array","items":{"type":"string"},"uniqueItems":true}}
+}

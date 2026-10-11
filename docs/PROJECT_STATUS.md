@@ -1,3 +1,14 @@
+# First governed production fixed-content evidence packet implemented — contract only
+
+Implementation began from the reconciled checkout baseline `2186a55d56284993e7807b1398299ba962de1a85`
+(the merge of GitHub PR #159). Versioned `fixed-content-acquisition-evidence-v1` now composes the
+existing manifest, sealed offer, component valuation, and Market observation contracts with strict
+source snapshots, independent timestamps, explicit cost/completeness states, optional unevaluated
+future-evidence references, deterministic content identity, conflict-rejecting replay, and a binary
+human review boundary. No real packet was acquired, reviewed, analyzed, or evaluated; no production
+or protected data changed. Architecture v12 remains unchanged and Competitive Intelligence remains
+**PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**.
+
 # Synthetic sealed-versus-singles acquisition decision vertical implemented
 
 The authoritative implementation baseline is `87e8f025fe3f1eb843fc11963bc45236d8059da0`,
