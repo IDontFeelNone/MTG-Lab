@@ -1,3 +1,21 @@
+# Current boundary — documentation milestone for Project Manager review
+
+Canonical main independently verified on 2026-10-12: `dd08c76d09e4b8d10c411ade0d8445987c8875c0`, the merge of GitHub PR #161 — Fixed-Content Evidence Admission Hardening. GitHub PR numbers and project phase numbers are independent; Phase 147 remains the highest numbered project phase. No new phase number is assigned to the later named milestones.
+
+The authorized documentation reconciliation corrects present-state summaries and verifies one documentation-only connector-delivered PR. Review the milestone PR and its validation/delivery results. Preserve historical records and protected implementation/data; do not merge automatically or begin the next milestone. No feature implementation, production evidence acquisition, pilot packet assembly, human readiness review, or acquisition recommendation is authorized in this task.
+
+## Next candidate — separately authorized real fixed-content pilot
+
+The next candidate, requiring separate authorization, is one governed real fixed-content Product Intelligence pilot for **Commander Collection: Black (non-premium)**: complete independently verifiable official contents, exact canonical Printings, one available current sealed offer, complete compatible current singles observations, explicit transaction costs (including evidence for zeros), source digests/provenance, and a deterministic freshness window. Stop on any gap. Packet assembly and human readiness review do not authorize canonical promotion or acquisition evaluation. Only after separate evaluation authorization and an exact human-attested v2 `READY_FOR_EVALUATION` review may a production caller use `require_ready_evidence_review` before the existing Product analysis and Decision policy.
+
+Architecture v12 remains frozen. Repository-first canonical truth, deterministic analytics and decisions, versioned immutable evidence, human-reviewed production admission, and product-neutral/game-neutral generic engines remain unchanged. AI/ChatGPT is the explanation and reasoning interface over validated outputs; it does not calculate or override acquisition decisions. Competitive Intelligence remains **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. Competitive Card Intelligence and Deck Intelligence remain planned and unauthorized; existing collection/deck-completion helpers are not the planned Deck Intelligence decision domain.
+
+---
+
+# Historical records — superseded for present state
+
+The entries below preserve their original milestone context, counts, environment observations, and review instructions. They do not describe the current baseline or authorize work; the current summary above takes precedence.
+
 # Current boundary — Project Manager review of admission hardening
 
 The authorized Fixed-Content Evidence Admission Hardening implementation is complete for review.

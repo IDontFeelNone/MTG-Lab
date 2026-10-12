@@ -1,5 +1,15 @@
 # Fixed-Content Product Intelligence Foundation
 
+## Current merged status (2026-10-12)
+
+Canonical main independently verified on 2026-10-12: `dd08c76d09e4b8d10c411ade0d8445987c8875c0`, the merge of GitHub PR #161 — Fixed-Content Evidence Admission Hardening. GitHub PR numbers and project phase numbers are independent; Phase 147 remains the highest numbered project phase. No new phase number is assigned to the later named milestones.
+
+Implemented: shared Decision Intelligence contracts, synthetic fixed-content Product analysis and sealed-versus-singles current-cost policy, packet v1, and hardened human-attested review v2. The hardening separates eligibility from approval, freezes nested inputs, requires cost provenance and freshness, validates replay, and binds review to the exact packet/window. Production fixed-content pilot assembly, readiness review, evaluation, and recommendations have not occurred. Forecasts, premium models, simulation, API/UI, live AI-provider integration, and an operational AI Advisor remain unsupported or planned.
+
+Architecture v12 remains frozen. Repository-first canonical truth, deterministic analytics and decisions, versioned immutable evidence, human-reviewed production admission, and product-neutral/game-neutral generic engines remain unchanged. AI/ChatGPT is the explanation and reasoning interface over validated outputs; it does not calculate or override acquisition decisions. Competitive Intelligence remains **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. Competitive Card Intelligence and Deck Intelligence remain planned and unauthorized; existing collection/deck-completion helpers are not the planned Deck Intelligence decision domain.
+
+The next candidate, requiring separate authorization, is one governed real fixed-content Product Intelligence pilot for **Commander Collection: Black (non-premium)**: complete independently verifiable official contents, exact canonical Printings, one available current sealed offer, complete compatible current singles observations, explicit transaction costs (including evidence for zeros), source digests/provenance, and a deterministic freshness window. Stop on any gap. Packet assembly and human readiness review do not authorize canonical promotion or acquisition evaluation. Only after separate evaluation authorization and an exact human-attested v2 `READY_FOR_EVALUATION` review may a production caller use `require_ready_evidence_review` before the existing Product analysis and Decision policy.
+
 ## Acquisition decision adapter
 
 The first synthetic end-to-end vertical adds a thin Product Intelligence adapter without changing
@@ -181,6 +191,6 @@ current sealed offer, complete compatible current singles observations, transact
 integrity. No production packet was retained in this milestone.
 
 The exact remaining dependency chain is: assemble that one governed packet from reviewed sources →
-human review → if and only if READY, call existing `analyze_fixed_content` → call the existing
+human review → separate evaluation authorization and exact READY admission guard → call existing `analyze_fixed_content` → call the existing
 sealed-versus-singles Decision Intelligence policy → expose its structured recommendation to ChatGPT.
 No additional infrastructure phase is presently indicated.
