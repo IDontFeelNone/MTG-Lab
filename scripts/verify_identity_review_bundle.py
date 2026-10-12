@@ -182,7 +182,7 @@ def _verify_bundle(bundle_path, data_root):
                 _require(candidate["validation_state"] == "requires_review", "candidate is not pending review")
                 validate_document(proposed, kind)
                 coverage = {p["field_path"] for p in candidate["field_provenance"]}
-                _require(set(proposed) - {"schema_version"} <= coverage, "candidate field provenance incomplete")
+                _require(set(proposed) <= coverage, "candidate field provenance incomplete")
                 for provenance in candidate["field_provenance"]:
                     for field in ("source_id", "raw_evidence_hash", "acquisition_target_id"):
                         _require(provenance[field] == parsed[field], "field provenance source mismatch")

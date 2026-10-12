@@ -55,6 +55,11 @@ retained separately for review. The verification command does not parse provider
 candidates. Confidence fields express extraction consistency within these pending artifacts; they
 are not human approval, probability estimates, or guarantees of upstream completeness.
 
+Candidate artifact revision 2 adds computed/internal `schema_version` provenance for the
+local Canonical Product v2 serialization choice. Every candidate payload field requires
+provenance coverage, including that version field. This revision preserves the original
+source and parsed bytes, records its actual preparation time, and remains `requires_review`.
+
 ## Remaining identity and content blockers
 
 The token source proves physical product TCGplayer `247541` pairs these provider UUIDs:

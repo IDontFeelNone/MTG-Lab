@@ -85,7 +85,7 @@ class IdentityPreparationTests(unittest.TestCase):
             exemplar = candidate["field_provenance"][0]
             candidate["field_provenance"] = [dict(exemplar, field_path=key, value_origin="computed",
                 notes="Explicit synthetic test fixture; pending and not source-admissible.")
-                for key in payload if key != "schema_version"]
+                for key in payload]
             path = f"candidates/{kind}.json"
             write(self.bundle / path, artifact)
             config["parsed_artifacts"][0]["candidate_artifacts"].append(path)
@@ -128,6 +128,37 @@ class IdentityPreparationTests(unittest.TestCase):
         self.assertFalse(report["source_extraction_semantically_approved"])
         self.assertFalse(report["promotion_performed"])
         self.assertEqual(report["readiness"], "NOT_READY_FOR_EVALUATION")
+        artifact = load(BUNDLE / "candidates/product.json")
+        candidate = artifact["candidates"][0]
+        self.assertEqual(candidate["validation_state"], "requires_review")
+        coverage = {item["field_path"] for item in candidate["field_provenance"]}
+        self.assertLessEqual(set(candidate["payload"]), coverage)
+        provenance = next(item for item in candidate["field_provenance"]
+                          if item["field_path"] == "schema_version")
+        self.assertEqual(provenance["value_origin"], "computed")
+        self.assertEqual(provenance["provenance_classification"], "internal")
+        for field in ("source_id", "raw_evidence_hash", "acquisition_target_id", "parsed_artifact_id"):
+            self.assertEqual(provenance[field], artifact[field])
+        self.assertIn(provenance["parsed_record_id"], candidate["parsed_record_ids"])
+        parsed = load(BUNDLE / "parsed/product.json")
+        self.assertIn(provenance["parsed_record_id"], {record["id"] for record in parsed["records"]})
+        self.assertEqual(provenance["transformation_id"], artifact["normalizer_id"])
+        self.assertEqual(provenance["transformation_version"], artifact["normalizer_version"])
+        self.assertIn("schema_version", provenance["notes"])
+        self.assertIn("v2", provenance["notes"])
+
+    def test_schema_version_field_provenance_is_required_after_integrity_repinning(self):
+        path = self.bundle / "candidates/product.json"
+        artifact = load(path)
+        candidate = artifact["candidates"][0]
+        self.assertTrue(any(item["field_path"] == "schema_version"
+                            for item in candidate["field_provenance"]))
+        candidate["field_provenance"] = [item for item in candidate["field_provenance"]
+                                         if item["field_path"] != "schema_version"]
+        write(path, artifact)
+        self.repin()
+        with self.assertRaisesRegex(ValueError, "candidate field provenance incomplete"):
+            self.verify()
 
     def test_retained_source_bytes_cannot_be_changed(self):
         entry = load(self.bundle / "bundle.json")["raw_sources"][0]
