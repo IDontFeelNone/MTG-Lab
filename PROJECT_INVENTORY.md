@@ -1,3 +1,23 @@
+# Current inventory — mechanical production-cohort evidence
+
+Canonical main verified on 2026-10-12: `c8941c568fb275a735ab6902e3663947f21760ee` (merged GitHub PR #165). Architecture v12 remains frozen; GitHub PR numbers and project phase numbers are independent. No new phase number is assigned.
+
+The mechanical Card Intelligence foundation produces immutable, read-only dossiers for the independently verified 384-Card production cohort from 385 retained Scryfall rows. Exact Oracle/canonical identity maps 384 rows uniquely; Essence of Ajani remains excluded. Five multi-faced Cards retain eleven explicit face objects. Root/face fields, known empty values, unknowns, nonstandard type labels, provider provenance, snapshot identities and projection omissions remain distinct. This is canonical-cohort analysis, not complete MB2 set membership.
+
+[Mechanical contract, findings, examples and replay instructions](docs/MECHANICAL_CARD_INTELLIGENCE.md) describe all 384 retained dossiers, the descriptive cohort report, four manual contexts, and their deterministic manifest. The existing Card Intelligence CLI/query/reasoning contracts are reused; the generic Reasoning Context Builder is unchanged. No canonical records or knowledge facts are admitted. The merged Sol Ring/Counterspell demonstration remains byte-identical. Test and hosted-CI results are recorded in the milestone PR.
+
+Functional-role classification, verified rules interactions, combo/synergy discovery, best-in-slot comparisons, competitive scores, deck optimization, forecasts and acquisition decisions remain unsupported. No provider download, model execution, live ChatGPT transport, new canonical repository, rules engine or architecture change is added. Competitive Intelligence remains parked and Deck Intelligence remains planned, with implementation unauthorized.
+
+The CC2 pending identity bundle remains NOT_READY_FOR_EVALUATION; its six missing pairs, incomplete token and requires_review Product candidate are unchanged. No promotion, market admission, READY attestation or product evaluation occurs. Stop after this bounded milestone's single PR handoff for Project Manager approval; no next milestone is automatic.
+
+Implementation adds `src/card_intelligence/mechanics.py`, extends the existing Card Intelligence exports/CLI, and uses `scripts/build_mechanical_cohort.py` for isolated generation/checking. Protected production remains 384 Cards, 913 Printings, 235 Identifiers, 2 Finishes, 956 observations and 140 historical/active fact files. The query's fifteen typed seed Cards remain outside the production cohort.
+
+---
+
+# Historical inventory records
+
+The original milestone bodies below remain intact; the current summary supersedes earlier next-task claims.
+
 # Current inventory — two-Card retained-evidence demonstration
 
 Canonical main verified on 2026-10-12: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0`, the merge of GitHub PR #164 including its Product `schema_version` provenance repair. PR numbers and project phases are independent; Phase 147 remains the highest numbered phase. Architecture v12 remains frozen.

@@ -1,9 +1,9 @@
 # MTG Lab
 
-> **Verified merged baseline:** `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (GitHub PR #164).
-> The Commander Collection: Black identity review bundle remains pending and
-> `NOT_READY_FOR_EVALUATION`. The current milestone prepares a retained-evidence,
-> read-only ChatGPT handoff for exactly Sol Ring and Counterspell. Architecture v12 is frozen.
+> **Verified merged baseline:** `c8941c568fb275a735ab6902e3663947f21760ee` (GitHub PR #165).
+> The two-Card manual evidence handoff is merged. The current milestone adds
+> verified mechanical dossiers and descriptive analysis for the existing production
+> Card cohort. Architecture v12 is frozen; production data remains unchanged.
 
 > **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
@@ -273,9 +273,9 @@ This organization allows multiple trading card games to share a common analytics
 
 **Status:** Active Development
 
-**Latest merged milestone:** Bounded non-promoting identity preparation and provenance repair — GitHub PR #164 (merged; candidate approval and promotion remain separate)
+**Latest merged milestone:** Two-Card evidence-to-ChatGPT manual demonstration — GitHub PR #165 (merged; no live integration or model execution)
 
-**Verified main baseline (2026-10-12):** `e5e11c41818b3a7e6bec85418a75a37e0ef638f0`
+**Verified main baseline (2026-10-12):** `c8941c568fb275a735ab6902e3663947f21760ee`
 
 **Highest numbered project phase:** Phase 147; later named milestones do not imply a new phase number.
 
@@ -294,11 +294,16 @@ identity bundle remain `NOT_READY_FOR_EVALUATION`; no complete production acquis
 recommendation exists. The six missing ordinary Card/Printing pairs and exact token identity remain
 unresolved, and the Product candidate requires review.
 
-The [two-Card evidence-to-ChatGPT demonstration](docs/TWO_CARD_CHATGPT_DEMO.md) composes retained
+The merged [two-Card evidence-to-ChatGPT demonstration](docs/TWO_CARD_CHATGPT_DEMO.md) composes retained
 canonical identities, Card Intelligence explanations, historical market observations, independent
 Scryfall and MTGJSON signals, and existing reasoning-context contracts. It prepares bounded,
 deterministic dossiers and explanation examples for manual review. It does not run a model or
-provide a live ChatGPT connection. Stop after this milestone's PR handoff; subsequent work requires
+provide a live ChatGPT connection. The [mechanical production-cohort foundation](docs/MECHANICAL_CARD_INTELLIGENCE.md)
+adds read-only source-attributed dossiers for all 384 independently verified production Cards,
+face-aware coverage and correctly denominated cohort statistics. The 385 retained Scryfall rows
+map uniquely to those Cards with one excluded emblem; this is not complete MB2 set membership.
+Functional roles, rules interactions, synergy and competitive rankings remain unsupported.
+Stop after the mechanical milestone's PR handoff; subsequent work requires
 separate approval. Competitive Intelligence remains parked; Competitive Card Intelligence and
 Deck Intelligence remain planned and unauthorized.
 

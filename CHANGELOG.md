@@ -1,3 +1,10 @@
+# Mechanical Card Intelligence — production cohort foundation (2026-10-12)
+
+- Reconcile main `c8941c568fb275a735ab6902e3663947f21760ee` and merged PR #165; independently verify 384 production Cards, 385 retained source rows, one excluded emblem, and five multi-faced Cards with eleven explicit faces.
+- Add immutable read-only mechanical dossiers, literal type-label projection with unresolved nonstandard labels, face-aware field coverage, descriptive cohort aggregation, and existing-contract manual reasoning contexts.
+- Retain all 384 dossiers, cohort findings, four examples/contexts and a deterministic manifest in eleven isolated derived review artifacts. Preserve the earlier two-Card demonstration and all protected production evidence.
+- Extend the existing Card Intelligence CLI, add production-backed and fail-closed regressions, and reconcile directly affected documentation. No roles, rules engine, combos, rankings, full-set claims, acquisition, promotion, model execution, or architecture change.
+
 # Two-Card evidence-to-ChatGPT demonstration (2026-10-12)
 
 - Reconcile canonical main `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` and merged PR #164; preserve Architecture v12 and the unresolved pending CC2 review boundary.
