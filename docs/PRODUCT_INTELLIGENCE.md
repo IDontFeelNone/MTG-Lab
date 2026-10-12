@@ -1,3 +1,15 @@
+# First real pilot outcome — evidence incomplete
+
+The guaranteed double-sided token is part of the candidate contents; a card-only packet would silently omit a component. Its exact identity/variants and price remain unresolved. The earlier provisional pilot discussion did not establish absence of non-card valuation gaps. Generic packet/admission contracts are unchanged.
+
+The authorized Commander Collection: Black (non-premium) attempt is **NOT_READY_FOR_EVALUATION**. Official/retailer research, exact canonical coverage, market leads, provenance/retention gaps, and a deterministic readiness dossier are retained for review. Only Sol Ring and Command Tower have canonical CC2 Printings; six Cards/Printings, the Product identity, and the token identity remain missing. No honest packet, human READY attestation, production analysis, or acquisition evaluation was produced. Architecture v12 and all existing production bytes remain unchanged.
+
+[First fixed-content pilot report](FIRST_FIXED_CONTENT_PILOT.md) contains sources, validation, review materials, and the proposed next action. Competitive Intelligence remains parked; future Competitive Card Intelligence and Deck Intelligence remain unauthorized.
+
+---
+
+The previous milestone summaries below retain their original baseline and authorization context. The pilot status above supersedes their next-task claims; unchanged technical contracts remain current.
+
 # Fixed-Content Product Intelligence Foundation
 
 ## Current merged status (2026-10-12)

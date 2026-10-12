@@ -1,3 +1,15 @@
+# Current session — first governed pilot review materials
+
+Canonical baseline: `e594912a681dd0afccf2a79f638a85f40dfac1e9` (merged PR #162). PR #161 hardening is present. No new numbered project phase is assigned; PR numbers are independent.
+
+The authorized Commander Collection: Black (non-premium) attempt is **NOT_READY_FOR_EVALUATION**. Official/retailer research, exact canonical coverage, market leads, provenance/retention gaps, and a deterministic readiness dossier are retained for review. Only Sol Ring and Command Tower have canonical CC2 Printings; six Cards/Printings, the Product identity, and the token identity remain missing. No honest packet, human READY attestation, production analysis, or acquisition evaluation was produced. Architecture v12 and all existing production bytes remain unchanged.
+
+[First fixed-content pilot report](FIRST_FIXED_CONTENT_PILOT.md) contains sources, validation, review materials, and the proposed next action. Competitive Intelligence remains parked; future Competitive Card Intelligence and Deck Intelligence remain unauthorized.
+
+---
+
+The previous milestone summaries below retain their original baseline and authorization context. The pilot status above supersedes their next-task claims; unchanged technical contracts remain current.
+
 # Current session — documentation reconciliation only
 
 Canonical main independently verified on 2026-10-12: `dd08c76d09e4b8d10c411ade0d8445987c8875c0`, the merge of GitHub PR #161 — Fixed-Content Evidence Admission Hardening. GitHub PR numbers and project phase numbers are independent; Phase 147 remains the highest numbered project phase. No new phase number is assigned to the later named milestones.

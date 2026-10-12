@@ -1,3 +1,13 @@
+# First production fixed-content pilot — retained research dossier only
+
+The authorized Commander Collection: Black (non-premium) attempt is **NOT_READY_FOR_EVALUATION**. Official/retailer research, exact canonical coverage, market leads, provenance/retention gaps, and a deterministic readiness dossier are retained for review. Only Sol Ring and Command Tower have canonical CC2 Printings; six Cards/Printings, the Product identity, and the token identity remain missing. No honest packet, human READY attestation, production analysis, or acquisition evaluation was produced. Architecture v12 and all existing production bytes remain unchanged.
+
+Added [pilot review materials](docs/FIRST_FIXED_CONTENT_PILOT.md) and isolated authored JSON reports under `data/reviews/fixed-content-pilot/commander-collection-black-non-premium-2026-10-12/`. These are research/review artifacts, not admitted source snapshots or a new runtime contract/subsystem. No implementation capability changed.
+
+---
+
+The previous milestone summaries below retain their original baseline and authorization context. The pilot status above supersedes their next-task claims; unchanged technical contracts remain current.
+
 # Current inventory — reconciled merged baseline
 
 Canonical main independently verified on 2026-10-12: `dd08c76d09e4b8d10c411ade0d8445987c8875c0`, the merge of GitHub PR #161 — Fixed-Content Evidence Admission Hardening. GitHub PR numbers and project phase numbers are independent; Phase 147 remains the highest numbered project phase. No new phase number is assigned to the later named milestones.
