@@ -1,3 +1,19 @@
+# Current boundary — review the two-Card evidence-to-ChatGPT demonstration
+
+Canonical baseline: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (merged GitHub PR #164). Architecture v12 remains frozen; GitHub PR numbers do not assign project phase numbers.
+
+The authorized milestone is limited to the demonstrated promoted-lineage projection repair and retained-evidence dossiers for production Sol Ring and Counterspell, with existing-contract manual reasoning contexts, supported explanation examples, regression coverage, and one PR. [Demonstration materials](TWO_CARD_CHATGPT_DEMO.md) identify the exact Cards, replay command, source/snapshot bindings, omission limits, and unsupported dimensions.
+
+The single next action is Project Manager review of this milestone's code, two dossiers, explanations, protected-data verification, test results, and hosted checks. Do not merge automatically or begin another milestone. A manual handoff is not a live ChatGPT integration and does not authorize model execution, external acquisition, canonical promotion, or market admission.
+
+The Commander Collection: Black pending identity bundle remains `NOT_READY_FOR_EVALUATION`; its six missing ordinary Card/Printing pairs and incomplete token are not resolved by this demonstration. Product human readiness and acquisition evaluation remain separate gates. Competitive Intelligence is parked, and Competitive Card Intelligence and Deck Intelligence remain planned and unauthorized.
+
+---
+
+# Historical next-task records
+
+The instructions below retain their original authorization context and are not active next tasks. The current boundary above supersedes their “current” headings and proposed follow-on work.
+
 # Current boundary — human review of partial identity preparation
 
 Canonical baseline: `4420686d3ee53d921563c41a889f51ba51d7b203` (merged PR #163). Architecture v12 remains frozen; PR numbers are independent of project phases.

@@ -1,3 +1,23 @@
+# Current handoff — two-Card retained-evidence demonstration
+
+Canonical main verified on 2026-10-12: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (merged GitHub PR #164). Architecture v12 is frozen. PR numbers and project phases are separate sequences.
+
+Review exactly the production Sol Ring and Counterspell dossiers, their existing-contract manual reasoning contexts, and evidence-constrained explanation examples in [the two-Card demonstration](TWO_CARD_CHATGPT_DEMO.md). The only upstream repair is the demonstrated promoted-audit query projection mismatch; compact audit integrity references retain lineage without embedding whole promotion batches in reasoning contexts. Replay, identity selection, source/snapshot references, explicit omissions/unknowns, and protected-data checks are covered by this milestone's focused tests. Full-suite and hosted-CI results are recorded in its PR.
+
+The handoff is read-only and manual. It adds no model, live ChatGPT connection, new provider, external acquisition, credential, hosting, GUI, or application deployment. Historical price observations are not current offers or completed sales. Scryfall EDHREC rank is an ordinal; MTGJSON provider-curated deck associations are not global usage or competitive performance. Explanations remain limited to the supplied dossier evidence.
+
+The merged CC2 review bundle stays pending and `NOT_READY_FOR_EVALUATION`: one Product requires review, six ordinary Card/Printing pairs remain unresolved, the token remains incomplete, and two existing CC2 Printings are reused. No protected production record, admitted market observation, knowledge fact, or architecture decision is changed. No acquisition evaluation, recommendation, human READY decision, or promotion follows from these dossiers.
+
+GitHub main/PR reads use the existing connected integration. Publish this milestone through the same connector and verify the commit, branch, tree, changed files, and hosted checks independently. Prior shell-proxy failures are session observations, not permanent project limitations; no authentication/protection change is authorized. The PR and final handoff report record actual delivery status.
+
+Stop after the single PR handoff for Project Manager review; do not merge or start another milestone automatically. Competitive Intelligence stays parked; future Competitive Card Intelligence and Deck Intelligence remain unauthorized.
+
+---
+
+# Historical handoff records
+
+The entries below preserve earlier baselines, test counts, environment observations, and instructions. Their “current” headings are historical; the present handoff above takes precedence.
+
 # Current handoff — partial identity bundle for human review
 
 Canonical baseline: `4420686d3ee53d921563c41a889f51ba51d7b203` (merged PR #163). Architecture v12 remains frozen; PR numbers are independent of project phases.

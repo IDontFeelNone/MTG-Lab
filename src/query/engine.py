@@ -198,7 +198,7 @@ class CanonicalQueryEngine:
                               "dataset_identity": _plain(raw.get("dataset_identity", [])),
                               "review_package_id": raw.get("review_package_id"),
                               "provider_policy": _plain(raw.get("provider_policy")),
-                              "promotion_history": [a for a in self._audit_records(entity_id=record.id)]}
+                              "promotion_history": list(self._audit_summaries(record.id))}
                 yield QueryResult(record.id, kind, values, provenance, confidence, uncertainty,
                                   "superseded" if superseded else "current")
         # Phase 85 knowledge promotions use a versioned state projection alongside the
@@ -217,27 +217,83 @@ class CanonicalQueryEngine:
                     evidence_ids = list(record.get("evidence_references", []))
                     audit = self._audit_records(promotion_id=record.get("promotion_id"))
                     package = audit[0].get("review_package", {}) if audit else {}
-                    assertions = [x for x in package.get("candidate_assertions", []) if x.get("id") in evidence_ids]
+                    assertions = self._state_assertions(str(identifier), record, package)
                     provenance = {"source_ids": sorted({str(x.get("source_id")) for x in assertions if x.get("source_id")}),
                         "evidence_assertions": assertions, "acquisition_lineage": _plain(record.get("acquisition_lineage", [])),
                         "dataset_identity": _plain(record.get("dataset_identity", [])),
                         "review_package_id": record.get("review_package_id"),
-                        "provider_policy": _plain(package.get("provider")), "promotion_history": list(audit)}
+                        "provider_policy": _plain(package.get("provider")),
+                        "record_provenance": _plain(record.get("provenance", {})),
+                        "promotion_history": list(self._audit_summaries(str(identifier),
+                            promotion_id=record.get("promotion_id"), evidence_ids=evidence_ids))}
                     yield QueryResult(str(identifier), entity_type, _plain(record.get("values", {})),
                         provenance, record.get("confidence"), str(record.get("uncertainty_state", "unknown")),
                         "superseded" if record.get("superseded_status") else "current")
 
-    def _audit_records(self, *, entity_id: str | None = None, promotion_id: str | None = None) -> tuple[Mapping[str, Any], ...]:
-        records = []
+    @staticmethod
+    def _state_assertions(identifier: str, record: Mapping[str, Any], package: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+        """Keep package assertions, or project retained references from bounded state.
+
+        Bounded promotion audits bind candidate membership and digests, rather than
+        embedding a review package. A reference projection preserves the state record's
+        lineage; it does not invent an assertion value or claim a new verification.
+        """
+        evidence_ids = list(record.get("evidence_references", []))
+        by_id = {x.get("id"): x for x in package.get("candidate_assertions", [])
+                 if isinstance(x, Mapping) and x.get("id") in evidence_ids}
+        retained = _plain(record.get("provenance", {}))
+        source_id = retained.get("source_id") or retained.get("artifact_identifier")
+        assertions = []
+        for evidence_id in sorted(set(evidence_ids)):
+            if evidence_id in by_id:
+                assertions.append(_plain(by_id[evidence_id]))
+                continue
+            reference = {"id": evidence_id, "canonical_identity": identifier,
+                         "projection": "retained_canonical_evidence_reference",
+                         "provenance": retained,
+                         "acquisition_lineage": _plain(record.get("acquisition_lineage", []))}
+            if source_id: reference["source_id"] = source_id
+            assertions.append(reference)
+        return assertions
+
+    def _audit_entries(self, *, entity_id: str | None = None, promotion_id: str | None = None):
         for path in sorted((self.data_root / "audit").rglob("*.json")):
-            try: value = json.loads(path.read_text())
+            try:
+                content = path.read_bytes()
+                value = json.loads(content)
             except (OSError, json.JSONDecodeError): continue
             if promotion_id and value.get("promotion_id") != promotion_id: continue
-            ids = value.get("promoted_entities", []) + value.get("rejected_entities", [])
+            ids = (value.get("promoted_entities", []) + value.get("rejected_entities", []) +
+                   value.get("promoted_printing_ids", []))
             candidate = value.get("candidate_snapshot", {}).get("canonical_entity", {}).get("id")
             if entity_id and entity_id not in ids and entity_id != candidate: continue
-            records.append(_plain(value))
-        return tuple(records)
+            yield path, content, value
+
+    def _audit_records(self, *, entity_id: str | None = None, promotion_id: str | None = None) -> tuple[Mapping[str, Any], ...]:
+        return tuple(_plain(value) for _, _, value in self._audit_entries(
+            entity_id=entity_id, promotion_id=promotion_id))
+
+    def _audit_summaries(self, identifier: str, *, promotion_id: str | None = None,
+                         evidence_ids: Iterable[str] = ()) -> tuple[Mapping[str, Any], ...]:
+        """Bind one entity to the immutable audit without copying its full population."""
+        fields = ("schema_version", "promotion_id", "result", "audit_digest",
+                  "canonical_pre_state_digest", "canonical_post_state_digest",
+                  "source_lineage_digest", "review_artifact_digests", "evidence_files",
+                  "acquisition_run_id", "evidence_identity", "batch_id", "readiness_plan_digest")
+        summaries = []
+        for path, content, value in self._audit_entries(
+                entity_id=None if promotion_id else identifier, promotion_id=promotion_id):
+            promoted = set(value.get("promoted_entities", []) + value.get("promoted_printing_ids", []))
+            references = sorted(set(evidence_ids))
+            matched = sorted(promoted.intersection([identifier, *references]))
+            summary = {key: _plain(value[key]) for key in fields if key in value}
+            summary.update({"audit_reference": {"relative_path": path.relative_to(self.data_root).as_posix(),
+                                "sha256": hashlib.sha256(content).hexdigest()},
+                            "entity_binding": {"canonical_identity": identifier,
+                                "evidence_references": references, "matched_promoted_references": matched},
+                            "omitted_promoted_entity_count": len(promoted) - len(matched)})
+            summaries.append(summary)
+        return tuple(summaries)
 
     @staticmethod
     def _identifiers(result: QueryResult, kind: str) -> set[str]:

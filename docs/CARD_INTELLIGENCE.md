@@ -1,3 +1,21 @@
+# Current Card Intelligence — two-Card retained-evidence demonstration
+
+Canonical baseline verified on 2026-10-12: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (merged GitHub PR #164). Architecture v12 is frozen; PR numbers and project phases are independent.
+
+The current milestone composes existing `card-value-explanation-v4`, canonical query, and `canonical-reasoning-context-v1` capabilities into bounded dossiers for exactly production Sol Ring (`6ad8011d-3471-4369-9d68-b264cc027487`) and Counterspell (`cc187110-1148-4090-bbb8-e205694a39f5`). Exact production identity is mandatory: legacy seed IDs and ambiguous name matches do not satisfy the dossier boundary. The promoted-audit query projection preserves retained evidence/source identifiers and compact audit integrity references. See [the demonstration contract, materials, and replay instructions](TWO_CARD_CHATGPT_DEMO.md).
+
+The dossiers preserve supported identity/rules/Printing evidence, retained observed price history, source timestamps and hashes, independent provider demand signals, explicit unknown/unsupported dimensions, and deterministic omission accounting. They are derived review outputs; they do not admit new facts, Printings, prices, provider evidence, or canonical entities. The manual explanation examples distinguish verified facts, deterministic descriptive calculations, supported interpretations, and unknown/unsupported conclusions. No model is executed.
+
+Scryfall's retained EDHREC ordinal is not a deck count. MTGJSON's represented-deck numerator and 3,004-provider-file denominator describe that retained corpus only, not global usage or actual competitive play. Printing counts are retained coverage, not total supply. Historical provider price observations are not current offers or completed sales. No competitive ranking, best-in-slot claim, forecast, investment valuation, acquisition recommendation, deck optimization, or strategic score is supported by this demo.
+
+Competitive Intelligence remains parked; Competitive Card Intelligence and Deck Intelligence remain planned and unauthorized. Stop after this demonstration's PR handoff for human review.
+
+---
+
+# Historical Card Intelligence milestone records
+
+The entries below retain their original evidence, counts, and milestone status. “Current” statements refer to their original milestone; the present summary above takes precedence. Provider and evidence contracts remain unchanged.
+
 # Phase 146 — no competitive provider is approved
 
 Current provider verification failed closed: the research service returned HTTP 401 and the HTTPS proxy returned HTTP 403 before provider-controlled terms or API documentation could be inspected. TopDeck.gg, Wizards / Magic.gg, Melee, MTGTop8, and MTGGoldfish therefore have unverified automation, retention, redistribution, identity, pagination, and denominator semantics. No acquisition, retained competitive evidence, fact, workflow, schema change, or explanation change was made. See `PHASE_146_PROVIDER_VERIFICATION.md`. Architecture v12 remains frozen.
