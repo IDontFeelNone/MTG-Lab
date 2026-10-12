@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .explanation import (CardValueExplanationEngine, ERROR_VERSION, ExplanationError,
                           render_historical_explanation)
+from .mechanics import MechanicalCardIntelligence
 
 
 def main(argv=None) -> int:
@@ -24,8 +25,23 @@ def main(argv=None) -> int:
                          help="opt in to card-value-explanation-v3 reviewed demand evidence")
     explain.add_argument("--human-readable", action="store_true",
                          help="render the historical JSON contract as text instead of authoritative JSON")
+    mechanical = commands.add_parser("mechanical", help="literal retained production Card mechanics")
+    mechanical.add_argument("--card-id", required=True)
+    mechanical.add_argument("--reasoning-context", action="store_true",
+                            help="existing-contract manual handoff; no model execution")
+    commands.add_parser("mechanical-cohort", help="descriptive canonical-cohort statistics, not full-set analysis")
     args = parser.parse_args(argv)
     try:
+        if args.command in {"mechanical", "mechanical-cohort"}:
+            engine = MechanicalCardIntelligence(args.data_root)
+            if args.command == "mechanical-cohort":
+                result = engine.cohort_report()
+            elif args.reasoning_context:
+                result = engine.reasoning_context(args.card_id).to_dict()
+            else:
+                result = engine.dossier(args.card_id).to_dict()
+            print(json.dumps(result, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False))
+            return 0
         result = CardValueExplanationEngine(args.data_root).explain(
             name=args.name, card_id=args.card_id,
             include_observed_prices=args.include_observed_prices,

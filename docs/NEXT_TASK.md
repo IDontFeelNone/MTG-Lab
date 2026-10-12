@@ -1,3 +1,23 @@
+# Current boundary — review mechanical cohort evidence
+
+Canonical main verified on 2026-10-12: `c8941c568fb275a735ab6902e3663947f21760ee` (merged GitHub PR #165). Architecture v12 remains frozen; GitHub PR numbers and project phase numbers are independent. No new phase number is assigned.
+
+The mechanical Card Intelligence foundation produces immutable, read-only dossiers for the independently verified 384-Card production cohort from 385 retained Scryfall rows. Exact Oracle/canonical identity maps 384 rows uniquely; Essence of Ajani remains excluded. Five multi-faced Cards retain eleven explicit face objects. Root/face fields, known empty values, unknowns, nonstandard type labels, provider provenance, snapshot identities and projection omissions remain distinct. This is canonical-cohort analysis, not complete MB2 set membership.
+
+[Mechanical contract, findings, examples and replay instructions](MECHANICAL_CARD_INTELLIGENCE.md) describe all 384 retained dossiers, the descriptive cohort report, four manual contexts, and their deterministic manifest. The existing Card Intelligence CLI/query/reasoning contracts are reused; the generic Reasoning Context Builder is unchanged. No canonical records or knowledge facts are admitted. The merged Sol Ring/Counterspell demonstration remains byte-identical. Test and hosted-CI results are recorded in the milestone PR.
+
+Functional-role classification, verified rules interactions, combo/synergy discovery, best-in-slot comparisons, competitive scores, deck optimization, forecasts and acquisition decisions remain unsupported. No provider download, model execution, live ChatGPT transport, new canonical repository, rules engine or architecture change is added. Competitive Intelligence remains parked and Deck Intelligence remains planned, with implementation unauthorized.
+
+The CC2 pending identity bundle remains NOT_READY_FOR_EVALUATION; its six missing pairs, incomplete token and requires_review Product candidate are unchanged. No promotion, market admission, READY attestation or product evaluation occurs. Stop after this bounded milestone's single PR handoff for Project Manager approval; no next milestone is automatic.
+
+The single next action is Project Manager review of this PR, its source reconciliation, dossier examples, cohort denominators, tests and protected-data verification. Do not merge automatically or begin functional-role or Deck Intelligence implementation.
+
+---
+
+# Historical milestone records
+
+Earlier baselines, counts, authorizations and current headings below retain their original context. This present-state summary supersedes their next-task claims without rewriting history.
+
 # Current boundary — review the two-Card evidence-to-ChatGPT demonstration
 
 Canonical baseline: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (merged GitHub PR #164). Architecture v12 remains frozen; GitHub PR numbers do not assign project phase numbers.
