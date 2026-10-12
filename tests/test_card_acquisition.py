@@ -6,10 +6,12 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from card_intelligence.acquisition import (CardAcquisitionAdapter, CardAcquisitionDossier,
     CardAcquisitionError, CardAcquisitionInput)
 from card_intelligence.mechanics import content_identity, stable_json
+from decision_intelligence.models import identity as decision_identity
 
 
 ROOT = Path(__file__).parents[1]
@@ -94,6 +96,57 @@ class CardAcquisitionTests(unittest.TestCase):
         self.assertEqual(value["decision"]["recommendation"]["outcome"], "abstain")
         self.assertFalse(value["actual_purchase_advice"])
         self.assertIn(phrase, " ".join(value["blockers"]))
+
+    @staticmethod
+    def rehash(document):
+        recommendation = document["decision"]["recommendation"]
+        recommendation["recommendation_id"] = decision_identity("recommendation-sha256:",
+            {k: v for k, v in recommendation.items() if k != "recommendation_id"})
+        document["dossier_id"] = content_identity({k: v for k, v in document.items() if k != "dossier_id"})
+        return document
+
+    def real_unit_evaluate(self, change=None):
+        # Fabricated temporary unit records verify the real-world gate. They
+        # are never retained as offers, review attestations, or purchase advice.
+        packet, source = self.fixture()
+        packet.update(mode="real_world", sources=[])
+        packet["context"]["value"]["eligibility_required"] = True
+        eligibility = []
+        for index, candidate in enumerate(packet["candidates"]):
+            candidate["requirements_binding"]["source_id"] = "buyer"
+            candidate["offer"]["binding"]["source_id"] = "offers"
+            value = {"status": "reviewed", "eligible": True, "card_id": candidate["card_id"],
+                "printing_id": candidate["printing_id"], "objective_id": packet["context"]["value"]["objective_id"],
+                "mechanical_dossier_id": self.adapter.mechanical.dossier(candidate["card_id"]).to_dict()["dossier_id"],
+                "basis_category": "reviewed_mechanical_objective", "basis": "Fictional scoped unit test review."}
+            candidate["eligibility"] = {"value": value,
+                "binding": {"source_id": "eligibility", "pointer": f"/eligibility/{index}"}}
+            eligibility.append(value)
+        packet["context"]["binding"]["source_id"] = "buyer"
+        packet["ownership"]["binding"]["source_id"] = "buyer"
+        metadata = {k: source[k] for k in ("provider_identity", "seller_identity", "captured_at")}
+        documents = {
+            "buyer": {**metadata, "mode": "real_world", "kind": "buyer_declaration",
+                "context": packet["context"]["value"], "ownership": packet["ownership"]["value"],
+                "requirements": [{k: c[k] for k in ("card_id", "printing_id", "acceptable_printing_ids", "desired_quantity", "preferred_dimensions")}
+                    for c in packet["candidates"]]},
+            "offers": {**metadata, "mode": "real_world", "kind": "reviewed_offer",
+                "offers": [c["offer"]["value"] for c in packet["candidates"]]},
+            "eligibility": {**metadata, "mode": "real_world", "kind": "objective_eligibility_review",
+                "eligibility": eligibility}}
+        reviews = {sid: {"status": "reviewed", "reviewer": "fictional-unit-only-reviewer",
+            "reviewed_at": packet["as_of"]} for sid in documents}
+        if change:
+            change(packet, documents, reviews)
+        with tempfile.TemporaryDirectory() as directory:
+            for sid, document in documents.items():
+                raw = stable_json(document).encode()
+                digest = "sha256:" + hashlib.sha256(raw).hexdigest()
+                Path(directory, sid + ".json").write_bytes(raw)
+                reviews[sid].setdefault("content_digest", digest)
+                packet["sources"].append({"source_id": sid, "relative_path": sid + ".json",
+                    "content_digest": digest, "kind": document["kind"], **metadata, "review": reviews[sid]})
+            return self.adapter.evaluate(packet, source_root=Path(directory))
 
     def test_exact_production_selection_and_existing_decision_engine(self):
         dossier = self.evaluate().to_dict()
@@ -300,6 +353,134 @@ class CardAcquisitionTests(unittest.TestCase):
             document["dossier_id"] = content_identity({k: v for k, v in document.items() if k != "dossier_id"})
             with self.assertRaises(CardAcquisitionError):
                 CardAcquisitionDossier(document)
+
+    def test_reported_rehashed_mode_cost_and_owned_copy_mutations_are_rejected(self):
+        original = self.evaluate().to_dict()
+        winner = original["decision"]["recommendation"]["selected_alternative_id"]
+        def chosen(document):
+            return next(row for row in document["candidates"] if row["printing_id"] == winner)
+        mutations = (
+            lambda d: d.update(mode="real_world", actual_purchase_advice=True),
+            lambda d: chosen(d).update(complete_cost="0.00", complete_cost_units=0, remaining_budget="10.00"),
+            lambda d: chosen(d).update(desired_quantity=1, owned_acceptable_quantity=1,
+                missing_quantity=1, acquisition_eligible=True))
+        for mutation in mutations:
+            with self.subTest(mutation=mutation):
+                document = copy.deepcopy(original)
+                mutation(document)
+                self.assertEqual(document["input_id"], original["input_id"])
+                self.assertEqual(document["decision_request_id"], original["decision_request_id"])
+                with self.assertRaises(CardAcquisitionError):
+                    CardAcquisitionDossier(self.rehash(document))
+
+    def test_rehashed_cross_field_money_and_quantity_mutations_are_rejected(self):
+        original = self.evaluate().to_dict()
+        winner = original["decision"]["recommendation"]["selected_alternative_id"]
+        for field, value in (("complete_cost_units", -1), ("complete_cost_units", True),
+                ("desired_quantity", True), ("owned_acceptable_quantity", -1),
+                ("owned_acceptable_quantity", True), ("missing_quantity", True),
+                ("acquisition_quantity", True), ("acquisition_quantity", 2),
+                ("declared_priority", False), ("money_scale", True), ("money_scale", 3),
+                ("currency", "EUR"), ("complete_cost", "8.0"), ("remaining_budget", "10.00"),
+                ("acquisition_eligible", False), ("objective_eligibility", "reviewed")):
+            with self.subTest(field=field, value=value):
+                document = copy.deepcopy(original)
+                next(row for row in document["candidates"] if row["printing_id"] == winner)[field] = value
+                with self.assertRaises(CardAcquisitionError):
+                    CardAcquisitionDossier(self.rehash(document))
+        document = copy.deepcopy(original)
+        next(row for row in document["candidates"] if row["printing_id"] == winner)["costs"]["shipping"] = {
+            "amount": "0.00", "basis": "unknown"}
+        with self.assertRaises(CardAcquisitionError):
+            CardAcquisitionDossier(self.rehash(document))
+
+    def test_rehashed_eligible_winner_rationale_actions_and_analysis_are_replayed(self):
+        original = self.evaluate().to_dict()
+        def action(document):
+            request = document["reconstruction"]["decision_request"]
+            request["alternatives"][0]["action"] = "BUY_ALL_COPIES"
+            request["request_id"] = decision_identity("request-sha256:",
+                {k: v for k, v in request.items() if k != "request_id"})
+            document["decision_request_id"] = request["request_id"]
+            document["decision"]["recommendation"]["request_id"] = request["request_id"]
+        mutations = (
+            lambda d: d["decision"]["recommendation"].update(selected_alternative_id=PRINTINGS[1]),
+            lambda d: d["decision"]["recommendation"]["rationale"][0].update(selected_value=99),
+            lambda d: d["decision"]["recommendation"]["supporting_factors"][0].update(statement="Altered justification."),
+            lambda d: d["reconstruction"]["analyses"][0]["metrics"][0].update(value=0),
+            action)
+        for mutation in mutations:
+            with self.subTest(mutation=mutation):
+                document = copy.deepcopy(original)
+                mutation(document)
+                with self.assertRaises(CardAcquisitionError):
+                    CardAcquisitionDossier(self.rehash(document))
+
+    def test_original_input_and_retained_source_snapshots_are_required_for_reconstruction(self):
+        original = self.evaluate().to_dict()
+        self.assertEqual(content_identity(original["reconstruction"]["input_packet"]), original["input_id"])
+        request = original["reconstruction"]["decision_request"]
+        self.assertEqual(decision_identity("request-sha256:", {k: v for k, v in request.items() if k != "request_id"}),
+            original["decision_request_id"])
+        mutations = (
+            lambda d: d.pop("reconstruction"),
+            lambda d: d["reconstruction"].update(input_packet=None),
+            lambda d: d["reconstruction"]["input_packet"].update(mode="real_world"),
+            lambda d: d["reconstruction"]["input_packet"]["context"]["value"].update(budget="500.00"),
+            lambda d: d["reconstruction"]["sources"][0].update(source_text="{}"),
+            lambda d: d["reconstruction"].update(sources=[]),
+            lambda d: d["reconstruction"].update(analysis_shared=[]),
+            lambda d: d.update(unbound_alternate_action="EXECUTE_PURCHASE"))
+        for mutation in mutations:
+            with self.subTest(mutation=mutation):
+                document = copy.deepcopy(original)
+                mutation(document)
+                with self.assertRaises(CardAcquisitionError):
+                    CardAcquisitionDossier(self.rehash(document))
+        # Reconstruction remains valid after temporary sources are gone and
+        # requires no file reads or implicit access to the production store.
+        with patch.object(Path, "read_bytes", side_effect=AssertionError("unexpected source read")):
+            self.assertEqual(CardAcquisitionDossier(original).to_dict(), original)
+
+    def test_fictional_unit_complete_real_review_and_eligibility_reconstruction(self):
+        original = self.real_unit_evaluate().to_dict()
+        self.assertEqual(original["decision"]["recommendation"]["selected_alternative_id"], PRINTINGS[2])
+        self.assertTrue(original["actual_purchase_advice"])
+        self.assertEqual(CardAcquisitionDossier(original).to_dict(), original)
+        for kind in ("buyer", "offers", "eligibility"):
+            self.assert_abstains(self.real_unit_evaluate(lambda p, d, r, k=kind:
+                r[k].update(status="READY_FOR_EVALUATION")), "scoped human review")
+        for field, value in (("status", "requires_review"), ("basis_category", "pending_role"),
+                ("basis", "unknown"), ("eligible", 1), ("mechanical_dossier_id", "sha256:unbound")):
+            self.assert_abstains(self.real_unit_evaluate(lambda p, d, r, f=field, v=value:
+                d["eligibility"]["eligibility"][2].update({f: v})), "objective eligibility")
+        for mutation in (
+                lambda d: d["reconstruction"]["input_packet"]["sources"][0]["review"].update(status="READY_FOR_EVALUATION"),
+                lambda d: d["reconstruction"]["input_packet"]["candidates"][2]["eligibility"]["value"].update(status="requires_review"),
+                lambda d: d["reconstruction"]["sources"][2].update(source_text="{}")):
+            document = copy.deepcopy(original)
+            mutation(document)
+            with self.assertRaises(CardAcquisitionError):
+                CardAcquisitionDossier(self.rehash(document))
+
+    def test_exact_budget_missing_quantity_and_result_byte_boundaries(self):
+        document = self.evaluate(lambda p: p["context"]["value"].update(budget="8.00")).to_dict()
+        self.assertEqual(document["decision"]["recommendation"]["selected_alternative_id"], PRINTINGS[2])
+        self.assertEqual(next(r for r in document["candidates"] if r["printing_id"] == PRINTINGS[2])["remaining_budget"], "0.00")
+        document = self.evaluate(lambda p: p["context"]["value"].update(budget="7.99")).to_dict()
+        self.assertEqual(document["decision"]["recommendation"]["selected_alternative_id"], PRINTINGS[1])
+        document = self.evaluate(lambda p: p["candidates"][0].update(desired_quantity=2)).to_dict()
+        self.assertEqual(document["decision"]["recommendation"]["selected_alternative_id"], PRINTINGS[0])
+        row = next(r for r in document["candidates"] if r["printing_id"] == PRINTINGS[0])
+        self.assertEqual((row["desired_quantity"], row["owned_acceptable_quantity"], row["missing_quantity"], row["acquisition_quantity"]),
+            (2, 1, 1, 1))
+        for value in (True, -1):
+            self.assert_abstains(self.evaluate(lambda p, v=value:
+                p["ownership"]["value"]["lots"][0].update(quantity=v)), "nonnegative integer")
+        document = self.evaluate().to_dict()
+        document["reconstruction"]["canonical"]["scope"] += "x" * 65536
+        with self.assertRaisesRegex(CardAcquisitionError, "byte bound"):
+            CardAcquisitionDossier(self.rehash(document))
 
     def test_protected_production_and_retained_evidence_are_not_mutated(self):
         self.evaluate()

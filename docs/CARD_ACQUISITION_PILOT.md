@@ -38,6 +38,14 @@ The versioned `collection-aware-card-acquisition` policy uses supplied personal 
 
 The existing `DecisionRequest`, `DomainAnalysisEnvelope`, `DecisionPolicy`, recommendation and decision-reasoning-context contracts preserve provenance, blockers, supporting factors, counterarguments, uncertainty and change conditions. An unknown decision-critical input yields ABSTAIN. No purchase is executed and no role, fact, price or canonical entity is admitted.
 
+## Reconstruction integrity repair
+
+Reconstructing an acquisition dossier now requires its versioned `card-acquisition-reconstruction-v1` proof. This retains the original immutable input packet, exact acquisition-source UTF-8 bytes (or an explicit unavailable-source reason), original Decision request and analyses, and the minimal read-only canonical projections used by the adapter. Identical analysis fields are shared losslessly; each original Decision analysis is recovered by combining `analysis_shared` with its individual fields. No metrics or evidence are discarded.
+
+The constructor verifies source digests and bindings, repeats the existing adapter's eligibility and exact monetary calculations, and replays the existing Decision orchestrator. It requires exact agreement with the retained request, analyses, recommendation and dossier projection. Recomputing the outer dossier hash cannot authorize a synthetic-to-real change, contradictory owned/desired/missing quantities, altered cost terms or units, an inconsistent budget remainder, or a different selected action. Real purchase-advice status still requires complete governed real inputs; the retained real assessment remains ABSTAIN.
+
+These canonical projections reference the existing query snapshot and mechanical dossiers; they are not a separate canonical store or independent authentication of imported canonical facts. Source review remains the established human-review boundary. Pre-repair dossiers lacking the reconstruction proof are rejected and must be regenerated from their original retained inputs. The combined review dossier omits the duplicate proofs after validating each complete scenario output and records their identities and omission accounting. Its manual handoff and explanation builders also compare the supplied projection against a replay from the original retained pilot inputs before rendering.
+
 ## Demonstrations and retained review materials
 
 The complete scenario is a fictional fixture. It supplies a 10.00 USD budget, one already-owned acceptable Ponder, and personal priority Ponder, Greater Good, Faithless Looting. Greater Good's fictional complete cost is 8.00 USD, leaving 2.00 USD. Faithless Looting's fictional complete cost is 2.00 USD. The synthetic result selects Greater Good because the supplied priority precedes price after excluding the owned Ponder. The cheaper alternative remains a counterargument. These amounts are not Scryfall observations or real seller offers.

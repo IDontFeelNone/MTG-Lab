@@ -1,6 +1,6 @@
 # Collection-aware Card acquisition — manual explanation example
 
-Dossier: `sha256:2c151de26e7cbe27cd55c7f40ba309b8f479b5e5ea4c689a340d5e8ed7f28fa6`. Human review remains pending. No actual purchase advice or live ChatGPT integration.
+Dossier: `sha256:d89c6962118665066621d0eaafac6d3b2742c729322401436ece79e4856b58f8`. Human review remains pending. No actual purchase advice or live ChatGPT integration.
 
 ## Evidence boundary
 

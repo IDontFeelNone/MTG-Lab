@@ -5,14 +5,18 @@ import contextlib
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
 
-from card_intelligence.acquisition import CardAcquisitionDossier
+from card_intelligence.acquisition import CardAcquisitionDossier, CardAcquisitionError
 from card_intelligence.cli import main as card_cli
 from card_intelligence.mechanics import content_identity, stable_json
+from decision_intelligence.models import identity as decision_identity
 from scripts import build_card_acquisition_pilot as pilot
 
 
@@ -171,7 +175,7 @@ class CardAcquisitionPilotTests(unittest.TestCase):
         self.assertEqual(self.context["canonical_contexts_reference"]["sha256"],
             hashlib.sha256(self.artifacts["canonical-contexts.json"]).hexdigest())
         self.assertEqual(self.context["omissions"]["pilot_subjects_omitted"], 0)
-        self.assertLess(len(self.artifacts["reasoning-context.json"]), 49152)
+        self.assertLessEqual(len(self.artifacts["reasoning-context.json"]), 65536)
         for key in ("synthetic_demonstration", "real_evidence_assessment"):
             scenario = self.dossier[key]
             reference = scenario["validated_acquisition_reference"]
@@ -184,29 +188,90 @@ class CardAcquisitionPilotTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "including trailing LF"):
             pilot.compact_payload("x" * 65534)
 
+    def test_full_reconstruction_proofs_bind_packets_and_project_with_explicit_accounting(self):
+        for mode, key in (("synthetic", "synthetic_demonstration"), ("real", "real_evidence_assessment")):
+            full = json.loads(self.artifacts[mode + "-result.json"])
+            proof = full["reconstruction"]
+            scenario = self.dossier[key]
+            omitted = scenario["omissions"]["reconstruction_proof"]
+            self.assertNotIn("reconstruction", scenario)
+            self.assertEqual(proof["input_packet"], json.loads(self.artifacts["packet-" + mode + ".json"]))
+            self.assertEqual(content_identity(proof["input_packet"]), full["input_id"])
+            self.assertEqual(proof["decision_request"]["request_id"], full["decision_request_id"])
+            self.assertEqual(proof["canonical"]["snapshot_id"], self.dossier["canonical_snapshot_id"])
+            self.assertEqual(omitted["retained_field"], "reconstruction")
+            self.assertEqual(omitted["content_identity"], content_identity(proof))
+            self.assertEqual(omitted["input_id"], full["input_id"])
+            self.assertEqual(omitted["decision_request_id"], full["decision_request_id"])
+            self.assertEqual(omitted["analysis_count"], 2 if mode == "synthetic" else 3)
+            self.assertEqual(omitted["analysis_content_identities"],
+                [content_identity({**proof["analysis_shared"], **analysis}) for analysis in proof["analyses"]])
+            self.assertEqual(omitted["source_snapshot_count"], len(proof["sources"]))
+            self.assertEqual(omitted["canonical_card_count"], 3)
+            self.assertEqual(omitted["canonical_printing_count"], 3)
+            self.assertEqual(CardAcquisitionDossier(full).to_dict(), full)
+            if mode == "synthetic":
+                self.assertEqual(len(proof["sources"]), 1)
+                self.assertEqual(proof["sources"][0]["source_text"].encode("utf-8"),
+                    (pilot.REVIEW / "synthetic-inputs.json").read_bytes())
+            else:
+                self.assertEqual(proof["sources"], [])
+
+    def test_projection_validates_full_proof_before_omitting_it(self):
+        full = json.loads(self.artifacts["synthetic-result.json"])
+        full["reconstruction"]["input_packet"]["ownership"]["value"]["scope_complete"] = False
+        full["dossier_id"] = content_identity({k: v for k, v in full.items() if k != "dossier_id"})
+        with self.assertRaises(CardAcquisitionError):
+            pilot._scenario_projection(full, "synthetic-result.json")
+
+    def test_manual_handoff_and_explanation_reject_rehashed_aggregate_contradictions(self):
+        changes = {
+            "ownership": lambda d: next(c for c in d["synthetic_demonstration"]["candidates"]
+                if c["card_name"] == "Ponder").update(owned_acceptable_quantity=0, missing_quantity=1),
+            "cost": lambda d: next(c for c in d["synthetic_demonstration"]["candidates"]
+                if c["card_name"] == "Greater Good").update(
+                    complete_cost="0.00", complete_cost_units=0, remaining_budget="10.00"),
+            "status": lambda d: d["real_evidence_assessment"]["decision"]["recommendation"].update(
+                outcome="selected", selected_alternative_id=EXPECTED["Greater Good"][1], abstention_reasons=[]),
+        }
+        for label, change in changes.items():
+            forged = copy.deepcopy(self.dossier)
+            change(forged)
+            for key in ("synthetic_demonstration", "real_evidence_assessment"):
+                scenario = forged[key]
+                recommendation = scenario["decision"]["recommendation"]
+                recommendation["recommendation_id"] = decision_identity("recommendation-sha256:",
+                    {k: v for k, v in recommendation.items() if k != "recommendation_id"})
+                scenario["projection_id"] = content_identity(
+                    {k: v for k, v in scenario.items() if k != "projection_id"})
+            forged["dossier_id"] = content_identity({k: v for k, v in forged.items() if k != "dossier_id"})
+            for renderer in (pilot.pilot_reasoning_context, pilot.pilot_explanation):
+                with self.subTest(change=label, renderer=renderer.__name__):
+                    with self.assertRaisesRegex(ValueError, "bound input/result replay"):
+                        renderer(forged)
+
     def test_cli_actual_stdout_matches_retained_adapter_payload_after_one_lf(self):
         for mode in ("synthetic", "real"):
             raw = self.artifacts[mode + "-result.json"]
             result = CardAcquisitionDossier(json.loads(raw))
-            with patch("card_intelligence.cli.CardAcquisitionAdapter") as adapter:
-                adapter.return_value.evaluate.return_value = result
-                argv = ["--data-root", str(pilot.ROOT / "data"), "acquisition", "--input",
-                    str(pilot.REVIEW / ("packet-" + mode + ".json")), "--source-root", str(pilot.ROOT)]
-                streams = []
-                for _ in range(2):
-                    output = io.StringIO()
-                    with contextlib.redirect_stdout(output):
-                        self.assertEqual(card_cli(argv), 0)
-                    streams.append(output.getvalue().encode("utf-8"))
-                self.assertEqual(streams, [raw, raw])
-                self.assertLessEqual(len(streams[0]), 65536)
-                self.assertEqual(streams[0][:-1].decode(), result.to_json())
-                output = io.StringIO()
-                with contextlib.redirect_stdout(output):
-                    self.assertEqual(card_cli(argv + ["--reasoning-context"]), 0)
-                context_raw = output.getvalue().encode("utf-8")
-                self.assertEqual(context_raw, (stable_json(result.reasoning_context()) + "\n").encode("utf-8"))
-                self.assertLessEqual(len(context_raw), 65536)
+            argv = [sys.executable, "-m", "card_intelligence.cli", "--data-root",
+                str(pilot.ROOT / "data"), "acquisition", "--input",
+                str(pilot.REVIEW / ("packet-" + mode + ".json")), "--source-root", str(pilot.ROOT)]
+            expected_context = (stable_json(result.reasoning_context()) + "\n").encode("utf-8")
+            for arguments, expected in ((argv, raw), (argv + ["--reasoning-context"], expected_context)):
+                completed = subprocess.run(arguments, cwd=pilot.ROOT,
+                    env={**os.environ, "PYTHONPATH": str(pilot.ROOT / "src")},
+                    capture_output=True, check=False)
+                self.assertEqual(completed.returncode, 0, completed.stderr.decode("utf-8"))
+                self.assertEqual(completed.stderr, b"")
+                self.assertEqual(completed.stdout, expected)
+                self.assertLessEqual(len(completed.stdout), 65536)
+                self.assertTrue(completed.stdout.endswith(b"\n"))
+                self.assertFalse(completed.stdout.endswith(b"\n\n"))
+                self.assertEqual(completed.stdout[:-1].decode(), stable_json(json.loads(completed.stdout)))
+                document = json.loads(completed.stdout)
+                reconstructed = document["dossier"] if "dossier" in document else document
+                self.assertEqual(CardAcquisitionDossier(reconstructed).to_json(), result.to_json())
 
     def test_cli_oversize_output_fails_closed_before_payload(self):
         argv = ["acquisition", "--input", str(pilot.REVIEW / "packet-synthetic.json"),

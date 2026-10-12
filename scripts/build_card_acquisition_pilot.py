@@ -12,7 +12,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from card_intelligence.acquisition import CardAcquisitionAdapter
+from card_intelligence.acquisition import CardAcquisitionAdapter, CardAcquisitionDossier
 from card_intelligence.mechanics import content_identity, stable_json
 from card_intelligence.roles import FunctionalRolePilot
 from reasoning import ReasoningContextRequest
@@ -163,21 +163,35 @@ def build_pilot_dossier() -> dict:
 
 def _scenario_projection(validated: dict, artifact_name: str) -> dict:
     """Keep all decision values; common subjects carry repeated canonical data."""
+    validated = CardAcquisitionDossier(validated).to_dict()
+    retained_bytes = compact_payload(validated)
+    reconstruction = validated["reconstruction"]
     omitted = {"printing_values", "source", "canonical_printing_provenance"}
     document = {key: value for key, value in validated.items() if key not in
-        {"schema_version", "dossier_id", "candidates", "evidence"}}
+        {"schema_version", "dossier_id", "candidates", "evidence", "reconstruction"}}
     document.update(schema_version="card-acquisition-scenario-projection-v1",
         validated_acquisition_dossier_id=validated["dossier_id"],
         validated_acquisition_reference={"relative_path": (REVIEW / artifact_name).relative_to(ROOT).as_posix(),
-            "sha256": hashlib.sha256(compact_payload(validated)).hexdigest(),
-            "bytes": len(compact_payload(validated))},
+            "sha256": hashlib.sha256(retained_bytes).hexdigest(), "bytes": len(retained_bytes)},
         candidates=[{key: value for key, value in row.items() if key not in omitted}
                     for row in validated["candidates"]],
         omissions={"candidate_count_omitted": 0, "decision_values_omitted": 0,
             "candidate_field_omissions": [{"printing_id": row["printing_id"],
                 "field_names": sorted(set(row) & omitted)} for row in validated["candidates"]],
             "repeated_evidence_reference_count": len(validated["evidence"]),
-            "policy": "Common subjects retain canonical Printing identity, provenance and mechanical source; recommendation retains complete evidence references. Full validated acquisition dossier replays from its retained input packet and is bound by its content identity."})
+            "reconstruction_proof": {"retained_field": "reconstruction",
+                "schema_version": reconstruction["schema_version"],
+                "content_identity": content_identity(reconstruction),
+                "input_id": validated["input_id"],
+                "decision_request_id": validated["decision_request_id"],
+                "analysis_count": len(reconstruction["analyses"]),
+                "analysis_content_identities": [content_identity({**reconstruction["analysis_shared"], **analysis})
+                    for analysis in reconstruction["analyses"]],
+                "source_snapshot_count": len(reconstruction["sources"]),
+                "canonical_snapshot_id": reconstruction["canonical"]["snapshot_id"],
+                "canonical_card_count": len(reconstruction["canonical"]["cards"]),
+                "canonical_printing_count": len(reconstruction["canonical"]["printings"])},
+            "policy": "Common subjects retain canonical Printing identity, provenance and mechanical source; recommendation retains complete evidence references. The fully validated reconstruction proof is omitted only from this projection and retained under reconstruction in the full acquisition result, bound by validated_acquisition_reference, validated_acquisition_dossier_id and the proof identity and counts above."})
     document["projection_id"] = content_identity(document)
     return document
 
@@ -192,9 +206,15 @@ def canonical_contexts(dossier: dict, roles: FunctionalRolePilot) -> list[dict]:
     return contexts
 
 
+def _validate_pilot_aggregate(dossier: dict) -> None:
+    if stable_json(dossier) != stable_json(_build_pilot()[0]):
+        raise ValueError("acquisition pilot aggregate contradicts bound input/result replay")
+
+
 def pilot_reasoning_context(dossier: dict, *, roles: FunctionalRolePilot | None = None,
                             contexts: list[dict] | None = None) -> dict:
     """Retain unchanged retrieval contracts separately; avoid repeated envelopes."""
+    _validate_pilot_aggregate(dossier)
     contexts = contexts or canonical_contexts(dossier, roles or FunctionalRolePilot(ROOT / "data"))
     context_bytes = compact_payload(contexts)
     context = {"schema_version": "card-acquisition-pilot-handoff-v1",
@@ -208,7 +228,7 @@ def pilot_reasoning_context(dossier: dict, *, roles: FunctionalRolePilot | None 
             "schema_version": "canonical-reasoning-context-v1", "contract_count": len(contexts)},
         "omissions": {"pilot_subjects_omitted": 0, "scenario_outcomes_omitted": 0,
             "canonical_contexts": [c["omitted_item_counts"] for c in contexts],
-            "policy": "The three unchanged retrieval envelopes are retained in a digest-bound companion artifact, with their exact context identities, snapshot and omissions copied here. Generic entity and evidence copies are omitted to avoid audit duplication. The dossier retains exact identities, compact lineage, source and record identities, and complete scenario results."},
+            "policy": "The three unchanged retrieval envelopes are retained in a digest-bound companion artifact, with their exact context identities, snapshot and omissions copied here. Generic entity and evidence copies are omitted to avoid audit duplication. The dossier retains exact identities, compact lineage, source and record identities, complete scenario decision values, and digest-bound full result and reconstruction references."},
         "delivery": "read-only manual handoff; no live model execution or transport",
         "maximum_serialized_bytes_including_trailing_lf": MAXIMUM_STDOUT_BYTES}
     context["handoff_id"] = content_identity(context)
@@ -223,6 +243,7 @@ def _recommendation(scenario: dict) -> dict:
 
 
 def pilot_explanation(dossier: dict) -> str:
+    _validate_pilot_aggregate(dossier)
     lines = ["# Collection-aware Card acquisition — manual explanation example", "",
         "Dossier: `" + dossier["dossier_id"] + "`. Human review remains pending. No actual purchase advice or live ChatGPT integration.", "",
         "## Evidence boundary", ""]

@@ -12,6 +12,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+from types import SimpleNamespace
 from typing import Any, Mapping
 
 from decision_intelligence import (AcquisitionDecisionOrchestrator, AnalysisMetric,
@@ -24,6 +25,8 @@ from .mechanics import MechanicalCardIntelligence, content_identity, stable_json
 
 INPUT_VERSION = "card-acquisition-input-v1"
 DOSSIER_VERSION = "card-acquisition-dossier-v1"
+RECONSTRUCTION_VERSION = "card-acquisition-reconstruction-v1"
+_PINNED_SCOPE = "Read-only projections of the existing canonical query snapshot and referenced mechanical dossiers."
 MAXIMUM_BYTES = 65536
 MAXIMUM_MONEY_SCALE = 6
 MAXIMUM_OFFER_AGE_SECONDS = 2592000
@@ -143,6 +146,35 @@ class CardAcquisitionDossier:
         if document.get("schema_version") != DOSSIER_VERSION or \
                 document.get("dossier_id") != content_identity(body):
             raise CardAcquisitionError("acquisition dossier content identity/schema mismatch")
+        if len(stable_json(document).encode("utf-8")) > MAXIMUM_BYTES:
+            raise CardAcquisitionError("acquisition dossier exceeds its byte bound")
+        # An outer hash only detects accidental edits. Reconstruct the domain
+        # projection from its original input and retained bytes, then let the
+        # existing Decision orchestrator reproduce the complete recommendation.
+        try:
+            proof = document.get("reconstruction")
+            if not isinstance(proof, dict) or set(proof) != {
+                    "schema_version", "input_packet", "decision_request", "analyses", "analysis_shared", "sources", "canonical"} or \
+                    proof.get("schema_version") != RECONSTRUCTION_VERSION:
+                raise CardAcquisitionError("original acquisition reconstruction proof is required")
+            packet = CardAcquisitionInput(proof["input_packet"])
+            if packet.input_id != document.get("input_id"):
+                raise CardAcquisitionError("original acquisition input identity mismatch")
+            adapter = CardAcquisitionAdapter._from_pinned_canonical(proof["canonical"], packet)
+            sources, evidence, blockers, snapshots = adapter._sources(packet.to_dict(),
+                Path("/__card_acquisition_source_root__"), snapshots=proof["sources"])
+            replay, request, analyses = adapter._evaluate_bound(packet, sources, evidence, blockers)
+            shared, serialized = adapter._serialize_analyses(analyses)
+            if stable_json(proof["sources"]) != stable_json(snapshots) or \
+                    stable_json(proof["decision_request"]) != stable_json(request.to_dict()) or \
+                    stable_json(proof["analysis_shared"]) != stable_json(shared) or \
+                    stable_json(proof["analyses"]) != stable_json(serialized) or \
+                    stable_json({k: v for k, v in body.items() if k != "reconstruction"}) != stable_json(replay):
+                raise CardAcquisitionError("acquisition reconstruction or Decision replay mismatch")
+        except (KeyError, TypeError, ValueError, AttributeError) as error:
+            if isinstance(error, CardAcquisitionError):
+                raise
+            raise CardAcquisitionError("invalid acquisition reconstruction proof") from error
         mode = document.get("mode")
         decision = document.get("decision", {})
         if not isinstance(decision, dict) or not isinstance(document.get("policy"), dict):
@@ -180,8 +212,6 @@ class CardAcquisitionDossier:
                 document.get("review") != {"status": "requires_review", "canonical_admission": False,
                     "role_approval": False, "purchase_executed": False}:
             raise CardAcquisitionError("acquisition mode or non-admission boundary changed")
-        if len(stable_json(document).encode("utf-8")) > MAXIMUM_BYTES:
-            raise CardAcquisitionError("acquisition dossier exceeds its byte bound")
         object.__setattr__(self, "payload", freeze(document))
 
     def to_dict(self) -> dict[str, Any]:
@@ -194,7 +224,7 @@ class CardAcquisitionDossier:
         context = {"schema_version": "card-acquisition-reasoning-context-v1",
             "instruction": "Explain only this deterministic result. Synthetic inputs are demonstrations, not actual purchase advice. Do not infer competitive strength or approve pending roles.",
             "dossier": self.to_dict(),
-            "omissions": {"full_source_bytes": "retained by references and digests",
+            "omissions": {"full_source_bytes": "Supplied acquisition source bytes are pinned in reconstruction; canonical mechanical source bytes remain retained by references and digests.",
                 "historical_prices": "not current executable offers",
                 "pending_role_payloads": "not approved eligibility evidence",
                 "competitive_rankings_and_forecasts": "unsupported"}}
@@ -212,25 +242,124 @@ class CardAcquisitionAdapter:
         self.query = self.mechanical.query
         self.printings = {p.canonical_identity: p for p in self.query.entities(entity_type="printing")
             if p.canonical_values.get("uuid") == p.canonical_identity and p.supersession_state == "current"}
-        self.policy = DecisionPolicy("collection-aware-card-acquisition", "1.0.0", (
+        self.policy = self._policy()
+
+    @staticmethod
+    def _policy() -> DecisionPolicy:
+        return DecisionPolicy("collection-aware-card-acquisition", "1.0.0", (
             MetricCriterion("acquisition_eligible", "maximize"),
             MetricCriterion("declared_priority", "minimize"),
             MetricCriterion("complete_cost_units", "minimize")))
 
-    def _sources(self, packet: dict[str, Any], root: Path) -> tuple[dict, list, list]:
-        sources, evidence, blockers = {}, [], []
+    @staticmethod
+    def _printing_provenance(printing: Any) -> dict[str, Any]:
+        lineage = printing.provenance_summary
+        return {"source_ids": lineage.get("source_ids", []),
+            "evidence_ids": [e.get("id") for e in lineage.get("evidence_assertions", [])],
+            "promotion_references": [{"promotion_id": audit.get("promotion_id"),
+                "audit_reference": audit.get("audit_reference"), "entity_binding": audit.get("entity_binding")}
+                for audit in lineage.get("promotion_history", [])]}
+
+    def _pinned_canonical(self, packet: CardAcquisitionInput) -> dict[str, Any]:
+        p = packet.to_dict()
+        ids = {c["printing_id"] for c in p["candidates"]} | {
+            i for c in p["candidates"] for i in c["acceptable_printing_ids"]}
+        cards = {}
+        for candidate in p["candidates"]:
+            card_id = candidate["card_id"]
+            dossier = self.mechanical.dossier(card_id).to_dict()
+            cards[card_id] = {key: dossier[key] for key in ("dossier_id", "card_identity", "source")}
+        return {"scope": _PINNED_SCOPE, "snapshot_id": self.mechanical.snapshot_id, "cards": cards,
+            "printings": {pid: {"canonical_values": thaw(freeze(self.printings[pid].canonical_values)),
+                "provenance": self._printing_provenance(self.printings[pid])}
+                for pid in sorted(ids) if pid in self.printings}}
+
+    @classmethod
+    def _from_pinned_canonical(cls, canonical: Any, packet: CardAcquisitionInput) -> CardAcquisitionAdapter:
+        if not isinstance(canonical, dict) or set(canonical) != {"scope", "snapshot_id", "cards", "printings"} or \
+                canonical["scope"] != _PINNED_SCOPE or \
+                not isinstance(canonical["cards"], dict) or not isinstance(canonical["printings"], dict):
+            raise CardAcquisitionError("pinned canonical acquisition scope is required")
+        p = packet.to_dict()
+        if set(canonical["cards"]) != {c["card_id"] for c in p["candidates"]}:
+            raise CardAcquisitionError("pinned canonical Card scope mismatch")
+        needed = {c["printing_id"] for c in p["candidates"]} | {
+            i for c in p["candidates"] for i in c["acceptable_printing_ids"]}
+        if set(canonical["printings"]) - needed:
+            raise CardAcquisitionError("pinned canonical Printing scope mismatch")
+        adapter = cls.__new__(cls)
+        cards = canonical["cards"]
+        for card_id, dossier in cards.items():
+            if not isinstance(dossier, dict) or set(dossier) != {"dossier_id", "card_identity", "source"} or \
+                    dossier["card_identity"].get("card_id") != card_id or \
+                    dossier["source"].get("oracle_id") != card_id:
+                raise CardAcquisitionError("pinned canonical mechanical Card binding mismatch")
+        adapter.mechanical = SimpleNamespace(snapshot_id=canonical["snapshot_id"], cards=cards,
+            dossier=lambda card_id: SimpleNamespace(to_dict=lambda: thaw(freeze(cards[card_id]))))
+        adapter.printings = {}
+        for pid, printing in canonical["printings"].items():
+            if not isinstance(printing, dict) or set(printing) != {"canonical_values", "provenance"} or \
+                    printing["canonical_values"].get("uuid") != pid:
+                raise CardAcquisitionError("pinned canonical exact Printing binding mismatch")
+            lineage = printing["provenance"]
+            if not isinstance(lineage, dict) or set(lineage) != {"source_ids", "evidence_ids", "promotion_references"}:
+                raise CardAcquisitionError("pinned canonical Printing provenance mismatch")
+            adapter.printings[pid] = SimpleNamespace(canonical_values=printing["canonical_values"],
+                provenance_summary={"source_ids": lineage["source_ids"],
+                    "evidence_assertions": [{"id": eid} for eid in lineage["evidence_ids"]],
+                    "promotion_history": lineage["promotion_references"]})
+        adapter.policy = cls._policy()
+        return adapter
+
+    @staticmethod
+    def _serialize_analyses(analyses: list[DomainAnalysisEnvelope]) -> tuple[dict, list]:
+        """Losslessly share identical contract fields within the byte bound.
+
+        Each original Decision analysis is exactly {**shared, **item}; neither
+        metrics nor evidence are dropped or replaced by asserted summary hashes.
+        """
+        documents = [analysis.to_dict() for analysis in analyses]
+        shared = {key: value for key, value in documents[0].items()
+            if all(stable_json(document[key]) == stable_json(value) for document in documents[1:])}
+        return shared, [{key: value for key, value in document.items() if key not in shared}
+            for document in documents]
+
+    def _sources(self, packet: dict[str, Any], root: Path, *, snapshots: Any = None) -> tuple[dict, list, list, list]:
+        sources, evidence, blockers, retained = {}, [], [], []
         entries = packet.get("sources", [])
         ids = [x.get("source_id") for x in entries]
         if any(not isinstance(x, str) or not x for x in ids) or len(ids) != len(set(ids)):
             raise CardAcquisitionError("source evidence identities must be unique and nonempty")
+        pinned = None
+        if snapshots is not None:
+            if not isinstance(snapshots, list) or any(not isinstance(s, dict) or
+                    set(s) not in ({"source_id", "source_text"}, {"source_id", "unavailable_reason"}) for s in snapshots):
+                raise CardAcquisitionError("pinned retained source bytes are required")
+            pinned = {s["source_id"]: s for s in snapshots}
+            if len(pinned) != len(snapshots) or set(pinned) != set(ids):
+                raise CardAcquisitionError("pinned retained source scope mismatch")
         for entry in entries:
             sid = entry["source_id"]
+            snapshot = {"source_id": sid}
             try:
                 relative = Path(entry["relative_path"])
                 path = (root / relative).resolve()
                 if relative.is_absolute() or not path.is_relative_to(root):
                     raise CardAcquisitionError("source locator escapes retained source root")
-                raw = path.read_bytes()
+                if pinned is None:
+                    raw = path.read_bytes()
+                    snapshot["source_text"] = raw.decode("utf-8")
+                elif "unavailable_reason" in pinned[sid]:
+                    reason = pinned[sid]["unavailable_reason"]
+                    if not isinstance(reason, str) or not reason:
+                        raise CardAcquisitionError("pinned unavailable source reason is required")
+                    raise CardAcquisitionError(reason)
+                else:
+                    source_text = pinned[sid]["source_text"]
+                    if not isinstance(source_text, str):
+                        raise CardAcquisitionError("pinned retained source text must be a string")
+                    raw = source_text.encode("utf-8")
+                    snapshot["source_text"] = source_text
                 digest = "sha256:" + hashlib.sha256(raw).hexdigest()
                 if digest != entry["content_digest"]:
                     raise CardAcquisitionError("retained source byte digest mismatch")
@@ -262,8 +391,11 @@ class CardAcquisitionAdapter:
                 evidence.append(EvidenceReference(sid, entry["provider_identity"], digest,
                     entry["captured_at"], entry["relative_path"]))
             except (OSError, KeyError, TypeError, ValueError) as error:
+                if "source_text" not in snapshot:
+                    snapshot["unavailable_reason"] = str(error)
                 blockers.append(f"source:{sid}:{error}")
-        return sources, evidence, blockers
+            retained.append(snapshot)
+        return sources, evidence, blockers, retained
 
     @staticmethod
     def _bound(wrapper: Any, sources: dict, *, mode: str, kinds: set[str]) -> Any:
@@ -285,7 +417,18 @@ class CardAcquisitionAdapter:
         packet = value if isinstance(value, CardAcquisitionInput) else CardAcquisitionInput(value)
         p = packet.to_dict()
         root = Path(source_root).resolve()
-        sources, evidence, blockers = self._sources(p, root)
+        sources, evidence, blockers, snapshots = self._sources(p, root)
+        body, request, analyses = self._evaluate_bound(packet, sources, evidence, blockers)
+        shared, serialized = self._serialize_analyses(analyses)
+        body["reconstruction"] = {"schema_version": RECONSTRUCTION_VERSION,
+            "input_packet": packet.to_dict(), "decision_request": request.to_dict(),
+            "analyses": serialized, "analysis_shared": shared, "sources": snapshots,
+            "canonical": self._pinned_canonical(packet)}
+        return CardAcquisitionDossier({**body, "dossier_id": content_identity(body)})
+
+    def _evaluate_bound(self, packet: CardAcquisitionInput, sources: dict, evidence: list,
+                        blockers: list) -> tuple[dict[str, Any], DecisionRequest, list[DomainAnalysisEnvelope]]:
+        p = packet.to_dict()
         if p.get("canonical_snapshot_id") != self.mechanical.snapshot_id:
             blockers.append("canonical_snapshot_mismatch")
         mode, now = p["mode"], _time(p["as_of"])
@@ -402,7 +545,7 @@ class CardAcquisitionAdapter:
             "evidence": [e.to_dict() for e in evidence],
             "review": {"status": "requires_review", "canonical_admission": False,
                        "role_approval": False, "purchase_executed": False}}
-        return CardAcquisitionDossier({**body, "dossier_id": content_identity(body)})
+        return body, request, analyses
 
     @staticmethod
     def _dimensions(value: dict, printing: Any) -> None:
@@ -439,12 +582,7 @@ class CardAcquisitionAdapter:
             "declared_priority": None, "complete_cost_units": None, "complete_cost": None,
             "remaining_budget": None, "offer_id": None, "exclusion_reasons": [],
             "objective_eligibility": "unknown", "unsupported_dimensions": ["competitive_strength", "future_prices", "approved_pending_roles"]}
-        lineage = self.printings[pid].provenance_summary
-        row["canonical_printing_provenance"] = {"source_ids": lineage.get("source_ids", []),
-            "evidence_ids": [e.get("id") for e in lineage.get("evidence_assertions", [])],
-            "promotion_references": [{"promotion_id": audit.get("promotion_id"),
-                "audit_reference": audit.get("audit_reference"), "entity_binding": audit.get("entity_binding")}
-                for audit in lineage.get("promotion_history", [])]}
+        row["canonical_printing_provenance"] = self._printing_provenance(self.printings[pid])
         try:
             required = {k: candidate[k] for k in _REQUIREMENTS}
             self._bound({"value": required, "binding": candidate.get("requirements_binding")}, sources,
