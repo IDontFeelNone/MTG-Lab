@@ -1,3 +1,10 @@
+# Functional-Role Card Intelligence — bounded review pilot (2026-10-12)
+
+- Verify merged PR #166 at `e4a99ae6ccffe3e7121337fe28d9127024be3743`; preserve Architecture v12 and the complete mechanical cohort.
+- Add one generic, immutable pending role-candidate contract and eleven provisional MTG role definitions; bind authored proposals to exact retained mechanical dossiers and complete source passages.
+- Prepare fifteen dossiers and thirty pending candidates with costs, conditions, targeting, restrictions, contextual dependencies and unknown prominence. No keyword classifier, canonical role admission or full-cohort classification.
+- Retain eight isolated review artifacts, a three-Card functional comparison and bounded manual reasoning contexts; extend the existing CLI and add focused regression coverage.
+
 # Mechanical Card Intelligence — production cohort foundation (2026-10-12)
 
 - Reconcile main `c8941c568fb275a735ab6902e3663947f21760ee` and merged PR #165; independently verify 384 production Cards, 385 retained source rows, one excluded emblem, and five multi-faced Cards with eleven explicit faces.

@@ -1,3 +1,5 @@
+> **Merged status:** GitHub PR #166 is merged at `e4a99ae6ccffe3e7121337fe28d9127024be3743`. The mechanical v1 projection and all retained artifacts below remain unchanged. A separately bounded [functional-role review pilot](FUNCTIONAL_ROLE_CARD_INTELLIGENCE.md) adds pending interpretations for fifteen Cards; it does not turn this literal projection into a classifier or admit roles as facts. The original milestone specification and stop boundary below retain their historical context.
+
 # Mechanical Card Intelligence — production cohort foundation
 
 Canonical main verified on 2026-10-12: `c8941c568fb275a735ab6902e3663947f21760ee`, the merge of GitHub PR #165. Architecture v12 remains frozen. This is a named milestone, not a new numbered project phase. PR numbers and phase numbers remain independent.

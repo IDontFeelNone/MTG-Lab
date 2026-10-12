@@ -1,0 +1,141 @@
+{
+  "game_id": "magic",
+  "review_status": "requires_review",
+  "role_semantics": "MTG-specific definitions in data; shared candidate subject, evidence, value states, review and supersession are game-neutral.",
+  "roles": {
+    "card_draw": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Provide an explicitly stated draw outcome.",
+      "evidence_requirements": [
+        "Include draw quantity, beneficiary, conditional instructions and accompanying discard/return; drawing is not automatically positive net advantage."
+      ],
+      "label": "Card draw"
+    },
+    "card_selection": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Choose, filter or reorder accessible cards.",
+      "evidence_requirements": [
+        "Require explicit look/choice/order evidence, or mark strategic filtering from draw/discard as contextual and incomplete."
+      ],
+      "label": "Card selection"
+    },
+    "combo_enabling": {
+      "allowed_bases": [
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Identify a contextual component for future interaction investigation.",
+      "evidence_requirements": [
+        "Require direct resource/permission evidence and explicit missing partner/cost/sequence dependencies; no verified combo, infinite loop, positive net resource or strength claim is admitted."
+      ],
+      "label": "Potential combo enabling (review only)"
+    },
+    "event_payoff": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Produce an explicitly stated benefit on a specified event.",
+      "evidence_requirements": [
+        "Include event, subject/controller, other/self distinction and recipient; a death payoff is not necessarily sacrifice-specific."
+      ],
+      "label": "Event payoff"
+    },
+    "mana_acceleration": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Create action-paying resources or access to additional resources.",
+      "evidence_requirements": [
+        "Require the actual production/access outcome and its costs, recipients, conditions and resource restrictions; an untap or resource word alone is insufficient."
+      ],
+      "label": "Resource acceleration"
+    },
+    "protection": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Provide a stated prevention, targeting restriction or protective permission.",
+      "evidence_requirements": [
+        "Identify protected subjects, scope and duration; interpreting interaction as protection requires a separately stated threat/objective."
+      ],
+      "label": "Protection"
+    },
+    "recursion": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Restore access to a previously used or discarded card/object.",
+      "evidence_requirements": [
+        "Preserve source and destination or casting permission, owner, permitted object class, costs, timing and exclusions; library-top return is not draw."
+      ],
+      "label": "Recursion/access restoration"
+    },
+    "removal": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Remove a specified game object through an explicit effect.",
+      "evidence_requirements": [
+        "Identify action, permitted target, destination, compensation and restrictions; removal keywords or death references alone are insufficient."
+      ],
+      "label": "Removal"
+    },
+    "sacrifice_outlet": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Provide a controllable activation with an explicit sacrifice cost.",
+      "evidence_requirements": [
+        "Identify the sacrificing ability, permitted object and benefit; forced sacrifice, death payoffs and a created token's self-sacrifice do not establish a creature outlet on its creator."
+      ],
+      "label": "Voluntary sacrifice outlet"
+    },
+    "stack_interaction": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Alter or prevent a pending action.",
+      "evidence_requirements": [
+        "Identify the exact affected action and restrictions; MTG counter-a-spell does not imply counter-an-ability or removing a resolved permanent."
+      ],
+      "label": "Pending-action interaction"
+    },
+    "tutoring": {
+      "allowed_bases": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ],
+      "definition": "Search for a permitted card or object.",
+      "evidence_requirements": [
+        "Include searched location, allowed selection, destination, costs, timing and resulting control or other downside."
+      ],
+      "label": "Tutoring"
+    }
+  },
+  "schema_version": "functional-role-vocabulary-v1",
+  "scope": "Eleven provisional role definitions for this reviewed pilot; not an exhaustive or universally approved taxonomy.",
+  "vocabulary_id": "mtg-functional-roles-pilot-v1"
+}

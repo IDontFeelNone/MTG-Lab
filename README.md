@@ -1,9 +1,9 @@
 # MTG Lab
 
-> **Verified merged baseline:** `c8941c568fb275a735ab6902e3663947f21760ee` (GitHub PR #165).
-> The two-Card manual evidence handoff is merged. The current milestone adds
-> verified mechanical dossiers and descriptive analysis for the existing production
-> Card cohort. Architecture v12 is frozen; production data remains unchanged.
+> **Verified merged baseline:** `e4a99ae6ccffe3e7121337fe28d9127024be3743` (GitHub PR #166).
+> The mechanical production-cohort foundation is merged. The current milestone
+> prepares a bounded functional-role review pilot for fifteen Cards. Architecture
+> v12 is frozen; all proposed roles require human review and production data stays unchanged.
 
 > **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
@@ -273,9 +273,9 @@ This organization allows multiple trading card games to share a common analytics
 
 **Status:** Active Development
 
-**Latest merged milestone:** Two-Card evidence-to-ChatGPT manual demonstration — GitHub PR #165 (merged; no live integration or model execution)
+**Latest merged milestone:** Mechanical Card Intelligence production cohort — GitHub PR #166 (merged; literal provider mechanics, no canonical role admission)
 
-**Verified main baseline (2026-10-12):** `c8941c568fb275a735ab6902e3663947f21760ee`
+**Verified main baseline (2026-10-12):** `e4a99ae6ccffe3e7121337fe28d9127024be3743`
 
 **Highest numbered project phase:** Phase 147; later named milestones do not imply a new phase number.
 
@@ -302,8 +302,10 @@ provide a live ChatGPT connection. The [mechanical production-cohort foundation]
 adds read-only source-attributed dossiers for all 384 independently verified production Cards,
 face-aware coverage and correctly denominated cohort statistics. The 385 retained Scryfall rows
 map uniquely to those Cards with one excluded emblem; this is not complete MB2 set membership.
-Functional roles, rules interactions, synergy and competitive rankings remain unsupported.
-Stop after the mechanical milestone's PR handoff; subsequent work requires
+The [functional-role review pilot](docs/FUNCTIONAL_ROLE_CARD_INTELLIGENCE.md) prepares exactly fifteen
+Cards and thirty source-bound pending proposals with restrictions and uncertainty. It does not
+classify the full cohort or admit knowledge facts. Verified rules interactions, synergy, rankings
+and deck optimization remain unsupported. Stop after the role pilot's PR handoff; subsequent work requires
 separate approval. Competitive Intelligence remains parked; Competitive Card Intelligence and
 Deck Intelligence remain planned and unauthorized.
 

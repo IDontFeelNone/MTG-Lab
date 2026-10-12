@@ -1,0 +1,1006 @@
+{
+  "annotation_method": "Engineer-authored semantic proposals; deterministic exact-source validation, no automatic text or keyword classifier.",
+  "canonical_main_baseline": "e4a99ae6ccffe3e7121337fe28d9127024be3743",
+  "canonical_snapshot_id": "sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7",
+  "cards": [
+    {
+      "card_id": "002965be-a36f-4a09-9ce0-c6535bca1703",
+      "mechanical_dossier_id": "sha256:346d8c3fb08ff2b68d87f6dd8c8477ebe3ef05b39882817f77fe08791f6a0166",
+      "name": "Veil of Summer",
+      "oracle_text": "Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn. (You and they can't be the targets of blue or black spells or abilities your opponents control.)",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {G}."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Spells you control can't be countered this turn; you and permanents you control gain hexproof from blue and black until end of turn.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The hexproof scope is blue and black.",
+            "The supplied reminder restricts the relevant opposing spells/abilities.",
+            "The stated protection expires this turn."
+          ],
+          "role_id": "protection",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "direct_mechanical",
+          "conditions": [
+            "An opponent must have cast a blue or black spell this turn."
+          ],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {G}."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Draw a card if an opponent has cast a blue or black spell this turn.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "Draw is conditional; it is not guaranteed for every casting."
+          ],
+          "role_id": "card_draw",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Conditional draw plus two differently scoped protection effects."
+    },
+    {
+      "card_id": "02090581-61aa-4348-ad57-451be8ee91c2",
+      "mechanical_dossier_id": "sha256:520679507ff35d784234c1c746e3daa09a04e460c48c33c6f39b40397374102b",
+      "name": "Ponder",
+      "oracle_text": "Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {U}."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Look at the top three cards, reorder them, and optionally shuffle.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "Selection is limited to the top three before the optional shuffle."
+          ],
+          "role_id": "card_selection",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {U}."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Draw one card after the look/reorder/optional-shuffle instructions.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "Drawing one card is not a proven positive net-card-advantage claim."
+          ],
+          "role_id": "card_draw",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Explicit ordering/shuffle selection followed by draw; comparison example."
+    },
+    {
+      "card_id": "27e0948b-9916-473b-8d8c-a51bdfbc7457",
+      "mechanical_dossier_id": "sha256:c1dc644b7d1f24c1c31a7d05ad3cd5d2d13384106b99b9c44231250fe66016b0",
+      "name": "Underworld Breach",
+      "oracle_text": "Each nonland card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard. (You may cast cards from your graveyard for their escape cost.)\nAt the beginning of the end step, sacrifice this enchantment.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [
+            "A nonland card must be in your graveyard."
+          ],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {1}{R}.",
+            "Escape cost equals that card's mana cost plus exile three other graveyard cards."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Nonland cards in your graveyard gain the supplied escape permission to be cast for their escape costs.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "Land cards are excluded.",
+            "Three other cards are required for the stated escape cost.",
+            "At the beginning of the end step, sacrifice this enchantment."
+          ],
+          "role_id": "recursion",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "contextual_interpretation",
+          "conditions": [],
+          "context_dependencies": [
+            "Partner identities, resource replenishment, legal action sequence and termination or loop proof are absent."
+          ],
+          "costs": [
+            "Every proposed escape still requires the stated mana and three-other-card costs."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "The permission and costs are literal; no partner sequence, loop, payoff or profitability is verified.",
+          "function": "Repeated graveyard-casting permission is a component for a later interaction review.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The enchantment has the retained end-step sacrifice instruction."
+          ],
+          "role_id": "combo_enabling",
+          "state": "incomplete",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "unsupported_claim",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "Its end-step sacrifice instruction is not a voluntary activation that sacrifices other objects.",
+          "function": null,
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "No general sacrifice outlet is assigned."
+          ],
+          "role_id": "sacrifice_outlet",
+          "state": "unsupported",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Graveyard-casting permission with substantial costs and duration; forced sacrifice is not an outlet."
+    },
+    {
+      "card_id": "3d6fa57a-aa53-4b5c-b8af-a7612c823117",
+      "mechanical_dossier_id": "sha256:c2c032ccc36ec75de853c094a88b8fac46393036685626f78423f74f3c9f2833",
+      "name": "Faithless Looting",
+      "oracle_text": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {R}."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Draw two cards, then discard two cards.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The discard-two instruction accompanies the draw-two instruction."
+          ],
+          "role_id": "card_draw",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "contextual_interpretation",
+          "conditions": [],
+          "context_dependencies": [
+            "Current hand, draw outcomes, graveyard utility and deck objective are not retained."
+          ],
+          "costs": [
+            "Card mana cost {R}."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "The draw/discard outcome is literal; the value of filtering or graveyard placement depends on separately supplied cards and objectives.",
+          "function": "Draw/discard may support filtering the hand or placing useful cards in the graveyard.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "Two cards must be discarded."
+          ],
+          "role_id": "card_selection",
+          "state": "incomplete",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [
+            "Flashback cost {2}{R}."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "The retained flashback reminder permits casting this card from the graveyard for its flashback cost, then exiling it.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "This permission concerns this card, not arbitrary graveyard cards.",
+            "The supplied reminder says to exile it afterward."
+          ],
+          "role_id": "recursion",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Draw/discard is not automatically card advantage; limited graveyard recasting."
+    },
+    {
+      "card_id": "4ec85850-f274-4c0c-9a03-0488267caa14",
+      "mechanical_dossier_id": "sha256:90f1c53e65b5f15cd8883ab9e8e747b6e05fe272aa1429f9029d8bef4f9ad3b6",
+      "name": "Giver of Runes",
+      "oracle_text": "{T}: Another target creature you control gains protection from colorless or from the color of your choice until end of turn.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {W}.",
+            "Activation cost {T}."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Another target creature you control gains protection from colorless or from a chosen color until end of turn.",
+          "limitations": [
+            "The protection keyword is not expanded into uncited rules interactions."
+          ],
+          "restrictions": [
+            "The target must be another creature you control.",
+            "Protection is from colorless or one chosen color, not every effect.",
+            "The stated duration is until end of turn."
+          ],
+          "role_id": "protection",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Another controlled creature, chosen protection scope and duration; self-protection false-positive control."
+    },
+    {
+      "card_id": "5b6bdf5a-2742-4851-92cd-a857a3852836",
+      "mechanical_dossier_id": "sha256:620ae346f09e631a01b27531d6517e43a927a651bea7cd568f472a450c1e3675",
+      "name": "Treasure Cruise",
+      "oracle_text": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDraw three cards.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [
+            "Available graveyard cards and exact casting payment are not evaluated."
+          ],
+          "costs": [
+            "Card mana cost {7}{U}.",
+            "Delve reminder: each exiled graveyard card while casting pays for {1}."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Draw three cards.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The supplied delve reminder pays generic {1}, not the {U} component."
+          ],
+          "role_id": "card_draw",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Draw-three with explicit graveyard-dependent generic-cost payment; no keyword-only ramp claim."
+    },
+    {
+      "card_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "mechanical_dossier_id": "sha256:e413ea823970a9a367d21bb4fb4cf896d0c331ad4c318899f5424b46cd3d951e",
+      "name": "Sol Ring",
+      "oracle_text": "{T}: Add {C}{C}.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [
+            "Whether its output satisfies a particular payment requires a separate payment/castability assessment."
+          ],
+          "costs": [
+            "Card mana cost {1}.",
+            "Activation cost {T}."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "The tap ability adds two colorless mana.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The stated output is {C}{C}, not colored mana."
+          ],
+          "role_id": "mana_acceleration",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Simple repeatable resource production; preserves the earlier demonstration."
+    },
+    {
+      "card_id": "6b8cf2a0-b045-4d91-9d91-c602d40c6237",
+      "mechanical_dossier_id": "sha256:b697c0e59a7f2d351038d2ab8182777dba75c7df893052fbfb6f3fe42eff01ce",
+      "name": "Basalt Monolith",
+      "oracle_text": "This artifact doesn't untap during your untap step.\n{T}: Add {C}{C}{C}.\n{3}: Untap this artifact.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {3}.",
+            "Mana activation cost {T}.",
+            "Separate untap activation costs {3}."
+          ],
+          "evidence_lines": [
+            0,
+            1,
+            2
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "The tap ability adds three colorless mana.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "This artifact doesn't untap during your untap step.",
+            "The stated output is {C}{C}{C}."
+          ],
+          "role_id": "mana_acceleration",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "contextual_interpretation",
+          "conditions": [],
+          "context_dependencies": [
+            "Separate partner identity, rules evidence, resource accounting and a repeatable sequence are absent."
+          ],
+          "costs": [
+            "The supplied untap cost is {3}; the supplied output is {C}{C}{C}."
+          ],
+          "evidence_lines": [
+            0,
+            1,
+            2
+          ],
+          "explanation": "Mana production and a paid untap are evidenced, but no independently verified interaction or profitable loop is supplied.",
+          "function": null,
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "No standalone infinite-mana claim follows from these abilities."
+          ],
+          "role_id": "combo_enabling",
+          "state": "unknown",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Resource production with an explicit untap restriction and paid untap; negative infinite-mana control."
+    },
+    {
+      "card_id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+      "mechanical_dossier_id": "sha256:4fcceaa12666e45900c9d2aeda1b7ab2887001caa46904e6577b592d7b1350ba",
+      "name": "Wishclaw Talisman",
+      "oracle_text": "This artifact enters with three wish counters on it.\n{1}, {T}, Remove a wish counter from this artifact: Search your library for a card, put it into your hand, then shuffle. An opponent gains control of this artifact. Activate only during your turn.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [
+            "This artifact enters with three wish counters.",
+            "A wish counter is required to pay the stated activation cost."
+          ],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {1}{B}.",
+            "Activation costs {1}, {T}, and removal of a wish counter."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Search your library for a card, put it into your hand, then shuffle; an opponent gains control of this artifact.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "An opponent gains control of this artifact.",
+            "A later activation cannot be assumed after control transfer."
+          ],
+          "role_id": "tutoring",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "Activate only during your turn.",
+            "status": "known"
+          }
+        }
+      ],
+      "selection_reason": "Tutor with counters, activation costs, own-turn restriction and control transfer."
+    },
+    {
+      "card_id": "97cabeda-9fe3-490d-99b4-4c8d87c17157",
+      "mechanical_dossier_id": "sha256:f76aedbbb7d120feab09977768cad50c36bc6153773e4ac897f7aaa5f5240ad3",
+      "name": "Noxious Revival",
+      "oracle_text": "({G/P} can be paid with either {G} or 2 life.)\nPut target card from a graveyard on top of its owner's library.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [
+            "Later access to that card and whether the chosen owner benefits require context."
+          ],
+          "costs": [
+            "Card mana cost {G/P}; the retained reminder permits {G} or 2 life."
+          ],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Put a target card from a graveyard on top of its owner's library.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The destination is the top of the owner's library, not hand or battlefield.",
+            "The supplied wording permits a card from a graveyard, not only your graveyard."
+          ],
+          "role_id": "recursion",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "unsupported_claim",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [],
+          "evidence_lines": [
+            0,
+            1
+          ],
+          "explanation": "The retained effect moves a card to the top of a library; it contains no draw instruction.",
+          "function": null,
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "No immediate card draw or return-to-hand role is assigned."
+          ],
+          "role_id": "card_draw",
+          "state": "unsupported",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Top-of-library return from any graveyard is not draw or return-to-hand."
+    },
+    {
+      "card_id": "a784481f-eccb-4112-bb38-04a659319660",
+      "mechanical_dossier_id": "sha256:c223fb6ab55294730b951d4449970ee3e823c221a9be83721193e8a6da93da40",
+      "name": "Pitiless Plunderer",
+      "oracle_text": "Whenever another creature you control dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [
+            "Another creature you control must die."
+          ],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {3}{B}."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "When another creature you control dies, create a Treasure token.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "Its own death is excluded by another.",
+            "Death need not be caused by sacrifice; no sacrifice-only trigger is inferred."
+          ],
+          "role_id": "event_payoff",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "direct_mechanical",
+          "conditions": [
+            "Another creature you control must die to create the Treasure."
+          ],
+          "context_dependencies": [],
+          "costs": [
+            "Treasure ability costs {T} and sacrifice of this token."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "The created Treasure has the retained tap-and-sacrifice ability to add one mana of any color.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The mana ability belongs to the created Treasure; it is not an activation on Pitiless Plunderer."
+          ],
+          "role_id": "mana_acceleration",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "unsupported_claim",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "A death trigger and the Treasure's self-sacrifice reminder do not give this Card a voluntary creature-sacrifice activation.",
+          "function": null,
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "No creature sacrifice outlet is assigned to the Plunderer."
+          ],
+          "role_id": "sacrifice_outlet",
+          "state": "unsupported",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "contextual_interpretation",
+          "conditions": [
+            "Another creature you control must die."
+          ],
+          "context_dependencies": [
+            "Partner Cards, a repeatable death mechanism, replacement effects, costs and interaction verification are absent."
+          ],
+          "costs": [],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Death-triggered token resources are evidenced, but partner interactions and a repeatable net-positive sequence are not supplied.",
+          "function": null,
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [],
+          "role_id": "combo_enabling",
+          "state": "unknown",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Death payoff versus sacrifice outlet; token-mediated resources and unverified combo interpretation."
+    },
+    {
+      "card_id": "b1544f21-7e98-461b-aed5-e748b0168c52",
+      "mechanical_dossier_id": "sha256:a50189ba81501fa5e1c45220acd37166c45fb690d863b3271aa52b720f401f4b",
+      "name": "Swords to Plowshares",
+      "oracle_text": "Exile target creature. Its controller gains life equal to its power.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [
+            "Target legality and the strategic value of that life gain are not calculated."
+          ],
+          "costs": [
+            "Card mana cost {W}."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Exile a target creature; its controller gains life equal to its power.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The target must be a creature.",
+            "Its controller receives the specified life gain."
+          ],
+          "role_id": "removal",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Targeted exile with an explicitly compensating benefit to the target controller."
+    },
+    {
+      "card_id": "cc187110-1148-4090-bbb8-e205694a39f5",
+      "mechanical_dossier_id": "sha256:5494cfb154004db4bafc5b1879df94a1d2b139092dee4afca54215df302a83a2",
+      "name": "Counterspell",
+      "oracle_text": "Counter target spell.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {U}{U}."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Counter a target spell.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The stated target is a spell, not an ability or an already-resolved permanent."
+          ],
+          "role_id": "stack_interaction",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "contextual_interpretation",
+          "conditions": [],
+          "context_dependencies": [
+            "A relevant pending spell, legal target and protection objective are not supplied."
+          ],
+          "costs": [
+            "Card mana cost {U}{U}."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Countering a spell is direct; describing that outcome as protection requires a particular threat and object or player to protect.",
+          "function": "Countering a threatening spell could support a protection objective.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "No blanket protection or ability-countering functionality is asserted."
+          ],
+          "role_id": "protection",
+          "state": "incomplete",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Stack interaction versus contextual protection; preserves the earlier demonstration."
+    },
+    {
+      "card_id": "dc0593c2-ccb4-4648-a592-c5bcd121dc72",
+      "mechanical_dossier_id": "sha256:dfee1e71560daf6c7971c453582a34f0d5af936405d050a2965b8f2dbebd7967",
+      "name": "Greater Good",
+      "oracle_text": "Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [
+            "A creature is required to pay the activation cost."
+          ],
+          "context_dependencies": [],
+          "costs": [
+            "Card mana cost {2}{G}{G}.",
+            "Activation cost: Sacrifice a creature."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Pay the sacrifice-a-creature activation cost to obtain the stated draw/discard effect.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The cost is a creature, not an arbitrary permanent."
+          ],
+          "role_id": "sacrifice_outlet",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "direct_mechanical",
+          "conditions": [
+            "The draw count depends on the sacrificed creature's power."
+          ],
+          "context_dependencies": [],
+          "costs": [
+            "Activation cost: Sacrifice a creature."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "Draw cards equal to the sacrificed creature's power, then discard three cards.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The discard-three instruction follows the draw.",
+            "A positive net-card-advantage result is not assumed."
+          ],
+          "role_id": "card_draw",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "contextual_interpretation",
+          "conditions": [],
+          "context_dependencies": [
+            "Creature power, hand contents, draw outcomes and the deck objective are absent."
+          ],
+          "costs": [
+            "Activation cost: Sacrifice a creature."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "The variable draw and discard-three sequence is direct; its selection value is a strategic interpretation.",
+          "function": "The draw/discard sequence may support filtering or graveyard preparation.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "Three cards are discarded after the variable draw."
+          ],
+          "role_id": "card_selection",
+          "state": "incomplete",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Voluntary creature sacrifice, variable draw and mandatory discard; multi-role comparison example."
+    },
+    {
+      "card_id": "fea4cb32-0329-4199-9abe-bff0cc45882a",
+      "mechanical_dossier_id": "sha256:b9bfd7d55885baf340e0cdcac1b34378ec89d428e239a6a82f388767e5141c59",
+      "name": "Standstill",
+      "oracle_text": "When a player casts a spell, sacrifice this enchantment. If you do, each of that player's opponents draws three cards.",
+      "roles": [
+        {
+          "basis": "direct_mechanical",
+          "conditions": [
+            "A player must cast a spell.",
+            "The draw instruction is conditional on sacrificing this enchantment."
+          ],
+          "context_dependencies": [
+            "Who casts the triggering spell determines who receives the draw."
+          ],
+          "costs": [
+            "Card mana cost {1}{U}."
+          ],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "Proposed functionality follows the complete retained ability, with its explicit qualifications; human semantic review is pending.",
+          "function": "When a player casts a spell, sacrifice this enchantment; if you do, each of that player's opponents draws three cards.",
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "The beneficiaries are opponents of the spell-casting player, not always the enchantment's controller."
+          ],
+          "role_id": "card_draw",
+          "state": "known",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        },
+        {
+          "basis": "unsupported_claim",
+          "conditions": [],
+          "context_dependencies": [],
+          "costs": [],
+          "evidence_lines": [
+            0
+          ],
+          "explanation": "The spell-triggered sacrifice instruction is not a voluntary sacrifice-cost activation.",
+          "function": null,
+          "limitations": [
+            "Functional capability is not efficiency, net advantage, competitive strength, or verified rules interaction."
+          ],
+          "restrictions": [
+            "No controllable creature sacrifice outlet is assigned."
+          ],
+          "role_id": "sacrifice_outlet",
+          "state": "unsupported",
+          "supersedes": [],
+          "timing": {
+            "description": "No specific legal activation/casting window is established by this annotation; card type is supplied separately.",
+            "status": "unknown"
+          }
+        }
+      ],
+      "selection_reason": "Draw beneficiaries depend on the spell-casting player; mandatory sacrifice is not an outlet."
+    }
+  ],
+  "comparison_card_ids": [
+    "02090581-61aa-4348-ad57-451be8ee91c2",
+    "3d6fa57a-aa53-4b5c-b8af-a7612c823117",
+    "dc0593c2-ccb4-4648-a592-c5bcd121dc72"
+  ],
+  "coverage_limitations": [
+    "Exactly 15 deliberately selected production Cards; no population prevalence or full-cohort classification.",
+    "All selected Cards have a single retained root Oracle text; face-specific role interpretation is outside this pilot.",
+    "One dated retained Scryfall acquisition; no new rules, providers, live data or current Oracle confirmation.",
+    "No deck objective or human priority review; every role prominence remains unknown.",
+    "Known means a directly evidenced proposed function, not canonical role approval.",
+    "Unlisted roles are unassessed, not known absent; combo correctness and net advantage remain unsupported."
+  ],
+  "game_id": "magic",
+  "prepared_at": "2026-10-12T16:08:11Z",
+  "schema_version": "functional-role-pilot-plan-v1",
+  "vocabulary_id": "mtg-functional-roles-pilot-v1"
+}
