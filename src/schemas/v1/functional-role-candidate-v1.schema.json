@@ -1,0 +1,387 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pending functional-role candidate v1 (game-neutral envelope)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "subject",
+    "role_reference",
+    "basis",
+    "value",
+    "basis_explanation",
+    "prominence",
+    "qualifiers",
+    "context_dependencies",
+    "limitations",
+    "evidence",
+    "mechanical_binding",
+    "preparation",
+    "prepared_at",
+    "supersedes",
+    "review"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "functional-role-candidate-v1"
+    },
+    "candidate_id": {
+      "$ref": "#/$defs/content_id"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "game_id",
+        "card_id"
+      ],
+      "properties": {
+        "game_id": {
+          "$ref": "#/$defs/text"
+        },
+        "card_id": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "role_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vocabulary_id",
+        "vocabulary_content_identity",
+        "role_id"
+      ],
+      "properties": {
+        "vocabulary_id": {
+          "$ref": "#/$defs/text"
+        },
+        "vocabulary_content_identity": {
+          "$ref": "#/$defs/content_id"
+        },
+        "role_id": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "basis": {
+      "enum": [
+        "direct_mechanical",
+        "contextual_interpretation",
+        "unsupported_claim"
+      ]
+    },
+    "value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "data"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "known",
+            "unknown",
+            "incomplete",
+            "unsupported"
+          ]
+        },
+        "data": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      }
+    },
+    "basis_explanation": {
+      "$ref": "#/$defs/text"
+    },
+    "prominence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "designation",
+        "reason",
+        "context_evidence"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "known",
+            "unknown"
+          ]
+        },
+        "designation": {
+          "enum": [
+            "primary",
+            "secondary",
+            null
+          ]
+        },
+        "reason": {
+          "$ref": "#/$defs/text"
+        },
+        "context_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "unknown"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "designation": {
+                "type": "null"
+              },
+              "context_evidence": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "known"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "designation": {
+                "enum": [
+                  "primary",
+                  "secondary"
+                ]
+              },
+              "context_evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "qualifiers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "costs",
+        "conditions",
+        "timing",
+        "restrictions"
+      ],
+      "properties": {
+        "costs": {
+          "$ref": "#/$defs/text_array"
+        },
+        "conditions": {
+          "$ref": "#/$defs/text_array"
+        },
+        "restrictions": {
+          "$ref": "#/$defs/text_array"
+        },
+        "timing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "description"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "known",
+                "unknown"
+              ]
+            },
+            "description": {
+              "$ref": "#/$defs/text"
+            }
+          }
+        }
+      }
+    },
+    "context_dependencies": {
+      "$ref": "#/$defs/text_array"
+    },
+    "limitations": {
+      "$ref": "#/$defs/text_array"
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "mechanical_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dossier_id",
+        "canonical_snapshot_id",
+        "record_content_identity",
+        "retained_source_sha256",
+        "source_pointer",
+        "ability_line_indices",
+        "ability_lines",
+        "source_field_name",
+        "source_field_value",
+        "context_metadata"
+      ],
+      "properties": {
+        "dossier_id": {
+          "$ref": "#/$defs/content_id"
+        },
+        "canonical_snapshot_id": {
+          "$ref": "#/$defs/content_id"
+        },
+        "record_content_identity": {
+          "$ref": "#/$defs/content_id"
+        },
+        "retained_source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_pointer": {
+          "$ref": "#/$defs/text"
+        },
+        "ability_line_indices": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "ability_lines": {
+          "$ref": "#/$defs/nonempty_text_array"
+        },
+        "source_field_name": {
+          "$ref": "#/$defs/text"
+        },
+        "source_field_value": {
+          "$ref": "#/$defs/text"
+        },
+        "context_metadata": {
+          "type": "object"
+        }
+      }
+    },
+    "preparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "annotation_plan_identity"
+      ],
+      "properties": {
+        "method": {
+          "$ref": "#/$defs/text"
+        },
+        "annotation_plan_identity": {
+          "$ref": "#/$defs/content_id"
+        }
+      }
+    },
+    "prepared_at": {
+      "$ref": "#/$defs/text"
+    },
+    "supersedes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/content_id"
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "human_attestation",
+        "canonical_admission"
+      ],
+      "properties": {
+        "status": {
+          "const": "requires_review"
+        },
+        "human_attestation": {
+          "type": "null"
+        },
+        "canonical_admission": {
+          "const": false
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "text_array": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "nonempty_text_array": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "source_type",
+        "reference",
+        "observed_at",
+        "claim"
+      ],
+      "properties": {
+        "source_id": {
+          "$ref": "#/$defs/text"
+        },
+        "source_type": {
+          "$ref": "#/$defs/text"
+        },
+        "reference": {
+          "$ref": "#/$defs/text"
+        },
+        "observed_at": {
+          "$ref": "#/$defs/text"
+        },
+        "claim": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    }
+  }
+}

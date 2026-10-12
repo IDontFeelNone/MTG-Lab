@@ -1,3 +1,17 @@
+# Current inventory — functional-role review pilot
+
+Canonical main verified on 2026-10-12: `e4a99ae6ccffe3e7121337fe28d9127024be3743` (merged GitHub PR #166). Architecture v12 remains frozen; PR numbers and project phases are independent.
+
+The authorized functional-role pilot prepares 30 pending candidates for exactly 15 production Cards using retained mechanical evidence: 20 directly evidenced proposed functions, four incomplete contextual interpretations, two unknown proposals and four unsupported assignments. All remain `requires_review`; no human approval or canonical knowledge admission occurs. A small provisional vocabulary, exact source-bound proposals, explicit qualifiers, a three-Card comparison and manual reasoning-context handoffs are described in [the functional-role pilot contract](docs/FUNCTIONAL_ROLE_CARD_INTELLIGENCE.md).
+
+The 384-Card mechanical cohort and earlier two-Card demonstration remain preserved. Full-cohort classification, verified interactions/combos, strategic scoring, rankings and deck optimization remain unsupported. Competitive Intelligence stays parked; Deck Intelligence remains planned and unauthorized. CC2 evidence remains pending and `NOT_READY_FOR_EVALUATION`. Stop for Project Manager review; no follow-on milestone is automatic.
+
+---
+
+# Historical milestone records
+
+Earlier milestone bodies retain their original context; the present summary supersedes their next-task claims.
+
 # Current inventory — mechanical production-cohort evidence
 
 Canonical main verified on 2026-10-12: `c8941c568fb275a735ab6902e3663947f21760ee` (merged GitHub PR #165). Architecture v12 remains frozen; GitHub PR numbers and project phase numbers are independent. No new phase number is assigned.

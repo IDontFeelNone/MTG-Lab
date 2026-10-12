@@ -8,6 +8,7 @@ from pathlib import Path
 from .explanation import (CardValueExplanationEngine, ERROR_VERSION, ExplanationError,
                           render_historical_explanation)
 from .mechanics import MechanicalCardIntelligence
+from .roles import FunctionalRolePilot
 
 
 def main(argv=None) -> int:
@@ -30,8 +31,25 @@ def main(argv=None) -> int:
     mechanical.add_argument("--reasoning-context", action="store_true",
                             help="existing-contract manual handoff; no model execution")
     commands.add_parser("mechanical-cohort", help="descriptive canonical-cohort statistics, not full-set analysis")
+    roles = commands.add_parser("roles", help="pending functional-role proposals for the exact bounded pilot")
+    roles.add_argument("--card-id", required=True)
+    roles.add_argument("--reasoning-context", action="store_true", help="manual review handoff; no model execution")
+    commands.add_parser("roles-pilot", help="15-Card candidate census and human-review material")
+    commands.add_parser("roles-comparison", help="three-Card functional comparison; no ranking")
     args = parser.parse_args(argv)
     try:
+        if args.command in {"roles", "roles-pilot", "roles-comparison"}:
+            pilot = FunctionalRolePilot(args.data_root)
+            if args.command == "roles-pilot":
+                result = pilot.report()
+            elif args.command == "roles-comparison":
+                result = pilot.comparison()
+            elif args.reasoning_context:
+                result = pilot.reasoning_context(args.card_id).to_dict()
+            else:
+                result = pilot.dossier(args.card_id)
+            print(json.dumps(result, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False))
+            return 0
         if args.command in {"mechanical", "mechanical-cohort"}:
             engine = MechanicalCardIntelligence(args.data_root)
             if args.command == "mechanical-cohort":
