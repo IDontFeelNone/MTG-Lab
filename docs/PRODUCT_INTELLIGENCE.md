@@ -90,9 +90,10 @@ The sealed wrapper records availability only when actually evidenced and separat
 tax, fees, and discounts `known`, `unknown`, `incomplete`, or `not_applicable`; the embedded offer
 continues to own exact listed-price-to-effective-cost arithmetic. `SinglesTransactionCosts` records
 shipping, acquisition-model marketplace fees, other explicit costs, currency, completeness,
-seller/order assumptions, and provenance. Missing values are never converted to zero: a component
-without compatible price evidence must be explicitly unpriced, and an unknown required cost remains
-unknown.
+seller/order assumptions, and provenance. Unknown singles cost amounts and their total serialize as
+null; complete cost bundles require every amount. Missing values are never converted to zero: a
+component without compatible price evidence must be explicitly unpriced, and an unknown required
+cost remains unknown.
 
 Canonical JSON uses sorted keys and compact separators. Packet identity is SHA-256 over the complete
 logical content including retained input snapshots and timestamps. The replay repository returns the
@@ -101,21 +102,66 @@ digest. Construction is immutable and never writes canonical, Market, Card Intel
 production repositories. The matching JSON Schema rejects additional top-level fields and unsupported
 future evidence classes.
 
-### Manual review and readiness
+### Admission hardening and manual review
 
-`fixed-content-acquisition-evidence-review-v1` records a human reviewer and review timestamp and has
-exactly two outcomes. `READY_FOR_EVALUATION` requires a complete manifest with no decision-critical
-unknowns, every guaranteed component valued, exact compatible Printing/finish/language/treatment and
-provider/currency/price-type dimensions, acceptable offer and singles timestamps under a
-reviewer-supplied currentness threshold, complete sealed effective-cost inputs, complete explicit
-singles transaction costs in the same currency, and known digest-bound provenance. Every failed gate
-produces `NOT_READY_FOR_EVALUATION` with machine-readable issues. Review never emits
-`BUY_SEALED_NOW` or `BUY_SINGLES_NOW`.
+The packet remains `fixed-content-acquisition-evidence-v1`. Sealed cost-state and future-evidence
+mappings are recursively frozen copies; contained contracts and exported JSON cannot alias mutable
+caller data. Existing valid numeric packet bytes and identities are preserved. Null singles cost
+amounts are an additive representation of explicit unknowns, and produce a null total; they cannot
+be marked complete or qualify for READY. Replay validates nested contracts, embedded identity,
+content digest, and canonical byte encoding.
 
-Reference-only placeholders exist for presale and post-release observations, supply/availability,
-listing depth/liquidity, historical comparables, sealed collectible premium, collector/IP demand, and
-reprint risk. They are optional and unevaluated by the current-cost vertical; arbitrary inference
-fields fail validation.
+Critical nested manifests, offers, valuations, and observations are checked against their existing
+versioned shapes. Unknown nested fields, unsupported versions, malformed timestamps, duplicate
+component IDs, and a nonzero sealed cost marked `not_applicable` are rejected. The packet schema
+embeds the existing Product contract definitions and the MarketObservation serialized shape for
+offline validation; Market continues to own observation semantics. Timestamp validation does not
+rely on jsonschema's optional date-time dependency.
+
+`assess_evidence_packet(packet, as_of=..., acceptable_observed_after=...)` returns automated
+eligibility and issues, never human approval or an acquisition action. Both times are caller-owned,
+timezone-aware, deterministic inputs. The observation window is inclusive; a missing cutoff cannot
+qualify, and a cutoff after `as_of` is invalid. Sealed and singles observation times are independently
+checked for staleness and future dates. Material evidence publication, retrieval, recording,
+effective, and assembly times cannot be in the future; inputs dated after assembly and publication
+after retrieval also fail. Singles must preserve the same provider/currency/price-type/observation-
+time basis. Sealed availability must be evidenced `available`; `unknown` and `unavailable` fail.
+
+Singles transaction provenance must contain unique, present SourceSnapshot references with known
+evidence state and valid digests. These sources must support the entire cost bundle, including every
+zero; seller/order assumptions must explicitly document the basis for zero costs. An amount of zero
+is not a substitute for unknown costs. The human reviewer verifies that the referenced evidence
+actually supports the amounts and assumptions; this library does not acquire source bytes or
+independently authenticate declared source claims.
+
+`fixed-content-acquisition-evidence-review-v2` distinguishes eligibility from an affirmative human
+attestation. Existing positional review arguments remain, but READY now additionally requires:
+
+- `acceptable_observed_after` and the explicit `reviewed_at` evaluation time;
+- `human_approved=True`, supplied by the trusted human-review caller;
+- `reviewed_packet_id` equal to the exact packet identity; and
+- a nonempty durable `review_reference` and reviewer identity.
+
+Without these inputs, `review_evidence_packet` returns `NOT_READY_FOR_EVALUATION` with machine-readable
+issues, even for an eligible packet. No caller should generate the human attestation from eligibility.
+The review record retains packet identity, policy window, reviewer/time, human attestation, durable
+reference, status, and issues. `EvidencePacketReview.from_dict` validates only v2 records. Historical
+v1 READY records lacked the required attestation/policy and must receive a new human review; they
+cannot be upgraded by relabeling the schema. There are no retained production packets or reviews to
+migrate at this milestone's baseline.
+
+`require_ready_evidence_review(packet, review, as_of=..., acceptable_observed_after=...)` verifies
+exact packet binding, affirmative review, the identical approved time window, and eligibility again.
+Changing a packet or the time window requires a new review. This verifies record consistency, not
+human authentication or the existence of an external approval reference; those remain the trusted
+review caller's responsibility. It introduces no signature service or authorization subsystem.
+Neither this guard nor review invokes Product analysis or Decision policy. Any future production
+entry point must use the guard before the existing analysis/evaluation functions; those functions
+remain available for their existing synthetic workflows.
+
+Reference-only placeholders for presale/post-release observations, supply/availability, listing
+depth/liquidity, historical comparables, sealed collectible premium, collector/IP demand, and reprint
+risk remain optional and unevaluated. They do not satisfy current-cost evidence gates.
 
 ### Existing reuse, gaps, and pilot
 

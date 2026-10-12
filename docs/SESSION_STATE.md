@@ -1,4 +1,14 @@
-# Current session — roadmap reset only
+# Current session — fixed-content admission hardening
+
+Baseline main is PR #160 merge `a2d51aa0facd4894d4117e43ea79373cf6904a9b`.
+Only the authorized correctness and directly related admission safeguards are implemented.
+Deep immutable mappings, cost provenance and null unknowns, explicit freshness, available sealed
+status, nested schema consistency, and v2 human-attested review binding are covered by synthetic
+regressions. Packet v1 identities are preserved for existing valid inputs. Protected data and
+Architecture v12 are unchanged. No pilot assembly, acquisition, promotion, production evaluation,
+provider, or competitive work is authorized by this milestone. Stop for Project Manager review.
+
+# Historical session — roadmap reset only
 
 Repository inspection establishes `bf2976c0c42153f11756bd362767356f23671cfc` as the mainline
 baseline before this reconciliation: project Phase 147 is merged via GitHub PR #154 and is the highest

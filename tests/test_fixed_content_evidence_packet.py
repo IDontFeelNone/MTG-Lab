@@ -79,7 +79,8 @@ class EvidencePacketTests(unittest.TestCase):
         manifest=FixedContentProductManifest("generic-1","non-mtg-game","collection",(component,),"complete",(MANIFEST_REF,),effective_at=NOW)
         value=ComponentValuationInput("piece",observation("piece-edition","18",finish="standard",language="xx"),"piece-edition","standard","xx","numbered")
         ready=FixedContentAcquisitionEvidencePacket(manifest,base.sealed_offer,(value,),(),base.sources,base.transaction_costs,NOW,base.sealed_cost_input_states,"available",("offer-source",))
-        review=review_evidence_packet(ready,"human-reviewer",NOW)
+        review=review_evidence_packet(ready,"human-reviewer",NOW,acceptable_observed_after=NOW,
+            human_approved=True,reviewed_packet_id=ready.packet_id,review_reference="review:synthetic-non-card")
         self.assertEqual(review.status,READY_FOR_EVALUATION); self.assertEqual(review.issues,())
 
     def test_not_ready_gates(self):
@@ -93,7 +94,7 @@ class EvidencePacketTests(unittest.TestCase):
     def test_market_dimension_and_timestamp_gates(self):
         p=packet(unpriced=("token-sheet",))
         cutoff=datetime(2026,8,17,tzinfo=timezone.utc)
-        issues=review_evidence_packet(p,"human",NOW,acceptable_observed_after=cutoff).issues
+        issues=review_evidence_packet(p,"human",cutoff,acceptable_observed_after=cutoff).issues
         self.assertIn("singles_timestamp_not_acceptable",issues); self.assertIn("sealed_timestamp_not_acceptable",issues)
         # Two differently sourced observations fail the packet review's same-market comparison dimension.
         c2=GuaranteedComponent("card-2","card",1,"printing-2","foil","en","showcase",("manifest-doc",))

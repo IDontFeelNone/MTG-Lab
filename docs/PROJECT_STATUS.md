@@ -1,3 +1,20 @@
+# Fixed-content evidence admission hardening — implementation for review
+
+Reconciled main baseline: `a2d51aa0facd4894d4117e43ea79373cf6904a9b` (PR #160).
+The bounded hardening fixes nested packet immutability, transaction-cost provenance/explicit
+unknowns, and mandatory deterministic freshness inputs. Unknown sealed availability fails closed;
+nested contracts and replay are validated. Automated eligibility is separate from v2 human-attested
+readiness, bound to the exact packet and time window. See `PRODUCT_INTELLIGENCE.md` for compatibility.
+Architecture v12, production data, domain ownership, and Decision policies are unchanged. No real
+packet, acquisition, promotion, production recommendation, provider, or Competitive Intelligence
+work occurred. Stop for Project Manager review; the production pilot requires separate authorization.
+
+Validation: exact hosted CI unittest discovery command passed **604 tests** locally; the
+focused packet/admission suites passed **29 tests** (21 new regression methods). Compilation and
+`git diff --check` passed. All 1,611 protected `data/` files match the pre-change byte inventory.
+Hosted GitHub checks are unverified because this environment blocks `api.github.com`.
+
+
 # First governed production fixed-content evidence packet implemented — contract only
 
 Implementation began from the reconciled checkout baseline `2186a55d56284993e7807b1398299ba962de1a85`

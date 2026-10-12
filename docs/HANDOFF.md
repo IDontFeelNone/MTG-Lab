@@ -1,4 +1,25 @@
-# Governed fixed-content production evidence handoff
+# Fixed-content evidence admission hardening handoff
+
+Started from current main `a2d51aa0facd4894d4117e43ea79373cf6904a9b` (PR #160).
+The three confirmed defects and related availability/nested-contract/human-review safeguards are
+corrected within Product Intelligence. `assess_evidence_packet` reports automated eligibility;
+`review_evidence_packet` requires explicit human attestation, an exact reviewed packet identity,
+a durable reference, and an explicit freshness window for READY. `require_ready_evidence_review`
+rechecks that exact packet/window. Authentication and source-content review remain human-caller
+responsibilities; no new authorization subsystem exists.
+
+Validation: exact hosted CI unittest discovery command passed **604 tests** locally; the
+focused packet/admission suites passed **29 tests** (21 new regression methods). Compilation and
+`git diff --check` passed. All 1,611 protected `data/` files match the pre-change byte inventory.
+Hosted GitHub checks are unverified because this environment blocks `api.github.com`.
+
+
+Packet v1 valid numeric bytes remain unchanged. Unknown singles costs are nullable, never zero;
+review v2 records the newly required policy/attestation. Old v1 READY is not sufficient and must be
+reviewed again. Production data, Architecture v12, and Decision policies are unchanged. Stop for
+Project Manager review; do not assemble the provisional pilot or run production recommendations.
+
+# Historical PR #160 evidence-contract handoff
 
 Baseline `2186a55d56284993e7807b1398299ba962de1a85` now has the additive,
 game-neutral `fixed-content-acquisition-evidence-v1` boundary. It embeds the existing immutable

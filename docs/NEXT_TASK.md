@@ -1,4 +1,16 @@
-# Single next step — assemble and manually review one pilot packet
+# Current boundary — Project Manager review of admission hardening
+
+The authorized Fixed-Content Evidence Admission Hardening implementation is complete for review.
+Review its focused changes, regression tests, compatibility notes, protected-data census, and CI
+results. Do not begin another implementation milestone or merge automatically.
+
+After this hardening is reviewed and merged, assembling Commander Collection: Black (non-premium)
+remains a separately authorized milestone. Canonical promotion stays separate from packet assembly;
+missing contents, costs, or observations must never be fabricated. Production evaluation requires
+both evidence eligibility and an exact, explicit human-attested v2 READY review. Competitive
+Intelligence remains parked and Architecture v12 remains unchanged.
+
+# Historical candidate after PR #160 — assemble and manually review one pilot packet
 
 The evidence contract milestone is complete. The single next highest-value step, requiring separate
 authorization, is to assemble one real `fixed-content-acquisition-evidence-v1` packet for the
