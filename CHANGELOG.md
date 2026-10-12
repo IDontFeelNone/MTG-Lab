@@ -1,3 +1,10 @@
+# Canonical documentation reconciliation (2026-10-12)
+
+- Reconcile current summaries against merged PR #161 at `dd08c76d09e4b8d10c411ade0d8445987c8875c0`; retain earlier milestone records as historical.
+- Distinguish GitHub PR numbers from project phase numbers, implemented synthetic/admission capabilities from the unassembled real pilot, and session network limits from permanent project constraints.
+- Preserve frozen Architecture v12, production data, runtime contracts, and the separate pilot/evaluation authorization gates.
+- Verify documentation-only delivery through the connected GitHub integration; validation and actual publication results are recorded in the milestone PR.
+
 # Fixed-content evidence admission hardening
 
 - Deep-freeze packet mappings and preserve existing valid v1 numeric identities/replay bytes.

@@ -1,8 +1,9 @@
 # MTG Lab
 
-> **Phase 124:** the Collection Intelligence Foundation connects deterministic collection
-> import, canonical resolution, immutable snapshots, summaries, deck completion, and
-> price-independent acquisition priorities. Architecture v12 remains unchanged.
+> **Current merged milestone:** Fixed-Content Evidence Admission Hardening (GitHub PR #161).
+> Shared deterministic decisions, synthetic fixed-content economics, and hardened human-reviewed
+> evidence admission are implemented. The first real fixed-content pilot remains separately
+> authorized future work. Architecture v12 remains unchanged.
 
 > **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
@@ -118,9 +119,10 @@ milestone. Entity-specific repository definitions preserve schema and
 referential boundaries while shared approval, conflict, audit, and rollback
 behavior remains reusable for future canonical entity types.
 
-The canonical repository also contains a deliberately small Card and Printing
-foundation dataset, now including four Mystery Booster 2 pairs populated across
-two bounded waves. Wave 2 consumes only content-verified Evidence Repository
+The earlier Card and Printing foundation included four Mystery Booster 2 pairs populated across
+two bounded waves. The current canonical state contains 384 Cards and 913 Printings, including
+379 promoted MB2 Printings and 534 retained non-MB2 pilot Printings. The earlier Wave 2 consumed
+only content-verified Evidence Repository
 bytes and validates embedded source attribution before deterministic ingestion.
 Game-scoped loaders validate schemas, stable identity paths,
 source-backed field provenance, and every Printing-to-Card reference before
@@ -171,7 +173,7 @@ value, simulation, portfolio optimization, or recommendations. See
 
 ## AI Reasoning Layer
 
-The implemented AI Reasoning Context Layer v1 converts public Semantic Query Layer responses into immutable, deterministic, provenance-backed evidence packages. It does not perform AI reasoning or generate advice. Model integration and explainable recommendations remain planned. The current Decision Engine is deterministic explicit-rule evaluation rather than AI/ML reasoning.
+The implemented AI Reasoning Context Layer v1 converts public Semantic Query Layer responses into immutable, deterministic, provenance-backed evidence packages. It does not perform AI reasoning or generate advice. Model integration remains planned. Shared Decision Intelligence now produces deterministic structured recommendations or abstentions for synthetic fixed-content current-cost inputs, with an AI-facing explanation envelope. Real product recommendations have not been generated. The Decision Engine and shared policy layer use explicit deterministic rules rather than AI/ML calculation.
 
 ## Applications & User Interfaces — vision
 
@@ -271,7 +273,11 @@ This organization allows multiple trading card games to share a common analytics
 
 **Status:** Active Development
 
-**Current Phase:** Phase 124 — Collection Intelligence Foundation (complete)
+**Latest merged milestone:** Fixed-Content Evidence Admission Hardening — GitHub PR #161 (complete)
+
+**Verified main baseline (2026-10-12):** `dd08c76d09e4b8d10c411ade0d8445987c8875c0`
+
+**Highest numbered project phase:** Phase 147; later named milestones do not imply a new phase number.
 
 **Reference Product:** Magic: The Gathering — Mystery Booster 2
 
@@ -280,6 +286,14 @@ generic Market, External Mapping, Collection, Analytics, Decision, Semantic Quer
 Reasoning Context, and AI Adapter foundations are also implemented. The repository does
 not yet contain an MB2 simulation framework, probability engine, model provider, or
 operational AI Advisor.
+
+The Collection Intelligence foundation (Phase 124) remains implemented. Shared Decision Intelligence,
+fixed-content Product Intelligence, the synthetic sealed-versus-singles vertical, evidence packet v1,
+and hardened human-attested review v2 are also implemented. No real fixed-content packet, review,
+or production acquisition recommendation exists. Commander Collection: Black (non-premium) is the
+provisional next pilot, subject to separate authorization and complete evidence. Evaluation requires
+separate authorization after READY review. Competitive Intelligence remains parked; Competitive
+Card Intelligence and Deck Intelligence remain planned and unauthorized.
 
 ---
 
