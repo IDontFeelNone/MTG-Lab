@@ -35,7 +35,7 @@ class CollectionAuditCliTests(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
-    def inventory(self, *, collection_id="fictional-cli-audit"):
+    def inventory(self, *, collection_id="fictional-cli-audit", source_name="inventory.json"):
         value = {"schema_version": "collection-import-v1", "collection_id": collection_id,
             "source": {"type": "synthetic_fixture", "mode": "synthetic_demonstration",
                 "real_user_inventory": False, "name": "Fictional CLI test inventory"},
@@ -44,7 +44,7 @@ class CollectionAuditCliTests(unittest.TestCase):
                 "provenance": {"owned_lot_id": "fictional-copy",
                     "organization": {"schema_version": "collection-organization-v1",
                                      "storage_classification": "bulk"}}}]}
-        path = self.root / "inventory.json"
+        path = self.root / source_name
         path.write_bytes(canonical_json(value))
         imported = read_import(path)
         snapshot = build_snapshot(imported, self.resolver.resolve(imported))
@@ -56,7 +56,8 @@ class CollectionAuditCliTests(unittest.TestCase):
         directory.mkdir(parents=True, exist_ok=True)
         (directory / (snapshot["snapshot_id"] + ".json")).write_bytes(canonical_json(snapshot))
 
-    def review_source(self, snapshot, *, human=False):
+    def review_source(self, snapshot, *, human=False, source_name="review.json",
+                      inventory_name="inventory.json"):
         claim = {"collection_id": snapshot["collection_id"],
             "card_id": snapshot["resolved_holdings"][0]["card_id"],
             "purpose": "personal_collection_organization", "status": "reviewed",
@@ -70,12 +71,12 @@ class CollectionAuditCliTests(unittest.TestCase):
             "snapshot_binding": {key: snapshot[key] for key in
                 ("snapshot_id", "snapshot_digest", "source_import_digest", "canonical_snapshot_id")},
             "evidence_references": [{"source_id": "fictional-cli-review", "source_type": "synthetic_fixture",
-                "reference": "review.json#/claim", "observed_at": TIME,
+                "reference": source_name + "#/claim", "observed_at": TIME,
                 "claim": "Fictional personal review state only."}]}
         claim["snapshot_binding"].update(resolved_printing_ids=[PRINTING],
-            source_import_reference={"relative_path": "inventory.json",
+            source_import_reference={"relative_path": inventory_name,
                                      "sha256": snapshot["source_import_digest"]})
-        (self.root / "review.json").write_bytes(canonical_json({"synthetic": not human, "claim": claim}))
+        (self.root / source_name).write_bytes(canonical_json({"synthetic": not human, "claim": claim}))
 
     def run_cli(self, command, snapshot, *options):
         output = io.StringIO()
@@ -121,6 +122,29 @@ class CollectionAuditCliTests(unittest.TestCase):
         self.assertIn("trusted", result["error"])
         self.assertEqual(self.records(), [])
 
+    def test_real_inventory_cannot_append_mock_review_even_with_trusted_flag(self):
+        self.inventory()
+        source_path = self.root / "inventory.json"
+        document = json.loads(source_path.read_bytes())
+        document["source"] = {"type": "user_inventory", "synthetic": False,
+                              "real_user_inventory": True,
+                              "notice": "Temporary fictional reproduction of a real-declared inventory."}
+        source_path.write_bytes(canonical_json(document))
+        imported = read_import(source_path)
+        snapshot = build_snapshot(imported, self.resolver.resolve(imported))
+        self.save_snapshot(snapshot)
+        self.review_source(snapshot)
+        before = {p: p.read_bytes() for p in (source_path, self.root / "review.json")}
+        for options in ((), ("--record-human-review",)):
+            with self.subTest(trust=bool(options)):
+                code, raw, result = self.run_cli("assess", snapshot, "--source", "review.json", *options)
+                self.assertEqual(code, 2)
+                self.assertFalse(result["valid"])
+                self.assertIn("synthetic inventory", result["error"])
+                self.assertEqual(raw, canonical_json(result))
+                self.assertEqual(self.records(), [])
+                self.assertEqual({p: p.read_bytes() for p in before}, before)
+
     def test_oversize_valid_receipt_fails_before_append(self):
         snapshot = self.inventory(collection_id="x" * 70000)
         self.review_source(snapshot)
@@ -162,6 +186,47 @@ class CollectionAuditCliTests(unittest.TestCase):
             self.assertFalse(result["boundaries"]["acquisition_input_ready"])
             self.assertFalse(result["boundaries"]["role_approval"])
             self.assertEqual(raw, canonical_json(result))
+
+    def test_default_repository_audits_each_collection_with_complete_applicable_history(self):
+        fixtures = {}
+        for label in ("a", "b"):
+            inventory_name = f"inventory-{label}.json"
+            review_name = f"review-{label}.json"
+            snapshot = self.inventory(collection_id=f"fictional-collection-{label}",
+                                      source_name=inventory_name)
+            self.review_source(snapshot, source_name=review_name, inventory_name=inventory_name)
+            code, _, receipt = self.run_cli("assess", snapshot, "--source", review_name)
+            self.assertEqual(code, 0)
+            fixtures[label] = (snapshot, inventory_name, [receipt["assessment_id"]])
+
+        # A's successor must retain its predecessor even when B shares the
+        # default repository and the same exact canonical Card/Printing.
+        snapshot, _, ids = fixtures["a"]
+        source = json.loads((self.root / "review-a.json").read_bytes())
+        claim = source["claim"]
+        claim.update(status="pending", outcome=None,
+                     reason="Fictional explicit follow-up remains pending.",
+                     prior_assessment_id=ids[0], supersedes=[ids[0]],
+                     recorded_at="2026-10-12T21:01:00Z")
+        (self.root / "review-a-successor.json").write_bytes(canonical_json(source))
+        code, _, receipt = self.run_cli("assess", snapshot, "--source", "review-a-successor.json")
+        self.assertEqual(code, 0)
+        ids.append(receipt["assessment_id"])
+        self.assertEqual(len(self.records()), 3)
+
+        for label, (snapshot, inventory_name, ids) in fixtures.items():
+            with self.subTest(collection=label):
+                code, raw, result = self.run_cli("audit", snapshot, "--source", inventory_name)
+                self.assertEqual(code, 0)
+                self.assertEqual(raw, canonical_json(result))
+                self.assertEqual(result["collection_id"], snapshot["collection_id"])
+                self.assertEqual(result["bindings"]["assessment_ids"], ids)
+                self.assertTrue(all(record["collection_id"] == snapshot["collection_id"]
+                                    for record in result["assessment_history"]))
+                self.assertEqual(result["cards"][0]["history_ids"], ids)
+                self.assertEqual(result["cards"][0]["review_status"],
+                                 "pending" if label == "a" else "reviewed")
+                self.assertFalse(result["cards"][0]["new_discovery_eligible"])
 
 
 if __name__ == "__main__":

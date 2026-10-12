@@ -33,6 +33,28 @@ class CollectionAssessmentError(ValueError):
     """An assessment lacks a valid source, subject, or history binding."""
 
 
+def assessment_inventory_compatible(record: Mapping[str, Any], *, source: Mapping[str, Any]) -> bool:
+    """A mock claim is operative only for an explicitly fictional inventory.
+
+    This applies independently of caller trust: trust can establish a retained
+    human approval, but cannot make synthetic evidence an actual personal review.
+    """
+    if record["human_review"]["kind"] != "synthetic_mock":
+        return True
+    if not isinstance(source, Mapping):
+        return False
+    if any(source.get(name) is not None and not isinstance(source[name], str)
+           for name in ("type", "mode", "notice")):
+        return False
+    synthetic = source.get("synthetic")
+    real = source.get("real_user_inventory")
+    if any(value is not None and type(value) is not bool for value in (synthetic, real)):
+        return False
+    declared_synthetic = source.get("mode") == "synthetic_demonstration" or \
+        source.get("type") in ("synthetic", "synthetic_fixture")
+    return real is not True and (synthetic is True or synthetic is None and declared_synthetic)
+
+
 def _text(value: Any, label: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise CollectionAssessmentError(f"{label} must be nonempty text")
@@ -169,6 +191,8 @@ class CollectionAssessment:
         if body["human_review"]["kind"] == "synthetic_mock" and (
                 not isinstance(source_document, dict) or source_document.get("synthetic") is not True):
             raise CollectionAssessmentError("mocked review requires an explicitly synthetic source")
+        if not assessment_inventory_compatible(body, source=snapshot.get("source", {})):
+            raise CollectionAssessmentError("mocked review requires an explicitly synthetic inventory")
         if body["human_review"]["approved"] and isinstance(source_document, dict) and source_document.get("synthetic") is True:
             raise CollectionAssessmentError("synthetic source cannot establish actual human approval")
         claim = {k: v for k, v in body.items() if k not in {"schema_version", "assessment_id", "source"}}
@@ -335,7 +359,8 @@ def validate_assessment_history(assessments: Iterable[CollectionAssessment]) -> 
         x.payload["purpose"], _time(x.payload["recorded_at"], "recorded_at"), x.payload["assessment_id"])))
 
 
-def assessment_review_states(assessments: Iterable[CollectionAssessment], *, collection_id: str) -> dict[str, dict]:
+def assessment_review_states(assessments: Iterable[CollectionAssessment], *, collection_id: str,
+                             inventory_source: Mapping[str, Any] | None = None) -> dict[str, dict]:
     history = validate_assessment_history(assessments)
     grouped: dict[str, list[dict]] = {}
     for item in history:
@@ -347,11 +372,13 @@ def assessment_review_states(assessments: Iterable[CollectionAssessment], *, col
         purposes = {x["purpose"] for x in records}
         if len(purposes) != 1:
             raise CollectionAssessmentError("Card review projection requires one explicit purpose")
-        replaced = {x["prior_assessment_id"] for x in records if x["prior_assessment_id"]}
-        current = next(x for x in records if x["assessment_id"] not in replaced)
-        reviewed = [x for x in records if x["status"] == "reviewed"]
-        result[card_id] = {"status": current["status"], "ever_reviewed": bool(reviewed),
-            "assessment_id": current["assessment_id"], "history_ids": [x["assessment_id"] for x in records],
+        operative = [x for x in records if inventory_source is None or
+                     assessment_inventory_compatible(x, source=inventory_source)]
+        current = operative[-1] if operative else None
+        reviewed = [x for x in operative if x["status"] == "reviewed"]
+        result[card_id] = {"status": current["status"] if current else "pending", "ever_reviewed": bool(reviewed),
+            "assessment_id": current["assessment_id"] if current else None,
+            "history_ids": [x["assessment_id"] for x in records],
             "review_basis": reviewed[-1]["human_review"]["kind"] if reviewed else None}
     return result
 
@@ -406,6 +433,12 @@ class CollectionAssessmentRepository:
 
     def all(self) -> tuple[CollectionAssessment, ...]:
         return validate_assessment_history(self.load(path) for path in sorted(self.root.glob("*.json")))
+
+    def for_collection(self, collection_id: str) -> tuple[CollectionAssessment, ...]:
+        """Scope a projection only after verifying every retained source and chain."""
+        _text(collection_id, "collection_id")
+        history = self.all()
+        return tuple(x for x in history if x.payload["collection_id"] == collection_id)
 
     def append(self, assessment: CollectionAssessment) -> Path:
         if not isinstance(assessment, CollectionAssessment):

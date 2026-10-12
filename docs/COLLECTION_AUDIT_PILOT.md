@@ -18,6 +18,8 @@ Unique Card and Printing counts use resolved identities. Storage copy counts and
 
 Read-only work lists answer which exact Cards have been reviewed, which never-reviewed Cards remain in bulk, and which prior reviews have an explicit request for another look. Previously processed Cards are not presented as new discoveries. Acquisition-candidate queries expose ownership evidence and its limitations; they do not provide reviewed buyer declarations, executable offers or purchase advice.
 
+Exact Card, Printing and name queries retain relevant incomplete quantity evidence even when a row supplies only a known Printing ID. The canonical relationship identifies which query the row concerns; it does not validate the quantity, admit an unresolved holding or establish complete ownership.
+
 ## Personal assessment history
 
 Collection-owned `collection-assessment-v1` records retain source-bound personal outcomes, assessment version and timestamps, original ownership snapshot, exact Card/Printing evidence, prior assessment identity, supersession and any explicit manual reassessment trigger. They are append-only references beside existing collection snapshots, not canonical knowledge facts or another ownership store.
@@ -27,6 +29,10 @@ Replay derives the current personal review state while preserving all earlier re
 Every current or historical ownership snapshot is replayed from an explicit original-import reference before it can influence review state or record admission. This bounded pilot requires its canonical query snapshot to match the current resolver. Canonical drift blocks validated audit/history projection rather than silently substituting new identity evidence; historical raw sources and assessments remain intact for explicit reconciliation. Cross-snapshot copy correspondence and automatic compatibility reconciliation are not implemented.
 
 Real human approval requires an explicit trusted review boundary and binds the exact source claim. Synthetic review examples use fictional reviewers and non-approving mock review metadata; they do not establish human approval. Personal collection review never approves pending functional-role candidates, promotes canonical entities, or authorizes acquisition advice.
+
+Mock assessment admission requires an explicitly synthetic original inventory. Historical mock records remain immutable but are nonoperative against a non-synthetic or real-declared current inventory: they cannot mark a Card reviewed, establish that it was actually reviewed, or suppress outstanding review work. Applicable actual reviews retain their complete predecessor history. The audit identifies nonoperative assessment references without converting them into human approvals.
+
+The default assessment repository may retain multiple collections. Audit delivery selects the requested collection only after validating every retained source and complete predecessor chain. Filtering never legitimizes missing predecessors or changes of collection, Card or purpose.
 
 ## Real inventory evidence gap
 

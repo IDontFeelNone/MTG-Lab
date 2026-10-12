@@ -257,7 +257,7 @@ def main(argv=None) -> int:
                         raise CollectionIntelligenceError("choose a bounded context or an identity query")
                     audit = CollectionAudit(resolver)
                     dossier = audit.build(snapshot, source_path=source_path, source_root=source_root,
-                        assessments=repository.all(), expected_total=args.expected_total,
+                        assessments=repository.for_collection(snapshot["collection_id"]), expected_total=args.expected_total,
                         candidate_printing_ids=args.candidate_printing_id)
                     if any((args.card_id, args.printing_id, args.card_name)):
                         result = audit.query(dossier, card_id=args.card_id,

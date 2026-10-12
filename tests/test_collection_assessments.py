@@ -6,7 +6,8 @@ import tempfile
 import unittest
 
 from collection.assessments import (CollectionAssessment, CollectionAssessmentError,
-    CollectionAssessmentRepository, assessment_review_states, validate_assessment_history)
+    CollectionAssessmentRepository, assessment_inventory_compatible,
+    assessment_review_states, validate_assessment_history)
 from collection.audit import CollectionAudit
 from collection.intelligence import CanonicalCollectionResolver, canonical_json, create_snapshot, digest, read_import
 
@@ -172,6 +173,112 @@ class CollectionAssessmentTests(unittest.TestCase):
             self.record(self.claim(assessment_version="unknown"))
         with self.assertRaises(CollectionAssessmentError):
             self.record(self.claim(human_review={**human, "kind": "synthetic_mock"}), trusted=True)
+
+    def test_mock_review_cannot_be_bound_to_real_or_unclassified_inventory(self):
+        original = json.loads(self.source_path.read_bytes())
+        review_files = []
+        for source in (
+                {"type": "user_inventory", "synthetic": False, "real_user_inventory": True},
+                {"type": "user_inventory"},
+                {"type": "synthetic_fixture", "synthetic": False, "real_user_inventory": False},
+                {"type": "synthetic_fixture", "synthetic": True, "real_user_inventory": True},
+                {"type": "synthetic_fixture", "synthetic": "true"},
+                {"type": "synthetic_fixture", "synthetic": True, "mode": []}):
+            with self.subTest(source=source):
+                inventory = {**original, "source": source}
+                self.source_path.write_bytes(canonical_json(inventory))
+                imported = read_import(self.source_path)
+                self.snapshot = create_snapshot(imported, self.resolver.resolve(imported),
+                    self.data / "collections" / "snapshots")
+                for trusted in (False, True):
+                    with self.assertRaisesRegex(CollectionAssessmentError, "synthetic inventory"):
+                        self.record(trusted=trusted)
+                    review_files.append((self.root / f"review-{self.counter}.json").read_bytes())
+                repository = CollectionAssessmentRepository(self.data, self.root,
+                    trusted_human_review=True, resolver=self.resolver)
+                self.assertEqual(repository.all(), ())
+                self.assertEqual(self.source_path.read_bytes(), canonical_json(inventory))
+        self.assertEqual(len(review_files), 12)
+        self.assertTrue(all(json.loads(raw)["synthetic"] for raw in review_files))
+
+    def test_mock_history_is_nonoperative_when_current_inventory_becomes_real(self):
+        first = self.record()
+        later = self.reassessment(first)
+        real_source = {"type": "user_inventory", "synthetic": False, "real_user_inventory": True}
+        original_records = [first.to_dict(), later.to_dict()]
+        state = assessment_review_states([later, first], collection_id="fictional-collection",
+            inventory_source=real_source)[PONDER]
+        self.assertEqual(state["status"], "pending")
+        self.assertFalse(state["ever_reviewed"])
+        self.assertIsNone(state["assessment_id"])
+        self.assertIsNone(state["review_basis"])
+        self.assertEqual(state["history_ids"], [first.payload["assessment_id"], later.payload["assessment_id"]])
+        self.assertEqual([first.to_dict(), later.to_dict()], original_records)
+        self.assertFalse(assessment_inventory_compatible(first.payload, source=real_source))
+        synthetic_state = assessment_review_states([first, later], collection_id="fictional-collection",
+            inventory_source=self.snapshot["source"])[PONDER]
+        self.assertTrue(synthetic_state["ever_reviewed"])
+        self.assertEqual(synthetic_state["status"], "reassessment_needed")
+
+    def test_actual_review_can_supersede_mock_and_later_mock_cannot_override_it(self):
+        first = self.record()
+        synthetic_snapshot = self.snapshot
+        inventory = json.loads(self.source_path.read_bytes())
+        inventory["source"] = {"type": "user_inventory", "synthetic": False, "real_user_inventory": True}
+        real_import_path = self.root / "real-inventory.json"
+        real_import_path.write_bytes(canonical_json(inventory))
+        imported = read_import(real_import_path)
+        self.snapshot = create_snapshot(imported, self.resolver.resolve(imported),
+            self.data / "collections" / "snapshots", "real-snapshot")
+        claim = self.claim(prior_assessment_id=first.payload["assessment_id"],
+            supersedes=[first.payload["assessment_id"]], recorded_at="2026-10-11T11:00:00Z",
+            human_review={"kind": "human", "approved": True, "reviewer": "fixture-human-review",
+                          "review_reference": "retained-user-review"})
+        claim["snapshot_binding"]["source_import_reference"]["relative_path"] = "real-inventory.json"
+        actual = self.record(claim, trusted=True, synthetic=False)
+        self.snapshot = synthetic_snapshot
+        later_mock = self.record(self.claim(status="pending", outcome=None,
+            prior_assessment_id=actual.payload["assessment_id"], supersedes=[actual.payload["assessment_id"]],
+            recorded_at="2026-10-12T11:00:00Z"))
+        state = assessment_review_states([later_mock, first, actual], collection_id="fictional-collection",
+            inventory_source=inventory["source"])[PONDER]
+        self.assertEqual(state["status"], "reviewed")
+        self.assertTrue(state["ever_reviewed"])
+        self.assertEqual(state["assessment_id"], actual.payload["assessment_id"])
+        self.assertEqual(state["review_basis"], "human")
+        self.assertEqual(state["history_ids"], [x.payload["assessment_id"] for x in (first, actual, later_mock)])
+
+    def test_collection_reader_scopes_validated_complete_chains(self):
+        first = self.record()
+        later = self.reassessment(first)
+        repository = CollectionAssessmentRepository(self.data, self.root, resolver=self.resolver)
+        repository.append(first)
+        repository.append(later)
+        inventory = json.loads(self.source_path.read_bytes())
+        inventory["collection_id"] = "second-collection"
+        source = self.root / "second-inventory.json"
+        source.write_bytes(canonical_json(inventory))
+        imported = read_import(source)
+        self.snapshot = create_snapshot(imported, self.resolver.resolve(imported),
+            self.data / "collections" / "snapshots", "second-snapshot")
+        claim = self.claim(collection_id="second-collection")
+        claim["snapshot_binding"]["source_import_reference"]["relative_path"] = "second-inventory.json"
+        second = self.record(claim)
+        repository.append(second)
+        self.assertEqual(repository.for_collection("fictional-collection"), (first, later))
+        self.assertEqual(repository.for_collection("second-collection"), (second,))
+        self.assertEqual(repository.for_collection("missing-collection"), ())
+        self.assertEqual(len(repository.all()), 3)
+        changed_claim = {**claim, "prior_assessment_id": first.payload["assessment_id"],
+            "supersedes": [first.payload["assessment_id"]], "recorded_at": "2026-10-12T11:00:00Z"}
+        invalid_child = self.record(changed_claim)
+        with self.assertRaisesRegex(CollectionAssessmentError, "preserve collection"):
+            repository.append(invalid_child)
+        # A malformed cross-collection chain must not disappear behind the reader's filter.
+        invalid_path = repository.root / f"{invalid_child.payload['assessment_id'].removeprefix('sha256:')}.json"
+        invalid_path.write_bytes(canonical_json(invalid_child.to_dict()))
+        with self.assertRaisesRegex(CollectionAssessmentError, "preserve collection"):
+            repository.for_collection("fictional-collection")
 
     def test_timestamp_shape_synthetic_label_and_import_path_are_explicit(self):
         for timestamp in ("2026-10-10Z", "2026-10-10T10:00:00+01:00Z", "2026-02-30T10:00:00Z"):

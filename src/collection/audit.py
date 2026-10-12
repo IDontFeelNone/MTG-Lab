@@ -108,6 +108,9 @@ class CollectionAuditDossier(Mapping):
                    "source_classification": _plain(self["source_classification"]),
                    "holdings": holdings, "cards": cards, "assessment_history": assessments,
                    "boundaries": _plain(self["boundaries"]), "limitations": _plain(self["limitations"])}
+        if self["review_census"].get("nonoperative_assessment_ids"):
+            context["review_census"]["nonoperative_assessment_ids"] = _plain(
+                self["review_census"]["nonoperative_assessment_ids"])
         while True:
             context["omissions"] = {name: {"total": len(self[key]), "included": len(context[key]),
                                             "omitted": len(self[key]) - len(context[key])}
@@ -305,6 +308,11 @@ class CollectionAudit:
                                               for x in histories),
             "reviewed_cards_by_basis": dict(sorted(Counter(x["review_basis"] for x in cards
                                                             if x["review_status"] == "reviewed").items()))}
+        from .assessments import assessment_inventory_compatible
+        nonoperative = [record["assessment_id"] for record in histories
+                        if not assessment_inventory_compatible(record, source=value["source"])]
+        if nonoperative:
+            review_census["nonoperative_assessment_ids"] = nonoperative
         organization = self._organization_groups(holdings)
         organization["new_discovery_card_ids"] = [x["card_id"] for x in cards if x["new_discovery_eligible"]]
         organization["unreviewed_bulk_card_ids"] = [x["card_id"] for x in cards if x["unreviewed_bulk_eligible"]]
@@ -365,7 +373,8 @@ class CollectionAudit:
             CollectionAssessment(record, source_root=source_root, snapshot=original,
                                  trusted_human_review=assessment.trusted_human_review)
             documents.append(record)
-        return assessment_review_states(history, collection_id=snapshot["collection_id"]), documents
+        return assessment_review_states(history, collection_id=snapshot["collection_id"],
+                                        inventory_source=snapshot["source"]), documents
 
     @staticmethod
     def _source_classification(source):
@@ -430,17 +439,29 @@ class CollectionAudit:
         for item in dossier["holdings"]:
             if item["resolution_status"] == "resolved" and not item["exclusion"]:
                 continue
-            possible_cards = {self.resolver.printings[pid]["card_id"] for pid in item["candidate_printing_ids"]
-                              if pid in self.resolver.printings}
             row = item["row"]
+            possible_printings = {pid for pid in item["candidate_printing_ids"]
+                                  if pid in self.resolver.printings}
+            # Invalid quantities bypass ownership resolution. Preserve an exact
+            # source Printing assertion for query relevance, without resolving
+            # the lot or treating its unsupported quantity as owned copies.
+            explicit_printing = row.get("printing_id")
+            if isinstance(explicit_printing, str) and explicit_printing in self.resolver.printings:
+                possible_printings.add(explicit_printing)
+            possible_cards = {self.resolver.printings[pid]["card_id"] for pid in possible_printings}
+            explicit_card = row.get("identity_constraints", {}).get("card_id")
+            if isinstance(explicit_card, str) and explicit_card in self.resolver.cards:
+                possible_cards.add(explicit_card)
             relevant = (card_id in possible_cards or row.get("identity_constraints", {}).get("card_id") == card_id
                         if card_id is not None else
-                        printing_id in item["candidate_printing_ids"] or row.get("printing_id") == printing_id
+                        printing_id in possible_printings or row.get("printing_id") == printing_id
                         if printing_id is not None else
-                        bool(row.get("card_name")) and str(row["card_name"]).casefold() == str(card_name).casefold())
+                        (bool(row.get("card_name")) and str(row["card_name"]).casefold() == str(card_name).casefold()) or
+                        any(self.resolver.cards[cid]["name"].casefold() == str(card_name).casefold()
+                            for cid in possible_cards))
             if relevant:
                 unresolved.append(item["holding_ref"])
-        return {"schema_version": "collection-audit-query-v1", "audit_id": dossier["audit_id"],
+        result = {"schema_version": "collection-audit-query-v1", "audit_id": dossier["audit_id"],
                 "audit_digest": dossier["audit_digest"], "bindings": _plain(dossier["bindings"]),
                 "source_classification": _plain(dossier["source_classification"]),
                 "boundaries": _plain(dossier["boundaries"]),
@@ -451,3 +472,6 @@ class CollectionAudit:
                 "cards": matches, "unresolved_holding_refs": [_plain(ref) for ref in unresolved],
                 "ownership_scope_complete": None,
                 "ownership_state": "incomplete_or_conflicting" if unresolved else "reported_resolved_holdings_only"}
+        if dossier["review_census"].get("nonoperative_assessment_ids"):
+            result["nonoperative_assessment_ids"] = _plain(dossier["review_census"]["nonoperative_assessment_ids"])
+        return result
