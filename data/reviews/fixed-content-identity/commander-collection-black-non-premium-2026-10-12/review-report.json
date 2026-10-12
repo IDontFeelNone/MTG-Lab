@@ -1,0 +1,186 @@
+{
+  "baseline_commit": "4420686d3ee53d921563c41a889f51ba51d7b203",
+  "blockers": [
+    "guaranteed_content_manifest_incomplete",
+    "independent_human_review_required",
+    "market_evidence_not_acquired",
+    "source_extraction_semantic_review_required",
+    "unresolved_exact_component_identities"
+  ],
+  "bundle_sha256": "eaea422cb0247324e9f1ecbf51278ea90a692f0e8f847c4fddeeadb05d9dade5",
+  "candidate_counts": {
+    "card": 0,
+    "printing": 0,
+    "product": 1
+  },
+  "extraction_semantics": "manual_preparation_requires_human_review",
+  "human_approved": false,
+  "manifest_completeness": "incomplete",
+  "manifest_id": "manifest-sha256:7a8c63056826396679bf05e7f235927b3ac7dfa6d8690548b008bd8e10282aeb",
+  "market_admission_performed": false,
+  "parsed_record_count": 3,
+  "product_id": "product-tcgplayer-247519",
+  "promotion_performed": false,
+  "readiness": "NOT_READY_FOR_EVALUATION",
+  "reused_canonical_references": [
+    {
+      "entity_id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+      "entity_type": "card",
+      "record_sha256": "6b4b1c043860bebf9b36556effaa14aefe7a80904cc24d677f3fa65b0c5ac732"
+    },
+    {
+      "entity_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+      "entity_type": "card",
+      "record_sha256": "c8762e76ccec1539fd947e8a38682aa0aff5c26f2aefee7571de3fa829c95751"
+    },
+    {
+      "entity_id": "0bd7bca4-2839-5824-a392-c38178dc16b3",
+      "entity_type": "printing",
+      "record_sha256": "f4472723adaacc74d077189c6be7e5ae8cb1ffbf75e3302ccbee0fd345f268bc"
+    },
+    {
+      "entity_id": "c57a0dff-d056-5f28-9914-6f5766ee6b7c",
+      "entity_type": "printing",
+      "record_sha256": "94dec1081de0754d1d7d3e92ea40884dc5b435bddd0ad5ee4cfdbea4c30b1193"
+    }
+  ],
+  "reused_printing_count": 2,
+  "schema_version": "pending-identity-bundle-validation-v1",
+  "source_count": 3,
+  "source_evidence": [
+    {
+      "git_blob_sha1": "860fe357de65f85b9574e1e233e203b8d711ee26",
+      "git_commit": "6bde64122026eb7e65c21db028e34f4cb42b5305",
+      "license": "MIT",
+      "license_path": "raw/mtgjson/cc2-license/a78bab0667e57b25b91b3e037f6856fe20fbe01a091c7c525be292d8a834283b/payload.bin",
+      "raw_sha256": "a78bab0667e57b25b91b3e037f6856fe20fbe01a091c7c525be292d8a834283b",
+      "retrieved_at": "2026-10-12T09:49:44Z",
+      "source_id": "mtgjson-cc2-license-a78bab0667e5",
+      "source_url": "https://github.com/mtgjson/mtg-sealed-content/blob/6bde64122026eb7e65c21db028e34f4cb42b5305/LICENSE.txt"
+    },
+    {
+      "git_blob_sha1": "4e8211a60959e8c617a2bae48f2d4895ee69bd74",
+      "git_commit": "6bde64122026eb7e65c21db028e34f4cb42b5305",
+      "license": "MIT",
+      "license_path": "raw/mtgjson/cc2-license/a78bab0667e57b25b91b3e037f6856fe20fbe01a091c7c525be292d8a834283b/payload.bin",
+      "raw_sha256": "87216b73a77118fa45f3069b370e55f918c79ae7b4d07d00b3fc82763f10caab",
+      "retrieved_at": "2026-10-12T09:49:44Z",
+      "source_id": "mtgjson-cc2-product-identities-87216b73a771",
+      "source_url": "https://github.com/mtgjson/mtg-sealed-content/blob/6bde64122026eb7e65c21db028e34f4cb42b5305/data/products/CC2.yaml"
+    },
+    {
+      "git_blob_sha1": "929149e7b368c1490f3abe9da3a4079e18bef41d",
+      "git_commit": "6bde64122026eb7e65c21db028e34f4cb42b5305",
+      "license": "MIT",
+      "license_path": "raw/mtgjson/cc2-license/a78bab0667e57b25b91b3e037f6856fe20fbe01a091c7c525be292d8a834283b/payload.bin",
+      "raw_sha256": "56ff9fb31b47b2c42be1da203d94c96c05c85d2dd66d549765e87327ab6fd193",
+      "retrieved_at": "2026-10-12T09:49:44Z",
+      "source_id": "mtgjson-cc2-token-physical-pairing-56ff9fb31b47",
+      "source_url": "https://github.com/mtgjson/mtg-sealed-content/blob/6bde64122026eb7e65c21db028e34f4cb42b5305/outputs/token_products_mappings/CC2.json"
+    }
+  ],
+  "source_extraction_semantically_approved": false,
+  "unresolved_identities": [
+    {
+      "component_id": "component-1",
+      "missing_fields": [
+        "provider/oracle identity",
+        "exact collector namespace",
+        "language",
+        "finish",
+        "treatment",
+        "source-backed complete face relationships"
+      ],
+      "name": "Liliana, Heretical Healer // Liliana, Defiant Necromancer",
+      "reason": "Exact native CC2/deck records unavailable; excluded from schema-valid Card/Printing subset."
+    },
+    {
+      "component_id": "component-2",
+      "missing_fields": [
+        "provider/oracle identity",
+        "exact collector namespace",
+        "language",
+        "finish",
+        "treatment",
+        "source-backed Card/Printing fields"
+      ],
+      "name": "Ghoulcaller Gisa",
+      "reason": "Exact native CC2/deck records unavailable; excluded from schema-valid Card/Printing subset."
+    },
+    {
+      "component_id": "component-3",
+      "missing_fields": [
+        "provider/oracle identity",
+        "exact collector namespace",
+        "language",
+        "finish",
+        "treatment",
+        "source-backed Card/Printing fields"
+      ],
+      "name": "Ophiomancer",
+      "reason": "Exact native CC2/deck records unavailable; excluded from schema-valid Card/Printing subset."
+    },
+    {
+      "component_id": "component-4",
+      "missing_fields": [
+        "provider/oracle identity",
+        "exact collector namespace",
+        "language",
+        "finish",
+        "treatment",
+        "source-backed Card/Printing fields"
+      ],
+      "name": "Phyrexian Arena",
+      "reason": "Exact native CC2/deck records unavailable; excluded from schema-valid Card/Printing subset."
+    },
+    {
+      "component_id": "component-5",
+      "missing_fields": [
+        "provider/oracle identity",
+        "exact collector namespace",
+        "language",
+        "finish",
+        "treatment",
+        "source-backed Card/Printing fields"
+      ],
+      "name": "Reanimate",
+      "reason": "Exact native CC2/deck records unavailable; excluded from schema-valid Card/Printing subset."
+    },
+    {
+      "component_id": "component-6",
+      "missing_fields": [
+        "provider/oracle identity",
+        "exact collector namespace",
+        "language",
+        "finish",
+        "treatment",
+        "source-backed Card/Printing fields"
+      ],
+      "name": "Toxic Deluge",
+      "reason": "Exact native CC2/deck records unavailable; excluded from schema-valid Card/Printing subset."
+    },
+    {
+      "component_id": "component-9",
+      "missing_fields": [
+        "provider/oracle identity",
+        "exact collector namespace",
+        "language",
+        "finish",
+        "treatment",
+        "source-backed complete face relationships"
+      ],
+      "name": "Snake Token // Zombie Token",
+      "reason": "Exact native CC2/deck records unavailable; excluded from schema-valid Card/Printing subset."
+    }
+  ],
+  "unresolved_identity_count": 7,
+  "valid": true,
+  "validation_scope": "retained_artifact_integrity_schemas_references_and_replay",
+  "verified_candidates": [
+    {
+      "entity_id": "product-tcgplayer-247519",
+      "entity_type": "product",
+      "validation_state": "requires_review"
+    }
+  ]
+}
