@@ -9,6 +9,7 @@ from .repository import KnowledgeRepository
 from .mechanics import MechanicalCardIntelligence, MechanicalDossier, MechanicalEvidenceError
 from .roles import FunctionalRoleCandidate, FunctionalRoleError, FunctionalRolePilot
 from .comparison import ContextualCardComparisonPilot, ContextualComparisonDossier, ContextualComparisonError
+from .acquisition import CardAcquisitionAdapter, CardAcquisitionDossier, CardAcquisitionInput, CardAcquisitionError
 
 __all__ = ["CardKnowledgeQuery", "Evidence", "KnowledgeFact", "KnowledgeRepository",
            "KnowledgeValidationError", "build_phase137_audit", "report_bytes",
@@ -16,4 +17,5 @@ __all__ = ["CardKnowledgeQuery", "Evidence", "KnowledgeFact", "KnowledgeReposito
            "render_historical_explanation", "MechanicalCardIntelligence",
            "MechanicalDossier", "MechanicalEvidenceError", "FunctionalRoleCandidate",
            "FunctionalRoleError", "FunctionalRolePilot", "ContextualCardComparisonPilot",
-           "ContextualComparisonDossier", "ContextualComparisonError"]
+           "ContextualComparisonDossier", "ContextualComparisonError", "CardAcquisitionAdapter",
+           "CardAcquisitionDossier", "CardAcquisitionInput", "CardAcquisitionError"]

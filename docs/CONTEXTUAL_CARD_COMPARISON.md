@@ -1,3 +1,5 @@
+> **Merged status:** GitHub PR #168 is merged at `3cf6ad35fcb54ed5a4b640e36af6fa2ecf99a747`, including compact CLI serialization and terminal-newline accounting. Its retained comparison and all eight pending roles remain unchanged. The separately bounded [Card acquisition pilot](CARD_ACQUISITION_PILOT.md) adds a different domain adapter; it does not enable selection in this pending comparison contract. The original milestone baseline and stop boundary below retain their historical context.
+
 # Contextual Card Comparison — bounded pending-evidence pilot
 
 Canonical main independently verified on 2026-10-12: `4d15582d6ed364f012e853c1fdb2312e54ea7c60`, the merge of GitHub PR #167. Architecture v12 remains frozen. GitHub PR numbers and project phases are independent; no new phase number is assigned.

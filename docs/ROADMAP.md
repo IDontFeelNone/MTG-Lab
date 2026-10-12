@@ -1,3 +1,19 @@
+# Current milestone — collection-aware Card acquisition pilot
+
+Canonical main independently verified: `3cf6ad35fcb54ed5a4b640e36af6fa2ecf99a747` (merged GitHub PR #168). Architecture v12 remains frozen. PR numbers are independent of project phases; no new phase number is assigned.
+
+The bounded pilot uses exact production Ponder, Faithless Looting and Greater Good MB2 Printings. A reusable Card-domain adapter validates supplied objectives, ownership, exact Printing preferences, budget, availability, freshness and source-bound complete transaction costs before the existing Decision Intelligence policy runs. Collection Intelligence identity resolution reads the existing canonical query projection, including promoted production identities; no second canonical store is introduced.
+
+The complete-input outcome is explicitly **synthetic demonstration evidence**, not purchase advice. The real-world example **ABSTAINS** because actual buyer context, ownership, objectives and reviewed current offers are missing. Historical Scryfall prices remain historical observations. Pending role candidates remain unapproved and cannot become strategic suitability scores. [The acquisition pilot contract and review materials](CARD_ACQUISITION_PILOT.md) describe inputs, costs, replay, limitations and the bounded manual ChatGPT handoff.
+
+Acquisition Intelligence is the next user-value priority, followed by Collection Intelligence and bounded deck relevance. This milestone does not authorize full inventory management, the separate mixed-policy deck-allocation repair, competitive rankings, provider acquisition, purchase execution or automatic follow-on work. Existing demonstrations, canonical records, historical market evidence, knowledge facts and Architecture v12 remain protected. CC2 remains NOT_READY_FOR_EVALUATION; tournament acquisition stays parked.
+
+Stop for Project Manager review of this pilot. No merge, real purchase recommendation, production admission or next milestone is automatic.
+
+---
+
+The previous present-state summaries below retain their original milestone baselines and authorization context as historical records. This summary supersedes their next-task claims.
+
 # Current roadmap — review one contextual Card comparison
 
 Canonical main verified on 2026-10-12: `4d15582d6ed364f012e853c1fdb2312e54ea7c60` (merged GitHub PR #167). Architecture v12 remains frozen; GitHub PR numbers and project phases are independent.
