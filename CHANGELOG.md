@@ -1,3 +1,9 @@
+# First real fixed-content pilot evidence assessment (2026-10-12)
+
+- Reconcile merged PR #162 main `e594912a681dd0afccf2a79f638a85f40dfac1e9` and audit Commander Collection: Black non-premium.
+- Retain factual research references, exact canonical coverage, market research leads, and deterministic NOT_READY review materials; include the guaranteed double-sided token in the candidate inventory.
+- Stop on missing canonical identities, current original source/cost/freshness evidence, buyer context, and unverified raw-retention rights. No packet, human READY attestation, canonical promotion, production evaluation, forecast, or generic implementation change.
+
 # Canonical documentation reconciliation (2026-10-12)
 
 - Reconcile current summaries against merged PR #161 at `dd08c76d09e4b8d10c411ade0d8445987c8875c0`; retain earlier milestone records as historical.
