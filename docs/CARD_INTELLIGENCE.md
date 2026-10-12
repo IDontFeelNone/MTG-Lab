@@ -1,3 +1,21 @@
+# Current Card Intelligence — contextual comparison pilot
+
+Canonical main verified on 2026-10-12: `4d15582d6ed364f012e853c1fdb2312e54ea7c60` (merged GitHub PR #167). Architecture v12 remains frozen; GitHub PR numbers and project phases are independent.
+
+The bounded contextual comparison uses exactly production Ponder, Faithless Looting and Greater Good in one explicitly hypothetical blue/red/green casual test shell. It separates retained mechanical facts, all eight unchanged pending role candidates, supplied context assumptions, deterministic descriptions and unverified strategic hypotheses. The existing Decision Intelligence engine returns ABSTAIN because human-reviewed context match remains unknown for every alternative. No Card is selected or approved.
+
+[The contextual comparison contract and review materials](CONTEXTUAL_CARD_COMPARISON.md) describe costs, restrictions, conditional instruction arithmetic, counterarguments, uncertainty, exact replay and one bounded manual ChatGPT handoff. Complete existing Decision contracts are retained separately to avoid duplication. This is a manual evidence handoff, not live model integration or deck optimization.
+
+PR #167's fifteen-Card / thirty-candidate pilot is merged as pending evidence; all roles and definitions still require review. The mechanical cohort and earlier two-Card demonstration remain unchanged. Canonical data, historical sources, market observations, knowledge facts and Architecture v12 are protected. CC2 remains NOT_READY_FOR_EVALUATION. Competitive Intelligence stays parked; Deck Intelligence and Competitive Card Intelligence remain planned and unauthorized.
+
+Stop for Project Manager review of this single comparison milestone. No role admission, Card selection, automatic follow-on or advanced intelligence implementation is authorized.
+
+---
+
+# Historical milestone records
+
+Earlier milestone bodies preserve their original baseline and review status; this present summary supersedes their next-task claims.
+
 # Current Card Intelligence — bounded functional-role review pilot
 
 Canonical main verified on 2026-10-12: `e4a99ae6ccffe3e7121337fe28d9127024be3743` (merged GitHub PR #166). Architecture v12 remains frozen; PR numbers and project phases are independent.

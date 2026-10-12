@@ -1,0 +1,179 @@
+{
+  "canonical_main_baseline": "4d15582d6ed364f012e853c1fdb2312e54ea7c60",
+  "canonical_snapshot_id": "sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7",
+  "cards": [
+    {
+      "card_id": "02090581-61aa-4348-ad57-451be8ee91c2",
+      "counterarguments": [
+        "The actual library, draw outcome and desired options are unknown; ordering is not a guaranteed favorable result."
+      ],
+      "literal_instruction_annotation": {
+        "draw_count": 1,
+        "draw_parameter_assumption": null,
+        "mandatory_discard_count": 0
+      },
+      "mechanical_dossier_id": "sha256:520679507ff35d784234c1c746e3daa09a04e460c48c33c6f39b40397374102b",
+      "name": "Ponder",
+      "oracle_text": "Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card.",
+      "role_dossier_id": "sha256:24efbe75670d139ca3463afb240415db35930c293dba97be9b92aa6cbc9647a4",
+      "strategic_hypotheses": [
+        {
+          "assumption_ids": [
+            "test_shell",
+            "resolved_instructions"
+          ],
+          "counterargument": "The actual library, draw outcome and desired options are unknown; ordering is not a guaranteed favorable result.",
+          "evidence_ids": [
+            "sha256:520679507ff35d784234c1c746e3daa09a04e460c48c33c6f39b40397374102b",
+            "sha256:8ec840cb35c583e8678b1f2af81b606530c6f0c30252825c5ca23a930968ffb9",
+            "sha256:84d90ff35c540a13d477e9bb84a6b667feec72a2f999166c5880d447521a8f24"
+          ],
+          "state": "unverified_hypothesis",
+          "statement": "Top-three ordering may help an immediate card-access objective if the revealed options matter."
+        }
+      ]
+    },
+    {
+      "card_id": "3d6fa57a-aa53-4b5c-b8af-a7612c823117",
+      "counterarguments": [
+        "Card selection is a pending incomplete role; the actual hand, discarded cards, graveyard utility and recasting opportunity are unknown."
+      ],
+      "literal_instruction_annotation": {
+        "draw_count": 2,
+        "draw_parameter_assumption": null,
+        "mandatory_discard_count": 2
+      },
+      "mechanical_dossier_id": "sha256:c2c032ccc36ec75de853c094a88b8fac46393036685626f78423f74f3c9f2833",
+      "name": "Faithless Looting",
+      "oracle_text": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+      "role_dossier_id": "sha256:c75770179c25379acfa6babda8c20843a30cbb5ae049a2d062fb9cbb0bc3c91e",
+      "strategic_hypotheses": [
+        {
+          "assumption_ids": [
+            "test_shell",
+            "resolved_instructions"
+          ],
+          "counterargument": "Card selection is a pending incomplete role; the actual hand, discarded cards, graveyard utility and recasting opportunity are unknown.",
+          "evidence_ids": [
+            "sha256:c2c032ccc36ec75de853c094a88b8fac46393036685626f78423f74f3c9f2833",
+            "sha256:49fd74b5770efe97a0478db980cd5373729749b3e492472975f2e0f0daa863f6",
+            "sha256:d4a16a92b31055f4d50d8d1b32708ab8ab8ec299beae42023848eb52d150ddac",
+            "sha256:1d6e9bbfc52ef02366c00b53c0bf2b3f90d90559fc309c8d1c2adc4e9a926513"
+          ],
+          "state": "unverified_hypothesis",
+          "statement": "The draw/discard sequence and later flashback access may suit a graveyard-tolerant hand-filtering plan."
+        }
+      ]
+    },
+    {
+      "card_id": "dc0593c2-ccb4-4648-a592-c5bcd121dc72",
+      "counterarguments": [
+        "Creature availability and opportunity cost are unknown; a power-four illustration does not prove net card advantage, repeatability or favorable deck suitability."
+      ],
+      "literal_instruction_annotation": {
+        "draw_count": null,
+        "draw_parameter_assumption": "sacrificed_creature_power",
+        "mandatory_discard_count": 3
+      },
+      "mechanical_dossier_id": "sha256:dfee1e71560daf6c7971c453582a34f0d5af936405d050a2965b8f2dbebd7967",
+      "name": "Greater Good",
+      "oracle_text": "Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards.",
+      "role_dossier_id": "sha256:4bfd0b3e1d7dac0a21774d8faa5cc38c3b3b37aa24aef14b80dd8f19962497c0",
+      "strategic_hypotheses": [
+        {
+          "assumption_ids": [
+            "test_shell",
+            "resolved_instructions",
+            "sacrificed_creature_power"
+          ],
+          "counterargument": "Creature availability and opportunity cost are unknown; a power-four illustration does not prove net card advantage, repeatability or favorable deck suitability.",
+          "evidence_ids": [
+            "sha256:dfee1e71560daf6c7971c453582a34f0d5af936405d050a2965b8f2dbebd7967",
+            "sha256:a0a97a3faae7eee971347619a5af874bc370ee6d0fdce7da6e26765bc079547e",
+            "sha256:924fa9b36f24a9bc6bb2b00c62d72f6e3f4b7bd5c3bd32e0d4042311d34f1c32",
+            "sha256:21cc8853dc94fd62f015c710dc2d9c31ce80f5288f419418caa8777611f025fd"
+          ],
+          "state": "unverified_hypothesis",
+          "statement": "A creature-supported draw/discard option may suit a plan that can afford its setup and creature sacrifice."
+        }
+      ]
+    }
+  ],
+  "context": {
+    "assumptions": [
+      {
+        "assumption_id": "test_shell",
+        "description": "Hypothetical blue/red/green casual testing shell; no submitted decklist or sanctioned format is represented.",
+        "state": "supplied_assumption",
+        "value": "blue/red/green casual testing shell"
+      },
+      {
+        "assumption_id": "resolved_instructions",
+        "description": "For instruction-count arithmetic only, suppose the described effect resolves and the stated draw/discard instructions can be followed; this does not verify a legal game state.",
+        "state": "supplied_assumption",
+        "value": true
+      },
+      {
+        "assumption_id": "sacrificed_creature_power",
+        "description": "For the Greater Good illustration only, suppose an available creature has power four at the relevant determination; availability, expendability and rules timing are unverified.",
+        "state": "supplied_assumption",
+        "value": 4
+      }
+    ],
+    "constraints": [
+      "Exactly three existing production Cards and their pending role evidence.",
+      "No weighted score, universal winner, deck optimization, acquisition or performance inference.",
+      "No assumed instant-speed permission, automatic repetition, free setup or free creature sacrifice."
+    ],
+    "description": "A blue/red/green casual test shell is exploring card access and optional hand/graveyard preparation. These are comparison alternatives, not equivalent slots or a real competitive list. Initial casting, later recasting and permanent activation are separate routes.",
+    "format_legality": {
+      "reason": "No format-specific legality evidence or sanctioned decklist is supplied.",
+      "status": "unknown",
+      "value": null
+    },
+    "kind": "hypothetical_deck_context",
+    "objective": "Compare resource requirements and card-access trade-offs for a hypothetical casual test shell; abstain from choosing a Card while suitability and human role review remain unverified.",
+    "unknowns": [
+      "Human approval of role definitions and all eight selected role candidates.",
+      "Actual hand, library contents, creature availability, power determination and graveyard utility.",
+      "Colored mana access, casting opportunity, setup expenditure and legal activation/casting windows.",
+      "Opportunity cost of losing a creature or a Card, repeatability, interaction and net card advantage.",
+      "Format legality, real deck suitability, competitive results, combo strength and substitute equivalence."
+    ]
+  },
+  "criteria": [
+    {
+      "category": "verified_mechanical",
+      "criterion_id": "casting_requirements",
+      "description": "Compare exact retained mana-cost strings and provider mana values; no castability or efficiency claim.",
+      "selection_weight": null
+    },
+    {
+      "category": "conditional_arithmetic",
+      "criterion_id": "instruction_counts",
+      "description": "Subtract stated mandatory discard count from draw count under explicitly supplied resolution/power assumptions; not net card advantage.",
+      "selection_weight": null
+    },
+    {
+      "category": "pending_functional",
+      "criterion_id": "selection_and_multiple_roles",
+      "description": "Retain directly evidenced and incomplete role proposals separately; all eight still require human review.",
+      "selection_weight": null
+    },
+    {
+      "category": "pending_functional",
+      "criterion_id": "costs_restrictions_and_dependencies",
+      "description": "Retain complete Oracle text and every pending qualifier; compare casting, flashback and activation routes without hiding their costs.",
+      "selection_weight": null
+    },
+    {
+      "category": "unknown",
+      "criterion_id": "timing_and_opportunity_cost",
+      "description": "Legal timing, creature value, actual deck context, net advantage and strategic suitability are unknown.",
+      "selection_weight": null
+    }
+  ],
+  "game_id": "magic",
+  "prepared_at": "2026-10-12T17:44:40Z",
+  "schema_version": "contextual-card-comparison-plan-v1"
+}

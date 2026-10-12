@@ -8,10 +8,12 @@ from .explanation import (CardValueExplanationEngine, ExplanationError,
 from .repository import KnowledgeRepository
 from .mechanics import MechanicalCardIntelligence, MechanicalDossier, MechanicalEvidenceError
 from .roles import FunctionalRoleCandidate, FunctionalRoleError, FunctionalRolePilot
+from .comparison import ContextualCardComparisonPilot, ContextualComparisonDossier, ContextualComparisonError
 
 __all__ = ["CardKnowledgeQuery", "Evidence", "KnowledgeFact", "KnowledgeRepository",
            "KnowledgeValidationError", "build_phase137_audit", "report_bytes",
            "CardValueExplanationEngine", "ExplanationError", "explanation_bytes",
            "render_historical_explanation", "MechanicalCardIntelligence",
            "MechanicalDossier", "MechanicalEvidenceError", "FunctionalRoleCandidate",
-           "FunctionalRoleError", "FunctionalRolePilot"]
+           "FunctionalRoleError", "FunctionalRolePilot", "ContextualCardComparisonPilot",
+           "ContextualComparisonDossier", "ContextualComparisonError"]

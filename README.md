@@ -1,9 +1,9 @@
 # MTG Lab
 
-> **Verified merged baseline:** `e4a99ae6ccffe3e7121337fe28d9127024be3743` (GitHub PR #166).
-> The mechanical production-cohort foundation is merged. The current milestone
-> prepares a bounded functional-role review pilot for fifteen Cards. Architecture
-> v12 is frozen; all proposed roles require human review and production data stays unchanged.
+> **Verified merged baseline:** `4d15582d6ed364f012e853c1fdb2312e54ea7c60` (GitHub PR #167).
+> The functional-role pilot is merged as pending evidence. The current milestone
+> compares Ponder, Faithless Looting and Greater Good in one declared hypothetical
+> context, preserving human review and abstention. Architecture v12 is frozen.
 
 > **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
@@ -273,9 +273,9 @@ This organization allows multiple trading card games to share a common analytics
 
 **Status:** Active Development
 
-**Latest merged milestone:** Mechanical Card Intelligence production cohort — GitHub PR #166 (merged; literal provider mechanics, no canonical role admission)
+**Latest merged milestone:** Functional-Role Card Intelligence pilot — GitHub PR #167 (merged as pending evidence; no role approval or canonical admission)
 
-**Verified main baseline (2026-10-12):** `e4a99ae6ccffe3e7121337fe28d9127024be3743`
+**Verified main baseline (2026-10-12):** `4d15582d6ed364f012e853c1fdb2312e54ea7c60`
 
 **Highest numbered project phase:** Phase 147; later named milestones do not imply a new phase number.
 
@@ -304,10 +304,12 @@ face-aware coverage and correctly denominated cohort statistics. The 385 retaine
 map uniquely to those Cards with one excluded emblem; this is not complete MB2 set membership.
 The [functional-role review pilot](docs/FUNCTIONAL_ROLE_CARD_INTELLIGENCE.md) prepares exactly fifteen
 Cards and thirty source-bound pending proposals with restrictions and uncertainty. It does not
-classify the full cohort or admit knowledge facts. Verified rules interactions, synergy, rankings
-and deck optimization remain unsupported. Stop after the role pilot's PR handoff; subsequent work requires
-separate approval. Competitive Intelligence remains parked; Competitive Card Intelligence and
-Deck Intelligence remain planned and unauthorized.
+classify the full cohort or admit knowledge facts. The [contextual comparison pilot](docs/CONTEXTUAL_CARD_COMPARISON.md)
+compares three of these Cards under explicit hypothetical assumptions, preserves pending evidence,
+and reuses the existing Decision Engine to abstain. It provides deterministic review materials and
+one manual handoff. Verified rules interactions, synergy, rankings and deck optimization remain
+unsupported. Stop after this comparison's PR handoff for Project Manager review. Competitive Intelligence
+remains parked; Competitive Card Intelligence and Deck Intelligence remain planned and unauthorized.
 
 ---
 
