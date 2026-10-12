@@ -1,5 +1,13 @@
 # Collection Intelligence Foundation
 
+## Current production identity resolution
+
+The bounded [Card acquisition pilot](CARD_ACQUISITION_PILOT.md), based on merged PR #168 at `3cf6ad35fcb54ed5a4b640e36af6fa2ecf99a747`, repairs `CanonicalCollectionResolver` to consume the existing canonical query projection. Its current census is 384 production Cards and 913 production Printings plus 15 legacy seed Cards/Printings. Exact production Printing resolution preserves dimensions and compact source/audit references; snapshot identity covers promoted canonical state and provenance. Name ambiguity and contradictory production identity/dimension inputs remain explicit.
+
+This repairs the Collection Intelligence import/snapshot resolver available for production identity imports. The pilot independently validates its direct source-bound ownership declaration against the same canonical query projection. The separate typed `CollectionService` repository path is unchanged. No real user collection is retained, and the pilot's complete ownership input is synthetic. Full collection inventory, sorting/reassessment history and production collection management are outside this milestone.
+
+The acquisition adapter uses direct acceptable-copy accounting and does not call deck allocation. Mixed `any`/`exact` deck requirements can still allocate one physical copy twice; that demonstrated defect remains explicitly out of scope. Collection valuation is descriptive and does not validate comparable current all-in acquisition offers. Neither helper is used to choose a purchase.
+
 **Contract versions:** `collection-import-v1`, `collection-snapshot-v1`,
 `deck-requirement-v1`. Collection intelligence is deterministic downstream user data;
 it reads canonical Cards and Printings but never writes canonical state.
@@ -42,7 +50,10 @@ A deck document contains `schema_version`, `deck_id`, `format`, version or snaps
 Each requirement declares a canonical `card_id`, positive quantity, `main` or `sideboard`,
 and optionally an exact `printing_id` and policy. `any` allows copies of the Card across
 Printings; `exact` allows only the declared Printing. Copies are allocated deterministically
-and cannot satisfy both main deck and sideboard requirements.
+within each policy counter. Uniform-policy requirements consume those counters, but mixed
+`any`/`exact` requirements currently use separate counters and can double-count the same
+physical copy across requirements. Do not use mixed-policy completion for acquisition;
+its repair requires separate authorization.
 
 For each requirement, comparison reports allocated owned, required, missing, excess and
 reusable quantities plus complete/partial/missing status. Completion is

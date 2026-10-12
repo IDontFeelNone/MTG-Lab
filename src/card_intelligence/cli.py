@@ -12,6 +12,8 @@ from .roles import FunctionalRolePilot
 from .comparison import (MAXIMUM_BYTES as COMPARISON_MAXIMUM_BYTES,
                          ContextualCardComparisonPilot, ContextualComparisonError,
                          comparison_explanation)
+from .acquisition import (MAXIMUM_BYTES as ACQUISITION_MAXIMUM_BYTES,
+                          CardAcquisitionAdapter, CardAcquisitionError)
 
 
 def main(argv=None) -> int:
@@ -43,8 +45,21 @@ def main(argv=None) -> int:
     output = comparison.add_mutually_exclusive_group()
     output.add_argument("--reasoning-context", action="store_true", help="bounded manual handoff; no live model")
     output.add_argument("--human-readable", action="store_true", help="evidence-grounded manual explanation example")
+    acquisition = commands.add_parser("acquisition", help="source-bound Card acquisition inputs; synthetic or reviewed real evidence")
+    acquisition.add_argument("--input", type=Path, required=True, help="card-acquisition-input-v1 JSON")
+    acquisition.add_argument("--source-root", type=Path, required=True, help="root containing the retained source references")
+    acquisition.add_argument("--reasoning-context", action="store_true", help="bounded manual handoff; no live model")
     args = parser.parse_args(argv)
     try:
+        if args.command == "acquisition":
+            packet = json.loads(args.input.read_bytes())
+            result = CardAcquisitionAdapter(args.data_root).evaluate(packet, source_root=args.source_root)
+            body = stable_json(result.reasoning_context()) if args.reasoning_context else result.to_json()
+            serialized = body + "\n"
+            if len(serialized.encode("utf-8")) > ACQUISITION_MAXIMUM_BYTES:
+                raise CardAcquisitionError("Card acquisition CLI output exceeds its byte bound including the trailing newline")
+            print(serialized, end="")
+            return 0
         if args.command == "contextual-comparison":
             pilot = ContextualCardComparisonPilot(args.data_root)
             if args.human_readable:

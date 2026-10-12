@@ -15,7 +15,7 @@ from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
-from repository.cards import canonical_repository_bytes, load_card_repository
+from query.engine import CanonicalQueryEngine
 
 SCHEMA_VERSION = "collection-import-v1"
 SNAPSHOT_VERSION = "collection-snapshot-v1"
@@ -66,30 +66,51 @@ class CanonicalCollectionResolver:
     def __init__(self, game: str, data_root: Path = Path("data")):
         self.game, self.data_root = game, Path(data_root)
         root = self.data_root / "canonical" / "games"
-        cards, printings = load_card_repository(game, games_root=root)
-        self.cards = {x["id"]: dict(x) for x in cards}
-        self.printings = {x["id"]: dict(x) for x in printings}
+        query = CanonicalQueryEngine(game, games_root=root, data_root=self.data_root)
+        snapshot = query.snapshot()
+        entities = [x for x in snapshot.entities if x.supersession_state == "current"]
+        # The current promoted-state contract has no game field. It may only be
+        # consumed from an unambiguous single-game repository; an unrelated game
+        # must not inherit that state's identities through the query facade.
+        configured_games = {path.name for path in root.iterdir() if path.is_dir()} if root.exists() else set()
+        unscoped_promotions = [x for x in entities if x.entity_type in {"card", "printing"}
+                              and not x.canonical_values.get("game_id")
+                              and x.canonical_values.get("id") != x.canonical_identity]
+        if unscoped_promotions and configured_games != {game}:
+            raise CollectionIntelligenceError("promoted canonical state requires an unambiguous game scope")
+        self.canonical_snapshot_id = snapshot.snapshot_id
+        self.canonical_digest = snapshot.snapshot_id.removeprefix("sha256:")
+        self.canonical_provenance = {x.canonical_identity: x.provenance_summary for x in entities}
+        self.canonical_references = {x.canonical_identity: _canonical_reference(x) for x in entities}
+        self.cards = {x.canonical_identity: {**x.canonical_values, "id": x.canonical_identity}
+                      for x in entities if x.entity_type == "card"}
+        self.printings = {x.canonical_identity: {**x.canonical_values, "id": x.canonical_identity,
+            "set_code": x.canonical_values.get("set_code", str(x.canonical_values.get("set_id", "")).upper()),
+            "rarity": x.canonical_values.get("rarity", x.canonical_values.get("rarity_id"))}
+                         for x in entities if x.entity_type == "printing"}
+        self.production_printing_ids = {x.canonical_identity for x in entities
+            if x.entity_type == "printing" and x.canonical_values.get("uuid") == x.canonical_identity}
         self.by_name: dict[str, list[str]] = defaultdict(list)
-        for printing in printings:
+        for printing in self.printings.values():
+            if printing.get("card_id") not in self.cards:
+                raise CollectionIntelligenceError("canonical Printing references no current Card")
             self.by_name[self.cards[printing["card_id"]]["name"].casefold()].append(printing["id"])
         self.external: dict[tuple[str, str], list[str]] = defaultdict(list)
-        for printing in printings:
+        for printing in self.printings.values():
             self.external[("canonical_printing_id", printing["id"])].append(printing["id"])
-            self.external[("set_collector_number", f"{printing.get('set_code')}:{printing.get('collector_number')}")].append(printing["id"])
-        state_path = self.data_root / "canonical" / "state.json"
-        if state_path.exists():
-            state = json.loads(state_path.read_text())
-            uuid_to_printing = {}
-            for key, record in state.get("printing", {}).items():
-                values = record.get("values", {})
-                uuid_to_printing[str(values.get("uuid", key))] = key
-            for record in state.get("identifier", {}).values():
-                values = record.get("values", {})
-                target = uuid_to_printing.get(str(values.get("printing_uuid")))
-                if target in self.printings:
-                    self.external[(str(values.get("namespace", "")).casefold(),
-                                   str(values.get("value", "")))].append(target)
-        self.canonical_digest = hashlib.sha256(canonical_repository_bytes(game, games_root=root)).hexdigest()
+            for set_id in {printing.get("set_code"), printing.get("set_id")} - {None, ""}:
+                self.external[("set_collector_number", f"{set_id}:{printing.get('collector_number')}")].append(printing["id"])
+            for namespace, value in printing.get("identifiers", {}).items():
+                self.external[(str(namespace).casefold(), str(value))].append(printing["id"])
+        for entity in entities:
+            if entity.entity_type != "identifier": continue
+            values = entity.canonical_values
+            target = str(values.get("printing_uuid", ""))
+            if target in self.printings:
+                self.external[(str(values.get("namespace", "")).casefold(),
+                               str(values.get("value", "")))].append(target)
+        for key, matches in self.external.items():
+            self.external[key] = sorted(set(matches))
 
     def resolve(self, imported: Mapping[str, Any]) -> dict:
         results, seen = [], set()
@@ -129,9 +150,65 @@ class CanonicalCollectionResolver:
                                    "ambiguous" if matches else "unresolved", reason, matches));
         for result in results:
             if result["status"] == "resolved":
-                result["card_id"] = self.printings[result["printing_id"]]["card_id"]
+                printing_id = result["printing_id"]
+                printing = self.printings[printing_id]
+                constraints = {**result["row"], **result["row"].get("identity_constraints", {})}
+                conflicts = self._production_dimension_conflicts(printing_id, constraints)
+                if conflicts:
+                    result.update(status="unresolved", reason="supplied dimensions contradict or exceed canonical evidence",
+                                  dimension_conflicts=conflicts)
+                    result.pop("printing_id")
+                    continue
+                result["card_id"] = printing["card_id"]
+                result["canonical_reference"] = {"snapshot_id": self.canonical_snapshot_id,
+                    "printing": self.canonical_references[printing_id],
+                    "card": self.canonical_references[printing["card_id"]]}
         return {"resolution_version": "collection-resolution-v1", "canonical_digest": self.canonical_digest,
+                "canonical_snapshot_id": self.canonical_snapshot_id,
                 "results": results}
+
+    def _production_dimension_conflicts(self, printing_id: str, supplied: Mapping[str, Any]) -> list[str]:
+        """Fail closed for contradicted production identity dimensions, not ownership metadata."""
+        if printing_id not in self.production_printing_ids: return []
+        printing = self.printings[printing_id]
+        card = self.cards[printing["card_id"]]
+        conflicts = []
+        for name, expected in (("card_id", printing["card_id"]), ("card_name", card["name"]),
+                               ("collector_number", printing.get("collector_number"))):
+            if supplied.get(name) is not None and str(supplied[name]).casefold() not in {"", "unknown", "null"}:
+                if str(supplied[name]).casefold() != str(expected).casefold(): conflicts.append(name)
+        for name in ("set_id", "set_code"):
+            if supplied.get(name) and str(supplied[name]).casefold() not in {"unknown", "null"}:
+                if str(supplied[name]).casefold() != str(printing.get("set_id", "")).casefold(): conflicts.append(name)
+        language = supplied.get("language")
+        if language and str(language).casefold() not in {"unknown", "null"}:
+            language_key = lambda value: {"english": "en"}.get(str(value).casefold(), str(value).casefold())
+            if language_key(language) != language_key(printing.get("language")): conflicts.append("language")
+        finish = supplied.get("finish")
+        if finish and str(finish).casefold() not in {"unknown", "null"}:
+            if str(finish).casefold() not in {str(x).casefold() for x in printing.get("finish_ids", ())}:
+                conflicts.append("finish")
+        treatment = supplied.get("treatment")
+        if treatment and str(treatment).casefold() not in {"unknown", "null"}:
+            if str(treatment).casefold() not in {str(x).casefold() for x in printing.get("treatment_ids", ())}:
+                conflicts.append("treatment")
+        for namespace, value in (supplied.get("external_identifiers") or {}).items():
+            if printing_id not in self.external.get((str(namespace).casefold(), str(value)), ()):
+                conflicts.append("external_identifiers." + str(namespace))
+        return sorted(conflicts)
+
+
+def _canonical_reference(entity) -> dict:
+    """Bind compact source references to the unchanged canonical query snapshot."""
+    provenance = entity.provenance_summary
+    return {"canonical_identity": entity.canonical_identity, "entity_type": entity.entity_type,
+            "uncertainty": entity.uncertainty, "supersession_state": entity.supersession_state,
+            "source_ids": provenance.get("source_ids", []),
+            "evidence_reference_ids": sorted({str(x["id"]) for x in provenance.get("evidence_assertions", []) if x.get("id")}),
+            "dataset_identity": provenance.get("dataset_identity", []),
+            "review_package_id": provenance.get("review_package_id"),
+            "promotion_references": [{key: item[key] for key in ("promotion_id", "audit_reference", "entity_binding") if key in item}
+                                     for item in provenance.get("promotion_history", [])]}
 
 
 def _normalize_row(raw: Mapping[str, Any], number: int) -> dict:
@@ -158,6 +235,9 @@ def _normalize_row(raw: Mapping[str, Any], number: int) -> dict:
            "provenance": raw.get("provenance") or {"source_row": number},
            "unknown_fields": sorted(k for k in known if optional(k) is None)}
     row["_invalid"] = invalid
+    constraints = {name: optional(name) for name in
+                   ("card_id", "set_id", "set_code", "collector_number", "treatment") if optional(name) is not None}
+    if constraints: row["identity_constraints"] = constraints
     if row["acquisition_date"]:
         try: date.fromisoformat(str(row["acquisition_date"]))
         except ValueError: row["_invalid"] = True
@@ -181,6 +261,8 @@ def create_snapshot(imported: Mapping[str, Any], resolution: Mapping[str, Any],
                "canonical_digest": resolution["canonical_digest"], "source": imported["source"],
                "resolved_holdings": [x for x in resolution["results"] if x["status"] == "resolved"],
                "unresolved_holdings": [x for x in resolution["results"] if x["status"] != "resolved"]}
+    if resolution.get("canonical_snapshot_id"):
+        payload["canonical_snapshot_id"] = resolution["canonical_snapshot_id"]
     resolved = payload["resolved_holdings"]
     payload["inventory"] = {
         "total_quantity": sum(x["row"]["quantity"] for x in resolved),
