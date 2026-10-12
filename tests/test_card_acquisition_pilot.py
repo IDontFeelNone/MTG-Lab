@@ -307,6 +307,21 @@ class CardAcquisitionPilotTests(unittest.TestCase):
         self.assertEqual(pilot.protected_inventory(), self.before)
         self.assertTrue(all(value is False for value in self.dossier["protection_boundary"].values()))
 
+    def test_collection_growth_preserves_original_protection_and_detects_canonical_edits(self):
+        inventory = pilot.protected_inventory()
+        retained = json.loads((pilot.REVIEW / "manifest.json").read_bytes())["protected_inventory"]
+        self.assertEqual(len(inventory), retained["file_count"])
+        self.assertEqual(content_identity(inventory), retained["content_identity"])
+        self.assertFalse(any(path.startswith(("data/collections/", "data/review/collection-audit-pilot/"))
+                             for path in inventory))
+        original = Path.read_bytes
+        target = pilot.ROOT / "data/canonical/state.json"
+        def altered(path):
+            return original(path) + b"tampered" if path == target else original(path)
+        with patch.object(Path, "read_bytes", altered):
+            changed = pilot.protected_inventory()
+        self.assertNotEqual(inventory["data/canonical/state.json"], changed["data/canonical/state.json"])
+
     def test_generator_refuses_to_overwrite_conflicting_review_evidence(self):
         with tempfile.TemporaryDirectory() as directory:
             destination = Path(directory)

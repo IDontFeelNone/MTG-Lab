@@ -1,3 +1,19 @@
+# Current milestone — collection audit and organization pilot
+
+Canonical main independently verified: `15e19b84701dd47970a948485683f73a687be9d2` (merged GitHub PR #169, including acquisition reconstruction repair). Architecture v12 remains frozen. PR numbers are independent of project phases; no new phase number is assigned.
+
+The bounded Collection Intelligence pilot reuses existing immutable collection imports/snapshots, canonical production identity resolution and Card Intelligence references. A source-replayed audit separates quantities, duplicate input records, physical storage, unresolved identities and personal Card review states. Append-only source-bound assessments preserve prior decisions, supersession and manual reassessment requests without performing reassessment or admitting canonical knowledge.
+
+No authoritative 360-copy MB2 ownership inventory is retained. Six partial unverified pack reports contain 90 positions and remain evidence leads. The compressed demonstration instead declares **360 fictional copies**: 330 resolved, 15 ambiguous and 15 unresolved; an extra repeated 80-copy input row and an invalid zero row are excluded. Six exact production Cards/Printings remain distinct from the 384-Card mechanical cohort and complete-set membership. Storage is independent of strategic usefulness. Three mock-reviewed Cards, two pending Cards and one manually flagged reassessment demonstrate work tracking; actual human approvals remain zero.
+
+[The audit contract and review materials](docs/COLLECTION_AUDIT_PILOT.md) describe quantity accounting, original-source replay, history, exact-ID queries, missing real inputs, a bounded manual ChatGPT handoff and current limitations. Existing acquisition, Product and Card demonstrations remain unchanged. Audit ownership coverage is informational and cannot replace a reviewed buyer declaration or authorize purchase advice. Pending functional roles remain unapproved; CC2 remains NOT_READY_FOR_EVALUATION; tournament acquisition stays parked.
+
+Stop for Project Manager review of this single pilot. Do not merge automatically, import an invented real inventory, repair mixed-policy deck allocation, perform automatic reassessment, rank value, recommend sorting, optimize decks, acquire providers or begin another milestone. The required real-input next step is an authoritative dated inventory and verifiable prior reviews, under the applicable approval boundary.
+
+---
+
+The earlier present-state summaries below preserve their original baselines and authorizations as historical records. This summary supersedes their next-task claims; unchanged technical contracts remain current.
+
 # Current milestone — collection-aware Card acquisition pilot
 
 Canonical main independently verified: `3cf6ad35fcb54ed5a4b640e36af6fa2ecf99a747` (merged GitHub PR #168). Architecture v12 remains frozen. PR numbers are independent of project phases; no new phase number is assigned.
