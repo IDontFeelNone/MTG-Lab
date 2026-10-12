@@ -8,12 +8,12 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from card_intelligence import (ContextualCardComparisonPilot, ContextualComparisonDossier,
                               ContextualComparisonError)
 from card_intelligence.cli import main
-from card_intelligence.comparison import comparison_explanation
+from card_intelligence.comparison import MAXIMUM_BYTES, comparison_explanation
 from card_intelligence.mechanics import content_identity, stable_json
 from card_intelligence.models import KnowledgeValidationError
 from card_intelligence.repository import KnowledgeRepository
@@ -258,6 +258,51 @@ class ContextualCardComparisonTests(unittest.TestCase):
         self.assertIn("Not net card advantage", text)
         for claim in ("Ponder is best", "Greater Good is superior", "wins games", "instant-speed activation", "verified combo"):
             self.assertNotIn(claim, text)
+
+    def test_cli_structured_stdout_matches_retained_payload_and_is_deterministic(self):
+        for flags, artifact in (([], "comparison.json"), (["--reasoning-context"], "reasoning-context.json")):
+            expected = (REVIEW / artifact).read_bytes()
+            outputs = []
+            for _ in range(2):
+                stream = io.StringIO()
+                with patch("card_intelligence.cli.ContextualCardComparisonPilot", return_value=self.pilot), contextlib.redirect_stdout(stream):
+                    self.assertEqual(main(["contextual-comparison", *flags]), 0)
+                raw = stream.getvalue().encode("utf-8")
+                self.assertLessEqual(len(raw), MAXIMUM_BYTES)
+                self.assertTrue(raw.endswith(b"\n"))
+                self.assertFalse(raw.endswith(b"\n\n"))
+                # Normalize exactly one documented LF, not arbitrary whitespace.
+                self.assertEqual(raw.removesuffix(b"\n"), expected.removesuffix(b"\n"))
+                self.assertEqual(raw, (stable_json(json.loads(expected)) + "\n").encode("utf-8"))
+                outputs.append(raw)
+            self.assertEqual(outputs[0], outputs[1])
+
+    def test_cli_byte_limit_includes_newline_and_multibyte_utf8_and_fails_closed(self):
+        prefix_bytes = len(stable_json({"synthetic_payload": ""}).encode("utf-8"))
+        for flags in ([], ["--reasoning-context"]):
+            for body_bytes, expected_code in ((MAXIMUM_BYTES - 1, 0), (MAXIMUM_BYTES, 2)):
+                payload = {"synthetic_payload": "é" + "x" * (body_bytes - prefix_bytes - len("é".encode("utf-8")))}
+                body = stable_json(payload)
+                self.assertEqual(len(body.encode("utf-8")), body_bytes)
+                self.assertLessEqual(len(body + "\n"), MAXIMUM_BYTES)
+                pilot = Mock()
+                pilot.reasoning_context.return_value = payload
+                pilot.dossier.return_value.to_json.return_value = body
+                stream = io.StringIO()
+                with patch("card_intelligence.cli.ContextualCardComparisonPilot", return_value=pilot), contextlib.redirect_stdout(stream):
+                    self.assertEqual(main(["contextual-comparison", *flags]), expected_code)
+                raw = stream.getvalue().encode("utf-8")
+                if expected_code == 0:
+                    self.assertEqual(len(raw), MAXIMUM_BYTES)
+                    self.assertEqual(raw, body.encode("utf-8") + b"\n")
+                    self.assertEqual(json.loads(raw), payload)
+                else:
+                    error = json.loads(raw)
+                    self.assertFalse(error["valid"])
+                    self.assertIn("trailing newline", error["error"])
+                    self.assertLess(len(raw), MAXIMUM_BYTES)
+                    self.assertNotIn(b"synthetic_payload", raw)
+                    self.assertNotIn(b"x" * 100, raw)
 
     def test_retained_replay_cli_previous_demos_and_protected_data(self):
         artifacts = build_artifacts()

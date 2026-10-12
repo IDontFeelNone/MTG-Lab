@@ -58,15 +58,15 @@ Preparation time `2026-10-12T17:44:40Z` was captured from the session clock and 
 
 Five isolated derived artifacts reside in `data/review/contextual-card-comparison/`:
 
-- [comparison.json](../data/review/contextual-card-comparison/comparison.json): the complete 55,793-byte dossier, including eight unchanged pending role candidates and the existing deterministic abstention.
+- [comparison.json](../data/review/contextual-card-comparison/comparison.json): the complete 55,794-byte compact JSON dossier (55,795 retained file bytes), including eight unchanged pending role candidates and the existing deterministic abstention.
 - [decision-inputs.json](../data/review/contextual-card-comparison/decision-inputs.json): complete existing request/policy/analysis contracts, independently content-addressed from the dossier rather than repeated in the handoff.
-- [reasoning-context.json](../data/review/contextual-card-comparison/reasoning-context.json): one 61,429-byte manual wrapper composing three unmodified `canonical-reasoning-context-v1` retrieval contracts, the full dossier and its `decision-reasoning-context-v1` result. JSON sizes exclude the retained final newline.
+- [reasoning-context.json](../data/review/contextual-card-comparison/reasoning-context.json): one 61,430-byte compact JSON manual wrapper (61,431 retained file and CLI output bytes) composing three unmodified `canonical-reasoning-context-v1` retrieval contracts, the full dossier and its `decision-reasoning-context-v1` result.
 - [explanation.md](../data/review/contextual-card-comparison/explanation.md): deterministic human-readable example, strictly rendering the dossier's facts, pending roles, assumptions, arithmetic, hypotheses, counterarguments and abstention.
 - [manifest.json](../data/review/contextual-card-comparison/manifest.json): input file byte counts/hashes, content identities and exact output integrity inventory.
 
 The generic retrieval contexts deliberately set entity/evidence limits to zero to avoid duplicating large audit projections already represented by compact lineage and source bindings in the comparison. Each reports one omitted generic entity and one omitted generic evidence item; no selected Card or role is omitted from the dossier. Their normalized exact-identity requests, snapshot IDs, original context identities, truncation limits and warnings remain intact. No new semantic operation, altered generic request or false analytics snapshot is introduced.
 
-Dossiers and manual wrappers have a 65,536-byte bound and fail on oversize; they never silently discard selected roles. Sorted-key compact UTF-8 JSON, immutable payloads and SHA-256 identities make replay deterministic. The manual wrapper is explicitly supplemental evidence, not live ChatGPT transport or model execution. ChatGPT may explain the supplied result while preserving abstention and evidence states.
+Dossiers and manual wrappers have a 65,536-byte compact UTF-8 JSON payload bound and fail on oversize; they never silently discard selected roles. Retained JSON files and contextual-comparison CLI JSON output append exactly one final LF. Content identities and the canonical payload guard exclude that framing byte. The CLI checks its complete UTF-8 output, including the LF, before writing and rejects output above 65,536 bytes; its compact payload therefore has a 65,535-byte budget. Sorted-key compact UTF-8 JSON, immutable payloads and SHA-256 identities make replay deterministic. The manual wrapper is explicitly supplemental evidence, not live ChatGPT transport or model execution. ChatGPT may explain the supplied result while preserving abstention and evidence states.
 
 ```bash
 PYTHONPATH=src python -m card_intelligence.cli contextual-comparison

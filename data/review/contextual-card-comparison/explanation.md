@@ -1,6 +1,6 @@
 # Contextual Card comparison — manual explanation example
 
-Comparison: `sha256:ec7bdc86116d2e6f6a0467ef60e19b962c51ccf41b57fc40895aa25ed707241b`. Human review is pending; no canonical admission or live ChatGPT integration.
+Comparison: `sha256:147ef342300b01aa94d37cfd07f2b15cd4b1b40d30f9da29b1365ec7dd24254f`. Human review is pending; no canonical admission or live ChatGPT integration.
 
 ## Declared hypothetical context
 
@@ -35,7 +35,7 @@ Pending functional interpretations:
   - restrictions: Selection is limited to the top three before the optional shuffle.
   - timing: No specific legal activation/casting window is established by this annotation; card type is supplied separately.
 
-Unverified strategic hypothesis: Top-three ordering may help an immediate card-access objective if the revealed options matter.
+Unverified strategic hypothesis: Top-three ordering may help an immediate card-access objective if the looked-at options matter.
 
 Counterargument: The actual library, draw outcome and desired options are unknown; ordering is not a guaranteed favorable result.
 

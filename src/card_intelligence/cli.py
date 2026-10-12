@@ -7,9 +7,11 @@ from pathlib import Path
 
 from .explanation import (CardValueExplanationEngine, ERROR_VERSION, ExplanationError,
                           render_historical_explanation)
-from .mechanics import MechanicalCardIntelligence
+from .mechanics import MechanicalCardIntelligence, stable_json
 from .roles import FunctionalRolePilot
-from .comparison import ContextualCardComparisonPilot, comparison_explanation
+from .comparison import (MAXIMUM_BYTES as COMPARISON_MAXIMUM_BYTES,
+                         ContextualCardComparisonPilot, ContextualComparisonError,
+                         comparison_explanation)
 
 
 def main(argv=None) -> int:
@@ -48,8 +50,13 @@ def main(argv=None) -> int:
             if args.human_readable:
                 print(comparison_explanation(pilot.dossier()), end="")
             else:
-                result = pilot.reasoning_context() if args.reasoning_context else pilot.dossier().to_dict()
-                print(json.dumps(result, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False))
+                body = stable_json(pilot.reasoning_context()) if args.reasoning_context else pilot.dossier().to_json()
+                serialized = body + "\n"
+                # The delivery budget includes the one terminal LF, unlike
+                # the canonical payload guard. Reject before writing any data.
+                if len(serialized.encode("utf-8")) > COMPARISON_MAXIMUM_BYTES:
+                    raise ContextualComparisonError("contextual comparison CLI output exceeds its byte bound including the trailing newline")
+                print(serialized, end="")
             return 0
         if args.command in {"roles", "roles-pilot", "roles-comparison"}:
             pilot = FunctionalRolePilot(args.data_root)
