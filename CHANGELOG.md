@@ -1,3 +1,13 @@
+# Fixed-content evidence admission hardening
+
+- Deep-freeze packet mappings and preserve existing valid v1 numeric identities/replay bytes.
+- Require known transaction-cost provenance, explicit zero-cost basis, and null unknown amounts.
+- Require deterministic freshness windows; reject stale/future material evidence and unknown availability.
+- Validate nested contracts and canonical replay; distinguish automated eligibility from v2 human
+  attestation tied to the exact packet and time window.
+- Add synthetic positive/negative regressions; no production acquisition, packet, promotion,
+  recommendation, provider, Competitive Intelligence, or Architecture v12 change.
+
 # Phase 127K — Remove unsupported branch-protection API dependency (2026-08-02)
 
 - Removed the redundant branch-protection REST probe from Market acquisition while retaining

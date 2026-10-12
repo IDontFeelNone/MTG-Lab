@@ -1,3 +1,12 @@
+# Fixed-content evidence admission hardening inventory
+
+Added bounded admission checks and regressions in `src/product_intelligence/evidence_packet.py`
+and `tests/test_fixed_content_admission_hardening.py`, strengthened nested packet schema validation,
+and added `fixed-content-acquisition-evidence-review-v2.schema.json`. New public helpers separate
+automated eligibility from explicit human review and verify exact packet/policy binding. Packet v1
+valid numeric serialization is preserved; unknown singles amounts are nullable, and historical
+review v1 cannot establish affirmative readiness. No production data or Architecture v12 change.
+
 # Phase 126 inventory update
 
 Added `src/market/intelligence.py`, `src/market/query.py`, Canonical Query Service market methods, collection valuation, unified JSON CLI routes, `tests/test_phase_126_market_intelligence.py`, and `docs/MARKET_INTELLIGENCE.md`. Observations are separate under `data/market/observations`; no production observation or canonical price fact was added. Architecture v12 and Phase 119 canonical state are unchanged.
