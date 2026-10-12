@@ -1,3 +1,11 @@
+# Bounded identity preparation inventory
+
+Prepared a non-promoting Commander Collection: Black non-premium identity review bundle from pinned MIT-licensed original MTGJSON bytes. One Product candidate is structurally valid and requires review; six ordinary Card/Printing pairs and the exact token pair remain unresolved/excluded because native identity records were unavailable. Physical token UUID pairing is supported, but face names and variants are not inferred. Two existing CC2 Printings are reused; the nine-component manifest remains explicitly incomplete. No canonical promotion, market admission, human READY attestation or evaluation occurred.
+
+Added isolated pending review artifacts, a read-only verification command composing existing validators, and focused regressions. No new importer, engine, schema or infrastructure subsystem. See [identity review materials](docs/FIXED_CONTENT_IDENTITY_REVIEW.md).
+
+---
+
 # First production fixed-content pilot — retained research dossier only
 
 The authorized Commander Collection: Black (non-premium) attempt is **NOT_READY_FOR_EVALUATION**. Official/retailer research, exact canonical coverage, market leads, provenance/retention gaps, and a deterministic readiness dossier are retained for review. Only Sol Ring and Command Tower have canonical CC2 Printings; six Cards/Printings, the Product identity, and the token identity remain missing. No honest packet, human READY attestation, production analysis, or acquisition evaluation was produced. Architecture v12 and all existing production bytes remain unchanged.

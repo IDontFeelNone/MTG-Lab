@@ -1,3 +1,15 @@
+# Identity preparation — source-supported subset, manifest incomplete
+
+Canonical baseline: `4420686d3ee53d921563c41a889f51ba51d7b203` (merged PR #163). Architecture v12 remains frozen; PR numbers are independent of project phases.
+
+Prepared a non-promoting Commander Collection: Black non-premium identity review bundle from pinned MIT-licensed original MTGJSON bytes. One Product candidate is structurally valid and requires review; six ordinary Card/Printing pairs and the exact token pair remain unresolved/excluded because native identity records were unavailable. Physical token UUID pairing is supported, but face names and variants are not inferred. Two existing CC2 Printings are reused; the nine-component manifest remains explicitly incomplete. No canonical promotion, market admission, human READY attestation or evaluation occurred.
+
+[Identity review materials](FIXED_CONTENT_IDENTITY_REVIEW.md) document sources, validation, blockers, and the next action. Stop for human review; do not automatically approve, promote, acquire markets or begin another milestone.
+
+---
+
+Earlier milestone summaries below retain their original context; the current identity status above supersedes their next-task claims. Unchanged technical contracts remain current.
+
 # First real pilot outcome — evidence incomplete
 
 The guaranteed double-sided token is part of the candidate contents; a card-only packet would silently omit a component. Its exact identity/variants and price remain unresolved. The earlier provisional pilot discussion did not establish absence of non-card valuation gaps. Generic packet/admission contracts are unchanged.

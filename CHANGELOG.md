@@ -1,3 +1,9 @@
+# Bounded non-promoting Product identity preparation (2026-10-12)
+
+- Reconcile main `4420686d3ee53d921563c41a889f51ba51d7b203`; retain exact licensed provider bytes and pending native Product candidate with explicit source/computed-field provenance.
+- Preserve seven unresolved Card/Printing pair descriptors, supported physical token UUID pairing, incomplete guaranteed-content manifest and references to two existing CC2 Printings.
+- Add read-only verification and regression coverage; no canonical production writes, market admission, human approval, promotion, recommendation, schema/dependency/workflow or Architecture v12 change.
+
 # First real fixed-content pilot evidence assessment (2026-10-12)
 
 - Reconcile merged PR #162 main `e594912a681dd0afccf2a79f638a85f40dfac1e9` and audit Commander Collection: Black non-premium.
