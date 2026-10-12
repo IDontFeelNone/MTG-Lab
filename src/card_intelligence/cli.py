@@ -7,8 +7,11 @@ from pathlib import Path
 
 from .explanation import (CardValueExplanationEngine, ERROR_VERSION, ExplanationError,
                           render_historical_explanation)
-from .mechanics import MechanicalCardIntelligence
+from .mechanics import MechanicalCardIntelligence, stable_json
 from .roles import FunctionalRolePilot
+from .comparison import (MAXIMUM_BYTES as COMPARISON_MAXIMUM_BYTES,
+                         ContextualCardComparisonPilot, ContextualComparisonError,
+                         comparison_explanation)
 
 
 def main(argv=None) -> int:
@@ -36,8 +39,25 @@ def main(argv=None) -> int:
     roles.add_argument("--reasoning-context", action="store_true", help="manual review handoff; no model execution")
     commands.add_parser("roles-pilot", help="15-Card candidate census and human-review material")
     commands.add_parser("roles-comparison", help="three-Card functional comparison; no ranking")
+    comparison = commands.add_parser("contextual-comparison", help="one hypothetical comparison; pending roles, no winner")
+    output = comparison.add_mutually_exclusive_group()
+    output.add_argument("--reasoning-context", action="store_true", help="bounded manual handoff; no live model")
+    output.add_argument("--human-readable", action="store_true", help="evidence-grounded manual explanation example")
     args = parser.parse_args(argv)
     try:
+        if args.command == "contextual-comparison":
+            pilot = ContextualCardComparisonPilot(args.data_root)
+            if args.human_readable:
+                print(comparison_explanation(pilot.dossier()), end="")
+            else:
+                body = stable_json(pilot.reasoning_context()) if args.reasoning_context else pilot.dossier().to_json()
+                serialized = body + "\n"
+                # The delivery budget includes the one terminal LF, unlike
+                # the canonical payload guard. Reject before writing any data.
+                if len(serialized.encode("utf-8")) > COMPARISON_MAXIMUM_BYTES:
+                    raise ContextualComparisonError("contextual comparison CLI output exceeds its byte bound including the trailing newline")
+                print(serialized, end="")
+            return 0
         if args.command in {"roles", "roles-pilot", "roles-comparison"}:
             pilot = FunctionalRolePilot(args.data_root)
             if args.command == "roles-pilot":

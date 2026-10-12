@@ -1,3 +1,5 @@
+> **Merged implementation:** PR #167 merged at `4d15582d6ed364f012e853c1fdb2312e54ea7c60`. All thirty role proposals and eleven definitions remain pending human review. The separately authorized [contextual comparison](CONTEXTUAL_CARD_COMPARISON.md) consumes eight unchanged candidates; it does not approve or supersede them. The original milestone record below is preserved.
+
 # Functional-Role Card Intelligence — bounded review pilot
 
 Canonical main independently verified on 2026-10-12: `e4a99ae6ccffe3e7121337fe28d9127024be3743`, the successful merge of GitHub PR #166. Architecture v12 remains frozen. This named milestone does not assign a phase number; project phases and GitHub PR numbers remain independent.

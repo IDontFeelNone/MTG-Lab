@@ -1,0 +1,474 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "contextual-card-comparison-v1",
+  "title": "Pending contextual Card comparison, without canonical admission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "comparison_id",
+    "canonical_main_baseline",
+    "canonical_snapshot_id",
+    "prepared_at",
+    "plan_identity",
+    "context_identity",
+    "context",
+    "criteria",
+    "candidates",
+    "evidence",
+    "deterministic_comparisons",
+    "decision_intelligence",
+    "review",
+    "omissions",
+    "unsupported_dimensions",
+    "protection_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "contextual-card-comparison-v1"
+    },
+    "comparison_id": {
+      "$ref": "#/$defs/digest"
+    },
+    "canonical_main_baseline": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "canonical_snapshot_id": {
+      "$ref": "#/$defs/digest"
+    },
+    "prepared_at": {
+      "type": "string",
+      "pattern": "Z$"
+    },
+    "plan_identity": {
+      "$ref": "#/$defs/digest"
+    },
+    "context_identity": {
+      "$ref": "#/$defs/digest"
+    },
+    "context": {
+      "type": "object",
+      "required": [
+        "kind",
+        "objective",
+        "description",
+        "format_legality",
+        "assumptions",
+        "constraints",
+        "unknowns"
+      ],
+      "properties": {
+        "kind": {
+          "const": "hypothetical_deck_context"
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "format_legality": {
+          "type": "object",
+          "required": [
+            "status",
+            "value"
+          ],
+          "properties": {
+            "status": {
+              "const": "unknown"
+            },
+            "value": {
+              "type": "null"
+            }
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "assumption_id",
+              "state",
+              "value",
+              "description"
+            ],
+            "properties": {
+              "assumption_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "state": {
+                "const": "supplied_assumption"
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "constraints": {
+          "$ref": "#/$defs/texts"
+        },
+        "unknowns": {
+          "$ref": "#/$defs/texts"
+        }
+      }
+    },
+    "criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "criterion_id",
+          "category",
+          "description",
+          "selection_weight"
+        ],
+        "properties": {
+          "criterion_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "enum": [
+              "verified_mechanical",
+              "pending_functional",
+              "conditional_arithmetic",
+              "unknown"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "selection_weight": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "card_identity",
+          "mechanical_dossier_id",
+          "role_dossier_id",
+          "mechanical_facts",
+          "source",
+          "canonical_provenance",
+          "pending_roles",
+          "literal_instruction_annotation",
+          "strategic_hypotheses",
+          "counterarguments"
+        ],
+        "properties": {
+          "card_identity": {
+            "type": "object",
+            "required": [
+              "card_id",
+              "game_id",
+              "name"
+            ],
+            "properties": {
+              "card_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "game_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "mechanical_dossier_id": {
+            "$ref": "#/$defs/digest"
+          },
+          "role_dossier_id": {
+            "$ref": "#/$defs/digest"
+          },
+          "mechanical_facts": {
+            "type": "object"
+          },
+          "source": {
+            "type": "object"
+          },
+          "canonical_provenance": {
+            "type": "object"
+          },
+          "pending_roles": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "candidate_id",
+                "review"
+              ],
+              "properties": {
+                "candidate_id": {
+                  "$ref": "#/$defs/digest"
+                },
+                "review": {
+                  "$ref": "#/$defs/review"
+                }
+              }
+            }
+          },
+          "literal_instruction_annotation": {
+            "type": "object",
+            "required": [
+              "draw_count",
+              "draw_parameter_assumption",
+              "mandatory_discard_count",
+              "review_status",
+              "basis"
+            ],
+            "properties": {
+              "review_status": {
+                "const": "requires_review"
+              }
+            }
+          },
+          "strategic_hypotheses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "statement",
+                "state",
+                "evidence_ids",
+                "assumption_ids",
+                "counterargument"
+              ],
+              "properties": {
+                "state": {
+                  "const": "unverified_hypothesis"
+                }
+              }
+            }
+          },
+          "counterarguments": {
+            "$ref": "#/$defs/texts"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "evidence_id",
+          "source_identity",
+          "content_digest"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_identity": {
+            "type": "string",
+            "minLength": 1
+          },
+          "content_digest": {
+            "$ref": "#/$defs/digest"
+          }
+        }
+      }
+    },
+    "deterministic_comparisons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "calculation_id",
+          "category",
+          "operation",
+          "card_ids",
+          "state",
+          "value",
+          "unit",
+          "evidence_ids",
+          "assumption_ids",
+          "limitations"
+        ],
+        "properties": {
+          "category": {
+            "enum": [
+              "deterministic_description",
+              "conditional_instruction_arithmetic"
+            ]
+          },
+          "state": {
+            "enum": [
+              "known",
+              "unknown"
+            ]
+          },
+          "evidence_ids": {
+            "$ref": "#/$defs/texts"
+          },
+          "assumption_ids": {
+            "$ref": "#/$defs/texts"
+          },
+          "limitations": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "decision_intelligence": {
+      "type": "object",
+      "required": [
+        "request_id",
+        "policy",
+        "input_reference",
+        "input_content_identity",
+        "reasoning_context"
+      ],
+      "properties": {
+        "policy": {
+          "type": "object"
+        },
+        "reasoning_context": {
+          "type": "object",
+          "required": [
+            "schema_version",
+            "recommendation"
+          ],
+          "properties": {
+            "schema_version": {
+              "const": "decision-reasoning-context-v1"
+            },
+            "recommendation": {
+              "type": "object",
+              "required": [
+                "outcome",
+                "selected_alternative_id",
+                "abstention_reasons"
+              ],
+              "properties": {
+                "outcome": {
+                  "const": "abstain"
+                },
+                "selected_alternative_id": {
+                  "type": "null"
+                },
+                "abstention_reasons": {
+                  "$ref": "#/$defs/texts"
+                }
+              }
+            }
+          }
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^request-sha256:[0-9a-f]{64}$"
+        },
+        "input_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_content_identity": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "review": {
+      "$ref": "#/$defs/review"
+    },
+    "omissions": {
+      "type": "object",
+      "required": [
+        "selected_cards_omitted",
+        "selected_role_candidates_omitted"
+      ],
+      "properties": {
+        "selected_cards_omitted": {
+          "const": 0
+        },
+        "selected_role_candidates_omitted": {
+          "const": 0
+        }
+      }
+    },
+    "unsupported_dimensions": {
+      "$ref": "#/$defs/texts"
+    },
+    "protection_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_writes",
+        "knowledge_fact_writes",
+        "market_admission",
+        "approval_performed"
+      ],
+      "properties": {
+        "canonical_writes": {
+          "const": false
+        },
+        "knowledge_fact_writes": {
+          "const": false
+        },
+        "market_admission": {
+          "const": false
+        },
+        "approval_performed": {
+          "const": false
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "texts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "human_attestation",
+        "canonical_admission"
+      ],
+      "properties": {
+        "status": {
+          "const": "requires_review"
+        },
+        "human_attestation": {
+          "type": "null"
+        },
+        "canonical_admission": {
+          "const": false
+        }
+      }
+    }
+  }
+}

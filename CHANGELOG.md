@@ -1,3 +1,10 @@
+# Contextual Card Comparison — bounded pending-evidence pilot (2026-10-12)
+
+- Verify merged PR #167 at `4d15582d6ed364f012e853c1fdb2312e54ea7c60`; preserve Architecture v12 and all prior production/review evidence.
+- Compare exact production Ponder, Faithless Looting and Greater Good in one supplied hypothetical context, separating source facts, eight pending role candidates, assumptions, deterministic descriptions and unverified hypotheses.
+- Reuse existing Decision contracts and the existing engine for explicit abstention; add no strategic score, Card selection, approval or admission path.
+- Retain five auditable derived artifacts, an evidence-grounded explanation and a bounded manual handoff; add focused regression coverage and reconcile directly affected documentation.
+
 # Functional-Role Card Intelligence — bounded review pilot (2026-10-12)
 
 - Verify merged PR #166 at `e4a99ae6ccffe3e7121337fe28d9127024be3743`; preserve Architecture v12 and the complete mechanical cohort.
