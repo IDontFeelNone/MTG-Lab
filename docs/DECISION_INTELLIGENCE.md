@@ -2,13 +2,15 @@
 
 ## Current merged status (2026-10-12)
 
-Canonical main independently verified on 2026-10-12: `dd08c76d09e4b8d10c411ade0d8445987c8875c0`, the merge of GitHub PR #161 — Fixed-Content Evidence Admission Hardening. GitHub PR numbers and project phase numbers are independent; Phase 147 remains the highest numbered project phase. No new phase number is assigned to the later named milestones.
+Canonical main verified on 2026-10-12: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (merged GitHub PR #164). PR #161's Fixed-Content Evidence Admission Hardening remains implemented. GitHub PR numbers and project phase numbers are independent; Phase 147 remains the highest numbered project phase. No new phase number is assigned to later named milestones.
 
-Implemented: shared Decision Intelligence contracts, synthetic fixed-content Product analysis and sealed-versus-singles current-cost policy, packet v1, and hardened human-attested review v2. The hardening separates eligibility from approval, freezes nested inputs, requires cost provenance and freshness, validates replay, and binds review to the exact packet/window. Production fixed-content pilot assembly, readiness review, evaluation, and recommendations have not occurred. Forecasts, premium models, simulation, API/UI, live AI-provider integration, and an operational AI Advisor remain unsupported or planned.
+Implemented: shared Decision Intelligence contracts, synthetic fixed-content Product analysis and sealed-versus-singles current-cost policy, packet v1, and hardened human-attested review v2. The hardening separates eligibility from approval, freezes nested inputs, requires cost provenance and freshness, validates replay, and binds review to the exact packet/window. The real Commander Collection: Black pilot has produced research and pending identity review materials, but no complete acquisition packet, affirmative human readiness, production evaluation, or recommendation. Forecasts, premium models, simulation, API/UI, live AI-provider integration, and an operational AI Advisor remain unsupported or planned.
 
 Architecture v12 remains frozen. Repository-first canonical truth, deterministic analytics and decisions, versioned immutable evidence, human-reviewed production admission, and product-neutral/game-neutral generic engines remain unchanged. AI/ChatGPT is the explanation and reasoning interface over validated outputs; it does not calculate or override acquisition decisions. Competitive Intelligence remains **PARKED / KNOWN GAP / NOT ON CURRENT CRITICAL PATH**. Competitive Card Intelligence and Deck Intelligence remain planned and unauthorized; existing collection/deck-completion helpers are not the planned Deck Intelligence decision domain.
 
-The next candidate, requiring separate authorization, is one governed real fixed-content Product Intelligence pilot for **Commander Collection: Black (non-premium)**: complete independently verifiable official contents, exact canonical Printings, one available current sealed offer, complete compatible current singles observations, explicit transaction costs (including evidence for zeros), source digests/provenance, and a deterministic freshness window. Stop on any gap. Packet assembly and human readiness review do not authorize canonical promotion or acquisition evaluation. Only after separate evaluation authorization and an exact human-attested v2 `READY_FOR_EVALUATION` review may a production caller use `require_ready_evidence_review` before the existing Product analysis and Decision policy.
+The present milestone is a read-only [two-Card evidence-to-ChatGPT demonstration](TWO_CARD_CHATGPT_DEMO.md) for exactly production Sol Ring and Counterspell using existing reasoning-context contracts, not a new Decision policy or evaluation. Its dossiers and explanation examples cannot authorize acquisition, promotion, or human READY attestation. Stop after its PR handoff for Project Manager review.
+
+The merged Commander Collection: Black identity bundle remains `NOT_READY_FOR_EVALUATION`: its Product candidate requires review, six ordinary Card/Printing pairs remain unresolved, and the token remains incomplete. Future acquisition evaluation still requires complete exact contents/Printings, compatible current sealed and singles evidence, explicit transaction costs with provenance, deterministic freshness, separate evaluation authorization, and an exact human-attested v2 `READY_FOR_EVALUATION` review checked by `require_ready_evidence_review`.
 
 ## First domain vertical
 
@@ -37,7 +39,7 @@ collector/IP demand, reprint risk, and historical comparables remain explicit `n
 limitations. ChatGPT receives the completed recommendation through the existing reasoning context
 and may explain, but neither recalculate nor override, it.
 
-## Status and boundary
+## Foundation implementation boundary (historical)
 
 The additive Decision Intelligence foundation approved by the 2026-08-12 assessment is implemented
 over the authoritative `19b69c2` baseline (GitHub PR #156). The highest merged **project phase** at

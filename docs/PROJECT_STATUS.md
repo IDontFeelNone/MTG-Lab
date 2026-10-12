@@ -1,3 +1,21 @@
+# Current status — two-Card evidence-to-ChatGPT demonstration for review
+
+Canonical main verified on 2026-10-12: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (merged GitHub PR #164, including the Product `schema_version` provenance repair). Architecture v12 remains frozen. PR numbers and project phase numbers are independent; Phase 147 remains the highest numbered phase.
+
+The current authorized scope is a narrow promoted-lineage query repair and exactly two bounded, deterministic dossiers for production Sol Ring and Counterspell, composed from retained canonical, Card Intelligence, market, and provider-specific demand evidence. Existing reasoning-context contracts support a read-only manual handoff; evidence-constrained explanation examples demonstrate the downstream reasoning boundary. No model/provider integration or live ChatGPT connection is added. See [the demonstration materials and replay instructions](TWO_CARD_CHATGPT_DEMO.md).
+
+Production remains 384 Cards, 913 Printings, 235 Identifiers, 2 Finishes, 956 observations, and 140 Card Intelligence fact files including historical/superseded facts. Existing canonical records, retained market evidence, knowledge facts, source bytes, and approved architecture are protected. The dossier output is derived review material, not production evidence admission or another canonical store. Test and hosted-CI results belong to this milestone's PR; older counts below describe their original baselines.
+
+PR #164's merged identity review bundle remains `NOT_READY_FOR_EVALUATION`: the Product candidate is `requires_review`, all six missing ordinary Card/Printing pairs remain unresolved, the token remains incomplete, and existing Sol Ring/Command Tower CC2 Printings are reused. No READY attestation, production promotion, market admission, product evaluation, or acquisition recommendation has occurred in this demonstration. Competitive Intelligence remains parked; Competitive Card Intelligence and Deck Intelligence remain planned and unauthorized.
+
+Stop after this demonstration's PR handoff for Project Manager review. No follow-on implementation is authorized.
+
+---
+
+# Historical status records
+
+All entries below preserve their original baseline and milestone context. Earlier “current” headings, test counts, next tasks, and network observations are historical; the present status above takes precedence. Unchanged technical contracts remain current.
+
 # Current status — bounded identity preparation pending review
 
 Canonical baseline: `4420686d3ee53d921563c41a889f51ba51d7b203` (merged PR #163). Architecture v12 remains frozen; PR numbers are independent of project phases.

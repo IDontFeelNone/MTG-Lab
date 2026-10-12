@@ -1,3 +1,23 @@
+# Current session — bounded two-Card evidence-to-ChatGPT demonstration
+
+Canonical main verified on 2026-10-12: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (merged GitHub PR #164, including its narrowly scoped provenance repair). Architecture v12 remains frozen; Phase 147 is the highest numbered project phase, independent of PR numbering.
+
+Authorization covers only the narrow promoted-lineage projection defect, exactly two production Card dossiers (Sol Ring and Counterspell), existing-contract manual reasoning contexts, evidence-constrained explanation examples, directly affected documentation, regression tests, and one human-reviewed PR. [The demonstration guide](TWO_CARD_CHATGPT_DEMO.md) provides exact identities, artifacts, replay instructions, retained-evidence dates and limitations. No missing `IMPLEMENTATION_PLAN.md` is reconstructed.
+
+Only retained repository evidence is used. No external provider request, model execution, live ChatGPT transport, hosting, new infrastructure subsystem, production canonical mutation, market admission, knowledge-fact admission, or acquisition evaluation is authorized. Source-specific Scryfall and MTGJSON evidence remains independent. Historical observations and incomplete source coverage are represented explicitly.
+
+The merged Commander Collection: Black pending bundle remains `NOT_READY_FOR_EVALUATION`: one Product candidate requires review, six ordinary Card/Printing pairs remain unresolved, and the token remains incomplete. Sol Ring and Command Tower CC2 Printings remain existing canonical references. This demonstration does not approve or promote that bundle.
+
+The current checkout supports file reads, scoped edits, and Python tests. Canonical verification uses the connected GitHub integration; delivery uses its tree/commit/ref/PR operations with independent readback and no protection bypass. Current validation and actual publication results are recorded in this milestone's PR and final report. Earlier test counts and network failures below are historical observations, not current verification.
+
+Stop after the two-Card demonstration and PR handoff for Project Manager review. Competitive Intelligence stays parked; Competitive Card Intelligence and Deck Intelligence remain planned and unauthorized. No follow-on milestone is automatic.
+
+---
+
+# Historical session records
+
+All entries below preserve their original baseline, milestone status, and authorization. Earlier “current” headings and next-task claims do not override the present session above.
+
 # Current session — bounded pending identity bundle
 
 Canonical baseline: `4420686d3ee53d921563c41a889f51ba51d7b203` (merged PR #163). Architecture v12 remains frozen; PR numbers are independent of project phases.

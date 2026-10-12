@@ -1,9 +1,9 @@
 # MTG Lab
 
-> **Current merged milestone:** Fixed-Content Evidence Admission Hardening (GitHub PR #161).
-> Shared deterministic decisions, synthetic fixed-content economics, and hardened human-reviewed
-> evidence admission are implemented. The first real fixed-content pilot remains separately
-> authorized future work. Architecture v12 remains unchanged.
+> **Verified merged baseline:** `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (GitHub PR #164).
+> The Commander Collection: Black identity review bundle remains pending and
+> `NOT_READY_FOR_EVALUATION`. The current milestone prepares a retained-evidence,
+> read-only ChatGPT handoff for exactly Sol Ring and Counterspell. Architecture v12 is frozen.
 
 > **A decision intelligence platform for collectible card games, powered by structured data, advanced analytics, simulation, and explainable AI.**
 
@@ -273,9 +273,9 @@ This organization allows multiple trading card games to share a common analytics
 
 **Status:** Active Development
 
-**Latest merged milestone:** Fixed-Content Evidence Admission Hardening — GitHub PR #161 (complete)
+**Latest merged milestone:** Bounded non-promoting identity preparation and provenance repair — GitHub PR #164 (merged; candidate approval and promotion remain separate)
 
-**Verified main baseline (2026-10-12):** `dd08c76d09e4b8d10c411ade0d8445987c8875c0`
+**Verified main baseline (2026-10-12):** `e5e11c41818b3a7e6bec85418a75a37e0ef638f0`
 
 **Highest numbered project phase:** Phase 147; later named milestones do not imply a new phase number.
 
@@ -287,13 +287,20 @@ Reasoning Context, and AI Adapter foundations are also implemented. The reposito
 not yet contain an MB2 simulation framework, probability engine, model provider, or
 operational AI Advisor.
 
-The Collection Intelligence foundation (Phase 124) remains implemented. Shared Decision Intelligence,
-fixed-content Product Intelligence, the synthetic sealed-versus-singles vertical, evidence packet v1,
-and hardened human-attested review v2 are also implemented. No real fixed-content packet, review,
-or production acquisition recommendation exists. Commander Collection: Black (non-premium) is the
-provisional next pilot, subject to separate authorization and complete evidence. Evaluation requires
-separate authorization after READY review. Competitive Intelligence remains parked; Competitive
-Card Intelligence and Deck Intelligence remain planned and unauthorized.
+The Collection Intelligence foundation (Phase 124), shared Decision Intelligence, fixed-content
+Product Intelligence, synthetic sealed-versus-singles vertical, evidence packet v1, and hardened
+human-attested review v2 remain implemented. The Commander Collection: Black pilot and pending
+identity bundle remain `NOT_READY_FOR_EVALUATION`; no complete production acquisition packet or
+recommendation exists. The six missing ordinary Card/Printing pairs and exact token identity remain
+unresolved, and the Product candidate requires review.
+
+The [two-Card evidence-to-ChatGPT demonstration](docs/TWO_CARD_CHATGPT_DEMO.md) composes retained
+canonical identities, Card Intelligence explanations, historical market observations, independent
+Scryfall and MTGJSON signals, and existing reasoning-context contracts. It prepares bounded,
+deterministic dossiers and explanation examples for manual review. It does not run a model or
+provide a live ChatGPT connection. Stop after this milestone's PR handoff; subsequent work requires
+separate approval. Competitive Intelligence remains parked; Competitive Card Intelligence and
+Deck Intelligence remain planned and unauthorized.
 
 ---
 

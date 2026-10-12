@@ -1,3 +1,11 @@
+# Two-Card evidence-to-ChatGPT demonstration (2026-10-12)
+
+- Reconcile canonical main `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` and merged PR #164; preserve Architecture v12 and the unresolved pending CC2 review boundary.
+- Repair the production-shaped promoted-audit query projection while retaining exact evidence/source references and compact audit integrity references.
+- Prepare deterministic bounded dossiers, existing-contract reasoning contexts, and evidence-constrained manual explanation examples for exactly production Sol Ring and Counterspell.
+- Preserve independent provider signals, historical price dimensions, source timestamps and digests, uncertainty, and explicit omission/unsupported-evidence accounting. Add focused regression coverage and reconcile directly affected current documentation.
+- No new provider, external acquisition, model execution, live ChatGPT transport, canonical promotion, market admission, acquisition recommendation, or follow-on milestone. Validation and delivery results are recorded in the milestone PR.
+
 # Bounded non-promoting Product identity preparation (2026-10-12)
 
 - Reconcile main `4420686d3ee53d921563c41a889f51ba51d7b203`; retain exact licensed provider bytes and pending native Product candidate with explicit source/computed-field provenance.

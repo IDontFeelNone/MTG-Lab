@@ -1,3 +1,19 @@
+# Current roadmap — bounded evidence-to-ChatGPT demonstration
+
+Canonical main verified on 2026-10-12: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0` (merged GitHub PR #164). PR numbers are independent of project phases; Phase 147 remains the highest numbered phase. Architecture v12 is frozen.
+
+The authorized milestone is one complete, read-only evidence handoff for exactly the production Cards Sol Ring and Counterspell: repair the demonstrated promoted-lineage projection mismatch, compose bounded deterministic dossiers from retained evidence, provide manual reasoning contexts and supported explanation examples, validate protected-data boundaries, and hand off one PR for human review. See [the two-Card demonstration](TWO_CARD_CHATGPT_DEMO.md). There is no live ChatGPT transport, model execution, new provider, external acquisition, production admission, or strategic scoring.
+
+This usable vertical takes priority over further Commander Collection: Black evidence acquisition. That pilot remains `NOT_READY_FOR_EVALUATION`: its merged pending Product candidate is not canonical, six ordinary Card/Printing pairs remain unresolved, and the token is incomplete. Current compatible prices, transaction costs, freshness, and human review still require separate work. This demonstration does not resolve or bypass those gates.
+
+Stop after the demonstration's PR and Project Manager review. No next implementation milestone is authorized automatically. Competitive Intelligence remains parked; future Competitive Card Intelligence and Deck Intelligence are planned and unauthorized. Repository-first truth, immutable evidence, deterministic analytics and decisions, human-reviewed production admission, generic engines, and ChatGPT's downstream explanation role remain unchanged.
+
+---
+
+# Historical roadmap records
+
+The entries below retain their original priorities, baselines, and next-task instructions. Their “current” headings are historical and do not override the present authorization above. No new phase number is assigned to this named milestone.
+
 # Current roadmap — one real fixed-content pilot candidate
 
 Canonical main independently verified on 2026-10-12: `dd08c76d09e4b8d10c411ade0d8445987c8875c0`, the merge of GitHub PR #161 — Fixed-Content Evidence Admission Hardening. GitHub PR numbers and project phase numbers are independent; Phase 147 remains the highest numbered project phase. No new phase number is assigned to the later named milestones.

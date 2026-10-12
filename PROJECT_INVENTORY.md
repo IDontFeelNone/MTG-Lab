@@ -1,3 +1,19 @@
+# Current inventory — two-Card retained-evidence demonstration
+
+Canonical main verified on 2026-10-12: `e5e11c41818b3a7e6bec85418a75a37e0ef638f0`, the merge of GitHub PR #164 including its Product `schema_version` provenance repair. PR numbers and project phases are independent; Phase 147 remains the highest numbered phase. Architecture v12 remains frozen.
+
+The current milestone adds a bounded, read-only composition of existing canonical query, Card Intelligence, and reasoning-context capabilities for exactly the production Cards Sol Ring (`6ad8011d-3471-4369-9d68-b264cc027487`) and Counterspell (`cc187110-1148-4090-bbb8-e205694a39f5`). It repairs the promoted-audit query projection and retains deterministic dossiers, manual handoff contexts, and evidence-constrained explanation examples. The demo is a derived review output, not another canonical store, importer, provider, model integration, or Decision policy. See [the demonstration contract and replay instructions](docs/TWO_CARD_CHATGPT_DEMO.md).
+
+Protected production census remains 384 Cards, 913 Printings, 235 Identifiers, 2 Finishes, 956 market observations across two retained MB2 acquisitions, and 140 Card Intelligence fact files including historical/superseded facts. The two dossiers use historical observations and retain source-specific demand semantics; they do not establish current offers, completed sales, global usage, or competitive rankings.
+
+The merged Commander Collection: Black identity bundle remains non-promoting: one Product candidate requires review, six ordinary Card/Printing pairs remain unresolved, the token remains incomplete, and two existing CC2 Printings are reused. Its overall outcome is `NOT_READY_FOR_EVALUATION`. No production evidence admission, READY attestation, acquisition evaluation, or recommendation is added by this demonstration. Competitive Intelligence remains parked; Competitive Card Intelligence and Deck Intelligence remain planned and unauthorized. Stop after review of this demonstration; no follow-on milestone is automatic.
+
+---
+
+# Historical milestone records
+
+All summaries below preserve their original baseline, counts, environment observations, and next-task context. Headings that originally said “current” refer to their historical milestone; the current inventory above takes precedence. Technical contracts remain applicable where unchanged.
+
 # Bounded identity preparation inventory
 
 Prepared a non-promoting Commander Collection: Black non-premium identity review bundle from pinned MIT-licensed original MTGJSON bytes. One Product candidate is structurally valid and requires review; six ordinary Card/Printing pairs and the exact token pair remain unresolved/excluded because native identity records were unavailable. Physical token UUID pairing is supported, but face names and variants are not inferred. Two existing CC2 Printings are reused; the nine-component manifest remains explicitly incomplete. No canonical promotion, market admission, human READY attestation or evaluation occurred.
