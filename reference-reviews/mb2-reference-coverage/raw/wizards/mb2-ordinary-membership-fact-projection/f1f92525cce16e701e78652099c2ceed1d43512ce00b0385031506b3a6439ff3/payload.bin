@@ -1,0 +1,2782 @@
+{
+  "schema_version": "wizards-mb2-membership-fact-projection-v1",
+  "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+  "source_title": "What's Inside Mystery Booster 2?",
+  "provider_id": "wizards",
+  "acquisition_method": "connected_search_service_browser_tool_rendered_text",
+  "upstream_html_bytes_retained": false,
+  "upstream_html_digest": null,
+  "capture_byte_semantics": "SHA-256 binds this exact tool-rendered factual projection only; it is not a digest of upstream HTML or a whole article.",
+  "scope": "Bounded ordinary-reprint membership names and expansion labels. No artwork or article prose.",
+  "license_notice": "Wizards article copyright remains with Wizards of the Coast. This minimal factual name/expansion projection makes no claim that the full article is licensed for mirroring.",
+  "interpretation_boundaries": [
+    "Expansion column is an official table label, not a verified Scryfall or MTGJSON Printing namespace.",
+    "Membership in this MB2 ordinary-reprint table does not identify an owner's exact physical copy.",
+    "No Planeswalker-stamp-to-set mapping is inferred.",
+    "No pending owner spelling proposal is converted to owner confirmation."
+  ],
+  "records": [
+    {
+      "card_name": "Abzan Battle Priest",
+      "wizards_expansion_label": "KTK",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 249,
+      "exact_tool_rendered_line": "L249: Abzan Battle Priest  | KTK",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Accorder Paladin",
+      "wizards_expansion_label": "MBS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 250,
+      "exact_tool_rendered_line": "L250: Accorder Paladin  | MBS",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Akroma, Angel of Wrath",
+      "wizards_expansion_label": "DD3",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 257,
+      "exact_tool_rendered_line": "L257: Akroma, Angel of Wrath  | DD3",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Amoeboid Changeling",
+      "wizards_expansion_label": "J22",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 518,
+      "exact_tool_rendered_line": "L518: Amoeboid Changeling  | J22",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "An Offer You Can't Refuse",
+      "wizards_expansion_label": "SNC",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 519,
+      "exact_tool_rendered_line": "L519: An Offer You Can't Refuse  | SNC",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Ancestor Dragon",
+      "wizards_expansion_label": "GS1",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 261,
+      "exact_tool_rendered_line": "L261: Ancestor Dragon  | GS1",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Ancestral Blade",
+      "wizards_expansion_label": "2XM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 262,
+      "exact_tool_rendered_line": "L262: Ancestral Blade  | 2XM",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Ancient Hydra",
+      "wizards_expansion_label": "NEM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1055,
+      "exact_tool_rendered_line": "L1055: Ancient Hydra  | NEM",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Ancient Lumberknot",
+      "wizards_expansion_label": "VOW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1581,
+      "exact_tool_rendered_line": "L1581: Ancient Lumberknot  | VOW",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Angel of Despair",
+      "wizards_expansion_label": "UMA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1582,
+      "exact_tool_rendered_line": "L1582: Angel of Despair  | UMA",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Angelic Blessing",
+      "wizards_expansion_label": "POR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 265,
+      "exact_tool_rendered_line": "L265: Angelic Blessing  | POR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Angelic Exaltation",
+      "wizards_expansion_label": "RNA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 266,
+      "exact_tool_rendered_line": "L266: Angelic Exaltation  | RNA",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Aphetto Alchemist",
+      "wizards_expansion_label": "ONS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 521,
+      "exact_tool_rendered_line": "L521: Aphetto Alchemist  | ONS",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Archivist of Oghma",
+      "wizards_expansion_label": "CLB",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 270,
+      "exact_tool_rendered_line": "L270: Archivist of Oghma  | CLB",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Arrogant Wurm",
+      "wizards_expansion_label": "TOR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1320,
+      "exact_tool_rendered_line": "L1320: Arrogant Wurm  | TOR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Assault Formation",
+      "wizards_expansion_label": "IMA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1321,
+      "exact_tool_rendered_line": "L1321: Assault Formation  | IMA",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Authority of the Consuls",
+      "wizards_expansion_label": "KLD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 273,
+      "exact_tool_rendered_line": "L273: Authority of the Consuls  | KLD",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Aven Squire",
+      "wizards_expansion_label": "CON",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 276,
+      "exact_tool_rendered_line": "L276: Aven Squire  | CON",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Azorius Herald",
+      "wizards_expansion_label": "GK2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 278,
+      "exact_tool_rendered_line": "L278: Azorius Herald  | GK2",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Bad Moon",
+      "wizards_expansion_label": "DD3",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 793,
+      "exact_tool_rendered_line": "L793: Bad Moon  | DD3",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Baird, Steward of Argive",
+      "wizards_expansion_label": "DAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 280,
+      "exact_tool_rendered_line": "L280: Baird, Steward of Argive  | DAR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Balduvian Warlord",
+      "wizards_expansion_label": "CSP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1061,
+      "exact_tool_rendered_line": "L1061: Balduvian Warlord  | CSP",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Baloth Woodcrasher",
+      "wizards_expansion_label": "ZEN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1325,
+      "exact_tool_rendered_line": "L1325: Baloth Woodcrasher  | ZEN",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Basri's Acolyte",
+      "wizards_expansion_label": "M21",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 287,
+      "exact_tool_rendered_line": "L287: Basri's Acolyte  | M21",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Basri's Solidarity",
+      "wizards_expansion_label": "M21",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 288,
+      "exact_tool_rendered_line": "L288: Basri's Solidarity  | M21",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Battle Cry Goblin",
+      "wizards_expansion_label": "AFR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1063,
+      "exact_tool_rendered_line": "L1063: Battle Cry Goblin  | AFR",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Batwing Brume",
+      "wizards_expansion_label": "EVE",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1587,
+      "exact_tool_rendered_line": "L1587: Batwing Brume  | EVE",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Belfry Spirit",
+      "wizards_expansion_label": "GK2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 290,
+      "exact_tool_rendered_line": "L290: Belfry Spirit  | GK2",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Bellowing Tanglewurm",
+      "wizards_expansion_label": "SOM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1328,
+      "exact_tool_rendered_line": "L1328: Bellowing Tanglewurm  | SOM",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Betrayal of Flesh",
+      "wizards_expansion_label": "MRD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 798,
+      "exact_tool_rendered_line": "L798: Betrayal of Flesh  | MRD",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Bitter Reunion",
+      "wizards_expansion_label": "BRO",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1068,
+      "exact_tool_rendered_line": "L1068: Bitter Reunion  | BRO",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Bladewing's Thrall",
+      "wizards_expansion_label": "SCG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 799,
+      "exact_tool_rendered_line": "L799: Bladewing's Thrall  | SCG",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Blanchwood Prowler",
+      "wizards_expansion_label": "BRO",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1330,
+      "exact_tool_rendered_line": "L1330: Blanchwood Prowler  | BRO",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Blood Fountain",
+      "wizards_expansion_label": "VOW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 803,
+      "exact_tool_rendered_line": "L803: Blood Fountain  | VOW",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Blood Speaker",
+      "wizards_expansion_label": "CHK",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 805,
+      "exact_tool_rendered_line": "L805: Blood Speaker  | CHK",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Bloodtithe Harvester",
+      "wizards_expansion_label": "VOW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1588,
+      "exact_tool_rendered_line": "L1588: Bloodtithe Harvester  | VOW",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Blossoming Defense",
+      "wizards_expansion_label": "KLD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1334,
+      "exact_tool_rendered_line": "L1334: Blossoming Defense  | KLD",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Blot Out",
+      "wizards_expansion_label": "MOM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 809,
+      "exact_tool_rendered_line": "L809: Blot Out  | MOM",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Bog Down",
+      "wizards_expansion_label": "PLS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 810,
+      "exact_tool_rendered_line": "L810: Bog Down  | PLS",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Boggart Harbinger",
+      "wizards_expansion_label": "LRW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 811,
+      "exact_tool_rendered_line": "L811: Boggart Harbinger  | LRW",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Bolt Bend",
+      "wizards_expansion_label": "WAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1077,
+      "exact_tool_rendered_line": "L1077: Bolt Bend  | WAR",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Boomerang",
+      "wizards_expansion_label": "MIR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 532,
+      "exact_tool_rendered_line": "L532: Boomerang  | MIR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Boros Elite",
+      "wizards_expansion_label": "GK1",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 298,
+      "exact_tool_rendered_line": "L298: Boros Elite  | GK1",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Breath of Life",
+      "wizards_expansion_label": "POR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 299,
+      "exact_tool_rendered_line": "L299: Breath of Life  | POR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Brightling",
+      "wizards_expansion_label": "BBD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 300,
+      "exact_tool_rendered_line": "L300: Brightling  | BBD",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Broodhatch Nantuko",
+      "wizards_expansion_label": "ONS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1339,
+      "exact_tool_rendered_line": "L1339: Broodhatch Nantuko  | ONS",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Call the Bloodline",
+      "wizards_expansion_label": "SOI",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 820,
+      "exact_tool_rendered_line": "L820: Call the Bloodline  | SOI",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Cavalier of Flame",
+      "wizards_expansion_label": "M20",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1088,
+      "exact_tool_rendered_line": "L1088: Cavalier of Flame  | M20",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Chainer, Nightmare Adept",
+      "wizards_expansion_label": "MH2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1592,
+      "exact_tool_rendered_line": "L1592: Chainer, Nightmare Adept  | MH2",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Charcoal Diamond",
+      "wizards_expansion_label": "MIR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 826,
+      "exact_tool_rendered_line": "L826: Charcoal Diamond  | MIR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Charge Through",
+      "wizards_expansion_label": "STX",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1346,
+      "exact_tool_rendered_line": "L1346: Charge Through  | STX",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Cloak of Feathers",
+      "wizards_expansion_label": "POR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 542,
+      "exact_tool_rendered_line": "L542: Cloak of Feathers  | POR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Cloud Djinn",
+      "wizards_expansion_label": "WTH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 543,
+      "exact_tool_rendered_line": "L543: Cloud Djinn  | WTH",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Cloudgoat Ranger",
+      "wizards_expansion_label": "LRW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 308,
+      "exact_tool_rendered_line": "L308: Cloudgoat Ranger  | LRW",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Coastal Piracy",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 545,
+      "exact_tool_rendered_line": "L545: Coastal Piracy  | MMQ",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Cone of Flame",
+      "wizards_expansion_label": "WTH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1095,
+      "exact_tool_rendered_line": "L1095: Cone of Flame  | WTH",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Consuming Aberration",
+      "wizards_expansion_label": "GK1",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1594,
+      "exact_tool_rendered_line": "L1594: Consuming Aberration  | GK1",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Convulsing Licid",
+      "wizards_expansion_label": "STH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1097,
+      "exact_tool_rendered_line": "L1097: Convulsing Licid  | STH",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Countersquall",
+      "wizards_expansion_label": "DDH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1595,
+      "exact_tool_rendered_line": "L1595: Countersquall  | DDH",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Crashing Boars",
+      "wizards_expansion_label": "EXO",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1348,
+      "exact_tool_rendered_line": "L1348: Crashing Boars  | EXO",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Decanter of Endless Water",
+      "wizards_expansion_label": "CLB",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1687,
+      "exact_tool_rendered_line": "L1687: Decanter of Endless Water  | CLB",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Deepwood Legate",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 849,
+      "exact_tool_rendered_line": "L849: Deepwood Legate  | MMQ",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Deftblade Elite",
+      "wizards_expansion_label": "LGN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 319,
+      "exact_tool_rendered_line": "L319: Deftblade Elite  | LGN",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Desertion",
+      "wizards_expansion_label": "CN2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 560,
+      "exact_tool_rendered_line": "L560: Desertion  | CN2",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Diversionary Tactics",
+      "wizards_expansion_label": "APC",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 323,
+      "exact_tool_rendered_line": "L323: Diversionary Tactics  | APC",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Dragon Mage",
+      "wizards_expansion_label": "M20",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1104,
+      "exact_tool_rendered_line": "L1104: Dragon Mage  | M20",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Dragonlair Spider",
+      "wizards_expansion_label": "PCA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1598,
+      "exact_tool_rendered_line": "L1598: Dragonlair Spider  | PCA",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Dreadhound",
+      "wizards_expansion_label": "MID",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 858,
+      "exact_tool_rendered_line": "L858: Dreadhound  | MID",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Dreampod Druid",
+      "wizards_expansion_label": "PC2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1359,
+      "exact_tool_rendered_line": "L1359: Dreampod Druid  | PC2",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Dreamscape Artist",
+      "wizards_expansion_label": "PLC",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 568,
+      "exact_tool_rendered_line": "L568: Dreamscape Artist  | PLC",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Dwarven Hammer",
+      "wizards_expansion_label": "KHM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1106,
+      "exact_tool_rendered_line": "L1106: Dwarven Hammer  | KHM",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Dwarven Recruiter",
+      "wizards_expansion_label": "ODY",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1108,
+      "exact_tool_rendered_line": "L1108: Dwarven Recruiter  | ODY",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Edgewalker",
+      "wizards_expansion_label": "SCG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1601,
+      "exact_tool_rendered_line": "L1601: Edgewalker  | SCG",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Elite Scaleguard",
+      "wizards_expansion_label": "CM2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 324,
+      "exact_tool_rendered_line": "L324: Elite Scaleguard  | CM2",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Empty the Warrens",
+      "wizards_expansion_label": "DDS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1113,
+      "exact_tool_rendered_line": "L1113: Empty the Warrens  | DDS",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Epic Downfall",
+      "wizards_expansion_label": "ELD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 862,
+      "exact_tool_rendered_line": "L862: Epic Downfall  | ELD",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Evangel of Heliod",
+      "wizards_expansion_label": "THS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 328,
+      "exact_tool_rendered_line": "L328: Evangel of Heliod  | THS",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Faithless Salvaging",
+      "wizards_expansion_label": "MH2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1117,
+      "exact_tool_rendered_line": "L1117: Faithless Salvaging  | MH2",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Falkenrath Celebrants",
+      "wizards_expansion_label": "VOW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1118,
+      "exact_tool_rendered_line": "L1118: Falkenrath Celebrants  | VOW",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Fanatical Devotion",
+      "wizards_expansion_label": "NEM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 333,
+      "exact_tool_rendered_line": "L333: Fanatical Devotion  | NEM",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Fanning the Flames",
+      "wizards_expansion_label": "STH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1121,
+      "exact_tool_rendered_line": "L1121: Fanning the Flames  | STH",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Fearless Fledgling",
+      "wizards_expansion_label": "ZNR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 334,
+      "exact_tool_rendered_line": "L334: Fearless Fledgling  | ZNR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Feast or Famine",
+      "wizards_expansion_label": "DDJ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 867,
+      "exact_tool_rendered_line": "L867: Feast or Famine  | DDJ",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Fierce Retribution",
+      "wizards_expansion_label": "VOW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 336,
+      "exact_tool_rendered_line": "L336: Fierce Retribution  | VOW",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Fiery Impulse",
+      "wizards_expansion_label": "ORI",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1123,
+      "exact_tool_rendered_line": "L1123: Fiery Impulse  | ORI",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Fire Servant",
+      "wizards_expansion_label": "PD2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1125,
+      "exact_tool_rendered_line": "L1125: Fire Servant  | PD2",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Fire-Belly Changeling",
+      "wizards_expansion_label": "LRW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1126,
+      "exact_tool_rendered_line": "L1126: Fire-Belly Changeling  | LRW",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Firemind Vessel",
+      "wizards_expansion_label": "WAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1690,
+      "exact_tool_rendered_line": "L1690: Firemind Vessel  | WAR",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Flash of Insight",
+      "wizards_expansion_label": "JUD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 586,
+      "exact_tool_rendered_line": "L586: Flash of Insight  | JUD",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Flux Channeler",
+      "wizards_expansion_label": "WAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 589,
+      "exact_tool_rendered_line": "L589: Flux Channeler  | WAR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Footfall Crater",
+      "wizards_expansion_label": "IKO",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1139,
+      "exact_tool_rendered_line": "L1139: Footfall Crater  | IKO",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Force Spike",
+      "wizards_expansion_label": "DDJ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 591,
+      "exact_tool_rendered_line": "L591: Force Spike  | DDJ",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Fury Sliver",
+      "wizards_expansion_label": "TSP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1145,
+      "exact_tool_rendered_line": "L1145: Fury Sliver  | TSP",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Gemstone Mine",
+      "wizards_expansion_label": "WTH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1739,
+      "exact_tool_rendered_line": "L1739: Gemstone Mine  | WTH",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Ghired, Conclave Exile",
+      "wizards_expansion_label": "C19",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1609,
+      "exact_tool_rendered_line": "L1609: Ghired, Conclave Exile  | C19",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Ghostly Flicker",
+      "wizards_expansion_label": "KHM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 596,
+      "exact_tool_rendered_line": "L596: Ghostly Flicker  | KHM",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Gigantosaurus",
+      "wizards_expansion_label": "M19",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1390,
+      "exact_tool_rendered_line": "L1390: Gigantosaurus  | M19",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Give // Take",
+      "wizards_expansion_label": "DGM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1610,
+      "exact_tool_rendered_line": "L1610: Give // Take  | DGM",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Glarewielder",
+      "wizards_expansion_label": "LRW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1151,
+      "exact_tool_rendered_line": "L1151: Glarewielder  | LRW",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Glimmerpoint Stag",
+      "wizards_expansion_label": "SOM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 342,
+      "exact_tool_rendered_line": "L342: Glimmerpoint Stag  | SOM",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Goblin Goliath",
+      "wizards_expansion_label": "GNT",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1156,
+      "exact_tool_rendered_line": "L1156: Goblin Goliath  | GNT",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Goblin Taskmaster",
+      "wizards_expansion_label": "ONS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1161,
+      "exact_tool_rendered_line": "L1161: Goblin Taskmaster  | ONS",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Goblin Wizardry",
+      "wizards_expansion_label": "M21",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1163,
+      "exact_tool_rendered_line": "L1163: Goblin Wizardry  | M21",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "God-Pharaoh's Gift",
+      "wizards_expansion_label": "HOU",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1691,
+      "exact_tool_rendered_line": "L1691: God-Pharaoh's Gift  | HOU",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "God-Pharaoh's Statue",
+      "wizards_expansion_label": "WAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1692,
+      "exact_tool_rendered_line": "L1692: God-Pharaoh's Statue  | WAR",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Goldvein Pick",
+      "wizards_expansion_label": "KHM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1693,
+      "exact_tool_rendered_line": "L1693: Goldvein Pick  | KHM",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Grim Bounty",
+      "wizards_expansion_label": "AFR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 887,
+      "exact_tool_rendered_line": "L887: Grim Bounty  | AFR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Grip of the Roil",
+      "wizards_expansion_label": "OGW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 598,
+      "exact_tool_rendered_line": "L598: Grip of the Roil  | OGW",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Grizzly Fate",
+      "wizards_expansion_label": "JUD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1394,
+      "exact_tool_rendered_line": "L1394: Grizzly Fate  | JUD",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Ground Rift",
+      "wizards_expansion_label": "TSP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1167,
+      "exact_tool_rendered_line": "L1167: Ground Rift  | TSP",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Guildpact Informant",
+      "wizards_expansion_label": "WAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 600,
+      "exact_tool_rendered_line": "L600: Guildpact Informant  | WAR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Havoc Demon",
+      "wizards_expansion_label": "EMA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 891,
+      "exact_tool_rendered_line": "L891: Havoc Demon  | EMA",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Heart Warden",
+      "wizards_expansion_label": "UDS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1398,
+      "exact_tool_rendered_line": "L1398: Heart Warden  | UDS",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Heroes' Bane",
+      "wizards_expansion_label": "IMA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1400,
+      "exact_tool_rendered_line": "L1400: Heroes' Bane  | IMA",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Honor the God-Pharaoh",
+      "wizards_expansion_label": "WAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1175,
+      "exact_tool_rendered_line": "L1175: Honor the God-Pharaoh  | WAR",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Hordeling Outburst",
+      "wizards_expansion_label": "A25",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1176,
+      "exact_tool_rendered_line": "L1176: Hordeling Outburst  | A25",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Horned Sliver",
+      "wizards_expansion_label": "TMP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1401,
+      "exact_tool_rendered_line": "L1401: Horned Sliver  | TMP",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Impostor of the Sixth Pride",
+      "wizards_expansion_label": "MH1",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 355,
+      "exact_tool_rendered_line": "L355: Impostor of the Sixth Pride  | MH1",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Injector Crocodile",
+      "wizards_expansion_label": "MOM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 898,
+      "exact_tool_rendered_line": "L898: Injector Crocodile  | MOM",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Inspiring Overseer",
+      "wizards_expansion_label": "SNC",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 356,
+      "exact_tool_rendered_line": "L356: Inspiring Overseer  | SNC",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Irenicus's Vile Duplication",
+      "wizards_expansion_label": "CLB",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 612,
+      "exact_tool_rendered_line": "L612: Irenicus's Vile Duplication  | CLB",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Irregular Cohort",
+      "wizards_expansion_label": "MH1",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 358,
+      "exact_tool_rendered_line": "L358: Irregular Cohort  | MH1",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Keen Sense",
+      "wizards_expansion_label": "PLC",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1424,
+      "exact_tool_rendered_line": "L1424: Keen Sense  | PLC",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Keldon Strike Team",
+      "wizards_expansion_label": "DMU",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1186,
+      "exact_tool_rendered_line": "L1186: Keldon Strike Team  | DMU",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Kyren Negotiations",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1187,
+      "exact_tool_rendered_line": "L1187: Kyren Negotiations  | MMQ",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Last Breath",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 372,
+      "exact_tool_rendered_line": "L372: Last Breath  | MMQ",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Leatherback Baloth",
+      "wizards_expansion_label": "WWK",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1430,
+      "exact_tool_rendered_line": "L1430: Leatherback Baloth  | WWK",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Lesser Gargadon",
+      "wizards_expansion_label": "PCY",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1190,
+      "exact_tool_rendered_line": "L1190: Lesser Gargadon  | PCY",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Letter of Acceptance",
+      "wizards_expansion_label": "STX",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1699,
+      "exact_tool_rendered_line": "L1699: Letter of Acceptance  | STX",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Liesa, Shroud of Dusk",
+      "wizards_expansion_label": "CMR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1627,
+      "exact_tool_rendered_line": "L1627: Liesa, Shroud of Dusk  | CMR",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Mad Auntie",
+      "wizards_expansion_label": "MMA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 907,
+      "exact_tool_rendered_line": "L907: Mad Auntie  | MMA",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Manipulate Fate",
+      "wizards_expansion_label": "INV",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 625,
+      "exact_tool_rendered_line": "L625: Manipulate Fate  | INV",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Mentor of the Meek",
+      "wizards_expansion_label": "2X2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 378,
+      "exact_tool_rendered_line": "L378: Mentor of the Meek  | 2X2",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Mercadia's Downfall",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1197,
+      "exact_tool_rendered_line": "L1197: Mercadia's Downfall  | MMQ",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Merfolk Seastalkers",
+      "wizards_expansion_label": "ZEN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 631,
+      "exact_tool_rendered_line": "L631: Merfolk Seastalkers  | ZEN",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Mesmeric Fiend",
+      "wizards_expansion_label": "TOR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 913,
+      "exact_tool_rendered_line": "L913: Mesmeric Fiend  | TOR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Miraculous Recovery",
+      "wizards_expansion_label": "VIS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 381,
+      "exact_tool_rendered_line": "L381: Miraculous Recovery  | VIS",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Mogg Infestation",
+      "wizards_expansion_label": "TPR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1201,
+      "exact_tool_rendered_line": "L1201: Mogg Infestation  | TPR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Moment's Peace",
+      "wizards_expansion_label": "TD0",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1438,
+      "exact_tool_rendered_line": "L1438: Moment's Peace  | TD0",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Moonglove Changeling",
+      "wizards_expansion_label": "MOR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 920,
+      "exact_tool_rendered_line": "L920: Moonglove Changeling  | MOR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Mother of Runes",
+      "wizards_expansion_label": "ULG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 386,
+      "exact_tool_rendered_line": "L386: Mother of Runes  | ULG",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Murmuring Mystic",
+      "wizards_expansion_label": "GRN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 643,
+      "exact_tool_rendered_line": "L643: Murmuring Mystic  | GRN",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Mystic Monastery",
+      "wizards_expansion_label": "KTK",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1744,
+      "exact_tool_rendered_line": "L1744: Mystic Monastery  | KTK",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Myth Realized",
+      "wizards_expansion_label": "2X2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 387,
+      "exact_tool_rendered_line": "L387: Myth Realized  | 2X2",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Narset's Reversal",
+      "wizards_expansion_label": "WAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 647,
+      "exact_tool_rendered_line": "L647: Narset's Reversal  | WAR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Necrologia",
+      "wizards_expansion_label": "7ED",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 923,
+      "exact_tool_rendered_line": "L923: Necrologia  | 7ED",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Nephalia Smuggler",
+      "wizards_expansion_label": "DDQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 648,
+      "exact_tool_rendered_line": "L648: Nephalia Smuggler  | DDQ",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Nexus of Fate",
+      "wizards_expansion_label": "M19",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 651,
+      "exact_tool_rendered_line": "L651: Nexus of Fate  | M19",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Nezumi Graverobber",
+      "wizards_expansion_label": "CHK",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 925,
+      "exact_tool_rendered_line": "L925: Nezumi Graverobber  | CHK",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Nullhide Ferox",
+      "wizards_expansion_label": "GRN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1452,
+      "exact_tool_rendered_line": "L1452: Nullhide Ferox  | GRN",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Oakhame Adversary",
+      "wizards_expansion_label": "ELD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1454,
+      "exact_tool_rendered_line": "L1454: Oakhame Adversary  | ELD",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Ogre Arsonist",
+      "wizards_expansion_label": "P02",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1209,
+      "exact_tool_rendered_line": "L1209: Ogre Arsonist  | P02",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "On Serra's Wings",
+      "wizards_expansion_label": "DAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 395,
+      "exact_tool_rendered_line": "L395: On Serra's Wings  | DAR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Ophidian Eye",
+      "wizards_expansion_label": "TSP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 656,
+      "exact_tool_rendered_line": "L656: Ophidian Eye  | TSP",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Order of Yawgmoth",
+      "wizards_expansion_label": "USG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 933,
+      "exact_tool_rendered_line": "L933: Order of Yawgmoth  | USG",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Orzhov Advokist",
+      "wizards_expansion_label": "C16",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 396,
+      "exact_tool_rendered_line": "L396: Orzhov Advokist  | C16",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Oubliette",
+      "wizards_expansion_label": "2XM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 935,
+      "exact_tool_rendered_line": "L935: Oubliette  | 2XM",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Overwhelming Encounter",
+      "wizards_expansion_label": "CLB",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1460,
+      "exact_tool_rendered_line": "L1460: Overwhelming Encounter  | CLB",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Painted Bluffs",
+      "wizards_expansion_label": "AKH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1747,
+      "exact_tool_rendered_line": "L1747: Painted Bluffs  | AKH",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Paragon of Open Graves",
+      "wizards_expansion_label": "M15",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 936,
+      "exact_tool_rendered_line": "L936: Paragon of Open Graves  | M15",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Path of Discovery",
+      "wizards_expansion_label": "RIX",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1462,
+      "exact_tool_rendered_line": "L1462: Path of Discovery  | RIX",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Pearl Shard",
+      "wizards_expansion_label": "MRD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1704,
+      "exact_tool_rendered_line": "L1704: Pearl Shard  | MRD",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Peat Bog",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 938,
+      "exact_tool_rendered_line": "L938: Peat Bog  | MMQ",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Pendrell Drake",
+      "wizards_expansion_label": "USG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 661,
+      "exact_tool_rendered_line": "L661: Pendrell Drake  | USG",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Power Sink",
+      "wizards_expansion_label": "MIR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 669,
+      "exact_tool_rendered_line": "L669: Power Sink  | MIR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Power Word Kill",
+      "wizards_expansion_label": "AFR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 944,
+      "exact_tool_rendered_line": "L944: Power Word Kill  | AFR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Predator's Strike",
+      "wizards_expansion_label": "MRD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1469,
+      "exact_tool_rendered_line": "L1469: Predator's Strike  | MRD",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Priest of Gix",
+      "wizards_expansion_label": "DDE",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 947,
+      "exact_tool_rendered_line": "L947: Priest of Gix  | DDE",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Probe",
+      "wizards_expansion_label": "INV",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 670,
+      "exact_tool_rendered_line": "L670: Probe  | INV",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Puppet Conjurer",
+      "wizards_expansion_label": "ALA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 950,
+      "exact_tool_rendered_line": "L950: Puppet Conjurer  | ALA",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Puppet Strings",
+      "wizards_expansion_label": "TMP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1709,
+      "exact_tool_rendered_line": "L1709: Puppet Strings  | TMP",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Pyrewild Shaman",
+      "wizards_expansion_label": "MM3",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1224,
+      "exact_tool_rendered_line": "L1224: Pyrewild Shaman  | MM3",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Quicksand",
+      "wizards_expansion_label": "VIS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1748,
+      "exact_tool_rendered_line": "L1748: Quicksand  | VIS",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Quicksilver Dagger",
+      "wizards_expansion_label": "APC",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1641,
+      "exact_tool_rendered_line": "L1641: Quicksilver Dagger  | APC",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Rain of Filth",
+      "wizards_expansion_label": "USG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 953,
+      "exact_tool_rendered_line": "L953: Rain of Filth  | USG",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Ramosian Rally",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 414,
+      "exact_tool_rendered_line": "L414: Ramosian Rally  | MMQ",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Rapid Hybridization",
+      "wizards_expansion_label": "STX",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 673,
+      "exact_tool_rendered_line": "L673: Rapid Hybridization  | STX",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Reanimate",
+      "wizards_expansion_label": "TMP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 956,
+      "exact_tool_rendered_line": "L956: Reanimate  | TMP",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Reckless Charge",
+      "wizards_expansion_label": "ODY",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1236,
+      "exact_tool_rendered_line": "L1236: Reckless Charge  | ODY",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Reckoner's Bargain",
+      "wizards_expansion_label": "NEO",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 959,
+      "exact_tool_rendered_line": "L959: Reckoner's Bargain  | NEO",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Reclamation Sage",
+      "wizards_expansion_label": "2XM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1481,
+      "exact_tool_rendered_line": "L1481: Reclamation Sage  | 2XM",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Renegade Warlord",
+      "wizards_expansion_label": "TMP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1240,
+      "exact_tool_rendered_line": "L1240: Renegade Warlord  | TMP",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Reverent Hoplite",
+      "wizards_expansion_label": "THB",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 424,
+      "exact_tool_rendered_line": "L424: Reverent Hoplite  | THB",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Rimewood Falls",
+      "wizards_expansion_label": "KHM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1749,
+      "exact_tool_rendered_line": "L1749: Rimewood Falls  | KHM",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Rite of Replication",
+      "wizards_expansion_label": "C14",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 680,
+      "exact_tool_rendered_line": "L680: Rite of Replication  | C14",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Rites of Initiation",
+      "wizards_expansion_label": "ODY",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1243,
+      "exact_tool_rendered_line": "L1243: Rites of Initiation  | ODY",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Scale Up",
+      "wizards_expansion_label": "MH1",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1491,
+      "exact_tool_rendered_line": "L1491: Scale Up  | MH1",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Scion of Glaciers",
+      "wizards_expansion_label": "KTK",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 686,
+      "exact_tool_rendered_line": "L686: Scion of Glaciers  | KTK",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Scurry Oak",
+      "wizards_expansion_label": "MH2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1493,
+      "exact_tool_rendered_line": "L1493: Scurry Oak  | MH2",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Scuttlemutt",
+      "wizards_expansion_label": "SHM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1712,
+      "exact_tool_rendered_line": "L1712: Scuttlemutt  | SHM",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Seal of Removal",
+      "wizards_expansion_label": "NEM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 688,
+      "exact_tool_rendered_line": "L688: Seal of Removal  | NEM",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Seedguide Ash",
+      "wizards_expansion_label": "LRW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1495,
+      "exact_tool_rendered_line": "L1495: Seedguide Ash  | LRW",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Seraph of Dawn",
+      "wizards_expansion_label": "AVR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 430,
+      "exact_tool_rendered_line": "L430: Seraph of Dawn  | AVR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Seton's Scout",
+      "wizards_expansion_label": "TOR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1496,
+      "exact_tool_rendered_line": "L1496: Seton's Scout  | TOR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Settle the Wreckage",
+      "wizards_expansion_label": "XLN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 432,
+      "exact_tool_rendered_line": "L432: Settle the Wreckage  | XLN",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Shadow Rift",
+      "wizards_expansion_label": "TMP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 694,
+      "exact_tool_rendered_line": "L694: Shadow Rift  | TMP",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Shambling Ghast",
+      "wizards_expansion_label": "AFR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 973,
+      "exact_tool_rendered_line": "L973: Shambling Ghast  | AFR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Sheltering Word",
+      "wizards_expansion_label": "AVR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1498,
+      "exact_tool_rendered_line": "L1498: Sheltering Word  | AVR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Sheoldred's Edict",
+      "wizards_expansion_label": "ONE",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 974,
+      "exact_tool_rendered_line": "L974: Sheoldred's Edict  | ONE",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Shepherd of the Flock",
+      "wizards_expansion_label": "ELD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 435,
+      "exact_tool_rendered_line": "L435: Shepherd of the Flock  | ELD",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Shimmering Glasskite",
+      "wizards_expansion_label": "BOK",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 696,
+      "exact_tool_rendered_line": "L696: Shimmering Glasskite  | BOK",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Shipwreck Dowser",
+      "wizards_expansion_label": "M21",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 697,
+      "exact_tool_rendered_line": "L697: Shipwreck Dowser  | M21",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Shoreline Salvager",
+      "wizards_expansion_label": "WWK",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 976,
+      "exact_tool_rendered_line": "L976: Shoreline Salvager  | WWK",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Sign in Blood",
+      "wizards_expansion_label": "M10",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 977,
+      "exact_tool_rendered_line": "L977: Sign in Blood  | M10",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Silvergill Douser",
+      "wizards_expansion_label": "LRW",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 701,
+      "exact_tool_rendered_line": "L701: Silvergill Douser  | LRW",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Skullport Merchant",
+      "wizards_expansion_label": "AFR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 983,
+      "exact_tool_rendered_line": "L983: Skullport Merchant  | AFR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Skullsnatcher",
+      "wizards_expansion_label": "BOK",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 984,
+      "exact_tool_rendered_line": "L984: Skullsnatcher  | BOK",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Skysnare Spider",
+      "wizards_expansion_label": "ORI",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1504,
+      "exact_tool_rendered_line": "L1504: Skysnare Spider  | ORI",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Slavering Nulls",
+      "wizards_expansion_label": "DDH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1260,
+      "exact_tool_rendered_line": "L1260: Slavering Nulls  | DDH",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Snake Pit",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1505,
+      "exact_tool_rendered_line": "L1505: Snake Pit  | MMQ",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Solar Blast",
+      "wizards_expansion_label": "ONS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1262,
+      "exact_tool_rendered_line": "L1262: Solar Blast  | ONS",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Souldrinker",
+      "wizards_expansion_label": "TMP",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 987,
+      "exact_tool_rendered_line": "L987: Souldrinker  | TMP",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Specimen Collector",
+      "wizards_expansion_label": "MH2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 706,
+      "exact_tool_rendered_line": "L706: Specimen Collector  | MH2",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Spectral Procession",
+      "wizards_expansion_label": "SHM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 445,
+      "exact_tool_rendered_line": "L445: Spectral Procession  | SHM",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Spectral Sailor",
+      "wizards_expansion_label": "M20",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 707,
+      "exact_tool_rendered_line": "L707: Spectral Sailor  | M20",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Spectral Sliver",
+      "wizards_expansion_label": "LGN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 989,
+      "exact_tool_rendered_line": "L989: Spectral Sliver  | LGN",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view0",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Spike Colony",
+      "wizards_expansion_label": "STH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1508,
+      "exact_tool_rendered_line": "L1508: Spike Colony  | STH",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Spined Megalodon",
+      "wizards_expansion_label": "M21",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 711,
+      "exact_tool_rendered_line": "L711: Spined Megalodon  | M21",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Spirit Link",
+      "wizards_expansion_label": "10E",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 447,
+      "exact_tool_rendered_line": "L447: Spirit Link  | 10E",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Splendor Mare",
+      "wizards_expansion_label": "IKO",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 450,
+      "exact_tool_rendered_line": "L450: Splendor Mare  | IKO",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Stand Together",
+      "wizards_expansion_label": "DST",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1512,
+      "exact_tool_rendered_line": "L1512: Stand Together  | DST",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Startle",
+      "wizards_expansion_label": "MID",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 714,
+      "exact_tool_rendered_line": "L714: Startle  | MID",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Steadfast Unicorn",
+      "wizards_expansion_label": "CLB",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 454,
+      "exact_tool_rendered_line": "L454: Steadfast Unicorn  | CLB",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Steel of the Godhead",
+      "wizards_expansion_label": "SHM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1655,
+      "exact_tool_rendered_line": "L1655: Steel of the Godhead  | SHM",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Storm the Seedcore",
+      "wizards_expansion_label": "MOM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1515,
+      "exact_tool_rendered_line": "L1515: Storm the Seedcore  | MOM",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Sunblade Angel",
+      "wizards_expansion_label": "CMM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 459,
+      "exact_tool_rendered_line": "L459: Sunblade Angel  | CMM",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Supreme Will",
+      "wizards_expansion_label": "HOU",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 722,
+      "exact_tool_rendered_line": "L722: Supreme Will  | HOU",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Survivors' Encampment",
+      "wizards_expansion_label": "HOU",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1756,
+      "exact_tool_rendered_line": "L1756: Survivors' Encampment  | HOU",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Suture Priest",
+      "wizards_expansion_label": "NPH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 464,
+      "exact_tool_rendered_line": "L464: Suture Priest  | NPH",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Symbiosis",
+      "wizards_expansion_label": "USG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1521,
+      "exact_tool_rendered_line": "L1521: Symbiosis  | USG",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Symbiotic Beast",
+      "wizards_expansion_label": "ONS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1522,
+      "exact_tool_rendered_line": "L1522: Symbiotic Beast  | ONS",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Tail Swipe",
+      "wizards_expansion_label": "DMU",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1523,
+      "exact_tool_rendered_line": "L1523: Tail Swipe  | DMU",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Tenacity",
+      "wizards_expansion_label": "SOI",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 472,
+      "exact_tool_rendered_line": "L472: Tenacity  | SOI",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Tezzeret's Gambit",
+      "wizards_expansion_label": "NPH",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 733,
+      "exact_tool_rendered_line": "L733: Tezzeret's Gambit  | NPH",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "The Birth of Meletis",
+      "wizards_expansion_label": "THB",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 474,
+      "exact_tool_rendered_line": "L474: The Birth of Meletis  | THB",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Thought Courier",
+      "wizards_expansion_label": "5DN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 736,
+      "exact_tool_rendered_line": "L736: Thought Courier  | 5DN",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Thundering Spineback",
+      "wizards_expansion_label": "XLN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1528,
+      "exact_tool_rendered_line": "L1528: Thundering Spineback  | XLN",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Titan's Strength",
+      "wizards_expansion_label": "THS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1284,
+      "exact_tool_rendered_line": "L1284: Titan's Strength  | THS",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Titanoth Rex",
+      "wizards_expansion_label": "IKO",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1531,
+      "exact_tool_rendered_line": "L1531: Titanoth Rex  | IKO",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Torrent of Fire",
+      "wizards_expansion_label": "SCG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1287,
+      "exact_tool_rendered_line": "L1287: Torrent of Fire  | SCG",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Tower Above",
+      "wizards_expansion_label": "SHM",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1532,
+      "exact_tool_rendered_line": "L1532: Tower Above  | SHM",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Trap Runner",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 482,
+      "exact_tool_rendered_line": "L482: Trap Runner  | MMQ",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Trollbred Guardian",
+      "wizards_expansion_label": "RNA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1535,
+      "exact_tool_rendered_line": "L1535: Trollbred Guardian  | RNA",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Trostani, Selesnya's Voice",
+      "wizards_expansion_label": "GK1",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1660,
+      "exact_tool_rendered_line": "L1660: Trostani, Selesnya's Voice  | GK1",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Twin-Silk Spider",
+      "wizards_expansion_label": "MH1",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1538,
+      "exact_tool_rendered_line": "L1538: Twin-Silk Spider  | MH1",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Tyvar's Stand",
+      "wizards_expansion_label": "ONE",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1539,
+      "exact_tool_rendered_line": "L1539: Tyvar's Stand  | ONE",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Unbounded Potential",
+      "wizards_expansion_label": "MH2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 487,
+      "exact_tool_rendered_line": "L487: Unbounded Potential  | MH2",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Undead Augur",
+      "wizards_expansion_label": "MH1",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1010,
+      "exact_tool_rendered_line": "L1010: Undead Augur  | MH1",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Undercity Informer",
+      "wizards_expansion_label": "GTC",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1011,
+      "exact_tool_rendered_line": "L1011: Undercity Informer  | GTC",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Underworld Hermit",
+      "wizards_expansion_label": "MH2",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1012,
+      "exact_tool_rendered_line": "L1012: Underworld Hermit  | MH2",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Undo",
+      "wizards_expansion_label": "P02",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 748,
+      "exact_tool_rendered_line": "L748: Undo  | P02",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Unmake",
+      "wizards_expansion_label": "EVE",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1662,
+      "exact_tool_rendered_line": "L1662: Unmake  | EVE",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Unspeakable Symbol",
+      "wizards_expansion_label": "SCG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1016,
+      "exact_tool_rendered_line": "L1016: Unspeakable Symbol  | SCG",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Utopia Vow",
+      "wizards_expansion_label": "PLC",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1541,
+      "exact_tool_rendered_line": "L1541: Utopia Vow  | PLC",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Vampire of the Dire Moon",
+      "wizards_expansion_label": "M20",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1018,
+      "exact_tool_rendered_line": "L1018: Vampire of the Dire Moon  | M20",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Vastwood Surge",
+      "wizards_expansion_label": "ZNR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1542,
+      "exact_tool_rendered_line": "L1542: Vastwood Surge  | ZNR",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Vendetta",
+      "wizards_expansion_label": "MMQ",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1020,
+      "exact_tool_rendered_line": "L1020: Vendetta  | MMQ",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Vindictive Vampire",
+      "wizards_expansion_label": "RNA",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1022,
+      "exact_tool_rendered_line": "L1022: Vindictive Vampire  | RNA",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Vines of Vastwood",
+      "wizards_expansion_label": "ZEN",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1545,
+      "exact_tool_rendered_line": "L1545: Vines of Vastwood  | ZEN",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Vivien's Grizzly",
+      "wizards_expansion_label": "WAR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1547,
+      "exact_tool_rendered_line": "L1547: Vivien's Grizzly  | WAR",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Volcanic Geyser",
+      "wizards_expansion_label": "MIR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1295,
+      "exact_tool_rendered_line": "L1295: Volcanic Geyser  | MIR",
+      "acquired_at": "2026-10-13T02:17:28Z",
+      "tool_result_reference": "turn209592view1",
+      "tool_call_reference": "wizards-open-table-800-1300"
+    },
+    {
+      "card_name": "Waker of Waves",
+      "wizards_expansion_label": "M21",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 756,
+      "exact_tool_rendered_line": "L756: Waker of Waves  | M21",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Wall of Glare",
+      "wizards_expansion_label": "UDS",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 494,
+      "exact_tool_rendered_line": "L494: Wall of Glare  | UDS",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Weatherseed Faeries",
+      "wizards_expansion_label": "ULG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 760,
+      "exact_tool_rendered_line": "L760: Weatherseed Faeries  | ULG",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Windfall",
+      "wizards_expansion_label": "USG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 766,
+      "exact_tool_rendered_line": "L766: Windfall  | USG",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Wirewood Guardian",
+      "wizards_expansion_label": "SCG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1561,
+      "exact_tool_rendered_line": "L1561: Wirewood Guardian  | SCG",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Wispweaver Angel",
+      "wizards_expansion_label": "KLD",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 501,
+      "exact_tool_rendered_line": "L501: Wispweaver Angel  | KLD",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Wizard Class",
+      "wizards_expansion_label": "AFR",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 771,
+      "exact_tool_rendered_line": "L771: Wizard Class  | AFR",
+      "acquired_at": "2026-10-13T02:17:03Z",
+      "tool_result_reference": "turn575651view0",
+      "tool_call_reference": "wizards-open-table-241"
+    },
+    {
+      "card_name": "Wood Elves",
+      "wizards_expansion_label": "EXO",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1562,
+      "exact_tool_rendered_line": "L1562: Wood Elves  | EXO",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Wrap in Vigor",
+      "wizards_expansion_label": "FUT",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1565,
+      "exact_tool_rendered_line": "L1565: Wrap in Vigor  | FUT",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Yavimaya Granger",
+      "wizards_expansion_label": "ULG",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1566,
+      "exact_tool_rendered_line": "L1566: Yavimaya Granger  | ULG",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view1",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Zulaport Cutthroat",
+      "wizards_expansion_label": "GNT",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1037,
+      "exact_tool_rendered_line": "L1037: Zulaport Cutthroat  | GNT",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    },
+    {
+      "card_name": "Zulaport Enforcer",
+      "wizards_expansion_label": "ROE",
+      "source_url": "https://magic.wizards.com/en/news/feature/whats-inside-mystery-booster-2",
+      "rendered_line": 1038,
+      "exact_tool_rendered_line": "L1038: Zulaport Enforcer  | ROE",
+      "acquired_at": "2026-10-13T02:17:33Z",
+      "tool_result_reference": "turn336923view0",
+      "tool_call_reference": "wizards-open-table-1050-1610"
+    }
+  ],
+  "publication_date": "2024-08-09",
+  "publication_date_precision": "calendar_day",
+  "publication_timestamp": null,
+  "publication_date_evidence": {
+    "exact_tool_rendered_line": "L95: 【58†Feature】 Aug 9, 2024",
+    "tool_result_reference": "turn703266view0",
+    "acquired_at": "2026-10-13T02:18:30Z"
+  },
+  "publisher": "Wizards of the Coast",
+  "publisher_evidence": {
+    "exact_tool_rendered_line": "L97: 【69†Wizards of the Coast】",
+    "tool_result_reference": "turn703266view0",
+    "acquired_at": "2026-10-13T02:18:30Z"
+  },
+  "membership_semantics": {
+    "table": "ordinary_reprints_with_planeswalker_symbol_in_mystery_booster_2",
+    "tool_result_reference": "turn575651view0",
+    "rendered_line": 241,
+    "acquired_at": "2026-10-13T02:17:03Z",
+    "paraphrase": "The article identifies the table as the complete Planeswalker-symbol reprint listing for Mystery Booster 2, while warning that displayed images may differ from included versions."
+  },
+  "article_modification_timestamp": null,
+  "artifact_review_status": "pending",
+  "terms_assessment": {
+    "assessment_type": "bounded_factual_projection",
+    "scope": "Only card-name and Expansion table facts, attribution, source locators, and extraction provenance; no artwork or article mirror.",
+    "copyright_owner": "Wizards of the Coast",
+    "full_article_redistribution_permission": "not_asserted",
+    "upstream_html_retention_permission": "not_asserted",
+    "source_terms_not_independently_retained": true,
+    "human_terms_review_status": "pending"
+  }
+}
