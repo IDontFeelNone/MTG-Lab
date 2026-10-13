@@ -33,6 +33,7 @@ Schema `automatic-canonical-update-v1` requires `game`, `target_code`, `target_n
 `config/automatic_updates/mb2-first-batch.json` references completed Phase 119. Its audit makes execution an idempotent verification; it does not duplicate promotion. No second MB2 batch or MSH candidate is configured.
 
 ```bash
+PYTHONPATH=src python scripts/automatic_canonical_update.py --config CONFIG
 PYTHONPATH=src python scripts/automatic_canonical_update.py plan --config CONFIG
 PYTHONPATH=src python scripts/automatic_canonical_update.py verify --config CONFIG
 PYTHONPATH=src python scripts/automatic_canonical_update.py execute --config CONFIG
@@ -45,6 +46,13 @@ All output is JSON. A new write additionally requires the live trusted-host revi
 boundary; this CLI does not install it. Read-only inspection/replay of exact retained
 historical evidence grants no new authority. `rollback-plan` never executes
 destructive work. Digests bind content and do not authenticate a reviewer.
+
+Omitting the command runs the existing read-only `plan` operation. Explicit commands
+remain supported. Configuration-loading and engine errors return a structured
+`status=blocked` result with exit code 1. Approval labels in configuration and actor
+names in environment variables do not install a trusted boundary. The existing plan
+is an inspection result; a reviewed, binding-complete owner authorization plan and
+the protected manual execution workflow remain integration work to complete.
 
 ## Automatic PR, merge, recovery, and settings
 
