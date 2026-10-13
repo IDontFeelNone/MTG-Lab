@@ -29,6 +29,12 @@ construction policy, canonical pre-state, operation, authenticated reviewer,
 decision time and review reference. Authorization and live integrity are checked
 again at readiness/write boundaries and on checkpoint resume; a checkpoint is an
 observation, not cached authority. Changed inputs cannot reuse an old decision.
+Previous completion requires a contiguous, scope-valid checkpoint prefix with
+matching admission/post-state and consumer results; merely placing a success file
+does not establish completion. Resumed acceptance executes the real consumer checks
+again and rejects cached claims that differ. These checks bind protected local
+artifact content and progress, not reviewer authentication; filesystem/code
+operators remain inside the documented host trust boundary.
 
 `IsolatedAdmissionTestBoundary` is nonserialized authority bound to one live
 `TemporaryDirectory` capability, exact root, lifetime and initially authorized

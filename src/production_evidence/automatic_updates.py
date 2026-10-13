@@ -358,10 +358,54 @@ class AutomaticCanonicalUpdate:
         return {**body, "result_digest": digest(body)}
 
     def _verify_result(self, result: dict, stage: str) -> None:
+        if not isinstance(result, dict) or not isinstance(result.get("details"), dict):
+            raise EvidenceError(f"invalid completed-stage checkpoint: {stage}")
         supplied = result.get("result_digest")
         body = {k: v for k, v in result.items() if k != "result_digest"}
-        if result.get("stage") != stage or result.get("status") != "succeeded" or supplied != digest(body):
+        if (result.get("schema_version") != SCHEMA
+                or result.get("batch_identifier") != self.descriptor.batch_identifier
+                or result.get("stage") != stage or result.get("status") != "succeeded"
+                or supplied != digest(body)):
             raise EvidenceError(f"invalid completed-stage checkpoint: {stage}")
+
+    def _has_contiguous_acceptance(self) -> bool:
+        """Recognize previous completion without trusting a lone cached success.
+
+        These protected local artifacts establish content/progress consistency,
+        not reviewer authentication. Every new write still requires the live host
+        boundary, and resumed consumers are executed again below. A valid previous
+        completion must not be undone merely because its source is later damaged.
+        """
+        completed = {}
+        try:
+            for stage in STAGES[:STAGES.index("query_and_analytics_smoke_tests") + 1]:
+                path = self._checkpoint(stage)
+                if not path.is_file(): return False
+                checkpoint = json.loads(path.read_bytes())
+                self._verify_result(checkpoint, stage)
+                completed[stage] = checkpoint["details"]
+            audit = json.loads((self.data / self.config["artifacts"]["promotion_audit"]).read_bytes())
+            body = {key: item for key, item in audit.items() if key != "audit_digest"}
+            post = audit["canonical_post_state_digest"]
+            if (audit.get("audit_digest") != digest(body)
+                    or audit.get("batch_id") != self.descriptor.batch_identifier
+                    or audit.get("candidate_id_digest") != self.descriptor.candidate_digest
+                    or completed["bounded_canonical_promotion"].get("canonical_post_state_digest") != post
+                    or completed["canonical_post_state_verification"].get("canonical_post_state_digest") != post
+                    or canonical_state_digest(self.data) != post):
+                return False
+            state = json.loads((self.data / "canonical/state.json").read_bytes())
+            consumer = completed["bounded_canonical_promotion"].get("consumer_validation", {})
+            admitted = audit["admitted_records"]
+            if (consumer.get("valid") is not True or consumer.get("projection_valid") is not True
+                    or consumer.get("printing_relationships_checked") != sum(row["entity_type"] == "printing" for row in admitted)
+                    or consumer.get("identifier_resolution_checked") != sum(row["entity_type"] == "identifier" for row in admitted)):
+                return False
+            expected = {"entity_counts": {kind: len(rows) for kind, rows in sorted(state.items())},
+                        "consumer_validation": consumer, "passed": True}
+            return completed["query_and_analytics_smoke_tests"] == expected
+        except (OSError, ValueError, KeyError, TypeError, EvidenceError):
+            return False
 
     def status(self) -> dict:
         completed = []
@@ -391,6 +435,7 @@ class AutomaticCanonicalUpdate:
 
     def execute(self, *, stop_after: str | None = None) -> dict:
         self._assert_storage_scope(check_tree=True)
+        self._restored_write_pre_digest = None
         if stop_after is not None and stop_after not in STAGES:
             raise EvidenceError("unknown stop-after stage")
         audit_path = self.data / self.config["artifacts"]["promotion_audit"]
@@ -406,7 +451,7 @@ class AutomaticCanonicalUpdate:
             return {**self.status(), "idempotent": True, "read_only": True}
         context = {"engine": self, "config": self.config, "target": self.descriptor.__dict__}
         backup_path = self.run_root / "canonical-pre-state.bytes"
-        incomplete = not self._checkpoint("query_and_analytics_smoke_tests").exists()
+        incomplete = not self._has_contiguous_acceptance()
         acceptance_completed = not incomplete
         original = backup_path.read_bytes() if incomplete and backup_path.exists() else None
         for stage in STAGES:
@@ -424,7 +469,13 @@ class AutomaticCanonicalUpdate:
                         self._atomic_write(backup_path, original.decode(), exclusive=True)
                 if path.exists():
                     value = json.loads(path.read_text()); self._verify_result(value, stage)
-                    context[stage] = value["details"]
+                    if stage == "query_and_analytics_smoke_tests":
+                        fresh = self._stage_query_and_analytics_smoke_tests(context)
+                        if fresh != value["details"]:
+                            raise EvidenceError("cached consumer acceptance differs from live validation")
+                        context[stage] = fresh
+                    else:
+                        context[stage] = value["details"]
                 else:
                     details = (self.handlers.get(stage) or getattr(self, f"_stage_{stage}"))(context)
                     result = self._result(stage, details)
@@ -458,7 +509,7 @@ class AutomaticCanonicalUpdate:
                           "canonical_original_bytes_restored": restored,
                           "failure_recovery": recovery_reason,
                           "invalidated_write_acceptance_checkpoints": invalidated,
-                          "partial_write_audit_retained": not acceptance_completed and audit_path.exists()}
+                          "audit_file_retained": audit_path.exists()}
                 self._atomic_write(self.run_root / "blocked-report.json", json.dumps(report, indent=2, sort_keys=True) + "\n")
                 raise
             if stop_after == stage: break
@@ -474,6 +525,9 @@ class AutomaticCanonicalUpdate:
         expected_pre = self.config["integrity"]["canonical_pre_state_digest"]
         if digest(inventory) != expected_pre:
             return False, "retained pre-state bytes do not match the authorized canonical pre-state"
+        if (getattr(self, "_restored_write_pre_digest", None) == expected_pre
+                and canonical_state_digest(self.data) == expected_pre):
+            return True, "this attempt already restored its authenticated original write bytes"
         expected_post = getattr(self, "_owned_post_state_digest", None)
         audit_path = self.data / self.config["artifacts"]["promotion_audit"]
         if expected_post is None and audit_path.exists():
@@ -516,11 +570,28 @@ class AutomaticCanonicalUpdate:
                 return False, "incomplete admission ownership receipt is unreadable"
         if not expected_post or canonical_state_digest(self.data) != expected_post:
             return False, "current canonical bytes differ from this run's owned partial post-state"
+        owns_audit = False
+        if audit_path.exists():
+            raw = audit_path.read_bytes()
+            owns_audit = getattr(self, "_owned_audit_sha256", None) == digest(raw)
+            if not owns_audit:
+                try:
+                    receipt = json.loads(raw)
+                    validate_admission_audit(self.data, receipt)
+                    owns_audit = (receipt.get("batch_id") == self.descriptor.batch_identifier
+                        and receipt.get("candidate_id_digest") == self.descriptor.candidate_digest
+                        and receipt.get("canonical_pre_state_digest") == expected_pre
+                        and receipt.get("canonical_post_state_digest") == expected_post
+                        and receipt.get("input_bindings", {}).get("target") == self.descriptor.__dict__)
+                except (OSError, ValueError, KeyError, TypeError, AttributeError, EvidenceError):
+                    owns_audit = False
         self._atomic_write(canonical / "state.json", original.decode())
-        audit_path.unlink(missing_ok=True)
+        if owns_audit:
+            audit_path.unlink(missing_ok=True)
         for failed_stage in STAGES[STAGES.index("bounded_canonical_promotion"):]:
             self._checkpoint(failed_stage).unlink(missing_ok=True)
         self._owned_post_state_digest = None
+        self._restored_write_pre_digest = expected_pre
         return True, "restored authenticated original bytes from this run's owned partial write"
 
     def _verify_historical_read_only(self, audit: Mapping) -> dict:
@@ -841,17 +912,18 @@ class AutomaticCanonicalUpdate:
             self._owned_post_state_digest = body["canonical_post_state_digest"]
             self._assert_storage_scope()
             self._atomic_write(state_path, state_text)
+            self._assert_storage_scope(check_tree=True)
             if body["canonical_post_state_digest"] != canonical_state_digest(self.data):
                 raise EvidenceError("canonical post-state verification failed")
             configured = self.config["integrity"].get("canonical_post_state_digest")
             if configured and configured != body["canonical_post_state_digest"]: raise EvidenceError("canonical post-state differs from plan")
             audit = {**body, "audit_digest": digest(body)}
-            self._atomic_write(audit_path, json.dumps(audit, indent=2, sort_keys=True) + "\n", exclusive=True)
+            audit_text = json.dumps(audit, indent=2, sort_keys=True) + "\n"
+            self._atomic_write(audit_path, audit_text, exclusive=True)
+            self._owned_audit_sha256 = digest(audit_text.encode())
         except BaseException:
             self._assert_storage_scope()
-            self._atomic_write(state_path, original.decode())
-            audit_path.unlink(missing_ok=True)
-            self._owned_post_state_digest = None
+            self._restore_owned_incomplete_state(original)
             raise
         return {"idempotent": False, "canonical_post_state_digest": body["canonical_post_state_digest"],
                 "consumer_validation": consumer_validation}

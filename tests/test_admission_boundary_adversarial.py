@@ -164,7 +164,7 @@ class AdmissionBoundaryAdversarialTests(unittest.TestCase):
             "refused compensation must retain the prior immutable partial-write receipt")
         report = json.loads((self.engine.run_root / "blocked-report.json").read_bytes())
         self.assertFalse(report["canonical_original_bytes_restored"])
-        self.assertTrue(report["partial_write_audit_retained"])
+        self.assertTrue(report["audit_file_retained"])
         self.assertIn("bounded_canonical_promotion", report["invalidated_write_acceptance_checkpoints"])
 
     def test_resume_pre_state_drift_does_not_erase_an_unrelated_write(self):
@@ -185,7 +185,7 @@ class AdmissionBoundaryAdversarialTests(unittest.TestCase):
         self.assertEqual(audit_path.read_bytes(), audit_bytes)
         report = json.loads((self.engine.run_root / "blocked-report.json").read_bytes())
         self.assertFalse(report["canonical_original_bytes_restored"])
-        self.assertTrue(report["partial_write_audit_retained"])
+        self.assertTrue(report["audit_file_retained"])
 
     def test_rehashed_partial_audit_cannot_claim_ownership_of_an_unrelated_write(self):
         self.engine.execute(stop_after="bounded_canonical_promotion")
@@ -264,6 +264,136 @@ class AdmissionBoundaryAdversarialTests(unittest.TestCase):
         self.assertFalse(any(raw != self.original for raw in canonical_writes),
             "bound evidence must be checked again after the trusted boundary returns")
         self.assertFalse(self.engine._checkpoint("bounded_canonical_promotion").exists())
+
+
+    def test_false_acceptance_checkpoint_cannot_hide_an_incomplete_operation(self):
+        for kind in ("invalid", "self-hashed", "null-details", "list-details"):
+            with self.subTest(kind=kind):
+                self.tearDown(); self.setUp()
+                self.engine.execute(stop_after="bounded_canonical_promotion")
+                checkpoint = self.engine._checkpoint("query_and_analytics_smoke_tests")
+                value = {"status": "succeeded", "details": {"passed": True}}
+                if kind == "self-hashed":
+                    value = self.engine._result("query_and_analytics_smoke_tests",
+                        {"passed": True, "consumer_validation": {"valid": True}})
+                elif kind in {"null-details", "list-details"}:
+                    value = self.engine._result("query_and_analytics_smoke_tests",
+                        None if kind == "null-details" else [])
+                checkpoint.write_text(json.dumps(value))
+                source = self.root / "data/evidence/source.json"
+                source.write_bytes(source.read_bytes() + b" altered")
+                with self.assertRaises(EvidenceError): self.engine.execute()
+                self.assertFalse(self.engine._checkpoint("bounded_canonical_promotion").exists())
+                self.assertFalse(checkpoint.exists())
+                self.assertEqual(self.state.read_bytes(), self.original)
+
+    def test_cached_acceptance_never_substitutes_for_live_consumer_validation(self):
+        self.engine.execute(stop_after="bounded_canonical_promotion")
+        checkpoint = self.engine._checkpoint("query_and_analytics_smoke_tests")
+        checkpoint.write_text(json.dumps(self.engine._result("query_and_analytics_smoke_tests",
+            {"passed": True, "consumer_validation": {"valid": True}})))
+        with patch.object(self.engine, "_validate_consumers",
+                side_effect=EvidenceError("required current consumer failure")) as consumer:
+            with self.assertRaisesRegex(EvidenceError, "required current consumer failure"):
+                self.engine.execute()
+        self.assertEqual(consumer.call_count, 1)
+        self.assertEqual(self.state.read_bytes(), self.original)
+        self.assertFalse(self.engine._checkpoint("bounded_canonical_promotion").exists())
+        self.assertFalse(checkpoint.exists())
+
+    def test_false_cached_consumer_details_are_rejected_after_live_validation(self):
+        self.engine.execute(stop_after="bounded_canonical_promotion")
+        checkpoint = self.engine._checkpoint("query_and_analytics_smoke_tests")
+        checkpoint.write_text(json.dumps(self.engine._result("query_and_analytics_smoke_tests",
+            {"passed": True, "entity_counts": {"card": 999}, "consumer_validation": {"valid": True}})))
+        with self.assertRaisesRegex(EvidenceError, "cached consumer acceptance differs"):
+            self.engine.execute()
+        self.assertEqual(self.state.read_bytes(), self.original)
+        self.assertFalse(self.engine._checkpoint("bounded_canonical_promotion").exists())
+        self.assertFalse(checkpoint.exists())
+
+    def test_genuine_completed_resume_still_runs_live_consumers(self):
+        self.engine.execute()
+        state_bytes = self.state.read_bytes()
+        audit_path = self.root / "data" / self.engine.config["artifacts"]["promotion_audit"]
+        audit_bytes = audit_path.read_bytes()
+        with patch.object(self.engine, "_validate_consumers",
+                side_effect=EvidenceError("current consumer regression")) as consumer:
+            with self.assertRaisesRegex(EvidenceError, "current consumer regression"):
+                self.engine.execute()
+        self.assertEqual(consumer.call_count, 1)
+        self.assertEqual(self.state.read_bytes(), state_bytes)
+        self.assertEqual(audit_path.read_bytes(), audit_bytes)
+
+    def test_genuine_completed_admission_is_preserved_when_later_input_is_tampered(self):
+        for artifact in ("source.json", "candidates.json"):
+            with self.subTest(artifact=artifact):
+                self.tearDown(); self.setUp()
+                self.engine.execute()
+                state_bytes = self.state.read_bytes()
+                audit_path = self.root / "data" / self.engine.config["artifacts"]["promotion_audit"]
+                audit_bytes = audit_path.read_bytes()
+                path = self.root / "data/evidence" / artifact
+                path.write_bytes(path.read_bytes() + b" ")
+                with self.assertRaises(EvidenceError): self.engine.execute()
+                self.assertEqual(self.state.read_bytes(), state_bytes)
+                self.assertEqual(audit_path.read_bytes(), audit_bytes)
+                self.assertTrue(self.engine._checkpoint("bounded_canonical_promotion").exists())
+                self.assertTrue(self.engine._checkpoint("query_and_analytics_smoke_tests").exists())
+
+    def test_internal_write_failure_does_not_erase_an_unrelated_current_change(self):
+        write = self.engine._atomic_write
+        injected = False
+        changed_bytes = None
+        def change_after_write(path, text, **kwargs):
+            nonlocal injected, changed_bytes
+            result = write(path, text, **kwargs)
+            if Path(path) == self.state and not injected:
+                injected = True
+                current = json.loads(self.state.read_bytes())
+                current["card"]["unrelated-after-write"] = {"entity_type": "card",
+                    "values": {"name": "Unrelated current write"}}
+                self.state.write_text(json.dumps(current))
+                changed_bytes = self.state.read_bytes()
+            return result
+        with patch.object(self.engine, "_atomic_write", side_effect=change_after_write):
+            with self.assertRaisesRegex(EvidenceError, "canonical post-state verification failed"):
+                self.engine.execute()
+        self.assertEqual(self.state.read_bytes(), changed_bytes)
+        self.assertFalse(self.engine._checkpoint("bounded_canonical_promotion").exists())
+        report = json.loads((self.engine.run_root / "blocked-report.json").read_bytes())
+        self.assertFalse(report["canonical_original_bytes_restored"])
+
+    def test_internal_owned_write_restoration_is_reported_truthfully(self):
+        config = json.loads(self.config.read_bytes())
+        config["integrity"]["canonical_post_state_digest"] = "deliberately-mismatched-plan"
+        self.config.write_text(json.dumps(config))
+        engine = self.fixture.engine()
+        with self.assertRaisesRegex(EvidenceError, "canonical post-state differs from plan"):
+            engine.execute()
+        self.assertEqual(self.state.read_bytes(), self.original)
+        report = json.loads((engine.run_root / "blocked-report.json").read_bytes())
+        self.assertTrue(report["canonical_original_bytes_restored"])
+
+    def test_audit_write_collision_preserves_an_unrelated_immutable_receipt(self):
+        audit_path = self.root / "data" / self.engine.config["artifacts"]["promotion_audit"]
+        sentinel = b'{"schema_version":"unrelated-immutable-audit","message":"retain these original bytes"}\n'
+        write = self.engine._atomic_write
+        def install_unrelated_audit(path, text, **kwargs):
+            result = write(path, text, **kwargs)
+            if Path(path) == self.state and not audit_path.exists():
+                audit_path.parent.mkdir(parents=True, exist_ok=True)
+                audit_path.write_bytes(sentinel)
+            return result
+        with patch.object(self.engine, "_atomic_write", side_effect=install_unrelated_audit):
+            with self.assertRaisesRegex(EvidenceError, "immutable file already exists"):
+                self.engine.execute()
+        self.assertEqual(self.state.read_bytes(), self.original)
+        self.assertTrue(audit_path.exists())
+        self.assertEqual(audit_path.read_bytes(), sentinel)
+        self.assertFalse(self.engine._checkpoint("bounded_canonical_promotion").exists())
+        report = json.loads((self.engine.run_root / "blocked-report.json").read_bytes())
+        self.assertTrue(report["audit_file_retained"])
 
 
 if __name__ == "__main__":
