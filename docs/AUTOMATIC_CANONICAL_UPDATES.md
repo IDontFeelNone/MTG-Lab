@@ -4,6 +4,14 @@ Phase 123 added an immutable, checksum-first MTGJSON snapshot registration bound
 
 # Automatic Canonical Updates
 
+The [implementation-only compatibility repair](CATALOG_ADMISSION_COMPATIBILITY_REPAIR.md)
+supersedes the routine-approval/write descriptions below. New admission requires a
+live authenticated trusted-host review decision bound to exact inputs and pre-state;
+validated candidates, configuration labels and saved checkpoints cannot authorize
+it. The standalone CLI has no installed reviewer authenticator and fails closed
+for new writes. Historical receipts and results below remain historical evidence,
+not reusable approval. Production admission and source activation remain on hold.
+
 ## Phase 122 first-real-target availability result
 
 The requested target was **The Hobbit**, with its code intentionally unknown until provider evidence established it. Inspection of retained trusted MTGJSON snapshot `mtgjson-allprintings-5.3.0+20260731-b47cc8360034` found exactly two set partitions, `MB2` and `MSH`, and zero set-level Hobbit matches. The immutable availability report is `data/automatic_updates/phase-122-hobbit-availability.json`. It classifies this provider snapshot as `not_yet_published_by_provider`; the repository-retained source summary and bounded payload inventory prove the snapshot's two-set scope, while the operator-managed source bytes are deliberately not retained.
@@ -33,7 +41,10 @@ PYTHONPATH=src python scripts/automatic_canonical_update.py replay --config CONF
 PYTHONPATH=src python scripts/automatic_canonical_update.py rollback-plan --config CONFIG
 ```
 
-All output is JSON. Only explicit `execute` writes. `rollback-plan` never executes destructive work. Routine updates require no signature, authorization form, supplied timestamp, or hand-calculated digest.
+All output is JSON. A new write additionally requires the live trusted-host review
+boundary; this CLI does not install it. Read-only inspection/replay of exact retained
+historical evidence grants no new authority. `rollback-plan` never executes
+destructive work. Digests bind content and do not authenticate a reviewer.
 
 ## Automatic PR, merge, recovery, and settings
 
