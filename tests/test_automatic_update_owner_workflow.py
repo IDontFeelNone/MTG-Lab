@@ -351,11 +351,11 @@ class OwnerWorkflowEntryTests(unittest.TestCase):
         self.assertIn("if: inputs.operation == 'plan'", planning)
         for forbidden in (".py admit ", ".py execute ", "getIDToken", "id-token: write", "git push", "gh pr"):
             self.assertNotIn(forbidden, planning)
-        for forbidden in ("gh pr merge", "gh pr review", "--auto", "git push", "git reset", "contents: write",
-                          "pull-requests: write", '"${{ inputs.', "approved=true"):
+        for forbidden in ("gh pr merge", "gh pr review", "--auto", "git push", "git reset", '"${{ inputs.', "approved=true"):
             self.assertNotIn(forbidden, workflow)
         self.assertIn("shell: false", workflow)
-        self.assertIn("Publication is DISABLED", workflow)
+        self.assertIn("--publish-admission-pr", workflow)
+        self.assertNotIn("--publish-admission-pr", planning)
 
     def test_workflow_spawn_passes_malicious_inputs_only_as_arguments(self):
         workflow = (ROOT / ENTRY.OWNER_WORKFLOW).read_text()

@@ -29,8 +29,8 @@ concurrency:
   group: owner-catalog-admission
   cancel-in-progress: false
 
-# Publication is DISABLED pending exact-delta/privacy boundary hardening.
-# No repository writes, branch publication, PR approval or merge in this path.
+# Publication is reachable only after authenticated admission and required validation.
+# Planning cannot publish; no PR approval or merge exists in this path.
 jobs:
   plan:
     if: inputs.operation == 'plan'
@@ -66,7 +66,8 @@ jobs:
     if: inputs.operation == 'admit'
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
+      pull-requests: write
       id-token: write
     steps:
       - uses: actions/checkout@v4
@@ -80,6 +81,8 @@ jobs:
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea9 # v7.0.1
         env:
           PYTHONPATH: src
+          PYTHONDONTWRITEBYTECODE: '1'
+          GH_TOKEN: ${{ github.token }}
           UPDATE_CONFIG: ${{ inputs.config }}
           EXPECTED_PLAN_ID: ${{ inputs.expected_plan_id }}
           REVIEWED_REVISION: ${{ inputs.reviewed_revision }}
@@ -91,7 +94,7 @@ jobs:
               const token = await core.getIDToken('mtg-lab:canonical-admission');
               core.setSecret(token);
               const result = spawnSync('python', [
-                'scripts/automatic_canonical_update.py', 'admit', '--github-owner-entry',
+                'scripts/automatic_canonical_update.py', 'admit', '--github-owner-entry', '--publish-admission-pr',
                 '--config=' + process.env.UPDATE_CONFIG,
                 '--expected-plan-id=' + process.env.EXPECTED_PLAN_ID,
                 '--reviewed-revision=' + process.env.REVIEWED_REVISION
@@ -100,19 +103,19 @@ jobs:
               let report;
               try {
                 report = JSON.parse(result.stdout);
-                if (!report || !['blocked', 'validated-local-only'].includes(report.status)) throw new Error();
+                if (!report || !['blocked', 'published'].includes(report.status)) throw new Error();
               } catch (error) {
                 report = {status: 'blocked', error: 'Entry point produced no valid structured report'};
               }
               const serialized = JSON.stringify(report);
               fs.writeFileSync('automatic-update-result.json', serialized);
               core.info(serialized);
-              if (result.status !== 0 || report.status !== 'validated-local-only') core.setFailed('Owner admission entry point blocked; inspect its report');
+              if (result.status !== 0 || report.status !== 'published') core.setFailed('Owner admission entry point blocked; inspect its report');
             } catch (error) {
               fs.writeFileSync('automatic-update-result.json', JSON.stringify({status: 'blocked', error: 'GitHub platform identity acquisition failed'}));
               core.setFailed('GitHub platform identity acquisition failed');
             }
-      - name: Check local delta formatting (publication remains disabled)
+      - name: Check delta formatting
         run: git diff --check
       - name: Retain bounded entry diagnostics
         if: always()

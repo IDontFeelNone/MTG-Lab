@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 from production_evidence.automatic_updates import (
-    ADMISSION_OPERATION, AdmissionDecision, AutomaticCanonicalUpdate, canonical_json,
+    ADMISSION_OPERATION, AdmissionDecision, AutomaticCanonicalUpdate, GitHubPersistence, canonical_json,
 )
 from production_evidence.repository import EvidenceError
 
@@ -164,11 +164,13 @@ class GitHubOwnerReviewBoundary:
 
 
 def workflow_entry(engine: AutomaticCanonicalUpdate, command: str, *,
-                   expected_plan_id: str | None = None, reviewed_revision: str | None = None) -> dict:
-    """Use the existing planner/writer; publication is intentionally disabled."""
+                   expected_plan_id: str | None = None, reviewed_revision: str | None = None,
+                   publish: bool = False) -> dict:
+    """Use the existing planner/writer and exact-delta publication boundary."""
     name = engine._configuration_path.relative_to(engine.root).as_posix()
     _workflow_configuration(engine.root, name)
     if command == "plan":
+        if publish: raise EvidenceError("planning cannot execute or publish an admission")
         _git(engine.root, "diff", "--exit-code", "HEAD", "--")
         result = engine.plan(expected_plan_id=expected_plan_id)
         return {**result, "reviewed_code_revision": _git(engine.root, "rev-parse", "HEAD"),
@@ -177,11 +179,14 @@ def workflow_entry(engine: AutomaticCanonicalUpdate, command: str, *,
         raise EvidenceError("admission requires an explicit operation, expected plan and reviewed revision")
     # Recompute only to validate the previously supplied identity, never to select
     # or approve a fresh identity on the operator's behalf.
-    engine.plan(expected_plan_id=expected_plan_id)
+    plan = engine.plan(expected_plan_id=expected_plan_id)
     boundary = GitHubOwnerReviewBoundary(engine, expected_plan_id, reviewed_revision)
-    boundary.authorize(engine.admission_bindings())  # fail closed before checkpoints
+    decision = boundary.authorize(engine.admission_bindings())  # fail closed before checkpoints
     engine.review_boundary = boundary
     result = engine.execute(stop_after="query_and_analytics_smoke_tests")
+    if publish:
+        return GitHubPersistence().publish_admission(engine, plan, reviewed_revision, decision,
+                                                    repository=boundary.context["repository"])
     return {"status": "validated-local-only", "plan_id": expected_plan_id,
             "execution": result, "publication": "disabled", "automatic_merge": False}
 
@@ -197,17 +202,23 @@ def main(argv=None) -> int:
     parser.add_argument("--reviewed-revision", help="exact reviewed GitHub workflow/code SHA for admission")
     parser.add_argument("--github-owner-entry", action="store_true",
                         help="use the reviewed workflow entry; admission requires verified GitHub OIDC")
+    parser.add_argument("--publish-admission-pr", action="store_true",
+                        help="after authenticated admission and required validation, publish its exact delta as a draft PR")
     args = parser.parse_args(argv)
     try:
         root = Path(args.repository_root).resolve()
         config = _workflow_configuration(root, args.config) if args.github_owner_entry else args.config
+        pending = json.loads(Path(config).read_bytes())
+        if pending.get("launch_state") == "pending":
+            raise EvidenceError("pending first-use configuration; unavailable execution inputs: " +
+                                ", ".join(pending.get("missing_execution_inputs", [])))
         engine = AutomaticCanonicalUpdate(root, config)
         if args.github_owner_entry:
             result = workflow_entry(engine, args.command, expected_plan_id=args.expected_plan_id,
-                                    reviewed_revision=args.reviewed_revision)
+                                    reviewed_revision=args.reviewed_revision, publish=args.publish_admission_pr)
             print(json.dumps(result, indent=2, sort_keys=True))
-            return 0
-        if args.command == "admit" or args.reviewed_revision is not None:
+            return 1 if result.get("status") == "blocked" else 0
+        if args.command == "admit" or args.reviewed_revision is not None or args.publish_admission_pr:
             raise EvidenceError("ordinary CLI calls cannot install owner admission authority")
         method = getattr(engine, args.command.replace("-", "_"))
         if args.expected_plan_id is not None and args.command != "plan":

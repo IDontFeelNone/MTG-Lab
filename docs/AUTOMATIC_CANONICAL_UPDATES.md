@@ -53,7 +53,7 @@ remain supported. Configuration-loading and engine errors return a structured
 `status=blocked` result with exit code 1. Approval labels in configuration and actor
 names in environment variables do not install a trusted boundary. The existing plan
 is an inspection result. The manual workflow now separates planning from explicit
-owner authorization; exact-delta publication remains disabled pending its repair.
+owner authorization; exact-delta publication follows only after required validation.
 
 Read-only planning reuses `admission_bindings()` and the existing source, payload
 and target-integrity checks. `decision_inputs` records the operation/target, exact
@@ -98,7 +98,7 @@ previously reviewed `expected_plan_id`, `reviewed_revision` (the plan's
 `reviewed_code_revision`), and reviewed `config`. Recomputing with
 `plan(expected_plan_id=...)` checks that old identity; it never silently substitutes
 a newly generated plan. Selecting admission is the owner's explicit decision to
-admit that exact proposal locally, subject to all gates. Neither a plan, tests,
+admit and propose that exact catalog delta as a draft data PR, subject to all gates. Neither a plan, tests,
 PR merge, configuration approval field nor a saved receipt supplies that decision.
 
 The reviewed script's policy allows only repository `IDontFeelNone/MTG-Lab`
@@ -155,21 +155,74 @@ Provider trust and receipt hashes alone never provide redistribution permission.
 
 The admission entry calls the existing repaired writer only through
 `query_and_analytics_smoke_tests`, including its actual query, collection and
-projection acceptance checks. It never reaches branch/PR persistence or merge
-stages. Publication is explicitly disabled: the workflow has no repository-write
-permissions, push, PR approval or merge command. Diagnostics contain bounded JSON
-reports only; no private files, tokens, backups or canonical data are uploaded.
-Exact-delta/dependency publication, full final validation and independent draft PR
-review remain unfinished integration work. Final owner merge authorization remains
-mandatory; automatic merge is removed, not a prerequisite to re-enable.
+projection acceptance checks. The fixed workflow then requests
+`--publish-admission-pr`, using the existing `GitHubPersistence` helper. That helper
+requires the live decision object from this operation; the read-only boundary CLI
+and copied audit metadata cannot install it. No merge or PR approval is requested.
 
-The admission job declares `contents: read` and `id-token: write`, which GitHub
-documents as permission to request an OIDC token, not repository-write access.
-No required repository-setting change has been established; no environment,
-external service, pasted token, automatic PR-approval setting or auto-merge setting
-is requested. Live OIDC/hosted execution has not been tested in this checkpoint.
-Offline tests use explicitly simulated platform and key doubles in disposable
-storage, returning only `isolated-test` decisions through the actual writer.
+`admission_publication_inventory()` in `automatic_updates.py` compares the reviewed
+Git base with the original canonical pre-state and reconstructs the exact selected
+delta through the existing `_canonical_record()` adapter. Every existing record and
+other canonical byte must be preserved. Current state, the original planning inputs,
+receipt and live decision must agree; a permitted state filename cannot conceal an
+unrelated edit. The explicit inventory binds raw hashes/Git blobs for state, audit,
+all fourteen successful writer checkpoints, configuration, payload and every
+configured source/receipt dependency. Existing dependencies remain bound to the
+base; newly required dependencies are staged with the actual catalog delta.
+
+Tracked, staged, untracked and ignored files are inspected before staging. Extra
+files, symlinks, path escapes, incompatible index modes and staged alternate bytes
+block publication. The sole known recovery backup is checked against original base
+bytes and remains local and unstaged; all other temporary/private artifacts are
+rejected. Credential/JWT/private-field checks apply to retained publication bytes
+and diagnostics. Raw tokens, headers and signing keys are never artifacts. Safe
+actor/run/decision metadata records history; it is not a reusable authenticator.
+
+Before committing, the helper runs the actual required unittest suite, strips the
+OIDC and GitHub credentials from its child environment, retains safe validation
+diagnostics under `.git`, and rechecks the entire inventory and remote refs. A moved
+main, unexpected branch or unrelated local head blocks. Only explicitly inventoried
+files are staged; a dedicated `canonical-update/` branch has one parent equal to the
+reviewed base. No reset, direct main push or force-push is used. Push status is
+captured and independently read back, even after an ambiguous response. A draft PR
+is created or an exact matching open draft reused. Git refs, PR head/base/draft,
+commit parent/tree and complete remote changed-file list must match. Readback cannot
+claim completeness at the GitHub compare API's 300-file limit. Failures report their
+phase and preserve local work; this is not a new rollback service.
+
+Planning retains `contents: read`. The admission job's `contents: write` and
+`pull-requests: write` are used only for its branch and draft PR; `id-token: write`
+requests identity, not repository-write access. No new token, external service or
+Actions permission was added to manufacture CI success. Under current GitHub
+documentation, GITHUB_TOKEN-created pushes do not trigger push workflows; PR opened,
+synchronize and reopened events can create approval-required workflow runs. A user
+with write access can select **Approve workflows to run** if that banner appears.
+This is distinct from admission approval or merge permission. Hosted CI may be
+pending, approval-required, successful or failed; publication success implies none
+of those outcomes. A repository setting that disallows Actions-created PRs will
+block creation, not silently trigger a broader credential or automatic setting change.
+
+Offline tests use fictional retained inputs, the actual writer and required
+consumer/suite validation, local bare Git, and explicitly simulated platform
+responses. Simulated decisions can publish only to the disposable capability's
+local bare remote using a transport double. They cannot publish to GitHub. These
+tests do not establish live authorization or publication of a real catalog update.
+
+`config/automatic_updates/mb2-ordinary-810-pending.json` binds the retained ordered
+810-ID digest, 270 records of each type, nine held IDs and all 32 retained packet
+files. It is explicitly pending and the CLI blocks it. The reviewed data-root
+candidate payload with parsed contexts, and source/receipt retention paths, have not
+been materialized as production inputs. Their missing paths/hashes are explicit;
+the rehearsal's simulated payload is not relabeled for real admission. Private
+processing, public redistribution, future application-use policy and an actual
+human decision remain separate gates. No held record, spelling proposal, Japanese
+language evidence, emblem semantics or physical-copy identity changes here.
+
+`requirements.txt` adds only `PyJWT[crypto]>=2.10,<3`: PyJWT verifies GitHub JWT
+claims and its cryptography extra verifies RS256 signatures. No unrelated dependency
+upgrade, custom signing implementation or authentication service is introduced.
+The combined implementation still requires the full final local suite, exact-head
+hosted validation and independent Project Manager review before owner merge approval.
 
 Current official GitHub references (read 2026-10-13):
 
@@ -177,6 +230,7 @@ Current official GitHub references (read 2026-10-13):
 - [Manual workflow dispatch and access](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)
 - [Rerun actor privileges](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs)
 - [Safe workflow input handling](https://docs.github.com/en/actions/reference/security/secure-use)
+- [Current workflow-token event behavior](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow)
 
 Failure before authorization writes no engine checkpoint. Later failures retain
 truthful engine diagnostics and evidence; the repaired writer's bounded compensation
