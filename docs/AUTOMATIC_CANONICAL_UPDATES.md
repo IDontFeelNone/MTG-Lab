@@ -8,8 +8,9 @@ The [implementation-only compatibility repair](CATALOG_ADMISSION_COMPATIBILITY_R
 supersedes the routine-approval/write descriptions below. New admission requires a
 live authenticated trusted-host review decision bound to exact inputs and pre-state;
 validated candidates, configuration labels and saved checkpoints cannot authorize
-it. The standalone CLI has no installed reviewer authenticator and fails closed
-for new writes. Historical receipts and results below remain historical evidence,
+it. Ordinary CLI calls install no authenticator and fail closed for new writes.
+The explicit GitHub entry below requires signed platform identity and live operation
+bindings. Historical receipts and results below remain historical evidence,
 not reusable approval. Production admission and source activation remain on hold.
 
 ## Phase 122 first-real-target availability result
@@ -43,7 +44,7 @@ PYTHONPATH=src python scripts/automatic_canonical_update.py rollback-plan --conf
 ```
 
 All output is JSON. A new write additionally requires the live trusted-host review
-boundary; this CLI does not install it. Read-only inspection/replay of exact retained
+boundary; ordinary CLI commands do not install it. Read-only inspection/replay of exact retained
 historical evidence grants no new authority. `rollback-plan` never executes
 destructive work. Digests bind content and do not authenticate a reviewer.
 
@@ -51,8 +52,8 @@ Omitting the command runs the existing read-only `plan` operation. Explicit comm
 remain supported. Configuration-loading and engine errors return a structured
 `status=blocked` result with exit code 1. Approval labels in configuration and actor
 names in environment variables do not install a trusted boundary. The existing plan
-is an inspection result; the protected manual execution workflow remains integration
-work to complete.
+is an inspection result. The manual workflow now separates planning from explicit
+owner authorization; exact-delta publication remains disabled pending its repair.
 
 Read-only planning reuses `admission_bindings()` and the existing source, payload
 and target-integrity checks. `decision_inputs` records the operation/target, exact
@@ -83,13 +84,103 @@ the missing pins, and retain their separately verified source-to-record evidence
 They never become a new admission preview or refresh historical expectations.
 Planning calls no execution/authorization path and writes no checkpoints or data.
 
-## Automatic PR, merge, recovery, and settings
+## Owner-controlled manual entry and trusted boundary
 
-The Actions workflow executes the exact configuration, runs unittest/compile/integrity checks, verifies the changed-file allowlist, pushes a dedicated branch without force, and creates or safely reuses its exact-head/base PR. It independently verifies head, base, audit/boundary, then requests auto-merge. Required checks and branch protection remain authoritative; there is no admin bypass or force merge. Branches and always-uploaded diagnostics remain if setup fails.
+This integration repairs implementation against Architecture v12; it changes no
+canonical, importer or admission-decision contract. The entry points remain
+`.github/workflows/automatic-canonical-update.yml` and
+`scripts/automatic_canonical_update.py`. The workflow defaults to `operation=plan`.
+Its separate plan job calls only the existing read-only planner; it installs no
+review boundary, cannot execute the writer, and has only `contents: read`.
 
-Administrators must enable **Allow GitHub Actions to create and approve pull requests**, Actions `contents: write` and `pull-requests: write`, repository auto-merge, and squash merge. Protect `main`, require this repository's CI checks and current branch, and disallow force pushes/protection bypass.
+A later action must explicitly choose `operation=admit` and supply the exact
+previously reviewed `expected_plan_id`, `reviewed_revision` (the plan's
+`reviewed_code_revision`), and reviewed `config`. Recomputing with
+`plan(expected_plan_id=...)` checks that old identity; it never silently substitutes
+a newly generated plan. Selecting admission is the owner's explicit decision to
+admit that exact proposal locally, subject to all gates. Neither a plan, tests,
+PR merge, configuration approval field nor a saved receipt supplies that decision.
 
-Humans intervene only for genuine conflicts, ambiguous/unsupported source data, validation failure, canonical drift, architecture/contract changes, destructive work, rollback, or a blocked report. Correct source/configuration and rerun to resume verified stages. Rollback requires review of `rollback-plan`, a separately invoked audited change, the full suite, and the protected PR path. After merge, configure the next trusted dataset, dispatch the workflow, monitor checks, and let GitHub merge when green. Never reuse a completed batch identity for different content.
+The reviewed script's policy allows only repository `IDontFeelNone/MTG-Lab`
+(immutable repository ID `1314720822`), its personal owner `IDontFeelNone`
+(account ID `310046194`), `refs/heads/main`, and this specific workflow.
+Those IDs were read independently through the GitHub repository API on 2026-10-13.
+Admission is not delegated to arbitrary collaborators or a request-supplied list.
+A future delegation requires reviewed policy, not a dispatch input.
+
+GitHub authenticates the account performing `workflow_dispatch` and supplies the
+runner/event context. Its OIDC issuer signs the actor/owner/repository IDs, workflow
+ref and SHA, code SHA, run ID/attempt and runner claims. The reviewed GitHub action
+requests audience `mtg-lab:canonical-admission`, masks the token, and passes it
+directly to the child process environment; it is never saved to a file or report.
+`PyJWT[crypto]` verifies RS256 signatures using only GitHub's fixed JWKS endpoint,
+issuer, audience, required claims and validity times. Environment variables are
+transport and consistency checks, not reviewer authentication.
+
+The application checks the fixed policy, branch subject (both official legacy and
+immutable forms), GitHub-hosted runner, manual event, actor equals owner, exact
+reviewed revision equals the signed workflow/code SHA and checkout HEAD, unchanged
+tracked checkout, matching run/event/workspace and triggering actor. All reruns
+(`run_attempt != 1`) are rejected: GitHub documents that reruns retain the original
+actor's privileges. A new explicit dispatch is required, with fresh review if inputs
+or pre-state changed. The authenticated context, plan identity, operation, code
+revision and run identity are retained in `AdmissionDecision.review_reference`;
+decision time is the live boundary's UTC observation of that explicit action.
+
+The trusted computing boundary includes GitHub's issuer and event delivery, runner
+isolation and credential secrecy, reviewed main code/policy, Actions and Python
+dependencies. The signature proves execution context, not that arbitrary code is
+safe; main review/protection and trusted dependencies remain host responsibilities.
+An operator able to replace trusted code or steal its live bearer capability is
+inside that boundary. This is a GitHub client integration, not an authentication
+service. Ordinary `execute`/`admit` calls, forged environment claims, request JSON
+and copied decisions cannot install production authority. There is no simulated
+authorization switch in the CLI or workflow.
+
+Before installing authority, and on every writer authorization callback including
+the final pre-write check, the entry verifies the original plan, source/payload and
+receipt checksums, policy, exact candidate order and canonical pre-state. It also
+rechecks signed execution identity and reviewed configuration. Configuration names
+are restricted to regular, tracked `config/automatic_updates/*.json` files with
+exact reviewed bytes; absolute paths, traversal and symlinks fail closed. Workflow
+inputs travel through quoted environment variables or argument arrays with
+`shell: false`, never shell expressions.
+
+Operation-specific source-policy clearance is a separate trusted-code gate:
+`SOURCE_POLICY_CLEARED_PLANS` is empty. No real proposal, including the pending
+810-record recommendation, is cleared or approved by this change. Adding a future
+clearance requires an independently reviewed, operation-specific policy decision
+backed by retained authoritative evidence; its exact plan binds that evidence.
+Provider trust and receipt hashes alone never provide redistribution permission.
+
+The admission entry calls the existing repaired writer only through
+`query_and_analytics_smoke_tests`, including its actual query, collection and
+projection acceptance checks. It never reaches branch/PR persistence or merge
+stages. Publication is explicitly disabled: the workflow has no repository-write
+permissions, push, PR approval or merge command. Diagnostics contain bounded JSON
+reports only; no private files, tokens, backups or canonical data are uploaded.
+Exact-delta/dependency publication, full final validation and independent draft PR
+review remain unfinished integration work. Final owner merge authorization remains
+mandatory; automatic merge is removed, not a prerequisite to re-enable.
+
+The admission job declares `contents: read` and `id-token: write`, which GitHub
+documents as permission to request an OIDC token, not repository-write access.
+No required repository-setting change has been established; no environment,
+external service, pasted token, automatic PR-approval setting or auto-merge setting
+is requested. Live OIDC/hosted execution has not been tested in this checkpoint.
+Offline tests use explicitly simulated platform and key doubles in disposable
+storage, returning only `isolated-test` decisions through the actual writer.
+
+Current official GitHub references (read 2026-10-13):
+
+- [OIDC claims, token-request permission and immutable subjects](https://docs.github.com/en/actions/reference/security/oidc)
+- [Manual workflow dispatch and access](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)
+- [Rerun actor privileges](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs)
+- [Safe workflow input handling](https://docs.github.com/en/actions/reference/security/secure-use)
+
+Failure before authorization writes no engine checkpoint. Later failures retain
+truthful engine diagnostics and evidence; the repaired writer's bounded compensation
+remains authoritative. `rollback-plan` is a nonexecuting plan, not a rollback service.
 
 ## Phase 121 synthetic production-readiness result
 
@@ -123,9 +214,8 @@ payload checksum mismatch, pre-state drift, checkpoint/audit alteration, interru
 conflicting replay, mismatched PRs, non-green checks, and any force/admin path.
 
 The engine source contains neither `MB2` nor `MSH`; no target-code/name condition was added.
-The workflow takes its dedicated branch from the descriptor, reuses only an identical remote
-branch/PR, validates head/base/boundary and required green checks, then requests protected
-auto-merge without force or admin bypass. Diagnostics remain always retained. Before a real
-future set, the remaining blockers are trusted terms-compliant evidence, full review, an
-approved bounded descriptor/current pre-state, and verified GitHub repository settings. A
-real update requires a later phase and normal protected review.
+The former Phase 121 workflow's publication and auto-merge behavior is historical;
+the owner-controlled integration above supersedes it. Original retained evidence and
+historical hashes remain unchanged. Real admission still requires source-policy
+clearance, exact owner authorization, completed publication safeguards and independent
+review; this implementation task grants none of those production decisions.

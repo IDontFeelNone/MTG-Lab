@@ -3,82 +3,121 @@ name: Automatic canonical update
 on:
   workflow_dispatch:
     inputs:
+      operation:
+        description: Planning grants no approval. Admission explicitly authorizes the reviewed plan.
+        type: choice
+        options: [plan, admit]
+        default: plan
+        required: true
       config:
-        description: Versioned update configuration
+        description: Reviewed file under config/automatic_updates (no private paths)
         required: true
         default: config/automatic_updates/mb2-first-batch.json
+      expected_plan_id:
+        description: For admission, exact plan_id from previously reviewed planning output
+        required: false
+        default: ''
+      reviewed_revision:
+        description: For admission, exact main workflow/code SHA from that reviewed plan
+        required: false
+        default: ''
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
-  group: automatic-canonical-update-${{ inputs.config }}
+  group: owner-catalog-admission
   cancel-in-progress: false
 
+# Publication is DISABLED pending exact-delta/privacy boundary hardening.
+# No repository writes, branch publication, PR approval or merge in this path.
 jobs:
-  update:
+  plan:
+    if: inputs.operation == 'plan'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Plan and execute exact batch
+      - run: python -m pip install -r requirements.txt
+      - name: Read-only plan (never execute or publish)
         env:
           PYTHONPATH: src
+          UPDATE_CONFIG: ${{ inputs.config }}
+          EXPECTED_PLAN_ID: ${{ inputs.expected_plan_id }}
         run: |
-          python scripts/automatic_canonical_update.py plan --config "${{ inputs.config }}" > automatic-update-plan.json
-          python scripts/automatic_canonical_update.py execute --config "${{ inputs.config }}" > automatic-update-result.json
-          python scripts/automatic_canonical_update.py verify --config "${{ inputs.config }}" > automatic-update-verification.json
-      - name: Complete integrity suite
-        env:
-          PYTHONPATH: src
-        run: |
-          python -m unittest discover -s tests -p "test_*.py" -v
-          python -m compileall -q src tests scripts
+          python scripts/automatic_canonical_update.py plan --github-owner-entry "--config=$UPDATE_CONFIG" > automatic-update-plan.json
+          if [ -n "$EXPECTED_PLAN_ID" ]; then
+            python scripts/automatic_canonical_update.py plan --github-owner-entry "--config=$UPDATE_CONFIG" "--expected-plan-id=$EXPECTED_PLAN_ID" > automatic-update-plan-recheck.json
+          fi
           git diff --check
-      - name: Verify changed-file boundary
-        run: |
-          python scripts/verify_automatic_update_boundary.py --base "${{ github.event.repository.default_branch }}"
-      - name: Create branch and pull request without force
-        env:
-          GH_TOKEN: ${{ github.token }}
-          CONFIG: ${{ inputs.config }}
-        run: |
-          BRANCH="$(python -c 'import json; print(json.load(open("automatic-update-plan.json"))["target"]["destination_branch"])')"
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git switch -c "$BRANCH"
-          git add data/automatic_updates automatic-update-*.json
-          git commit -m "Apply trusted canonical update"
-          if git fetch origin "$BRANCH"; then
-            git diff --quiet "origin/$BRANCH" HEAD || { echo "existing update branch differs" >&2; exit 1; }
-            git reset --hard "origin/$BRANCH"
-          else
-            git push origin "$BRANCH"
-          fi
-          PR="$(gh pr list --head "$BRANCH" --base "${{ github.event.repository.default_branch }}" --json url --jq '.[0].url')"
-          if [ -z "$PR" ]; then
-            PR="$(gh pr create --head "$BRANCH" --base "${{ github.event.repository.default_branch }}" --title "Automatic canonical update" --body "Automated trusted-source update from \`$CONFIG\`.")"
-          fi
-          printf '%s\n' "$PR" > automatic-update-pr-url.txt
-      - name: Independently verify PR and enable auto-merge
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          PR="$(cat automatic-update-pr-url.txt)"
-          test "$(gh pr view "$PR" --json baseRefName --jq .baseRefName)" = "${{ github.event.repository.default_branch }}"
-          test "$(gh pr view "$PR" --json headRefOid --jq .headRefOid)" = "$(git rev-parse HEAD)"
-          python scripts/verify_automatic_update_boundary.py --base "${{ github.event.repository.default_branch }}"
-          test "$(gh pr checks "$PR" --required --json state --jq 'all(.[]; .state == "SUCCESS")')" = true
-          gh pr merge "$PR" --auto --squash --delete-branch=false
-      - name: Retain diagnostics
+      - name: Retain planning diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: automatic-canonical-update-${{ github.run_id }}-${{ github.run_attempt }}
-          path: automatic-update-*.json
+          name: canonical-plan-${{ github.run_id }}-${{ github.run_attempt }}
+          path: automatic-update-plan*.json
+          if-no-files-found: warn
+
+  admit:
+    if: inputs.operation == 'admit'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Explicit owner action for the previously reviewed plan
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea9 # v7.0.1
+        env:
+          PYTHONPATH: src
+          UPDATE_CONFIG: ${{ inputs.config }}
+          EXPECTED_PLAN_ID: ${{ inputs.expected_plan_id }}
+          REVIEWED_REVISION: ${{ inputs.reviewed_revision }}
+        with:
+          script: |
+            const fs = require('fs');
+            const {spawnSync} = require('child_process');
+            try {
+              const token = await core.getIDToken('mtg-lab:canonical-admission');
+              core.setSecret(token);
+              const result = spawnSync('python', [
+                'scripts/automatic_canonical_update.py', 'admit', '--github-owner-entry',
+                '--config=' + process.env.UPDATE_CONFIG,
+                '--expected-plan-id=' + process.env.EXPECTED_PLAN_ID,
+                '--reviewed-revision=' + process.env.REVIEWED_REVISION
+              ], {encoding: 'utf8', shell: false,
+                  env: {...process.env, MTG_LAB_ADMISSION_OIDC: token}});
+              let report;
+              try {
+                report = JSON.parse(result.stdout);
+                if (!report || !['blocked', 'validated-local-only'].includes(report.status)) throw new Error();
+              } catch (error) {
+                report = {status: 'blocked', error: 'Entry point produced no valid structured report'};
+              }
+              const serialized = JSON.stringify(report);
+              fs.writeFileSync('automatic-update-result.json', serialized);
+              core.info(serialized);
+              if (result.status !== 0 || report.status !== 'validated-local-only') core.setFailed('Owner admission entry point blocked; inspect its report');
+            } catch (error) {
+              fs.writeFileSync('automatic-update-result.json', JSON.stringify({status: 'blocked', error: 'GitHub platform identity acquisition failed'}));
+              core.setFailed('GitHub platform identity acquisition failed');
+            }
+      - name: Check local delta formatting (publication remains disabled)
+        run: git diff --check
+      - name: Retain bounded entry diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-admission-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: automatic-update-result.json
           if-no-files-found: warn

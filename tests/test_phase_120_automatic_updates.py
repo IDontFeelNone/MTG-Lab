@@ -136,11 +136,14 @@ class AutomaticUpdateTests(unittest.TestCase):
             return subprocess.CompletedProcess(command, 0, "", "")
         self.assertTrue(GitHubPersistence(reuse).persist("canonical-update/x", "main", "title", "body")["reused"])
 
-    def test_workflow_has_merge_gates_and_diagnostic_retention(self):
+    def test_workflow_defaults_to_planning_and_has_no_publication_or_merge(self):
         workflow = (ROOT / ".github/workflows/automatic-canonical-update.yml").read_text()
-        for token in ("git diff --check", "headRefOid", "baseRefName", "--auto", "if: always()", "push origin"):
+        for token in ("git diff --check", "default: plan", "--expected-plan-id", "id-token: write",
+                      "if: always()", "Publication is DISABLED", "--github-owner-entry"):
             self.assertIn(token, workflow)
-        self.assertNotIn("--force", workflow); self.assertNotIn("--admin", workflow)
+        for token in ("gh pr merge", "gh pr review", "--auto", "git push", "git reset", "contents: write",
+                      "pull-requests: write", "--force", "--admin"):
+            self.assertNotIn(token, workflow)
 
 
 if __name__ == "__main__": unittest.main()
