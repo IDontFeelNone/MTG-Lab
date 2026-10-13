@@ -182,7 +182,8 @@ class CanonicalCollectionResolver:
                 if str(supplied[name]).casefold() != str(printing.get("set_id", "")).casefold(): conflicts.append(name)
         language = supplied.get("language")
         if language and str(language).casefold() not in {"unknown", "null"}:
-            language_key = lambda value: {"english": "en"}.get(str(value).casefold(), str(value).casefold())
+            language_key = lambda value: {"english": "en", "japanese": "ja"}.get(
+                str(value).casefold(), str(value).casefold())
             if language_key(language) != language_key(printing.get("language")): conflicts.append("language")
         finish = supplied.get("finish")
         if finish and str(finish).casefold() not in {"unknown", "null"}:

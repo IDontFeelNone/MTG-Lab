@@ -291,9 +291,10 @@ class CardAcquisitionAdapter:
         cards = canonical["cards"]
         for card_id, dossier in cards.items():
             if not isinstance(dossier, dict) or set(dossier) != {"dossier_id", "card_identity", "source"} or \
-                    dossier["card_identity"].get("card_id") != card_id or \
-                    dossier["source"].get("oracle_id") != card_id:
+                    not isinstance(dossier["card_identity"], dict) or \
+                    dossier["card_identity"].get("card_id") != card_id:
                 raise CardAcquisitionError("pinned canonical mechanical Card binding mismatch")
+            cls._mechanical_source_status(dossier["source"], card_id)
         adapter.mechanical = SimpleNamespace(snapshot_id=canonical["snapshot_id"], cards=cards,
             dossier=lambda card_id: SimpleNamespace(to_dict=lambda: thaw(freeze(cards[card_id]))))
         adapter.printings = {}
@@ -559,6 +560,40 @@ class CardAcquisitionAdapter:
         if "treatment" not in value or value["treatment"] != canonical.get("treatment"):
             raise CardAcquisitionError("treatment is unsupported or differs from canonical evidence")
 
+    @staticmethod
+    def _mechanical_source_status(source: Any, card_id: str) -> str | None:
+        """Separate ordinary unbound coverage from a corrupt claimed binding.
+
+        Missing/ambiguous dossiers do not have a provider row identity, digest or
+        index. Those fields cannot be synthesized just to create an evidence
+        reference. A source claiming a unique row must instead be complete.
+        """
+        if not isinstance(source, dict):
+            raise CardAcquisitionError("invalid mechanical source binding")
+        resolution = source.get("resolution")
+        matches = source.get("matching_provider_record_ids")
+        row_keys = {"oracle_id", "provider_record_id", "record_content_identity", "source_record_index"}
+        if not isinstance(matches, list) or any(not _known_text(x) for x in matches) or \
+                len(matches) != len(set(matches)):
+            raise CardAcquisitionError("invalid mechanical source binding")
+        for key in ("acquisition_run_id", "source_timestamp", "retained_source_reference"):
+            if not _known_text(source.get(key)):
+                raise CardAcquisitionError("invalid mechanical source binding metadata")
+        _time(source["source_timestamp"])
+        if resolution in {"missing", "ambiguous"}:
+            if row_keys.intersection(source) or (resolution == "missing" and matches) or \
+                    (resolution == "ambiguous" and len(matches) < 2):
+                raise CardAcquisitionError("invalid incomplete mechanical source binding")
+            return "source_binding_" + resolution
+        if resolution != "unique" or source.get("oracle_id") != card_id or \
+                matches != [source.get("provider_record_id")] or \
+                not isinstance(source.get("record_content_identity"), str) or \
+                not re.fullmatch(r"sha256:[0-9a-f]{64}", source["record_content_identity"]) or \
+                isinstance(source.get("source_record_index"), bool) or \
+                not isinstance(source.get("source_record_index"), int) or source["source_record_index"] < 0:
+            raise CardAcquisitionError("invalid unique mechanical source binding")
+        return None
+
     def _candidate(self, candidate, packet, context, ownership, sources, evidence, blockers,
                    offer_ids, now, scale, budget):
         card_id, pid = candidate.get("card_id"), candidate.get("printing_id")
@@ -567,12 +602,7 @@ class CardAcquisitionAdapter:
             raise CardAcquisitionError("exact linked canonical production Card and Printing required")
         mechanical = self.mechanical.dossier(card_id).to_dict()
         source = mechanical["source"]
-        ref = EvidenceReference(mechanical["dossier_id"], source["acquisition_run_id"],
-            source["record_content_identity"], source["source_timestamp"],
-            source["retained_source_reference"] + f"#/{source['source_record_index']}")
-        if any(e.evidence_id == ref.evidence_id and e != ref for e in evidence):
-            raise CardAcquisitionError("conflicting evidence identity")
-        evidence.append(ref)
+        source_reason = self._mechanical_source_status(source, card_id)
         row = {"card_id": card_id, "card_name": mechanical["card_identity"]["name"],
             "printing_id": pid, "printing_values": thaw(freeze(self.printings[pid].canonical_values)),
             "mechanical_dossier_id": mechanical["dossier_id"],
@@ -583,6 +613,17 @@ class CardAcquisitionAdapter:
             "remaining_budget": None, "offer_id": None, "exclusion_reasons": [],
             "objective_eligibility": "unknown", "unsupported_dimensions": ["competitive_strength", "future_prices", "approved_pending_roles"]}
         row["canonical_printing_provenance"] = self._printing_provenance(self.printings[pid])
+        if source_reason:
+            row["source_status"] = {"status": "incomplete", "reason": source_reason}
+            row["exclusion_reasons"].append(source_reason)
+            blockers.append(f"mechanical_source:{card_id}:{source_reason}")
+            return row
+        ref = EvidenceReference(mechanical["dossier_id"], source["acquisition_run_id"],
+            source["record_content_identity"], source["source_timestamp"],
+            source["retained_source_reference"] + f"#/{source['source_record_index']}")
+        if any(e.evidence_id == ref.evidence_id and e != ref for e in evidence):
+            raise CardAcquisitionError("conflicting evidence identity")
+        evidence.append(ref)
         try:
             required = {k: candidate[k] for k in _REQUIREMENTS}
             self._bound({"value": required, "binding": candidate.get("requirements_binding")}, sources,

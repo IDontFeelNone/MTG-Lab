@@ -1,5 +1,6 @@
 """Phase 120 reusable automatic canonical update coverage (unittest only)."""
 import json
+from contextlib import contextmanager
 from pathlib import Path
 import shutil
 import subprocess
@@ -7,7 +8,7 @@ import tempfile
 import unittest
 
 from production_evidence.automatic_updates import (
-    AutomaticCanonicalUpdate, GitHubPersistence, STAGES, TargetDescriptor, digest,
+    AutomaticCanonicalUpdate, GitHubPersistence, IsolatedAdmissionTestBoundary, STAGES, TargetDescriptor, digest,
 )
 from production_evidence.repository import EvidenceError
 
@@ -15,15 +16,29 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config/automatic_updates/mb2-first-batch.json"
 
 
+@contextmanager
+def isolated_directory():
+    """Nonserialized authorization exists only while this temporary root lives."""
+    temporary = tempfile.TemporaryDirectory()
+    try:
+        yield temporary.name, IsolatedAdmissionTestBoundary(temporary)
+    finally:
+        temporary.cleanup()
+
+
 class AutomaticUpdateTests(unittest.TestCase):
     def synthetic(self, directory, *, code="NEW", provider="trusted", classifications=None):
         root = Path(directory); (root / "data/canonical").mkdir(parents=True)
+        (root / "data/canonical/games/magic").mkdir(parents=True)
+        (root / "data/canonical/games/magic/game.json").write_text(json.dumps({"id": "magic", "name": "Fictional test game"}))
         (root / "data/canonical/state.json").write_text('{"card": {}, "finish": {}, "identifier": {}, "printing": {}}\n')
         candidates = classifications or [
             {"candidate_identifier": "card:1", "entity_type": "card", "validation_state": "validated",
-             "mapped_fields": {"card_reference": "c1", "set_code": code}, "provenance": {"provider": provider}},
+             "mapped_fields": {"card_reference": "c1", "name": "Fictional update Card", "set_code": code}, "provenance": {"provider": provider}},
             {"candidate_identifier": "printing:1", "entity_type": "printing", "validation_state": "validated",
-             "mapped_fields": {"uuid": "p1", "card_reference": "c1", "set_code": code}, "provenance": {"provider": provider}},
+             "mapped_fields": {"uuid": "p1", "card_reference": "c1", "set_code": code, "collector_number": "1", "language": "en", "finishes": ["nonfoil"]}, "provenance": {"provider": provider}},
+            {"candidate_identifier": "finish:nonfoil", "entity_type": "finish", "validation_state": "validated",
+             "mapped_fields": {"value": "nonfoil", "set_code": code}, "provenance": {"provider": provider}},
         ]
         ids = [row["candidate_identifier"] for row in candidates]
         payload = {"candidate_ids": ids, "candidate_payloads": candidates, "target_set_code": code}
@@ -57,24 +72,29 @@ class AutomaticUpdateTests(unittest.TestCase):
         self.assertEqual(engine.verify()["canonical_state_digest"], phase136["canonical_post_state_digest"])
 
     def test_exact_stage_order_and_interrupted_run_recovery(self):
-        with tempfile.TemporaryDirectory() as temporary:
+        with isolated_directory() as (temporary, boundary):
             root, config = self.synthetic(temporary); observed = []
-            handlers = {stage: (lambda context, stage=stage: observed.append(stage) or {"ok": True}) for stage in STAGES}
-            engine = AutomaticCanonicalUpdate(root, config, handlers=handlers)
+            def observe(context, stage):
+                observed.append(stage)
+                # Observe the real stages. Fake-success checkpoints cannot
+                # stand in for integrity, authorization or consumer results.
+                return getattr(context["engine"], "_stage_" + stage)(context)
+            handlers = {stage: (lambda context, stage=stage: observe(context, stage)) for stage in STAGES}
+            engine = AutomaticCanonicalUpdate(root, config, handlers=handlers, review_boundary=boundary)
             engine.execute(stop_after=STAGES[4]); self.assertEqual(observed, list(STAGES[:5]))
             engine.execute(); self.assertEqual(observed, list(STAGES)); self.assertTrue(engine.status()["complete"])
             self.assertTrue(engine.replay()["idempotent"])
 
     def test_failure_stops_later_stages_and_retains_report(self):
-        with tempfile.TemporaryDirectory() as temporary:
+        with isolated_directory() as (temporary, boundary):
             root, config = self.synthetic(temporary); observed = []
             def handler(stage):
                 def run(context):
                     observed.append(stage)
                     if stage == STAGES[3]: raise EvidenceError("isolated failure")
-                    return {"ok": True}
+                    return getattr(context["engine"], "_stage_" + stage)(context)
                 return run
-            engine = AutomaticCanonicalUpdate(root, config, handlers={x: handler(x) for x in STAGES})
+            engine = AutomaticCanonicalUpdate(root, config, handlers={x: handler(x) for x in STAGES}, review_boundary=boundary)
             with self.assertRaises(EvidenceError): engine.execute()
             self.assertEqual(observed, list(STAGES[:4]))
             self.assertTrue((engine.run_root / "blocked-report.json").is_file())
@@ -82,11 +102,11 @@ class AutomaticUpdateTests(unittest.TestCase):
     def test_trust_isolation_classification_dependency_and_drift_fail_closed(self):
         cases = ("trust", "isolation", "quarantine", "orphan", "drift")
         for case in cases:
-            with self.subTest(case=case), tempfile.TemporaryDirectory() as temporary:
+            with self.subTest(case=case), isolated_directory() as (temporary, boundary):
                 rows = None
                 if case == "quarantine": rows = [{"candidate_identifier": "x", "entity_type": "card", "final_classification": "quarantined", "mapped_fields": {"card_reference": "c", "set_code": "NEW"}, "provenance": {"provider": "trusted"}}]
                 root, config = self.synthetic(temporary, provider="bad" if case == "trust" else "trusted", classifications=rows)
-                engine = AutomaticCanonicalUpdate(root, config)
+                engine = AutomaticCanonicalUpdate(root, config, review_boundary=boundary)
                 if case == "isolation":
                     value = json.loads((root / "data/evidence/payload.json").read_text()); value["candidate_payloads"][0]["mapped_fields"]["set_code"] = "OTHER"; (root / "data/evidence/payload.json").write_text(json.dumps(value))
                 elif case == "orphan":
@@ -95,10 +115,10 @@ class AutomaticUpdateTests(unittest.TestCase):
                 with self.assertRaises(EvidenceError): engine.execute()
 
     def test_conflicting_checkpoint_and_immutable_audit_fail_closed(self):
-        with tempfile.TemporaryDirectory() as temporary:
+        with isolated_directory() as (temporary, boundary):
             root, config = self.synthetic(temporary)
-            handlers = {stage: (lambda context: {"ok": True}) for stage in STAGES}
-            engine = AutomaticCanonicalUpdate(root, config, handlers=handlers); engine.execute(stop_after=STAGES[0])
+            handlers = {stage: (lambda context, stage=stage: getattr(context["engine"], "_stage_" + stage)(context)) for stage in STAGES}
+            engine = AutomaticCanonicalUpdate(root, config, handlers=handlers, review_boundary=boundary); engine.execute(stop_after=STAGES[0])
             checkpoint = engine._checkpoint(STAGES[0]); value = json.loads(checkpoint.read_text()); value["details"] = {"tampered": True}; checkpoint.write_text(json.dumps(value))
             with self.assertRaises(EvidenceError): engine.execute()
 
