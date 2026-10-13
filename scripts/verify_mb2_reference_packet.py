@@ -23,6 +23,8 @@ from validation import validate_document
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKET = ROOT / "reference-reviews/mb2-reference-coverage"
+HISTORICAL_PACKET_PREFIX = Path("reference-reviews/mb2-reference-coverage")
+HISTORICAL_REPOSITORY_FILES = {"docs/MB2_REFERENCE_COVERAGE_REVIEW.md"}
 REVISION = "structured-2026-10-13"
 SNAPSHOT = "sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7"
 
@@ -44,10 +46,18 @@ def read(path):
     return json.loads(path.read_bytes())
 
 
+def bound_manifest_path(root, name):
+    relative = Path(name)
+    require(not relative.is_absolute() and ".." not in relative.parts, "manifest path escape")
+    path = (root / relative).resolve()
+    require(path.is_relative_to(root.resolve()), "manifest path escape")
+    return path
+
+
 def check_manifest(root, manifest):
     for name, ref in manifest["files"].items():
-        path = (root / name).resolve()
-        require(path.is_relative_to(root.resolve()), "manifest path escape")
+        path = bound_manifest_path(root, name)
+        require(path.is_file(), f"manifest-listed file missing: {name}")
         raw = path.read_bytes()
         require(len(raw) == ref["bytes"] and digest(raw) == ref["sha256"],
                 f"manifest integrity mismatch: {name}")
@@ -59,7 +69,20 @@ def check_manifest(root, manifest):
 
 def check_original(packet=PACKET, root=ROOT):
     manifest = read(packet / "review-manifest.json")
-    check_manifest(root, manifest)
+    # The retained manifest uses repository-relative names. Rebase only its
+    # packet entries to the actual supplied packet, never a checkout fallback.
+    packet_files, repository_files = {}, {}
+    for name, ref in manifest["files"].items():
+        relative = Path(name)
+        require(not relative.is_absolute() and ".." not in relative.parts, "manifest path escape")
+        if relative.is_relative_to(HISTORICAL_PACKET_PREFIX):
+            packet_files[relative.relative_to(HISTORICAL_PACKET_PREFIX).as_posix()] = ref
+        else:
+            require(name in HISTORICAL_REPOSITORY_FILES,
+                    f"unexpected historical repository dependency: {name}")
+            repository_files[name] = ref
+    check_manifest(packet, {"files": packet_files})
+    check_manifest(root, {"files": repository_files})
     require(manifest["review_status"] == "pending" and manifest["human_approvals"] == 0
             and manifest["new_entity_candidate_set"] == []
             and not manifest["entity_admission_ready"], "false historical approval claim")
@@ -93,7 +116,7 @@ def check_original(packet=PACKET, root=ROOT):
     require(reuse["canonical_snapshot_id"] == SNAPSHOT, "snapshot binding mismatch")
     require(len(reuse["references"]) == 60, "existing reference count mismatch")
     for ref in reuse["references"]:
-        source_raw = (root / ref["source_reference"]).read_bytes()
+        source_raw = bound_manifest_path(root, ref["source_reference"]).read_bytes()
         require(digest(source_raw) == ref["source_sha256"], "existing source digest mismatch")
         row = json.loads(source_raw)[ref["source_record_index"]]
         require("sha256:" + digest(deterministic_json(row).encode()) == ref["record_content_identity"],

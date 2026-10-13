@@ -9,8 +9,8 @@
         "errors": 0,
         "exit_code": 0,
         "failures": 0,
-        "passed": 12,
-        "seconds": 87.693
+        "passed": 17,
+        "seconds": 93.335
       }
     },
     {
@@ -19,8 +19,8 @@
         "errors": 0,
         "exit_code": 0,
         "failures": 0,
-        "passed": 807,
-        "seconds": 725.85
+        "passed": 812,
+        "seconds": 769.975
       }
     },
     {
@@ -37,11 +37,11 @@
       }
     },
     {
-      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/mtglab-compile python -m compileall -q src tests scripts",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/mtglab-repair-compile python -m compileall -q src tests scripts",
       "exit_code": 0
     },
     {
-      "command": "git diff --check; git diff --cached --check",
+      "command": "git diff --check",
       "exit_code": 0
     }
   ],
@@ -56,15 +56,263 @@
     "9e2a5eff32704ab2c288608bb2397858481a44b8": {
       "byte_identical": true,
       "files_checked": 2200
+    },
+    "f2073705d1e55e091ae3e85b44514a022364d9cd": {
+      "byte_identical": true,
+      "excluded_repair_files": [
+        "scripts/verify_mb2_reference_packet.py",
+        "tests/test_mb2_reference_packet.py",
+        "docs/MB2_REFERENCE_STRUCTURED_VALIDATION.json"
+      ],
+      "files_checked": 2249
     }
+  },
+  "previous_validation_record": {
+    "commit": "f2073705d1e55e091ae3e85b44514a022364d9cd",
+    "path": "docs/MB2_REFERENCE_STRUCTURED_VALIDATION.json",
+    "retained_results": {
+      "architecture_v12_changed": false,
+      "baseline_main": "9e2a5eff32704ab2c288608bb2397858481a44b8",
+      "canonical_write": false,
+      "commands": [
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m unittest discover -s tests -p 'test_mb2_reference_packet.py' -v",
+          "result": {
+            "errors": 0,
+            "exit_code": 0,
+            "failures": 0,
+            "passed": 12,
+            "seconds": 87.693
+          }
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m unittest discover -s tests -p 'test_*.py' -v",
+          "result": {
+            "errors": 0,
+            "exit_code": 0,
+            "failures": 0,
+            "passed": 807,
+            "seconds": 725.85
+          }
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python scripts/verify_mb2_reference_packet.py --check",
+          "exit_code": 0,
+          "result": {
+            "candidate_counts": {
+              "card": 273,
+              "identifier": 273,
+              "printing": 273
+            },
+            "prepared_artifacts": 5,
+            "verified": true
+          }
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/mtglab-compile python -m compileall -q src tests scripts",
+          "exit_code": 0
+        },
+        {
+          "command": "git diff --check; git diff --cached --check",
+          "exit_code": 0
+        }
+      ],
+      "exact_existing_printing_namespace_readback_passed": 60,
+      "human_approvals": 0,
+      "original_pr_head": "24719e132ad395e3bbdb762bb9a2adad2aaebf7d",
+      "preservation": {
+        "24719e132ad395e3bbdb762bb9a2adad2aaebf7d": {
+          "byte_identical": true,
+          "files_checked": 2216
+        },
+        "9e2a5eff32704ab2c288608bb2397858481a44b8": {
+          "byte_identical": true,
+          "files_checked": 2200
+        }
+      },
+      "privacy": {
+        "only_new_public_packet_documentation_and_offline_tests": true,
+        "private_inventory_declarations_quantities_crosswalks_audits_published": false
+      },
+      "promotion_performed": false,
+      "recorded_at": "2026-10-13T05:07:25.923462+00:00",
+      "review_status": "pending",
+      "test_input_files": {
+        "docs/MB2_REFERENCE_STRUCTURED_REVIEW.md": {
+          "bytes": 8440,
+          "sha256": "793114988bca58cae7b1000d3f3849bfd5407ce5eee354c70a7afd1aef8d9c7e"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/candidate-preparation.json": {
+          "bytes": 7273002,
+          "sha256": "158440b59b45c0d50e81f4d8345f4ea637e6d5bbef6d77400a3a2300738c11b8"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/correspondence.json": {
+          "bytes": 238962,
+          "sha256": "163987b2235e2fb6252e3504a6d2413fba7987a487b8989ab8c56c4bfe0a21e5"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/manifest.json": {
+          "bytes": 5943,
+          "sha256": "7a7633545d699828665339a7f112d8d9942828b1918c2bdd695fddafa988f90e"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/parsed-records.json": {
+          "bytes": 794377,
+          "sha256": "1daf8271c15162b3b23c74836edac0f4e6d7e5d2994702db3fbb153b242e9a7b"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/acquisition-result.json": {
+          "bytes": 158,
+          "sha256": "30b96dc97856980bbd5a9a0c860a6f2d171f4835d05a6ead87f92552558b7429"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/checksum.sha256": {
+          "bytes": 78,
+          "sha256": "575a25229ff73e808b1c1435b0df9916d5f4e4e88e0900c892b02d7303411ddf"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/manifest.json": {
+          "bytes": 660,
+          "sha256": "26eea426b39b39410d2ec7e985a71cc60785752cb44ad4c330cae0927bdd6ece"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/payload.bin": {
+          "bytes": 1542,
+          "sha256": "de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/provider-metadata.json": {
+          "bytes": 278,
+          "sha256": "cf880bc8e03bc0efd434fc4d17781442579345f14b36a4274f03fb66f44cfe49"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/acquisition-result.json": {
+          "bytes": 158,
+          "sha256": "4d1ee1a4609c6126f29213406d905f8752ac4fc52e4da1dcc0a300e65fa42368"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/checksum.sha256": {
+          "bytes": 78,
+          "sha256": "e6978922795603856d555a79037aea9d371cf0231afd3de8077565009cb8ae15"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/manifest.json": {
+          "bytes": 643,
+          "sha256": "0384586cb6d96c8bd327a58261304edbb6c6c49dfe0efc7599a48a353d932083"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/payload.bin": {
+          "bytes": 1195,
+          "sha256": "6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/provider-metadata.json": {
+          "bytes": 398,
+          "sha256": "cc7064290c09420538fe97a82b77a9be392cd23450b2d522580dbc962d6d6e6f"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/acquisition-result.json": {
+          "bytes": 160,
+          "sha256": "cb0d3601b55aeb73d1b229e9515f4e5b3a4415c1edc35e1e31589db9525e34ee"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/checksum.sha256": {
+          "bytes": 78,
+          "sha256": "8c9facb9b3c6e77bc201ff993e29e19f4b54a1464a66088a0e0ddaa1c5f3b8b3"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/manifest.json": {
+          "bytes": 667,
+          "sha256": "4a4456785af2437a60c90818372852cde9905d7cd2cf7a2d000ef1e98d2a3753"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/payload.bin": {
+          "bytes": 744807,
+          "sha256": "aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/provider-metadata.json": {
+          "bytes": 64289,
+          "sha256": "16c0acafd0a6c28ad8ffce78db44803d66742e5c076f49937e216a25efd5cd53"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/acquisition-result.json": {
+          "bytes": 157,
+          "sha256": "ca688a3956525faff30ee828be4184aa0dbdfd4473db9bf4e65e91f8f5a53cfb"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/checksum.sha256": {
+          "bytes": 78,
+          "sha256": "1521fa703eb91808b1bb5a1b35985c0b757a52b3296a11612019baf82077ddf7"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/manifest.json": {
+          "bytes": 653,
+          "sha256": "9ce120e8e95532592099ad4334f2cd722f98efab36f89bb3b66661fdafff3526"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/payload.bin": {
+          "bytes": 390,
+          "sha256": "8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/provider-metadata.json": {
+          "bytes": 146,
+          "sha256": "3a1002564218f12d264777f93409ec2a2e92f597045688f2cef4561cf5e328c2"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/acquisition-result.json": {
+          "bytes": 160,
+          "sha256": "777bad28b6826ff892bfd405692fa4736d5d799f4fd150c0025d2103d3dcf021"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/checksum.sha256": {
+          "bytes": 78,
+          "sha256": "3b1eedccb68ab1a95374f06621ccf6f7ec6ed611f5dc757bbd6b4d42e288d4e2"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/manifest.json": {
+          "bytes": 660,
+          "sha256": "24d576b1a24244d6a1578e825263e088c44fa0bb09c6258cdd37437e985bb401"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/payload.bin": {
+          "bytes": 166185,
+          "sha256": "8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/provider-metadata.json": {
+          "bytes": 408,
+          "sha256": "4f7007bf84de4641d07ef8d06a94861b1a907ae36edf6bacfe7bae4a295c7a7d"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/review-summary.json": {
+          "bytes": 315922,
+          "sha256": "bbec717ec36755aaac5057b63607d85d463aabffe28c69075fc1f5ed4549920f"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/source-receipts.json": {
+          "bytes": 66564,
+          "sha256": "8113a8be3b65ad010544778956927e6b82d5ab65bef71cbe51e0c14d9dd52b48"
+        },
+        "reference-reviews/mb2-reference-coverage/structured-2026-10-13/source-record.json": {
+          "bytes": 867,
+          "sha256": "068f20ecb1e62c881b8146f6a31ac96e1f00b9a959d8e4350e891443cda35ad9"
+        },
+        "scripts/verify_mb2_reference_packet.py": {
+          "bytes": 20914,
+          "sha256": "84b4cbe7a75fa4dad88e92854f162fa3dfd6113ca752437c31b58ce07b932c94"
+        },
+        "tests/test_mb2_reference_packet.py": {
+          "bytes": 10760,
+          "sha256": "ef9b8ceead37a7f9ff642664930f1035e87d2d38b4a002c9bb1d11bd9f9ae34c"
+        }
+      }
+    },
+    "sha256": "99ec4c9605c13fcf781f8787d27115736678506eb1f5b2a900c05b6958e8f155"
   },
   "privacy": {
     "only_new_public_packet_documentation_and_offline_tests": true,
     "private_inventory_declarations_quantities_crosswalks_audits_published": false
   },
   "promotion_performed": false,
-  "recorded_at": "2026-10-13T05:07:25.923462+00:00",
+  "recorded_at": "2026-10-13T15:57:56.496454+00:00",
+  "repair_scope": [
+    "scripts/verify_mb2_reference_packet.py",
+    "tests/test_mb2_reference_packet.py",
+    "docs/MB2_REFERENCE_STRUCTURED_VALIDATION.json"
+  ],
+  "review_finding": {
+    "canonical_snapshot_bindings_changed": false,
+    "finding": "Historical manifest checked checkout files while later validation read the supplied packet.",
+    "fix": "Rebase historical packet-prefixed manifest entries to the supplied packet; bind the explicit review-document dependency to the specified repository root. Reject missing files, traversal and resolved symlink escapes; no checkout fallback.",
+    "full_verifier_regressions": [
+      "test_unchanged_relocated_packet_validates_against_repository_dependencies",
+      "test_schema_valid_historical_source_changes_rejected_in_relocated_packet (title and source_location)",
+      "test_missing_relocated_historical_file_rejected_without_checkout_fallback",
+      "test_historical_manifest_parent_path_escape_rejected_by_full_verifier",
+      "test_historical_packet_symlink_escape_rejected_by_full_verifier"
+    ],
+    "historical_manifest_rehashed": false,
+    "reviewed_head_reproduction": {
+      "missing_acquisition_limitations": "accepted by reviewed verifier; rejected by repaired verifier",
+      "source_location_change": "accepted by reviewed verifier; rejected by repaired verifier",
+      "title_change": "accepted by reviewed verifier; rejected by repaired verifier"
+    }
+  },
   "review_status": "pending",
+  "reviewed_head": "f2073705d1e55e091ae3e85b44514a022364d9cd",
   "test_input_files": {
     "docs/MB2_REFERENCE_STRUCTURED_REVIEW.md": {
       "bytes": 8440,
@@ -199,12 +447,12 @@
       "sha256": "068f20ecb1e62c881b8146f6a31ac96e1f00b9a959d8e4350e891443cda35ad9"
     },
     "scripts/verify_mb2_reference_packet.py": {
-      "bytes": 20914,
-      "sha256": "84b4cbe7a75fa4dad88e92854f162fa3dfd6113ca752437c31b58ce07b932c94"
+      "bytes": 22159,
+      "sha256": "3eaea99b9f1e9615f7583eea57148c7d89c3b126f613e220507a83f55df6ab6d"
     },
     "tests/test_mb2_reference_packet.py": {
-      "bytes": 10760,
-      "sha256": "ef9b8ceead37a7f9ff642664930f1035e87d2d38b4a002c9bb1d11bd9f9ae34c"
+      "bytes": 13819,
+      "sha256": "e8f33c2eb0b5267b7420f3eb48f57a17a5717fd2270df196fe6363b5785c4898"
     }
   }
 }

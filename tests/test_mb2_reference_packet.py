@@ -36,6 +36,62 @@ class MB2ReferencePacketTests(unittest.TestCase):
         for name, raw in self.documents.items():
             self.assertEqual((packet.PACKET / packet.REVISION / name).read_bytes(), raw)
 
+    def test_unchanged_relocated_packet_validates_against_repository_dependencies(self):
+        target = self.copy_packet()
+        self.assertNotEqual(target.resolve(), packet.PACKET.resolve())
+        self.assertEqual(packet.verify(target, root=packet.ROOT), self.summary)
+
+    def test_schema_valid_historical_source_changes_rejected_in_relocated_packet(self):
+        changes = {
+            "title": "Altered historical source title",
+            "source_location": "https://magic.wizards.com/en/news/feature/altered-source",
+        }
+        for field, value in changes.items():
+            with self.subTest(field=field):
+                target = self.copy_packet()
+                path = target / "source-record.json"
+                source = packet.read(path)
+                source[field] = value
+                # Both substitutions still satisfy the source-record schema;
+                # the unchanged historical manifest must reject their bytes.
+                packet.validate_document(source, "source-record")
+                path.write_bytes(packet.encoded(source))
+                with self.assertRaisesRegex(ValueError, "manifest integrity mismatch"):
+                    packet.verify(target, root=packet.ROOT)
+
+    def test_missing_relocated_historical_file_rejected_without_checkout_fallback(self):
+        target = self.copy_packet()
+        name = "acquisition-limitations.json"
+        self.assertTrue((packet.PACKET / name).is_file())
+        historical_manifest = packet.read(target / "review-manifest.json")
+        self.assertIn(f"reference-reviews/mb2-reference-coverage/{name}",
+                      historical_manifest["files"])
+        (target / name).unlink()
+        with self.assertRaisesRegex(ValueError, "manifest.*missing"):
+            packet.verify(target, root=packet.ROOT)
+
+    def test_historical_manifest_parent_path_escape_rejected_by_full_verifier(self):
+        target = self.copy_packet()
+        path = target / "review-manifest.json"
+        manifest = packet.read(path)
+        key = "reference-reviews/mb2-reference-coverage/source-record.json"
+        # Resolving this repository-relative spelling points at the original
+        # checkout file. It must not serve as an alternate packet source.
+        escaped = "reference-reviews/mb2-reference-coverage/../mb2-reference-coverage/source-record.json"
+        manifest["files"][escaped] = manifest["files"].pop(key)
+        path.write_bytes(packet.encoded(manifest))
+        with self.assertRaisesRegex(ValueError, "manifest path escape"):
+            packet.verify(target, root=packet.ROOT)
+
+    def test_historical_packet_symlink_escape_rejected_by_full_verifier(self):
+        target = self.copy_packet()
+        path = target / "source-record.json"
+        path.unlink()
+        path.symlink_to(packet.PACKET / "source-record.json")
+        # The target has the exact expected bytes, but lies outside this copy.
+        with self.assertRaisesRegex(ValueError, "manifest path escape"):
+            packet.verify(target, root=packet.ROOT)
+
     def test_source_to_parsed_counts_identity_and_pending_provenance(self):
         parsed = json.loads(self.documents["parsed-records.json"])
         candidates = json.loads(self.documents["candidate-preparation.json"])
@@ -193,8 +249,8 @@ class MB2ReferencePacketTests(unittest.TestCase):
                 refs = packet.read(path)
                 refs["references"][0][key] = value
                 path.write_bytes(packet.encoded(refs))
-                with self.assertRaisesRegex(ValueError, "identity reference mismatch"):
-                    packet.check_original(target)
+                with self.assertRaisesRegex(ValueError, "manifest integrity mismatch"):
+                    packet.verify(target, root=packet.ROOT)
 
 
 if __name__ == "__main__":
