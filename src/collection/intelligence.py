@@ -254,8 +254,9 @@ def _result(row, status, reason, candidates, evidence=None):
     return result
 
 
-def create_snapshot(imported: Mapping[str, Any], resolution: Mapping[str, Any],
-                    snapshots_root: Path, snapshot_id: str | None = None) -> dict:
+def build_snapshot(imported: Mapping[str, Any], resolution: Mapping[str, Any],
+                   snapshot_id: str | None = None) -> dict:
+    """Build the existing snapshot document without publishing any files."""
     payload = {"schema_version": SNAPSHOT_VERSION, "collection_id": imported["collection_id"],
                "source_import_digest": imported["source_import_digest"],
                "canonical_digest": resolution["canonical_digest"], "source": imported["source"],
@@ -277,6 +278,12 @@ def create_snapshot(imported: Mapping[str, Any], resolution: Mapping[str, Any],
     identity_digest = digest(payload)
     payload["snapshot_id"] = snapshot_id or identity_digest[:24]
     payload["snapshot_digest"] = digest(payload)
+    return payload
+
+
+def create_snapshot(imported: Mapping[str, Any], resolution: Mapping[str, Any],
+                    snapshots_root: Path, snapshot_id: str | None = None) -> dict:
+    payload = build_snapshot(imported, resolution, snapshot_id)
     root = Path(snapshots_root); root.mkdir(parents=True, exist_ok=True)
     path = root / f"{payload['snapshot_id']}.json"; content = canonical_json(payload)
     if path.exists():

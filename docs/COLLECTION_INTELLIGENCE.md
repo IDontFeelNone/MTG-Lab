@@ -1,10 +1,18 @@
 # Collection Intelligence Foundation
 
+## Collection audit and personal review history
+
+Canonical baseline `15e19b84701dd47970a948485683f73a687be9d2` includes merged PR #169's production identity resolver and source-replayed acquisition repair. The [bounded collection audit pilot](COLLECTION_AUDIT_PILOT.md) now projects the existing immutable ownership snapshots, preserving source-byte provenance, exact identities, physical organization, unresolved quantities, and append-only personal Card assessment history. It adds no parallel ownership store and leaves typed Collection Engine operations unchanged.
+
+Organization annotations reuse existing row provenance. Storage classification and location remain independent of review status or strategic suitability. Current and historical assessment subjects must reproduce their retained import sources through the canonical resolver before projection or persistence. Snapshot drift fails closed; old source and history files remain retained for explicit reconciliation. Personal assessments do not approve canonical facts, pending roles, or acquisition advice.
+
+The isolated fixture declares 360 fictional copies, including duplicates and unresolved identities. No complete real collection is retained: six partial unverified opening reports account for 90 positions only. The real import requires an exhaustive source-bound inventory and verifiable prior reviews. Historical acquisition-pilot boundaries below describe that milestone's original scope; the audit adds only the bounded functionality described above.
+
 ## Current production identity resolution
 
 The bounded [Card acquisition pilot](CARD_ACQUISITION_PILOT.md), based on merged PR #168 at `3cf6ad35fcb54ed5a4b640e36af6fa2ecf99a747`, repairs `CanonicalCollectionResolver` to consume the existing canonical query projection. Its current census is 384 production Cards and 913 production Printings plus 15 legacy seed Cards/Printings. Exact production Printing resolution preserves dimensions and compact source/audit references; snapshot identity covers promoted canonical state and provenance. Name ambiguity and contradictory production identity/dimension inputs remain explicit.
 
-This repairs the Collection Intelligence import/snapshot resolver available for production identity imports. The pilot independently validates its direct source-bound ownership declaration against the same canonical query projection. The separate typed `CollectionService` repository path is unchanged. No real user collection is retained, and the pilot's complete ownership input is synthetic. Full collection inventory, sorting/reassessment history and production collection management are outside this milestone.
+This repairs the Collection Intelligence import/snapshot resolver available for production identity imports. The acquisition pilot independently validates its direct source-bound ownership declaration against the same canonical query projection. The separate typed `CollectionService` repository path is unchanged. No real user collection was retained by that milestone, and its complete ownership input remains synthetic. Its original exclusions of sorting/reassessment history are superseded only by the bounded audit described above; production collection management and automatic reassessment remain outside the pilot.
 
 The acquisition adapter uses direct acceptable-copy accounting and does not call deck allocation. Mixed `any`/`exact` deck requirements can still allocate one physical copy twice; that demonstrated defect remains explicitly out of scope. Collection valuation is descriptive and does not validate comparable current all-in acquisition offers. Neither helper is used to choose a purchase.
 

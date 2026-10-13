@@ -310,7 +310,12 @@ def pilot_explanation(dossier: dict) -> str:
 
 
 def protected_inventory() -> dict[str, str]:
-    files = [p for p in (ROOT / "data").rglob("*") if p.is_file() and not p.is_relative_to(REVIEW)]
+    # These downstream collection scopes were absent from this pilot's pinned
+    # baseline. Their later addition must not rewrite its historical manifest;
+    # the collection audit protects its own inputs and the original baseline.
+    later_collection_scopes = (ROOT / "data/collections", ROOT / "data/review/collection-audit-pilot")
+    files = [p for p in (ROOT / "data").rglob("*") if p.is_file() and not p.is_relative_to(REVIEW)
+             and not any(p.is_relative_to(scope) for scope in later_collection_scopes)]
     files.append(ROOT / "docs/ARCHITECTURE.md")
     return {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(files)}
 

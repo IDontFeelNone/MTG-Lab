@@ -2,6 +2,7 @@
 import argparse
 import json
 from pathlib import Path
+import re
 
 from dataset_import import DatasetRegistry, ImportManager
 from external_ingestion import (AdapterRegistry, ExternalDatasetIngestor, MTGJSONAdapter,
@@ -26,6 +27,8 @@ from collection import (CanonicalCollectionResolver, CollectionIntelligenceError
     collection_value, read_import, verify_snapshot)
 from market import MarketObservationRepository, MarketQueryService
 
+COLLECTION_DELIVERY_MAXIMUM_BYTES = 65536
+
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="mtg-lab")
@@ -39,6 +42,26 @@ def main(argv=None) -> int:
     for name in ("verify", "summary", "value", "duplicates", "owned", "missing", "unique", "unresolved", "acquisitions"):
         command = collection_commands.add_parser(name); command.add_argument("--snapshot", required=True)
         command.add_argument("--game", default="magic")
+    for name in ("audit", "assess"):
+        command = collection_commands.add_parser(name)
+        command.add_argument("--snapshot", required=True)
+        command.add_argument("--source", type=Path, required=True)
+        command.add_argument("--source-root", type=Path)
+        command.add_argument("--assessment-root", type=Path)
+        command.add_argument("--game", default="magic")
+        if name == "audit":
+            command.add_argument("--expected-total", type=int)
+            command.add_argument("--candidate-printing-id", action="append", default=[])
+            command.add_argument("--reasoning-context", action="store_true")
+            selector = command.add_mutually_exclusive_group()
+            selector.add_argument("--card-id")
+            selector.add_argument("--printing-id")
+            selector.add_argument("--card-name")
+            command.add_argument("--trust-retained-human-reviews", action="store_true",
+                help="Read source-bound approval records from a trusted collection repository; does not approve new records.")
+        else:
+            command.add_argument("--record-human-review", action="store_true",
+                help="Explicit trusted caller boundary for recording the supplied human approval; never inferred.")
     deck = commands.add_parser("deck")
     deck_commands = deck.add_subparsers(dest="deck_command", required=True)
     for name in ("compare", "missing", "acquisition-priorities"):
@@ -191,7 +214,64 @@ def main(argv=None) -> int:
         try:
             resolver = CanonicalCollectionResolver(args.game, args.data_root)
             snapshots = args.data_root / "collections" / "snapshots"
-            if args.command == "collection" and args.collection_command == "import":
+            if args.command == "collection" and args.collection_command in {"audit", "assess"}:
+                from collection.audit import CollectionAudit
+                from collection.assessments import CollectionAssessment, CollectionAssessmentRepository
+                from collection.intelligence import canonical_json
+                if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}", args.snapshot):
+                    raise CollectionIntelligenceError("invalid collection snapshot path identity")
+                snapshot_path = (snapshots / (args.snapshot + ".json")).resolve()
+                if not snapshot_path.is_relative_to(snapshots.resolve()):
+                    raise CollectionIntelligenceError("collection snapshot path escapes snapshot root")
+                snapshot = json.loads(snapshot_path.read_bytes())
+                if snapshot.get("snapshot_id") != args.snapshot:
+                    raise CollectionIntelligenceError("collection snapshot filename identity mismatch")
+                source_root = (args.source_root or args.data_root.resolve().parent).resolve()
+                source_path = args.source if args.source.is_absolute() else source_root / args.source
+                trusted = (args.record_human_review if args.collection_command == "assess"
+                           else args.trust_retained_human_reviews)
+                repository = CollectionAssessmentRepository(args.data_root, source_root,
+                    trusted_human_review=trusted, assessment_root=args.assessment_root, resolver=resolver)
+                to_append = None
+                if args.collection_command == "assess":
+                    assessment = CollectionAssessment.from_source(source_path, source_root,
+                        snapshot=snapshot, trusted_human_review=trusted)
+                    auditor = CollectionAudit(resolver)
+                    for record in (*repository.all(), assessment):
+                        original_source = record.to_dict()["snapshot_binding"]["source_import_reference"]
+                        verified_snapshot = auditor.verify_source_snapshot(record.snapshot,
+                            source_path=original_source["relative_path"], source_root=source_root)
+                    path = repository._path(assessment)
+                    to_append = assessment
+                    result = {"schema_version": "collection-assessment-receipt-v1",
+                        "assessment_id": assessment.to_dict()["assessment_id"],
+                        "collection_id": assessment.to_dict()["collection_id"],
+                        "status": assessment.to_dict()["status"],
+                        "human_review": assessment.to_dict()["human_review"],
+                        "source_classification": auditor._source_classification(verified_snapshot["source"]),
+                        "retained_path": path.resolve().relative_to(args.data_root.resolve()).as_posix(),
+                        "canonical_admission": False, "ownership_write": False,
+                        "role_approval": False, "automatic_reassessment": False}
+                else:
+                    if args.reasoning_context and any((args.card_id, args.printing_id, args.card_name)):
+                        raise CollectionIntelligenceError("choose a bounded context or an identity query")
+                    audit = CollectionAudit(resolver)
+                    dossier = audit.build(snapshot, source_path=source_path, source_root=source_root,
+                        assessments=repository.for_collection(snapshot["collection_id"]), expected_total=args.expected_total,
+                        candidate_printing_ids=args.candidate_printing_id)
+                    if any((args.card_id, args.printing_id, args.card_name)):
+                        result = audit.query(dossier, card_id=args.card_id,
+                            printing_id=args.printing_id, card_name=args.card_name)
+                    else:
+                        result = dossier.reasoning_context() if args.reasoning_context else dossier.to_dict()
+                payload = canonical_json(result)
+                if len(payload) > COLLECTION_DELIVERY_MAXIMUM_BYTES:
+                    raise CollectionIntelligenceError("collection delivery exceeds 65,536 bytes including trailing LF; use the bounded reasoning context")
+                if to_append is not None:
+                    repository.append(to_append)
+                print(payload.decode("utf-8"), end="")
+                return 0
+            elif args.command == "collection" and args.collection_command == "import":
                 imported = read_import(args.input); resolution = resolver.resolve(imported)
                 result = create_snapshot(imported, resolution, snapshots, args.snapshot_id)
             else:
@@ -222,6 +302,19 @@ def main(argv=None) -> int:
                                       "requirements":[x for x in comparisons[0]["requirements"] if x["missing_quantity"]]}
                         else: result = acquisition_priorities(comparisons)
         except (CollectionIntelligenceError, OSError, ValueError, KeyError, json.JSONDecodeError) as error:
+            if args.command == "collection" and args.collection_command in {"audit", "assess"}:
+                from collection.intelligence import canonical_json
+                diagnostic = {"valid": False, "error": str(error)}
+                try:
+                    payload = canonical_json(diagnostic)
+                except UnicodeError:
+                    payload = b""
+                if not payload or len(payload) > COLLECTION_DELIVERY_MAXIMUM_BYTES:
+                    payload = canonical_json({"valid": False,
+                        "error": "Collection operation failed; diagnostic cannot fit the UTF-8 delivery contract.",
+                        "diagnostic_omitted": True})
+                print(payload.decode("utf-8"), end="")
+                return 2
             print(json.dumps({"valid":False,"error":str(error)}, indent=2, sort_keys=True)); return 2
     elif args.command == "market":
         engine = CanonicalQueryEngine(args.game, games_root=args.data_root / "canonical" / "games", data_root=args.data_root)
