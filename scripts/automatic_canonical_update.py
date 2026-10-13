@@ -15,11 +15,14 @@ def main() -> int:
                         help="operation to perform (default: read-only plan)")
     parser.add_argument("--config", required=True)
     parser.add_argument("--repository-root", default=str(Path(__file__).resolve().parents[1]))
+    parser.add_argument("--expected-plan-id", help="recheck a previous read-only plan identity")
     args = parser.parse_args()
     try:
         engine = AutomaticCanonicalUpdate(args.repository_root, args.config)
         method = getattr(engine, args.command.replace("-", "_"))
-        result = method()
+        if args.expected_plan_id is not None and args.command != "plan":
+            raise ValueError("--expected-plan-id is only valid for read-only planning")
+        result = method(expected_plan_id=args.expected_plan_id) if args.command == "plan" else method()
     except BaseException as error:
         print(json.dumps({"status": "blocked", "error": f"{type(error).__name__}: {error}"}, sort_keys=True))
         return 1

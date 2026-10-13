@@ -51,8 +51,37 @@ Omitting the command runs the existing read-only `plan` operation. Explicit comm
 remain supported. Configuration-loading and engine errors return a structured
 `status=blocked` result with exit code 1. Approval labels in configuration and actor
 names in environment variables do not install a trusted boundary. The existing plan
-is an inspection result; a reviewed, binding-complete owner authorization plan and
-the protected manual execution workflow remain integration work to complete.
+is an inspection result; the protected manual execution workflow remains integration
+work to complete.
+
+Read-only planning reuses `admission_bindings()` and the existing source, payload
+and target-integrity checks. `decision_inputs` records the operation/target, exact
+ordered IDs and digest, counts by type, actual retained source/receipt and payload
+hashes, expected integrity values, policy/construction bindings and observed
+canonical pre-state. New admission previews require explicit expected source,
+payload and configured receipt hash pins and a matching pre-state; planning never
+fills in or rewrites those expectations. Final rereads reject changes during
+verification.
+
+`plan_id` is `sha256:` followed by the existing `digest(decision_inputs)` recipe:
+UTF-8 JSON with sorted keys, separators `(',', ':')`, `ensure_ascii=False`, and no
+trailing newline. It includes the configuration's actual byte hash and excludes
+checkpoint progress and timestamps. Recheck a saved identity with
+`plan --config CONFIG --expected-plan-id sha256:...`; changed decision-relevant
+inputs block that check. This option supplies no execution authority.
+
+Every preview reports `approval_state=not_granted`, `execution_authorized=false`
+and `admission_ready=false`. Source-policy permissions and admission/readiness
+review remain unresolved or unassessed; retained license receipts and provider
+trust do not authenticate an approver or establish a rights decision.
+
+Completed batches are labeled `historical_inspection` only after their existing
+retained admission verification succeeds. Their original pre-state is displayed
+alongside the current catalog, which may include later admissions. Historical
+descriptors lacking raw-byte hash pins report `integrity_verified=false`, expose
+the missing pins, and retain their separately verified source-to-record evidence.
+They never become a new admission preview or refresh historical expectations.
+Planning calls no execution/authorization path and writes no checkpoints or data.
 
 ## Automatic PR, merge, recovery, and settings
 

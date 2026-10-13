@@ -223,7 +223,8 @@ class AutomaticCanonicalUpdate:
                  review_boundary: AdmissionReviewBoundary | None = None):
         self.root = Path(repository_root)
         self._repository_scope = self.root.resolve()
-        self.descriptor, self.config = TargetDescriptor.load(config)
+        self._configuration_path = Path(config)
+        self.descriptor, self.config = TargetDescriptor.load(self._configuration_path)
         data_relative = Path(self.config.get("data_root", "data"))
         self.data = self.root / data_relative
         if (data_relative.is_absolute() or ".." in data_relative.parts
@@ -418,9 +419,93 @@ class AutomaticCanonicalUpdate:
                 "completed_stages": completed, "next_stage": STAGES[len(completed)] if len(completed) < len(STAGES) else None,
                 "complete": len(completed) == len(STAGES)}
 
-    def plan(self) -> dict:
-        return {"schema_version": SCHEMA, "target": self.descriptor.__dict__, "stages": list(STAGES),
-                "status": self.status(), "canonical_write": False}
+    def plan(self, *, expected_plan_id: str | None = None) -> dict:
+        """Inspect exact retained inputs; integrity is neither approval nor readiness."""
+        self._assert_storage_scope(check_tree=True)
+        descriptor, configuration = TargetDescriptor.load(self._configuration_path)
+        if descriptor != self.descriptor or configuration != self.config:
+            raise EvidenceError("configuration changed since engine initialization")
+        configuration_sha256 = digest(self._configuration_path.read_bytes())
+        bindings = self.admission_bindings()
+        source = self._stage_source_acquisition_verification({})
+        payload_check = self._stage_evidence_normalization({})
+        isolation = self._stage_target_partitioning({})
+        if (source["sha256"] != bindings["evidence_files"][0]["sha256"]
+                or payload_check["payload_sha256"] != bindings["candidate_payload_sha256"]):
+            raise EvidenceError("planning inputs changed during integrity verification")
+        _, payload, payload_raw = self._payload()
+        if digest(payload_raw) != bindings["candidate_payload_sha256"]:
+            raise EvidenceError("planning inputs changed during integrity verification")
+        counts = {}
+        for row in payload["candidate_payloads"]:
+            kind = row.get("entity_type")
+            if not isinstance(kind, str) or not kind:
+                raise EvidenceError("candidate type inventory is invalid")
+            counts[kind] = counts.get(kind, 0) + 1
+        observed = canonical_state_digest(self.data)
+        expected = bindings["canonical_pre_state_digest"]
+        audit_path = self.data / self.config["artifacts"]["promotion_audit"]
+        historical = None
+        if audit_path.exists():
+            raw_audit = audit_path.read_bytes()
+            audit = json.loads(raw_audit)
+            if "input_bindings" in audit:
+                validate_admission_audit(self.data, audit)
+                if audit["input_bindings"] != bindings or audit["canonical_post_state_digest"] != observed:
+                    raise EvidenceError("historical admission inspection binding mismatch")
+            else:
+                self._verify_historical_read_only(audit)
+            historical = {"verified": True, "path": self.config["artifacts"]["promotion_audit"],
+                          "sha256": digest(raw_audit), "original_pre_state_digest": expected,
+                          "recorded_post_state_digest": audit["canonical_post_state_digest"]}
+        elif self.config.get("reference_completed_promotion"):
+            raise EvidenceError("historical admission audit is missing")
+        elif observed != expected:
+            raise EvidenceError("canonical pre-state drift")
+        missing_pins = ["integrity." + key for key in ("source_sha256", "candidate_payload_sha256")
+                        if not self.config["integrity"].get(key)]
+        for item in self.config["artifacts"].get("receipts", []):
+            if isinstance(item, str) or not item.get("sha256"):
+                missing_pins.append("receipt:" + (item if isinstance(item, str) else item["path"]))
+        if missing_pins and historical is None:
+            raise EvidenceError("new admission planning requires expected hash pins: " + ", ".join(missing_pins))
+        gates = [
+            {"gate": "admission_authorization", "state": "unresolved",
+             "reason": "Planning supplies no authenticated reviewer or admission decision."},
+            {"gate": "source_policy", "state": "unresolved",
+             "reason": "Provider trust and retained receipts do not establish operation-specific data permissions."},
+            {"gate": "admission_readiness", "state": "not_assessed",
+             "reason": "Candidate review, compatibility and write-time checks remain required."}]
+        if missing_pins:
+            gates.append({"gate": "historical_raw_byte_pins", "state": "unresolved",
+                          "reason": "Historical source-to-record evidence does not supply missing raw-byte pins."})
+        # Progress/checkpoints are deliberately excluded: they grant no authority
+        # and do not change the proposed data. Canonical JSON has no trailing LF.
+        inputs = {"scope": "historical_inspection" if historical else "new_admission_preview",
+                  "configuration_sha256": configuration_sha256, "bindings": bindings,
+                  "expected_integrity": deepcopy(self.config["integrity"]),
+                  "observed_canonical_pre_state_digest": observed,
+                  "candidate_counts_by_type": dict(sorted(counts.items())),
+                  "policy": deepcopy(self.config["policy"]),
+                  "canonical_identity_fields": deepcopy(self.config.get("canonical_identity_fields", {})),
+                  "historical_admission": historical, "missing_expected_hashes": missing_pins,
+                  "unresolved_gates": gates}
+        if (self.admission_bindings() != bindings or canonical_state_digest(self.data) != observed
+                or digest(self._configuration_path.read_bytes()) != configuration_sha256
+                or (historical and digest(audit_path.read_bytes()) != historical["sha256"])):
+            raise EvidenceError("planning inputs changed during integrity verification")
+        plan_id = "sha256:" + digest(inputs)
+        if expected_plan_id is not None and expected_plan_id != plan_id:
+            raise EvidenceError("plan identity does not match current decision-relevant inputs")
+        return {"schema_version": SCHEMA, "plan_schema_version": "canonical-admission-preview-v1",
+                "plan_id": plan_id, "operation": bindings["operation"],
+                "target": deepcopy(self.descriptor.__dict__), "stages": list(STAGES),
+                "status": self.status(), "decision_inputs": inputs,
+                "integrity_verified": not missing_pins,
+                "integrity_checks": {"source": source, "payload": payload_check, "isolation": isolation},
+                "pre_state_matches_expected": observed == expected,
+                "approval_state": "not_granted", "execution_authorized": False,
+                "admission_ready": False, "canonical_write": False}
 
     def verify(self) -> dict:
         self._assert_storage_scope(check_tree=True)
