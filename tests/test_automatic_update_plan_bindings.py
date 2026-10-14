@@ -225,7 +225,8 @@ class HistoricalAdmissionPlanningTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        shutil.copytree(ROOT / "data", self.root / "data")
+        from historical_catalog import historical_data
+        shutil.copytree(historical_data(), self.root / "data")
         self.config = self.root / "historical-config.json"
         shutil.copyfile(ROOT / "config/automatic_updates/mb2-first-batch.json", self.config)
 

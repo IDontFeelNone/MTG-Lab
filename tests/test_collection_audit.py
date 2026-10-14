@@ -11,7 +11,10 @@ from collection.intelligence import (CanonicalCollectionResolver, build_snapshot
                                      create_snapshot, digest, read_import)
 
 
-ROOT = Path(__file__).parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 PONDER = "5c8d3bc4-32fc-5b26-84bf-9921e5884d43"
 
 

@@ -39,6 +39,9 @@ def data_inventory(root):
 class CollectionAuditPilotTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        from historical_catalog import bind_replay_builder
+        from scripts import build_collection_audit_pilot
+        bind_replay_builder(cls, build_collection_audit_pilot)
         cls.before = pilot.protected_inventory()
         cls.artifacts = pilot.build_artifacts()
         cls.dossier = json.loads(cls.artifacts["audit-dossier.json"])

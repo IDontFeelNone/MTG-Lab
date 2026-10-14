@@ -8,7 +8,10 @@ import unittest
 from card_intelligence.competitive_evidence import records_digest, validate_competitive_snapshot
 from card_intelligence.repository import KnowledgeRepository
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 
 
 def tree_digest(relative):

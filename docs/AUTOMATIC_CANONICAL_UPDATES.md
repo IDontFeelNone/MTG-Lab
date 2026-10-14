@@ -190,6 +190,42 @@ commit parent/tree and complete remote changed-file list must match. Readback ca
 claim completeness at the GitHub compare API's 300-file limit. Failures report their
 phase and preserve local work; this is not a new rollback service.
 
+### Historical replay and expanded-current validation
+
+The publication gate runs the complete discovery suite in the writer's changed
+checkout. It does not validate an old checkout instead. Historical replay tests
+explicitly select `tests/historical_catalog.py`'s original snapshot fixture;
+current query, collection, projection and missing-mechanical-evidence checks in
+`tests/test_current_catalog_validation.py` read the actual checkout's `data`.
+The same distinction applies to ordinary hosted CI discovery after a data PR
+is checked out. No runtime consumer falls back to historical data.
+
+`tests/fixtures/historical_catalog/canonical-3bf4cc27.zip` retains exact original
+canonical bytes, independently compared with revision
+`3bf4cc27dc87ba931d775a61961a2cc6b12fd5f3`. Its pinned manifest binds every original
+public data dependency. Historical evidence is copied only from those exact
+retained paths after checksum verification; added current records and audits are
+not inserted into that historical fixture. Original assertions, snapshot hashes,
+retained dossiers, packets and mismatch rejection remain unchanged. Fixture
+integrity failure is an error, never permission to refresh pins or use a fallback.
+
+Run the slow integration separately so full discovery cannot recursively start
+another publication-validation subprocess:
+
+```
+PYTHONPATH=src:tests python tests/publication_validation_regression.py
+```
+
+CI runs both discovery and this integration. The integration uses the existing
+supported writer with the independently pinned 810 pending records, the live
+`IsolatedAdmissionTestBoundary` capability, disposable Git and the existing
+explicit GitHub transport double. It calls `publish_admission()` without mocking
+the validation result: the actual complete suite checks its 654-Card writer output,
+including 270 missing mechanical bindings, before local-only publication/readback.
+This establishes neither live owner authorization nor live data admission.
+The original one-test fictional publication fixtures remain useful for failure
+isolation, but are not evidence that the full expanded catalog validates.
+
 Planning retains `contents: read`. The admission job's `contents: write` and
 `pull-requests: write` are used only for its branch and draft PR; `id-token: write`
 requests identity, not repository-write access. No new token, external service or

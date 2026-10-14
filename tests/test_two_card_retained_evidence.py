@@ -5,7 +5,10 @@ from pathlib import Path
 import unittest
 
 
-ROOT = Path(__file__).parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 DATA = ROOT / "data"
 DEMO = DATA / "review/two-card-chatgpt-demo"
 TARGETS = {

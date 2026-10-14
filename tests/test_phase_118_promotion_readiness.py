@@ -12,7 +12,10 @@ from production_evidence.promotion_readiness import (
 )
 from production_evidence.repository import EvidenceError
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 
 
 class Phase118PromotionReadinessTests(unittest.TestCase):

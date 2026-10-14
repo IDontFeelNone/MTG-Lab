@@ -11,7 +11,10 @@ from card_intelligence import CardKnowledgeQuery, KnowledgeRepository, Knowledge
 from card_intelligence.repository import serialize_fact
 from scripts.market_acquisition_evidence import retain
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 KNOWLEDGE = ROOT / "data" / "knowledge"
 REPORT = ROOT / "data" / "reviews" / "phase-132" / "pilot-review.json"
 PROTECTED_DIGESTS = {

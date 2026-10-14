@@ -15,7 +15,10 @@ from collection.intelligence import (CanonicalCollectionResolver, build_snapshot
 from mtglab.__main__ import main
 
 
-ROOT = Path(__file__).parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 PRINTING = "5c8d3bc4-32fc-5b26-84bf-9921e5884d43"
 OTHER_CARD = "dc0593c2-ccb4-4648-a592-c5bcd121dc72"
 TIME = "2026-10-12T21:00:00Z"

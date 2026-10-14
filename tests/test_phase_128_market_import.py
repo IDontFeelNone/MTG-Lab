@@ -11,7 +11,10 @@ from market.models import MarketValidationError
 from scripts.import_market_observations import import_acquisition
 
 
-ROOT = Path(__file__).parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 RUN = "scryfall-mb2-30754638264-1"
 
 

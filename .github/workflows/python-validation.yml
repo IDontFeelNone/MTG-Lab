@@ -18,3 +18,7 @@ jobs:
       - run: python -m unittest discover -s tests -p "test_*.py" -v
         env:
           PYTHONPATH: src
+      - name: Real publication validation against disposable writer expansion
+        run: python tests/publication_validation_regression.py
+        env:
+          PYTHONPATH: src:tests

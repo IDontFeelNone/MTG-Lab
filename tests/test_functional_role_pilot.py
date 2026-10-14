@@ -20,7 +20,10 @@ from scripts.build_mechanical_cohort import build_artifacts as mechanical_artifa
 from scripts.build_two_card_demo import build_artifacts as two_card_artifacts
 
 
-ROOT = Path(__file__).parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 DATA = ROOT / "data"
 REVIEW = DATA / "review/functional-role-pilot"
 
@@ -40,6 +43,13 @@ def rehash(document):
 class FunctionalRolePilotTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        from historical_catalog import bind_replay_builder
+        from scripts import build_functional_role_pilot
+        bind_replay_builder(cls, build_functional_role_pilot)
+        from scripts import build_mechanical_cohort
+        bind_replay_builder(cls, build_mechanical_cohort)
+        from scripts import build_two_card_demo
+        bind_replay_builder(cls, build_two_card_demo)
         cls.protected = protected_inventory()
         cls.pilot = FunctionalRolePilot(DATA)
         cls.documents = {i: cls.pilot.dossier(i) for i in cls.pilot.cards}

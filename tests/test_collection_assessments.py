@@ -12,7 +12,10 @@ from collection.audit import CollectionAudit
 from collection.intelligence import CanonicalCollectionResolver, canonical_json, create_snapshot, digest, read_import
 
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 PONDER = "02090581-61aa-4348-ad57-451be8ee91c2"
 PONDER_PRINTING = "5c8d3bc4-32fc-5b26-84bf-9921e5884d43"
 FAITHLESS = "3d6fa57a-aa53-4b5c-b8af-a7612c823117"
