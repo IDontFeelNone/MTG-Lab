@@ -114,3 +114,14 @@ implemented dependency direction is documented in `../ARCHITECTURE_REVIEW_v1.md`
 ## Engineering Philosophy
 
 MTG Lab favors correctness over convenience, reproducibility over randomness, documentation alongside implementation, modular components over tightly coupled systems, and evidence-based analysis over assumptions.
+
+## Proposed external canonical authority — not active
+
+[Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots)
+and [the external card-data-plane review](EXTERNAL_CARD_DATA_PLANE.md) propose
+**ARCHITECTURE V13 REQUIRED**, because non-Git production data authority changes
+Decision 004's Tier-0 invariant. This is a documentation-first proposal only.
+Architecture v12 and its current repository authority remain active and frozen
+until owner approval. No runtime, canonical data, admission or source-policy
+state changes are made here. Existing accepted text above remains historical and
+current authority; the proposal documents prospective changes explicitly.

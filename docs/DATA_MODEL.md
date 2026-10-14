@@ -185,3 +185,14 @@ This milestone migrates architectural documentation only. It does not:
   probabilities;
 - introduce database models, migrations, or persistence behavior; or
 - implement simulation, analytics, market, API, or AI behavior.
+
+## Proposed authority amendment — not active
+
+Proposed [Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots)
+would prospectively replace the Git-only production dataset authority premise in
+this Tier-0 model with a selected approved immutable operator snapshot under public
+contracts. It would not change existing entity IDs, relationship semantics,
+evidence requirements or generated-database subordination. See
+[EXTERNAL_CARD_DATA_PLANE.md](EXTERNAL_CARD_DATA_PLANE.md). This requires v13 owner
+approval; the accepted v12 model above remains unchanged and active. No nameless
+Card contract, runtime schema or data admission is introduced by this proposal.

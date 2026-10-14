@@ -42,3 +42,15 @@ Print Sheets and Slots follow the same repository authority and lifecycle
 boundaries as the other canonical domain entities defined in `DATA_MODEL.md`.
 
 This document will be expanded as implementation milestones are completed.
+
+## Proposed v13 authority boundary — not active
+
+[EXTERNAL_CARD_DATA_PLANE.md](EXTERNAL_CARD_DATA_PLANE.md) and proposed Decision
+017 separate public architectural/code authority, immutable operator canonical
+snapshots, independently permissioned source evidence, generated persistence and
+personal data. If accepted, this prospectively supersedes the Git-only production
+canonical authority premise above while preserving raw/processed/canonical/
+validated lifecycle, stable IDs and explicit reviewed promotion. Rebuild would
+require exact code plus the authorized retained snapshot/evidence, not public Git
+alone. Architecture v12 remains active; no data migration or permission clearance
+is performed by the proposal. Historical evidence is not rewritten or deleted.

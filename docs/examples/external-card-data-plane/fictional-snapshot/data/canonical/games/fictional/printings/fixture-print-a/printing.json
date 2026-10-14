@@ -1,0 +1,1 @@
+{"card_id":"fixture-card-a","collector_number":"1","id":"fixture-print-a","language":"en","provenance":[{"claim":"Original fictional documentation fixture; no real game/provider content.","field_paths":["id","card_id","set_code","collector_number","rarity","language"],"source_id":"fixture-source"}],"rarity":"fixture","schema_version":"v1","set_code":"FICTIONAL"}
