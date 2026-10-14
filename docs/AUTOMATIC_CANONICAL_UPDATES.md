@@ -190,6 +190,16 @@ commit parent/tree and complete remote changed-file list must match. Readback ca
 claim completeness at the GitHub compare API's 300-file limit. Failures report their
 phase and preserve local work; this is not a new rollback service.
 
+The complete publication-gate suite has a fixed, reviewed one-hour deadline:
+`ADMISSION_VALIDATION_TIMEOUT_SECONDS = 3600`. Hosted run `38514592849` on
+`35a1f9c` completed discovery in 1,852.485 seconds, while its nested expanded
+suite was cut off by the previous 1,800-second deadline. The one-hour cap gives
+bounded hosted-runtime headroom without changing the command, test selection,
+execution order or success parsing. A request or saved checkpoint cannot extend
+or disable it. A timeout propagates to publication's blocked validation result;
+nonzero exit or missing/nonpositive test count or final `OK` also blocks. Safe
+completed-suite diagnostics and private Python-cache handling remain unchanged.
+
 ### Historical replay and expanded-current validation
 
 The publication gate runs the complete discovery suite in the writer's changed

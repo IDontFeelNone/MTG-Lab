@@ -43,6 +43,12 @@ def digest(value: object) -> str:
 
 ADMISSION_OPERATION = "canonical-admission"
 
+# Hosted discovery exceeded 30 minutes (1,852.485s on reviewed head 35a1f9c).
+# Allow bounded headroom for the complete writer-expanded suite, never an
+# unbounded wait or a request-controlled deadline. Timeout still blocks writing
+# a publication commit and pushing; it is not successful validation.
+ADMISSION_VALIDATION_TIMEOUT_SECONDS = 60 * 60
+
 
 @dataclass(frozen=True)
 class AdmissionDecision:
@@ -1409,7 +1415,8 @@ class GitHubPersistence:
         cache = tempfile.mkdtemp(prefix="catalog-admission-pycache-", dir=root / ".git")
         env.update(PYTHONPATH=str(Path(__file__).resolve().parents[1]), PYTHONDONTWRITEBYTECODE="1",
                    PYTHONPYCACHEPREFIX=cache)
-        result = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True, timeout=1800)
+        result = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True,
+                                timeout=ADMISSION_VALIDATION_TIMEOUT_SECONDS)
         output = result.stdout + result.stderr
         _check_public_bytes(output.encode())
         match = re.search(r"Ran (\d+) tests? in", output)

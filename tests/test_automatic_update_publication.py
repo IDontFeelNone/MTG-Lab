@@ -6,10 +6,12 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import tempfile
 import unittest
 from unittest.mock import patch
 
 from production_evidence.automatic_updates import (
+    ADMISSION_VALIDATION_TIMEOUT_SECONDS,
     AutomaticCanonicalUpdate, GitHubPersistence, IsolatedAdmissionTestBoundary,
     admission_publication_inventory, digest,
 )
@@ -449,6 +451,20 @@ class ActualCurrentConsumers(unittest.TestCase):
         self.assertIn('FAILED', (self.root / '.git/catalog-admission-validation.log').read_text())
         self.assertFalse(any('push' in c for c in self.transport.calls))
 
+    def test_required_suite_timeout_blocks_publication_and_preserves_writer_output(self):
+        engine, decision = self.write()
+        before = admission_publication_inventory(engine, self.plan, self.base, decision)
+        # Test-only millisecond deadline: the real unittest subprocess and its
+        # actual TimeoutExpired exercise publication, without a one-hour sleep.
+        with patch('production_evidence.automatic_updates.ADMISSION_VALIDATION_TIMEOUT_SECONDS', 0.001):
+            result = self.publish(engine, decision)
+        self.assertEqual((result['status'], result['publication_phase']), ('blocked', 'validation'), result)
+        self.assertIn('timed out after 0.001 seconds', result['error'])
+        self.assertEqual(admission_publication_inventory(engine, self.plan, self.base, decision), before)
+        self.assertEqual(self.git('rev-parse', 'HEAD').strip(), self.base)
+        self.assertFalse(engine._checkpoint('branch_and_pull_request_persistence').exists())
+        self.assertFalse(any('push' in c or c[0] == 'gh' for c in self.transport.calls))
+
     def seed_validation_cache_probe(self):
         # Fictional tracked inputs are established before planning/authorization.
         # The real suite exercises explicit main-process compilation and a child
@@ -566,6 +582,56 @@ class ActualValidationCacheProbe(unittest.TestCase):
                 code = entry.main(['admit', '--github-owner-entry', '--publish-admission-pr', '--repository-root', str(self.root),
                                   '--config', self.fixture.config_name])
             self.assertEqual(code, 1)
+
+
+class AdmissionValidationTimeoutPolicyTests(unittest.TestCase):
+    """Duration/result doubles test policy; they are not real full-suite runs."""
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory(prefix='mtglab-validation-policy-')
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        (self.root / '.git').mkdir()
+        self.command = ['python', '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py', '-v']
+
+    def test_reviewed_bounded_policy_accepts_suite_duration_over_1800(self):
+        output = '\nRan 7 tests in 1853.000s\n\nOK\n'
+
+        def simulated_elapsed_suite(command, **kwargs):
+            self.assertEqual(command, self.command)
+            self.assertEqual(kwargs['cwd'], self.root)
+            self.assertEqual(kwargs['timeout'], 3600)
+            self.assertEqual(ADMISSION_VALIDATION_TIMEOUT_SECONDS, 3600)
+            # Exercise the old failure threshold without sleeping for 30 minutes.
+            if kwargs['timeout'] < 1853:
+                raise subprocess.TimeoutExpired(command, kwargs['timeout'])
+            self.assertEqual(kwargs['env']['PYTHONDONTWRITEBYTECODE'], '1')
+            self.assertTrue(Path(kwargs['env']['PYTHONPYCACHEPREFIX']).is_relative_to(self.root / '.git'))
+            return subprocess.CompletedProcess(command, 0, '', output)
+
+        with patch('production_evidence.automatic_updates.subprocess.run', side_effect=simulated_elapsed_suite):
+            result = GitHubPersistence._required_admission_validation(self.root)
+        self.assertEqual(result, {'exit_status': 0, 'tests': 7, 'log_sha256': digest(output.encode())})
+        self.assertEqual((self.root / '.git/catalog-admission-validation.log').read_text(), output)
+
+    def test_nonzero_incomplete_zero_count_or_missing_final_success_still_fail(self):
+        cases = [(1, '\nRan 7 tests in 1.000s\n\nOK\n'),
+                 (0, '\nRan 7 tests in 1.000s\n\nFAILED (failures=1)\n'),
+                 (0, '\nOK\n'), (0, '\nRan 0 tests in 0.000s\n\nOK\n'),
+                 (0, '\nRan 7 tests in 1.000s\n')]
+        for returncode, output in cases:
+            with self.subTest(returncode=returncode, output=output), \
+                    patch('production_evidence.automatic_updates.subprocess.run',
+                          return_value=subprocess.CompletedProcess(self.command, returncode, '', output)):
+                with self.assertRaisesRegex(EvidenceError, 'failed or incomplete'):
+                    GitHubPersistence._required_admission_validation(self.root)
+                self.assertEqual((self.root / '.git/catalog-admission-validation.log').read_text(), output)
+
+    def test_timeout_partial_success_text_is_not_a_terminal_validation_result(self):
+        error = subprocess.TimeoutExpired(self.command, ADMISSION_VALIDATION_TIMEOUT_SECONDS,
+                                         output='\nRan 7 tests in 3600.001s\n\nOK\n')
+        with patch('production_evidence.automatic_updates.subprocess.run', side_effect=error):
+            with self.assertRaises(subprocess.TimeoutExpired):
+                GitHubPersistence._required_admission_validation(self.root)
 
 
 class ExpandedInventoryPreflightTests(unittest.TestCase):
