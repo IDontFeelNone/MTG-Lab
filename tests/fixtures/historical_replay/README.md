@@ -28,5 +28,7 @@ ordinary CI uses only the retained fixture. The old data manifest/archive remain
 unchanged. The fixture is independent of PR #175's new architecture examples.
 
 This is historical replay isolation, not permanent protection of future current
-architecture bytes. Current proposal tests separately preserve accepted text and
-the Proposed Decision 017 status; v12 remains active and no v13 runtime is installed.
+architecture bytes. Current governance tests independently preserve historical
+decision text and the owner-accepted Decision 017 status. Architecture v13 is now
+approved governance; no v13 runtime is installed. This acceptance leaves the
+original Architecture-v12 fixture and all its integrity bindings unchanged.

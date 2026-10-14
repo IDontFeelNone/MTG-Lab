@@ -1,6 +1,8 @@
-# Immutable canonical snapshot contract — proposed
+# Immutable canonical snapshot contract — accepted design direction
 
-**Status: Documentation design only, conditional on Decision 017 approval.**
+**Status: Accepted v13 architectural requirements; documentation design only.**
+Decision 017 is Accepted; installing executable contracts and runtime support is
+future work and is NOT AUTHORIZED by the architecture approval.
 No production manifest schema/loader/authority is installed. Examples under
 `docs/examples/external-card-data-plane/` are original fictional documentation
 fixtures, not an admission, permission grant or production validation receipt.
@@ -51,7 +53,7 @@ For each semantic ID, hash exactly the canonical JSON object
 `source-manifest`, `content-manifest`, `validation-input`, `release-manifest`,
 `schema-set` and `policy`. Each body's own ID is excluded; the validation-input
 body is the explicit object of content ID, validator/schema/policy identities and
-check profile. This recipe applies only to the proposed outer contract; existing
+check profile. This recipe applies only to the documented outer design; existing
 entity IDs and query/evidence hash recipes are unchanged. The fictional example
 and its tests specify the exact object shapes. Timestamps/locators are never
 removed through a caller-selected exclusion list.

@@ -1,9 +1,12 @@
 # Canonical authority options
 
-**Status: Proposed analysis, not architecture or data-use approval.** Baseline:
+**Status: Retained options analysis supporting accepted Decision 017.** Baseline:
 `ec8fcbf97c84d24337503c81dd1c31a31e163d44`. Rankings are engineering judgments
 under the project's stated open-code, provenance and conservative policy goals;
 they are not legal permission verdicts or numerical performance measurements.
+Option 8 is the approved v13 direction, initially using Option 3's single bundle.
+The comparison describes alternatives against the original v12 audit baseline;
+runtime implementation and all dataset/use permissions remain separately gated.
 
 ## Definitions and ranking
 

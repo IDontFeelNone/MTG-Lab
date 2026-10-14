@@ -1,14 +1,14 @@
 # Incremental migration and CI/deployment model
 
-**Status: Proposed sequence; each implementation scope needs approval.** No phase
-number is assigned and no step is executed by this documentation PR. Architecture
-v12 remains active until the owner accepts the prospective v13 authority decision.
+**Status: Architecture v13 is ACTIVE APPROVED; implementation sequence remains future work.**
+Decision 017 is Accepted by the owner. Architecture v12 is the previous historical
+baseline. No runtime step is authorized or executed by this governance transition.
 
 ## Stages with acceptance and rollback
 
 | Stage | Scope | Compatibility boundary | Required tests | Rollback | Acceptance |
 | --- | --- | --- | --- | --- | --- |
-| 1 Architecture decision | Accept/revise/reject Decision 017 and implementation scope | Preserve historical 004/009; explicitly authorize future authority model | Decision/document consistency and Tier-0 rationale | Leave v12 active if not accepted | Owner decision recorded separately from any dataset permission/admission |
+| Governance decision — complete | Owner accepted Decision 017 and the v13 direction; implementation not authorized | Preserve historical 004/009 and v12 replay | Decision/document consistency and Tier-0 rationale | Historical v12 remains interpretable; governance reversal requires an explicit decision | Architecture approval recorded separately from implementation, dataset permission/admission and merge |
 | 2 Snapshot contract | Review manifest, identity, provenance, permission/authority and capability contracts; fictional fixtures only | No production schema/identity changes; distinguish content/report/release/query IDs | Canonical hash determinism, tampering, path escapes, extra/missing files, scope, dependency/cycle failures | Keep docs/fixtures; no production effect | Independent inspection and production-ineligible fixture validation agree |
 | 3 Minimal attachment seam | Read-only verified handle through current injected-root readers; explicit fixture selection | Existing query envelope unchanged; no runtime acquisition, importer or second store | Fictional game, absent/corrupt/unsupported snapshot, root relocation, no ambient fallback | Retain legacy reader route explicitly | All required authority/compatibility gates precede consumer construction; no hidden default catalog |
 | 4 Legacy public snapshot profile | Inventory current typed/promoted/knowledge/audit generations; attach in place where permitted, without copying/reformatting historical bytes | Preserve old IDs, query hashes, source projections and audit scope; source-policy review remains separate | Original historical replay unchanged; old/current calculations distinct; missing source disclosed | Existing public checkout remains interpretable | Old dossiers/audits still reject wrong snapshot; exact graph and source bindings survive |
@@ -80,12 +80,24 @@ policy/transform/engine versions, configuration and source manifests, independen
 market/user/rules inputs, and PRNG algorithm/version/seed when applicable. A fresh
 render timestamp is display metadata, not silently a new analytical input.
 
-## First bounded implementation proposal
+## V13 Stage 1 — Fictional Canonical Snapshot Attachment
 
-After owner approval of Decision 017: implement only manifest verification and
-explicit read-only attachment of a fictional snapshot through existing query/
-collection roots, plus absent/corrupt/incompatible/no-fallback regressions. Preserve
-all canonical bytes and existing public behavior with an explicit legacy profile.
-No SQL, real provider acquisition, new writer destination, AI transport, actual
-MB2 artifact construction or private production admission is included in that
-first proposed implementation scope. It is not authorized by this design PR.
+**Implementation status: NOT AUTHORIZED.** This owner decision accepts architecture
+only; a future explicit owner instruction is required before starting Stage 1.
+The numbered migration rows above are planning workstreams, not separately approved
+milestones. Stage 1 is restricted to the fictional contract/attachment subset.
+
+Future scope:
+
+- Generic snapshot manifest verification and an immutable fictional snapshot fixture.
+- Explicit read-only attachment through existing query/collection readers.
+- Integrity, version and compatibility validation; missing/corrupt/incompatible
+  snapshots fail closed.
+- Relocation determinism, no ambient fallback, and preservation of the existing
+  explicit legacy/public profile and all historical bytes/hashes.
+
+Explicitly excluded: real MB2 data; protected/provider datasets; production
+admission; provider acquisition; SQL persistence; module composition; writer
+destination changes; Rules Intelligence; Deck Intelligence expansion; simulation;
+AI transport/model integration. Architecture approval does not clear source
+policy, select a production snapshot or authorize any of these operations.

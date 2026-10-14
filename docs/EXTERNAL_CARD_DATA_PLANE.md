@@ -1,16 +1,18 @@
-# External canonical card-data plane — architecture proposal
+# External canonical card-data plane — accepted architecture direction
 
-**Status: Proposed; owner approval required. No runtime support implemented.**
+**Status: Decision 017 Accepted by owner. No runtime support implemented.**
 
-**Classification: ARCHITECTURE V13 REQUIRED.** Architecture v12 remains active
-and frozen. Decision 017 proposes a prospective authority change; this review
-does not approve it, grant data permissions, or admit any dataset.
+**Classification: Architecture v13 — ACTIVE APPROVED architecture.** Architecture
+v12 is the previous historical baseline. The owner approved the direction reviewed
+at `3d21656b9f67a3089f32c5613804a1984fb44139` in PR #175. This acceptance is a
+documentation/governance transition only; no runtime implementation is authorized,
+no data permissions are granted and no dataset is admitted.
 
 Audit baseline: `ec8fcbf97c84d24337503c81dd1c31a31e163d44`, the merge of PR #174.
 The architecture branch starts exactly there. Existing production has 384 Cards,
 913 Printings and 235 identifiers; the MB2 810 expansion remains pending.
 
-## Recommendation and ranking
+## Accepted direction and retained options ranking
 
 Adopt **Option 8: public architectural authority with operator-managed immutable
 effective canonical snapshots**, delivered initially as the single-bundle form
@@ -62,11 +64,11 @@ database row, a conversation or an LLM answer cannot grant that status.
 
 ## Current conflicts and what stays unchanged
 
-Decision 004 says Git owns canonical datasets and generated databases can be
-rebuilt from that repository. `DATA_MODEL.md` and `DATA_REPOSITORY.md` repeat this
-Tier-0 authority invariant. A production bundle that public Git cannot reconstruct
+Historical Decision 004 says Git owns canonical datasets and generated databases
+can be rebuilt from that repository. The v12 DATA_MODEL and DATA_REPOSITORY stated
+this Tier-0 authority invariant. A production bundle that public Git cannot reconstruct
 changes that invariant. Calling it a different data-root path would hide the
-change. Decision 017 therefore proposes to supersede only those production-data
+change. Accepted Decision 017 therefore prospectively supersedes only those public-Git production-data
 authority and rebuild-from-public-Git clauses; public architectural authority
 and generated-database subordination remain.
 
@@ -76,7 +78,7 @@ repository-owned contracts in a selected operator snapshot. Decision 010's
 SQLAlchemy-generated persistence direction remains; its inputs become code plus
 authorized snapshot, not public Git alone. Decision 011's structured knowledge
 invariant remains, with repository-data wording clarified for selected snapshots.
-Accepted historical decision text is unchanged; the new decision is Proposed.
+Accepted historical decision text is unchanged; Decision 017 is Accepted.
 
 Unchanged invariants: stable IDs, game-neutral shared engines, data-driven
 products, explicit reviewed admission, validation before consumption, immutable
@@ -225,14 +227,21 @@ nine holds, Japanese Printing distinction, owner spelling uncertainty and emblem
 semantics remain unchanged. Private processing and retention remain unresolved
 alongside public/service use. Externalizing them is not an admission or clearance.
 
-## Deliverable and owner decision
+## Acceptance and remaining authorization boundaries
 
-This documentation-first review proposes Decision 017 and an incremental v13
-authority migration. The only executable additions are documentation-example
-tests; no source loader, runtime schema registry, writer, workflow, production data,
-MB2 configuration or source-policy clearance changes.
+The owner accepted Decision 017 and the v13 direction. This transition records
+governance only. Existing runtime remains filesystem/Git-bound; no external loader,
+runtime schema registry, snapshot activation service, SQL, writer destination,
+workflow, production data, MB2 configuration or source-policy clearance changes.
+Documentation tests reflect acceptance; the historical replay auxiliary fixture
+continues to bind original Architecture-v12 bytes independently of current docs.
 
-Owner decision: accept/revise/reject the prospective authority change and the
-first synthetic snapshot attachment implementation scope. Architecture acceptance
-does not approve a production snapshot, its terms, MB2 candidates, data transfer,
-AI transport, or merge/admission. Stop for independent review.
+The next documented milestone is **V13 Stage 1 — Fictional Canonical Snapshot
+Attachment**, NOT AUTHORIZED. Its [future scope and exclusions](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md#v13-stage-1--fictional-canonical-snapshot-attachment)
+require separate owner implementation approval. Architecture acceptance grants no
+processing, private-retention, public-redistribution, free/commercial application
+or AI-export permission; no protected snapshot, MB2 admission, source-policy plan,
+network acquisition, SQL, Rules Intelligence or simulation work. It resolves no
+nine held multiface candidates, spelling proposals or physical Printing identities.
+`SOURCE_POLICY_CLEARED_PLANS` remains unchanged. Stop for independent merge review;
+this documentation approval does not authorize merging PR #175.

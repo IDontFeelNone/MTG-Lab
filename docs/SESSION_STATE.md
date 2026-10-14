@@ -1,3 +1,41 @@
+# Current session state — Architecture v13 acceptance
+
+**Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
+The owner approved the direction reviewed at
+`3d21656b9f67a3089f32c5613804a1984fb44139` in PR #175. This is a
+documentation/governance transition only; **no runtime implementation is authorized**.
+Architecture v12 is the previous historical baseline, preserved with its original
+canonical/evidence bytes, replay hashes and Card Acquisition auxiliary fixture.
+
+Public Git owns code and architectural contracts/policies. Production may use a
+selected reviewed, validated immutable canonical snapshot under its declared
+scope and permissions; private location alone is neither authority nor permission.
+Generated persistence remains subordinate. Source evidence is independently
+governed; personal collections remain a separate private trust domain.
+The existing runtime still uses legacy filesystem/Git-bound roots. External
+attachment/activation and generated SQL runtime are not implemented here.
+
+MB2's exact 810 candidates and nine holds remain pending and unadmitted. No owner
+spelling change, physical Printing verification, provider acquisition, protected
+production snapshot, AI export, dataset processing/retention/redistribution/service
+permission or source-policy clearance is granted. `SOURCE_POLICY_CLEARED_PLANS`
+is unchanged. Historical public demonstration counts do not describe owner inventory.
+
+Next documented milestone: **V13 Stage 1 — Fictional Canonical Snapshot Attachment**.
+**Implementation status: NOT AUTHORIZED.** Separate owner implementation approval
+is required; no automatic follow-on or merge is authorized.
+See [Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots)
+and [Stage 1 scope and exclusions](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md#v13-stage-1--fictional-canonical-snapshot-attachment).
+
+---
+
+## Historical record boundary
+
+Everything below retains its original milestone baseline and authorization context.
+Earlier “current”, “next”, v12-active and repository-authority statements are
+historical records, superseded by the current governance above. Unchanged technical
+contracts remain applicable; old next-task claims do not authorize new work.
+
 # Current milestone — collection audit and organization pilot
 
 Canonical main independently verified: `15e19b84701dd47970a948485683f73a687be9d2` (merged GitHub PR #169, including acquisition reconstruction repair). Architecture v12 remains frozen. PR numbers are independent of project phases; no new phase number is assigned.

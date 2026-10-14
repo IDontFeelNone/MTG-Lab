@@ -264,18 +264,75 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         self.assertEqual(report["approval_state"], "not_granted")
         self.assertIn("authenticated_release_authority", report["unrun_production_checks"])
 
-    def test_accepted_architecture_text_is_preserved_as_exact_prefix(self):
+    def test_historical_decisions_and_auxiliary_bindings_remain_exact(self):
         baseline = read_json(EXAMPLES / "baseline-audit.json")
+        self.assertEqual(hashlib.sha256((EXAMPLES / "baseline-audit.json").read_bytes()).hexdigest(),
+                         "8e9bb0041193684488f89337595b64177514d588db12a629425dd8145cd974ed")
         for entry in baseline["files"]:
-            if entry["path"] in {"docs/DECISIONS.md", "docs/ARCHITECTURE.md", "docs/DATA_MODEL.md", "docs/DATA_REPOSITORY.md"}:
+            if entry["path"] == "docs/DECISIONS.md":
+                # Decision 017 may change prospectively; the earlier ledger,
+                # including Decisions 004/009, must remain byte-identical.
                 prefix = (ROOT / entry["path"]).read_bytes()[:entry["byte_length"]]
                 self.assertEqual(hashlib.sha256(prefix).hexdigest(), entry["sha256"], entry["path"])
-        decision = (ROOT / "docs/DECISIONS.md").read_text()
-        proposed = decision.split("## Decision 017", 1)[1]
-        self.assertIn("Proposed", proposed)
-        self.assertIn("ARCHITECTURE V13 REQUIRED", proposed)
-        self.assertIn("Decision 004", proposed)
-        self.assertIn("Decision 009", proposed)
+            if entry["path"] == "docs/ARCHITECTURE.md":
+                # Current Tier-0 authority wording is owner-authorized to change.
+                # Historical replay keeps the original bytes in its own fixture.
+                original = ROOT / "tests/fixtures/historical_replay/card-acquisition-pilot/docs/ARCHITECTURE.md"
+                self.assertEqual(len(original.read_bytes()), entry["byte_length"])
+                self.assertEqual(hashlib.sha256(original.read_bytes()).hexdigest(), entry["sha256"])
+        manifest = ROOT / "tests/fixtures/historical_replay/card-acquisition-pilot/manifest.json"
+        self.assertEqual(hashlib.sha256(manifest.read_bytes()).hexdigest(),
+                         "360d732fa3ec9d4b784eef9c25f4afbec9c645cb7b983c34e25e0b4b248e85d7")
+
+    def test_owner_accepted_v13_governance_does_not_authorize_runtime_or_data(self):
+        decision = " ".join((ROOT / "docs/DECISIONS.md").read_text().split("## Decision 017", 1)[1].split())
+        self.assertIn("**Status:** Accepted", decision)
+        self.assertIn("Architecture v13 — ACTIVE APPROVED", decision)
+        self.assertIn("No runtime implementation is authorized", decision)
+        self.assertIn("supersedes Decision 004 only", decision)
+        self.assertIn("clarifies/refines Decision 009", decision)
+        self.assertIn("Raw → Processed → Canonical → Validated", decision)
+        self.assertIn("Decision 010", decision)
+        self.assertIn("Decision 011", decision)
+        self.assertIn("conversation memory", decision)
+        self.assertIn("not an owner admission decision", decision)
+        self.assertIn("no processing, private-retention", decision)
+        self.assertIn("SOURCE_POLICY_CLEARED_PLANS", decision)
+        self.assertNotIn("**Status:** Proposed", decision)
+        for name in ("docs/ARCHITECTURE.md", "docs/DATA_MODEL.md", "docs/DATA_REPOSITORY.md"):
+            text = " ".join((ROOT / name).read_text().split())
+            self.assertIn("Architecture v13 — ACTIVE APPROVED", text, name)
+            self.assertIn("historical baseline", text, name)
+        for entry in read_json(EXAMPLES / "baseline-audit.json")["files"]:
+            if entry["path"] in {"README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md"}:
+                text = (ROOT / entry["path"]).read_bytes()
+                self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])
+
+    def test_current_status_and_next_milestone_are_governance_only(self):
+        milestone = "V13 Stage 1 — Fictional Canonical Snapshot Attachment"
+        for name in ("README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md",
+                     "docs/SESSION_STATE.md", "docs/NEXT_TASK.md"):
+            text = (ROOT / name).read_text()
+            current, historical = text.split("## Historical record boundary", 1)
+            current = " ".join(current.split())
+            self.assertIn("Architecture v13 — ACTIVE APPROVED", current, name)
+            self.assertIn("Decision 017 is Accepted", current, name)
+            self.assertIn("no runtime implementation is authorized", current, name)
+            self.assertIn(milestone, current, name)
+            self.assertIn("NOT AUTHORIZED", current, name)
+            self.assertIn("nine holds remain pending and unadmitted", current, name)
+            self.assertTrue(historical.strip(), name)
+        migration = " ".join((ROOT / "docs/EXTERNAL_CARD_DATA_PLANE_MIGRATION.md").read_text().split())
+        scope = migration.split("## " + milestone, 1)[1]
+        self.assertIn("NOT AUTHORIZED", scope)
+        for item in ("Generic snapshot manifest verification", "immutable fictional snapshot",
+                     "read-only attachment", "query/collection", "Integrity, version and compatibility",
+                     "missing/corrupt/incompatible", "Relocation determinism", "no ambient fallback",
+                     "legacy/public profile", "real MB2 data", "protected/provider datasets",
+                     "production admission", "provider acquisition", "SQL persistence", "module composition",
+                     "writer destination changes", "Rules Intelligence", "Deck Intelligence expansion",
+                     "simulation", "AI transport/model integration"):
+            self.assertIn(item, scope, item)
 
     def test_proposal_links_and_component_paths_exist(self):
         docs = sorted((ROOT / "docs").glob("EXTERNAL_CARD_DATA_PLANE*.md"))

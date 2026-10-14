@@ -51,15 +51,18 @@ It is not the existing query snapshot identity and never replaces old hash recip
 `baseline-audit.json` binds the architecture documents inspected at canonical main
 `ec8fcbf97c84d24337503c81dd1c31a31e163d44`; it records that API_CONTRACT.md was
 absent. It is an audit inventory, not permission evidence or a runtime dependency.
-Accepted architecture/decision text is preserved as an exact prefix before the
-new proposed notes.
+Decision 004/009 and earlier accepted decision text remain an exact prefix of the
+decision ledger. The audit's old Tier-0 file hashes are historical observations;
+owner-accepted Decision 017 now authorizes current authority wording to change.
+The original Architecture-v12 bytes remain independently bound by historical replay.
 
 ## What the tests demonstrate
 
 Run `PYTHONPATH=src python -m unittest discover -s tests -p
 'test_external_card_data_plane_design.py' -v`. Checks cover the proposed example's
 identity/hash/inventory closure, tampering, safe paths, repeated metadata, authority
-separation, documentation links and preserved accepted text. They also relocate
+separation, documentation links, preserved historical decision text and accepted
+v13 governance without runtime authorization. They also relocate
 this fictional data and call the **existing** CanonicalQueryEngine and
 CanonicalCollectionResolver with explicit data roots.
 

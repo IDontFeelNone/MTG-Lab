@@ -323,22 +323,37 @@ a named-product acquisition subsystem. It is additive within frozen Architecture
 
 ## Decision 017 — Public Architectural Authority and Immutable Operator Canonical Snapshots
 
-**Status:** Proposed — owner approval required; no runtime implementation authorized
+**Status:** Accepted
 
-**Architecture classification:** ARCHITECTURE V13 REQUIRED
+**Architecture classification:** Architecture v13 — ACTIVE APPROVED architecture
 
-MTG Lab should retain public Git authority over architecture, schemas, policies,
-identity/validation rules, algorithms, migrations, adapters, contracts and safe
-fixtures. Production canonical data may instead be an explicitly selected,
+The owner approved Decision 017 and the v13 direction reviewed at
+`3d21656b9f67a3089f32c5613804a1984fb44139` in PR #175. This approval authorizes
+the documentation/governance transition only. No runtime implementation is
+authorized. Architecture v12 is the previous historical architecture baseline;
+the existing runtime remains on its legacy filesystem/Git-bound implementation.
+
+MTG Lab retains public Git authority over architecture, source code, schemas,
+policies, identity/validation rules, deterministic algorithms, transformations,
+migrations, provider adapters, contracts, safe/public fixtures and public
+architecture/version manifests. Production canonical data may be an explicitly selected,
 reviewed, validated immutable operator-managed snapshot with independently
 permissioned source evidence. Generated databases, projections and caches remain
 subordinate to that snapshot. Personal collection data and credentials remain
 separate trust domains.
 
+A snapshot is authoritative only for its declared game, scope, content identity,
+schema/policy versions, capabilities, provenance/evidence bindings and approved
+operation/use scope. Private location alone does not make data canonical.
+Collections, holdings, storage information, preferences and assessments remain
+separate personal data, outside the shared canonical card-data snapshot. Source
+evidence is independently governed from both canonical and personal data.
+
 ### Relationship to accepted decisions
 
-If accepted, this decision prospectively **supersedes Decision 004's canonical
-production dataset location and rebuild-from-that-public-repository premises**.
+This decision prospectively **supersedes Decision 004 only where it requires
+production canonical datasets to live in public Git and production knowledge to
+be rebuildable from public Git alone**.
 It preserves Git architectural/code authority and generated-database subordination.
 Rebuild requires the exact code plus retained authorized snapshot/evidence, not
 public Git alone. This changes the explicit Tier-0 repository-authority invariant
@@ -365,11 +380,20 @@ Private storage or a digest is no permission shortcut. Unavailable/incompatible
 required snapshots fail closed; no hidden seed/provider/history fallback. Existing
 IDs, historical bytes/expected hashes and immutable audits remain interpretable.
 
-The authoritative proposal, alternatives, contracts, compatibility, security and
+The accepted architecture direction, alternatives, design contracts, compatibility, security and
 migration plan are in [EXTERNAL_CARD_DATA_PLANE.md](EXTERNAL_CARD_DATA_PLANE.md).
-This entry neither changes current v12 runtime authority nor clears/adopts any
-real dataset. The pending MB2 810 recommendation remains unadmitted, and accepting
-an architecture decision would still not be an owner admission decision.
+This entry changes governance authority, not runtime behavior or dataset state.
+The pending MB2 810 recommendation remains unadmitted; architecture approval is
+not an owner admission decision. It grants no processing, private-retention,
+public-redistribution, free/commercial application or protected-data AI-export
+permission. It does not resolve the nine held multiface candidates, owner spelling
+proposals or physical Printing verification; approve a source-policy plan; change
+`SOURCE_POLICY_CLEARED_PLANS`; or authorize acquisition, protected production
+snapshots, SQL, Rules Intelligence or simulation implementation.
+
+The next documented milestone is **V13 Stage 1 — Fictional Canonical Snapshot
+Attachment**. It remains NOT AUTHORIZED; its bounded future scope and exclusions
+are recorded in [the migration plan](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md#v13-stage-1--fictional-canonical-snapshot-attachment).
 
 ### Reasoning
 

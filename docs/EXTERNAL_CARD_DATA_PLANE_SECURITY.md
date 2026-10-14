@@ -1,6 +1,6 @@
 # Data-plane security, privacy and permission model
 
-**Status: Proposed threat model. No security service or runtime controls added.**
+**Status: Accepted v13 security requirements. No security service or runtime controls added or authorized.**
 
 ## Separate domains
 

@@ -4,7 +4,11 @@
 
 **Version:** 1.0
 
-**Status:** Approved Architecture
+**Status:** Architecture v13 — ACTIVE APPROVED architecture
+
+Decision 017 is Accepted. Architecture v12 remains the previous historical
+baseline. This governance transition does not implement the external data plane
+or authorize runtime work, new serialized contracts or dataset admission.
 
 ## Purpose
 
@@ -29,8 +33,14 @@ does not expand the model, populate entities, or authorize persistence work.
 
 ## Model Principles
 
-- **Repository authority:** Version-controlled canonical data in Git is the
-  source of truth. A database is a generated persistence and query layer.
+- **Authority separation:** Public Git owns code, architecture, schemas, policies,
+  identity/validation rules, transformations, adapters, migrations, contracts,
+  deterministic algorithms, safe fixtures and architecture/version manifests.
+  Production may select a reviewed, validated immutable operator-managed canonical
+  snapshot, bounded to its game, scope, content identity, schema/policy versions,
+  capabilities, provenance/evidence bindings and approved operation/use scope.
+  A private path alone is neither authority nor permission. A database is a
+  subordinate generated persistence and query layer.
 - **Stable identity:** Persistent entities use stable IDs. Relationships refer
   to those IDs rather than file position or collection ordering.
 - **Game-agnostic core:** Shared entities do not encode Mystery Booster 2 or
@@ -136,8 +146,10 @@ this model as follows:
 1. **Raw:** immutable acquired evidence and its content identity.
 2. **Processed:** parsed records and normalized candidates with transformation
    lineage; these records are explicitly non-canonical.
-3. **Canonical:** reviewed, approved entity definitions stored in the Git
-   repository under versioned contracts.
+3. **Canonical:** reviewed, approved entity definitions in an explicitly selected,
+   validated immutable snapshot under public versioned contracts. Existing
+   Git-backed data remains an explicit legacy/public profile; external attachment
+   runtime support is not implemented by this governance change.
 4. **Validation:** structural, referential, domain, and later statistical
    results proving whether canonical data is eligible for consumption.
 5. **Derived analytics:** reproducible results calculated from validated
@@ -172,7 +184,8 @@ currently empty datasets.
 
 Database tables, SQLAlchemy models, migrations, indexes, and generated database
 artifacts are outside this milestone. Any persistence implementation must
-follow Decision 010, remain derivable from validated repository data, and be
+follow Decision 010, remain derivable from the exact authorized validated snapshot
+plus compatible public code/contracts, and be
 approved as a separate milestone.
 
 ## Scope of This Migration
@@ -186,13 +199,16 @@ This milestone migrates architectural documentation only. It does not:
 - introduce database models, migrations, or persistence behavior; or
 - implement simulation, analytics, market, API, or AI behavior.
 
-## Proposed authority amendment — not active
+## Accepted authority amendment
 
-Proposed [Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots)
-would prospectively replace the Git-only production dataset authority premise in
-this Tier-0 model with a selected approved immutable operator snapshot under public
-contracts. It would not change existing entity IDs, relationship semantics,
+Accepted [Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots)
+prospectively supersedes Decision 004's public-Git-only production data location and
+rebuild premises with a selected approved immutable operator snapshot under public
+contracts. It does not change existing entity IDs, relationship semantics,
 evidence requirements or generated-database subordination. See
-[EXTERNAL_CARD_DATA_PLANE.md](EXTERNAL_CARD_DATA_PLANE.md). This requires v13 owner
-approval; the accepted v12 model above remains unchanged and active. No nameless
-Card contract, runtime schema or data admission is introduced by this proposal.
+[EXTERNAL_CARD_DATA_PLANE.md](EXTERNAL_CARD_DATA_PLANE.md). Source evidence remains
+independently governed; personal collections, holdings, storage, preferences and
+assessments remain a separate private trust domain, outside the shared snapshot.
+No nameless Card contract, runtime schema, data admission or permission clearance
+is introduced. Existing runtime behavior and historical v12 replay stay unchanged;
+MB2 810 and its nine holds remain pending and unadmitted.

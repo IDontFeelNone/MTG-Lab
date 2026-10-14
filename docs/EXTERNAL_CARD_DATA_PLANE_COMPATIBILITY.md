@@ -1,6 +1,6 @@
 # Current-component compatibility map
 
-**Status: Proposed migration map; no runtime changes.** Audit baseline
+**Status: Migration map for accepted v13 direction; no runtime changes authorized.** Audit baseline
 `ec8fcbf97c84d24337503c81dd1c31a31e163d44`. Difficulty is relative engineering
 scope, not an estimate or implementation authorization.
 
