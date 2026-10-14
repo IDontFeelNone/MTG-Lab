@@ -1,0 +1,17 @@
+{
+  "artifact_manifest": {
+    "path": "data/review/card-acquisition-pilot/manifest.json",
+    "sha256": "add6e43db48f814e2c43c33529e852948ea093a2b968f9ee69c19ea0a5b1b390"
+  },
+  "files": {
+    "docs/ARCHITECTURE.md": {
+      "bytes": 3430,
+      "sha256": "53b2818c428901b9dcb46f0eee54017527bc6088fd08fe7aa47aab010afa00f5"
+    }
+  },
+  "fixture_id": "card-acquisition-pilot-architecture-v12",
+  "historical_data_manifest_sha256": "ac3ce95f6f9a10cefd2c04afd6a08eb5343f5ef5931508d16c12885f3a45f25a",
+  "original_revision": "3cf6ad35fcb54ed5a4b640e36af6fa2ecf99a747",
+  "protected_inventory_identity": "sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53",
+  "schema_version": "historical-replay-auxiliary-v1"
+}
