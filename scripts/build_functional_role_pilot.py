@@ -42,8 +42,12 @@ def comparison_text(comparison: dict) -> str:
     return "\n".join(lines).rstrip("\n") + "\n"
 
 
-def build_artifacts() -> dict[str, bytes]:
-    pilot = FunctionalRolePilot(ROOT / "data")
+def build_artifacts(data_root: Path | None = None) -> dict[str, bytes]:
+    data = Path(data_root if data_root is not None else ROOT / "data").resolve()
+    repository_root = data.parent
+    config = repository_root / "config/card_intelligence"
+    pilot = FunctionalRolePilot(data, plan_path=config / "functional-role-pilot-v1.json",
+                                vocabulary_path=config / "functional-role-vocabulary-v1.json")
     dossiers = [pilot.dossier(i) for i in sorted(pilot.cards)]
     comparison = pilot.comparison()
     artifacts = {"dossiers.jsonl": ("\n".join(stable_json(d) for d in dossiers) + "\n").encode(),
@@ -56,7 +60,7 @@ def build_artifacts() -> dict[str, bytes]:
         "canonical_main_baseline": pilot.plan["canonical_main_baseline"],
         "canonical_snapshot_id": pilot.mechanical.snapshot_id,
         "annotation_plan_identity": pilot.plan_identity, "vocabulary_identity": pilot.vocabulary_identity,
-        "input_files": {p.relative_to(ROOT).as_posix(): {"bytes": p.stat().st_size,
+        "input_files": {p.relative_to(repository_root).as_posix(): {"bytes": p.stat().st_size,
                         "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                         for p in (pilot.plan_path, pilot.vocabulary_path)},
         "review_status": "requires_review", "human_attestation": None, "canonical_admission": False,

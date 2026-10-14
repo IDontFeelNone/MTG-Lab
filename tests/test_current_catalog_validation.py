@@ -69,15 +69,25 @@ class CurrentCatalogValidationTests(unittest.TestCase):
         # expanded checkouts exercise the same real consumer against new Cards.
         self.assertEqual(bool(rows), bool(missing))
         if rows:
-            pid, printing = rows[0]
+            # The existing acquisition contract compares two or three distinct
+            # Cards; a one-Card packet cannot reach missing-evidence handling.
+            unique = {}
+            for pid, printing in sorted(rows):
+                unique.setdefault(printing["card_id"], (pid, printing))
+            self.assertGreaterEqual(len(unique), 2)
+            selected = list(unique.values())[:2]
             packet = {"schema_version": "card-acquisition-input-v1", "mode": "synthetic_demonstration",
                 "as_of": "2026-10-13T00:00:00Z", "canonical_snapshot_id": self.mechanical.snapshot_id,
                 "sources": [], "candidates": [{"card_id": printing["card_id"], "printing_id": pid,
                     "acceptable_printing_ids": [pid], "desired_quantity": 1,
-                    "preferred_dimensions": {"language": printing["language"], "finish": "nonfoil", "treatment": None}}]}
+                    "preferred_dimensions": {"language": printing["language"], "finish": "nonfoil", "treatment": None}}
+                    for pid, printing in selected]}
             result = CardAcquisitionAdapter(DATA).evaluate(packet, source_root=DATA.parent).to_dict()
             self.assertEqual(result["decision"]["recommendation"]["outcome"], "abstain")
             self.assertTrue(any("source_binding_missing" in reason for reason in result["blockers"]))
+            self.assertEqual(len(result["candidates"]), 2)
+            self.assertTrue(all(c["source_status"] == {"status": "incomplete", "reason": "source_binding_missing"}
+                                for c in result["candidates"]))
             self.assertFalse(result["actual_purchase_advice"])
 
 

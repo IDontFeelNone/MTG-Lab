@@ -15,8 +15,14 @@ from card_intelligence.comparison import ContextualCardComparisonPilot, comparis
 from card_intelligence.mechanics import stable_json
 
 
-def build_artifacts() -> dict[str, bytes]:
-    pilot = ContextualCardComparisonPilot(ROOT / "data")
+def build_artifacts(data_root: Path | None = None) -> dict[str, bytes]:
+    data = Path(data_root if data_root is not None else ROOT / "data").resolve()
+    repository_root = data.parent
+    config = repository_root / "config/card_intelligence"
+    pilot = ContextualCardComparisonPilot(data,
+        plan_path=config / "contextual-comparison-pilot-v1.json",
+        role_plan_path=config / "functional-role-pilot-v1.json",
+        role_vocabulary_path=config / "functional-role-vocabulary-v1.json")
     dossier = pilot.dossier()
     artifacts = {"comparison.json": (dossier.to_json() + "\n").encode(),
         "decision-inputs.json": (stable_json(pilot.decision_inputs()) + "\n").encode(),
@@ -24,14 +30,14 @@ def build_artifacts() -> dict[str, bytes]:
         "explanation.md": comparison_explanation(dossier).encode()}
     source = pilot.cards[0]["source"]
     inputs = [pilot.plan_path, pilot.roles.plan_path, pilot.roles.vocabulary_path,
-              ROOT / source["retained_source_reference"], ROOT / source["manifest_reference"]]
+              repository_root / source["retained_source_reference"], repository_root / source["manifest_reference"]]
     manifest = {"schema_version": "contextual-card-comparison-manifest-v1",
         "canonical_main_baseline": pilot.plan["canonical_main_baseline"],
         "canonical_snapshot_id": pilot.roles.mechanical.snapshot_id,
         "comparison_id": dossier.to_dict()["comparison_id"], "plan_identity": pilot.plan_identity,
         "context_identity": pilot.context_identity, "prepared_at": pilot.plan["prepared_at"],
         "review": dossier.to_dict()["review"], "decision_outcome": "abstain",
-        "input_files": {p.relative_to(ROOT).as_posix(): {"bytes": p.stat().st_size,
+        "input_files": {p.relative_to(repository_root).as_posix(): {"bytes": p.stat().st_size,
             "sha256": hashlib.sha256(p.read_bytes()).hexdigest()} for p in inputs},
         "files": {name: {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
                   for name, raw in sorted(artifacts.items())}}

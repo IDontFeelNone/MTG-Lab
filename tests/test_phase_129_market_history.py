@@ -11,7 +11,10 @@ from market.intelligence import MarketObservation, MarketObservationRepository
 from scripts.import_market_observations import import_acquisition
 
 
-ROOT = Path(__file__).parents[1]
+from historical_catalog import historical_repository
+
+# Replay the retained original catalog; current checks use their actual root.
+ROOT = historical_repository()
 RUN = "scryfall-mb2-30754638264-1"
 UTC = timezone.utc
 

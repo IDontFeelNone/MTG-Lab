@@ -105,10 +105,12 @@ class ProductionCollectionResolutionTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.resolver = CanonicalCollectionResolver("magic", ROOT / "data")
+        from historical_catalog import historical_data
+        cls.data = historical_data()
+        cls.resolver = CanonicalCollectionResolver("magic", cls.data)
 
     def test_exact_promoted_printings_preserve_card_dimensions_and_provenance(self):
-        protected = (ROOT / "data/canonical/state.json").read_bytes()
+        protected = (self.data / "canonical/state.json").read_bytes()
         result = self.resolver.resolve({"entries": [{"printing_id": pid, "quantity": 1,
             "language": "English", "finish": "nonfoil"} for pid in self.PRINTINGS]})
         self.assertEqual((len(self.resolver.cards), len(self.resolver.printings)), (399, 928))
@@ -132,7 +134,7 @@ class ProductionCollectionResolutionTests(unittest.TestCase):
                 self.assertTrue(entity["evidence_reference_ids"])
                 self.assertTrue(entity["promotion_references"][0]["audit_reference"]["sha256"])
                 self.assertNotIn("review_artifact_digests", entity["promotion_references"][0])
-        self.assertEqual(protected, (ROOT / "data/canonical/state.json").read_bytes())
+        self.assertEqual(protected, (self.data / "canonical/state.json").read_bytes())
 
     def test_external_identity_resolves_production_without_seed_name_fallback(self):
         pid = next(iter(self.PRINTINGS))
