@@ -449,6 +449,92 @@ class ActualCurrentConsumers(unittest.TestCase):
         self.assertIn('FAILED', (self.root / '.git/catalog-admission-validation.log').read_text())
         self.assertFalse(any('push' in c for c in self.transport.calls))
 
+    def seed_validation_cache_probe(self):
+        # Fictional tracked inputs are established before planning/authorization.
+        # The real suite exercises explicit main-process compilation and a child
+        # that enables caching while inheriting the controlled destination.
+        files = {
+            'src/fictional_cache_main.py': 'VALUE = "FICTIONAL_MAIN"\n',
+            'src/fictional_cache_child.py': 'VALUE = "FICTIONAL_CHILD"\n',
+            'tests/test_validation_cache_probe.py': '''import json, os, py_compile, subprocess, sys, unittest
+from pathlib import Path
+class ActualValidationCacheProbe(unittest.TestCase):
+    def test_main_and_inherited_child_cache_locations(self):
+        root = Path.cwd()
+        cache = Path(sys.pycache_prefix)
+        self.assertTrue(cache.is_relative_to(root / ".git"))
+        self.assertEqual(cache.stat().st_mode & 0o777, 0o700)
+        self.assertTrue(sys.dont_write_bytecode)
+        main = Path(py_compile.compile(str(root / "src/fictional_cache_main.py"), doraise=True))
+        self.assertTrue(main.is_file())
+        self.assertTrue(main.is_relative_to(cache))
+        command = [sys.executable, "-c", "import json, sys; sys.path.insert(0, 'src'); import fictional_cache_child as m; print(json.dumps({'prefix': sys.pycache_prefix, 'cached': m.__cached__, 'disabled': sys.dont_write_bytecode, 'value': m.VALUE}))"]
+        child = subprocess.run(command, env={**os.environ, "PYTHONDONTWRITEBYTECODE": "0"},
+                               check=True, capture_output=True, text=True)
+        result = json.loads(child.stdout)
+        self.assertEqual(result["prefix"], str(cache))
+        self.assertFalse(result["disabled"])
+        self.assertEqual(result["value"], "FICTIONAL_CHILD")
+        child_cache = Path(result["cached"])
+        self.assertTrue(child_cache.is_file())
+        self.assertTrue(child_cache.is_relative_to(cache))
+        forbidden = os.environ.get("FICTIONAL_UNCONTROLLED_ARTIFACT")
+        if forbidden:
+            path = root / forbidden
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b"FICTIONAL uncontrolled artifact must remain excluded")
+''',
+        }
+        for name, content in files.items():
+            path = self.root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content)
+        self.git('add', '--', *sorted(files))
+        self.git('-c', 'user.name=Fictional fixture', '-c', 'user.email=fixture@example.invalid',
+                 'commit', '--quiet', '-m', 'Establish fictional validation cache probes')
+        self.base = self.git('rev-parse', 'HEAD').strip()
+        self.git('push', '--quiet', 'origin', 'HEAD:refs/heads/main')
+        self.plan = self.engine().plan()
+
+    def test_real_validation_main_and_inherited_child_use_private_cache_without_tree_artifacts(self):
+        self.seed_validation_cache_probe()
+        engine, decision = self.write()
+        # An inherited destination must not select a publishable directory.
+        with patch.dict(os.environ, {'PYTHONPYCACHEPREFIX': str(self.root / 'unsafe-cache')}):
+            result = self.publish(engine, decision)
+        self.assertEqual(result['status'], 'published', result)
+        self.assertEqual(result['validation']['tests'], 2)
+        self.assertFalse((self.root / 'unsafe-cache').exists())
+        caches = list((self.root / '.git').glob('catalog-admission-pycache-*'))
+        self.assertEqual(len(caches), 1)
+        self.assertTrue(list(caches[0].rglob('fictional_cache_main.*.pyc')))
+        self.assertTrue(list(caches[0].rglob('fictional_cache_child.*.pyc')))
+        self.assertFalse([p for p in self.root.rglob('*') if not p.is_relative_to(self.root / '.git')
+                          and (p.name == '__pycache__' or p.suffix == '.pyc')])
+        self.assertFalse(any('pycache' in name or name.endswith('.pyc')
+                             for name in result['inventory']['changed_paths']))
+
+    def assert_uncontrolled_validation_artifact_rejected(self, name):
+        self.seed_validation_cache_probe()
+        exclude = self.root / '.git/info/exclude'
+        exclude.write_text(exclude.read_text() + name + '\n')
+        engine, decision = self.write()
+        with patch.dict(os.environ, {'FICTIONAL_UNCONTROLLED_ARTIFACT': name}):
+            result = self.publish(engine, decision)
+        self.assertEqual((result['status'], result['publication_phase']), ('blocked', 'validation'), result)
+        report = json.loads(result['error'].split(': ', 1)[1])
+        self.assertEqual(report['offenders'], [{'path': name, 'categories': ['ignored']}])
+        self.assertTrue((self.root / name).is_file())
+        self.assertEqual(self.git('rev-parse', 'HEAD').strip(), self.base)
+        self.assertFalse(any('push' in c or c[0] == 'gh' for c in self.transport.calls))
+        self.assertIn('Ran 2 tests', (self.root / '.git/catalog-admission-validation.log').read_text())
+
+    def test_post_validation_unrelated_ignored_file_still_blocks(self):
+        self.assert_uncontrolled_validation_artifact_rejected('unrelated-validation.log')
+
+    def test_post_validation_uncontrolled_pyc_like_file_still_blocks(self):
+        self.assert_uncontrolled_validation_artifact_rejected('src/__pycache__/forged.cpython-312.pyc')
+
     def test_simulated_capability_cannot_publish_to_a_network_remote(self):
         engine, decision = self.write()
         self.git('remote', 'set-url', 'origin', 'https://github.com/IDontFeelNone/MTG-Lab.git')

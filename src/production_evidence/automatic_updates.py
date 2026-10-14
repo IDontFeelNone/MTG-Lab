@@ -1403,7 +1403,12 @@ class GitHubPersistence:
         command = ["python", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py", "-v"]
         env = {k: v for k, v in os.environ.items() if k not in {
             "MTG_LAB_ADMISSION_OIDC", "GH_TOKEN", "GITHUB_TOKEN", "INPUT_GITHUB_TOKEN", "ACTIONS_ID_TOKEN_REQUEST_TOKEN"}}
-        env.update(PYTHONPATH=str(Path(__file__).resolve().parents[1]), PYTHONDONTWRITEBYTECODE="1")
+        # Keep any explicit compilation or child interpreter cache out of the
+        # proposed Git tree. Each validation owns a private cache in Git's
+        # non-publishable metadata; never trust an inherited cache destination.
+        cache = tempfile.mkdtemp(prefix="catalog-admission-pycache-", dir=root / ".git")
+        env.update(PYTHONPATH=str(Path(__file__).resolve().parents[1]), PYTHONDONTWRITEBYTECODE="1",
+                   PYTHONPYCACHEPREFIX=cache)
         result = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True, timeout=1800)
         output = result.stdout + result.stderr
         _check_public_bytes(output.encode())
