@@ -1199,12 +1199,34 @@ def admission_publication_inventory(engine, plan, base_revision, decision) -> di
     backup = relative(engine.run_root / "canonical-pre-state.bytes")
     if (root / backup).read_bytes() != original:
         raise EvidenceError("local recovery backup differs from the reviewed original bytes")
-    tracked = set(git("diff", "--name-only", "--no-renames", base_revision, "--").stdout.decode().splitlines())
-    staged = set(git("diff", "--cached", "--name-only", "--no-renames", "--").stdout.decode().splitlines())
+    tracked = set(git("diff", "--name-only", "--no-renames", "-z", base_revision, "--").stdout.decode().split("\0")) - {""}
+    staged = set(git("diff", "--cached", "--name-only", "--no-renames", "-z", "--").stdout.decode().split("\0")) - {""}
     untracked = set(git("ls-files", "--others", "--exclude-standard", "-z").stdout.decode().strip("\0").split("\0")) - {""}
     ignored = set(git("ls-files", "--others", "--ignored", "--exclude-standard", "-z").stdout.decode().strip("\0").split("\0")) - {""}
-    if (tracked | staged | untracked | ignored) - files - {backup} or backup in tracked | staged:
-        raise EvidenceError("unexpected staged/tracked/untracked or private publication artifacts")
+    extra = (tracked | staged | untracked | ignored) - files - {backup}
+    invalid_backup = {backup} if backup in tracked | staged else set()
+    if extra or invalid_backup:
+        categories = {"tracked_modification": tracked, "staged": staged,
+                      "untracked": untracked, "ignored": ignored}
+        offenders = []
+        for name in sorted(extra | invalid_backup):
+            item = {"categories": [category for category, paths in categories.items() if name in paths]}
+            if name in invalid_backup:
+                item["categories"].append("improperly_staged_recovery_backup" if name in staged
+                                          else "tracked_recovery_backup")
+            # Paths are repository-relative metadata, never file contents. Do
+            # not echo credentials embedded in a filename or absolute/escape
+            # spellings; a digest still identifies the offending local name.
+            try:
+                if Path(name).is_absolute() or ".." in Path(name).parts:
+                    raise EvidenceError("unsafe diagnostic path")
+                _check_public_bytes(canonical_json(name))
+                item["path"] = name
+            except EvidenceError:
+                item.update(path="[redacted]", path_sha256=digest(name.encode()))
+            offenders.append(item)
+        raise EvidenceError("unexpected publication artifacts: " + json.dumps(
+            {"offenders": offenders}, sort_keys=True, ensure_ascii=True))
     for name in staged:
         if git("show", ":" + name).stdout != read(name):
             raise EvidenceError("staged file differs from the verified working bytes")

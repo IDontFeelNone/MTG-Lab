@@ -203,6 +203,77 @@ class ActualCurrentConsumers(unittest.TestCase):
         self.assertEqual(result['status'], 'blocked')
         self.assertIn('unexpected', result['error'])
 
+    def ignored_historical_summary(self):
+        # Same demonstrated path/ignore condition; contents are fictional here.
+        name = 'data/validation/production-runs/30649546787/phase109_run_evidence_summary.json'
+        path = self.root / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        raw = b'{"notice":"FICTIONAL historical validation, not admission evidence"}\n'
+        path.write_bytes(raw)
+        exclude = self.root / '.git/info/exclude'
+        exclude.write_text(exclude.read_text() + name + '\n')
+        self.assertEqual(self.git('ls-files', '--others', '--ignored', '--exclude-standard').splitlines(), [name])
+        return name, raw
+
+    def test_copied_ignored_history_omitted_from_base_fails_with_exact_diagnostic(self):
+        name, raw = self.ignored_historical_summary()
+        engine, decision = self.write()
+        result = self.publish(engine, decision)
+        self.assertEqual((result['status'], result['publication_phase']), ('blocked', 'preflight'))
+        report = json.loads(result['error'].split(': ', 1)[1])
+        self.assertEqual(report['offenders'], [{'path': name, 'categories': ['ignored']}])
+        self.assertEqual((self.root / name).read_bytes(), raw)
+        self.assertFalse(any('push' in c or c[0] == 'gh' for c in self.transport.calls))
+
+    def test_explicitly_seeded_tracked_ignored_history_is_preserved_not_added_to_delta(self):
+        name, raw = self.ignored_historical_summary()
+        # Establish the reviewed fictional base before authorizing/writing. The
+        # production inventory gains no exception for this or any ignored file.
+        self.git('add', '--force', '--', name)
+        self.git('-c', 'user.name=Fictional fixture', '-c', 'user.email=fixture@example.invalid',
+                 'commit', '--quiet', '-m', 'Seed the exact existing ignored historical summary')
+        self.base = self.git('rev-parse', 'HEAD').strip()
+        self.git('push', '--quiet', 'origin', 'HEAD:refs/heads/main')
+        self.plan = self.engine().plan()
+        engine, decision = self.write()
+        inventory = admission_publication_inventory(engine, self.plan, self.base, decision)
+        self.assertNotIn(name, inventory['changed_paths'])
+        self.assertNotIn(name, [r['path'] for r in inventory['files']])
+        self.assertEqual((self.root / name).read_bytes(), raw)
+        self.assertEqual(self.git('show', self.base + ':' + name).encode(), raw)
+
+    def test_artifact_diagnostics_group_categories_backups_and_redact_secret_filenames(self):
+        engine, decision = self.write()
+        sentinel = 'FICTIONAL FILE CONTENT MUST NOT APPEAR IN DIAGNOSTICS'
+        names = {'data/audit/private_crosswalk.json': ['tracked_modification', 'staged'],
+                 'unexpected-operator.log': ['untracked'], '.env': ['ignored'],
+                 'unexpected\noperator\t.log': ['tracked_modification', 'staged']}
+        for name in names:
+            (self.root / name).write_text(sentinel)
+        self.git('add', '--', 'data/audit/private_crosswalk.json', 'unexpected\noperator\t.log')
+        tracked = 'tests/test_current_catalog.py'
+        (self.root / tracked).write_text((self.root / tracked).read_text() + '# ' + sentinel + '\n')
+        names[tracked] = ['tracked_modification']
+        backup = engine.run_root / 'canonical-pre-state.bytes'
+        backup_name = backup.relative_to(self.root).as_posix()
+        self.git('add', '--', backup_name)
+        names[backup_name] = ['tracked_modification', 'staged', 'improperly_staged_recovery_backup']
+        credential_name = 'ghp_' + 'FICTIONALCREDENTIAL' * 2
+        (self.root / credential_name).write_text(sentinel)
+        result = self.publish(engine, decision)
+        self.assertEqual((result['status'], result['publication_phase']), ('blocked', 'preflight'))
+        error = result['error']
+        self.assertNotIn(sentinel, error)
+        self.assertNotIn(str(self.root), error)
+        self.assertNotIn(credential_name, error)
+        self.assertNotIn('\n', error)
+        rows = json.loads(error.split(': ', 1)[1])['offenders']
+        expected = [{'path': name, 'categories': categories} for name, categories in names.items()]
+        expected.append({'path': '[redacted]', 'path_sha256': digest(credential_name.encode()),
+                         'categories': ['untracked']})
+        self.assertCountEqual(rows, expected)
+        self.assertFalse(any('push' in c or c[0] == 'gh' for c in self.transport.calls))
+
     def test_path_escape_secret_and_private_dependency_bytes_are_rejected(self):
         engine, decision = self.write()
         original = self.new_dependency.read_bytes()
@@ -409,6 +480,28 @@ class ActualCurrentConsumers(unittest.TestCase):
                 code = entry.main(['admit', '--github-owner-entry', '--publish-admission-pr', '--repository-root', str(self.root),
                                   '--config', self.fixture.config_name])
             self.assertEqual(code, 1)
+
+
+class ExpandedInventoryPreflightTests(unittest.TestCase):
+    def test_actual_retained_writer_preflight_without_full_suite_or_publication(self):
+        from publication_validation_regression import ExpandedPublicationValidationRegression
+        fixture = ExpandedPublicationValidationRegression(methodName='runTest')
+        self.addCleanup(fixture.doCleanups)
+        engine, plan, decision = fixture.prepare_writer_expansion()
+        inventory = admission_publication_inventory(engine, plan, fixture.base, decision)
+        self.assertTrue(inventory['existing_records_preserved'])
+        self.assertEqual(inventory['candidate_counts_by_type'], {'card': 270, 'printing': 270, 'identifier': 270})
+        self.assertIn('data/canonical/state.json', inventory['changed_paths'])
+        history = 'data/validation/production-runs/30649546787/phase109_run_evidence_summary.json'
+        self.assertNotIn(history, inventory['changed_paths'])
+        self.assertIn(history, fixture.git('ls-files').splitlines())
+        self.assertEqual((fixture.root / history).read_bytes(),
+                         subprocess.check_output(['git', 'show', fixture.base + ':' + history], cwd=fixture.root))
+        backup = engine.run_root / 'canonical-pre-state.bytes'
+        self.assertEqual(inventory['excluded_local_recovery_backup'], backup.relative_to(fixture.root).as_posix())
+        self.assertNotIn(inventory['excluded_local_recovery_backup'], inventory['changed_paths'])
+        self.assertFalse((fixture.root / '.git/catalog-admission-validation.log').exists())
+        self.assertEqual(fixture.git('rev-parse', 'HEAD').strip(), fixture.base)
 
 
 class PendingFirstUseTests(unittest.TestCase):

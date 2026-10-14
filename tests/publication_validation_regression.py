@@ -27,7 +27,7 @@ class ExpandedPublicationValidationRegression(unittest.TestCase):
     def engine(self):
         return AutomaticCanonicalUpdate(self.root, self.config)
 
-    def test_real_writer_expansion_passes_real_publication_suite_and_readback(self):
+    def prepare_writer_expansion(self):
         # Keep the actual TemporaryDirectory capability alive throughout writing
         # and publication; no simulated receipt can substitute for this object.
         temporary = tempfile.TemporaryDirectory(prefix="mtglab-expanded-publication-")
@@ -38,7 +38,9 @@ class ExpandedPublicationValidationRegression(unittest.TestCase):
         extra = ["tests/historical_catalog.py", "tests/test_current_catalog_validation.py",
                  "tests/publication_validation_regression.py", "tests/fixtures/historical_catalog/manifest.json",
                  "tests/fixtures/historical_catalog/canonical-3bf4cc27.zip"]
-        for relative in sorted({p.decode() for p in paths if p} | set(extra)):
+        original_paths = {p.decode() for p in paths if p}
+        code_paths = original_paths | set(extra)
+        for relative in sorted(code_paths):
             if relative.startswith("data/"):
                 continue
             target = self.root / relative
@@ -47,12 +49,21 @@ class ExpandedPublicationValidationRegression(unittest.TestCase):
         self.git("init", "--quiet", "--initial-branch=main")
         self.git("config", "user.name", "SIMULATED_PUBLICATION_TEST_ONLY")
         self.git("config", "user.email", "fictional@example.invalid")
-        # This baseline is disposable, public-test inputs only; never sent to GitHub.
-        self.git("add", ".")
-        # The project intentionally ignores locally generated state.json. Its
-        # real historical counterpart is already tracked in the real checkout;
-        # seed that same exact file explicitly in this fresh disposable repository.
-        self.git("add", "--force", "data/canonical/state.json")
+        # Seed only the explicit copied tracked-file inventory and the already
+        # bound rehearsal inputs. Historical files that match ignore rules must
+        # remain tracked in this baseline, not become unrelated ignored extras.
+        # This repository is disposable; nothing here is sent to GitHub.
+        config = json.loads(self.config.read_bytes())
+        artifacts = config["artifacts"]
+        seed = {name for name in code_paths if (self.root / name).is_file()}
+        seed.add(self.config.relative_to(self.root).as_posix())
+        seed.update("data/" + artifacts[key] for key in ("source_artifact", "candidate_payload"))
+        seed.update("data/" + ref["path"] for ref in artifacts["receipts"])
+        ignored_history = {"data/canonical/state.json",
+            "data/validation/production-runs/30649546787/phase109_run_evidence_summary.json"}
+        self.assertTrue(ignored_history <= original_paths & seed)
+        self.git("add", "--", *sorted(seed - ignored_history))
+        self.git("add", "--force", "--", *sorted(ignored_history))
         self.git("commit", "--quiet", "-m", "Disposable original catalog and pending test inputs")
         self.base = self.git("rev-parse", "HEAD").strip()
         origin = self.root / ".git/fictional-origin.git"
@@ -71,6 +82,10 @@ class ExpandedPublicationValidationRegression(unittest.TestCase):
         self.assertEqual(len(selected), 810)
         self.assertEqual(digest(plan["decision_inputs"]["bindings"]["candidate_ids"]), RECOMMENDED_DIGEST)
         self.assertNotEqual(original, (self.root / "data/canonical/state.json").read_bytes())
+        return engine, plan, decision
+
+    def test_real_writer_expansion_passes_real_publication_suite_and_readback(self):
+        engine, plan, decision = self.prepare_writer_expansion()
         transport = FictionalGitHubTransport(self)
         # No validation replacement: this calls the publication helper, real
         # writer-output integrity checks and its complete unittest subprocess.
