@@ -12,7 +12,10 @@ from card_intelligence import CardKnowledgeQuery, CardValueExplanationEngine, Kn
 from card_intelligence.cli import main as explanation_cli
 from card_intelligence.demand_review import DemandEvidenceError, load_reviewed_demand
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# Replay the original demand-evidence snapshot without repinning its hashes.
+ROOT = historical_repository()
 EVIDENCE = ROOT / "data/card_intelligence/demand/phase-142/scryfall-edhrec-rank.json"
 DECK_USAGE_EVIDENCE = ROOT / "data/card_intelligence/demand/phase-143/mtgjson-decks.json"
 NAMES = ["Brainstorm", "Command Tower", "Counterspell", "Goblin Charbelcher", "Goblin King",

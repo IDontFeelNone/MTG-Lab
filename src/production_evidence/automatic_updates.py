@@ -43,6 +43,12 @@ def digest(value: object) -> str:
 
 ADMISSION_OPERATION = "canonical-admission"
 
+# Hosted discovery exceeded 30 minutes (1,852.485s on reviewed head 35a1f9c).
+# Allow bounded headroom for the complete writer-expanded suite, never an
+# unbounded wait or a request-controlled deadline. Timeout still blocks writing
+# a publication commit and pushing; it is not successful validation.
+ADMISSION_VALIDATION_TIMEOUT_SECONDS = 60 * 60
+
 
 @dataclass(frozen=True)
 class AdmissionDecision:
@@ -223,7 +229,8 @@ class AutomaticCanonicalUpdate:
                  review_boundary: AdmissionReviewBoundary | None = None):
         self.root = Path(repository_root)
         self._repository_scope = self.root.resolve()
-        self.descriptor, self.config = TargetDescriptor.load(config)
+        self._configuration_path = Path(config)
+        self.descriptor, self.config = TargetDescriptor.load(self._configuration_path)
         data_relative = Path(self.config.get("data_root", "data"))
         self.data = self.root / data_relative
         if (data_relative.is_absolute() or ".." in data_relative.parts
@@ -418,9 +425,93 @@ class AutomaticCanonicalUpdate:
                 "completed_stages": completed, "next_stage": STAGES[len(completed)] if len(completed) < len(STAGES) else None,
                 "complete": len(completed) == len(STAGES)}
 
-    def plan(self) -> dict:
-        return {"schema_version": SCHEMA, "target": self.descriptor.__dict__, "stages": list(STAGES),
-                "status": self.status(), "canonical_write": False}
+    def plan(self, *, expected_plan_id: str | None = None) -> dict:
+        """Inspect exact retained inputs; integrity is neither approval nor readiness."""
+        self._assert_storage_scope(check_tree=True)
+        descriptor, configuration = TargetDescriptor.load(self._configuration_path)
+        if descriptor != self.descriptor or configuration != self.config:
+            raise EvidenceError("configuration changed since engine initialization")
+        configuration_sha256 = digest(self._configuration_path.read_bytes())
+        bindings = self.admission_bindings()
+        source = self._stage_source_acquisition_verification({})
+        payload_check = self._stage_evidence_normalization({})
+        isolation = self._stage_target_partitioning({})
+        if (source["sha256"] != bindings["evidence_files"][0]["sha256"]
+                or payload_check["payload_sha256"] != bindings["candidate_payload_sha256"]):
+            raise EvidenceError("planning inputs changed during integrity verification")
+        _, payload, payload_raw = self._payload()
+        if digest(payload_raw) != bindings["candidate_payload_sha256"]:
+            raise EvidenceError("planning inputs changed during integrity verification")
+        counts = {}
+        for row in payload["candidate_payloads"]:
+            kind = row.get("entity_type")
+            if not isinstance(kind, str) or not kind:
+                raise EvidenceError("candidate type inventory is invalid")
+            counts[kind] = counts.get(kind, 0) + 1
+        observed = canonical_state_digest(self.data)
+        expected = bindings["canonical_pre_state_digest"]
+        audit_path = self.data / self.config["artifacts"]["promotion_audit"]
+        historical = None
+        if audit_path.exists():
+            raw_audit = audit_path.read_bytes()
+            audit = json.loads(raw_audit)
+            if "input_bindings" in audit:
+                validate_admission_audit(self.data, audit)
+                if audit["input_bindings"] != bindings or audit["canonical_post_state_digest"] != observed:
+                    raise EvidenceError("historical admission inspection binding mismatch")
+            else:
+                self._verify_historical_read_only(audit)
+            historical = {"verified": True, "path": self.config["artifacts"]["promotion_audit"],
+                          "sha256": digest(raw_audit), "original_pre_state_digest": expected,
+                          "recorded_post_state_digest": audit["canonical_post_state_digest"]}
+        elif self.config.get("reference_completed_promotion"):
+            raise EvidenceError("historical admission audit is missing")
+        elif observed != expected:
+            raise EvidenceError("canonical pre-state drift")
+        missing_pins = ["integrity." + key for key in ("source_sha256", "candidate_payload_sha256")
+                        if not self.config["integrity"].get(key)]
+        for item in self.config["artifacts"].get("receipts", []):
+            if isinstance(item, str) or not item.get("sha256"):
+                missing_pins.append("receipt:" + (item if isinstance(item, str) else item["path"]))
+        if missing_pins and historical is None:
+            raise EvidenceError("new admission planning requires expected hash pins: " + ", ".join(missing_pins))
+        gates = [
+            {"gate": "admission_authorization", "state": "unresolved",
+             "reason": "Planning supplies no authenticated reviewer or admission decision."},
+            {"gate": "source_policy", "state": "unresolved",
+             "reason": "Provider trust and retained receipts do not establish operation-specific data permissions."},
+            {"gate": "admission_readiness", "state": "not_assessed",
+             "reason": "Candidate review, compatibility and write-time checks remain required."}]
+        if missing_pins:
+            gates.append({"gate": "historical_raw_byte_pins", "state": "unresolved",
+                          "reason": "Historical source-to-record evidence does not supply missing raw-byte pins."})
+        # Progress/checkpoints are deliberately excluded: they grant no authority
+        # and do not change the proposed data. Canonical JSON has no trailing LF.
+        inputs = {"scope": "historical_inspection" if historical else "new_admission_preview",
+                  "configuration_sha256": configuration_sha256, "bindings": bindings,
+                  "expected_integrity": deepcopy(self.config["integrity"]),
+                  "observed_canonical_pre_state_digest": observed,
+                  "candidate_counts_by_type": dict(sorted(counts.items())),
+                  "policy": deepcopy(self.config["policy"]),
+                  "canonical_identity_fields": deepcopy(self.config.get("canonical_identity_fields", {})),
+                  "historical_admission": historical, "missing_expected_hashes": missing_pins,
+                  "unresolved_gates": gates}
+        if (self.admission_bindings() != bindings or canonical_state_digest(self.data) != observed
+                or digest(self._configuration_path.read_bytes()) != configuration_sha256
+                or (historical and digest(audit_path.read_bytes()) != historical["sha256"])):
+            raise EvidenceError("planning inputs changed during integrity verification")
+        plan_id = "sha256:" + digest(inputs)
+        if expected_plan_id is not None and expected_plan_id != plan_id:
+            raise EvidenceError("plan identity does not match current decision-relevant inputs")
+        return {"schema_version": SCHEMA, "plan_schema_version": "canonical-admission-preview-v1",
+                "plan_id": plan_id, "operation": bindings["operation"],
+                "target": deepcopy(self.descriptor.__dict__), "stages": list(STAGES),
+                "status": self.status(), "decision_inputs": inputs,
+                "integrity_verified": not missing_pins,
+                "integrity_checks": {"source": source, "payload": payload_check, "isolation": isolation},
+                "pre_state_matches_expected": observed == expected,
+                "approval_state": "not_granted", "execution_authorized": False,
+                "admission_ready": False, "canonical_write": False}
 
     def verify(self) -> dict:
         self._assert_storage_scope(check_tree=True)
@@ -1001,9 +1092,339 @@ class AutomaticCanonicalUpdate:
                 "force_merge": False, "diagnostics_retained_on_failure": True}
 
 
+def _check_public_bytes(raw: bytes) -> None:
+    """Reject credential material and private collection fields, without echoing it."""
+    if re.search(rb"(?i)(authorization\s*:\s*bearer|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|"
+                 rb"\beyJ[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]{5,}\b|\bgh[pousr]_[A-Za-z0-9]{20,}|\bgithub_pat_[A-Za-z0-9_]{20,})", raw):
+        raise EvidenceError("secret material is forbidden in publication or retained diagnostics")
+    try: document = json.loads(raw)
+    except (ValueError, UnicodeDecodeError): return
+    forbidden = {"access_token", "id_token", "oidc_token", "oidc_jwt", "raw_oidc_token", "jwt_token",
+                 "client_secret", "signing_key", "authorization", "password", "private_key",
+                 "signing_secret", "gh_token", "owner_declared_total", "ownership_declaration",
+                 "pack_position", "pack_positions", "private_crosswalk", "personal_inventory"}
+    def inspect(value):
+        if isinstance(value, dict):
+            if any(str(key).lower() in forbidden for key in value):
+                raise EvidenceError("secret/private fields are forbidden in published evidence")
+            for item in value.values(): inspect(item)
+        elif isinstance(value, list):
+            for item in value: inspect(item)
+    inspect(document)
+
+
+def admission_publication_inventory(engine, plan, base_revision, decision) -> dict:
+    """Read-only exact Git/content boundary. This is validation, never authority."""
+    root = engine.root.resolve()
+    def git(*args, checked=True):
+        result = subprocess.run(["git", "-C", str(root), *args], capture_output=True, timeout=30)
+        if checked and result.returncode: raise EvidenceError("publication Git inventory check failed")
+        return result
+    def base_bytes(name):
+        result = git("show", base_revision + ":" + name, checked=False)
+        return result.stdout if result.returncode == 0 else None
+    def relative(path): return Path(path).relative_to(root).as_posix()
+    def read(name):
+        path = root / name
+        if (Path(name).is_absolute() or any(part in {"..", ".git", "private"} for part in Path(name).parts)
+                or not path.resolve().is_relative_to(root) or not path.is_file()
+                or path.stat().st_mode & 0o111
+                or any(p.is_symlink() for p in (path, *path.parents))):
+            raise EvidenceError("publication file is missing or escapes its regular-file boundary")
+        raw = path.read_bytes()
+        _check_public_bytes(raw)
+        return raw
+    if (not re.fullmatch(r"[0-9a-f]{40}", base_revision or "")
+            or plan.get("plan_id") != "sha256:" + digest(plan.get("decision_inputs"))
+            or not plan.get("integrity_verified")
+            or plan["decision_inputs"].get("scope") != "new_admission_preview"):
+        raise EvidenceError("publication requires an exact verified new-admission plan")
+    inputs = plan["decision_inputs"]
+    if (inputs["bindings"] != engine.admission_bindings() or decision.bindings != inputs["bindings"]
+            or digest(engine._configuration_path.read_bytes()) != inputs["configuration_sha256"]):
+        raise EvidenceError("publication payload/evidence/policy bindings changed")
+    config_name = relative(engine._configuration_path)
+    if base_bytes(config_name) != read(config_name):
+        raise EvidenceError("publication configuration is not in the reviewed base")
+    canonical_prefix = relative(engine.data / "canonical") + "/"
+    tree = git("ls-tree", "-r", "-z", base_revision, "--", canonical_prefix).stdout
+    original_inventory = []
+    for item in tree.split(b"\0"):
+        if not item: continue
+        metadata, name = item.split(b"\t", 1)
+        name = name.decode()
+        if metadata.split()[0] != b"100644": raise EvidenceError("unsupported canonical base file mode")
+        raw = base_bytes(name)
+        original_inventory.append({"path": name[len(canonical_prefix):], "sha256": digest(raw)})
+        if name != canonical_prefix + "state.json" and read(name) != raw:
+            raise EvidenceError("unrelated canonical base bytes changed")
+    if digest(sorted(original_inventory, key=lambda r: r["path"])) != inputs["bindings"]["canonical_pre_state_digest"]:
+        raise EvidenceError("reviewed Git base does not match the authorized canonical pre-state")
+    state_name = canonical_prefix + "state.json"
+    original = base_bytes(state_name)
+    if original is None: raise EvidenceError("reviewed canonical pre-state is missing")
+    expected = json.loads(original)
+    _, payload, _ = engine._payload()
+    for candidate in payload["candidate_payloads"]:
+        kind, identifier, record = engine._canonical_record(candidate,
+            payload.get("candidate_contexts", {}).get(candidate["candidate_identifier"]))
+        existing = expected.setdefault(kind, {}).get(identifier)
+        if existing is not None and existing != record:
+            raise EvidenceError("publication would alter an existing canonical identity")
+        expected[kind][identifier] = record
+    if json.loads(read(state_name)) != expected:
+        raise EvidenceError("canonical state contains changes outside the exact approved delta")
+    audit_name = relative(engine.data / engine.config["artifacts"]["promotion_audit"])
+    audit_raw = read(audit_name)
+    audit = json.loads(audit_raw)
+    validate_admission_audit(engine.data, audit)
+    if (audit["admission_decision"] != decision.as_dict()
+            or audit["input_bindings"] != inputs["bindings"]
+            or audit["canonical_post_state_digest"] != canonical_state_digest(engine.data)):
+        raise EvidenceError("publication receipt/output differs from the live admission operation")
+    if base_bytes(audit_name) is not None:
+        raise EvidenceError("publication may not replace an existing historical admission audit")
+    files = {state_name, audit_name, config_name,
+             relative(engine.data / inputs["bindings"]["candidate_payload_path"])}
+    files.update(relative(engine.data / e["path"]) for e in inputs["bindings"]["evidence_files"])
+    for stage in STAGES[:STAGES.index("query_and_analytics_smoke_tests") + 1]:
+        name = relative(engine._checkpoint(stage))
+        value = json.loads(read(name))
+        engine._verify_result(value, stage)
+        files.add(name)
+    acceptance = json.loads(read(relative(engine._checkpoint("query_and_analytics_smoke_tests"))))
+    if acceptance["details"] != engine._stage_query_and_analytics_smoke_tests({}):
+        raise EvidenceError("publication requires fresh actual consumer acceptance")
+    inventory = [{"path": name, "byte_length": len(read(name)), "sha256": digest(read(name)),
+                  "git_blob": git("hash-object", "--", name).stdout.decode().strip()}
+                 for name in sorted(files)]
+    changed = sorted(name for name in files if base_bytes(name) != read(name))
+    if state_name not in changed or audit_name not in changed:
+        raise EvidenceError("publication contains no new writer-produced canonical delta and receipt")
+    # The backup remains local, immutable and excluded, even if Git ignores it.
+    backup = relative(engine.run_root / "canonical-pre-state.bytes")
+    if (root / backup).read_bytes() != original:
+        raise EvidenceError("local recovery backup differs from the reviewed original bytes")
+    tracked = set(git("diff", "--name-only", "--no-renames", "-z", base_revision, "--").stdout.decode().split("\0")) - {""}
+    staged = set(git("diff", "--cached", "--name-only", "--no-renames", "-z", "--").stdout.decode().split("\0")) - {""}
+    untracked = set(git("ls-files", "--others", "--exclude-standard", "-z").stdout.decode().strip("\0").split("\0")) - {""}
+    ignored = set(git("ls-files", "--others", "--ignored", "--exclude-standard", "-z").stdout.decode().strip("\0").split("\0")) - {""}
+    extra = (tracked | staged | untracked | ignored) - files - {backup}
+    invalid_backup = {backup} if backup in tracked | staged else set()
+    if extra or invalid_backup:
+        categories = {"tracked_modification": tracked, "staged": staged,
+                      "untracked": untracked, "ignored": ignored}
+        offenders = []
+        for name in sorted(extra | invalid_backup):
+            item = {"categories": [category for category, paths in categories.items() if name in paths]}
+            if name in invalid_backup:
+                item["categories"].append("improperly_staged_recovery_backup" if name in staged
+                                          else "tracked_recovery_backup")
+            # Paths are repository-relative metadata, never file contents. Do
+            # not echo credentials embedded in a filename or absolute/escape
+            # spellings; a digest still identifies the offending local name.
+            try:
+                if Path(name).is_absolute() or ".." in Path(name).parts:
+                    raise EvidenceError("unsafe diagnostic path")
+                _check_public_bytes(canonical_json(name))
+                item["path"] = name
+            except EvidenceError:
+                item.update(path="[redacted]", path_sha256=digest(name.encode()))
+            offenders.append(item)
+        raise EvidenceError("unexpected publication artifacts: " + json.dumps(
+            {"offenders": offenders}, sort_keys=True, ensure_ascii=True))
+    for name in staged:
+        if git("show", ":" + name).stdout != read(name):
+            raise EvidenceError("staged file differs from the verified working bytes")
+        index = git("ls-files", "--stage", "--", name).stdout.splitlines()
+        if len(index) != 1 or index[0].split()[0] != b"100644" or index[0].split()[2] != b"0":
+            raise EvidenceError("staged file mode or merge state differs from the permitted regular file")
+    return {"base_revision": base_revision, "plan_id": plan["plan_id"],
+            "candidate_id_digest": inputs["bindings"]["candidate_id_digest"],
+            "candidate_counts_by_type": inputs["candidate_counts_by_type"],
+            "canonical_pre_state_digest": audit["canonical_pre_state_digest"],
+            "canonical_post_state_digest": audit["canonical_post_state_digest"],
+            "admission_audit_sha256": digest(audit_raw), "changed_paths": changed,
+            "files": inventory, "inventory_digest": digest(inventory),
+            "excluded_local_recovery_backup": backup, "existing_records_preserved": True}
+
+
 class GitHubPersistence:
     """Small command builder used by Actions; commands never force or bypass protection."""
     def __init__(self, run: Callable[..., subprocess.CompletedProcess] = subprocess.run): self.run = run
+
+    def publish_admission(self, engine, plan, base_revision, decision, *, repository):
+        """Publish only this live host operation; receipts alone grant no capability.
+
+        Test decisions require their existing live temporary-root capability and a
+        local bare remote. No serialization or CLI flag enables that test scope.
+        """
+        root = engine.root.resolve()
+        phase, head, push_exit = "preflight", None, None
+
+        def run(command, *, checked=True, **kwargs):
+            result = self.run(command, cwd=root, text=True, capture_output=True, timeout=60, **kwargs)
+            if checked and result.returncode:
+                raise EvidenceError(f"publication command failed ({command[0]}, exit {result.returncode})")
+            return result
+
+        def git(*args, checked=True, **kwargs):
+            return run(["git", *args], checked=checked, **kwargs)
+
+        def remote(branch):
+            result = git("-c", "credential.helper=!gh auth git-credential", "ls-remote", "--heads", "origin",
+                         "refs/heads/" + branch)
+            rows = result.stdout.splitlines()
+            if len(rows) > 1: raise EvidenceError("remote branch response is ambiguous")
+            return rows[0].split()[0] if rows else None
+
+        def gh_json(*args):
+            return json.loads(run(["gh", *args]).stdout)
+
+        try:
+            if (engine.review_boundary is None or not isinstance(decision, AdmissionDecision)
+                    or decision.reviewer != engine.review_boundary.authenticated_reviewer):
+                raise EvidenceError("publication requires the live authenticated admission boundary")
+            if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository):
+                raise EvidenceError("invalid publication repository")
+            if decision.scope == "isolated-test":
+                if not isinstance(engine.review_boundary, IsolatedAdmissionTestBoundary):
+                    raise EvidenceError("publication test scope requires the live isolated capability")
+                engine.review_boundary._verify_root(root)
+                origin = Path(git("remote", "get-url", "origin").stdout.strip())
+                if not origin.is_absolute() or not origin.resolve().is_relative_to(root / ".git"):
+                    raise EvidenceError("simulated publication is limited to its disposable local bare remote")
+                if self.run is subprocess.run:
+                    raise EvidenceError("simulated publication requires an explicit platform transport double")
+            elif decision.scope == "production":
+                origin = git("remote", "get-url", "origin").stdout.strip()
+                if origin not in {f"https://github.com/{repository}.git", f"https://github.com/{repository}",
+                                  f"git@github.com:{repository}.git"}:
+                    raise EvidenceError("publication remote does not match the intended repository")
+            else:
+                raise EvidenceError("unsupported publication authorization scope")
+            branch, base = engine.descriptor.destination_branch, engine.descriptor.base_branch
+            if (base != "main" or not branch.startswith("canonical-update/") or ".." in branch
+                    or not re.fullmatch(r"canonical-update/[A-Za-z0-9][A-Za-z0-9_./-]*", branch)):
+                raise EvidenceError("publication branch/base is outside the dedicated data-PR boundary")
+            git("check-ref-format", "--branch", branch)
+            head = git("rev-parse", "HEAD").stdout.strip()
+            current_branch = git("symbolic-ref", "--quiet", "--short", "HEAD", checked=False).stdout.strip()
+            existing = remote(branch)
+            if remote(base) != base_revision:
+                raise EvidenceError("reviewed remote base moved")
+            if head != base_revision and (current_branch != branch or existing != head):
+                raise EvidenceError("local head/branch does not match the reviewed base or exact published operation")
+            if existing is not None and (head == base_revision or existing != head):
+                raise EvidenceError("unexpected existing publication branch")
+            if current_branch != branch and git("show-ref", "--verify", "refs/heads/" + branch,
+                                               checked=False).returncode == 0:
+                raise EvidenceError("local publication branch already exists")
+            inventory = admission_publication_inventory(engine, plan, base_revision, decision)
+            phase = "validation"
+            validation = self._required_admission_validation(root)
+            # Tests or concurrent edits cannot change the operation after acceptance.
+            if admission_publication_inventory(engine, plan, base_revision, decision) != inventory:
+                raise EvidenceError("publication inputs changed during required validation")
+            if remote(base) != base_revision or remote(branch) != existing:
+                raise EvidenceError("remote base or publication branch moved during validation")
+            phase = "commit"
+            if head == base_revision:
+                if current_branch != branch: git("switch", "-c", branch)
+                # Explicit files only, including ignored but required retained inputs.
+                git("add", "-f", "--", *inventory["changed_paths"])
+                git("diff", "--cached", "--check")
+                if admission_publication_inventory(engine, plan, base_revision, decision) != inventory:
+                    raise EvidenceError("staged publication differs from verified inventory")
+                timestamp = decision.decided_at
+                git("-c", "user.name=github-actions[bot]", "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com",
+                    "commit", "-m", f"Catalog admission {engine.descriptor.batch_identifier}\n\nReviewed plan: {plan['plan_id']}",
+                    env={**os.environ, "GIT_AUTHOR_DATE": timestamp, "GIT_COMMITTER_DATE": timestamp})
+                head = git("rev-parse", "HEAD").stdout.strip()
+            if git("rev-parse", "HEAD^").stdout.strip() != base_revision:
+                raise EvidenceError("publication commit has the wrong parent")
+            if remote(base) != base_revision or remote(branch) not in {None, head}:
+                raise EvidenceError("remote base or branch moved before push")
+            phase = "push"
+            if remote(branch) is None:
+                result = git("-c", "credential.helper=!gh auth git-credential", "push", "origin",
+                             f"HEAD:refs/heads/{branch}", checked=False)
+                push_exit = result.returncode
+            # Always read back, including an ambiguous/failed push response.
+            if remote(branch) != head:
+                raise EvidenceError("push did not establish the exact remote commit")
+            phase = "pull_request"
+            prs = gh_json("pr", "list", "--repo", repository, "--head", branch, "--state", "all", "--json",
+                          "number,url,headRefName,baseRefName,headRefOid,isDraft,state")
+            if len(prs) > 1: raise EvidenceError("publication PR response is ambiguous")
+            if not prs:
+                body_path = root / ".git" / "catalog-admission-pr-body.txt"
+                body_path.write_text(f"Proposes the exact writer-produced delta for {plan['plan_id']}.\n\n"
+                    f"Reviewed base: {base_revision}. Required local suite: {validation['tests']} tests passed.\n"
+                    "Independent review and explicit owner merge authorization remain required. No automatic merge.\n")
+                created = run(["gh", "pr", "create", "--draft", "--repo", repository, "--base", base,
+                    "--head", branch, "--title", f"Catalog admission: {engine.descriptor.batch_identifier}",
+                    "--body-file", str(body_path)], checked=False)
+                # An unsuccessful response may still have created the PR; read back.
+                prs = gh_json("pr", "list", "--repo", repository, "--head", branch, "--state", "all", "--json",
+                              "number,url,headRefName,baseRefName,headRefOid,isDraft,state")
+                if len(prs) != 1:
+                    raise EvidenceError(f"PR creation not verified (exit {created.returncode})")
+            pr = prs[0]
+            phase = "readback"
+            view = gh_json("pr", "view", str(pr["number"]), "--repo", repository, "--json",
+                           "number,url,headRefName,baseRefName,headRefOid,baseRefOid,isDraft,state,statusCheckRollup")
+            if (view.get("headRefName") != branch or view.get("baseRefName") != base
+                    or view.get("headRefOid") != head or view.get("baseRefOid") != base_revision
+                    or not view.get("isDraft") or view.get("state") != "OPEN"):
+                raise EvidenceError("published PR head/base/draft does not match the reviewed operation")
+            commit = gh_json("api", f"repos/{repository}/git/commits/{head}")
+            compare = gh_json("api", f"repos/{repository}/compare/{base_revision}...{head}")
+            if (commit.get("sha") != head or [p["sha"] for p in commit.get("parents", [])] != [base_revision]
+                    or commit.get("tree", {}).get("sha") != git("rev-parse", "HEAD^{tree}").stdout.strip()
+                    or compare.get("base_commit", {}).get("sha") != base_revision
+                    or len(inventory["changed_paths"]) >= 300
+                    or sorted(f["filename"] for f in compare.get("files", [])) != inventory["changed_paths"]):
+                raise EvidenceError("remote commit or complete changed-file inventory mismatch")
+            if remote(base) != base_revision or remote(branch) != head:
+                raise EvidenceError("remote moved during publication readback")
+            if admission_publication_inventory(engine, plan, base_revision, decision) != inventory:
+                raise EvidenceError("published local inputs differ from verified inventory")
+            checks = view.get("statusCheckRollup") or []
+            conclusions = [(c.get("conclusion") or c.get("state") or "").upper() for c in checks]
+            ci = ("approval-required" if "ACTION_REQUIRED" in conclusions else
+                  "failed" if any(c in {"FAILURE", "ERROR", "CANCELLED", "TIMED_OUT"} for c in conclusions) else
+                  "successful" if conclusions and all(c == "SUCCESS" for c in conclusions) else "pending")
+            return {"status": "published", "head": head, "pull_request": view["url"], "draft": True,
+                    "push_exit_status": push_exit, "hosted_ci": ci, "validation": validation,
+                    "inventory": inventory, "automatic_merge": False}
+        except Exception as error:
+            return {"status": "blocked", "publication_phase": phase, "error": str(error),
+                    "recoverable_local_commit": head, "local_work_retained": True,
+                    "push_exit_status": push_exit, "automatic_merge": False}
+
+    @staticmethod
+    def _required_admission_validation(root):
+        """No saved/JSON success claim substitutes for this actual required suite."""
+        command = ["python", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py", "-v"]
+        env = {k: v for k, v in os.environ.items() if k not in {
+            "MTG_LAB_ADMISSION_OIDC", "GH_TOKEN", "GITHUB_TOKEN", "INPUT_GITHUB_TOKEN", "ACTIONS_ID_TOKEN_REQUEST_TOKEN"}}
+        # Keep any explicit compilation or child interpreter cache out of the
+        # proposed Git tree. Each validation owns a private cache in Git's
+        # non-publishable metadata; never trust an inherited cache destination.
+        cache = tempfile.mkdtemp(prefix="catalog-admission-pycache-", dir=root / ".git")
+        env.update(PYTHONPATH=str(Path(__file__).resolve().parents[1]), PYTHONDONTWRITEBYTECODE="1",
+                   PYTHONPYCACHEPREFIX=cache)
+        result = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True,
+                                timeout=ADMISSION_VALIDATION_TIMEOUT_SECONDS)
+        output = result.stdout + result.stderr
+        _check_public_bytes(output.encode())
+        match = re.search(r"Ran (\d+) tests? in", output)
+        log = root / ".git" / "catalog-admission-validation.log"
+        log.write_text(output)
+        if result.returncode or not match or int(match[1]) == 0 or not re.search(r"\nOK(?: \([^\n]*\))?\s*$", output):
+            raise EvidenceError(f"required local suite failed or incomplete (exit {result.returncode})")
+        return {"exit_status": result.returncode, "tests": int(match[1]), "log_sha256": digest(output.encode())}
 
     def persist(self, branch: str, base: str, title: str, body_file: str) -> dict:
         commands = [["git", "switch", "-c", branch], ["git", "push", "origin", branch],

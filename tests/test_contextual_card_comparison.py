@@ -25,7 +25,10 @@ from scripts.build_mechanical_cohort import build_artifacts as mechanical_artifa
 from scripts.build_two_card_demo import build_artifacts as demo_artifacts
 
 
-ROOT = Path(__file__).parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 REVIEW = ROOT / "data/review/contextual-card-comparison"
 EXPECTED_IDS = {"Ponder": "02090581-61aa-4348-ad57-451be8ee91c2",
                 "Faithless Looting": "3d6fa57a-aa53-4b5c-b8af-a7612c823117",
@@ -47,6 +50,15 @@ def protected_inventory():
 class ContextualCardComparisonTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        from historical_catalog import bind_replay_builder
+        from scripts import build_contextual_card_comparison
+        bind_replay_builder(cls, build_contextual_card_comparison)
+        from scripts import build_functional_role_pilot
+        bind_replay_builder(cls, build_functional_role_pilot)
+        from scripts import build_mechanical_cohort
+        bind_replay_builder(cls, build_mechanical_cohort)
+        from scripts import build_two_card_demo
+        bind_replay_builder(cls, build_two_card_demo)
         cls.protected = protected_inventory()
         cls.pilot = ContextualCardComparisonPilot(ROOT / "data")
         cls.document = cls.pilot.dossier().to_dict()

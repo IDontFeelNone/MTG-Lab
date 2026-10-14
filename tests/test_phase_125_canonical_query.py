@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import sys
 import unittest
@@ -57,11 +58,13 @@ class CanonicalQueryServiceTests(unittest.TestCase):
 
     def test_cli_json_and_error_behavior(self):
         base = [sys.executable, "-m", "mtglab", "--data-root", "data", "query"]
+        # Preserve the validation runner's private Python cache controls.
+        env = {**os.environ, "PYTHONPATH": "src"}
         run = subprocess.run(base + ["card", "Sol Ring"], cwd=ROOT,
-            env={"PYTHONPATH": "src"}, text=True, capture_output=True, check=False)
+            env=env, text=True, capture_output=True, check=False)
         self.assertEqual(run.returncode, 0, run.stderr)
         self.assertEqual(json.loads(run.stdout)["schema_version"], "canonical-query-v1")
-        bad = subprocess.run(base + ["card"], cwd=ROOT, env={"PYTHONPATH": "src"},
+        bad = subprocess.run(base + ["card"], cwd=ROOT, env=env,
             text=True, capture_output=True, check=False)
         self.assertEqual(bad.returncode, 2)
         self.assertFalse(json.loads(bad.stdout)["valid"])

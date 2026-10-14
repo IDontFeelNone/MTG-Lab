@@ -42,7 +42,8 @@ def prepare_reference_rehearsal(root):
         raise ValueError("retained pending packet census mismatch")
     if any(c["payload"]["review_status"] != "pending" for c in selected):
         raise ValueError("rehearsal source must remain pending")
-    shutil.copytree(ROOT / "data", root / "data")
+    from historical_catalog import historical_data
+    shutil.copytree(historical_data(), root / "data")
     evidence = root / "data/test-evidence/structured-reference"
     shutil.copytree(PACKET, evidence)
     rows = [deepcopy(c["payload"]) for c in selected]

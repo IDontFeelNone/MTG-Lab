@@ -10,7 +10,10 @@ from card_intelligence.repository import KnowledgeRepository
 from card_intelligence.topdeck_provider import (TopDeckProbeError, authorization_header,
     canonical_bytes, competitive_metrics, project_tournaments, safe_request_descriptor)
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 IDS = {name: f"00000000-0000-4000-8000-{index:012d}" for index, name in enumerate(PILOT_NAMES, 1)}
 
 

@@ -109,8 +109,10 @@ class ContextualComparisonDossier:
 class ContextualCardComparisonPilot:
     """Source-bound descriptive adapter; the existing engine owns abstention."""
 
-    def __init__(self, data_root: Path, *, plan_path: Path | None = None):
-        self.roles = FunctionalRolePilot(data_root)
+    def __init__(self, data_root: Path, *, plan_path: Path | None = None,
+                 role_plan_path: Path | None = None, role_vocabulary_path: Path | None = None):
+        self.roles = FunctionalRolePilot(data_root, plan_path=role_plan_path,
+                                         vocabulary_path=role_vocabulary_path)
         self.plan_path = Path(plan_path or PLAN)
         self.plan = json.loads(self.plan_path.read_bytes())
         p = self.plan

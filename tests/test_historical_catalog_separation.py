@@ -16,7 +16,10 @@ from collection.audit import CollectionAudit, CollectionAuditError
 from collection.intelligence import CanonicalCollectionResolver, build_snapshot, read_import
 
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 HISTORICAL_DATA = ROOT / "data"
 IMPORT = ROOT / "data/collections/imports/fictional-collection-audit-pilot.json"
 SNAPSHOT = ROOT / "data/collections/snapshots/4a8072970571a357780a6d24.json"

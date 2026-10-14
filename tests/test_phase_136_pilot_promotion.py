@@ -12,7 +12,10 @@ from production_evidence.phase136_promotion import (
 )
 from production_evidence.repository import EvidenceError
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 DATA = ROOT / "data"
 REPORT = DATA / "reviews/phase-136/pilot-review.json"
 

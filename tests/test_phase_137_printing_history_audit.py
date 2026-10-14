@@ -3,7 +3,9 @@ from pathlib import Path
 import unittest
 from card_intelligence import build_phase137_audit, report_bytes, CardKnowledgeQuery, KnowledgeRepository
 
-ROOT=Path(__file__).resolve().parents[1]; DATA=ROOT/'data'; REPORT=DATA/'reviews/phase-137/printing-history-audit.json'
+from historical_catalog import historical_repository
+
+ROOT=historical_repository(); DATA=ROOT/'data'; REPORT=DATA/'reviews/phase-137/printing-history-audit.json'
 COUNTS={'Brainstorm':47,'Command Tower':110,'Counterspell':83,'Goblin Charbelcher':8,'Goblin King':26,'Sol Ring':135,'Swords to Plowshares':96,'Treasure Cruise':14,'Walking Ballista':10,'Wishclaw Talisman':5}
 class Phase137AuditTests(unittest.TestCase):
  @classmethod

@@ -1,13 +1,36 @@
 #!/usr/bin/env python3
-"""Fail closed when an update branch changes anything outside durable update outputs."""
+"""Read-only semantic publication inventory; this never authenticates or publishes."""
 import argparse
+import json
 from pathlib import Path
-import subprocess
 
-parser = argparse.ArgumentParser(); parser.add_argument("--base", required=True); args = parser.parse_args()
-subprocess.run(["git", "fetch", "origin", args.base], check=True)
-changed = subprocess.check_output(["git", "diff", "--name-only", f"origin/{args.base}...HEAD"], text=True).splitlines()
-allowed = ("data/canonical/", "data/audit/bounded_promotions/", "data/automatic_updates/")
-bad = [path for path in changed if not path.startswith(allowed)]
-if bad: raise SystemExit("changed-file boundary violation: " + ", ".join(bad))
-if not changed: raise SystemExit("update produced no durable changes")
+from production_evidence.automatic_updates import (
+    AdmissionDecision, AutomaticCanonicalUpdate, admission_publication_inventory,
+)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--base", required=True, help="exact reviewed base SHA, not a moving branch")
+    parser.add_argument("--config", required=True)
+    parser.add_argument("--plan", required=True, help="retained previously reviewed planning JSON")
+    parser.add_argument("--repository-root", default=str(Path(__file__).resolve().parents[1]))
+    args = parser.parse_args()
+    try:
+        engine = AutomaticCanonicalUpdate(args.repository_root, args.config)
+        plan = json.loads(Path(args.plan).read_bytes())
+        audit = json.loads((engine.data / engine.config["artifacts"]["promotion_audit"]).read_bytes())
+        # Content inspection only. This serialized decision is NOT installed as
+        # a trusted boundary and cannot be supplied to an execution/publish CLI.
+        decision = AdmissionDecision(**audit["admission_decision"])
+        result = admission_publication_inventory(engine, plan, args.base, decision)
+        print(json.dumps({"status": "verified-content-only", "execution_authorized": False,
+                          "inventory": result}, indent=2, sort_keys=True))
+        return 0
+    except Exception as error:
+        print(json.dumps({"status": "blocked", "error": str(error)}, sort_keys=True))
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

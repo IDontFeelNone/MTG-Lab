@@ -8,7 +8,10 @@ from pathlib import Path
 from projection import ProjectionValidationError, TypedCanonicalProjectionEngine
 
 
-ROOT = Path(__file__).parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 TIME = "2026-10-13T12:00:00+00:00"
 
 

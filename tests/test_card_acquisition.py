@@ -14,7 +14,10 @@ from card_intelligence.mechanics import content_identity, stable_json
 from decision_intelligence.models import identity as decision_identity
 
 
-ROOT = Path(__file__).parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 PRINTINGS = ("5c8d3bc4-32fc-5b26-84bf-9921e5884d43",
              "72783a15-4847-5448-8f1d-0c40379594d3",
              "46c0ae9f-b64a-528f-aab6-f1ceff9f0ade")

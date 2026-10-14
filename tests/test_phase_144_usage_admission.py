@@ -15,7 +15,10 @@ from card_intelligence.explanation import CardValueExplanationEngine
 from card_intelligence.repository import KnowledgeRepository
 from card_intelligence.usage_review import admit_usage_facts, build_usage_facts
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 EVIDENCE = ROOT / "data/card_intelligence/demand/phase-143/mtgjson-decks.json"
 
 
@@ -89,7 +92,7 @@ class Phase144UsageAdmissionTests(unittest.TestCase):
         for args in (["explain", "Sol Ring", "--include-demand-evidence"],
                      ["explain", "--card-id", card_id, "--include-demand-evidence"]):
             stream = io.StringIO()
-            with redirect_stdout(stream): self.assertEqual(cli_main(args), 0)
+            with redirect_stdout(stream): self.assertEqual(cli_main(["--data-root", str(ROOT / "data"), *args]), 0)
             outputs.append(json.loads(stream.getvalue()))
         self.assertEqual(outputs[0], outputs[1])
 

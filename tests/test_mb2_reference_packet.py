@@ -8,12 +8,15 @@ import unittest
 from ingestion.candidate_validation import validate_candidate_artifact
 from ingestion.candidates import CandidateValidationState
 from scripts import verify_mb2_reference_packet as packet
+from historical_catalog import historical_repository
+
+HISTORICAL_ROOT = historical_repository()
 
 
 class MB2ReferencePacketTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.documents = packet.derive()
+        cls.documents = packet.derive(root=HISTORICAL_ROOT)
         cls.summary = json.loads(cls.documents["review-summary.json"])
 
     def copy_packet(self):
@@ -32,14 +35,14 @@ class MB2ReferencePacketTests(unittest.TestCase):
         (base / "manifest.json").write_bytes(packet.encoded(manifest))
 
     def test_file_manifest_integrity_and_exact_offline_replay(self):
-        self.assertEqual(packet.verify(), self.summary)
+        self.assertEqual(packet.verify(root=HISTORICAL_ROOT), self.summary)
         for name, raw in self.documents.items():
             self.assertEqual((packet.PACKET / packet.REVISION / name).read_bytes(), raw)
 
     def test_unchanged_relocated_packet_validates_against_repository_dependencies(self):
         target = self.copy_packet()
         self.assertNotEqual(target.resolve(), packet.PACKET.resolve())
-        self.assertEqual(packet.verify(target, root=packet.ROOT), self.summary)
+        self.assertEqual(packet.verify(target, root=HISTORICAL_ROOT), self.summary)
 
     def test_schema_valid_historical_source_changes_rejected_in_relocated_packet(self):
         changes = {
@@ -57,7 +60,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
                 packet.validate_document(source, "source-record")
                 path.write_bytes(packet.encoded(source))
                 with self.assertRaisesRegex(ValueError, "manifest integrity mismatch"):
-                    packet.verify(target, root=packet.ROOT)
+                    packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_missing_relocated_historical_file_rejected_without_checkout_fallback(self):
         target = self.copy_packet()
@@ -68,7 +71,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
                       historical_manifest["files"])
         (target / name).unlink()
         with self.assertRaisesRegex(ValueError, "manifest.*missing"):
-            packet.verify(target, root=packet.ROOT)
+            packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_historical_manifest_parent_path_escape_rejected_by_full_verifier(self):
         target = self.copy_packet()
@@ -81,7 +84,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
         manifest["files"][escaped] = manifest["files"].pop(key)
         path.write_bytes(packet.encoded(manifest))
         with self.assertRaisesRegex(ValueError, "manifest path escape"):
-            packet.verify(target, root=packet.ROOT)
+            packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_historical_packet_symlink_escape_rejected_by_full_verifier(self):
         target = self.copy_packet()
@@ -90,7 +93,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
         path.symlink_to(packet.PACKET / "source-record.json")
         # The target has the exact expected bytes, but lies outside this copy.
         with self.assertRaisesRegex(ValueError, "manifest path escape"):
-            packet.verify(target, root=packet.ROOT)
+            packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_source_to_parsed_counts_identity_and_pending_provenance(self):
         parsed = json.loads(self.documents["parsed-records.json"])
@@ -109,7 +112,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
                 self.assertEqual(provenance["raw_evidence_hash"], parsed["raw_evidence_hash"])
 
     def test_existing_references_snapshot_emblem_and_dependency_closure(self):
-        state, _ = packet.check_original()
+        state, _ = packet.check_original(root=HISTORICAL_ROOT)
         self.assertEqual(self.summary["canonical_snapshot_id"], packet.SNAPSHOT)
         self.assertEqual(self.summary["candidate_counts"], {"card": 273, "printing": 273, "identifier": 273})
         self.assertEqual(self.summary["reused_dependencies"], [{"canonical_id": "nonfoil", "entity_type": "finish"}])
@@ -152,13 +155,13 @@ class MB2ReferencePacketTests(unittest.TestCase):
         path = target / packet.REVISION / receipt["path"] / "payload.bin"
         path.write_bytes(path.read_bytes() + b" ")
         with self.assertRaisesRegex(ValueError, "integrity mismatch"):
-            packet.verify(target)
+            packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_unmanifested_evidence_rejected(self):
         target = self.copy_packet()
         (target / packet.REVISION / "extra.json").write_bytes(b"{}")
         with self.assertRaisesRegex(ValueError, "unmanifested evidence"):
-            packet.verify(target)
+            packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_rehashed_source_path_escape_rejected_before_reading(self):
         target = self.copy_packet()
@@ -168,7 +171,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
         path.write_bytes(packet.encoded(value))
         self.rehash(target)
         with self.assertRaisesRegex(ValueError, "source path escape"):
-            packet.verify(target)
+            packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_rehashed_parsed_row_or_count_changes_rejected(self):
         for field in ("record_count", "raw_fields"):
@@ -183,7 +186,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
                 path.write_bytes(packet.encoded(value))
                 self.rehash(target)
                 with self.assertRaisesRegex(ValueError, "deterministic replay mismatch"):
-                    packet.verify(target)
+                    packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_rehashed_candidate_dependency_provenance_and_approval_changes_rejected(self):
         changes = {
@@ -205,7 +208,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
                 path.write_bytes(packet.encoded(value))
                 self.rehash(target)
                 with self.assertRaisesRegex(ValueError, "deterministic replay mismatch"):
-                    packet.verify(target)
+                    packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_rehashed_false_summary_and_manifest_approval_claims_rejected(self):
         target = self.copy_packet()
@@ -215,13 +218,13 @@ class MB2ReferencePacketTests(unittest.TestCase):
         path.write_bytes(packet.encoded(value))
         self.rehash(target)
         with self.assertRaisesRegex(ValueError, "deterministic replay mismatch"):
-            packet.verify(target)
+            packet.verify(target, root=HISTORICAL_ROOT)
         path = target / packet.REVISION / "manifest.json"
         value = packet.read(path)
         value.update(human_approvals=819, review_status="approved")
         path.write_bytes(packet.encoded(value))
         with self.assertRaisesRegex(ValueError, "false approval claim"):
-            packet.verify(target)
+            packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_rehashed_false_upstream_byte_claim_rejected(self):
         target = self.copy_packet()
@@ -238,7 +241,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
         path.write_bytes(packet.encoded(value))
         self.rehash(target)
         with self.assertRaisesRegex(ValueError, "false upstream retention claim"):
-            packet.verify(target)
+            packet.verify(target, root=HISTORICAL_ROOT)
 
     def test_existing_snapshot_or_card_reference_changes_rejected(self):
         for key, value in (("query_snapshot_id", "sha256:" + "0" * 64),
@@ -250,7 +253,7 @@ class MB2ReferencePacketTests(unittest.TestCase):
                 refs["references"][0][key] = value
                 path.write_bytes(packet.encoded(refs))
                 with self.assertRaisesRegex(ValueError, "manifest integrity mismatch"):
-                    packet.verify(target, root=packet.ROOT)
+                    packet.verify(target, root=HISTORICAL_ROOT)
 
 
 if __name__ == "__main__":

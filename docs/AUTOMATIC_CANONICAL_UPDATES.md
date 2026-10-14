@@ -8,8 +8,9 @@ The [implementation-only compatibility repair](CATALOG_ADMISSION_COMPATIBILITY_R
 supersedes the routine-approval/write descriptions below. New admission requires a
 live authenticated trusted-host review decision bound to exact inputs and pre-state;
 validated candidates, configuration labels and saved checkpoints cannot authorize
-it. The standalone CLI has no installed reviewer authenticator and fails closed
-for new writes. Historical receipts and results below remain historical evidence,
+it. Ordinary CLI calls install no authenticator and fail closed for new writes.
+The explicit GitHub entry below requires signed platform identity and live operation
+bindings. Historical receipts and results below remain historical evidence,
 not reusable approval. Production admission and source activation remain on hold.
 
 ## Phase 122 first-real-target availability result
@@ -33,6 +34,7 @@ Schema `automatic-canonical-update-v1` requires `game`, `target_code`, `target_n
 `config/automatic_updates/mb2-first-batch.json` references completed Phase 119. Its audit makes execution an idempotent verification; it does not duplicate promotion. No second MB2 batch or MSH candidate is configured.
 
 ```bash
+PYTHONPATH=src python scripts/automatic_canonical_update.py --config CONFIG
 PYTHONPATH=src python scripts/automatic_canonical_update.py plan --config CONFIG
 PYTHONPATH=src python scripts/automatic_canonical_update.py verify --config CONFIG
 PYTHONPATH=src python scripts/automatic_canonical_update.py execute --config CONFIG
@@ -42,17 +44,243 @@ PYTHONPATH=src python scripts/automatic_canonical_update.py rollback-plan --conf
 ```
 
 All output is JSON. A new write additionally requires the live trusted-host review
-boundary; this CLI does not install it. Read-only inspection/replay of exact retained
+boundary; ordinary CLI commands do not install it. Read-only inspection/replay of exact retained
 historical evidence grants no new authority. `rollback-plan` never executes
 destructive work. Digests bind content and do not authenticate a reviewer.
 
-## Automatic PR, merge, recovery, and settings
+Omitting the command runs the existing read-only `plan` operation. Explicit commands
+remain supported. Configuration-loading and engine errors return a structured
+`status=blocked` result with exit code 1. Approval labels in configuration and actor
+names in environment variables do not install a trusted boundary. The existing plan
+is an inspection result. The manual workflow now separates planning from explicit
+owner authorization; exact-delta publication follows only after required validation.
 
-The Actions workflow executes the exact configuration, runs unittest/compile/integrity checks, verifies the changed-file allowlist, pushes a dedicated branch without force, and creates or safely reuses its exact-head/base PR. It independently verifies head, base, audit/boundary, then requests auto-merge. Required checks and branch protection remain authoritative; there is no admin bypass or force merge. Branches and always-uploaded diagnostics remain if setup fails.
+Read-only planning reuses `admission_bindings()` and the existing source, payload
+and target-integrity checks. `decision_inputs` records the operation/target, exact
+ordered IDs and digest, counts by type, actual retained source/receipt and payload
+hashes, expected integrity values, policy/construction bindings and observed
+canonical pre-state. New admission previews require explicit expected source,
+payload and configured receipt hash pins and a matching pre-state; planning never
+fills in or rewrites those expectations. Final rereads reject changes during
+verification.
 
-Administrators must enable **Allow GitHub Actions to create and approve pull requests**, Actions `contents: write` and `pull-requests: write`, repository auto-merge, and squash merge. Protect `main`, require this repository's CI checks and current branch, and disallow force pushes/protection bypass.
+`plan_id` is `sha256:` followed by the existing `digest(decision_inputs)` recipe:
+UTF-8 JSON with sorted keys, separators `(',', ':')`, `ensure_ascii=False`, and no
+trailing newline. It includes the configuration's actual byte hash and excludes
+checkpoint progress and timestamps. Recheck a saved identity with
+`plan --config CONFIG --expected-plan-id sha256:...`; changed decision-relevant
+inputs block that check. This option supplies no execution authority.
 
-Humans intervene only for genuine conflicts, ambiguous/unsupported source data, validation failure, canonical drift, architecture/contract changes, destructive work, rollback, or a blocked report. Correct source/configuration and rerun to resume verified stages. Rollback requires review of `rollback-plan`, a separately invoked audited change, the full suite, and the protected PR path. After merge, configure the next trusted dataset, dispatch the workflow, monitor checks, and let GitHub merge when green. Never reuse a completed batch identity for different content.
+Every preview reports `approval_state=not_granted`, `execution_authorized=false`
+and `admission_ready=false`. Source-policy permissions and admission/readiness
+review remain unresolved or unassessed; retained license receipts and provider
+trust do not authenticate an approver or establish a rights decision.
+
+Completed batches are labeled `historical_inspection` only after their existing
+retained admission verification succeeds. Their original pre-state is displayed
+alongside the current catalog, which may include later admissions. Historical
+descriptors lacking raw-byte hash pins report `integrity_verified=false`, expose
+the missing pins, and retain their separately verified source-to-record evidence.
+They never become a new admission preview or refresh historical expectations.
+Planning calls no execution/authorization path and writes no checkpoints or data.
+
+## Owner-controlled manual entry and trusted boundary
+
+This integration repairs implementation against Architecture v12; it changes no
+canonical, importer or admission-decision contract. The entry points remain
+`.github/workflows/automatic-canonical-update.yml` and
+`scripts/automatic_canonical_update.py`. The workflow defaults to `operation=plan`.
+Its separate plan job calls only the existing read-only planner; it installs no
+review boundary, cannot execute the writer, and has only `contents: read`.
+
+A later action must explicitly choose `operation=admit` and supply the exact
+previously reviewed `expected_plan_id`, `reviewed_revision` (the plan's
+`reviewed_code_revision`), and reviewed `config`. Recomputing with
+`plan(expected_plan_id=...)` checks that old identity; it never silently substitutes
+a newly generated plan. Selecting admission is the owner's explicit decision to
+admit and propose that exact catalog delta as a draft data PR, subject to all gates. Neither a plan, tests,
+PR merge, configuration approval field nor a saved receipt supplies that decision.
+
+The reviewed script's policy allows only repository `IDontFeelNone/MTG-Lab`
+(immutable repository ID `1314720822`), its personal owner `IDontFeelNone`
+(account ID `310046194`), `refs/heads/main`, and this specific workflow.
+Those IDs were read independently through the GitHub repository API on 2026-10-13.
+Admission is not delegated to arbitrary collaborators or a request-supplied list.
+A future delegation requires reviewed policy, not a dispatch input.
+
+GitHub authenticates the account performing `workflow_dispatch` and supplies the
+runner/event context. Its OIDC issuer signs the actor/owner/repository IDs, workflow
+ref and SHA, code SHA, run ID/attempt and runner claims. The reviewed GitHub action
+requests audience `mtg-lab:canonical-admission`, masks the token, and passes it
+directly to the child process environment; it is never saved to a file or report.
+`PyJWT[crypto]` verifies RS256 signatures using only GitHub's fixed JWKS endpoint,
+issuer, audience, required claims and validity times. Environment variables are
+transport and consistency checks, not reviewer authentication.
+
+The application checks the fixed policy, branch subject (both official legacy and
+immutable forms), GitHub-hosted runner, manual event, actor equals owner, exact
+reviewed revision equals the signed workflow/code SHA and checkout HEAD, unchanged
+tracked checkout, matching run/event/workspace and triggering actor. All reruns
+(`run_attempt != 1`) are rejected: GitHub documents that reruns retain the original
+actor's privileges. A new explicit dispatch is required, with fresh review if inputs
+or pre-state changed. The authenticated context, plan identity, operation, code
+revision and run identity are retained in `AdmissionDecision.review_reference`;
+decision time is the live boundary's UTC observation of that explicit action.
+
+The trusted computing boundary includes GitHub's issuer and event delivery, runner
+isolation and credential secrecy, reviewed main code/policy, Actions and Python
+dependencies. The signature proves execution context, not that arbitrary code is
+safe; main review/protection and trusted dependencies remain host responsibilities.
+An operator able to replace trusted code or steal its live bearer capability is
+inside that boundary. This is a GitHub client integration, not an authentication
+service. Ordinary `execute`/`admit` calls, forged environment claims, request JSON
+and copied decisions cannot install production authority. There is no simulated
+authorization switch in the CLI or workflow.
+
+Before installing authority, and on every writer authorization callback including
+the final pre-write check, the entry verifies the original plan, source/payload and
+receipt checksums, policy, exact candidate order and canonical pre-state. It also
+rechecks signed execution identity and reviewed configuration. Configuration names
+are restricted to regular, tracked `config/automatic_updates/*.json` files with
+exact reviewed bytes; absolute paths, traversal and symlinks fail closed. Workflow
+inputs travel through quoted environment variables or argument arrays with
+`shell: false`, never shell expressions.
+
+Operation-specific source-policy clearance is a separate trusted-code gate:
+`SOURCE_POLICY_CLEARED_PLANS` is empty. No real proposal, including the pending
+810-record recommendation, is cleared or approved by this change. Adding a future
+clearance requires an independently reviewed, operation-specific policy decision
+backed by retained authoritative evidence; its exact plan binds that evidence.
+Provider trust and receipt hashes alone never provide redistribution permission.
+
+The admission entry calls the existing repaired writer only through
+`query_and_analytics_smoke_tests`, including its actual query, collection and
+projection acceptance checks. The fixed workflow then requests
+`--publish-admission-pr`, using the existing `GitHubPersistence` helper. That helper
+requires the live decision object from this operation; the read-only boundary CLI
+and copied audit metadata cannot install it. No merge or PR approval is requested.
+
+`admission_publication_inventory()` in `automatic_updates.py` compares the reviewed
+Git base with the original canonical pre-state and reconstructs the exact selected
+delta through the existing `_canonical_record()` adapter. Every existing record and
+other canonical byte must be preserved. Current state, the original planning inputs,
+receipt and live decision must agree; a permitted state filename cannot conceal an
+unrelated edit. The explicit inventory binds raw hashes/Git blobs for state, audit,
+all fourteen successful writer checkpoints, configuration, payload and every
+configured source/receipt dependency. Existing dependencies remain bound to the
+base; newly required dependencies are staged with the actual catalog delta.
+
+Tracked, staged, untracked and ignored files are inspected before staging. Extra
+files, symlinks, path escapes, incompatible index modes and staged alternate bytes
+block publication. The sole known recovery backup is checked against original base
+bytes and remains local and unstaged; all other temporary/private artifacts are
+rejected. Credential/JWT/private-field checks apply to retained publication bytes
+and diagnostics. Raw tokens, headers and signing keys are never artifacts. Safe
+actor/run/decision metadata records history; it is not a reusable authenticator.
+
+Before committing, the helper runs the actual required unittest suite, strips the
+OIDC and GitHub credentials from its child environment, retains safe validation
+diagnostics under `.git`, and rechecks the entire inventory and remote refs. A moved
+main, unexpected branch or unrelated local head blocks. Only explicitly inventoried
+files are staged; a dedicated `canonical-update/` branch has one parent equal to the
+reviewed base. No reset, direct main push or force-push is used. Push status is
+captured and independently read back, even after an ambiguous response. A draft PR
+is created or an exact matching open draft reused. Git refs, PR head/base/draft,
+commit parent/tree and complete remote changed-file list must match. Readback cannot
+claim completeness at the GitHub compare API's 300-file limit. Failures report their
+phase and preserve local work; this is not a new rollback service.
+
+The complete publication-gate suite has a fixed, reviewed one-hour deadline:
+`ADMISSION_VALIDATION_TIMEOUT_SECONDS = 3600`. Hosted run `38514592849` on
+`35a1f9c` completed discovery in 1,852.485 seconds, while its nested expanded
+suite was cut off by the previous 1,800-second deadline. The one-hour cap gives
+bounded hosted-runtime headroom without changing the command, test selection,
+execution order or success parsing. A request or saved checkpoint cannot extend
+or disable it. A timeout propagates to publication's blocked validation result;
+nonzero exit or missing/nonpositive test count or final `OK` also blocks. Safe
+completed-suite diagnostics and private Python-cache handling remain unchanged.
+
+### Historical replay and expanded-current validation
+
+The publication gate runs the complete discovery suite in the writer's changed
+checkout. It does not validate an old checkout instead. Historical replay tests
+explicitly select `tests/historical_catalog.py`'s original snapshot fixture;
+current query, collection, projection and missing-mechanical-evidence checks in
+`tests/test_current_catalog_validation.py` read the actual checkout's `data`.
+The same distinction applies to ordinary hosted CI discovery after a data PR
+is checked out. No runtime consumer falls back to historical data.
+
+`tests/fixtures/historical_catalog/canonical-3bf4cc27.zip` retains exact original
+canonical bytes, independently compared with revision
+`3bf4cc27dc87ba931d775a61961a2cc6b12fd5f3`. Its pinned manifest binds every original
+public data dependency. Historical evidence is copied only from those exact
+retained paths after checksum verification; added current records and audits are
+not inserted into that historical fixture. Original assertions, snapshot hashes,
+retained dossiers, packets and mismatch rejection remain unchanged. Fixture
+integrity failure is an error, never permission to refresh pins or use a fallback.
+
+Run the slow integration separately so full discovery cannot recursively start
+another publication-validation subprocess:
+
+```
+PYTHONPATH=src:tests python tests/publication_validation_regression.py
+```
+
+CI runs both discovery and this integration. The integration uses the existing
+supported writer with the independently pinned 810 pending records, the live
+`IsolatedAdmissionTestBoundary` capability, disposable Git and the existing
+explicit GitHub transport double. It calls `publish_admission()` without mocking
+the validation result: the actual complete suite checks its 654-Card writer output,
+including 270 missing mechanical bindings, before local-only publication/readback.
+This establishes neither live owner authorization nor live data admission.
+The original one-test fictional publication fixtures remain useful for failure
+isolation, but are not evidence that the full expanded catalog validates.
+
+Planning retains `contents: read`. The admission job's `contents: write` and
+`pull-requests: write` are used only for its branch and draft PR; `id-token: write`
+requests identity, not repository-write access. No new token, external service or
+Actions permission was added to manufacture CI success. Under current GitHub
+documentation, GITHUB_TOKEN-created pushes do not trigger push workflows; PR opened,
+synchronize and reopened events can create approval-required workflow runs. A user
+with write access can select **Approve workflows to run** if that banner appears.
+This is distinct from admission approval or merge permission. Hosted CI may be
+pending, approval-required, successful or failed; publication success implies none
+of those outcomes. A repository setting that disallows Actions-created PRs will
+block creation, not silently trigger a broader credential or automatic setting change.
+
+Offline tests use fictional retained inputs, the actual writer and required
+consumer/suite validation, local bare Git, and explicitly simulated platform
+responses. Simulated decisions can publish only to the disposable capability's
+local bare remote using a transport double. They cannot publish to GitHub. These
+tests do not establish live authorization or publication of a real catalog update.
+
+`config/automatic_updates/mb2-ordinary-810-pending.json` binds the retained ordered
+810-ID digest, 270 records of each type, nine held IDs and all 32 retained packet
+files. It is explicitly pending and the CLI blocks it. The reviewed data-root
+candidate payload with parsed contexts, and source/receipt retention paths, have not
+been materialized as production inputs. Their missing paths/hashes are explicit;
+the rehearsal's simulated payload is not relabeled for real admission. Private
+processing, public redistribution, future application-use policy and an actual
+human decision remain separate gates. No held record, spelling proposal, Japanese
+language evidence, emblem semantics or physical-copy identity changes here.
+
+`requirements.txt` adds only `PyJWT[crypto]>=2.10,<3`: PyJWT verifies GitHub JWT
+claims and its cryptography extra verifies RS256 signatures. No unrelated dependency
+upgrade, custom signing implementation or authentication service is introduced.
+The combined implementation still requires the full final local suite, exact-head
+hosted validation and independent Project Manager review before owner merge approval.
+
+Current official GitHub references (read 2026-10-13):
+
+- [OIDC claims, token-request permission and immutable subjects](https://docs.github.com/en/actions/reference/security/oidc)
+- [Manual workflow dispatch and access](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)
+- [Rerun actor privileges](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs)
+- [Safe workflow input handling](https://docs.github.com/en/actions/reference/security/secure-use)
+- [Current workflow-token event behavior](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow)
+
+Failure before authorization writes no engine checkpoint. Later failures retain
+truthful engine diagnostics and evidence; the repaired writer's bounded compensation
+remains authoritative. `rollback-plan` is a nonexecuting plan, not a rollback service.
 
 ## Phase 121 synthetic production-readiness result
 
@@ -86,9 +314,8 @@ payload checksum mismatch, pre-state drift, checkpoint/audit alteration, interru
 conflicting replay, mismatched PRs, non-green checks, and any force/admin path.
 
 The engine source contains neither `MB2` nor `MSH`; no target-code/name condition was added.
-The workflow takes its dedicated branch from the descriptor, reuses only an identical remote
-branch/PR, validates head/base/boundary and required green checks, then requests protected
-auto-merge without force or admin bypass. Diagnostics remain always retained. Before a real
-future set, the remaining blockers are trusted terms-compliant evidence, full review, an
-approved bounded descriptor/current pre-state, and verified GitHub repository settings. A
-real update requires a later phase and normal protected review.
+The former Phase 121 workflow's publication and auto-merge behavior is historical;
+the owner-controlled integration above supersedes it. Original retained evidence and
+historical hashes remain unchanged. Real admission still requires source-policy
+clearance, exact owner authorization, completed publication safeguards and independent
+review; this implementation task grants none of those production decisions.

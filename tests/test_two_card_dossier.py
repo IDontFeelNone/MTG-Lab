@@ -14,7 +14,10 @@ from scripts.card_dossier import (CardEvidenceDossierBuilder, MAXIMUM_BYTES,
 from reasoning import ReasoningContextResult
 
 
-ROOT = Path(__file__).resolve().parents[1]
+from historical_catalog import historical_repository
+
+# This module replays the retained original catalog, not the current catalog.
+ROOT = historical_repository()
 ARTIFACTS = ROOT / "data/review/two-card-chatgpt-demo"
 
 
@@ -28,6 +31,9 @@ def protected_inventory():
 class TwoCardDossierTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        from historical_catalog import bind_replay_builder
+        from scripts import build_two_card_demo
+        bind_replay_builder(cls, build_two_card_demo)
         cls.protected_before = protected_inventory()
         cls.builder = CardEvidenceDossierBuilder(ROOT / "data")
         cls.dossiers = {slug: cls.builder.build(card_id) for slug, card_id, _ in TARGETS}

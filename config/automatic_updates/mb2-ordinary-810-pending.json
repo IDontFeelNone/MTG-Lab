@@ -1,0 +1,247 @@
+{
+  "artifacts": {
+    "candidate_payload": null,
+    "promotion_audit": "audit/bounded_promotions/mb2-ordinary-810-pending.json",
+    "receipts": [],
+    "source_artifact": null
+  },
+  "candidate_selection": {
+    "count": 810,
+    "counts_by_type": {
+      "card": 270,
+      "identifier": 270,
+      "printing": 270
+    },
+    "held_candidate_ids": [
+      "mtgjson:card:42ddeb149a34e527317e6b59b20211904acd5ad0bff73ce8bb0bbb0d8637fe4f",
+      "mtgjson:card:9ef9a8e455737257d74eaebb2b074484d002251cc0c5ef48d4e2d35b161fe749",
+      "mtgjson:card:d6e10aabb41f0bf5d66ccb20dca98a3045a973f61d4b4d727f2683ce20540b16",
+      "mtgjson:identifier:2559e307cd3196ea670087a03c64515ea18256e7acb1cd79e72d25ff86661352",
+      "mtgjson:identifier:6d2700d0b9290a810b58363f22709facbfd014b9606f25592f0a213a0a368054",
+      "mtgjson:identifier:a3845364a037bc71daa3c322b0e8bddfb928aac0563069cfa4957778ab5bc773",
+      "mtgjson:printing:3008f01061a07395b4c296c080721478fc19343b4b29190798baa2c3955f268c",
+      "mtgjson:printing:82b571683bf4d9ee2cca2e1d043b86f292eecbf7059898b2bd6e2697fb2822d8",
+      "mtgjson:printing:9bd78d7042f63131a6c8debb2fe8d5489db1ad6ae667346dfd5bfd7006626e45"
+    ],
+    "ordered_candidate_digest": "f63585f4a023e2b81656a4cca0c6811a7d598e45f065633c3a11d9a9a2b5d500",
+    "path": "tests/fixtures/catalog_admission/mb2-recommended-candidate-ids.json",
+    "sha256": "f63585f4a023e2b81656a4cca0c6811a7d598e45f065633c3a11d9a9a2b5d500"
+  },
+  "canonical_identity_fields": {
+    "card": "card_reference",
+    "finish": "value",
+    "printing": "uuid"
+  },
+  "canonical_pre_state_observed_at_main": "b50505d0645b4512f03281ffef0e60b40a52d80d",
+  "data_root": "data",
+  "integrity": {
+    "candidate_payload_sha256": null,
+    "canonical_pre_state_digest": "881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+    "expected_candidate_count": 810,
+    "source_sha256": "068f20ecb1e62c881b8146f6a31ac96e1f00b9a959d8e4350e891443cda35ad9"
+  },
+  "launch_state": "pending",
+  "missing_execution_inputs": [
+    "artifacts.candidate_payload (reviewed data-root payload and parsed context)",
+    "artifacts.source_artifact and receipts (reviewed data-root retention paths)"
+  ],
+  "policy": {
+    "permitted_final_classifications": [
+      "approved"
+    ],
+    "trusted_providers": [
+      "mtgjson"
+    ]
+  },
+  "remaining_gates": {
+    "human_admission_decision": "absent",
+    "reviewed_execution_configuration": "pending",
+    "source_policy_future_application_use": "unresolved",
+    "source_policy_private_processing": "unresolved",
+    "source_policy_public_redistribution": "unresolved"
+  },
+  "retained_evidence_files": [
+    {
+      "byte_length": 7273002,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/candidate-preparation.json",
+      "sha256": "158440b59b45c0d50e81f4d8345f4ea637e6d5bbef6d77400a3a2300738c11b8"
+    },
+    {
+      "byte_length": 238962,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/correspondence.json",
+      "sha256": "163987b2235e2fb6252e3504a6d2413fba7987a487b8989ab8c56c4bfe0a21e5"
+    },
+    {
+      "byte_length": 5943,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/manifest.json",
+      "sha256": "7a7633545d699828665339a7f112d8d9942828b1918c2bdd695fddafa988f90e"
+    },
+    {
+      "byte_length": 794377,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/parsed-records.json",
+      "sha256": "1daf8271c15162b3b23c74836edac0f4e6d7e5d2994702db3fbb153b242e9a7b"
+    },
+    {
+      "byte_length": 158,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/acquisition-result.json",
+      "sha256": "30b96dc97856980bbd5a9a0c860a6f2d171f4835d05a6ead87f92552558b7429"
+    },
+    {
+      "byte_length": 78,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/checksum.sha256",
+      "sha256": "575a25229ff73e808b1c1435b0df9916d5f4e4e88e0900c892b02d7303411ddf"
+    },
+    {
+      "byte_length": 660,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/manifest.json",
+      "sha256": "26eea426b39b39410d2ec7e985a71cc60785752cb44ad4c330cae0927bdd6ece"
+    },
+    {
+      "byte_length": 1542,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/payload.bin",
+      "sha256": "de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6"
+    },
+    {
+      "byte_length": 278,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mb2-products/de411be6af6bd024faf5e7a5b5e1db48ac22404f8214091cde9ea2aab84d32b6/provider-metadata.json",
+      "sha256": "cf880bc8e03bc0efd434fc4d17781442579345f14b36a4274f03fb66f44cfe49"
+    },
+    {
+      "byte_length": 158,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/acquisition-result.json",
+      "sha256": "4d1ee1a4609c6126f29213406d905f8752ac4fc52e4da1dcc0a300e65fa42368"
+    },
+    {
+      "byte_length": 78,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/checksum.sha256",
+      "sha256": "e6978922795603856d555a79037aea9d371cf0231afd3de8077565009cb8ae15"
+    },
+    {
+      "byte_length": 643,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/manifest.json",
+      "sha256": "0384586cb6d96c8bd327a58261304edbb6c6c49dfe0efc7599a48a353d932083"
+    },
+    {
+      "byte_length": 1195,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/payload.bin",
+      "sha256": "6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006"
+    },
+    {
+      "byte_length": 398,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/mtgjson-license-notice/6c630d28b18f2e59c45874f033e1481348c5883ab3b18a5048f4104aaa4ef006/provider-metadata.json",
+      "sha256": "cc7064290c09420538fe97a82b77a9be392cd23450b2d522580dbc962d6d6e6f"
+    },
+    {
+      "byte_length": 160,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/acquisition-result.json",
+      "sha256": "cb0d3601b55aeb73d1b229e9515f4e5b3a4415c1edc35e1e31589db9525e34ee"
+    },
+    {
+      "byte_length": 78,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/checksum.sha256",
+      "sha256": "8c9facb9b3c6e77bc201ff993e29e19f4b54a1464a66088a0e0ddaa1c5f3b8b3"
+    },
+    {
+      "byte_length": 667,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/manifest.json",
+      "sha256": "4a4456785af2437a60c90818372852cde9905d7cd2cf7a2d000ef1e98d2a3753"
+    },
+    {
+      "byte_length": 744807,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/payload.bin",
+      "sha256": "aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505"
+    },
+    {
+      "byte_length": 64289,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/plst-mb2-records/aa0d6b8eac0e49c1cf06a8bf0cf01cd07955cd4fc0938a3ebc5a7f5c21521505/provider-metadata.json",
+      "sha256": "16c0acafd0a6c28ad8ffce78db44803d66742e5c076f49937e216a25efd5cd53"
+    },
+    {
+      "byte_length": 157,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/acquisition-result.json",
+      "sha256": "ca688a3956525faff30ee828be4184aa0dbdfd4473db9bf4e65e91f8f5a53cfb"
+    },
+    {
+      "byte_length": 78,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/checksum.sha256",
+      "sha256": "1521fa703eb91808b1bb5a1b35985c0b757a52b3296a11612019baf82077ddf7"
+    },
+    {
+      "byte_length": 653,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/manifest.json",
+      "sha256": "9ce120e8e95532592099ad4334f2cd722f98efab36f89bb3b66661fdafff3526"
+    },
+    {
+      "byte_length": 390,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/payload.bin",
+      "sha256": "8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6"
+    },
+    {
+      "byte_length": 146,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/mtgjson/provider-checksums/8690c5805c089a64559d7036d1d357c9e9a7f3c85989edfc859072a2d0e736a6/provider-metadata.json",
+      "sha256": "3a1002564218f12d264777f93409ec2a2e92f597045688f2cef4561cf5e328c2"
+    },
+    {
+      "byte_length": 160,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/acquisition-result.json",
+      "sha256": "777bad28b6826ff892bfd405692fa4736d5d799f4fd150c0025d2103d3dcf021"
+    },
+    {
+      "byte_length": 78,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/checksum.sha256",
+      "sha256": "3b1eedccb68ab1a95374f06621ccf6f7ec6ed611f5dc757bbd6b4d42e288d4e2"
+    },
+    {
+      "byte_length": 660,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/manifest.json",
+      "sha256": "24d576b1a24244d6a1578e825263e088c44fa0bb09c6258cdd37437e985bb401"
+    },
+    {
+      "byte_length": 166185,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/payload.bin",
+      "sha256": "8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36"
+    },
+    {
+      "byte_length": 408,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/raw/scryfall/scryfall-printing-facts/8560a94b319e39b536bacaab6489716ded07312d36791260e99b2a1f44004e36/provider-metadata.json",
+      "sha256": "4f7007bf84de4641d07ef8d06a94861b1a907ae36edf6bacfe7bae4a295c7a7d"
+    },
+    {
+      "byte_length": 315922,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/review-summary.json",
+      "sha256": "bbec717ec36755aaac5057b63607d85d463aabffe28c69075fc1f5ed4549920f"
+    },
+    {
+      "byte_length": 66564,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/source-receipts.json",
+      "sha256": "8113a8be3b65ad010544778956927e6b82d5ab65bef71cbe51e0c14d9dd52b48"
+    },
+    {
+      "byte_length": 867,
+      "path": "reference-reviews/mb2-reference-coverage/structured-2026-10-13/source-record.json",
+      "sha256": "068f20ecb1e62c881b8146f6a31ac96e1f00b9a959d8e4350e891443cda35ad9"
+    }
+  ],
+  "schema_version": "automatic-canonical-update-v1",
+  "scope_notes": [
+    "Catalog membership is not physical-copy evidence.",
+    "Nine multiface candidates remain held and unselected.",
+    "Japanese Gigantosaurus remains Japanese. Owner spelling proposals remain unapplied. Essence of Ajani remains an emblem.",
+    "No test-only authorization or rehearsal payload is an executable owner approval."
+  ],
+  "target": {
+    "base_branch": "main",
+    "batch_identifier": "mb2-ordinary-810-pending",
+    "candidate_digest": "f63585f4a023e2b81656a4cca0c6811a7d598e45f065633c3a11d9a9a2b5d500",
+    "destination_branch": "canonical-update/mb2-ordinary-810-pending",
+    "evidence_identity": "mtgjson-mb2-ordinary-plst-projection",
+    "expected_target_isolation": "PLST",
+    "game": "magic",
+    "promotion_policy": "deterministic-v1",
+    "source_artifact_or_workflow_run": "retained-structured-reference-2026-10-13",
+    "source_dataset_identity": "mtgjson-mb2-ordinary-plst-projection",
+    "target_code": "PLST",
+    "target_name": "MB2 ordinary reprints evidenced in PLST",
+    "trusted_provider": "mtgjson"
+  }
+}
