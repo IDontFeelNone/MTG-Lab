@@ -319,8 +319,10 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("Decision 017 is Accepted", current, name)
             self.assertIn("merged in PR #176", current, name)
             self.assertIn("V13 Stage 2 — Legacy/Public Snapshot Profile Review", current, name)
+            self.assertIn("merged in PR #177", current, name)
             self.assertIn("pending independent Project Manager inspection", current, name)
-            self.assertIn("Stage 3 real-profile readiness: NOT READY", current, name)
+            self.assertIn("READY_FOR_NON_PRODUCTION_STAGE3", current, name)
+            self.assertIn("production operator profile remains **BLOCKED**", current, name)
             self.assertIn("Legacy/Public Profile Permission and Closure Contract", current, name)
             self.assertIn("NOT AUTHORIZED", current, name)
             self.assertIn("holds remain pending and unadmitted", current, name)
@@ -329,7 +331,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         scope = migration.split("## " + milestone, 1)[1]
         self.assertIn("Implementation status: merged in PR #176", scope)
         self.assertIn("## V13 Stage 2 — Legacy/Public Snapshot Profile Review", scope)
-        self.assertIn("NOT AUTHORIZED", scope.split("## Next prerequisite", 1)[1])
+        self.assertIn("NOT AUTHORIZED", scope.split("## Next implementation candidate", 1)[1])
         for item in ("Generic snapshot manifest verification", "immutable fictional snapshot",
                      "read-only attachment", "query/collection", "Integrity, version and compatibility",
                      "missing/corrupt/incompatible", "Relocation determinism", "no ambient fallback",

@@ -1,0 +1,93 @@
+{
+  "baseline_revision": "d4e673a31714e30eb4056c43fca76b159008c813",
+  "document_kind": "capability_contract_not_authorization",
+  "incompleteness": {
+    "gameplay_rules": "unsupported",
+    "mechanical_evidence": "not a TierA capability; unavailable/incomplete where evidence missing",
+    "optional_knowledge_state": "unavailable; absent at baseline",
+    "product_collation": "unsupported",
+    "product_slots": 0,
+    "typed_materialization": "incomplete",
+    "unresolved_finish_references": {
+      "etched": 9,
+      "signed": 21
+    }
+  },
+  "parity": {
+    "bare_constructor_entity_count": 32,
+    "bare_constructor_equivalent": false,
+    "bare_constructor_query_snapshot_id": "sha256:e580c987f4e7cae0c0a69e22dc025e468ceacef078a4ff907935c1d54998fa6e",
+    "bare_constructor_status": "legacy convenience/path-inference technical debt; unchanged, not Stage3 parity target",
+    "counts_by_type": {
+      "card": 399,
+      "finish": 2,
+      "game": 1,
+      "identifier": 235,
+      "printing": 928,
+      "product": 1
+    },
+    "data_root": "<explicit-repository>/data",
+    "games_root": "<explicit-repository>/data/canonical/games",
+    "optional_knowledge_state": "absence pinned; appearance blocks instead of expanding scope",
+    "outer_profile_identity": "separate from existing query snapshot and whole-canonical prestate",
+    "precedence": "typed first by exact(entity_type,ID); retain original mixed representations",
+    "promoted_records": 1534,
+    "query_entities": 1566,
+    "query_snapshot_id": "sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7",
+    "source_records_in_selected_closure": 5,
+    "source_records_total_broader_census": 8,
+    "target": "EXPLICIT_BOTH_ROOTS",
+    "tier_A_verifies_whole_canonical_prestate": false,
+    "typed_promoted_id_overlap": {
+      "card": 0,
+      "printing": 0
+    },
+    "whole_canonical_prestate_historical_reference": "881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077"
+  },
+  "production_eligible": false,
+  "selected": "A",
+  "source_policy_clearance": "not_granted",
+  "tiers": [
+    {
+      "available": [
+        "entity",
+        "entities",
+        "search",
+        "snapshot",
+        "Card/Printing/Identifier/Finish/Game/Product relationships",
+        "entity provenance",
+        "entity-local validation unknown/conflicting/unresolved/superseded",
+        "collection identity resolution"
+      ],
+      "consumers": [
+        "CanonicalQueryEngine entity/search/relationship/snapshot",
+        "CanonicalCollectionResolver",
+        "CanonicalSemanticQueryEngine entity-local catalog operations"
+      ],
+      "count": 40,
+      "name": "CATALOG_QUERY_COLLECTION",
+      "tier": "A",
+      "unsupported": [
+        "related promotion_audits",
+        "validation rejected/validation_failure",
+        "aggregate validation/validation_statistics",
+        "semantic list_validation rejected/validation_failure",
+        "full audit APIs",
+        "admission validation",
+        "original provider evidence replay"
+      ]
+    },
+    {
+      "adds": "all30audit files and full current audit APIs, separately permissioned; not selected",
+      "count": 68,
+      "name": "FULL_QUERY_AUDIT",
+      "tier": "B"
+    },
+    {
+      "adds": "52canonical bytes+30audits+17historical admission dependencies; no universal raw replay claim; not selected",
+      "count": 99,
+      "name": "HISTORICAL_ADMISSION_REPLAY",
+      "tier": "C"
+    }
+  ]
+}

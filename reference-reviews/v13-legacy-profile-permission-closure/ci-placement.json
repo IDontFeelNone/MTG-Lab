@@ -1,0 +1,41 @@
+{
+  "document_kind": "future_ci_placement_contract",
+  "production_eligibility_from_ci": false,
+  "protected": [
+    {
+      "class": "future operator snapshot + evidence context",
+      "currently_available": false,
+      "never_export": [
+        "protected values",
+        "personal collection data",
+        "credentials",
+        "private policy captures",
+        "raw JWTs",
+        "caches",
+        "unreviewed logs/backups"
+      ],
+      "placement": "reviewed trusted code and explicitly permissioned mounts only",
+      "public_artifacts": "contentless reviewed summaries only"
+    }
+  ],
+  "protected_ci_required_for_contributor_tests": false,
+  "public": [
+    {
+      "class": "authored metadata, hashes, bounded policy summaries",
+      "placement": "public repository and normal CI",
+      "value_export": false
+    },
+    {
+      "class": "new snapshot/capability behavior",
+      "placement": "fictional fixtures, including mixed typed/state/source/audit families",
+      "private_dependency": false
+    },
+    {
+      "class": "already public historical catalog/replay",
+      "limits": "Compatibility characterization only, not clearance. If a later review restricts these bytes, preserve identities and move authorized replay privately with public fictional equivalent; do not skip or repin history.",
+      "permission_status": "NOT_ESTABLISHED",
+      "placement": "existing explicit historical CI roots and unchanged expectations; no new redistributed corpus"
+    }
+  ],
+  "stage3_parity_proof": "Use fictional mixed fixtures for capability/negative-I/O/relocation contract; characterize existing in-place public roots separately with field-free counts/hash/ID-equality outcomes and synthetic collection input. No new copied/reformatted real dataset."
+}

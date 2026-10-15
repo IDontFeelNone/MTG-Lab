@@ -1,0 +1,94 @@
+{
+  "approval_state": "not_granted",
+  "data_processing_permission_established": false,
+  "decision": "READY_FOR_NON_PRODUCTION_STAGE3",
+  "document_kind": "design_recommendation_not_authorization",
+  "excluded": [
+    "data copying/reformatting or distributable catalog bundle",
+    "production authority/activation/services",
+    "MB2 admission or nine-held changes",
+    "provider acquisition",
+    "writer/admission/OIDC changes",
+    "SOURCE_POLICY_CLEARED_PLANS changes",
+    "default query root inference fix",
+    "canonical schema/state/identity migration",
+    "SQL",
+    "public/private composition",
+    "new rules/mechanical/market/AI/simulation support"
+  ],
+  "execution_authorized": false,
+  "implementation_authorized": false,
+  "legacy_compatibility_profile": "READY",
+  "next_milestone": "V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile",
+  "next_milestone_authorization": "NOT AUTHORIZED",
+  "operations": [
+    {
+      "action": "author code/control metadata",
+      "copies_existing_values": false,
+      "creates_bundle": false,
+      "engineering_scope_only": true,
+      "exports_values": false
+    },
+    {
+      "action": "path/hash references to existing tracked files in place",
+      "copies_existing_values": false,
+      "creates_bundle": false,
+      "exports_values": false,
+      "referent_permission": "NOT_ESTABLISHED"
+    },
+    {
+      "action": "ordinary existing catalog reads/parity characterization",
+      "copies_existing_values": false,
+      "creates_bundle": false,
+      "exports_values": false,
+      "limit": "Existing compatibility characterization, not new operation clearance. New processing/use requires separate evidence.",
+      "referent_permission": "NOT_ESTABLISHED"
+    },
+    {
+      "action": "copies/reformatted source values/new bundle/service/AI export/operator activation",
+      "allowed_in_stage3": false,
+      "requires_separate_operation_evidence": true
+    }
+  ],
+  "production_eligible": false,
+  "production_operator_profile": "BLOCKED",
+  "remaining_production_blockers": [
+    {
+      "issuer": "MTGJSON",
+      "needed": "Field-scoped statement identifying controlled compilation/identifier contributions and any upstream sublicensing, exact selected bytes and operation, complete MIT notice binding."
+    },
+    {
+      "issuer": "Scryfall",
+      "needed": "Accessible current first-party API/data reuse terms or verifiable direct permission for the exact identifiers and derived fields; separate local processing, private retention, public redistribution, free/paid service and AI export, including attribution and downstream conditions."
+    },
+    {
+      "issuer": "Wizards",
+      "needed": "Applicable express permission or a documented applicability determination covering exact names, rules/type/mana text, printed/foreign/flavor/ruling content and intended operation; distinguish database retention/republication from original fan creation."
+    },
+    {
+      "issuer": "Marketplace/EDHREC/artwork upstream",
+      "needed": "Exact ownership/permission evidence for embedded metrics, SKU/product mappings, creator metadata and identifier compilations if those values remain part of an operation; bare IDs and authored content require separate decisions, not a blanket exclusion or clearance."
+    },
+    {
+      "issuer": "Operator/owner governance",
+      "needed": "Concrete future use scope and later explicit data admission/activation decision after evidence is complete; no authorization is created by this review."
+    }
+  ],
+  "scope": [
+    "generic separately named legacy representation/profile metadata",
+    "explicit in-place hash-bound40-file closure",
+    "existing query/collection readers with both roots and exact historical query semantics",
+    "bounded audit-context read seam and unsupported-capability failures before I/O",
+    "fictional fixture and explicit existing-public compatibility characterization",
+    "detect missing/corrupt/extra selected inputs, changed absence bindings and relocation",
+    "preserve explicit existing legacy/public behavior and historical fixtures"
+  ],
+  "selected_tier": "A",
+  "source_policy_clearance": "not_granted",
+  "stop_conditions": [
+    "implementation requires new provider-derived value retention/export or a new corpus",
+    "unbound audit/source/optional state would change results",
+    "identity or query snapshot semantics require change",
+    "writer or Tier0 authority changes become necessary"
+  ]
+}
