@@ -1,57 +1,73 @@
-# Current boundary — Stage 3 non-production compatibility implementation
+# Current milestone — Tier A Card Intelligence attachment
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
 Stage 1 fictional read-only snapshot attachment is merged in PR #176.
 **V13 Stage 2 — Legacy/Public Snapshot Profile Review** is merged in PR #177.
 The **Legacy/Public Profile Permission and Closure Contract** is merged in PR #178;
-its **READY_FOR_NON_PRODUCTION_STAGE3** recommendation received separate owner
-implementation authorization for this milestone.
-Reviewed canonical main: `e63b5ca54d6cef0425c39fe8cc05c79720dc9c03`.
+its **READY_FOR_NON_PRODUCTION_STAGE3** engineering recommendation was separately
+implemented as **V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile**,
+merged in PR #179. Reviewed canonical main:
+`4ef94dd704b052a7fbaf15d034fe65c015be256f`.
 Architecture v12 remains the preserved historical baseline.
 
 ## Current implementation and explicit limits
 
-**V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile** is implemented,
-pending independent Project Manager inspection. The explicit
-`legacy-public-compatibility-v1` profile supports only Tier A
-**CATALOG_QUERY_COLLECTION** through 40 in-place dependencies: 33 existing core
-files, five selected SourceRecord references and two separately bound audit files.
-The bounded read inventory prevents excluded audit/source reads and rejects Tier
-B/C operations before I/O. No real catalog copy, reformatting, export or new bundle
-is created. Fictional mixed fixtures exercise relocation and negative-I/O cases.
+**V13 Tier A Card Intelligence & Acquisition Attachment Integration** is implemented,
+pending independent Project Manager inspection. Explicit
+`MechanicalCardIntelligence.from_attachment` constructs one verified attached
+query, and `CardAcquisitionAdapter.from_mechanical` reuses that exact instance.
+The adapter's `from_attachment` convenience path uses the same sequence.
+`CanonicalSemanticQueryEngine` and `ReasoningContextBuilder` share that query.
+Expected query identity, catalog integrity and independent mechanical-source
+integrity remain separately bound and checked; failed attachment never falls
+back to a legacy root. `catalog_binding` is exposed separately without changing
+retained mechanical/acquisition dossier formats or Decision Intelligence policy.
 
-The explicit both-root compatibility result retains 399 Cards / 928 Printings /
+The `legacy-public-compatibility-v1` profile remains Tier A
+**CATALOG_QUERY_COLLECTION**: 40 in-place dependencies, comprising 33 core files,
+five selected SourceRecord references and two audit-context files. Tier B/C
+operations remain unsupported before excluded I/O. This milestone selects no new
+catalog evidence, copies no provider corpus and acquires no provider data.
+Mechanical evidence remains outside the catalog profile and independently verified.
+
+The explicit both-root compatibility target retains 399 Cards / 928 Printings /
 235 Identifiers / two Finishes / Game / Product, totaling 1,566 query entities,
-with the unchanged query identity `sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7`.
-The bare constructor's 32-entity scope, unrestricted legacy profile and Stage 1
-fictional profile remain distinct and unchanged. New namespace members, optional
-knowledge state, selected-byte drift and retargeted roots block this fixed profile.
+with unchanged query identity
+`sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7`.
+Legacy MCI/acquisition constructors, the bare query constructor's 32-entity scope,
+unrestricted legacy attachment and Stage 1 fictional profile remain unchanged.
+No name fallback, physical-copy upgrade, ownership inference, mechanical fact or
+approval is added. Missing/ambiguous source coverage stays explicit.
 
-The production operator profile remains **BLOCKED**. The complete mixed-content
-permission chain remains **NOT_ESTABLISHED** for processing, private retention,
-existing-public-Git compatibility, new redistribution, free/paid service and AI
-export. Fixed flags remain `production_eligible=false`, `approval_state=not_granted`,
+The production operator profile remains **BLOCKED**. All seven mixed-content
+operation permission states remain **NOT_ESTABLISHED**. Fixed flags remain
+`production_eligible=false`, `approval_state=not_granted`,
 `source_policy_clearance=not_granted` and
-`data_processing_permission_established=false`. Integrity grants no permission.
-Finish gaps, typed incompleteness, zero Product slots and unavailable rules/
-mechanical coverage are represented honestly, not repaired by the profile.
+`data_processing_permission_established=false`. Integrity and reasoning grant no
+permission. No production snapshot or real admission is created.
 
-Next candidate: **Tier B Audit-Context Capability Design Review**.
-**NOT AUTHORIZED.** This candidate would review a separate audit-context capability;
-it does not authorize Tier B/C implementation, closure expansion, a production
-snapshot, real-data admission, provider acquisition, SQL/composition, Rules/Deck/
-Simulation/AI work or source-policy clearance. No next stage begins automatically.
+**Tier B Audit-Context Capability Design Review** is deliberately **DEFERRED**:
+this Card Intelligence/Acquisition vertical requires only Tier A entity,
+relationship and provenance operations.
+
+Next candidate: **V13 Functional-Role and Contextual-Comparison Attachment
+Integration — NOT AUTHORIZED**. Those existing pilots still construct legacy
+mechanical readers. A later narrow attachment migration could extend the same
+binding through their explanatory path while keeping role proposals pending and
+unverified-context results ABSTAIN. Rules/interaction foundation, simulation,
+Deck Intelligence and Tier B remain separately reviewed future alternatives;
+none begins automatically.
 
 MB2's 810 selected candidates and nine multiface holds remain pending and unadmitted.
 Owner spelling proposals remain unapplied; physical Printing verification stays
 unresolved. `SOURCE_POLICY_CLEARED_PLANS`, pending execution configuration,
-production canonical bytes, selected audits, SourceRecords, writer/admission/OIDC
-and the historical Architecture-v12 auxiliary fixture are unchanged. No owner
-admission decision or merge occurred.
+production canonical bytes, selected audits, SourceRecords, retained mechanical
+source evidence, writer/admission/OIDC and the historical Architecture-v12 auxiliary
+fixture are unchanged. No owner admission decision or merge occurred.
 
-See [the Stage 3 API and limits](docs/V13_STAGE3_LEGACY_PUBLIC_COMPATIBILITY_PROFILE.md),
-[the unchanged closure contract](docs/V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md), and
-[Stage 2 retained findings](docs/V13_STAGE2_LEGACY_PUBLIC_PROFILE_REVIEW.md).
+See [the integration API and limits](docs/V13_TIER_A_CARD_INTELLIGENCE_ATTACHMENT.md),
+[the merged Stage 3 profile](docs/V13_STAGE3_LEGACY_PUBLIC_COMPATIBILITY_PROFILE.md),
+and [the unchanged closure contract](docs/V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md).
 
 ---
 
