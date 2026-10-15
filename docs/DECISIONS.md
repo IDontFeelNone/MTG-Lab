@@ -318,3 +318,87 @@ Production evaluation is prohibited unless the packet is READY.
 This fail-closed admission boundary makes real inputs reconstructable and auditable without
 transferring recommendation ownership, duplicating Market history, mutating canonical data, or adding
 a named-product acquisition subsystem. It is additive within frozen Architecture v12.
+
+---
+
+## Decision 017 — Public Architectural Authority and Immutable Operator Canonical Snapshots
+
+**Status:** Accepted
+
+**Architecture classification:** Architecture v13 — ACTIVE APPROVED architecture
+
+The owner approved Decision 017 and the v13 direction reviewed at
+`3d21656b9f67a3089f32c5613804a1984fb44139` in PR #175. This approval authorizes
+the documentation/governance transition only. No runtime implementation is
+authorized. Architecture v12 is the previous historical architecture baseline;
+the existing runtime remains on its legacy filesystem/Git-bound implementation.
+
+MTG Lab retains public Git authority over architecture, source code, schemas,
+policies, identity/validation rules, deterministic algorithms, transformations,
+migrations, provider adapters, contracts, safe/public fixtures and public
+architecture/version manifests. Production canonical data may be an explicitly selected,
+reviewed, validated immutable operator-managed snapshot with independently
+permissioned source evidence. Generated databases, projections and caches remain
+subordinate to that snapshot. Personal collection data and credentials remain
+separate trust domains.
+
+A snapshot is authoritative only for its declared game, scope, content identity,
+schema/policy versions, capabilities, provenance/evidence bindings and approved
+operation/use scope. Private location alone does not make data canonical.
+Collections, holdings, storage information, preferences and assessments remain
+separate personal data, outside the shared canonical card-data snapshot. Source
+evidence is independently governed from both canonical and personal data.
+
+### Relationship to accepted decisions
+
+This decision prospectively **supersedes Decision 004 only where it requires
+production canonical datasets to live in public Git and production knowledge to
+be rebuildable from public Git alone**.
+It preserves Git architectural/code authority and generated-database subordination.
+Rebuild requires the exact code plus retained authorized snapshot/evidence, not
+public Git alone. This changes the explicit Tier-0 repository-authority invariant
+also stated in DATA_MODEL and DATA_REPOSITORY, hence v13 rather than a path-only
+additive v12 interpretation.
+
+It **clarifies/refines Decision 009**: Raw → Processed → Canonical → Validated,
+explicit reviewed promotion, provenance and validation before use remain. The
+approved canonical definitions are bound to the selected immutable authority
+snapshot under public repository-owned contracts, not necessarily stored in the
+public code repository. The lifecycle is not replaced by startup provider fetches.
+
+Decision 010 remains the generated SQLAlchemy persistence direction; it is not
+currently implemented SQL runtime. Decision 011 is clarified from repository-data
+location to structured validated selected-snapshot knowledge, preserving the
+prohibition on conversation memory as canonical authority. Stable IDs, game-neutral
+engines, deterministic results and all other accepted invariants remain.
+
+### Gates and scope
+
+Snapshot integrity, authenticated admission/release authority and permission to
+process, privately retain, redistribute, serve or export data are independent.
+Private storage or a digest is no permission shortcut. Unavailable/incompatible
+required snapshots fail closed; no hidden seed/provider/history fallback. Existing
+IDs, historical bytes/expected hashes and immutable audits remain interpretable.
+
+The accepted architecture direction, alternatives, design contracts, compatibility, security and
+migration plan are in [EXTERNAL_CARD_DATA_PLANE.md](EXTERNAL_CARD_DATA_PLANE.md).
+This entry changes governance authority, not runtime behavior or dataset state.
+The pending MB2 810 recommendation remains unadmitted; architecture approval is
+not an owner admission decision. It grants no processing, private-retention,
+public-redistribution, free/commercial application or protected-data AI-export
+permission. It does not resolve the nine held multiface candidates, owner spelling
+proposals or physical Printing verification; approve a source-policy plan; change
+`SOURCE_POLICY_CLEARED_PLANS`; or authorize acquisition, protected production
+snapshots, SQL, Rules Intelligence or simulation implementation.
+
+The next documented milestone is **V13 Stage 1 — Fictional Canonical Snapshot
+Attachment**. It remains NOT AUTHORIZED; its bounded future scope and exclusions
+are recorded in [the migration plan](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md#v13-stage-1--fictional-canonical-snapshot-attachment).
+
+### Reasoning
+
+Open code and reproducible intelligence do not require publicly redistributing
+every useful provider dataset. An immutable effective snapshot can preserve
+structured authority, review, provenance, deterministic identity and replay while
+supporting permitted operator-supplied/licensed inputs. Public CI uses fictional
+safe fixtures; protected integration tests exact permitted production snapshots.

@@ -1,0 +1,1 @@
+Original fictional fixture: Fixture Card A; printing fixture-print-a belongs to fixture-card-a. No real provider, ownership or admission evidence.
