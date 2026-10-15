@@ -63,9 +63,11 @@ def read_import(path: Path) -> dict:
 
 class CanonicalCollectionResolver:
     """Read-only, explicit-priority resolver over Cards, Printings and Identifiers."""
-    def __init__(self, game: str, data_root: Path = Path("data")):
+    def __init__(self, game: str, data_root: Path = Path("data"), *, games_root: Path | None = None):
+        self._catalog_attachment = None
         self.game, self.data_root = game, Path(data_root)
-        root = self.data_root / "canonical" / "games"
+        root = Path(games_root) if games_root is not None else self.data_root / "canonical" / "games"
+        self.games_root = root
         query = CanonicalQueryEngine(game, games_root=root, data_root=self.data_root)
         snapshot = query.snapshot()
         entities = [x for x in snapshot.entities if x.supersession_state == "current"]
@@ -112,7 +114,37 @@ class CanonicalCollectionResolver:
         for key, matches in self.external.items():
             self.external[key] = sorted(set(matches))
 
+    @classmethod
+    def from_attachment(cls, attachment) -> CanonicalCollectionResolver:
+        """Reuse resolution against one verified, explicitly selected catalog."""
+        from repository.snapshots import LegacyPublicAttachment, SnapshotAttachment, SnapshotError
+
+        if not isinstance(attachment, (SnapshotAttachment, LegacyPublicAttachment)):
+            raise SnapshotError("verified catalog attachment required")
+        attachment.verify_unchanged()
+        resolver = cls(attachment.game, attachment.data_root, games_root=attachment.games_root)
+        attachment.verify_unchanged()
+        resolver._catalog_attachment = attachment
+        return resolver
+
+    def _verify_attachment(self) -> None:
+        if self._catalog_attachment is not None:
+            from repository.snapshots import SnapshotError
+
+            attachment = self._catalog_attachment
+            attachment.verify_unchanged()
+            if (self.game != attachment.game
+                    or self.data_root.resolve() != attachment.data_root.resolve()
+                    or self.games_root.resolve() != attachment.games_root.resolve()):
+                raise SnapshotError("catalog attachment scope changed")
+
+    @property
+    def catalog_binding(self) -> dict[str, Any] | None:
+        self._verify_attachment()
+        return self._catalog_attachment.binding if self._catalog_attachment is not None else None
+
     def resolve(self, imported: Mapping[str, Any]) -> dict:
+        self._verify_attachment()
         results, seen = [], set()
         for number, raw in enumerate(imported["entries"], 1):
             row = _normalize_row(raw, number)
@@ -163,9 +195,13 @@ class CanonicalCollectionResolver:
                 result["canonical_reference"] = {"snapshot_id": self.canonical_snapshot_id,
                     "printing": self.canonical_references[printing_id],
                     "card": self.canonical_references[printing["card_id"]]}
-        return {"resolution_version": "collection-resolution-v1", "canonical_digest": self.canonical_digest,
-                "canonical_snapshot_id": self.canonical_snapshot_id,
-                "results": results}
+        resolved = {"resolution_version": "collection-resolution-v1", "canonical_digest": self.canonical_digest,
+                    "canonical_snapshot_id": self.canonical_snapshot_id,
+                    "results": results}
+        if self._catalog_attachment is not None:
+            resolved["catalog_attachment"] = self.catalog_binding
+        self._verify_attachment()
+        return resolved
 
     def _production_dimension_conflicts(self, printing_id: str, supplied: Mapping[str, Any]) -> list[str]:
         """Fail closed for contradicted production identity dimensions, not ownership metadata."""

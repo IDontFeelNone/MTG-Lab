@@ -3,8 +3,11 @@
 Status: Tier 0 (Architectural Constitution)
 
 Architecture v13 — ACTIVE APPROVED architecture under accepted Decision 017.
-This authority model is approved governance; external runtime support remains
-unimplemented. Architecture v12 is the previous historical baseline.
+This authority model is approved governance. Separately owner-authorized Stage 1
+fictional read-only snapshot attachment is implemented and pending independent
+Project Manager review; production external attachment/activation remains
+unimplemented. Architecture v12 is the previous historical baseline. See
+[Stage 1 implementation and limits](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 
 ## Purpose
 
@@ -36,8 +39,9 @@ This document defines the canonical data repository architecture for MTG Lab.
   policies. Its authority is bounded to declared game, scope, content identity,
   schema/policy versions, capabilities, provenance/evidence bindings and approved
   operation/use scope. Relationships use stable IDs. Private location alone is
-  neither authority nor permission. The existing runtime remains Git-bound until
-  separately authorized implementation.
+  neither authority nor permission. Existing legacy constructors remain Git-bound;
+  separately authorized fictional read-only attachment and an explicit legacy/public
+  profile do not enable production external-data attachment or admission.
 - **Validation Data:** Structural, referential, domain, and later statistical
   results establish whether canonical definitions are eligible for downstream
   consumption. For Print Sheets and Slots, this includes
@@ -68,8 +72,10 @@ projections remain subordinate; rebuild requires compatible public code/contract
 plus the exact authorized retained snapshot/evidence.
 
 Personal collections, holdings, storage, preferences and assessments remain outside
-the shared snapshot. Source evidence has its own governance. No data migration,
-processing/retention/redistribution/application permission, protected snapshot,
-AI export, admission or runtime implementation is authorized. Historical evidence
-is not rewritten or deleted; MB2 810, the nine holds and source-policy gates remain
-unchanged.
+the shared snapshot. Source evidence has its own governance. Governance acceptance
+alone authorized no runtime implementation; the subsequent separate Stage 1
+authorization is limited to fictional read-only attachment and the explicit
+legacy/public profile. No data migration, processing/retention/redistribution/
+application permission, protected snapshot, AI export or admission is authorized.
+Historical evidence is not rewritten or deleted; MB2 810, the nine holds and
+source-policy gates remain unchanged.

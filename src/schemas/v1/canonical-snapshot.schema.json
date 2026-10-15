@@ -1,0 +1,552 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mtg-lab.dev/schemas/v1/canonical-snapshot.schema.json",
+  "title": "Fictional local read-only snapshot profile; no production admission authority",
+  "$ref": "#/$defs/release",
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "byte_length",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "byte_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2097152
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "records"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 128
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "sha256"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9._-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "minItems": 0,
+          "maxItems": 128
+        }
+      }
+    },
+    "entities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "card",
+        "printing",
+        "identifier"
+      ],
+      "properties": {
+        "card": {
+          "$ref": "#/$defs/inventory"
+        },
+        "printing": {
+          "$ref": "#/$defs/inventory"
+        },
+        "identifier": {
+          "const": {
+            "count": 0,
+            "records": []
+          }
+        }
+      }
+    },
+    "validation-input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "content_id",
+        "schema_set_id",
+        "policy_id",
+        "validator_profile",
+        "validator_sha256",
+        "required_checks"
+      ],
+      "properties": {
+        "content_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "schema_set_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "policy_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "validator_profile": {
+          "const": "fictional-read-only-verifier-v1"
+        },
+        "validator_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "required_checks": {
+          "const": [
+            "byte-integrity",
+            "entity-schemas",
+            "relationships",
+            "scope-and-capabilities",
+            "source-correspondence"
+          ]
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "scope",
+        "production_eligible",
+        "approval_state",
+        "source_policy_clearance",
+        "contract_version",
+        "snapshot_id",
+        "game",
+        "content_id",
+        "source_manifest_id",
+        "schema_set_id",
+        "policy_id",
+        "representation_profile",
+        "entity_inventory",
+        "capabilities",
+        "content_manifest",
+        "source_manifest",
+        "validation_report",
+        "validation_input",
+        "validation_input_id",
+        "created_at",
+        "decision_references",
+        "compatibility"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "v1"
+        },
+        "scope": {
+          "const": "original-fictional-only"
+        },
+        "production_eligible": {
+          "const": false
+        },
+        "approval_state": {
+          "const": "not_granted"
+        },
+        "source_policy_clearance": {
+          "const": "not_granted"
+        },
+        "contract_version": {
+          "const": "canonical-snapshot-fictional-v1"
+        },
+        "snapshot_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "game": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "content_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_manifest_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "schema_set_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "policy_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "representation_profile": {
+          "const": "typed-card-printing-v1"
+        },
+        "entity_inventory": {
+          "$ref": "#/$defs/entities"
+        },
+        "capabilities": {
+          "const": {
+            "catalog_identity": "available",
+            "mechanical_evidence": "unavailable",
+            "rules_execution": "unsupported",
+            "identifier_records": "unavailable"
+          }
+        },
+        "content_manifest": {
+          "$ref": "#/$defs/binding"
+        },
+        "source_manifest": {
+          "$ref": "#/$defs/binding"
+        },
+        "validation_report": {
+          "$ref": "#/$defs/binding"
+        },
+        "validation_input": {
+          "$ref": "#/$defs/validation-input"
+        },
+        "validation_input_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "decision_references": {
+          "const": []
+        },
+        "compatibility": {
+          "const": {
+            "reader_profile": "typed-card-printing-v1",
+            "validator_profile": "fictional-read-only-verifier-v1"
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "scope",
+        "game",
+        "content_id",
+        "source_manifest_id",
+        "schema_set_id",
+        "policy_id",
+        "representation_profile",
+        "entity_inventory",
+        "capabilities",
+        "source_manifest",
+        "policy",
+        "schema_bindings",
+        "files"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "v1"
+        },
+        "scope": {
+          "const": "original-fictional-only"
+        },
+        "game": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "content_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_manifest_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "schema_set_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "policy_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "representation_profile": {
+          "const": "typed-card-printing-v1"
+        },
+        "entity_inventory": {
+          "$ref": "#/$defs/entities"
+        },
+        "capabilities": {
+          "const": {
+            "catalog_identity": "available",
+            "mechanical_evidence": "unavailable",
+            "rules_execution": "unsupported",
+            "identifier_records": "unavailable"
+          }
+        },
+        "source_manifest": {
+          "$ref": "#/$defs/binding"
+        },
+        "policy": {
+          "$ref": "#/$defs/binding"
+        },
+        "schema_bindings": {
+          "$ref": "#/$defs/binding"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/binding"
+          },
+          "minItems": 5,
+          "maxItems": 256
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "scope",
+        "source_manifest_id",
+        "game",
+        "sources"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "v1"
+        },
+        "scope": {
+          "const": "original-fictional-only"
+        },
+        "source_manifest_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "game": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source_id",
+              "record_path",
+              "evidence",
+              "provider",
+              "version"
+            ],
+            "properties": {
+              "source_id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9._-]*$"
+              },
+              "record_path": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "evidence": {
+                "$ref": "#/$defs/binding"
+              },
+              "provider": {
+                "const": "Original fictional fixture"
+              },
+              "version": {
+                "const": "fictional-source-v1"
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 32
+        }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "production_eligible",
+        "approval_state",
+        "game",
+        "content_id",
+        "validation_input_id",
+        "inventory_identity",
+        "status",
+        "checks",
+        "unrun_checks"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "v1"
+        },
+        "production_eligible": {
+          "const": false
+        },
+        "approval_state": {
+          "const": "not_granted"
+        },
+        "game": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "content_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "validation_input_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "inventory_identity": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "status": {
+          "const": "valid_fictional"
+        },
+        "checks": {
+          "const": [
+            {
+              "name": "byte-integrity",
+              "status": "passed"
+            },
+            {
+              "name": "entity-schemas",
+              "status": "passed"
+            },
+            {
+              "name": "relationships",
+              "status": "passed"
+            },
+            {
+              "name": "scope-and-capabilities",
+              "status": "passed"
+            },
+            {
+              "name": "source-correspondence",
+              "status": "passed"
+            }
+          ]
+        },
+        "unrun_checks": {
+          "const": [
+            "production-admission",
+            "source-permissions",
+            "full-production-consumers"
+          ]
+        }
+      }
+    },
+    "schemas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "schemas"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "v1"
+        },
+        "schemas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "version",
+              "byte_length",
+              "sha256"
+            ],
+            "properties": {
+              "name": {
+                "enum": [
+                  "canonical-snapshot",
+                  "card",
+                  "printing",
+                  "source-record"
+                ]
+              },
+              "version": {
+                "const": "v1"
+              },
+              "byte_length": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "scope",
+        "production_eligible",
+        "approval_state",
+        "source_policy_clearance",
+        "policy_version"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "v1"
+        },
+        "scope": {
+          "const": "original-fictional-only"
+        },
+        "production_eligible": {
+          "const": false
+        },
+        "approval_state": {
+          "const": "not_granted"
+        },
+        "source_policy_clearance": {
+          "const": "not_granted"
+        },
+        "policy_version": {
+          "const": "fictional-local-read-only-v1"
+        }
+      }
+    }
+  }
+}

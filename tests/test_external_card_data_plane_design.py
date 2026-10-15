@@ -308,7 +308,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                 text = (ROOT / entry["path"]).read_bytes()
                 self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])
 
-    def test_current_status_and_next_milestone_are_governance_only(self):
+    def test_current_status_separates_fictional_stage1_from_unapproved_next_stage(self):
         milestone = "V13 Stage 1 — Fictional Canonical Snapshot Attachment"
         for name in ("README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md",
                      "docs/SESSION_STATE.md", "docs/NEXT_TASK.md"):
@@ -317,19 +317,24 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             current = " ".join(current.split())
             self.assertIn("Architecture v13 — ACTIVE APPROVED", current, name)
             self.assertIn("Decision 017 is Accepted", current, name)
-            self.assertIn("no runtime implementation is authorized", current, name)
+            self.assertIn("authorized " + milestone, current, name)
+            self.assertIn("implemented, pending independent Project Manager review", current, name)
+            self.assertIn("V13 Stage 2 — Legacy/Public Snapshot Profile Review", current, name)
+            self.assertIn("not authorize Stage 2", current, name)
             self.assertIn(milestone, current, name)
             self.assertIn("NOT AUTHORIZED", current, name)
             self.assertIn("nine holds remain pending and unadmitted", current, name)
             self.assertTrue(historical.strip(), name)
         migration = " ".join((ROOT / "docs/EXTERNAL_CARD_DATA_PLANE_MIGRATION.md").read_text().split())
         scope = migration.split("## " + milestone, 1)[1]
-        self.assertIn("NOT AUTHORIZED", scope)
+        self.assertIn("Implementation status: implemented, pending PM review", scope)
+        self.assertIn("## V13 Stage 2 — Legacy/Public Snapshot Profile Review", scope)
+        self.assertIn("NOT AUTHORIZED", scope.split("## V13 Stage 2", 1)[1])
         for item in ("Generic snapshot manifest verification", "immutable fictional snapshot",
                      "read-only attachment", "query/collection", "Integrity, version and compatibility",
                      "missing/corrupt/incompatible", "Relocation determinism", "no ambient fallback",
                      "legacy/public profile", "real MB2 data", "protected/provider datasets",
-                     "production admission", "provider acquisition", "SQL persistence", "module composition",
+                     "admission", "provider acquisition", "SQL persistence", "module composition",
                      "writer destination changes", "Rules Intelligence", "Deck Intelligence expansion",
                      "simulation", "AI transport/model integration"):
             self.assertIn(item, scope, item)

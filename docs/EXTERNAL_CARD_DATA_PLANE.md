@@ -1,12 +1,13 @@
 # External canonical card-data plane — accepted architecture direction
 
-**Status: Decision 017 Accepted by owner. No runtime support implemented.**
+**Status: Decision 017 Accepted; fictional Stage 1 implemented, pending PM review.**
 
 **Classification: Architecture v13 — ACTIVE APPROVED architecture.** Architecture
 v12 is the previous historical baseline. The owner approved the direction reviewed
-at `3d21656b9f67a3089f32c5613804a1984fb44139` in PR #175. This acceptance is a
-documentation/governance transition only; no runtime implementation is authorized,
-no data permissions are granted and no dataset is admitted.
+at `3d21656b9f67a3089f32c5613804a1984fb44139` in PR #175. That acceptance was a
+documentation/governance transition only. The later separate owner instruction
+authorizes [fictional Stage 1](V13_STAGE1_SNAPSHOT_ATTACHMENT.md), now implemented
+pending PM review. No data permissions are granted and no real dataset is admitted.
 
 Audit baseline: `ec8fcbf97c84d24337503c81dd1c31a31e163d44`, the merge of PR #174.
 The architecture branch starts exactly there. Existing production has 384 Cards,
@@ -229,19 +230,20 @@ alongside public/service use. Externalizing them is not an admission or clearanc
 
 ## Acceptance and remaining authorization boundaries
 
-The owner accepted Decision 017 and the v13 direction. This transition records
-governance only. Existing runtime remains filesystem/Git-bound; no external loader,
-runtime schema registry, snapshot activation service, SQL, writer destination,
-workflow, production data, MB2 configuration or source-policy clearance changes.
-Documentation tests reflect acceptance; the historical replay auxiliary fixture
-continues to bind original Architecture-v12 bytes independently of current docs.
+The owner accepted Decision 017 and the v13 direction, then separately authorized
+**V13 Stage 1 — Fictional Canonical Snapshot Attachment**. The constrained fictional
+verifier and existing query/collection reader integration are implemented, pending
+PM review; see [the runtime contract](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
+Legacy behavior and historical Architecture-v12 replay remain explicit and intact.
+Production external snapshots, activation, SQL, writer destinations and later
+consumer migration remain unimplemented. MB2 configuration and source-policy
+clearance are unchanged.
 
-The next documented milestone is **V13 Stage 1 — Fictional Canonical Snapshot
-Attachment**, NOT AUTHORIZED. Its [future scope and exclusions](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md#v13-stage-1--fictional-canonical-snapshot-attachment)
-require separate owner implementation approval. Architecture acceptance grants no
+Candidate next milestone: **V13 Stage 2 — Legacy/Public Snapshot Profile Review**,
+NOT AUTHORIZED. Architecture acceptance and fictional implementation grant no
 processing, private-retention, public-redistribution, free/commercial application
 or AI-export permission; no protected snapshot, MB2 admission, source-policy plan,
-network acquisition, SQL, Rules Intelligence or simulation work. It resolves no
-nine held multiface candidates, spelling proposals or physical Printing identities.
-`SOURCE_POLICY_CLEARED_PLANS` remains unchanged. Stop for independent merge review;
-this documentation approval does not authorize merging PR #175.
+network acquisition, SQL, Rules Intelligence or simulation work. They resolve no
+held multiface candidates, spelling proposals or physical Printing identities.
+`SOURCE_POLICY_CLEARED_PLANS` remains unchanged. Independent review and owner merge
+authorization remain required.

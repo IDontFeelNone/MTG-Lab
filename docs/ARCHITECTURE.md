@@ -2,7 +2,9 @@
 
 > **Status: Architecture v13 — ACTIVE APPROVED architecture.** Owner-accepted
 > Decision 017 governs authority. Architecture v12 is the previous historical baseline.
-> This is a documentation/governance transition only; no runtime implementation is authorized.
+> Governance acceptance alone authorized no runtime work. A subsequent separate owner
+> authorization enabled Stage 1 fictional read-only snapshot attachment, now implemented
+> and pending independent Project Manager review; production attachment remains unsupported.
 > The high-level target diagram includes planned layers and is not a claim
 > that every component is implemented. `../ARCHITECTURE_REVIEW_v1.md` contains the
 > Phase 77 current-implementation dependency diagram and maturity assessment.
@@ -30,8 +32,12 @@ public code/contracts. They are not editable fact authorities. Provider/source
 evidence is independently governed. Personal collections, holdings, storage,
 preferences and assessments remain a separate private trust domain.
 
-The existing runtime still uses its legacy filesystem/Git-bound data roots; no
-external loader, activation service or generated SQL runtime is implemented here.
+Existing legacy constructors still use their filesystem/Git-bound data roots.
+Separately authorized Stage 1 adds explicit fictional snapshot verification and
+read-only attachment through the existing query and collection readers, plus an
+explicit legacy/public attachment profile. Production external-data attachment,
+activation services and generated SQL runtime remain unimplemented. See
+[Stage 1 implementation and limits](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 See [Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots)
 and [the accepted direction](EXTERNAL_CARD_DATA_PLANE.md). Implementation, dataset
 processing/retention/redistribution/service permission, admission and AI export
@@ -151,8 +157,12 @@ historical text, canonical bytes, source evidence and expected replay hashes rem
 unchanged. Card Acquisition replay explicitly retains its original Architecture-v12
 auxiliary file; it does not read current architecture as a historical dependency.
 
-The next documented milestone, **V13 Stage 1 — Fictional Canonical Snapshot
-Attachment**, is NOT AUTHORIZED. It is limited to fictional manifest verification,
-read-only attachment through existing query/collection readers and compatibility/
-integrity/failure tests, preserving an explicit legacy/public profile. See the
-[scope and exclusions](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md#v13-stage-1--fictional-canonical-snapshot-attachment).
+**V13 Stage 1 — Fictional Canonical Snapshot Attachment** was separately authorized
+and is implemented, pending independent Project Manager review. Its bounded scope
+is fictional manifest verification and explicit read-only attachment through
+existing query/collection readers, preserving legacy constructor behavior and an
+explicit legacy/public profile. See the [implementation and limits](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
+
+The next candidate is **V13 Stage 2 — Legacy/Public Snapshot Profile Review**.
+It is **NOT AUTHORIZED**; naming this candidate grants no follow-on work, production
+data attachment, admission, source-policy clearance or merge authority.

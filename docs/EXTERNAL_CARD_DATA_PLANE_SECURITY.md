@@ -1,6 +1,16 @@
 # Data-plane security, privacy and permission model
 
-**Status: Accepted v13 security requirements. No security service or runtime controls added or authorized.**
+**Status: Accepted v13 security requirements; bounded Stage 1 local integrity controls implemented, pending independent Project Manager review.**
+
+Governance acceptance alone authorized no runtime work. Subsequent separate owner
+authorization enabled local fictional snapshot verification/read-only attachment
+and an explicit legacy/public profile: exact inventory/hash/schema/compatibility
+checks, path containment and revalidation on attached query/resolution access.
+These are bounded local controls, not a new authentication/security service,
+network acquisition, production activation or permission grant. Personal data and
+source permissions remain independently governed and unchanged. The threat-model
+requirements below describe the accepted broader design; they are not all
+implemented controls. See [Stage 1 implementation and limits](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 
 ## Separate domains
 

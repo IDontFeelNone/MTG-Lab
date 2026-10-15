@@ -1,11 +1,14 @@
 # Immutable canonical snapshot contract — accepted design direction
 
-**Status: Accepted v13 architectural requirements; documentation design only.**
-Decision 017 is Accepted; installing executable contracts and runtime support is
-future work and is NOT AUTHORIZED by the architecture approval.
-No production manifest schema/loader/authority is installed. Examples under
-`docs/examples/external-card-data-plane/` are original fictional documentation
-fixtures, not an admission, permission grant or production validation receipt.
+**Status: Accepted v13 architectural requirements; constrained fictional Stage 1 implemented.**
+Decision 017 is Accepted. A later separate owner instruction authorized the local
+fictional-only `canonical-snapshot-fictional-v1` contract and read-only attachment,
+now pending PM review. See [its implemented scope and API](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
+The broader production snapshot design below remains future work. No production
+manifest authority, activation or dataset permission is installed. Examples under
+`docs/examples/external-card-data-plane/` retain their original `design-v1` domain
+and bytes; they are documentation fixtures, not runtime production authority.
+Runtime fictional fixtures live separately under `tests/fixtures/canonical_snapshots/`.
 
 ## Scope and identities
 

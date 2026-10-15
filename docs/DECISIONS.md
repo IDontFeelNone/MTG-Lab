@@ -330,8 +330,9 @@ a named-product acquisition subsystem. It is additive within frozen Architecture
 The owner approved Decision 017 and the v13 direction reviewed at
 `3d21656b9f67a3089f32c5613804a1984fb44139` in PR #175. This approval authorizes
 the documentation/governance transition only. No runtime implementation is
-authorized. Architecture v12 is the previous historical architecture baseline;
-the existing runtime remains on its legacy filesystem/Git-bound implementation.
+authorized by that architecture approval alone. Architecture v12 is the previous
+historical architecture baseline; its filesystem/Git-bound implementation remains
+the explicit legacy/public compatibility route.
 
 MTG Lab retains public Git authority over architecture, source code, schemas,
 policies, identity/validation rules, deterministic algorithms, transformations,
@@ -391,9 +392,12 @@ proposals or physical Printing verification; approve a source-policy plan; chang
 `SOURCE_POLICY_CLEARED_PLANS`; or authorize acquisition, protected production
 snapshots, SQL, Rules Intelligence or simulation implementation.
 
-The next documented milestone is **V13 Stage 1 — Fictional Canonical Snapshot
-Attachment**. It remains NOT AUTHORIZED; its bounded future scope and exclusions
-are recorded in [the migration plan](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md#v13-stage-1--fictional-canonical-snapshot-attachment).
+After this governance acceptance, the owner separately authorized **V13 Stage 1 —
+Fictional Canonical Snapshot Attachment**. Its fictional-only read-side implementation
+is pending PM review; see [the runtime scope](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
+This later instruction does not grant real-data permission or admission authority.
+The candidate **V13 Stage 2 — Legacy/Public Snapshot Profile Review** remains
+NOT AUTHORIZED. See [the migration plan](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md).
 
 ### Reasoning
 
