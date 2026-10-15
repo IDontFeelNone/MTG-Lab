@@ -1,0 +1,313 @@
+{
+  "baseline_revision": "d4e673a31714e30eb4056c43fca76b159008c813",
+  "capture_note": "Reader-envelope digests bind exact private captures, not HTTP origin bytes. Public summaries/quotes are separately hash-bound by this packet manifest. Prior retained payloads are pinned, not redownloaded or relabeled.",
+  "document_kind": "bounded_first_party_policy_review",
+  "minimum_additional_evidence": [
+    {
+      "issuer": "MTGJSON",
+      "needed": "Field-scoped statement identifying controlled compilation/identifier contributions and any upstream sublicensing, exact selected bytes and operation, complete MIT notice binding."
+    },
+    {
+      "issuer": "Scryfall",
+      "needed": "Accessible current first-party API/data reuse terms or verifiable direct permission for the exact identifiers and derived fields; separate local processing, private retention, public redistribution, free/paid service and AI export, including attribution and downstream conditions."
+    },
+    {
+      "issuer": "Wizards",
+      "needed": "Applicable express permission or a documented applicability determination covering exact names, rules/type/mana text, printed/foreign/flavor/ruling content and intended operation; distinguish database retention/republication from original fan creation."
+    },
+    {
+      "issuer": "Marketplace/EDHREC/artwork upstream",
+      "needed": "Exact ownership/permission evidence for embedded metrics, SKU/product mappings, creator metadata and identifier compilations if those values remain part of an operation; bare IDs and authored content require separate decisions, not a blanket exclusion or clearance."
+    },
+    {
+      "issuer": "Operator/owner governance",
+      "needed": "Concrete future use scope and later explicit data admission/activation decision after evidence is complete; no authorization is created by this review."
+    }
+  ],
+  "new_full_captures_publicly_retained": false,
+  "research_limits": [
+    "Only eight relevant official pages opened; Scryfall first-party terms/API/bulk pages unavailable via supported reader.",
+    "First-party Scryfall domain searches returned no usable additional authoritative licensing grant.",
+    "No provider contacted, no card data downloaded, no rights conclusion inferred from HTTP status.",
+    "No novel legal determination about copyrightability of facts/names/identifiers is made."
+  ],
+  "sources": [
+    {
+      "applicability": [
+        "MTGJSON-authored structures and compilation contributions to the extent MTGJSON controls the relevant rights"
+      ],
+      "availability": "AVAILABLE",
+      "capture": {
+        "byte_length": 4181,
+        "full_capture_publicly_retained": false,
+        "kind": "exact web-reader tool-response envelope UTF-8 bytes; not origin HTTP entity bytes",
+        "origin_entity_sha256": null,
+        "sha256": "0c4a2eb82e25ece58b720954642f4eb3ee51e9e61039b7eb0eb2a2b25b4c7c40"
+      },
+      "existing_evidence_id": "mtgjson-license-current",
+      "id": "closure-mtgjson-license",
+      "issuer": "MTGJSON / Zach Halpern",
+      "license_name": "MIT",
+      "limitations": [
+        "No operation-complete third-party permission chain established.",
+        "A provider MIT label does not license each upstream field."
+      ],
+      "notice_requirements": [
+        "Preserve the complete copyright and MIT permission notice when copying all or substantial portions of covered material; retain the complete existing notice by reference rather than creating an abbreviated license."
+      ],
+      "quote": "Copyright © 2018 – Present, Zach Halpern",
+      "retained_prior_evidence": {
+        "payload_byte_length": 2136,
+        "payload_path": "reference-reviews/mb2-810-source-policy/2026-10-14/raw/mtgjson/mtgjson-license-current/56a278d6e86f4927ce78ade9bf288369f95c749e3469b9490ffcff78b03fb9b0/payload.bin",
+        "payload_sha256": "56a278d6e86f4927ce78ade9bf288369f95c749e3469b9490ffcff78b03fb9b0",
+        "receipt_id": "mtgjson-license-current",
+        "receipt_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-receipts.json",
+        "receipt_sha256": "2933a9ebeb4b374bce5098b4ee9b9f2dbcb65429a411c2e7d1ed9bf91c25ed8e",
+        "source_record_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-records/mtgjson-license-current.json",
+        "source_record_sha256": "532d4058e46863f1b8f5cb981899acb2d58dfa92173b39e5f434cf9aa11eabe3"
+      },
+      "retrieved_at": "2026-10-15T14:50:09Z",
+      "review_method": "first-party URL opened using supported web reader",
+      "summary": "MTGJSON grants use, copying, modification, publication, distribution, sublicensing and sale of its defined Software under MIT. Copyright and permission notices must accompany copies or substantial portions; warranty includes no noninfringement assurance. This establishes only MTGJSON-controlled rights, not a demonstrated sublicense over Wizards, Scryfall or marketplace contributions.",
+      "title": "MTGJSON License",
+      "url": "https://mtgjson.com/license/"
+    },
+    {
+      "applicability": [
+        "Immediate MTGJSON lineage and heterogeneous upstream content"
+      ],
+      "availability": "AVAILABLE",
+      "capture": {
+        "byte_length": 13790,
+        "full_capture_publicly_retained": false,
+        "kind": "exact web-reader tool-response envelope UTF-8 bytes; not origin HTTP entity bytes",
+        "origin_entity_sha256": null,
+        "sha256": "9b7531fa9a73d9e0ba72ca1aeeab1142c5b3e7f8dcc21bacd09ff0915c67bc12"
+      },
+      "existing_evidence_id": "mtgjson-faq-current",
+      "id": "closure-mtgjson-faq",
+      "issuer": "MTGJSON",
+      "limitations": [
+        "Operational download guidance is not a complete underlying-content grant."
+      ],
+      "notice_requirements": [],
+      "quote": "Data is collected from a variety of sources",
+      "retained_prior_evidence": {
+        "payload_byte_length": 902,
+        "payload_path": "reference-reviews/mb2-810-source-policy/2026-10-14/raw/mtgjson/mtgjson-faq-current/228083081f3180cd46e1cc4eee01e4cd84db1834382a51b6dbe1c75102a1edb7/payload.bin",
+        "payload_sha256": "228083081f3180cd46e1cc4eee01e4cd84db1834382a51b6dbe1c75102a1edb7",
+        "receipt_id": "mtgjson-faq-current",
+        "receipt_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-receipts.json",
+        "receipt_sha256": "2933a9ebeb4b374bce5098b4ee9b9f2dbcb65429a411c2e7d1ed9bf91c25ed8e",
+        "source_record_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-records/mtgjson-faq-current.json",
+        "source_record_sha256": "b77f700ad935cbd9f1a3f61922908714a0da4a41c56dcb4d9b5e6bb6251d164f"
+      },
+      "retrieved_at": "2026-10-15T14:50:09Z",
+      "review_method": "first-party URL opened using supported web reader",
+      "summary": "The FAQ names Gatherer, Scryfall and TCGplayer as upstream examples, recommends processing downloaded files locally or remotely, and identifies MTGJSON as MIT licensed. It does not provide field-level ownership or upstream sublicensing evidence.",
+      "title": "Frequently Asked Questions",
+      "url": "https://mtgjson.com/faq/"
+    },
+    {
+      "applicability": [
+        "Scryfall-generated identifiers and metadata",
+        "Underlying Wizards card content"
+      ],
+      "availability": "AVAILABLE",
+      "capture": {
+        "byte_length": 7065,
+        "full_capture_publicly_retained": false,
+        "kind": "exact web-reader tool-response envelope UTF-8 bytes; not origin HTTP entity bytes",
+        "origin_entity_sha256": null,
+        "sha256": "e1e487a165ce6d7c459ac99a89792b8364a09f6ff770e9580e441cb952633ebd"
+      },
+      "existing_evidence_id": "scryfall-access-faq-current",
+      "id": "closure-scryfall-local-processing-faq",
+      "issuer": "Scryfall, LLC",
+      "limitations": [
+        "Bulk local processing guidance cannot be inherited as collection-API or third-party content permission."
+      ],
+      "notice_requirements": [
+        "Preserve existing source attribution and notices. No new general Scryfall redistribution-attribution condition was recovered; that omission is an evidence gap, not waiver."
+      ],
+      "quote": "You can fetch and process these files locally on your own systems.",
+      "retained_prior_evidence": {
+        "payload_byte_length": 1392,
+        "payload_path": "reference-reviews/mb2-810-source-policy/2026-10-14/raw/scryfall/scryfall-access-faq-current/307c63919c9e38d4563d4815378afee59d300232e0053ab3b0385af488878634/payload.bin",
+        "payload_sha256": "307c63919c9e38d4563d4815378afee59d300232e0053ab3b0385af488878634",
+        "receipt_id": "scryfall-access-faq-current",
+        "receipt_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-receipts.json",
+        "receipt_sha256": "2933a9ebeb4b374bce5098b4ee9b9f2dbcb65429a411c2e7d1ed9bf91c25ed8e",
+        "source_record_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-records/scryfall-access-faq-current.json",
+        "source_record_sha256": "46a54c0e555659a3bfa565112d16a66baabee348a0ea719f2ffa898ffbe411e5"
+      },
+      "retrieved_at": "2026-10-15T14:50:09Z",
+      "review_method": "first-party URL opened using supported web reader",
+      "summary": "Scryfall directs heavy simple-lookups toward bulk downloads and local processing, requests constrained HTTPS API traffic, attributes literal/graphical Magic information to Wizards, and reserves other site content to Scryfall. This is narrow local-bulk operational guidance; the current mixed legacy records also derive from collection/API and MTGJSON projections. No complete redistribution, private-retention, public-service, commercial or AI-export grant is established by this FAQ.",
+      "title": "I'm having trouble accessing the Scryfall API, or I'm blocked",
+      "url": "https://scryfall.com/docs/faqs/i-m-having-trouble-accessing-the-scryfall-api-or-i-m-blocked-17"
+    },
+    {
+      "applicability": [
+        "Potential API use, data retention and reuse terms"
+      ],
+      "availability": "EVIDENCE_UNAVAILABLE",
+      "capture": {
+        "byte_length": 549,
+        "full_capture_publicly_retained": false,
+        "kind": "exact web-reader tool-response envelope UTF-8 bytes; not origin HTTP entity bytes",
+        "origin_entity_sha256": null,
+        "sha256": "b6a5f4d53f20ee011e914f8a159463ddfb3ddce84117397d7abaa338dc67f3b5"
+      },
+      "existing_evidence_id": null,
+      "id": "closure-scryfall-api",
+      "issuer": "Scryfall, LLC",
+      "limitations": [
+        "HTTP failure establishes neither permission nor prohibition."
+      ],
+      "notice_requirements": [],
+      "observed_http_status": 403,
+      "quote": null,
+      "retrieved_at": "2026-10-15T14:50:09Z",
+      "review_method": "first-party URL opened using supported web reader",
+      "summary": "The supported web reader returned HTTP 403 Forbidden for this first-party page. Its contents and any relevant permission provisions were not available to this review.",
+      "title": "API Documentation",
+      "url": "https://scryfall.com/docs/api"
+    },
+    {
+      "applicability": [
+        "Potential bulk-data processing and redistribution terms"
+      ],
+      "availability": "EVIDENCE_UNAVAILABLE",
+      "capture": {
+        "byte_length": 580,
+        "full_capture_publicly_retained": false,
+        "kind": "exact web-reader tool-response envelope UTF-8 bytes; not origin HTTP entity bytes",
+        "origin_entity_sha256": null,
+        "sha256": "cc0a16025424daea890984c7e2b9371ed8ce673dcaa1c47f57338dd6d618a814"
+      },
+      "existing_evidence_id": null,
+      "id": "closure-scryfall-bulk",
+      "issuer": "Scryfall, LLC",
+      "limitations": [
+        "HTTP failure establishes neither permission nor prohibition."
+      ],
+      "notice_requirements": [],
+      "observed_http_status": 403,
+      "quote": null,
+      "retrieved_at": "2026-10-15T14:50:09Z",
+      "review_method": "first-party URL opened using supported web reader",
+      "summary": "The supported web reader returned HTTP 403 Forbidden for this first-party page. Its contents and any relevant permission provisions were not available to this review.",
+      "title": "Bulk Data Documentation",
+      "url": "https://scryfall.com/docs/api/bulk-data"
+    },
+    {
+      "applicability": [
+        "Potential Scryfall retention, reuse, redistribution and service terms"
+      ],
+      "availability": "EVIDENCE_UNAVAILABLE",
+      "capture": {
+        "byte_length": 557,
+        "full_capture_publicly_retained": false,
+        "kind": "exact web-reader tool-response envelope UTF-8 bytes; not origin HTTP entity bytes",
+        "origin_entity_sha256": null,
+        "sha256": "5ecdf1e15b2a7057b055a015a33f5a789ecef218161d9db2aed8c6125c1f47a9"
+      },
+      "existing_evidence_id": null,
+      "id": "closure-scryfall-terms",
+      "issuer": "Scryfall, LLC",
+      "limitations": [
+        "HTTP failure establishes neither permission nor prohibition."
+      ],
+      "notice_requirements": [],
+      "observed_http_status": 403,
+      "quote": null,
+      "retrieved_at": "2026-10-15T14:50:09Z",
+      "review_method": "first-party URL opened using supported web reader",
+      "summary": "The official FAQ Terms of Service link resolves to /docs/terms. Both direct open and that first-party link returned HTTP 403 Forbidden. No substantive terms were recovered.",
+      "title": "Terms of Service",
+      "url": "https://scryfall.com/docs/terms"
+    },
+    {
+      "applicability": [
+        "Underlying Magic content in names, rules, types, mana descriptions, printed/foreign text and related fields"
+      ],
+      "availability": "AVAILABLE",
+      "capture": {
+        "byte_length": 38250,
+        "full_capture_publicly_retained": false,
+        "kind": "exact web-reader tool-response envelope UTF-8 bytes; not origin HTTP entity bytes",
+        "origin_entity_sha256": null,
+        "sha256": "b77cbff79df9cbb325abf78c474835555621ee68a3b281de49a78a992b99fdeb"
+      },
+      "existing_evidence_id": "wizards-general-terms-current",
+      "id": "closure-wizards-terms",
+      "issuer": "Wizards of the Coast LLC",
+      "last_updated": "2025-12-10",
+      "limitations": [
+        "Website access permission is distinct from underlying data reuse permission.",
+        "No express operation-complete AI/model-export grant recovered. Absence of AI wording is not permission."
+      ],
+      "notice_requirements": [
+        "Preserve existing notices if a separately qualifying use is later established."
+      ],
+      "quote": "All rights granted to you under these Terms are granted by express license only",
+      "retained_prior_evidence": {
+        "payload_byte_length": 1257,
+        "payload_path": "reference-reviews/mb2-810-source-policy/2026-10-14/raw/wizards/wizards-general-terms-current/16e13ba185a610dba472212f5badcc4466c43e3cc74345f1292c12172865c6ea/payload.bin",
+        "payload_sha256": "16e13ba185a610dba472212f5badcc4466c43e3cc74345f1292c12172865c6ea",
+        "receipt_id": "wizards-general-terms-current",
+        "receipt_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-receipts.json",
+        "receipt_sha256": "2933a9ebeb4b374bce5098b4ee9b9f2dbcb65429a411c2e7d1ed9bf91c25ed8e",
+        "source_record_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-records/wizards-general-terms-current.json",
+        "source_record_sha256": "2170f6aa426c68326d5627aebc2b6f0a0483632721511446114a284ac605cc8a"
+      },
+      "retrieved_at": "2026-10-15T14:50:09Z",
+      "review_method": "first-party URL opened using supported web reader",
+      "summary": "Sections 2.1-2.2 give individual noncommercial website/service use subject to restrictions. Sections 6.1-6.2 reserve Game Content rights and refer permitted use to the Terms or Fan Content Policy. These website/service provisions do not themselves establish database processing, redistribution or production-service permission for the exact provider-derived legacy cohort. Applicability to third-party processing is not assumed.",
+      "title": "General Terms",
+      "url": "https://company.wizards.com/en/legal/terms"
+    },
+    {
+      "applicability": [
+        "Potential future qualifying original fan websites or applications, not an automatic source-derived database license"
+      ],
+      "availability": "AVAILABLE",
+      "capture": {
+        "byte_length": 14720,
+        "full_capture_publicly_retained": false,
+        "kind": "exact web-reader tool-response envelope UTF-8 bytes; not origin HTTP entity bytes",
+        "origin_entity_sha256": null,
+        "sha256": "a25a4532e248998ea70d92a027fade1c3a6861817bc409aed25db3ada6c762f0"
+      },
+      "existing_evidence_id": "wizards-fan-content-current",
+      "id": "closure-wizards-fan-content",
+      "issuer": "Wizards of the Coast LLC",
+      "last_updated": "2017-11-15",
+      "limitations": [
+        "Paid access/licensing and verbatim database republication are not established.",
+        "Notice compliance alone does not establish qualification."
+      ],
+      "notice_requirements": [
+        "If qualifying fan use is established, include the unofficial/not-approved-or-endorsed/property-of-Wizards notice prescribed by policy section 2.",
+        "Preserve existing copyright, trademark and other notices; comply with third-party-rights conditions."
+      ],
+      "quote": "Fan Content does not include the verbatim copying and reposting of Wizards’ IP",
+      "retained_prior_evidence": {
+        "payload_byte_length": 1498,
+        "payload_path": "reference-reviews/mb2-810-source-policy/2026-10-14/raw/wizards/wizards-fan-content-current/4592d12dfc02d52681b8b77b56ea5e4ff62cd82609067f05df2ba4fd2c202d05/payload.bin",
+        "payload_sha256": "4592d12dfc02d52681b8b77b56ea5e4ff62cd82609067f05df2ba4fd2c202d05",
+        "receipt_id": "wizards-fan-content-current",
+        "receipt_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-receipts.json",
+        "receipt_sha256": "2933a9ebeb4b374bce5098b4ee9b9f2dbcb65429a411c2e7d1ed9bf91c25ed8e",
+        "source_record_path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-records/wizards-fan-content-current.json",
+        "source_record_sha256": "d3d695760dcd0f85d03a078412208bce8ab9d6c299636be26daa82e3ebdf63f1"
+      },
+      "retrieved_at": "2026-10-15T14:50:09Z",
+      "review_method": "first-party URL opened using supported web reader",
+      "summary": "Conditional permission concerns original free fan creations, with unofficial attribution, preserved notices, third-party-rights compliance, and Wizards terms. Free access and allowed sponsorship/donations do not create paid database/service permission. The policy excludes verbatim republication; this exact mixed-content database is not established as a qualifying original fan creation. No universal conclusion about factual fields is drawn.",
+      "title": "Fan Content Policy",
+      "url": "https://company.wizards.com/en/legal/fancontentpolicy"
+    }
+  ]
+}

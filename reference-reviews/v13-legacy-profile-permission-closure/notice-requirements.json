@@ -1,0 +1,68 @@
+{
+  "document_kind": "conditional_notice_contract_not_use_clearance",
+  "notice_compliance_is_permission": false,
+  "placements": {
+    "application_ui_api": [
+      "If and only if qualifying Wizards fan use is established, show its required unofficial/nonendorsement/property notice. Notice compliance does not itself establish database or paid-service permission."
+    ],
+    "operator_deployment": [
+      "Bind exact applicable notices and operation-specific permissions before activation; a private path does not satisfy rights."
+    ],
+    "public_repository": [
+      "Keep existing full MIT copyright and permission notices for covered copied material.",
+      "Bounded first-party citations/quotes do not relabel upstream data as MIT."
+    ],
+    "snapshot_control": [
+      "Where future permitted distribution includes MTGJSON-controlled material, bind a complete MIT notice dependency and material scope.",
+      "Preserve source-specific attribution and existing embedded notices; no fabricated Scryfall general license."
+    ],
+    "source_evidence_plane": [
+      "Retain source URL, issuer, retrieval time, capture form, exact hashes and origin-versus-reader distinction; full uncertain-rights pages remain private."
+    ]
+  },
+  "requirements": [
+    {
+      "evidence_ids": [
+        "closure-mtgjson-license"
+      ],
+      "id": "mtgjson-mit-if-covered",
+      "placement": [
+        "public repository if copied",
+        "future permitted snapshot manifest/dependency",
+        "operator deployment if distributed"
+      ],
+      "requirement": "Preserve full copyright and MIT permission notice; retain existing full notice by pinned reference.",
+      "status": "ESTABLISHED_WITH_CONDITIONS",
+      "trigger": "copy all/substantial covered MTGJSON-controlled material"
+    },
+    {
+      "evidence_ids": [
+        "closure-wizards-terms",
+        "closure-wizards-fan-content",
+        "closure-scryfall-local-processing-faq"
+      ],
+      "id": "preserve-existing-notices",
+      "placement": [
+        "source evidence plane",
+        "permitted retained bytes",
+        "manifest references"
+      ],
+      "requirement": "Do not remove original notices or provenance. No newly invented Scryfall general redistribution condition or waiver.",
+      "status": "NEEDS_DIRECT_REVIEW",
+      "trigger": "any separately permitted use retaining existing notices"
+    },
+    {
+      "evidence_ids": [
+        "closure-wizards-fan-content"
+      ],
+      "id": "wizards-fan-if-qualified",
+      "placement": [
+        "future qualifying UI/API/service",
+        "operator deployment documentation"
+      ],
+      "requirement": "Use the policy section2 unofficial/nonendorsement/property notice; preserve notices and third-party rights. This review does not say MTG Lab or this database qualifies.",
+      "status": "ESTABLISHED_WITH_CONDITIONS",
+      "trigger": "only a separately established qualifying original fan use"
+    }
+  ]
+}

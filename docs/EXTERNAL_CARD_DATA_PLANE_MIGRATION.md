@@ -112,10 +112,27 @@ No real snapshot profile or runtime migration is implemented. The current query
 requires mixed representations, audit context and explicit roots; historical
 materialization gaps and operation-specific rights remain unresolved.
 
-## Next prerequisite — Legacy/Public Profile Permission and Closure Contract
+## Permission and closure contract — review complete
 
-**NOT AUTHORIZED.** Stage 3 real-profile implementation is NOT READY. First review
-exact field/component/operation permissions and evidence/CI placement, define the
-required query/audit capability closure and preserve declared legacy incompleteness.
-No writer change, identity migration, state rewrite, real-data activation or
-source-policy clearance follows from the Stage 2 inventory.
+PR #177 is merged. The separately owner-authorized
+[Legacy/Public Profile Permission and Closure Contract](V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md)
+is complete, pending PM review, at canonical main
+`d4e673a31714e30eb4056c43fca76b159008c813`.
+The Stage 1/2 sections above preserve their original milestone context.
+
+## Next implementation candidate — NOT AUTHORIZED
+
+**V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile** is
+**READY_FOR_NON_PRODUCTION_STAGE3** as an engineering scope only: Tier A's40
+in-place dependencies, explicit both-root parity, separate source/audit context,
+a bounded read-side audit inventory and unsupported-capability failures before I/O.
+No new corpus, source-derived value reformatting or production authority.
+The production operator profile remains BLOCKED and the underlying seven operation
+permission scopes remain NOT_ESTABLISHED. A non-production flag is no license.
+
+No runtime work begins here. No writer/default-root/projection/schema change,
+real-data admission, provider acquisition, SQL/composition, protected snapshot,
+service, rules/simulation/AI implementation or source-policy clearance is authorized.
+Future code must preserve fictional/legacy behavior, exact historical hashes,
+known incompleteness and existing production data. See the closure contract's
+explicit Stage 3 acceptance criteria and stop conditions.

@@ -1,0 +1,2699 @@
+{
+  "document_kind": "query_field_metadata_only",
+  "entity_counts": {
+    "card": 399,
+    "finish": 2,
+    "game": 1,
+    "identifier": 235,
+    "printing": 928,
+    "product": 1
+  },
+  "fields": [
+    {
+      "field_path": "/canonical_identity",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/assertions",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/card_reference",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/colors",
+      "group": "query_card",
+      "leaf_occurrences": 87,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/colors/*",
+      "group": "query_card",
+      "leaf_occurrences": 354,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/faces",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/facts",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_object"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/game_id",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/id",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/layout",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/mana_cost",
+      "group": "query_card",
+      "leaf_occurrences": 342,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/mana_cost/status",
+      "group": "query_card",
+      "leaf_occurrences": 42,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/metadata",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_object"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/name",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/normalized_name",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/schema_version",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/acquired_at",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/capture_method",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/captured_at",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/source_identity",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/dataset_identity",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/dataset_identity/*",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/acquired_at",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/capture_method",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/captured_at",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/source_identity",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/canonical_identity",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/claim",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/field_paths/*",
+      "group": "query_card",
+      "leaf_occurrences": 45,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/id",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/notes",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/projection",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/provenance/artifact_identifier",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/provenance/provider",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/source_id",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history",
+      "group": "query_card",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_digest",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_reference/relative_path",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_reference/sha256",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/batch_id",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/canonical_post_state_digest",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/canonical_pre_state_digest",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/canonical_identity",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/evidence_references/*",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/matched_promoted_references/*",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/evidence_identity",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/omitted_promoted_entity_count",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/promotion_id",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/readiness_plan_digest",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/result",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1candidate-review-ledger.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1dependency-closure-verification.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1findings-report.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1pending-review-decision.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1promotion-readiness-report.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1collision-analysis-report.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1dependency-closure-verification.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1identifier-resolution-ledger.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1pending-review-decision.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1promotion-readiness-report.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1updated-candidate-classification-ledger.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1updated-findings-report.json",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/schema_version",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/source_lineage_digest",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/provider_policy",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/record_provenance/artifact_identifier",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/record_provenance/provider",
+      "group": "query_card",
+      "leaf_occurrences": 384,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/review_package_id",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/source_ids/*",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/supersession_state",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty",
+      "group": "query_card",
+      "leaf_occurrences": 399,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_identity",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/value",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/acquired_at",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/capture_method",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/captured_at",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/source_identity",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/dataset_identity/*",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/acquired_at",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/capture_method",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/captured_at",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/source_identity",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/canonical_identity",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/id",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/projection",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/provenance/artifact_identifier",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/provenance/provider",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/source_id",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_digest",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_reference/relative_path",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_reference/sha256",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/batch_id",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/canonical_post_state_digest",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/canonical_pre_state_digest",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/canonical_identity",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/evidence_references/*",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/matched_promoted_references/*",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/evidence_identity",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/omitted_promoted_entity_count",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/promotion_id",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/readiness_plan_digest",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/result",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1candidate-review-ledger.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1dependency-closure-verification.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1findings-report.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1pending-review-decision.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1promotion-readiness-report.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1collision-analysis-report.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1dependency-closure-verification.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1identifier-resolution-ledger.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1pending-review-decision.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1promotion-readiness-report.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1updated-candidate-classification-ledger.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1updated-findings-report.json",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/schema_version",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/source_lineage_digest",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/provider_policy",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/record_provenance/artifact_identifier",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/record_provenance/provider",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/review_package_id",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/source_ids/*",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/supersession_state",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty",
+      "group": "query_finish",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_identity",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/id",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/metadata/status",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/name",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/dataset_identity",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/provider_policy",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/review_package_id",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/source_ids",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/supersession_state",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty",
+      "group": "query_game",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_identity",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/namespace",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/printing_uuid",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/value",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/acquired_at",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/capture_method",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/captured_at",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/source_identity",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/dataset_identity/*",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/acquired_at",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/capture_method",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/captured_at",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/source_identity",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/canonical_identity",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/id",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/projection",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/provenance/artifact_identifier",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/provenance/provider",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/source_id",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_digest",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_reference/relative_path",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_reference/sha256",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/batch_id",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/canonical_post_state_digest",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/canonical_pre_state_digest",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/canonical_identity",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/evidence_references/*",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/matched_promoted_references/*",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/evidence_identity",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/omitted_promoted_entity_count",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/promotion_id",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/readiness_plan_digest",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/result",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1candidate-review-ledger.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1dependency-closure-verification.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1findings-report.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1pending-review-decision.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1promotion-readiness-report.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1collision-analysis-report.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1dependency-closure-verification.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1identifier-resolution-ledger.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1pending-review-decision.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1promotion-readiness-report.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1updated-candidate-classification-ledger.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1updated-findings-report.json",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/schema_version",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/source_lineage_digest",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/provider_policy",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/record_provenance/artifact_identifier",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/record_provenance/provider",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/review_package_id",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/source_ids/*",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/supersession_state",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty",
+      "group": "query_identifier",
+      "leaf_occurrences": 235,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/assertions",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/card_id",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/collector_number",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/digital_or_paper",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/facts/rarity",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/finish_ids",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/finish_ids/*",
+      "group": "query_printing",
+      "leaf_occurrences": 1215,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/frame_or_treatment",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/id",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/cardKingdomFoilId",
+      "group": "query_printing",
+      "leaf_occurrences": 121,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/cardKingdomId",
+      "group": "query_printing",
+      "leaf_occurrences": 357,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/cardsphereFoilId",
+      "group": "query_printing",
+      "leaf_occurrences": 121,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/cardsphereId",
+      "group": "query_printing",
+      "leaf_occurrences": 357,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/deckboxId",
+      "group": "query_printing",
+      "leaf_occurrences": 378,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/mcmId",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/mcmMetaId",
+      "group": "query_printing",
+      "leaf_occurrences": 264,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/mtgjsonV4Id",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/mtgoId",
+      "group": "query_printing",
+      "leaf_occurrences": 257,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/multiverseId",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/scryfallCardBackId",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/scryfallId",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/scryfallIllustrationId",
+      "group": "query_printing",
+      "leaf_occurrences": 378,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/scryfallOracleId",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/identifiers/tcgplayerProductId",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/language",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/metadata",
+      "group": "query_printing",
+      "leaf_occurrences": 11,
+      "types": [
+        "empty_object"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/metadata/product_membership/*",
+      "group": "query_printing",
+      "leaf_occurrences": 4,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/promotional",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "boolean",
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/provider_card_or_oracle_id",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/rarity",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/rarity_id",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/release_date",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/reprint",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "boolean",
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/schema_version",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/set_code",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/set_id",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/set_name",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/source_record_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/treatment_ids",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/uuid",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/acquired_at",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/acquisition_run_id",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/capture_method",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/captured_at",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/normalized_projection_sha256",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/source_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage/*/source_sha256",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/dataset_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/dataset_identity/*",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/acquired_at",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/acquisition_run_id",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/capture_method",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/captured_at",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/normalized_projection_sha256",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/source_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/acquisition_lineage/*/source_sha256",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/canonical_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/claim",
+      "group": "query_printing",
+      "leaf_occurrences": 19,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/field_paths/*",
+      "group": "query_printing",
+      "leaf_occurrences": 94,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/id",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/notes",
+      "group": "query_printing",
+      "leaf_occurrences": 5,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/projection",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/provenance/artifact_identifier",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/provenance/provider",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/provenance/source_record_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/source_id",
+      "group": "query_printing",
+      "leaf_occurrences": 398,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history",
+      "group": "query_printing",
+      "leaf_occurrences": 15,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/acquisition_run_id",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_digest",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_reference/relative_path",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/audit_reference/sha256",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/batch_id",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/canonical_post_state_digest",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/canonical_pre_state_digest",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/canonical_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/evidence_references/*",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/entity_binding/matched_promoted_references/*",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/evidence_files/acquisition-report.json",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/evidence_files/manifest.json",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/evidence_files/source-pilot-printings.json",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/evidence_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/omitted_promoted_entity_count",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/promotion_id",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/readiness_plan_digest",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/result",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1candidate-review-ledger.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1dependency-closure-verification.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1findings-report.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1pending-review-decision.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-115~1mb2-batch-000001-e32022126c07~1promotion-readiness-report.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1collision-analysis-report.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1dependency-closure-verification.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1identifier-resolution-ledger.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1pending-review-decision.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1promotion-readiness-report.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1updated-candidate-classification-ledger.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/review_artifact_digests/reviews~1phase-116~1mb2-batch-000001-e32022126c07~1updated-findings-report.json",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/schema_version",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history/*/source_lineage_digest",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/provider_policy",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/record_provenance/artifact_identifier",
+      "group": "query_printing",
+      "leaf_occurrences": 379,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/record_provenance/provider",
+      "group": "query_printing",
+      "leaf_occurrences": 913,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/record_provenance/source_record_identity",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/review_package_id",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/source_ids",
+      "group": "query_printing",
+      "leaf_occurrences": 534,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/source_ids/*",
+      "group": "query_printing",
+      "leaf_occurrences": 398,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/supersession_state",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty",
+      "group": "query_printing",
+      "leaf_occurrences": 928,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_identity",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/game_id",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/id",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/lifecycle_status",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/metadata",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_object"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/name",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/product_type",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/schema_version",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_values/version_ids",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/acquisition_lineage",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/dataset_identity",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/claim",
+      "group": "query_product",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/notes",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/source_classification",
+      "group": "query_product",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/source_location",
+      "group": "query_product",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/evidence_assertions/*/verification_status",
+      "group": "query_product",
+      "leaf_occurrences": 2,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/promotion_history",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/provider_policy",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/review_package_id",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "null"
+      ]
+    },
+    {
+      "field_path": "/provenance_summary/source_ids",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/supersession_state",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty",
+      "group": "query_product",
+      "leaf_occurrences": 1,
+      "types": [
+        "string"
+      ]
+    }
+  ],
+  "query_snapshot_id": "sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7",
+  "source_values_included": false
+}

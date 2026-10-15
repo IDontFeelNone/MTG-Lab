@@ -1,0 +1,118 @@
+{
+  "baseline_revision": "d4e673a31714e30eb4056c43fca76b159008c813",
+  "document_kind": "permission_closure_review_not_snapshot",
+  "files": [
+    {
+      "byte_length": 3465,
+      "path": "capability-tiers.json",
+      "sha256": "678317473d2c911c8a0bf14c9147a930c322c916c8b3851940a4e10c265aa555"
+    },
+    {
+      "byte_length": 1781,
+      "path": "ci-placement.json",
+      "sha256": "ec399f365077c0e70afa6771bd2eaee58708d25b31095c20c7286a14ee1125be"
+    },
+    {
+      "byte_length": 80087,
+      "path": "dependency-closure.json",
+      "sha256": "7b381c14a50b3236c4ca26ccb7fbfdc04031b0cc78663cffb1f11801e93dcf37"
+    },
+    {
+      "byte_length": 110038,
+      "path": "field-inventory.json",
+      "sha256": "ba17359288de65f035fbf4ad52bf543aa6cfc3ddf93383a49facd91085fd9772"
+    },
+    {
+      "byte_length": 2956,
+      "path": "notice-requirements.json",
+      "sha256": "aebf15512804390c87a0659456023557bb518ab3c2948a0bb8869a9b16d6ef18"
+    },
+    {
+      "byte_length": 504360,
+      "path": "permission-matrix.json",
+      "sha256": "5ff71ca2d4d8484aaa4b4b91b5dafe002659b1eaf514dc7e6bcfc4ad37b02a30"
+    },
+    {
+      "byte_length": 5258,
+      "path": "preservation-bindings.json",
+      "sha256": "285027021c2d7ceab160b1c6a0d1923a23593bb63965bde31ac6be4fa5433fe2"
+    },
+    {
+      "byte_length": 68056,
+      "path": "query-field-inventory.json",
+      "sha256": "4304adb7eb0fc30f92df785365c566cb8bc3a6d7c9a118242b4b599926a429fd"
+    },
+    {
+      "byte_length": 19019,
+      "path": "source-evidence-index.json",
+      "sha256": "bd3948f45273c3a699448fd05e16f3561fe40f2a0e7caa4545fb2b9ffeac1ffb"
+    },
+    {
+      "byte_length": 4481,
+      "path": "stage3-readiness.json",
+      "sha256": "a7b442749084686d05976cb100b5e99ff0276ff6bc32aba1155cc2aabf8e267f"
+    }
+  ],
+  "format_version": "legacy-permission-closure-v1",
+  "inputs": [
+    {
+      "byte_length": 6505,
+      "path": "reference-reviews/mb2-810-source-policy/2026-10-14/manifest.json",
+      "sha256": "f686a1792303adbdcfa0dc15359f4614bc2076cc8896dae7273752f98cf9e8d7"
+    },
+    {
+      "byte_length": 3939,
+      "path": "reference-reviews/mb2-810-source-policy/2026-10-14/source-receipts.json",
+      "sha256": "2933a9ebeb4b374bce5098b4ee9b9f2dbcb65429a411c2e7d1ed9bf91c25ed8e"
+    },
+    {
+      "byte_length": 5182,
+      "path": "reference-reviews/v13-stage2-legacy-public-profile/census.json",
+      "sha256": "e93d7baca8ef8175c7f9c4cb53dfdf79a820f2f54042d9f02d617b6a39ecaf3a"
+    },
+    {
+      "byte_length": 29557,
+      "path": "reference-reviews/v13-stage2-legacy-public-profile/consumer-dependencies.json",
+      "sha256": "c4ad8a5a66434cf9274b5a64c89f355a88bb8f702dedce0af2033a6e6e8ac7e1"
+    },
+    {
+      "byte_length": 548600,
+      "path": "reference-reviews/v13-stage2-legacy-public-profile/file-inventory.json",
+      "sha256": "61e7076c89ae8b9397fa7ab2168ea7620ce1d579c7101a3cc22b2016e7d905c9"
+    },
+    {
+      "byte_length": 13930,
+      "path": "reference-reviews/v13-stage2-legacy-public-profile/layer-inventory.json",
+      "sha256": "708f72084cf51f40b47a55adc1df0c090a8f9d4242658cf3f61508fc860697c9"
+    },
+    {
+      "byte_length": 3433,
+      "path": "reference-reviews/v13-stage2-legacy-public-profile/preservation-bindings.json",
+      "sha256": "7eceeec7fe8d00fc6b4c3e6e54bafdf23d28c188296900744363e5c863bb5340"
+    },
+    {
+      "byte_length": 1578,
+      "path": "reference-reviews/v13-stage2-legacy-public-profile/review-decision.json",
+      "sha256": "3150bbd362c83d550716bed37217ca9e26025a7966cd73e499feb459d849189c"
+    },
+    {
+      "byte_length": 1644,
+      "path": "reference-reviews/v13-stage2-legacy-public-profile/review-manifest.json",
+      "sha256": "65ecbdcaca062082c3b55a9d7a461351c95ce8b7f84294a1af165de23f816cb5"
+    },
+    {
+      "byte_length": 58744,
+      "path": "reference-reviews/v13-stage2-legacy-public-profile/semantic-dependencies.json",
+      "sha256": "5c50c5d8c06325c125a8d4ea334bee36c4c48f7461a0c37eb99ccf7dd333c028"
+    }
+  ],
+  "inspection_method": {
+    "byte_length": 15052,
+    "path": "scripts/verify_legacy_permission_closure.py",
+    "sha256": "86958977d306e9503425a49f630ef47ddf22e17e7fb0868f5b790e77fce63ca5"
+  },
+  "no_approval_or_clearance": true,
+  "no_runtime_implementation": true,
+  "production_eligible": false,
+  "source_values_included": false
+}

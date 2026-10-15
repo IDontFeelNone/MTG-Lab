@@ -1,0 +1,3575 @@
+{
+  "baseline_revision": "d4e673a31714e30eb4056c43fca76b159008c813",
+  "document_kind": "field_metadata_only",
+  "dynamic_key_normalization": {
+    "audit/cards_reused": "*",
+    "audit/evidence_files": "*",
+    "audit/review_artifact_digests": "*",
+    "promoted_state/entity_ids": "iterated_by_entity_type_not_retained"
+  },
+  "field_count_by_group": {
+    "audit": 47,
+    "promoted_card": 102,
+    "promoted_finish": 15,
+    "promoted_identifier": 17,
+    "promoted_printing": 127,
+    "typed_card": 8,
+    "typed_game": 3,
+    "typed_printing": 12,
+    "typed_product": 12,
+    "typed_source": 11
+  },
+  "hazards": [
+    "Full promoted state physically contains unknown_values including rules/printed/flavor/rulings content, artist identifiers, EDHREC metrics and marketplace metadata even though basic query output omits unknown_values.",
+    "Existing-public-Git in-place path/hash metadata is not a new permission grant to process, retain, redistribute, serve or export underlying content.",
+    "Five SourceRecords in the 40-file entity closure are a subset of eight canonical SourceRecords counted by Stage2; do not enlarge Tier A merely to make source_record count equal eight.",
+    "Two bounded audit files are required for exact entity provenance/query identity; only summary fields enter ordinary query values, but exact complete audit bytes are hash-bound.",
+    "Source references do not require source corpora to be physically copied into the Tier A core; historical source revalidation belongs in Tier C and remains separately permissioned.",
+    "provider-derived identifier namespaces include independent marketplace/Wizards/Scryfall identifiers; MTGJSON provider label does not establish rights for those upstream fields."
+  ],
+  "source_values_included": false,
+  "storage_fields": [
+    {
+      "field_path": "/acquisition_run_id",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/action",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/audit_digest",
+      "group": "audit",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/batch_id",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/candidate_count",
+      "group": "audit",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/candidate_digest",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/candidate_id_digest",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_post_state_digest",
+      "group": "audit",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/canonical_pre_state_digest",
+      "group": "audit",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/cards_reused/*",
+      "group": "audit",
+      "leaf_occurrences": 10,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_WITH_UPSTREAM_NAMES_OR_IDENTIFIERS",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/dependency_digest",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/dependency_order/*",
+      "group": "audit",
+      "leaf_occurrences": 4,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/entity_counts/card",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/entity_counts/finish",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/entity_counts/identifier",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/entity_counts/printing",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/evidence_files/*",
+      "group": "audit",
+      "leaf_occurrences": 3,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/evidence_identity",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/excluded_targets/*",
+      "group": "audit",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/findings_digest",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/preflight_digest",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/promoted_entities/*",
+      "group": "audit",
+      "leaf_occurrences": 1000,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/promoted_printing_ids/*",
+      "group": "audit",
+      "leaf_occurrences": 534,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/promotion_id",
+      "group": "audit",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/readiness_plan_digest",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/replay/command",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/replay/expected_result",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/replay_behavior",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/result",
+      "group": "audit",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/review_artifact_digests/*",
+      "group": "audit",
+      "leaf_occurrences": 12,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/review_census/accepted",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/review_census/ambiguous",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/review_census/conflicting",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/review_census/existing_canonical_duplicate",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/review_census/incomplete",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/review_census/rejected",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/review_census/retained_duplicate",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/review_census/unsupported",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/rollback/command",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/rollback/expected_post_rollback_digest",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/rollback/remove/*",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/rollback_identity",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/schema_version",
+      "group": "audit",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/source_lineage_digest",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/supporting_entities_reused/finish/*",
+      "group": "audit",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/target/code",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_WITH_UPSTREAM_NAMES_OR_IDENTIFIERS",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/target/name",
+      "group": "audit",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_AUDIT_WITH_UPSTREAM_NAMES_OR_IDENTIFIERS",
+      "query_surface": "raw_audit_is_hash_bound_selected_summary_fields_only",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/acquired_at",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/capture_method",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/captured_at",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/source_identity",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/dataset_identity/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/evidence_references/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/promotion_id",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/artifact_identifier",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/provider",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/review_package_id",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty_state",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/artist",
+      "group": "promoted_card",
+      "leaf_occurrences": 383,
+      "lineage_category": "ARTIST_OR_ARTWORK_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/artistIds/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 385,
+      "lineage_category": "ARTIST_OR_ARTWORK_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/asciiName",
+      "group": "promoted_card",
+      "leaf_occurrences": 1,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/availability/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 641,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/borderColor",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/colorIdentity",
+      "group": "promoted_card",
+      "leaf_occurrences": 68,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/colorIdentity/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 394,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/colorIndicator/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 8,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/convertedManaCost",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/edhrecRank",
+      "group": "promoted_card",
+      "leaf_occurrences": 255,
+      "lineage_category": "EDHREC_METRIC_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/edhrecSaltiness",
+      "group": "promoted_card",
+      "leaf_occurrences": 261,
+      "lineage_category": "EDHREC_METRIC_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/faceConvertedManaCost",
+      "group": "promoted_card",
+      "leaf_occurrences": 5,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/faceManaValue",
+      "group": "promoted_card",
+      "leaf_occurrences": 5,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/faceName",
+      "group": "promoted_card",
+      "leaf_occurrences": 5,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/flavorText",
+      "group": "promoted_card",
+      "leaf_occurrences": 130,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/foreignData",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/frameEffects/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 53,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/frameVersion",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/hasAlternativeDeckLimit",
+      "group": "promoted_card",
+      "leaf_occurrences": 2,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isFullArt",
+      "group": "promoted_card",
+      "leaf_occurrences": 4,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isGameChanger",
+      "group": "promoted_card",
+      "leaf_occurrences": 5,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isReprint",
+      "group": "promoted_card",
+      "leaf_occurrences": 270,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isTextless",
+      "group": "promoted_card",
+      "leaf_occurrences": 3,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isTimeshifted",
+      "group": "promoted_card",
+      "leaf_occurrences": 136,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/keywords/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 168,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/brawl",
+      "group": "promoted_card",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/commander",
+      "group": "promoted_card",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/oathbreaker",
+      "group": "promoted_card",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/pauper_commander",
+      "group": "promoted_card",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/predh",
+      "group": "promoted_card",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities",
+      "group": "promoted_card",
+      "leaf_occurrences": 120,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_object"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/alchemy",
+      "group": "promoted_card",
+      "leaf_occurrences": 11,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/brawl",
+      "group": "promoted_card",
+      "leaf_occurrences": 131,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/commander",
+      "group": "promoted_card",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/duel",
+      "group": "promoted_card",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/future",
+      "group": "promoted_card",
+      "leaf_occurrences": 6,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/gladiator",
+      "group": "promoted_card",
+      "leaf_occurrences": 135,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/historic",
+      "group": "promoted_card",
+      "leaf_occurrences": 131,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/legacy",
+      "group": "promoted_card",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/modern",
+      "group": "promoted_card",
+      "leaf_occurrences": 149,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/oathbreaker",
+      "group": "promoted_card",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/pauper",
+      "group": "promoted_card",
+      "leaf_occurrences": 60,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/paupercommander",
+      "group": "promoted_card",
+      "leaf_occurrences": 60,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/penny",
+      "group": "promoted_card",
+      "leaf_occurrences": 54,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/pioneer",
+      "group": "promoted_card",
+      "leaf_occurrences": 67,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/predh",
+      "group": "promoted_card",
+      "leaf_occurrences": 165,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/premodern",
+      "group": "promoted_card",
+      "leaf_occurrences": 93,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/standard",
+      "group": "promoted_card",
+      "leaf_occurrences": 8,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/standardbrawl",
+      "group": "promoted_card",
+      "leaf_occurrences": 10,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/timeless",
+      "group": "promoted_card",
+      "leaf_occurrences": 134,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/vintage",
+      "group": "promoted_card",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/loyalty",
+      "group": "promoted_card",
+      "leaf_occurrences": 12,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/manaValue",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/originalText",
+      "group": "promoted_card",
+      "leaf_occurrences": 375,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/originalType",
+      "group": "promoted_card",
+      "leaf_occurrences": 257,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/otherFaceIds/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 6,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/power",
+      "group": "promoted_card",
+      "leaf_occurrences": 147,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/printings/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 2489,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/producedMana/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 161,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/promoTypes/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 127,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/cardKingdom",
+      "group": "promoted_card",
+      "leaf_occurrences": 362,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/cardKingdomFoil",
+      "group": "promoted_card",
+      "leaf_occurrences": 121,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/cardmarket",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/cardmarketFoil",
+      "group": "promoted_card",
+      "leaf_occurrences": 121,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/tcgplayer",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/relatedCards/tokens/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 14,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/rulings/*/date",
+      "group": "promoted_card",
+      "leaf_occurrences": 1406,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/rulings/*/text",
+      "group": "promoted_card",
+      "leaf_occurrences": 1406,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/securityStamp",
+      "group": "promoted_card",
+      "leaf_occurrences": 58,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/setCode",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/side",
+      "group": "promoted_card",
+      "leaf_occurrences": 5,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/skuIds/foil",
+      "group": "promoted_card",
+      "leaf_occurrences": 121,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/skuIds/nonfoil",
+      "group": "promoted_card",
+      "leaf_occurrences": 362,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/subtypes",
+      "group": "promoted_card",
+      "leaf_occurrences": 190,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/subtypes/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 291,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/supertypes",
+      "group": "promoted_card",
+      "leaf_occurrences": 322,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/supertypes/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 69,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/text",
+      "group": "promoted_card",
+      "leaf_occurrences": 381,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/toughness",
+      "group": "promoted_card",
+      "leaf_occurrences": 147,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/type",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/types/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 404,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/card_reference",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/colors",
+      "group": "promoted_card",
+      "leaf_occurrences": 87,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/values/colors/*",
+      "group": "promoted_card",
+      "leaf_occurrences": 354,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/layout",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/mana_cost",
+      "group": "promoted_card",
+      "leaf_occurrences": 342,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/mana_cost/status",
+      "group": "promoted_card",
+      "leaf_occurrences": 42,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/name",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/normalized_name",
+      "group": "promoted_card",
+      "leaf_occurrences": 384,
+      "lineage_category": "PROJECT_TRANSFORMATION_OF_WIZARDS_NAME_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/acquired_at",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/capture_method",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/captured_at",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/source_identity",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/dataset_identity/*",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/evidence_references/*",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/promotion_id",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/artifact_identifier",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/provider",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/review_package_id",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty_state",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_object"
+      ]
+    },
+    {
+      "field_path": "/values/value",
+      "group": "promoted_finish",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/acquired_at",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/capture_method",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/captured_at",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/source_identity",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/dataset_identity/*",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/evidence_references/*",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/promotion_id",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/artifact_identifier",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/provider",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/review_package_id",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty_state",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_object"
+      ]
+    },
+    {
+      "field_path": "/values/namespace",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/printing_uuid",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/value",
+      "group": "promoted_identifier",
+      "leaf_occurrences": 235,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/acquired_at",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/acquisition_run_id",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/capture_method",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/captured_at",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/normalized_projection_sha256",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/source_identity",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/acquisition_lineage/*/source_sha256",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/confidence",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/dataset_identity/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/entity_type",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/evidence_references/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/promotion_id",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/artifact_identifier",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/provider",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/source_record_identity",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/review_package_id",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/uncertainty_state",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values",
+      "group": "promoted_printing",
+      "leaf_occurrences": 14,
+      "lineage_category": "PROJECT_AUTHORED_CANONICAL_CONTROL_AND_SOURCE_REFERENCES",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_object"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/artist",
+      "group": "promoted_printing",
+      "leaf_occurrences": 378,
+      "lineage_category": "ARTIST_OR_ARTWORK_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/artistIds/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 380,
+      "lineage_category": "ARTIST_OR_ARTWORK_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/asciiName",
+      "group": "promoted_printing",
+      "leaf_occurrences": 1,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/availability/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 636,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/borderColor",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/colorIdentity",
+      "group": "promoted_printing",
+      "leaf_occurrences": 68,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/colorIdentity/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 388,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/colorIndicator/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 7,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/convertedManaCost",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/digital_or_paper/status",
+      "group": "promoted_printing",
+      "leaf_occurrences": 500,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/edhrecRank",
+      "group": "promoted_printing",
+      "leaf_occurrences": 255,
+      "lineage_category": "EDHREC_METRIC_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/edhrecSaltiness",
+      "group": "promoted_printing",
+      "leaf_occurrences": 261,
+      "lineage_category": "EDHREC_METRIC_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/flavorText",
+      "group": "promoted_printing",
+      "leaf_occurrences": 130,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/foreignData",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/frameEffects/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 53,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/frameVersion",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/hasAlternativeDeckLimit",
+      "group": "promoted_printing",
+      "leaf_occurrences": 2,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isFullArt",
+      "group": "promoted_printing",
+      "leaf_occurrences": 4,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isGameChanger",
+      "group": "promoted_printing",
+      "leaf_occurrences": 5,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isReprint",
+      "group": "promoted_printing",
+      "leaf_occurrences": 270,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isTextless",
+      "group": "promoted_printing",
+      "leaf_occurrences": 3,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/isTimeshifted",
+      "group": "promoted_printing",
+      "leaf_occurrences": 136,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/keywords/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 166,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/brawl",
+      "group": "promoted_printing",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/commander",
+      "group": "promoted_printing",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/oathbreaker",
+      "group": "promoted_printing",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/pauper_commander",
+      "group": "promoted_printing",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/leadershipSkills/predh",
+      "group": "promoted_printing",
+      "leaf_occurrences": 71,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "boolean"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities",
+      "group": "promoted_printing",
+      "leaf_occurrences": 115,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_object"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/alchemy",
+      "group": "promoted_printing",
+      "leaf_occurrences": 11,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/brawl",
+      "group": "promoted_printing",
+      "leaf_occurrences": 131,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/commander",
+      "group": "promoted_printing",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/duel",
+      "group": "promoted_printing",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/future",
+      "group": "promoted_printing",
+      "leaf_occurrences": 6,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/gladiator",
+      "group": "promoted_printing",
+      "leaf_occurrences": 135,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/historic",
+      "group": "promoted_printing",
+      "leaf_occurrences": 131,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/legacy",
+      "group": "promoted_printing",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/modern",
+      "group": "promoted_printing",
+      "leaf_occurrences": 149,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/oathbreaker",
+      "group": "promoted_printing",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/pauper",
+      "group": "promoted_printing",
+      "leaf_occurrences": 60,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/paupercommander",
+      "group": "promoted_printing",
+      "leaf_occurrences": 60,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/penny",
+      "group": "promoted_printing",
+      "leaf_occurrences": 54,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/pioneer",
+      "group": "promoted_printing",
+      "leaf_occurrences": 67,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/predh",
+      "group": "promoted_printing",
+      "leaf_occurrences": 165,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/premodern",
+      "group": "promoted_printing",
+      "leaf_occurrences": 93,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/standard",
+      "group": "promoted_printing",
+      "leaf_occurrences": 8,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/standardbrawl",
+      "group": "promoted_printing",
+      "leaf_occurrences": 10,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/timeless",
+      "group": "promoted_printing",
+      "leaf_occurrences": 134,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/legalities/vintage",
+      "group": "promoted_printing",
+      "leaf_occurrences": 257,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/loyalty",
+      "group": "promoted_printing",
+      "leaf_occurrences": 12,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/manaValue",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "number"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/originalText",
+      "group": "promoted_printing",
+      "leaf_occurrences": 370,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/originalType",
+      "group": "promoted_printing",
+      "leaf_occurrences": 257,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/power",
+      "group": "promoted_printing",
+      "leaf_occurrences": 146,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/printings/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 2484,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/producedMana/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 154,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/promoTypes/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 122,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/promotional/status",
+      "group": "promoted_printing",
+      "leaf_occurrences": 487,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/cardKingdom",
+      "group": "promoted_printing",
+      "leaf_occurrences": 357,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/cardKingdomFoil",
+      "group": "promoted_printing",
+      "leaf_occurrences": 121,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/cardmarket",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/cardmarketFoil",
+      "group": "promoted_printing",
+      "leaf_occurrences": 121,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/purchaseUrls/tcgplayer",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/relatedCards/tokens/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 14,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/rulings/*/date",
+      "group": "promoted_printing",
+      "leaf_occurrences": 1367,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/rulings/*/text",
+      "group": "promoted_printing",
+      "leaf_occurrences": 1367,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/securityStamp",
+      "group": "promoted_printing",
+      "leaf_occurrences": 58,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/setCode",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "MIXED_PROVIDER_AND_UPSTREAM_FACTS_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/skuIds/foil",
+      "group": "promoted_printing",
+      "leaf_occurrences": 121,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/skuIds/nonfoil",
+      "group": "promoted_printing",
+      "leaf_occurrences": 357,
+      "lineage_category": "MARKETPLACE_METADATA_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/subtypes",
+      "group": "promoted_printing",
+      "leaf_occurrences": 189,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/subtypes/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 287,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/supertypes",
+      "group": "promoted_printing",
+      "leaf_occurrences": 317,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/supertypes/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 69,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/text",
+      "group": "promoted_printing",
+      "leaf_occurrences": 376,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/toughness",
+      "group": "promoted_printing",
+      "leaf_occurrences": 146,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/type",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/unknown_values/types/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 399,
+      "lineage_category": "WIZARDS_CARD_CONTENT_OR_FACTUAL_STRUCTURE_VIA_MTGJSON",
+      "query_surface": "not_in_query_result",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/card_id",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/collector_number",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/digital_or_paper",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/finish_ids/*",
+      "group": "promoted_printing",
+      "leaf_occurrences": 1215,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/frame_or_treatment",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/cardKingdomFoilId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 121,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/cardKingdomId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 357,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/cardsphereFoilId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 121,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/cardsphereId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 357,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/deckboxId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 378,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/mcmId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/mcmMetaId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 264,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/mtgjsonV4Id",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/mtgoId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 257,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/multiverseId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/scryfallCardBackId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/scryfallId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/scryfallIllustrationId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 378,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/scryfallOracleId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/identifiers/tcgplayerProductId",
+      "group": "promoted_printing",
+      "leaf_occurrences": 379,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/language",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/promotional",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "boolean",
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/provider_card_or_oracle_id",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/rarity",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/release_date",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/reprint",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "boolean",
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/set_code",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/set_id",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/set_name",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/source_record_identity",
+      "group": "promoted_printing",
+      "leaf_occurrences": 534,
+      "lineage_category": "WIZARDS_CARD_NAME_OR_STRUCTURAL_FACT_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/values/uuid",
+      "group": "promoted_printing",
+      "leaf_occurrences": 913,
+      "lineage_category": "PROVIDER_OR_UPSTREAM_IDENTIFIER_OR_LINKAGE_VIA_MTGJSON",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/game",
+      "group": "typed_card",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/id",
+      "group": "typed_card",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/name",
+      "group": "typed_card",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/claim",
+      "group": "typed_card",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_AUTHORED_ASSERTION_WITH_UPSTREAM_CONTENT",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/field_paths/*",
+      "group": "typed_card",
+      "leaf_occurrences": 45,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/notes",
+      "group": "typed_card",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_AUTHORED_ASSERTION_WITH_UPSTREAM_CONTENT",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/source_id",
+      "group": "typed_card",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/schema_version",
+      "group": "typed_card",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/id",
+      "group": "typed_game",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/metadata/status",
+      "group": "typed_game",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/name",
+      "group": "typed_game",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/card_id",
+      "group": "typed_printing",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/collector_number",
+      "group": "typed_printing",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/id",
+      "group": "typed_printing",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/language",
+      "group": "typed_printing",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/metadata/product_membership/*",
+      "group": "typed_printing",
+      "leaf_occurrences": 4,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/claim",
+      "group": "typed_printing",
+      "leaf_occurrences": 19,
+      "lineage_category": "PROJECT_AUTHORED_ASSERTION_WITH_UPSTREAM_CONTENT",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/field_paths/*",
+      "group": "typed_printing",
+      "leaf_occurrences": 94,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/notes",
+      "group": "typed_printing",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_ASSERTION_WITH_UPSTREAM_CONTENT",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/source_id",
+      "group": "typed_printing",
+      "leaf_occurrences": 19,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/rarity",
+      "group": "typed_printing",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/schema_version",
+      "group": "typed_printing",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/set_code",
+      "group": "typed_printing",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/game",
+      "group": "typed_product",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/id",
+      "group": "typed_product",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/lifecycle_status",
+      "group": "typed_product",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/name",
+      "group": "typed_product",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_IDENTITY_OR_FACTUAL_LINKAGE_DERIVED_FROM_WIZARDS_OR_SCRYFALL",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/product_type",
+      "group": "typed_product",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/claim",
+      "group": "typed_product",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_ASSERTION_WITH_UPSTREAM_CONTENT",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/notes",
+      "group": "typed_product",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_ASSERTION_WITH_UPSTREAM_CONTENT",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/source_classification",
+      "group": "typed_product",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/source_location",
+      "group": "typed_product",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provenance/*/verification_status",
+      "group": "typed_product",
+      "leaf_occurrences": 2,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/schema_version",
+      "group": "typed_product",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/slot_ids",
+      "group": "typed_product",
+      "leaf_occurrences": 1,
+      "lineage_category": "PROJECT_AUTHORED_STRUCTURE_OR_SOURCE_REFERENCE",
+      "query_surface": "query_values_or_provenance_or_control",
+      "types": [
+        "empty_array"
+      ]
+    },
+    {
+      "field_path": "/access_date",
+      "group": "typed_source",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_METADATA_AND_PROVIDER_REFERENCES",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/claims/*",
+      "group": "typed_source",
+      "leaf_occurrences": 15,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_DESCRIPTION_WITH_UPSTREAM_CONTENT",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/id",
+      "group": "typed_source",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_METADATA_AND_PROVIDER_REFERENCES",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/notes",
+      "group": "typed_source",
+      "leaf_occurrences": 3,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_METADATA_AND_PROVIDER_REFERENCES",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/provider",
+      "group": "typed_source",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_METADATA_AND_PROVIDER_REFERENCES",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/record_version",
+      "group": "typed_source",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_METADATA_AND_PROVIDER_REFERENCES",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/schema_version",
+      "group": "typed_source",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_METADATA_AND_PROVIDER_REFERENCES",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/source_classification",
+      "group": "typed_source",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_METADATA_AND_PROVIDER_REFERENCES",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/source_location",
+      "group": "typed_source",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_METADATA_AND_PROVIDER_REFERENCES",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/title",
+      "group": "typed_source",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_DESCRIPTION_WITH_UPSTREAM_CONTENT",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    },
+    {
+      "field_path": "/verification_status",
+      "group": "typed_source",
+      "leaf_occurrences": 5,
+      "lineage_category": "PROJECT_AUTHORED_SOURCE_METADATA_AND_PROVIDER_REFERENCES",
+      "query_surface": "source_reference_not_query_entity",
+      "types": [
+        "string"
+      ]
+    }
+  ]
+}
