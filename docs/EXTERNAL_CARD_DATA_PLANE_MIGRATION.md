@@ -1,8 +1,9 @@
 # Incremental migration and CI/deployment model
 
-**Status: Architecture v13 is ACTIVE APPROVED; implementation sequence remains future work.**
+**Status: Architecture v13 is ACTIVE APPROVED; fictional Stage 1 implemented, pending PM review.**
 Decision 017 is Accepted by the owner. Architecture v12 is the previous historical
-baseline. No runtime step is authorized or executed by this governance transition.
+baseline. Governance approval alone authorized no runtime step. The later owner
+instruction separately authorized only fictional Stage 1; later stages remain future work.
 
 ## Stages with acceptance and rollback
 
@@ -82,12 +83,13 @@ render timestamp is display metadata, not silently a new analytical input.
 
 ## V13 Stage 1 — Fictional Canonical Snapshot Attachment
 
-**Implementation status: NOT AUTHORIZED.** This owner decision accepts architecture
-only; a future explicit owner instruction is required before starting Stage 1.
+**Implementation status: implemented, pending PM review.** The owner separately
+authorized this fictional-only runtime checkpoint after architecture acceptance.
+See [the API and supported contract](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 The numbered migration rows above are planning workstreams, not separately approved
 milestones. Stage 1 is restricted to the fictional contract/attachment subset.
 
-Future scope:
+Implemented scope:
 
 - Generic snapshot manifest verification and an immutable fictional snapshot fixture.
 - Explicit read-only attachment through existing query/collection readers.
@@ -101,3 +103,10 @@ admission; provider acquisition; SQL persistence; module composition; writer
 destination changes; Rules Intelligence; Deck Intelligence expansion; simulation;
 AI transport/model integration. Architecture approval does not clear source
 policy, select a production snapshot or authorize any of these operations.
+
+## V13 Stage 2 — Legacy/Public Snapshot Profile Review
+
+**NOT AUTHORIZED.** Candidate only: review the existing public catalog generations,
+exact evidence closure and reader compatibility before proposing another profile.
+No real-data attachment, production snapshot selection, source-policy clearance,
+writer change or further implementation follows automatically from Stage 1.

@@ -1,8 +1,22 @@
 # Current-component compatibility map
 
-**Status: Migration map for accepted v13 direction; no runtime changes authorized.** Audit baseline
+**Status: Accepted v13 migration map, with separately authorized Stage 1 read-only integration pending review.** Audit baseline
 `ec8fcbf97c84d24337503c81dd1c31a31e163d44`. Difficulty is relative engineering
 scope, not an estimate or implementation authorization.
+
+## Current Stage 1 implementation
+
+The table below preserves the original audited baseline and the broader migration
+map. Subsequent separate owner authorization enabled fictional read-only snapshot
+attachment, now implemented and pending independent Project Manager review.
+`repository.snapshots` supplies verification and explicit fictional/legacy-public
+attachment factories. `CanonicalQueryEngine.from_attachment()` and
+`CanonicalCollectionResolver.from_attachment()` reuse existing readers with both
+verified roots, separate outer identity bindings and source-drift revalidation.
+Legacy constructors and query snapshot serialization remain unchanged; a failed
+selected snapshot never falls back to ambient data. Projection, other intelligence
+consumers, writer/admission/publication and production external-data activation
+remain unchanged. See [Stage 1 implementation and limits](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 
 | Component | Current dependency / audited entry point | Proposed dependency | Difficulty | Blocker / risk |
 | --- | --- | --- | --- | --- |

@@ -64,6 +64,7 @@ class CanonicalQueryEngine:
 
     def __init__(self, game: str = "magic", *, games_root: Path | None = None,
                  data_root: Path | None = None) -> None:
+        self._catalog_attachment = None
         self.game = game
         self.games_root = Path(games_root) if games_root else Path(__file__).resolve().parents[2] / "data/canonical/games"
         self.data_root = Path(data_root) if data_root else self.games_root.parents[2]
@@ -71,10 +72,43 @@ class CanonicalQueryEngine:
         self._raw = self._load_raw()
         self._results = tuple(sorted(self._build_results(), key=lambda x: (x.entity_type, x.canonical_identity)))
 
+    @classmethod
+    def from_attachment(cls, attachment) -> CanonicalQueryEngine:
+        """Read one verified attachment without changing legacy query identities."""
+        from repository.snapshots import LegacyPublicAttachment, SnapshotAttachment, SnapshotError
+
+        if not isinstance(attachment, (SnapshotAttachment, LegacyPublicAttachment)):
+            raise SnapshotError("verified catalog attachment required")
+        attachment.verify_unchanged()
+        engine = cls(attachment.game, games_root=attachment.games_root,
+                     data_root=attachment.data_root)
+        attachment.verify_unchanged()
+        engine._catalog_attachment = attachment
+        return engine
+
+    def _verify_attachment(self) -> None:
+        if self._catalog_attachment is not None:
+            from repository.snapshots import SnapshotError
+
+            attachment = self._catalog_attachment
+            attachment.verify_unchanged()
+            if (self.game != attachment.game
+                    or self.data_root.resolve() != attachment.data_root.resolve()
+                    or self.games_root.resolve() != attachment.games_root.resolve()):
+                raise SnapshotError("catalog attachment scope changed")
+
+    @property
+    def catalog_binding(self) -> dict[str, Any] | None:
+        """Outer attachment identity, separate from the existing query snapshot."""
+        self._verify_attachment()
+        return self._catalog_attachment.binding if self._catalog_attachment is not None else None
+
     def snapshot(self) -> QuerySnapshot:
         """Return all query results and their deterministic content identity."""
+        self._verify_attachment()
         payload = json.dumps([item.as_dict() for item in self._results], sort_keys=True,
                              separators=(",", ":"), ensure_ascii=False).encode()
+        self._verify_attachment()
         return QuerySnapshot("sha256:" + hashlib.sha256(payload).hexdigest(), self.game,
                              self._results)
 
@@ -83,6 +117,7 @@ class CanonicalQueryEngine:
                  card_name: str | None = None, normalized_name: str | None = None,
                  printing_id: str | None = None, set_id: str | None = None) -> tuple[QueryResult, ...]:
         """Retrieve entities by one or more exact identifiers/attributes."""
+        self._verify_attachment()
         filters = (canonical_id, provider_id, external_id, entity_type, card_name,
                    normalized_name, printing_id, set_id)
         if not any(value is not None for value in filters):
@@ -96,6 +131,7 @@ class CanonicalQueryEngine:
         if normalized_name is not None: values = tuple(x for x in values if x.entity_type == "card" and normalize_name(str(x.canonical_values.get("name", ""))) == normalize_name(normalized_name))
         if provider_id is not None: values = tuple(x for x in values if provider_id in self._identifiers(x, "provider"))
         if external_id is not None: values = tuple(x for x in values if external_id in self._identifiers(x, "external"))
+        self._verify_attachment()
         return values
 
     def entity(self, identifier: str, *, entity_type: str | None = None) -> QueryResult:
@@ -105,6 +141,7 @@ class CanonicalQueryEngine:
 
     def search(self, text: str, *, mode: str = "exact", case_insensitive: bool = False) -> tuple[QueryResult, ...]:
         """Search Card names using exact, normalized, or prefix semantics; never fuzzy."""
+        self._verify_attachment()
         if mode not in {"exact", "normalized", "prefix"}: raise QueryError("search mode must be exact, normalized, or prefix")
         if not text: raise QueryError("search text must not be empty")
         needle = normalize_name(text) if mode == "normalized" or case_insensitive else text
@@ -115,10 +152,12 @@ class CanonicalQueryEngine:
             candidate = normalize_name(name) if mode == "normalized" or case_insensitive else name
             if (mode == "prefix" and candidate.startswith(needle)) or (mode != "prefix" and candidate == needle):
                 found.append(result)
+        self._verify_attachment()
         return tuple(found)
 
     def related(self, identifier: str, relationship: str) -> tuple[QueryResult | Mapping[str, Any], ...]:
         """Traverse a named relationship without exposing storage paths or models."""
+        self._verify_attachment()
         if relationship == "card_printings":
             self.entity(identifier, entity_type="card")
             return tuple(x for x in self._results if x.entity_type == "printing" and x.canonical_values.get("card_id") == identifier)
@@ -134,7 +173,9 @@ class CanonicalQueryEngine:
             key = "dataset_identity" if relationship.startswith("dataset") else "review_package_id"
             return tuple(x for x in self._results if self._provenance_contains(x, key, identifier))
         if relationship == "promotion_audits":
-            return self._audit_records(promotion_id=identifier)
+            records = self._audit_records(promotion_id=identifier)
+            self._verify_attachment()
+            return records
         raise QueryError(f"unsupported relationship: {relationship}")
 
     def provenance(self, identifier: str) -> Mapping[str, Any]:
@@ -147,6 +188,7 @@ class CanonicalQueryEngine:
 
     def validation(self, state: str) -> tuple[QueryResult | Mapping[str, Any], ...]:
         """Query explicit epistemic and audit failure states."""
+        self._verify_attachment()
         allowed = {"unknown", "conflicting", "unresolved", "rejected", "validation_failure", "superseded"}
         if state not in allowed: raise QueryError("unsupported validation state")
         results: list[QueryResult | Mapping[str, Any]] = []
@@ -161,6 +203,7 @@ class CanonicalQueryEngine:
                 rejected = audit.get("rejected_entities", [])
                 valid = audit.get("validation_results", {}).get("valid", True)
                 if state == "rejected" and rejected or state == "validation_failure" and not valid: results.append(audit)
+        self._verify_attachment()
         return tuple(sorted(results, key=lambda x: x.canonical_identity if isinstance(x, QueryResult) else str(x.get("promotion_id", x.get("audit_id", "")))))
 
     def _load_raw(self) -> dict[str, Mapping[str, Any]]:

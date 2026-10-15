@@ -7,8 +7,11 @@
 **Status:** Architecture v13 — ACTIVE APPROVED architecture
 
 Decision 017 is Accepted. Architecture v12 remains the previous historical
-baseline. This governance transition does not implement the external data plane
-or authorize runtime work, new serialized contracts or dataset admission.
+baseline. Governance acceptance alone did not authorize runtime work. A subsequent
+separate owner authorization enabled Stage 1 fictional read-only snapshot
+attachment, now implemented and pending independent Project Manager review.
+No production external-data support, domain identity/relationship change or dataset
+admission is introduced. See [Stage 1 implementation and limits](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 
 ## Purpose
 
@@ -148,8 +151,9 @@ this model as follows:
    lineage; these records are explicitly non-canonical.
 3. **Canonical:** reviewed, approved entity definitions in an explicitly selected,
    validated immutable snapshot under public versioned contracts. Existing
-   Git-backed data remains an explicit legacy/public profile; external attachment
-   runtime support is not implemented by this governance change.
+   Git-backed data remains an explicit legacy/public profile. Separately authorized
+   Stage 1 implements fictional read-only and explicit legacy/public attachment;
+   production external-data attachment and activation remain unimplemented.
 4. **Validation:** structural, referential, domain, and later statistical
    results proving whether canonical data is eligible for consumption.
 5. **Derived analytics:** reproducible results calculated from validated
@@ -209,6 +213,8 @@ evidence requirements or generated-database subordination. See
 [EXTERNAL_CARD_DATA_PLANE.md](EXTERNAL_CARD_DATA_PLANE.md). Source evidence remains
 independently governed; personal collections, holdings, storage, preferences and
 assessments remain a separate private trust domain, outside the shared snapshot.
-No nameless Card contract, runtime schema, data admission or permission clearance
-is introduced. Existing runtime behavior and historical v12 replay stay unchanged;
-MB2 810 and its nine holds remain pending and unadmitted.
+No nameless Card contract, production domain schema, data admission or permission
+clearance is introduced. Existing legacy constructor behavior and historical v12
+replay stay unchanged; the separately authorized Stage 1 read-only attachment
+entry points add no approval or production authority. MB2 810 and its nine holds
+remain pending and unadmitted.

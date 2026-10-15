@@ -1,31 +1,50 @@
-# Current session state — Architecture v13 acceptance
+# Current session state — V13 Stage 1 pending review
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
-The owner approved the direction reviewed at
-`3d21656b9f67a3089f32c5613804a1984fb44139` in PR #175. This is a
-documentation/governance transition only; **no runtime implementation is authorized**.
-Architecture v12 is the previous historical baseline, preserved with its original
-canonical/evidence bytes, replay hashes and Card Acquisition auxiliary fixture.
+The owner approved the architecture reviewed at
+`3d21656b9f67a3089f32c5613804a1984fb44139` in PR #175, then separately
+**authorized V13 Stage 1 — Fictional Canonical Snapshot Attachment**.
+The bounded Stage 1 implementation is present for independent Project Manager
+review; it is not a production-data attachment, admission or merge approval.
+Architecture v12 remains the preserved historical baseline, including original
+canonical/evidence bytes, replay hashes and the Card Acquisition auxiliary fixture.
 
-Public Git owns code and architectural contracts/policies. Production may use a
-selected reviewed, validated immutable canonical snapshot under its declared
-scope and permissions; private location alone is neither authority nor permission.
-Generated persistence remains subordinate. Source evidence is independently
-governed; personal collections remain a separate private trust domain.
-The existing runtime still uses legacy filesystem/Git-bound roots. External
-attachment/activation and generated SQL runtime are not implemented here.
+## Implemented scope and unchanged boundaries
+
+`repository.snapshots` supplies explicit fictional-snapshot and legacy/public
+attachment factories. `CanonicalQueryEngine.from_attachment()` and
+`CanonicalCollectionResolver.from_attachment()` reuse the existing readers with
+verified roots and a separate catalog attachment binding. Existing constructor
+behavior and legacy query snapshot identity remain unchanged. A failed selected
+snapshot blocks; it never falls back to ambient checkout data, a provider request
+or an old cached catalog. This stage implements read-only attachment, not protected
+production activation, a new writer destination, generated SQL or later intelligence.
+
+Public Git owns code and architectural contracts/policies. Snapshot validation is
+not authority to use a dataset or permission to process, retain, redistribute or
+export it. Source evidence is independently governed; personal collection data
+remains a separate private trust domain. Fictional fixtures and the explicit
+legacy/public profile are not permission grants for production provider content.
 
 MB2's exact 810 candidates and nine holds remain pending and unadmitted. No owner
-spelling change, physical Printing verification, provider acquisition, protected
-production snapshot, AI export, dataset processing/retention/redistribution/service
-permission or source-policy clearance is granted. `SOURCE_POLICY_CLEARED_PLANS`
-is unchanged. Historical public demonstration counts do not describe owner inventory.
+spelling change, physical Printing assignment, provider acquisition, protected
+production snapshot, AI export or source-policy clearance is performed.
+`SOURCE_POLICY_CLEARED_PLANS` and the pending MB2 execution configuration remain
+unchanged. Historical public demonstration counts do not describe owner inventory.
 
-Next documented milestone: **V13 Stage 1 — Fictional Canonical Snapshot Attachment**.
-**Implementation status: NOT AUTHORIZED.** Separate owner implementation approval
-is required; no automatic follow-on or merge is authorized.
-See [Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots)
-and [Stage 1 scope and exclusions](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md#v13-stage-1--fictional-canonical-snapshot-attachment).
+## Review and next candidate
+
+Stage 1 is **implemented, pending independent Project Manager review**. Validation
+results must be reported from completed runs in the milestone delivery; this
+summary does not assert a test count or final review outcome.
+
+Next candidate: **V13 Stage 2 — Legacy/Public Snapshot Profile Review**.
+**Implementation status: NOT AUTHORIZED.** This names a candidate only; it does
+not authorize Stage 2 work, automatic follow-on, admission or merge.
+
+See [Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots),
+[accepted data-plane design](EXTERNAL_CARD_DATA_PLANE.md), and
+[Stage 1 implementation and limits](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 
 ---
 
