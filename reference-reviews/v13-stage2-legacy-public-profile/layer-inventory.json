@@ -1,0 +1,432 @@
+{
+  "document_kind": "review_not_snapshot",
+  "families": [
+    {
+      "exists": true,
+      "member_roles": [
+        "AUDIT_PROVENANCE_HISTORY"
+      ],
+      "path": "data/audit",
+      "personal_detail_omitted": false,
+      "primary_role": "AUDIT_PROVENANCE_HISTORY",
+      "retained_file_count": 30,
+      "retained_inventory_digest": "debcca0605d9bd3332eacc6066f2f6742f9cf4053f8741512d5c17b6e057d928",
+      "schema_versions": {
+        "phase-119-bounded-promotion-v1": 1,
+        "phase-136-bounded-promotion-audit-v1": 1,
+        "v1": 28
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "AUDIT_PROVENANCE_HISTORY"
+      ],
+      "path": "data/automatic_updates",
+      "personal_detail_omitted": false,
+      "primary_role": "AUDIT_PROVENANCE_HISTORY",
+      "retained_file_count": 2,
+      "retained_inventory_digest": "a0cff12ee498f9a785faffd2becd165f2e2bdde598a1f6671a6514c543f8511f",
+      "schema_versions": {
+        "mtgjson-refresh-attempt-v1": 1,
+        "mtgjson-target-availability-v1": 1
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "CANONICAL_SNAPSHOT_CONTENT",
+        "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "data/canonical",
+      "personal_detail_omitted": false,
+      "primary_role": "CANONICAL_SNAPSHOT_CONTENT",
+      "retained_file_count": 52,
+      "retained_inventory_digest": "a9d7751dc647d76cc8e114565e6a4c0ccd9db75a76976a02d34c9e3d7e10c5cc",
+      "schema_versions": {
+        "unversioned": 2,
+        "v1": 44
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "DERIVED_CARD_PRODUCT_DECISION_INTELLIGENCE",
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "data/card_intelligence",
+      "personal_detail_omitted": false,
+      "primary_role": "DERIVED_CARD_PRODUCT_DECISION_INTELLIGENCE",
+      "retained_file_count": 3,
+      "retained_inventory_digest": "87c9bacb8d665aa73a30306cbd68cb999327bbdccecb0a6657ec9b6279384a28",
+      "schema_versions": {
+        "card-deck-usage-evidence-v1": 1,
+        "card-deck-usage-review-v1": 1,
+        "card-demand-evidence-v1": 1
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [],
+      "path": "data/collections",
+      "personal_detail_omitted": true,
+      "primary_role": "PERSONAL_USER_DATA",
+      "retained_file_count": 0,
+      "retained_inventory_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "schema_versions": {}
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "DERIVED_CARD_PRODUCT_DECISION_INTELLIGENCE"
+      ],
+      "path": "data/deck_requirements",
+      "personal_detail_omitted": false,
+      "primary_role": "DERIVED_CARD_PRODUCT_DECISION_INTELLIGENCE",
+      "retained_file_count": 1,
+      "retained_inventory_digest": "c2f08cfef6e54c8d1f9796527c5c6fc0edef815480e5b0d37e16f5432cfc64d3",
+      "schema_versions": {
+        "deck-requirement-v1": 1
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "data/evidence",
+      "personal_detail_omitted": false,
+      "primary_role": "SOURCE_EVIDENCE_PLANE",
+      "retained_file_count": 3,
+      "retained_inventory_digest": "4b88374b85ed6d58b22ece54088bd2ed12a7f51a790158e96673b410c4c2fd23",
+      "schema_versions": {
+        "mtgjson-pilot-printing-retention-v1": 3
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "data/evidence-packages",
+      "personal_detail_omitted": false,
+      "primary_role": "SOURCE_EVIDENCE_PLANE",
+      "retained_file_count": 9,
+      "retained_inventory_digest": "b023acb456a71f68ef6478c6dd0e8adb83cbe6d913342705bbe58af81515f9f5",
+      "schema_versions": {
+        "mb2-stage-1-dataset-v1": 1,
+        "mb2-stage-1-package-v1": 1,
+        "mb2-stage-1-review-v1": 1,
+        "mb2-stage-1-source-v1": 1,
+        "mb2-stage-1-validation-v1": 1,
+        "v1": 3
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "HISTORICAL_TEST_REPLAY_FIXTURE"
+      ],
+      "path": "data/fixtures",
+      "personal_detail_omitted": false,
+      "primary_role": "HISTORICAL_TEST_REPLAY_FIXTURE",
+      "retained_file_count": 4,
+      "retained_inventory_digest": "8f55be9294a89ed1b3947b538c7a7ac15802f408e09d0d90dca270f47611607b",
+      "schema_versions": {
+        "pilot-card-dataset-v1": 1,
+        "provider-policy-v1": 1,
+        "unversioned": 2
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "UNSUPPORTED_UNRESOLVED"
+      ],
+      "path": "data/intermediate",
+      "personal_detail_omitted": false,
+      "primary_role": "UNSUPPORTED_UNRESOLVED",
+      "retained_file_count": 15,
+      "retained_inventory_digest": "d717b5d02ac338a58d218df323eed35cd23bdbfad0eb6617ae9879fb0227e8a2",
+      "schema_versions": {
+        "v1": 14
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "DERIVED_CARD_PRODUCT_DECISION_INTELLIGENCE"
+      ],
+      "path": "data/knowledge",
+      "personal_detail_omitted": false,
+      "primary_role": "DERIVED_CARD_PRODUCT_DECISION_INTELLIGENCE",
+      "retained_file_count": 140,
+      "retained_inventory_digest": "0d525f67fbf3a9dfbb3b84de2861fdeb169cbc90d60e415ece9c8276bd34928a",
+      "schema_versions": {
+        "card-knowledge-fact-v1": 140
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "SOURCE_EVIDENCE_PLANE",
+        "TEMPORAL_MARKET_EVIDENCE"
+      ],
+      "path": "data/market",
+      "personal_detail_omitted": false,
+      "primary_role": "TEMPORAL_MARKET_EVIDENCE",
+      "retained_file_count": 964,
+      "retained_inventory_digest": "8f643559e42c79d455cb503446b36606953c695e99bfc82001dca3b7e1d8248c",
+      "schema_versions": {
+        "json-array": 2,
+        "market-acquisition-evidence-v1": 2,
+        "market-acquisition-run-v1": 2,
+        "market-observation-import-v1": 2,
+        "market-observation-v1": 956
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "data/observations",
+      "personal_detail_omitted": false,
+      "primary_role": "SOURCE_EVIDENCE_PLANE",
+      "retained_file_count": 8,
+      "retained_inventory_digest": "85bc33fa67d450e953decfc2c25c79adf3b76fb3c81b5461a81dab7f74c17ce7",
+      "schema_versions": {
+        "unversioned": 7
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "GENERATED_PERSISTENCE_INDEX"
+      ],
+      "path": "data/processed",
+      "personal_detail_omitted": false,
+      "primary_role": "GENERATED_PERSISTENCE_INDEX",
+      "retained_file_count": 1,
+      "retained_inventory_digest": "99dd39dbd138145b1d9da078524484e92d6411ec2324a4997b4187d780fab0fd",
+      "schema_versions": {}
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "GENERATED_PERSISTENCE_INDEX",
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "data/production_runs",
+      "personal_detail_omitted": false,
+      "primary_role": "SOURCE_EVIDENCE_PLANE",
+      "retained_file_count": 342,
+      "retained_inventory_digest": "962929e510595c261edaf58680b5549f5dbd322c2adb8b993a0fed45dba29aa5",
+      "schema_versions": {
+        "1.0.0": 1,
+        "2.0.0": 14,
+        "mtgjson-dataset-delivery-v1": 18,
+        "mtgjson-streaming-ingestion-v1": 36,
+        "unversioned": 264
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "data/raw",
+      "personal_detail_omitted": false,
+      "primary_role": "SOURCE_EVIDENCE_PLANE",
+      "retained_file_count": 8,
+      "retained_inventory_digest": "4a63b0653bc6f8891b81e5bef81fd5a594d1b38dd104033e2d8637bf16c2f476",
+      "schema_versions": {
+        "unversioned": 2,
+        "v1": 1
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "CANONICAL_SNAPSHOT_CONTROL_METADATA"
+      ],
+      "path": "data/reference",
+      "personal_detail_omitted": false,
+      "primary_role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+      "retained_file_count": 1,
+      "retained_inventory_digest": "b385a8e80b9e6d20b5a21e54affdc96db4f439e4b3b4a8b17c76a6d34462a24f",
+      "schema_versions": {
+        "unversioned": 1
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "HISTORICAL_TEST_REPLAY_FIXTURE"
+      ],
+      "path": "data/review",
+      "personal_detail_omitted": false,
+      "primary_role": "HISTORICAL_TEST_REPLAY_FIXTURE",
+      "retained_file_count": 42,
+      "retained_inventory_digest": "70212a03a3ba791cb404daafc3d12ce1ed85bfb5bff1760dc0a9de397cc1de66",
+      "schema_versions": {
+        "canonical-reasoning-context-v1": 9,
+        "card-acquisition-dossier-v1": 2,
+        "card-acquisition-input-v1": 2,
+        "card-acquisition-pilot-handoff-v1": 1,
+        "card-acquisition-pilot-manifest-v1": 1,
+        "card-acquisition-pilot-plan-v1": 1,
+        "card-acquisition-pilot-v1": 1,
+        "card-acquisition-synthetic-fixture-v1": 1,
+        "card-evidence-dossier-v1": 2,
+        "contextual-card-comparison-handoff-v1": 1,
+        "contextual-card-comparison-manifest-v1": 1,
+        "contextual-card-comparison-v1": 1,
+        "functional-role-comparison-v1": 1,
+        "functional-role-pilot-report-v1": 1,
+        "functional-role-review-manifest-v1": 1,
+        "json-array": 1,
+        "mechanical-card-cohort-v1": 1,
+        "mechanical-card-dossier-v1": 4,
+        "mechanical-cohort-review-manifest-v1": 1,
+        "two-card-evidence-demo-manifest-v1": 1,
+        "unversioned": 1
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "AUDIT_PROVENANCE_HISTORY"
+      ],
+      "path": "data/reviews",
+      "personal_detail_omitted": false,
+      "primary_role": "AUDIT_PROVENANCE_HISTORY",
+      "retained_file_count": 52,
+      "retained_inventory_digest": "ce51ebee3d71ea719454fdad379391b232e669fa32a14780d83b0cc20c15eaa9",
+      "schema_versions": {
+        "card-intelligence-pilot-review-v1": 1,
+        "card-intelligence-review-v1": 1,
+        "fixed-content-product-manifest-v1": 1,
+        "json-array": 2,
+        "pending-identity-bundle-validation-v1": 1,
+        "phase-115-candidate-review-v1": 5,
+        "phase-116-identifier-resolution-v1": 7,
+        "phase-134-evidence-gap-report-v1": 1,
+        "phase-136-pilot-review-v1": 1,
+        "phase-137-printing-history-audit-v1": 1,
+        "phase-142-demand-review-v1": 1,
+        "raw-snapshot-v1": 6,
+        "unversioned": 12,
+        "v1": 6
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "data/sources",
+      "personal_detail_omitted": false,
+      "primary_role": "SOURCE_EVIDENCE_PLANE",
+      "retained_file_count": 6,
+      "retained_inventory_digest": "1fb52ebad9950d17776b873551005f3438dd18c271217574ed96a689658243cf",
+      "schema_versions": {
+        "unversioned": 2,
+        "v1": 3
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "HISTORICAL_TEST_REPLAY_FIXTURE"
+      ],
+      "path": "data/validation",
+      "personal_detail_omitted": false,
+      "primary_role": "HISTORICAL_TEST_REPLAY_FIXTURE",
+      "retained_file_count": 4,
+      "retained_inventory_digest": "0ee876b1a2122c82ce98ce63045096e3d18c7dd39316f7a7c08dcd7ce213dfe3",
+      "schema_versions": {
+        "phase109-run-evidence-summary-v1": 1,
+        "unversioned": 1,
+        "v1": 1
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "reference-reviews/mb2-810-production-readiness",
+      "personal_detail_omitted": false,
+      "primary_role": "SOURCE_EVIDENCE_PLANE",
+      "retained_file_count": 5,
+      "retained_inventory_digest": "761ad915cd1ce6fb9c07e5174c62f0758b7363abffd27fde9c2c8aea6c1aba99",
+      "schema_versions": {
+        "unversioned": 5
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "reference-reviews/mb2-810-source-policy",
+      "personal_detail_omitted": false,
+      "primary_role": "SOURCE_EVIDENCE_PLANE",
+      "retained_file_count": 34,
+      "retained_inventory_digest": "5b4669c71c516b0d2e3b0040e1053976755d5aadffee59ac87bdbfb3a9cc9812",
+      "schema_versions": {
+        "raw-snapshot-v1": 10,
+        "unversioned": 9,
+        "v1": 5
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "SOURCE_EVIDENCE_PLANE"
+      ],
+      "path": "reference-reviews/mb2-reference-coverage",
+      "personal_detail_omitted": false,
+      "primary_role": "SOURCE_EVIDENCE_PLANE",
+      "retained_file_count": 47,
+      "retained_inventory_digest": "1d83a63ea11065ea270482dd8233120fbef0dd93a350fe66da19f16f8dca91ca",
+      "schema_versions": {
+        "json-array": 1,
+        "raw-snapshot-v1": 12,
+        "unversioned": 16,
+        "v1": 6
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "HISTORICAL_TEST_REPLAY_FIXTURE"
+      ],
+      "path": "tests/fixtures/historical_catalog",
+      "personal_detail_omitted": false,
+      "primary_role": "HISTORICAL_TEST_REPLAY_FIXTURE",
+      "retained_file_count": 2,
+      "retained_inventory_digest": "f993cdc45eeaaea510e89c659f6ecca276f7a27346c945c4649de16a0c819700",
+      "schema_versions": {
+        "historical-catalog-test-fixture-v1": 1
+      }
+    },
+    {
+      "exists": true,
+      "member_roles": [
+        "HISTORICAL_TEST_REPLAY_FIXTURE"
+      ],
+      "path": "tests/fixtures/historical_replay",
+      "personal_detail_omitted": false,
+      "primary_role": "HISTORICAL_TEST_REPLAY_FIXTURE",
+      "retained_file_count": 3,
+      "retained_inventory_digest": "3e956c6259cf91725853c25dd163547e473492b8792b39e7e8f057daa05c2033",
+      "schema_versions": {
+        "historical-replay-auxiliary-v1": 1
+      }
+    }
+  ],
+  "personal_file_details_retained": false
+}
