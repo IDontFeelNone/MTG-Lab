@@ -27,6 +27,8 @@ FAMILY_ROLES = {
     'observations': ROLES[2], 'processed': ROLES[4], 'production_runs': ROLES[2],
     'raw': ROLES[2], 'reference': ROLES[1], 'review': ROLES[8],
     'reviews': ROLES[3], 'sources': ROLES[2], 'validation': ROLES[8],
+    # Isolated writer/publication rehearsal inputs, never production authority.
+    'test-evidence': ROLES[8],
 }
 TYPED = {'card': 'cards/*/card.json', 'printing': 'printings/*/printing.json',
     'product': 'products/*/product.json', 'product_version': 'product_versions/*.json',

@@ -50,6 +50,15 @@ output dynamically. Thus a future writer-produced expansion can legitimately
 change current counts without rewriting the Stage 2 baseline or hiding a failure
 behind old data. The existing full hosted expanded-writer gate remains intact.
 
+The isolated writer/publication rehearsal also tracks `data/test-evidence/`:
+copied retained evidence and derived rehearsal inputs, explicitly not owner
+approval. The inspector classifies this known namespace as
+`HISTORICAL_TEST_REPLAY_FIXTURE`, not canonical content or production evidence.
+Unknown families still fail closed. This compatibility rule does not extend the
+retained 1,778-file baseline; the manifest's inspection-method hash continues to
+identify the original baseline method. Later inspections describe their own bytes
+without rewriting that historical review package or granting any permission.
+
 ## Exact census: representations are not interchangeable
 
 | Kind | Typed per-game entities | Promoted state | Explicit both-root query |

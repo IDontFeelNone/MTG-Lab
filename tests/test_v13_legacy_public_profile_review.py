@@ -9,7 +9,8 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from scripts.review_legacy_catalog import inspect, encoded, personal, ROLES
+from scripts.review_legacy_catalog import inspect, encoded, personal, role, ROLES
+from catalog_admission_helpers import prepare_reference_rehearsal
 from historical_catalog import historical_repository
 from repository.snapshots import attach_snapshot, attach_legacy_public, SnapshotError
 from query import CanonicalQueryEngine
@@ -140,6 +141,85 @@ class LegacyPublicProfileReviewTests(unittest.TestCase):
             'sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53')
         fixture = ROOT/'tests/fixtures/historical_replay/card-acquisition-pilot/docs/ARCHITECTURE.md'
         self.assertEqual(hashlib.sha256(fixture.read_bytes()).hexdigest(), ref['historical_auxiliary_architecture_sha256'])
+
+
+class IsolatedRehearsalInspectionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        temporary = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(temporary.cleanup)
+        cls.root = Path(temporary.name)
+        cls.retained = {p.name: p.read_bytes() for p in REVIEW.iterdir()}
+        config, cls.selected = prepare_reference_rehearsal(cls.root)
+        cls.config = read(config)
+        subprocess.run(['git', 'init', '-q', str(cls.root)], check=True)
+        # Track the helper's exact isolated inputs, as the publication fixture does.
+        files = sorted(p.relative_to(cls.root).as_posix()
+                       for p in (cls.root/'data').rglob('*') if p.is_file())
+        subprocess.run(['git', '-C', str(cls.root), 'add', '--', *files], check=True)
+        cls.observed = inspect(cls.root, baseline_revision=BASE)
+
+    def test_official_tracked_rehearsal_family_is_only_test_replay_metadata(self):
+        evidence = [r for r in self.observed['files']
+                    if r['path'].startswith('data/test-evidence/')]
+        self.assertTrue(evidence)
+        self.assertIn('data/test-evidence/reference-input.json', [r['path'] for r in evidence])
+        self.assertEqual({r['role'] for r in evidence}, {'HISTORICAL_TEST_REPLAY_FIXTURE'})
+        family = next(f for f in self.observed['families'] if f['path'] == 'data/test-evidence')
+        self.assertEqual(family['primary_role'], 'HISTORICAL_TEST_REPLAY_FIXTURE')
+        self.assertEqual(family['member_roles'], ['HISTORICAL_TEST_REPLAY_FIXTURE'])
+        self.assertEqual(family['retained_file_count'], len(evidence))
+        self.assertTrue(self.config['rehearsal_only'])
+        self.assertTrue(self.config['not_owner_approval'])
+        self.assertEqual(len(self.selected), 810)
+        self.assertFalse(self.observed['production_eligible'])
+        self.assertEqual(self.observed['approval_state'], 'not_granted')
+        self.assertEqual(self.observed['source_policy_clearance'], 'not_granted')
+
+    def test_rehearsal_inspection_does_not_extend_or_rewrite_retained_baseline(self):
+        baseline = read(REVIEW/'census.json')
+        for key in ('canonical_tree_digest', 'games', 'promoted_state', 'typed_state_overlap'):
+            self.assertEqual(self.observed[key], baseline[key])
+        inventory = read(REVIEW/'file-inventory.json')['files']
+        self.assertEqual(len(inventory), 1778)
+        self.assertFalse(any(r['path'].startswith('data/test-evidence/') for r in inventory))
+        self.assertEqual({p.name: p.read_bytes() for p in REVIEW.iterdir()}, self.retained)
+
+    def test_unknown_and_similarly_named_unreviewed_families_still_fail_closed(self):
+        for family in ('completely-unknown-family', 'test-evidence-extra'):
+            with self.subTest(family=family), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                name = 'data/' + family + '/fixture.json'
+                save(root/name, {'fictional_test_only': True})
+                subprocess.run(['git', 'init', '-q', str(root)], check=True)
+                subprocess.run(['git', '-C', str(root), 'add', '--', name], check=True)
+                with self.assertRaisesRegex(ValueError, '^unclassified data family: ' + family + '$'):
+                    inspect(root, baseline_revision='fictional-review-only')
+                with self.assertRaisesRegex(ValueError, '^unclassified data family: ' + family + '$'):
+                    role(name)
+
+    def test_personal_files_remain_unread_and_source_values_are_not_copied(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            marker = 'FICTIONAL_VALUE_MUST_NOT_ENTER_REVIEW_METADATA'
+            names = ['data/test-evidence/probe.json',
+                     'data/collections/private-fixture.json',
+                     'data/review/collection-audit-pilot/private-fixture.json']
+            for name in names:
+                save(root/name, {'source_value': marker})
+            subprocess.run(['git', 'init', '-q', str(root)], check=True)
+            subprocess.run(['git', '-C', str(root), 'add', '--', *names], check=True)
+            original = Path.read_bytes
+            def guarded(path):
+                if path in {root/name for name in names[1:]}:
+                    raise AssertionError('personal content was read')
+                return original(path)
+            with patch.object(Path, 'read_bytes', guarded):
+                observed = inspect(root, baseline_revision='fictional-review-only')
+            self.assertEqual([r['path'] for r in observed['files']], names[:1])
+            self.assertEqual(observed['files'][0]['role'], 'HISTORICAL_TEST_REPLAY_FIXTURE')
+            self.assertNotIn(marker.encode(), encoded(observed))
+            self.assertEqual({p.name: p.read_bytes() for p in REVIEW.iterdir()}, self.retained)
 
 
 class FictionalLegacyClosureProofTests(unittest.TestCase):
