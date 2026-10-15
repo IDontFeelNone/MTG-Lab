@@ -7,6 +7,7 @@ from types import MappingProxyType
 from analytics import CanonicalAnalyticsEngine, CanonicalAnalyticsResult
 from mtglab.__main__ import main
 from query import QueryResult, QuerySnapshot
+from repository.snapshots import SnapshotError
 
 
 def entity(identifier, kind, values, *, sources=(), datasets=(), confidence=None,
@@ -25,6 +26,10 @@ class FakeQuery:
 
     def snapshot(self):
         return self.value
+
+    def require_capability(self, name):
+        """This explicit unrestricted test double has no bounded attachment."""
+        return None
 
     def validation(self, state):
         if state == "superseded":
@@ -49,6 +54,20 @@ class CanonicalAnalyticsEngineTests(unittest.TestCase):
                    datasets=("one",), uncertainty="unresolved"),
         ))
         self.engine = CanonicalAnalyticsEngine(self.query)
+
+    def test_excluded_validation_capability_is_checked_before_snapshot_io(self):
+        class BoundedQuery(FakeQuery):
+            def require_capability(self, name):
+                if name == "full_query_audit":
+                    raise SnapshotError("catalog capability is unsupported",
+                                        code="unsupported_capability")
+
+            def snapshot(self):
+                raise AssertionError("blocked aggregate must not read a snapshot")
+
+        with self.assertRaises(SnapshotError) as failure:
+            CanonicalAnalyticsEngine(BoundedQuery()).validation()
+        self.assertEqual(failure.exception.code, "unsupported_capability")
 
     def test_summary_is_deterministic_ordered_and_reproducible(self):
         first = self.engine.summary()

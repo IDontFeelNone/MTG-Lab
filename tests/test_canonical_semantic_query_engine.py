@@ -7,6 +7,7 @@ from types import MappingProxyType
 from analytics import CanonicalAnalyticsEngine
 from mtglab.__main__ import main
 from query import QueryError, QueryResult, QuerySnapshot
+from repository.snapshots import SnapshotError
 from semantic import (CanonicalSemanticQueryEngine, SemanticQueryError, SemanticRequest,
                       SemanticResponse)
 
@@ -26,6 +27,9 @@ class FakeQuery:
                                    tuple(sorted(entities, key=lambda x: (x.entity_type, x.canonical_identity))))
 
     def snapshot(self): return self.value
+    def require_capability(self, name):
+        """This explicit unrestricted test double has no bounded attachment."""
+        return None
     def entity(self, identifier, *, entity_type=None):
         found = [x for x in self.value.entities if x.canonical_identity == identifier and (not entity_type or x.entity_type == entity_type)]
         if len(found) != 1: raise QueryError(f"expected one entity for {identifier}, found {len(found)}")
@@ -54,6 +58,25 @@ class CanonicalSemanticQueryEngineTests(unittest.TestCase):
 
     def execute(self, operation, **parameters):
         return self.engine.execute(SemanticRequest(operation, parameters))
+
+    def test_audit_only_semantic_operations_fail_before_snapshot_io(self):
+        class BoundedQuery(FakeQuery):
+            def require_capability(self, name):
+                if name == "full_query_audit":
+                    raise SnapshotError("catalog capability is unsupported",
+                                        code="unsupported_capability")
+
+            def snapshot(self):
+                raise AssertionError("blocked semantic operation must not read a snapshot")
+
+        engine = CanonicalSemanticQueryEngine(BoundedQuery())
+        for operation, parameters in (("validation_statistics", {}),
+                ("list_validation", {"state": "rejected"}),
+                ("list_validation", {"state": "validation_failure"})):
+            with self.subTest(operation=operation, parameters=parameters):
+                with self.assertRaises(SnapshotError) as failure:
+                    engine.execute(SemanticRequest(operation, parameters))
+                self.assertEqual(failure.exception.code, "unsupported_capability")
 
     def test_deterministic_repeated_execution_and_order(self):
         first = self.execute("list_type", entity_type="card")

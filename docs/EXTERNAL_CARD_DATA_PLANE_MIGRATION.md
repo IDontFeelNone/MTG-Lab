@@ -120,7 +120,7 @@ is complete, pending PM review, at canonical main
 `d4e673a31714e30eb4056c43fca76b159008c813`.
 The Stage 1/2 sections above preserve their original milestone context.
 
-## Next implementation candidate — NOT AUTHORIZED
+## Historical Stage 3 recommendation — separately authorized and implemented below
 
 **V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile** is
 **READY_FOR_NON_PRODUCTION_STAGE3** as an engineering scope only: Tier A's40
@@ -136,3 +136,45 @@ service, rules/simulation/AI implementation or source-policy clearance is author
 Future code must preserve fictional/legacy behavior, exact historical hashes,
 known incompleteness and existing production data. See the closure contract's
 explicit Stage 3 acceptance criteria and stop conditions.
+
+## V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile
+
+**Implementation status: implemented, pending independent Project Manager
+inspection.** The owner separately authorized only non-production Tier A after
+PR #178 merged. The historical recommendation above records its original
+authorization context and is not the current task state.
+
+The separately named `legacy-public-compatibility-v1` profile verifies the exact
+40-file in-place closure: 33 core catalog files, five SourceRecord references and
+two audit-context files. Existing query/repository/Collection readers receive an
+explicit bounded read inventory; the other 28 audit files and three unselected
+SourceRecords are not read. Unsupported Tier B/C operations fail before excluded
+I/O. Empty namespaces, one game and absent optional knowledge state are bound.
+No real source values are copied or reformatted into new catalog artifacts.
+
+The existing explicit both-root query has 1,566 entities: 399 Cards, 928 Printings,
+235 Identifiers, two Finishes, Game and Product. Its query identity remains
+`sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7`.
+Bare-constructor scope/root inference, unrestricted legacy behavior and Stage 1's
+fictional contract remain unchanged. The fixed profile blocks legitimate expanded
+catalog bytes instead of silently repinning or substituting an old catalog.
+
+`production_eligible=false`, `approval_state=not_granted`,
+`source_policy_clearance=not_granted` and processing permission false remain fixed.
+All seven operation permissions remain NOT_ESTABLISHED; the production operator
+profile remains BLOCKED. Known Finish gaps, incomplete typed materialization,
+zero Product slots and absent rules/mechanical evidence remain explicit.
+
+The [Stage 3 API and validation scope](V13_STAGE3_LEGACY_PUBLIC_COMPATIBILITY_PROFILE.md)
+describes fictional relocation/security tests, selected-source/audit boundaries,
+unchanged historical replay and the permitted current-public in-place parity
+characterization. This is no writer, acquisition, permission or production
+activation milestone.
+
+## Next implementation candidate — NOT AUTHORIZED
+
+**Tier B Audit-Context Capability Design Review** is the next candidate only.
+It would determine a separate bounded context/consumer contract before any Tier B
+runtime implementation. It cannot expand Stage 3 implicitly. Production snapshots,
+new provider use, MB2 admission, SQL, composition, Rules, Deck, simulation and AI
+transport remain separately blocked or unauthorized.

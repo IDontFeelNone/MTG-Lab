@@ -28,13 +28,17 @@ def product_record_path(
 
 
 def load_product(
-    game: str, product_id: str, *, games_root: Path | None = None
+    game: str, product_id: str, *, games_root: Path | None = None,
+    read_inventory: Any = None
 ) -> Mapping[str, Any]:
     """Load and validate a canonical product record by stable identifiers."""
     record_path = product_record_path(game, product_id, games_root=games_root)
     try:
-        with record_path.open(encoding="utf-8") as product_file:
-            document = json.load(product_file)
+        if read_inventory is not None:
+            document = read_inventory.read_json(record_path)
+        else:
+            with record_path.open(encoding="utf-8") as product_file:
+                document = json.load(product_file)
     except FileNotFoundError as error:
         raise ProductLoadError(f"Product record not found: {record_path}") from error
     except json.JSONDecodeError as error:

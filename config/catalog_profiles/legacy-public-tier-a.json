@@ -1,0 +1,411 @@
+{
+  "absent": [
+    "data/canonical/knowledge/state.json"
+  ],
+  "approval_state": "not_granted",
+  "capabilities": {
+    "catalog_query_collection": "available",
+    "full_query_audit": "unsupported",
+    "gameplay_rules": "unsupported",
+    "historical_admission_replay": "unsupported",
+    "mechanical_evidence": "outside_tier_a",
+    "product_collation": "unsupported"
+  },
+  "capability_tier": "CATALOG_QUERY_COLLECTION",
+  "closure_id": "sha256:2d5241a2c03a07bb435a60ae0a9457b6795fa6bee511a38721bcce250c4950c7",
+  "contract_version": "v1",
+  "data_processing_permission_established": false,
+  "data_root": "data",
+  "entity_counts": {
+    "card": 399,
+    "finish": 2,
+    "game": 1,
+    "identifier": 235,
+    "printing": 928,
+    "product": 1
+  },
+  "files": [
+    {
+      "byte_length": 91629,
+      "path": "data/audit/bounded_promotions/phase-119-mb2-batch-000001-e32022126c07.json",
+      "placement": "AUDIT_CONTEXT",
+      "sha256": "1abdf8da7188d0ad24c234237dcd3827de38ec631ab6b411f06c1455c127021d"
+    },
+    {
+      "byte_length": 25558,
+      "path": "data/audit/bounded_promotions/phase-136-mtgjson-pilot-30786023976-1.json",
+      "placement": "AUDIT_CONTEXT",
+      "sha256": "eeae7aa9c51cda61c77ed480b4eb3f95bc4186116963598ea080029d96a88b93"
+    },
+    {
+      "byte_length": 460,
+      "path": "data/canonical/games/magic/cards/magic.abzan-falconer/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "6baadefd9981b26d410dc6ff0eb7a5f3604e5f705780a1c35fbeb05e278387bc"
+    },
+    {
+      "byte_length": 468,
+      "path": "data/canonical/games/magic/cards/magic.academy-manufactor/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "26cf523d854c2f2371e54ec473a5f3e3500554e95baaffc3b76036d0c4b68fc4"
+    },
+    {
+      "byte_length": 452,
+      "path": "data/canonical/games/magic/cards/magic.ad-nauseam/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "569fb8295ab3d924302c9d7fc4e8cf178cea355c13823912f222590fe0970b3a"
+    },
+    {
+      "byte_length": 464,
+      "path": "data/canonical/games/magic/cards/magic.adarkar-windform/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "8a8386488aabe58a669113ecec86d6ea0f19bcdbee4b7e43deca4abd1ae25289"
+    },
+    {
+      "byte_length": 478,
+      "path": "data/canonical/games/magic/cards/magic.ancestral-recall/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "f264ae1e716029828171979a773150ab1b32ca703198cda78922ef8b972d415a"
+    },
+    {
+      "byte_length": 468,
+      "path": "data/canonical/games/magic/cards/magic.black-lotus/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "384b0f774e617b565d7d76e4b05ac85226e45b28797b320909d617b61c954b89"
+    },
+    {
+      "byte_length": 458,
+      "path": "data/canonical/games/magic/cards/magic.lightning-bolt/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "644f41f56c2f35753c314f5a5831e94e9fdf1cb1a7bc2bbe784acc360d778c6c"
+    },
+    {
+      "byte_length": 468,
+      "path": "data/canonical/games/magic/cards/magic.mox-emerald/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "aa01e186ff6a11953299179625c9061a6e9eaf17928c1588415dabdb3336530c"
+    },
+    {
+      "byte_length": 460,
+      "path": "data/canonical/games/magic/cards/magic.mox-jet/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "b1ca3ffadfa4d5de85a91c2cc8eefd52e5c8538714f89b00e6baa0db7eb8d2ed"
+    },
+    {
+      "byte_length": 464,
+      "path": "data/canonical/games/magic/cards/magic.mox-pearl/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "5fb3631d3cccf274cfe2cf46333ce32530a5e08e5e65c9e7660453a8714c7353"
+    },
+    {
+      "byte_length": 462,
+      "path": "data/canonical/games/magic/cards/magic.mox-ruby/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "bfaf3cbae5fa530493b23c5ee3763763bc528e06d637b502a3ef42fc65c08ff4"
+    },
+    {
+      "byte_length": 470,
+      "path": "data/canonical/games/magic/cards/magic.mox-sapphire/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "3cadf5cc301c6a715d54ba9e503bce4affacc318d302993b8770c461dc934431"
+    },
+    {
+      "byte_length": 462,
+      "path": "data/canonical/games/magic/cards/magic.sol-ring/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "ec17bd5b43fb9518e26bb36ccdf9b68cff64475c58609dc6d324531590544867"
+    },
+    {
+      "byte_length": 464,
+      "path": "data/canonical/games/magic/cards/magic.time-walk/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "2178a7008cd767b67e9673e4105de78767a046cbf716f3fbc1a6a75e3b155624"
+    },
+    {
+      "byte_length": 468,
+      "path": "data/canonical/games/magic/cards/magic.timetwister/card.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "a5f57ee54c736280103bd89cb1210a154f40f99d858b9b01dd9b260cbb3adf55"
+    },
+    {
+      "byte_length": 111,
+      "path": "data/canonical/games/magic/game.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "65d3fc54eb9a0eca53e074e956b1af6a7575201313195897044b327df122a4e5"
+    },
+    {
+      "byte_length": 666,
+      "path": "data/canonical/games/magic/printings/magic.lea.161.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "5133d16dc83ebf71c6515632bbd1ddcfba26b2c4061ef518013cc72de584fe38"
+    },
+    {
+      "byte_length": 566,
+      "path": "data/canonical/games/magic/printings/magic.lea.232.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "56425e146844e40e7b6fc52b0090f0d842243990bb92106e17dd1bbba8f59134"
+    },
+    {
+      "byte_length": 566,
+      "path": "data/canonical/games/magic/printings/magic.lea.262.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "f56ad71bd1c37f4b0fc4f4e49e828e17cf642d11e8febb599f3e488efb8cd1be"
+    },
+    {
+      "byte_length": 562,
+      "path": "data/canonical/games/magic/printings/magic.lea.263.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "36015b80471d13f67140f1f248843f0794dcfe50d7b4dfe694bac781d2e01da9"
+    },
+    {
+      "byte_length": 564,
+      "path": "data/canonical/games/magic/printings/magic.lea.264.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "f8e08e7c856a89ef7ec765f0bffafc4eb33baa74e92e91aaa8b9e09ad67f6da7"
+    },
+    {
+      "byte_length": 563,
+      "path": "data/canonical/games/magic/printings/magic.lea.265.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "155f63e182faa9fe5d5e1321372ff0b4a47bcf4bbbdc3c26d82d31d6704bf898"
+    },
+    {
+      "byte_length": 567,
+      "path": "data/canonical/games/magic/printings/magic.lea.266.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "86bee9f8d6d9e5eb944000078a3a8bc67675a6abb3d13aa0bb0b5b87c305e8a3"
+    },
+    {
+      "byte_length": 567,
+      "path": "data/canonical/games/magic/printings/magic.lea.270.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "b4ca2ab8374b0e1a975704d98922a545a21085951220273be9dceb90071cd6b9"
+    },
+    {
+      "byte_length": 569,
+      "path": "data/canonical/games/magic/printings/magic.lea.47.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "9f66d60498c8e452d0f4b0144a839b67c9780fb6f3b36f583e0db57a1a2229ad"
+    },
+    {
+      "byte_length": 562,
+      "path": "data/canonical/games/magic/printings/magic.lea.83.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "50a04967eb788c61c76bb8077b29b0f28cb813960b66e5f1654290c99fcc144a"
+    },
+    {
+      "byte_length": 564,
+      "path": "data/canonical/games/magic/printings/magic.lea.85.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "4f3ab79252d899529f9529b5f51f7fb3dec069daad36baf98137825ca2784a97"
+    },
+    {
+      "byte_length": 903,
+      "path": "data/canonical/games/magic/printings/magic.mb2.1.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "dc3f0c30877d19a231e818efe19026941a6bc54fb6cc986d905ccee84337693d"
+    },
+    {
+      "byte_length": 903,
+      "path": "data/canonical/games/magic/printings/magic.mb2.2.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "b54f6aa0e27f7e1458baa56d1a15281cb9d78b02903404990697d6a83bcf3e21"
+    },
+    {
+      "byte_length": 895,
+      "path": "data/canonical/games/magic/printings/magic.mb2.3.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "72740a98d400afe74829437f39a07e0448a0cbfc721ad37e5cf9e0d7753b402f"
+    },
+    {
+      "byte_length": 905,
+      "path": "data/canonical/games/magic/printings/magic.mb2.4.en/printing.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "db30530ab6573bcb14b69d8b21d6af1e2f940db6d854475a78efa041abb5845f"
+    },
+    {
+      "byte_length": 907,
+      "path": "data/canonical/games/magic/products/mystery_booster_2/product.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "a83708aad4f5f33abe5ee54c30e22d5254f153a68c7663a4868937a50e725642"
+    },
+    {
+      "byte_length": 702,
+      "path": "data/canonical/games/magic/sources/gatherer-lightning-bolt-lea.json",
+      "placement": "SOURCE_EVIDENCE_REFERENCE",
+      "sha256": "e148b523d20c2ea41476dfc67018da5e8b3aefecb5d5f3697382dd5c3d931892"
+    },
+    {
+      "byte_length": 1659,
+      "path": "data/canonical/games/magic/sources/gatherer-limited-edition-alpha-phase-58.json",
+      "placement": "SOURCE_EVIDENCE_REFERENCE",
+      "sha256": "b74531386c73c175d25d04fa81659eb677d315e74587198053d5d2ae58fa4de4"
+    },
+    {
+      "byte_length": 504,
+      "path": "data/canonical/games/magic/sources/gatherer-magic-card-identities-wave-1.json",
+      "placement": "SOURCE_EVIDENCE_REFERENCE",
+      "sha256": "46dc946ebdd3d7805b4054b5e6b90ad76491b3b67ec73a074969fb84ab336fca"
+    },
+    {
+      "byte_length": 586,
+      "path": "data/canonical/games/magic/sources/scryfall-mystery-booster-2-wave-1.json",
+      "placement": "SOURCE_EVIDENCE_REFERENCE",
+      "sha256": "78ea29d19a0ac68eec686da4a908460c89387c8d7943f48c66c6d4f766fce6a4"
+    },
+    {
+      "byte_length": 521,
+      "path": "data/canonical/games/magic/sources/wizards-mystery-booster-2-gallery-wave-1.json",
+      "placement": "SOURCE_EVIDENCE_REFERENCE",
+      "sha256": "61b20f7519e4ea1dce166ae3f816d617ce7b5202236d72641adfdce05c165c8a"
+    },
+    {
+      "byte_length": 4855554,
+      "path": "data/canonical/state.json",
+      "placement": "CORE_CATALOG_CONTENT",
+      "sha256": "5d01f3382a92b1afbb5105686b93b757e9a7669d7ee3f760bcbf88eadacc2d5f"
+    }
+  ],
+  "game": "magic",
+  "game_namespaces": [
+    "magic"
+  ],
+  "games_root": "data/canonical/games",
+  "historical_prestate_reference": "881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+  "incompleteness": {
+    "finish_references": {
+      "status": "incomplete",
+      "unresolved_by_identifier": {
+        "etched": 9,
+        "signed": 21
+      }
+    },
+    "gameplay_rules": "unsupported",
+    "mechanical_evidence": "outside_tier_a",
+    "optional_knowledge_state": "absent",
+    "product_collation": "unsupported",
+    "product_slots": 0,
+    "typed_materialization": "incomplete"
+  },
+  "namespaces": [
+    {
+      "paths": [
+        "data/canonical/games/magic/game.json"
+      ],
+      "pattern": "data/canonical/games/magic/game.json"
+    },
+    {
+      "paths": [
+        "data/canonical/games/magic/cards/magic.abzan-falconer/card.json",
+        "data/canonical/games/magic/cards/magic.academy-manufactor/card.json",
+        "data/canonical/games/magic/cards/magic.ad-nauseam/card.json",
+        "data/canonical/games/magic/cards/magic.adarkar-windform/card.json",
+        "data/canonical/games/magic/cards/magic.ancestral-recall/card.json",
+        "data/canonical/games/magic/cards/magic.black-lotus/card.json",
+        "data/canonical/games/magic/cards/magic.lightning-bolt/card.json",
+        "data/canonical/games/magic/cards/magic.mox-emerald/card.json",
+        "data/canonical/games/magic/cards/magic.mox-jet/card.json",
+        "data/canonical/games/magic/cards/magic.mox-pearl/card.json",
+        "data/canonical/games/magic/cards/magic.mox-ruby/card.json",
+        "data/canonical/games/magic/cards/magic.mox-sapphire/card.json",
+        "data/canonical/games/magic/cards/magic.sol-ring/card.json",
+        "data/canonical/games/magic/cards/magic.time-walk/card.json",
+        "data/canonical/games/magic/cards/magic.timetwister/card.json"
+      ],
+      "pattern": "data/canonical/games/magic/cards/*/card.json"
+    },
+    {
+      "paths": [
+        "data/canonical/games/magic/printings/magic.lea.161.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.232.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.262.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.263.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.264.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.265.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.266.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.270.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.47.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.83.en/printing.json",
+        "data/canonical/games/magic/printings/magic.lea.85.en/printing.json",
+        "data/canonical/games/magic/printings/magic.mb2.1.en/printing.json",
+        "data/canonical/games/magic/printings/magic.mb2.2.en/printing.json",
+        "data/canonical/games/magic/printings/magic.mb2.3.en/printing.json",
+        "data/canonical/games/magic/printings/magic.mb2.4.en/printing.json"
+      ],
+      "pattern": "data/canonical/games/magic/printings/*/printing.json"
+    },
+    {
+      "paths": [
+        "data/canonical/games/magic/products/mystery_booster_2/product.json"
+      ],
+      "pattern": "data/canonical/games/magic/products/*/product.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/identifiers/*.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/identifiers/**/*.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/finishes/*.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/treatments/*.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/rarities/*.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/product_versions/**/*.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/packs/**/*.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/slots/**/*.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/sheets/*.json"
+    },
+    {
+      "paths": [],
+      "pattern": "data/canonical/games/magic/print_sheets/**/*.json"
+    },
+    {
+      "paths": [
+        "data/canonical/games/magic/sources/gatherer-lightning-bolt-lea.json",
+        "data/canonical/games/magic/sources/gatherer-limited-edition-alpha-phase-58.json",
+        "data/canonical/games/magic/sources/gatherer-magic-card-identities-wave-1.json",
+        "data/canonical/games/magic/sources/mb2-wave-1-evidence-bundle.json",
+        "data/canonical/games/magic/sources/scryfall-mystery-booster-2-wave-1.json",
+        "data/canonical/games/magic/sources/wizards-mystery-booster-2-gallery-wave-1.json",
+        "data/canonical/games/magic/sources/wizards-mystery-booster-2-product-overview.json"
+      ],
+      "pattern": "data/canonical/games/magic/sources/*.json"
+    }
+  ],
+  "permissions": {
+    "AI_OR_MODEL_EXPORT": "NOT_ESTABLISHED",
+    "COMMERCIAL_OR_PAID_SERVICE": "NOT_ESTABLISHED",
+    "EXISTING_PUBLIC_GIT_COMPATIBILITY": "NOT_ESTABLISHED",
+    "FREE_PUBLIC_APPLICATION_SERVICE": "NOT_ESTABLISHED",
+    "LOCAL_PRIVATE_PROCESSING": "NOT_ESTABLISHED",
+    "NEW_PUBLIC_REPOSITORY_REDISTRIBUTION": "NOT_ESTABLISHED",
+    "PRIVATE_OPERATOR_RETENTION": "NOT_ESTABLISHED"
+  },
+  "precedence": "typed-first-exact-entity-type-id",
+  "production_eligible": false,
+  "profile": "legacy-public-compatibility-v1",
+  "profile_id": "sha256:71b8879ced8fe7203aa69755bec411f0160a7c0011fdc768976c2113df600d3e",
+  "query_snapshot_id": "sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7",
+  "source_policy_clearance": "not_granted"
+}

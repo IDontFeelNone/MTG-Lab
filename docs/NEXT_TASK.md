@@ -1,47 +1,57 @@
-# Next implementation candidate — NOT AUTHORIZED
+# Next candidate — NOT AUTHORIZED; Stage 3 pending review
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
 Stage 1 fictional read-only snapshot attachment is merged in PR #176.
 **V13 Stage 2 — Legacy/Public Snapshot Profile Review** is merged in PR #177.
-The separately authorized **Legacy/Public Profile Permission and Closure Contract**
-is complete, pending independent Project Manager inspection.
-Reviewed canonical main: `d4e673a31714e30eb4056c43fca76b159008c813`.
+The **Legacy/Public Profile Permission and Closure Contract** is merged in PR #178;
+its **READY_FOR_NON_PRODUCTION_STAGE3** recommendation received separate owner
+implementation authorization for this milestone.
+Reviewed canonical main: `e63b5ca54d6cef0425c39fe8cc05c79720dc9c03`.
 Architecture v12 remains the preserved historical baseline.
 
-## Current recommendation and explicit limits
+## Current implementation and explicit limits
 
-**READY_FOR_NON_PRODUCTION_STAGE3**, targeting only Tier A
-**CATALOG_QUERY_COLLECTION**: 33 existing core files, five SourceRecord references
-and two separately bound audit files. The explicit both-root target retains
-399 Cards / 928 Printings / 235 Identifiers / two Finishes / Game / Product,
-original IDs and query identity. The 32-entity bare-constructor scope is distinct
-legacy path-inference behavior, unchanged. Tier B full audits and Tier C historical
-admission replay remain separate capabilities. No runtime change is made here.
+**V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile** is implemented,
+pending independent Project Manager inspection. The explicit
+`legacy-public-compatibility-v1` profile supports only Tier A
+**CATALOG_QUERY_COLLECTION** through 40 in-place dependencies: 33 existing core
+files, five selected SourceRecord references and two separately bound audit files.
+The bounded read inventory prevents excluded audit/source reads and rejects Tier
+B/C operations before I/O. No real catalog copy, reformatting, export or new bundle
+is created. Fictional mixed fixtures exercise relocation and negative-I/O cases.
+
+The explicit both-root compatibility result retains 399 Cards / 928 Printings /
+235 Identifiers / two Finishes / Game / Product, totaling 1,566 query entities,
+with the unchanged query identity `sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7`.
+The bare constructor's 32-entity scope, unrestricted legacy profile and Stage 1
+fictional profile remain distinct and unchanged. New namespace members, optional
+knowledge state, selected-byte drift and retargeted roots block this fixed profile.
 
 The production operator profile remains **BLOCKED**. The complete mixed-content
 permission chain remains **NOT_ESTABLISHED** for processing, private retention,
-existing-public-Git use, new redistribution, free/paid service and AI export.
-Engineering readiness for authored metadata/in-place references grants no rights
-over their referents. No corpus copy, reformatting, service, AI export, production
-attachment or new use is authorized by non-production labeling.
+existing-public-Git compatibility, new redistribution, free/paid service and AI
+export. Fixed flags remain `production_eligible=false`, `approval_state=not_granted`,
+`source_policy_clearance=not_granted` and
+`data_processing_permission_established=false`. Integrity grants no permission.
+Finish gaps, typed incompleteness, zero Product slots and unavailable rules/
+mechanical coverage are represented honestly, not repaired by the profile.
 
-Next candidate: **V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile**.
-**NOT AUTHORIZED.** It would require a narrow bounded read-side audit-context seam,
-exact closure/absence checks, unchanged query/Collection semantics and fictional
-negative-I/O/relocation tests. It would remain production-ineligible and would not
-fix default root inference, migrate identities/state, change writer authority,
-implement SQL/composition/Rules/Deck/Simulation/AI, or acquire provider data.
-Stage 2's historical production-readiness blocker is preserved, not cleared.
+Next candidate: **Tier B Audit-Context Capability Design Review**.
+**NOT AUTHORIZED.** This candidate would review a separate audit-context capability;
+it does not authorize Tier B/C implementation, closure expansion, a production
+snapshot, real-data admission, provider acquisition, SQL/composition, Rules/Deck/
+Simulation/AI work or source-policy clearance. No next stage begins automatically.
 
 MB2's 810 selected candidates and nine multiface holds remain pending and unadmitted.
 Owner spelling proposals remain unapplied; physical Printing verification stays
 unresolved. `SOURCE_POLICY_CLEARED_PLANS`, pending execution configuration,
-production canonical bytes, writer/admission/OIDC and the historical Architecture-v12
-auxiliary fixture are unchanged. No owner admission decision or merge occurred.
+production canonical bytes, selected audits, SourceRecords, writer/admission/OIDC
+and the historical Architecture-v12 auxiliary fixture are unchanged. No owner
+admission decision or merge occurred.
 
-See [the closure contract](V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md),
-[Stage 2 retained findings](V13_STAGE2_LEGACY_PUBLIC_PROFILE_REVIEW.md), and
-[Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots).
+See [the Stage 3 API and limits](V13_STAGE3_LEGACY_PUBLIC_COMPATIBILITY_PROFILE.md),
+[the unchanged closure contract](V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md), and
+[Stage 2 retained findings](V13_STAGE2_LEGACY_PUBLIC_PROFILE_REVIEW.md).
 
 ---
 
