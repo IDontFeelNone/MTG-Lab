@@ -1,0 +1,184 @@
+{
+  "approval_state": "not_granted",
+  "baseline_revision": "83e832e3105ddb1c65252b5946387651c49685e4",
+  "canonical_file_count": 52,
+  "canonical_json_file_count": 46,
+  "canonical_tree_digest": "881c4ddf1dd5f3dc8004aef001277407e359b165cba6d9f5e8d442e9eef48077",
+  "document_kind": "review_inventory_not_snapshot",
+  "excluded_personal_roots": [
+    "data/collections",
+    "data/review/collection-audit-pilot"
+  ],
+  "format_version": "legacy-public-review-v1",
+  "games": {
+    "magic": {
+      "card": {
+        "count": 15,
+        "ordered_id_digest": "6d3d79bf33fd00a86c739fb126572395e95886567cf82a750d81aa461064827b",
+        "schema_versions": {
+          "v1": 15
+        }
+      },
+      "finish": {
+        "count": 0,
+        "ordered_id_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "schema_versions": {}
+      },
+      "game": {
+        "count": 1,
+        "schema_versions": {
+          "unversioned": 1
+        }
+      },
+      "pack_definition": {
+        "count": 0,
+        "ordered_id_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "schema_versions": {}
+      },
+      "print_sheet": {
+        "count": 0,
+        "ordered_id_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "schema_versions": {}
+      },
+      "printing": {
+        "count": 15,
+        "ordered_id_digest": "6b4d61410f557be62c63f59e6a74bf3ba065b5e487ecddc0855fc208a8ef3db1",
+        "schema_versions": {
+          "v1": 15
+        }
+      },
+      "product": {
+        "count": 1,
+        "ordered_id_digest": "b850d3caf15046ffb96ffa91d49bc753f0ab2d20056368a18c3dd5afea0a8dd1",
+        "schema_versions": {
+          "v1": 1
+        }
+      },
+      "product_version": {
+        "count": 0,
+        "ordered_id_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "schema_versions": {}
+      },
+      "rarity": {
+        "count": 0,
+        "ordered_id_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "schema_versions": {}
+      },
+      "slot": {
+        "count": 0,
+        "ordered_id_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "schema_versions": {}
+      },
+      "source_record": {
+        "count": 8,
+        "schema_versions": {
+          "v1": 8
+        }
+      },
+      "treatment": {
+        "count": 0,
+        "ordered_id_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "schema_versions": {}
+      }
+    }
+  },
+  "inventory_digest": "f7ab19ad0a0e2360076ac46a54d698ae81e0b1f36dea758015385fbce5314bc5",
+  "optional_knowledge_state_present": false,
+  "production_eligible": false,
+  "promoted_relationships": {
+    "identifier_namespace_counts": {
+      "cardKingdomFoilId": 10,
+      "cardKingdomId": 16,
+      "cardsphereFoilId": 3,
+      "cardsphereId": 19,
+      "deckboxId": 13,
+      "mcmId": 24,
+      "mcmMetaId": 12,
+      "mtgjsonV4Id": 12,
+      "mtgoId": 6,
+      "multiverseId": 26,
+      "scryfallCardBackId": 21,
+      "scryfallId": 22,
+      "scryfallIllustrationId": 24,
+      "scryfallOracleId": 12,
+      "tcgplayerProductId": 15
+    },
+    "language_labels": {
+      "English": 896,
+      "French": 4,
+      "Japanese": 4,
+      "Quenya": 6,
+      "Spanish": 3
+    },
+    "orphan_identifier_printing_count": 0,
+    "orphan_printing_card_count": 0,
+    "unresolved_finish_reference_counts": {
+      "etched": 9,
+      "signed": 21
+    }
+  },
+  "promoted_state": {
+    "card": {
+      "count": 384,
+      "ordered_id_digest": "c0d349225c540ea0fe6e23f7f7f5056996b0ec9eba0559eba38fc9398a7c6cc4",
+      "schema_versions": {
+        "unversioned": 384
+      }
+    },
+    "finish": {
+      "count": 2,
+      "ordered_id_digest": "50e09b9465e113d79a75452e2d5a8417c01d42f50740d42af5cd2787ac9c07d3",
+      "schema_versions": {
+        "unversioned": 2
+      }
+    },
+    "identifier": {
+      "count": 235,
+      "ordered_id_digest": "448feb286d94e003830a5a12f21a321e0a0fd999e8c925ca2836fc860f0c8548",
+      "schema_versions": {
+        "unversioned": 235
+      }
+    },
+    "printing": {
+      "count": 913,
+      "ordered_id_digest": "59f292a642177124a320197800a0dd9582f60d2bccb8d4c72715cdd423c9d19d",
+      "schema_versions": {
+        "unversioned": 913
+      }
+    }
+  },
+  "separate_planes": {
+    "audit_json_files": 30,
+    "knowledge_fact_files": 140,
+    "knowledge_fact_kinds": {
+      "card_advantage": 1,
+      "deck_role": 4,
+      "demand": 30,
+      "format_usage": 10,
+      "legality": 10,
+      "mana_acceleration": 1,
+      "market_observation_coverage": 10,
+      "market_price_availability": 10,
+      "mechanical_theme": 10,
+      "product_membership": 10,
+      "removal": 2,
+      "reprint_history": 30,
+      "treatment_availability": 10,
+      "tribal_theme": 1,
+      "tutor": 1
+    },
+    "market_files_by_area": {
+      "acquisitions": 6,
+      "imports": 2,
+      "observations": 956
+    }
+  },
+  "source_policy_clearance": "not_granted",
+  "typed_state_overlap": {
+    "magic": {
+      "card": 0,
+      "printing": 0,
+      "shared_name_count_not_identity_mapping": 1
+    }
+  }
+}

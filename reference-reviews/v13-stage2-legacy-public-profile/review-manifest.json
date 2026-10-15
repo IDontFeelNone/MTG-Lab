@@ -1,0 +1,49 @@
+{
+  "approval_state": "not_granted",
+  "baseline_revision": "83e832e3105ddb1c65252b5946387651c49685e4",
+  "document_kind": "review_not_snapshot",
+  "files": [
+    {
+      "byte_length": 5182,
+      "path": "census.json",
+      "sha256": "e93d7baca8ef8175c7f9c4cb53dfdf79a820f2f54042d9f02d617b6a39ecaf3a"
+    },
+    {
+      "byte_length": 29557,
+      "path": "consumer-dependencies.json",
+      "sha256": "c4ad8a5a66434cf9274b5a64c89f355a88bb8f702dedce0af2033a6e6e8ac7e1"
+    },
+    {
+      "byte_length": 548600,
+      "path": "file-inventory.json",
+      "sha256": "61e7076c89ae8b9397fa7ab2168ea7620ce1d579c7101a3cc22b2016e7d905c9"
+    },
+    {
+      "byte_length": 13930,
+      "path": "layer-inventory.json",
+      "sha256": "708f72084cf51f40b47a55adc1df0c090a8f9d4242658cf3f61508fc860697c9"
+    },
+    {
+      "byte_length": 3433,
+      "path": "preservation-bindings.json",
+      "sha256": "7eceeec7fe8d00fc6b4c3e6e54bafdf23d28c188296900744363e5c863bb5340"
+    },
+    {
+      "byte_length": 1578,
+      "path": "review-decision.json",
+      "sha256": "3150bbd362c83d550716bed37217ca9e26025a7966cd73e499feb459d849189c"
+    },
+    {
+      "byte_length": 58744,
+      "path": "semantic-dependencies.json",
+      "sha256": "5c50c5d8c06325c125a8d4ea334bee36c4c48f7461a0c37eb99ccf7dd333c028"
+    }
+  ],
+  "format_version": "legacy-public-review-v1",
+  "inspection_method": {
+    "authority": "read-only review method, not snapshot or admission validation",
+    "repository_relative_path": "scripts/review_legacy_catalog.py",
+    "sha256": "1f7d90251b7ea0d2061e99e57a4c7d17e1b2a489a38f02d231c07a8186e87cdf"
+  },
+  "production_eligible": false
+}

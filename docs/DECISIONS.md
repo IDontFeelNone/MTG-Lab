@@ -396,8 +396,10 @@ After this governance acceptance, the owner separately authorized **V13 Stage 1 
 Fictional Canonical Snapshot Attachment**. Its fictional-only read-side implementation
 is pending PM review; see [the runtime scope](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 This later instruction does not grant real-data permission or admission authority.
-The candidate **V13 Stage 2 — Legacy/Public Snapshot Profile Review** remains
-NOT AUTHORIZED. See [the migration plan](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md).
+Stage 1 is now merged in PR #176. The owner separately authorized **V13 Stage 2 —
+Legacy/Public Snapshot Profile Review** as review only; see [its findings](V13_STAGE2_LEGACY_PUBLIC_PROFILE_REVIEW.md).
+A real legacy profile remains unimplemented and Stage 3 is NOT AUTHORIZED.
+See [the migration plan](EXTERNAL_CARD_DATA_PLANE_MIGRATION.md).
 
 ### Reasoning
 

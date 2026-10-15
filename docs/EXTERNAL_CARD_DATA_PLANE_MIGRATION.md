@@ -1,6 +1,6 @@
 # Incremental migration and CI/deployment model
 
-**Status: Architecture v13 is ACTIVE APPROVED; fictional Stage 1 implemented, pending PM review.**
+**Status: Architecture v13 is ACTIVE APPROVED; Stage 1 merged, Stage 2 review pending PM inspection.**
 Decision 017 is Accepted by the owner. Architecture v12 is the previous historical
 baseline. Governance approval alone authorized no runtime step. The later owner
 instruction separately authorized only fictional Stage 1; later stages remain future work.
@@ -83,7 +83,7 @@ render timestamp is display metadata, not silently a new analytical input.
 
 ## V13 Stage 1 — Fictional Canonical Snapshot Attachment
 
-**Implementation status: implemented, pending PM review.** The owner separately
+**Implementation status: merged in PR #176.** The owner separately
 authorized this fictional-only runtime checkpoint after architecture acceptance.
 See [the API and supported contract](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 The numbered migration rows above are planning workstreams, not separately approved
@@ -106,7 +106,16 @@ policy, select a production snapshot or authorize any of these operations.
 
 ## V13 Stage 2 — Legacy/Public Snapshot Profile Review
 
-**NOT AUTHORIZED.** Candidate only: review the existing public catalog generations,
-exact evidence closure and reader compatibility before proposing another profile.
-No real-data attachment, production snapshot selection, source-policy clearance,
-writer change or further implementation follows automatically from Stage 1.
+**Review status: separately authorized and complete, pending PM inspection.**
+See [the retained review and Stage 3 blockers](V13_STAGE2_LEGACY_PUBLIC_PROFILE_REVIEW.md).
+No real snapshot profile or runtime migration is implemented. The current query
+requires mixed representations, audit context and explicit roots; historical
+materialization gaps and operation-specific rights remain unresolved.
+
+## Next prerequisite — Legacy/Public Profile Permission and Closure Contract
+
+**NOT AUTHORIZED.** Stage 3 real-profile implementation is NOT READY. First review
+exact field/component/operation permissions and evidence/CI placement, define the
+required query/audit capability closure and preserve declared legacy incompleteness.
+No writer change, identity migration, state rewrite, real-data activation or
+source-policy clearance follows from the Stage 2 inventory.

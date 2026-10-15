@@ -1,0 +1,33 @@
+{
+  "approval_state": "not_granted",
+  "baseline_revision": "83e832e3105ddb1c65252b5946387651c49685e4",
+  "document_kind": "review_decision_not_admission",
+  "identity_migration_required": false,
+  "implementation_authorized": false,
+  "next_candidate": "Legacy/Public Profile Permission and Closure Contract",
+  "next_candidate_authorized": false,
+  "policy_evidence": [
+    "docs/MB2_810_PRODUCTION_READINESS.md",
+    "docs/MB2_810_SOURCE_PERMISSION_FOLLOW_UP.md",
+    "reference-reviews/mb2-810-source-policy/2026-10-14/policy-review.json",
+    "docs/EXTERNAL_CARD_DATA_PLANE_SECURITY.md"
+  ],
+  "query_snapshot_redefinition_required": false,
+  "reasons": [
+    "Required operation-specific permissions for exact legacy fields and replay closure are not established.",
+    "AuditAPI/pre-state/admission-validation scopes need distinct declared closure and incomplete legacy Finish semantics."
+  ],
+  "source_policy_clearance": false,
+  "stage3_feasibility": "NOT READY",
+  "technical_contract": [
+    "preserve typed and promoted state bytes separately",
+    "typed-first precedence and explicit single-game state scope",
+    "preserve original entity IDs, aliases and language labels",
+    "outer release identity is distinct from query ID and canonical pre-state",
+    "audit and source planes are dependencies, not canonical entities",
+    "no personal, market, intelligence, pending or raw corpus absorption",
+    "preserve original historical hashes and disclose materialization gaps"
+  ],
+  "tier0_correction_demonstrated": false,
+  "writer_change_authorized": false
+}

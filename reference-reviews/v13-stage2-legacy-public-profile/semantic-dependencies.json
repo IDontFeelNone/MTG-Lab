@@ -1,0 +1,1317 @@
+{
+  "baseline_revision": "83e832e3105ddb1c65252b5946387651c49685e4",
+  "document_kind": "dependency_review_not_snapshot",
+  "exclusions": [
+    "raw provider corpora are not read by the basic query",
+    "knowledge/facts is not canonical/knowledge/state.json",
+    "market evidence requires separate temporal selection",
+    "personal data is never included"
+  ],
+  "meaning": "These are observed read dependencies, not a permission grant or a releasable snapshot. Audit scanning touches all30files even when only2enterentityprovenance. Original source references can require independently permissioned evidence beyond the observed read set.",
+  "optional_knowledge_state": {
+    "absence_must_be_bound": true,
+    "path": "data/canonical/knowledge/state.json",
+    "present": false
+  },
+  "promoted_values_field_occurrences": {
+    "card": {
+      "card_reference": 384,
+      "colors": 384,
+      "layout": 384,
+      "mana_cost": 384,
+      "name": 384,
+      "normalized_name": 384
+    },
+    "finish": {
+      "value": 2
+    },
+    "identifier": {
+      "namespace": 235,
+      "printing_uuid": 235,
+      "value": 235
+    },
+    "printing": {
+      "card_id": 913,
+      "collector_number": 913,
+      "digital_or_paper": 534,
+      "finish_ids": 913,
+      "frame_or_treatment": 534,
+      "identifiers": 379,
+      "language": 913,
+      "promotional": 534,
+      "provider_card_or_oracle_id": 534,
+      "rarity": 913,
+      "release_date": 534,
+      "reprint": 534,
+      "set_code": 534,
+      "set_id": 913,
+      "set_name": 534,
+      "source_record_identity": 534,
+      "uuid": 913
+    }
+  },
+  "sets": {
+    "canonical_tree_and_full_query_api_parity": {
+      "count": 82,
+      "files": [
+        {
+          "byte_length": 91629,
+          "path": "data/audit/bounded_promotions/phase-119-mb2-batch-000001-e32022126c07.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "1abdf8da7188d0ad24c234237dcd3827de38ec631ab6b411f06c1455c127021d"
+        },
+        {
+          "byte_length": 25558,
+          "path": "data/audit/bounded_promotions/phase-136-mtgjson-pilot-30786023976-1.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "eeae7aa9c51cda61c77ed480b4eb3f95bc4186116963598ea080029d96a88b93"
+        },
+        {
+          "byte_length": 4888,
+          "path": "data/audit/promotions/card-promotion-01ee891c52a9509940fd23bd.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "32dc581ff2601d1dc62fd5aa819cfd74d5af1fde1aa03abee8c4a49ca0b5375c"
+        },
+        {
+          "byte_length": 5019,
+          "path": "data/audit/promotions/card-promotion-1dde8c5ddfaa03ceac14c16b.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "8a33c564fc4bee4a0a8d2af6d7a8166881f9069723c38dbcf1e9c354bbfa55ec"
+        },
+        {
+          "byte_length": 5071,
+          "path": "data/audit/promotions/card-promotion-3327f7c740feb22fa3d22673.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "29fec2d13b53adf1b24c41cd6b0c7e2b12116d4668cc8ceb9ef54dcb76297ea8"
+        },
+        {
+          "byte_length": 4849,
+          "path": "data/audit/promotions/card-promotion-4c2a071c7dd82665aa461cf6.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "dd1f7af2dcbd04d12365837eaeb70f9e9b8d450db0bf5ad85039658ba2da2827"
+        },
+        {
+          "byte_length": 5047,
+          "path": "data/audit/promotions/card-promotion-5133565c1acf3dce02309633.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "b61d8de548ada488ea4182f9e5e182b5d49447adcd7009a8d4d3d32a2a902f60"
+        },
+        {
+          "byte_length": 4862,
+          "path": "data/audit/promotions/card-promotion-521c1c443a786d932c58a1e3.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "7cfa6b248f8a23ece15469383c6c208f1f15b367004981dd07db7ca74cc89a6a"
+        },
+        {
+          "byte_length": 4849,
+          "path": "data/audit/promotions/card-promotion-663fe9d4c7746dcdce686fd1.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "77d4d6a15cb4531eb1d6a28d9f12768b1a17d116490e866cd67c7d2e814b6855"
+        },
+        {
+          "byte_length": 4862,
+          "path": "data/audit/promotions/card-promotion-807f9b4ffe8d3d557f6bc28d.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "6aff8fa383ba5b48b1c1f779bb2278f4c42742e59fe99f2b8acfd9da83be675d"
+        },
+        {
+          "byte_length": 4836,
+          "path": "data/audit/promotions/card-promotion-9422772e0773195cb9d6db19.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "ac2d3d10f0d6354ea0b039a72d62e300cdc64070dee1e6fea5716fa523b0dc96"
+        },
+        {
+          "byte_length": 5075,
+          "path": "data/audit/promotions/card-promotion-b2c246a98c2a31ee16c1e797.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "aa8be604281dcab261bde3a25ba58fe1d53229aff3c847a568c3ac228a2471be"
+        },
+        {
+          "byte_length": 4953,
+          "path": "data/audit/promotions/card-promotion-ba83ee064fd2c739c7339771.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "6ec978c93ddbfb151ca823d100a736861094f154fd97de9c21ea658cbc095de8"
+        },
+        {
+          "byte_length": 4888,
+          "path": "data/audit/promotions/card-promotion-c727baa3663904335d03d52a.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "2e93bedf2cd4ed450c62bbebab52d6b259207a66d33c94d87cec21e22706630d"
+        },
+        {
+          "byte_length": 4888,
+          "path": "data/audit/promotions/card-promotion-d97e4d7575351c03b70618b8.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "0643b17ef36f4af3afba43431566bb124d88a2ae8452e6321eb8d5a133082c56"
+        },
+        {
+          "byte_length": 4901,
+          "path": "data/audit/promotions/card-promotion-edf5a2ba40be450822a692bd.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "22ebd3e912e73707b73518db6529d7bf7929241366d9df7de7b92cdb0fa6f4d3"
+        },
+        {
+          "byte_length": 7015,
+          "path": "data/audit/promotions/printing-promotion-227f3285c3bc9bc6e51900bd.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "cb74f91fdcb96f7bdcd6edfe2babc61edb8257cf6e1b51660fd4f7a9ddb95a77"
+        },
+        {
+          "byte_length": 8568,
+          "path": "data/audit/promotions/printing-promotion-422248ee9633e8d6c110ef28.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "450ae5eba84d7a9851e1bf401632f38117fd0018a2bfd6f61cf4bd945d462f94"
+        },
+        {
+          "byte_length": 7020,
+          "path": "data/audit/promotions/printing-promotion-470033f726a93f0b4862ac26.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "0d8fe3e5b8a2ac32984bf2d358518c1bd603c6d6a8ca0eadd346af08052a6590"
+        },
+        {
+          "byte_length": 7015,
+          "path": "data/audit/promotions/printing-promotion-5c2d70db64484e185bf8913a.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "cba387abfee619319ef787491d559eb4ac9d37ca934a395a3cf0fadeeed25442"
+        },
+        {
+          "byte_length": 7007,
+          "path": "data/audit/promotions/printing-promotion-6ba4090c367de700fc7b63bb.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "a860b56d3a6f8b4da4765ae8f9b985a4e287f37626f2625d3aa4117c59fbacfa"
+        },
+        {
+          "byte_length": 8582,
+          "path": "data/audit/promotions/printing-promotion-81aa1bb9d52a905a7a748ef1.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "e26d1bc0820688f893b8a064ebb6101d64ab35f35fdaf1e32adc7f116538d692"
+        },
+        {
+          "byte_length": 7046,
+          "path": "data/audit/promotions/printing-promotion-9fbc7416956aef140bc43152.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "6e43fd478d14c1a4f5ae09d75e1172ae158e9a0256356bca86ef706a952bcf0b"
+        },
+        {
+          "byte_length": 8552,
+          "path": "data/audit/promotions/printing-promotion-ea4e8050f1f1d8447dc3dc3b.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "2f046523e22ae80ab3b8ef2f7388093dfb97187bee5e9d0455f37851a17af5c8"
+        },
+        {
+          "byte_length": 6994,
+          "path": "data/audit/promotions/printing-promotion-ea63f83c4d0986c856d6c046.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "963980dd6e9ba4e283e5afdadc6c9b76e97e7a51112dd31f1de00f16bcf99725"
+        },
+        {
+          "byte_length": 7106,
+          "path": "data/audit/promotions/printing-promotion-edb40be81f41d128f8d13ba6.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "b93a2a26d62444bab71307fd643b97add3cc8fca4e57add0ae0397d40286ab07"
+        },
+        {
+          "byte_length": 7041,
+          "path": "data/audit/promotions/printing-promotion-edc1f66672d96d5d50206c0d.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "fd7598d79864ab62db20205452b78cc31616b9ab2d3237b89564c1bf9cba94b9"
+        },
+        {
+          "byte_length": 7059,
+          "path": "data/audit/promotions/printing-promotion-ee72cd3f112b3cd442214c9e.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "968659e0880d0185419a92097e5e06d74718aa352d0cc7f3c9d076a8d5120a90"
+        },
+        {
+          "byte_length": 8568,
+          "path": "data/audit/promotions/printing-promotion-fb2fc092a8c113ced3c6ba02.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "cb35ee01acd722665b67bf64e8f2356c9f62d71521ae1a8829adecdbbac6d001"
+        },
+        {
+          "byte_length": 7046,
+          "path": "data/audit/promotions/printing-promotion-feb9d1f37eccc4ffc2411564.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "a5f927c007656820d50e907593bd28ec6cb939dc5c1ab7b9a0b6f8115eebc589"
+        },
+        {
+          "byte_length": 0,
+          "path": "data/canonical/.gitkeep",
+          "role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "byte_length": 460,
+          "path": "data/canonical/games/magic/cards/magic.abzan-falconer/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "6baadefd9981b26d410dc6ff0eb7a5f3604e5f705780a1c35fbeb05e278387bc"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.academy-manufactor/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "26cf523d854c2f2371e54ec473a5f3e3500554e95baaffc3b76036d0c4b68fc4"
+        },
+        {
+          "byte_length": 452,
+          "path": "data/canonical/games/magic/cards/magic.ad-nauseam/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "569fb8295ab3d924302c9d7fc4e8cf178cea355c13823912f222590fe0970b3a"
+        },
+        {
+          "byte_length": 464,
+          "path": "data/canonical/games/magic/cards/magic.adarkar-windform/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "8a8386488aabe58a669113ecec86d6ea0f19bcdbee4b7e43deca4abd1ae25289"
+        },
+        {
+          "byte_length": 478,
+          "path": "data/canonical/games/magic/cards/magic.ancestral-recall/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "f264ae1e716029828171979a773150ab1b32ca703198cda78922ef8b972d415a"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.black-lotus/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "384b0f774e617b565d7d76e4b05ac85226e45b28797b320909d617b61c954b89"
+        },
+        {
+          "byte_length": 458,
+          "path": "data/canonical/games/magic/cards/magic.lightning-bolt/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "644f41f56c2f35753c314f5a5831e94e9fdf1cb1a7bc2bbe784acc360d778c6c"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.mox-emerald/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "aa01e186ff6a11953299179625c9061a6e9eaf17928c1588415dabdb3336530c"
+        },
+        {
+          "byte_length": 460,
+          "path": "data/canonical/games/magic/cards/magic.mox-jet/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "b1ca3ffadfa4d5de85a91c2cc8eefd52e5c8538714f89b00e6baa0db7eb8d2ed"
+        },
+        {
+          "byte_length": 464,
+          "path": "data/canonical/games/magic/cards/magic.mox-pearl/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "5fb3631d3cccf274cfe2cf46333ce32530a5e08e5e65c9e7660453a8714c7353"
+        },
+        {
+          "byte_length": 462,
+          "path": "data/canonical/games/magic/cards/magic.mox-ruby/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "bfaf3cbae5fa530493b23c5ee3763763bc528e06d637b502a3ef42fc65c08ff4"
+        },
+        {
+          "byte_length": 470,
+          "path": "data/canonical/games/magic/cards/magic.mox-sapphire/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "3cadf5cc301c6a715d54ba9e503bce4affacc318d302993b8770c461dc934431"
+        },
+        {
+          "byte_length": 462,
+          "path": "data/canonical/games/magic/cards/magic.sol-ring/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "ec17bd5b43fb9518e26bb36ccdf9b68cff64475c58609dc6d324531590544867"
+        },
+        {
+          "byte_length": 464,
+          "path": "data/canonical/games/magic/cards/magic.time-walk/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "2178a7008cd767b67e9673e4105de78767a046cbf716f3fbc1a6a75e3b155624"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.timetwister/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "a5f57ee54c736280103bd89cb1210a154f40f99d858b9b01dd9b260cbb3adf55"
+        },
+        {
+          "byte_length": 0,
+          "path": "data/canonical/games/magic/finishes/.gitkeep",
+          "role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "byte_length": 111,
+          "path": "data/canonical/games/magic/game.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "65d3fc54eb9a0eca53e074e956b1af6a7575201313195897044b327df122a4e5"
+        },
+        {
+          "byte_length": 0,
+          "path": "data/canonical/games/magic/packs/.gitkeep",
+          "role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "byte_length": 666,
+          "path": "data/canonical/games/magic/printings/magic.lea.161.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "5133d16dc83ebf71c6515632bbd1ddcfba26b2c4061ef518013cc72de584fe38"
+        },
+        {
+          "byte_length": 566,
+          "path": "data/canonical/games/magic/printings/magic.lea.232.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "56425e146844e40e7b6fc52b0090f0d842243990bb92106e17dd1bbba8f59134"
+        },
+        {
+          "byte_length": 566,
+          "path": "data/canonical/games/magic/printings/magic.lea.262.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "f56ad71bd1c37f4b0fc4f4e49e828e17cf642d11e8febb599f3e488efb8cd1be"
+        },
+        {
+          "byte_length": 562,
+          "path": "data/canonical/games/magic/printings/magic.lea.263.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "36015b80471d13f67140f1f248843f0794dcfe50d7b4dfe694bac781d2e01da9"
+        },
+        {
+          "byte_length": 564,
+          "path": "data/canonical/games/magic/printings/magic.lea.264.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "f8e08e7c856a89ef7ec765f0bffafc4eb33baa74e92e91aaa8b9e09ad67f6da7"
+        },
+        {
+          "byte_length": 563,
+          "path": "data/canonical/games/magic/printings/magic.lea.265.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "155f63e182faa9fe5d5e1321372ff0b4a47bcf4bbbdc3c26d82d31d6704bf898"
+        },
+        {
+          "byte_length": 567,
+          "path": "data/canonical/games/magic/printings/magic.lea.266.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "86bee9f8d6d9e5eb944000078a3a8bc67675a6abb3d13aa0bb0b5b87c305e8a3"
+        },
+        {
+          "byte_length": 567,
+          "path": "data/canonical/games/magic/printings/magic.lea.270.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "b4ca2ab8374b0e1a975704d98922a545a21085951220273be9dceb90071cd6b9"
+        },
+        {
+          "byte_length": 569,
+          "path": "data/canonical/games/magic/printings/magic.lea.47.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "9f66d60498c8e452d0f4b0144a839b67c9780fb6f3b36f583e0db57a1a2229ad"
+        },
+        {
+          "byte_length": 562,
+          "path": "data/canonical/games/magic/printings/magic.lea.83.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "50a04967eb788c61c76bb8077b29b0f28cb813960b66e5f1654290c99fcc144a"
+        },
+        {
+          "byte_length": 564,
+          "path": "data/canonical/games/magic/printings/magic.lea.85.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "4f3ab79252d899529f9529b5f51f7fb3dec069daad36baf98137825ca2784a97"
+        },
+        {
+          "byte_length": 903,
+          "path": "data/canonical/games/magic/printings/magic.mb2.1.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "dc3f0c30877d19a231e818efe19026941a6bc54fb6cc986d905ccee84337693d"
+        },
+        {
+          "byte_length": 903,
+          "path": "data/canonical/games/magic/printings/magic.mb2.2.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "b54f6aa0e27f7e1458baa56d1a15281cb9d78b02903404990697d6a83bcf3e21"
+        },
+        {
+          "byte_length": 895,
+          "path": "data/canonical/games/magic/printings/magic.mb2.3.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "72740a98d400afe74829437f39a07e0448a0cbfc721ad37e5cf9e0d7753b402f"
+        },
+        {
+          "byte_length": 905,
+          "path": "data/canonical/games/magic/printings/magic.mb2.4.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "db30530ab6573bcb14b69d8b21d6af1e2f940db6d854475a78efa041abb5845f"
+        },
+        {
+          "byte_length": 0,
+          "path": "data/canonical/games/magic/product_versions/.gitkeep",
+          "role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "byte_length": 167,
+          "path": "data/canonical/games/magic/products/mystery_booster_2/metadata.json",
+          "role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+          "sha256": "0a7d80e622f66c0108ccb73f82d5740ec8d1fb5f7965585eb5de3094853ddbd3"
+        },
+        {
+          "byte_length": 58,
+          "path": "data/canonical/games/magic/products/mystery_booster_2/packs.json",
+          "role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+          "sha256": "692b56b25e07c284c304b24ae8a137d8a3d0f53e5290e3bfa22e1977f463b732"
+        },
+        {
+          "byte_length": 907,
+          "path": "data/canonical/games/magic/products/mystery_booster_2/product.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "a83708aad4f5f33abe5ee54c30e22d5254f153a68c7663a4868937a50e725642"
+        },
+        {
+          "byte_length": 47,
+          "path": "data/canonical/games/magic/products/mystery_booster_2/slots.json",
+          "role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+          "sha256": "193881fa5a9a2d2d75e8867340628bc54fd8e3a0e66d1cd78e494b99fe2711bc"
+        },
+        {
+          "byte_length": 938,
+          "path": "data/canonical/games/magic/products/mystery_booster_2/sources/mb2_wave_1_card_printings.manifest.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "dc7a6d093c9260f8ba4c6e71836b6fa4119a8368fb7f9ea1a80888093a489501"
+        },
+        {
+          "byte_length": 953,
+          "path": "data/canonical/games/magic/products/mystery_booster_2/sources/mystery_booster_2_product_overview.manifest.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "5346704adc59f1e632b1888ee28709732033807422aaeba18b6456af6bb10b3f"
+        },
+        {
+          "byte_length": 421,
+          "path": "data/canonical/games/magic/products/mystery_booster_2/sources/official_product_page.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "c185aed6a9dac6d448df84230516a1937bf15564bfba20aef387da2c20c7f297"
+        },
+        {
+          "byte_length": 0,
+          "path": "data/canonical/games/magic/rarities/.gitkeep",
+          "role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "byte_length": 702,
+          "path": "data/canonical/games/magic/sources/gatherer-lightning-bolt-lea.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "e148b523d20c2ea41476dfc67018da5e8b3aefecb5d5f3697382dd5c3d931892"
+        },
+        {
+          "byte_length": 1659,
+          "path": "data/canonical/games/magic/sources/gatherer-limited-edition-alpha-phase-58.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "b74531386c73c175d25d04fa81659eb677d315e74587198053d5d2ae58fa4de4"
+        },
+        {
+          "byte_length": 504,
+          "path": "data/canonical/games/magic/sources/gatherer-magic-card-identities-wave-1.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "46dc946ebdd3d7805b4054b5e6b90ad76491b3b67ec73a074969fb84ab336fca"
+        },
+        {
+          "byte_length": 682,
+          "path": "data/canonical/games/magic/sources/mb2-wave-1-evidence-bundle.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "2f444aef7848e0f2cde1453df7c3747bcb121a34099f754da7a461ddcf995a72"
+        },
+        {
+          "byte_length": 586,
+          "path": "data/canonical/games/magic/sources/scryfall-mystery-booster-2-wave-1.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "78ea29d19a0ac68eec686da4a908460c89387c8d7943f48c66c6d4f766fce6a4"
+        },
+        {
+          "byte_length": 521,
+          "path": "data/canonical/games/magic/sources/wizards-mystery-booster-2-gallery-wave-1.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "61b20f7519e4ea1dce166ae3f816d617ce7b5202236d72641adfdce05c165c8a"
+        },
+        {
+          "byte_length": 913,
+          "path": "data/canonical/games/magic/sources/wizards-mystery-booster-2-product-overview.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "356314074b693ee8ffa65606cb980dd23de529f591340193b984a7e43c613f41"
+        },
+        {
+          "byte_length": 0,
+          "path": "data/canonical/games/magic/treatments/.gitkeep",
+          "role": "CANONICAL_SNAPSHOT_CONTROL_METADATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "byte_length": 4855554,
+          "path": "data/canonical/state.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "5d01f3382a92b1afbb5105686b93b757e9a7669d7ee3f760bcbf88eadacc2d5f"
+        }
+      ]
+    },
+    "current_entity_snapshot_query": {
+      "count": 40,
+      "files": [
+        {
+          "byte_length": 91629,
+          "path": "data/audit/bounded_promotions/phase-119-mb2-batch-000001-e32022126c07.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "1abdf8da7188d0ad24c234237dcd3827de38ec631ab6b411f06c1455c127021d"
+        },
+        {
+          "byte_length": 25558,
+          "path": "data/audit/bounded_promotions/phase-136-mtgjson-pilot-30786023976-1.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "eeae7aa9c51cda61c77ed480b4eb3f95bc4186116963598ea080029d96a88b93"
+        },
+        {
+          "byte_length": 460,
+          "path": "data/canonical/games/magic/cards/magic.abzan-falconer/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "6baadefd9981b26d410dc6ff0eb7a5f3604e5f705780a1c35fbeb05e278387bc"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.academy-manufactor/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "26cf523d854c2f2371e54ec473a5f3e3500554e95baaffc3b76036d0c4b68fc4"
+        },
+        {
+          "byte_length": 452,
+          "path": "data/canonical/games/magic/cards/magic.ad-nauseam/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "569fb8295ab3d924302c9d7fc4e8cf178cea355c13823912f222590fe0970b3a"
+        },
+        {
+          "byte_length": 464,
+          "path": "data/canonical/games/magic/cards/magic.adarkar-windform/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "8a8386488aabe58a669113ecec86d6ea0f19bcdbee4b7e43deca4abd1ae25289"
+        },
+        {
+          "byte_length": 478,
+          "path": "data/canonical/games/magic/cards/magic.ancestral-recall/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "f264ae1e716029828171979a773150ab1b32ca703198cda78922ef8b972d415a"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.black-lotus/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "384b0f774e617b565d7d76e4b05ac85226e45b28797b320909d617b61c954b89"
+        },
+        {
+          "byte_length": 458,
+          "path": "data/canonical/games/magic/cards/magic.lightning-bolt/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "644f41f56c2f35753c314f5a5831e94e9fdf1cb1a7bc2bbe784acc360d778c6c"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.mox-emerald/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "aa01e186ff6a11953299179625c9061a6e9eaf17928c1588415dabdb3336530c"
+        },
+        {
+          "byte_length": 460,
+          "path": "data/canonical/games/magic/cards/magic.mox-jet/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "b1ca3ffadfa4d5de85a91c2cc8eefd52e5c8538714f89b00e6baa0db7eb8d2ed"
+        },
+        {
+          "byte_length": 464,
+          "path": "data/canonical/games/magic/cards/magic.mox-pearl/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "5fb3631d3cccf274cfe2cf46333ce32530a5e08e5e65c9e7660453a8714c7353"
+        },
+        {
+          "byte_length": 462,
+          "path": "data/canonical/games/magic/cards/magic.mox-ruby/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "bfaf3cbae5fa530493b23c5ee3763763bc528e06d637b502a3ef42fc65c08ff4"
+        },
+        {
+          "byte_length": 470,
+          "path": "data/canonical/games/magic/cards/magic.mox-sapphire/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "3cadf5cc301c6a715d54ba9e503bce4affacc318d302993b8770c461dc934431"
+        },
+        {
+          "byte_length": 462,
+          "path": "data/canonical/games/magic/cards/magic.sol-ring/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "ec17bd5b43fb9518e26bb36ccdf9b68cff64475c58609dc6d324531590544867"
+        },
+        {
+          "byte_length": 464,
+          "path": "data/canonical/games/magic/cards/magic.time-walk/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "2178a7008cd767b67e9673e4105de78767a046cbf716f3fbc1a6a75e3b155624"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.timetwister/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "a5f57ee54c736280103bd89cb1210a154f40f99d858b9b01dd9b260cbb3adf55"
+        },
+        {
+          "byte_length": 111,
+          "path": "data/canonical/games/magic/game.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "65d3fc54eb9a0eca53e074e956b1af6a7575201313195897044b327df122a4e5"
+        },
+        {
+          "byte_length": 666,
+          "path": "data/canonical/games/magic/printings/magic.lea.161.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "5133d16dc83ebf71c6515632bbd1ddcfba26b2c4061ef518013cc72de584fe38"
+        },
+        {
+          "byte_length": 566,
+          "path": "data/canonical/games/magic/printings/magic.lea.232.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "56425e146844e40e7b6fc52b0090f0d842243990bb92106e17dd1bbba8f59134"
+        },
+        {
+          "byte_length": 566,
+          "path": "data/canonical/games/magic/printings/magic.lea.262.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "f56ad71bd1c37f4b0fc4f4e49e828e17cf642d11e8febb599f3e488efb8cd1be"
+        },
+        {
+          "byte_length": 562,
+          "path": "data/canonical/games/magic/printings/magic.lea.263.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "36015b80471d13f67140f1f248843f0794dcfe50d7b4dfe694bac781d2e01da9"
+        },
+        {
+          "byte_length": 564,
+          "path": "data/canonical/games/magic/printings/magic.lea.264.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "f8e08e7c856a89ef7ec765f0bffafc4eb33baa74e92e91aaa8b9e09ad67f6da7"
+        },
+        {
+          "byte_length": 563,
+          "path": "data/canonical/games/magic/printings/magic.lea.265.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "155f63e182faa9fe5d5e1321372ff0b4a47bcf4bbbdc3c26d82d31d6704bf898"
+        },
+        {
+          "byte_length": 567,
+          "path": "data/canonical/games/magic/printings/magic.lea.266.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "86bee9f8d6d9e5eb944000078a3a8bc67675a6abb3d13aa0bb0b5b87c305e8a3"
+        },
+        {
+          "byte_length": 567,
+          "path": "data/canonical/games/magic/printings/magic.lea.270.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "b4ca2ab8374b0e1a975704d98922a545a21085951220273be9dceb90071cd6b9"
+        },
+        {
+          "byte_length": 569,
+          "path": "data/canonical/games/magic/printings/magic.lea.47.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "9f66d60498c8e452d0f4b0144a839b67c9780fb6f3b36f583e0db57a1a2229ad"
+        },
+        {
+          "byte_length": 562,
+          "path": "data/canonical/games/magic/printings/magic.lea.83.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "50a04967eb788c61c76bb8077b29b0f28cb813960b66e5f1654290c99fcc144a"
+        },
+        {
+          "byte_length": 564,
+          "path": "data/canonical/games/magic/printings/magic.lea.85.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "4f3ab79252d899529f9529b5f51f7fb3dec069daad36baf98137825ca2784a97"
+        },
+        {
+          "byte_length": 903,
+          "path": "data/canonical/games/magic/printings/magic.mb2.1.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "dc3f0c30877d19a231e818efe19026941a6bc54fb6cc986d905ccee84337693d"
+        },
+        {
+          "byte_length": 903,
+          "path": "data/canonical/games/magic/printings/magic.mb2.2.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "b54f6aa0e27f7e1458baa56d1a15281cb9d78b02903404990697d6a83bcf3e21"
+        },
+        {
+          "byte_length": 895,
+          "path": "data/canonical/games/magic/printings/magic.mb2.3.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "72740a98d400afe74829437f39a07e0448a0cbfc721ad37e5cf9e0d7753b402f"
+        },
+        {
+          "byte_length": 905,
+          "path": "data/canonical/games/magic/printings/magic.mb2.4.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "db30530ab6573bcb14b69d8b21d6af1e2f940db6d854475a78efa041abb5845f"
+        },
+        {
+          "byte_length": 907,
+          "path": "data/canonical/games/magic/products/mystery_booster_2/product.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "a83708aad4f5f33abe5ee54c30e22d5254f153a68c7663a4868937a50e725642"
+        },
+        {
+          "byte_length": 702,
+          "path": "data/canonical/games/magic/sources/gatherer-lightning-bolt-lea.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "e148b523d20c2ea41476dfc67018da5e8b3aefecb5d5f3697382dd5c3d931892"
+        },
+        {
+          "byte_length": 1659,
+          "path": "data/canonical/games/magic/sources/gatherer-limited-edition-alpha-phase-58.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "b74531386c73c175d25d04fa81659eb677d315e74587198053d5d2ae58fa4de4"
+        },
+        {
+          "byte_length": 504,
+          "path": "data/canonical/games/magic/sources/gatherer-magic-card-identities-wave-1.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "46dc946ebdd3d7805b4054b5e6b90ad76491b3b67ec73a074969fb84ab336fca"
+        },
+        {
+          "byte_length": 586,
+          "path": "data/canonical/games/magic/sources/scryfall-mystery-booster-2-wave-1.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "78ea29d19a0ac68eec686da4a908460c89387c8d7943f48c66c6d4f766fce6a4"
+        },
+        {
+          "byte_length": 521,
+          "path": "data/canonical/games/magic/sources/wizards-mystery-booster-2-gallery-wave-1.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "61b20f7519e4ea1dce166ae3f816d617ce7b5202236d72641adfdce05c165c8a"
+        },
+        {
+          "byte_length": 4855554,
+          "path": "data/canonical/state.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "5d01f3382a92b1afbb5105686b93b757e9a7669d7ee3f760bcbf88eadacc2d5f"
+        }
+      ]
+    },
+    "current_full_query_api_read_surface": {
+      "count": 68,
+      "files": [
+        {
+          "byte_length": 91629,
+          "path": "data/audit/bounded_promotions/phase-119-mb2-batch-000001-e32022126c07.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "1abdf8da7188d0ad24c234237dcd3827de38ec631ab6b411f06c1455c127021d"
+        },
+        {
+          "byte_length": 25558,
+          "path": "data/audit/bounded_promotions/phase-136-mtgjson-pilot-30786023976-1.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "eeae7aa9c51cda61c77ed480b4eb3f95bc4186116963598ea080029d96a88b93"
+        },
+        {
+          "byte_length": 4888,
+          "path": "data/audit/promotions/card-promotion-01ee891c52a9509940fd23bd.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "32dc581ff2601d1dc62fd5aa819cfd74d5af1fde1aa03abee8c4a49ca0b5375c"
+        },
+        {
+          "byte_length": 5019,
+          "path": "data/audit/promotions/card-promotion-1dde8c5ddfaa03ceac14c16b.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "8a33c564fc4bee4a0a8d2af6d7a8166881f9069723c38dbcf1e9c354bbfa55ec"
+        },
+        {
+          "byte_length": 5071,
+          "path": "data/audit/promotions/card-promotion-3327f7c740feb22fa3d22673.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "29fec2d13b53adf1b24c41cd6b0c7e2b12116d4668cc8ceb9ef54dcb76297ea8"
+        },
+        {
+          "byte_length": 4849,
+          "path": "data/audit/promotions/card-promotion-4c2a071c7dd82665aa461cf6.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "dd1f7af2dcbd04d12365837eaeb70f9e9b8d450db0bf5ad85039658ba2da2827"
+        },
+        {
+          "byte_length": 5047,
+          "path": "data/audit/promotions/card-promotion-5133565c1acf3dce02309633.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "b61d8de548ada488ea4182f9e5e182b5d49447adcd7009a8d4d3d32a2a902f60"
+        },
+        {
+          "byte_length": 4862,
+          "path": "data/audit/promotions/card-promotion-521c1c443a786d932c58a1e3.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "7cfa6b248f8a23ece15469383c6c208f1f15b367004981dd07db7ca74cc89a6a"
+        },
+        {
+          "byte_length": 4849,
+          "path": "data/audit/promotions/card-promotion-663fe9d4c7746dcdce686fd1.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "77d4d6a15cb4531eb1d6a28d9f12768b1a17d116490e866cd67c7d2e814b6855"
+        },
+        {
+          "byte_length": 4862,
+          "path": "data/audit/promotions/card-promotion-807f9b4ffe8d3d557f6bc28d.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "6aff8fa383ba5b48b1c1f779bb2278f4c42742e59fe99f2b8acfd9da83be675d"
+        },
+        {
+          "byte_length": 4836,
+          "path": "data/audit/promotions/card-promotion-9422772e0773195cb9d6db19.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "ac2d3d10f0d6354ea0b039a72d62e300cdc64070dee1e6fea5716fa523b0dc96"
+        },
+        {
+          "byte_length": 5075,
+          "path": "data/audit/promotions/card-promotion-b2c246a98c2a31ee16c1e797.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "aa8be604281dcab261bde3a25ba58fe1d53229aff3c847a568c3ac228a2471be"
+        },
+        {
+          "byte_length": 4953,
+          "path": "data/audit/promotions/card-promotion-ba83ee064fd2c739c7339771.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "6ec978c93ddbfb151ca823d100a736861094f154fd97de9c21ea658cbc095de8"
+        },
+        {
+          "byte_length": 4888,
+          "path": "data/audit/promotions/card-promotion-c727baa3663904335d03d52a.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "2e93bedf2cd4ed450c62bbebab52d6b259207a66d33c94d87cec21e22706630d"
+        },
+        {
+          "byte_length": 4888,
+          "path": "data/audit/promotions/card-promotion-d97e4d7575351c03b70618b8.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "0643b17ef36f4af3afba43431566bb124d88a2ae8452e6321eb8d5a133082c56"
+        },
+        {
+          "byte_length": 4901,
+          "path": "data/audit/promotions/card-promotion-edf5a2ba40be450822a692bd.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "22ebd3e912e73707b73518db6529d7bf7929241366d9df7de7b92cdb0fa6f4d3"
+        },
+        {
+          "byte_length": 7015,
+          "path": "data/audit/promotions/printing-promotion-227f3285c3bc9bc6e51900bd.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "cb74f91fdcb96f7bdcd6edfe2babc61edb8257cf6e1b51660fd4f7a9ddb95a77"
+        },
+        {
+          "byte_length": 8568,
+          "path": "data/audit/promotions/printing-promotion-422248ee9633e8d6c110ef28.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "450ae5eba84d7a9851e1bf401632f38117fd0018a2bfd6f61cf4bd945d462f94"
+        },
+        {
+          "byte_length": 7020,
+          "path": "data/audit/promotions/printing-promotion-470033f726a93f0b4862ac26.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "0d8fe3e5b8a2ac32984bf2d358518c1bd603c6d6a8ca0eadd346af08052a6590"
+        },
+        {
+          "byte_length": 7015,
+          "path": "data/audit/promotions/printing-promotion-5c2d70db64484e185bf8913a.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "cba387abfee619319ef787491d559eb4ac9d37ca934a395a3cf0fadeeed25442"
+        },
+        {
+          "byte_length": 7007,
+          "path": "data/audit/promotions/printing-promotion-6ba4090c367de700fc7b63bb.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "a860b56d3a6f8b4da4765ae8f9b985a4e287f37626f2625d3aa4117c59fbacfa"
+        },
+        {
+          "byte_length": 8582,
+          "path": "data/audit/promotions/printing-promotion-81aa1bb9d52a905a7a748ef1.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "e26d1bc0820688f893b8a064ebb6101d64ab35f35fdaf1e32adc7f116538d692"
+        },
+        {
+          "byte_length": 7046,
+          "path": "data/audit/promotions/printing-promotion-9fbc7416956aef140bc43152.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "6e43fd478d14c1a4f5ae09d75e1172ae158e9a0256356bca86ef706a952bcf0b"
+        },
+        {
+          "byte_length": 8552,
+          "path": "data/audit/promotions/printing-promotion-ea4e8050f1f1d8447dc3dc3b.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "2f046523e22ae80ab3b8ef2f7388093dfb97187bee5e9d0455f37851a17af5c8"
+        },
+        {
+          "byte_length": 6994,
+          "path": "data/audit/promotions/printing-promotion-ea63f83c4d0986c856d6c046.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "963980dd6e9ba4e283e5afdadc6c9b76e97e7a51112dd31f1de00f16bcf99725"
+        },
+        {
+          "byte_length": 7106,
+          "path": "data/audit/promotions/printing-promotion-edb40be81f41d128f8d13ba6.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "b93a2a26d62444bab71307fd643b97add3cc8fca4e57add0ae0397d40286ab07"
+        },
+        {
+          "byte_length": 7041,
+          "path": "data/audit/promotions/printing-promotion-edc1f66672d96d5d50206c0d.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "fd7598d79864ab62db20205452b78cc31616b9ab2d3237b89564c1bf9cba94b9"
+        },
+        {
+          "byte_length": 7059,
+          "path": "data/audit/promotions/printing-promotion-ee72cd3f112b3cd442214c9e.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "968659e0880d0185419a92097e5e06d74718aa352d0cc7f3c9d076a8d5120a90"
+        },
+        {
+          "byte_length": 8568,
+          "path": "data/audit/promotions/printing-promotion-fb2fc092a8c113ced3c6ba02.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "cb35ee01acd722665b67bf64e8f2356c9f62d71521ae1a8829adecdbbac6d001"
+        },
+        {
+          "byte_length": 7046,
+          "path": "data/audit/promotions/printing-promotion-feb9d1f37eccc4ffc2411564.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "a5f927c007656820d50e907593bd28ec6cb939dc5c1ab7b9a0b6f8115eebc589"
+        },
+        {
+          "byte_length": 460,
+          "path": "data/canonical/games/magic/cards/magic.abzan-falconer/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "6baadefd9981b26d410dc6ff0eb7a5f3604e5f705780a1c35fbeb05e278387bc"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.academy-manufactor/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "26cf523d854c2f2371e54ec473a5f3e3500554e95baaffc3b76036d0c4b68fc4"
+        },
+        {
+          "byte_length": 452,
+          "path": "data/canonical/games/magic/cards/magic.ad-nauseam/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "569fb8295ab3d924302c9d7fc4e8cf178cea355c13823912f222590fe0970b3a"
+        },
+        {
+          "byte_length": 464,
+          "path": "data/canonical/games/magic/cards/magic.adarkar-windform/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "8a8386488aabe58a669113ecec86d6ea0f19bcdbee4b7e43deca4abd1ae25289"
+        },
+        {
+          "byte_length": 478,
+          "path": "data/canonical/games/magic/cards/magic.ancestral-recall/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "f264ae1e716029828171979a773150ab1b32ca703198cda78922ef8b972d415a"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.black-lotus/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "384b0f774e617b565d7d76e4b05ac85226e45b28797b320909d617b61c954b89"
+        },
+        {
+          "byte_length": 458,
+          "path": "data/canonical/games/magic/cards/magic.lightning-bolt/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "644f41f56c2f35753c314f5a5831e94e9fdf1cb1a7bc2bbe784acc360d778c6c"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.mox-emerald/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "aa01e186ff6a11953299179625c9061a6e9eaf17928c1588415dabdb3336530c"
+        },
+        {
+          "byte_length": 460,
+          "path": "data/canonical/games/magic/cards/magic.mox-jet/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "b1ca3ffadfa4d5de85a91c2cc8eefd52e5c8538714f89b00e6baa0db7eb8d2ed"
+        },
+        {
+          "byte_length": 464,
+          "path": "data/canonical/games/magic/cards/magic.mox-pearl/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "5fb3631d3cccf274cfe2cf46333ce32530a5e08e5e65c9e7660453a8714c7353"
+        },
+        {
+          "byte_length": 462,
+          "path": "data/canonical/games/magic/cards/magic.mox-ruby/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "bfaf3cbae5fa530493b23c5ee3763763bc528e06d637b502a3ef42fc65c08ff4"
+        },
+        {
+          "byte_length": 470,
+          "path": "data/canonical/games/magic/cards/magic.mox-sapphire/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "3cadf5cc301c6a715d54ba9e503bce4affacc318d302993b8770c461dc934431"
+        },
+        {
+          "byte_length": 462,
+          "path": "data/canonical/games/magic/cards/magic.sol-ring/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "ec17bd5b43fb9518e26bb36ccdf9b68cff64475c58609dc6d324531590544867"
+        },
+        {
+          "byte_length": 464,
+          "path": "data/canonical/games/magic/cards/magic.time-walk/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "2178a7008cd767b67e9673e4105de78767a046cbf716f3fbc1a6a75e3b155624"
+        },
+        {
+          "byte_length": 468,
+          "path": "data/canonical/games/magic/cards/magic.timetwister/card.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "a5f57ee54c736280103bd89cb1210a154f40f99d858b9b01dd9b260cbb3adf55"
+        },
+        {
+          "byte_length": 111,
+          "path": "data/canonical/games/magic/game.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "65d3fc54eb9a0eca53e074e956b1af6a7575201313195897044b327df122a4e5"
+        },
+        {
+          "byte_length": 666,
+          "path": "data/canonical/games/magic/printings/magic.lea.161.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "5133d16dc83ebf71c6515632bbd1ddcfba26b2c4061ef518013cc72de584fe38"
+        },
+        {
+          "byte_length": 566,
+          "path": "data/canonical/games/magic/printings/magic.lea.232.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "56425e146844e40e7b6fc52b0090f0d842243990bb92106e17dd1bbba8f59134"
+        },
+        {
+          "byte_length": 566,
+          "path": "data/canonical/games/magic/printings/magic.lea.262.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "f56ad71bd1c37f4b0fc4f4e49e828e17cf642d11e8febb599f3e488efb8cd1be"
+        },
+        {
+          "byte_length": 562,
+          "path": "data/canonical/games/magic/printings/magic.lea.263.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "36015b80471d13f67140f1f248843f0794dcfe50d7b4dfe694bac781d2e01da9"
+        },
+        {
+          "byte_length": 564,
+          "path": "data/canonical/games/magic/printings/magic.lea.264.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "f8e08e7c856a89ef7ec765f0bffafc4eb33baa74e92e91aaa8b9e09ad67f6da7"
+        },
+        {
+          "byte_length": 563,
+          "path": "data/canonical/games/magic/printings/magic.lea.265.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "155f63e182faa9fe5d5e1321372ff0b4a47bcf4bbbdc3c26d82d31d6704bf898"
+        },
+        {
+          "byte_length": 567,
+          "path": "data/canonical/games/magic/printings/magic.lea.266.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "86bee9f8d6d9e5eb944000078a3a8bc67675a6abb3d13aa0bb0b5b87c305e8a3"
+        },
+        {
+          "byte_length": 567,
+          "path": "data/canonical/games/magic/printings/magic.lea.270.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "b4ca2ab8374b0e1a975704d98922a545a21085951220273be9dceb90071cd6b9"
+        },
+        {
+          "byte_length": 569,
+          "path": "data/canonical/games/magic/printings/magic.lea.47.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "9f66d60498c8e452d0f4b0144a839b67c9780fb6f3b36f583e0db57a1a2229ad"
+        },
+        {
+          "byte_length": 562,
+          "path": "data/canonical/games/magic/printings/magic.lea.83.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "50a04967eb788c61c76bb8077b29b0f28cb813960b66e5f1654290c99fcc144a"
+        },
+        {
+          "byte_length": 564,
+          "path": "data/canonical/games/magic/printings/magic.lea.85.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "4f3ab79252d899529f9529b5f51f7fb3dec069daad36baf98137825ca2784a97"
+        },
+        {
+          "byte_length": 903,
+          "path": "data/canonical/games/magic/printings/magic.mb2.1.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "dc3f0c30877d19a231e818efe19026941a6bc54fb6cc986d905ccee84337693d"
+        },
+        {
+          "byte_length": 903,
+          "path": "data/canonical/games/magic/printings/magic.mb2.2.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "b54f6aa0e27f7e1458baa56d1a15281cb9d78b02903404990697d6a83bcf3e21"
+        },
+        {
+          "byte_length": 895,
+          "path": "data/canonical/games/magic/printings/magic.mb2.3.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "72740a98d400afe74829437f39a07e0448a0cbfc721ad37e5cf9e0d7753b402f"
+        },
+        {
+          "byte_length": 905,
+          "path": "data/canonical/games/magic/printings/magic.mb2.4.en/printing.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "db30530ab6573bcb14b69d8b21d6af1e2f940db6d854475a78efa041abb5845f"
+        },
+        {
+          "byte_length": 907,
+          "path": "data/canonical/games/magic/products/mystery_booster_2/product.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "a83708aad4f5f33abe5ee54c30e22d5254f153a68c7663a4868937a50e725642"
+        },
+        {
+          "byte_length": 702,
+          "path": "data/canonical/games/magic/sources/gatherer-lightning-bolt-lea.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "e148b523d20c2ea41476dfc67018da5e8b3aefecb5d5f3697382dd5c3d931892"
+        },
+        {
+          "byte_length": 1659,
+          "path": "data/canonical/games/magic/sources/gatherer-limited-edition-alpha-phase-58.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "b74531386c73c175d25d04fa81659eb677d315e74587198053d5d2ae58fa4de4"
+        },
+        {
+          "byte_length": 504,
+          "path": "data/canonical/games/magic/sources/gatherer-magic-card-identities-wave-1.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "46dc946ebdd3d7805b4054b5e6b90ad76491b3b67ec73a074969fb84ab336fca"
+        },
+        {
+          "byte_length": 586,
+          "path": "data/canonical/games/magic/sources/scryfall-mystery-booster-2-wave-1.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "78ea29d19a0ac68eec686da4a908460c89387c8d7943f48c66c6d4f766fce6a4"
+        },
+        {
+          "byte_length": 521,
+          "path": "data/canonical/games/magic/sources/wizards-mystery-booster-2-gallery-wave-1.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "61b20f7519e4ea1dce166ae3f816d617ce7b5202236d72641adfdce05c165c8a"
+        },
+        {
+          "byte_length": 4855554,
+          "path": "data/canonical/state.json",
+          "role": "CANONICAL_SNAPSHOT_CONTENT",
+          "sha256": "5d01f3382a92b1afbb5105686b93b757e9a7669d7ee3f760bcbf88eadacc2d5f"
+        }
+      ]
+    },
+    "historical_admission_validation_additional_dependencies": {
+      "count": 17,
+      "files": [
+        {
+          "byte_length": 408,
+          "path": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/acquisition-report.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "8ec581975cb2b06b362d6bac8f408cfbe958630fa83e6eed3fd59f863c61575d"
+        },
+        {
+          "byte_length": 1939,
+          "path": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/manifest.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "c082e8338b4e5c940d713c6d7ef620049bc587a67ef1f475edf552e5a28bdae4"
+        },
+        {
+          "byte_length": 371126,
+          "path": "data/evidence/phase-135/mtgjson-pilot-30786023976-1/source-pilot-printings.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "493df83312c8d9271e84a143ed288767d7fbf53d7b4a23bfc2f72af514bc67e6"
+        },
+        {
+          "byte_length": 283,
+          "path": "data/production_runs/30663562841-review-payload-v2/lineage/source.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "0b246ad2a4e6e691b0afe6dbba83526cdda4d35fad46a8f81558b05b92aa6fd6"
+        },
+        {
+          "byte_length": 4078034,
+          "path": "data/production_runs/30663562841-review-payload-v2/review_payloads/mb2/mb2-batch-000001-e32022126c07.json",
+          "role": "SOURCE_EVIDENCE_PLANE",
+          "sha256": "007e69530bac92de3794089623f6fa1610f374ceb4f8f3c75a96502ddc6fba1d"
+        },
+        {
+          "byte_length": 322669,
+          "path": "data/reviews/phase-115/mb2-batch-000001-e32022126c07/candidate-review-ledger.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "e4600093a5f460657014d2e8053f10f1f1850fc4035eec75e75b4f5a131f6311"
+        },
+        {
+          "byte_length": 335,
+          "path": "data/reviews/phase-115/mb2-batch-000001-e32022126c07/dependency-closure-verification.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "2e2c874237ecc265b2850b74a22086d78c1cc471798f99a25e89dd000d96b874"
+        },
+        {
+          "byte_length": 13917,
+          "path": "data/reviews/phase-115/mb2-batch-000001-e32022126c07/findings-report.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "72ee2b6db74cb4b59a841840a8b690e507813a8a1ae898f75dc018f1a20efa76"
+        },
+        {
+          "byte_length": 401,
+          "path": "data/reviews/phase-115/mb2-batch-000001-e32022126c07/pending-review-decision.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "325270e3d20e0552a42e54d98af19e9bd77c357a1a125592e90f9cd185487a85"
+        },
+        {
+          "byte_length": 367,
+          "path": "data/reviews/phase-115/mb2-batch-000001-e32022126c07/promotion-readiness-report.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "7135173aa95132d277f13ee376d35b6b0691b61af04fba03380fb13651cae769"
+        },
+        {
+          "byte_length": 225283,
+          "path": "data/reviews/phase-116/mb2-batch-000001-e32022126c07/collision-analysis-report.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "608fac2f052bc9e92f2c9306c86fd5fedaf9c022adc9d1f653c21a1916b985ab"
+        },
+        {
+          "byte_length": 88634,
+          "path": "data/reviews/phase-116/mb2-batch-000001-e32022126c07/dependency-closure-verification.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "c8f6b98964f501f91006e8e7835b4d58c64370894dd6183594a3bbaf6f469aa9"
+        },
+        {
+          "byte_length": 859332,
+          "path": "data/reviews/phase-116/mb2-batch-000001-e32022126c07/identifier-resolution-ledger.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "54c71c9cd690759d7c6febc60ea694e8286a2321ac4de7902df410611b6a255c"
+        },
+        {
+          "byte_length": 89821,
+          "path": "data/reviews/phase-116/mb2-batch-000001-e32022126c07/pending-review-decision.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "5eeb4ca18c3066fb52a5f396dee76a9b931d14b0ff23e3d022fd3131eac38322"
+        },
+        {
+          "byte_length": 809,
+          "path": "data/reviews/phase-116/mb2-batch-000001-e32022126c07/promotion-readiness-report.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "15b321a21d6659bc9d55f5ee312cc2099d75b88309c167579764006ba5718df9"
+        },
+        {
+          "byte_length": 374204,
+          "path": "data/reviews/phase-116/mb2-batch-000001-e32022126c07/updated-candidate-classification-ledger.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "722accaddf6c0bb2de80c4a0312f59ef0a7afc00ca6a9cbe398f43ac1bdf45bd"
+        },
+        {
+          "byte_length": 740,
+          "path": "data/reviews/phase-116/mb2-batch-000001-e32022126c07/updated-findings-report.json",
+          "role": "AUDIT_PROVENANCE_HISTORY",
+          "sha256": "7ea7735a75695bf6e8206b4fd314ac52be5700a4c8a7c0fb77919c4d42a18272"
+        }
+      ]
+    }
+  }
+}

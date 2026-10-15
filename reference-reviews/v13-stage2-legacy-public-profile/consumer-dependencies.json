@@ -1,0 +1,574 @@
+{
+  "audit_coverage_summary": {
+    "all_audit_json_remains_global_history_validation_read_surface": true,
+    "distinct_entity_referenced_audit_count": 2,
+    "entity_reference_counts_by_audit": {
+      "audit/bounded_promotions/phase-119-mb2-batch-000001-e32022126c07.json": 1000,
+      "audit/bounded_promotions/phase-136-mtgjson-pilot-30786023976-1.json": 534
+    },
+    "globbed_and_parseable_audit_json_count": 30,
+    "per_entity_rows_retained_in_this_document": false,
+    "typed_entities_without_audit_reference": 32
+  },
+  "baseline_revision": "83e832e3105ddb1c65252b5946387651c49685e4",
+  "components": [
+    {
+      "blockers": [
+        "Typed repository excludes1534promoted records; it is not the full current query catalog. SourceRecord provenance and mixed schema adapters must remain unchanged."
+      ],
+      "data_domains": [
+        "typed canonical entities",
+        "SourceRecords",
+        "separate archived evidence API"
+      ],
+      "explicit_root_capability": "games_root and evidence_root seams; do not use implicit repository defaults in a new profile",
+      "generated_identity": "canonical_repository_bytes serializes Cards/Printings only; no outer release identity",
+      "name": "CanonicalRepository / Card repository loaders",
+      "read_roots": [
+        "data/canonical/games/<game>",
+        "explicit evidence_root for archived evidence API"
+      ],
+      "review_flags": {
+        "audits": false,
+        "derived_intelligence": false,
+        "market": false,
+        "promoted_state": false,
+        "source_evidence": true
+      },
+      "source_paths": [
+        "src/repository/canonical.py",
+        "src/repository/cards.py",
+        "src/repository/products.py",
+        "src/repository/canonical_compatibility.py",
+        "src/repository/sources.py",
+        "src/repository/evidence.py"
+      ],
+      "stage3_difficulty": "medium for mixed legacy parity; low for existing typed roots"
+    },
+    {
+      "blockers": [
+        "State/typed precedence and duplicate namespace behavior must be frozen",
+        "Full audit API closure differs from identity-only catalog",
+        "Do not rely on constructor root inference"
+      ],
+      "data_domains": [
+        "typed_canonical",
+        "promoted_state",
+        "canonical_knowledge_state_if_present",
+        "source_records",
+        "audit_history"
+      ],
+      "explicit_root_capability": "Existing constructor + from_attachment; v13 outer binding separate.",
+      "generated_identity": "QuerySnapshot sha256 of sorted QueryResult.as_dict list, compact sorted UTF-8 JSON without LF; includes values and provenance/audit-reference byte hashes.",
+      "name": "CanonicalQueryEngine",
+      "read_roots": "Both explicit games_root/data_root; surfaces above.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/query/engine.py",
+        "src/repository/canonical.py",
+        "src/repository/cards.py",
+        "src/repository/products.py",
+        "src/repository/sources.py",
+        "src/repository/canonical_compatibility.py"
+      ],
+      "stage3_difficulty": "medium"
+    },
+    {
+      "blockers": [
+        "Analytics may call query.validation and therefore consume lazy audit history",
+        "Response currently lacks outer attachment identity; preserve legacy envelope and add separately only through reviewed contract"
+      ],
+      "data_domains": [
+        "query_envelopes",
+        "query_validation_audit_history"
+      ],
+      "explicit_root_capability": "Inject query from the selected attachment.",
+      "generated_identity": "SemanticResponse preserves query canonical_snapshot_id; analytics_snapshot_id hashes report.to_dict. AnalyticsReport has canonical query ID, not a new production authority ID.",
+      "name": "CanonicalSemanticQueryEngine / CanonicalAnalyticsEngine",
+      "read_roots": "No own filesystem reads: injected CanonicalQueryEngine; optional injected CanonicalAnalyticsEngine.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/semantic/engine.py",
+        "src/semantic/models.py",
+        "src/analytics/canonical.py",
+        "src/analytics/models.py"
+      ],
+      "stage3_difficulty": "low-medium"
+    },
+    {
+      "blockers": [
+        "Unscoped production state requires exactly the requested game directory",
+        "Required Card names cannot become placeholders",
+        "Persisted personal snapshot outer-binding migration remains outside Stage1",
+        "No catalog/name match upgrades physical Printing evidence"
+      ],
+      "data_domains": [
+        "query_envelopes",
+        "separate_personal_imports_snapshots_assessments"
+      ],
+      "explicit_root_capability": "from_attachment implemented; ordinary constructors unchanged.",
+      "generated_identity": "Resolution canonical_snapshot_id is query ID; attached output additionally catalog_attachment. build_snapshot digest hashes import/provenance/results with LF-bearing canonical_json; it does not copy outer catalog_attachment today.",
+      "name": "CanonicalCollectionResolver / CollectionAudit",
+      "read_roots": "Resolver explicit data_root and optional games_root; creates same query and indexes Card.name/Printing.card_id/identifiers. Audit separately reads caller source_root/source_path and referenced <data_root>/collections/snapshots/<id>.json.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/collection/intelligence.py",
+        "src/collection/audit.py",
+        "src/collection/assessments.py"
+      ],
+      "stage3_difficulty": "medium"
+    },
+    {
+      "blockers": [
+        "Read validity is not typed materialization readiness",
+        "Production flat records have whole-row references, not v3 field assertions",
+        "Historical signed/etched Finish dependencies missing",
+        "Exact old source/audit bytes cannot be rewritten or stripped"
+      ],
+      "data_domains": [
+        "promoted_state",
+        "audit_history",
+        "admission_payloads",
+        "source_receipts"
+      ],
+      "explicit_root_capability": "Three roots already injectable, no from_attachment seam.",
+      "generated_identity": "projection-<sha256> of projection schema version, canonical-state digest, game. Validation canonical-state digest is digest of JSON state with LF, distinct from whole canonical tree digest.",
+      "name": "TypedCanonicalProjectionEngine",
+      "read_roots": "Explicit canonical_root/state.json; canonical_root.parent/audit/**/*.json selects exactly one production audit; legacy admission reads production_runs/<evidence>/review_payloads/mb2/<batch>.json, review_artifact_digests paths, lineage/source.json; Phase136 verify_evidence reads exact evidence/phase-135 run receipt inventory. New audit validator reads input_bindings candidate payload and evidence files. _approved_assertions for field-path mode reads audit/*.json only.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/projection/engine.py",
+        "src/production_evidence/automatic_updates.py",
+        "src/production_evidence/bounded_promotion.py",
+        "src/production_evidence/phase136_promotion.py"
+      ],
+      "stage3_difficulty": "high"
+    },
+    {
+      "blockers": [
+        "Uses Magic Oracle ID = admitted card_reference, not all typed seed Cards",
+        "Missing per-Card row is incomplete, source absence/corruption differs",
+        "New structured packet is unsupported source format, not merely missing coverage",
+        "Evidence snapshot is independent of canonical catalog"
+      ],
+      "data_domains": [
+        "query_envelopes",
+        "retained_mechanical_provider_projection"
+      ],
+      "explicit_root_capability": "Data/source roots injectable but no attachment seam; fixed source contract remains Scryfall market-acquisition-evidence-v1.",
+      "generated_identity": "Query ID, mechanical dossier/content_identity, source manifest SHA/retained source hash; references acquisition canonical_snapshot_identity independently.",
+      "name": "MechanicalCardIntelligence",
+      "read_roots": "data_root plus optional source_directory contained within it. Defaults market/acquisitions/scryfall-mb2-30754638264-1. Reads manifest.json, exact manifest.files plus dry-run-report.json; requires one source-*.json and mb2_record_count.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/card_intelligence/mechanics.py",
+        "src/card_intelligence/acquisition.py"
+      ],
+      "stage3_difficulty": "medium-high"
+    },
+    {
+      "blockers": [
+        "Keep named historical pilots pinned, not universal current-catalog assertions",
+        "Knowledge facts are admitted evidence assertions with supersession, not freely disposable derived caches",
+        "Do not activate new mechanics format or approve pending roles"
+      ],
+      "data_domains": [
+        "promoted_state",
+        "admitted_knowledge_facts",
+        "mechanical_source",
+        "temporal_market",
+        "reviewed_domain_configuration"
+      ],
+      "explicit_root_capability": "Roots and pilot config seams exist; not migrated to attachment.",
+      "generated_identity": "KnowledgeFact semantic IDs, named pilot dossier/content identities; CardValueExplanation retains constant canonical-tree identity sha256:881c... and expects ten Phase136 histories.",
+      "name": "Other Card Intelligence",
+      "read_roots": "KnowledgeRepository(root) reads facts/*/*/*.json with full supersession closure. Explanation reads data_root/canonical/state.json, knowledge, market/observations, optional card_intelligence/demand/phase-143/mtgjson-decks.json, and market/acquisitions/*/source-mb2.json for historical movement. Roles/comparison accept data_root and optional plan/vocabulary paths, default to config/card_intelligence/*.json under code checkout.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/card_intelligence/repository.py",
+        "src/card_intelligence/query.py",
+        "src/card_intelligence/explanation.py",
+        "src/card_intelligence/roles.py",
+        "src/card_intelligence/comparison.py",
+        "src/card_intelligence/demand_review.py",
+        "src/card_intelligence/deck_usage.py"
+      ],
+      "stage3_difficulty": "medium-high"
+    },
+    {
+      "blockers": [
+        "Complete catalog does not establish guaranteed product contents/current prices",
+        "Human READY and operation authorization remain separate",
+        "CC2 real pilot incomplete"
+      ],
+      "data_domains": [
+        "supplied_product_manifests",
+        "supplied_offers",
+        "market_valuation_bindings",
+        "source_snapshots",
+        "human_evidence_readiness"
+      ],
+      "explicit_root_capability": "Storage-independent inputs; catalog component resolution requires explicit upstream integration.",
+      "generated_identity": "manifest_id, analysis_id, packet_id, review identity bind supplied semantic inputs/time windows.",
+      "name": "Product Intelligence",
+      "read_roots": "Pure typed manifests/offers/valuations and supplied source snapshots; schema files from installed src/schemas/v1. EvidencePacketReplayRepository stores bytes in memory.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/product_intelligence/models.py",
+        "src/product_intelligence/analysis.py",
+        "src/product_intelligence/evidence_packet.py",
+        "src/product_intelligence/acquisition_decision.py"
+      ],
+      "stage3_difficulty": "low-medium"
+    },
+    {
+      "blockers": [
+        "Temporal evidence is independent, not stable catalog authority",
+        "Mixed historical canonical mappings need explicit compatibility, no relabeling",
+        "No fabricated market facts/freshness",
+        "Historical price source-MB2 projections contain broader content than prices alone"
+      ],
+      "data_domains": [
+        "promoted_state",
+        "temporal_market_observations",
+        "market_acquisition_manifests",
+        "provider_mappings"
+      ],
+      "explicit_root_capability": "Injectable repositories/data_root, no attachment migration.",
+      "generated_identity": "Immutable observation content-derived identity; market-snapshot-v1 legacy ID is provider-printing-retrieved timestamp. Report canonical identity derives observation lineage and becomes None if mixed. Time series requires exact provider/Printing/finish/language/currency/price_type/as_of.",
+      "name": "Market Intelligence",
+      "read_roots": "MarketObservationRepository(root): */*/*/*.json. MarketHistoryReports(data_root): canonical/state.json, market/observations, market/acquisitions/<run>/manifest.json. MarketQueryService receives canonical service + observation repo. Legacy MarketSnapshotRepository(root): */*/*.json; separate external mapping repo provider/<dataset>.json.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/market/intelligence.py",
+        "src/market/query.py",
+        "src/market/reporting.py",
+        "src/market/repository.py",
+        "src/market/mappings.py"
+      ],
+      "stage3_difficulty": "medium"
+    },
+    {
+      "blockers": [
+        "No actual live AI transport",
+        "Context limits do not enforce rights/export policy",
+        "Provider prose untrusted; user data separate",
+        "Digest does not authenticate owner/reviewer"
+      ],
+      "data_domains": [
+        "supplied_request_policy_domain_envelopes",
+        "semantic_query_envelopes",
+        "separately_scoped_personal_and_offer_inputs_for_acquisition_adapter"
+      ],
+      "explicit_root_capability": "Inject attached query into semantic builder; domain adapters need separately bound dependencies.",
+      "generated_identity": "Request/recommendation/context semantic IDs bind input snapshot IDs, selected content, provenance, omissions; reasoning analytics query IDs must agree.",
+      "name": "Decision Intelligence / ReasoningContextBuilder",
+      "read_roots": "Decision core pure request/policy/domain envelopes; reasoning consumes injected semantic engine only; Card acquisition adapter separately reads caller source_root JSON referenced by packet.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/decision_intelligence/service.py",
+        "src/decision_intelligence/models.py",
+        "src/decision_intelligence/reasoning.py",
+        "src/reasoning/context.py",
+        "src/reasoning/models.py",
+        "src/card_intelligence/acquisition.py"
+      ],
+      "stage3_difficulty": "low core, medium adapters"
+    },
+    {
+      "blockers": [
+        "Product collation structures do not implement timing/Oracle/gameplay rules",
+        "No complete MB2 pools/slots/sheets or simulation demonstrated",
+        "Research sufficiency remains noncanonical"
+      ],
+      "data_domains": [
+        "typed_product_rules",
+        "referenced_card_printing_source_records",
+        "noncanonical_research",
+        "referenced_evidence_bundles"
+      ],
+      "explicit_root_capability": "Existing root injection, no gameplay rules runtime.",
+      "generated_identity": "canonical_rules_repository_bytes is deterministic JSON of game/sheets/slots, not new v13 authority.",
+      "name": "Rules / Probability",
+      "read_roots": "repository.rules games_root loads print_sheets/*/print-sheet.json, slots/*/slot.json, complete card/printing/source dependencies and products/*/product.json. rule_research reads research_root/<product>/<phase>/{rule-claim-matrix,evidence-sufficiency-report}.json plus referenced evidence bundles/source records with injectable roots. probability package is placeholder.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/repository/rules.py",
+        "src/repository/rule_research.py",
+        "src/repository/evidence.py",
+        "src/probability/__init__.py"
+      ],
+      "stage3_difficulty": "medium product structural integration; future gameplay separate"
+    },
+    {
+      "blockers": [
+        "Do not bypass path/approval/source-policy gates",
+        "Source/payload/audit closure reproduces source-controlled fields",
+        "Historical decisions carry root-bound scope, not portable live grants",
+        "No writer execution in Stage2"
+      ],
+      "data_domains": [
+        "repository_scoped_configuration",
+        "payload_context",
+        "source_receipts",
+        "canonical_tree",
+        "admission_authorization",
+        "audit_and_checkpoints",
+        "git_publication_base"
+      ],
+      "explicit_root_capability": "Root/config injection exists but outside repository roots rejected; no external release destination support.",
+      "generated_identity": "Plan ID, ordered candidate payload/evidence/policy/pre-state bindings, admission audit and canonical pre/post tree digests.",
+      "name": "AutomaticCanonicalUpdate",
+      "read_roots": "Repository-contained data_root; configured candidate payload/source_artifact/receipts/promotion_audit; automatic_updates/<batch> stages/checkpoints and backup; complete canonical tree digest; GitHub publication Git base and exact dependency inventory. Consumer validation directly constructs query/resolver/projection against staging data_root.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "src/production_evidence/automatic_updates.py",
+        "src/production_evidence/promotion_readiness.py",
+        "scripts/automatic_canonical_update.py"
+      ],
+      "stage3_difficulty": "high, not required for read-only legacy profile"
+    },
+    {
+      "blockers": [
+        "Do not invent runtime database support",
+        "Generated persistence must remain subordinate to an authorized retained snapshot",
+        "No SQL implementation is authorized by this review"
+      ],
+      "data_domains": [
+        "future_generated_persistence"
+      ],
+      "explicit_root_capability": "Not implemented. Existing MTGJSON transient SQLite index is not SQLAlchemy or canonical authority.",
+      "generated_identity": "No current materialization identity; a future generation manifest must bind selected catalog, code/schema/policy/materializer/configuration.",
+      "name": "SQLAlchemy persistence",
+      "read_roots": "No implemented SQLAlchemy models, imports, migrations or production materializer found. Decision 010 specifies the intended persistence direction.",
+      "review_flags": {
+        "profile_attached": false,
+        "runtime_changed": false,
+        "writer_executed": false
+      },
+      "source_paths": [
+        "docs/DECISIONS.md",
+        "docs/DATA_MODEL.md",
+        "requirements.txt"
+      ],
+      "stage3_difficulty": "Future subsystem, not needed for a read-only legacy profile."
+    }
+  ],
+  "document_kind": "review_not_snapshot",
+  "identity_distinctions": {
+    "canonical_tree_prestate": "production_evidence.promotion_readiness.canonical_state_digest inventories ALL files recursively below data_root/canonical, hashing each exact file and relative path then compact canonical JSON inventory. It is not state.json-only.",
+    "legacy_public_handle": "Explicit roots, snapshot_id=None and existing-reader-contracts. verify_unchanged checks directory/game syntax/symlinks, not file hashes or immutable closure. It is not a sealed real-data snapshot.",
+    "outer_v13_snapshot": "Stage1 release/content/source/report domain-separated identities; never rewrite legacy query/canonical-tree identities.",
+    "query_snapshot": "Hash of resulting envelopes including audit-reference byte hashes; not canonical-tree digest."
+  },
+  "minimum_faithful_profiles": [
+    {
+      "exclude_as_independent_domains": "Market observations/acquisitions, Card KnowledgeRepository fact files, personal collections, archived source byte corpora, research and derived reports are not canonical-query entity files. Required admission/source dependencies remain separately bound, not silently discarded.",
+      "include": "Exact typed schema-valid game tree and referenced SourceRecords; both present promoted-state files; complete audit JSON read surface for full historical/validation-query fidelity; public code/schema bindings. To preserve historical canonical-tree digest, inventory every existing canonical file, even files not projected as query entities.",
+      "name": "faithful legacy canonical/query profile",
+      "risk": "A narrower entity-only envelope may preserve counts but alter query provenance SHA, canonical-tree digest or query capabilities; it needs an explicitly different profile, not a faithful legacy claim."
+    },
+    {
+      "include": "Exact audit selected per promotion plus historical payload/review/source receipts actually reopened by projection engine; new admission format payload/evidence files referenced in audit input_bindings.",
+      "name": "projection/admission integrity extension",
+      "risk": "Flat-record production validate is supported, but typed materialization remains unsupported; historical missing Finish labels remain visible."
+    },
+    {
+      "include": "Explicit independently versioned mechanics source; Card KnowledgeRepository history; market temporal evidence; product offers/content evidence; domain config policies.",
+      "name": "domain evidence attachments",
+      "risk": "Must not fold these into unqualified canonical truth or assume all are derived/rebuildable without retained source."
+    },
+    {
+      "include": "Separate private collection import/snapshot/assessment and source_root references.",
+      "name": "personal data attachment",
+      "risk": "Never package with public/shared card snapshot; historical catalog change requires a newly identified audit."
+    }
+  ],
+  "query_observations": {
+    "bare_default": {
+      "audit_file_count": 0,
+      "counts_by_type": {
+        "card": 15,
+        "game": 1,
+        "printing": 15,
+        "product": 1
+      },
+      "distinct_entity_referenced_audit_count": 0,
+      "entity_audit_coverage_histogram": {
+        "0": 32
+      },
+      "global_rejected_count": 0,
+      "global_validation_failure_count": 0,
+      "parseable_audit_count": 0,
+      "per_kind_distinct_audit_count": {
+        "card": 0,
+        "game": 0,
+        "printing": 0,
+        "product": 0
+      },
+      "query_snapshot_id": "sha256:e580c987f4e7cae0c0a69e22dc025e468ceacef078a4ff907935c1d54998fa6e",
+      "total": 32
+    },
+    "both_roots": {
+      "audit_file_count": 30,
+      "counts_by_type": {
+        "card": 399,
+        "finish": 2,
+        "game": 1,
+        "identifier": 235,
+        "printing": 928,
+        "product": 1
+      },
+      "distinct_entity_referenced_audit_count": 2,
+      "entity_audit_coverage_histogram": {
+        "0": 32,
+        "1": 1534
+      },
+      "global_rejected_count": 0,
+      "global_validation_failure_count": 0,
+      "parseable_audit_count": 30,
+      "per_kind_distinct_audit_count": {
+        "card": 1,
+        "finish": 1,
+        "game": 0,
+        "identifier": 1,
+        "printing": 2,
+        "product": 0
+      },
+      "query_snapshot_id": "sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7",
+      "total": 1566
+    },
+    "separate_domains": {
+      "canonical_knowledge_state_exists": false,
+      "knowledge_fact_file_count": 140
+    }
+  },
+  "query_read_surface": {
+    "audit_operations": "All query construction derives matching lineage; related(promotion_audits) and validation(rejected/validation_failure) lazily rescan audits. A non-entity-referenced audit may still be a queryable historical decision or affect validation statistics.",
+    "audit_scan": "<data_root>/audit/**/*.json, sorted recursively. Malformed/unreadable JSON is skipped. Matching promotion IDs or entity membership determine summary/package selection. Missing promotion_id removes that filter.",
+    "entrypoint": "src/query/engine.py:CanonicalQueryEngine",
+    "not_read_by_basic_query": [
+      "<data_root>/knowledge/facts/*/*/*.json",
+      "<data_root>/market/**",
+      "<data_root>/sources/** raw archives",
+      "<data_root>/reviews/**",
+      "<data_root>/review/**",
+      "<data_root>/collections/**"
+    ],
+    "not_read_does_not_mean_not_required": "Full admission validation, source replay, projection validation, domain intelligence and personal audit require their own declared closures.",
+    "precedence": "Typed entity (kind,id) suppresses state versions. canonical/state is read before canonical/knowledge/state; the typed skip set is NOT updated by state rows, so duplicate state-versus-knowledge IDs are not automatically collapsed.",
+    "promoted_state_files": [
+      "<data_root>/canonical/state.json",
+      "<data_root>/canonical/knowledge/state.json"
+    ],
+    "raw_envelope_globs": [
+      "cards/*/card.json",
+      "printings/*/printing.json",
+      "products/*/product.json",
+      "product_versions/**/*.json",
+      "packs/**/*.json",
+      "slots/**/*.json",
+      "print_sheets/**/*.json"
+    ],
+    "roots": {
+      "data_root": "explicit, else games_root.parents[2]; for <repo>/data/canonical/games this is <repo>, not <repo>/data",
+      "games_root": "explicit, else code checkout data/canonical/games",
+      "safe_call_rule": "Always supply BOTH explicit roots; Stage1 from_attachment does this."
+    },
+    "typed_game_files": [
+      "<games_root>/<game>/game.json",
+      "cards/*/card.json",
+      "printings/*/printing.json",
+      "products/*/product.json",
+      "product_versions/*.json",
+      "product_versions/*/product-version.json",
+      "packs/*.json",
+      "packs/*/pack-definition.json",
+      "slots/*.json",
+      "slots/*/slot.json",
+      "sheets/*.json",
+      "print_sheets/*/print-sheet.json",
+      "treatments/*.json",
+      "finishes/*.json",
+      "rarities/*.json"
+    ],
+    "typed_source_dependencies": "Each Card/Printing asserted source_id loads <games_root>/<game>/sources/<source_id>.json; product loader is schema/path validation, not generic archive lookup."
+  },
+  "review_status": "complete_pending_independent_project_manager_review",
+  "safety_state": {
+    "actual_snapshot_attached": false,
+    "admission_decision_created": false,
+    "canonical_data_changed": false,
+    "production_eligible": false,
+    "runtime_profile_created": false,
+    "source_policy_clearance_granted": false,
+    "writer_executed": false
+  },
+  "schema_version": "v13-stage2-consumer-dependencies-review-v1",
+  "scope": "Engineering dependency review only. Existing legacy constructors were measured read-only; no immutable real-data snapshot was constructed or attached.",
+  "stage3_readiness": {
+    "blockers": [
+      "Operation-specific permission for required catalog fields and faithful replay dependencies is not established.",
+      "Current legacy query is a mixed typed/promoted/audit representation; exact closure, precedence and distinct semantic identities require a reviewed contract before sealing a real profile."
+    ],
+    "next_prerequisite": "Legacy/Public Profile Permission and Closure Contract",
+    "next_prerequisite_authorized": false,
+    "status": "not_ready",
+    "technical_recommendation": {
+      "required_future_tests": [
+        "Exact relocated entity/value/provenance/query digest equivalence, not count smoke tests",
+        "Lazy audit and source-file tampering after construction",
+        "Missing or extra state/knowledge/audit files and duplicate namespace handling",
+        "Historical canonical-tree/query IDs unchanged",
+        "Actual query relationships/identifier aliases and separate personal resolution",
+        "No ambient fallback, provider fetch, runtime writer, source-policy override or new authority claim"
+      ],
+      "separated_domain_design": "Canonical entities/identifiers and required lineage remain catalog authority; Card KnowledgeRepository, temporal market evidence, rules research, personal records, and disposable derived outputs remain separate typed domains. Existing canonical/knowledge/state is different from data/knowledge/facts and is already in the query envelope/read surface.",
+      "smallest_faithful_scope": "A separately reviewed legacy profile inventories exact current canonical representations + SourceRecords + audit read surface and scoped admission/source validation dependencies, preserves identities, pins both roots, declares independent domain attachments unavailable unless explicitly supplied. Do not attach it as production or broaden Stage1 fictional contract during review."
+    }
+  }
+}

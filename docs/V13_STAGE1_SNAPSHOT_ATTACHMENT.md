@@ -1,3 +1,8 @@
+Current status: Stage 1 is merged in PR #176. Its implementation and historical
+scope below are preserved. The separately authorized Stage 2 review is in
+[V13_STAGE2_LEGACY_PUBLIC_PROFILE_REVIEW.md](V13_STAGE2_LEGACY_PUBLIC_PROFILE_REVIEW.md);
+its next prerequisite remains NOT AUTHORIZED. No real profile is activated.
+
 # V13 Stage 1 — Fictional Canonical Snapshot Attachment
 
 Status: separately owner-authorized implementation, pending independent PM review.

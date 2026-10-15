@@ -4,7 +4,7 @@
 > Decision 017 governs authority. Architecture v12 is the previous historical baseline.
 > Governance acceptance alone authorized no runtime work. A subsequent separate owner
 > authorization enabled Stage 1 fictional read-only snapshot attachment, now implemented
-> and pending independent Project Manager review; production attachment remains unsupported.
+> and merged in PR #176; production attachment remains unsupported.
 > The high-level target diagram includes planned layers and is not a claim
 > that every component is implemented. `../ARCHITECTURE_REVIEW_v1.md` contains the
 > Phase 77 current-implementation dependency diagram and maturity assessment.
@@ -158,11 +158,13 @@ unchanged. Card Acquisition replay explicitly retains its original Architecture-
 auxiliary file; it does not read current architecture as a historical dependency.
 
 **V13 Stage 1 — Fictional Canonical Snapshot Attachment** was separately authorized
-and is implemented, pending independent Project Manager review. Its bounded scope
+and is merged in PR #176. Its bounded scope
 is fictional manifest verification and explicit read-only attachment through
 existing query/collection readers, preserving legacy constructor behavior and an
 explicit legacy/public profile. See the [implementation and limits](V13_STAGE1_SNAPSHOT_ATTACHMENT.md).
 
-The next candidate is **V13 Stage 2 — Legacy/Public Snapshot Profile Review**.
-It is **NOT AUTHORIZED**; naming this candidate grants no follow-on work, production
-data attachment, admission, source-policy clearance or merge authority.
+The owner separately authorized **V13 Stage 2 — Legacy/Public Snapshot Profile
+Review** as review only. [Its census and dependency analysis](V13_STAGE2_LEGACY_PUBLIC_PROFILE_REVIEW.md)
+leave real Stage 3 profile implementation NOT READY. The narrower prerequisite
+**Legacy/Public Profile Permission and Closure Contract** is NOT AUTHORIZED;
+no production attachment, admission, source-policy clearance or merge follows.
