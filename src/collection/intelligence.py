@@ -63,12 +63,13 @@ def read_import(path: Path) -> dict:
 
 class CanonicalCollectionResolver:
     """Read-only, explicit-priority resolver over Cards, Printings and Identifiers."""
-    def __init__(self, game: str, data_root: Path = Path("data"), *, games_root: Path | None = None):
+    def __init__(self, game: str, data_root: Path = Path("data"), *, games_root: Path | None = None, _attachment=None):
         self._catalog_attachment = None
         self.game, self.data_root = game, Path(data_root)
         root = Path(games_root) if games_root is not None else self.data_root / "canonical" / "games"
         self.games_root = root
-        query = CanonicalQueryEngine(game, games_root=root, data_root=self.data_root)
+        query = (CanonicalQueryEngine.from_attachment(_attachment) if _attachment is not None else
+                 CanonicalQueryEngine(game, games_root=root, data_root=self.data_root))
         snapshot = query.snapshot()
         entities = [x for x in snapshot.entities if x.supersession_state == "current"]
         # The current promoted-state contract has no game field. It may only be
@@ -118,11 +119,13 @@ class CanonicalCollectionResolver:
     def from_attachment(cls, attachment) -> CanonicalCollectionResolver:
         """Reuse resolution against one verified, explicitly selected catalog."""
         from repository.snapshots import LegacyPublicAttachment, SnapshotAttachment, SnapshotError
+        from repository.legacy_profile import LegacyCompatibilityAttachment
 
-        if not isinstance(attachment, (SnapshotAttachment, LegacyPublicAttachment)):
+        if not isinstance(attachment, (SnapshotAttachment, LegacyPublicAttachment, LegacyCompatibilityAttachment)):
             raise SnapshotError("verified catalog attachment required")
         attachment.verify_unchanged()
-        resolver = cls(attachment.game, attachment.data_root, games_root=attachment.games_root)
+        resolver = cls(attachment.game, attachment.data_root, games_root=attachment.games_root,
+                       _attachment=attachment)
         attachment.verify_unchanged()
         resolver._catalog_attachment = attachment
         return resolver

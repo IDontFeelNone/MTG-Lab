@@ -85,6 +85,7 @@ class CanonicalAnalyticsEngine:
             "total_entities": len(snapshot.entities)})
 
     def validation(self) -> CanonicalAnalyticsResult:
+        self._query.require_capability("full_query_audit")
         snapshot = self._query.snapshot()
         data = {state: len(self._query.validation(state)) for state in
                 ("conflicting", "rejected", "superseded", "unknown", "unresolved", "validation_failure")}

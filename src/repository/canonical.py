@@ -28,11 +28,13 @@ class CanonicalRepositoryError(ValueError):
 class CanonicalRepository:
     """Validated in-memory view; this service never writes canonical files."""
 
-    def __init__(self, game: str, *, games_root: Path | None = None):
+    def __init__(self, game: str, *, games_root: Path | None = None,
+                 read_inventory: Any = None):
         if not _ID.fullmatch(game):
             raise CanonicalRepositoryError("game must be a stable lowercase identifier")
         self.game_id = game
         self.root = Path(games_root) if games_root is not None else _DEFAULT_ROOT
+        self._read_inventory = read_inventory
         self.game = self._load_game()
         self.cards, self.printings = self._load_cards()
         product_documents = self._load_product_documents()
@@ -108,7 +110,9 @@ class CanonicalRepository:
 
     def _load_game(self) -> Game:
         path = self.root / self.game_id / "game.json"
-        if not path.exists():
+        if self._read_inventory is not None:
+            self._read_inventory.require(path)
+        if self._read_inventory is None and not path.exists():
             return Game(self.game_id, {}, self.game_id.replace("_", " ").title())
         data = self._read(path)
         try:
@@ -121,7 +125,8 @@ class CanonicalRepository:
 
     def _load_cards(self) -> tuple[tuple[Card, ...], tuple[Printing, ...]]:
         try:
-            cards, printings = load_card_repository(self.game_id, games_root=self.root)
+            cards, printings = load_card_repository(
+                self.game_id, games_root=self.root, read_inventory=self._read_inventory)
         except ValueError as error:
             raise CanonicalRepositoryError(str(error)) from error
         return (
@@ -131,13 +136,14 @@ class CanonicalRepository:
 
     def _load_product_documents(self) -> tuple[Mapping[str, Any], ...]:
         result = []
-        for path in sorted((self.root / self.game_id / "products").glob("*/product.json")):
-            try: result.append(load_product(self.game_id, path.parent.name, games_root=self.root))
+        for path in self._paths(self.root / self.game_id / "products", "*/product.json"):
+            try: result.append(load_product(self.game_id, path.parent.name, games_root=self.root,
+                                            read_inventory=self._read_inventory))
             except ValueError as error: raise CanonicalRepositoryError(str(error)) from error
         return tuple(result)
 
     def _documents(self, patterns: tuple[str, ...]) -> tuple[Mapping[str, Any], ...]:
-        paths = {path for pattern in patterns for path in (self.root / self.game_id).glob(pattern)}
+        paths = {path for pattern in patterns for path in self._paths(self.root / self.game_id, pattern)}
         return tuple(self._read(path) for path in sorted(paths))
 
     def _load_product_versions(self) -> tuple[ProductVersion, ...]:
@@ -178,7 +184,7 @@ class CanonicalRepository:
 
     def _load(self, directory: str, model: type) -> tuple:
         records = []
-        for path in sorted((self.root / self.game_id / directory).glob("*.json")):
+        for path in self._paths(self.root / self.game_id / directory, "*.json"):
             data = self._read(path)
             try:
                 records.append(self._construct(model, data))
@@ -291,9 +297,15 @@ class CanonicalRepository:
             visiting.remove(identifier); visited.add(identifier)
         for identifier in sorted(versions): visit(identifier)
 
-    @staticmethod
-    def _read(path: Path) -> Mapping[str, Any]:
-        try: data = json.loads(path.read_text(encoding="utf-8"))
+    def _paths(self, root: Path, pattern: str) -> tuple[Path, ...]:
+        if self._read_inventory is not None:
+            return tuple(self._read_inventory.paths(root, pattern))
+        return tuple(sorted(root.glob(pattern)))
+
+    def _read(self, path: Path) -> Mapping[str, Any]:
+        try:
+            data = (self._read_inventory.read_json(path) if self._read_inventory is not None
+                    else json.loads(path.read_text(encoding="utf-8")))
         except (OSError, json.JSONDecodeError) as error: raise CanonicalRepositoryError(f"Invalid JSON: {path}") from error
         if not isinstance(data, dict): raise CanonicalRepositoryError(f"Canonical record must be an object: {path}")
         return data
@@ -326,8 +338,9 @@ class CanonicalRepository:
                 if value not in ids: raise CanonicalRepositoryError(f"{source_label} {source.id} references missing {target_label} {value}")
 
 
-def load_canonical_repository(game: str, *, games_root: Path | None = None) -> CanonicalRepository:
-    return CanonicalRepository(game, games_root=games_root)
+def load_canonical_repository(game: str, *, games_root: Path | None = None,
+                              read_inventory: Any = None) -> CanonicalRepository:
+    return CanonicalRepository(game, games_root=games_root, read_inventory=read_inventory)
 
 
 __all__ = ["CanonicalRepository", "CanonicalRepositoryError", "load_canonical_repository"]

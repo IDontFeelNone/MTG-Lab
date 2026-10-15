@@ -29,40 +29,42 @@ def printing_record_path(
     return _entity_path(game, "printings", printing_id, "printing.json", games_root)
 
 
-def load_card(game: str, card_id: str, *, games_root: Path | None = None) -> Mapping[str, Any]:
+def load_card(game: str, card_id: str, *, games_root: Path | None = None,
+              read_inventory: Any = None) -> Mapping[str, Any]:
     """Load one structurally valid Card whose identity matches its path."""
-    document = _load(card_record_path(game, card_id, games_root=games_root), "card")
+    document = _load(card_record_path(game, card_id, games_root=games_root), "card", read_inventory)
     if document["id"] != card_id or document["game"] != game:
         raise CardRepositoryError("Card identifiers do not match its canonical path")
-    _validate_provenance(game, document, games_root)
+    _validate_provenance(game, document, games_root, read_inventory)
     return document
 
 
 def load_printing(
-    game: str, printing_id: str, *, games_root: Path | None = None
+    game: str, printing_id: str, *, games_root: Path | None = None,
+    read_inventory: Any = None
 ) -> Mapping[str, Any]:
     """Load one structurally valid Printing whose identity matches its path."""
-    document = _load(printing_record_path(game, printing_id, games_root=games_root), "printing")
+    document = _load(printing_record_path(game, printing_id, games_root=games_root), "printing", read_inventory)
     if document["id"] != printing_id:
         raise CardRepositoryError("Printing identifier does not match its canonical path")
-    _validate_provenance(game, document, games_root)
+    _validate_provenance(game, document, games_root, read_inventory)
     return document
 
 
 def load_card_repository(
-    game: str, *, games_root: Path | None = None
+    game: str, *, games_root: Path | None = None, read_inventory: Any = None
 ) -> tuple[tuple[Mapping[str, Any], ...], tuple[Mapping[str, Any], ...]]:
     """Load the complete game repository and enforce Printing-to-Card references."""
     _validate_identifier("game", game)
     root = Path(games_root) if games_root is not None else _DEFAULT_GAMES_ROOT
     game_root = root / game
     cards = tuple(
-        load_card(game, path.parent.name, games_root=root)
-        for path in sorted((game_root / "cards").glob("*/card.json"))
+        load_card(game, path.parent.name, games_root=root, read_inventory=read_inventory)
+        for path in _paths(game_root / "cards", "*/card.json", read_inventory)
     )
     printings = tuple(
-        load_printing(game, path.parent.name, games_root=root)
-        for path in sorted((game_root / "printings").glob("*/printing.json"))
+        load_printing(game, path.parent.name, games_root=root, read_inventory=read_inventory)
+        for path in _paths(game_root / "printings", "*/printing.json", read_inventory)
     )
     _reject_duplicates(cards, "Card")
     _reject_duplicates(printings, "Printing")
@@ -91,9 +93,16 @@ def _entity_path(
     return root / game / kind / entity_id / filename
 
 
-def _load(path: Path, schema: str) -> Mapping[str, Any]:
+def _paths(root: Path, pattern: str, read_inventory: Any = None) -> tuple[Path, ...]:
+    if read_inventory is not None:
+        return tuple(read_inventory.paths(root, pattern))
+    return tuple(sorted(root.glob(pattern)))
+
+
+def _load(path: Path, schema: str, read_inventory: Any = None) -> Mapping[str, Any]:
     try:
-        document = json.loads(path.read_text(encoding="utf-8"))
+        document = (read_inventory.read_json(path) if read_inventory is not None
+                    else json.loads(path.read_text(encoding="utf-8")))
     except FileNotFoundError as error:
         raise CardRepositoryError(f"Canonical {schema} record not found: {path}") from error
     except json.JSONDecodeError as error:
@@ -108,14 +117,15 @@ def _load(path: Path, schema: str) -> Mapping[str, Any]:
 
 
 def _validate_provenance(
-    game: str, document: Mapping[str, Any], games_root: Path | None
+    game: str, document: Mapping[str, Any], games_root: Path | None,
+    read_inventory: Any = None
 ) -> None:
     root = Path(games_root) if games_root is not None else _DEFAULT_GAMES_ROOT
     covered_fields: set[str] = set()
     evidence = document.get("assertions", document.get("provenance", ()))
     for provenance in evidence:
         source_id = provenance["source_id"]
-        source = _load(root / game / "sources" / f"{source_id}.json", "source-record")
+        source = _load(root / game / "sources" / f"{source_id}.json", "source-record", read_inventory)
         if source["id"] != source_id:
             raise CardRepositoryError("Source identifier does not match its canonical path")
         covered_fields.update(provenance.get("field_paths", ()))

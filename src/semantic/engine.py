@@ -30,6 +30,10 @@ class CanonicalSemanticQueryEngine:
     def execute(self, request: SemanticRequest) -> SemanticResponse:
         if request.operation not in self.OPERATIONS:
             raise SemanticQueryError(f"unsupported semantic operation: {request.operation}")
+        if (request.operation == "validation_statistics"
+                or (request.operation == "list_validation"
+                    and request.parameters.get("state") in {"rejected", "validation_failure"})):
+            self._query.require_capability("full_query_audit")
         snapshot = self._query.snapshot()
         parameters = request.parameters
         analytics_name = {"analytics_summary": "summary", "dataset_statistics": "dataset",

@@ -63,12 +63,16 @@ class CanonicalQueryEngine:
     """Read-only facade; downstream callers do not receive repository objects."""
 
     def __init__(self, game: str = "magic", *, games_root: Path | None = None,
-                 data_root: Path | None = None) -> None:
+                 data_root: Path | None = None, _read_inventory=None) -> None:
         self._catalog_attachment = None
+        self._read_inventory = _read_inventory
         self.game = game
         self.games_root = Path(games_root) if games_root else Path(__file__).resolve().parents[2] / "data/canonical/games"
         self.data_root = Path(data_root) if data_root else self.games_root.parents[2]
-        self._repository = CanonicalRepository(game, games_root=self.games_root)
+        repository_options = ({"read_inventory": _read_inventory}
+                              if _read_inventory is not None else {})
+        self._repository = CanonicalRepository(game, games_root=self.games_root,
+                                               **repository_options)
         self._raw = self._load_raw()
         self._results = tuple(sorted(self._build_results(), key=lambda x: (x.entity_type, x.canonical_identity)))
 
@@ -76,21 +80,66 @@ class CanonicalQueryEngine:
     def from_attachment(cls, attachment) -> CanonicalQueryEngine:
         """Read one verified attachment without changing legacy query identities."""
         from repository.snapshots import LegacyPublicAttachment, SnapshotAttachment, SnapshotError
+        from repository.legacy_profile import LegacyCompatibilityAttachment
 
-        if not isinstance(attachment, (SnapshotAttachment, LegacyPublicAttachment)):
+        if not isinstance(attachment, (SnapshotAttachment, LegacyPublicAttachment,
+                                       LegacyCompatibilityAttachment)):
             raise SnapshotError("verified catalog attachment required")
         attachment.verify_unchanged()
-        engine = cls(attachment.game, games_root=attachment.games_root,
-                     data_root=attachment.data_root)
+        bounded = isinstance(attachment, LegacyCompatibilityAttachment)
+        try:
+            engine = cls(attachment.game, games_root=attachment.games_root,
+                         data_root=attachment.data_root,
+                         _read_inventory=attachment if bounded else None)
+        except SnapshotError:
+            raise
+        except (ValueError, OSError, KeyError, TypeError):
+            if not bounded:
+                raise
+            # Legacy loader exceptions can contain absolute paths or source values.
+            # The bounded attachment reports a safe category rather than that text.
+            raise SnapshotError("selected canonical catalog is invalid",
+                                code="invalid_catalog") from None
         attachment.verify_unchanged()
         engine._catalog_attachment = attachment
+        if bounded:
+            attachment.validate_query(engine.snapshot())
         return engine
+
+    def require_capability(self, name: str) -> None:
+        """Reject excluded capabilities before any attachment or evidence reads.
+
+        Existing unrestricted readers retain their existing API surface. An explicit
+        bounded attachment supplies the capability policy; it cannot be upgraded by
+        a query request.
+        """
+        from repository.legacy_profile import LegacyCompatibilityAttachment
+
+        if isinstance(self._catalog_attachment, LegacyCompatibilityAttachment):
+            self._catalog_attachment.require_capability(name)
+        elif self._read_inventory is not None:
+            self._read_inventory.require_capability(name)
+
+    def _paths(self, root: Path, pattern: str) -> tuple[Path, ...]:
+        if self._read_inventory is not None:
+            return self._read_inventory.paths(root, pattern)
+        return tuple(sorted(root.glob(pattern)))
+
+    def _read_json(self, path: Path):
+        if self._read_inventory is not None:
+            return self._read_inventory.read_json(path)
+        return json.loads(path.read_text())
 
     def _verify_attachment(self) -> None:
         if self._catalog_attachment is not None:
             from repository.snapshots import SnapshotError
 
             attachment = self._catalog_attachment
+            from repository.legacy_profile import LegacyCompatibilityAttachment
+
+            if (isinstance(attachment, LegacyCompatibilityAttachment)
+                    and self._read_inventory is not attachment):
+                raise SnapshotError("catalog attachment read inventory changed", code="scope_changed")
             attachment.verify_unchanged()
             if (self.game != attachment.game
                     or self.data_root.resolve() != attachment.data_root.resolve()
@@ -157,6 +206,8 @@ class CanonicalQueryEngine:
 
     def related(self, identifier: str, relationship: str) -> tuple[QueryResult | Mapping[str, Any], ...]:
         """Traverse a named relationship without exposing storage paths or models."""
+        if relationship == "promotion_audits":
+            self.require_capability("full_query_audit")
         self._verify_attachment()
         if relationship == "card_printings":
             self.entity(identifier, entity_type="card")
@@ -188,6 +239,8 @@ class CanonicalQueryEngine:
 
     def validation(self, state: str) -> tuple[QueryResult | Mapping[str, Any], ...]:
         """Query explicit epistemic and audit failure states."""
+        if state in {"rejected", "validation_failure"}:
+            self.require_capability("full_query_audit")
         self._verify_attachment()
         allowed = {"unknown", "conflicting", "unresolved", "rejected", "validation_failure", "superseded"}
         if state not in allowed: raise QueryError("unsupported validation state")
@@ -211,8 +264,8 @@ class CanonicalQueryEngine:
         root = self.games_root / self.game
         for pattern in ("cards/*/card.json", "printings/*/printing.json", "products/*/product.json",
                         "product_versions/**/*.json", "packs/**/*.json", "slots/**/*.json", "print_sheets/**/*.json"):
-            for path in sorted(root.glob(pattern)):
-                try: value = json.loads(path.read_text())
+            for path in self._paths(root, pattern):
+                try: value = self._read_json(path)
                 except (json.JSONDecodeError, OSError): continue
                 if isinstance(value, dict) and value.get("id"): raw[str(value["id"])] = value
         return raw
@@ -248,8 +301,12 @@ class CanonicalQueryEngine:
         # typed game tree.  It is read through the same contract, never exposed directly.
         for path in (self.data_root / "canonical" / "state.json",
                      self.data_root / "canonical" / "knowledge" / "state.json"):
-            if not path.exists(): continue
-            try: state = json.loads(path.read_text())
+            if self._read_inventory is not None:
+                if not self._paths(path.parent, path.name):
+                    continue
+            elif not path.exists():
+                continue
+            try: state = self._read_json(path)
             except (OSError, json.JSONDecodeError) as error: raise QueryError(f"invalid canonical state: {path}") from error
             for kind, entities in sorted(state.items()):
                 if not isinstance(entities, Mapping): continue
@@ -300,9 +357,13 @@ class CanonicalQueryEngine:
         return assertions
 
     def _audit_entries(self, *, entity_id: str | None = None, promotion_id: str | None = None):
-        for path in sorted((self.data_root / "audit").rglob("*.json")):
+        paths = (self._paths(self.data_root / "audit", "**/*.json")
+                 if self._read_inventory is not None
+                 else sorted((self.data_root / "audit").rglob("*.json")))
+        for path in paths:
             try:
-                content = path.read_bytes()
+                content = (self._read_inventory.read_bytes(path)
+                           if self._read_inventory is not None else path.read_bytes())
                 value = json.loads(content)
             except (OSError, json.JSONDecodeError): continue
             if promotion_id and value.get("promotion_id") != promotion_id: continue
