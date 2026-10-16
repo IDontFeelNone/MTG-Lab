@@ -308,7 +308,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                 text = (ROOT / entry["path"]).read_bytes()
                 self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])
 
-    def test_current_status_separates_gameplay_foundation_and_unapproved_next_domain(self):
+    def test_current_status_separates_rules_source_review_and_unapproved_projection(self):
         milestone = "V13 Stage 1 — Fictional Canonical Snapshot Attachment"
         for name in ("README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md",
                      "docs/SESSION_STATE.md", "docs/NEXT_TASK.md"):
@@ -324,6 +324,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("merged in PR #179", current, name)
             self.assertIn("merged in PR #180", current, name)
             self.assertIn("merged in PR #181", current, name)
+            self.assertIn("merged in PR #182", current, name)
             self.assertIn("pending independent Project Manager inspection", current, name)
             self.assertIn("READY_FOR_NON_PRODUCTION_STAGE3", current, name)
             self.assertIn("V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile", current, name)
@@ -353,7 +354,13 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("remains unimplemented", current, name)
             self.assertIn("Gameplay Rules Source/Evidence Intake & Versioning", current, name)
             self.assertIn("serious gameplay simulation", current, name)
-            self.assertIn("no current official rules version", current, name)
+            self.assertIn("CURRENT_RULES_RELEASE_NOT_VERIFIED", current, name)
+            self.assertIn("NOT_READY_FOR_RULE_PROJECTION", current, name)
+            self.assertIn("src/gameplay_rules/source_evidence/", current, name)
+            self.assertIn("review-only", current, name)
+            self.assertIn("Official Gameplay Rules Release Discovery Closure", current, name)
+            self.assertIn("No real rules projection", current, name)
+            self.assertIn("eight source-specific operations", current, name)
             self.assertIn("mechanical", current, name)
             self.assertIn("production operator profile remains **BLOCKED**", current, name)
             self.assertIn("Legacy/Public Profile Permission and Closure Contract", current, name)
@@ -371,8 +378,10 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         self.assertIn("## V13 Functional-Role and Contextual-Comparison Attachment Integration", scope)
         self.assertIn("Implementation status: merged in PR #181", scope)
         self.assertIn("## Gameplay Rules & Interaction Intelligence Foundation", scope)
-        self.assertIn("Implementation status: implemented, pending independent Project Manager", scope)
-        self.assertIn("src/gameplay_rules/", scope)
+        self.assertIn("Implementation status: merged in PR #182", scope)
+        self.assertIn("## Gameplay Rules Source/Evidence Intake & Versioning", scope)
+        self.assertIn("Implementation status: implemented as a review-only lane, pending independent", scope)
+        self.assertIn("src/gameplay_rules/source_evidence/", scope)
         self.assertIn("Product Rules remain the unchanged Product/Pack/collation domain", scope)
         self.assertIn("Tier B Audit-Context Capability Design Review is deliberately **DEFERRED**", scope)
         self.assertIn("NOT AUTHORIZED", scope.split("## Next implementation candidate", 1)[1])
@@ -384,6 +393,36 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                      "writer destination changes", "Rules Intelligence", "Deck Intelligence expansion",
                      "simulation", "AI transport/model integration"):
             self.assertIn(item, scope, item)
+
+    def test_rules_source_versioning_documents_preserve_review_execution_boundary(self):
+        path = ROOT / "docs/GAMEPLAY_RULES_SOURCE_VERSIONING.md"
+        text = " ".join(path.read_text().split())
+        for item in ("Architecture v13", "Decision 017 remains Accepted and unchanged",
+                     "no Tier-0 change", "review-only", "non-admissible", "PRODUCT RULES",
+                     "GAMEPLAY RULES", "COMPREHENSIVE_RULES", "UPDATE_BULLETIN",
+                     "RELEASE_NOTES", "RULES_INDEX", "RULES_BLOG", "ORACLE", "FORMAT_POLICY",
+                     "PROJECT_AUTHORED_FICTIONAL", "VERIFIED_ARTIFACT", "VERIFIED_METADATA_ONLY",
+                     "DISCOVERED_UNVERIFIED", "EVIDENCE_UNAVAILABLE", "AMBIGUOUS",
+                     "SUPERSEDED", "CONFLICTING", "DESIGNATES", "effective",
+                     "Current, as-of and set-release", "max(date)", "filename",
+                     "June 19, 2026", "Reality Fracture", "leads", "not facts verified",
+                     "CURRENT_RULES_RELEASE_NOT_VERIFIED", "discovery_metadata_processing",
+                     "transient_inspection", "private_raw_retention", "public_metadata_retention",
+                     "public_source_content_redistribution", "free_service_use",
+                     "commercial_service_use", "ai_model_export", "ESTABLISHED_WITH_CONDITIONS",
+                     "NOT_ESTABLISHED", "NEEDS_REVIEW", "RawSnapshotStore",
+                     "ProviderRegistry", "ReferenceDatasetRegistry", "licensing gates",
+                     "no implicit", "NOT_READY_FOR_RULE_PROJECTION",
+                     "Official Gameplay Rules Release Discovery Closure", "NOT AUTHORIZED",
+                     "No next milestone begins automatically"):
+            self.assertIn(item, text, item)
+        foundation = (ROOT / "docs/GAMEPLAY_RULES_INTELLIGENCE.md").read_text()
+        self.assertIn("## Historical foundation milestone record", foundation)
+        self.assertIn("PR #182", foundation.split("## Historical foundation milestone record")[0])
+        self.assertIn("not modify the fictional kernel", " ".join(foundation.split()))
+        for target in re.findall(r"\]\(([^)]+)\)", path.read_text()):
+            if "://" not in target and not target.startswith("#"):
+                self.assertTrue((path.parent / target.split("#")[0]).exists(), target)
 
     def test_gameplay_foundation_documents_separate_domains_and_fictional_execution(self):
         path = ROOT / "docs/GAMEPLAY_RULES_INTELLIGENCE.md"
