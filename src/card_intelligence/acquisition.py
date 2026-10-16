@@ -244,6 +244,77 @@ class CardAcquisitionAdapter:
             if p.canonical_values.get("uuid") == p.canonical_identity and p.supersession_state == "current"}
         self.policy = self._policy()
 
+    @classmethod
+    def from_attachment(cls, attachment, *, data_root: Path,
+                        expected_query_snapshot_id: str,
+                        source_directory: Path | None = None) -> CardAcquisitionAdapter:
+        """Use one explicitly attached catalog and independent mechanical evidence.
+
+        This does not authorize data use, acquire offers or create another
+        canonical query. The existing legacy constructor remains separate.
+        """
+        mechanical = MechanicalCardIntelligence.from_attachment(attachment,
+            data_root=data_root, source_directory=source_directory,
+            expected_query_snapshot_id=expected_query_snapshot_id)
+        return cls.from_mechanical(mechanical,
+            expected_query_snapshot_id=expected_query_snapshot_id)
+
+    @classmethod
+    def from_mechanical(cls, mechanical: MechanicalCardIntelligence, *,
+                        expected_query_snapshot_id: str) -> CardAcquisitionAdapter:
+        """Reuse a real attachment-backed mechanical reader without re-querying roots."""
+        if not isinstance(mechanical, MechanicalCardIntelligence) or mechanical.catalog_binding is None:
+            raise CardAcquisitionError("an explicitly attached MechanicalCardIntelligence is required")
+        mechanical.verify_inputs()
+        if not isinstance(expected_query_snapshot_id, str) or \
+                mechanical.snapshot_id != expected_query_snapshot_id or \
+                mechanical.query.snapshot().snapshot_id != expected_query_snapshot_id:
+            raise CardAcquisitionError("attached acquisition canonical snapshot mismatch")
+        adapter = cls.__new__(cls)
+        adapter.mechanical = mechanical
+        adapter.query = mechanical.query
+        adapter._attached_mechanical = mechanical
+        adapter._attached_query = mechanical.query
+        adapter._expected_query_snapshot_id = expected_query_snapshot_id
+        adapter._catalog_binding = freeze(mechanical.catalog_binding)
+        adapter.printings = {p.canonical_identity: p
+            for p in adapter.query.entities(entity_type="printing")
+            if p.canonical_values.get("uuid") == p.canonical_identity and p.supersession_state == "current"}
+        adapter._printing_inventory_identity = adapter._printing_cache_identity()
+        adapter.policy = adapter._policy()
+        adapter._verify_attached_inputs()
+        return adapter
+
+    @property
+    def catalog_binding(self) -> dict[str, Any] | None:
+        """Catalog control identity, separate from historical dossier payloads."""
+        self._verify_attached_inputs()
+        binding = getattr(self, "_catalog_binding", None)
+        return thaw(binding) if binding is not None else None
+
+    def _printing_cache_identity(self) -> str:
+        try:
+            return content_identity({pid: {"canonical_values": thaw(freeze(p.canonical_values)),
+                "provenance": self._printing_provenance(p)} for pid, p in self.printings.items()})
+        except (AttributeError, TypeError, ValueError) as error:
+            raise CardAcquisitionError("attached acquisition Printing cache is invalid") from error
+
+    def _verify_attached_inputs(self) -> None:
+        # Offline dossier reconstruction deliberately uses a pinned, bounded
+        # SimpleNamespace rather than installing a live catalog attachment.
+        mechanical = getattr(self, "_attached_mechanical", None)
+        if mechanical is None:
+            return
+        if self.mechanical is not mechanical or self.query is not self._attached_query or \
+                mechanical.query is not self._attached_query:
+            raise CardAcquisitionError("attached acquisition reader was retargeted")
+        mechanical.verify_inputs()
+        if mechanical.snapshot_id != self._expected_query_snapshot_id or \
+                self.query.snapshot().snapshot_id != self._expected_query_snapshot_id or \
+                stable_json(mechanical.catalog_binding) != stable_json(thaw(self._catalog_binding)) or \
+                self._printing_cache_identity() != self._printing_inventory_identity:
+            raise CardAcquisitionError("attached acquisition canonical snapshot or catalog binding changed")
+
     @staticmethod
     def _policy() -> DecisionPolicy:
         return DecisionPolicy("collection-aware-card-acquisition", "1.0.0", (
@@ -415,8 +486,12 @@ class CardAcquisitionAdapter:
         return wrapper["value"]
 
     def evaluate(self, value: Mapping[str, Any] | CardAcquisitionInput, *, source_root: Path) -> CardAcquisitionDossier:
+        self._verify_attached_inputs()
         packet = value if isinstance(value, CardAcquisitionInput) else CardAcquisitionInput(value)
         p = packet.to_dict()
+        if getattr(self, "_attached_mechanical", None) is not None and \
+                p.get("canonical_snapshot_id") != self._expected_query_snapshot_id:
+            raise CardAcquisitionError("attached acquisition input canonical snapshot mismatch")
         root = Path(source_root).resolve()
         sources, evidence, blockers, snapshots = self._sources(p, root)
         body, request, analyses = self._evaluate_bound(packet, sources, evidence, blockers)
@@ -425,7 +500,9 @@ class CardAcquisitionAdapter:
             "input_packet": packet.to_dict(), "decision_request": request.to_dict(),
             "analyses": serialized, "analysis_shared": shared, "sources": snapshots,
             "canonical": self._pinned_canonical(packet)}
-        return CardAcquisitionDossier({**body, "dossier_id": content_identity(body)})
+        dossier = CardAcquisitionDossier({**body, "dossier_id": content_identity(body)})
+        self._verify_attached_inputs()
+        return dossier
 
     def _evaluate_bound(self, packet: CardAcquisitionInput, sources: dict, evidence: list,
                         blockers: list) -> tuple[dict[str, Any], DecisionRequest, list[DomainAnalysisEnvelope]]:

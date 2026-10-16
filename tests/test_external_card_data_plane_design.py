@@ -308,7 +308,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                 text = (ROOT / entry["path"]).read_bytes()
                 self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])
 
-    def test_current_status_separates_stage3_implementation_and_unapproved_next_stage(self):
+    def test_current_status_separates_tier_a_intelligence_and_unapproved_next_stage(self):
         milestone = "V13 Stage 1 — Fictional Canonical Snapshot Attachment"
         for name in ("README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md",
                      "docs/SESSION_STATE.md", "docs/NEXT_TASK.md"):
@@ -321,12 +321,19 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("V13 Stage 2 — Legacy/Public Snapshot Profile Review", current, name)
             self.assertIn("merged in PR #177", current, name)
             self.assertIn("merged in PR #178", current, name)
+            self.assertIn("merged in PR #179", current, name)
             self.assertIn("pending independent Project Manager inspection", current, name)
             self.assertIn("READY_FOR_NON_PRODUCTION_STAGE3", current, name)
             self.assertIn("V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile", current, name)
             self.assertIn("is implemented", current, name)
             self.assertIn("legacy-public-compatibility-v1", current, name)
             self.assertIn("Tier B Audit-Context Capability Design Review", current, name)
+            self.assertIn("DEFERRED", current, name)
+            self.assertIn("V13 Tier A Card Intelligence & Acquisition Attachment Integration", current, name)
+            self.assertIn("MechanicalCardIntelligence.from_attachment", current, name)
+            self.assertIn("CardAcquisitionAdapter.from_mechanical", current, name)
+            self.assertIn("V13 Functional-Role and Contextual-Comparison Attachment Integration", current, name)
+            self.assertIn("mechanical", current, name)
             self.assertIn("production operator profile remains **BLOCKED**", current, name)
             self.assertIn("Legacy/Public Profile Permission and Closure Contract", current, name)
             self.assertIn("NOT AUTHORIZED", current, name)
@@ -337,7 +344,10 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         self.assertIn("Implementation status: merged in PR #176", scope)
         self.assertIn("## V13 Stage 2 — Legacy/Public Snapshot Profile Review", scope)
         self.assertIn("## V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile", scope)
+        self.assertIn("Implementation status: merged in PR #179", scope)
+        self.assertIn("## V13 Tier A Card Intelligence & Acquisition Attachment Integration", scope)
         self.assertIn("Implementation status: implemented, pending independent Project Manager", scope)
+        self.assertIn("Tier B Audit-Context Capability Design Review is deliberately **DEFERRED**", scope)
         self.assertIn("NOT AUTHORIZED", scope.split("## Next implementation candidate", 1)[1])
         for item in ("Generic snapshot manifest verification", "immutable fictional snapshot",
                      "read-only attachment", "query/collection", "Integrity, version and compatibility",

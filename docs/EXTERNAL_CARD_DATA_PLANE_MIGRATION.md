@@ -1,9 +1,10 @@
 # Incremental migration and CI/deployment model
 
-**Status: Architecture v13 is ACTIVE APPROVED; Stage 1 merged, Stage 2 review pending PM inspection.**
+**Status: Architecture v13 is ACTIVE APPROVED; Stages 1–3 merged; Tier A Card Intelligence attachment integration pending PM inspection.**
 Decision 017 is Accepted by the owner. Architecture v12 is the previous historical
-baseline. Governance approval alone authorized no runtime step. The later owner
-instruction separately authorized only fictional Stage 1; later stages remain future work.
+baseline. Governance approval alone authorized no runtime step. Runtime milestones
+require separate owner instructions. The implementation sections below record
+their original milestone contexts; the latest section states the current scope.
 
 ## Stages with acceptance and rollback
 
@@ -139,8 +140,7 @@ explicit Stage 3 acceptance criteria and stop conditions.
 
 ## V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile
 
-**Implementation status: implemented, pending independent Project Manager
-inspection.** The owner separately authorized only non-production Tier A after
+**Implementation status: merged in PR #179.** The owner separately authorized only non-production Tier A after
 PR #178 merged. The historical recommendation above records its original
 authorization context and is not the current task state.
 
@@ -171,10 +171,44 @@ unchanged historical replay and the permitted current-public in-place parity
 characterization. This is no writer, acquisition, permission or production
 activation milestone.
 
+## V13 Tier A Card Intelligence & Acquisition Attachment Integration
+
+**Implementation status: implemented, pending independent Project Manager
+inspection.** The owner separately authorized this existing-consumer integration
+after PR #179 merged, from canonical main
+`4ef94dd704b052a7fbaf15d034fe65c015be256f`.
+
+The explicit mechanical reader constructs one query through
+`CanonicalQueryEngine.from_attachment`. Card acquisition reuses the same
+MechanicalCardIntelligence/query, including exact Printing relationships. The
+semantic query and ReasoningContextBuilder use that same query; contexts preserve
+their existing canonical snapshot binding. Outer catalog/profile binding remains
+separate from mechanical source/acquisition, dossier and request identities.
+
+Mechanical retained-source validation remains independent and outside Tier A.
+Catalog drift, source drift, reader retargeting and mismatched expected query or
+request snapshots block instead of falling back to legacy roots. Legacy
+constructors and retained dossier/reconstruction formats remain unchanged. No
+provider lookup, corpus copy, new purchase rule, real-data admission or permission
+clearance is introduced. See [the API and tests](V13_TIER_A_CARD_INTELLIGENCE_ATTACHMENT.md).
+
+Tier B Audit-Context Capability Design Review is deliberately **DEFERRED**. The
+implemented vertical needs no excluded audit/history API; existing Tier B/C gates
+remain intact. All fixed non-production/permission flags and seven NOT_ESTABLISHED
+operation states remain unchanged. The production operator profile remains BLOCKED.
+
 ## Next implementation candidate — NOT AUTHORIZED
 
-**Tier B Audit-Context Capability Design Review** is the next candidate only.
-It would determine a separate bounded context/consumer contract before any Tier B
-runtime implementation. It cannot expand Stage 3 implicitly. Production snapshots,
-new provider use, MB2 admission, SQL, composition, Rules, Deck, simulation and AI
-transport remain separately blocked or unauthorized.
+**V13 Functional-Role and Contextual-Comparison Attachment Integration** is the
+recommended next candidate, not an authorization. Those existing pilots still
+construct legacy mechanical readers; passing the established attachment through
+them offers explanatory value without introducing a new intelligence domain.
+Pending role proposals must stay pending and unverified context must retain
+ABSTAIN. This candidate does not authorize role admission, contextual approval,
+new source acquisition or production use.
+
+Rules & Interaction Intelligence, simulation and Deck Intelligence each require a
+separate evidence/domain foundation. Tier B should be reconsidered only for a real
+audit consumer. No follow-on is automatic; SQL, composition, protected snapshots,
+provider use, MB2 admission, rules/simulation/AI transport and source-policy
+clearance remain separately blocked or unauthorized.

@@ -11,7 +11,8 @@ from datetime import datetime
 from decimal import Decimal, InvalidOperation
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+import re
 from typing import Any, Mapping
 
 from query import CanonicalQueryEngine
@@ -119,14 +120,43 @@ class MechanicalCardIntelligence:
     """Compose existing canonical queries with one verified retained acquisition."""
 
     def __init__(self, data_root: Path, *, source_directory: Path | None = None):
+        self._initialize(data_root, source_directory=source_directory)
+
+    @classmethod
+    def from_attachment(cls, attachment, *, data_root: Path,
+                        expected_query_snapshot_id: str,
+                        source_directory: Path | None = None) -> MechanicalCardIntelligence:
+        """Use one verified catalog and separately selected retained mechanics.
+
+        The evidence root is explicit and need not be the catalog's data root.
+        Integrity does not grant source permission or production authority.
+        """
+        from repository.snapshots import SnapshotAttachment, SnapshotError
+        from repository.legacy_profile import LegacyCompatibilityAttachment
+
+        if not isinstance(attachment, (SnapshotAttachment, LegacyCompatibilityAttachment)):
+            raise SnapshotError("verified immutable catalog attachment required")
+        if not isinstance(expected_query_snapshot_id, str) or not re.fullmatch(
+                r"sha256:[0-9a-f]{64}", expected_query_snapshot_id):
+            raise MechanicalEvidenceError("an exact expected query snapshot is required")
+        query = CanonicalQueryEngine.from_attachment(attachment)
+        if query.snapshot().snapshot_id != expected_query_snapshot_id:
+            raise MechanicalEvidenceError("attached mechanical canonical snapshot mismatch")
+        result = cls.__new__(cls)
+        result._initialize(data_root, source_directory=source_directory, query=query)
+        return result
+
+    def _initialize(self, data_root, *, source_directory=None, query=None):
+        self._attached_query = query
         self.data_root = Path(data_root).resolve()
         self.repository_root = self.data_root.parent
         directory = (Path(source_directory) if source_directory else
                      self.data_root / "market/acquisitions" / DEFAULT_ACQUISITION).resolve()
         if not directory.is_relative_to(self.data_root):
             raise MechanicalEvidenceError("source acquisition must be retained inside data_root")
-        self.query = CanonicalQueryEngine(data_root=self.data_root,
-                                         games_root=self.data_root / "canonical/games")
+        self.query = (query if query is not None else
+                      CanonicalQueryEngine(data_root=self.data_root,
+                                           games_root=self.data_root / "canonical/games"))
         cards = self.query.entities(entity_type="card")
         # card_reference is the admitted production-state identity binding. Typed
         # seed Cards have no such binding and are never selected by name instead.
@@ -134,7 +164,24 @@ class MechanicalCardIntelligence:
                       if r.canonical_values.get("card_reference") == r.canonical_identity
                       and r.supersession_state == "current"}
         self.snapshot_id = self.query.snapshot().snapshot_id
-        self.source, rows = self._load_source(directory)
+        if query is not None:
+            self._expected_query_snapshot_id = self.snapshot_id
+            self._attached_evidence_root = self.data_root
+            self._attached_repository_root = self.repository_root
+            self._source_directory = directory
+            self._attached_source_directory = directory
+            self._bound_catalog = freeze(query.catalog_binding)
+            if self._bound_catalog is None:
+                raise MechanicalEvidenceError("verified catalog attachment required")
+            self._source_files = self._source_fingerprint(directory)
+            try:
+                self.source, rows = self._load_source(directory)
+            except MechanicalEvidenceError:
+                raise
+            except (OSError, ValueError, TypeError, KeyError):
+                raise MechanicalEvidenceError("invalid or unavailable mechanical acquisition evidence") from None
+        else:
+            self.source, rows = self._load_source(directory)
         self.rows: dict[str, list[tuple[int, dict[str, Any]]]] = defaultdict(list)
         excluded = []
         record_ids = set()
@@ -164,6 +211,69 @@ class MechanicalCardIntelligence:
             "mapping_rule": "exact provider oracle_id equals admitted canonical card_reference; no name fallback",
             "scope": "current canonical production cohort; not complete set membership"}
         self.context_builder = ReasoningContextBuilder(CanonicalSemanticQueryEngine(self.query))
+        if query is not None:
+            self._attached_context_builder = self.context_builder
+            self._source_metadata = freeze(self.source)
+            self._rows_identity = content_identity(dict(self.rows))
+            self._cards_identity = content_identity({key: value.as_dict() for key, value in self.cards.items()})
+            self.verify_inputs()
+
+    @property
+    def catalog_binding(self) -> dict[str, Any] | None:
+        """Outer catalog identity, deliberately absent from v1 dossier bytes."""
+        if self._attached_query is None:
+            return None
+        self.verify_inputs()
+        return thaw(self._bound_catalog)
+
+    @staticmethod
+    def _source_fingerprint(directory: Path) -> tuple:
+        """Pin only the existing manifest dependency closure, not catalog sources."""
+        try:
+            manifest_path = directory / "manifest.json"
+            if any(p.is_symlink() for p in (manifest_path, *manifest_path.parents)):
+                raise MechanicalEvidenceError("mechanical evidence contains a symlink")
+            manifest = json.loads(manifest_path.read_bytes())
+            names = sorted({"manifest.json", *manifest["files"]})
+            if "dry-run-report.json" not in names:
+                raise MechanicalEvidenceError("mechanical report dependency is missing")
+            result = []
+            for name in names:
+                if not isinstance(name, str):
+                    raise MechanicalEvidenceError("invalid mechanical evidence locator")
+                relative = PurePosixPath(name)
+                if (relative.is_absolute() or relative.as_posix() != name or ".." in relative.parts
+                        or "\\" in name or not relative.parts):
+                    raise MechanicalEvidenceError("unsafe mechanical evidence locator")
+                path = directory / name
+                if any(p.is_symlink() for p in (path, *path.parents)):
+                    raise MechanicalEvidenceError("mechanical evidence contains a symlink")
+                raw = path.read_bytes()
+                result.append((name, len(raw), hashlib.sha256(raw).hexdigest()))
+            return tuple(result)
+        except MechanicalEvidenceError:
+            raise
+        except (OSError, ValueError, KeyError, TypeError):
+            raise MechanicalEvidenceError("invalid or unavailable mechanical acquisition evidence") from None
+
+    def verify_inputs(self) -> None:
+        """Revalidate attached inputs; legacy replay retains its original behavior."""
+        if self._attached_query is None:
+            return
+        if (self.query is not self._attached_query or self.snapshot_id != self._expected_query_snapshot_id
+                or self.data_root != self._attached_evidence_root or self.repository_root != self._attached_repository_root
+                or self._source_directory != self._attached_source_directory
+                or self.context_builder is not self._attached_context_builder
+                or self.context_builder._semantic._query is not self._attached_query):
+            raise MechanicalEvidenceError("attached mechanical reader was retargeted")
+        if (self.query.snapshot().snapshot_id != self._expected_query_snapshot_id
+                or self.query.catalog_binding != thaw(self._bound_catalog)):
+            raise MechanicalEvidenceError("attached mechanical canonical snapshot changed")
+        if (self._source_fingerprint(self._source_directory) != self._source_files
+                or self.source != thaw(self._source_metadata)
+                or content_identity(dict(self.rows)) != self._rows_identity
+                or content_identity({key: value.as_dict() for key, value in self.cards.items()}) != self._cards_identity):
+            raise MechanicalEvidenceError("mechanical source integrity mismatch")
 
     def _load_source(self, directory: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
         manifest_path = directory / "manifest.json"
@@ -217,6 +327,7 @@ class MechanicalCardIntelligence:
             "original_bulk_bytes": "not_retained; upstream digest is an acquisition assertion"}, rows
 
     def dossier(self, card_id: str) -> MechanicalDossier:
+        self.verify_inputs()
         if card_id not in self.cards:
             raise MechanicalEvidenceError("exact admitted production Card ID required")
         canonical = self.cards[card_id]
@@ -281,9 +392,11 @@ class MechanicalCardIntelligence:
         result = MechanicalDossier(payload)
         if len(result.to_json().encode()) > MAXIMUM_BYTES:
             raise MechanicalEvidenceError("mechanical dossier exceeds its byte bound")
+        self.verify_inputs()
         return result
 
     def cohort_report(self) -> dict[str, Any]:
+        self.verify_inputs()
         dossiers = [self.dossier(identity).to_dict() for identity in sorted(self.cards)]
         root_coverage = {key: Counter() for key in FIELD_NAMES}
         face_coverage = {key: Counter() for key in FIELD_NAMES}
@@ -354,6 +467,7 @@ class MechanicalCardIntelligence:
             "unsupported_dimensions": list(UNSUPPORTED),
             "scope": "current canonical production cohort; no complete MB2 membership claim or promotion"}
         result["report_id"] = content_identity(result)
+        self.verify_inputs()
         return result
 
     def reasoning_context(self, card_id: str) -> ReasoningContextResult:
@@ -364,6 +478,8 @@ class MechanicalCardIntelligence:
             requested_entity_types=("card",), maximum_entities=1,
             maximum_relationships=5, maximum_evidence_items=20))
         b = base.to_dict()
+        if self._attached_query is not None and b["canonical_snapshot_id"] != self._expected_query_snapshot_id:
+            raise MechanicalEvidenceError("mechanical reasoning canonical snapshot mismatch")
         analytics = [{"projection": "mechanical_card_evidence_manual_handoff", "dossier": dossier}]
         truncation = {**b["truncation"], "supplemental_projection": {
             "schema_version": DOSSIER_VERSION, "maximum_serialized_bytes": MAXIMUM_BYTES,
@@ -379,4 +495,5 @@ class MechanicalCardIntelligence:
                          analytics_snapshot_id=None, truncation=truncation, warnings=warnings)
         if len(result.to_json().encode()) > MAXIMUM_BYTES:
             raise MechanicalEvidenceError("mechanical reasoning context exceeds its byte bound")
+        self.verify_inputs()
         return result
