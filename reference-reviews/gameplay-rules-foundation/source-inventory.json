@@ -1,0 +1,80 @@
+{
+  "authority_model": {
+    "card_specific": "Official Oracle and rulings are distinct evidence classes, not executable semantics",
+    "format_deck_legality": "Separate policy/version snapshot, outside this kernel",
+    "general_gameplay": "Explicit version of official Comprehensive Rules; update bulletins/release notes are supporting sources and do not override it when conflicting"
+  },
+  "fictional_execution_only": true,
+  "real_rules_execution_authorized": false,
+  "records": [
+    {
+      "availability": "EVIDENCE_UNAVAILABLE",
+      "content_sha256": null,
+      "effective_date_verified": null,
+      "error_type": "URLError",
+      "issuer": "Wizards of the Coast",
+      "permission_inference_from_availability": false,
+      "permission_status": {
+        "ai_export": "NOT_ESTABLISHED",
+        "commercial_service": "NOT_ESTABLISHED",
+        "free_service": "NOT_ESTABLISHED",
+        "private_retention": "NOT_ESTABLISHED",
+        "processing": "NOT_ESTABLISHED",
+        "public_retention": "NOT_ESTABLISHED",
+        "redistribution": "NOT_ESTABLISHED"
+      },
+      "retrieved_at": "2026-10-16T14:42:11.243035Z",
+      "review_scope": "URL/availability metadata only; document contents unavailable",
+      "rules_version_verified": null,
+      "source_class": "official_comprehensive_rules",
+      "url": "https://magic.wizards.com/en/rules"
+    },
+    {
+      "availability": "EVIDENCE_UNAVAILABLE",
+      "content_sha256": null,
+      "effective_date_verified": null,
+      "error_type": "URLError",
+      "issuer": "Wizards of the Coast",
+      "permission_inference_from_availability": false,
+      "permission_status": {
+        "ai_export": "NOT_ESTABLISHED",
+        "commercial_service": "NOT_ESTABLISHED",
+        "free_service": "NOT_ESTABLISHED",
+        "private_retention": "NOT_ESTABLISHED",
+        "processing": "NOT_ESTABLISHED",
+        "public_retention": "NOT_ESTABLISHED",
+        "redistribution": "NOT_ESTABLISHED"
+      },
+      "retrieved_at": "2026-10-16T14:42:11.264949Z",
+      "review_scope": "URL/availability metadata only; document contents unavailable",
+      "rules_version_verified": null,
+      "source_class": "official_oracle_card_text",
+      "url": "https://gatherer.wizards.com/"
+    },
+    {
+      "availability": "EVIDENCE_UNAVAILABLE",
+      "content_sha256": null,
+      "effective_date_verified": null,
+      "error_type": "URLError",
+      "issuer": "Wizards of the Coast",
+      "permission_inference_from_availability": false,
+      "permission_status": {
+        "ai_export": "NOT_ESTABLISHED",
+        "commercial_service": "NOT_ESTABLISHED",
+        "free_service": "NOT_ESTABLISHED",
+        "private_retention": "NOT_ESTABLISHED",
+        "processing": "NOT_ESTABLISHED",
+        "public_retention": "NOT_ESTABLISHED",
+        "redistribution": "NOT_ESTABLISHED"
+      },
+      "retrieved_at": "2026-10-16T14:42:11.268319Z",
+      "review_scope": "URL/availability metadata only; document contents unavailable",
+      "rules_version_verified": null,
+      "source_class": "format_banned_restricted_policy",
+      "url": "https://magic.wizards.com/en/formats"
+    }
+  ],
+  "reviewed_main": "da8c5a4053ba749a1c0af9b6044ee0560c10156e",
+  "schema_version": "gameplay-source-inventory-review-v1",
+  "scope": "Bounded first-party source discovery; no rules corpus or source text retained"
+}

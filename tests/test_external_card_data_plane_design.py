@@ -308,7 +308,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                 text = (ROOT / entry["path"]).read_bytes()
                 self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])
 
-    def test_current_status_separates_role_comparison_integration_and_unapproved_next_domain(self):
+    def test_current_status_separates_gameplay_foundation_and_unapproved_next_domain(self):
         milestone = "V13 Stage 1 — Fictional Canonical Snapshot Attachment"
         for name in ("README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md",
                      "docs/SESSION_STATE.md", "docs/NEXT_TASK.md"):
@@ -323,6 +323,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("merged in PR #178", current, name)
             self.assertIn("merged in PR #179", current, name)
             self.assertIn("merged in PR #180", current, name)
+            self.assertIn("merged in PR #181", current, name)
             self.assertIn("pending independent Project Manager inspection", current, name)
             self.assertIn("READY_FOR_NON_PRODUCTION_STAGE3", current, name)
             self.assertIn("V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile", current, name)
@@ -341,7 +342,18 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("null selection", current, name)
             self.assertIn("zero approvals or KnowledgeFact writes", current, name)
             self.assertIn("Gameplay Rules & Interaction Intelligence Foundation", current, name)
-            self.assertIn("before serious gameplay simulation", current, name)
+            self.assertIn("src/gameplay_rules/", current, name)
+            self.assertIn("GameplayRulesEngine.evaluate_action", current, name)
+            self.assertIn("LEGAL, ILLEGAL, INDETERMINATE and UNSUPPORTED", current, name)
+            self.assertIn("project-authored fictional rules/Card semantics", current, name)
+            self.assertIn("PRODUCT RULES", current, name)
+            self.assertIn("GAMEPLAY RULES", current, name)
+            self.assertIn("no Tier-0 change", current, name)
+            self.assertIn("src/simulation/", current, name)
+            self.assertIn("remains unimplemented", current, name)
+            self.assertIn("Gameplay Rules Source/Evidence Intake & Versioning", current, name)
+            self.assertIn("serious gameplay simulation", current, name)
+            self.assertIn("no current official rules version", current, name)
             self.assertIn("mechanical", current, name)
             self.assertIn("production operator profile remains **BLOCKED**", current, name)
             self.assertIn("Legacy/Public Profile Permission and Closure Contract", current, name)
@@ -357,7 +369,11 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         self.assertIn("## V13 Tier A Card Intelligence & Acquisition Attachment Integration", scope)
         self.assertIn("Implementation status: merged in PR #180", scope)
         self.assertIn("## V13 Functional-Role and Contextual-Comparison Attachment Integration", scope)
+        self.assertIn("Implementation status: merged in PR #181", scope)
+        self.assertIn("## Gameplay Rules & Interaction Intelligence Foundation", scope)
         self.assertIn("Implementation status: implemented, pending independent Project Manager", scope)
+        self.assertIn("src/gameplay_rules/", scope)
+        self.assertIn("Product Rules remain the unchanged Product/Pack/collation domain", scope)
         self.assertIn("Tier B Audit-Context Capability Design Review is deliberately **DEFERRED**", scope)
         self.assertIn("NOT AUTHORIZED", scope.split("## Next implementation candidate", 1)[1])
         for item in ("Generic snapshot manifest verification", "immutable fictional snapshot",
@@ -368,6 +384,33 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                      "writer destination changes", "Rules Intelligence", "Deck Intelligence expansion",
                      "simulation", "AI transport/model integration"):
             self.assertIn(item, scope, item)
+
+    def test_gameplay_foundation_documents_separate_domains_and_fictional_execution(self):
+        path = ROOT / "docs/GAMEPLAY_RULES_INTELLIGENCE.md"
+        text = " ".join(path.read_text().split())
+        for item in ("GAMEPLAY RULES", "PRODUCT RULES", "src/repository/rules.py",
+                     "src/repository/rule_research.py", "Architecture v13", "no Tier-0 change",
+                     "Decision 017 is unchanged", "GameplayRulesSnapshot", "CardGameplaySemantics",
+                     "GameState", "GameAction", "LegalityResult", "GameTransition", "PaymentResult",
+                     "evaluate_action", "apply_action", "replay_transition", "INDETERMINATE",
+                     "UNSUPPORTED", "source identities", "effective date", "no implicit",
+                     "not complete Magic rules support", "project-authored and fictional",
+                     "CAN_INCLUDE_IN_DECK", "CAN_CAST_NOW", "LEGAL never means GOOD",
+                     "hidden", "priority", "state-based action", "unsupported abilities",
+                     "No next milestone begins automatically", "NOT AUTHORIZED",
+                     "Gameplay Rules Source/Evidence Intake & Versioning",
+                     "src/simulation/", "remains unimplemented", "EVIDENCE_UNAVAILABLE",
+                     "current Comprehensive Rules version", "was not verified",
+                     "669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53"):
+            self.assertIn(item, text, item)
+        architecture = " ".join((ROOT / "docs/ARCHITECTURE.md").read_text().split())
+        self.assertIn("Gameplay Rules & Interaction Intelligence", architecture)
+        self.assertIn("fits the existing v13 future-domain boundary without a Tier-0 change", architecture)
+        self.assertIn("Product Rules", architecture)
+        self.assertIn("fictional rules and Card semantics", architecture)
+        for target in re.findall(r"\]\(([^)]+)\)", path.read_text()):
+            if "://" not in target and not target.startswith("#"):
+                self.assertTrue((path.parent / target.split("#")[0]).exists(), target)
 
     def test_role_comparison_document_preserves_domain_and_authority_boundaries(self):
         path = ROOT / "docs/V13_ROLE_COMPARISON_ATTACHMENT_INTEGRATION.md"

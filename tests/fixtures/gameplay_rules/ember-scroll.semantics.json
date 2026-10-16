@@ -1,0 +1,36 @@
+{
+  "abilities": [],
+  "card_id": "ember-scroll",
+  "completeness": "complete",
+  "effects": [
+    {
+      "amount": -2,
+      "kind": "adjust_life",
+      "target": "opponent"
+    }
+  ],
+  "game_id": "fictional-duel",
+  "mana_cost": {
+    "colored": {
+      "red": 1
+    },
+    "generic": 1,
+    "kind": "mana",
+    "known": true,
+    "unsupported": []
+  },
+  "object_kind": "spell",
+  "post_resolution_zone": "graveyard",
+  "required_capabilities": [],
+  "restrictions": [],
+  "review_status": "fictional_test_only",
+  "rules_snapshot_id": "sha256:21c4d3a5a061882ff7454e34bd2ab1fc1c878a3a3c0db6b10c5bde2e4308e358",
+  "schema_version": "gameplay-card-semantics-v1",
+  "semantics_id": "sha256:94c27e132562b4bb3748567770a0cbae1e4666a1f6d1134e6d10a5f08154d555",
+  "semantics_version": "fictional-card-semantics-v1",
+  "source_references": [
+    "fictional-authored-rules-v1"
+  ],
+  "timing": "sorcery",
+  "unsupported_text": []
+}

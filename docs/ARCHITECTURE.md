@@ -148,6 +148,22 @@ implemented dependency direction is documented in `../ARCHITECTURE_REVIEW_v1.md`
 
 MTG Lab favors correctness over convenience, reproducibility over randomness, documentation alongside implementation, modular components over tightly coupled systems, and evidence-based analysis over assumptions.
 
+## Gameplay Rules & Interaction Intelligence — separately authorized foundation
+
+The [Gameplay Rules & Interaction Intelligence foundation](GAMEPLAY_RULES_INTELLIGENCE.md)
+fits the existing v13 future-domain boundary without a Tier-0 change. The separately
+owner-authorized runtime proof is limited to immutable versioned rules/state/action
+contracts and generic deterministic primitives using project-authored fictional
+rules and Card semantics. It introduces no real rules corpus, Oracle parsing,
+production authority, format/deck legality, strategy or gameplay simulation.
+
+Gameplay rules answer game-action legality over explicit versioned state/evidence;
+Product Rules (`RULES_ENGINE.md`, `repository.rules`, `repository.rule_research`)
+remain the unchanged Product/Pack/Slot/Print Sheet/collation domain. Mechanical
+Card evidence is not automatically executable gameplay semantics. Source-use
+permissions, real Card semantic review and future simulation stay separate gates.
+Decision 017 and historical v12 replay bindings are unchanged.
+
 ## Historical v12 preservation and future implementation
 
 [Decision 017](DECISIONS.md#decision-017--public-architectural-authority-and-immutable-operator-canonical-snapshots)

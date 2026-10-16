@@ -1,0 +1,12 @@
+{
+  "files": {
+    "source-inventory.json": {
+      "bytes": 3365,
+      "sha256": "f88a0e2ef92b8074387d4c4fa5cb64624757a7447f3203d87a46eafdaff4524d"
+    }
+  },
+  "retention": "Project-authored URL/attempt metadata only; no original terms, Comprehensive Rules, Oracle text or corpus copied",
+  "reviewed_main": "da8c5a4053ba749a1c0af9b6044ee0560c10156e",
+  "schema_version": "gameplay-foundation-evidence-manifest-v1",
+  "source_permission_clearance": false
+}
