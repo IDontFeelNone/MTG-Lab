@@ -246,9 +246,8 @@ permission clearance; all executable proof data is project-authored fiction.
 
 ## Gameplay Rules Source/Evidence Intake & Versioning
 
-**Implementation status: implemented as a review-only lane, pending independent
-Project Manager inspection.** The owner separately authorized this milestone after
-PR #182 merged, from canonical main
+**Implementation status: merged in PR #183.** The owner separately authorized
+this review-only milestone after PR #182 merged, from canonical main
 `65f209032dfed80735146a01531c87d0d0b0861b`.
 
 `src/gameplay_rules/source_evidence/` provides immutable metadata/review/version
@@ -270,13 +269,39 @@ Existing evidence/provider/registry licensing gates, the fictional gameplay
 kernel and all catalog/intelligence/writer/historical boundaries are unchanged.
 See [source evidence and versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md).
 
+## Official Gameplay Rules Release Discovery Closure
+
+**Implementation status: implemented as a metadata-only review/verification
+handoff, pending independent Project Manager inspection.** The separately
+owner-authorized milestone starts from canonical main
+`988ac4bc384da8e4b62f89790727c2e79373eea2` after PR #183 merged. It fits the
+existing v13 evidence domain; Decision 017 and the fictional kernel are unchanged.
+
+The original ACCESS_UNAVAILABLE observation and eight-file package are preserved.
+A distinct PM_SUPPLIED_FIRST_PARTY_OBSERVATION dated 2026-10-16 establishes
+VERIFIED_METADATA_ONLY designation of the September 25, 2026 Comprehensive Rules
+in DOCX/PDF/TXT as of that review; the observed TXT/PDF filenames contain
+20260925. Its observed 701.71 Empower Jace marker establishes the identified
+Reality Fracture change's incorporation,
+not verification of the full bulletin diff. Codex did not independently fetch
+Wizards; no HTTP receipt, exact artifact URL/basename, hash or byte length is
+invented. The new sibling review package binds the earlier historical package.
+
+An explicit offline local TXT verifier hashes bounded bytes and checks title,
+effective date and selected markers. It copies no body, performs no network
+request, invokes no RawSnapshotStore and authorizes no projection. No real TXT
+was supplied. NOT_READY_FOR_RULE_PROJECTION remains, narrowed to
+OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED. All source-content permissions stay
+NOT_ESTABLISHED and existing evidence/registry gates remain unchanged. See
+[the provenance and local handoff](GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md).
+
 ## Next implementation candidate — NOT AUTHORIZED
 
-**Official Gameplay Rules Release Discovery Closure** is the recommended
-prerequisite because the first-party release chain remains unresolved. Close the exact
-missing index designation, effective/version, artifact and later-update
-incorporation chain with operation-specific evidence. Do not substitute an older
-available artifact for a verified requested scope or infer rights from retrieval.
+**Owner-Supplied Comprehensive Rules Artifact Verification** is the recommended
+smallest prerequisite. Supply the exact designated TXT locally, verify its exact
+byte identity against the retained request, and perform an explicit source review.
+This closes an integrity/readiness gap; it does not establish source permissions
+or authorize a real rules projection.
 
 No real rules projection, Oracle parser, Card semantics intake, gameplay
 simulation, Deck/format legality, additional Tier A migration, Tier B audit

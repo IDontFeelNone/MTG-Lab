@@ -1,3 +1,49 @@
+# Current release discovery closure
+
+The source/evidence intake and versioning milestone below is merged in PR #183.
+The separately authorized [Official Gameplay Rules Release Discovery Closure](GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md)
+is implemented pending independent Project Manager inspection, based on canonical
+main `988ac4bc384da8e4b62f89790727c2e79373eea2`. Architecture v13 and Decision 017
+are unchanged. The original eight-file PR #183 package remains byte-identical;
+its failed ACCESS_UNAVAILABLE observation is preserved and is not a successful
+Codex fetch.
+
+A separate PM_SUPPLIED_FIRST_PARTY_OBSERVATION, dated 2026-10-16, establishes
+VERIFIED_METADATA_ONLY designation as of that date: official DOCX/PDF/TXT,
+20260925 TXT/PDF filename family and the explicit September 25, 2026 effective
+date. Observed 701.71 Empower Jace matches the identified September 21 Reality
+Fracture bulletin change. At least that change is incorporated; the full bulletin
+diff is not verified. Codex did not independently fetch Wizards. Exact artifact
+URL/basename, SHA-256 and byte length remain unknown; no real body was supplied.
+
+The reconciled package at
+`reference-reviews/gameplay-rules-release-discovery-closure/` binds the old review
+and adds only authored metadata. The explicit offline TXT verifier accepts an
+owner/operator file, checks bounded title/date/rule markers, emits exact byte
+length/SHA-256 and never copies or retains the body, invokes RawSnapshotStore or
+fetches a URL. Its immutable result remains projection_authorized=false.
+The existing evidence-registry licensing gates are unchanged.
+
+Readiness is **NOT_READY_FOR_RULE_PROJECTION** with narrowed blocker
+`OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED`. Metadata-only designation does not become
+VERIFIED_ARTIFACT. All source-content permissions remain NOT_ESTABLISHED. A later
+successful local artifact verification plus the exact metadata bindings and
+explicit source review can close technical readiness; none authorizes projection,
+source retention, redistribution, service use or AI export.
+
+The next candidate is **Owner-Supplied Comprehensive Rules Artifact Verification
+— NOT AUTHORIZED**. No next milestone begins automatically. No real rules,
+Oracle parser, Card semantics or simulation is implemented by this evidence lane.
+
+## Historical source/versioning milestone record
+
+Everything below preserves the original PR #183 implementation and its then-current
+network findings, review result and authorization boundary. Its discovery-closure
+candidate was separately authorized above. Historical next-task/currentness claims
+are not live selectors and do not override the scoped reconciled review.
+
+---
+
 # Gameplay Rules Source Evidence and Versioning
 
 ## Scope and Architecture v13 gate
