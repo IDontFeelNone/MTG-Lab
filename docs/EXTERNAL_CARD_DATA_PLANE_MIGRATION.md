@@ -1,6 +1,6 @@
 # Incremental migration and CI/deployment model
 
-**Status: Architecture v13 is ACTIVE APPROVED; Stages 1–3 merged; Tier A Card Intelligence attachment integration pending PM inspection.**
+**Status: Architecture v13 is ACTIVE APPROVED; Stages 1–3 and Tier A MCI/acquisition merged; role/comparison attachment integration pending PM inspection.**
 Decision 017 is Accepted by the owner. Architecture v12 is the previous historical
 baseline. Governance approval alone authorized no runtime step. Runtime milestones
 require separate owner instructions. The implementation sections below record
@@ -173,9 +173,8 @@ activation milestone.
 
 ## V13 Tier A Card Intelligence & Acquisition Attachment Integration
 
-**Implementation status: implemented, pending independent Project Manager
-inspection.** The owner separately authorized this existing-consumer integration
-after PR #179 merged, from canonical main
+**Implementation status: merged in PR #180.** The owner separately authorized this
+existing-consumer integration after PR #179 merged, from canonical main
 `4ef94dd704b052a7fbaf15d034fe65c015be256f`.
 
 The explicit mechanical reader constructs one query through
@@ -197,18 +196,44 @@ implemented vertical needs no excluded audit/history API; existing Tier B/C gate
 remain intact. All fixed non-production/permission flags and seven NOT_ESTABLISHED
 operation states remain unchanged. The production operator profile remains BLOCKED.
 
+## V13 Functional-Role and Contextual-Comparison Attachment Integration
+
+**Implementation status: implemented, pending independent Project Manager
+inspection.** The owner separately authorized this final small Card Intelligence
+consumer integration after PR #180 merged, from canonical main
+`bea66e1b52eae0c20dc82a6959b2ecbd7c9698e6`.
+
+`FunctionalRolePilot.from_mechanical` requires and reuses the exact attached
+MechanicalCardIntelligence. `ContextualCardComparisonPilot.from_roles` reuses that
+exact roles instance. Their query, semantic query and ReasoningContextBuilder are
+the same objects already established by MCI. Live catalog binding remains separate
+from unchanged mechanical, role, comparison, Decision and reasoning artifact IDs.
+Catalog/source/role-plan/vocabulary/context drift blocks without fallback or
+refreshed hashes. Existing legacy constructors remain unchanged.
+
+The original 15 Cards and 30 candidates remain pending/requires_review. The
+three-Card comparison, eight pending roles and unknown human-reviewed-context
+metric still produce ABSTAIN with null selection. No role approval, knowledge
+write, scoring, selection, legality or verified interaction is introduced. The
+profile stays Tier A; Tier B Audit-Context Capability Design Review is deliberately
+**DEFERRED** because the completed vertical requires no full audit operation.
+Source permissions, MB2 pending state, source-policy registry and writer/admission
+behavior remain unchanged. See [the API and limits](V13_ROLE_COMPARISON_ATTACHMENT_INTEGRATION.md).
+
 ## Next implementation candidate — NOT AUTHORIZED
 
-**V13 Functional-Role and Contextual-Comparison Attachment Integration** is the
-recommended next candidate, not an authorization. Those existing pilots still
-construct legacy mechanical readers; passing the established attachment through
-them offers explanatory value without introducing a new intelligence domain.
-Pending role proposals must stay pending and unverified context must retain
-ABSTAIN. This candidate does not authorize role admission, contextual approval,
-new source acquisition or production use.
+**Gameplay Rules & Interaction Intelligence Foundation — bounded design, contracts
+and fictional proof** is the recommended next candidate, not an authorization.
+The existing Card Intelligence consumers now have attachment paths. A structured,
+provenance-bound rules/action model should precede serious gameplay simulation:
+legal actions, mana/payment, timing, zones and state-based actions cannot be
+invented by a simulator. Deck Intelligence also needs legality/context semantics.
+A bounded fictional proof and explicit unsupported outcomes can validate a future
+domain contract without claiming real-card rules coverage or source permission.
 
-Rules & Interaction Intelligence, simulation and Deck Intelligence each require a
-separate evidence/domain foundation. Tier B should be reconsidered only for a real
-audit consumer. No follow-on is automatic; SQL, composition, protected snapshots,
-provider use, MB2 admission, rules/simulation/AI transport and source-policy
-clearance remain separately blocked or unauthorized.
+Additional attachment migration should follow only a demonstrated blocking
+consumer. Tier B should be reconsidered only for a concrete audit consumer; it is
+not the default next workstream. No rules, simulation, Deck Intelligence, SQL,
+protected snapshot, AI/model transport, provider acquisition, MB2 admission or
+source-policy clearance is authorized by this recommendation. Separate owner
+instructions must select and bound the next milestone.

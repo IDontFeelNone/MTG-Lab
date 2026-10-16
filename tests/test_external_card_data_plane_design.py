@@ -308,7 +308,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                 text = (ROOT / entry["path"]).read_bytes()
                 self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])
 
-    def test_current_status_separates_tier_a_intelligence_and_unapproved_next_stage(self):
+    def test_current_status_separates_role_comparison_integration_and_unapproved_next_domain(self):
         milestone = "V13 Stage 1 — Fictional Canonical Snapshot Attachment"
         for name in ("README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md",
                      "docs/SESSION_STATE.md", "docs/NEXT_TASK.md"):
@@ -322,6 +322,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("merged in PR #177", current, name)
             self.assertIn("merged in PR #178", current, name)
             self.assertIn("merged in PR #179", current, name)
+            self.assertIn("merged in PR #180", current, name)
             self.assertIn("pending independent Project Manager inspection", current, name)
             self.assertIn("READY_FOR_NON_PRODUCTION_STAGE3", current, name)
             self.assertIn("V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile", current, name)
@@ -333,6 +334,14 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("MechanicalCardIntelligence.from_attachment", current, name)
             self.assertIn("CardAcquisitionAdapter.from_mechanical", current, name)
             self.assertIn("V13 Functional-Role and Contextual-Comparison Attachment Integration", current, name)
+            self.assertIn("FunctionalRolePilot.from_mechanical", current, name)
+            self.assertIn("ContextualCardComparisonPilot.from_roles", current, name)
+            self.assertIn("requires_review", current, name)
+            self.assertIn("ABSTAIN", current, name)
+            self.assertIn("null selection", current, name)
+            self.assertIn("zero approvals or KnowledgeFact writes", current, name)
+            self.assertIn("Gameplay Rules & Interaction Intelligence Foundation", current, name)
+            self.assertIn("before serious gameplay simulation", current, name)
             self.assertIn("mechanical", current, name)
             self.assertIn("production operator profile remains **BLOCKED**", current, name)
             self.assertIn("Legacy/Public Profile Permission and Closure Contract", current, name)
@@ -346,6 +355,8 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         self.assertIn("## V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile", scope)
         self.assertIn("Implementation status: merged in PR #179", scope)
         self.assertIn("## V13 Tier A Card Intelligence & Acquisition Attachment Integration", scope)
+        self.assertIn("Implementation status: merged in PR #180", scope)
+        self.assertIn("## V13 Functional-Role and Contextual-Comparison Attachment Integration", scope)
         self.assertIn("Implementation status: implemented, pending independent Project Manager", scope)
         self.assertIn("Tier B Audit-Context Capability Design Review is deliberately **DEFERRED**", scope)
         self.assertIn("NOT AUTHORIZED", scope.split("## Next implementation candidate", 1)[1])
@@ -357,6 +368,20 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                      "writer destination changes", "Rules Intelligence", "Deck Intelligence expansion",
                      "simulation", "AI transport/model integration"):
             self.assertIn(item, scope, item)
+
+    def test_role_comparison_document_preserves_domain_and_authority_boundaries(self):
+        path = ROOT / "docs/V13_ROLE_COMPARISON_ATTACHMENT_INTEGRATION.md"
+        text = " ".join(path.read_text().split())
+        for item in ("FunctionalRolePilot.from_mechanical", "ContextualCardComparisonPilot.from_roles",
+                     "one MechanicalCardIntelligence", "the same ReasoningContextBuilder",
+                     "catalog_binding", "mechanical-card-dossier-v1", "functional-role-candidate-v1",
+                     "functional-role-dossier-v1", "15 selected Cards and 30 authored role",
+                     "ABSTAIN", "null selection", "human_reviewed_context_match",
+                     "Tier B Audit-Context Capability Design Review", "DEFERRED",
+                     "production_eligible=false", "source_policy_clearance=not_granted",
+                     "NOT_ESTABLISHED", "Gameplay Rules & Interaction Intelligence Foundation",
+                     "NOT AUTHORIZED", "669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53"):
+            self.assertIn(item, text, item)
 
     def test_proposal_links_and_component_paths_exist(self):
         docs = sorted((ROOT / "docs").glob("EXTERNAL_CARD_DATA_PLANE*.md"))

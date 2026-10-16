@@ -105,11 +105,47 @@ class FunctionalRolePilot:
 
     def __init__(self, data_root: Path, *, plan_path: Path | None = None,
                  vocabulary_path: Path | None = None):
-        self.mechanical = MechanicalCardIntelligence(data_root)
+        self._initialize(MechanicalCardIntelligence(data_root), plan_path=plan_path,
+                         vocabulary_path=vocabulary_path)
+
+    @classmethod
+    def from_mechanical(cls, mechanical: MechanicalCardIntelligence, *,
+                        plan_path: Path | None = None,
+                        vocabulary_path: Path | None = None) -> FunctionalRolePilot:
+        """Reuse one verified attachment-backed mechanical/query chain.
+
+        The outer catalog binding stays outside the historical v1 artifacts.
+        This construction path neither approves proposals nor admits facts.
+        """
+        if not isinstance(mechanical, MechanicalCardIntelligence) or mechanical.catalog_binding is None:
+            raise FunctionalRoleError("attachment-backed MechanicalCardIntelligence required")
+        result = cls.__new__(cls)
+        try:
+            result._initialize(mechanical, plan_path=plan_path, vocabulary_path=vocabulary_path)
+        except OSError:
+            raise FunctionalRoleError("role plan or vocabulary dependency unavailable") from None
+        result._attached_mechanical = mechanical
+        result._attached_query = mechanical.query
+        result._bound_catalog = freeze(mechanical.catalog_binding)
+        result._expected_snapshot_id = mechanical.snapshot_id
+        result._bound_plan_path = result.plan_path
+        result._bound_vocabulary_path = result.vocabulary_path
+        result._bound_files = result._loaded_files
+        result._bound_state = result._state_identity()
+        result.verify_inputs()
+        return result
+
+    def _initialize(self, mechanical, *, plan_path=None, vocabulary_path=None):
+        self._attached_mechanical = None
+        self.mechanical = mechanical
         self.plan_path = Path(plan_path or CONFIG / "functional-role-pilot-v1.json")
         self.vocabulary_path = Path(vocabulary_path or CONFIG / "functional-role-vocabulary-v1.json")
-        self.plan = json.loads(self.plan_path.read_bytes())
-        self.vocabulary = json.loads(self.vocabulary_path.read_bytes())
+        plan_bytes = self.plan_path.read_bytes()
+        vocabulary_bytes = self.vocabulary_path.read_bytes()
+        self._loaded_files = tuple(hashlib.sha256(raw).hexdigest()
+                                   for raw in (plan_bytes, vocabulary_bytes))
+        self.plan = json.loads(plan_bytes)
+        self.vocabulary = json.loads(vocabulary_bytes)
         if self.plan["schema_version"] != "functional-role-pilot-plan-v1" or \
                 self.vocabulary["schema_version"] != "functional-role-vocabulary-v1":
             raise FunctionalRoleError("unsupported role preparation contract")
@@ -141,6 +177,51 @@ class FunctionalRolePilot:
         self._dossiers = {}
         for card_id in sorted(self.cards):
             self._dossiers[card_id] = freeze(self._build(card_id))
+
+    def _input_fingerprint(self) -> tuple[str, str]:
+        try:
+            return tuple(hashlib.sha256(path.read_bytes()).hexdigest()
+                         for path in (self.plan_path, self.vocabulary_path))
+        except OSError:
+            raise FunctionalRoleError("role plan or vocabulary dependency unavailable") from None
+
+    def _state_identity(self) -> str:
+        return content_identity({"plan": self.plan, "vocabulary": self.vocabulary,
+            "plan_identity": self.plan_identity, "vocabulary_identity": self.vocabulary_identity,
+            "cards": self.cards, "dossiers": thaw(freeze(self._dossiers))})
+
+    def verify_inputs(self) -> None:
+        """Fail closed on attached input drift; historical construction is unchanged."""
+        mechanical = self._attached_mechanical
+        if mechanical is None:
+            return
+        if self.mechanical is not mechanical or mechanical.query is not self._attached_query:
+            raise FunctionalRoleError("attached role mechanical/query binding changed")
+        # The binding property validates the mechanical source and catalog once.
+        binding = mechanical.catalog_binding
+        if (not isinstance(self.plan, Mapping)
+                or mechanical.snapshot_id != self._expected_snapshot_id
+                or self.plan.get("canonical_snapshot_id") != self._expected_snapshot_id
+                or mechanical.query.game != self.plan.get("game_id")
+                or binding != thaw(self._bound_catalog)):
+            raise FunctionalRoleError("attached role catalog snapshot binding changed")
+        try:
+            intact = not (self.plan_path != self._bound_plan_path
+                or self.vocabulary_path != self._bound_vocabulary_path
+                or self._input_fingerprint() != self._bound_files
+                or self._state_identity() != self._bound_state)
+        except (ValueError, TypeError, AttributeError):
+            intact = False
+        if not intact:
+            raise FunctionalRoleError("attached role plan, vocabulary or dossier binding changed")
+
+    @property
+    def catalog_binding(self) -> dict[str, Any] | None:
+        """Defensive outer binding, deliberately absent from retained artifacts."""
+        if self._attached_mechanical is None:
+            return None
+        self.verify_inputs()
+        return thaw(self._bound_catalog)
 
     def _build(self, card_id: str) -> dict[str, Any]:
         annotation = self.cards[card_id]
@@ -223,11 +304,15 @@ class FunctionalRolePilot:
         return dossier
 
     def dossier(self, card_id: str) -> dict[str, Any]:
+        self.verify_inputs()
         if card_id not in self._dossiers:
             raise FunctionalRoleError("exact authorized pilot Card ID required; no cohort classifier")
-        return thaw(self._dossiers[card_id])
+        result = thaw(self._dossiers[card_id])
+        self.verify_inputs()
+        return result
 
     def report(self) -> dict[str, Any]:
+        self.verify_inputs()
         documents = [self.dossier(i) for i in sorted(self.cards)]
         census = []
         frequencies, states = Counter(), Counter()
@@ -256,9 +341,11 @@ class FunctionalRolePilot:
             "limitations": self.plan["coverage_limitations"],
             "scope": "bounded proposed functionality; no strength, combo correctness, or complete-cohort claim"}
         report["report_id"] = content_identity(report)
+        self.verify_inputs()
         return report
 
     def comparison(self) -> dict[str, Any]:
+        self.verify_inputs()
         rows = []
         for card_id in sorted(set(self.plan["comparison_card_ids"])):
             d = self.dossier(card_id)
@@ -271,9 +358,11 @@ class FunctionalRolePilot:
             "review_status": "requires_review", "canonical_snapshot_id": self.mechanical.snapshot_id,
             "interpretation": "Compare proposed outcomes and explicit restrictions. No ranking, substitute verdict, net advantage, or verified interaction is computed."}
         report["comparison_id"] = content_identity(report)
+        self.verify_inputs()
         return report
 
     def reasoning_context(self, card_id: str):
+        self.verify_inputs()
         dossier = self.dossier(card_id)
         base = self.mechanical.reasoning_context(card_id)
         b = base.to_dict()
@@ -291,4 +380,5 @@ class FunctionalRolePilot:
                          truncation=truncation, warnings=warnings, analytics_snapshot_id=None)
         if len(result.to_json().encode()) > MAXIMUM_BYTES:
             raise FunctionalRoleError("role reasoning context exceeds its byte bound")
+        self.verify_inputs()
         return result

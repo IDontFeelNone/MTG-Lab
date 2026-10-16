@@ -1,4 +1,4 @@
-# Current project status — Tier A Card Intelligence attachment
+# Current project status — Functional-Role and Contextual-Comparison attachment
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
 Stage 1 fictional read-only snapshot attachment is merged in PR #176.
@@ -6,67 +6,73 @@ Stage 1 fictional read-only snapshot attachment is merged in PR #176.
 The **Legacy/Public Profile Permission and Closure Contract** is merged in PR #178;
 its **READY_FOR_NON_PRODUCTION_STAGE3** engineering recommendation was separately
 implemented as **V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile**,
-merged in PR #179. Reviewed canonical main:
-`4ef94dd704b052a7fbaf15d034fe65c015be256f`.
+merged in PR #179. **V13 Tier A Card Intelligence & Acquisition Attachment
+Integration** is merged in PR #180. Reviewed canonical main:
+`bea66e1b52eae0c20dc82a6959b2ecbd7c9698e6`.
 Architecture v12 remains the preserved historical baseline.
 
 ## Current implementation and explicit limits
 
-**V13 Tier A Card Intelligence & Acquisition Attachment Integration** is implemented,
-pending independent Project Manager inspection. Explicit
-`MechanicalCardIntelligence.from_attachment` constructs one verified attached
-query, and `CardAcquisitionAdapter.from_mechanical` reuses that exact instance.
-The adapter's `from_attachment` convenience path uses the same sequence.
-`CanonicalSemanticQueryEngine` and `ReasoningContextBuilder` share that query.
-Expected query identity, catalog integrity and independent mechanical-source
-integrity remain separately bound and checked; failed attachment never falls
-back to a legacy root. `catalog_binding` is exposed separately without changing
-retained mechanical/acquisition dossier formats or Decision Intelligence policy.
+**V13 Functional-Role and Contextual-Comparison Attachment Integration** is implemented,
+pending independent Project Manager inspection. The explicit
+`MechanicalCardIntelligence.from_attachment` path constructs one verified query;
+`FunctionalRolePilot.from_mechanical` reuses that exact attachment-backed MCI, and
+`ContextualCardComparisonPilot.from_roles` reuses that exact roles instance.
+`CardAcquisitionAdapter.from_mechanical` remains available from the merged prior
+milestone. All these consumers use the same canonical query snapshot. The existing
+`CanonicalSemanticQueryEngine` and `ReasoningContextBuilder` remain the shared
+reasoning path; no second MCI/query or ambient-root fallback is introduced.
+
+Catalog integrity and the independent mechanical source remain separately bound.
+Attached role/vocabulary/context-plan bytes and identities are rechecked; drift or
+retargeting blocks rather than refreshing bindings. Defensive `catalog_binding`
+metadata remains separate from retained domain formats and content identities.
+The original 15-Card/30-candidate role pilot stays `requires_review`/pending, with
+zero approvals or KnowledgeFact writes. Its three-Card contextual comparison,
+eight pending roles, Decision inputs and reasoning handoff retain their semantics:
+**ABSTAIN**, null selection and unknown `human_reviewed_context_match`. No score,
+Card superiority claim, legality conclusion or verified rules interaction is added.
 
 The `legacy-public-compatibility-v1` profile remains Tier A
 **CATALOG_QUERY_COLLECTION**: 40 in-place dependencies, comprising 33 core files,
 five selected SourceRecord references and two audit-context files. Tier B/C
-operations remain unsupported before excluded I/O. This milestone selects no new
-catalog evidence, copies no provider corpus and acquires no provider data.
-Mechanical evidence remains outside the catalog profile and independently verified.
-
+operations remain unsupported before excluded I/O. Mechanical evidence stays
+outside the catalog profile. No provider corpus is copied or acquired.
 The explicit both-root compatibility target retains 399 Cards / 928 Printings /
 235 Identifiers / two Finishes / Game / Product, totaling 1,566 query entities,
 with unchanged query identity
 `sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7`.
-Legacy MCI/acquisition constructors, the bare query constructor's 32-entity scope,
-unrestricted legacy attachment and Stage 1 fictional profile remain unchanged.
-No name fallback, physical-copy upgrade, ownership inference, mechanical fact or
-approval is added. Missing/ambiguous source coverage stays explicit.
+Legacy MCI/roles/comparison/acquisition constructors, the bare query constructor's
+32-entity scope, unrestricted legacy attachment and Stage 1 profile are unchanged.
 
 The production operator profile remains **BLOCKED**. All seven mixed-content
 operation permission states remain **NOT_ESTABLISHED**. Fixed flags remain
 `production_eligible=false`, `approval_state=not_granted`,
 `source_policy_clearance=not_granted` and
 `data_processing_permission_established=false`. Integrity and reasoning grant no
-permission. No production snapshot or real admission is created.
+permission. No production snapshot, source clearance or real admission is created.
 
 **Tier B Audit-Context Capability Design Review** is deliberately **DEFERRED**:
-this Card Intelligence/Acquisition vertical requires only Tier A entity,
-relationship and provenance operations.
+the completed Card Intelligence/Acquisition/role/comparison vertical requires only
+Tier A entity, relationship and selected-provenance operations.
 
-Next candidate: **V13 Functional-Role and Contextual-Comparison Attachment
-Integration — NOT AUTHORIZED**. Those existing pilots still construct legacy
-mechanical readers. A later narrow attachment migration could extend the same
-binding through their explanatory path while keeping role proposals pending and
-unverified-context results ABSTAIN. Rules/interaction foundation, simulation,
-Deck Intelligence and Tier B remain separately reviewed future alternatives;
-none begins automatically.
+Next candidate: **Gameplay Rules & Interaction Intelligence Foundation — bounded
+design, contracts and fictional proof — NOT AUTHORIZED**. This is the last small
+Tier A Card Intelligence consumer migration unless another directly blocking
+consumer is demonstrated. Product value now favors a structured rules/action and
+interaction-evidence foundation before serious gameplay simulation. Deck
+Intelligence also needs legality/context semantics; Tier B should return only for
+a concrete audit consumer. No next domain begins automatically.
 
 MB2's 810 selected candidates and nine multiface holds remain pending and unadmitted.
 Owner spelling proposals remain unapplied; physical Printing verification stays
 unresolved. `SOURCE_POLICY_CLEARED_PLANS`, pending execution configuration,
 production canonical bytes, selected audits, SourceRecords, retained mechanical
-source evidence, writer/admission/OIDC and the historical Architecture-v12 auxiliary
-fixture are unchanged. No owner admission decision or merge occurred.
+and role/context artifacts, writer/admission/OIDC and the historical Architecture-v12
+auxiliary fixture are unchanged. No owner admission decision or merge occurred.
 
-See [the integration API and limits](V13_TIER_A_CARD_INTELLIGENCE_ATTACHMENT.md),
-[the merged Stage 3 profile](V13_STAGE3_LEGACY_PUBLIC_COMPATIBILITY_PROFILE.md),
+See [the role/comparison API and limits](V13_ROLE_COMPARISON_ATTACHMENT_INTEGRATION.md),
+[the merged MCI/acquisition seam](V13_TIER_A_CARD_INTELLIGENCE_ATTACHMENT.md),
 and [the unchanged closure contract](V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md).
 
 ---

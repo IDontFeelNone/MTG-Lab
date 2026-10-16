@@ -8,6 +8,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
+import hashlib
 import json
 from pathlib import Path
 from typing import Any, Mapping
@@ -111,10 +112,46 @@ class ContextualCardComparisonPilot:
 
     def __init__(self, data_root: Path, *, plan_path: Path | None = None,
                  role_plan_path: Path | None = None, role_vocabulary_path: Path | None = None):
-        self.roles = FunctionalRolePilot(data_root, plan_path=role_plan_path,
-                                         vocabulary_path=role_vocabulary_path)
+        self._attached_roles = None
+        roles = FunctionalRolePilot(data_root, plan_path=role_plan_path,
+                                    vocabulary_path=role_vocabulary_path)
+        self._initialize(roles, plan_path=plan_path)
+
+    @classmethod
+    def from_roles(cls, roles: FunctionalRolePilot, *,
+                   plan_path: Path | None = None) -> ContextualCardComparisonPilot:
+        """Reuse one verified attachment-backed role/mechanical/query chain.
+
+        The live catalog binding stays outside historical comparison payloads.
+        No catalog or mechanical source is discovered by this construction path.
+        """
+        if not isinstance(roles, FunctionalRolePilot):
+            raise ContextualComparisonError("an attachment-backed FunctionalRolePilot is required")
+        binding = roles.catalog_binding
+        if binding is None:
+            raise ContextualComparisonError("an attachment-backed FunctionalRolePilot is required")
+        instance = cls.__new__(cls)
+        instance._attached_roles = None
+        try:
+            instance._initialize(roles, plan_path=plan_path)
+        except OSError:
+            raise ContextualComparisonError("comparison plan dependency unavailable") from None
+        instance._attached_roles = roles
+        instance._attached_mechanical = roles.mechanical
+        instance._attached_query = roles.mechanical.query
+        instance._bound_catalog = freeze(binding)
+        instance._bound_plan_path = instance.plan_path
+        instance._bound_plan_sha256 = instance._loaded_plan_sha256
+        instance._bound_state_identity = instance._state_identity()
+        instance.verify_inputs()
+        return instance
+
+    def _initialize(self, roles: FunctionalRolePilot, *, plan_path: Path | None):
+        self.roles = roles
         self.plan_path = Path(plan_path or PLAN)
-        self.plan = json.loads(self.plan_path.read_bytes())
+        plan_bytes = self.plan_path.read_bytes()
+        self._loaded_plan_sha256 = hashlib.sha256(plan_bytes).hexdigest()
+        self.plan = json.loads(plan_bytes)
         p = self.plan
         if p["schema_version"] != "contextual-card-comparison-plan-v1":
             raise ContextualComparisonError("unsupported comparison plan")
@@ -185,6 +222,39 @@ class ContextualCardComparisonPilot:
         self.policy = DecisionPolicy("pending-contextual-comparison-review-boundary", "1.0.0",
             (MetricCriterion("human_reviewed_context_match", "maximize"),), require_analysis_state_known=False)
         self._dossier = self._build()
+
+    def _state_identity(self) -> str:
+        return content_identity({"plan": self.plan, "plan_identity": self.plan_identity,
+            "context_identity": self.context_identity, "assumptions": self.assumptions,
+            "cards": self.cards, "evidence": [e.to_dict() for e in self.evidence],
+            "policy": self.policy.to_dict(), "dossier": self._dossier.to_dict(),
+            "decision_inputs": thaw(self._decision_inputs)})
+
+    def verify_inputs(self) -> None:
+        """Fail closed on attached-chain drift; legacy replay behavior is unchanged."""
+        if self._attached_roles is None:
+            return
+        if self.roles is not self._attached_roles or \
+                self.roles.mechanical is not self._attached_mechanical or \
+                self.roles.mechanical.query is not self._attached_query:
+            raise ContextualComparisonError("attached comparison dependency chain changed")
+        # The binding property verifies the entire injected role/mechanical chain.
+        if freeze(self.roles.catalog_binding) != self._bound_catalog:
+            raise ContextualComparisonError("attached comparison catalog binding changed")
+        try:
+            intact = self.plan_path == self._bound_plan_path and \
+                hashlib.sha256(self.plan_path.read_bytes()).hexdigest() == self._bound_plan_sha256 and \
+                self._state_identity() == self._bound_state_identity
+        except (OSError, ValueError, TypeError, AttributeError):
+            intact = False
+        if not intact:
+            raise ContextualComparisonError("attached comparison plan or prepared inputs changed")
+
+    @property
+    def catalog_binding(self) -> dict[str, Any] | None:
+        """Defensive live attachment metadata, separate from retained dossier identity."""
+        self.verify_inputs()
+        return None if self._attached_roles is None else thaw(self._bound_catalog)
 
     @staticmethod
     def _time(value: str) -> datetime:
@@ -267,13 +337,20 @@ class ContextualCardComparisonPilot:
         return ContextualComparisonDossier(document)
 
     def dossier(self) -> ContextualComparisonDossier:
-        return self._dossier
+        self.verify_inputs()
+        result = self._dossier
+        self.verify_inputs()
+        return result
 
     def decision_inputs(self) -> dict[str, Any]:
         """Complete existing contracts retained separately to avoid duplication."""
-        return thaw(self._decision_inputs)
+        self.verify_inputs()
+        result = thaw(self._decision_inputs)
+        self.verify_inputs()
+        return result
 
     def reasoning_context(self) -> dict[str, Any]:
+        self.verify_inputs()
         # The full comparison supplies compact canonical lineage and exact
         # source bindings for all three subjects. Bound the generic retrieval
         # copies at zero rather than duplicate large entity audit projections.
@@ -295,6 +372,7 @@ class ContextualCardComparisonPilot:
         result["handoff_id"] = content_identity(result)
         if len(stable_json(result).encode()) > MAXIMUM_BYTES:
             raise ContextualComparisonError("comparison reasoning handoff exceeds its byte bound")
+        self.verify_inputs()
         return result
 
 
