@@ -1,4 +1,4 @@
-# Current session — Gameplay Rules & Interaction Intelligence Foundation
+# Current session — Gameplay Rules Source Evidence and Versioning
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
 Stage 1 fictional read-only snapshot attachment is merged in PR #176.
@@ -8,68 +8,76 @@ its **READY_FOR_NON_PRODUCTION_STAGE3** engineering recommendation was separatel
 implemented as **V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile**,
 merged in PR #179. **V13 Tier A Card Intelligence & Acquisition Attachment
 Integration** is merged in PR #180. **V13 Functional-Role and Contextual-Comparison
-Attachment Integration** is merged in PR #181. Reviewed canonical main:
-`da8c5a4053ba749a1c0af9b6044ee0560c10156e`.
+Attachment Integration** is merged in PR #181. **Gameplay Rules & Interaction
+Intelligence Foundation** is merged in PR #182. Reviewed canonical main:
+`65f209032dfed80735146a01531c87d0d0b0861b`.
 Architecture v12 remains the preserved historical baseline.
 
 ## Current implementation and explicit limits
 
-**Gameplay Rules & Interaction Intelligence Foundation** is implemented,
-pending independent Project Manager inspection. This separate owner authorization
-covers design, contracts, generic primitives and a fictional executable proof.
-It fits the existing Architecture v13 future-domain boundary: no Tier-0 change,
-Architecture v14 or Decision 017 modification is required.
+**Gameplay Rules Source/Evidence Intake & Versioning** is implemented as a
+review-only lane, pending independent Project Manager inspection. The separate
+owner authorization covers versioned source metadata, authority/lineage/selection
+contracts, bounded evidence inspection and fictional offline proof. It requires
+no Tier-0 change, Architecture v14 or Decision 017 modification.
 
-`src/gameplay_rules/` provides immutable content-addressed rules snapshots, Card
-semantics, state, actions, payment/results and transitions. Explicit game/rules
-versions, effective date, source/provenance bindings and capability manifests are
-required. `GameplayRulesEngine.evaluate_action` checks without mutation;
-`apply_action` applies only LEGAL actions and otherwise returns the blocked result.
-LEGAL, ILLEGAL, INDETERMINATE and UNSUPPORTED remain distinct. Structured rule
-references explain requirements; no natural-language inference is executable.
+`src/gameplay_rules/source_evidence/` separates exact artifact bytes, source
+identity, first-party designation, effective/version metadata, reviewed lineage,
+selection scope and operation-specific permission. A rules index, Comprehensive
+Rules, update bulletin, release notes and explanatory blog are not interchangeable.
+Official Comprehensive Rules are the primary general-rules authority; unresolved
+later updates must not be ignored to make an older artifact appear current.
+No implicit latest/max-date/filename selection or live fallback is permitted.
 
-The fictional two-player proof covers configured mana/generic payment, sorcery/
-instant timing, land allowance, priority passing, stack resolution, explicit zone
-moves and one life-threshold state-based action. Identical inputs replay exactly.
-Unsupported/unknown costs, effects and hidden required information block instead
-of being ignored. Only project-authored fictional rules/Card semantics execute.
-Real Comprehensive Rules ingestion, arbitrary Oracle parsing, real Card semantics,
-full Magic rules, format/deck legality, strategy and gameplay simulation are not
-implemented. `src/simulation/` remains unimplemented. GAMEPLAY RULES are separate
-from unchanged PRODUCT RULES for Product/Pack/Slot/Print Sheet/collation.
+Evidence states distinguish VERIFIED_ARTIFACT, VERIFIED_METADATA_ONLY,
+DISCOVERED_UNVERIFIED, EVIDENCE_UNAVAILABLE, AMBIGUOUS, SUPERSEDED and CONFLICTING.
+Unknown permission stays unresolved. Existing provider/registry licensing gates
+are unchanged; review-only records are not admitted evidence or executable rules.
+No real source body, PDF, extracted Comprehensive Rules or Oracle corpus enters
+public fixtures or production canonical storage. Public CI uses fictional sources.
+
+The June 19, 2026 PDF and reported Reality Fracture bulletin remain leads requiring
+an official designation/effective-version/incorporation chain. Their applicability
+is not inferred from filenames or the owner report. The one-time official rules-index access attempt on
+2026-10-16 returned ACCESS_UNAVAILABLE under the environment's network policy:
+no origin HTTP status, source body/hash, designated artifact, official version or
+Reality Fracture incorporation was verified. The retained review therefore returns
+CURRENT_RULES_RELEASE_NOT_VERIFIED and NOT_READY_FOR_RULE_PROJECTION. No permission
+is inferred from unavailable evidence, accessibility or source hashes.
+
+The merged gameplay foundation remains unchanged: `src/gameplay_rules/` has
+immutable rules/state/action/semantics/result/transition contracts, and
+`GameplayRulesEngine.evaluate_action` checks without mutation. LEGAL, ILLEGAL,
+INDETERMINATE and UNSUPPORTED remain distinct. Only project-authored fictional
+rules/Card semantics execute. PRODUCT RULES and GAMEPLAY RULES are separate;
+`src/simulation/` remains unimplemented. No real rules projection, Oracle parser,
+Card semantic intake, full Magic rules, deck/format legality, strategy or simulation
+is implemented or authorized by a release-readiness result.
 
 The completed Tier A Card Intelligence vertical remains unchanged:
 `MechanicalCardIntelligence.from_attachment` ->
 `FunctionalRolePilot.from_mechanical` ->
 `ContextualCardComparisonPilot.from_roles`, with
 `CardAcquisitionAdapter.from_mechanical` and the same semantic/reasoning query.
-Independent mechanical evidence stays outside the catalog profile. The original
-15-Card/30-candidate role pilot remains `requires_review`/pending, with zero
-approvals or KnowledgeFact writes; comparison remains **ABSTAIN**, null selection.
-Gameplay foundation results do not turn those authored annotations into rules facts.
+Mechanical evidence remains independent. The original role pilot stays
+`requires_review`/pending, with zero approvals or KnowledgeFact writes;
+comparison remains **ABSTAIN**, null selection. The
+`legacy-public-compatibility-v1` profile and its exact Tier A both-root query
+identity remain unchanged. **Tier B Audit-Context Capability Design Review** is
+still **DEFERRED** absent a concrete consumer.
 
-The `legacy-public-compatibility-v1` Tier A **CATALOG_QUERY_COLLECTION** profile
-still binds 40 in-place files; its exact both-root query identity remains
-`sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7`.
-No catalog/profile, legacy root inference, source/audit scope or historical
-constructor semantics change. **Tier B Audit-Context Capability Design Review**
-remains deliberately **DEFERRED** absent a concrete consumer.
-
-The production operator profile remains **BLOCKED**. All seven mixed-content
-operation permission states remain **NOT_ESTABLISHED**. Fixed flags remain
-`production_eligible=false`, `approval_state=not_granted`,
+The production operator profile remains **BLOCKED**. All seven existing
+mixed-content operation permission states remain **NOT_ESTABLISHED**. Its fixed
+flags stay `production_eligible=false`, `approval_state=not_granted`,
 `source_policy_clearance=not_granted` and
-`data_processing_permission_established=false`. Fictional execution and successful
-integrity verification grant no real-source permission. Bounded official Wizards
-source access attempts yielded unavailable evidence, not permission or prohibition;
-no current official rules version or document contents were verified or ingested.
+`data_processing_permission_established=false`. The new review lane evaluates
+eight source-specific operations separately; it clears none merely by reviewing
+a source. Permission is never inherited from catalog, provider or Git history.
 
-Next candidate: **Gameplay Rules Source/Evidence Intake & Versioning — NOT
-AUTHORIZED**. Explicit source/version/provenance/permission and interpretation
-review should precede real-domain executable semantics and serious gameplay
-simulation. Deck/format policy remains separate. This is not an authorization to
-ingest a real corpus, broaden the kernel, implement simulation or begin another
-Tier A migration. No next milestone begins automatically.
+The next candidate is **Official Gameplay Rules Release Discovery Closure — NOT
+AUTHORIZED**. Exact source/version/
+provenance/permission and update-incorporation review must precede real gameplay
+projection and serious gameplay simulation. No next milestone begins automatically.
 
 MB2's 810 selected candidates and nine multiface holds remain pending and unadmitted.
 Owner spelling proposals remain unapplied; physical Printing verification stays
@@ -78,9 +86,9 @@ production canonical bytes, selected audits, SourceRecords, retained mechanical
 and role/context artifacts, writer/admission/OIDC and the historical Architecture-v12
 auxiliary fixture are unchanged. No owner admission decision or merge occurred.
 
-See [Gameplay Rules & Interaction Intelligence](GAMEPLAY_RULES_INTELLIGENCE.md),
-[the merged role/comparison seam](V13_ROLE_COMPARISON_ATTACHMENT_INTEGRATION.md),
-and [the unchanged closure contract](V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md).
+See [source evidence and versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md),
+[the merged fictional gameplay foundation](GAMEPLAY_RULES_INTELLIGENCE.md),
+and [the unchanged permission closure](V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md).
 
 ---
 

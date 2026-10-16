@@ -1,3 +1,23 @@
+# Current source/evidence milestone
+
+The Gameplay Rules & Interaction Intelligence Foundation below is merged in
+PR #182 at canonical main `65f209032dfed80735146a01531c87d0d0b0861b`.
+The separately authorized [Gameplay Rules Source/Evidence Intake & Versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md)
+adds a non-admissible review lane for source/version/designation/lineage and
+operation-specific permissions. It does not modify the fictional kernel, make
+real rules executable, clear permissions or authorize rules projection.
+Current release-readiness and exact source findings belong to that new review
+package. Historical unavailable-source attempts below remain historical facts;
+they are not silently refreshed or promoted into current verification.
+
+## Historical foundation milestone record
+
+Everything below preserves the original foundation's implementation, evidence and
+authorization context. Its next-candidate recommendation was separately authorized
+for the review-only milestone above; later implementation is never automatic.
+
+---
+
 # Gameplay Rules & Interaction Intelligence Foundation
 
 ## Scope and Architecture v13 gate

@@ -1,6 +1,6 @@
 # Incremental migration and CI/deployment model
 
-**Status: Architecture v13 is ACTIVE APPROVED; Stages 1–3 and Tier A MCI/acquisition merged; role/comparison attachment integration pending PM inspection.**
+**Status: Architecture v13 is ACTIVE APPROVED; Stages 1–3, the Tier A Card Intelligence vertical and fictional gameplay foundation are merged; gameplay source/evidence/versioning review is pending PM inspection.**
 Decision 017 is Accepted by the owner. Architecture v12 is the previous historical
 baseline. Governance approval alone authorized no runtime step. Runtime milestones
 require separate owner instructions. The implementation sections below record
@@ -222,9 +222,9 @@ behavior remain unchanged. See [the API and limits](V13_ROLE_COMPARISON_ATTACHME
 
 ## Gameplay Rules & Interaction Intelligence Foundation
 
-**Implementation status: implemented, pending independent Project Manager
-inspection.** The owner separately authorized this design/contracts/generic
-primitives/fictional-proof domain after PR #181 merged, from canonical main
+**Implementation status: merged in PR #182.** The owner separately authorized
+this design/contracts/generic primitives/fictional-proof domain after PR #181
+merged, from canonical main
 `da8c5a4053ba749a1c0af9b6044ee0560c10156e`.
 
 The package `src/gameplay_rules/` adds immutable versioned rules/state/action/
@@ -244,20 +244,42 @@ admission/OIDC remain unchanged. Bounded first-party source access attempts
 produced EVIDENCE_UNAVAILABLE, no current rules/version verification and no
 permission clearance; all executable proof data is project-authored fiction.
 
+## Gameplay Rules Source/Evidence Intake & Versioning
+
+**Implementation status: implemented as a review-only lane, pending independent
+Project Manager inspection.** The owner separately authorized this milestone after
+PR #182 merged, from canonical main
+`65f209032dfed80735146a01531c87d0d0b0861b`.
+
+`src/gameplay_rules/source_evidence/` provides immutable metadata/review/version
+contracts, bounded explicit first-party intake and scoped release selection.
+Official index designation, source authority, exact artifact bytes, effective/
+version metadata, reviewed supersession/update incorporation and per-operation
+permissions remain separate bindings. Evidence unavailability, ambiguity and
+conflict remain explicit; there is no implicit latest/max-date/filename fallback.
+The June PDF and reported later update require verified first-party closure,
+not assumption. The single official rules-index access attempt on 2026-10-16
+returned ACCESS_UNAVAILABLE under the environment network policy, with no origin
+HTTP status, source body/hash or designated artifact. The retained review is
+NOT_READY_FOR_RULE_PROJECTION / CURRENT_RULES_RELEASE_NOT_VERIFIED; no official
+version/effective date or update incorporation was established.
+
+This is not rules projection, executable real-card semantics, a new source-policy
+clearance, production admission, a real corpus bundle or runtime activation.
+Existing evidence/provider/registry licensing gates, the fictional gameplay
+kernel and all catalog/intelligence/writer/historical boundaries are unchanged.
+See [source evidence and versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md).
+
 ## Next implementation candidate — NOT AUTHORIZED
 
-**Gameplay Rules Source/Evidence Intake & Versioning** is the recommended next
-candidate. Before real-domain executable claims, define reviewed official-source
-revision/effective-date/provenance/permission and interpretation bindings with
-safe retention boundaries. Metadata availability, authoritative issuer and hash
-integrity are separate from permission to process, retain, redistribute, serve
-or export. This recommendation authorizes no real corpus ingestion or Card parser.
+**Official Gameplay Rules Release Discovery Closure** is the recommended
+prerequisite because the first-party release chain remains unresolved. Close the exact
+missing index designation, effective/version, artifact and later-update
+incorporation chain with operation-specific evidence. Do not substitute an older
+available artifact for a verified requested scope or infer rights from retrieval.
 
-Gameplay simulation should follow sufficient known legality/transition coverage;
-it must use the deterministic rules seam rather than duplicate its semantics.
-Targets, triggers/replacement/layers, Card semantic review and independent
-format/deck policy remain separately scoped future work. Additional Tier A
-migration requires a directly blocking consumer; Tier B Audit-Context Capability
-Design Review remains deliberately **DEFERRED** until a concrete consumer needs it.
-No next milestone, SQL, protected snapshot, provider acquisition, MB2 admission or
-source-policy clearance begins automatically.
+No real rules projection, Oracle parser, Card semantics intake, gameplay
+simulation, Deck/format legality, additional Tier A migration, Tier B audit
+support, SQL, protected snapshot, provider/Card acquisition, MB2 admission or
+source-policy clearance begins automatically. The next milestone requires
+separate owner authorization even if a future reviewed selection is complete.
