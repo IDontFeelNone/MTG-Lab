@@ -1,0 +1,168 @@
+{
+  "active_effects": [],
+  "active_player": "A",
+  "consecutive_passes": [],
+  "game_id": "fictional-duel",
+  "loser_ids": [],
+  "objects": [
+    {
+      "card_id": "pebble-resource",
+      "controller": "A",
+      "knowledge": "known",
+      "object_id": "pebble-resource",
+      "owner": "A",
+      "semantics_id": "sha256:2dbe3f3e95f5407a1dc1228e535c1a1360cfb4cabc34b5ffd8c16c075db52f7c",
+      "tapped": false,
+      "zone_id": "A:battlefield"
+    },
+    {
+      "card_id": "ember-scroll",
+      "controller": "A",
+      "knowledge": "known",
+      "object_id": "ember-scroll",
+      "owner": "A",
+      "semantics_id": "sha256:94c27e132562b4bb3748567770a0cbae1e4666a1f6d1134e6d10a5f08154d555",
+      "tapped": false,
+      "zone_id": "A:hand"
+    },
+    {
+      "card_id": "swift-lantern",
+      "controller": "A",
+      "knowledge": "known",
+      "object_id": "swift-lantern",
+      "owner": "A",
+      "semantics_id": "sha256:edb39fdb55e53c03d7455f0ba71e0afa256d31cbbeede9a7a8cbf203c01b265e",
+      "tapped": false,
+      "zone_id": "A:hand"
+    },
+    {
+      "card_id": "moss-plot",
+      "controller": "A",
+      "knowledge": "known",
+      "object_id": "moss-plot",
+      "owner": "A",
+      "semantics_id": "sha256:a76b05a00abd1d53eb6fd84cf53e70e20a7e339fd872940c8989eeedea0dbe01",
+      "tapped": false,
+      "zone_id": "A:hand"
+    },
+    {
+      "card_id": null,
+      "controller": "B",
+      "knowledge": "unknown",
+      "object_id": "unobserved-library-object",
+      "owner": "B",
+      "semantics_id": null,
+      "tapped": null,
+      "zone_id": "B:library"
+    }
+  ],
+  "pending_system_actions": [],
+  "phase": "main",
+  "players": [
+    {
+      "land_plays_available": 1,
+      "land_plays_used": 0,
+      "life": 10,
+      "mana_pool": {},
+      "player_id": "A"
+    },
+    {
+      "land_plays_available": 1,
+      "land_plays_used": 0,
+      "life": 10,
+      "mana_pool": {},
+      "player_id": "B"
+    }
+  ],
+  "priority_player": "A",
+  "revision": 0,
+  "rules_snapshot_id": "sha256:21c4d3a5a061882ff7454e34bd2ab1fc1c878a3a3c0db6b10c5bde2e4308e358",
+  "schema_version": "gameplay-state-v1",
+  "stack": [],
+  "state_id": "sha256:627ff0a373eb8e11ea8def1da1da7a8c45216f18000b15565c04d4b623b9c71d",
+  "status": "in_progress",
+  "step": "action",
+  "turn_number": 1,
+  "unknown_fields": [],
+  "winner_ids": [],
+  "zones": [
+    {
+      "kind": "library",
+      "owner": "A",
+      "visibility": "hidden",
+      "zone_id": "A:library"
+    },
+    {
+      "kind": "hand",
+      "owner": "A",
+      "visibility": "hidden",
+      "zone_id": "A:hand"
+    },
+    {
+      "kind": "battlefield",
+      "owner": "A",
+      "visibility": "public",
+      "zone_id": "A:battlefield"
+    },
+    {
+      "kind": "graveyard",
+      "owner": "A",
+      "visibility": "public",
+      "zone_id": "A:graveyard"
+    },
+    {
+      "kind": "exile",
+      "owner": "A",
+      "visibility": "public",
+      "zone_id": "A:exile"
+    },
+    {
+      "kind": "command",
+      "owner": "A",
+      "visibility": "public",
+      "zone_id": "A:command"
+    },
+    {
+      "kind": "library",
+      "owner": "B",
+      "visibility": "hidden",
+      "zone_id": "B:library"
+    },
+    {
+      "kind": "hand",
+      "owner": "B",
+      "visibility": "hidden",
+      "zone_id": "B:hand"
+    },
+    {
+      "kind": "battlefield",
+      "owner": "B",
+      "visibility": "public",
+      "zone_id": "B:battlefield"
+    },
+    {
+      "kind": "graveyard",
+      "owner": "B",
+      "visibility": "public",
+      "zone_id": "B:graveyard"
+    },
+    {
+      "kind": "exile",
+      "owner": "B",
+      "visibility": "public",
+      "zone_id": "B:exile"
+    },
+    {
+      "kind": "command",
+      "owner": "B",
+      "visibility": "public",
+      "zone_id": "B:command"
+    },
+    {
+      "kind": "stack",
+      "owner": null,
+      "visibility": "public",
+      "zone_id": "shared:stack"
+    }
+  ]
+}

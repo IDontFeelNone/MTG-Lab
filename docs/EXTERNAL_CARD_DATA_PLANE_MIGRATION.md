@@ -198,8 +198,8 @@ operation states remain unchanged. The production operator profile remains BLOCK
 
 ## V13 Functional-Role and Contextual-Comparison Attachment Integration
 
-**Implementation status: implemented, pending independent Project Manager
-inspection.** The owner separately authorized this final small Card Intelligence
+**Implementation status: merged in PR #181.** The owner separately authorized
+this final small Card Intelligence
 consumer integration after PR #180 merged, from canonical main
 `bea66e1b52eae0c20dc82a6959b2ecbd7c9698e6`.
 
@@ -220,20 +220,44 @@ profile stays Tier A; Tier B Audit-Context Capability Design Review is deliberat
 Source permissions, MB2 pending state, source-policy registry and writer/admission
 behavior remain unchanged. See [the API and limits](V13_ROLE_COMPARISON_ATTACHMENT_INTEGRATION.md).
 
+## Gameplay Rules & Interaction Intelligence Foundation
+
+**Implementation status: implemented, pending independent Project Manager
+inspection.** The owner separately authorized this design/contracts/generic
+primitives/fictional-proof domain after PR #181 merged, from canonical main
+`da8c5a4053ba749a1c0af9b6044ee0560c10156e`.
+
+The package `src/gameplay_rules/` adds immutable versioned rules/state/action/
+semantics/result/transition contracts and a deterministic fictional two-player
+kernel. Explicit snapshot selection, rule references and capability manifests
+preserve unknown/unsupported outcomes. Check and apply are separate; payment,
+priority, stack, land allowance, zone changes and one life-threshold SBA have
+bounded fictional proofs. No real Card semantics, real rules corpus, arbitrary
+Oracle parsing, complete Magic rules, strategy, deck/format legality or simulation
+is implemented. Product Rules remain the unchanged Product/Pack/collation domain.
+See [the contracts and explicit limitations](GAMEPLAY_RULES_INTELLIGENCE.md).
+
+This fits the existing v13 future-domain boundary without Decision 017 or Tier-0
+changes. Existing Tier A catalog/query/Collection and Card Intelligence behavior,
+production canonical data, MB2 pending state, source-policy registry and writer/
+admission/OIDC remain unchanged. Bounded first-party source access attempts
+produced EVIDENCE_UNAVAILABLE, no current rules/version verification and no
+permission clearance; all executable proof data is project-authored fiction.
+
 ## Next implementation candidate — NOT AUTHORIZED
 
-**Gameplay Rules & Interaction Intelligence Foundation — bounded design, contracts
-and fictional proof** is the recommended next candidate, not an authorization.
-The existing Card Intelligence consumers now have attachment paths. A structured,
-provenance-bound rules/action model should precede serious gameplay simulation:
-legal actions, mana/payment, timing, zones and state-based actions cannot be
-invented by a simulator. Deck Intelligence also needs legality/context semantics.
-A bounded fictional proof and explicit unsupported outcomes can validate a future
-domain contract without claiming real-card rules coverage or source permission.
+**Gameplay Rules Source/Evidence Intake & Versioning** is the recommended next
+candidate. Before real-domain executable claims, define reviewed official-source
+revision/effective-date/provenance/permission and interpretation bindings with
+safe retention boundaries. Metadata availability, authoritative issuer and hash
+integrity are separate from permission to process, retain, redistribute, serve
+or export. This recommendation authorizes no real corpus ingestion or Card parser.
 
-Additional attachment migration should follow only a demonstrated blocking
-consumer. Tier B should be reconsidered only for a concrete audit consumer; it is
-not the default next workstream. No rules, simulation, Deck Intelligence, SQL,
-protected snapshot, AI/model transport, provider acquisition, MB2 admission or
-source-policy clearance is authorized by this recommendation. Separate owner
-instructions must select and bound the next milestone.
+Gameplay simulation should follow sufficient known legality/transition coverage;
+it must use the deterministic rules seam rather than duplicate its semantics.
+Targets, triggers/replacement/layers, Card semantic review and independent
+format/deck policy remain separately scoped future work. Additional Tier A
+migration requires a directly blocking consumer; Tier B Audit-Context Capability
+Design Review remains deliberately **DEFERRED** until a concrete consumer needs it.
+No next milestone, SQL, protected snapshot, provider acquisition, MB2 admission or
+source-policy clearance begins automatically.

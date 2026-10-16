@@ -1,0 +1,224 @@
+{
+  "capabilities": {
+    "activated_abilities": "supported",
+    "active_player": "supported",
+    "additional_costs": "unsupported",
+    "alternate_costs": "unsupported",
+    "combat": "unsupported",
+    "commander_specific_rules": "unsupported",
+    "continuous_effects": "unsupported",
+    "copy_effects": "unsupported",
+    "cost_reductions_increases": "unsupported",
+    "damage": "unsupported",
+    "deck_construction": "unsupported",
+    "format_legality": "unsupported",
+    "generic_costs": "supported",
+    "land_play": "supported",
+    "layers": "unsupported",
+    "mana_generation": "supported",
+    "mana_payment": "supported",
+    "multiplayer": "unsupported",
+    "prevention_effects": "unsupported",
+    "priority": "supported",
+    "replacement_effects": "unsupported",
+    "resolution": "supported",
+    "spell_casting": "supported",
+    "stack": "supported",
+    "state_based_actions": "supported",
+    "targeting": "unsupported",
+    "triggered_abilities": "unsupported",
+    "turn_structure": "supported",
+    "zone_changes": "supported",
+    "zones": "supported"
+  },
+  "effective_date": "2026-10-16",
+  "engine_contract_version": "gameplay-kernel-v1",
+  "execution_profile": "fictional-two-player-v1",
+  "game_id": "fictional-duel",
+  "parameters": {
+    "generic_payment_order": [
+      "blue",
+      "red"
+    ],
+    "land_plays_per_turn": 1,
+    "life_loss_threshold": 0,
+    "main_phase": "main",
+    "main_step": "action",
+    "mana_symbols": [
+      "blue",
+      "red"
+    ],
+    "turn_steps": [
+      {
+        "phase": "beginning",
+        "step": "start"
+      },
+      {
+        "phase": "main",
+        "step": "action"
+      },
+      {
+        "phase": "ending",
+        "step": "end"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "category": "priority",
+      "description": "Authored bounded fictional priority primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:538ccb30bbec8a1ae20648a7e018751f6a173f5d66256c24f6b3b7c7babfc158",
+      "rule_id": "fictional.rules.priority.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "timing",
+      "description": "Authored bounded fictional timing primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:8763f2d96cd30e156f1762afc6e0311a1545a0635e36b1eb6b261040bb4b0100",
+      "rule_id": "fictional.rules.timing.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "zones",
+      "description": "Authored bounded fictional zones primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:1278a980540323d96061c08f4391e03934bdad2d148160f0f0942f3ef1005dac",
+      "rule_id": "fictional.rules.zones.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "land_play",
+      "description": "Authored bounded fictional land play primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:ed34ca6f9ad70de1c670ec3ef1bfa88f832ec501da36fb6f827b9dd302898989",
+      "rule_id": "fictional.rules.land_play.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "spell_casting",
+      "description": "Authored bounded fictional spell casting primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:ace491ec732ede4e5ce5b6aceaf90a44ae373cf10338a885da281d6a96d5d530",
+      "rule_id": "fictional.rules.spell_casting.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "activated_abilities",
+      "description": "Authored bounded fictional activated abilities primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:37abe5e57e8b8e06cd0916ad3d17de5840ee34d681228c75bf4d8845292e8605",
+      "rule_id": "fictional.rules.activated_abilities.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "mana_generation",
+      "description": "Authored bounded fictional mana generation primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:74f025a3aa55f5d8b69ce07f97450b778a3ebfcd4618bf0b0bafa1f22ff0d321",
+      "rule_id": "fictional.rules.mana_generation.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "mana_payment",
+      "description": "Authored bounded fictional mana payment primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:3cb680e8f8110282718e3d414c9e804658137a442752e041db857eac5b903567",
+      "rule_id": "fictional.rules.mana_payment.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "stack",
+      "description": "Authored bounded fictional stack primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:bd73eab86529e895747aa158ffd1c8a9df4b1d95fcb98dbf6bbba79e657442aa",
+      "rule_id": "fictional.rules.stack.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "resolution",
+      "description": "Authored bounded fictional resolution primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:56264c3f695cdf0bf879e2ef0cfd1cd571194cf4df59416cde33c5b856ebde08",
+      "rule_id": "fictional.rules.resolution.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "turn_structure",
+      "description": "Authored bounded fictional turn structure primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:ab5f0b2f401cf4ce0dfb730b511beada8cac449a30e28498d13dedd2ec1c0f05",
+      "rule_id": "fictional.rules.turn_structure.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    },
+    {
+      "category": "state_based_actions",
+      "description": "Authored bounded fictional state based actions primitive.",
+      "external_reference": null,
+      "rule_hash": "sha256:b529328a795259401e9e9ded03c89ca73a380bb478fbc419f95e837bd59d1c25",
+      "rule_id": "fictional.rules.state_based_actions.1",
+      "source_id": "fictional-authored-rules-v1",
+      "status": "supported"
+    }
+  ],
+  "rules_snapshot_id": "sha256:21c4d3a5a061882ff7454e34bd2ab1fc1c878a3a3c0db6b10c5bde2e4308e358",
+  "rules_version": "fictional-duel-v1",
+  "schema_version": "gameplay-rules-snapshot-v1",
+  "sources": [
+    {
+      "authoritative_reference": "urn:mtglab:fictional-duel:rules:v1",
+      "completeness": "partial",
+      "content_hash": null,
+      "effective_date": "2026-10-16",
+      "issuer": "MTG Lab fictional test authors",
+      "permission_status": {
+        "ai_export": "NOT_APPLICABLE",
+        "private_retention": "NOT_APPLICABLE",
+        "processing": "NOT_APPLICABLE",
+        "redistribution": "NOT_APPLICABLE",
+        "service_use": "NOT_APPLICABLE"
+      },
+      "provenance": [
+        "Original project-authored fictional fixture"
+      ],
+      "retention_status": "project_authored_public",
+      "retrieved_at": "2026-10-16T00:00:00Z",
+      "rules_version": "fictional-duel-v1",
+      "source_class": "project_authored_fictional",
+      "source_id": "fictional-authored-rules-v1",
+      "superseded_by": [],
+      "supersedes": [],
+      "title": "Fictional Duel bounded gameplay proof, revision 1"
+    }
+  ],
+  "unsupported_rule_families": [
+    "targeting",
+    "triggered_abilities",
+    "replacement_effects",
+    "prevention_effects",
+    "continuous_effects",
+    "layers",
+    "copy_effects",
+    "combat",
+    "damage",
+    "multiplayer",
+    "alternate_costs",
+    "additional_costs",
+    "cost_reductions_increases",
+    "format_legality",
+    "deck_construction",
+    "commander_specific_rules"
+  ]
+}

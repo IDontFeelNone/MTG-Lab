@@ -1,4 +1,4 @@
-# Current implementation inventory — Functional-Role and Contextual-Comparison attachment
+# Current implementation inventory — Gameplay Rules & Interaction Intelligence Foundation
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
 Stage 1 fictional read-only snapshot attachment is merged in PR #176.
@@ -7,62 +7,69 @@ The **Legacy/Public Profile Permission and Closure Contract** is merged in PR #1
 its **READY_FOR_NON_PRODUCTION_STAGE3** engineering recommendation was separately
 implemented as **V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile**,
 merged in PR #179. **V13 Tier A Card Intelligence & Acquisition Attachment
-Integration** is merged in PR #180. Reviewed canonical main:
-`bea66e1b52eae0c20dc82a6959b2ecbd7c9698e6`.
+Integration** is merged in PR #180. **V13 Functional-Role and Contextual-Comparison
+Attachment Integration** is merged in PR #181. Reviewed canonical main:
+`da8c5a4053ba749a1c0af9b6044ee0560c10156e`.
 Architecture v12 remains the preserved historical baseline.
 
 ## Current implementation and explicit limits
 
-**V13 Functional-Role and Contextual-Comparison Attachment Integration** is implemented,
-pending independent Project Manager inspection. The explicit
-`MechanicalCardIntelligence.from_attachment` path constructs one verified query;
-`FunctionalRolePilot.from_mechanical` reuses that exact attachment-backed MCI, and
-`ContextualCardComparisonPilot.from_roles` reuses that exact roles instance.
-`CardAcquisitionAdapter.from_mechanical` remains available from the merged prior
-milestone. All these consumers use the same canonical query snapshot. The existing
-`CanonicalSemanticQueryEngine` and `ReasoningContextBuilder` remain the shared
-reasoning path; no second MCI/query or ambient-root fallback is introduced.
+**Gameplay Rules & Interaction Intelligence Foundation** is implemented,
+pending independent Project Manager inspection. This separate owner authorization
+covers design, contracts, generic primitives and a fictional executable proof.
+It fits the existing Architecture v13 future-domain boundary: no Tier-0 change,
+Architecture v14 or Decision 017 modification is required.
 
-Catalog integrity and the independent mechanical source remain separately bound.
-Attached role/vocabulary/context-plan bytes and identities are rechecked; drift or
-retargeting blocks rather than refreshing bindings. Defensive `catalog_binding`
-metadata remains separate from retained domain formats and content identities.
-The original 15-Card/30-candidate role pilot stays `requires_review`/pending, with
-zero approvals or KnowledgeFact writes. Its three-Card contextual comparison,
-eight pending roles, Decision inputs and reasoning handoff retain their semantics:
-**ABSTAIN**, null selection and unknown `human_reviewed_context_match`. No score,
-Card superiority claim, legality conclusion or verified rules interaction is added.
+`src/gameplay_rules/` provides immutable content-addressed rules snapshots, Card
+semantics, state, actions, payment/results and transitions. Explicit game/rules
+versions, effective date, source/provenance bindings and capability manifests are
+required. `GameplayRulesEngine.evaluate_action` checks without mutation;
+`apply_action` applies only LEGAL actions and otherwise returns the blocked result.
+LEGAL, ILLEGAL, INDETERMINATE and UNSUPPORTED remain distinct. Structured rule
+references explain requirements; no natural-language inference is executable.
 
-The `legacy-public-compatibility-v1` profile remains Tier A
-**CATALOG_QUERY_COLLECTION**: 40 in-place dependencies, comprising 33 core files,
-five selected SourceRecord references and two audit-context files. Tier B/C
-operations remain unsupported before excluded I/O. Mechanical evidence stays
-outside the catalog profile. No provider corpus is copied or acquired.
-The explicit both-root compatibility target retains 399 Cards / 928 Printings /
-235 Identifiers / two Finishes / Game / Product, totaling 1,566 query entities,
-with unchanged query identity
+The fictional two-player proof covers configured mana/generic payment, sorcery/
+instant timing, land allowance, priority passing, stack resolution, explicit zone
+moves and one life-threshold state-based action. Identical inputs replay exactly.
+Unsupported/unknown costs, effects and hidden required information block instead
+of being ignored. Only project-authored fictional rules/Card semantics execute.
+Real Comprehensive Rules ingestion, arbitrary Oracle parsing, real Card semantics,
+full Magic rules, format/deck legality, strategy and gameplay simulation are not
+implemented. `src/simulation/` remains unimplemented. GAMEPLAY RULES are separate
+from unchanged PRODUCT RULES for Product/Pack/Slot/Print Sheet/collation.
+
+The completed Tier A Card Intelligence vertical remains unchanged:
+`MechanicalCardIntelligence.from_attachment` ->
+`FunctionalRolePilot.from_mechanical` ->
+`ContextualCardComparisonPilot.from_roles`, with
+`CardAcquisitionAdapter.from_mechanical` and the same semantic/reasoning query.
+Independent mechanical evidence stays outside the catalog profile. The original
+15-Card/30-candidate role pilot remains `requires_review`/pending, with zero
+approvals or KnowledgeFact writes; comparison remains **ABSTAIN**, null selection.
+Gameplay foundation results do not turn those authored annotations into rules facts.
+
+The `legacy-public-compatibility-v1` Tier A **CATALOG_QUERY_COLLECTION** profile
+still binds 40 in-place files; its exact both-root query identity remains
 `sha256:7cee417d40186169829d812c1edd4db6d6934f75f3eeb7183dae09f61bb437a7`.
-Legacy MCI/roles/comparison/acquisition constructors, the bare query constructor's
-32-entity scope, unrestricted legacy attachment and Stage 1 profile are unchanged.
+No catalog/profile, legacy root inference, source/audit scope or historical
+constructor semantics change. **Tier B Audit-Context Capability Design Review**
+remains deliberately **DEFERRED** absent a concrete consumer.
 
 The production operator profile remains **BLOCKED**. All seven mixed-content
 operation permission states remain **NOT_ESTABLISHED**. Fixed flags remain
 `production_eligible=false`, `approval_state=not_granted`,
 `source_policy_clearance=not_granted` and
-`data_processing_permission_established=false`. Integrity and reasoning grant no
-permission. No production snapshot, source clearance or real admission is created.
+`data_processing_permission_established=false`. Fictional execution and successful
+integrity verification grant no real-source permission. Bounded official Wizards
+source access attempts yielded unavailable evidence, not permission or prohibition;
+no current official rules version or document contents were verified or ingested.
 
-**Tier B Audit-Context Capability Design Review** is deliberately **DEFERRED**:
-the completed Card Intelligence/Acquisition/role/comparison vertical requires only
-Tier A entity, relationship and selected-provenance operations.
-
-Next candidate: **Gameplay Rules & Interaction Intelligence Foundation — bounded
-design, contracts and fictional proof — NOT AUTHORIZED**. This is the last small
-Tier A Card Intelligence consumer migration unless another directly blocking
-consumer is demonstrated. Product value now favors a structured rules/action and
-interaction-evidence foundation before serious gameplay simulation. Deck
-Intelligence also needs legality/context semantics; Tier B should return only for
-a concrete audit consumer. No next domain begins automatically.
+Next candidate: **Gameplay Rules Source/Evidence Intake & Versioning — NOT
+AUTHORIZED**. Explicit source/version/provenance/permission and interpretation
+review should precede real-domain executable semantics and serious gameplay
+simulation. Deck/format policy remains separate. This is not an authorization to
+ingest a real corpus, broaden the kernel, implement simulation or begin another
+Tier A migration. No next milestone begins automatically.
 
 MB2's 810 selected candidates and nine multiface holds remain pending and unadmitted.
 Owner spelling proposals remain unapplied; physical Printing verification stays
@@ -71,8 +78,8 @@ production canonical bytes, selected audits, SourceRecords, retained mechanical
 and role/context artifacts, writer/admission/OIDC and the historical Architecture-v12
 auxiliary fixture are unchanged. No owner admission decision or merge occurred.
 
-See [the role/comparison API and limits](docs/V13_ROLE_COMPARISON_ATTACHMENT_INTEGRATION.md),
-[the merged MCI/acquisition seam](docs/V13_TIER_A_CARD_INTELLIGENCE_ATTACHMENT.md),
+See [Gameplay Rules & Interaction Intelligence](docs/GAMEPLAY_RULES_INTELLIGENCE.md),
+[the merged role/comparison seam](docs/V13_ROLE_COMPARISON_ATTACHMENT_INTEGRATION.md),
 and [the unchanged closure contract](docs/V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md).
 
 ---
