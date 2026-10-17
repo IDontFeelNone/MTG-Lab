@@ -1,34 +1,58 @@
-# Current rules evidence / artifact verification boundary
+# Current rules evidence / foundational projection boundary
 
 The Gameplay Rules & Interaction Intelligence Foundation below is merged in
 PR #182. [Source/evidence versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md) is merged
-in PR #183 and [release discovery closure](GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md)
-in PR #184. [Owner-Supplied Artifact Verification](GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md)
-is implemented pending independent Project Manager inspection from canonical
-main `7342e20a2f38be43f517f4cfcca19e23da3c0e70`.
+in PR #183, [release discovery closure](GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md)
+in PR #184, and [owner-supplied artifact verification](GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md)
+in PR #185. The separately owner-authorized
+[Core Comprehensive Rules Projection — Foundational Rules Subset](GAMEPLAY_RULES_FOUNDATIONAL_PROJECTION.md)
+is implemented as a structured **NON-EXECUTABLE** projection, pending independent
+Project Manager inspection, from canonical main
+`54cd3c33875a949d9a06fb70c336f0b55fb5aef9`.
 
-This metadata-only milestone does not modify the fictional kernel. The existing
-verifier confirms the owner-supplied September 25, 2026 TXT's exact 977752 bytes,
-SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`,
-and bounded title/date/701.71/Empower Jace markers. Owner provenance is distinct
-from Codex network verification; no Wizards fetch occurred and no source body was
-copied or retained. Prior unavailable Codex and external PM observations remain
-unchanged, as do both historical review packages.
+The existing verifier confirms the external owner-supplied September 25, 2026
+TXT's exact **977752 bytes**, SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`, and bounded
+title/date/701.71/Empower Jace markers. The verification result remains
+`sha256:6289f9e138c248f33b950842fd079f9dc9d4be431a9ac8dc1effb4a18ec502b3`;
+the correspondence review remains
+`sha256:7332e6517b1b28085bbee1fa76b8ecbc9cbe4148e261452449a308ba348d9def`.
+Owner provenance is distinct from Codex network verification; no Wizards fetch
+occurred. Prior unavailable Codex and external PM observations and all older
+review packages remain byte-identical.
 
-Explicit source-correspondence review plus the existing selector now establishes
+Explicit source-correspondence review plus the existing selector establishes
 READY_FOR_RULE_PROJECTION for designation observed as of 2026-10-16 and effective
-release 2026-09-25. Identified Reality Fracture incorporation remains narrow;
-full bulletin diff verification remains false. Exact-byte identity does not
-establish source permission or cryptographic origin. `projection_authorized=false`,
-`admission_eligible=false`, `source_policy_clearance=not_granted` and all unresolved
-source-content permissions remain unchanged.
+release 2026-09-25. The identified Reality Fracture incorporation remains narrow;
+full bulletin diff verification remains false. The historical metadata packages'
+`projection_authorized=false` values remain unchanged. The present task provides
+separate bounded authorization for transient source inspection and the retained
+project-authored paraphrases and metadata. It does not establish broader raw
+retention, redistribution, service-use or AI/model export permission.
+`admission_eligible=false` and `source_policy_clearance=not_granted` remain fixed.
 
-The new package retains metadata only. No real rules projection, real Card
-semantics, Oracle parser, format/deck legality, strategy or simulation exists.
-**Core Comprehensive Rules Projection — Foundational Rules Subset — NOT AUTHORIZED**
-is the next candidate: a small manually reviewed set of Golden Rules and
-players/game/object/zone concepts, with later mana/timing/casting/SBA expansion
-remaining separate. No next milestone begins automatically.
+The new two-file package at
+`reference-reviews/gameplay-rules-foundational-projection/` contains exactly twenty
+selected records, exact source-line anchors/span hashes, project-authored
+paraphrases and an explicit dependency/exception graph. It contains no official
+rule prose, source TXT or absolute local source path. Offline integrity and
+source-aware span verification remain distinct. `104.3a`, `111.2`, `112.2`,
+`113.10` and `407` remain unresolved; `109.4a`–`109.4g` and `400.7a`–`400.7k`,
+`400.7m` remain unprojected exceptions. They do not add selected rules or establish
+complete control/zone-identity policies.
+
+No real `GameplayRulesSnapshot` or real execution profile is created. These
+metadata and non-executable projection milestones do not modify the fictional
+kernel. `GameplayRulesEngine` and the fictional profile remain unchanged. Oracle
+ingestion, real Card semantics, mana/payment, timing/priority,
+casting/stack-resolution, SBA expansion, simulation and a general/full
+Comprehensive Rules parser remain unsupported. Architecture v13 and Decision 017
+are unchanged; no Tier-0 change is introduced.
+
+**Foundational Dependency and Exception Coverage Review — NOT AUTHORIZED** is a
+possible next candidate, requiring a separate exact allowlist and source-use
+boundary. This milestone ends with one draft PR; do not merge or start another
+milestone.
 
 ## Historical foundation milestone record
 
