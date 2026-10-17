@@ -1,3 +1,43 @@
+# Current artifact verification follow-up
+
+**Official Gameplay Rules Release Discovery Closure** is merged in PR #184.
+Its complete implementation record below is historical: it correctly ended with
+unknown artifact hash/length and NOT_READY_FOR_RULE_PROJECTION at that milestone.
+The prior seven-file discovery package and PR #183 package remain unchanged.
+
+The separately owner-authorized
+[Comprehensive Rules Artifact Verification](GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md)
+is now implemented pending independent Project Manager inspection from canonical
+main `7342e20a2f38be43f517f4cfcca19e23da3c0e70`. The owner supplied the designated
+TXT; the existing offline verifier confirms 977752 bytes and SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`,
+with matching title, September 25, 2026 date, 701.71 and Empower Jace markers.
+The explicit verification timestamp is `2026-10-16T22:15:00-04:00`.
+
+A new explicit correspondence review binds local byte identity and owner origin
+testimony to the unchanged PM observation and release candidate. Reproducing the
+existing selector yields READY_FOR_RULE_PROJECTION. Currentness remains observed
+as of 2026-10-16, effective release 2026-09-25; full Reality Fracture bulletin diff
+verification remains false. Codex did not independently fetch Wizards. Neither
+the source body nor its local path is retained in the repository.
+
+The new append-only metadata package is
+`reference-reviews/gameplay-rules-artifact-verification/`. It leaves
+`projection_authorized=false`, `admission_eligible=false`,
+`source_policy_clearance=not_granted` and source-content permissions NOT_ESTABLISHED.
+No real rule projection, real Card semantics, Oracle parser or simulation is
+implemented. **Core Comprehensive Rules Projection — Foundational Rules Subset
+— NOT AUTHORIZED** is only the next candidate; no follow-on begins automatically.
+
+## Historical PR #184 discovery-closure milestone record
+
+Everything below preserves the original discovery milestone's implementation,
+metadata-only findings and authorization boundary. Its later local verification
+candidate was separately authorized above. Historical then-current readiness and
+next-task statements do not override the new reviewed artifact verification.
+
+---
+
 # Official Gameplay Rules Release Discovery Closure
 
 ## Scope and Architecture v13 gate

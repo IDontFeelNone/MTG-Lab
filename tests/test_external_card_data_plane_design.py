@@ -308,7 +308,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                 text = (ROOT / entry["path"]).read_bytes()
                 self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])
 
-    def test_current_status_separates_discovery_closure_and_unapproved_projection(self):
+    def test_current_status_separates_reviewed_artifact_readiness_and_unapproved_projection(self):
         milestone = "V13 Stage 1 — Fictional Canonical Snapshot Attachment"
         for name in ("README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md",
                      "docs/SESSION_STATE.md", "docs/NEXT_TASK.md"):
@@ -326,6 +326,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("merged in PR #181", current, name)
             self.assertIn("merged in PR #182", current, name)
             self.assertIn("merged in PR #183", current, name)
+            self.assertIn("merged in PR #184", current, name)
             self.assertIn("pending independent Project Manager inspection", current, name)
             self.assertIn("READY_FOR_NON_PRODUCTION_STAGE3", current, name)
             self.assertIn("V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile", current, name)
@@ -354,19 +355,25 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("src/simulation/", current, name)
             self.assertIn("remains unimplemented", current, name)
             self.assertIn("Gameplay Rules Source/Evidence Intake & Versioning", current, name)
-            self.assertIn("serious gameplay simulation", current, name)
+            self.assertIn("serious gameplay simulation", current.lower(), name)
             self.assertIn("CURRENT_RULES_RELEASE_NOT_VERIFIED", current, name)
-            self.assertIn("NOT_READY_FOR_RULE_PROJECTION", current, name)
+            self.assertRegex(current, r"(?<!NOT_)READY_FOR_RULE_PROJECTION", name)
             self.assertIn("src/gameplay_rules/source_evidence/", current, name)
             self.assertIn("review-only", current, name)
             self.assertIn("Official Gameplay Rules Release Discovery Closure", current, name)
             for item in ("PM_SUPPLIED_FIRST_PARTY_OBSERVATION", "2026-10-16",
                          "VERIFIED_METADATA_ONLY", "20260925", "September 25, 2026",
                          "701.71", "Empower Jace", "ACCESS_UNAVAILABLE",
-                         "OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED", "offline",
+                         "offline",
                          "content_retained=false", "projection_authorized=false",
                          "Owner-Supplied Comprehensive Rules Artifact Verification"):
                 self.assertIn(item, current, (name, item))
+            for item in ("owner-supplied provenance", "VERIFIED_EXPECTED_ARTIFACT",
+                         "977752", "8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca",
+                         "2026-10-16T22:15:00-04:00", "admission_eligible=false",
+                         "source_policy_clearance=not_granted"):
+                self.assertIn(item, current, (name, item))
+            self.assertIn("Core Comprehensive Rules Projection", current, name)
             self.assertIn("No real rules projection", current, name)
             self.assertIn("eight source-specific operations", current, name)
             self.assertIn("mechanical", current, name)
@@ -391,11 +398,18 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         source_scope = scope.split("## Gameplay Rules Source/Evidence Intake & Versioning", 1)[1]
         self.assertIn("Implementation status: merged in PR #183", source_scope)
         self.assertIn("## Official Gameplay Rules Release Discovery Closure", source_scope)
-        closure_scope = source_scope.split("## Official Gameplay Rules Release Discovery Closure", 1)[1]
-        self.assertIn("pending independent", closure_scope)
+        closure_scope, artifact_scope = source_scope.split("## Official Gameplay Rules Release Discovery Closure", 1)[1].split(
+            "## Owner-Supplied Comprehensive Rules Artifact Verification & Readiness Closure", 1)
+        self.assertIn("Implementation status: merged in PR #184", closure_scope)
         self.assertIn("OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED", closure_scope)
         self.assertIn("PM_SUPPLIED_FIRST_PARTY_OBSERVATION", closure_scope)
-        self.assertIn("Owner-Supplied Comprehensive Rules Artifact Verification", closure_scope)
+        self.assertIn("pending independent Project Manager inspection", artifact_scope)
+        self.assertRegex(artifact_scope, r"(?<!NOT_)READY_FOR_RULE_PROJECTION")
+        self.assertIn("977752", artifact_scope)
+        self.assertIn("8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca", artifact_scope)
+        self.assertIn("projection_authorized=false", artifact_scope)
+        self.assertIn("admission_eligible=false", artifact_scope)
+        self.assertIn("source_policy_clearance=not_granted", artifact_scope)
         self.assertIn("src/gameplay_rules/source_evidence/", scope)
         self.assertIn("Product Rules remain the unchanged Product/Pack/collation domain", scope)
         self.assertIn("Tier B Audit-Context Capability Design Review is deliberately **DEFERRED**", scope)

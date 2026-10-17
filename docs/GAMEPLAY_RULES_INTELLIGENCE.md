@@ -1,29 +1,34 @@
-# Current rules evidence / release discovery boundary
+# Current rules evidence / artifact verification boundary
 
 The Gameplay Rules & Interaction Intelligence Foundation below is merged in
-PR #182. [Gameplay Rules Source/Evidence Intake & Versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md)
-is merged in PR #183. The separately authorized
-[Official Gameplay Rules Release Discovery Closure](GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md)
+PR #182. [Source/evidence versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md) is merged
+in PR #183 and [release discovery closure](GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md)
+in PR #184. [Owner-Supplied Artifact Verification](GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md)
 is implemented pending independent Project Manager inspection from canonical
-main `988ac4bc384da8e4b62f89790727c2e79373eea2`.
+main `7342e20a2f38be43f517f4cfcca19e23da3c0e70`.
 
-This metadata-only review does not modify the fictional kernel, make real rules
-executable, clear permissions or authorize rules projection. Its new PM-supplied
-first-party observation is distinct from the preserved unavailable Codex network
-attempt. As of 2026-10-16, that supplied observation designates September 25, 2026
-Comprehensive Rules, with the 20260925 artifact family and identified 701.71
-Empower Jace incorporation; it does not verify the full Reality Fracture diff.
-Codex did not independently fetch Wizards. Artifact SHA-256 and byte length remain
-unknown because no real TXT was supplied.
+This metadata-only milestone does not modify the fictional kernel. The existing
+verifier confirms the owner-supplied September 25, 2026 TXT's exact 977752 bytes,
+SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`,
+and bounded title/date/701.71/Empower Jace markers. Owner provenance is distinct
+from Codex network verification; no Wizards fetch occurred and no source body was
+copied or retained. Prior unavailable Codex and external PM observations remain
+unchanged, as do both historical review packages.
 
-The offline TXT verifier and request provide an exact metadata-only handoff.
-Readiness remains NOT_READY_FOR_RULE_PROJECTION with
-OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED. Existing source-content permissions stay
-NOT_ESTABLISHED. The next candidate is Owner-Supplied Comprehensive Rules Artifact
-Verification — NOT AUTHORIZED. No real rules projection, Oracle parser, Card
-semantic intake or simulation begins automatically. Current source findings and
-readiness belong to the new review package; historical attempts below remain
-historical facts and are not silently promoted into verification.
+Explicit source-correspondence review plus the existing selector now establishes
+READY_FOR_RULE_PROJECTION for designation observed as of 2026-10-16 and effective
+release 2026-09-25. Identified Reality Fracture incorporation remains narrow;
+full bulletin diff verification remains false. Exact-byte identity does not
+establish source permission or cryptographic origin. `projection_authorized=false`,
+`admission_eligible=false`, `source_policy_clearance=not_granted` and all unresolved
+source-content permissions remain unchanged.
+
+The new package retains metadata only. No real rules projection, real Card
+semantics, Oracle parser, format/deck legality, strategy or simulation exists.
+**Core Comprehensive Rules Projection — Foundational Rules Subset — NOT AUTHORIZED**
+is the next candidate: a small manually reviewed set of Golden Rules and
+players/game/object/zone concepts, with later mana/timing/casting/SBA expansion
+remaining separate. No next milestone begins automatically.
 
 ## Historical foundation milestone record
 
