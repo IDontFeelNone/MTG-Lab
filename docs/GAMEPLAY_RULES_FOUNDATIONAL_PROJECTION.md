@@ -1,3 +1,59 @@
+# Current foundational projection review overlay
+
+**Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
+Canonical main and branch base:
+`90ce520be8b0319111ca74fdb385b01de522523a`; PR #186 is merged.
+
+**Foundational Projection Review & Real Execution Profile Design** adds a separate
+immutable review/design layer over exactly **20** merged projected rules. The
+original package ID remains
+`sha256:22740145cf0ec457e0b297eba5ebed3d58054b6d16179bdd738a4f5ccc5463ea`;
+projection ID remains
+`sha256:98bfd574c774a48aaaab4753eb8eb864dc7242effa011568f2ebf59c6a9ce6f7`.
+The package bytes, anchors and original `IMPLEMENTED_PENDING_REVIEW` status are
+unchanged. The new review is `REVIEWED_FOR_EXECUTION_DESIGN`, which is not
+execution approval. Owner execution approval remains `NOT_GRANTED` and
+`execution_authorized=false`.
+
+The versioned target `magic-comprehensive-rules-20260925-v1` is **DESIGN ONLY / NOT
+EXECUTABLE**, pinned to source release **2026-09-25**. Overall execution readiness
+is **BLOCKED / REAL_EXECUTION_PROFILE_NOT_READY**. Unresolved `104.3a`, `111.2`,
+`112.2`, `113.10` and `407`, open `109.4a`–`109.4g` and `400.7a`–`400.7k`,
+`400.7m` exception families, absent real primitives and absent owner activation
+prevent promotion. Partial state/vocabulary candidates do not become executable.
+`108.1` remains reference authority only. No implicit current/latest profile is
+allowed.
+
+[The real-profile design](GAMEPLAY_RULES_REAL_EXECUTION_PROFILE_DESIGN.md) documents per-rule review,
+capability coverage, deterministic dependency/exception and activation gates,
+future snapshot/proof/replay contracts, and the six-file retained package at
+`reference-reviews/gameplay-rules-execution-profile-design/`. It reproduces from
+retained metadata without the external TXT, new rule prose or a network fetch.
+`GameplayRulesEngine`, `GameplayRulesSnapshot`, `gameplay-kernel-v1`,
+`fictional-two-player-v1` and fictional behavior remain unchanged. No real
+snapshot, runtime activation, projection-to-engine conversion, Oracle ingestion,
+real Card semantics, mana/priority/casting/SBA or simulation is introduced.
+
+Source-policy clearance remains `not_granted`; private retention,
+redistribution, free/commercial service and AI export remain `NOT_ESTABLISHED`.
+All prior gameplay evidence and protected Card Acquisition identity
+`sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
+remain unchanged. Product Rules, Tier A, Card Intelligence, catalog, MB2,
+`SOURCE_POLICY_CLEARED_PLANS` and writer/admission/OIDC remain unchanged. The
+preserved operational and evidence lineage below remains applicable.
+
+Recommend one next candidate: **Foundational Dependency & Exception Projection —
+NOT AUTHORIZED**, requiring a later exact allowlist and source-use boundary.
+Stop after one draft PR for PM review; do not merge or begin the next milestone.
+
+## Historical foundational projection milestone record
+
+The following preserves the prior milestone's implementation and authorization
+context. Its source-TXT precondition, pending-review description, historical
+branch base and next-candidate recommendation belong to that earlier milestone;
+the current review/design boundary is stated above. Later review does not rewrite
+historical evidence or its original permissions.
+
 # Core Comprehensive Rules Projection — Foundational Rules Subset
 
 ## Review scope and authority
