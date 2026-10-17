@@ -271,8 +271,8 @@ See [source evidence and versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md).
 
 ## Official Gameplay Rules Release Discovery Closure
 
-**Implementation status: implemented as a metadata-only review/verification
-handoff, pending independent Project Manager inspection.** The separately
+**Implementation status: merged in PR #184.** The milestone findings below
+retain their historical metadata-only review/verification handoff boundary. The separately
 owner-authorized milestone starts from canonical main
 `988ac4bc384da8e4b62f89790727c2e79373eea2` after PR #183 merged. It fits the
 existing v13 evidence domain; Decision 017 and the fictional kernel are unchanged.
@@ -295,16 +295,47 @@ OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED. All source-content permissions stay
 NOT_ESTABLISHED and existing evidence/registry gates remain unchanged. See
 [the provenance and local handoff](GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md).
 
+## Owner-Supplied Comprehensive Rules Artifact Verification & Readiness Closure
+
+**Implementation status: metadata-only verification and explicit review implemented,
+pending independent Project Manager inspection.** This separately owner-authorized
+milestone starts from canonical main
+`7342e20a2f38be43f517f4cfcca19e23da3c0e70`. It leaves Architecture v13, Decision
+017, the existing local verifier and the fictional gameplay kernel unchanged.
+
+The explicit owner-supplied designated TXT passes the existing UTF-8/5 MiB/family/
+title/date/701.71/Empower Jace profile. Exact byte identity is SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`,
+977752 bytes, observed at the owner-supplied `2026-10-16T22:15:00-04:00` timestamp.
+The owner states direct download from the designated official TXT without
+intentional modification; Codex does not independently fetch or authenticate
+Wizards origin. No source body is copied, retained or admitted to RawSnapshotStore.
+
+An explicit immutable source-correspondence review binds the existing PM observation,
+release candidate and request to the exact local result. The existing selector
+reproduces READY_FOR_RULE_PROJECTION, with currentness still observed as of
+2026-10-16 and effective release 2026-09-25. Identified Reality Fracture 701.71
+incorporation remains narrow; the full bulletin diff is not verified. Both prior
+source/versioning and discovery-closure packages remain byte-identical.
+
+The new `reference-reviews/gameplay-rules-artifact-verification/` package contains
+metadata JSON only. `projection_authorized=false`, `admission_eligible=false` and
+`source_policy_clearance=not_granted` remain fixed. Source-content private raw
+retention, redistribution, free/commercial service and AI/model export stay
+NOT_ESTABLISHED. No real GameplayRulesSnapshot, executable rules projection,
+Oracle parser, real Card semantics or simulation is implemented. See
+[artifact verification](GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md).
+
 ## Next implementation candidate — NOT AUTHORIZED
 
-**Owner-Supplied Comprehensive Rules Artifact Verification** is the recommended
-smallest prerequisite. Supply the exact designated TXT locally, verify its exact
-byte identity against the retained request, and perform an explicit source review.
-This closes an integrity/readiness gap; it does not establish source permissions
-or authorize a real rules projection.
+**Core Comprehensive Rules Projection — Foundational Rules Subset** is the
+recommended next candidate. Start with a small manually reviewed set of Magic
+Golden Rules and players/game/object/zone concepts, including explicit
+unknown-exception handling. Later mana/payment, timing/priority, casting/stack
+resolution and SBA projections remain separate bounded expansions. The source-use
+boundary and any structured projection require separate owner authorization.
 
-No real rules projection, Oracle parser, Card semantics intake, gameplay
-simulation, Deck/format legality, additional Tier A migration, Tier B audit
-support, SQL, protected snapshot, provider/Card acquisition, MB2 admission or
-source-policy clearance begins automatically. The next milestone requires
-separate owner authorization even if a future reviewed selection is complete.
+No source-body retention or redistribution, real rules projection, Oracle parsing,
+Card semantics intake, gameplay simulation, Deck/format legality, additional Tier A
+migration, Tier B audit support, SQL, protected snapshot, provider/Card acquisition,
+MB2 admission or source-policy clearance begins automatically.

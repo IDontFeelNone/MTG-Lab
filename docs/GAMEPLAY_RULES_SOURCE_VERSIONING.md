@@ -1,39 +1,43 @@
-# Current release discovery closure
+# Current artifact verification and readiness closure
 
-The source/evidence intake and versioning milestone below is merged in PR #183.
-The separately authorized [Official Gameplay Rules Release Discovery Closure](GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md)
-is implemented pending independent Project Manager inspection, based on canonical
-main `988ac4bc384da8e4b62f89790727c2e79373eea2`. Architecture v13 and Decision 017
-are unchanged. The original eight-file PR #183 package remains byte-identical;
-its failed ACCESS_UNAVAILABLE observation is preserved and is not a successful
-Codex fetch.
+The source/evidence system is merged in PR #183 and release discovery closure in
+PR #184. [Owner-Supplied Comprehensive Rules Artifact Verification](GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md)
+is implemented pending independent Project Manager inspection from canonical
+main `7342e20a2f38be43f517f4cfcca19e23da3c0e70`. Architecture v13 and Decision 017
+are unchanged. Both prior metadata packages remain byte-identical, including the
+original Codex ACCESS_UNAVAILABLE observation and separate PM-supplied observation.
 
-A separate PM_SUPPLIED_FIRST_PARTY_OBSERVATION, dated 2026-10-16, establishes
-VERIFIED_METADATA_ONLY designation as of that date: official DOCX/PDF/TXT,
-20260925 TXT/PDF filename family and the explicit September 25, 2026 effective
-date. Observed 701.71 Empower Jace matches the identified September 21 Reality
-Fracture bulletin change. At least that change is incorporated; the full bulletin
-diff is not verified. Codex did not independently fetch Wizards. Exact artifact
-URL/basename, SHA-256 and byte length remain unknown; no real body was supplied.
+The owner supplied the designated 20260925 TXT with explicit direct-download
+provenance. The existing offline verifier, request and profile were used unchanged:
+VERIFIED_EXPECTED_ARTIFACT, 977752 bytes, SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`,
+observed at the owner-supplied `2026-10-16T22:15:00-04:00` timestamp. The title,
+September 25, 2026 effective date, 701.71 and Empower Jace markers matched.
+No Wizards network request, source copy, source retention or RawSnapshotStore
+write occurred. Local byte verification does not authenticate Wizards origin;
+owner provenance and the prior PM first-party designation remain explicit.
 
-The reconciled package at
-`reference-reviews/gameplay-rules-release-discovery-closure/` binds the old review
-and adds only authored metadata. The explicit offline TXT verifier accepts an
-owner/operator file, checks bounded title/date/rule markers, emits exact byte
-length/SHA-256 and never copies or retains the body, invokes RawSnapshotStore or
-fetches a URL. Its immutable result remains projection_authorized=false.
-The existing evidence-registry licensing gates are unchanged.
+A new immutable source-correspondence review binds that result to the existing
+release candidate and dated designation, and the existing selector reproduces
+READY_FOR_RULE_PROJECTION. Currentness remains scoped to 2026-10-16; effective
+date remains 2026-09-25. The narrow Reality Fracture marker match remains true,
+while the full bulletin diff remains unverified. No timeless current selector,
+new logical rules release or source permission is created.
 
-Readiness is **NOT_READY_FOR_RULE_PROJECTION** with narrowed blocker
-`OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED`. Metadata-only designation does not become
-VERIFIED_ARTIFACT. All source-content permissions remain NOT_ESTABLISHED. A later
-successful local artifact verification plus the exact metadata bindings and
-explicit source review can close technical readiness; none authorizes projection,
-source retention, redistribution, service use or AI export.
+The append-only package is
+`reference-reviews/gameplay-rules-artifact-verification/`. It contains metadata
+JSON only. `projection_authorized=false`, `admission_eligible=false` and
+`source_policy_clearance=not_granted` remain fixed. Source-content private raw
+retention, redistribution, free/commercial service and AI/model export stay
+NOT_ESTABLISHED; existing evidence-registry licensing gates remain unchanged.
+No real GameplayRulesSnapshot, rule projection, Oracle parser, real Card semantics
+or simulation exists. No next milestone begins automatically.
 
-The next candidate is **Owner-Supplied Comprehensive Rules Artifact Verification
-— NOT AUTHORIZED**. No next milestone begins automatically. No real rules,
-Oracle parser, Card semantics or simulation is implemented by this evidence lane.
+**Core Comprehensive Rules Projection — Foundational Rules Subset — NOT AUTHORIZED**
+is the next candidate. Begin with a small manually reviewed set of Magic Golden
+Rules and players/game/object/zone concepts before expanding into real mana,
+priority, casting or SBA semantics. Any projection and its source-use boundary
+require separate owner authorization.
 
 ## Historical source/versioning milestone record
 

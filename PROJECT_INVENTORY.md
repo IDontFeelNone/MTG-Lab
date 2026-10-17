@@ -1,106 +1,105 @@
-# Current implementation inventory — Official Gameplay Rules Release Discovery Closure
+# Current implementation inventory — Comprehensive Rules Artifact Verification
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
-Stage 1 fictional read-only snapshot attachment is merged in PR #176.
-**V13 Stage 2 — Legacy/Public Snapshot Profile Review** is merged in PR #177.
-The **Legacy/Public Profile Permission and Closure Contract** is merged in PR #178;
-its **READY_FOR_NON_PRODUCTION_STAGE3** engineering recommendation was separately
-implemented as **V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile**,
-merged in PR #179. **V13 Tier A Card Intelligence & Acquisition Attachment
-Integration** is merged in PR #180. **V13 Functional-Role and Contextual-Comparison
-Attachment Integration** is merged in PR #181. **Gameplay Rules & Interaction
-Intelligence Foundation** is merged in PR #182. Reviewed canonical main:
-`988ac4bc384da8e4b62f89790727c2e79373eea2`.
-Architecture v12 remains the preserved historical baseline.
+Architecture v12 remains the preserved historical baseline. Reviewed canonical
+main: `7342e20a2f38be43f517f4cfcca19e23da3c0e70`; PR #184 is merged.
 
-## Current implementation and explicit limits
+## Current evidence closure and explicit limits
 
+**Owner-Supplied Comprehensive Rules Artifact Verification & Readiness Closure**
+is implemented as a review-only metadata milestone, pending independent Project
+Manager inspection. It uses the merged verifier unchanged. This fits Architecture
+v13 with no Tier-0 change and no Decision 017 modification.
+
+**Official Gameplay Rules Release Discovery Closure** is merged in PR #184;
 **Gameplay Rules Source/Evidence Intake & Versioning** is merged in PR #183.
-**Official Gameplay Rules Release Discovery Closure** is implemented as a
-review-only metadata reconciliation and offline verification handoff, pending
-independent Project Manager inspection. This separate owner authorization does
-not authorize real rules projection. It requires no Tier-0 change, Architecture
-v14 or Decision 017 modification.
+The original Codex `ACCESS_UNAVAILABLE` observation and its historical
+`CURRENT_RULES_RELEASE_NOT_VERIFIED` / `NOT_READY_FOR_RULE_PROJECTION` result
+remain unchanged. The PR #184 package is also byte-identical. Its distinct
+`PM_SUPPLIED_FIRST_PARTY_OBSERVATION` remains `VERIFIED_METADATA_ONLY` designation
+as of **2026-10-16**: DOCX/PDF/TXT, the `20260925` TXT/PDF family, and rules effective
+**September 25, 2026**. The identified `701.71` / Empower Jace Reality Fracture
+change is incorporated; the full bulletin diff is not verified. Codex did not
+independently fetch Wizards, and no new network review occurred.
 
-`src/gameplay_rules/source_evidence/` separates exact artifact bytes, source
-identity, first-party designation, effective/version metadata, reviewed lineage,
-selection scope and operation-specific permission. A rules index, Comprehensive
-Rules, update bulletin, release notes and explanatory blog are not interchangeable.
-Official Comprehensive Rules are the primary general-rules authority; unresolved
-later updates must not be ignored to make an older artifact appear current.
-No implicit latest/max-date/filename selection or live fallback is permitted.
+The owner separately supplied the exact local TXT and stated it came directly
+from the designated official link without intentional modification. The offline
+verifier reports `VERIFIED_EXPECTED_ARTIFACT`, UTF-8, **977752 bytes**, and SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`.
+The explicit retained operation timestamp is `2026-10-16T22:15:00-04:00`.
+Title, effective date, 701.71 and Empower Jace checks all pass. This is locally
+verified byte identity with owner-supplied provenance, not Wizards cryptographic
+authentication or independent Codex network verification. No source body or local
+absolute path enters the public package; no RawSnapshotStore is used.
 
-Evidence states distinguish VERIFIED_ARTIFACT, VERIFIED_METADATA_ONLY,
-DISCOVERED_UNVERIFIED, EVIDENCE_UNAVAILABLE, AMBIGUOUS, SUPERSEDED and CONFLICTING.
-Unknown permission stays unresolved. Existing provider/registry licensing gates
-are unchanged; review-only records are not admitted evidence or executable rules.
-No real source body, PDF, extracted Comprehensive Rules or Oracle corpus enters
-public fixtures or production canonical storage. Public CI uses fictional sources.
+The successful result plus a new explicit source-correspondence review closes
+`OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED`. Reproducing the existing selection yields
+**READY_FOR_RULE_PROJECTION**, still only for current designation observed as of
+2026-10-16 and effective release 2026-09-25. The same existing release candidate is
+bound to exact bytes; no new logical release or timeless current alias is created.
+`projection_authorized=false`, `admission_eligible=false`,
+`source_policy_clearance=not_granted` and `content_retained=false` remain fixed.
+Readiness does not authorize a structured rules projection.
 
-The original Codex network observation returned ACCESS_UNAVAILABLE and
-CURRENT_RULES_RELEASE_NOT_VERIFIED; its PR #183 package remains byte-identical.
-The new PM_SUPPLIED_FIRST_PARTY_OBSERVATION is explicitly external first-party
-review dated 2026-10-16, not a Codex fetch. It establishes VERIFIED_METADATA_ONLY
-current designation as of that date: DOCX/PDF/TXT, the 20260925 TXT/PDF family,
-and rules effective September 25, 2026. The observed 701.71 Empower Jace marker
-matches the September 21 Reality Fracture bulletin's identified new rule.
-At least that update is incorporated; the full bulletin diff is not verified.
-No origin HTTP status, exact TXT filename/URL, SHA-256 or byte length is invented.
+The append-only metadata package is
+`reference-reviews/gameplay-rules-artifact-verification/`. The source TXT remains
+external owner-controlled input and is never copied into the repository, data,
+fixtures, RawSnapshotStore or another evidence corpus.
+`src/gameplay_rules/source_evidence/` retains distinct artifact, source,
+observation, release, review, selection and operation-permission identities.
+The lane evaluates eight source-specific operations; source-content private
+retention, redistribution, free/commercial service and AI/model export remain
+**NOT_ESTABLISHED**. Existing licensing gates are unchanged.
 
-No real artifact was supplied. Readiness remains NOT_READY_FOR_RULE_PROJECTION,
-with the narrowed gate OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED. An explicit offline
-TXT verifier checks bounded title/date/701.71/Empower Jace markers and emits only
-SHA-256, byte count and metadata; it performs no network access, source-body copy,
-RawSnapshotStore write or automatic projection. Successful verification still
-requires an explicit source review. Its result always has content_retained=false
-and projection_authorized=false. The reconciled metadata package is separate at
-reference-reviews/gameplay-rules-release-discovery-closure/.
+**Gameplay Rules & Interaction Intelligence Foundation** is merged in PR #182.
+The `src/gameplay_rules/` fictional kernel remains unchanged:
+`GameplayRulesEngine.evaluate_action` distinguishes LEGAL, ILLEGAL, INDETERMINATE
+and UNSUPPORTED and executes only project-authored fictional rules/Card semantics.
+PRODUCT RULES and GAMEPLAY RULES remain separate; `src/simulation/` remains
+unimplemented. No real rules projection, Oracle parser, real Card gameplay
+semantics, format/deck legality, strategy or simulation is implemented here.
+Future serious gameplay simulation still requires reviewed executable rules semantics.
 
-The merged gameplay foundation remains unchanged: `src/gameplay_rules/` has
-immutable rules/state/action/semantics/result/transition contracts, and
-`GameplayRulesEngine.evaluate_action` checks without mutation. LEGAL, ILLEGAL,
-INDETERMINATE and UNSUPPORTED remain distinct. Only project-authored fictional
-rules/Card semantics execute. PRODUCT RULES and GAMEPLAY RULES are separate;
-`src/simulation/` remains unimplemented. No real rules projection, Oracle parser,
-Card semantic intake, full Magic rules, deck/format legality, strategy or simulation
-is implemented or authorized by a release-readiness result.
+The Tier A foundation is unchanged: Stage 1 is merged in PR #176;
+**V13 Stage 2 — Legacy/Public Snapshot Profile Review** is merged in PR #177;
+the **Legacy/Public Profile Permission and Closure Contract** is merged in PR #178.
+Its **READY_FOR_NON_PRODUCTION_STAGE3** recommendation was separately implemented
+as **V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile**, merged in PR #179.
+The `legacy-public-compatibility-v1` profile is implemented with the same exact
+Tier A both-root query identity. **V13 Tier A Card Intelligence & Acquisition Attachment Integration** is merged in PR #180; **V13 Functional-Role and Contextual-Comparison Attachment Integration** is merged in PR #181.
+`MechanicalCardIntelligence.from_attachment` → `FunctionalRolePilot.from_mechanical`
+→ `ContextualCardComparisonPilot.from_roles` and
+`CardAcquisitionAdapter.from_mechanical` share the same query. Mechanical evidence
+remains independent, roles remain `requires_review`/pending with zero approvals or KnowledgeFact writes, and comparison remains **ABSTAIN**, null selection.
+**Tier B Audit-Context Capability Design Review** remains **DEFERRED** absent a
+concrete consumer.
 
-The completed Tier A Card Intelligence vertical remains unchanged:
-`MechanicalCardIntelligence.from_attachment` ->
-`FunctionalRolePilot.from_mechanical` ->
-`ContextualCardComparisonPilot.from_roles`, with
-`CardAcquisitionAdapter.from_mechanical` and the same semantic/reasoning query.
-Mechanical evidence remains independent. The original role pilot stays
-`requires_review`/pending, with zero approvals or KnowledgeFact writes;
-comparison remains **ABSTAIN**, null selection. The
-`legacy-public-compatibility-v1` profile and its exact Tier A both-root query
-identity remain unchanged. **Tier B Audit-Context Capability Design Review** is
-still **DEFERRED** absent a concrete consumer.
+The production operator profile remains **BLOCKED**. All seven mixed-content
+operation permissions remain **NOT_ESTABLISHED**, with `production_eligible=false`,
+`approval_state=not_granted`, `source_policy_clearance=not_granted` and
+`data_processing_permission_established=false`. Catalog and rules evidence
+permissions remain separate; successful verification clears neither.
 
-The production operator profile remains **BLOCKED**. All seven existing
-mixed-content operation permission states remain **NOT_ESTABLISHED**. Its fixed
-flags stay `production_eligible=false`, `approval_state=not_granted`,
-`source_policy_clearance=not_granted` and
-`data_processing_permission_established=false`. The new review lane evaluates
-eight source-specific operations separately; it clears none merely by reviewing
-a source. Permission is never inherited from catalog, provider or Git history.
-
-The next candidate is **Owner-Supplied Comprehensive Rules Artifact Verification
-— NOT AUTHORIZED**. The exact designated TXT must be supplied locally to close
-artifact byte identity before real gameplay projection and serious gameplay
-simulation. No next milestone begins automatically.
+The recommended next candidate is **Core Comprehensive Rules Projection —
+Foundational Rules Subset — NOT AUTHORIZED**. Begin only with a manually reviewed,
+small explicit subset of Magic Golden Rules and players/game/object/zone concepts,
+including the unknown-exception boundary. Mana/payment, timing/priority,
+casting/stack-resolution and SBA expansion remain later bounded projections.
+No real source-body retention or redistribution is authorized by this recommendation.
+No next milestone begins automatically.
 
 MB2's 810 selected candidates and nine multiface holds remain pending and unadmitted.
-Owner spelling proposals remain unapplied; physical Printing verification stays
-unresolved. `SOURCE_POLICY_CLEARED_PLANS`, pending execution configuration,
-production canonical bytes, selected audits, SourceRecords, retained mechanical
-and role/context artifacts, writer/admission/OIDC and the historical Architecture-v12
-auxiliary fixture are unchanged. No owner admission decision or merge occurred.
+Owner spelling proposals remain unapplied and physical Printing verification stays
+unresolved. Canonical data, selected audits, SourceRecords, mechanical and
+role/context artifacts, markets, collections, MB2 pending execution configuration,
+`SOURCE_POLICY_CLEARED_PLANS`, writer/admission/OIDC and the historical v12
+auxiliary fixture remain unchanged. No merge or owner admission is performed.
 
-See [release discovery closure](docs/GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md),
-[source evidence and versioning](docs/GAMEPLAY_RULES_SOURCE_VERSIONING.md),
-[the merged fictional gameplay foundation](docs/GAMEPLAY_RULES_INTELLIGENCE.md),
-and [the unchanged permission closure](docs/V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md).
+See [artifact verification](docs/GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md),
+[release discovery history](docs/GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md),
+[source versioning](docs/GAMEPLAY_RULES_SOURCE_VERSIONING.md),
+[the fictional gameplay foundation](docs/GAMEPLAY_RULES_INTELLIGENCE.md),
+and [the unchanged catalog permission closure](docs/V13_LEGACY_PUBLIC_PERMISSION_CLOSURE.md).
 
 ---
 
