@@ -308,7 +308,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                 text = (ROOT / entry["path"]).read_bytes()
                 self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])
 
-    def test_current_status_separates_reviewed_artifact_readiness_and_unapproved_projection(self):
+    def test_current_status_separates_authorized_review_projection_from_execution_and_source_permissions(self):
         milestone = "V13 Stage 1 — Fictional Canonical Snapshot Attachment"
         for name in ("README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md",
                      "docs/SESSION_STATE.md", "docs/NEXT_TASK.md"):
@@ -373,8 +373,24 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                          "2026-10-16T22:15:00-04:00", "admission_eligible=false",
                          "source_policy_clearance=not_granted"):
                 self.assertIn(item, current, (name, item))
-            self.assertIn("Core Comprehensive Rules Projection", current, name)
-            self.assertIn("No real rules projection", current, name)
+            self.assertIn("Core Comprehensive Rules Projection — Foundational Rules Subset", current, name)
+            self.assertIn("structured **NON-EXECUTABLE** review projection", current, name)
+            allowlist = current.split("exactly **20** references:", 1)[1].split(". Parent references", 1)[0]
+            self.assertEqual(re.findall(r"`([0-9]+\.[0-9]+[a-z]?)`", allowlist), [
+                "101.1", "101.2", "101.2a", "101.3", "102.1", "102.2",
+                "108.1", "108.3", "108.4", "108.4a", "109.1", "109.3", "109.4",
+                "110.1", "110.2", "110.2a", "400.1", "400.2", "400.3", "400.7",
+            ], name)
+            self.assertIn("project-authored paraphrases", current, name)
+            self.assertIn("No official rule prose, source TXT", current, name)
+            self.assertIn("not retroactively authorized", current, name)
+            self.assertIn("No real `GameplayRulesSnapshot`", current, name)
+            for reference in ("104.3a", "111.2", "112.2", "113.10", "109.4a", "109.4g",
+                              "400.7a", "400.7k", "400.7m"):
+                self.assertIn("`" + reference + "`", current, (name, reference))
+            self.assertIn("remain unresolved", current, name)
+            self.assertIn("unprojected exceptions", current, name)
+            self.assertIn("NOT AUTHORIZED", current.split("The recommended next candidate is", 1)[1], name)
             self.assertIn("eight source-specific operations", current, name)
             self.assertIn("mechanical", current, name)
             self.assertIn("production operator profile remains **BLOCKED**", current, name)
@@ -400,16 +416,21 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         self.assertIn("## Official Gameplay Rules Release Discovery Closure", source_scope)
         closure_scope, artifact_scope = source_scope.split("## Official Gameplay Rules Release Discovery Closure", 1)[1].split(
             "## Owner-Supplied Comprehensive Rules Artifact Verification & Readiness Closure", 1)
+        artifact_scope, projection_scope = artifact_scope.split(
+            "## Core Comprehensive Rules Projection — Foundational Rules Subset", 1)
+        projection_scope = projection_scope.split("## Next implementation candidate", 1)[0]
         self.assertIn("Implementation status: merged in PR #184", closure_scope)
         self.assertIn("OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED", closure_scope)
         self.assertIn("PM_SUPPLIED_FIRST_PARTY_OBSERVATION", closure_scope)
-        self.assertIn("pending independent Project Manager inspection", artifact_scope)
+        self.assertIn("Implementation status: merged in PR #185", artifact_scope)
         self.assertRegex(artifact_scope, r"(?<!NOT_)READY_FOR_RULE_PROJECTION")
         self.assertIn("977752", artifact_scope)
         self.assertIn("8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca", artifact_scope)
         self.assertIn("projection_authorized=false", artifact_scope)
         self.assertIn("admission_eligible=false", artifact_scope)
         self.assertIn("source_policy_clearance=not_granted", artifact_scope)
+        self.assertIn("NON-EXECUTABLE", projection_scope)
+        self.assertIn("pending independent Project Manager inspection", projection_scope)
         self.assertIn("src/gameplay_rules/source_evidence/", scope)
         self.assertIn("Product Rules remain the unchanged Product/Pack/collation domain", scope)
         self.assertIn("Tier B Audit-Context Capability Design Review is deliberately **DEFERRED**", scope)

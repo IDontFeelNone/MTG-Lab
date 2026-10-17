@@ -1,15 +1,75 @@
-# Current implementation inventory — Comprehensive Rules Artifact Verification
+# Current implementation inventory — Foundational Comprehensive Rules Projection
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
 Architecture v12 remains the preserved historical baseline. Reviewed canonical
-main: `7342e20a2f38be43f517f4cfcca19e23da3c0e70`; PR #184 is merged.
+main: `54cd3c33875a949d9a06fb70c336f0b55fb5aef9`; PR #185 is merged.
 
-## Current evidence closure and explicit limits
+**Core Comprehensive Rules Projection — Foundational Rules Subset** is implemented
+as a structured **NON-EXECUTABLE** review projection, pending independent Project
+Manager inspection. The separately authorized scope is exactly **20** references:
+`101.1`, `101.2`, `101.2a`, `101.3`, `102.1`, `102.2`, `108.1`, `108.3`, `108.4`,
+`108.4a`, `109.1`, `109.3`, `109.4`, `110.1`, `110.2`, `110.2a`, `400.1`, `400.2`,
+`400.3`, `400.7`. Parent references do not implicitly select their children.
+
+The external owner-supplied TXT was required to reproduce the existing verifier's
+exact **977752-byte** source with SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`, effective
+**2026-09-25**. The verification result remains
+`sha256:6289f9e138c248f33b950842fd079f9dc9d4be431a9ac8dc1effb4a18ec502b3`;
+the correspondence review remains
+`sha256:7332e6517b1b28085bbee1fa76b8ecbc9cbe4148e261452449a308ba348d9def`.
+No new Wizards fetch or later currentness claim is made. The prior first-party
+designation remains observed as of 2026-10-16; no full bulletin diff is claimed.
+
+`src/gameplay_rules/projection/` supplies a separate immutable review contract,
+release-specific twenty-line locator and strict package/source verification.
+`reference-reviews/gameplay-rules-foundational-projection/` contains exactly
+`projection.json` and `manifest.json`: project-authored paraphrases, concepts,
+limitations, precise source anchors/span hashes and a dependency/exception graph.
+Offline integrity checks do not claim fresh source-span proof; source-aware
+verification requires access to the exact external TXT and recomputes all spans.
+
+`104.3a`, `111.2`, `112.2`, `113.10` and `407` remain unresolved. `109.4a`–`109.4g`
+and `400.7a`–`400.7k`, `400.7m` remain individually recorded unprojected exceptions.
+They do not add selected rules. The graph is not complete semantic closure, and
+its baseline control/zone-identity descriptions cannot become complete policies.
+
+The owner's bounded authorization permits transient source inspection and the
+retained authored projection/metadata only. No official rule prose, source TXT or
+absolute local source path enters the repository. Historical source, discovery
+and artifact-verification packages remain byte-identical with their original
+`projection_authorized=false` values; they are not retroactively authorized.
+`source_policy_clearance=not_granted` and `admission_eligible=false` remain fixed.
+Broader raw retention, redistribution, service use and AI/model export permission
+remain unestablished. Catalog and rules-source permissions remain separate.
+
+No real `GameplayRulesSnapshot`, real execution profile, engine change, fictional
+profile change, Oracle ingestion, real Card semantics, mana/payment,
+timing/priority, casting/stack-resolution, SBA expansion or simulation is added.
+No general/full Comprehensive Rules parser is introduced. Prior gameplay evidence
+and protected Card Acquisition identity
+`sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
+remain unchanged. Tier A, canonical catalog, pending intelligence artifacts,
+markets, collections, MB2 pending state, production permissions, licensing gates
+and writer/admission/OIDC behavior are preserved.
+
+The [projection contract and reproduction instructions](docs/GAMEPLAY_RULES_FOUNDATIONAL_PROJECTION.md)
+describe review scope, exact anchoring, graph boundaries and both verification
+modes. The [artifact-verification history](docs/GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md)
+remains the source-byte/provenance record. Actual full regression, publication and
+exact-head hosted-check results belong to this milestone's draft PR review record.
+
+Stop after **one draft PR** for independent review. Do not merge or start the next
+milestone. The recommended next candidate is **Foundational Dependency and
+Exception Coverage Review — NOT AUTHORIZED**, requiring a separately approved
+exact allowlist and source-use boundary. No implementation follows automatically.
+
+## Preserved evidence lineage and operational boundaries
 
 **Owner-Supplied Comprehensive Rules Artifact Verification & Readiness Closure**
-is implemented as a review-only metadata milestone, pending independent Project
-Manager inspection. It uses the merged verifier unchanged. This fits Architecture
-v13 with no Tier-0 change and no Decision 017 modification.
+is merged in PR #185 as a review-only metadata milestone. Its verifier and retained
+package are unchanged. This fits Architecture v13 with no Tier-0 change and no
+Decision 017 modification.
 
 **Official Gameplay Rules Release Discovery Closure** is merged in PR #184;
 **Gameplay Rules Source/Evidence Intake & Versioning** is merged in PR #183.
@@ -32,14 +92,15 @@ verified byte identity with owner-supplied provenance, not Wizards cryptographic
 authentication or independent Codex network verification. No source body or local
 absolute path enters the public package; no RawSnapshotStore is used.
 
-The successful result plus a new explicit source-correspondence review closes
+The successful result plus its explicit source-correspondence review closes
 `OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED`. Reproducing the existing selection yields
 **READY_FOR_RULE_PROJECTION**, still only for current designation observed as of
 2026-10-16 and effective release 2026-09-25. The same existing release candidate is
 bound to exact bytes; no new logical release or timeless current alias is created.
-`projection_authorized=false`, `admission_eligible=false`,
-`source_policy_clearance=not_granted` and `content_retained=false` remain fixed.
-Readiness does not authorize a structured rules projection.
+In that historical metadata package, `projection_authorized=false`,
+`admission_eligible=false`, `source_policy_clearance=not_granted` and
+`content_retained=false` remain fixed. That readiness alone did not authorize a
+structured rules projection; the present bounded task supplies separate authority.
 
 The append-only metadata package is
 `reference-reviews/gameplay-rules-artifact-verification/`. The source TXT remains
@@ -56,8 +117,8 @@ The `src/gameplay_rules/` fictional kernel remains unchanged:
 `GameplayRulesEngine.evaluate_action` distinguishes LEGAL, ILLEGAL, INDETERMINATE
 and UNSUPPORTED and executes only project-authored fictional rules/Card semantics.
 PRODUCT RULES and GAMEPLAY RULES remain separate; `src/simulation/` remains
-unimplemented. No real rules projection, Oracle parser, real Card gameplay
-semantics, format/deck legality, strategy or simulation is implemented here.
+unimplemented. The current projection adds no executable rules, Oracle parser,
+real Card gameplay semantics, format/deck legality, strategy or simulation.
 Future serious gameplay simulation still requires reviewed executable rules semantics.
 
 The Tier A foundation is unchanged: Stage 1 is merged in PR #176;
@@ -79,14 +140,6 @@ operation permissions remain **NOT_ESTABLISHED**, with `production_eligible=fals
 `approval_state=not_granted`, `source_policy_clearance=not_granted` and
 `data_processing_permission_established=false`. Catalog and rules evidence
 permissions remain separate; successful verification clears neither.
-
-The recommended next candidate is **Core Comprehensive Rules Projection —
-Foundational Rules Subset — NOT AUTHORIZED**. Begin only with a manually reviewed,
-small explicit subset of Magic Golden Rules and players/game/object/zone concepts,
-including the unknown-exception boundary. Mana/payment, timing/priority,
-casting/stack-resolution and SBA expansion remain later bounded projections.
-No real source-body retention or redistribution is authorized by this recommendation.
-No next milestone begins automatically.
 
 MB2's 810 selected candidates and nine multiface holds remain pending and unadmitted.
 Owner spelling proposals remain unapplied and physical Printing verification stays

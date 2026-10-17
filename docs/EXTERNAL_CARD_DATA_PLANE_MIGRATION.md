@@ -297,8 +297,8 @@ NOT_ESTABLISHED and existing evidence/registry gates remain unchanged. See
 
 ## Owner-Supplied Comprehensive Rules Artifact Verification & Readiness Closure
 
-**Implementation status: metadata-only verification and explicit review implemented,
-pending independent Project Manager inspection.** This separately owner-authorized
+**Implementation status: merged in PR #185.** The retained metadata-only
+verification and explicit review preserve their original authority boundary. This separately owner-authorized
 milestone starts from canonical main
 `7342e20a2f38be43f517f4cfcca19e23da3c0e70`. It leaves Architecture v13, Decision
 017, the existing local verifier and the fictional gameplay kernel unchanged.
@@ -326,16 +326,61 @@ NOT_ESTABLISHED. No real GameplayRulesSnapshot, executable rules projection,
 Oracle parser, real Card semantics or simulation is implemented. See
 [artifact verification](GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md).
 
+## Core Comprehensive Rules Projection — Foundational Rules Subset
+
+**Implementation status: structured NON-EXECUTABLE projection implemented, pending
+independent Project Manager inspection.** The owner separately authorized this
+bounded milestone after PR #185 merged, from canonical main
+`54cd3c33875a949d9a06fb70c336f0b55fb5aef9`. It fits Architecture v13 with no
+Tier-0 change, Decision 017 change, catalog profile change or fictional kernel
+change.
+
+The exact external owner-supplied TXT reproduces the existing verifier's required
+SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca` and
+977752 bytes, effective 2026-09-25. Existing verification and correspondence
+identities are preserved. No Wizards fetch, substitute source or later-currentness
+claim is introduced. Prior source/versioning, release-discovery and
+artifact-verification packages remain byte-identical; their historical
+`projection_authorized=false` flags are not rewritten.
+
+`src/gameplay_rules/projection/` supplies a separate immutable review contract and
+a release-specific locator for exactly twenty selected references:
+`101.1`, `101.2`, `101.2a`, `101.3`, `102.1`, `102.2`, `108.1`, `108.3`, `108.4`,
+`108.4a`, `109.1`, `109.3`, `109.4`, `110.1`, `110.2`, `110.2a`, `400.1`, `400.2`,
+`400.3`, `400.7`. The two-file review package contains project-authored
+paraphrases, concept labels, limitations, source anchors/span hashes and a
+local dependency/exception graph. Each span covers its exact original physical
+rule line including the marker, excluding the line terminator and child lines;
+byte offsets are zero-based start-inclusive/end-exclusive, with a one-based line
+number. Offline package integrity does not assert access to source bytes;
+source-aware verification requires the exact external TXT and recomputes all spans.
+
+`104.3a`, `111.2`, `112.2`, `113.10` and `407` remain unresolved. `109.4a`–`109.4g`
+and `400.7a`–`400.7k`, `400.7m` remain individually retained unprojected exceptions.
+These graph placeholders contain no rule prose or paraphrases and do not increase
+the selected count. The projection does not claim complete dependency closure.
+
+The bounded owner authorization permits transient source inspection and authored
+projection/metadata only. No official rule prose, source TXT or local source path
+is retained. `source_policy_clearance=not_granted` and `admission_eligible=false`
+remain fixed; broader raw retention, redistribution, service use and AI/model
+export permissions remain unestablished. No real GameplayRulesSnapshot, real
+execution profile, GameplayRulesEngine or fictional-profile modification, Oracle
+ingestion, real Card semantics, mana/timing/casting/SBA expansion, simulation or
+general/full Comprehensive Rules parser is introduced. Prior gameplay evidence
+and protected Card Acquisition identity remain unchanged. See
+[the exact scope, anchoring and reproduction contract](GAMEPLAY_RULES_FOUNDATIONAL_PROJECTION.md).
+
 ## Next implementation candidate — NOT AUTHORIZED
 
-**Core Comprehensive Rules Projection — Foundational Rules Subset** is the
-recommended next candidate. Start with a small manually reviewed set of Magic
-Golden Rules and players/game/object/zone concepts, including explicit
-unknown-exception handling. Later mana/payment, timing/priority, casting/stack
-resolution and SBA projections remain separate bounded expansions. The source-use
-boundary and any structured projection require separate owner authorization.
+**Foundational Dependency and Exception Coverage Review** is a possible next
+candidate. Any selected unresolved reference or exception requires a separately
+approved exact allowlist and source-use boundary. Existing placeholders remain
+unresolved/unprojected until then. Later mana/payment, timing/priority,
+casting/stack-resolution and SBA projections remain separate bounded expansions.
 
-No source-body retention or redistribution, real rules projection, Oracle parsing,
-Card semantics intake, gameplay simulation, Deck/format legality, additional Tier A
-migration, Tier B audit support, SQL, protected snapshot, provider/Card acquisition,
-MB2 admission or source-policy clearance begins automatically.
+This milestone ends with one draft PR for independent review. No merge, broader
+source retention or redistribution, executable integration, Oracle/Card semantics
+intake, simulation, Deck/format legality, additional Tier A migration, Tier B audit
+support, SQL, protected snapshot, provider/Card acquisition, MB2 admission or
+source-policy clearance begins automatically.

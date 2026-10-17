@@ -1,3 +1,11 @@
+# Core Comprehensive Rules Projection — Foundational Rules Subset (2026-10-17)
+
+- Reconcile exact canonical main `54cd3c33875a949d9a06fb70c336f0b55fb5aef9` after merged PR #185 and reproduce the existing owner-supplied artifact verifier against the external exact 977752-byte TXT.
+- Add a separate immutable NON-EXECUTABLE projection of exactly twenty authorized references, with project-authored paraphrases, source-line byte anchors/hashes, explicit limitations and a dependency/exception graph.
+- Preserve unresolved references and all specified unprojected exceptions; add strict two-file package integrity verification and optional exact-source span reproduction without retaining official prose or source paths.
+- Preserve prior gameplay packages and protected Card Acquisition identity; leave the fictional engine/profile, real snapshots/profiles, Oracle/Card semantics, canonical state, source permissions and Architecture v13 unchanged. Add focused regression coverage and update current review/reproduction documentation.
+- End with one draft PR for independent review. No merge or next milestone is automatic; actual full regression and publication results are recorded with the milestone PR.
+
 # Contextual Card Comparison — bounded pending-evidence pilot (2026-10-12)
 
 - Verify merged PR #167 at `4d15582d6ed364f012e853c1fdb2312e54ea7c60`; preserve Architecture v12 and all prior production/review evidence.

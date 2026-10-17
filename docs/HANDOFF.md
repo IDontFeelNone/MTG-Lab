@@ -1,3 +1,77 @@
+# Current handoff — Foundational Comprehensive Rules Projection
+
+**Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
+Architecture v12 remains the preserved historical baseline. Reviewed canonical
+main: `54cd3c33875a949d9a06fb70c336f0b55fb5aef9`; PR #185 is merged.
+
+**Core Comprehensive Rules Projection — Foundational Rules Subset** is implemented
+as a structured **NON-EXECUTABLE** review projection, pending independent Project
+Manager inspection. The separately authorized scope is exactly **20** references:
+`101.1`, `101.2`, `101.2a`, `101.3`, `102.1`, `102.2`, `108.1`, `108.3`, `108.4`,
+`108.4a`, `109.1`, `109.3`, `109.4`, `110.1`, `110.2`, `110.2a`, `400.1`, `400.2`,
+`400.3`, `400.7`. Parent references do not implicitly select their children.
+
+The external owner-supplied TXT was required to reproduce the existing verifier's
+exact **977752-byte** source with SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`, effective
+**2026-09-25**. The verification result remains
+`sha256:6289f9e138c248f33b950842fd079f9dc9d4be431a9ac8dc1effb4a18ec502b3`;
+the correspondence review remains
+`sha256:7332e6517b1b28085bbee1fa76b8ecbc9cbe4148e261452449a308ba348d9def`.
+No new Wizards fetch or later currentness claim is made. The prior first-party
+designation remains observed as of 2026-10-16; no full bulletin diff is claimed.
+
+`src/gameplay_rules/projection/` supplies a separate immutable review contract,
+release-specific twenty-line locator and strict package/source verification.
+`reference-reviews/gameplay-rules-foundational-projection/` contains exactly
+`projection.json` and `manifest.json`: project-authored paraphrases, concepts,
+limitations, precise source anchors/span hashes and a dependency/exception graph.
+Offline integrity checks do not claim fresh source-span proof; source-aware
+verification requires access to the exact external TXT and recomputes all spans.
+
+`104.3a`, `111.2`, `112.2`, `113.10` and `407` remain unresolved. `109.4a`–`109.4g`
+and `400.7a`–`400.7k`, `400.7m` remain individually recorded unprojected exceptions.
+They do not add selected rules. The graph is not complete semantic closure, and
+its baseline control/zone-identity descriptions cannot become complete policies.
+
+The owner's bounded authorization permits transient source inspection and the
+retained authored projection/metadata only. No official rule prose, source TXT or
+absolute local source path enters the repository. Historical source, discovery
+and artifact-verification packages remain byte-identical with their original
+`projection_authorized=false` values; they are not retroactively authorized.
+`source_policy_clearance=not_granted` and `admission_eligible=false` remain fixed.
+Broader raw retention, redistribution, service use and AI/model export permission
+remain unestablished. Catalog and rules-source permissions remain separate.
+
+No real `GameplayRulesSnapshot`, real execution profile, engine change, fictional
+profile change, Oracle ingestion, real Card semantics, mana/payment,
+timing/priority, casting/stack-resolution, SBA expansion or simulation is added.
+No general/full Comprehensive Rules parser is introduced. Prior gameplay evidence
+and protected Card Acquisition identity
+`sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
+remain unchanged. Tier A, canonical catalog, pending intelligence artifacts,
+markets, collections, MB2 pending state, production permissions, licensing gates
+and writer/admission/OIDC behavior are preserved.
+
+The [projection contract and reproduction instructions](GAMEPLAY_RULES_FOUNDATIONAL_PROJECTION.md)
+describe review scope, exact anchoring, graph boundaries and both verification
+modes. The [artifact-verification history](GAMEPLAY_RULES_ARTIFACT_VERIFICATION.md)
+remains the source-byte/provenance record. Actual full regression, publication and
+exact-head hosted-check results belong to this milestone's draft PR review record.
+
+Stop after **one draft PR** for independent review. Do not merge or start the next
+milestone. The recommended next candidate is **Foundational Dependency and
+Exception Coverage Review — NOT AUTHORIZED**, requiring a separately approved
+exact allowlist and source-use boundary. No implementation follows automatically.
+
+---
+
+## Historical handoff boundary
+
+Earlier milestone bodies below preserve their original baselines, review states,
+authorizations and environment observations. Their “current” headings and next
+steps are historical; the present handoff above governs this milestone.
+
 # Current milestone — collection audit and organization pilot
 
 Canonical main independently verified: `15e19b84701dd47970a948485683f73a687be9d2` (merged GitHub PR #169, including acquisition reconstruction repair). Architecture v12 remains frozen. PR numbers are independent of project phases; no new phase number is assigned.
