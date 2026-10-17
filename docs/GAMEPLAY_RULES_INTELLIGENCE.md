@@ -1,50 +1,66 @@
-# Current Gameplay Rules review and execution-profile design boundary
+# Current Gameplay Rules dependency projection boundary
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**
-Canonical main and branch base:
-`90ce520be8b0319111ca74fdb385b01de522523a`; PR #186 is merged.
+Canonical main and branch base: `71652074fe5640d5b2cb4780c63f6b8bab5642d6`; PR #187 is merged.
 
-**Foundational Projection Review & Real Execution Profile Design** adds a separate
-immutable review/design layer over exactly **20** merged projected rules. The
-original package ID remains
-`sha256:22740145cf0ec457e0b297eba5ebed3d58054b6d16179bdd738a4f5ccc5463ea`;
-projection ID remains
-`sha256:98bfd574c774a48aaaab4753eb8eb864dc7242effa011568f2ebf59c6a9ce6f7`.
-The package bytes, anchors and original `IMPLEMENTED_PENDING_REVIEW` status are
-unchanged. The new review is `REVIEWED_FOR_EXECUTION_DESIGN`, which is not
-execution approval. Owner execution approval remains `NOT_GRANTED` and
-`execution_authorized=false`.
+**Direct Foundational Comprehensive Rules Dependency Projection** adds exactly
+**12** structured, source-anchored, **NON-EXECUTABLE** records in a separate
+append-only package at
+`reference-reviews/gameplay-rules-foundational-dependencies/`. The exact scope is
+`104.3a`, `111.2`, `112.2`, `112.2a`, `113.10`, `113.10a`, `113.10b`, `113.10c`,
+`407.1`, `407.2`, `407.3`, `407.4`. No additional real rule is projected.
+Milestone status is `DIRECT_FOUNDATIONAL_DEPENDENCIES_PROJECTED`; the records
+remain `PROJECTED_FOR_REVIEW`, with `execution_authorized=false`.
 
-The versioned target `magic-comprehensive-rules-20260925-v1` is **DESIGN ONLY / NOT
-EXECUTABLE**, pinned to source release **2026-09-25**. Overall execution readiness
-is **BLOCKED / REAL_EXECUTION_PROFILE_NOT_READY**. Unresolved `104.3a`, `111.2`,
-`112.2`, `113.10` and `407`, open `109.4a`–`109.4g` and `400.7a`–`400.7k`,
-`400.7m` exception families, absent real primitives and absent owner activation
-prevent promotion. Partial state/vocabulary candidates do not become executable.
-`108.1` remains reference authority only. No implicit current/latest profile is
-allowed.
+All five original unresolved targets (`104.3a`, `111.2`, `112.2`, `113.10`, `407`)
+are now `DIRECT_REFERENCE_RESOLVED` by selected evidence; section `407` is
+represented by its four selected rules. Direct resolution leaves
+`SEMANTIC_CLOSURE_OPEN` and `EXECUTION_BLOCKED`. The new `113.10c` dependency
+`613` is **UNRESOLVED and UNPROJECTED**. Ante remains an unsupported variant;
+tournament/deck policy is separate external authority, with no policy ingestion,
+deck-legality implementation or legal conclusion.
 
-[The real-profile design](GAMEPLAY_RULES_REAL_EXECUTION_PROFILE_DESIGN.md) documents per-rule review,
-capability coverage, deterministic dependency/exception and activation gates,
-future snapshot/proof/replay contracts, and the six-file retained package at
-`reference-reviews/gameplay-rules-execution-profile-design/`. It reproduces from
-retained metadata without the external TXT, new rule prose or a network fetch.
+The read-only composite binds **20 original + 12 new = 32** source units while
+preserving distinct projection/package identities. The original projection ID
+`sha256:98bfd574c774a48aaaab4753eb8eb864dc7242effa011568f2ebf59c6a9ce6f7`
+and package ID
+`sha256:22740145cf0ec457e0b297eba5ebed3d58054b6d16179bdd738a4f5ccc5463ea`
+remain unchanged. The PR #187 execution-design package
+`sha256:f20d51ee190b4b23789208d0ae4bfa092d72aa23086fb01251d67b324ddb0687`
+is byte-identical; the new reassessment is append-only.
+
+The target `magic-comprehensive-rules-20260925-v1` remains **DESIGN ONLY / NOT
+EXECUTABLE**, with **BLOCKED / REAL_EXECUTION_PROFILE_NOT_READY**. Direct blockers
+for `101.1`, `101.2`/`101.2a`, `108.3`, `108.4` and `110.2` are reassessed, not
+promoted to execution. `109.4a`–`109.4g` and `400.7a`–`400.7k`, `400.7m` remain
+unprojected; complete semantic closure, real primitives, Card/effect semantics,
+deterministic real-runtime vectors and owner activation remain absent.
+
+[The dependency projection and closure review](GAMEPLAY_RULES_FOUNDATIONAL_DEPENDENCIES.md)
+document exact artifact/anchor checks, direct versus execution closure, policy
+boundaries, deferred-family rationale and composite coverage. The owner-supplied
+**977752-byte**, **2026-09-25** TXT remains external; no source prose, TXT or
+source excerpt is retained, and no Wizards fetch is used. Source-policy clearance remains
+`not_granted`; private retention, redistribution, free/commercial service and AI
+export remain `NOT_ESTABLISHED`.
+
 `GameplayRulesEngine`, `GameplayRulesSnapshot`, `gameplay-kernel-v1`,
 `fictional-two-player-v1` and fictional behavior remain unchanged. No real
-snapshot, runtime activation, projection-to-engine conversion, Oracle ingestion,
-real Card semantics, mana/priority/casting/SBA or simulation is introduced.
+snapshot, real runtime primitive, profile activation, Oracle/Card semantics,
+mana/priority/casting/layers/SBA implementation or simulation is added. Product
+Rules, Tier A, Card Intelligence, canonical catalog, MB2,
+`SOURCE_POLICY_CLEARED_PLANS`, writer/admission and historical Card Acquisition
+identity `sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
+remain unchanged. No Architecture v14 or Decision 017 change is required.
 
-Source-policy clearance remains `not_granted`; private retention,
-redistribution, free/commercial service and AI export remain `NOT_ESTABLISHED`.
-All prior gameplay evidence and protected Card Acquisition identity
-`sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
-remain unchanged. Product Rules, Tier A, Card Intelligence, catalog, MB2,
-`SOURCE_POLICY_CLEARED_PLANS` and writer/admission/OIDC remain unchanged. The
-preserved operational and evidence lineage below remains applicable.
-
-Recommend one next candidate: **Foundational Dependency & Exception Projection —
-NOT AUTHORIZED**, requiring a later exact allowlist and source-use boundary.
-Stop after one draft PR for PM review; do not merge or begin the next milestone.
+Recommend one next candidate: **Object-Control Exception Family Projection —
+NOT AUTHORIZED**. Retained evidence identifies seven `109.4` exceptions blocking
+control, compared with twelve `400.7` exceptions; `613` lacks a reviewed bounded
+scope, and complete semantic closure does not yet justify primitive contracts.
+Stop after one draft PR for independent PM review; do not merge, activate real
+rules or begin another milestone. Historical milestone bodies below preserve
+their original identities, findings and authorization context; the current
+dependency projection and reassessment boundary is stated above.
 
 ## Historical rules evidence / foundational projection boundary
 

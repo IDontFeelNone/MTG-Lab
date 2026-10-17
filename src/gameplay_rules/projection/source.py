@@ -79,10 +79,10 @@ def _verified_bytes(artifact_path, *, artifact_review_root, source_root, discove
     return data
 
 
-def _locate_anchors(data):
+def _locate_anchors(data, *, references=SELECTED_REFERENCES):
     """Locate only the immutable allowlist; no other rule body is extracted."""
     patterns = {reference: re.compile(rb"^" + re.escape(reference.encode("ascii")) + rb"\.?[ \t]+")
-                for reference in SELECTED_REFERENCES}
+                for reference in references}
     anchors = {}
     offset = 0
     for line_number, physical_line in enumerate(data.splitlines(keepends=True), 1):
@@ -99,9 +99,9 @@ def _locate_anchors(data):
                     "span_policy": "EXACT_RULE_LINE_EXCLUDING_LINE_TERMINATOR",
                 }
         offset += len(physical_line)
-    if set(anchors) != set(SELECTED_REFERENCES):
+    if set(anchors) != set(references):
         _fail("selected rule line missing")
-    return [anchors[reference] for reference in SELECTED_REFERENCES]
+    return [anchors[reference] for reference in references]
 
 
 def build_projection(artifact_path, *, artifact_review_root, source_root, discovery_root):
