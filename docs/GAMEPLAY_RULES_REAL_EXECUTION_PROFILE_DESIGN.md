@@ -1,3 +1,59 @@
+# Current dependency-projection reassessment overlay
+
+**Architecture v13 — ACTIVE APPROVED. Decision 017 is Accepted and unchanged.**
+Canonical main and branch base: `71652074fe5640d5b2cb4780c63f6b8bab5642d6`; PR #187 is merged.
+
+The separately authorized
+[Direct Foundational Dependency Projection](GAMEPLAY_RULES_FOUNDATIONAL_DEPENDENCIES.md)
+adds exactly twelve non-executable records and an append-only reassessment at
+`reference-reviews/gameplay-rules-foundational-dependencies/`. The original
+execution-design package
+`sha256:f20d51ee190b4b23789208d0ae4bfa092d72aa23086fb01251d67b324ddb0687`
+and projection-review identity
+`sha256:f1b57c6465e5a9dfcb96ec241e5e83d12cbbdd1d5b47546090c4d8ac44a2b104`
+remain byte-identical; the historical design body below is preserved.
+
+The original direct unresolved targets `104.3a`, `111.2`, `112.2`, `113.10` and
+`407` are now represented by selected projection evidence. The reassessment
+updates direct dependency findings for `101.1`, `101.2`/`101.2a`, `108.3`, `108.4`
+and `110.2` without treating `DIRECT_REFERENCE_RESOLVED` as
+`SEMANTICALLY_CLOSED_FOR_EXECUTION`. Rule `113.10c` explicitly leaves `613`
+UNRESOLVED and UNPROJECTED. Ante is an unsupported execution variant;
+tournament/deck policy remains a separate external authority with no policy
+ingestion or deck-legality engine.
+
+The read-only composite covers **32** source units from two distinct projections
+(**20 + 12**). Original source anchors, original projection identity
+`sha256:98bfd574c774a48aaaab4753eb8eb864dc7242effa011568f2ebf59c6a9ce6f7`
+and original package
+`sha256:22740145cf0ec457e0b297eba5ebed3d58054b6d16179bdd738a4f5ccc5463ea`
+remain unchanged. `109.4a`–`109.4g` and `400.7a`–`400.7k`, `400.7m` remain
+unprojected; their dependencies are not inspected in this milestone.
+
+The target `magic-comprehensive-rules-20260925-v1` remains **DESIGN_ONLY / NOT
+EXECUTABLE** and **BLOCKED / REAL_EXECUTION_PROFILE_NOT_READY**.
+`execution_authorized=false` remains fixed. Unknown complete semantic closure,
+open exception families, absent real primitives, absent Card/effect semantics,
+absent deterministic real-runtime vectors and absent owner activation still
+prevent execution. `GameplayRulesEngine`, `GameplayRulesSnapshot`, both runtime
+constants and the fictional profile/behavior remain unchanged. No real snapshot,
+projection-to-engine path, Oracle/Card semantics, mana/priority/casting/layers/SBA
+or simulation is introduced. Source-policy clearance remains `not_granted`; all
+five broader source-content permission dimensions remain `NOT_ESTABLISHED`.
+
+Recommend one next candidate: **Object-Control Exception Family Projection —
+NOT AUTHORIZED**. The retained capability matrix still ties control to seven
+unprojected `109.4` exceptions; the twelve-rule `400.7` family is larger, `613`
+lacks a reviewed bounded scope, and complete semantic closure does not justify
+primitive contracts yet. No next milestone is started.
+
+## Historical merged PR #187 execution-design milestone record
+
+The following retains the merged design's original twenty-rule scope, source
+requirements, unresolved-reference findings and next-candidate recommendation.
+The current dependency evidence and readiness changes are stated above and in
+the separate reassessment; they do not rewrite the historical design package.
+
 # Foundational Projection Review & Real Execution Profile Design
 
 ## Scope, result and Architecture v13

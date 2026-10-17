@@ -41,10 +41,19 @@ PROTECTED_GROUPS = {
          "src/gameplay_rules/snapshots.py", "tests/gameplay_rules_fixture.py",
          "tests/fixtures/gameplay_rules"),
         15, "bd8c79afcd39ff0256cc6dd536b3b6785cd9e1f25a2953a42c52391477f006af"),
+    # Pin the original module inventory explicitly: the separately authorized
+    # dependency milestone adds projection modules and generalizes only the
+    # source locator's fixed-allowlist parameter. Retained packages stay pinned
+    # independently below; newly added modules have their own boundary tests.
     "projection_and_source_evidence_code": (
-        ("src/gameplay_rules/projection", "src/gameplay_rules/source_evidence",
+        ("src/gameplay_rules/projection/__init__.py",
+         "src/gameplay_rules/projection/__main__.py",
+         "src/gameplay_rules/projection/contracts.py",
+         "src/gameplay_rules/projection/package.py",
+         "src/gameplay_rules/projection/scope.py",
+         "src/gameplay_rules/projection/source.py", "src/gameplay_rules/source_evidence",
          "tests/gameplay_rules_source_fixture.py"),
-        17, "79fd3b987d615c42fbd1984bcb427d1ff5e0acc1c76eaea8f362e2be53fa4784"),
+        17, "462ab6a5cb1be58ec3e3cc4af73dfa6008f8893c62a2f0af7d9f4e32541e99e1"),
     "product_rules": (
         ("src/repository/rules.py", "src/decisions/rules.py"),
         2, "d1b0447582e4c97d3ec2ae1f74881a755d7d725b7298a7545ff650da0bbc94f6"),
