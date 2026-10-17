@@ -308,7 +308,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
                 text = (ROOT / entry["path"]).read_bytes()
                 self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])
 
-    def test_current_status_separates_rules_source_review_and_unapproved_projection(self):
+    def test_current_status_separates_discovery_closure_and_unapproved_projection(self):
         milestone = "V13 Stage 1 — Fictional Canonical Snapshot Attachment"
         for name in ("README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md",
                      "docs/SESSION_STATE.md", "docs/NEXT_TASK.md"):
@@ -325,6 +325,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("merged in PR #180", current, name)
             self.assertIn("merged in PR #181", current, name)
             self.assertIn("merged in PR #182", current, name)
+            self.assertIn("merged in PR #183", current, name)
             self.assertIn("pending independent Project Manager inspection", current, name)
             self.assertIn("READY_FOR_NON_PRODUCTION_STAGE3", current, name)
             self.assertIn("V13 Stage 3 — Legacy/Public Compatibility Snapshot Profile", current, name)
@@ -359,6 +360,13 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
             self.assertIn("src/gameplay_rules/source_evidence/", current, name)
             self.assertIn("review-only", current, name)
             self.assertIn("Official Gameplay Rules Release Discovery Closure", current, name)
+            for item in ("PM_SUPPLIED_FIRST_PARTY_OBSERVATION", "2026-10-16",
+                         "VERIFIED_METADATA_ONLY", "20260925", "September 25, 2026",
+                         "701.71", "Empower Jace", "ACCESS_UNAVAILABLE",
+                         "OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED", "offline",
+                         "content_retained=false", "projection_authorized=false",
+                         "Owner-Supplied Comprehensive Rules Artifact Verification"):
+                self.assertIn(item, current, (name, item))
             self.assertIn("No real rules projection", current, name)
             self.assertIn("eight source-specific operations", current, name)
             self.assertIn("mechanical", current, name)
@@ -380,7 +388,14 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         self.assertIn("## Gameplay Rules & Interaction Intelligence Foundation", scope)
         self.assertIn("Implementation status: merged in PR #182", scope)
         self.assertIn("## Gameplay Rules Source/Evidence Intake & Versioning", scope)
-        self.assertIn("Implementation status: implemented as a review-only lane, pending independent", scope)
+        source_scope = scope.split("## Gameplay Rules Source/Evidence Intake & Versioning", 1)[1]
+        self.assertIn("Implementation status: merged in PR #183", source_scope)
+        self.assertIn("## Official Gameplay Rules Release Discovery Closure", source_scope)
+        closure_scope = source_scope.split("## Official Gameplay Rules Release Discovery Closure", 1)[1]
+        self.assertIn("pending independent", closure_scope)
+        self.assertIn("OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED", closure_scope)
+        self.assertIn("PM_SUPPLIED_FIRST_PARTY_OBSERVATION", closure_scope)
+        self.assertIn("Owner-Supplied Comprehensive Rules Artifact Verification", closure_scope)
         self.assertIn("src/gameplay_rules/source_evidence/", scope)
         self.assertIn("Product Rules remain the unchanged Product/Pack/collation domain", scope)
         self.assertIn("Tier B Audit-Context Capability Design Review is deliberately **DEFERRED**", scope)

@@ -1,14 +1,29 @@
-# Current source/evidence milestone
+# Current rules evidence / release discovery boundary
 
 The Gameplay Rules & Interaction Intelligence Foundation below is merged in
-PR #182 at canonical main `65f209032dfed80735146a01531c87d0d0b0861b`.
-The separately authorized [Gameplay Rules Source/Evidence Intake & Versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md)
-adds a non-admissible review lane for source/version/designation/lineage and
-operation-specific permissions. It does not modify the fictional kernel, make
-real rules executable, clear permissions or authorize rules projection.
-Current release-readiness and exact source findings belong to that new review
-package. Historical unavailable-source attempts below remain historical facts;
-they are not silently refreshed or promoted into current verification.
+PR #182. [Gameplay Rules Source/Evidence Intake & Versioning](GAMEPLAY_RULES_SOURCE_VERSIONING.md)
+is merged in PR #183. The separately authorized
+[Official Gameplay Rules Release Discovery Closure](GAMEPLAY_RULES_RELEASE_DISCOVERY_CLOSURE.md)
+is implemented pending independent Project Manager inspection from canonical
+main `988ac4bc384da8e4b62f89790727c2e79373eea2`.
+
+This metadata-only review does not modify the fictional kernel, make real rules
+executable, clear permissions or authorize rules projection. Its new PM-supplied
+first-party observation is distinct from the preserved unavailable Codex network
+attempt. As of 2026-10-16, that supplied observation designates September 25, 2026
+Comprehensive Rules, with the 20260925 artifact family and identified 701.71
+Empower Jace incorporation; it does not verify the full Reality Fracture diff.
+Codex did not independently fetch Wizards. Artifact SHA-256 and byte length remain
+unknown because no real TXT was supplied.
+
+The offline TXT verifier and request provide an exact metadata-only handoff.
+Readiness remains NOT_READY_FOR_RULE_PROJECTION with
+OFFICIAL_ARTIFACT_BYTES_NOT_VERIFIED. Existing source-content permissions stay
+NOT_ESTABLISHED. The next candidate is Owner-Supplied Comprehensive Rules Artifact
+Verification — NOT AUTHORIZED. No real rules projection, Oracle parser, Card
+semantic intake or simulation begins automatically. Current source findings and
+readiness belong to the new review package; historical attempts below remain
+historical facts and are not silently promoted into verification.
 
 ## Historical foundation milestone record
 
