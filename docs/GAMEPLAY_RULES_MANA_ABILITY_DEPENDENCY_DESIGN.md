@@ -1,3 +1,82 @@
+# Current source-verification overlay — Bounded Mana Ability Rules Projection
+
+**Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**
+Canonical main and branch base are
+`6d7542f7d375e6c75e3de7bf6ce3010868ca04ad`; PR #194 is merged. Branch:
+`codex/cr-bounded-mana-abilities`.
+
+**Bounded Mana Ability Rules Projection** adds exactly **13** source-verified
+units: `605.1`, `605.1a`, `605.1b`, `605.2`, `605.3`, `605.3a`, `605.3b`,
+`605.3c`, `605.4`, `605.4a`, `605.5`, `605.5a`, `605.5b`. Coverage becomes
+**81** across seven distinct projections. The section heading `605` is not a
+fourteenth rule. All nine prior rule/design packages and historical anchors
+remain byte-identical.
+
+Actual owner-supplied `2026-09-25` TXT bytes were verified against SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`
+and length `977752`. The bounded verifier hashes complete selected raw-byte
+blocks using `MULTI_LINE_RULE_BLOCK_ANCHOR` /
+`EXACT_RULE_BLOCK_RAW_BYTES_EXCLUDING_FINAL_LINE_TERMINATOR`. Internal line
+terminators are preserved; final terminators are excluded. Unambiguous examples
+belonging to `605.2` and `605.4a` contribute only to block hashes. No official
+prose, examples, TXT or attachment paths are retained.
+
+The complete selected family represents activated and triggered classification,
+classification persistence, special activation opportunities, no-stack/immediate
+behavior, the own-activation restriction and exclusions. Classification remains
+separate from current activation eligibility, productive output and execution.
+The new correspondence review verifies prior PM observations without changing
+the historical mana-ability design.
+
+Append-only reviews classify both `601.2g → 605` and `109.4a → 605` as
+**SECTION_REFERENCE_RESOLVED_BY_COMPLETE_FAMILY**. The existing consumer rules
+and their direct-dependency arrays are unchanged. This resolves section lookup
+only: semantic closure stays OPEN and execution stays BLOCKED. Controller
+attribution still requires `hypothetical_stack_controller_attribution`; actual
+stack presence and hypothetical controller attribution remain distinct. Madness
+continues to depend indirectly through `702.35b → bounded casting → 601.2g`;
+no direct Madness-to-605 citation is invented.
+
+Verified external citations are `115.6`, `606`, `602.2`, `405.6c` and `603`.
+All remain UNRESOLVED / UNPROJECTED. Classification, activated behavior and
+triggered behavior have REPRESENTED_WITH_OPEN_DEPENDENCIES source coverage.
+Mana production, pool semantics, payment, general abilities, controller
+assignment and real Card/effect semantics remain blocked or absent.
+**FICTIONAL_MANA_DOES_NOT_SATISFY_REAL_605** remains enforced; fictional runtime
+supplies no real-rule execution authority.
+
+The append-only evidence package is
+`reference-reviews/gameplay-rules-bounded-mana-ability-projection/`.
+[The bounded mana projection](GAMEPLAY_RULES_BOUNDED_MANA_ABILITY_PROJECTION.md) records exact anchors, design/source
+correspondence, family closure, consumer and capability reassessments, and the
+seven-projection composite. Mana abilities, alternative-cost casting, complete
+casting, object control and Madness remain EXECUTION_BLOCKED. The real profile
+remains DESIGN_ONLY / NOT EXECUTABLE / REAL_EXECUTION_PROFILE_NOT_READY.
+
+Recommend exactly one next milestone: **Mana Ability Direct Dependency Design —
+NOT AUTHORIZED**. Review the verified `115.6`, `606`, `602.2`, `405.6c`, `603`
+frontier to separate bounded classification/stack context from large activated
+and triggered subsystems. This future design can use retained evidence without
+the external TXT; any later source projection must require the exact verified
+artifact. Do not begin another milestone.
+
+Gameplay runtime, fictional behavior, Oracle/Card semantics and simulation
+remain unchanged. Product Rules, Tier A, Card Intelligence, canonical catalog,
+MB2, `SOURCE_POLICY_CLEARED_PLANS` and writer/admission remain unchanged.
+Historical acquisition identity
+`sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
+is preserved. `source_policy_clearance=not_granted`; private retention,
+redistribution, free/commercial service and AI export remain NOT_ESTABLISHED.
+Stop at this milestone's one draft PR for PM review; do not merge or activate
+real rules. Historical bodies below retain their original findings and scope.
+
+## Historical merged PR #194 mana-ability dependency design record
+
+The complete design body below is preserved byte-for-byte. Its PM-supplied
+observations, source-artifact exemption, candidate projection and readiness
+findings belong to that earlier design milestone. The source verification and
+append-only reassessments above do not rewrite it.
+
 # Mana Ability Dependency Design
 
 ## Scope, provenance and current coverage

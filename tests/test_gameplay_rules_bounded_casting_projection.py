@@ -96,7 +96,7 @@ def prior_rules():
 class BoundedCastingPreservationTests(unittest.TestCase):
     def test_all_292_prior_source_files_include_design_and_runtime_byte_identically(self):
         paths = [path for path in regular_files(ROOT / "src")
-                 if not (path.parent == CODE and path.name.startswith("bounded_casting"))
+                 if not (path.parent == CODE and path.name.startswith(("bounded_casting", "bounded_mana")))
                  and "mana_ability_design" not in path.parts]
         values = inventory(paths)
         self.assertEqual(len(values), 292)
@@ -105,7 +105,8 @@ class BoundedCastingPreservationTests(unittest.TestCase):
 
     def test_all_162_prior_evidence_files_and_seven_packages_remain_byte_identical(self):
         values = inventory(path for path in regular_files(REVIEWS) if PACKAGE not in path.parents
-                           and "gameplay-rules-mana-ability-design" not in path.parts)
+                           and "gameplay-rules-mana-ability-design" not in path.parts
+                           and "gameplay-rules-bounded-mana-ability-projection" not in path.parts)
         self.assertEqual(len(values), 162)
         self.assertEqual(hashlib.sha256(deterministic_json(values).encode()).hexdigest(),
                          "e11dae638659061a4496a236c0f0d0b0b82b90383171f1073d8542562e4362b4")
