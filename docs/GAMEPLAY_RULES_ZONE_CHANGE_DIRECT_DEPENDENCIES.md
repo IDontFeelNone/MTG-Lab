@@ -1,3 +1,34 @@
+# Current Madness casting dependency design overlay
+
+PR #191 is merged; the twelve-rule projection and its package below remain
+immutable historical evidence. Canonical main and current branch base are
+`ccf408904f682d9b2e49ba6d25ade335d80d61fb`. Architecture v13 remains ACTIVE
+APPROVED and Decision 017 remains Accepted.
+
+[Madness Casting Dependency Design](GAMEPLAY_RULES_MADNESS_CASTING_DEPENDENCY_DESIGN.md)
+now describes the `601.2b/f/g/h` frontier without projecting any source rule.
+Those four references remain UNRESOLVED / UNPROJECTED; the composite remains
+**63 real source units**. Existing `702.35a–c` and `400.7k` are bound as retained
+evidence. The external TXT is not required for this design, and PM observations
+are DESIGN INPUT rather than new source verification or source anchors.
+Historical single-line anchors and all prior package identities are unchanged.
+
+The design distinguishes alternative-cost subprocedure stages from complete
+casting. Madness, both casting capabilities and real execution remain blocked.
+No runtime, Card semantics, simulation or source-policy permission changes are
+introduced. The one future recommendation is **Bounded Casting Rules Projection
+— NOT AUTHORIZED**, proposed five-unit allowlist `601.2`, `601.2b`, `601.2f`,
+`601.2g`, `601.2h`. The parent is an unverified design scope judgment; the future
+verified TXT must confirm coherent source boundaries. The future block policy
+preserves internal line endings and excludes the final terminator. No next
+milestone is begun.
+
+## Historical merged PR #191 zone-change direct-dependency milestone record
+
+The following preserves the original projection scope, source-TXT precondition,
+anchors, findings and next-candidate recommendation. That source requirement
+belongs to the projection milestone, not the current design-only milestone.
+
 # Comprehensive Rules Zone-Change Direct Dependency Projection
 
 ## Scope and result
