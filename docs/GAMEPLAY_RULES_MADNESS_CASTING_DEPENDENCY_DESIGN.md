@@ -1,3 +1,44 @@
+# Current bounded casting source correspondence overlay
+
+PR #192 is merged. Canonical main and branch base are
+`eacfe1ebd641966681797bd4647daa254900d178`. The immutable design record below
+retains its original DESIGN INPUT provenance and 63-rule historical baseline.
+Its package is not changed.
+
+[Bounded Casting Rules Projection](GAMEPLAY_RULES_BOUNDED_CASTING_PROJECTION.md)
+adds a separate source-verified projection of exactly `601.2`, `601.2b`,
+`601.2f`, `601.2g`, `601.2h`. The six distinct projections now cover **68**
+real source units. A new append-only correspondence review verifies or refines
+observations from this design; it does not retroactively change their original
+provenance. Complete block anchors use the reviewed policy. The verified
+physical blocks for parent/b/f/g have one line; h has two, including an
+unambiguously owned adjacent example in the hash only. These actual shapes
+refine the anticipated multi-line shape without converting historical anchors.
+
+Selected cost-related stages improve source coverage. The alternative-cost
+subprocedure, Madness and complete casting still have open semantic closure
+and remain EXECUTION_BLOCKED. Unprojected sibling stages, `601.3`, `733`,
+choice/cost dependencies and real `605` remain blockers. Fictional mana is
+not real-rule authority. No runtime, snapshot, Card semantics, simulation or
+permission change is introduced.
+
+Recommend exactly one next milestone: **Mana Ability Dependency Design —
+NOT AUTHORIZED**. Its scope is non-executable design centered on unresolved
+`605`, using read-only bindings to selected `601.2g` and the existing
+object-control dependency frontier. `605` is a shared dependency hub, and
+fictional mana behavior cannot establish its real semantics. The design should
+define authority and unknown-semantic boundaries and derive a separately
+reviewed future source-projection scope. It projects no source unit and
+implements no mana behavior. The external TXT is not required for a design
+reproduced solely from retained evidence; a later source projection would
+require the verified artifact. Authorization remains **no**; do not begin it.
+
+## Historical merged PR #192 Madness casting dependency design record
+
+The following complete design body is preserved byte-for-byte. Its original
+source-artifact exemption, candidate projection, permissions and findings
+belong to that design milestone.
+
 # Madness Casting Dependency Design
 
 ## Scope, provenance and current coverage

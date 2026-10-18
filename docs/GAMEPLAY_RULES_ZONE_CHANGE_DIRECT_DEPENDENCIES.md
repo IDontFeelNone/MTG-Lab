@@ -1,27 +1,77 @@
-# Current Madness casting dependency design overlay
+# Current bounded casting projection overlay
 
-PR #191 is merged; the twelve-rule projection and its package below remain
-immutable historical evidence. Canonical main and current branch base are
-`ccf408904f682d9b2e49ba6d25ade335d80d61fb`. Architecture v13 remains ACTIVE
-APPROVED and Decision 017 remains Accepted.
+**Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**
+Canonical main and branch base are
+`eacfe1ebd641966681797bd4647daa254900d178`; PR #192 is merged. Branch:
+`codex/cr-bounded-casting-rules`.
 
-[Madness Casting Dependency Design](GAMEPLAY_RULES_MADNESS_CASTING_DEPENDENCY_DESIGN.md)
-now describes the `601.2b/f/g/h` frontier without projecting any source rule.
-Those four references remain UNRESOLVED / UNPROJECTED; the composite remains
-**63 real source units**. Existing `702.35a–c` and `400.7k` are bound as retained
-evidence. The external TXT is not required for this design, and PM observations
-are DESIGN INPUT rather than new source verification or source anchors.
-Historical single-line anchors and all prior package identities are unchanged.
+**Bounded Casting Rules Projection** represents exactly **five** verified
+source units: `601.2`, `601.2b`, `601.2f`, `601.2g`, `601.2h`. The read-only
+six-projection composite is **68** units: 20 + 12 + 7 + 12 + 12 + 5. No sixth
+rule is selected. Prior projection, design, review and package identities
+remain unchanged.
 
-The design distinguishes alternative-cost subprocedure stages from complete
-casting. Madness, both casting capabilities and real execution remain blocked.
-No runtime, Card semantics, simulation or source-policy permission changes are
-introduced. The one future recommendation is **Bounded Casting Rules Projection
-— NOT AUTHORIZED**, proposed five-unit allowlist `601.2`, `601.2b`, `601.2f`,
-`601.2g`, `601.2h`. The parent is an unverified design scope judgment; the future
-verified TXT must confirm coherent source boundaries. The future block policy
-preserves internal line endings and excludes the final terminator. No next
-milestone is begun.
+Construction requires the owner-supplied `2026-09-25` artifact: **977752**
+bytes, SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`.
+The bounded verifier uses `MULTI_LINE_RULE_BLOCK_ANCHOR` with policy
+`EXACT_RULE_BLOCK_RAW_BYTES_EXCLUDING_FINAL_LINE_TERMINATOR`. Internal
+terminators are hashed exactly; the final terminator is excluded. Actual
+physical blocks are one line for `601.2`, `601.2b`, `601.2f`, `601.2g`, and
+two lines for `601.2h`. The adjacent example belongs unambiguously to the
+last block and contributes only to its source-span hash. No source prose,
+examples, TXT or attachment paths are retained. Historical single-line
+anchors retain their original bytes and policy.
+
+The parent supplies ordered-procedure context. Selected stages describe
+casting choices, total-cost determination, a conditional mana-ability window
+and payment. A selected alternative cost replaces the normal base cost; it
+is not a discount. Costs and payment groups are descriptive records, with
+cost lock-in, no partial payment and unpayable-cost boundaries represented.
+No computation or payment occurs.
+
+`601.2a`, `601.2c`, `601.2d`, `601.2e`, `601.2i` remain
+**UNPROJECTED_CASTING_STAGE**; parent coverage does not satisfy them.
+`601.2e` is an essential legality gap. Verified unresolved references include
+`601.3`, `733`, `700.2`, `702.47`, `118.8`, `118.9`, `107.3`, `605`.
+The selected `601.2b` ↔ `601.2f` relationship is represented. Earlier `613`
+and object-control blockers remain unprojected.
+
+The new correspondence review verifies or refines the PR #192 design
+observations without rewriting that design package. Existing `702.35a–c`
+and `400.7k` remain identity-bound evidence. Source coverage for
+`alternative_cost_casting_subprocedure` improves; semantic closure remains
+open. Madness, that subprocedure and complete casting remain
+**EXECUTION_BLOCKED**. The future profile
+`magic-comprehensive-rules-20260925-v1` remains **DESIGN_ONLY / NOT EXECUTABLE /
+REAL_EXECUTION_PROFILE_NOT_READY**.
+
+The append-only package is
+`reference-reviews/gameplay-rules-bounded-casting-projection/`.
+[The bounded casting projection](GAMEPLAY_RULES_BOUNDED_CASTING_PROJECTION.md) documents exact source bounds,
+verified references, the casting-stage matrix, append-only reassessments and
+remaining gaps. Runtime, fictional behavior, real Card semantics, Oracle
+intake and simulation remain unchanged. Product Rules, Tier A, Card
+Intelligence, canonical catalog, MB2, `SOURCE_POLICY_CLEARED_PLANS` and
+writer/admission remain unchanged. Historical acquisition identity
+`sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
+is preserved. `source_policy_clearance=not_granted`; private retention,
+redistribution, free/commercial service and AI export remain `NOT_ESTABLISHED`.
+
+Recommend exactly one next milestone: **Mana Ability Dependency Design —
+NOT AUTHORIZED**. Its scope is non-executable design centered on unresolved
+`605`, using read-only bindings to selected `601.2g` and the existing
+object-control dependency frontier. `605` is a shared dependency hub, and
+fictional mana behavior cannot establish its real semantics. The design should
+define authority and unknown-semantic boundaries and derive a separately
+reviewed future source-projection scope. It projects no source unit and
+implements no mana behavior. The external TXT is not required for a design
+reproduced solely from retained evidence; a later source projection would
+require the verified artifact. Authorization remains **no**; do not begin it.
+
+Stop at one draft PR for PM review. Do not merge, activate real rules or begin
+another milestone. Historical records below retain their original scope,
+source requirements, findings and recommendations.
 
 ## Historical merged PR #191 zone-change direct-dependency milestone record
 
