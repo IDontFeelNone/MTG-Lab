@@ -1,3 +1,83 @@
+# Current object-control exception projection overlay
+
+**Architecture v13 — ACTIVE APPROVED. Decision 017 is Accepted and unchanged.**
+Canonical main and branch base: `f1b72325ec4c84f20063da1945b1f8b7f8721970`;
+PR #188 is merged.
+
+**Object-Control Exception Family Projection** adds exactly seven structured,
+source-anchored, **NON-EXECUTABLE** records: `109.4a`, `109.4b`, `109.4c`,
+`109.4d`, `109.4e`, `109.4f`, `109.4g`. Parent `109.4` remains solely in the
+original projection. No eighth rule or dependency target is projected. The
+append-only package is
+`reference-reviews/gameplay-rules-object-control-exceptions/`; records remain
+`PROJECTED_FOR_REVIEW`, with `execution_authorized=false`.
+
+All seven direct exceptions are `EXCEPTION_REFERENCE_PROJECTED`, yielding
+**7/7** direct-family reference coverage and
+`DIRECT_EXCEPTION_FAMILY_REPRESENTED`. This represents the enumeration; dependency
+closure remains **OPEN**, complete semantic closure remains **UNKNOWN**, and
+parent `109.4` and the CONTROL capability remain **EXECUTION_BLOCKED**. The exact
+source's declared count of **6** differs from its **7** enumerated subrules. A
+separate deterministic anomaly preserves both observations without source
+correction, intent inference, discarded exceptions or invalidity claims.
+
+The core branches (`109.4a`–`109.4c`) expose unresolved `605`, `603`,
+`603.7d`, `603.7e`, `603.7f` and `114`. The casual-variant branches
+(`109.4d`–`109.4g`) expose unresolved `901.6`, `902.6`, `904.7` and `905.5`.
+Planechase, Vanguard, Archenemy and Conspiracy Draft remain unsupported. The
+bounded `901.6` designation/active-player/departure boundary is recorded without
+projecting that rule. Mana abilities, triggers, delayed triggers, emblems and
+all variant control operations gain no runtime implementation.
+
+The read-only composite binds **20 foundational + 12 direct dependencies + 7
+object-control exceptions = 39** real projected source units, preserving three
+distinct projection/package identities. All prior packages, including the merged
+PR #187 execution design and PR #188 dependency projection, remain byte-identical.
+`400.7a`–`400.7k`, `400.7m` and `613` remain **UNPROJECTED**; the new control
+dependencies are unresolved and unprojected. Ante remains unsupported, with
+tournament/deck policy a separate authority and no policy ingestion.
+
+The target `magic-comprehensive-rules-20260925-v1` remains **DESIGN_ONLY / NOT
+EXECUTABLE** and **BLOCKED / REAL_EXECUTION_PROFILE_NOT_READY**. No real snapshot,
+controller query, real primitive, projection-to-engine path or activation is
+added. `GameplayRulesEngine`, `GameplayRulesSnapshot`, `gameplay-kernel-v1`,
+`fictional-two-player-v1` and fictional behavior remain unchanged. No Oracle/Card
+ingestion, Card/effect semantics, mana/trigger/stack/priority/casting/resolving/
+SBA/multiplayer runtime or simulation is introduced.
+
+[The object-control projection and reassessments](GAMEPLAY_RULES_OBJECT_CONTROL_EXCEPTIONS.md) document the exact
+seven-rule scope, anchors, anomaly, unresolved graph, capability findings and
+limitations. Construction requires the actual external **977752-byte** TXT,
+effective **2026-09-25**, with SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`.
+No official prose, examples, TXT or local attachment path is retained; no Wizards
+fetch is used. `source_policy_clearance=not_granted`; private retention,
+redistribution, free/commercial service and AI export remain `NOT_ESTABLISHED`.
+
+Product Rules, Tier A, Card Intelligence, canonical catalog, MB2,
+`SOURCE_POLICY_CLEARED_PLANS`, writer/admission and historical Card Acquisition
+identity `sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
+remain unchanged. Real execution still lacks dependency/semantic closure, real
+primitives, Card/effect semantics, deterministic runtime vectors and owner
+activation.
+
+Recommend exactly one next candidate: **Zone-Change Identity Exception Family
+Projection — NOT AUTHORIZED**. The retained graph identifies a finite direct
+family of twelve `400.7` exceptions blocking zone-change identity. Core control
+now exposes `603`/`605`/`114` subsystem scopes not yet bounded for review;
+`613` also lacks a reviewed bounded scope, and casual-variant support has no
+strategic authorization.
+This recommendation does not inspect or project those rules. Stop after this
+milestone's draft PR for independent PM review; do not merge or start another
+milestone. Historical records below retain their original scope and findings.
+
+## Historical merged PR #188 direct-dependency milestone record
+
+The following preserves the merged twelve-rule milestone's original source,
+projection, closure, authorization and next-candidate findings. The current
+seven-rule projection and updated composite are described above and in their
+separate append-only package; the retained dependency package is unchanged.
+
 # Direct Foundational Comprehensive Rules Dependency Projection
 
 ## Scope, result and Architecture v13
