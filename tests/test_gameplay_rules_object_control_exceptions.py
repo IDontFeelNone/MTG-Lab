@@ -342,8 +342,9 @@ class ObjectControlPreservationTests(unittest.TestCase):
         self.assert_inventory(paths, 256, "191d9a47b9b9de75dd25cddb4b5497a06c7981858d17f1ecba813610073ee8f1")
 
     def test_prior_projection_infrastructure_is_byte_identical(self):
+        # Later append-only families are outside this milestone's original inventory.
         paths = [path for path in (ROOT / "src/gameplay_rules/projection").glob("*.py")
-                 if not path.name.startswith("object_control_")]
+                 if not path.name.startswith(("object_control_", "zone_change_"))]
         self.assert_inventory(paths, 11, "03b512cc5da329a2e7a6fa7a2ec3c00e9fd18bffc20cedb9c6292035399621e3")
 
     def test_original_twenty_rule_package_and_projection_identity_preserved(self):
