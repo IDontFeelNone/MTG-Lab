@@ -1,3 +1,72 @@
+# Current mana-ability dependency design overlay — Mana Ability Dependency Design
+
+**Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**
+Canonical main and branch base are
+`3d403a62c66b8cb678eda9c07038da3ac59ae659`; PR #193 is merged. Branch:
+`codex/mana-ability-dependency-design`.
+
+**Mana Ability Dependency Design** scopes the shared unresolved `605` boundary
+for retained `601.2g` casting evidence and retained `109.4a` controller evidence.
+It adds **0** real source units: coverage remains **68** across six distinct
+projections. All earlier rule, design, review, package and anchor identities
+remain unchanged. No `605` rule or real source anchor is created.
+
+The design reproduces from retained repository evidence and explicitly labeled
+**PM_SUPPLIED_DESIGN_INPUT_NOT_SOURCE_VERIFIED** observations. The external
+TXT is not required or read, and no Wizards fetch is used. Candidate `605`
+knowledge is scoping input, not independently verified rule evidence.
+
+Activated and triggered classification inputs are distinct. Classification,
+current output, current activation eligibility and execution readiness are
+separate declarations. Unknown required inputs fail closed to INDETERMINATE or
+UNSUPPORTED; synthetic declarations do not implement a real classifier. Eight
+capabilities separately describe classification, activation windows, activated
+and triggered immediate resolution, controller attribution, payment opportunity,
+production and pool semantics. None is executable or satisfied by another.
+
+Five activation-window categories, no-stack/immediate-resolution concepts and
+the own-activation reentry restriction remain design only. `109.4a` binds a
+distinct `hypothetical_stack_controller_attribution` concept; hypothetical
+attribution does not require actual stack presence. General ability-controller
+semantics, production, pools and payment remain unresolved boundaries.
+**FICTIONAL_MANA_DOES_NOT_SATISFY_REAL_605**: fictional behavior remains unchanged
+and supplies no real-rule authority. The Madness path through `702.35b`, bounded
+casting and `601.2g` is indirect; no direct Madness-to-605 citation is invented.
+
+The append-only package is
+`reference-reviews/gameplay-rules-mana-ability-design/`.
+[The mana-ability design](GAMEPLAY_RULES_MANA_ABILITY_DEPENDENCY_DESIGN.md) records the consumer matrix, candidate family,
+independent readiness findings and authority limits. Mana abilities are
+DESIGN_SCOPED / EXECUTION_BLOCKED; alternative-cost casting, complete casting,
+object control and Madness remain BLOCKED. The future real profile remains
+DESIGN_ONLY / NOT EXECUTABLE / REAL_EXECUTION_PROFILE_NOT_READY.
+
+Recommend exactly one next milestone: **Bounded Mana Ability Rules Projection —
+NOT AUTHORIZED**. Its proposed coherent family is `605.1`, `605.1a`, `605.1b`,
+`605.2`, `605.3`, `605.3a`, `605.3b`, `605.3c`, `605.4`, `605.4a`, `605.5`,
+`605.5a`, `605.5b` (**13 candidate units**). Future exact-artifact verification
+must establish the family and outgoing references; no candidate is projected
+now. Candidate outgoing `115.6`, `606`, `602.2`, `405.6c`, `603` remain unverified
+and unprojected. The large activated/triggered subsystems are deferred. A future
+projection requires the verified TXT and reviewed complete-block anchor policy;
+source coverage still would not establish execution. Do not begin it.
+
+Runtime, fictional behavior, Oracle/Card semantics and simulation remain
+unchanged. Product Rules, Tier A, Card Intelligence, canonical catalog, MB2,
+`SOURCE_POLICY_CLEARED_PLANS` and writer/admission remain unchanged. Historical
+acquisition identity
+`sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
+is preserved. `source_policy_clearance=not_granted`; private retention,
+redistribution, free/commercial service and AI export remain NOT_ESTABLISHED.
+Stop at this milestone's one draft PR for PM review; do not merge or activate
+real rules. Historical bodies below retain their original findings and scope.
+
+## Historical merged PR #193 bounded casting projection record
+
+The complete projection body below retains its original source requirements,
+anchors, findings and recommendation unchanged. The current design introduces
+no new source verification or projection.
+
 # Bounded Comprehensive Rules Casting Projection
 
 ## Scope and result

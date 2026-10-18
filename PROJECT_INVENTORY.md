@@ -1,77 +1,65 @@
-# Current implementation inventory — Bounded Casting Rules Projection
+# Current implementation inventory — Mana Ability Dependency Design
 
 **Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**
 Canonical main and branch base are
-`eacfe1ebd641966681797bd4647daa254900d178`; PR #192 is merged. Branch:
-`codex/cr-bounded-casting-rules`.
+`3d403a62c66b8cb678eda9c07038da3ac59ae659`; PR #193 is merged. Branch:
+`codex/mana-ability-dependency-design`.
 
-**Bounded Casting Rules Projection** represents exactly **five** verified
-source units: `601.2`, `601.2b`, `601.2f`, `601.2g`, `601.2h`. The read-only
-six-projection composite is **68** units: 20 + 12 + 7 + 12 + 12 + 5. No sixth
-rule is selected. Prior projection, design, review and package identities
-remain unchanged.
+**Mana Ability Dependency Design** scopes the shared unresolved `605` boundary
+for retained `601.2g` casting evidence and retained `109.4a` controller evidence.
+It adds **0** real source units: coverage remains **68** across six distinct
+projections. All earlier rule, design, review, package and anchor identities
+remain unchanged. No `605` rule or real source anchor is created.
 
-Construction requires the owner-supplied `2026-09-25` artifact: **977752**
-bytes, SHA-256
-`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`.
-The bounded verifier uses `MULTI_LINE_RULE_BLOCK_ANCHOR` with policy
-`EXACT_RULE_BLOCK_RAW_BYTES_EXCLUDING_FINAL_LINE_TERMINATOR`. Internal
-terminators are hashed exactly; the final terminator is excluded. Actual
-physical blocks are one line for `601.2`, `601.2b`, `601.2f`, `601.2g`, and
-two lines for `601.2h`. The adjacent example belongs unambiguously to the
-last block and contributes only to its source-span hash. No source prose,
-examples, TXT or attachment paths are retained. Historical single-line
-anchors retain their original bytes and policy.
+The design reproduces from retained repository evidence and explicitly labeled
+**PM_SUPPLIED_DESIGN_INPUT_NOT_SOURCE_VERIFIED** observations. The external
+TXT is not required or read, and no Wizards fetch is used. Candidate `605`
+knowledge is scoping input, not independently verified rule evidence.
 
-The parent supplies ordered-procedure context. Selected stages describe
-casting choices, total-cost determination, a conditional mana-ability window
-and payment. A selected alternative cost replaces the normal base cost; it
-is not a discount. Costs and payment groups are descriptive records, with
-cost lock-in, no partial payment and unpayable-cost boundaries represented.
-No computation or payment occurs.
+Activated and triggered classification inputs are distinct. Classification,
+current output, current activation eligibility and execution readiness are
+separate declarations. Unknown required inputs fail closed to INDETERMINATE or
+UNSUPPORTED; synthetic declarations do not implement a real classifier. Eight
+capabilities separately describe classification, activation windows, activated
+and triggered immediate resolution, controller attribution, payment opportunity,
+production and pool semantics. None is executable or satisfied by another.
 
-`601.2a`, `601.2c`, `601.2d`, `601.2e`, `601.2i` remain
-**UNPROJECTED_CASTING_STAGE**; parent coverage does not satisfy them.
-`601.2e` is an essential legality gap. Verified unresolved references include
-`601.3`, `733`, `700.2`, `702.47`, `118.8`, `118.9`, `107.3`, `605`.
-The selected `601.2b` ↔ `601.2f` relationship is represented. Earlier `613`
-and object-control blockers remain unprojected.
-
-The new correspondence review verifies or refines the PR #192 design
-observations without rewriting that design package. Existing `702.35a–c`
-and `400.7k` remain identity-bound evidence. Source coverage for
-`alternative_cost_casting_subprocedure` improves; semantic closure remains
-open. Madness, that subprocedure and complete casting remain
-**EXECUTION_BLOCKED**. The future profile
-`magic-comprehensive-rules-20260925-v1` remains **DESIGN_ONLY / NOT EXECUTABLE /
-REAL_EXECUTION_PROFILE_NOT_READY**.
+Five activation-window categories, no-stack/immediate-resolution concepts and
+the own-activation reentry restriction remain design only. `109.4a` binds a
+distinct `hypothetical_stack_controller_attribution` concept; hypothetical
+attribution does not require actual stack presence. General ability-controller
+semantics, production, pools and payment remain unresolved boundaries.
+**FICTIONAL_MANA_DOES_NOT_SATISFY_REAL_605**: fictional behavior remains unchanged
+and supplies no real-rule authority. The Madness path through `702.35b`, bounded
+casting and `601.2g` is indirect; no direct Madness-to-605 citation is invented.
 
 The append-only package is
-`reference-reviews/gameplay-rules-bounded-casting-projection/`.
-[The bounded casting projection](docs/GAMEPLAY_RULES_BOUNDED_CASTING_PROJECTION.md) documents exact source bounds,
-verified references, the casting-stage matrix, append-only reassessments and
-remaining gaps. Runtime, fictional behavior, real Card semantics, Oracle
-intake and simulation remain unchanged. Product Rules, Tier A, Card
-Intelligence, canonical catalog, MB2, `SOURCE_POLICY_CLEARED_PLANS` and
-writer/admission remain unchanged. Historical acquisition identity
+`reference-reviews/gameplay-rules-mana-ability-design/`.
+[The mana-ability design](docs/GAMEPLAY_RULES_MANA_ABILITY_DEPENDENCY_DESIGN.md) records the consumer matrix, candidate family,
+independent readiness findings and authority limits. Mana abilities are
+DESIGN_SCOPED / EXECUTION_BLOCKED; alternative-cost casting, complete casting,
+object control and Madness remain BLOCKED. The future real profile remains
+DESIGN_ONLY / NOT EXECUTABLE / REAL_EXECUTION_PROFILE_NOT_READY.
+
+Recommend exactly one next milestone: **Bounded Mana Ability Rules Projection —
+NOT AUTHORIZED**. Its proposed coherent family is `605.1`, `605.1a`, `605.1b`,
+`605.2`, `605.3`, `605.3a`, `605.3b`, `605.3c`, `605.4`, `605.4a`, `605.5`,
+`605.5a`, `605.5b` (**13 candidate units**). Future exact-artifact verification
+must establish the family and outgoing references; no candidate is projected
+now. Candidate outgoing `115.6`, `606`, `602.2`, `405.6c`, `603` remain unverified
+and unprojected. The large activated/triggered subsystems are deferred. A future
+projection requires the verified TXT and reviewed complete-block anchor policy;
+source coverage still would not establish execution. Do not begin it.
+
+Runtime, fictional behavior, Oracle/Card semantics and simulation remain
+unchanged. Product Rules, Tier A, Card Intelligence, canonical catalog, MB2,
+`SOURCE_POLICY_CLEARED_PLANS` and writer/admission remain unchanged. Historical
+acquisition identity
 `sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
 is preserved. `source_policy_clearance=not_granted`; private retention,
-redistribution, free/commercial service and AI export remain `NOT_ESTABLISHED`.
-
-Recommend exactly one next milestone: **Mana Ability Dependency Design —
-NOT AUTHORIZED**. Its scope is non-executable design centered on unresolved
-`605`, using read-only bindings to selected `601.2g` and the existing
-object-control dependency frontier. `605` is a shared dependency hub, and
-fictional mana behavior cannot establish its real semantics. The design should
-define authority and unknown-semantic boundaries and derive a separately
-reviewed future source-projection scope. It projects no source unit and
-implements no mana behavior. The external TXT is not required for a design
-reproduced solely from retained evidence; a later source projection would
-require the verified artifact. Authorization remains **no**; do not begin it.
-
-Stop at one draft PR for PM review. Do not merge, activate real rules or begin
-another milestone. Historical records below retain their original scope,
-source requirements, findings and recommendations.
+redistribution, free/commercial service and AI export remain NOT_ESTABLISHED.
+Stop at this milestone's one draft PR for PM review; do not merge or activate
+real rules. Historical bodies below retain their original findings and scope.
 
 ## Historical merged projection context
 
