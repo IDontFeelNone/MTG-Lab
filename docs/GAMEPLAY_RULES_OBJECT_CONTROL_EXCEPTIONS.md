@@ -1,86 +1,65 @@
-# Current zone-change direct-dependency projection overlay
+# Current mana-ability dependency design overlay — Mana Ability Dependency Design
 
-**Architecture v13 — ACTIVE APPROVED. Decision 017 is Accepted and unchanged.**
-Canonical main and branch base: `fe6eb895914decb3c0f5fdcda74cd595173cff93`;
-PR #190 is merged.
+**Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**
+Canonical main and branch base are
+`3d403a62c66b8cb678eda9c07038da3ac59ae659`; PR #193 is merged. Branch:
+`codex/mana-ability-dependency-design`.
 
-**Zone-Change Direct Dependency Projection** adds exactly twelve structured,
-source-anchored, **NON-EXECUTABLE** records: `611.3`, `611.3a`, `611.3b`,
-`611.3d`, `704.5m`, `702.35a`, `702.35b`, `702.35c`, `123.5`, `123.5a`,
-`123.5b`, `123.5c`. The append-only package is
-`reference-reviews/gameplay-rules-zone-change-direct-dependencies/`.
-The milestone result is `ZONE_CHANGE_DIRECT_DEPENDENCIES_PROJECTED`;
-records remain review-bound and `execution_authorized=false`.
+**Mana Ability Dependency Design** scopes the shared unresolved `605` boundary
+for retained `601.2g` casting evidence and retained `109.4a` controller evidence.
+It adds **0** real source units: coverage remains **68** across six distinct
+projections. All earlier rule, design, review, package and anchor identities
+remain unchanged. No `605` rule or real source anchor is created.
 
-The four direct targets exposed by PR #190 — `611.3d`, `704.5m`, `702.35`
-and `123.5` — are **4/4 DIRECT_REFERENCE_RESOLVED**. This bounded closure uses
-immediate continuous-effect context, the exact Aura action, all three Madness
-subrules and all four sticker-retention records. It does not close their
-semantics or make any real rule executable. `611.3d` explicitly binds its
-exception relationship to selected `611.3a` and `611.3b`; `611.3c` is deliberately
-outside that relationship and remains unprojected.
+The design reproduces from retained repository evidence and explicitly labeled
+**PM_SUPPLIED_DESIGN_INPUT_NOT_SOURCE_VERIFIED** observations. The external
+TXT is not required or read, and no Wizards fetch is used. Candidate `605`
+knowledge is scoping input, not independently verified rule evidence.
 
-The selected Madness family preserves the linked hand/replacement and triggered
-abilities, optional alternative-cost casting and the public-zone backlink to
-already projected `400.7k`. The direct casting references `601.2b`, `601.2f`,
-`601.2g`, `601.2h` remain **UNRESOLVED / UNPROJECTED**. Sticker records preserve
-hidden/public-zone differences, distinct meld and merge composition boundaries,
-and the owner's choice of exactly one resulting object for retention when the
-permanent splits. Existing `400.7` and `400.7k` are linked, not re-projected.
-No additional real source unit is projected.
+Activated and triggered classification inputs are distinct. Classification,
+current output, current activation eligibility and execution readiness are
+separate declarations. Unknown required inputs fail closed to INDETERMINATE or
+UNSUPPORTED; synthetic declarations do not implement a real classifier. Eight
+capabilities separately describe classification, activation windows, activated
+and triggered immediate resolution, controller attribution, payment opportunity,
+production and pool semantics. None is executable or satisfied by another.
 
-Append-only reviews reassess `400.7b`, `400.7f`, `400.7k`, `400.7m`, parent
-`400.7` and `zone_change_identity` without changing earlier packages. Their
-four direct target blockers are resolved at the reference/evidence level.
-Continuous effects, Aura legality/SBAs, Madness casting/triggers, stickers and
-meld/merge semantics remain open. Historical information, public-zone
-findability, casting/play bridges and same-effect/cost tracking still need
-semantic primitives. Parent and capability execution remain **BLOCKED**.
+Five activation-window categories, no-stack/immediate-resolution concepts and
+the own-activation reentry restriction remain design only. `109.4a` binds a
+distinct `hypothetical_stack_controller_attribution` concept; hypothetical
+attribution does not require actual stack presence. General ability-controller
+semantics, production, pools and payment remain unresolved boundaries.
+**FICTIONAL_MANA_DOES_NOT_SATISFY_REAL_605**: fictional behavior remains unchanged
+and supplies no real-rule authority. The Madness path through `702.35b`, bounded
+casting and `601.2g` is indirect; no direct Madness-to-605 citation is invented.
 
-The read-only five-projection composite is **20 foundational + 12 direct
-foundational dependencies + 7 object-control exceptions + 12 zone-change
-exceptions + 12 zone-change direct dependencies = 63** projected real source
-units. All five projection/package identities remain distinct. Earlier rules
-and execution-design packages remain byte-identical. `613`; object-control
-references `605`, `603`, `603.7d`, `603.7e`, `603.7f`, `114`, `901.6`, `902.6`,
-`904.7`, `905.5`; and the four Madness casting references remain unprojected.
+The append-only package is
+`reference-reviews/gameplay-rules-mana-ability-design/`.
+[The mana-ability design](GAMEPLAY_RULES_MANA_ABILITY_DEPENDENCY_DESIGN.md) records the consumer matrix, candidate family,
+independent readiness findings and authority limits. Mana abilities are
+DESIGN_SCOPED / EXECUTION_BLOCKED; alternative-cost casting, complete casting,
+object control and Madness remain BLOCKED. The future real profile remains
+DESIGN_ONLY / NOT EXECUTABLE / REAL_EXECUTION_PROFILE_NOT_READY.
 
-The target `magic-comprehensive-rules-20260925-v1` remains **DESIGN_ONLY / NOT
-EXECUTABLE / REAL_EXECUTION_PROFILE_NOT_READY**. No real snapshot, primitives,
-projection-to-engine conversion or activation is added. `GameplayRulesEngine`,
-`GameplayRulesSnapshot`, `gameplay-kernel-v1`, `fictional-two-player-v1` and
-fictional gameplay behavior remain unchanged. No continuous-effect, layer,
-SBA, attachment, casting, trigger, alternative-cost, discard/exile, sticker,
-meld/merge or zone-movement runtime is implemented. No Oracle/Card semantics
-or simulation is introduced.
+Recommend exactly one next milestone: **Bounded Mana Ability Rules Projection —
+NOT AUTHORIZED**. Its proposed coherent family is `605.1`, `605.1a`, `605.1b`,
+`605.2`, `605.3`, `605.3a`, `605.3b`, `605.3c`, `605.4`, `605.4a`, `605.5`,
+`605.5a`, `605.5b` (**13 candidate units**). Future exact-artifact verification
+must establish the family and outgoing references; no candidate is projected
+now. Candidate outgoing `115.6`, `606`, `602.2`, `405.6c`, `603` remain unverified
+and unprojected. The large activated/triggered subsystems are deferred. A future
+projection requires the verified TXT and reviewed complete-block anchor policy;
+source coverage still would not establish execution. Do not begin it.
 
-[The dependency projection and reassessments](GAMEPLAY_RULES_ZONE_CHANGE_DIRECT_DEPENDENCIES.md) document exact scope,
-anchors, distinctions, blockers and limitations. Construction requires actual
-access to the external **977752-byte** TXT, effective **2026-09-25**, with SHA-256
-`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`.
-Exactly one full-line source match is required for each selected rule. Anchors
-bind line number, byte span and span hash under
-`EXACT_RULE_LINE_EXCLUDING_LINE_TERMINATOR`. No official prose, examples, TXT
-or attachment path is retained; no Wizards fetch is used.
-`source_policy_clearance=not_granted`; private retention, redistribution,
-free/commercial service and AI export remain `NOT_ESTABLISHED`.
-
-Product Rules, Tier A, Card Intelligence, canonical catalog, MB2,
+Runtime, fictional behavior, Oracle/Card semantics and simulation remain
+unchanged. Product Rules, Tier A, Card Intelligence, canonical catalog, MB2,
 `SOURCE_POLICY_CLEARED_PLANS` and writer/admission remain unchanged. Historical
-Card Acquisition identity
+acquisition identity
 `sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
-is preserved. Real execution still lacks complete dependency/semantic closure,
-reviewed primitives, Card/effect semantics, deterministic runtime vectors and
-owner activation.
-
-Recommend exactly one next candidate: **Madness Casting Dependency Design —
-NOT AUTHORIZED**. The selected `702.35b` exposes the precise four-reference
-frontier `601.2b/f/g/h`; a separate bounded design can define its casting,
-alternative-cost and payment boundaries before any projection or runtime work.
-The broader control and continuous-effect frontiers remain unresolved and do
-not justify primitive implementation. Do not begin this candidate. Stop after
-this milestone's one draft PR for independent PM review; do not merge or
-activate real rules. Historical records below retain their original findings.
+is preserved. `source_policy_clearance=not_granted`; private retention,
+redistribution, free/commercial service and AI export remain NOT_ESTABLISHED.
+Stop at this milestone's one draft PR for PM review; do not merge or activate
+real rules. Historical bodies below retain their original findings and scope.
 
 ## Historical merged PR #189 object-control exception milestone record
 
