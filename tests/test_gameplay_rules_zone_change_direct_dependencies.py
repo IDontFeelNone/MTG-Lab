@@ -645,7 +645,7 @@ class ZoneChangeDependencyPreservationTests(unittest.TestCase):
 
     def test_all_twenty_one_prior_projection_modules_are_byte_identical(self):
         paths = [path for path in (ROOT / "src/gameplay_rules/projection").glob("*.py")
-                 if not path.name.startswith(("zone_change_dependency_", "bounded_casting_", "bounded_mana_"))]
+                 if not path.name.startswith(("zone_change_dependency_", "bounded_casting_", "bounded_mana_", "mana_classification_"))]
         self.assert_inventory(paths, 21, "07287a6cf0aaa6f978bf6d3a3d31d5067a646009b55d6b07558542e9de39c0ac")
 
     def test_five_prior_rules_packages_are_byte_identical_with_exact_package_identities(self):

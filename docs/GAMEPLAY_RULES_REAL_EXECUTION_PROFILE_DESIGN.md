@@ -1,5 +1,32 @@
 # Current direct-dependency readiness overlay — Mana Ability Direct Dependency Design
 
+## Current status — bounded mana classification projection
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Canonical main / branch base: `7082d7c048ef764d5e5ec8d5ea42e2ab9d3dbb28`
+(PR #196 merged). Branch: `codex/cr-bounded-mana-classification`.
+**BOUNDED_MANA_CLASSIFICATION_DEPENDENCIES_PROJECTED** adds exactly
+`115.6`, `606.1`, `606.2`: **3** new units, **84** total across **eight**
+distinct projections. The exact owner TXT was verified (977752 bytes,
+effective 2026-09-25); no source body is retained.
+
+Direct 115.6 references from 605.1a/b are resolved; target recognition remains
+OPEN. Loyalty classification evidence is represented with open dependencies.
+Broad 606 remains OPEN / PARTIALLY REPRESENTED; 606.3–6 remain unprojected.
+Historical dependency arrays, anchors and all eleven prior packages are unchanged.
+Mana classification, targeting and loyalty execution remain BLOCKED.
+The real profile remains DESIGN_ONLY / NOT EXECUTABLE /
+REAL_EXECUTION_PROFILE_NOT_READY. No runtime, Oracle/Card semantics, simulation,
+source-policy, Product Rules, Tier A, Card Intelligence, MB2 or writer changes.
+
+Exactly one next recommendation: **Bounded Mana Stack-Exception Projection**,
+proposed `405.6c`, exact verified source TXT required; **NOT AUTHORIZED**.
+Do not begin it, merge, broaden scope or activate real rules.
+See [bounded classification projection](GAMEPLAY_RULES_BOUNDED_MANA_CLASSIFICATION_PROJECTION.md) for evidence, anchors,
+consumer reassessments, readiness and protected-state details.
+
+## Historical status and retained context
+
 **Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**
 Canonical main and branch base are
 `a9943fc8ca89ced4d3d288926f63fede12f4b57a`; PR #195 is merged. Branch:
