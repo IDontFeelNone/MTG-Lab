@@ -56,6 +56,13 @@ RULE_IDS = {
 
 
 def regular_files(root):
+    # This later append-only milestone is outside the historical inventory.
+    return [p for p in _historical_regular_files(root)
+            if not (p.parent == ROOT / "src/gameplay_rules/projection" and p.name.startswith("mana_classification_"))
+            and "gameplay-rules-bounded-mana-classification-projection" not in p.parts]
+
+
+def _historical_regular_files(root):
     return [path for path in root.rglob("*") if path.is_file()
             and "__pycache__" not in path.parts and path.suffix != ".pyc"]
 

@@ -416,7 +416,7 @@ class ZoneChangePreservationTests(unittest.TestCase):
 
     def test_prior_projection_infrastructure_is_byte_identical(self):
         paths = [path for path in (ROOT / "src/gameplay_rules/projection").glob("*.py")
-                 if not path.name.startswith(("zone_change_", "bounded_casting_", "bounded_mana_"))]
+                 if not path.name.startswith(("zone_change_", "bounded_casting_", "bounded_mana_", "mana_classification_"))]
         self.assert_inventory(paths, 16, "7eda9f9c213c5ffe9308db29c872692bc31cdf1ef564ca7149b035a8a35a5f02")
 
     def test_foundational_twenty_rule_package_is_byte_identical(self):

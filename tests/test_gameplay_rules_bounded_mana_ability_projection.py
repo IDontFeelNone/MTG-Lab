@@ -73,6 +73,13 @@ def inventory(paths):
 
 
 def regular_files(root):
+    # This later append-only milestone is outside the historical inventory.
+    return [p for p in _historical_regular_files(root)
+            if not (p.parent == ROOT / "src/gameplay_rules/projection" and p.name.startswith("mana_classification_"))
+            and "gameplay-rules-bounded-mana-classification-projection" not in p.parts]
+
+
+def _historical_regular_files(root):
     return [p for p in root.rglob("*") if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"]
 
 
