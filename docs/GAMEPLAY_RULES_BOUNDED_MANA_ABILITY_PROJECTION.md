@@ -1,3 +1,77 @@
+# Current dependency-design overlay — Mana Ability Direct Dependency Design
+
+**Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**
+Canonical main and branch base are
+`a9943fc8ca89ced4d3d288926f63fede12f4b57a`; PR #195 is merged. Branch:
+`codex/mana-ability-direct-dependency-design`.
+
+**Mana Ability Direct Dependency Design** adds **0** real source units.
+Coverage remains **81** across seven separate projections. All ten prior
+retained rule/design packages, existing rule identities, source anchors and
+append-only reviews remain byte-identical. The external TXT is neither required
+nor opened; no source projection, new anchor or Wizards fetch occurs.
+
+Retained bounded-mana evidence verifies exactly five outgoing targets:
+`115.6`, `606`, `602.2`, `405.6c`, `603`. All remain UNRESOLVED / UNPROJECTED.
+Detailed observations about their unprojected bodies are
+**PM_SUPPLIED_DESIGN_INPUT_NOT_SOURCE_VERIFIED**. The new immutable records
+remain DESIGN_ONLY / NON_EXECUTABLE; existing citations are not rewritten.
+
+The design separates four groups: bounded mana-classification dependencies;
+bounded stack-exception context; the large general activated-ability procedure;
+and the large shared triggered-ability subsystem. Target requirement is distinct
+from chosen targets and target legality. Loyalty classification is distinct from
+loyalty execution. A provisional `606.1`/`606.2` classification scope does not
+resolve the whole section-level `606` citation. `405.6c` alone is provisionally
+coherent with retained mana-exception context; optional parent `405.6` is reviewed
+without automatic admission. General activation and triggers retain separate
+contracts and their specific mana exceptions.
+
+The read-only consumer matrix binds `605.1a`, `605.1b`, `605.3`, `605.3b`,
+`605.4`, `109.4b` and `601.2g`. The shared triggered subsystem serves both
+`605.4` and `109.4b`, including delayed-controller frontier `603.7d/e/f`.
+Parent delayed-trigger context is preferred provisionally over isolated controller
+children, pending future scope design and source verification. Existing broad
+`601.2g → 605` and `109.4a → 605` remain
+SECTION_REFERENCE_RESOLVED_BY_COMPLETE_FAMILY. Section resolution supplies no
+semantic closure or execution readiness; hypothetical stack-controller
+attribution remains open. No new direct CR citation is invented.
+
+Recommend exactly one next milestone: **Bounded Mana Classification Dependency
+Projection — NOT AUTHORIZED**. Provisional allowlist: `115.6`, `606.1`, `606.2`
+(**3** units). It addresses the shared target-requirement nuance and activated
+loyalty exclusion while leaving complete `606`, target grammar, stack, activation,
+triggers and runtime unresolved. That future projection requires the exact
+verified owner-controlled TXT and reviewed raw-byte block anchoring; this design
+does not begin it or claim any future source verification.
+
+[The direct-dependency design](GAMEPLAY_RULES_MANA_ABILITY_DIRECT_DEPENDENCY_DESIGN.md)
+records scope comparisons, grouping, consumer bindings and the next decision.
+Its append-only package is
+`reference-reviews/gameplay-rules-mana-direct-dependency-design/`.
+Mana classification, activated/triggered behavior, object control, casting and
+Madness remain EXECUTION_BLOCKED. The real profile remains DESIGN_ONLY /
+NOT EXECUTABLE / REAL_EXECUTION_PROFILE_NOT_READY.
+**FICTIONAL_MANA_DOES_NOT_SATISFY_REAL_605** remains enforced.
+
+Gameplay runtime, fictional behavior, Oracle/Card semantics and simulation remain
+unchanged. Product Rules, Tier A, Card Intelligence, canonical catalog, MB2,
+`SOURCE_POLICY_CLEARED_PLANS` and writer/admission remain unchanged. Historical
+acquisition identity
+`sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
+is preserved. `source_policy_clearance=not_granted`; private retention,
+redistribution, free/commercial service and AI export remain NOT_ESTABLISHED.
+Stop at one draft PR for PM review; do not merge, activate real rules or begin
+another milestone. Historical bodies below retain their original authority,
+findings and scope.
+
+## Historical merged PR #195 bounded mana-ability projection record
+
+The complete projection body below is preserved byte-for-byte. Its verified
+source anchors, source-artifact precondition, prior branch base and next-design
+recommendation belong to that merged milestone. This overlay changes only the
+current dependency-design status.
+
 # Bounded Comprehensive Rules Mana Ability Projection
 
 ## Scope and result

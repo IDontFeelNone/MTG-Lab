@@ -78,14 +78,14 @@ class MadnessCastingPreservationTests(unittest.TestCase):
     def test_all_prior_runtime_product_policy_admission_intelligence_and_projection_code_byte_identical(self):
         paths = [path for path in (ROOT / "src").iterdir() if path.name != "gameplay_rules"]
         paths.extend(path for path in (ROOT / "src/gameplay_rules").iterdir()
-                     if path.name not in {"projection", "casting_design", "mana_ability_design", "__pycache__"})
+                     if path.name not in {"projection", "casting_design", "mana_ability_design", "mana_dependency_design", "__pycache__"})
         paths.extend(path for path in (ROOT / "src/gameplay_rules/projection").glob("*.py")
                      if not path.name.startswith(("bounded_casting_", "bounded_mana_")))
         self.assert_inventory(paths, 282, "16e1125ab591a3bf2c5e503a5c3b1eda854dfcbb56d5e1a7e99a1fcbce173a20")
 
     def test_all_156_prior_retained_evidence_and_design_files_byte_identical(self):
         paths = [path for path in (ROOT / "reference-reviews").iterdir()
-                 if path != PACKAGE and path.name not in {"gameplay-rules-bounded-casting-projection", "gameplay-rules-mana-ability-design", "gameplay-rules-bounded-mana-ability-projection"}]
+                 if path != PACKAGE and path.name not in {"gameplay-rules-bounded-casting-projection", "gameplay-rules-mana-ability-design", "gameplay-rules-bounded-mana-ability-projection", "gameplay-rules-mana-direct-dependency-design"}]
         self.assert_inventory(paths, 156, "29b7e1fe080bc49bfdf68f39f7b1fec783c7447bac72d2d7f261778a77a9e509")
 
     def test_exact_six_prior_package_identities_remain(self):
@@ -97,7 +97,7 @@ class MadnessCastingPreservationTests(unittest.TestCase):
     def test_historical_single_line_anchor_and_evidence_identities_are_byte_identical(self):
         paths = [path for path in (ROOT / "reference-reviews").iterdir()
                  if path.name.startswith("gameplay-rules-") and path != PACKAGE
-                 and path.name not in {"gameplay-rules-bounded-casting-projection", "gameplay-rules-mana-ability-design", "gameplay-rules-bounded-mana-ability-projection"}]
+                 and path.name not in {"gameplay-rules-bounded-casting-projection", "gameplay-rules-mana-ability-design", "gameplay-rules-bounded-mana-ability-projection", "gameplay-rules-mana-direct-dependency-design"}]
         self.assert_inventory(paths, 51, "66b80a9883ad434ff778d528cbc938f3804c6f9b4355b9fff0e6e63f8808c0f4")
         for rule in retained_projection_rules().values():
             self.assertEqual(rule["source_anchor"]["span_policy"], "EXACT_RULE_LINE_EXCLUDING_LINE_TERMINATOR")

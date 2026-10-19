@@ -91,6 +91,7 @@ def design_body(record):
 class ManaAbilityPreservationTests(unittest.TestCase):
     def test_all_297_prior_source_files_byte_identical(self):
         values = inventory(path for path in regular_files(ROOT / "src") if CODE not in path.parents
+                           and "mana_dependency_design" not in path.parts
                            and not (path.parent == ROOT / "src/gameplay_rules/projection"
                                     and path.name.startswith("bounded_mana_")))
         self.assertEqual(len(values), 297)
@@ -99,7 +100,8 @@ class ManaAbilityPreservationTests(unittest.TestCase):
 
     def test_all_169_prior_review_files_byte_identical(self):
         values = inventory(path for path in regular_files(REVIEWS) if PACKAGE not in path.parents
-                           and "gameplay-rules-bounded-mana-ability-projection" not in path.parts)
+                           and "gameplay-rules-bounded-mana-ability-projection" not in path.parts
+                           and "gameplay-rules-mana-direct-dependency-design" not in path.parts)
         self.assertEqual(len(values), 169)
         self.assertEqual(hashlib.sha256(deterministic_json(values).encode()).hexdigest(),
                          "578b6f24130bc8363fecb86fe8115c31f7f558b78ab974d74a142758fb9b740e")

@@ -626,7 +626,7 @@ class DependencyPreservationTests(unittest.TestCase):
         paths = [path for path in (ROOT / "src").iterdir()
                  if path.name != "gameplay_rules"]
         paths.extend(path for path in (ROOT / "src/gameplay_rules").iterdir()
-                     if path.name not in {"projection", "casting_design", "mana_ability_design", "__pycache__"})
+                     if path.name not in {"projection", "casting_design", "mana_ability_design", "mana_dependency_design", "__pycache__"})
         value = inventory(paths)
         self.assertEqual(len(value), 256)
         self.assertEqual(hashlib.sha256(deterministic_json(value).encode()).hexdigest(),
