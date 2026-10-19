@@ -95,13 +95,15 @@ def prior_rules():
 class BoundedManaPreservationTests(unittest.TestCase):
     def test_all_308_prior_source_files_preserve_engine_profiles_policy_products_writer_and_simulation(self):
         values = inventory(p for p in regular_files(ROOT / "src")
-                           if not (p.parent == CODE and p.name.startswith("bounded_mana")))
+                           if not (p.parent == CODE and p.name.startswith("bounded_mana"))
+                           and "mana_dependency_design" not in p.parts)
         self.assertEqual(len(values), 308)
         self.assertEqual(hashlib.sha256(deterministic_json(values).encode()).hexdigest(),
                          "745d737bbd8fb53f97d5d599b807255cd29adca63dc9a2c6baf3debc219cde50")
 
     def test_all_176_prior_review_files_and_nine_package_identities_are_byte_identical(self):
-        values = inventory(p for p in regular_files(REVIEWS) if PACKAGE not in p.parents)
+        values = inventory(p for p in regular_files(REVIEWS) if PACKAGE not in p.parents
+                           and "gameplay-rules-mana-direct-dependency-design" not in p.parts)
         self.assertEqual(len(values), 176)
         self.assertEqual(hashlib.sha256(deterministic_json(values).encode()).hexdigest(),
                          "5cf537091af0a56b12d6f1e14679faab64a373a46d66936389d51ba02741136e")

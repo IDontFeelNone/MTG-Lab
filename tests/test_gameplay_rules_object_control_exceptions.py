@@ -338,7 +338,7 @@ class ObjectControlPreservationTests(unittest.TestCase):
     def test_all_nonprojection_production_source_preserves_runtime_policy_cards_and_writer(self):
         paths = [path for path in (ROOT / "src").iterdir() if path.name != "gameplay_rules"]
         paths.extend(path for path in (ROOT / "src/gameplay_rules").iterdir()
-                     if path.name not in {"projection", "casting_design", "mana_ability_design", "__pycache__"})
+                     if path.name not in {"projection", "casting_design", "mana_ability_design", "mana_dependency_design", "__pycache__"})
         self.assert_inventory(paths, 256, "191d9a47b9b9de75dd25cddb4b5497a06c7981858d17f1ecba813610073ee8f1")
 
     def test_prior_projection_infrastructure_is_byte_identical(self):
