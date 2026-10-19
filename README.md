@@ -1,60 +1,69 @@
-# Current milestone — Mana Ability Dependency Design
+# Current milestone — Bounded Mana Ability Rules Projection
 
 **Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**
 Canonical main and branch base are
-`3d403a62c66b8cb678eda9c07038da3ac59ae659`; PR #193 is merged. Branch:
-`codex/mana-ability-dependency-design`.
+`6d7542f7d375e6c75e3de7bf6ce3010868ca04ad`; PR #194 is merged. Branch:
+`codex/cr-bounded-mana-abilities`.
 
-**Mana Ability Dependency Design** scopes the shared unresolved `605` boundary
-for retained `601.2g` casting evidence and retained `109.4a` controller evidence.
-It adds **0** real source units: coverage remains **68** across six distinct
-projections. All earlier rule, design, review, package and anchor identities
-remain unchanged. No `605` rule or real source anchor is created.
+**Bounded Mana Ability Rules Projection** adds exactly **13** source-verified
+units: `605.1`, `605.1a`, `605.1b`, `605.2`, `605.3`, `605.3a`, `605.3b`,
+`605.3c`, `605.4`, `605.4a`, `605.5`, `605.5a`, `605.5b`. Coverage becomes
+**81** across seven distinct projections. The section heading `605` is not a
+fourteenth rule. All nine prior rule/design packages and historical anchors
+remain byte-identical.
 
-The design reproduces from retained repository evidence and explicitly labeled
-**PM_SUPPLIED_DESIGN_INPUT_NOT_SOURCE_VERIFIED** observations. The external
-TXT is not required or read, and no Wizards fetch is used. Candidate `605`
-knowledge is scoping input, not independently verified rule evidence.
+Actual owner-supplied `2026-09-25` TXT bytes were verified against SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`
+and length `977752`. The bounded verifier hashes complete selected raw-byte
+blocks using `MULTI_LINE_RULE_BLOCK_ANCHOR` /
+`EXACT_RULE_BLOCK_RAW_BYTES_EXCLUDING_FINAL_LINE_TERMINATOR`. Internal line
+terminators are preserved; final terminators are excluded. Unambiguous examples
+belonging to `605.2` and `605.4a` contribute only to block hashes. No official
+prose, examples, TXT or attachment paths are retained.
 
-Activated and triggered classification inputs are distinct. Classification,
-current output, current activation eligibility and execution readiness are
-separate declarations. Unknown required inputs fail closed to INDETERMINATE or
-UNSUPPORTED; synthetic declarations do not implement a real classifier. Eight
-capabilities separately describe classification, activation windows, activated
-and triggered immediate resolution, controller attribution, payment opportunity,
-production and pool semantics. None is executable or satisfied by another.
+The complete selected family represents activated and triggered classification,
+classification persistence, special activation opportunities, no-stack/immediate
+behavior, the own-activation restriction and exclusions. Classification remains
+separate from current activation eligibility, productive output and execution.
+The new correspondence review verifies prior PM observations without changing
+the historical mana-ability design.
 
-Five activation-window categories, no-stack/immediate-resolution concepts and
-the own-activation reentry restriction remain design only. `109.4a` binds a
-distinct `hypothetical_stack_controller_attribution` concept; hypothetical
-attribution does not require actual stack presence. General ability-controller
-semantics, production, pools and payment remain unresolved boundaries.
-**FICTIONAL_MANA_DOES_NOT_SATISFY_REAL_605**: fictional behavior remains unchanged
-and supplies no real-rule authority. The Madness path through `702.35b`, bounded
-casting and `601.2g` is indirect; no direct Madness-to-605 citation is invented.
+Append-only reviews classify both `601.2g → 605` and `109.4a → 605` as
+**SECTION_REFERENCE_RESOLVED_BY_COMPLETE_FAMILY**. The existing consumer rules
+and their direct-dependency arrays are unchanged. This resolves section lookup
+only: semantic closure stays OPEN and execution stays BLOCKED. Controller
+attribution still requires `hypothetical_stack_controller_attribution`; actual
+stack presence and hypothetical controller attribution remain distinct. Madness
+continues to depend indirectly through `702.35b → bounded casting → 601.2g`;
+no direct Madness-to-605 citation is invented.
 
-The append-only package is
-`reference-reviews/gameplay-rules-mana-ability-design/`.
-[The mana-ability design](docs/GAMEPLAY_RULES_MANA_ABILITY_DEPENDENCY_DESIGN.md) records the consumer matrix, candidate family,
-independent readiness findings and authority limits. Mana abilities are
-DESIGN_SCOPED / EXECUTION_BLOCKED; alternative-cost casting, complete casting,
-object control and Madness remain BLOCKED. The future real profile remains
-DESIGN_ONLY / NOT EXECUTABLE / REAL_EXECUTION_PROFILE_NOT_READY.
+Verified external citations are `115.6`, `606`, `602.2`, `405.6c` and `603`.
+All remain UNRESOLVED / UNPROJECTED. Classification, activated behavior and
+triggered behavior have REPRESENTED_WITH_OPEN_DEPENDENCIES source coverage.
+Mana production, pool semantics, payment, general abilities, controller
+assignment and real Card/effect semantics remain blocked or absent.
+**FICTIONAL_MANA_DOES_NOT_SATISFY_REAL_605** remains enforced; fictional runtime
+supplies no real-rule execution authority.
 
-Recommend exactly one next milestone: **Bounded Mana Ability Rules Projection —
-NOT AUTHORIZED**. Its proposed coherent family is `605.1`, `605.1a`, `605.1b`,
-`605.2`, `605.3`, `605.3a`, `605.3b`, `605.3c`, `605.4`, `605.4a`, `605.5`,
-`605.5a`, `605.5b` (**13 candidate units**). Future exact-artifact verification
-must establish the family and outgoing references; no candidate is projected
-now. Candidate outgoing `115.6`, `606`, `602.2`, `405.6c`, `603` remain unverified
-and unprojected. The large activated/triggered subsystems are deferred. A future
-projection requires the verified TXT and reviewed complete-block anchor policy;
-source coverage still would not establish execution. Do not begin it.
+The append-only evidence package is
+`reference-reviews/gameplay-rules-bounded-mana-ability-projection/`.
+[The bounded mana projection](docs/GAMEPLAY_RULES_BOUNDED_MANA_ABILITY_PROJECTION.md) records exact anchors, design/source
+correspondence, family closure, consumer and capability reassessments, and the
+seven-projection composite. Mana abilities, alternative-cost casting, complete
+casting, object control and Madness remain EXECUTION_BLOCKED. The real profile
+remains DESIGN_ONLY / NOT EXECUTABLE / REAL_EXECUTION_PROFILE_NOT_READY.
 
-Runtime, fictional behavior, Oracle/Card semantics and simulation remain
-unchanged. Product Rules, Tier A, Card Intelligence, canonical catalog, MB2,
-`SOURCE_POLICY_CLEARED_PLANS` and writer/admission remain unchanged. Historical
-acquisition identity
+Recommend exactly one next milestone: **Mana Ability Direct Dependency Design —
+NOT AUTHORIZED**. Review the verified `115.6`, `606`, `602.2`, `405.6c`, `603`
+frontier to separate bounded classification/stack context from large activated
+and triggered subsystems. This future design can use retained evidence without
+the external TXT; any later source projection must require the exact verified
+artifact. Do not begin another milestone.
+
+Gameplay runtime, fictional behavior, Oracle/Card semantics and simulation
+remain unchanged. Product Rules, Tier A, Card Intelligence, canonical catalog,
+MB2, `SOURCE_POLICY_CLEARED_PLANS` and writer/admission remain unchanged.
+Historical acquisition identity
 `sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
 is preserved. `source_policy_clearance=not_granted`; private retention,
 redistribution, free/commercial service and AI export remain NOT_ESTABLISHED.
