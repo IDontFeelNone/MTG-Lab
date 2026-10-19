@@ -245,7 +245,11 @@ class PreservationAndIntegrityTests(unittest.TestCase):
         expected={row['path']:row['sha256'] for row in inventory}
         actual={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
             for p in (ROOT/'src').rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc'
-            and not (p.parent == ROOT/'src/gameplay_rules/projection' and p.name in NEW_FILES)}
+            # The successor guard pins every byte in this canonical inventory
+            # and permits only these four append-only source files.
+            and not (p.parent == ROOT/'src/gameplay_rules/projection' and p.name in NEW_FILES | {
+                'mana_stack_exception_source.py','mana_stack_exception_pins.py',
+                'mana_stack_exception_reports.py','mana_stack_exception_package.py'})}
         self.assertEqual(actual,expected)
 
     def test_all_eleven_prior_packages_and_historical_anchors_preserved(self):

@@ -56,10 +56,15 @@ RULE_IDS = {
 
 
 def regular_files(root):
-    # This later append-only milestone is outside the historical inventory.
+    # Later append-only milestones are outside this historical inventory.
+    # The successor preservation guard pins their exact four-file namespaces.
     return [p for p in _historical_regular_files(root)
             if not (p.parent == ROOT / "src/gameplay_rules/projection" and p.name.startswith("mana_classification_"))
-            and "gameplay-rules-bounded-mana-classification-projection" not in p.parts]
+            and "gameplay-rules-bounded-mana-classification-projection" not in p.parts
+            and not (p.parent == ROOT / "src/gameplay_rules/projection" and p.name in {
+                "mana_stack_exception_source.py", "mana_stack_exception_pins.py",
+                "mana_stack_exception_reports.py", "mana_stack_exception_package.py"})
+            and "gameplay-rules-bounded-mana-stack-exception-projection" not in p.parts]
 
 
 def _historical_regular_files(root):
