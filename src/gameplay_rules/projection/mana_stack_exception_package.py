@@ -32,6 +32,32 @@ def _bytes(value):
     return (deterministic_json(value)+'\n').encode('utf-8')
 
 
+def _canonical_candidate(value):
+    """Compare exact JSON values without Python numeric equality or coercion."""
+    def validate(item):
+        kind = type(item)
+        if kind is dict:
+            for key, child in item.items():
+                if type(key) is not str:
+                    _fail('PLAIN_JSON_RECORDS_REQUIRED')
+                validate(child)
+        elif kind is list:
+            for child in item:
+                validate(child)
+        elif kind is float:
+            if not -float('inf') < item < float('inf'):
+                _fail('FINITE_JSON_NUMBERS_REQUIRED')
+        elif kind not in (str, int, bool, type(None)):
+            _fail('PLAIN_JSON_RECORDS_REQUIRED')
+    try:
+        validate(value)
+        return _bytes(value)
+    except GameplayContractError:
+        raise
+    except (TypeError, ValueError, RecursionError):
+        _fail('MALFORMED_JSON_RECORDS')
+
+
 def verify_prior_packages(review_root):
     root = _root(review_root)
     for name, pin in _json(PRIOR_PACKAGES).items():
@@ -81,10 +107,21 @@ def build_package(artifact_path, *, review_root):
 def manifest(records):
     if type(records) is not dict or set(records) != RECORD_NAMES:
         _fail('EXACT_NINE_RECORDS_REQUIRED')
+    _canonical_candidate(records)
     p = records['projection.json']
-    if p != projection():
+    if _canonical_candidate(p) != _bytes(projection()):
         _fail('FIXED_PROJECTION_REQUIRED')
-    record_ids = {name: value.get('projection_id', value.get('review_id')) for name,value in records.items()}
+    record_ids = {}
+    for name, value in records.items():
+        field = 'projection_id' if name == 'projection.json' else 'review_id'
+        if (type(value) is not dict or type(value.get(field)) is not str
+                or type(value.get('schema_version')) is not str):
+            _fail('RECORD_IDENTITY_REQUIRED')
+        content = {key: item for key, item in value.items() if key != field}
+        identity = 'sha256:'+sha256_identity({'domain':value['schema_version'], 'content':content})
+        if value[field] != identity:
+            _fail('RECORD_IDENTITY_DOES_NOT_REPRODUCE')
+        record_ids[name] = value[field]
     if len(set(record_ids.values())) != 9:
         _fail('DISTINCT_RECORD_IDENTITIES_REQUIRED')
     body = {'schema_version':'gameplay-bounded-mana-stack-exception-package-v1',
@@ -104,7 +141,7 @@ def manifest(records):
 
 
 def write_package(root, records, *, review_root):
-    if records != rebuild_package(review_root=review_root):
+    if _canonical_candidate(records) != _bytes(rebuild_package(review_root=review_root)):
         _fail('AUTHORED_RECORDS_DO_NOT_REPRODUCE')
     root = Path(root)
     if any(p.is_symlink() for p in (root,*root.parents)):
@@ -135,7 +172,7 @@ def load_package(root, *, review_root):
 
 def verify_source(records, artifact_path, *, review_root):
     reproduced = build_package(artifact_path, review_root=review_root)
-    if records != reproduced:
+    if _canonical_candidate(records) != _bytes(reproduced):
         _fail('EXACT_SOURCE_REPRODUCTION_FAILED')
     return {'status':'VERIFIED_EXACT_SOURCE_BLOCKS', 'selected_rule_count':1,
         'projection_id':records['projection.json']['projection_id'], 'source_body_retained':False}

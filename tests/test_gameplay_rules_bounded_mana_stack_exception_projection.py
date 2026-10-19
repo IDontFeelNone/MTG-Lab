@@ -12,6 +12,7 @@ from pathlib import Path
 import shutil
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from evidence.contracts import deterministic_json
 from gameplay_rules.capabilities import ENGINE_CONTRACT_VERSION, EXECUTION_PROFILE
@@ -463,6 +464,116 @@ class ProjectionTests(unittest.TestCase):
 
 
 class PreservationAndIntegrityTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.records = pkg.load_package(PACKAGE, review_root=REVIEWS)
+
+    def assert_rejected_at_record_boundaries(self, records):
+        """Exercise record comparison only, without claiming fresh source proof."""
+        unchanged = repr(records)
+        with self.subTest(boundary='manifest'), self.assertRaises(GameplayContractError):
+            pkg.manifest(records)
+        self.assertEqual(repr(records), unchanged)
+        with tempfile.TemporaryDirectory() as td:
+            destination = Path(td) / 'not-created' / 'package'
+            with self.subTest(boundary='write_package'):
+                with self.assertRaises(GameplayContractError):
+                    pkg.write_package(destination, records, review_root=REVIEWS)
+                self.assertFalse(destination.exists())
+                self.assertEqual(list(Path(td).iterdir()), [])
+        self.assertEqual(repr(records), unchanged)
+        # This isolates the post-build comparison. The mock neither reads nor
+        # verifies any official artifact; the real source test is separate.
+        with patch.object(pkg, 'build_package', return_value=copy.deepcopy(self.records)) as build:
+            with self.subTest(boundary='verify_source'), self.assertRaises(GameplayContractError):
+                pkg.verify_source(records, None, review_root=REVIEWS)
+            build.assert_called_once_with(None, review_root=REVIEWS)
+        self.assertEqual(repr(records), unchanged)
+
+    def test_json_distinct_equal_python_values_rejected_without_coercion_or_writes(self):
+        cases = (
+            ('projection_nested_false_to_zero',
+             ('projection.json', 'boundary_flags', 'real_rules_executable'), 0),
+            ('projection_count_one_to_true',
+             ('projection.json', 'selected_rule_count'), True),
+            ('projection_anchor_integer_to_float',
+             ('projection.json', 'rules', 0, 'source_anchor', 'line_count'), 1.0),
+            ('review_nested_false_to_zero',
+             ('overall-readiness.json', 'boundary_flags', 'real_rules_executable'), 0),
+            ('review_count_zero_to_false',
+             ('section-dependency-review.json', 'findings', 'section_reference',
+              'family_source_units_reprojected'), False),
+            ('review_anchor_integer_to_float',
+             ('section-dependency-review.json', 'findings', 'section_reference',
+              'concrete_family_bindings', 0, 'source_anchor', 'line_count'), 1.0),
+            ('review_true_to_one',
+             ('parent-scope-review.json', 'findings', 'parent_observed'), 1),
+        )
+        for label, path, replacement in cases:
+            with self.subTest(change=label):
+                records = copy.deepcopy(self.records)
+                owner = records
+                for key in path[:-1]:
+                    owner = owner[key]
+                original = owner[path[-1]]
+                self.assertEqual(original, replacement)  # The reproduced Python-equality trap.
+                self.assertIsNot(type(original), type(replacement))
+                owner[path[-1]] = replacement
+                self.assertEqual(records, self.records)
+                self.assertNotEqual(deterministic_json(records), deterministic_json(self.records))
+                self.assert_rejected_at_record_boundaries(records)
+
+    def test_manifest_protects_the_complete_nine_record_set(self):
+        self.assertEqual(len(self.records), 9)
+        for name in self.records:
+            with self.subTest(record=name):
+                records = copy.deepcopy(self.records)
+                records[name]['boundary_flags']['real_rules_executable'] = 0
+                with self.assertRaises(GameplayContractError):
+                    pkg.manifest(records)
+
+    def test_malformed_non_json_candidates_rejected_before_writes(self):
+        cases = (
+            ('tuple', ('projection.json', 'selected_references'), ('405.6c',)),
+            ('review_tuple', ('section-dependency-review.json', 'findings', 'section_reference',
+                              'concrete_family_references'), tuple(FAMILY)),
+            ('nan', ('projection.json', 'selected_rule_count'), float('nan')),
+            ('infinity', ('overall-readiness.json', 'findings', 'new_source_units_projected'), float('inf')),
+            ('bytes', ('overall-readiness.json', 'status'), b'NON_JSON'),
+            ('set', ('overall-readiness.json', 'status'), {'NON_JSON'}),
+        )
+        for label, path, replacement in cases:
+            with self.subTest(change=label):
+                records = copy.deepcopy(self.records)
+                owner = records
+                for key in path[:-1]:
+                    owner = owner[key]
+                owner[path[-1]] = replacement
+                self.assert_rejected_at_record_boundaries(records)
+        records = copy.deepcopy(self.records)
+        records['overall-readiness.json']['findings'][0] = 'NON_STRING_KEY'
+        self.assert_rejected_at_record_boundaries(records)
+
+    def test_valid_records_preserve_canonical_bytes_identities_and_round_trip(self):
+        before = deterministic_json(self.records)
+        expected_manifest = json.loads((PACKAGE / 'manifest.json').read_bytes())
+        self.assertEqual(pkg.manifest(self.records), expected_manifest)
+        with tempfile.TemporaryDirectory() as td:
+            destination = Path(td) / 'package'
+            self.assertEqual(pkg.write_package(destination, self.records, review_root=REVIEWS), expected_manifest)
+            for path in PACKAGE.iterdir():
+                self.assertEqual((destination / path.name).read_bytes(), path.read_bytes())
+            loaded = pkg.load_package(destination, review_root=REVIEWS)
+            self.assertEqual(deterministic_json(loaded), before)
+        self.assertEqual(deterministic_json(self.records), before)
+
+    def test_isolated_source_verification_comparison_accepts_unchanged_records(self):
+        # This proves comparison behavior only; build_package is deliberately
+        # replaced, so this is not verification of official source bytes.
+        with patch.object(pkg, 'build_package', return_value=copy.deepcopy(self.records)):
+            result = pkg.verify_source(self.records, None, review_root=REVIEWS)
+        self.assertEqual(result['projection_id'], self.records['projection.json']['projection_id'])
+
     def test_second_rule_and_changed_projection_cannot_be_manifested_or_written(self):
         original = pkg.rebuild_package(review_root=REVIEWS)
         for change in ('second_rule', 'parent_anchor', 'invented_dependency', 'runtime_claim'):
@@ -556,11 +667,35 @@ class PreservationAndIntegrityTests(unittest.TestCase):
                 pkg.load_package(link, review_root=REVIEWS)
             self.assertEqual(pkg.load_package(target, review_root=REVIEWS), pkg.rebuild_package(review_root=REVIEWS))
 
+    def test_offline_retained_anchor_metadata_consistency_is_not_source_reproduction(self):
+        self.assertEqual(_json(VERIFIED_ANCHORS), [r['source_anchor'] for r in pkg.projection()['rules']])
+        self.assertEqual(pkg.rebuild_package(review_root=REVIEWS), self.records)
+
+    def test_unconfigured_source_reproduction_explicitly_skips(self):
+        with patch.dict(os.environ):
+            os.environ.pop('MTGLAB_STACK_EXCEPTION_SOURCE_ARTIFACT', None)
+            with self.assertRaisesRegex(unittest.SkipTest, 'Exact external source artifact unavailable'):
+                self.test_exact_external_source_reproduction_without_source_retention()
+
+    def test_configured_invalid_source_reproduction_fails_instead_of_skipping(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            wrong = root / 'project-authored.fixture'
+            wrong.write_bytes(FIXTURE)
+            for selector, expected in (
+                ('', 'MISSING_VERIFIED_SOURCE_ARTIFACT'),
+                (str(root / 'unavailable.fixture'), 'MISSING_VERIFIED_SOURCE_ARTIFACT'),
+                (str(wrong), 'VERIFIED_SOURCE_ARTIFACT_MISMATCH'),
+            ):
+                with self.subTest(expected=expected):
+                    with patch.dict(os.environ, {'MTGLAB_STACK_EXCEPTION_SOURCE_ARTIFACT': selector}):
+                        with self.assertRaisesRegex(GameplayContractError, expected):
+                            self.test_exact_external_source_reproduction_without_source_retention()
+
     def test_exact_external_source_reproduction_without_source_retention(self):
         selector = os.environ.get('MTGLAB_STACK_EXCEPTION_SOURCE_ARTIFACT')
         if selector is None:
-            self.assertEqual(_json(VERIFIED_ANCHORS), [r['source_anchor'] for r in pkg.projection()['rules']])
-            return
+            self.skipTest('Exact external source artifact unavailable; offline metadata checks run separately')
         records = pkg.load_package(PACKAGE, review_root=REVIEWS)
         result = pkg.verify_source(records, selector, review_root=REVIEWS)
         self.assertEqual(result['selected_rule_count'], 1)
