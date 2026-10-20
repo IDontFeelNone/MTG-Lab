@@ -50,8 +50,10 @@ No outgoing target or imported body is projected. All 454 protected baseline
 files remain byte-identical: 339 src and 115 gameplay evidence across 18 directories.
 All seven historical document bodies are retained; current status is appended to
 four and the other three remain wholly byte-identical. Historical assertions and
-immutable fixtures remain intact. Only two historical test files change selectors
-for eight exact new source files and eleven exact new evidence files.
+immutable fixtures remain intact. Only three historical test files change selectors
+for eight exact new source files, eleven exact new evidence files, and the exact
+current inventory appendix. The original historical suffix assertion and immutable
+baseline-audit digest are preserved; altered or future appendices are rejected.
 
 Protected identities:
 
@@ -73,7 +75,7 @@ unittest elapsed time from command wall time where both were measured.
 
 | Check and actual command | Tests / skips | Duration | Exit / result |
 |---|---|---|---|
-| `MTGLAB_ACTIVATED_ABILITY_PROJECTION_SOURCE_ARTIFACT="$CR_SOURCE" PYTHONPATH=src python -m unittest discover -s tests -p 'test_gameplay_rules_bounded_activated_ability*.py' -v` | 54 / 0 | 7.461s unittest; 7.654s wall| 0 / PASS |
+| `MTGLAB_ACTIVATED_ABILITY_PROJECTION_SOURCE_ARTIFACT="$CR_SOURCE" PYTHONPATH=src python -m unittest discover -s tests -p 'test_gameplay_rules_bounded_activated_ability*.py' -v` | 55 / 0 | 7.836s unittest; 8.027s wall| 0 / PASS |
 | `PYTHONPATH=src python -m gameplay_rules.activated_ability_projection validate --package reference-reviews/gameplay-rules-bounded-activated-ability-procedure-projection --source "$CR_SOURCE"` | Fresh 3 spans | 0.489s wall| 0 / PASS |
 | Same `validate` command without `--source` | Offline metadata only| 0.248s wall| 0 / PASS |
 | Actual fresh `build_package`, `write_package`, `load_package`, all 11 files compared byte-for-byte, `verify_preservation` | 3 fresh anchors; 454 preserved files| 0.515s operations; 0.752s wall| 0 / PASS |
@@ -87,7 +89,7 @@ preservation 75/0 in 0.906s passed. Adversarial 16/0 in 8.022s passed, followed 
 corrected 17/0 in 7.546s. Consumer semantics 11/0 in 0.187s passed. All exit 0.
 These are earlier results, separate from the final combined and full checks.
 
-Two failed validation attempts are retained:
+Failed validation attempts are retained:
 
 - Intermediate adversarial run: 17 tests, one error, 9.181s, exit 1. A new test
   expected the discarded `literal_outgoing_references` alias after the evidence
@@ -95,8 +97,17 @@ Two failed validation attempts are retained:
 - First combined focused run: 43 tests, one error, 9.595s unittest / 9.805s wall,
   exit 1, same test-field mismatch. The corrected final run passes separately.
 
-No failed result is erased by a later pass. No publication timeout or full-suite
-failure has been recorded at this point. An auxiliary broad forbidden-token scan
+- The first full discovery observed one failure in the existing architecture
+  governance test: the required inventory appendix moved its expected historical
+  suffix. A focused one-test reproduction failed in 0.002s. The complete first
+  discovery remains running at this checkpoint and its final result will be retained.
+  The finite selector correction preserves the original suffix-hash assertion and
+  audit fixture. Its focused document/preservation check passed 27 tests, zero
+  skips, in 0.166s, exit 0. The corrected combined check passed 55 tests above.
+
+No failed result is erased by a later pass. The earlier hosted head and its
+results remain separate from corrected-head gates. No publication timeout has
+been observed at this checkpoint. An auxiliary broad forbidden-token scan
 flagged the inherited test's own detector string; a precise scan of actual
 attachment identifiers and all three selected full bodies passed. This was a scan
 false positive, separate from unittest results. Initial sandboxed Git access and
@@ -173,6 +184,7 @@ after all gates finish; this checkpoint does not declare merge readiness.
 - `tests/activated_ability_projection_preservation.py`
 - `tests/fixtures/bounded-activated-ability-protected-state.json`
 - `tests/test_activated_ability_procedure_design.py`
+- `tests/test_external_card_data_plane_design.py`
 - `tests/test_gameplay_rules_bounded_activated_ability_preservation.py`
 - `tests/test_gameplay_rules_bounded_activated_ability_procedure_consumers.py`
 - `tests/test_gameplay_rules_bounded_activated_ability_projection_validation.py`

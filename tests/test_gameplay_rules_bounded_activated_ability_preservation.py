@@ -11,6 +11,7 @@ import unittest
 
 from activated_ability_projection_preservation import (
     NEW_REVIEW_PATHS, NEW_SOURCE_PATHS, is_projection_addition,
+    historical_inventory_before_projection_append,
 )
 
 
@@ -103,6 +104,20 @@ class BoundedActivatedAbilityPreservationTests(unittest.TestCase):
                 self.assertEqual(hashlib.sha256(original).hexdigest(), row["sha256"])
                 if row["path"] not in append_only:
                     self.assertEqual(len(raw), row["bytes"])
+
+    def test_historical_inventory_selector_accepts_only_the_exact_current_appendix(self):
+        raw = (ROOT / "PROJECT_INVENTORY.md").read_bytes()
+        historical = historical_inventory_before_projection_append(raw)
+        row = next(r for r in fixture()["historical_documents"]
+                   if r["path"] == "PROJECT_INVENTORY.md")
+        self.assertEqual(len(historical), row["bytes"])
+        self.assertEqual(hashlib.sha256(historical).hexdigest(), row["sha256"])
+        for candidate in (raw + b"future appendix\n", raw[:-1],
+                          b"X" + raw[1:], raw[:-1] + b"X", historical,
+                          bytearray(raw)):
+            with self.subTest(kind=type(candidate).__name__, length=len(candidate)):
+                with self.assertRaises(AssertionError):
+                    historical_inventory_before_projection_append(candidate)
 
     def test_historical_85_units_nine_projections_and_exact_three_unit_extension(self):
         old_paths = [r["path"] for r in fixture()["protected_files"]
