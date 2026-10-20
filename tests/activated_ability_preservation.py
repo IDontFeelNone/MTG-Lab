@@ -5,6 +5,8 @@ inventory. Unknown additions remain visible to those historical guards.
 """
 from pathlib import Path
 
+from activated_ability_projection_preservation import is_projection_addition
+
 
 ROOT = Path(__file__).resolve().parents[1]
 NEW_SOURCE_PATHS = frozenset(
@@ -22,5 +24,6 @@ NEW_REVIEW_PATHS = frozenset(
 
 
 def is_design_addition(path):
-    """Recognize only the reviewed design milestone's exact file extension."""
-    return path.relative_to(ROOT).as_posix() in NEW_SOURCE_PATHS | NEW_REVIEW_PATHS
+    """Select historical members, with both exact successor additions excluded."""
+    return (path.relative_to(ROOT).as_posix() in NEW_SOURCE_PATHS | NEW_REVIEW_PATHS
+            or is_projection_addition(path))

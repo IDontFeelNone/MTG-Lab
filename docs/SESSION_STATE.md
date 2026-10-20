@@ -932,3 +932,60 @@ untracked evidence document. The replacement verifier includes all staged, unsta
 deleted, renamed, and copied states and accepts only the exact evidence file in its expected pre-stage
 or staged status. This session did not contact MTGJSON or create production evidence. Canonical,
 market, knowledge, Phase 135 evidence, and all other protected production data remain unchanged.
+
+
+---
+
+## Current milestone append — Bounded Activated Ability Procedure Projection
+
+The subsequent owner prompt authorizes this bounded projection only. All earlier
+bodies above, including their authorization flags, counts and bases, retain their
+historical authority. GitHub main and PR #199's merge were independently verified
+at `2aa01764db0cfbcd89bc3a30a4433c4f24ea5893`; its merge tree matches reviewed
+head `6cf3f4897c919b39ec82e6b9ad2e26a4ff06c183`. The isolated branch is
+`codex/cr-bounded-activated-ability-procedure`, starting at that exact main.
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+
+The exact allowlist is **602.2, 602.2a, 602.2b**: three new NON-EXECUTABLE
+source units, **85 → 88 distinct units** and **nine → ten projections**.
+Fresh verification uses the owner-attached 977752-byte TXT, effective 2026-09-25,
+SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`.
+It confirms the merged design's review-only fingerprints and independently creates
+new projection anchors. No official prose, examples, TXT or attachment path is retained.
+See [the milestone](GAMEPLAY_RULES_BOUNDED_ACTIVATED_ABILITY_PROCEDURE_PROJECTION.md) for the source contract, relationships, reproduction,
+coverage, preservation and readiness. Validation evidence is reported in the
+single draft PR and completion report; required final-head hosted gates remain
+necessary for independent PM review. The owner retains final merge approval.
+
+Append-only consumer reassessment resolves `605.3 → 602.2` source correspondence.
+The separate `602.2b → 601.2f` cost analogy resolves against retained evidence.
+`602.2 → 733` and `602.2a → 701.20a` remain unresolved. The single imported
+range `601.2b–601.2i` has eight rows: b/f/g/h projected, c/d/e/i unprojected.
+No `601.2a` import, invented applicability qualifier, synthetic 605 section,
+new indirect-as-direct dependency or execution claim is introduced.
+Mana exceptions and hypothetical-stack controller attribution remain separate.
+All ten procedure responsibilities remain **OPEN / EXECUTION_BLOCKED**.
+The real profile remains **DESIGN_ONLY / NOT EXECUTABLE /
+REAL_EXECUTION_PROFILE_NOT_READY**; real execution remains **BLOCKED**.
+
+All 339 inherited src files and 115 prior gameplay evidence files (454 total)
+are protected against exact canonical Git. Historical document bodies are
+preserved. Source policy remains `not_granted`; private retention,
+redistribution, free service, commercial service and AI export remain
+NOT_ESTABLISHED. Runtime, Product Rules, Tier A, Card Intelligence, MB2,
+canonical catalog, collections, admission, publication workflows and timeouts
+remain unchanged.
+
+After reassessing shared procedure, reveal, rollback, trigger, controller and
+runtime frontiers, exactly one subsequent recommendation is **Shared Casting-Stage
+Gap Scope Design**: a bounded review-only comparison of the four missing imported
+members with other blockers, with **zero projected units and an empty projection
+allowlist**. Their bodies are not inspected in this milestone. This recommendation
+supplies no future source admission or execution authority.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false
+
+Stop at the single draft PR for independent PM review. Do not merge, enable
+auto-merge or begin the recommendation.
