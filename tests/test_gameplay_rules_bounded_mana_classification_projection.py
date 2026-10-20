@@ -10,6 +10,7 @@ import subprocess
 import tempfile
 import unittest
 
+from activated_ability_preservation import is_design_addition
 from evidence.contracts import deterministic_json
 from gameplay_rules.errors import GameplayContractError
 from gameplay_rules.projection import mana_classification_package as pkg
@@ -245,6 +246,7 @@ class PreservationAndIntegrityTests(unittest.TestCase):
         expected={row['path']:row['sha256'] for row in inventory}
         actual={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
             for p in (ROOT/'src').rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc'
+            and not is_design_addition(p)
             # The successor guard pins every byte in this canonical inventory
             # and permits only these four append-only source files.
             and not (p.parent == ROOT/'src/gameplay_rules/projection' and p.name in NEW_FILES | {

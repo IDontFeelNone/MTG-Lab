@@ -1,3 +1,45 @@
+# Current boundary — independent PM review of Activated Ability Procedure Design
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+PR #198 is merged. Canonical main and branch base:
+`9e1335d53458913dec1907e2922b9e99339cc3c5`.
+Branch: `codex/activated-ability-procedure-design`.
+The subsequent owner authorization covers **ACTIVATED ABILITY PROCEDURE DESIGN**
+only, with **0** new projected units, an empty current projection allowlist,
+**85** existing units and **nine** distinct projections.
+
+Review the [design](GAMEPLAY_RULES_ACTIVATED_ABILITY_PROCEDURE_DESIGN.md),
+append-only package, bounded exact-source correspondence, responsibility matrix,
+member-by-member import coverage, mana exceptions, consumer bindings, strict
+package validation and canonical-base preservation results. The local three-unit
+cluster is coherent as source coverage, while `605.3 → 602.2` remains unresolved
+and real execution remains BLOCKED / DESIGN_ONLY / NOT EXECUTABLE.
+
+Exactly one subsequent recommendation awaits owner approval: **Bounded Activated
+Ability Procedure Projection**, proposed allowlist `602.2`, `602.2a`, `602.2b`,
+expected count **3**. Its consumer value is bounded source correspondence for
+`605.3`, leaving the imported unprojected casting stages, illegal-action and
+reveal references, recognition, costs, payment, timing, stack, priority, Card
+semantics and downstream resolution unresolved. Require the exact owner artifact,
+reviewed anchors and preserved evidence; stop on scope, artifact, correspondence
+or preservation mismatch. This is a recommendation only.
+
+Future milestone authorized: **false**. Future source projection authorized:
+**false**. Future milestone begun: **false**. Do not begin it, merge, enable
+auto-merge, construct real snapshots, activate gameplay rules or execute gameplay.
+PM cannot recommend merge until complete hosted discovery and actual publication
+validation are green for the final head, with push head and PR merge-ref checked
+SHAs distinguished. The owner remains the final approver.
+
+---
+
+## Preserved historical milestone records
+
+The complete earlier document follows unchanged. Its former current headings,
+next recommendations and “NOT AUTHORIZED” records retain their original authority.
+The subsequent owner instruction authorizes only the present design milestone;
+it does not retroactively change those records.
+
 # Current task — Bounded Mana Stack-Exception Projection
 
 ## Current status — bounded mana stack-exception projection

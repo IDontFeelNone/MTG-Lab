@@ -17,6 +17,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+from activated_ability_preservation import is_design_addition
 from evidence.contracts import deterministic_json
 from gameplay_rules.capabilities import ENGINE_CONTRACT_VERSION, EXECUTION_PROFILE
 from gameplay_rules.engine import GameplayRulesEngine
@@ -100,6 +101,9 @@ def inventory(paths):
                       and "__pycache__" not in item.parts and item.suffix != ".pyc"])
     result = []
     for path in sorted(files):
+        # The successor guard independently pins every inherited byte.
+        if is_design_addition(path):
+            continue
         if path.is_symlink():
             raise AssertionError("Protected file must not be a symlink")
         raw = path.read_bytes()

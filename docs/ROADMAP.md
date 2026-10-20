@@ -1,3 +1,31 @@
+# Current roadmap — Activated Ability Procedure Design
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+PR #198 is merged at canonical main and branch base
+`9e1335d53458913dec1907e2922b9e99339cc3c5`. The owner separately authorized
+**ACTIVATED ABILITY PROCEDURE DESIGN** only. Its bounded review contracts and
+append-only findings are in the [design](GAMEPLAY_RULES_ACTIVATED_ABILITY_PROCEDURE_DESIGN.md).
+The milestone adds **0** projected units; coverage remains **85/nine** and the
+current projection allowlist is empty. Real execution remains BLOCKED;
+`605.3 → 602.2` remains unresolved.
+
+Exactly one subsequent recommendation awaits owner approval: **Bounded Activated
+Ability Procedure Projection**, proposed allowlist `602.2`, `602.2a`, `602.2b`
+(**3** units). The design finds this local cluster coherent for source coverage,
+without imported-stage completeness or semantic/execution closure. Future
+milestone authorized: false; future source projection authorized: false; future
+milestone begun: false. Finish one draft PR for independent PM review and stop.
+No architecture, gameplay activation or subsequent milestone follows automatically.
+
+---
+
+## Preserved historical milestone records
+
+The complete earlier document follows unchanged. Its former current headings,
+next recommendations and “NOT AUTHORIZED” records retain their original authority.
+The subsequent owner instruction authorizes only the present design milestone;
+it does not retroactively change those records.
+
 # Current milestone — collection audit and organization pilot
 
 Canonical main independently verified: `15e19b84701dd47970a948485683f73a687be9d2` (merged GitHub PR #169, including acquisition reconstruction repair). Architecture v12 remains frozen. PR numbers are independent of project phases; no new phase number is assigned.

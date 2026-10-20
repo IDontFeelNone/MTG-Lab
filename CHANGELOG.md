@@ -1,3 +1,18 @@
+# Activated Ability Procedure Design — review-identity correction (2026-10-20)
+
+- Audit all 51 prior-review pins against historical schema contracts and manifests; correct twelve selections that named foreign identities within their records.
+- Validate own-record identities, intended pinned packages and manifest correspondence through the actual prior-evidence path, with focused before/after regression coverage.
+- Recompute the dependent pin and manifest/package identities while preserving all seven authored design records, inherited evidence, existing test guards and 85-unit/nine-projection coverage.
+- Keep the correction in draft PR #199; execution remains blocked and the recommended future projection remains unauthorized and unbegun.
+
+# Activated Ability Procedure Design (2026-10-20)
+
+- Reconcile exact canonical main `9e1335d53458913dec1907e2922b9e99339cc3c5` after merged PR #198 and create a new design branch.
+- Inspect only the exact owner artifact's `602.2` / `602.2a` / `602.2b` cluster and necessary structure; retain authored findings and review-only provenance separately from historical unverified PM observations.
+- Define procedure responsibilities, exact `601.2b`–`601.2i` import coverage and activation-cost analogy, mana-exception relationships, consumer bindings and unresolved requirements in one deterministic append-only design package.
+- Add strict review-tooling and preservation checks; add zero projected units and preserve 85-unit/nine-projection coverage, inherited source/evidence, blocked execution, source permissions and Architecture v13.
+- Recommend only a future three-unit Bounded Activated Ability Procedure Projection for separate owner approval; no future projection is authorized or begun.
+
 # Core Comprehensive Rules Projection — Foundational Rules Subset (2026-10-17)
 
 - Reconcile exact canonical main `54cd3c33875a949d9a06fb70c336f0b55fb5aef9` after merged PR #185 and reproduce the existing owner-supplied artifact verifier against the external exact 977752-byte TXT.

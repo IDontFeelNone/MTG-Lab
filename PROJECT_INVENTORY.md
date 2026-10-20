@@ -1,3 +1,43 @@
+# Current implementation inventory — Activated Ability Procedure Design
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Canonical main / branch base: `9e1335d53458913dec1907e2922b9e99339cc3c5`
+(PR #198 merged). Branch: `codex/activated-ability-procedure-design`.
+The owner separately authorized **ACTIVATED ABILITY PROCEDURE DESIGN** only.
+
+The append-only [design](docs/GAMEPLAY_RULES_ACTIVATED_ABILITY_PROCEDURE_DESIGN.md)
+and `reference-reviews/gameplay-rules-activated-ability-procedure-design/`
+establish review contracts for the inspected `602.2` / `602.2a` / `602.2b` cluster.
+The exact owner artifact is 977752 bytes, effective 2026-09-25, SHA-256
+`8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`.
+New source-inspection findings are separate from PR #196's historical
+PM_SUPPLIED_DESIGN_INPUT_NOT_SOURCE_VERIFIED observations.
+
+The three-unit cluster is coherent for a future bounded source review. Its
+`601.2b`–`601.2i` procedure import and `601.2f` cost analogy leave missing
+`601.2c/d/e/i`, `733`, `701.20a` and independent gameplay semantics unresolved.
+The design adds **0** projected units; the current projection allowlist is empty.
+Coverage remains **85** units across **nine** projections, and
+`605.3 → 602.2` remains an unresolved projected-source dependency.
+No projected identity, registered anchor, real GameplayRulesSnapshot or execution
+path is added. Real execution remains BLOCKED; the real profile remains
+DESIGN_ONLY / NOT EXECUTABLE.
+
+Exactly one subsequent recommendation awaits owner approval: **Bounded Activated
+Ability Procedure Projection**, proposed allowlist `602.2`, `602.2a`, `602.2b`
+(**3** units). Future milestone authorized: false; future source projection
+authorized: false; future milestone begun: false. Stop at one draft PR for
+independent PM review; do not merge or begin that recommendation.
+
+---
+
+## Preserved historical milestone records
+
+The complete earlier document follows unchanged. Its former current headings,
+next recommendations and “NOT AUTHORIZED” records retain their original authority.
+The subsequent owner instruction authorizes only the present design milestone;
+it does not retroactively change those records.
+
 # Current implementation inventory — Bounded Mana Stack-Exception Projection
 
 ## Current status — bounded mana stack-exception projection
