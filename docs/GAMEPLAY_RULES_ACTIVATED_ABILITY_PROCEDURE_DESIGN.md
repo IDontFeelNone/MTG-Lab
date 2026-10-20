@@ -247,6 +247,38 @@ service, commercial service and AI export remain **NOT_ESTABLISHED**. Historical
 next-milestone authorization records remain immutable; this owner's prompt
 authorizes this design only.
 
+## PR #199 review-identity provenance correction
+
+Independent review found that twelve of the 51 declared prior-review bindings
+selected a foreign identity within the named record. The audit verified all 51
+against their historical schema contracts, content identities and explicit
+manifest bindings: twelve required correction and 39 were already correct.
+All seven review identities consumed by the authored design records were correct;
+all seven records, including the exact-source findings and fingerprints, remain
+byte-identical to reviewed head `d07fd53d6a41512caf2188e43d172da6eab8121c`.
+
+Prior-evidence validation now uses 36 historical typed contracts and 15 explicit
+sealed-report schema contracts. Each selection must name the contract's own
+identity and agree with its intended pinned parent package, manifest identity
+binding and canonical file metadata. Missing, invalid, ambiguous, unsupported or
+foreign selections fail through the actual prior-evidence path before output.
+Identity selection uses explicit contracts; field order and filename inference
+contribute no authority. Offline validation remains separate from fresh TXT proof.
+
+The twelve corrected values change the pin identity from
+`sha256:0af33c540db9295504c44d3f4a3b357ad90dab1209b7f2d787add4d281d977e2`
+to `sha256:b814f7a84bcc495dd1ddd315a67e75a01537a898393518d204d43d782cae0426`.
+Only that manifest dependency and its derived package identity change:
+`sha256:fd33e3356c0e8bc66e443b70c4cdd8c41bc9f66f74365bcee220545e24c26df3`
+is the reviewed predecessor;
+`sha256:cfe499b63d673af2337beac94134d30b1dac2a14097e244e79742670ed2ec1b1`
+is its corrected successor. All 440 preservation digests, 16 prior-package
+bindings, 85 projected rule bindings and nine projection identities are unchanged.
+Regression commands, before/after results and corrected-head hosted evidence are
+recorded in the same draft PR and completion report. The earlier two local
+publication timeouts remain failed attempts. No projection or semantic scope
+changes follow from this metadata correction.
+
 ## Exactly one subsequent recommendation — awaiting owner approval
 
 Recommend **Bounded Activated Ability Procedure Projection**, proposed exact

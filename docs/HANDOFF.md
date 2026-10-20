@@ -1,3 +1,21 @@
+# PR #199 provenance correction — existing design milestone
+
+Independent PM review returned REVISE for twelve foreign review-ID selections
+among 51 pins. The bounded correction verifies every selection against its own
+historical schema contract and manifest through prior-evidence validation.
+All seven authored design records remain byte-identical to reviewed head
+`d07fd53d6a41512caf2188e43d172da6eab8121c`; only the pin metadata, corresponding
+validator constant and dependent manifest/package identity change.
+The [design correction](GAMEPLAY_RULES_ACTIVATED_ABILITY_PROCEDURE_DESIGN.md#pr-199-review-identity-provenance-correction)
+records the identity succession. Exact correction-only files, audit, regressions,
+local results and corrected-head hosted checks belong in draft PR #199 and its
+completion report. Previous local publication timeouts remain failures.
+The canonical base remains `9e1335d53458913dec1907e2922b9e99339cc3c5`.
+Keep this one draft PR for independent review; future projection remains
+unauthorized and unbegun. Coverage stays 85/nine; real execution stays BLOCKED.
+
+---
+
 # Current handoff — Activated Ability Procedure Design
 
 Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.

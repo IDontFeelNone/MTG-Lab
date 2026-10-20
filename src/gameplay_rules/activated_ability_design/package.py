@@ -20,7 +20,7 @@ CANONICAL_MAIN = "9e1335d53458913dec1907e2922b9e99339cc3c5"
 PACKAGE_NAME = "gameplay-rules-activated-ability-procedure-design"
 PACKAGE_SCHEMA = "gameplay-activated-ability-procedure-design-package-v1"
 RECORD_DOMAIN = "gameplay-activated-ability-procedure-design-record-v1"
-PINS_SHA256 = "0af33c540db9295504c44d3f4a3b357ad90dab1209b7f2d787add4d281d977e2"
+PINS_SHA256 = "b814f7a84bcc495dd1ddd315a67e75a01537a898393518d204d43d782cae0426"
 RECORD_NAMES = frozenset((
     "source-correspondence.json", "local-scope.json",
     "procedure-responsibilities.json", "casting-import.json",
@@ -68,6 +68,185 @@ def retained_binding():
     return _copy(_pins()["binding"])
 
 
+def _review_binding_contracts():
+    """Name only the 51 retained reviews used by this bounded design.
+
+    Historical contracts own their schema and identity field. The two later
+    report families use their explicit seal schemas. Neither enumeration scans
+    a record for a plausible identity or inherits a selection from pins.json.
+    """
+    from gameplay_rules.projection import (
+        bounded_casting_package, bounded_mana_package, dependency_package,
+        object_control_package, zone_change_package, zone_change_dependency_package,
+    )
+    from gameplay_rules.mana_ability_design import package as mana_design_package
+    from gameplay_rules.mana_dependency_design import package as direct_design_package
+
+    contracts = {}
+    groups = (
+        ("gameplay-rules-bounded-casting-projection", bounded_casting_package,
+         ("casting-readiness-reassessment.json", "casting-stage-matrix.json",
+          "composite-coverage.json", "design-source-correspondence.json",
+          "madness-readiness-reassessment.json"), "filename"),
+        ("gameplay-rules-bounded-mana-ability-projection", bounded_mana_package,
+         ("behavior-readiness.json", "classification-readiness.json",
+          "composite-coverage.json", "consumer-reassessment.json",
+          "design-source-correspondence.json", "family-closure-review.json",
+          "overall-readiness.json"), "filename"),
+        ("gameplay-rules-foundational-dependencies", dependency_package,
+         ("closure-review.json", "composite-coverage.json",
+          "execution-readiness-reassessment.json"), "top"),
+        ("gameplay-rules-mana-ability-design", mana_design_package,
+         ("classification-design.json", "consumer-bindings.json",
+          "projection-frontier.json", "readiness.json"), "field"),
+        ("gameplay-rules-mana-direct-dependency-design", direct_design_package,
+         ("activated-procedure-design.json", "classification-dependencies.json",
+          "consumer-bindings.json", "dependency-groups.json", "readiness.json",
+          "stack-context-design.json", "triggered-procedure-design.json"), "field"),
+        ("gameplay-rules-object-control-exceptions", object_control_package,
+         ("composite-coverage.json", "control-readiness-reassessment.json",
+          "family-closure-review.json", "source-anomaly.json"), "top"),
+        ("gameplay-rules-zone-change-direct-dependencies", zone_change_dependency_package,
+         ("closure-review.json", "composite-coverage.json",
+          "zone-change-readiness-reassessment.json"), "top"),
+        ("gameplay-rules-zone-change-exceptions", zone_change_package,
+         ("composite-coverage.json", "family-closure-review.json",
+          "zone-change-readiness-reassessment.json"), "top"),
+    )
+    for package_name, module, names, location in groups:
+        for filename in names:
+            contract = module.RECORD_TYPES[filename]
+            field = contract.ID_FIELD
+            if location == "filename":
+                manifest_path = ("record_ids", filename)
+            elif location == "field":
+                manifest_path = ("record_ids", field)
+            else:
+                # This historical manifest names the anomaly with an alias.
+                manifest_path = ("source_anomaly_id" if field == "anomaly_id" else field,)
+            contracts[package_name + "/" + filename] = (
+                contract.SCHEMA, field, module.PACKAGE_SCHEMA, manifest_path, contract)
+
+    sealed_groups = (
+        ("gameplay-rules-bounded-mana-classification-projection",
+         "gameplay-bounded-mana-classification-package-v1",
+         (("classification-dependency-review.json",
+           "gameplay-bounded-mana-classification-classification-dependency-review-v1"),
+          ("composite-coverage.json", "gameplay-bounded-mana-classification-composite-coverage-v1"),
+          ("consumer-reassessment.json", "gameplay-bounded-mana-classification-consumer-reassessment-v1"),
+          ("design-source-correspondence.json",
+           "gameplay-bounded-mana-classification-design-source-correspondence-v1"),
+          ("loyalty-readiness.json", "gameplay-bounded-mana-classification-loyalty-readiness-v1"),
+          ("overall-readiness.json", "gameplay-bounded-mana-classification-overall-readiness-v1"),
+          ("target-readiness.json", "gameplay-bounded-mana-classification-target-readiness-v1"))),
+        ("gameplay-rules-bounded-mana-stack-exception-projection",
+         "gameplay-bounded-mana-stack-exception-package-v1",
+         (("composite-coverage.json", "gameplay-bounded-mana-stack-exception-composite-coverage-v1"),
+          ("consumer-reassessment.json", "gameplay-bounded-mana-stack-exception-consumer-reassessment-v1"),
+          ("design-source-correspondence.json",
+           "gameplay-bounded-mana-stack-exception-design-source-correspondence-v1"),
+          ("overall-readiness.json", "gameplay-bounded-mana-stack-exception-overall-readiness-v1"),
+          ("parent-scope-review.json", "gameplay-bounded-mana-stack-exception-parent-scope-review-v1"),
+          ("priority-readiness.json", "gameplay-bounded-mana-stack-exception-priority-readiness-v1"),
+          ("section-dependency-review.json", "gameplay-bounded-mana-stack-exception-section-dependency-review-v1"),
+          ("stack-exception-readiness.json", "gameplay-bounded-mana-stack-exception-stack-exception-readiness-v1"))),
+    )
+    for package_name, package_schema, schemas in sealed_groups:
+        for filename, schema in schemas:
+            contracts[package_name + "/" + filename] = (
+                schema, "review_id", package_schema, ("record_ids", filename), None)
+    return contracts
+
+
+def _historical_json(path):
+    """Load only canonical plain JSON from the existing safe bounded reader."""
+    raw = _read(path)
+    try:
+        value = json.loads(raw)
+        if type(value) is not dict or _canonical_candidate(value) != raw:
+            _fail("HISTORICAL_REVIEW_CANONICAL_JSON_REQUIRED")
+    except (GameplayContractError, ValueError, TypeError, UnicodeError, RecursionError):
+        _fail("HISTORICAL_REVIEW_CANONICAL_JSON_REQUIRED")
+    return value, raw
+
+
+def validate_review_bindings(binding, *, review_root):
+    """Verify each named selection against its own contract and parent manifest.
+
+    Byte pins establish preservation, while these independent finite contracts
+    establish provenance meaning. A foreign link remains invalid even if the
+    proposed metadata is coherently rehashed. No caller-selected path is opened.
+    """
+    try:
+        _canonical_candidate(binding)
+        contracts = _review_binding_contracts()
+        if (type(binding) is not dict or type(binding.get("review_bindings")) is not dict
+                or set(binding["review_bindings"]) != set(contracts)
+                or type(binding.get("prior_package_ids")) is not dict):
+            _fail("MISSING_OR_UNSUPPORTED_REVIEW_BINDING_SELECTION")
+        selections = binding["review_bindings"]
+        if any(type(identity) is not str for identity in selections.values()):
+            _fail("REVIEW_BINDING_IDENTITY_STRING_REQUIRED")
+        if len(set(selections.values())) != len(contracts):
+            _fail("AMBIGUOUS_REVIEW_BINDING_SELECTION")
+        root = _root(review_root)
+        manifests = {}
+        for name, descriptor in contracts.items():
+            schema, field, package_schema, manifest_path, contract = descriptor
+            package_name, filename = name.split("/")
+            package = _root(root / package_name)
+            if package_name not in manifests:
+                parent, _ = _historical_json(package / "manifest.json")
+                if (type(parent.get("schema_version")) is not str
+                        or parent["schema_version"] != package_schema
+                        or type(parent.get("package_id")) is not str
+                        or type(binding["prior_package_ids"].get(package_name)) is not str
+                        or parent["package_id"] != binding["prior_package_ids"][package_name]):
+                    _fail("REVIEW_PARENT_PACKAGE_BINDING_MISMATCH")
+                content = {key: value for key, value in parent.items() if key != "package_id"}
+                expected = "sha256:" + sha256_identity({
+                    "domain": package_schema, "content": content})
+                if parent["package_id"] != expected:
+                    _fail("REVIEW_PARENT_PACKAGE_IDENTITY_INVALID")
+                manifests[package_name] = parent
+            parent = manifests[package_name]
+            record, raw = _historical_json(package / filename)
+            if (type(record.get("schema_version")) is not str
+                    or record["schema_version"] != schema
+                    or type(record.get(field)) is not str):
+                _fail("UNSUPPORTED_OR_MISSING_REVIEW_OWN_IDENTITY")
+            content = {key: value for key, value in record.items() if key != field}
+            own_identity = "sha256:" + sha256_identity({"domain": schema, "content": content})
+            if record[field] != own_identity or selections[name] != own_identity:
+                _fail("REVIEW_BINDING_DOES_NOT_NAME_OWN_IDENTITY")
+            if contract is not None:
+                validated = contract.from_json(raw)
+                if (validated.identity != own_identity
+                        or (validated.serialize() + "\n").encode("utf-8") != raw):
+                    _fail("HISTORICAL_REVIEW_CONTRACT_MISMATCH")
+            declared = parent
+            for key in manifest_path:
+                if type(declared) is not dict or key not in declared:
+                    _fail("MISSING_REVIEW_OWN_MANIFEST_BINDING")
+                declared = declared[key]
+            if type(declared) is not str or declared != own_identity:
+                _fail("REVIEW_OWN_MANIFEST_BINDING_MISMATCH")
+            files = parent.get("files")
+            metadata = files.get(filename) if type(files) is dict else None
+            if (type(metadata) is not dict or set(metadata) != {"bytes", "sha256"}
+                    or type(metadata["bytes"]) is not int or metadata["bytes"] != len(raw)
+                    or type(metadata["sha256"]) is not str
+                    or metadata["sha256"] != hashlib.sha256(raw).hexdigest()):
+                _fail("REVIEW_MANIFEST_CANONICAL_BYTES_MISMATCH")
+        return _copy(selections)
+    except GameplayContractError as error:
+        if error.code == "activated_ability_design_package":
+            raise
+        _fail("INVALID_HISTORICAL_REVIEW_BINDING_CONTRACT")
+    except (OSError, ValueError, TypeError, KeyError, AttributeError, UnicodeError, RecursionError):
+        _fail("INVALID_HISTORICAL_REVIEW_BINDING_CONTRACT")
+
+
 def verify_prior_packages(review_root):
     """Check all 107 inherited gameplay-evidence files and their exact file sets."""
     root = _root(review_root)
@@ -84,7 +263,9 @@ def verify_prior_packages(review_root):
         for filename, digest in files.items():
             if hashlib.sha256(_read(package / filename)).hexdigest() != digest:
                 _fail("PRIOR_GAMEPLAY_EVIDENCE_BYTES_CHANGED")
-    return retained_binding()
+    binding = retained_binding()
+    validate_review_bindings(binding, review_root=root)
+    return binding
 
 
 def verify_preservation(repo_root):

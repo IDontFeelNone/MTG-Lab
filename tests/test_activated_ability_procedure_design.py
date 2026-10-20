@@ -6,17 +6,19 @@ Offline reproduction verifies retained metadata and must never substitute for it
 import ast
 import copy
 import hashlib
+from importlib import import_module
 import json
 import os
 from pathlib import Path
 import shutil
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from activated_ability_preservation import (
     NEW_REVIEW_PATHS, NEW_SOURCE_PATHS, is_design_addition,
 )
-from evidence.contracts import deterministic_json
+from evidence.contracts import deterministic_json, sha256_identity
 from gameplay_rules.activated_ability_design import inspection
 from gameplay_rules.activated_ability_design import package as pkg
 from gameplay_rules.errors import GameplayContractError
@@ -60,6 +62,364 @@ def replace_at(value, path, replacement):
     for key in path[:-1]:
         target = target[key]
     target[path[-1]] = replacement
+
+
+def historical_review_contracts():
+    """Independent own-ID oracle from immutable historical contracts/manifests.
+
+    These are historical package contracts, never activated-design pin values or
+    the implementation's new review-binding descriptor table. A record can carry
+    many valid foreign IDs; only its declared own field identifies that record.
+    """
+    groups = (
+        ("gameplay-rules-bounded-casting-projection", "projection.bounded_casting_package", "filename", None),
+        ("gameplay-rules-bounded-mana-ability-projection", "projection.bounded_mana_package", "filename", None),
+        ("gameplay-rules-foundational-dependencies", "projection.dependency_package", "top", None),
+        ("gameplay-rules-mana-ability-design", "mana_ability_design.package", "field",
+         {"classification-design.json", "consumer-bindings.json", "projection-frontier.json", "readiness.json"}),
+        ("gameplay-rules-mana-direct-dependency-design", "mana_dependency_design.package", "field", None),
+        ("gameplay-rules-object-control-exceptions", "projection.object_control_package", "top", None),
+        ("gameplay-rules-zone-change-direct-dependencies", "projection.zone_change_dependency_package", "top", None),
+        ("gameplay-rules-zone-change-exceptions", "projection.zone_change_package", "top", None),
+    )
+    result = {}
+    for directory, module, manifest_kind, selected in groups:
+        for filename, contract in import_module("gameplay_rules." + module).RECORD_TYPES.items():
+            if filename == "projection.json" or selected is not None and filename not in selected:
+                continue
+            field = contract.ID_FIELD
+            manifest_path = (("record_ids", filename) if manifest_kind == "filename" else
+                             ("record_ids", field) if manifest_kind == "field" else (field,))
+            if directory == "gameplay-rules-object-control-exceptions" and filename == "source-anomaly.json":
+                # The historical manifest names this record's anomaly_id via
+                # its explicitly defined source_anomaly_id relationship.
+                manifest_path = ("source_anomaly_id",)
+            result[directory + "/" + filename] = (contract.SCHEMA, field, manifest_path)
+    sealed_groups = (
+        ("gameplay-rules-bounded-mana-classification-projection", (
+            ("classification-dependency-review.json", "gameplay-bounded-mana-classification-classification-dependency-review-v1"),
+            ("composite-coverage.json", "gameplay-bounded-mana-classification-composite-coverage-v1"),
+            ("consumer-reassessment.json", "gameplay-bounded-mana-classification-consumer-reassessment-v1"),
+            ("design-source-correspondence.json", "gameplay-bounded-mana-classification-design-source-correspondence-v1"),
+            ("loyalty-readiness.json", "gameplay-bounded-mana-classification-loyalty-readiness-v1"),
+            ("overall-readiness.json", "gameplay-bounded-mana-classification-overall-readiness-v1"),
+            ("target-readiness.json", "gameplay-bounded-mana-classification-target-readiness-v1"))),
+        ("gameplay-rules-bounded-mana-stack-exception-projection", (
+            ("composite-coverage.json", "gameplay-bounded-mana-stack-exception-composite-coverage-v1"),
+            ("consumer-reassessment.json", "gameplay-bounded-mana-stack-exception-consumer-reassessment-v1"),
+            ("design-source-correspondence.json", "gameplay-bounded-mana-stack-exception-design-source-correspondence-v1"),
+            ("overall-readiness.json", "gameplay-bounded-mana-stack-exception-overall-readiness-v1"),
+            ("parent-scope-review.json", "gameplay-bounded-mana-stack-exception-parent-scope-review-v1"),
+            ("priority-readiness.json", "gameplay-bounded-mana-stack-exception-priority-readiness-v1"),
+            ("section-dependency-review.json", "gameplay-bounded-mana-stack-exception-section-dependency-review-v1"),
+            ("stack-exception-readiness.json", "gameplay-bounded-mana-stack-exception-stack-exception-readiness-v1"))),
+    )
+    for directory, contracts in sealed_groups:
+        for filename, schema in contracts:
+            result[directory + "/" + filename] = (schema, "review_id", ("record_ids", filename))
+    return result
+
+
+class RetainedReviewBindingTests(unittest.TestCase):
+    maxDiff = None
+
+    def copy_review_inputs(self, root):
+        for directory in {name.split("/")[0] for name in historical_review_contracts()}:
+            shutil.copytree(REVIEWS / directory, root / directory)
+
+    def set_record_and_manifest_bytes(self, review_root, name, record):
+        """Keep file metadata consistent so corrupt content is not a hash-only test."""
+        path = review_root / name
+        raw = canonical_bytes(record)
+        path.write_bytes(raw)
+        manifest_path = path.parent / "manifest.json"
+        manifest = json.loads(manifest_path.read_bytes())
+        manifest["files"][path.name] = {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+        return self.set_manifest_and_binding(manifest_path, manifest)
+
+    def set_manifest_and_binding(self, manifest_path, manifest):
+        content = {key: value for key, value in manifest.items() if key != "package_id"}
+        manifest["package_id"] = "sha256:" + sha256_identity({
+            "domain": manifest["schema_version"], "content": content})
+        manifest_path.write_bytes(canonical_bytes(manifest))
+        binding = pkg.retained_binding()
+        binding["prior_package_ids"][manifest_path.parent.name] = manifest["package_id"]
+        return binding
+
+    def test_all_51_bindings_select_contract_own_identity_and_manifest_relationship(self):
+        contracts = historical_review_contracts()
+        binding = pkg.verify_prior_packages(REVIEWS)
+        self.assertEqual(len(contracts), 51)
+        self.assertEqual(set(binding["review_bindings"]), set(contracts))
+        wrong = []
+        for name, (schema, own_field, manifest_path) in contracts.items():
+            record_path = REVIEWS / name
+            raw = record_path.read_bytes()
+            record = json.loads(raw)
+            manifest = json.loads((record_path.parent / "manifest.json").read_bytes())
+            self.assertEqual(record["schema_version"], schema)
+            expected = record[own_field]
+            in_manifest = manifest
+            for key in manifest_path:
+                in_manifest = in_manifest[key]
+            self.assertEqual(expected, in_manifest)
+            self.assertEqual(manifest["files"][record_path.name],
+                             {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()})
+            if binding["review_bindings"][name] != expected:
+                wrong.append(name)
+        self.assertEqual(wrong, [], "review bindings must name each historical record's own identity")
+
+    def test_real_prior_validation_rejects_existing_valid_foreign_review_identity(self):
+        name = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        record = json.loads((REVIEWS / name).read_bytes())
+        self.assertNotEqual(record["grouping_id"], record["activated_procedure_design_id"])
+        # Keep every actual prior evidence file and preservation digest valid.
+        # Only the proposed binding is wrong, and its replacement is a real,
+        # correctly formatted ID already present as a foreign link in this file.
+        pins = copy.deepcopy(pkg._pins())
+        pins["binding"]["review_bindings"][name] = record["activated_procedure_design_id"]
+        for validate in (pkg.verify_prior_packages, lambda root: pkg.rebuild_package(review_root=root)):
+            with self.subTest(path=validate.__name__), patch.object(pkg, "_pins", return_value=pins):
+                with self.assertRaises(GameplayContractError):
+                    validate(REVIEWS)
+
+    def test_unique_foreign_id_permutation_fails_actual_validation_before_output(self):
+        group = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        consumer = "gameplay-rules-mana-direct-dependency-design/consumer-bindings.json"
+        group_record = json.loads((REVIEWS / group).read_bytes())
+        records = pkg.rebuild_package(review_root=REVIEWS)
+        pins = copy.deepcopy(pkg._pins())
+        selected = pins["binding"]["review_bindings"]
+        self.assertEqual(selected[consumer], group_record["consumer_matrix_id"])
+        selected[group], selected[consumer] = selected[consumer], selected[group]
+        # Duplicate detection cannot reject this candidate: all 51 IDs are
+        # genuine, unique and merely assigned to the wrong historical records.
+        self.assertEqual(len(set(selected.values())), 51)
+        operations = (
+            lambda: pkg.validate_review_bindings(pins["binding"], review_root=REVIEWS),
+            lambda: pkg.verify_prior_packages(REVIEWS),
+            lambda: pkg.rebuild_package(review_root=REVIEWS),
+        )
+        with patch.object(pkg, "_pins", return_value=pins):
+            for index, operation in enumerate(operations):
+                with self.subTest(operation=index), self.assertRaisesRegex(
+                        GameplayContractError, "REVIEW_BINDING_DOES_NOT_NAME_OWN_IDENTITY"):
+                    operation()
+            with tempfile.TemporaryDirectory() as td:
+                target = Path(td) / "must-not-exist" / "package"
+                with self.assertRaisesRegex(GameplayContractError, "REVIEW_BINDING_DOES_NOT_NAME_OWN_IDENTITY"):
+                    pkg.write_package(target, records, review_root=REVIEWS)
+                self.assertFalse(target.parent.exists())
+
+    def test_valid_binding_validation_is_detached_and_preserves_actual_evidence(self):
+        binding = pkg.retained_binding()
+        original = copy.deepcopy(binding)
+        paths = {REVIEWS / name for name in historical_review_contracts()}
+        paths.update(path.parent / "manifest.json" for path in tuple(paths))
+        before = {path: path.read_bytes() for path in paths}
+        validated = pkg.validate_review_bindings(binding, review_root=REVIEWS)
+        self.assertEqual(validated, binding["review_bindings"])
+        validated.clear()
+        self.assertEqual(binding, original)
+        self.assertEqual(pkg.validate_review_bindings(binding, review_root=REVIEWS), original["review_bindings"])
+        self.assertEqual({path: path.read_bytes() for path in paths}, before)
+
+    def test_grouping_identity_is_distinct_from_each_real_foreign_link(self):
+        name = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        record = json.loads((REVIEWS / name).read_bytes())
+        foreign_fields = ("classification_design_id", "activated_procedure_design_id",
+                          "triggered_procedure_design_id", "stack_context_design_id", "consumer_matrix_id")
+        self.assertEqual(len({record[field] for field in foreign_fields}), 5)
+        for field in foreign_fields:
+            self.assertNotEqual(record["grouping_id"], record[field])
+            binding = pkg.retained_binding()
+            binding["review_bindings"][name] = record[field]
+            with self.subTest(foreign_field=field), self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(binding, review_root=REVIEWS)
+
+    def test_binding_keysets_and_identity_types_reject_without_coercion(self):
+        name = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        base = pkg.retained_binding()
+        candidates = [None, [], tuple(base.items())]
+        for value in (None, [], {}, "sha256:" + "0" * 64):
+            candidates.append({**base, "review_bindings": value})
+        missing = copy.deepcopy(base)
+        missing["review_bindings"].pop(name)
+        candidates.append(missing)
+        extra = copy.deepcopy(base)
+        extra["review_bindings"]["unapproved/extra.json"] = "sha256:" + "0" * 64
+        candidates.append(extra)
+        for value in (None, True, False, 1, 1.0, [], {}, "not-a-hash", "sha256:" + "f" * 63):
+            candidate = copy.deepcopy(base)
+            candidate["review_bindings"][name] = value
+            candidates.append(candidate)
+        class DictSubclass(dict):
+            pass
+        class StrSubclass(str):
+            pass
+        candidates.append(DictSubclass(base))
+        subclass_value = copy.deepcopy(base)
+        subclass_value["review_bindings"][name] = StrSubclass(base["review_bindings"][name])
+        candidates.append(subclass_value)
+        for candidate in candidates:
+            with self.subTest(candidate_type=type(candidate).__name__), self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(candidate, review_root=REVIEWS)
+
+    def test_parent_manifest_identity_requires_its_actual_package(self):
+        directory = "gameplay-rules-mana-direct-dependency-design"
+        base = pkg.retained_binding()
+        foreign = base["prior_package_ids"]["gameplay-rules-mana-ability-design"]
+        self.assertNotEqual(base["prior_package_ids"][directory], foreign)
+        for value in (None, True, 1, 1.0, foreign, "not-a-hash"):
+            candidate = copy.deepcopy(base)
+            candidate["prior_package_ids"][directory] = value
+            with self.subTest(value_type=type(value).__name__), self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(candidate, review_root=REVIEWS)
+        missing = copy.deepcopy(base)
+        missing["prior_package_ids"].pop(directory)
+        with self.assertRaises(GameplayContractError):
+            pkg.validate_review_bindings(missing, review_root=REVIEWS)
+
+    def test_actual_record_missing_unsupported_or_typed_schema_is_rejected(self):
+        name = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        original = json.loads((REVIEWS / name).read_bytes())
+        with tempfile.TemporaryDirectory() as td:
+            review_root = Path(td)
+            self.copy_review_inputs(review_root)
+            for schema in (None, True, 1, 1.0, [], {}, "unsupported-review-schema-v99"):
+                record = copy.deepcopy(original)
+                record["schema_version"] = schema
+                binding = self.set_record_and_manifest_bytes(review_root, name, record)
+                with self.subTest(schema_type=type(schema).__name__), self.assertRaises(GameplayContractError):
+                    pkg.validate_review_bindings(binding, review_root=review_root)
+            record = copy.deepcopy(original)
+            record.pop("schema_version")
+            binding = self.set_record_and_manifest_bytes(review_root, name, record)
+            with self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(binding, review_root=review_root)
+
+    def test_actual_own_identity_missing_invalid_or_foreign_is_rejected(self):
+        name = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        original = json.loads((REVIEWS / name).read_bytes())
+        with tempfile.TemporaryDirectory() as td:
+            review_root = Path(td)
+            self.copy_review_inputs(review_root)
+            for identity in (None, True, 1, 1.0, [], {}, "not-a-hash", original["consumer_matrix_id"]):
+                record = copy.deepcopy(original)
+                record["grouping_id"] = identity
+                binding = self.set_record_and_manifest_bytes(review_root, name, record)
+                with self.subTest(identity_type=type(identity).__name__), self.assertRaises(GameplayContractError):
+                    pkg.validate_review_bindings(binding, review_root=review_root)
+            record = copy.deepcopy(original)
+            record.pop("grouping_id")
+            binding = self.set_record_and_manifest_bytes(review_root, name, record)
+            with self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(binding, review_root=review_root)
+
+    def test_record_identity_and_manifest_relationship_cannot_be_forged_together(self):
+        name = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        original = json.loads((REVIEWS / name).read_bytes())
+        with tempfile.TemporaryDirectory() as td:
+            review_root = Path(td)
+            self.copy_review_inputs(review_root)
+            record = copy.deepcopy(original)
+            foreign = record["consumer_matrix_id"]
+            record["grouping_id"] = foreign
+            self.set_record_and_manifest_bytes(review_root, name, record)
+            manifest_path = (review_root / name).parent / "manifest.json"
+            manifest = json.loads(manifest_path.read_bytes())
+            manifest["record_ids"]["grouping_id"] = foreign
+            binding = self.set_manifest_and_binding(manifest_path, manifest)
+            binding["review_bindings"][name] = foreign
+            with self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(binding, review_root=review_root)
+
+    def test_actual_ambiguous_noncanonical_missing_and_manifest_links_fail_closed(self):
+        name = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        original_raw = (REVIEWS / name).read_bytes()
+        original = json.loads(original_raw)
+        with tempfile.TemporaryDirectory() as td:
+            review_root = Path(td)
+            self.copy_review_inputs(review_root)
+            record_path = review_root / name
+            manifest_path = record_path.parent / "manifest.json"
+            original_manifest = manifest_path.read_bytes()
+            variants = (
+                b" " + original_raw,
+                b'{"grouping_id":' + json.dumps(original["grouping_id"]).encode() + b"," + original_raw[1:],
+            )
+            for raw in variants:
+                record_path.write_bytes(raw)
+                with self.subTest(kind="noncanonical_or_duplicate"), self.assertRaises(GameplayContractError):
+                    pkg.validate_review_bindings(pkg.retained_binding(), review_root=review_root)
+            record_path.unlink()
+            with self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(pkg.retained_binding(), review_root=review_root)
+            record_path.write_bytes(original_raw)
+            manifest = json.loads(original_manifest)
+            manifest["record_ids"]["grouping_id"] = original["consumer_matrix_id"]
+            binding = self.set_manifest_and_binding(manifest_path, manifest)
+            with self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(binding, review_root=review_root)
+
+    def test_sealed_review_requires_its_exact_schema_and_own_content_hash(self):
+        name = "gameplay-rules-bounded-mana-classification-projection/target-readiness.json"
+        original = json.loads((REVIEWS / name).read_bytes())
+        with tempfile.TemporaryDirectory() as td:
+            review_root = Path(td)
+            self.copy_review_inputs(review_root)
+            # Another supported family's schema remains wrong for this record.
+            record = copy.deepcopy(original)
+            record["schema_version"] = "gameplay-bounded-mana-classification-consumer-reassessment-v1"
+            content = {key: value for key, value in record.items() if key != "review_id"}
+            record["review_id"] = "sha256:" + sha256_identity({"domain": record["schema_version"], "content": content})
+            binding = self.set_record_and_manifest_bytes(review_root, name, record)
+            binding["review_bindings"][name] = record["review_id"]
+            with self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(binding, review_root=review_root)
+            # Matching selection and file metadata do not validate a stale ID.
+            record = copy.deepcopy(original)
+            record["findings"]["test_authored_change"] = True
+            binding = self.set_record_and_manifest_bytes(review_root, name, record)
+            with self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(binding, review_root=review_root)
+
+    def test_manifest_metadata_exact_types_and_missing_own_relationship_after_rehash(self):
+        name = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        with tempfile.TemporaryDirectory() as td:
+            review_root = Path(td)
+            self.copy_review_inputs(review_root)
+            path = review_root / name
+            manifest_path = path.parent / "manifest.json"
+            original = json.loads(manifest_path.read_bytes())
+            for value in (True, float(original["files"][path.name]["bytes"])):
+                manifest = copy.deepcopy(original)
+                manifest["files"][path.name]["bytes"] = value
+                binding = self.set_manifest_and_binding(manifest_path, manifest)
+                with self.subTest(size_type=type(value).__name__), self.assertRaises(GameplayContractError):
+                    pkg.validate_review_bindings(binding, review_root=review_root)
+            manifest = copy.deepcopy(original)
+            manifest["record_ids"].pop("grouping_id")
+            binding = self.set_manifest_and_binding(manifest_path, manifest)
+            with self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(binding, review_root=review_root)
+
+    def test_unrelated_unique_but_invalid_record_identity_cannot_be_rehashed_into_parent(self):
+        name = "gameplay-rules-mana-direct-dependency-design/dependency-groups.json"
+        original = json.loads((REVIEWS / name).read_bytes())
+        with tempfile.TemporaryDirectory() as td:
+            review_root = Path(td)
+            self.copy_review_inputs(review_root)
+            record = copy.deepcopy(original)
+            record["grouping_id"] = "sha256:" + "0" * 64
+            self.set_record_and_manifest_bytes(review_root, name, record)
+            manifest_path = (review_root / name).parent / "manifest.json"
+            manifest = json.loads(manifest_path.read_bytes())
+            manifest["record_ids"]["grouping_id"] = record["grouping_id"]
+            binding = self.set_manifest_and_binding(manifest_path, manifest)
+            binding["review_bindings"][name] = record["grouping_id"]
+            with self.assertRaises(GameplayContractError):
+                pkg.validate_review_bindings(binding, review_root=review_root)
 
 
 class SourceInspectionTests(unittest.TestCase):

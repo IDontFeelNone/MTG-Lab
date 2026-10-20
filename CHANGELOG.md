@@ -1,3 +1,10 @@
+# Activated Ability Procedure Design — review-identity correction (2026-10-20)
+
+- Audit all 51 prior-review pins against historical schema contracts and manifests; correct twelve selections that named foreign identities within their records.
+- Validate own-record identities, intended pinned packages and manifest correspondence through the actual prior-evidence path, with focused before/after regression coverage.
+- Recompute the dependent pin and manifest/package identities while preserving all seven authored design records, inherited evidence, existing test guards and 85-unit/nine-projection coverage.
+- Keep the correction in draft PR #199; execution remains blocked and the recommended future projection remains unauthorized and unbegun.
+
 # Activated Ability Procedure Design (2026-10-20)
 
 - Reconcile exact canonical main `9e1335d53458913dec1907e2922b9e99339cc3c5` after merged PR #198 and create a new design branch.

@@ -1,3 +1,19 @@
+# Current correction — PR #199 review-identity provenance
+
+The owner's follow-up authorizes correction of the P2 review-binding defect
+within the existing Activated Ability Procedure Design and draft PR #199.
+All 51 relationships were independently audited against historical contracts and
+manifests; twelve foreign-ID selections are corrected and all seven authored
+design records remain unchanged. The dependent pin and package identities are
+documented in the [design correction](GAMEPLAY_RULES_ACTIVATED_ABILITY_PROCEDURE_DESIGN.md#pr-199-review-identity-provenance-correction).
+Current validation results belong in the PR/completion report; earlier failed
+local publication attempts remain failures, and earlier green hosted runs cover
+only their previously reviewed head. Corrected-head hosted gates are required.
+The exact canonical base, protected evidence and 85/nine coverage are unchanged.
+Real execution remains BLOCKED; future projection is unauthorized and unbegun.
+
+---
+
 # Current session state — Activated Ability Procedure Design
 
 Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
