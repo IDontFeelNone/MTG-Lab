@@ -12,6 +12,7 @@ from jsonschema import Draft202012Validator
 from jsonschema.exceptions import ValidationError
 
 from activated_ability_projection_preservation import historical_inventory_before_projection_append
+from shared_casting_stage_preservation import historical_document_before_shared_casting_append
 
 from collection.intelligence import CanonicalCollectionResolver
 from query import CanonicalQueryEngine
@@ -308,6 +309,8 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         for entry in read_json(EXAMPLES / "baseline-audit.json")["files"]:
             if entry["path"] in {"README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md"}:
                 text = (ROOT / entry["path"]).read_bytes()
+                if entry["path"] in {"PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md"}:
+                    text = historical_document_before_shared_casting_append(entry["path"], text)
                 if entry["path"] == "PROJECT_INVENTORY.md":
                     text = historical_inventory_before_projection_append(text)
                 self.assertEqual(hashlib.sha256(text[-entry["byte_length"]:]).hexdigest(), entry["sha256"])

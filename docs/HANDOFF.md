@@ -886,3 +886,39 @@ Future milestone begun: false
 
 Stop at the single draft PR for independent PM review. Do not merge, enable
 auto-merge or begin the recommendation.
+
+
+---
+
+## Current milestone append — Shared Casting-Stage Gap Scope Design
+
+The subsequent owner prompt authorizes only this review-only design. Earlier
+bodies and appendices retain their historical authority and validation history.
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Canonical main / branch base: `8c2a79ecce9ae7e6ff8e7959c57271e02bf1a4cb`.
+Branch: `codex/shared-casting-stage-gap-design`. PR #200's merge and reviewed
+head share tree `7e9f056923fdffe1c2871d8d9c49c42ab6bfea21`.
+Only complete 601.2c/d/e/i bodies were newly inspected, with exact original
+artifact bytes and retained lineage reproduced; c includes its owned example.
+Current projection allowlist: empty. Added units/projections/identities/registered
+anchors/edges: 0. Coverage remains 88 units / ten projections; import coverage4/8.
+All ten activation responsibilities remain OPEN / EXECUTION_BLOCKED; execution
+BLOCKED. Source policy stays not_granted; private retention, redistribution,
+free service, commercial service and AI export stay NOT_ESTABLISHED.
+
+Review the linked design and its identity-bound package, including current
+consumer relationships and the one-unit future recommendation. Historical
+records and failed validation history remain intact. Final-head hosted push
+must check out the literal head; PR must check out its merge ref with exact
+canonical-base/final-head parents. Both require complete discovery and actual
+publication validation including nested discovery and disposable readback.
+Local success alone does not establish PM merge readiness. Leave exactly one
+draft PR unmerged with auto-merge disabled; owner retains final approval.
+
+See [the design and validation checkpoint](GAMEPLAY_RULES_SHARED_CASTING_STAGE_GAP_DESIGN.md) and
+`reference-reviews/gameplay-rules-shared-casting-stage-gap-design/`.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false

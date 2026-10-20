@@ -661,3 +661,36 @@ no pricing, market intelligence, simulation, recommendation, AI provider, or pro
   competitive acquisition absent a future explicit authorization and complete dependency chain.
 - Re-ranked the critical path around a generic Product Intelligence evidence-to-decision vertical;
   reserved the domain for separate requirements without implementation or Architecture v12 changes.
+
+
+---
+
+## Current milestone append — Shared Casting-Stage Gap Scope Design
+
+The subsequent owner prompt authorizes only this review-only design. Earlier
+bodies and appendices retain their historical authority and validation history.
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Canonical main / branch base: `8c2a79ecce9ae7e6ff8e7959c57271e02bf1a4cb`.
+Branch: `codex/shared-casting-stage-gap-design`. PR #200's merge and reviewed
+head share tree `7e9f056923fdffe1c2871d8d9c49c42ab6bfea21`.
+Only complete 601.2c/d/e/i bodies were newly inspected, with exact original
+artifact bytes and retained lineage reproduced; c includes its owned example.
+Current projection allowlist: empty. Added units/projections/identities/registered
+anchors/edges: 0. Coverage remains 88 units / ten projections; import coverage4/8.
+All ten activation responsibilities remain OPEN / EXECUTION_BLOCKED; execution
+BLOCKED. Source policy stays not_granted; private retention, redistribution,
+free service, commercial service and AI export stay NOT_ESTABLISHED.
+
+Added a bounded, review-only source-informed scope design, immutable five-record
+package/manifest, focused canonical identity/type validation and independent
+473-file preservation guard. The selected future recommendation is601.2c only;
+it remains unapproved and unbegun. No gameplay execution, source admission,
+projected coverage, historical evidence or source permissions changed.
+
+See [the design and validation checkpoint](docs/GAMEPLAY_RULES_SHARED_CASTING_STAGE_GAP_DESIGN.md) and
+`reference-reviews/gameplay-rules-shared-casting-stage-gap-design/`.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false
