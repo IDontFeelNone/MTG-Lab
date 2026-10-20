@@ -1,29 +1,47 @@
-# Current direct-dependency readiness overlay — Mana Ability Direct Dependency Design
+# Current execution readiness overlay — Bounded Mana Stack-Exception Projection
 
-## Current status — bounded mana classification projection
+## Current status — bounded mana stack-exception projection
 
 Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
-Canonical main / branch base: `7082d7c048ef764d5e5ec8d5ea42e2ab9d3dbb28`
-(PR #196 merged). Branch: `codex/cr-bounded-mana-classification`.
-**BOUNDED_MANA_CLASSIFICATION_DEPENDENCIES_PROJECTED** adds exactly
-`115.6`, `606.1`, `606.2`: **3** new units, **84** total across **eight**
-distinct projections. The exact owner TXT was verified (977752 bytes,
-effective 2026-09-25); no source body is retained.
+Canonical main / branch base: `c9f46a2768cdee5e32f72e27d0255c6d4efbe175`
+(PR #197 merged). Branch: `codex/cr-bounded-mana-stack-exception`.
+**BOUNDED_MANA_STACK_EXCEPTION_PROJECTED** adds exactly `405.6c`:
+**1** new source unit, **85** total across **nine** distinct projections.
+The exact owner TXT was verified (977752 bytes, effective 2026-09-25,
+SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`).
+No source body, parent anchor or TXT is retained.
 
-Direct 115.6 references from 605.1a/b are resolved; target recognition remains
-OPEN. Loyalty classification evidence is represented with open dependencies.
-Broad 606 remains OPEN / PARTIALLY REPRESENTED; 606.3–6 remain unprojected.
-Historical dependency arrays, anchors and all eleven prior packages are unchanged.
-Mana classification, targeting and loyalty execution remain BLOCKED.
-The real profile remains DESIGN_ONLY / NOT EXECUTABLE /
-REAL_EXECUTION_PROFILE_NOT_READY. No runtime, Oracle/Card semantics, simulation,
-source-policy, Product Rules, Tier A, Card Intelligence, MB2 or writer changes.
+405.6 was observed only as structural parent context and remains unprojected.
+Child-only scope is coherent for the existing bounded 605.3b consumer.
+405.6c adds immediate mana-ability resolution, immediate mana-plus-other-effect
+context without a finer ordering claim, and a distinct priority-return finding
+limited to the activated-mana case. It supplies no triggered priority-return rule.
 
-Exactly one next recommendation: **Bounded Mana Stack-Exception Projection**,
-proposed `405.6c`, exact verified source TXT required; **NOT AUTHORIZED**.
-Do not begin it, merge, broaden scope or activate real rules.
-See [bounded classification projection](GAMEPLAY_RULES_BOUNDED_MANA_CLASSIFICATION_PROJECTION.md) for evidence, anchors,
-consumer reassessments, readiness and protected-state details.
+Append-only reviews resolve `605.3b → 405.6c` as DIRECT_REFERENCE_RESOLVED
+and `405.6c → 605` as SECTION_REFERENCE_RESOLVED_BY_COMPLETE_FAMILY, binding
+all 13 existing concrete 605 units. No synthetic 605 unit is created.
+Activated no-stack evidence remains 605.3b; triggered no-stack and immediate
+resolution evidence remains 605.4a. The latter has semantic overlap without a
+direct 405.6c citation. Historical rule identities, dependency arrays, anchors
+and all twelve prior packages remain unchanged.
+
+General stack and priority semantics remain OPEN; real execution remains
+BLOCKED. 601.2g and Madness improve only through existing indirect routes;
+109.4a controller attribution remains separate. 602.2, 603, 603.7d–f and 613
+remain unprojected; broad 606 remains partially represented and OPEN, with
+606.3–6 unprojected. Mana abilities, casting, object control and Madness remain
+execution-blocked. The real profile remains DESIGN_ONLY / NOT EXECUTABLE /
+REAL_EXECUTION_PROFILE_NOT_READY. Runtime, Oracle/Card semantics, simulation,
+source policy, Product Rules, Tier A, Card Intelligence, MB2 and writer/admission
+remain unchanged.
+
+Exactly one next recommendation: **Activated Ability Procedure Design**,
+centered on `602.2` with the provisional `602.2` / `602.2a` / `602.2b` cluster
+as design input, **0** projected units; **NOT AUTHORIZED**. The exact source TXT
+is required to inspect procedure shape and dependencies in that future design.
+No future projection allowlist is authorized. Do not begin it, merge or activate real rules.
+See [bounded stack-exception projection](GAMEPLAY_RULES_BOUNDED_MANA_STACK_EXCEPTION_PROJECTION.md) for source anchors,
+provenance, consumer reassessments, readiness and protected-state details.
 
 ## Historical status and retained context
 

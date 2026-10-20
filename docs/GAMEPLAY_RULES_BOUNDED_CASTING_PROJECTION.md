@@ -1,69 +1,47 @@
-# Current direct-dependency design overlay — Mana Ability Direct Dependency Design
+# Current casting readiness overlay — Bounded Mana Stack-Exception Projection
 
-**Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**
-Canonical main and branch base are
-`a9943fc8ca89ced4d3d288926f63fede12f4b57a`; PR #195 is merged. Branch:
-`codex/mana-ability-direct-dependency-design`.
+## Current status — bounded mana stack-exception projection
 
-**Mana Ability Direct Dependency Design** adds **0** real source units.
-Coverage remains **81** across seven separate projections. All ten prior
-retained rule/design packages, existing rule identities, source anchors and
-append-only reviews remain byte-identical. The external TXT is neither required
-nor opened; no source projection, new anchor or Wizards fetch occurs.
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Canonical main / branch base: `c9f46a2768cdee5e32f72e27d0255c6d4efbe175`
+(PR #197 merged). Branch: `codex/cr-bounded-mana-stack-exception`.
+**BOUNDED_MANA_STACK_EXCEPTION_PROJECTED** adds exactly `405.6c`:
+**1** new source unit, **85** total across **nine** distinct projections.
+The exact owner TXT was verified (977752 bytes, effective 2026-09-25,
+SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`).
+No source body, parent anchor or TXT is retained.
 
-Retained bounded-mana evidence verifies exactly five outgoing targets:
-`115.6`, `606`, `602.2`, `405.6c`, `603`. All remain UNRESOLVED / UNPROJECTED.
-Detailed observations about their unprojected bodies are
-**PM_SUPPLIED_DESIGN_INPUT_NOT_SOURCE_VERIFIED**. The new immutable records
-remain DESIGN_ONLY / NON_EXECUTABLE; existing citations are not rewritten.
+405.6 was observed only as structural parent context and remains unprojected.
+Child-only scope is coherent for the existing bounded 605.3b consumer.
+405.6c adds immediate mana-ability resolution, immediate mana-plus-other-effect
+context without a finer ordering claim, and a distinct priority-return finding
+limited to the activated-mana case. It supplies no triggered priority-return rule.
 
-The design separates four groups: bounded mana-classification dependencies;
-bounded stack-exception context; the large general activated-ability procedure;
-and the large shared triggered-ability subsystem. Target requirement is distinct
-from chosen targets and target legality. Loyalty classification is distinct from
-loyalty execution. A provisional `606.1`/`606.2` classification scope does not
-resolve the whole section-level `606` citation. `405.6c` alone is provisionally
-coherent with retained mana-exception context; optional parent `405.6` is reviewed
-without automatic admission. General activation and triggers retain separate
-contracts and their specific mana exceptions.
+Append-only reviews resolve `605.3b → 405.6c` as DIRECT_REFERENCE_RESOLVED
+and `405.6c → 605` as SECTION_REFERENCE_RESOLVED_BY_COMPLETE_FAMILY, binding
+all 13 existing concrete 605 units. No synthetic 605 unit is created.
+Activated no-stack evidence remains 605.3b; triggered no-stack and immediate
+resolution evidence remains 605.4a. The latter has semantic overlap without a
+direct 405.6c citation. Historical rule identities, dependency arrays, anchors
+and all twelve prior packages remain unchanged.
 
-The read-only consumer matrix binds `605.1a`, `605.1b`, `605.3`, `605.3b`,
-`605.4`, `109.4b` and `601.2g`. The shared triggered subsystem serves both
-`605.4` and `109.4b`, including delayed-controller frontier `603.7d/e/f`.
-Parent delayed-trigger context is preferred provisionally over isolated controller
-children, pending future scope design and source verification. Existing broad
-`601.2g → 605` and `109.4a → 605` remain
-SECTION_REFERENCE_RESOLVED_BY_COMPLETE_FAMILY. Section resolution supplies no
-semantic closure or execution readiness; hypothetical stack-controller
-attribution remains open. No new direct CR citation is invented.
+General stack and priority semantics remain OPEN; real execution remains
+BLOCKED. 601.2g and Madness improve only through existing indirect routes;
+109.4a controller attribution remains separate. 602.2, 603, 603.7d–f and 613
+remain unprojected; broad 606 remains partially represented and OPEN, with
+606.3–6 unprojected. Mana abilities, casting, object control and Madness remain
+execution-blocked. The real profile remains DESIGN_ONLY / NOT EXECUTABLE /
+REAL_EXECUTION_PROFILE_NOT_READY. Runtime, Oracle/Card semantics, simulation,
+source policy, Product Rules, Tier A, Card Intelligence, MB2 and writer/admission
+remain unchanged.
 
-Recommend exactly one next milestone: **Bounded Mana Classification Dependency
-Projection — NOT AUTHORIZED**. Provisional allowlist: `115.6`, `606.1`, `606.2`
-(**3** units). It addresses the shared target-requirement nuance and activated
-loyalty exclusion while leaving complete `606`, target grammar, stack, activation,
-triggers and runtime unresolved. That future projection requires the exact
-verified owner-controlled TXT and reviewed raw-byte block anchoring; this design
-does not begin it or claim any future source verification.
-
-[The direct-dependency design](GAMEPLAY_RULES_MANA_ABILITY_DIRECT_DEPENDENCY_DESIGN.md)
-records scope comparisons, grouping, consumer bindings and the next decision.
-Its append-only package is
-`reference-reviews/gameplay-rules-mana-direct-dependency-design/`.
-Mana classification, activated/triggered behavior, object control, casting and
-Madness remain EXECUTION_BLOCKED. The real profile remains DESIGN_ONLY /
-NOT EXECUTABLE / REAL_EXECUTION_PROFILE_NOT_READY.
-**FICTIONAL_MANA_DOES_NOT_SATISFY_REAL_605** remains enforced.
-
-Gameplay runtime, fictional behavior, Oracle/Card semantics and simulation remain
-unchanged. Product Rules, Tier A, Card Intelligence, canonical catalog, MB2,
-`SOURCE_POLICY_CLEARED_PLANS` and writer/admission remain unchanged. Historical
-acquisition identity
-`sha256:669d7db9ebcaf97853058fd62f408ce3c6596d5dae0ee72ff39d2ba9df56bb53`
-is preserved. `source_policy_clearance=not_granted`; private retention,
-redistribution, free/commercial service and AI export remain NOT_ESTABLISHED.
-Stop at one draft PR for PM review; do not merge, activate real rules or begin
-another milestone. Historical bodies below retain their original authority,
-findings and scope.
+Exactly one next recommendation: **Activated Ability Procedure Design**,
+centered on `602.2` with the provisional `602.2` / `602.2a` / `602.2b` cluster
+as design input, **0** projected units; **NOT AUTHORIZED**. The exact source TXT
+is required to inspect procedure shape and dependencies in that future design.
+No future projection allowlist is authorized. Do not begin it, merge or activate real rules.
+See [bounded stack-exception projection](GAMEPLAY_RULES_BOUNDED_MANA_STACK_EXCEPTION_PROJECTION.md) for source anchors,
+provenance, consumer reassessments, readiness and protected-state details.
 
 ## Historical merged PR #193 bounded casting projection record
 
