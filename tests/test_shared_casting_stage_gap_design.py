@@ -195,6 +195,34 @@ class SharedCastingStageReviewTests(unittest.TestCase):
         with self.assertRaisesRegex(GameplayContractError, "RETAINED_CASTING_STAGE_MATRIX_BINDING_MISMATCH"):
             review._validate_context_bindings(records, review_root=REVIEW_ROOT)
 
+    def test_six_additional_historical_package_own_domains_fields_and_types(self):
+        binding = review.historical_projection.retained_binding()
+        review._validate_additional_package_identities(REVIEW_ROOT, binding)
+        names = ("gameplay-rules-execution-profile-design", "gameplay-rules-foundational-projection",
+            "gameplay-rules-madness-casting-design", "gameplay-rules-source-versioning",
+            "gameplay-rules-release-discovery-closure", "gameplay-rules-artifact-verification")
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for name in names:
+                shutil.copytree(REVIEW_ROOT / name, root / name)
+            path = root / "gameplay-rules-source-versioning" / "manifest.json"
+            original = path.read_bytes()
+            for mutation in ("referenced_identity", "wrong_domain", "boolean_schema", "integer_boolean_substitution"):
+                value = json.loads(original)
+                if mutation == "referenced_identity":
+                    value["package_id"] = value["evidence_index_id"]
+                elif mutation == "boolean_schema":
+                    value["schema_version"] = True
+                else:
+                    if mutation == "integer_boolean_substitution":
+                        value["metadata_only"] = 1
+                    body = {key: item for key, item in value.items() if key != "package_id"}
+                    domain = "gameplay-rules-source-review-v1" if mutation == "integer_boolean_substitution" else review.RECORD_DOMAIN
+                    value["package_id"] = "sha256:" + sha256_identity({"domain": domain, "content": body})
+                path.write_bytes(review._bytes(value))
+                with self.subTest(mutation=mutation), self.assertRaisesRegex(GameplayContractError, "ADDITIONAL_HISTORICAL_PACKAGE_OWN_IDENTITY_INVALID"):
+                    review._validate_additional_package_identities(root, binding)
+
     def test_wrong_historical_own_field_domain_and_bound_bytes_fail(self):
         name = review.historical_projection.PACKAGE_NAME
         with tempfile.TemporaryDirectory() as temporary:

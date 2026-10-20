@@ -385,6 +385,25 @@ at this committed checkpoint. Their measured counts, skips, exit statuses and
 run links must be recorded in the single draft PR and self-contained completion
 report. This checkpoint does not claim those gates passed or PM merge readiness.
 
+The final in-milestone audit subsequently added explicit own-manifest identity
+recomputation for the six remaining legacy package bindings, using the domains
+defined by their actual implementations. Exact retained bytes alone are not
+substituted for those identity checks. Source findings, review identities and
+the package identity above remain unchanged. The corrected combined focused
+selection passed **26 tests, zero skips, 5.284 seconds, exit 0**, including
+actual attached-source reproduction. The added regression rejects referenced
+identities substituted for own IDs, wrong domains and JSON-distinct types.
+
+Two preliminary discovery attempts completed 163 and 179 individual tests,
+respectively, before deliberate interruption (each exit 130); neither supplies
+a complete discovery count. The preliminary actual-publication attempt was
+also interrupted with exit 130 during writer preparation, before nested
+discovery or publication/readback, and supplies no publication success.
+Final complete discovery and actual publication are restarted only after this
+last validator correction. The initial hosted runs for head
+`4133e99bb7e2c8f05ea20bbc5e4c770a9ff50f8c` remain earlier-head evidence,
+not final-head gates. Failed/interrupted attempts are not hidden by later passes.
+
 Stop at exactly one draft PR, unmerged with auto-merge disabled, for independent
 PM review. The owner retains final merge approval.
 

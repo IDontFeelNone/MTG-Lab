@@ -173,12 +173,53 @@ def _historical_envelope(root, name, module, expected_id):
     return parent
 
 
+
+def _validate_additional_package_identities(root, binding):
+    """Recompute six remaining own manifest identities using actual contracts.
+
+    Each implementation below explicitly hashes its manifest body in its own
+    PACKAGE_SCHEMA domain. Selecting that constant is deliberate, rather than
+    trusting the schema_version or another identity found in candidate JSON.
+    """
+    from gameplay_rules.execution_design import package as execution_package
+    from gameplay_rules.projection import package as foundation_package
+    from gameplay_rules.casting_design import package as casting_design_package
+    from gameplay_rules.source_evidence import review as source_review
+    from gameplay_rules.source_evidence import closure as discovery_review
+    from gameplay_rules.source_evidence import artifact_review
+    contracts = (
+        ("gameplay-rules-execution-profile-design", execution_package.PACKAGE_SCHEMA),
+        ("gameplay-rules-foundational-projection", foundation_package.PACKAGE_SCHEMA),
+        ("gameplay-rules-madness-casting-design", casting_design_package.PACKAGE_SCHEMA),
+        ("gameplay-rules-source-versioning", source_review.PACKAGE_SCHEMA),
+        ("gameplay-rules-release-discovery-closure", discovery_review.PACKAGE_SCHEMA),
+        ("gameplay-rules-artifact-verification", artifact_review.PACKAGE_SCHEMA),
+    )
+    for name, domain in contracts:
+        value, _ = _document(root / name / "manifest.json")
+        body = {key: item for key, item in value.items() if key != "package_id"}
+        expected = binding["prior_package_ids"][name]
+        if (type(value.get("schema_version")) is not str or value["schema_version"] != domain
+                or type(value.get("package_id")) is not str
+                or value["package_id"] != _identity(domain, body)
+                or value["package_id"] != expected):
+            _fail("ADDITIONAL_HISTORICAL_PACKAGE_OWN_IDENTITY_INVALID")
+        files = value.get("files")
+        if type(files) is not dict:
+            _fail("ADDITIONAL_HISTORICAL_MANIFEST_FILES_INVALID")
+        for filename, metadata in files.items():
+            raw = _read(root / name / filename)
+            canonical_binding = {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+            if type(metadata) is not dict or _bytes(metadata) != _bytes(canonical_binding):
+                _fail("ADDITIONAL_HISTORICAL_CANONICAL_BYTE_BINDING_INVALID")
+
 def validate_historical(*, review_root):
     """Validate exact retained bytes, schema-owned identities and manifest paths."""
     root = _root(review_root)
     # This verifies the 58 selected historical review identities using their
     # actual contracts and domains, plus all 115 pre-PR200 evidence bytes.
     binding = historical_projection.verify_prior_packages(root)
+    _validate_additional_package_identities(root, binding)
     historical_design.load_package(root / historical_design.PACKAGE_NAME, review_root=root)
     historical_projection.load_package(root / historical_projection.PACKAGE_NAME, review_root=root)
     prior = _historical_envelope(root, historical_design.PACKAGE_NAME, historical_design, PR199_PACKAGE_ID)
