@@ -15,6 +15,7 @@ NEW_REVIEW_PATHS = frozenset(
         "scope-recommendation.json", "readiness.json", "manifest.json",
     )
 )
+NEW_TOOL_PATHS = frozenset({"scripts/shared_casting_stage_gap_design.py"})
 # Only the exact appendix of this milestone may be removed before a historical
 # assertion. Baseline bytes include the complete PR #200 appendices.
 DOCUMENT_APPENDICES = {
@@ -58,8 +59,8 @@ DOCUMENT_APPENDICES = {
 
 
 def is_shared_casting_design_addition(path):
-    """Exclude only this milestone's named review files from older inventories."""
-    return path.relative_to(ROOT).as_posix() in NEW_REVIEW_PATHS
+    """Exclude only this milestone's named reviews and tool from older inventories."""
+    return path.relative_to(ROOT).as_posix() in NEW_REVIEW_PATHS | NEW_TOOL_PATHS
 
 
 def historical_document_before_shared_casting_append(path, raw):

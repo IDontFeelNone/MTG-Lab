@@ -10,7 +10,7 @@ import unittest
 
 from activated_ability_projection_preservation import historical_inventory_before_projection_append
 from shared_casting_stage_preservation import (
-    DOCUMENT_APPENDICES, NEW_REVIEW_PATHS,
+    DOCUMENT_APPENDICES, NEW_REVIEW_PATHS, NEW_TOOL_PATHS,
     historical_document_before_shared_casting_append,
     is_shared_casting_design_addition,
 )
@@ -71,9 +71,22 @@ class SharedCastingStagePreservationTests(unittest.TestCase):
         self.assertEqual(actual, reviews | NEW_REVIEW_PATHS)
         for name in NEW_REVIEW_PATHS:
             self.assertTrue(is_shared_casting_design_addition(ROOT / name))
+        self.assertEqual(NEW_TOOL_PATHS, {"scripts/shared_casting_stage_gap_design.py"})
+        for name in NEW_TOOL_PATHS:
+            self.assertTrue((ROOT / name).is_file())
+            self.assertFalse((ROOT / name).is_symlink())
+            self.assertTrue(is_shared_casting_design_addition(ROOT / name))
+        self.assertEqual({name for name in regular_paths(ROOT / "scripts")
+                          if is_shared_casting_design_addition(ROOT / name)}, NEW_TOOL_PATHS)
+        # No canonical source/evidence member may disappear from older guards.
+        self.assertFalse(any(is_shared_casting_design_addition(ROOT / row["path"])
+                             for row in rows))
         for name in (
             "src/gameplay_rules/engine.py",
             "src/gameplay_rules/shared_casting_design/future.py",
+            "scripts/shared_casting_stage_gap_design_future.py",
+            "scripts/future.py",
+            "scripts/automatic_canonical_update.py",
             "reference-reviews/gameplay-rules-shared-casting-stage-gap-design/future.json",
             "reference-reviews/gameplay-rules-shared-casting-stage-gap-design/projection.json",
         ):

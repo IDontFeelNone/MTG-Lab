@@ -404,6 +404,27 @@ last validator correction. The initial hosted runs for head
 `4133e99bb7e2c8f05ea20bbc5e4c770a9ff50f8c` remain earlier-head evidence,
 not final-head gates. Failed/interrupted attempts are not hidden by later passes.
 
+The first complete local discovery for superseded head `6097a33` finished
+**2,247 tests in 1,802.738 seconds: one failure, seven source-dependent skips**.
+Its retained unittest summary is a failed gate. The environment transition lost
+terminal handles while the underlying processes continued; no recovered process
+field is substituted for that failure summary. The superseded hosted PR run
+`39513595277` independently failed the same assertion: **2,247 tests in
+1,668.251 seconds, one failure, eight skips, exit 1**. Publication was skipped
+in that workflow because discovery failed; no success/readback is claimed.
+
+The failure was a historical inventory counting every script: the new review
+tool made 83 entries where its preserved baseline expects 82. The correction
+enumerates only `scripts/shared_casting_stage_gap_design.py` as a successor
+addition before the original count/hash assertion. The original 82 count,
+digest, fixtures and assertions remain unchanged. Regressions prove that every
+other current script, future script names and all 473 canonical source/evidence
+files remain visible to historical guards. The corrected old module plus new
+design/preservation checks passed **37 tests, zero skips, 5.566 seconds, exit 0**,
+including the actual four-fingerprint reproduction. No test methods were added
+by this correction. Complete discovery and actual publication must run again on
+the corrected final head; superseded-head failures remain in the PR/report.
+
 Stop at exactly one draft PR, unmerged with auto-merge disabled, for independent
 PM review. The owner retains final merge approval.
 
