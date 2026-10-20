@@ -1,3 +1,48 @@
+# Current handoff — Activated Ability Procedure Design
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+PR #198 is merged; exact GitHub main and branch base:
+`9e1335d53458913dec1907e2922b9e99339cc3c5`.
+Branch: `codex/activated-ability-procedure-design`.
+The owner's subsequent instruction authorizes this design milestone only.
+
+Review the [design](GAMEPLAY_RULES_ACTIVATED_ABILITY_PROCEDURE_DESIGN.md) and
+`reference-reviews/gameplay-rules-activated-ability-procedure-design/`. The new
+append-only correspondence records distinguish retained projected evidence,
+historical unverified PM observations, exact-source findings, architectural
+judgments and unresolved requirements. Local `602.2` / `602.2a` / `602.2b` scope
+is coherent for future bounded source coverage. The verified import is
+`601.2b`–`601.2i`; `601.2c/d/e/i`, `733` and `701.20a` remain unprojected.
+
+Actual attached-source inspection verified 977752 bytes, effective 2026-09-25,
+SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`.
+Offline metadata/package verification is separate from this source-dependent
+result. No official prose, source body, example, TXT or attachment path is retained.
+New projected units: **0**; current allowlist: empty; coverage: **85/nine**.
+`605.3 → 602.2` remains unresolved; real execution remains BLOCKED and the real
+profile DESIGN_ONLY / NOT EXECUTABLE. Protected source/evidence and identities
+are compared with the exact canonical base, without weakening historical guards.
+
+Current validation and delivery results belong in this milestone's draft PR and
+completion report. Independent PM review must verify final-head push discovery
+and actual publication validation, plus the associated PR run and its distinct
+merge-ref checkout SHA. The owner is the final approver.
+
+Exactly one subsequent recommendation: **Bounded Activated Ability Procedure
+Projection**, proposed allowlist `602.2`, `602.2a`, `602.2b` (**3**), awaiting
+owner approval. Future milestone authorized: false; future source projection
+authorized: false; future milestone begun: false. Stop after this draft PR is
+ready for PM review. Do not merge, enable auto-merge or begin subsequent work.
+
+---
+
+## Preserved historical milestone records
+
+The complete earlier document follows unchanged. Its former current headings,
+next recommendations and “NOT AUTHORIZED” records retain their original authority.
+The subsequent owner instruction authorizes only the present design milestone;
+it does not retroactively change those records.
+
 # Current handoff — Foundational Comprehensive Rules Projection
 
 **Architecture v13 — ACTIVE APPROVED architecture. Decision 017 is Accepted.**

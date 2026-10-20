@@ -1,3 +1,51 @@
+# Current session state — Activated Ability Procedure Design
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+PR #198 is merged. GitHub main and branch base were verified at exactly
+`9e1335d53458913dec1907e2922b9e99339cc3c5`; branch:
+`codex/activated-ability-procedure-design`. The owner's subsequent authorization
+is limited to this design milestone.
+
+The exact attached artifact passed raw-byte verification: **977752 bytes**,
+SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`,
+effective **2026-09-25**. Existing artifact-verification identity remains
+`sha256:6289f9e138c248f33b950842fd079f9dc9d4be431a9ac8dc1effb4a18ec502b3`.
+Bounded inspection covered only `602.2`, `602.2a`, `602.2b` and necessary
+structural context. Review-only metadata and authored findings are retained;
+source bodies, official examples, TXT and attachment paths are not retained.
+Offline reproduction and mocked checks do not claim fresh source inspection.
+
+The [design](GAMEPLAY_RULES_ACTIVATED_ABILITY_PROCEDURE_DESIGN.md) separates
+local source coherence, imported stages, costs, legality, rollback, resolution,
+ordinary activation, qualifying mana exceptions and consumer readiness.
+The exact import is `601.2b`–`601.2i`; four members remain unprojected.
+Literal references `602.2 → 733` and `602.2a → 701.20a` have unprojected targets.
+Historical PM observations retain their original unverified authority.
+
+New projected units: **0**; current allowlist: empty; total: **85** across
+**nine** projections. `605.3 → 602.2` remains unresolved. Real execution remains
+BLOCKED and the real profile remains DESIGN_ONLY / NOT EXECUTABLE.
+All inherited source and retained gameplay evidence remain protected against
+the exact canonical base. `source_policy_clearance=not_granted`; private
+retention, redistribution, free service, commercial service and AI export remain
+NOT_ESTABLISHED. Architecture, runtime, fictional behavior, Product Rules, Tier A,
+Card Intelligence, MB2, catalog, collections and admission remain unchanged.
+
+Exactly one recommendation awaits owner approval: **Bounded Activated Ability
+Procedure Projection**, proposed allowlist `602.2`, `602.2a`, `602.2b` (**3**).
+Future milestone authorized: false; future source projection authorized: false;
+future milestone begun: false. Stop after the draft PR is ready for independent
+PM review; no merge, auto-merge or subsequent work is authorized.
+
+---
+
+## Preserved historical milestone records
+
+The complete earlier document follows unchanged. Its former current headings,
+next recommendations and “NOT AUTHORIZED” records retain their original authority.
+The subsequent owner instruction authorizes only the present design milestone;
+it does not retroactively change those records.
+
 # Current session state — Bounded Mana Stack-Exception Projection
 
 ## Current status — bounded mana stack-exception projection

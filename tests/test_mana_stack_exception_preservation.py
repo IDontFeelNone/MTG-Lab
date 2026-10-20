@@ -11,6 +11,9 @@ from pathlib import Path
 import unittest
 
 
+from activated_ability_preservation import is_design_addition
+
+
 ROOT = Path(__file__).resolve().parents[1]
 CANONICAL_MAIN = "c9f46a2768cdee5e32f72e27d0255c6d4efbe175"
 FIXTURE = ROOT / "tests/fixtures/mana-stack-exception-protected-state.json"
@@ -47,7 +50,8 @@ def fixture():
 
 def source_paths():
     return {p.relative_to(ROOT).as_posix() for p in (ROOT / "src").rglob("*")
-        if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"}
+        if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"
+        and not is_design_addition(p)}
 
 
 class CanonicalPreservationTests(unittest.TestCase):
