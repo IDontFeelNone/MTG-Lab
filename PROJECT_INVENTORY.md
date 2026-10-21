@@ -1046,3 +1046,101 @@ no merge or auto-merge is enabled. The owner retains final merge approval.
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+---
+
+## Current milestone append — Bounded Shared Proposal-Legality Checkpoint Projection
+
+This subsequent owner authorization admits exactly **[601.2e]**, one real
+source unit, as structured **NON-EXECUTABLE** evidence. Every inherited body,
+appendix, count, identity, authorization flag and dated validation checkpoint
+retains its historical bytes. Architecture v13 remains ACTIVE APPROVED;
+Decision 017 remains ACCEPTED. Canonical main and branch base are
+`a21cda0c22092a77ec07097d7b155e7a71bd8de2`, tree
+`6816bbdfbbed9d4ee37e5fe8df98d66bc91763c4`. GitHub confirms PR #203 merged;
+its reviewed head `a4218192044213b174faab61fbdff969c0271851` has the same tree.
+The clean local checkout was stale at PR #202's merge and was safely fetched
+and reconciled onto `codex/cr-bounded-shared-proposal-legality` at exact main.
+
+The newly attached original TXT reproduces 977752 bytes, effective 2026-09-25,
+raw SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`
+and retained artifact verification/review lineage before e-only inspection.
+The complete unit occupies physical line 2472, bytes [298690, 298921),
+231 bytes, raw-span SHA-256
+`6b30c02c87f09a559eba9525cc331b65ddf668783d526e9f27f52a8447b11249`.
+It owns no continuation/example lines; final terminator and separator are
+excluded. Only the f marker prefix at physical line 2474 establishes the end;
+f's body is uninspected. No TXT, official prose/examples, source extract or
+attachment path is retained. PR #201's matching fingerprint remains a historical
+review observation, distinct from this new projected anchor. D's old statement
+that e's following-marker body was uninspected retains its historical meaning.
+
+The game checks the proposed spell's eligibility to be cast. An illegal proposal
+has a source-prescribed conditional return point before that spell's casting
+was proposed. Its sole literal numbered citation is **601.2e → 733**, with no
+numbered range. The reference remains UNRESOLVED; target coverage UNPROJECTED;
+semantic recovery closure OPEN; recovery execution BLOCKED. The target is
+metadata-only without fabricated rule, anchor, projection or package identity.
+No positive legal-outcome branch is expressly stated by e; structural order
+supplies no positive literal e→f citation or guarantee of continuation. Actual
+legality stays UNKNOWN_OR_UNSUPPORTED without criteria, Card/effect information,
+state and execution machinery. Absence of a detected violation proves nothing.
+No legality adjudicator, proposal validator, rollback or restoration is supplied.
+Casting recovery and the separate retained pre-activation context remain distinct.
+
+The parent assessment is
+STRUCTURAL_SIBLING_WITHOUT_RETAINED_PARENT_DIRECT_CITATION. It binds the new e
+identities without resolving a parent→e direct citation. The explicit proposal
+range remains a–d: b/c/d projected, a unprojected; the cost range remains f–h.
+The old casting projection and graph remain unchanged and incomplete.
+Current coverage becomes **90 → 91 units / 12 → 13 projections**. The one
+602.2b b–i import retains eight member rows: b/c/d/e/f/g/h projected and i
+unprojected, **6/8 → 7/8**; a remains excluded. E's current member binds its
+actual enclosing package, projection, rule and anchor. Historical member
+bindings and the separate resolved 602.2b→601.2f cost analogy are preserved.
+605.3→602.2 remains resolved at source-coverage level only. Parent→733,
+602.2→733 and 602.2a→701.20a stay unresolved. Madness remains an indirect
+consumer. All ten activation responsibilities remain OPEN / EXECUTION_BLOCKED.
+Seven covered members establish no complete casting, activation, legality or
+recovery. Activated relevance comes through the retained import; spell-specific
+wording is not generalized into an unrestricted activated-ability legality rule.
+
+New production modules are confined to `src/gameplay_rules/shared_proposal_legality/`;
+new evidence to `reference-reviews/gameplay-rules-bounded-shared-proposal-legality/`.
+The canonical manifest binds one immutable projection and eight authored review
+records covering correspondence, structural provenance, recovery, import,
+consumers, composite coverage, preservation/readiness and one recommendation.
+All 361 inherited source files and 150 evidence files across 22 directories
+(511 total) remain byte-identical. Independent canonical Git reconstruction
+reproduced digest `ab6257aa1e9e960a6a81728cb68637a4a7ce5379212dff83a85ce363bbe9defd`.
+Six fixtures, 13 historical documents, the inherited design tool and controlled
+82-file inventory are protected. The complete 83080-byte inherited inventory
+retains all five segments: 69051 + 3400 + 1989 + 3400 + 5240. Finite adapters
+strip only this exact suffix; a new independent guard covers the whole state.
+
+Source policy remains `not_granted`; private retention, redistribution, free
+service, commercial service and AI export remain NOT_ESTABLISHED. Semantic
+closure stays OPEN; real execution BLOCKED. No real snapshot/profile, runtime,
+Card/Oracle ingestion, simulation, catalog/publication/admission behavior,
+Product Rules, target/mana/loyalty/trigger distinctions or workflow gate changes.
+Only MTGLAB_SHARED_PROPOSAL_LEGALITY_SOURCE is configured for fresh reproduction;
+inherited source selectors stay unconfigured with explicit source-test skips.
+See [the milestone document](docs/GAMEPLAY_RULES_BOUNDED_SHARED_PROPOSAL_LEGALITY_PROJECTION.md)
+for commands, measured validation, limitations and pre-publication checkpoint.
+Final-head local publication and hosted push/PR evidence belongs in the PR and
+completion report after it is actually obtained; no pending gate is claimed passed.
+
+Exactly one subsequent recommendation is **Proposal-legality criteria dependency
+scope design**, a review-only retained-evidence assessment with an empty source
+allowlist and zero new units. Its question is which dependency and missing-input
+categories prevent a supported actual proposal-legality decision. It would map
+retained criteria, Card/effect, state and machinery gaps before proposing any
+further bounded investigation. No new body inspection or projection, i, recovery,
+reveal, shared-triggered or runtime work is selected or begun. Separate owner
+authorization is required. Leave one draft PR unmerged with auto-merge disabled
+for independent PM review. The owner retains final approval.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false

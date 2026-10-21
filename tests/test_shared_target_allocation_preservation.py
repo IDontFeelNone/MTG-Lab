@@ -19,6 +19,15 @@ from shared_target_allocation_preservation import (
 )
 
 
+from shared_proposal_legality_preservation import (
+    DOCUMENT_APPENDICES as PROPOSAL_LEGALITY_APPENDICES,
+    NEW_SOURCE_PATHS as PROPOSAL_LEGALITY_SOURCE_PATHS,
+    NEW_REVIEW_PATHS as PROPOSAL_LEGALITY_REVIEW_PATHS,
+    historical_document_before_proposal_legality_append,
+    is_proposal_legality_addition,
+)
+
+
 def fixture():
     raw = FIXTURE.read_bytes()
     if hashlib.sha256(raw).hexdigest() != FIXTURE_SHA256:
@@ -32,7 +41,9 @@ def fixture():
 def regular_paths(directory, root=ROOT):
     return {p.relative_to(root).as_posix() for p in directory.rglob("*")
             if (p.is_file() or p.is_symlink())
-            and "__pycache__" not in p.parts and p.suffix != ".pyc"}
+            and "__pycache__" not in p.parts and p.suffix != ".pyc"
+            and p.relative_to(root).as_posix() not in
+            PROPOSAL_LEGALITY_SOURCE_PATHS | PROPOSAL_LEGALITY_REVIEW_PATHS}
 
 
 class SharedTargetAllocationPreservationTests(unittest.TestCase):
@@ -158,6 +169,8 @@ class SharedTargetAllocationPreservationTests(unittest.TestCase):
         for row in rows:
             with self.subTest(path=row["path"]):
                 raw = (ROOT / row["path"]).read_bytes()
+                if row["path"] in PROPOSAL_LEGALITY_APPENDICES:
+                    raw = historical_document_before_proposal_legality_append(row["path"], raw)
                 if row["path"] in DOCUMENT_APPENDICES:
                     pin = DOCUMENT_APPENDICES[row["path"]]
                     self.assertGreater(pin["appendix_bytes"], 0)
@@ -205,7 +218,8 @@ class SharedTargetAllocationPreservationTests(unittest.TestCase):
         self.assertEqual((len(inherited), len(old_rules), len(old_refs)), (11, 89, 89))
         self.assertIn("601.2c", old_refs)
         self.assertNotIn("601.2d", old_refs)
-        paths = sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
+        paths = [p for p in sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
+                 if not is_proposal_legality_addition(p)]
         projections = [json.loads(p.read_bytes()) for p in paths]
         rules = [r for p in projections for r in p["rules"]]
         refs = {r["rule_reference"] for r in rules}

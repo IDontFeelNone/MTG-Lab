@@ -8,6 +8,12 @@ import hashlib
 from pathlib import Path
 
 
+from shared_proposal_legality_preservation import (
+    DOCUMENT_APPENDICES as PROPOSAL_LEGALITY_APPENDICES,
+    historical_document_before_proposal_legality_append,
+)
+
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "d0331139ae10d6709bd448ac83b28ea4e2b45969"
 TREE = "a1a4eb4c2f857b50cb3ac0f63162773596eabd8d"
@@ -74,6 +80,9 @@ def historical_document_before_target_allocation_append(path, raw):
         raise AssertionError("Only the named target-allocation documents are adapted")
     if type(raw) is not bytes:
         raise AssertionError("Canonical document input must be bytes")
+    if (path in PROPOSAL_LEGALITY_APPENDICES
+            and len(raw) > PROPOSAL_LEGALITY_APPENDICES[path]["baseline_bytes"]):
+        raw = historical_document_before_proposal_legality_append(path, raw)
     pin = DOCUMENT_APPENDICES[path]
     length = pin["baseline_bytes"]
     if len(raw) not in (length, length + pin["appendix_bytes"]):
