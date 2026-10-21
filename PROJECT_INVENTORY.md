@@ -962,3 +962,87 @@ recommendation. The owner retains final merge approval.
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+---
+
+## Current milestone append — Bounded Shared Target-Allocation Stage Projection
+
+This subsequent owner authorization covers exactly **[601.2d]** and one new
+real source unit. Every inherited body, appendix, identity, historical source
+inspection statement and future-authorization flag retains its original bytes.
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+
+Canonical main / branch base: `d0331139ae10d6709bd448ac83b28ea4e2b45969`.
+Branch: `codex/cr-bounded-shared-target-allocation`. PR #202 is merged; literal
+main and reviewed head `9c3c2f38a8dda28dfc75ac1abc7923f60fe3ad36` share tree
+`a1a4eb4c2f857b50cb3ac0f63162773596eabd8d`. The clean local checkout started
+at that exact base. No unrelated work is included.
+
+The newly supplied original TXT and retained verification lineage were freshly
+reproduced before d-only inspection: 977752 bytes, effective 2026-09-25,
+raw SHA-256 `8d860e451f20f38865b725b42d82feb714c725373dd8f3b32b8652b3eeb070ca`.
+The complete d unit is physical line 2470, original bytes [298444, 298686),
+242 bytes, raw-span SHA-256
+`6f9f37717e4f0594579bc0cf3fd938c7d56cc49deaa165c7c011400e46e38fbc`.
+It owns no example lines and has no numbered outgoing citations or ranges.
+Only the e marker prefix at line 2472 supplies the ending boundary; e's body
+and all other rule bodies remain uninspected in this milestone. No TXT,
+official prose/examples, source extract or attachment path is retained.
+
+The reasoning gain separates retained c recipient declaration from conditional
+distribution allocation. When a spell requires distribution of an effect among
+one or more targets, the casting player declares the division; each recipient
+in that required distribution receives at least one unit of the divided subject.
+The minimum does not apply to every target. Actual recipients, quantities,
+Card/effect semantics and state remain unknown. No target recognition, selection,
+compatibility solving, arithmetic/allocation solving, damage/counter application,
+resolution, legality decision, casting or activation execution is implemented.
+
+Current coverage is **89 → 90 distinct rules**, **eleven → twelve projections**,
+and **5/8 → 6/8** of the single `602.2b` b–i import: b/c/d/f/g/h projected;
+e/i unprojected; a excluded. Parent d coverage resolves only the normalized
+member of the explicit a–d range at SOURCE_COVERAGE_ONLY level: b/c/d projected,
+a open. Neither parent nor import/procedure is complete. Historical c and 4/8
+and 5/8 records remain unchanged; direct citations and range membership stay
+distinct. Source coverage supplies no semantic closure. All ten activated-
+ability responsibilities remain OPEN / EXECUTION_BLOCKED; real execution stays
+BLOCKED. No real snapshot/profile is created or activated.
+
+All **495** inherited source/evidence files (354 + 141 across 21 evidence
+directories), five fixtures, the inherited design tool, twelve documents and
+the controlled 82-file inventory remain protected byte-for-byte. Exact finite
+adapters strip only this pinned new suffix before older adapters. The inventory
+retains the complete 77840-byte sequence: 69051 + 3400 + 1989 + 3400.
+Source policy remains not_granted; private retention, redistribution, free
+service, commercial service and AI export remain NOT_ESTABLISHED.
+
+New immutable modules are confined to `src/gameplay_rules/shared_target_allocation/`.
+One manifest binds the projection, correspondence, current parent/import
+reassessments, consumer boundaries, composite coverage, preservation/readiness
+and exactly one subsequent recommendation. The independent baseline row digest
+is `731267c1ca4c8f04e07529656c10e85a0bcecc7a555364a5132e43c7eef84c30`.
+
+See [the bounded projection and validation checkpoint](docs/GAMEPLAY_RULES_BOUNDED_SHARED_TARGET_ALLOCATION_PROJECTION.md) and
+`reference-reviews/gameplay-rules-bounded-shared-target-allocation/` for exact
+source, identity, preservation, consumer and measured validation contracts.
+Offline validation and synthetic tests establish no fresh source authority.
+Only MTGLAB_SHARED_TARGET_ALLOCATION_SOURCE is configured for local fresh
+reproduction; inherited source selectors remain unconfigured. Configured invalid
+source must fail. Final-head hosted push and PR gates must pass full discovery
+and actual publication, including nested discovery and disposable-remote
+writer/readback. Their completed evidence belongs in the PR completion report;
+a committed pre-publication checkpoint claims no later gate as already passed.
+
+Exactly one subsequent recommendation is **Bounded Shared Proposal-Legality
+Checkpoint Projection**, proposed future allowlist **[601.2e]**, expected +1,
+conditional 91 rules / thirteen projections / 7/8 import coverage. Retained
+checkpoint evidence is coherent with recovery733 still open; i, reveal,
+recovery, shared-triggered/delayed-trigger and runtime frontiers remain bounded
+and unresolved. No additional source body is inspected. This recommendation is
+unauthorized and unbegun. Stop at one draft PR for independent PM review;
+no merge or auto-merge is enabled. The owner retains final merge approval.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false

@@ -7,6 +7,11 @@ exact document appendices are selected before those guards run.
 import hashlib
 from pathlib import Path
 
+from shared_target_allocation_preservation import (
+    DOCUMENT_APPENDICES as TARGET_ALLOCATION_APPENDICES,
+    historical_document_before_target_allocation_append,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "9953142e6b729f8ca34a008dc5e8fcf5b642ad54"
@@ -75,6 +80,9 @@ def historical_document_before_target_declaration_append(path, raw):
         raise AssertionError("Only the named target-declaration documents are adapted")
     if type(raw) is not bytes:
         raise AssertionError("Canonical document input must be bytes")
+    if (path in TARGET_ALLOCATION_APPENDICES
+            and len(raw) > TARGET_ALLOCATION_APPENDICES[path]["baseline_bytes"]):
+        raw = historical_document_before_target_allocation_append(path, raw)
     pin = DOCUMENT_APPENDICES[path]
     length = pin["baseline_bytes"]
     if len(raw) not in (length, length + pin["appendix_bytes"]):

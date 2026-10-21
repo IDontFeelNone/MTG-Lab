@@ -15,6 +15,7 @@ from shared_casting_stage_preservation import (
     is_shared_casting_design_addition,
 )
 from shared_target_declaration_preservation import is_target_declaration_addition
+from shared_target_allocation_preservation import is_target_allocation_addition
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "8c2a79ecce9ae7e6ff8e7959c57271e02bf1a4cb"
@@ -32,7 +33,8 @@ def fixture():
 def regular_paths(directory):
     return {p.relative_to(ROOT).as_posix() for p in directory.rglob("*")
             if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"
-            and not is_target_declaration_addition(p)}
+            and not is_target_declaration_addition(p)
+            and not is_target_allocation_addition(p)}
 
 
 class SharedCastingStagePreservationTests(unittest.TestCase):
