@@ -7,6 +7,11 @@ unknown additions or arbitrary document suffixes remain visible and fail closed.
 import hashlib
 from pathlib import Path
 
+from shared_target_declaration_preservation import (
+    DOCUMENT_APPENDICES as TARGET_DECLARATION_APPENDICES,
+    historical_document_before_target_declaration_append,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 NEW_REVIEW_PATHS = frozenset(
     "reference-reviews/gameplay-rules-shared-casting-stage-gap-design/" + name
@@ -69,6 +74,8 @@ def historical_document_before_shared_casting_append(path, raw):
         raise AssertionError("Only the named shared casting design documents are adapted")
     if type(raw) is not bytes:
         raise AssertionError("Canonical document input must be bytes")
+    if path in TARGET_DECLARATION_APPENDICES:
+        raw = historical_document_before_target_declaration_append(path, raw)
     pin = DOCUMENT_APPENDICES[path]
     length = pin["baseline_bytes"]
     if len(raw) != length + pin["appendix_bytes"]:

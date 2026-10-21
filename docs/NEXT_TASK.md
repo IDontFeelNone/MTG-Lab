@@ -653,3 +653,60 @@ See [the design and validation checkpoint](GAMEPLAY_RULES_SHARED_CASTING_STAGE_G
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+---
+
+## Current milestone append — Bounded Shared Target-Declaration Stage Projection
+
+The subsequent owner prompt authorizes exactly this one source projection.
+Every earlier body and appendix retains its historical bytes, bases, counts,
+identities, authorization flags and validation history.
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Canonical main / branch base: `9953142e6b729f8ca34a008dc5e8fcf5b642ad54`.
+Branch: `codex/cr-bounded-shared-target-declaration`. PR #201's merge and
+reviewed head share tree `7e283050ca31cf9ca62ead060a94ee5dbd4b4871`.
+The exact allowlist is **[601.2c]**. The complete two-line unit includes its
+owned example within one rule: lines 2467–2468, bytes [296470, 298440),
+1970 bytes, raw-span SHA-256
+`6209ab42af52680707d5d42a8054e3b3681d050440ff8dc31f4cf86d0556a08e`.
+Source verification requires the exact supplied artifact and retained lineage;
+only c's body and its structural ending boundary may be freshly inspected.
+No TXT, official prose/examples or attachment path is retained.
+
+The current NON-EXECUTABLE coverage is **88 → 89 distinct units**, **ten →
+eleven projections**, and **4/8 → 5/8** of one `602.2b` b–i range import.
+Covered members are b/c/f/g/h; d/e/i remain unprojected and a remains excluded.
+The casting-parent c assessment resolves source coverage through its explicit
+a–d proposal range, with b/c covered and a/d open. Historical unresolved records
+and 4/8 assessments remain immutable. No individual-citation list or import
+qualifier is invented; Madness remains an indirect consumer.
+
+All ten activation responsibilities remain OPEN / EXECUTION_BLOCKED; real
+execution remains BLOCKED. Source coverage is distinct from semantic closure.
+Target requirements, actual chosen-target count and targeted status remain
+separate; zero chosen targets do not establish mana-ability eligibility.
+Source policy stays not_granted; private retention, redistribution, free
+service, commercial service and AI export stay NOT_ESTABLISHED.
+
+Immediate next action: independent PM review of the single draft PR after
+final-head hosted discovery and actual publication gates pass. The owner is
+final merge approver. Exactly one subsequent recommendation is **Bounded Shared
+Target-Allocation Stage Projection**, proposed future allowlist **[601.2d]**,
+expected addition **1**, conditional coverage **90 units / twelve projections**
+and import **6/8**. Retained d observations with new c coverage could distinguish
+recipient declaration from conditional allocation. e/i, reveal, recovery,
+shared-triggered and independent runtime frontiers retain their limits.
+That recommendation is unauthorized and unbegun; no further body is inspected.
+
+See [the projection contract and validation checkpoint](GAMEPLAY_RULES_BOUNDED_SHARED_TARGET_DECLARATION_PROJECTION.md) and
+`reference-reviews/gameplay-rules-bounded-shared-target-declaration/`.
+Exactly one future recommendation is 601.2d only, expected +1, conditional
+90/twelve and import 6/8; all further source/runtime work stays unauthorized.
+Leave one draft PR unmerged with auto-merge disabled. Do not begin the
+recommendation. The owner retains final merge approval.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false
