@@ -19,6 +19,7 @@ from shared_casting_stage_preservation import (
     is_shared_casting_design_addition, historical_document_before_shared_casting_append,
 )
 from shared_target_declaration_preservation import is_target_declaration_addition
+from shared_target_allocation_preservation import is_target_allocation_addition
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "2aa01764db0cfbcd89bc3a30a4433c4f24ea5893"
@@ -39,7 +40,8 @@ def files_under(directory):
     return {p.relative_to(ROOT).as_posix() for p in directory.rglob("*")
             if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"
             and not is_shared_casting_design_addition(p)
-            and not is_target_declaration_addition(p)}
+            and not is_target_declaration_addition(p)
+            and not is_target_allocation_addition(p)}
 
 
 class BoundedActivatedAbilityPreservationTests(unittest.TestCase):

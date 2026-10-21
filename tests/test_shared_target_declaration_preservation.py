@@ -17,6 +17,11 @@ from shared_target_declaration_preservation import (
     historical_document_before_target_declaration_append,
     is_target_declaration_addition,
 )
+from shared_target_allocation_preservation import (
+    DOCUMENT_APPENDICES as TARGET_ALLOCATION_APPENDICES,
+    historical_document_before_target_allocation_append,
+    is_target_allocation_addition,
+)
 
 
 def fixture():
@@ -32,7 +37,8 @@ def fixture():
 def regular_paths(directory):
     return {p.relative_to(ROOT).as_posix() for p in directory.rglob("*")
             if (p.is_file() or p.is_symlink())
-            and "__pycache__" not in p.parts and p.suffix != ".pyc"}
+            and "__pycache__" not in p.parts and p.suffix != ".pyc"
+            and not is_target_allocation_addition(p)}
 
 
 class SharedTargetDeclarationPreservationTests(unittest.TestCase):
@@ -114,6 +120,8 @@ class SharedTargetDeclarationPreservationTests(unittest.TestCase):
         for row in rows:
             with self.subTest(path=row["path"]):
                 raw = (ROOT / row["path"]).read_bytes()
+                if row["path"] in TARGET_ALLOCATION_APPENDICES:
+                    raw = historical_document_before_target_allocation_append(row["path"], raw)
                 if row["path"] in DOCUMENT_APPENDICES:
                     pin = DOCUMENT_APPENDICES[row["path"]]
                     self.assertGreater(pin["appendix_bytes"], 0)
@@ -157,7 +165,8 @@ class SharedTargetDeclarationPreservationTests(unittest.TestCase):
         old_refs = {r["rule_reference"] for r in old_rules}
         self.assertEqual((len(inherited), len(old_rules), len(old_refs)), (10, 88, 88))
         self.assertNotIn("601.2c", old_refs)
-        live_paths = sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
+        live_paths = [p for p in sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
+                      if not is_target_allocation_addition(p)]
         projections = [json.loads(p.read_bytes()) for p in live_paths]
         rules = [r for p in projections for r in p["rules"]]
         refs = {r["rule_reference"] for r in rules}
