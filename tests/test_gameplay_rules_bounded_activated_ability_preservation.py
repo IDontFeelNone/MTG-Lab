@@ -15,6 +15,10 @@ from activated_ability_projection_preservation import (
 )
 
 
+from shared_casting_stage_preservation import (
+    is_shared_casting_design_addition, historical_document_before_shared_casting_append,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "2aa01764db0cfbcd89bc3a30a4433c4f24ea5893"
 FIXTURE = ROOT / "tests/fixtures/bounded-activated-ability-protected-state.json"
@@ -32,7 +36,8 @@ def fixture():
 
 def files_under(directory):
     return {p.relative_to(ROOT).as_posix() for p in directory.rglob("*")
-            if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"}
+            if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"
+            and not is_shared_casting_design_addition(p)}
 
 
 class BoundedActivatedAbilityPreservationTests(unittest.TestCase):
@@ -106,7 +111,8 @@ class BoundedActivatedAbilityPreservationTests(unittest.TestCase):
                     self.assertEqual(len(raw), row["bytes"])
 
     def test_historical_inventory_selector_accepts_only_the_exact_current_appendix(self):
-        raw = (ROOT / "PROJECT_INVENTORY.md").read_bytes()
+        raw = historical_document_before_shared_casting_append(
+            "PROJECT_INVENTORY.md", (ROOT / "PROJECT_INVENTORY.md").read_bytes())
         historical = historical_inventory_before_projection_append(raw)
         row = next(r for r in fixture()["historical_documents"]
                    if r["path"] == "PROJECT_INVENTORY.md")

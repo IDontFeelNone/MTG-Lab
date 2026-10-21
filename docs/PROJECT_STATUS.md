@@ -1030,3 +1030,38 @@ ten-record digest and exact pilot, and path-derived retained record identities. 
 remains nullable and non-unique; ZIP member paths remain unique source identities and denominator
 units. No provider acquisition was run during this repair, and no canonical, market, knowledge, Phase
 135 evidence, or other production data changed.
+
+
+---
+
+## Current milestone append — Shared Casting-Stage Gap Scope Design
+
+The subsequent owner prompt authorizes only this review-only design. Earlier
+bodies and appendices retain their historical authority and validation history.
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Canonical main / branch base: `8c2a79ecce9ae7e6ff8e7959c57271e02bf1a4cb`.
+Branch: `codex/shared-casting-stage-gap-design`. PR #200's merge and reviewed
+head share tree `7e9f056923fdffe1c2871d8d9c49c42ab6bfea21`.
+Only complete 601.2c/d/e/i bodies were newly inspected, with exact original
+artifact bytes and retained lineage reproduced; c includes its owned example.
+Current projection allowlist: empty. Added units/projections/identities/registered
+anchors/edges: 0. Coverage remains 88 units / ten projections; import coverage4/8.
+All ten activation responsibilities remain OPEN / EXECUTION_BLOCKED; execution
+BLOCKED. Source policy stays not_granted; private retention, redistribution,
+free service, commercial service and AI export stay NOT_ESTABLISHED.
+
+The source-informed design finds 601.2c alone the smallest useful next source
+boundary: shared target-declaration/count context using retained601.2,601.2b,
+115.6 and602.2b. The c+d grouping is coherent but allocation adds a separate
+responsibility. e checkpoint/recovery and i completion reach different frontiers.
+All four gaps would still leave complete casting and activation unsupported.
+Reveal, rollback, shared-triggered and independent runtime alternatives were
+compared only through retained evidence; broad603 keeps its own design boundary.
+
+See [the design and validation checkpoint](GAMEPLAY_RULES_SHARED_CASTING_STAGE_GAP_DESIGN.md) and
+`reference-reviews/gameplay-rules-shared-casting-stage-gap-design/`.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false

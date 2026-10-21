@@ -867,3 +867,39 @@ Future milestone begun: false
 
 Stop at the single draft PR for independent PM review. Do not merge, enable
 auto-merge or begin the recommendation.
+
+
+---
+
+## Current milestone append — Shared Casting-Stage Gap Scope Design
+
+The subsequent owner prompt authorizes only this review-only design. Earlier
+bodies and appendices retain their historical authority and validation history.
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Canonical main / branch base: `8c2a79ecce9ae7e6ff8e7959c57271e02bf1a4cb`.
+Branch: `codex/shared-casting-stage-gap-design`. PR #200's merge and reviewed
+head share tree `7e9f056923fdffe1c2871d8d9c49c42ab6bfea21`.
+Only complete 601.2c/d/e/i bodies were newly inspected, with exact original
+artifact bytes and retained lineage reproduced; c includes its owned example.
+Current projection allowlist: empty. Added units/projections/identities/registered
+anchors/edges: 0. Coverage remains 88 units / ten projections; import coverage4/8.
+All ten activation responsibilities remain OPEN / EXECUTION_BLOCKED; execution
+BLOCKED. Source policy stays not_granted; private retention, redistribution,
+free service, commercial service and AI export stay NOT_ESTABLISHED.
+
+The new review-only package contains five immutable review records and one bound
+manifest. Its four-stage matrix separates literal references, range membership,
+structural context and indirect consumers; inspection creates no source coverage.
+347 inherited src files and126 prior gameplay evidence files in19 directories
+(473 total) remain byte-identical. Historical document bodies, identities and
+manifests are preserved. The finite successor adapter preserves the original
+69,051-byte inventory plus3,400-byte PR #200 appendix before this exact appendix.
+New tooling is confined to scripts/tests; no runtime or projection objects added.
+
+See [the design and validation checkpoint](docs/GAMEPLAY_RULES_SHARED_CASTING_STAGE_GAP_DESIGN.md) and
+`reference-reviews/gameplay-rules-shared-casting-stage-gap-design/`.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false
