@@ -289,7 +289,7 @@ one new projection document. No existing source module or evidence file changes.
 | `reference-reviews/gameplay-rules-bounded-shared-target-declaration/preservation-readiness.json` | 479-file/tool/history preservation and blocked execution/permission evidence. |
 | `reference-reviews/gameplay-rules-bounded-shared-target-declaration/projection.json` | One immutable c-only non-executable rule with complete source anchor. |
 | `reference-reviews/gameplay-rules-bounded-shared-target-declaration/subsequent-recommendation.json` | One retained-evidence d-only recommendation; unauthorized and unbegun. |
-| `src/gameplay_rules/shared_target_declaration/__init__.py` | Exports only the bounded descriptive projection contract. |
+| `src/gameplay_rules/shared_target_declaration/__init__.py` | Names the bounded knowledge package without runtime activation. |
 | `src/gameplay_rules/shared_target_declaration/__main__.py` | Offline validation and explicit c-only source-reproduction CLI. |
 | `src/gameplay_rules/shared_target_declaration/contracts.py` | Immutable exact-content projection/rule identities and strict JSON contract. |
 | `src/gameplay_rules/shared_target_declaration/package.py` | Closed package, actual historical contracts, canonical load/write and source binding. |
