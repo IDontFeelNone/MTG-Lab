@@ -306,6 +306,79 @@ class SharedProposalLegalityPackageTests(unittest.TestCase):
         self.assertEqual(result["projection_id"], validated_snapshot["projection.json"]["projection_id"])
         self.assertEqual(result["source_anchor"], validated_snapshot["projection.json"]["rules"][0]["source_anchor"])
 
+    def test_direct_history_validation_matches_original_loader_and_complete_bindings(self):
+        # The unchanged original loader is exercised once as an independent
+        # equivalence oracle; the production e validator never delegates to it.
+        from gameplay_rules.shared_target_allocation import package as original
+        inherited = original.load_package(REVIEWS / original.PACKAGE_NAME, review_root=REVIEWS)
+        inherited_manifest = json.loads((REVIEWS / original.PACKAGE_NAME / "manifest.json").read_bytes())
+        original_binding = original.retained_binding()
+        composite = deepcopy(inherited["composite-coverage.json"]["findings"])
+
+        def resolve_enclosing_package(value):
+            if type(value) is dict:
+                if "package_binding" in value:
+                    self.assertEqual(value.pop("package_binding"), "THIS_ENCLOSING_PACKAGE")
+                    value["package_id"] = inherited_manifest["package_id"]
+                for child in value.values():
+                    resolve_enclosing_package(child)
+            elif type(value) is list:
+                for child in value:
+                    resolve_enclosing_package(child)
+
+        resolve_enclosing_package(composite)
+        original_binding["canonical_base"] = package.CANONICAL_MAIN
+        original_binding["projection_components"] = composite["projection_components"]
+        original_binding["rule_bindings"] = composite["all_prior_rule_bindings"]
+        projection = inherited["projection.json"]
+        for rule in projection["rules"]:
+            original_binding["rule_bindings"][rule["rule_reference"]] = {
+                "retained_package": original.PACKAGE_NAME, "package_id": inherited_manifest["package_id"],
+                "projection_id": projection["projection_id"], "rule_id": rule["rule_id"],
+                "anchor_identity": rule["source_anchor"]["anchor_id"],
+                "source_anchor": deepcopy(rule["source_anchor"]), "identity_basis": "EXISTING_STANDALONE_ID"}
+        original_binding["prior_package_ids"][original.PACKAGE_NAME] = inherited_manifest["package_id"]
+        actual = package.validate_historical(review_root=REVIEWS)
+        self.assertEqual(package._bytes(actual), package._bytes(original_binding))
+        self.assertEqual(package._bytes(package.retained_binding()), package._bytes(original_binding))
+        reproduced = package.rebuild_package(review_root=REVIEWS)
+        self.assertEqual(package._bytes(reproduced), package._bytes(self.records))
+        for name, record in reproduced.items():
+            self.assertEqual(package._bytes(record), (PACKAGE / name).read_bytes())
+        self.assertEqual(package._bytes(package.manifest(reproduced)), (PACKAGE / "manifest.json").read_bytes())
+
+    def test_every_canonical_historical_evidence_file_is_rechecked_after_cache_warmup(self):
+        guard_path = ROOT / "tests" / "fixtures" / "shared-proposal-legality-protected-state.json"
+        raw_guard = guard_path.read_bytes()
+        self.assertEqual(hashlib.sha256(raw_guard).hexdigest(),
+            "ef2bb3484803d44f9e1ad20e1be1c27b15d3901d3b4e1b86b1476662c0c4e094")
+        guard = json.loads(raw_guard)
+        self.assertEqual(guard["canonical_base"], "a21cda0c22092a77ec07097d7b155e7a71bd8de2")
+        rows = [row for row in guard["protected_files"] if row["path"].startswith("reference-reviews/")]
+        self.assertEqual(len(rows), 150)
+        self.assertEqual(len({row["path"] for row in rows}), 150)
+        self.assertEqual(len({str(Path(row["path"]).parent) for row in rows}), 22)
+        with tempfile.TemporaryDirectory() as temporary:
+            copied = Path(temporary) / "reviews"
+            shutil.copytree(REVIEWS, copied)
+            package.retained_binding()
+            package._expected_records()
+            package.validate_historical(review_root=copied)
+            for row in rows:
+                relative = Path(row["path"]).relative_to("reference-reviews")
+                target = copied / relative
+                original = target.read_bytes()
+                self.assertEqual(len(original), row["bytes"])
+                self.assertEqual(hashlib.sha256(original).hexdigest(), row["sha256"])
+                self.assertTrue(original)
+                try:
+                    target.write_bytes(bytes([original[0] ^ 1]) + original[1:])
+                    with self.subTest(path=row["path"]), self.assertRaises(GameplayContractError):
+                        package.validate_historical(review_root=copied)
+                finally:
+                    target.write_bytes(original)
+            package.validate_historical(review_root=copied)
+
     def test_cli_unconfigured_skip_and_configured_invalid_source_failure(self):
         environment = os.environ.copy()
         environment["PYTHONPATH"] = str(ROOT / "src")

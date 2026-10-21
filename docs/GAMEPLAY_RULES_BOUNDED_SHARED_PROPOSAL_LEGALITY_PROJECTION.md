@@ -364,3 +364,66 @@ merge-ref ordered parents and run links belong in the single draft PR and
 completion report after collection. No code,evidence,fixture or pinned appendix
 changes are planned. The PR remains draft and unmerged,with auto-merge disabled;
 stop only for independent PM review,with owner final approval retained.
+
+### Reconstruction refinement and replacement checkpoint — 2026-10-21 UTC
+
+The first candidate head `b7d416cfed0d4133552348e2484ddded8c2cd918` and its
+checkpoint above remain historical. Its 69-test focused suite passed, but took
+1772.371s. The inherited actual-publication nested-suite timeout is exactly
+3600s and remains unchanged. Initial complete discovery was deliberately stopped
+before completion at2472.457s process duration:373 tests had emitted success,
+one inherited source skip was emitted,no failures/errors were emitted,and no
+completed suite summary existed. Child SIGTERM(-15) produced runner exit241.
+This is an interrupted superseded attempt,not a completed discovery pass.
+The initial hosted runs39664098371(push) and39664208393(PR) target that old head
+and are superseded by the replacement push; their outcomes cannot establish a
+new final-head gate. No gate timeout has been hidden or converted into success.
+
+The correction is confined to the new e package's validation/reconstruction
+implementation and two additional focused tests. Instead of recursively
+regenerating old authored findings, it freshly validates the inherited115 files
+in18 directories through the existing validator, plus35 files in four successor
+packages through their fixed canonical manifest identities. All150 files across
+22 directories retain actual own schema types,identity fields,domains,content
+hashes and enclosing bindings. Activated/c/d typed projections,PR #201's distinct
+integer reviews,the inherited design tool's six additional manifest-domain checks,
+d's rule/anchor identities and historical source correspondence remain checked.
+Every actual historical file is reread; successful file validation is never cached.
+Source/lineage verification remains fresh and e-only. No inherited implementation,
+assertion,fixture,workflow or timeout changes. All ten retained e files and every
+new own identity remain byte-identical to the first candidate.
+
+Measured original historical validation:69.444926s; replacement cold0.761793s,
+warm0.444109s; package load4.528221s. The new regressions independently compare
+complete bindings and all ten e outputs with the original loader,then warm caches
+and independently mutate/restore each of the150 canonical historical evidence
+files. Every mutation is rejected. All prior69 tests remain; total additions are
+now71,with a complete collection of2426 against2355 inherited tests.
+
+Five targeted equivalence/mutation/foreign-record/cache tests passed in71.750s,
+exit0,no skips. Their exact selection was:
+
+```sh
+PYTHONPATH=src:tests python -m unittest test_shared_proposal_legality_package.SharedProposalLegalityPackageTests.test_direct_history_validation_matches_original_loader_and_complete_bindings test_shared_proposal_legality_package.SharedProposalLegalityPackageTests.test_every_canonical_historical_evidence_file_is_rechecked_after_cache_warmup test_shared_proposal_legality_package.SharedProposalLegalityPackageTests.test_pr201_actual_own_domain_manifest_and_exact_retained_bytes test_shared_proposal_legality_package.SharedProposalLegalityPackageTests.test_pr203_own_domain_and_coherently_rehashed_historical_binding_changes_fail test_shared_proposal_legality_package.SharedProposalLegalityPackageTests.test_warm_metadata_caches_return_defensive_copies_and_revalidate_disk_history -v
+```
+
+| Replacement-code local gate | Measured completed result |
+|---|---|
+| Offline package CLI | Exit0;8.767s process. |
+| Actual e-only source CLI | Exit0;29.622s process; exact artifact,lineage,complete anchor and sole733 citation reproduced. |
+| Full focused selection | **71 tests,69.074s,0 skips,exit0**;69.831s process. |
+| Historical/preservation/boundary selection | **128 tests,58.959s,1 explicit inherited-source skip,exit0**;59.977s process. |
+
+The source-aware commands remain exactly those recorded above,with only the e
+selector configured. The historical skip remains the deliberately unconfigured
+activated-procedure source inspection. Source count91,projection count13,import
+coverage7/8,parent provenance,recovery OPEN/BLOCKED,permissions and the sole
+unauthorized recommendation are unchanged. Four pinned established-document
+appendices and all inherited bytes remain untouched.
+
+This replacement checkpoint is still explicitly PRE-PUBLICATION. The final-head
+complete local discovery,actual publication with nested discovery/readback,and
+replacement hosted push/PR workflows remain pending until measured. Their final
+results belong in PR #204 and the completion report. Do not infer them from any
+old candidate or partial run. The same single PR stays draft/unmerged,auto-merge
+off; no subsequent milestone has begun and the owner retains final approval.
