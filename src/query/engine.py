@@ -120,6 +120,22 @@ class QueryResult:
     supersession_state: str
 
     def __post_init__(self) -> None:
+        # Every field contributes to the reusable snapshot identity. Type hints
+        # alone do not prevent mutable state values from entering scalar slots.
+        for name in ("canonical_identity", "entity_type", "uncertainty", "supersession_state"):
+            value = getattr(self, name)
+            if not isinstance(value, str):
+                raise TypeError(f"{name} must be a string")
+            object.__setattr__(self, name, str.__str__(value))
+        confidence = self.confidence
+        if confidence is not None:
+            if isinstance(confidence, bool) or not isinstance(confidence, (int, float)):
+                raise TypeError("confidence must be a number or None")
+            # Strip mutable subclass attributes without changing integer/float
+            # JSON representations or invoking caller-defined conversion hooks.
+            confidence = (int.__int__(confidence) if isinstance(confidence, int)
+                          else float.__float__(confidence))
+            object.__setattr__(self, "confidence", confidence)
         object.__setattr__(self, "canonical_values", _DetachedMapping(self.canonical_values))
         object.__setattr__(self, "provenance_summary", _DetachedMapping(self.provenance_summary))
 

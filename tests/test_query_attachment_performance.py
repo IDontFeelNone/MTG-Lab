@@ -1,5 +1,6 @@
 """Detached query values and content identities remain safe when snapshots are reused."""
 from collections import Counter
+from copy import deepcopy
 from dataclasses import asdict, dataclass, is_dataclass
 import hashlib
 import json
@@ -10,9 +11,10 @@ from typing import Mapping
 import unittest
 from unittest.mock import patch
 
-from legacy_profile_fixture import CONTROL, build_legacy_fixture, read, save
+from legacy_profile_fixture import CONTROL, binding, build_legacy_fixture, read, save
 from query.engine import CanonicalQueryEngine, QueryResult, _plain
-from repository.legacy_profile import LegacyCompatibilityAttachment, attach_legacy_compatibility
+from repository.legacy_profile import (LegacyCompatibilityAttachment, attach_legacy_compatibility,
+                                       closure_identity, profile_identity)
 from repository.snapshots import SnapshotError
 
 
@@ -119,6 +121,141 @@ class QueryConversionIsolationTests(unittest.TestCase):
         exported["canonical_values"]["nested"]["values"].clear()
         exported["provenance_summary"]["source_ids"].clear()
         self.assertEqual(result.as_dict(), expected)
+
+
+class QueryScalarOwnershipTests(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        self.control = build_legacy_fixture(self.root)
+        self.state_path = self.root / "data/canonical/state.json"
+        self.original_entities = [item.as_dict() for item in self.engine().snapshot().entities]
+
+    def engine(self):
+        return CanonicalQueryEngine(self.control["game"], data_root=self.root / "data",
+                                    games_root=self.root / "data/canonical/games")
+
+    def write_confidence(self, confidence):
+        state = read(self.state_path)
+        state["card"]["cloth-unit"]["confidence"] = confidence
+        # Ordinary JSON state supports floating-point confidence. The fictional
+        # snapshot control writer intentionally accepts only integer JSON numbers.
+        self.state_path.write_text(json.dumps(state, sort_keys=True, separators=(",", ":"),
+                                              ensure_ascii=False, allow_nan=False))
+
+    def expected_entities(self, confidence):
+        entities = deepcopy(self.original_entities)
+        next(item for item in entities if item["canonical_identity"] == "cloth-unit")["confidence"] = confidence
+        return entities
+
+    @staticmethod
+    def payload(entities):
+        return json.dumps(entities, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+    def test_json_state_rejects_non_numeric_confidence_before_public_access(self):
+        for confidence in (["before"], {"nested": ["before"]}, True, False, "0.75"):
+            with self.subTest(confidence=confidence):
+                self.write_confidence(confidence)
+                with self.assertRaisesRegex(TypeError, "confidence"):
+                    engine = self.engine()
+                    engine.entity("cloth-unit").confidence
+                    engine.snapshot()
+
+    def test_correctly_bound_attachment_rejects_mutable_confidence_safely(self):
+        for confidence in (["before"], {"nested": ["before"]}):
+            with self.subTest(confidence=confidence):
+                self.write_confidence(confidence)
+                control = deepcopy(self.control)
+                control["files"] = [binding(self.root, row["path"], row["placement"])
+                    if row["path"] == "data/canonical/state.json" else row
+                    for row in control["files"]]
+                control["closure_id"] = closure_identity(control["files"])
+                # Independently describe the malformed fixture's exact would-be
+                # query bytes; the reader must reject rather than bless them.
+                control["query_snapshot_id"] = "sha256:" + hashlib.sha256(
+                    self.payload(self.expected_entities(confidence))).hexdigest()
+                control["profile_id"] = profile_identity(control)
+                save(self.root / CONTROL, control)
+                attachment = attach_legacy_compatibility(self.root, control_path=CONTROL,
+                    game=control["game"], expected_profile_id=control["profile_id"])
+                attachment.verify_unchanged()
+                with self.assertRaises(SnapshotError) as caught:
+                    engine = CanonicalQueryEngine.from_attachment(attachment)
+                    engine.entity("cloth-unit").confidence
+                    engine.snapshot()
+                self.assertEqual(caught.exception.code, "invalid_catalog")
+                self.assertEqual(str(caught.exception), "selected canonical catalog is invalid")
+                attachment.verify_unchanged()
+
+    def test_json_numeric_and_null_confidence_preserve_exact_output_identity_and_warm_reuse(self):
+        identities = {}
+        for confidence in (0, 1, 0.0, 1.0, -0.0, .75, None):
+            label = json.dumps(confidence)
+            with self.subTest(confidence=label):
+                self.write_confidence(confidence)
+                engine = self.engine()
+                result = engine.entity("cloth-unit")
+                snapshot = engine.snapshot()
+                expected = self.payload(self.expected_entities(confidence))
+                self.assertIs(type(result.confidence), type(confidence))
+                self.assertEqual(self.payload([item.as_dict() for item in snapshot.entities]), expected)
+                self.assertEqual(snapshot.snapshot_id, "sha256:" + hashlib.sha256(expected).hexdigest())
+                if type(confidence) is int and confidence == 1:
+                    self.assertEqual(snapshot.snapshot_id, self.control["query_snapshot_id"])
+                with patch("query.engine._plain", side_effect=AssertionError("warm result conversion")):
+                    repeated = engine.snapshot()
+                self.assertEqual(repeated.snapshot_id, snapshot.snapshot_id)
+                self.assertEqual(repeated.as_dict(), snapshot.as_dict())
+                identities[label] = snapshot.snapshot_id
+        self.assertNotEqual(identities["1"], identities["1.0"])
+        self.assertNotEqual(identities["0"], identities["0.0"])
+        self.assertNotEqual(identities["0.0"], identities["-0.0"])
+
+    def test_other_scalar_result_fields_reject_mutable_or_non_string_values(self):
+        for field in ("canonical_identity", "entity_type", "uncertainty", "supersession_state"):
+            for value in (["before"], {"nested": ["before"]}, None, 1):
+                with self.subTest(field=field, value=value):
+                    arguments = make_result().as_dict()
+                    arguments[field] = value
+                    with self.assertRaisesRegex(TypeError, field):
+                        QueryResult(**arguments)
+
+    def test_scalar_subclasses_cannot_retain_mutable_caller_attributes(self):
+        class Text(str):
+            def __str__(self):
+                return "overridden conversion"
+
+        class Integer(int):
+            def __int__(self):
+                return 99
+
+        class Floating(float):
+            def __float__(self):
+                return 99.0
+
+        for scalar, expected in ((Integer(1), 1), (Floating(.75), .75)):
+            arguments = make_result().as_dict()
+            original_text = {field: arguments[field] for field in
+                ("canonical_identity", "entity_type", "uncertainty", "supersession_state")}
+            aliases = []
+            for field in ("canonical_identity", "entity_type", "uncertainty", "supersession_state"):
+                alias = Text(arguments[field])
+                alias.nested = ["before"]
+                aliases.append(alias)
+                arguments[field] = alias
+            scalar.nested = ["before"]
+            arguments["confidence"] = scalar
+            result = QueryResult(**arguments)
+            exported = result.as_dict()
+            for field in ("canonical_identity", "entity_type", "uncertainty", "supersession_state"):
+                self.assertIs(type(getattr(result, field)), str)
+                self.assertEqual(getattr(result, field), original_text[field])
+            self.assertIs(type(result.confidence), type(expected))
+            self.assertEqual(result.confidence, expected)
+            for alias in [*aliases, scalar]:
+                alias.nested.append("changed")
+            self.assertEqual(result.as_dict(), exported)
 
 
 class QuerySnapshotReuseIntegrityTests(unittest.TestCase):

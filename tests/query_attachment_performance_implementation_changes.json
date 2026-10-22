@@ -60,8 +60,8 @@
       },
       "path": "src/query/engine.py",
       "replacement": {
-        "bytes": 29866,
-        "sha256": "e14b686b0c7db19e9ead9067b168ad91aba25c0ea51f31228635adb19a51abe0"
+        "bytes": 30923,
+        "sha256": "03a9d07fe20a14d978d9a673520794a202eca43c0e1854aa9306daa8e22aeb95"
       }
     },
     {
