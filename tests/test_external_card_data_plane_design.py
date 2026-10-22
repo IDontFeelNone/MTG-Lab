@@ -13,6 +13,7 @@ from jsonschema.exceptions import ValidationError
 
 from activated_ability_projection_preservation import historical_inventory_before_projection_append
 from shared_casting_stage_preservation import historical_document_before_shared_casting_append
+from casting_stage_family_completion_preservation import historical_document_before_casting_stage_family_completion_append
 
 from collection.intelligence import CanonicalCollectionResolver
 from query import CanonicalQueryEngine
@@ -309,6 +310,7 @@ class ExternalCardDataPlaneDesignTests(unittest.TestCase):
         for entry in read_json(EXAMPLES / "baseline-audit.json")["files"]:
             if entry["path"] in {"README.md", "PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md"}:
                 text = (ROOT / entry["path"]).read_bytes()
+                text = historical_document_before_casting_stage_family_completion_append(entry["path"], text)
                 if entry["path"] in {"PROJECT_INVENTORY.md", "docs/PROJECT_STATUS.md"}:
                     text = historical_document_before_shared_casting_append(entry["path"], text)
                 if entry["path"] == "PROJECT_INVENTORY.md":

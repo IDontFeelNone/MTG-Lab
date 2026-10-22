@@ -8,11 +8,27 @@ import unittest
 from unittest.mock import patch
 
 import validation_performance_preservation as guard
+from casting_stage_family_completion_preservation import (
+    DOCUMENT_APPENDICES as CASTING_STAGE_BATCH_APPENDICES,
+    historical_document_before_casting_stage_family_completion_append,
+)
+
+
+_CURRENT_REGULAR_BYTES = guard.regular_bytes
+
+
+def historical_performance_bytes(name, root=guard.ROOT):
+    """Supply only the verified historical document view to unchanged PR205 code."""
+    raw = _CURRENT_REGULAR_BYTES(name, root)
+    if name in CASTING_STAGE_BATCH_APPENDICES:
+        raw = historical_document_before_casting_stage_family_completion_append(name, raw)
+    return raw
 
 
 class ValidationPerformancePreservationTests(unittest.TestCase):
     def test_current_authorized_implementations_and_operational_appendix_match_exact_pins(self):
-        guard.assert_current_implementation()
+        with patch.object(guard, "regular_bytes", side_effect=historical_performance_bytes):
+            guard.assert_current_implementation()
 
     def test_original_historical_rows_are_required_before_each_successor_check(self):
         rows = json.loads((guard.ROOT / "tests/fixtures/shared-proposal-legality-protected-state.json").read_bytes())["protected_files"]
@@ -104,7 +120,7 @@ class ValidationPerformancePreservationTests(unittest.TestCase):
             for name in names:
                 path = root / name
                 path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_bytes(guard.regular_bytes(name))
+                path.write_bytes(historical_performance_bytes(name))
             guard.assert_current_implementation(root)
             for item in value["additions"]:
                 path = root / item["path"]
@@ -126,7 +142,7 @@ class ValidationPerformancePreservationTests(unittest.TestCase):
 
     def test_operational_appendix_rejects_changed_prefix_unknown_suffix_and_truncation(self):
         name = "docs/NEXT_TASK.md"
-        raw = guard.regular_bytes(name)
+        raw = historical_performance_bytes(name)
         baseline = guard.historical_document_before_validation_performance_append(name, raw)
         self.assertEqual(guard.historical_document_before_validation_performance_append(name, baseline), baseline)
         for changed in (raw + b"future appendix\n", raw[:-1], b"X" + raw[1:],

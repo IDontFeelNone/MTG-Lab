@@ -6,6 +6,10 @@ unknown additions or arbitrary document suffixes remain visible and fail closed.
 """
 import hashlib
 from pathlib import Path
+from casting_stage_family_completion_preservation import (
+    DOCUMENT_APPENDICES as CASTING_STAGE_BATCH_APPENDICES,
+    historical_document_before_casting_stage_family_completion_append,
+)
 
 from shared_target_declaration_preservation import (
     DOCUMENT_APPENDICES as TARGET_DECLARATION_APPENDICES,
@@ -74,6 +78,9 @@ def historical_document_before_shared_casting_append(path, raw):
         raise AssertionError("Only the named shared casting design documents are adapted")
     if type(raw) is not bytes:
         raise AssertionError("Canonical document input must be bytes")
+    if (path in CASTING_STAGE_BATCH_APPENDICES
+            and len(raw) > CASTING_STAGE_BATCH_APPENDICES[path]["baseline_bytes"]):
+        raw = historical_document_before_casting_stage_family_completion_append(path, raw)
     if path in TARGET_DECLARATION_APPENDICES:
         raw = historical_document_before_target_declaration_append(path, raw)
     pin = DOCUMENT_APPENDICES[path]

@@ -8,6 +8,10 @@ import hashlib
 from pathlib import Path
 
 from validation_performance_preservation import historical_document_before_validation_performance_append
+from casting_stage_family_completion_preservation import (
+    DOCUMENT_APPENDICES as CASTING_STAGE_BATCH_APPENDICES,
+    historical_document_before_casting_stage_family_completion_append,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "a21cda0c22092a77ec07097d7b155e7a71bd8de2"
@@ -65,6 +69,9 @@ def historical_document_before_proposal_legality_append(path, raw):
         raise AssertionError("Only the named proposal-legality documents are adapted")
     if type(raw) is not bytes:
         raise AssertionError("Canonical document input must be bytes")
+    if (path in CASTING_STAGE_BATCH_APPENDICES
+            and len(raw) > CASTING_STAGE_BATCH_APPENDICES[path]["baseline_bytes"]):
+        raw = historical_document_before_casting_stage_family_completion_append(path, raw)
     if path == "docs/NEXT_TASK.md" and len(raw) > 65914:
         raw = historical_document_before_validation_performance_append(path, raw)
     pin = DOCUMENT_APPENDICES[path]
