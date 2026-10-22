@@ -891,3 +891,22 @@ for independent PM review. The owner retains final approval.
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+---
+
+## Validation performance and delivery capacity
+
+The owner authorized this implementation milestone only. See
+[the profiling, preservation and validation report](VALIDATION_PERFORMANCE_CAPACITY.md)
+for measurements and exact review evidence. Gameplay remains 91 distinct real
+source units / 13 projections / 7 of 8 imported members; 601.2i is missing.
+Semantic closure stays OPEN; all ten activation responsibilities remain
+OPEN / EXECUTION_BLOCKED and real execution stays BLOCKED. No source body is
+inspected or projected. Architecture v13 and accepted Decision 017 remain active.
+
+Next rules planning must use coherent batches organized around useful reasoning
+outcomes. Exact per-rule provenance does not require one PR per rule. This policy
+begins no source inspection, planning package or subsequent milestone. Stop at
+exactly one draft PR for independent PM review; owner retains final merge
+approval. Do not merge or enable auto-merge.

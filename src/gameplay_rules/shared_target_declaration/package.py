@@ -6,6 +6,7 @@ Fresh reproduction has a separate c-only source boundary and selector.
 from __future__ import annotations
 
 from copy import deepcopy
+from functools import cache
 import hashlib
 import importlib.util
 import json
@@ -13,6 +14,7 @@ from pathlib import Path
 
 from evidence.contracts import sha256_identity
 from gameplay_rules.errors import GameplayContractError
+from gameplay_rules.retained_stage_validation import validate_retained_stage
 from gameplay_rules.activated_ability_projection import package as activated
 from gameplay_rules.projection.dependency_package import _read, _root
 from gameplay_rules.projection.mana_stack_exception_package import _canonical_candidate
@@ -73,7 +75,13 @@ def _historical_tool():
 
 
 def retained_binding():
-    """Rebuild old identities from their fixed contracts, never mutable candidates."""
+    """Return defensive fixed metadata; public operations check current history."""
+    return json.loads(_retained_binding_bytes())
+
+
+@cache
+def _retained_binding_bytes():
+    """Only immutable contract-derived metadata bytes are cached."""
     old = activated._expected_records()
     view = activated.composite_view(old)
     binding = activated.retained_binding()
@@ -91,17 +99,45 @@ def retained_binding():
     binding["prior_package_ids"][activated.PACKAGE_NAME] = package_id
     binding["prior_package_ids"][DESIGN_NAME] = DESIGN_ID
     binding["responsibility_names"] = [row["responsibility"] for row in old["procedure-responsibilities.json"]["findings"]["rows"]]
-    return binding
+    return _bytes(binding)
+
+
+def _validated_historical_records(review_root):
+    """Freshly verify the baseline and two successors without recursive package reconstruction."""
+    from gameplay_rules.activated_ability_projection.contracts import BoundedActivatedAbilityProjection
+    try:
+        root = _root(review_root)
+        binding = activated.verify_prior_packages(root)
+        tool = _historical_tool()
+        tool._validate_additional_package_identities(root, binding)
+        selections = (
+            (activated.PACKAGE_NAME, activated.PACKAGE_SCHEMA,
+             "sha256:02667e58da72701b7464275184de452a1ec53f34b7dedc80ca3cde8c595a7ff4",
+             activated.RECORD_DOMAIN, activated.RECORD_NAMES, BoundedActivatedAbilityProjection),
+            (DESIGN_NAME, tool.PACKAGE_SCHEMA, DESIGN_ID,
+             tool.RECORD_DOMAIN, tool.RECORD_NAMES, None),
+        )
+        successors = {name: validate_retained_stage(root, name=name, package_schema=schema,
+            package_id=identity, record_domain=domain, record_names=names,
+            projection_type=projection_type)
+            for name, schema, identity, domain, names, projection_type in selections}
+        # Preserve the inherited tool's authored and contextual checks without
+        # its recursive older package reconstruction or source functions.
+        records = successors[DESIGN_NAME]["records"]
+        tool.validate_records(records)
+        tool._validate_context_bindings(records, review_root=root)
+        return successors
+    except GameplayContractError:
+        raise
+    except (OSError, ValueError, TypeError, KeyError, AttributeError, UnicodeError, RecursionError):
+        _fail("RETAINED_HISTORICAL_CONTRACT_INVALID")
 
 
 def validate_historical(*, review_root):
     """Verify exact retained canonical bytes, own identities and manifest bindings."""
     root = _root(review_root)
-    tool = _historical_tool()
-    # load_package verifies PR #199, PR #200, earlier packages and the five
-    # PR #201 integer-schema reviews with their actual explicit domains.
-    records = tool.load_package(root / DESIGN_NAME, review_root=root)
-    parent, _ = tool._document(root / DESIGN_NAME / "manifest.json")
+    successor = _validated_historical_records(root)[DESIGN_NAME]
+    records, parent = successor["records"], successor["manifest"]
     if (type(parent.get("schema_version")) is not str
             or parent["schema_version"] != "gameplay-shared-casting-stage-gap-design-package-v1"
             or type(parent.get("package_id")) is not str or parent["package_id"] != DESIGN_ID):
@@ -128,15 +164,24 @@ def _projection():
 
 
 def _expected_records():
+    return json.loads(_expected_record_bytes())
+
+
+@cache
+def _expected_record_bytes():
+    """Cache immutable fixed authored bytes, never caller data or disk success."""
     from .reviews import authored_records
     projection = _projection()
     bodies = authored_records(retained_binding(), projection)
-    return {"projection.json": projection,
-        **{name: _identify_record(body) for name, body in bodies.items()}}
+    return _bytes({"projection.json": projection,
+        **{name: _identify_record(body) for name, body in bodies.items()}})
 
 
 def validate_records(records):
     raw = _bytes(records)
+    # Capture once before reconstruction or history can yield to the caller.
+    # All validation and every later consumer use this private snapshot.
+    records = json.loads(raw)
     if type(records) is not dict or set(records) != RECORD_NAMES:
         _fail("EXACT_EIGHT_AUTHORED_RECORDS_REQUIRED")
     from .contracts import BoundedSharedTargetDeclarationProjection
@@ -156,7 +201,7 @@ def validate_records(records):
     # and rejects coherent foreign rehashes as well as valid but altered claims.
     if raw != _bytes(_expected_records()):
         _fail("EXACT_AUTHORED_RECORD_CONTENT_REQUIRED")
-    return deepcopy(records)
+    return records
 
 
 def rebuild_package(*, review_root):
@@ -178,7 +223,11 @@ def build_package(artifact_path, *, review_root):
 def manifest(records, *, review_root=DEFAULT_REVIEW_ROOT):
     records = validate_records(records)
     validate_historical(review_root=review_root)
-    binding = retained_binding()
+    return _manifest_validated(records, retained_binding())
+
+
+def _manifest_validated(records, binding):
+    """Construct a manifest after validation, without repeating disk work."""
     projection = records["projection.json"]
     body = {"schema_version": PACKAGE_SCHEMA, "canonical_base": CANONICAL_MAIN,
         "status": "BOUNDED_SHARED_TARGET_DECLARATION_PROJECTED",
@@ -211,9 +260,9 @@ def manifest(records, *, review_root=DEFAULT_REVIEW_ROOT):
 
 def write_package(root, records, *, review_root):
     """Validate every candidate and retained binding before creating output."""
-    validate_records(records)
+    records = validate_records(records)
     validate_historical(review_root=review_root)
-    metadata = manifest(records, review_root=review_root)
+    metadata = _manifest_validated(records, retained_binding())
     root = Path(root)
     if any(path.is_symlink() for path in (root, *root.parents)):
         _fail("SYMLINK_DESTINATION_FORBIDDEN")
@@ -231,14 +280,14 @@ def load_package(root, *, review_root):
     if {path.name for path in root.iterdir()} != RECORD_NAMES | {"manifest.json"}:
         _fail("EXACT_PACKAGE_FILE_SET_REQUIRED")
     expected = rebuild_package(review_root=review_root)
-    for name, value in {**expected, "manifest.json": manifest(expected, review_root=review_root)}.items():
+    for name, value in {**expected, "manifest.json": _manifest_validated(expected, retained_binding())}.items():
         if _read(root / name) != _bytes(value):
             _fail("PACKAGE_CANONICAL_BYTES_OR_BINDINGS_DO_NOT_REPRODUCE")
     return expected
 
 
 def verify_source(records, artifact_path, *, review_root):
-    validate_records(records)
+    records = validate_records(records)
     reproduced = build_package(artifact_path, review_root=review_root)
     if _bytes(records) != _bytes(reproduced):
         _fail("EXACT_C_SOURCE_CORRESPONDENCE_DOES_NOT_REPRODUCE")
@@ -257,7 +306,14 @@ def current_view(records):
     The immutable authored records avoid circular content hashes. This read-only
     view binds their current c rows to the verified enclosing manifest instead.
     """
-    metadata = manifest(records)
+    result = validate_records(records)
+    validate_historical(review_root=DEFAULT_REVIEW_ROOT)
+    metadata = _manifest_validated(result, retained_binding())
+    return _resolved_view(result, metadata)
+
+
+def _resolved_view(records, metadata):
+    """Resolve a private snapshot using its already validated manifest."""
     result = _copy(records)
     def resolve(value):
         if type(value) is dict:

@@ -13,6 +13,7 @@ from pathlib import Path
 
 from evidence.contracts import sha256_identity
 from gameplay_rules.errors import GameplayContractError
+from gameplay_rules.retained_stage_validation import validate_retained_stage
 from gameplay_rules.activated_ability_projection import package as activated
 from gameplay_rules.shared_target_declaration import package as declaration
 from gameplay_rules.shared_target_allocation import package as allocation
@@ -68,16 +69,14 @@ def retained_binding():
 
 @cache
 def _retained_binding_bytes():
-    """Cache fixed metadata bytes, reconstructed from independently checked records.
+    """Cache only metadata derived from immutable authored contracts.
 
-    The retained d composite already contains the historical bindings. Resolving
-    its one enclosing-package reference does not require rebuilding every older
-    authored package or invoking their public manifest functions recursively.
-    Actual historical bytes are nevertheless rechecked at every public boundary.
+    No default review directory is read during fixed reconstruction: a caller's
+    selected history is checked independently at each public disk boundary.
     """
-    successors = _validated_historical_records(DEFAULT_REVIEW_ROOT)
-    old = successors[allocation.PACKAGE_NAME]["records"]
-    package_id = successors[allocation.PACKAGE_NAME]["manifest"]["package_id"]
+    old = allocation._expected_records()
+    parent = allocation._manifest_validated(old, allocation.retained_binding())
+    package_id = parent["package_id"]
     view = _copy(old["composite-coverage.json"]["findings"])
 
     def resolve(value):
@@ -97,8 +96,8 @@ def _retained_binding_bytes():
     binding["canonical_base"] = CANONICAL_MAIN
     binding["projection_components"] = view["projection_components"]
     binding["rule_bindings"] = view["all_prior_rule_bindings"]
-    binding["prior_package_ids"] = _copy(successors[allocation.PACKAGE_NAME]["manifest"]["prior_package_ids"])
-    procedure = successors[activated.PACKAGE_NAME]["records"]["procedure-responsibilities.json"]["findings"]
+    binding["prior_package_ids"] = _copy(parent["prior_package_ids"])
+    procedure = activated._expected_records()["procedure-responsibilities.json"]["findings"]
     binding["responsibility_names"] = [row["responsibility"] for row in procedure["rows"]]
     projection = old["projection.json"]
     for rule in projection["rules"]:
@@ -112,105 +111,17 @@ def _retained_binding_bytes():
     return _bytes(binding)
 
 
-def _canonical_record(path):
-    raw = _read(path)
-    value = json.loads(raw)
-    if type(value) is not dict or _bytes(value) != raw:
-        _fail("RETAINED_CANONICAL_RECORD_BYTES_REQUIRED")
-    return value, raw
-
-
-def _validate_successor(root, *, name, package_schema, package_id, record_domain,
-                        record_names, projection_type):
-    """Check actual bytes against a fixed manifest identity and own contracts.
-
-    The fixed package identity binds the exact canonical manifest, including all
-    record identities, byte lengths and hashes. Checking those bindings freshly
-    preserves exact historical content without regenerating authored findings.
-    """
-    directory = _root(root / name)
-    if {path.name for path in directory.iterdir()} != set(record_names) | {"manifest.json"}:
-        _fail("RETAINED_SUCCESSOR_FILE_SET_CHANGED")
-    parent, _ = _canonical_record(directory / "manifest.json")
-    body = {key: value for key, value in parent.items() if key != "package_id"}
-    if (type(parent.get("schema_version")) is not str
-            or parent["schema_version"] != package_schema
-            or type(parent.get("package_id")) is not str
-            or parent["package_id"] != package_id
-            or parent["package_id"] != _identity(package_schema, body)):
-        _fail("RETAINED_SUCCESSOR_PACKAGE_OWN_IDENTITY_INVALID")
-    if (type(parent.get("files")) is not dict or set(parent["files"]) != set(record_names)
-            or type(parent.get("record_ids")) is not dict
-            or set(parent["record_ids"]) != set(record_names)):
-        _fail("RETAINED_SUCCESSOR_MANIFEST_BINDINGS_INVALID")
-    records = {}
-    for filename in sorted(record_names):
-        record, raw = _canonical_record(directory / filename)
-        expected_file = {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
-        if _bytes(parent["files"][filename]) != _bytes(expected_file):
-            _fail("RETAINED_SUCCESSOR_CANONICAL_FILE_BINDING_INVALID")
-        projected = filename == "projection.json"
-        identity_field = "projection_id" if projected else "review_id"
-        domain = projection_type.SCHEMA if projected else record_domain
-        schema = record.get("schema_version")
-        schema_valid = (type(schema) is str and schema == domain if projected else
-            type(schema) is int and schema == 1)
-        own_body = {key: value for key, value in record.items() if key != identity_field}
-        if (not schema_valid or type(record.get(identity_field)) is not str
-                or record[identity_field] != _identity(domain, own_body)
-                or type(parent["record_ids"][filename]) is not str
-                or parent["record_ids"][filename] != record[identity_field]):
-            _fail("RETAINED_SUCCESSOR_RECORD_OWN_IDENTITY_OR_DOMAIN_INVALID")
-        if projected:
-            projection_type.from_dict(record)
-        records[filename] = record
-    return {"manifest": parent, "records": records}
-
-
 def _validated_historical_records(review_root):
-    """Freshly validate all 150 inherited evidence files in 22 directories.
-
-    The inherited activated validator checks its exact 115-file / 18-directory
-    baseline and schema-owned review contracts. Four fixed successor manifests
-    account for the other 35 files, preserving their own distinct identity
-    domains and typed projection contracts. No successful validation is cached.
-    """
-    from gameplay_rules.activated_ability_projection.contracts import BoundedActivatedAbilityProjection
-    from gameplay_rules.shared_target_declaration.contracts import BoundedSharedTargetDeclarationProjection
+    """Freshly verify the same 150 files, extending the bounded c/d checks."""
     from gameplay_rules.shared_target_allocation.contracts import BoundedSharedTargetAllocationProjection
-    try:
-        root = _root(review_root)
-        historical_binding = activated.verify_prior_packages(root)
-        design = _historical_tool()
-        # Keep the inherited explicit domains for the six manifests whose
-        # own identities are separate from the selected review contracts.
-        design._validate_additional_package_identities(root, historical_binding)
-        selections = (
-            (activated.PACKAGE_NAME, activated.PACKAGE_SCHEMA,
-             "sha256:02667e58da72701b7464275184de452a1ec53f34b7dedc80ca3cde8c595a7ff4",
-             activated.RECORD_DOMAIN, activated.RECORD_NAMES, BoundedActivatedAbilityProjection),
-            (DESIGN_NAME, design.PACKAGE_SCHEMA, DESIGN_ID,
-             design.RECORD_DOMAIN, design.RECORD_NAMES, None),
-            (declaration.PACKAGE_NAME, declaration.PACKAGE_SCHEMA,
-             "sha256:55b70ae4c7c8fa5f4abadba27a0205f1c433aaff3f6de74f1d42829cf1b999ce",
-             declaration.RECORD_DOMAIN, declaration.RECORD_NAMES, BoundedSharedTargetDeclarationProjection),
-            (allocation.PACKAGE_NAME, allocation.PACKAGE_SCHEMA,
-             "sha256:56ad746cd5c87c0fac1b864289283135b4d4adb10ee441fbaa970a1dcefb1678",
-             allocation.RECORD_DOMAIN, allocation.RECORD_NAMES, BoundedSharedTargetAllocationProjection),
-        )
-        historical = {Path(path).parts[1] for path in activated._pins()["protected_files"]
-            if path.startswith("reference-reviews/")}
-        if (len(historical) != 18 or len(historical | {row[0] for row in selections}) != 22
-                or sum(len(row[4]) + 1 for row in selections) != 35):
-            _fail("EXACT_150_FILE_22_DIRECTORY_HISTORICAL_BOUNDARY_REQUIRED")
-        return {name: _validate_successor(root, name=name, package_schema=schema,
-            package_id=identity, record_domain=domain, record_names=names,
-            projection_type=projection_type)
-            for name, schema, identity, domain, names, projection_type in selections}
-    except GameplayContractError:
-        raise
-    except (OSError, ValueError, TypeError, KeyError, AttributeError, UnicodeError, RecursionError):
-        _fail("RETAINED_HISTORICAL_CONTRACT_INVALID")
+    root = _root(review_root)
+    successors = allocation._validated_historical_records(root)
+    successors[allocation.PACKAGE_NAME] = validate_retained_stage(root,
+        name=allocation.PACKAGE_NAME, package_schema=allocation.PACKAGE_SCHEMA,
+        package_id="sha256:56ad746cd5c87c0fac1b864289283135b4d4adb10ee441fbaa970a1dcefb1678",
+        record_domain=allocation.RECORD_DOMAIN, record_names=allocation.RECORD_NAMES,
+        projection_type=BoundedSharedTargetAllocationProjection)
+    return successors
 
 
 def validate_historical(*, review_root):

@@ -9,6 +9,11 @@ from pathlib import Path
 import tempfile
 import unittest
 
+from validation_performance_preservation import (
+    NEW_SOURCE_PATHS as PERFORMANCE_SOURCE_PATHS, assert_retained_row,
+    historical_document_before_validation_performance_append,
+)
+
 from activated_ability_projection_preservation import historical_inventory_before_projection_append
 from shared_casting_stage_preservation import historical_document_before_shared_casting_append
 from shared_target_declaration_preservation import historical_document_before_target_declaration_append
@@ -38,21 +43,13 @@ def regular_paths(directory, root=ROOT):
 
 class SharedProposalLegalityPreservationTests(unittest.TestCase):
     def assert_retained_row(self, row, root=ROOT):
-        path = root / row["path"]
-        self.assertTrue(path.is_file())
-        for ancestor in (path, *path.parents):
-            if ancestor == root:
-                break
-            self.assertFalse(ancestor.is_symlink())
-        raw = path.read_bytes()
-        self.assertEqual(len(raw), row["bytes"])
-        self.assertEqual(hashlib.sha256(raw).hexdigest(), row["sha256"])
+        assert_retained_row(row, root)
 
     def assert_exact_current_inventory(self, root=ROOT):
         rows = fixture()["protected_files"]
         sources = {r["path"] for r in rows if r["path"].startswith("src/")}
         reviews = {r["path"] for r in rows if r["path"].startswith("reference-reviews/")}
-        self.assertEqual(regular_paths(root / "src", root), sources | NEW_SOURCE_PATHS)
+        self.assertEqual(regular_paths(root / "src", root), sources | NEW_SOURCE_PATHS | PERFORMANCE_SOURCE_PATHS)
         actual = set()
         for directory in (root / "reference-reviews").glob("gameplay-rules-*"):
             actual.update(regular_paths(directory, root))
@@ -74,7 +71,7 @@ class SharedProposalLegalityPreservationTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(raw).hexdigest(), PROTECTED_INVENTORY_SHA256)
         self.assertEqual(guard["protected_inventory_sha256"], PROTECTED_INVENTORY_SHA256)
 
-    def test_every_inherited_source_and_evidence_file_remains_byte_identical(self):
+    def test_historical_rows_and_authorized_current_implementation_match_exact_pins(self):
         for row in fixture()["protected_files"]:
             with self.subTest(path=row["path"]):
                 self.assert_retained_row(row)
@@ -123,7 +120,7 @@ class SharedProposalLegalityPreservationTests(unittest.TestCase):
         # byte-preservation or source authority and never modify the checkout.
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
-            names = {r["path"] for r in fixture()["protected_files"]} | NEW_SOURCE_PATHS | NEW_REVIEW_PATHS
+            names = {r["path"] for r in fixture()["protected_files"]} | NEW_SOURCE_PATHS | NEW_REVIEW_PATHS | PERFORMANCE_SOURCE_PATHS
             for name in names:
                 path = root / name
                 path.parent.mkdir(parents=True, exist_ok=True)
@@ -161,6 +158,8 @@ class SharedProposalLegalityPreservationTests(unittest.TestCase):
         for row in rows:
             with self.subTest(path=row["path"]):
                 raw = (ROOT / row["path"]).read_bytes()
+                if row["path"] == "docs/NEXT_TASK.md":
+                    raw = historical_document_before_validation_performance_append(row["path"], raw)
                 if row["path"] in DOCUMENT_APPENDICES:
                     pin = DOCUMENT_APPENDICES[row["path"]]
                     self.assertGreater(pin["appendix_bytes"], 0)

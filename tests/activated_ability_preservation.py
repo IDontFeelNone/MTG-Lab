@@ -5,6 +5,8 @@ inventory. Unknown additions remain visible to those historical guards.
 """
 from pathlib import Path
 
+from validation_performance_preservation import is_validation_performance_addition
+
 from activated_ability_projection_preservation import is_projection_addition
 from shared_casting_stage_preservation import is_shared_casting_design_addition
 from shared_target_declaration_preservation import is_target_declaration_addition
@@ -32,4 +34,5 @@ def is_design_addition(path):
     return (path.relative_to(ROOT).as_posix() in NEW_SOURCE_PATHS | NEW_REVIEW_PATHS
             or is_projection_addition(path) or is_shared_casting_design_addition(path)
             or is_target_declaration_addition(path) or is_target_allocation_addition(path)
-            or is_proposal_legality_addition(path))
+            or is_proposal_legality_addition(path)
+            or is_validation_performance_addition(path))
