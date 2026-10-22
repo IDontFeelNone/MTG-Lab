@@ -25,6 +25,7 @@ from activated_ability_projection_preservation import is_projection_addition
 from shared_target_declaration_preservation import is_target_declaration_addition
 from shared_target_allocation_preservation import is_target_allocation_addition
 from shared_proposal_legality_preservation import is_proposal_legality_addition
+from casting_permission_family_preservation import is_casting_permission_family_addition
 from casting_stage_family_completion_preservation import is_casting_stage_family_completion_addition
 from evidence.contracts import deterministic_json, sha256_identity
 from gameplay_rules.activated_ability_design import inspection
@@ -55,6 +56,7 @@ def inherited_projections():
             if not is_projection_addition(p) and not is_target_declaration_addition(p)
             and not is_target_allocation_addition(p)
             and not is_proposal_legality_addition(p)
+            and not is_casting_permission_family_addition(p)
             and not is_casting_stage_family_completion_addition(p)]
 
 
@@ -673,6 +675,7 @@ class CanonicalPreservationTests(unittest.TestCase):
                          and not is_target_declaration_addition(p)
                          and not is_target_allocation_addition(p)
                          and not is_proposal_legality_addition(p)
+                         and not is_casting_permission_family_addition(p)
                          and not is_casting_stage_family_completion_addition(p)
                          and not is_validation_performance_addition(p)}
         self.assertEqual(actual_source, inherited_source | NEW_SOURCE_PATHS)

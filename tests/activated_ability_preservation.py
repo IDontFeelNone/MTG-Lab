@@ -12,6 +12,7 @@ from shared_casting_stage_preservation import is_shared_casting_design_addition
 from shared_target_declaration_preservation import is_target_declaration_addition
 from shared_target_allocation_preservation import is_target_allocation_addition
 from shared_proposal_legality_preservation import is_proposal_legality_addition
+from casting_permission_family_preservation import is_casting_permission_family_addition
 from casting_stage_family_completion_preservation import is_casting_stage_family_completion_addition
 
 
@@ -36,5 +37,6 @@ def is_design_addition(path):
             or is_projection_addition(path) or is_shared_casting_design_addition(path)
             or is_target_declaration_addition(path) or is_target_allocation_addition(path)
             or is_proposal_legality_addition(path)
+            or is_casting_permission_family_addition(path)
             or is_casting_stage_family_completion_addition(path)
             or is_validation_performance_addition(path))
