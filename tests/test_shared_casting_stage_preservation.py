@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 import unittest
 
+from validation_performance_preservation import is_validation_performance_addition
+
 from activated_ability_projection_preservation import historical_inventory_before_projection_append
 from shared_casting_stage_preservation import (
     DOCUMENT_APPENDICES, NEW_REVIEW_PATHS, NEW_TOOL_PATHS,
@@ -36,7 +38,8 @@ def regular_paths(directory):
             if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"
             and not is_target_declaration_addition(p)
             and not is_target_allocation_addition(p)
-            and not is_proposal_legality_addition(p)}
+            and not is_proposal_legality_addition(p)
+            and not is_validation_performance_addition(p)}
 
 
 class SharedCastingStagePreservationTests(unittest.TestCase):

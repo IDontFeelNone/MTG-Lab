@@ -9,6 +9,8 @@ import json
 from pathlib import Path
 import unittest
 
+from validation_performance_preservation import is_validation_performance_addition
+
 from activated_ability_projection_preservation import (
     NEW_REVIEW_PATHS, NEW_SOURCE_PATHS, is_projection_addition,
     historical_inventory_before_projection_append,
@@ -43,7 +45,8 @@ def files_under(directory):
             and not is_shared_casting_design_addition(p)
             and not is_target_declaration_addition(p)
             and not is_target_allocation_addition(p)
-            and not is_proposal_legality_addition(p)}
+            and not is_proposal_legality_addition(p)
+            and not is_validation_performance_addition(p)}
 
 
 class BoundedActivatedAbilityPreservationTests(unittest.TestCase):

@@ -18,6 +18,8 @@ from unittest.mock import patch
 from activated_ability_preservation import (
     NEW_REVIEW_PATHS, NEW_SOURCE_PATHS, is_design_addition,
 )
+from validation_performance_preservation import is_validation_performance_addition
+
 from activated_ability_projection_preservation import is_projection_addition
 from shared_target_declaration_preservation import is_target_declaration_addition
 from shared_target_allocation_preservation import is_target_allocation_addition
@@ -660,7 +662,8 @@ class CanonicalPreservationTests(unittest.TestCase):
                          and not is_projection_addition(p)
                          and not is_target_declaration_addition(p)
                          and not is_target_allocation_addition(p)
-                         and not is_proposal_legality_addition(p)}
+                         and not is_proposal_legality_addition(p)
+                         and not is_validation_performance_addition(p)}
         self.assertEqual(actual_source, inherited_source | NEW_SOURCE_PATHS)
         old_dirs = {Path(name).parts[1] for name in protected if name.startswith("reference-reviews/")}
         self.assertEqual(len(old_dirs), 17)

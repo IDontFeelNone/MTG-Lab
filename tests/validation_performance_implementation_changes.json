@@ -1,0 +1,68 @@
+{
+  "additions": [
+    {
+      "bytes": 4209,
+      "path": "src/gameplay_rules/retained_stage_validation.py",
+      "purpose": "Share bounded direct validation of fixed historical manifests and current retained bytes without dependency reversal.",
+      "sha256": "93829771ac77cb7bcfd6e704563dcbbe0ff8f1d9843af04eddb38db0afacec6e"
+    },
+    {
+      "bytes": 6808,
+      "path": "scripts/profile_validation_capacity.py",
+      "purpose": "Measure the same complete public operations in controlled baseline/candidate processes, including setup and validation call counts.",
+      "sha256": "26ce3ee307c6015dfb3c6402349953d848a5ce0348822b020bc29a9cc9bf5609"
+    }
+  ],
+  "canonical_base": "bdccc4e9be2f6ff2aec7b5764baa022e15f51cfe",
+  "canonical_tree": "6afe49701cd99b7b6f124a979fbe332c91bb4c71",
+  "document_appendices": {
+    "docs/NEXT_TASK.md": {
+      "appendix_bytes": 951,
+      "appendix_sha256": "8c0e366636b158de701271d50883633a20b52d0b14a424ffed8cf213befd2f56",
+      "baseline_bytes": 65914,
+      "baseline_sha256": "8b6ef70b90942df3d593115f5dbc434f0b78a036b2b91ecffa048d6732dfea63"
+    }
+  },
+  "purpose": "FINITE_AUTHORIZED_IMPLEMENTATION_SUCCESSORS_ONLY",
+  "replacements": [
+    {
+      "original": {
+        "bytes": 13710,
+        "git_blob": "2d2b28a53dce6698c5d647ecf4dedd8db4c3b940",
+        "sha256": "2df44207f65ca7a31ca9bbf8c8d49e8f108396a460dc7969bf2c0930fe696b10"
+      },
+      "path": "src/gameplay_rules/shared_target_declaration/package.py",
+      "purpose": "Remove recursive historical reconstruction while preserving actual retained-byte verification and private validated snapshots.",
+      "replacement": {
+        "bytes": 16299,
+        "sha256": "5546e59226f0f4e37f69758ed317630024c1129d38de35f46ee111b30298f44a"
+      }
+    },
+    {
+      "original": {
+        "bytes": 15827,
+        "git_blob": "77a47ed30dd03ab40701f53a192bdea91018115d",
+        "sha256": "570497fe40b1bac70126ae6f4476321b6eaf21411c61b5d15907b6852dcc3310"
+      },
+      "path": "src/gameplay_rules/shared_target_allocation/package.py",
+      "purpose": "Remove recursive historical reconstruction while preserving actual retained-byte verification and private validated snapshots.",
+      "replacement": {
+        "bytes": 17779,
+        "sha256": "5f004be0b7079d0ec443289a62375e8b52ea77611abbbb9beee1092d6e4545dd"
+      }
+    },
+    {
+      "original": {
+        "bytes": 24363,
+        "git_blob": "2fb9d02bd56b73560a27ca589b454b320e10d4ec",
+        "sha256": "637cecce22c99008618af4b963fc63f0712be63e9e241f60298e38a177e461dd"
+      },
+      "path": "src/gameplay_rules/shared_proposal_legality/package.py",
+      "purpose": "Remove recursive historical reconstruction while preserving actual retained-byte verification and private validated snapshots.",
+      "replacement": {
+        "bytes": 18983,
+        "sha256": "5d4398147d5ce69aaab57a096cd6be1f042bc0be85fd5d82c4b214aad58811b2"
+      }
+    }
+  ]
+}

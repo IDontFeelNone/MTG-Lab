@@ -14,6 +14,8 @@ from pathlib import Path
 import unittest
 from unittest.mock import patch
 
+from validation_performance_preservation import is_validation_performance_addition
+
 from shared_casting_stage_preservation import is_shared_casting_design_addition
 
 from gameplay_rules.capabilities import ENGINE_CONTRACT_VERSION, EXECUTION_PROFILE
@@ -113,9 +115,9 @@ def controlled_inventory(roots):
                          and "__pycache__" not in p.parts and p.suffix != ".pyc")
     result = []
     for path in sorted(files):
-        # Preserve the original writer/admission inventory and its exact digest;
-        # this review-only successor tool is protected by its own finite guard.
-        if is_shared_casting_design_addition(path):
+        # Preserve the original writer/admission inventory and its exact digest.
+        # The exact added review/profiling tools have separate current pins.
+        if is_shared_casting_design_addition(path) or is_validation_performance_addition(path):
             continue
         if path.is_symlink():
             raise AssertionError("Controlled artifact must not be a symlink")

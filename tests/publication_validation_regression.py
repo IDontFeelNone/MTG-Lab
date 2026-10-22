@@ -4,11 +4,15 @@ Run explicitly after discovery (also in CI), so the suite executed by the gate
 does not recursively launch another whole-suite publication. No test is skipped,
 validation is not mocked, and platform doubles grant no live GitHub authority.
 """
+import hashlib
 import json
+import math
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
+import time
 import unittest
 
 from catalog_admission_helpers import prepare_reference_rehearsal, RECOMMENDED_DIGEST
@@ -18,6 +22,42 @@ from production_evidence.automatic_updates import (
 from test_automatic_update_publication import FictionalGitHubTransport
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def nested_validation_diagnostics(raw, validation):
+    """Describe the actual retained subprocess log without changing its authority.
+
+    Production already decided whether publication may proceed. These independent
+    consistency checks make the integration test's observations auditable; they
+    neither replace validation nor become canonical evidence.
+    """
+    if type(raw) is not bytes or type(validation) is not dict:
+        raise ValueError("validation diagnostics require log bytes and the real result")
+    log_sha256 = hashlib.sha256(raw).hexdigest()
+    if validation.get("log_sha256") != log_sha256:
+        raise ValueError("retained validation log hash differs from the real result")
+    if type(validation.get("exit_status")) is not int or validation["exit_status"] != 0:
+        raise ValueError("validation diagnostics require a successful real result")
+    text = raw.decode("utf-8")
+    summaries = re.findall(r"^Ran (\d+) tests? in (\d+(?:\.\d+)?)s\r?$", text, re.MULTILINE)
+    final = re.search(
+        r"^Ran (\d+) tests? in (\d+(?:\.\d+)?)s\r?\n\r?\n"
+        r"OK(?: \(skipped=(\d+)\))?\r?\n?\Z", text, re.MULTILINE)
+    if len(summaries) != 1 or final is None:
+        raise ValueError("one complete successful nested discovery summary is required")
+    count = int(final[1])
+    if (type(validation.get("tests")) is not int or count <= 0
+            or count != validation["tests"]):
+        raise ValueError("nested discovery test count differs from the real result")
+    elapsed = float(final[2])
+    if not math.isfinite(elapsed):
+        raise ValueError("observed nested discovery duration must be finite")
+    skipped = int(final[3]) if final[3] is not None else 0
+    observed_skips = len(re.findall(r"^.* \.\.\. skipped [^\r\n]+\r?$", text, re.MULTILINE))
+    if skipped > count or observed_skips != skipped:
+        raise ValueError("verbose skip entries differ from the nested discovery summary")
+    return {"tests": count, "elapsed_seconds": elapsed, "skipped": skipped,
+            "log_sha256": log_sha256}
 
 
 class ExpandedPublicationValidationRegression(unittest.TestCase):
@@ -85,12 +125,15 @@ class ExpandedPublicationValidationRegression(unittest.TestCase):
         return engine, plan, decision
 
     def test_real_writer_expansion_passes_real_publication_suite_and_readback(self):
+        started = time.monotonic()
         engine, plan, decision = self.prepare_writer_expansion()
+        prepared = time.monotonic()
         transport = FictionalGitHubTransport(self)
         # No validation replacement: this calls the publication helper, real
         # writer-output integrity checks and its complete unittest subprocess.
         result = GitHubPersistence(transport).publish_admission(
             engine, plan, self.base, decision, repository="IDontFeelNone/MTG-Lab")
+        publication_finished = time.monotonic()
         if result["status"] != "published":
             log = self.root / ".git/catalog-admission-validation.log"
             if log.exists():
@@ -101,11 +144,19 @@ class ExpandedPublicationValidationRegression(unittest.TestCase):
         self.assertIn("data/canonical/state.json", result["inventory"]["changed_paths"])
         self.assertEqual(result["head"], self.git("rev-parse", "HEAD").strip())
         self.assertTrue(result["draft"])
-        self.assertEqual(self.git("ls-remote", "origin", "refs/heads/" + engine.descriptor.destination_branch).split()[0],
-                         result["head"])
+        readback_head = self.git("ls-remote", "origin", "refs/heads/" + engine.descriptor.destination_branch).split()[0]
+        self.assertEqual(readback_head, result["head"])
         self.assertFalse(any("merge" in c or "--force" in c for c in transport.calls))
+        nested = nested_validation_diagnostics(
+            (self.root / ".git/catalog-admission-validation.log").read_bytes(), result["validation"])
+        completed = time.monotonic()
         print(json.dumps({"simulated_platform_only": True, "actual_writer_card_count": 654,
-            "validation": result["validation"], "published_to": "disposable_local_bare_remote"}, sort_keys=True), flush=True)
+            "validation": result["validation"], "nested_discovery": nested,
+            "timings_seconds": {"preparation": prepared - started,
+                "publication_integration": publication_finished - prepared,
+                "total_integration": completed - started},
+            "published_head": result["head"], "readback_head": readback_head,
+            "published_to": "disposable_local_bare_remote"}, sort_keys=True), flush=True)
 
 
 if __name__ == "__main__":

@@ -7,6 +7,8 @@ new suffix before older assertions inspect their historical states.
 import hashlib
 from pathlib import Path
 
+from validation_performance_preservation import historical_document_before_validation_performance_append
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "a21cda0c22092a77ec07097d7b155e7a71bd8de2"
 TREE = "6816bbdfbbed9d4ee37e5fe8df98d66bc91763c4"
@@ -63,6 +65,8 @@ def historical_document_before_proposal_legality_append(path, raw):
         raise AssertionError("Only the named proposal-legality documents are adapted")
     if type(raw) is not bytes:
         raise AssertionError("Canonical document input must be bytes")
+    if path == "docs/NEXT_TASK.md" and len(raw) > 65914:
+        raw = historical_document_before_validation_performance_append(path, raw)
     pin = DOCUMENT_APPENDICES[path]
     length = pin["baseline_bytes"]
     if len(raw) not in (length, length + pin["appendix_bytes"]):

@@ -9,6 +9,10 @@ from pathlib import Path
 import tempfile
 import unittest
 
+from validation_performance_preservation import (
+    assert_retained_row, is_validation_performance_addition,
+)
+
 from activated_ability_projection_preservation import historical_inventory_before_projection_append
 from shared_casting_stage_preservation import historical_document_before_shared_casting_append
 from shared_target_declaration_preservation import historical_document_before_target_declaration_append
@@ -43,20 +47,13 @@ def regular_paths(directory, root=ROOT):
             if (p.is_file() or p.is_symlink())
             and "__pycache__" not in p.parts and p.suffix != ".pyc"
             and p.relative_to(root).as_posix() not in
-            PROPOSAL_LEGALITY_SOURCE_PATHS | PROPOSAL_LEGALITY_REVIEW_PATHS}
+            PROPOSAL_LEGALITY_SOURCE_PATHS | PROPOSAL_LEGALITY_REVIEW_PATHS
+            and not is_validation_performance_addition(p, root)}
 
 
 class SharedTargetAllocationPreservationTests(unittest.TestCase):
     def assert_retained_row(self, row, root=ROOT):
-        path = root / row["path"]
-        self.assertTrue(path.is_file())
-        for ancestor in (path, *path.parents):
-            if ancestor == root:
-                break
-            self.assertFalse(ancestor.is_symlink())
-        raw = path.read_bytes()
-        self.assertEqual(len(raw), row["bytes"])
-        self.assertEqual(hashlib.sha256(raw).hexdigest(), row["sha256"])
+        assert_retained_row(row, root)
 
     def assert_exact_current_inventory(self, root=ROOT):
         rows = fixture()["protected_files"]
@@ -84,7 +81,7 @@ class SharedTargetAllocationPreservationTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(raw).hexdigest(), PROTECTED_INVENTORY_SHA256)
         self.assertEqual(guard["protected_inventory_sha256"], PROTECTED_INVENTORY_SHA256)
 
-    def test_every_inherited_source_and_evidence_file_remains_byte_identical(self):
+    def test_historical_rows_and_authorized_current_implementation_match_exact_pins(self):
         for row in fixture()["protected_files"]:
             with self.subTest(path=row["path"]):
                 self.assert_retained_row(row)
