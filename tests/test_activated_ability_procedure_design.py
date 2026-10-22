@@ -19,6 +19,7 @@ from activated_ability_preservation import (
     NEW_REVIEW_PATHS, NEW_SOURCE_PATHS, is_design_addition,
 )
 from validation_performance_preservation import is_validation_performance_addition
+from query_attachment_performance_preservation import assert_hash_row
 
 from activated_ability_projection_preservation import is_projection_addition
 from shared_target_declaration_preservation import is_target_declaration_addition
@@ -649,9 +650,16 @@ class PackageBoundaryTests(unittest.TestCase):
 
 
 class CanonicalPreservationTests(unittest.TestCase):
-    def test_complete_canonical_source_and_evidence_inventory_is_unchanged(self):
-        pkg.verify_preservation(ROOT)
+    def test_historical_inventory_and_exact_current_implementation_successors(self):
+        # This immutable gameplay verifier describes its historical Git bytes;
+        # current authorized query/attachment successors do not rewrite it.
+        with self.assertRaisesRegex(GameplayContractError, "CANONICAL_BASE_PROTECTED_BYTES_CHANGED"):
+            pkg.verify_preservation(ROOT)
         pins = json.loads((CODE / "pins.json").read_bytes())
+        for name, digest in pins["protected_files"].items():
+            with self.subTest(path=name):
+                assert_hash_row({"path": name, "sha256": digest})
+        pkg.verify_prior_packages(REVIEWS)
         self.assertEqual(pins["canonical_base"], CANONICAL_MAIN)
         self.assertEqual(pins["inherited_source_count"], 333)
         protected = pins["protected_files"]

@@ -9,8 +9,10 @@ from pathlib import Path
 import tempfile
 import unittest
 
+from query_attachment_performance_preservation import assert_retained_row
+
 from validation_performance_preservation import (
-    assert_retained_row, is_validation_performance_addition,
+    is_validation_performance_addition,
 )
 
 from activated_ability_projection_preservation import historical_inventory_before_projection_append

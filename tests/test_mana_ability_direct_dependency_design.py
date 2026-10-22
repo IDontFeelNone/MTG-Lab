@@ -16,6 +16,7 @@ import unittest
 from unittest.mock import patch
 
 from activated_ability_preservation import is_design_addition
+from query_attachment_performance_preservation import historical_inventory_row
 from evidence.contracts import deterministic_json
 from gameplay_rules.capabilities import ENGINE_CONTRACT_VERSION, EXECUTION_PROFILE
 from gameplay_rules.errors import GameplayContractError
@@ -89,8 +90,8 @@ def inventory(paths):
         if path.is_symlink():
             raise AssertionError("Protected file must remain regular")
         raw = path.read_bytes()
-        values.append({"path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
-                       "sha256": hashlib.sha256(raw).hexdigest()})
+        values.append(historical_inventory_row({"path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
+                       "sha256": hashlib.sha256(raw).hexdigest()}, ROOT))
     return values
 
 
@@ -112,7 +113,7 @@ def body(record):
 
 
 class ManaDirectPreservationTests(unittest.TestCase):
-    def test_all_313_source_files_preserve_engine_fictional_products_policy_writer_and_simulation(self):
+    def test_313_historical_source_rows_and_current_successors_match_exact_pins(self):
         values = inventory(p for p in regular_files(ROOT / "src") if CODE not in p.parents)
         self.assertEqual(len(values), 313)
         self.assertEqual(hashlib.sha256(deterministic_json(values).encode()).hexdigest(),

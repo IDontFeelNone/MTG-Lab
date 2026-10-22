@@ -4,8 +4,10 @@ from __future__ import annotations
 import hashlib
 import json
 import unicodedata
-from dataclasses import asdict, dataclass, is_dataclass
+from copy import deepcopy
+from dataclasses import dataclass, fields, is_dataclass
 from pathlib import Path
+from types import MappingProxyType
 from typing import Any, Iterable, Mapping
 
 from repository.canonical import CanonicalRepository
@@ -16,13 +18,88 @@ class QueryError(ValueError):
 
 
 def _plain(value: Any) -> Any:
+    if type(value) in (str, int, float, bool, type(None)):
+        return value
+    if isinstance(value, _DetachedMapping):
+        return _thaw(value._values)
     if is_dataclass(value):
-        return _plain(asdict(value))
+        if isinstance(value, type):
+            raise TypeError("asdict() should be called on dataclass instances")
+        return {item.name: _plain(getattr(value, item.name))
+                for item in sorted(fields(value), key=lambda item: item.name)}
     if isinstance(value, Mapping):
         return {str(k): _plain(v) for k, v in sorted(value.items(), key=lambda x: str(x[0]))}
     if isinstance(value, (tuple, list)):
         return [_plain(v) for v in value]
+    return deepcopy(value)
+
+
+def _freeze(value: Any) -> Any:
+    """Own the supported JSON values, without retaining caller-owned containers."""
+    if type(value) in (str, int, float, bool, type(None)):
+        return value
+    if isinstance(value, _DetachedMapping):
+        return value._values
+    if is_dataclass(value):
+        return _freeze(_plain(value))
+    if isinstance(value, Mapping):
+        return MappingProxyType({str(key): _freeze(child) for key, child in
+                                 sorted(value.items(), key=lambda item: str(item[0]))})
+    if isinstance(value, (tuple, list)):
+        return tuple(_freeze(child) for child in value)
+    # Scalar subclasses may have mutable attributes; retain only their JSON value.
+    if isinstance(value, str):
+        return str.__str__(value)
+    if isinstance(value, int):
+        return int.__int__(value)
+    if isinstance(value, float):
+        return float.__float__(value)
+    raise TypeError(f"unsupported query value: {type(value).__name__}")
+
+
+def _thaw(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        return {key: _thaw(child) for key, child in value.items()}
+    if isinstance(value, tuple):
+        return [_thaw(child) for child in value]
     return value
+
+
+class _DetachedMapping(Mapping):
+    """Immutable private values with ordinary detached nested dict/list reads.
+
+    A frozen QueryResult alone cannot isolate nested aliases. The backing tree
+    contains only mapping proxies, tuples and immutable JSON scalars. Returning a
+    nested value never gives a caller access to that tree. Exports remain mutable
+    copies, and the public Mapping interface and JSON representation are unchanged.
+    """
+
+    __slots__ = ("_values",)
+
+    def __init__(self, values):
+        object.__setattr__(self, "_values", _freeze(values))
+
+    def __setattr__(self, name, value):
+        raise TypeError("query values are immutable")
+
+    def __delattr__(self, name):
+        raise TypeError("query values are immutable")
+
+    def __getitem__(self, key):
+        return _thaw(self._values[key])
+
+    def __iter__(self):
+        return iter(self._values)
+
+    def __len__(self):
+        return len(self._values)
+
+    def __deepcopy__(self, memo):
+        # dataclasses.asdict remains supported, without exposing mapping proxies.
+        return _thaw(self._values)
+
+    def __copy__(self):
+        return self
 
 
 def normalize_name(value: str) -> str:
@@ -42,8 +119,12 @@ class QueryResult:
     uncertainty: str
     supersession_state: str
 
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "canonical_values", _DetachedMapping(self.canonical_values))
+        object.__setattr__(self, "provenance_summary", _DetachedMapping(self.provenance_summary))
+
     def as_dict(self) -> dict[str, Any]:
-        return _plain(asdict(self))
+        return _plain(self)
 
 
 @dataclass(frozen=True)
@@ -65,7 +146,9 @@ class CanonicalQueryEngine:
     def __init__(self, game: str = "magic", *, games_root: Path | None = None,
                  data_root: Path | None = None, _read_inventory=None) -> None:
         self._catalog_attachment = None
+        self._bound_attachment = None
         self._read_inventory = _read_inventory
+        self._bound_read_inventory = _read_inventory
         self.game = game
         self.games_root = Path(games_root) if games_root else Path(__file__).resolve().parents[2] / "data/canonical/games"
         self.data_root = Path(data_root) if data_root else self.games_root.parents[2]
@@ -74,7 +157,16 @@ class CanonicalQueryEngine:
         self._repository = CanonicalRepository(game, games_root=self.games_root,
                                                **repository_options)
         self._raw = self._load_raw()
-        self._results = tuple(sorted(self._build_results(), key=lambda x: (x.entity_type, x.canonical_identity)))
+        self._building_results = True
+        self._construction_audits = None
+        try:
+            self._results = tuple(sorted(self._build_results(), key=lambda x: (x.entity_type, x.canonical_identity)))
+        finally:
+            # Only construction shares this owned audit materialization. Public
+            # audit queries continue to inspect the current inventory and bytes.
+            self._building_results = False
+            self._construction_audits = None
+        self._snapshot_id = None
 
     @classmethod
     def from_attachment(cls, attachment) -> CanonicalQueryEngine:
@@ -102,6 +194,7 @@ class CanonicalQueryEngine:
                                 code="invalid_catalog") from None
         attachment.verify_unchanged()
         engine._catalog_attachment = attachment
+        engine._bound_attachment = attachment
         if bounded:
             attachment.validate_query(engine.snapshot())
         return engine
@@ -131,14 +224,15 @@ class CanonicalQueryEngine:
         return json.loads(path.read_text())
 
     def _verify_attachment(self) -> None:
+        if self._catalog_attachment is not self._bound_attachment:
+            from repository.snapshots import SnapshotError
+
+            raise SnapshotError("catalog attachment changed", code="scope_changed")
         if self._catalog_attachment is not None:
             from repository.snapshots import SnapshotError
 
             attachment = self._catalog_attachment
-            from repository.legacy_profile import LegacyCompatibilityAttachment
-
-            if (isinstance(attachment, LegacyCompatibilityAttachment)
-                    and self._read_inventory is not attachment):
+            if self._read_inventory is not self._bound_read_inventory:
                 raise SnapshotError("catalog attachment read inventory changed", code="scope_changed")
             attachment.verify_unchanged()
             if (self.game != attachment.game
@@ -155,11 +249,14 @@ class CanonicalQueryEngine:
     def snapshot(self) -> QuerySnapshot:
         """Return all query results and their deterministic content identity."""
         self._verify_attachment()
-        payload = json.dumps([item.as_dict() for item in self._results], sort_keys=True,
-                             separators=(",", ":"), ensure_ascii=False).encode()
+        if self._snapshot_id is None:
+            payload = json.dumps([item.as_dict() for item in self._results], sort_keys=True,
+                                 separators=(",", ":"), ensure_ascii=False).encode()
+            # Only privately owned immutable results back this identity. Current
+            # attachment content and scope are still checked on every access.
+            self._snapshot_id = "sha256:" + hashlib.sha256(payload).hexdigest()
         self._verify_attachment()
-        return QuerySnapshot("sha256:" + hashlib.sha256(payload).hexdigest(), self.game,
-                             self._results)
+        return QuerySnapshot(self._snapshot_id, self.game, self._results)
 
     def entities(self, *, canonical_id: str | None = None, provider_id: str | None = None,
                  external_id: str | None = None, entity_type: str | None = None,
@@ -315,8 +412,8 @@ class CanonicalQueryEngine:
                     if (entity_type, str(identifier)) in typed_identities:
                         continue
                     evidence_ids = list(record.get("evidence_references", []))
-                    audit = self._audit_records(promotion_id=record.get("promotion_id"))
-                    package = audit[0].get("review_package", {}) if audit else {}
+                    audit = next(self._audit_entries(promotion_id=record.get("promotion_id")), None)
+                    package = audit[2].get("review_package", {}) if audit else {}
                     assertions = self._state_assertions(str(identifier), record, package)
                     provenance = {"source_ids": sorted({str(x.get("source_id")) for x in assertions if x.get("source_id")}),
                         "evidence_assertions": assertions, "acquisition_lineage": _plain(record.get("acquisition_lineage", [])),
@@ -356,7 +453,7 @@ class CanonicalQueryEngine:
             assertions.append(reference)
         return assertions
 
-    def _audit_entries(self, *, entity_id: str | None = None, promotion_id: str | None = None):
+    def _read_audit_entries(self):
         paths = (self._paths(self.data_root / "audit", "**/*.json")
                  if self._read_inventory is not None
                  else sorted((self.data_root / "audit").rglob("*.json")))
@@ -366,6 +463,17 @@ class CanonicalQueryEngine:
                            if self._read_inventory is not None else path.read_bytes())
                 value = json.loads(content)
             except (OSError, json.JSONDecodeError): continue
+            yield path, content, value
+
+    def _audit_entries(self, *, entity_id: str | None = None, promotion_id: str | None = None):
+        if self._building_results:
+            if self._construction_audits is None:
+                self._construction_audits = tuple((path, content, _DetachedMapping(value))
+                    for path, content, value in self._read_audit_entries())
+            entries = self._construction_audits
+        else:
+            entries = self._read_audit_entries()
+        for path, content, value in entries:
             if promotion_id and value.get("promotion_id") != promotion_id: continue
             ids = (value.get("promoted_entities", []) + value.get("rejected_entities", []) +
                    value.get("promoted_printing_ids", []))

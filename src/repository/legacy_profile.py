@@ -6,12 +6,14 @@ No acquisition, copying, writer, activation or fallback is provided here.
 from __future__ import annotations
 
 from collections import Counter
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 import hashlib
 import json
 import math
 import os
 from pathlib import Path
+from types import MappingProxyType
 import re
 import stat
 
@@ -212,10 +214,60 @@ def _matches(name, pattern):
 
 
 @dataclass(frozen=True)
+class _ControlPlan:
+    """Pure, immutable inspection metadata; every path remains relative."""
+
+    game: str
+    query_snapshot_id: str
+    entity_counts: tuple[tuple[str, int], ...]
+    files: tuple[tuple[str, str, int], ...]
+    by_path: Mapping[str, tuple[str, int]]
+    namespaces: tuple[tuple[str, tuple[str, ...], str], ...]
+    namespace_paths: Mapping[str, tuple[str, ...]]
+    absent: tuple[str, ...]
+    ancestors: tuple[tuple[str, frozenset[str]], ...]
+
+
+def _control_plan(document, control_path):
+    doc = strict_json(document, control_path)
+    _validate_control(doc, doc.get("game"), doc.get("profile_id"))
+    files = tuple((row["path"], row["sha256"], row["byte_length"]) for row in doc["files"])
+    namespaces = tuple((entry["pattern"], tuple(entry["paths"]),
+                        entry["pattern"].split("*", 1)[0].rstrip("/"))
+                       for entry in doc["namespaces"])
+    ancestors = {}
+    for name in [row[0] for row in files] + [entry[2] for entry in namespaces]:
+        path = Path(name)
+        while path != Path("."):
+            ancestors.setdefault(path.parent.as_posix(), set()).add(path.name.casefold())
+            path = path.parent
+    return _ControlPlan(
+        game=doc["game"], query_snapshot_id=doc["query_snapshot_id"],
+        entity_counts=tuple(doc["entity_counts"].items()), files=files,
+        by_path=MappingProxyType({name: (digest, length) for name, digest, length in files}),
+        namespaces=namespaces,
+        namespace_paths=MappingProxyType({pattern: tuple(name for name, _, _ in files
+                                                       if _matches(name, pattern))
+                                         for pattern, _, _ in namespaces}),
+        absent=tuple(doc["absent"]),
+        ancestors=tuple((parent, frozenset(names)) for parent, names in ancestors.items()))
+
+
+@dataclass(frozen=True)
 class LegacyCompatibilityAttachment:
     root: Path
     control_path: str
     _document: bytes = field(repr=False)
+    _plan: _ControlPlan = field(init=False, repr=False, compare=False)
+    _parsed_files: Mapping[str, bytes] = field(init=False, repr=False, compare=False,
+                                             default_factory=lambda: MappingProxyType({}))
+
+    def __post_init__(self):
+        # Only immutable, privately owned bytes and relative scalar metadata may
+        # be reused. Neither plan nor parsed-byte memo proves current disk state.
+        document = bytes(self._document)
+        object.__setattr__(self, "_document", document)
+        object.__setattr__(self, "_plan", _control_plan(document, self.control_path))
 
     @property
     def binding(self):
@@ -223,7 +275,7 @@ class LegacyCompatibilityAttachment:
 
     @property
     def game(self):
-        return self.binding["game"]
+        return self._plan.game
 
     @property
     def data_root(self):
@@ -247,16 +299,16 @@ class LegacyCompatibilityAttachment:
 
     def require(self, path):
         name = self._name(path)
-        if name not in {r["path"] for r in self.binding["files"]}:
+        if name not in self._plan.by_path:
             raise SnapshotError("dependency is not selected", code="unsupported_capability", relative_path=name)
         _path(self.root, name)
 
     def read_bytes(self, path):
         name = self._name(path)
         self.require(path)
-        row = next(r for r in self.binding["files"] if r["path"] == name)
+        digest, length = self._plan.by_path[name]
         raw = _read(self.root, name)
-        if len(raw) != row["byte_length"] or hashlib.sha256(raw).hexdigest() != row["sha256"]:
+        if len(raw) != length or hashlib.sha256(raw).hexdigest() != digest:
             raise SnapshotError("selected dependency changed", code="integrity_mismatch", relative_path=name)
         return raw
 
@@ -265,29 +317,37 @@ class LegacyCompatibilityAttachment:
 
     def paths(self, root, pattern):
         base = self._name(root)
-        return tuple(self.root / r["path"] for r in self.binding["files"] if _matches(r["path"], base + "/" + pattern))
+        full_pattern = base + "/" + pattern
+        names = self._plan.namespace_paths.get(full_pattern)
+        if names is None:
+            names = tuple(name for name, _, _ in self._plan.files if _matches(name, full_pattern))
+        return tuple(self.root / name for name in names)
 
     def verify_unchanged(self):
         if _directory(self.root) != self.root:
             raise SnapshotError("attachment root changed", code="scope_mismatch")
-        current = strict_json(_read(self.root, self.control_path), self.control_path)
-        if canonical_json(current) != self._document:
-            raise SnapshotError("compatibility control changed", code="identity_mismatch")
-        _validate_control(current, self.game, current["profile_id"])
+        raw_control = _read(self.root, self.control_path)
+        # Exact bytes already have a strict, validated interpretation. Other
+        # representations still require strict parsing and canonical equivalence.
+        if raw_control != self._document:
+            current = strict_json(raw_control, self.control_path)
+            if canonical_json(current) != self._document:
+                raise SnapshotError("compatibility control changed", code="identity_mismatch")
+        plan = self._plan
         games = self.games_root
         _path(self.root, "data/canonical/games")
         try:
             children = sorted(p.name for p in games.iterdir() if p.is_dir() or p.is_symlink())
-            if children != current["game_namespaces"]:
+            if children != [plan.game]:
                 raise SnapshotError("game namespace changed", code="scope_mismatch")
-            for entry in current["namespaces"]:
-                _path(self.root, entry["pattern"].split("*", 1)[0].rstrip("/"))
-                observed = sorted(p.relative_to(self.root).as_posix() for p in self.root.glob(entry["pattern"]))
+            for pattern, paths, prefix in plan.namespaces:
+                _path(self.root, prefix)
+                observed = sorted(p.relative_to(self.root).as_posix() for p in self.root.glob(pattern))
                 for name in observed:
                     _path(self.root, name)
-                if observed != entry["paths"]:
+                if tuple(observed) != paths:
                     raise SnapshotError("selected namespace changed", code="inventory_mismatch")
-            for name in current["absent"]:
+            for name in plan.absent:
                 path = _path(self.root, name)
                 if path.exists():
                     raise SnapshotError("bound absence changed", code="scope_mismatch", relative_path=name)
@@ -295,22 +355,29 @@ class LegacyCompatibilityAttachment:
             raise SnapshotError("namespace inspection failed", code="filesystem_error") from None
         # Check case/normalization ambiguity at every selected ancestor, including
         # empty namespace directories. This inspects names, never excluded bytes.
-        selected_names = {}
-        for name in [r["path"] for r in current["files"]] + [n["pattern"].split("*", 1)[0].rstrip("/") for n in current["namespaces"]]:
-            path = self.root / name
-            while path != self.root and path.is_relative_to(self.root):
-                selected_names.setdefault(path.parent, set()).add(path.name.casefold())
-                path = path.parent
-        for parent, wanted in selected_names.items():
+        for relative_parent, wanted in plan.ancestors:
+            parent = self.root / relative_parent
             if parent.is_dir():
                 counts = Counter(p.name.casefold() for p in parent.iterdir())
                 if any(counts[name] > 1 for name in wanted):
                     raise SnapshotError("casefold path collision in selected namespace", code="duplicate_path")
-        for row in current["files"]:
-            strict_json(self.read_bytes(self.root / row["path"]), row["path"])
+        parsed = self._parsed_files
+        initial = {}
+        for name, _, _ in plan.files:
+            # The required current read, path/descriptor checks, byte length and
+            # digest are never memoized. Only JSON validity of exact private
+            # bytes may be reused after the current read has passed every check.
+            raw = self.read_bytes(self.root / name)
+            if parsed.get(name) != raw:
+                strict_json(raw, name)
+            if not parsed:
+                initial[name] = raw
+        if not parsed:
+            object.__setattr__(self, "_parsed_files", MappingProxyType(initial))
 
     def validate_query(self, snapshot):
-        if snapshot.snapshot_id != self.binding["query_snapshot_id"] or dict(Counter(x.entity_type for x in snapshot.entities)) != self.binding["entity_counts"]:
+        if (snapshot.snapshot_id != self._plan.query_snapshot_id
+                or dict(Counter(x.entity_type for x in snapshot.entities)) != dict(self._plan.entity_counts)):
             raise SnapshotError("query result differs from reviewed profile", code="query_mismatch")
 
 

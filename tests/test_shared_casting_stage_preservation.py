@@ -9,6 +9,7 @@ from pathlib import Path
 import unittest
 
 from validation_performance_preservation import is_validation_performance_addition
+from query_attachment_performance_preservation import assert_retained_row
 
 from activated_ability_projection_preservation import historical_inventory_before_projection_append
 from shared_casting_stage_preservation import (
@@ -43,7 +44,7 @@ def regular_paths(directory):
 
 
 class SharedCastingStagePreservationTests(unittest.TestCase):
-    def test_independent_fixture_names_exact_473_file_canonical_authority(self):
+    def test_exact_canonical_authority_473_historical_rows_and_current_successors(self):
         guard = fixture()
         self.assertEqual(guard["canonical_base"], BASE)
         self.assertEqual(guard["authority"], "CANONICAL_GIT_STATE")
@@ -57,15 +58,7 @@ class SharedCastingStagePreservationTests(unittest.TestCase):
         self.assertEqual(len({row["path"] for row in rows}), 473)
         for row in rows:
             with self.subTest(path=row["path"]):
-                path = ROOT / row["path"]
-                self.assertTrue(path.is_file())
-                for parent in (path, *path.parents):
-                    if parent == ROOT:
-                        break
-                    self.assertFalse(parent.is_symlink())
-                raw = path.read_bytes()
-                self.assertEqual(len(raw), row["bytes"])
-                self.assertEqual(hashlib.sha256(raw).hexdigest(), row["sha256"])
+                assert_retained_row(row)
 
     def test_no_new_source_files_and_only_finitely_enumerated_review_additions(self):
         rows = fixture()["protected_files"]

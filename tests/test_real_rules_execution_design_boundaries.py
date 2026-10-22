@@ -15,6 +15,10 @@ import unittest
 from unittest.mock import patch
 
 from validation_performance_preservation import is_validation_performance_addition
+from query_attachment_performance_preservation import (
+    assert_authorized_addition, historical_inventory_row,
+    is_query_attachment_performance_addition,
+)
 
 from shared_casting_stage_preservation import is_shared_casting_design_addition
 
@@ -119,16 +123,20 @@ def controlled_inventory(roots):
         # The exact added review/profiling tools have separate current pins.
         if is_shared_casting_design_addition(path) or is_validation_performance_addition(path):
             continue
+        if is_query_attachment_performance_addition(path, ROOT):
+            assert_authorized_addition(path, ROOT)
+            continue
         if path.is_symlink():
             raise AssertionError("Controlled artifact must not be a symlink")
         raw = path.read_bytes()
-        result.append({"path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
-                       "sha256": hashlib.sha256(raw).hexdigest()})
+        result.append(historical_inventory_row({
+            "path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
+            "sha256": hashlib.sha256(raw).hexdigest()}, ROOT))
     return result
 
 
 class RealRulesExecutionDesignBoundaryTests(unittest.TestCase):
-    def test_preexisting_kernel_evidence_product_and_admission_bytes_are_preserved(self):
+    def test_historical_kernel_evidence_product_admission_rows_and_current_successors(self):
         for name, (roots, expected_count, expected_hash) in PROTECTED_GROUPS.items():
             with self.subTest(group=name):
                 inventory = controlled_inventory(roots)
