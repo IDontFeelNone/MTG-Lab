@@ -21,6 +21,7 @@ from activated_ability_preservation import (
 from activated_ability_projection_preservation import is_projection_addition
 from shared_target_declaration_preservation import is_target_declaration_addition
 from shared_target_allocation_preservation import is_target_allocation_addition
+from shared_proposal_legality_preservation import is_proposal_legality_addition
 from evidence.contracts import deterministic_json, sha256_identity
 from gameplay_rules.activated_ability_design import inspection
 from gameplay_rules.activated_ability_design import package as pkg
@@ -48,7 +49,8 @@ def inherited_projections():
     """Inspect retained projection records without modifying their evidence."""
     return [json.loads(p.read_bytes()) for p in sorted(REVIEWS.glob("gameplay-rules-*/projection.json"))
             if not is_projection_addition(p) and not is_target_declaration_addition(p)
-            and not is_target_allocation_addition(p)]
+            and not is_target_allocation_addition(p)
+            and not is_proposal_legality_addition(p)]
 
 
 def paths_to(value, predicate, prefix=()):
@@ -657,7 +659,8 @@ class CanonicalPreservationTests(unittest.TestCase):
                          if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"
                          and not is_projection_addition(p)
                          and not is_target_declaration_addition(p)
-                         and not is_target_allocation_addition(p)}
+                         and not is_target_allocation_addition(p)
+                         and not is_proposal_legality_addition(p)}
         self.assertEqual(actual_source, inherited_source | NEW_SOURCE_PATHS)
         old_dirs = {Path(name).parts[1] for name in protected if name.startswith("reference-reviews/")}
         self.assertEqual(len(old_dirs), 17)

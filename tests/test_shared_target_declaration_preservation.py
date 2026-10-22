@@ -22,6 +22,7 @@ from shared_target_allocation_preservation import (
     historical_document_before_target_allocation_append,
     is_target_allocation_addition,
 )
+from shared_proposal_legality_preservation import is_proposal_legality_addition
 
 
 def fixture():
@@ -38,7 +39,8 @@ def regular_paths(directory):
     return {p.relative_to(ROOT).as_posix() for p in directory.rglob("*")
             if (p.is_file() or p.is_symlink())
             and "__pycache__" not in p.parts and p.suffix != ".pyc"
-            and not is_target_allocation_addition(p)}
+            and not is_target_allocation_addition(p)
+            and not is_proposal_legality_addition(p)}
 
 
 class SharedTargetDeclarationPreservationTests(unittest.TestCase):
@@ -166,7 +168,8 @@ class SharedTargetDeclarationPreservationTests(unittest.TestCase):
         self.assertEqual((len(inherited), len(old_rules), len(old_refs)), (10, 88, 88))
         self.assertNotIn("601.2c", old_refs)
         live_paths = [p for p in sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
-                      if not is_target_allocation_addition(p)]
+                      if not is_target_allocation_addition(p)
+                      and not is_proposal_legality_addition(p)]
         projections = [json.loads(p.read_bytes()) for p in live_paths]
         rules = [r for p in projections for r in p["rules"]]
         refs = {r["rule_reference"] for r in rules}
