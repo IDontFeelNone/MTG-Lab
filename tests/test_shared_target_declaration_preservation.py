@@ -26,6 +26,11 @@ from shared_target_allocation_preservation import (
     is_target_allocation_addition,
 )
 from shared_proposal_legality_preservation import is_proposal_legality_addition
+from casting_stage_family_completion_preservation import (
+    DOCUMENT_APPENDICES as CASTING_STAGE_BATCH_APPENDICES,
+    historical_document_before_casting_stage_family_completion_append,
+    is_casting_stage_family_completion_addition,
+)
 
 
 def fixture():
@@ -44,6 +49,7 @@ def regular_paths(directory):
             and "__pycache__" not in p.parts and p.suffix != ".pyc"
             and not is_target_allocation_addition(p)
             and not is_proposal_legality_addition(p)
+            and not is_casting_stage_family_completion_addition(p)
             and not is_validation_performance_addition(p)}
 
 
@@ -118,6 +124,8 @@ class SharedTargetDeclarationPreservationTests(unittest.TestCase):
         for row in rows:
             with self.subTest(path=row["path"]):
                 raw = (ROOT / row["path"]).read_bytes()
+                if row["path"] in CASTING_STAGE_BATCH_APPENDICES:
+                    raw = historical_document_before_casting_stage_family_completion_append(row["path"], raw)
                 if row["path"] in TARGET_ALLOCATION_APPENDICES:
                     raw = historical_document_before_target_allocation_append(row["path"], raw)
                 if row["path"] in DOCUMENT_APPENDICES:
@@ -165,7 +173,8 @@ class SharedTargetDeclarationPreservationTests(unittest.TestCase):
         self.assertNotIn("601.2c", old_refs)
         live_paths = [p for p in sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
                       if not is_target_allocation_addition(p)
-                      and not is_proposal_legality_addition(p)]
+                      and not is_proposal_legality_addition(p)
+                      and not is_casting_stage_family_completion_addition(p)]
         projections = [json.loads(p.read_bytes()) for p in live_paths]
         rules = [r for p in projections for r in p["rules"]]
         refs = {r["rule_reference"] for r in rules}

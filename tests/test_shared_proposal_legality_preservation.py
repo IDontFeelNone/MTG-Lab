@@ -10,6 +10,11 @@ import tempfile
 import unittest
 
 from query_attachment_performance_preservation import assert_retained_row
+from casting_stage_family_completion_preservation import (
+    DOCUMENT_APPENDICES as CASTING_STAGE_BATCH_APPENDICES,
+    historical_document_before_casting_stage_family_completion_append,
+    is_casting_stage_family_completion_addition,
+)
 
 from validation_performance_preservation import (
     NEW_SOURCE_PATHS as PERFORMANCE_SOURCE_PATHS,
@@ -40,7 +45,8 @@ def fixture():
 def regular_paths(directory, root=ROOT):
     return {p.relative_to(root).as_posix() for p in directory.rglob("*")
             if (p.is_file() or p.is_symlink())
-            and "__pycache__" not in p.parts and p.suffix != ".pyc"}
+            and "__pycache__" not in p.parts and p.suffix != ".pyc"
+            and not is_casting_stage_family_completion_addition(p, root)}
 
 
 class SharedProposalLegalityPreservationTests(unittest.TestCase):
@@ -160,6 +166,8 @@ class SharedProposalLegalityPreservationTests(unittest.TestCase):
         for row in rows:
             with self.subTest(path=row["path"]):
                 raw = (ROOT / row["path"]).read_bytes()
+                if row["path"] in CASTING_STAGE_BATCH_APPENDICES:
+                    raw = historical_document_before_casting_stage_family_completion_append(row["path"], raw)
                 if row["path"] == "docs/NEXT_TASK.md":
                     raw = historical_document_before_validation_performance_append(row["path"], raw)
                 if row["path"] in DOCUMENT_APPENDICES:
@@ -214,7 +222,8 @@ class SharedProposalLegalityPreservationTests(unittest.TestCase):
         self.assertEqual((len(inherited), len(old_rules), len(old_refs)), (12, 90, 90))
         self.assertTrue({"601.2b", "601.2c", "601.2d", "601.2f", "601.2g", "601.2h"}.issubset(old_refs))
         self.assertNotIn("601.2e", old_refs)
-        paths = sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
+        paths = [p for p in sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
+                 if not is_casting_stage_family_completion_addition(p)]
         projections = [json.loads(p.read_bytes()) for p in paths]
         rules = [r for p in projections for r in p["rules"]]
         refs = {r["rule_reference"] for r in rules}

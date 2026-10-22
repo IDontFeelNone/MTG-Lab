@@ -694,3 +694,49 @@ See [the design and validation checkpoint](docs/GAMEPLAY_RULES_SHARED_CASTING_ST
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+---
+
+## Current scope decision — Casting-stage family completion batch
+
+The owner selects exactly **601.2a and 601.2i together** for this milestone,
+replacing the unbegun Proposal-legality criteria dependency scope design
+recommendation as the current scope. That historical recommendation and all
+earlier counts, empty allowlists, authorization flags and findings remain
+unchanged. Its legality-criteria and missing-input questions are assessed
+using retained evidence plus these two units, without additional bodies.
+
+Canonical base: `422ef1f295ba06889b805c8c429c9cbade813c9e`; tree
+`e176441c99e9c331a2b1589662cff9495e9916d6`, identical to merged PR #206
+reviewed head. Branch: `codex/cr-casting-stage-family-completion`.
+Architecture v13 remains ACTIVE APPROVED; Decision 017 ACCEPTED.
+
+Exact-source artifact/lineage and complete a/i boundaries passed preflight.
+One combined NON_EXECUTABLE package adds two distinct units: **91→93**,
+**13→14 projections**, numbered a–i **9/9**, parent a–d **4/4**,
+the one 602.2b b–i import **8/8**, and i’s separate a–h range **8/8**.
+A remains excluded from the literal activation import. Parent f–h provenance
+and structural parent→e/i context remain distinct. New a citations 611.2f
+and 610.5 stay unresolved; 601.3, 733, 701.20a, triggers, broad/missing
+loyalty and all other unlisted source bodies remain outside fresh inspection.
+
+The ordered procedure map explains start versus completion, declarations,
+legality checkpoint, costs, mana access, full payment and conditional
+completion. Prior-priority conditions remain explicit. Stage coverage
+supplies no actual legality, semantic closure or execution. All ten activation
+responsibilities remain OPEN / EXECUTION_BLOCKED; real execution BLOCKED.
+PR #205/#206 performance implementations and ledgers remain unchanged.
+
+`source_policy_clearance=not_granted`; private retention, redistribution,
+free service, commercial service and AI export remain NOT_ESTABLISHED.
+No real snapshot/profile, Card interpretation, gameplay engine, simulation,
+query/catalog/admission/publication/workflow change or permission inference.
+
+See [the batch assessment and reproduction commands](docs/GAMEPLAY_RULES_CASTING_STAGE_FAMILY_COMPLETION.md).
+Final local and hosted evidence belongs in the draft PR/completion report.
+Exactly one proposed subsequent milestone: **Legality-input and
+semantic-frontier reasoning review**, retained evidence only, empty source
+allowlist, zero new units; unauthorized and unbegun. Keep one draft PR
+unmerged with auto-merge disabled. Stop for independent PM review; the owner
+retains final merge approval. Do not begin that recommendation.

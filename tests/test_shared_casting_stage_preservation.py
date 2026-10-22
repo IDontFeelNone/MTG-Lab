@@ -20,6 +20,7 @@ from shared_casting_stage_preservation import (
 from shared_target_declaration_preservation import is_target_declaration_addition
 from shared_target_allocation_preservation import is_target_allocation_addition
 from shared_proposal_legality_preservation import is_proposal_legality_addition
+from casting_stage_family_completion_preservation import is_casting_stage_family_completion_addition
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "8c2a79ecce9ae7e6ff8e7959c57271e02bf1a4cb"
@@ -40,6 +41,7 @@ def regular_paths(directory):
             and not is_target_declaration_addition(p)
             and not is_target_allocation_addition(p)
             and not is_proposal_legality_addition(p)
+            and not is_casting_stage_family_completion_addition(p)
             and not is_validation_performance_addition(p)}
 
 
