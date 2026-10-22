@@ -432,6 +432,10 @@ while the report is uncommitted; final ledger pins must match those bytes.
 ## PR #206 correction: complete scalar ownership
 
 This bounded revision responds to the PM's REVISE at reviewed head `660daace`.
+The scalar-only intermediate commit `947d033fbe9b675af49ca4e65fc149ea05ef0e07`
+(tree `6cde461587bcb7535aa8c7d680668422880ec660`) was superseded after a
+related caller-owned mapping-key comparison hook was reproduced. Both ownership
+gaps are closed in the final successor; intermediate observations stay labeled.
 Direct GitHub verification found main and PR base still exactly
 `f66c912a2fbffe80c4c60241e555dfeeb4ba0c36`; PR/remote branch and clean local
 checkout matched reviewed head/tree. Work continues on the same branch and draft
@@ -478,15 +482,24 @@ Bounded attachment construction translates the type failure into the existing
 safe `SnapshotError(code="invalid_catalog")`, with no source value/path disclosure.
 Malformed content cannot acquire a returned engine or reusable snapshot.
 
+The final ownership audit also found that `str(key)` can return a caller-owned
+string subclass. Its mutable comparison hooks can change sorted JSON serialization
+after construction. Both direct conversion and private map storage now reduce
+converted keys to exact builtin strings before sorting/storing them. Stable key
+conversion and collision ordering remain. A focused regression fails before this
+fix (one test / 0.001s / one failure) and passes afterward; public key iteration
+cannot expose the original mutable hook object. The final query module passes
+17 tests / 0.626s, including both mappings and all scalar/export/reuse checks.
+
 The map ownership boundary, detached exports/public Mapping behavior, warm
 snapshot identity reuse and construction-only audit materialization are unchanged.
 `src/repository/legacy_profile.py` is byte-identical to the reviewed implementation;
 all existing before/after attachment and current-filesystem checks remain.
 
-Five new regression methods load actual temporary JSON state, exercise both
+Six new regression methods load actual temporary JSON state, exercise both
 confidence shapes/public access paths, reject a correctly rebound attachment,
 compare exact valid numeric/null output and content identities, and cover all
-other scalar fields and mutable scalar-subclass attributes. The bound test
+other scalar fields, mutable scalar-subclass attributes and mapping keys. The bound test
 independently derives the malformed would-be query identity from the original
 valid fixture export; it does not ask the corrected reader to bless malformed
 input. Existing map/export mutation and warm attachment drift coverage remains.
@@ -495,28 +508,38 @@ Before the implementation edit, the five-test selection produced 24 failing
 assertions/subtests in 0.188s, with no test errors; numeric/null parity already
 passed. Its log SHA-256 is
 `eef7757f72dd13684a1e2e1cab1afaa017467a2ad6758fbd969e18bc47ac9cec`.
-The initial after-fix module run passed 16 tests in 0.624s; the final broader
+The intermediate scalar-only module run passed 16 tests in 0.624s; its broader
 selection also covers the later string-subclass text-preservation assertion.
-That final focused selection passed 294 tests in 160.766s, zero skips, failures
+That intermediate selection passed 294 tests in 160.766s, zero skips, failures
 or errors (161.555620s whole process, exit 0). Command arguments and environment
-are in `/tmp/query-immutability-focused-final.json`; verbose log SHA-256:
+are in `/tmp/query-immutability-focused-superseded-947.json`; verbose log SHA-256:
 `b7ec99c0e5681b998d921f79300bc78f576d17137593b956b4d2e36ae2476713`.
+The final scalar/key selection passes 295 tests / 157.408s / zero skips, failures
+or errors (158.151733s whole process, exit 0). Its command/environment metadata
+is `/tmp/query-immutability-focused-final.json`; final verbose log SHA-256:
+`28bd230cc3ce49ddb75aca62105132bae0829f818d9679f34fbdfd9cbcbe6663`.
 
 ### Corrected successor and retained history
 
-Only the current PR's engine replacement pin changes: 30,923 bytes / SHA-256
-`03a9d07fe20a14d978d9a673520794a202eca43c0e1854aa9306daa8e22aeb95`
-(Git blob `d472fa12ad65265099cc8accfa2a0745e7e9f4b9`). The current ledger SHA-256
-is `f4abaced652f79acf737813ffdb6a6ce34f5b3d930f973f8c02a39d42a5acc40`;
+Only the current PR's engine replacement pin changes: 31,049 bytes / SHA-256
+`85e9b8a02a23c674ff7e2325d4704ef93537337eec56d6b1bc8e8d9c31d22a3c`.
+Its Git blob is `28a2a693eab9a4e87bea28b68ae76949ef428ac0`.
+The current ledger SHA-256 is
+`1a7e49863e37e683600c832e7e2805e00208507cf327cdd82b6b56f93fb87a54`;
 the preservation helper changes only its corresponding checksum. Historical
 original rows, base/tree, prior ledgers, legacy replacement and tool pins remain
-original. The reviewed engine is explicitly rejected by corrected hash-only,
+original. The reviewed and intermediate engines are explicitly rejected by corrected hash-only,
 hash-plus-length and aggregate-row guards in a temporary-root negative check.
 
-Preservation selection passed 150 tests / 3.776s / zero skips, failures or errors.
+Intermediate preservation selection passed 150 tests / 3.776s / zero skips, failures or errors.
 Exact command/result are under `/tmp/query-attachment-correction-preservation-`
 `{command,result}.json`; log SHA-256
 `0f22324fae04f840601e89d2ad48fa6213159051909954ab02704db220d92deb`.
+The final key/scalar successor passes the same 150 tests in 4.074s, zero skips,
+failures or errors (4.285409s process, exit 0). Its separate command/result/log
+use `/tmp/query-attachment-key-ownership-final-preservation*`; log SHA-256:
+`94820f473c3f9a900d84ece428593badde36066efdf635ddd7fb71d26b889fb0`.
+The earlier artifacts remain unchanged and explicitly labeled intermediate.
 Independent byte/mode/inventory checks preserve 53 fixtures, 1,707 data files,
 265 retained reviews, 137 gameplay files, 230 other source files, seven workflows,
 158 prior documents and four PR #205 accounting/tool files. Legacy/tool match the
@@ -531,12 +554,22 @@ rejected by the existing integer-only control helper; integer test payloads
 then reproduced the actual defect. Neither authoring issue changed source/data.
 Earlier failed/superseded attempts in the original report remain retained.
 
+Intermediate `947d033` local discovery was intentionally interrupted before the
+key edit, exit -2 / 270.725140s / 369 completed result lines / no observed failures
+or errors; it has no complete summary. Log SHA-256:
+`60fe0fec1bde1f5cdeb92ebee7f6d0e45e1adc37d4169820a530489df30e46b9`.
+Hosted push 39818726380 and PR 39818736404 are likewise superseded and cannot
+validate final bytes. The connector has no cancel operation; `gh run cancel`
+returned Forbidden, so no cancellation was established and those runs may finish.
+Their eventual results remain labeled history rather than final-head evidence.
+
 ### Targeted corrected-byte performance check
 
 Earlier paired ordinary/expanded benchmark observations remain attributed to
 reviewed head `660daace` and its engine SHA-256 `e14b686b...`; they are not
-measurements of this correction. One representative targeted check used the
-corrected engine hash above and the unchanged legacy hash, before commit
+measurements of this correction. The intermediate scalar-only targeted check used
+engine SHA-256 `03a9d07fe20a14d978d9a673520794a202eca43c0e1854aa9306daa8e22aeb95`
+and the unchanged legacy hash, before commit
 (report metadata correctly says reviewed HEAD plus dirty implementation bytes):
 
 ```sh
@@ -547,7 +580,7 @@ CPython 3.12.14 / Linux 6.18.55 / seed 0; one fresh process per workload, OS cac
 uncontrolled, ordinary preparation zero. Actual promoted counts remain 384 Cards,
 913 Printings, 235 Identifiers and two Finishes; full query contains 1,566 entities.
 
-| Corrected actual operation | Cold/first | Two repeats |
+| Intermediate scalar-only actual operation | Cold/first | Two repeats |
 |---|---:|---:|
 | Current-consumer class construction | 8.443881s | — |
 | Actual query/collection test | 0.492280s | 0.166125s / 0.170701s |
@@ -565,21 +598,45 @@ Existing profile/closure identities also match. The ordinary mechanical loop
 has zero missing-source Cards and supplies correctness, not a speed claim.
 The new valid-value and existing snapshot regressions forbid warm result
 conversion, preserving the performance mechanism without timing thresholds.
-This single sample is not a fresh paired speedup or an expanded benchmark claim.
+This intermediate sample is not a fresh paired speedup or an expanded benchmark claim.
 No complete benchmark matrix was rerun. Raw report SHA-256:
 `1e6c3f74f0631d34660b109e680bba9d2c42adb4b10280c7c4aed8e340802565`.
+
+One further targeted sample after the mapping-key correction uses the final
+engine SHA-256 `85e9b8a0...` and unchanged legacy bytes. Its metadata accurately
+records intermediate HEAD `947d033` plus dirty final implementation hashes.
+The same command, with `--output /tmp/query-immutability-targeted-final.json`,
+uses the same ordinary catalog, environment and zero preparation. No heavy local
+test overlaps either sample; tiny preservation tests finish before measurement.
+
+| Final corrected actual operation | Cold/first | Two repeats |
+|---|---:|---:|
+| Current-consumer class construction | 8.484103s | — |
+| Actual query/collection test | 0.286309s | 0.150684s / 0.154829s |
+| Bare query construction | 2.175465s | — |
+| Bare query snapshot | 0.154891s | 0.000003765s / 0.000001332s |
+| Attached query construction | 2.382986s | — |
+| Attached snapshot | 0.043101s | 0.041206s / 0.046593s |
+| Attachment verification | 0.021412s | 0.019756s / 0.018489s |
+
+Full query/resolver/mechanical IDs, snapshot export, profile, closure and catalog
+state hash match the reviewed and intermediate outputs exactly. The final warm
+reuse regression also forbids result conversion. The final sample is a mechanism
+and output check, not a statistically controlled new speedup claim. Its raw
+report SHA-256 is
+`62003aec3b8e3e7b0f4bfcb2710da52fe6822a2c3e43615eae166d11dd5b7364`.
 
 ### Correction file list and final gates
 
 | Path changed relative to reviewed head | Purpose |
 |---|---|
 | `src/query/engine.py` | Enforce all scalar result types and immutable ownership. |
-| `tests/test_query_attachment_performance.py` | Five JSON-loading, binding, scalar and identity regressions. |
+| `tests/test_query_attachment_performance.py` | Six JSON-loading, binding, scalar/key and identity regressions. |
 | `tests/query_attachment_performance_implementation_changes.json` | Corrected engine replacement hash and length only. |
 | `tests/query_attachment_performance_preservation.py` | Corresponding current-ledger checksum only. |
 | `docs/QUERY_ATTACHMENT_PERFORMANCE.md` | Attribution note and this appended correction evidence. |
 
-Inventory becomes 2,490 tests, adding five methods to the reviewed 2,485 without
+Inventory becomes 2,491 tests, adding six methods to the reviewed 2,485 without
 removing assertions or adding skips. Focused selections run before complete
 local discovery and both final-head hosted gates. Exact final corrected head/tree,
 all completed test summaries, literal push/merge checkouts and ordered parents,

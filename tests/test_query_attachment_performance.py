@@ -122,6 +122,29 @@ class QueryConversionIsolationTests(unittest.TestCase):
         exported["provenance_summary"]["source_ids"].clear()
         self.assertEqual(result.as_dict(), expected)
 
+    def test_mapping_keys_cannot_retain_caller_owned_comparison_hooks(self):
+        class MutableKey(str):
+            def __str__(self):
+                return self
+
+            def __lt__(self, other):
+                return str.__gt__(self, other) if self.reverse else str.__lt__(self, other)
+
+        aliases = [MutableKey(value) for value in ("a", "b", "c", "d")]
+        for key in aliases:
+            key.reverse = False
+        result = make_result({aliases[0]: 1, aliases[1]: 2},
+                             {aliases[2]: 3, aliases[3]: 4})
+        expected = json.dumps(result.as_dict(), sort_keys=True, separators=(",", ":"))
+        for key in aliases:
+            key.reverse = True
+        self.assertEqual(json.dumps(result.as_dict(), sort_keys=True, separators=(",", ":")), expected)
+        for mapping in (result.canonical_values, result.provenance_summary):
+            for key in mapping:
+                self.assertIs(type(key), str)
+                with self.assertRaises(AttributeError):
+                    key.reverse = True
+
 
 class QueryScalarOwnershipTests(unittest.TestCase):
     def setUp(self):

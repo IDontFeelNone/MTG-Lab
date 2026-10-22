@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "f66c912a2fbffe80c4c60241e555dfeeb4ba0c36"
 TREE = "d98d291da9a542f0396ce399043279fed88ec20d"
 LEDGER_PATH = "tests/query_attachment_performance_implementation_changes.json"
-LEDGER_SHA256 = "f4abaced652f79acf737813ffdb6a6ce34f5b3d930f973f8c02a39d42a5acc40"
+LEDGER_SHA256 = "1a7e49863e37e683600c832e7e2805e00208507cf327cdd82b6b56f93fb87a54"
 REPLACEMENT_PATHS = frozenset({
     "src/query/engine.py", "src/repository/legacy_profile.py",
 })

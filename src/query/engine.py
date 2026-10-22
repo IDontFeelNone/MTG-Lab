@@ -28,7 +28,8 @@ def _plain(value: Any) -> Any:
         return {item.name: _plain(getattr(value, item.name))
                 for item in sorted(fields(value), key=lambda item: item.name)}
     if isinstance(value, Mapping):
-        return {str(k): _plain(v) for k, v in sorted(value.items(), key=lambda x: str(x[0]))}
+        return {str.__str__(str(k)): _plain(v) for k, v in
+                sorted(value.items(), key=lambda x: str.__str__(str(x[0])))}
     if isinstance(value, (tuple, list)):
         return [_plain(v) for v in value]
     return deepcopy(value)
@@ -43,8 +44,9 @@ def _freeze(value: Any) -> Any:
     if is_dataclass(value):
         return _freeze(_plain(value))
     if isinstance(value, Mapping):
-        return MappingProxyType({str(key): _freeze(child) for key, child in
-                                 sorted(value.items(), key=lambda item: str(item[0]))})
+        # str(key) can itself return a mutable subclass with comparison hooks.
+        return MappingProxyType({str.__str__(str(key)): _freeze(child) for key, child in
+            sorted(value.items(), key=lambda item: str.__str__(str(item[0])))})
     if isinstance(value, (tuple, list)):
         return tuple(_freeze(child) for child in value)
     # Scalar subclasses may have mutable attributes; retain only their JSON value.
