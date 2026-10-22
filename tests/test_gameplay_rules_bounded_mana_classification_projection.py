@@ -11,6 +11,7 @@ import tempfile
 import unittest
 
 from activated_ability_preservation import is_design_addition
+from query_attachment_performance_preservation import assert_hash_row
 from evidence.contracts import deterministic_json
 from gameplay_rules.errors import GameplayContractError
 from gameplay_rules.projection import mana_classification_package as pkg
@@ -239,12 +240,15 @@ class ProjectionTests(unittest.TestCase):
 
 
 class PreservationAndIntegrityTests(unittest.TestCase):
-    def test_all_prior_source_bytes_and_runtime_products_policy_writer_unchanged(self):
+    def test_historical_source_inventory_and_authorized_current_implementations_match_pins(self):
         raw=(ROOT/'tests/fixtures/mana-classification-protected-source.json').read_bytes()
         self.assertEqual(hashlib.sha256(raw).hexdigest(),'e21f4a50990577e46ddc36ffb21bf16852fa9efa4f2800ecd30b54ef17e3d784')
         inventory=json.loads(raw)
-        expected={row['path']:row['sha256'] for row in inventory}
-        actual={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
+        expected={row['path'] for row in inventory}
+        for row in inventory:
+            with self.subTest(path=row['path']):
+                assert_hash_row(row)
+        actual={str(p.relative_to(ROOT))
             for p in (ROOT/'src').rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc'
             and not is_design_addition(p)
             # The successor guard pins every byte in this canonical inventory

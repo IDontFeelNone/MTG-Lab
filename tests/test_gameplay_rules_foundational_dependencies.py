@@ -17,6 +17,7 @@ import unittest
 from unittest.mock import patch
 
 from activated_ability_preservation import is_design_addition
+from query_attachment_performance_preservation import historical_inventory_row
 from evidence.contracts import deterministic_json
 from gameplay_rules.capabilities import ENGINE_CONTRACT_VERSION, EXECUTION_PROFILE
 from gameplay_rules.engine import GameplayRulesEngine
@@ -93,8 +94,8 @@ def inventory(paths):
         if path.is_symlink():
             raise AssertionError("Protected file must not be a symlink")
         raw = path.read_bytes()
-        result.append({"path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
-                       "sha256": hashlib.sha256(raw).hexdigest()})
+        result.append(historical_inventory_row({"path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
+                       "sha256": hashlib.sha256(raw).hexdigest()}, ROOT))
     return result
 
 
@@ -624,7 +625,7 @@ class DependencyPackageTests(unittest.TestCase):
 
 
 class DependencyPreservationTests(unittest.TestCase):
-    def test_all_nonprojection_source_bytes_preserve_runtime_primitives_policy_writer_and_intelligence(self):
+    def test_256_historical_source_rows_and_current_successors_match_exact_pins(self):
         # All production source outside the one authorized review/projection
         # directory remains canonical, including engine, semantics and writer.
         paths = [path for path in (ROOT / "src").iterdir()

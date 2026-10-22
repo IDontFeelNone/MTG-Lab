@@ -1,0 +1,81 @@
+{
+  "additions": [
+    {
+      "bytes": 15005,
+      "path": "scripts/measure_query_attachment_performance.py",
+      "sha256": "9fa6e860d2021780b13fbfeb83c77b93dc2767248a54e41330fc53e6108e5781"
+    }
+  ],
+  "canonical_base": "f66c912a2fbffe80c4c60241e555dfeeb4ba0c36",
+  "canonical_tree": "d98d291da9a542f0396ce399043279fed88ec20d",
+  "historical_fixtures": [
+    {
+      "bytes": 40805,
+      "path": "tests/fixtures/mana-classification-protected-source.json",
+      "sha256": "e21f4a50990577e46ddc36ffb21bf16852fa9efa4f2800ecd30b54ef17e3d784"
+    },
+    {
+      "bytes": 69316,
+      "path": "tests/fixtures/mana-stack-exception-protected-state.json",
+      "sha256": "26ffe31092f4fcbe7207afab58bf85ddf4907e432a16c0fad13cf4cd126aed8e"
+    },
+    {
+      "bytes": 69664,
+      "path": "tests/fixtures/bounded-activated-ability-protected-state.json",
+      "sha256": "2505fae1bc886a5e32084a674974b9048b4e0329fa7a4557983bf19c67bfdf3a"
+    },
+    {
+      "bytes": 74116,
+      "path": "tests/fixtures/shared-casting-stage-protected-state.json",
+      "sha256": "2b5510fa32594ef6e7eb4271aa0837f34ef32a576a588afe91deaad0f11d5140"
+    },
+    {
+      "bytes": 76163,
+      "path": "tests/fixtures/shared-target-declaration-protected-state.json",
+      "sha256": "304a26435fe18bfa9a9e093b43f6186c94d4d1d36d9f5986135f0f08058a3cda"
+    },
+    {
+      "bytes": 79433,
+      "path": "tests/fixtures/shared-target-allocation-protected-state.json",
+      "sha256": "9185b77c73b22e21944df4d0f9aba2885b4da1e83e38a5e7a8e88348e0f0145b"
+    },
+    {
+      "bytes": 82687,
+      "path": "tests/fixtures/shared-proposal-legality-protected-state.json",
+      "sha256": "ef2bb3484803d44f9e1ad20e1be1c27b15d3901d3b4e1b86b1476662c0c4e094"
+    }
+  ],
+  "prior_implementation_ledger": {
+    "bytes": 2919,
+    "path": "tests/validation_performance_implementation_changes.json",
+    "sha256": "89fd37eb6f94182a118420ecdc8ed4aa52fd66d3f83c75fa1abb2a2c2e167322"
+  },
+  "purpose": "FINITE_AUTHORIZED_IMPLEMENTATION_SUCCESSORS_ONLY",
+  "replacements": [
+    {
+      "original": {
+        "bytes": 25510,
+        "git_blob": "034df802d27b35a14a31696eaaca27e655c7b54c",
+        "sha256": "32e1bc7040ade6fcc87a953b0b91b15f9db516668a7c405f4fb88a0191355ed4"
+      },
+      "path": "src/query/engine.py",
+      "replacement": {
+        "bytes": 31049,
+        "sha256": "85e9b8a02a23c674ff7e2325d4704ef93537337eec56d6b1bc8e8d9c31d22a3c"
+      }
+    },
+    {
+      "original": {
+        "bytes": 17754,
+        "git_blob": "51aedff76fb439f2d0503d651545dd1aab647141",
+        "sha256": "d198b59277dca1a4afc866973a4bd4db00ab5fae32a5efbbd23324ec53619483"
+      },
+      "path": "src/repository/legacy_profile.py",
+      "replacement": {
+        "bytes": 20751,
+        "sha256": "3f4ab75d9d11fba60ac70cb1a377170c43294cfd6cf6deb61880482518dddea3"
+      }
+    }
+  ],
+  "schema_version": "query-attachment-performance-implementation-changes-v1"
+}

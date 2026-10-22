@@ -10,6 +10,7 @@ from pathlib import Path
 import unittest
 
 from validation_performance_preservation import is_validation_performance_addition
+from query_attachment_performance_preservation import assert_retained_row
 
 from activated_ability_projection_preservation import (
     NEW_REVIEW_PATHS, NEW_SOURCE_PATHS, is_projection_addition,
@@ -50,7 +51,7 @@ def files_under(directory):
 
 
 class BoundedActivatedAbilityPreservationTests(unittest.TestCase):
-    def test_fixture_authority_exact_main_and_all_454_baseline_files(self):
+    def test_exact_main_authority_454_historical_rows_and_current_successors(self):
         guard = fixture()
         self.assertEqual(guard["canonical_base"], BASE)
         self.assertEqual(guard["authority"], "CANONICAL_GIT_STATE")
@@ -64,15 +65,7 @@ class BoundedActivatedAbilityPreservationTests(unittest.TestCase):
         self.assertEqual(len({r["path"] for r in rows}), 454)
         for row in rows:
             with self.subTest(path=row["path"]):
-                path = ROOT / row["path"]
-                self.assertTrue(path.is_file())
-                for parent in (path, *path.parents):
-                    if parent == ROOT:
-                        break
-                    self.assertFalse(parent.is_symlink())
-                raw = path.read_bytes()
-                self.assertEqual(len(raw), row["bytes"])
-                self.assertEqual(hashlib.sha256(raw).hexdigest(), row["sha256"])
+                assert_retained_row(row)
 
     def test_exact_finite_source_and_evidence_extensions(self):
         rows = fixture()["protected_files"]

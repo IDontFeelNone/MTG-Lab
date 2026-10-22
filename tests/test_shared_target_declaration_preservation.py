@@ -10,6 +10,7 @@ from pathlib import Path
 import unittest
 
 from validation_performance_preservation import is_validation_performance_addition
+from query_attachment_performance_preservation import assert_retained_row
 
 from activated_ability_projection_preservation import historical_inventory_before_projection_append
 from shared_casting_stage_preservation import historical_document_before_shared_casting_append
@@ -48,15 +49,7 @@ def regular_paths(directory):
 
 class SharedTargetDeclarationPreservationTests(unittest.TestCase):
     def assert_retained_row(self, row):
-        path = ROOT / row["path"]
-        self.assertTrue(path.is_file())
-        for ancestor in (path, *path.parents):
-            if ancestor == ROOT:
-                break
-            self.assertFalse(ancestor.is_symlink())
-        raw = path.read_bytes()
-        self.assertEqual(len(raw), row["bytes"])
-        self.assertEqual(hashlib.sha256(raw).hexdigest(), row["sha256"])
+        assert_retained_row(row)
 
     def test_independent_fixture_pins_exact_main_tree_and_479_file_authority(self):
         guard = fixture()
@@ -73,7 +66,7 @@ class SharedTargetDeclarationPreservationTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(raw).hexdigest(), PROTECTED_INVENTORY_SHA256)
         self.assertEqual(guard["protected_inventory_sha256"], PROTECTED_INVENTORY_SHA256)
 
-    def test_every_inherited_source_and_evidence_file_remains_byte_identical(self):
+    def test_historical_rows_and_authorized_current_implementations_match_exact_pins(self):
         for row in fixture()["protected_files"]:
             with self.subTest(path=row["path"]):
                 self.assert_retained_row(row)

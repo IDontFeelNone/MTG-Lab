@@ -9,8 +9,10 @@ from pathlib import Path
 import tempfile
 import unittest
 
+from query_attachment_performance_preservation import assert_retained_row
+
 from validation_performance_preservation import (
-    NEW_SOURCE_PATHS as PERFORMANCE_SOURCE_PATHS, assert_retained_row,
+    NEW_SOURCE_PATHS as PERFORMANCE_SOURCE_PATHS,
     historical_document_before_validation_performance_append,
 )
 

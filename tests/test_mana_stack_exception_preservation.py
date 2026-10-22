@@ -12,6 +12,7 @@ import unittest
 
 
 from activated_ability_preservation import is_design_addition
+from query_attachment_performance_preservation import assert_retained_row
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,16 +56,11 @@ def source_paths():
 
 
 class CanonicalPreservationTests(unittest.TestCase):
-    def assertInventoryPreserved(self, rows):
+    def assertHistoricalRowsChecked(self, rows):
         self.assertEqual(len(rows), len({row["path"] for row in rows}))
         for row in rows:
             with self.subTest(path=row["path"]):
-                path = ROOT / row["path"]
-                self.assertTrue(path.is_file())
-                self.assertFalse(path.is_symlink())
-                raw = path.read_bytes()
-                self.assertEqual(len(raw), row["bytes"])
-                self.assertEqual(hashlib.sha256(raw).hexdigest(), row["sha256"])
+                assert_retained_row(row)
 
     def test_guard_is_preservation_only_subordinate_to_exact_canonical_git(self):
         guard = fixture()
@@ -91,13 +87,13 @@ class CanonicalPreservationTests(unittest.TestCase):
             "src/gameplay_rules/projection/mana_classification_" + part + ".py"
             for part in ("package", "pins", "reports", "source")})
 
-    def test_all_329_canonical_source_files_and_exact_four_file_extension(self):
+    def test_329_historical_source_rows_current_successors_and_exact_extension(self):
         rows = fixture()["canonical_source_files"]
         self.assertEqual(len(rows), 329)
         canonical = {row["path"] for row in rows}
         self.assertFalse(canonical & NEW_SOURCE_PATHS)
         self.assertEqual(source_paths(), canonical | NEW_SOURCE_PATHS)
-        self.assertInventoryPreserved(rows)
+        self.assertHistoricalRowsChecked(rows)
 
     def test_engine_fictional_runtime_products_policy_writer_and_simulation_preserved(self):
         rows = fixture()["canonical_source_files"]
@@ -112,7 +108,7 @@ class CanonicalPreservationTests(unittest.TestCase):
             self.assertIn(name, names)
         self.assertEqual({p.name for p in (ROOT / "src/simulation").iterdir()
             if p.name != "__pycache__"}, {".gitkeep"})
-        self.assertInventoryPreserved(fixture()["protected_support_files"])
+        self.assertHistoricalRowsChecked(fixture()["protected_support_files"])
 
     def test_all_twelve_prior_packages_exact_file_bytes_and_historical_anchors(self):
         pins = fixture()["prior_packages"]
@@ -125,7 +121,7 @@ class CanonicalPreservationTests(unittest.TestCase):
                 root = ROOT / "reference-reviews" / name
                 self.assertEqual({p.name for p in root.iterdir()},
                     {Path(row["path"]).name for row in pin["files"]})
-                self.assertInventoryPreserved(pin["files"])
+                self.assertHistoricalRowsChecked(pin["files"])
                 self.assertEqual(json.loads((root / "manifest.json").read_bytes())["package_id"],
                     pin["package_id"])
 

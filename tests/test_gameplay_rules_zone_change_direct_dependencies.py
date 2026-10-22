@@ -17,6 +17,7 @@ import unittest
 from unittest.mock import patch
 
 from activated_ability_preservation import is_design_addition
+from query_attachment_performance_preservation import historical_inventory_row
 from evidence.contracts import deterministic_json
 from gameplay_rules.capabilities import ENGINE_CONTRACT_VERSION, EXECUTION_PROFILE
 from gameplay_rules.engine import GameplayRulesEngine
@@ -115,8 +116,8 @@ def inventory(paths):
         if path.is_symlink():
             raise AssertionError("Protected file must not be a symlink")
         raw = path.read_bytes()
-        result.append({"path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
-                       "sha256": hashlib.sha256(raw).hexdigest()})
+        result.append(historical_inventory_row({"path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
+                       "sha256": hashlib.sha256(raw).hexdigest()}, ROOT))
     return result
 
 
@@ -641,7 +642,7 @@ class ZoneChangeDependencyPreservationTests(unittest.TestCase):
         self.assertEqual(len(value), count)
         self.assertEqual(hashlib.sha256(deterministic_json(value).encode()).hexdigest(), digest)
 
-    def test_runtime_product_tier_a_intelligence_mb2_writer_admission_and_policy_are_byte_identical(self):
+    def test_256_historical_source_rows_and_current_successors_match_exact_pins(self):
         paths = [path for path in (ROOT / "src").iterdir() if path.name != "gameplay_rules"]
         paths.extend(path for path in (ROOT / "src/gameplay_rules").iterdir()
                      if path.name not in {"projection", "casting_design", "mana_ability_design", "mana_dependency_design", "__pycache__"})

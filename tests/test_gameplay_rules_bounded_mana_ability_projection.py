@@ -16,6 +16,7 @@ import unittest
 from unittest.mock import patch
 
 from activated_ability_preservation import is_design_addition
+from query_attachment_performance_preservation import historical_inventory_row
 from evidence.contracts import deterministic_json
 from gameplay_rules.capabilities import ENGINE_CONTRACT_VERSION, EXECUTION_PROFILE
 from gameplay_rules.errors import GameplayContractError
@@ -68,8 +69,8 @@ def inventory(paths):
         if path.is_symlink():
             raise AssertionError("Protected file must be regular")
         raw = path.read_bytes()
-        values.append({"path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
-                       "sha256": hashlib.sha256(raw).hexdigest()})
+        values.append(historical_inventory_row({"path": path.relative_to(ROOT).as_posix(), "bytes": len(raw),
+                       "sha256": hashlib.sha256(raw).hexdigest()}, ROOT))
     return values
 
 
@@ -106,7 +107,7 @@ def prior_rules():
 
 
 class BoundedManaPreservationTests(unittest.TestCase):
-    def test_all_308_prior_source_files_preserve_engine_profiles_policy_products_writer_and_simulation(self):
+    def test_308_historical_source_rows_and_current_successors_match_exact_pins(self):
         values = inventory(p for p in regular_files(ROOT / "src")
                            if not (p.parent == CODE and p.name.startswith("bounded_mana"))
                            and "mana_dependency_design" not in p.parts)
