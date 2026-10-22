@@ -391,3 +391,224 @@ class SharedProposalLegalityPackageTests(unittest.TestCase):
         result = subprocess.run(command, cwd=ROOT, env=environment, capture_output=True, text=True)
         self.assertEqual(result.returncode, 1)
         self.assertNotIn("VERIFIED_EXACT", result.stdout)
+
+
+# Synthetic mutation coordination only. These subprocesses read retained authored
+# JSON and exercise actual validators/writers; they establish no source authority.
+_SNAPSHOT_BOUNDARY_SUBPROCESS = r'''
+from copy import deepcopy
+import hashlib
+import json
+from pathlib import Path
+import sys
+import tempfile
+import threading
+from unittest import mock
+
+from gameplay_rules.shared_proposal_legality import package
+from gameplay_rules.shared_proposal_legality import reviews as authored_reviews
+
+boundary, phase = sys.argv[1:]
+review_root = Path.cwd() / "reference-reviews"
+retained = review_root / package.PACKAGE_NAME
+original_bytes = {name: (retained / name).read_bytes() for name in package.RECORD_NAMES}
+original = {name: json.loads(raw) for name, raw in original_bytes.items()}
+original_manifest_bytes = (retained / "manifest.json").read_bytes()
+original_manifest = json.loads(original_manifest_bytes)
+records = deepcopy(original)
+
+if phase == "historical":
+    # Warm the actual reconstruction through its public validator. Cold cases
+    # deliberately make no package load/validation/reconstruction call here.
+    package.validate_records(deepcopy(original))
+
+entered = threading.Event()
+mutated = threading.Event()
+abort = threading.Event()
+worker_errors = []
+real_calls = []
+
+
+def require_same(actual, expected, label):
+    actual_bytes = package._bytes(actual)
+    expected_bytes = package._bytes(expected)
+    if actual_bytes != expected_bytes:
+        raise AssertionError(label + " differs from the validated canonical snapshot: actual_sha256="
+            + hashlib.sha256(actual_bytes).hexdigest() + "; expected_sha256="
+            + hashlib.sha256(expected_bytes).hexdigest())
+
+
+def reseal_review(record):
+    record["review_id"] = package._identity(package.RECORD_DOMAIN,
+        {key: value for key, value in record.items() if key != "review_id"})
+
+
+def mutate_ordinary_caller():
+    try:
+        if not entered.wait(15):
+            raise AssertionError("real reconstruction/history hook was not entered")
+        if abort.is_set():
+            return
+        # Both are coherent synthetic foreign claims. Neither claim is a source
+        # finding, and changing a caller's plain dictionaries must not admit it.
+        recovery = records["recovery-dependency.json"]
+        recovery["findings"]["state"] = "DIRECT_REFERENCE_RESOLVED"
+        recovery["findings"]["target_source_coverage"] = "PROJECTED"
+        reseal_review(recovery)
+        coverage = records["composite-coverage.json"]
+        coverage["findings"]["total_projected_rule_count"] = 999
+        reseal_review(coverage)
+    except BaseException as error:
+        worker_errors.append(repr(error))
+    finally:
+        mutated.set()
+
+
+if phase == "cold":
+    target, attribute = authored_reviews, "authored_records"
+else:
+    target, attribute = package, "validate_historical"
+actual_function = getattr(target, attribute)
+
+
+def coordinated_real_function(*args, **kwargs):
+    # A one-shot barrier creates deterministic caller interleaving while all
+    # actual reconstruction and historical validation still run unmodified.
+    if not entered.is_set():
+        entered.set()
+        if not mutated.wait(15):
+            raise AssertionError("ordinary caller did not finish its synthetic mutation")
+        if worker_errors:
+            raise AssertionError("mutator failed: " + repr(worker_errors))
+    result = actual_function(*args, **kwargs)
+    real_calls.append(attribute)
+    return result
+
+
+def independently_resolve(value):
+    if type(value) is dict:
+        if "package_binding" in value:
+            if value.pop("package_binding") != "THIS_ENCLOSING_PACKAGE":
+                raise AssertionError("unexpected retained binding sentinel")
+            value["package_id"] = original_manifest["package_id"]
+        for child in value.values():
+            independently_resolve(child)
+    elif type(value) is list:
+        for child in value:
+            independently_resolve(child)
+
+
+with tempfile.TemporaryDirectory() as temporary:
+    output = Path(temporary) / "new-parent" / "retained-package"
+    worker = threading.Thread(target=mutate_ordinary_caller, daemon=True)
+    worker.start()
+    try:
+        with mock.patch.object(target, attribute, side_effect=coordinated_real_function):
+            if boundary == "validate_records":
+                result = package.validate_records(records)
+            elif boundary == "manifest":
+                result = package.manifest(records, review_root=review_root)
+            elif boundary == "write_package":
+                result = package.write_package(output, records, review_root=review_root)
+            elif boundary == "current_view":
+                result = package.current_view(records)
+            elif boundary == "composite_view":
+                result = package.composite_view(records)
+            else:
+                raise AssertionError("unknown public boundary")
+    finally:
+        abort.set()
+        entered.set()
+        worker.join(15)
+    if worker.is_alive() or worker_errors or not real_calls or not mutated.is_set():
+        raise AssertionError("coordinated real work did not complete: " + repr(worker_errors))
+    if records["recovery-dependency.json"]["findings"]["state"] != "DIRECT_REFERENCE_RESOLVED":
+        raise AssertionError("ordinary recovery mutation did not occur")
+    if records["composite-coverage.json"]["findings"]["total_projected_rule_count"] != 999:
+        raise AssertionError("ordinary coverage mutation did not occur")
+
+    if boundary == "validate_records":
+        require_same(result, original, "validated records")
+    elif boundary == "manifest":
+        require_same(result, original_manifest, "manifest identity and bindings")
+    elif boundary == "write_package":
+        # Always exercise the actual loader/readback, even if a broken writer
+        # produced invalid output. No writer or successful validation is mocked.
+        restored = package.load_package(output, review_root=review_root)
+        require_same(restored, original, "actual retained loader round trip")
+        require_same(result, original_manifest, "written manifest identity")
+        if {path.name for path in output.iterdir()} != set(original_bytes) | {"manifest.json"}:
+            raise AssertionError("writer did not retain exactly the canonical package files")
+        for name, raw in {**original_bytes, "manifest.json": original_manifest_bytes}.items():
+            if (output / name).read_bytes() != raw:
+                raise AssertionError("real writer changed canonical retained bytes: " + name)
+    else:
+        expected = deepcopy(original)
+        independently_resolve(expected)
+        if boundary == "current_view":
+            require_same(result, {"package_id": original_manifest["package_id"],
+                "records": expected,
+                "view_kind": "READ_ONLY_RESOLVED_PACKAGE_BINDINGS_NOT_NEW_CANONICAL_RECORDS"},
+                "complete current view and enclosing identity")
+        else:
+            require_same(result, expected["composite-coverage.json"]["findings"],
+                "composite view coverage and resolved binding")
+    print(json.dumps({"boundary": boundary, "phase": phase,
+        "synthetic_mutation_no_source_authority": True, "real_function_calls": len(real_calls),
+        "package_id": original_manifest["package_id"]}, sort_keys=True))
+'''
+
+
+class SharedProposalLegalitySnapshotBoundaryTests(unittest.TestCase):
+    """Plain caller mutations cannot acquire an unrelated validated identity."""
+
+    def run_snapshot_boundary(self, boundary, phase):
+        environment = os.environ.copy()
+        environment["PYTHONPATH"] = str(ROOT / "src")
+        environment.pop(SOURCE_ENV, None)
+        result = subprocess.run([sys.executable, "-c", _SNAPSHOT_BOUNDARY_SUBPROCESS,
+            boundary, phase], cwd=ROOT, env=environment, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0,
+            "synthetic " + phase + " mutation at " + boundary + " failed:\n" + result.stdout + result.stderr)
+        evidence = json.loads(result.stdout)
+        self.assertEqual((evidence["boundary"], evidence["phase"]), (boundary, phase))
+        self.assertTrue(evidence["synthetic_mutation_no_source_authority"])
+        self.assertGreaterEqual(evidence["real_function_calls"], 1)
+
+    def test_cold_validate_records_returns_the_captured_canonical_snapshot(self):
+        self.run_snapshot_boundary("validate_records", "cold")
+
+    def test_cold_manifest_binds_the_captured_canonical_snapshot(self):
+        self.run_snapshot_boundary("manifest", "cold")
+
+    def test_cold_real_writer_roundtrips_the_captured_canonical_snapshot(self):
+        self.run_snapshot_boundary("write_package", "cold")
+
+    def test_cold_current_view_resolves_only_the_captured_canonical_snapshot(self):
+        self.run_snapshot_boundary("current_view", "cold")
+
+    def test_cold_composite_view_resolves_only_the_captured_canonical_snapshot(self):
+        self.run_snapshot_boundary("composite_view", "cold")
+
+    def test_historical_validation_does_not_change_manifest_snapshot(self):
+        self.run_snapshot_boundary("manifest", "historical")
+
+    def test_historical_validation_does_not_change_real_writer_snapshot(self):
+        self.run_snapshot_boundary("write_package", "historical")
+
+    def test_historical_validation_does_not_change_current_view_snapshot(self):
+        self.run_snapshot_boundary("current_view", "historical")
+
+    def test_historical_validation_does_not_change_composite_view_snapshot(self):
+        self.run_snapshot_boundary("composite_view", "historical")
+
+    def test_views_reject_unrelated_recovery_or_coverage_claims_before_binding(self):
+        original = {name: json.loads((PACKAGE / name).read_bytes()) for name in package.RECORD_NAMES}
+        for name, field, replacement in (("recovery-dependency.json", "state", "DIRECT_REFERENCE_RESOLVED"),
+                ("composite-coverage.json", "total_projected_rule_count", 999)):
+            for view in (package.current_view, package.composite_view):
+                records = deepcopy(original)
+                records[name]["findings"][field] = replacement
+                reseal(records[name])
+                with self.subTest(record=name, view=view.__name__), self.assertRaises(GameplayContractError):
+                    view(records)

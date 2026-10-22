@@ -304,6 +304,10 @@ def _expected_record_bytes():
 
 def validate_records(records):
     raw = _bytes(records)
+    # Own exactly the captured content before reconstruction can yield to a
+    # caller. Every check and consumer must use this snapshot, never a later
+    # copy of the caller's live dictionary.
+    records = json.loads(raw)
     if type(records) is not dict or set(records) != RECORD_NAMES:
         _fail("EXACT_NINE_AUTHORED_RECORDS_REQUIRED")
     from .contracts import BoundedSharedProposalLegalityProjection
@@ -323,7 +327,7 @@ def validate_records(records):
     # and rejects coherent foreign rehashes as well as valid but altered claims.
     if raw != _bytes(_expected_records()):
         _fail("EXACT_AUTHORED_RECORD_CONTENT_REQUIRED")
-    return deepcopy(records)
+    return records
 
 
 def rebuild_package(*, review_root):
@@ -429,8 +433,9 @@ def current_view(records):
     The immutable authored records avoid circular content hashes. This read-only
     view binds their current e rows to the verified enclosing manifest instead.
     """
-    metadata = manifest(records)
-    result = _copy(records)
+    result = validate_records(records)
+    validate_historical(review_root=DEFAULT_REVIEW_ROOT)
+    metadata = _manifest_validated(result, retained_binding())
     def resolve(value):
         if type(value) is dict:
             if "package_binding" in value:
