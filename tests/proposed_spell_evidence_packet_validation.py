@@ -143,6 +143,42 @@ RECORD_NAMES = {"contract.json", "design-assessment.json", *PACKET_NAMES}
 CANONICAL_BASE = "80c7cee9c1448c97a76f7a9139b405cbcb4c3613"
 
 
+def observation_material(packet, observation):
+    """Bind this design's review targets and their finite reference closure."""
+    indexes = {name: unique_index(packet[name], field) for name, field in (
+        ("contexts", "context_id"), ("claims", "claim_id"),
+        ("choices", "choice_id"), ("reasoning", "step_id"),
+        ("limitations", "limitation_id"), ("rule_evidence", "evidence_id"))}
+    material = {name: {} for name in indexes}
+    pending = [("claims", ref) for ref in observation["claim_refs"]]
+    pending.extend(("reasoning", ref) for ref in observation["step_refs"])
+    while pending:
+        kind, ref = pending.pop()
+        if ref in material[kind]:
+            continue
+        row = indexes[kind][ref]
+        material[kind][ref] = row
+        if kind in ("claims", "choices", "reasoning"):
+            pending.append(("contexts", row["context_id"]))
+            if row["alternative_id"] is not None:
+                pending.extend(("choices", key) for key, choice in indexes["choices"].items()
+                    if (choice["context_id"], choice["alternative_id"]) ==
+                    (row["context_id"], row["alternative_id"]))
+        if kind == "claims":
+            pending.extend(("rule_evidence", key) for key in row["rule_context_refs"])
+        if kind in ("choices", "reasoning", "limitations"):
+            pending.extend(("claims", key) for key in row["claim_refs"])
+        if kind == "reasoning":
+            pending.extend(("reasoning", key) for key in row["depends_on_steps"])
+            pending.extend(("rule_evidence", key) for key in row["rule_refs"])
+        if kind in ("claims", "reasoning"):
+            pending.extend(("limitations", key) for key in row["limitation_refs"])
+        if kind == "limitations":
+            pending.extend(("contexts", key) for key in row["context_ids"])
+            pending.extend(("reasoning", key) for key in row["step_refs"])
+    return material
+
+
 def validate_packet(value, *, contract=None, rules=None, history=None, _seen=frozenset()):
     """Return an owned structural snapshot; evidence truth remains unassessed."""
     value = snapshot(value)
@@ -243,6 +279,11 @@ def validate_packet(value, *, contract=None, rules=None, history=None, _seen=fro
     branches = {(steps[ref]["context_id"], steps[ref]["alternative_id"]) for ref in conclusion["step_refs"]}
     if conclusion["kind"] != "INDEPENDENT_CONDITIONALS_ONLY" and len(branches) != 1:
         fail("DISTINCT_ALTERNATIVES_CANNOT_BECOME_JOINT_CONCLUSION")
+    for ref in conclusion["assumption_refs"]:
+        assumption = claims[ref]
+        if any(assumption["context_id"] != context or assumption["alternative_id"] not in (None, alternative)
+                for context, alternative in branches):
+            fail("CONCLUSION_ASSUMPTION_SCOPE_MISMATCH")
     required_limit = {"INDETERMINATE_MISSING": "UNKNOWN", "INDETERMINATE_UNSUPPORTED": "UNSUPPORTED",
         "INDETERMINATE_CONFLICT": "CONFLICT", "INDEPENDENT_CONDITIONALS_ONLY": "COMPATIBILITY_GAP"}.get(conclusion["kind"])
     if required_limit and not any(limits[ref]["kind"] == required_limit for ref in conclusion["limitation_refs"]):
@@ -262,6 +303,9 @@ def validate_packet(value, *, contract=None, rules=None, history=None, _seen=fro
         fail("CONCLUSION_MUST_RETAIN_DEPENDENCY_LIMITATIONS")
     if any(row["context_id"] != value["question"]["context_id"] for row in cited_rows):
         fail("CONCLUSION_QUESTION_CONTEXT_MISMATCH")
+    if any(row["alternative_id"] is not None and (row["context_id"], row["alternative_id"]) not in branches
+            for row in cited_rows):
+        fail("CONCLUSION_DEPENDENCY_ALTERNATIVE_MISMATCH")
     required_condition = {"INDETERMINATE_MISSING": "UNKNOWN", "INDETERMINATE_UNSUPPORTED": "UNSUPPORTED",
         "INDETERMINATE_CONFLICT": "CONFLICTING"}.get(conclusion["kind"])
     if required_condition and not any(row["condition"] == required_condition for row in cited_rows):
@@ -291,11 +335,25 @@ def validate_packet(value, *, contract=None, rules=None, history=None, _seen=fro
         if any(key not in contexts or _canonical_candidate(contexts[key]) != _canonical_candidate(row)
                 for key, row in old_contexts.items()):
             fail("HISTORICAL_CONTEXT_REBINDING_FORBIDDEN")
-        current_observations = {row["observation_id"]: row for row in observations}
+    current_observations = {row["observation_id"]: row for row in observations}
+    pending_ancestors = list(value["history"]["supersedes_packet_ids"])
+    checked_ancestors = set()
+    while pending_ancestors:
+        ref = pending_ancestors.pop()
+        if ref in checked_ancestors:
+            continue
+        checked_ancestors.add(ref)
+        prior = history[ref]  # Every reachable ancestor was recursively validated above.
+        pending_ancestors.extend(prior["history"]["supersedes_packet_ids"])
         for old_observation in prior["history"]["review_observations"]:
             old_id = old_observation["observation_id"]
-            if old_id in current_observations and _canonical_candidate(current_observations[old_id]) != _canonical_candidate(old_observation):
+            if old_id not in current_observations:
+                continue
+            if _canonical_candidate(current_observations[old_id]) != _canonical_candidate(old_observation):
                 fail("HISTORICAL_OBSERVATION_REWRITE_FORBIDDEN")
+            if _canonical_candidate(observation_material(value, current_observations[old_id])) != _canonical_candidate(
+                    observation_material(prior, old_observation)):
+                fail("HISTORICAL_OBSERVATION_MATERIAL_CHANGED")
     return value
 
 

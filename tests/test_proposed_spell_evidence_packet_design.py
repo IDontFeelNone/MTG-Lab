@@ -180,6 +180,113 @@ class ProposedSpellEvidencePacketDesignTests(unittest.TestCase):
         with self.assertRaises(GameplayContractError):
             self.validate(design.seal_packet(packet))
 
+    def test_conclusion_assumptions_preserve_direct_and_transitive_scopes(self):
+        for derived in (False, True):
+            for alternative in (None, "soften", "brighten"):
+                packet = deepcopy(self.packets[4])
+                assumption = deepcopy(packet["claims"][-1])
+                assumption.update(claim_id="scoped-premise", alternative_id=alternative)
+                assumption["attribution"]["statement_id"] = "statement-scoped-premise"
+                packet["claims"].append(assumption)
+                step = "address"
+                if derived:
+                    packet["reasoning"].append({**packet["reasoning"][0],
+                        "step_id": "derived", "claim_refs": ["premise"],
+                        "depends_on_steps": ["address"]})
+                    step = "derived"
+                packet["conclusion"].update(kind="CONDITIONAL_SUPPORT", step_refs=[step],
+                    assumption_refs=["premise", "scoped-premise"], limitation_refs=["scope"])
+                design.seal_packet(packet)
+                with self.subTest(derived=derived, alternative=alternative):
+                    if alternative == "brighten":
+                        with self.assertRaisesRegex(GameplayContractError, "CONCLUSION_ASSUMPTION_SCOPE_MISMATCH"):
+                            self.validate(packet)
+                    else:
+                        self.assertEqual(self.validate(packet), packet)
+        packet["reasoning"].append({**packet["reasoning"][0], "step_id": "general",
+            "alternative_id": None, "claim_refs": ["premise"]})
+        packet["conclusion"]["step_refs"] = ["general"]
+        with self.assertRaisesRegex(GameplayContractError, "CONCLUSION_ASSUMPTION_SCOPE_MISMATCH"):
+            self.validate(design.seal_packet(packet))
+        packet = deepcopy(self.packets[4])
+        assumption = deepcopy(packet["claims"][-1])
+        assumption.update(claim_id="soften-premise", alternative_id="soften")
+        assumption["attribution"]["statement_id"] = "statement-soften-premise"
+        packet["claims"].append(assumption)
+        packet["reasoning"][0]["claim_refs"].append("soften-premise")
+        self.assertEqual(self.validate(design.seal_packet(packet)), packet)
+        packet["conclusion"]["assumption_refs"].append("soften-premise")
+        with self.assertRaisesRegex(GameplayContractError, "CONCLUSION_ASSUMPTION_SCOPE_MISMATCH"):
+            self.validate(design.seal_packet(packet))
+
+    def test_historical_observation_claim_targets_remain_bound(self):
+        original = deepcopy(self.packets[0])
+        successor = deepcopy(original)
+        successor["revision"] = 2
+        successor["history"]["supersedes_packet_ids"] = [original["packet_id"]]
+        history = {original["packet_id"]: original}
+        self.assertEqual(self.validate(design.seal_packet(successor), history=history), successor)
+        successor["claims"][-1]["value"] = False
+        with self.assertRaisesRegex(GameplayContractError, "HISTORICAL_OBSERVATION_MATERIAL_CHANGED"):
+            self.validate(design.seal_packet(successor), history=history)
+        observation = deepcopy(successor["history"]["review_observations"][0])
+        observation.update(observation_id="review-2", reviewer_id="fictional:a:second-reviewer",
+            text="A separately attributed fictional observation of the corrected premise.")
+        successor["history"]["review_observations"] = [observation]
+        self.assertEqual(self.validate(design.seal_packet(successor), history=history), successor)
+        self.assertEqual(history[original["packet_id"]], original)
+
+    def test_historical_observation_step_targets_include_transitive_dependencies(self):
+        for change in ("step", "premise", "transitive-premise", "choice", "limitation"):
+            original = deepcopy(self.packets[0])
+            original["history"]["review_observations"][0]["claim_refs"] = []
+            if change == "limitation":
+                original["reasoning"][0]["limitation_refs"] = ["scope"]
+            if change == "transitive-premise":
+                dependency = {**original["reasoning"][0], "step_id": "premise-step",
+                    "alternative_id": None, "claim_refs": ["premise"]}
+                original["reasoning"].insert(0, dependency)
+                original["reasoning"][1]["depends_on_steps"] = ["premise-step"]
+                original["reasoning"][1]["claim_refs"].remove("premise")
+            self.assertEqual(self.validate(design.seal_packet(original)), original)
+            successor = deepcopy(original)
+            successor["revision"] = 2
+            successor["history"]["supersedes_packet_ids"] = [original["packet_id"]]
+            if change == "step":
+                successor["reasoning"][0]["explanation"] += " Revised authored reasoning."
+            elif change == "choice":
+                successor["choices"][0]["description"] += " Revised fictional choice description."
+            elif change == "limitation":
+                successor["limitations"][0]["description"] += " Additional authored restriction."
+            else:
+                successor["claims"][-1]["value"] = False
+            with self.subTest(change=change), self.assertRaisesRegex(GameplayContractError, "HISTORICAL_OBSERVATION_MATERIAL_CHANGED"):
+                self.validate(design.seal_packet(successor), history={original["packet_id"]: original})
+
+    def test_omitted_observations_cannot_reappear_with_changed_historical_targets(self):
+        original = deepcopy(self.packets[0])
+        for changed in (False, True):
+            middle = deepcopy(original)
+            middle["revision"] = 2
+            middle["history"]["supersedes_packet_ids"] = [original["packet_id"]]
+            middle["history"]["review_observations"] = []
+            if changed:
+                middle["claims"][-1]["value"] = False
+            history = {original["packet_id"]: original}
+            self.assertEqual(self.validate(design.seal_packet(middle), history=history), middle)
+            successor = deepcopy(middle)
+            successor["revision"] = 3
+            successor["history"]["supersedes_packet_ids"] = [middle["packet_id"]]
+            successor["history"]["review_observations"] = deepcopy(original["history"]["review_observations"])
+            history[middle["packet_id"]] = middle
+            design.seal_packet(successor)
+            with self.subTest(changed=changed):
+                if changed:
+                    with self.assertRaisesRegex(GameplayContractError, "HISTORICAL_OBSERVATION_MATERIAL_CHANGED"):
+                        self.validate(successor, history=history)
+                else:
+                    self.assertEqual(self.validate(successor, history=history), successor)
+
     def test_unsupported_positive_legality_and_execution_states_fail(self):
         for field, value in (("kind", "LEGAL"), ("kind", "CASTABLE"), ("kind", "READY_TO_EXECUTE"),
                 ("stage", "PROPOSAL_LEGALITY"), ("unsupported_stronger_conclusions", [])):

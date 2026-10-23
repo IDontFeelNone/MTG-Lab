@@ -293,3 +293,36 @@ remote and matching published/readback heads. Literal checkouts and ordered merg
 parents must be recorded. Final hosted evidence belongs in the PR description,
 without a metadata-only commit after validation. Stop for independent PM review;
 the owner retains final merge approval.
+
+## PR #209 structural correction
+
+This bounded correction enforces the existing reference-integrity obligations in
+the test-only checker. The proposed schema, eight retained JSON records, their
+bytes and identities, and all five example outcomes remain unchanged. The
+reviewed 2,575-test count above is historical; four focused regression methods
+bring discovery to 2,579. No subsequent milestone has begun.
+
+Every consumed premise must retain its context and alternative restriction,
+including direct conclusion assumptions and transitive reasoning dependencies.
+A general premise may support a named alternative; a general/null scope cannot
+absorb an alternative-restricted premise. Direct conclusion assumptions apply to
+every directly cited branch and must fit each branch. An assumption specific to
+one independent explanation must instead be referenced within that explanation's
+matching step. Independent explanations keep their distinct scopes and required
+compatibility limitation. These checks establish reference consistency only;
+they do not evaluate compatibility or change evidence-condition checks.
+
+A carried historical observation must preserve both its own canonical bytes and
+the material its claim/step references identified in **every reachable superseded
+packet**, including ancestors where an intermediate revision omitted it. Reviewed
+material includes referenced claims and steps, transitive step dependencies,
+linked rule evidence, contexts and limitations (including their claim/step
+references), and all choice records identifying each referenced alternative with
+their claim dependencies. Adding a choice in that alternative changes the reviewed
+material. Local IDs alone cannot preserve these referents.
+Changing any such material requires leaving the old observation in its immutable,
+validated historical packet; the successor may omit it and add a separately
+attributed observation with a fresh ID. An unchanged observation may be carried
+or restored only while its reviewed material remains unchanged. Original history
+must remain available and validate. This finite contract-specific closure adds
+no provenance framework, gameplay evaluator or production authoring mechanism.
