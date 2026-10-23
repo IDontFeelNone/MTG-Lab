@@ -532,3 +532,49 @@ projection, evaluator or runtime admission. Do not begin it.
 future_milestone_authorized=false
 future_source_projection_authorized=false
 future_milestone_begun=false
+
+
+---
+
+## Current pilot — Offline proposed-spell packet authoring
+
+The owner separately authorized this fictional-only local authoring and structural
+review pilot. This authorization succeeds the retained recommendation; its old
+false authorization/begun flags and all eight design JSON files remain unchanged.
+PR #209 is merged. The pilot base is exactly
+`96d120a6543a9eb65e670d00c8fa66a0cf049c1a`, tree
+`3fa893becd3fc83e1a0731f97f24bdc1cfff8828`, matching corrected reviewed head
+`780a626e2925a0479defbedc5eeec77131014812`.
+
+The small offline CLI creates explicit editable drafts from selected fictional
+examples or validated packets, records canonical content-addressed packets in an
+explicit local workspace, and renders authored explanations and linear history.
+Corrections append records; reviewer observations retain their originating
+packet/revision. Structural validity, authored evidence condition, authored
+explanation and execution authority remain distinct. Validation checks structure
+and retained references, never truth, legality, permission or sound reasoning.
+Execution authority is always BLOCKED. See [usage and reproducible demonstration](OFFLINE_PROPOSED_SPELL_AUTHORING.md).
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 ACCEPTED. New real source
+units, projections, anchors and dependency admissions are all zero. Coverage stays
+100 real source units / 15 projections; casting stages 9/9; parent range 4/4;
+the single activated-ability b–i import 8/8 (a excluded); completion's preceding
+a–h range 8/8. Counts do not establish semantic completeness. Semantic closure
+remains OPEN; all ten activated-ability responsibilities remain
+OPEN / EXECUTION_BLOCKED. Real execution remains BLOCKED. No real
+GameplayRulesSnapshot or execution profile is created or activated.
+
+`source_policy_clearance=not_granted`; private retention, redistribution, free
+service, commercial service and AI export remain NOT_ESTABLISHED. No source TXT,
+new source body, real Card evidence, evaluator, runtime integration or automatic
+publication is introduced. Historical product/collation rules remain separate.
+PR #205/#206 performance behavior and all retained evidence identities remain
+protected. Exact validation and final-head hosted publication/readback evidence
+belong in the single draft PR completion report. Stop for independent PM review;
+the owner retains final merge approval. Do not merge or enable auto-merge.
+
+No subsequent milestone is authorized or begun.
+
+future_milestone_authorized=false
+future_source_projection_authorized=false
+future_milestone_begun=false
