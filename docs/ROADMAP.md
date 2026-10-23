@@ -464,3 +464,36 @@ semantic-frontier reasoning review**, retained evidence only, empty source
 allowlist, zero new units; unauthorized and unbegun. Keep one draft PR
 unmerged with auto-merge disabled. Stop for independent PM review; the owner
 retains final merge approval. Do not begin that recommendation.
+
+
+---
+
+## Current scope decision — Casting-permission family batch
+
+The owner selects the complete, freshly inventoried **601.3 family** for one
+NON_EXECUTABLE projection/package. PR #207's “Legality-input and semantic-frontier
+reasoning review” recommendation, its authorization flags and unbegun history
+remain unchanged. Architecture v13 stays ACTIVE APPROVED; Decision 017 ACCEPTED.
+
+Marker-only selection froze **601.3, 601.3a–f (7 units)** before body inspection,
+with 601.4 as the following boundary. Exact artifact/lineage reproduction and
+coherence preflight passed. Coverage is **93 + 7 = 100 distinct units / 15
+projections**. Retained a–i 9/9, parent a–d 4/4, one activation b–i import 8/8,
+and i's separate a–h range 8/8 remain unchanged.
+
+The new knowledge explains conditional permission to begin, proposal choices,
+qualified timing allowances, characteristic evidence and face-down exile access.
+The individual literal 601.2→601.3 reference is now source-resolved; complete
+family coverage leaves semantic closure open. The e checkpoint has no literal
+601.3 citation, and 733 remains unresolved. Card/effect/state evidence and all
+retained semantic frontiers remain needed. All ten activation responsibilities
+remain OPEN / EXECUTION_BLOCKED; real execution BLOCKED. Source-policy clearance
+is not_granted; private retention, redistribution, free/commercial service and AI
+export remain NOT_ESTABLISHED. No runtime, evaluator or workflow is authorized.
+
+See [the bounded family assessment](GAMEPLAY_RULES_CASTING_PERMISSION_FAMILY.md)
+for source anchors, authored cases, preservation and reproduction commands.
+Exactly one subsequent recommendation is a **Proposed-spell evidence packet
+contract design**, with a useful evidence-bound explanation format; it remains
+unauthorized and unbegun. One draft PR stays unmerged with auto-merge disabled,
+awaiting independent PM review and final owner approval.

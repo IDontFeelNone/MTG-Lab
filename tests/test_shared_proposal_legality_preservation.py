@@ -10,6 +10,7 @@ import tempfile
 import unittest
 
 from query_attachment_performance_preservation import assert_retained_row
+from casting_permission_family_preservation import is_casting_permission_family_addition
 from casting_stage_family_completion_preservation import (
     DOCUMENT_APPENDICES as CASTING_STAGE_BATCH_APPENDICES,
     historical_document_before_casting_stage_family_completion_append,
@@ -46,6 +47,7 @@ def regular_paths(directory, root=ROOT):
     return {p.relative_to(root).as_posix() for p in directory.rglob("*")
             if (p.is_file() or p.is_symlink())
             and "__pycache__" not in p.parts and p.suffix != ".pyc"
+            and not is_casting_permission_family_addition(p, root)
             and not is_casting_stage_family_completion_addition(p, root)}
 
 
@@ -223,7 +225,8 @@ class SharedProposalLegalityPreservationTests(unittest.TestCase):
         self.assertTrue({"601.2b", "601.2c", "601.2d", "601.2f", "601.2g", "601.2h"}.issubset(old_refs))
         self.assertNotIn("601.2e", old_refs)
         paths = [p for p in sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
-                 if not is_casting_stage_family_completion_addition(p)]
+                 if not is_casting_permission_family_addition(p)
+                 and not is_casting_stage_family_completion_addition(p)]
         projections = [json.loads(p.read_bytes()) for p in paths]
         rules = [r for p in projections for r in p["rules"]]
         refs = {r["rule_reference"] for r in rules}

@@ -5,6 +5,10 @@ Historical fixtures, expected counts and digests keep their original values;
 unknown neighboring paths remain visible to every historical guard.
 """
 import hashlib
+from casting_permission_family_preservation import (
+    DOCUMENT_APPENDICES as CASTING_PERMISSION_APPENDICES,
+    historical_document_before_casting_permission_append,
+)
 from pathlib import Path
 
 
@@ -75,6 +79,8 @@ def historical_document_before_casting_stage_family_completion_append(path, raw)
         raise AssertionError("Only named casting-stage batch documents are adapted")
     if type(raw) is not bytes:
         raise AssertionError("Canonical document input must be bytes")
+    if len(raw) > CASTING_PERMISSION_APPENDICES[path]["baseline_bytes"]:
+        raw = historical_document_before_casting_permission_append(path, raw)
     pin = DOCUMENT_APPENDICES[path]
     length = pin["baseline_bytes"]
     if len(raw) not in (length, length + pin["appendix_bytes"]):

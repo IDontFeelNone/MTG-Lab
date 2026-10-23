@@ -10,6 +10,7 @@ import tempfile
 import unittest
 
 from query_attachment_performance_preservation import assert_retained_row
+from casting_permission_family_preservation import is_casting_permission_family_addition
 from casting_stage_family_completion_preservation import (
     DOCUMENT_APPENDICES as CASTING_STAGE_BATCH_APPENDICES,
     historical_document_before_casting_stage_family_completion_append,
@@ -55,6 +56,7 @@ def regular_paths(directory, root=ROOT):
             and "__pycache__" not in p.parts and p.suffix != ".pyc"
             and p.relative_to(root).as_posix() not in
             PROPOSAL_LEGALITY_SOURCE_PATHS | PROPOSAL_LEGALITY_REVIEW_PATHS
+            and not is_casting_permission_family_addition(p, root)
             and not is_casting_stage_family_completion_addition(p, root)
             and not is_validation_performance_addition(p, root)}
 
@@ -227,6 +229,7 @@ class SharedTargetAllocationPreservationTests(unittest.TestCase):
         self.assertNotIn("601.2d", old_refs)
         paths = [p for p in sorted((ROOT / "reference-reviews").glob("gameplay-rules-*/projection.json"))
                  if not is_proposal_legality_addition(p)
+                 and not is_casting_permission_family_addition(p)
                  and not is_casting_stage_family_completion_addition(p)]
         projections = [json.loads(p.read_bytes()) for p in paths]
         rules = [r for p in projections for r in p["rules"]]
