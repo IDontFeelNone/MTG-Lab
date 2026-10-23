@@ -989,3 +989,38 @@ Exactly one subsequent recommendation is a **Proposed-spell evidence packet
 contract design**, with a useful evidence-bound explanation format; it remains
 unauthorized and unbegun. One draft PR stays unmerged with auto-merge disabled,
 awaiting independent PM review and final owner approval.
+
+
+---
+
+## Current design — Proposed-spell evidence packet contract
+
+The owner separately authorizes this design milestone only. One proposed,
+NON_EXECUTABLE contract and five complete fictional packets explain asserted
+permission to begin casting. Structural validity, evidence condition, bounded
+conclusion and execution authority remain separate. Missing, unsupported and
+conflicting evidence stays visible; no packet grants gameplay authority.
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 ACCEPTED. Retained-only
+source allowlist is empty: zero new source units/projections; coverage stays
+100/15, stages 9/9, parent range 4/4, one activation b–i import 8/8 and i's a–h
+range 8/8. Historical PR #208 recommendation and all evidence remain unchanged.
+Semantic closure stays OPEN; all ten activation responsibilities remain
+OPEN / EXECUTION_BLOCKED; real execution BLOCKED. Source-policy clearance stays
+not_granted; private retention, redistribution, free/commercial service and AI
+export remain NOT_ESTABLISHED. No source-body inspection or evaluator is added.
+
+See [the contract and complete packets](GAMEPLAY_RULES_PROPOSED_SPELL_EVIDENCE_PACKET_DESIGN.md)
+for identities, validation boundaries and remaining questions. Final validation
+and hosted evidence belong in the draft PR/completion report. Stop for independent
+PM review; owner retains final merge approval. Keep exactly one draft PR unmerged
+with auto-merge disabled.
+
+Exactly one subsequent recommendation: **Offline proposed-spell packet authoring
+pilot**, a later fictional-only local authoring/structural-review tool showing
+append-only corrections and separate review observations, with no new source,
+projection, evaluator or runtime admission. Do not begin it.
+
+future_milestone_authorized=false
+future_source_projection_authorized=false
+future_milestone_begun=false

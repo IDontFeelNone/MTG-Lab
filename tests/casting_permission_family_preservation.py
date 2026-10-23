@@ -5,6 +5,10 @@ Canonical Git comparisons reproduce inherited blobs and modes directly; this
 helper adds no source authority and stores no whole-repository freeze fixture.
 """
 import hashlib
+from proposed_spell_evidence_packet_preservation import (
+    is_proposed_spell_evidence_packet_addition,
+    historical_document_before_packet_append,
+)
 from pathlib import Path
 import subprocess
 
@@ -25,8 +29,9 @@ NEW_REVIEW_PATHS = frozenset(
 
 
 def is_casting_permission_family_addition(path, root=ROOT):
-    """Exclude only the seven named modules and eight named package files."""
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | NEW_REVIEW_PATHS
+    """Select the named family files and exact finite successor design files."""
+    return (path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | NEW_REVIEW_PATHS
+            or is_proposed_spell_evidence_packet_addition(path, root))
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 37420,
@@ -68,6 +73,8 @@ def historical_document_before_casting_permission_append(path, raw):
     if type(path) is not str or path not in DOCUMENT_APPENDICES or type(raw) is not bytes:
         raise AssertionError("Only named casting-permission documents and bytes are adapted")
     pin = DOCUMENT_APPENDICES[path]
+    if len(raw) > pin["baseline_bytes"] + pin["appendix_bytes"]:
+        raw = historical_document_before_packet_append(path, raw)
     size = pin["baseline_bytes"]
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact casting-permission appendix is permitted")
