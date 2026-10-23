@@ -8,10 +8,13 @@ import re
 import secrets
 import stat
 
+from gameplay_rules.source_evidence.artifacts import _open_regular_no_symlinks
+
 from . import validation as v
 
 
 IDENTITY = re.compile(r"sha256:[0-9a-f]{64}\Z")
+DRAFT_BYTE_LIMIT = 1_024_000
 
 
 def selected_path(value):
@@ -84,8 +87,27 @@ def atomic_create(path, raw, *, identical=False):
         os.close(directory)
 
 
+def read_draft_bytes(path):
+    """Draft formatting has its own bound; sealed readers remain unchanged."""
+    descriptor = _open_regular_no_symlinks(selected_path(path))
+    if descriptor is None:
+        v.fail("REGULAR_DRAFT_WITHOUT_SYMLINKS_REQUIRED")
+    with os.fdopen(descriptor, "rb") as stream:
+        before = os.fstat(stream.fileno())
+        if before.st_nlink != 1:
+            v.fail("HARD_LINKED_DRAFT_FORBIDDEN")
+        raw = stream.read(DRAFT_BYTE_LIMIT + 1)
+        after = os.fstat(stream.fileno())
+        fields = ("st_dev", "st_ino", "st_size", "st_mtime_ns", "st_ctime_ns")
+        if any(getattr(before, k) != getattr(after, k) for k in fields):
+            v.fail("DRAFT_CHANGED_WHILE_READING")
+    if len(raw) > DRAFT_BYTE_LIMIT:
+        v.fail("DRAFT_EXCEEDS_BOUNDED_READ_SIZE")
+    return raw
+
+
 def read_draft(path):
-    raw = v._read(selected_path(path))
+    raw = read_draft_bytes(path)
     try:
         envelope = json.loads(raw, object_pairs_hook=v._unique, parse_constant=v._nonfinite)
     except (ValueError, UnicodeError, RecursionError):
@@ -139,7 +161,7 @@ class Workspace:
 
     def validate(self, value):
         value = v.snapshot(value)
-        _, contract, rules = self.bindings()
+        package, contract, rules = self.bindings()
         # Schema/own identity first, before following untrusted history references.
         try:
             v.StrictValidator(contract).validate(value)
@@ -148,6 +170,8 @@ class Workspace:
         v.check_identity(value, v.PACKET_DOMAIN, "packet_id")
         history = self.load_history(value)
         packet = v.validate_packet(value, contract=contract, rules=rules, history=history)
+        retained_roots = {package[name]["packet_id"]: v._canonical_candidate(package[name])
+            for name in v.PACKET_NAMES}
         # The pilot offers a linear authoring workflow. Import cannot bypass
         # explicit parent selection for a correction or introduce history merges.
         for row in (packet, *history.values()):
@@ -156,6 +180,11 @@ class Workspace:
                 v.fail("PILOT_LINEAR_HISTORY_REQUIRED")
             if not parents and row["revision"] != 1:
                 v.fail("PILOT_ROOT_REVISION_ONE_REQUIRED")
+            # Empty ancestry is not proof of fresh review material. Only exact
+            # freshly validated examples establish pilot roots; all edits must
+            # retain explicit history, including imported reachable ancestors.
+            if not parents and retained_roots.get(row["packet_id"]) != v._canonical_candidate(row):
+                v.fail("PILOT_EDITED_ROOT_REQUIRES_EXPLICIT_PARENT: record the unchanged example, then draft --base")
         return packet, history
 
     def read(self, identity):
@@ -180,6 +209,10 @@ class Workspace:
         if path == self.packets or self.packets in path.parents:
             v.fail("EDITABLE_DRAFT_CANNOT_BE_A_SEALED_RECORD")
         raw = (json.dumps(envelope, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode()
+        if len(raw) > DRAFT_BYTE_LIMIT:
+            raw = v._canonical_candidate(envelope)
+        if len(raw) > DRAFT_BYTE_LIMIT:
+            v.fail("DRAFT_EXCEEDS_BOUNDED_READ_SIZE")
         atomic_create(path, raw)
         return {"status": "EDITABLE_FICTIONAL_DRAFT", "base_packet_id": base}
 

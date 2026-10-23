@@ -149,3 +149,58 @@ EXECUTION_BLOCKED. No real snapshot or execution profile is created or activated
 service, commercial service and AI export remain NOT_ESTABLISHED. This pilot
 awaits independent PM review and final owner merge approval; no subsequent
 milestone or source projection is authorized or begun.
+
+## PR #210 correction: roots, review provenance and draft bounds
+
+The initial instruction above to edit an example before its first recording is
+superseded. A root must be an exact, validated retained fictional example, with
+its original canonical bytes and identity. First record the selected example
+unchanged, then select that record explicitly with `draft --base` before making
+any authored change:
+
+```sh
+export PYTHONPATH=src
+correction_workspace=$(mktemp -d)
+python -m proposed_spell_packets --workspace "$correction_workspace" draft \
+  --example packet-b-missing.json --output "$correction_workspace/original-draft.json"
+python -m proposed_spell_packets --workspace "$correction_workspace" record \
+  --draft "$correction_workspace/original-draft.json"
+original_id=sha256:23e25cdaf82b0afdf3e69a8f98474fd149128d91b77efde1d19397f922c2369b
+python -m proposed_spell_packets --workspace "$correction_workspace" inspect "$original_id"
+python -m proposed_spell_packets --workspace "$correction_workspace" draft \
+  --base "$original_id" --output "$correction_workspace/correction-draft.json"
+${EDITOR:-vi} "$correction_workspace/correction-draft.json"
+python -m proposed_spell_packets --workspace "$correction_workspace" record \
+  --draft "$correction_workspace/correction-draft.json"
+```
+
+The original identity above is fixed by the unchanged retained B example. For an
+edit that changes reviewed material, explicitly omit its old observation from
+the correction; it remains in the original packet. Supply the new assertion,
+explanation and conclusion yourself. Use the correction's emitted identity for
+the separately attributed fresh-review workflow above.
+
+This root policy applies equally to example-derived drafts, manually supplied
+draft envelopes and sealed imports, including roots reached through declared
+history. An empty parent list does not establish new provenance. The pilot
+validates the actual retained examples and required ancestor files before
+accepting a root or its descendants. An edited unparented copy is rejected
+before publication; the tool does not remove or rename observations, rewrite
+their text or repair authored material. Unchanged retained-example round trips
+keep their original identities. Explicitly parented corrections, fresh reviews
+and unchanged-material review corrections retain their existing behavior.
+
+Observation IDs remain local to their packet history; this policy adds no global
+observation-ID registry. The shared v1 schema and validator remain unchanged.
+Historical inspection continues to show the packet/revision where the reviewed
+material and observation originated.
+
+Draft input has a separate 1,024,000-byte bound. Draft generation normally uses
+readable JSON; if that formatting would exceed the draft bound, it emits compact
+JSON instead. Generated drafts for valid, within-limit canonical children can
+therefore be read without manual whitespace changes. The canonical sealed-packet
+limit remains 128,000 bytes, and genuinely oversized packets are rejected before
+publication. The shared sealed-file reader is unchanged. Both draft formats
+retain strict types, duplicate-key and nonfinite-number rejection, safe file
+reads and privately owned snapshots; sealed records still require their supplied
+identity and exact canonical bytes.

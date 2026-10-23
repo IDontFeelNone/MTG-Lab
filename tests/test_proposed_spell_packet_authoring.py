@@ -175,7 +175,11 @@ class ProposedSpellPacketAuthoringTests(unittest.TestCase):
             self.assertEqual(self.records(), before)
 
     def test_direct_transitive_and_independent_assumption_scopes_through_record(self):
-        good = self.draft(example=design.PACKET_NAMES[4])
+        original = self.record(self.draft(example=design.PACKET_NAMES[4]))
+        good = self.draft(base=original["packet_id"])
+        # These authored premise variants change reviewed material. Keep the
+        # retained observation only in the explicit original packet.
+        good["packet"]["history"]["review_observations"] = []
         for derived in (False, True):
             for alternative in (None, "soften", "brighten"):
                 candidate = deepcopy(good)
@@ -255,9 +259,17 @@ class ProposedSpellPacketAuthoringTests(unittest.TestCase):
         self.rejected(dangling, "DANGLING_PRIOR_OBSERVATION_REFERENCE")
 
     def test_historical_observations_bind_claims_transitive_material_choices_and_limits(self):
+        retained = self.import_packet(deepcopy(self.examples[design.PACKET_NAMES[0]]))
         for change in ("claim", "step", "transitive", "choice", "added-choice", "limitation", "rule-context", "rule-evidence", "context"):
-            original = deepcopy(self.examples[design.PACKET_NAMES[0]])
-            original["history"]["review_observations"][0]["claim_refs"] = []
+            original = deepcopy(retained)
+            original["revision"] = 2
+            original["history"]["supersedes_packet_ids"] = [retained["packet_id"]]
+            # Establish each closure fixture through an explicitly parented
+            # revision with a fresh fictional observation of its new material.
+            original["history"]["review_observations"][0].update(
+                observation_id="review-closure-fixture", claim_refs=[],
+                reviewer_id="fictional:a:closure-reviewer",
+                text="Fictional observation of this explicitly parented closure fixture only; no approval or gameplay authority.")
             original["reasoning"][0]["limitation_refs"] = ["scope"]
             if change == "transitive":
                 original["reasoning"].insert(0, {**original["reasoning"][0],
