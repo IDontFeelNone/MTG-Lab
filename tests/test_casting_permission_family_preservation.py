@@ -4,6 +4,7 @@ from pathlib import Path
 import unittest
 
 import casting_permission_family_preservation as guard
+from proposed_spell_evidence_packet_preservation import historical_document_before_packet_append
 import casting_stage_family_completion_preservation as previous
 
 
@@ -31,7 +32,7 @@ class CastingPermissionFamilyPreservationTests(unittest.TestCase):
         total = 0
         for name, pin in guard.DOCUMENT_APPENDICES.items():
             with self.subTest(path=name):
-                raw = (guard.ROOT / name).read_bytes()
+                raw = historical_document_before_packet_append(name, (guard.ROOT / name).read_bytes())
                 self.assertEqual(len(raw), pin["baseline_bytes"] + pin["appendix_bytes"])
                 inherited = guard.historical_document_before_casting_permission_append(name, raw)
                 self.assertEqual(len(inherited), pin["baseline_bytes"])
