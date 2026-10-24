@@ -1,5 +1,6 @@
 """Finite pilot preservation composition; historical evidence remains intact."""
 import hashlib
+from proposed_spell_packet_analysis_preservation import historical_document_before_analysis_append
 from pathlib import Path
 import tempfile
 import unittest
@@ -11,7 +12,7 @@ import proposed_spell_evidence_packet_preservation as previous
 class ProposedSpellPacketAuthoringPreservationTests(unittest.TestCase):
     def test_exact_document_suffixes_compose_and_tampering_remains_visible(self):
         for name, pin in guard.DOCUMENT_APPENDICES.items():
-            raw = (guard.ROOT / name).read_bytes()
+            raw = historical_document_before_analysis_append(name, (guard.ROOT / name).read_bytes())
             old = guard.historical_document_before_authoring_append(name, raw)
             with self.subTest(path=name):
                 self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])

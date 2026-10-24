@@ -1304,3 +1304,22 @@ No subsequent milestone is authorized or begun.
 future_milestone_authorized=false
 future_source_projection_authorized=false
 future_milestone_begun=false
+
+
+---
+
+## Current pilot — Proposed-spell evidence-gap analysis
+
+The separately owner-authorized read-only pilot is implemented for independent
+PM review and final owner merge approval. PR #210 is merged; the exact base is
+`99813ea7b98c1fc1a2deda31479464ef83a47c31`. See the single
+[capability, derived-report contract and commands](docs/PROPOSED_SPELL_EVIDENCE_GAP_ANALYSIS.md).
+It traces declared dependencies and compares explicitly related revisions;
+authored conclusions remain authored and execution authority remains BLOCKED.
+All historical bodies, evidence and permissions remain unchanged. Exact final
+validation and hosted evidence belong in the one draft PR report. Stop for PM
+review; the owner retains final merge approval. No subsequent work is authorized.
+
+future_milestone_authorized=false
+future_source_projection_authorized=false
+future_milestone_begun=false

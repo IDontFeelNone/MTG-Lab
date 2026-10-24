@@ -5,6 +5,9 @@ appendices compose with the inherited guards; the promoted checker can be
 reconstructed byte-for-byte without keeping a second implementation.
 """
 import hashlib
+from proposed_spell_packet_analysis_preservation import (
+    is_packet_analysis_addition, historical_document_before_analysis_append,
+)
 from pathlib import Path
 import subprocess
 
@@ -16,7 +19,8 @@ NEW_SOURCE_PATHS = frozenset("src/proposed_spell_packets/" + name for name in
 
 
 def is_packet_authoring_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS
+    return (path.relative_to(root).as_posix() in NEW_SOURCE_PATHS
+            or is_packet_analysis_addition(path, root))
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 41223,
@@ -59,6 +63,8 @@ def historical_document_before_authoring_append(path, raw):
         raise AssertionError("Only named pilot document bytes are adapted")
     pin = DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        raw = historical_document_before_analysis_append(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact authoring-pilot appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]
