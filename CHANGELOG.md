@@ -873,3 +873,22 @@ review; the owner retains final merge approval. No subsequent work is authorized
 future_milestone_authorized=false
 future_source_projection_authorized=false
 future_milestone_begun=false
+
+
+---
+
+## Current pilot — Offline fictional conditional reasoning
+
+The owner-authorized bounded pilot adds a separate versioned condition model and
+read-only Boolean assertion evaluator over exact validated fictional packets.
+PR #211 is merged; canonical base is `514386f418b05643b839a246089c0080dfc2d4e3`.
+See the single [contract, operator guide and demonstration](docs/OFFLINE_FICTIONAL_CONDITIONAL_REASONING.md).
+Packet v1 and authored conclusions retain their authority; computed results concern
+only the named condition under supplied assertions. Execution remains BLOCKED.
+Historical bodies, evidence, coverage, permissions and Architecture v13 / Decision
+017 remain unchanged. Final local and hosted evidence belongs in the one draft PR
+description. Stop for independent PM review and final owner merge approval.
+
+future_milestone_authorized=false
+future_source_projection_authorized=false
+future_milestone_begun=false

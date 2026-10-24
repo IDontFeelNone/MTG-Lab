@@ -7,6 +7,7 @@ from gameplay_rules.errors import GameplayContractError
 from .authoring import Workspace
 from .analysis import analyze, compare, render
 from .validation import PACKET_NAMES
+from .conditions import evaluate, read_model, render as render_condition
 
 
 def main(argv=None):
@@ -32,6 +33,10 @@ def main(argv=None):
     comparison.add_argument("ancestor_id")
     comparison.add_argument("descendant_id")
     comparison.add_argument("--json", action="store_true", help="Emit deterministic derived-report bytes")
+    evaluation = commands.add_parser("evaluate", help="Compute one explicitly authored fictional condition under selected assertions")
+    evaluation.add_argument("packet_id", help="Exact recorded packet identity")
+    evaluation.add_argument("--model", required=True, help="Separate explicit versioned condition-model JSON file")
+    evaluation.add_argument("--json", action="store_true", help="Emit canonical immutable computed-result bytes")
     args = parser.parse_args(argv)
     try:
         workspace = Workspace(args.workspace)
@@ -39,6 +44,13 @@ def main(argv=None):
             result = workspace.draft(example=args.example, base=args.base, output=args.output)
         elif args.command == "record":
             result = workspace.record(draft=args.draft, sealed=args.sealed)
+        elif args.command == "evaluate":
+            report = evaluate(workspace, args.packet_id, read_model(args.model))
+            if args.json:
+                sys.stdout.buffer.write(report.canonical_bytes)
+            else:
+                print(render_condition(report))
+            return 0
         elif args.command in ("analyze", "compare"):
             report = (analyze(workspace, args.packet_id) if args.command == "analyze"
                       else compare(workspace, args.ancestor_id, args.descendant_id))
