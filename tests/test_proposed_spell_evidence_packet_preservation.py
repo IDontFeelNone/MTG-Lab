@@ -1,5 +1,6 @@
 """Three bounded preservation checks; source and historical assertions stay intact."""
 import hashlib
+from proposed_spell_packet_authoring_preservation import historical_document_before_authoring_append
 from pathlib import Path
 import unittest
 
@@ -23,7 +24,7 @@ class ProposedSpellEvidencePacketPreservationTests(unittest.TestCase):
 
     def test_complete_inherited_documents_and_exact_suffixes_remain_distinct(self):
         for name, pin in guard.DOCUMENT_APPENDICES.items():
-            raw = (guard.ROOT / name).read_bytes()
+            raw = historical_document_before_authoring_append(name, (guard.ROOT / name).read_bytes())
             old = guard.historical_document_before_packet_append(name, raw)
             with self.subTest(path=name):
                 self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
