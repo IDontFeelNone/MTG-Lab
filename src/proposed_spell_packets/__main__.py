@@ -5,6 +5,7 @@ import sys
 
 from gameplay_rules.errors import GameplayContractError
 from .authoring import Workspace
+from .analysis import analyze, compare, render
 from .validation import PACKET_NAMES
 
 
@@ -24,6 +25,13 @@ def main(argv=None):
     for name in ("inspect", "history"):
         command = commands.add_parser(name, help="Read validated authored explanations" + (" with ancestors" if name == "history" else ""))
         command.add_argument("packet_id")
+    analysis = commands.add_parser("analyze", help="Trace declared evidence dependencies; no sufficiency or gameplay verdict")
+    analysis.add_argument("packet_id", help="Exact recorded packet identity")
+    analysis.add_argument("--json", action="store_true", help="Emit deterministic derived-report bytes")
+    comparison = commands.add_parser("compare", help="Compare an explicit ancestor and descendant; no latest selection")
+    comparison.add_argument("ancestor_id")
+    comparison.add_argument("descendant_id")
+    comparison.add_argument("--json", action="store_true", help="Emit deterministic derived-report bytes")
     args = parser.parse_args(argv)
     try:
         workspace = Workspace(args.workspace)
@@ -31,6 +39,14 @@ def main(argv=None):
             result = workspace.draft(example=args.example, base=args.base, output=args.output)
         elif args.command == "record":
             result = workspace.record(draft=args.draft, sealed=args.sealed)
+        elif args.command in ("analyze", "compare"):
+            report = (analyze(workspace, args.packet_id) if args.command == "analyze"
+                      else compare(workspace, args.ancestor_id, args.descendant_id))
+            if args.json:
+                sys.stdout.buffer.write(report.canonical_bytes)
+            else:
+                print(render(report))
+            return 0
         else:
             print(workspace.inspect(args.packet_id, history=args.command == "history"))
             return 0
