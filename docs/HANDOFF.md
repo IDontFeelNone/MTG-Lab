@@ -1359,3 +1359,24 @@ description. Stop for independent PM review and final owner merge approval.
 future_milestone_authorized=false
 future_source_projection_authorized=false
 future_milestone_begun=false
+
+
+---
+
+## Current milestone — Offline missing-input sensitivity analysis
+
+The owner-authorized bounded capability examines independent true/false hypotheses
+for selected UNKNOWN assertion groups over one freshly validated fictional packet
+and its exact condition model. PR #212 is merged; canonical base is
+`e114c70b01a0a28c77278efb9c2c058d1a73d660`. See the single
+[contract, operator guide and actual demonstration](OFFLINE_MISSING_INPUT_SENSITIVITY.md).
+The ordinary baseline remains unchanged and visible; hypothetical authority is
+HYPOTHETICAL_CONDITION_SENSITIVITY_ONLY. No facts or records are established or
+rewritten. Execution remains BLOCKED. Historical bodies, evidence, permissions,
+coverage, Architecture v13 and Decision 017 remain unchanged. Final validation and
+hosted evidence belong in the one draft PR description. Stop for independent PM
+review; the owner retains final merge approval. No later milestone is authorized.
+
+future_milestone_authorized=false
+future_source_projection_authorized=false
+future_milestone_begun=false

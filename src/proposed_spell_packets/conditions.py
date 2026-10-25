@@ -263,13 +263,24 @@ def _groups(packet, model):
     return context, groups
 
 
-def _operand(operand, rows):
-    findings, evaluations = [], []
+def _operand(operand, rows, assumptions=None):
+    """One comparison policy for actual and private hypothetical calculations.
+
+    Overrides affect calculation values only; original rows are never changed.
+    Only actual UNKNOWN claims may receive exact Boolean hypotheses.
+    """
+    if assumptions is not None:
+        allowed = {row["claim_id"] for row in rows if row["condition"] == "UNKNOWN"}
+        if (type(assumptions) is not dict or not set(assumptions) <= allowed or
+                any(type(value) is not bool for value in assumptions.values())):
+            _error("ONLY_UNKNOWN_BOOLEAN_HYPOTHESES_ALLOWED")
+    findings, evaluations, effective_booleans = [], [], []
     for row in rows:
         condition = row["condition"]
-        value = row["value"]
+        hypothesized = assumptions is not None and row["claim_id"] in assumptions
+        value = assumptions[row["claim_id"]] if hypothesized else row["value"]
         match = None
-        if condition == "UNKNOWN":
+        if condition == "UNKNOWN" and not hypothesized:
             finding = "MISSING_ASSERTION"
         elif condition == "UNSUPPORTED":
             finding = "UNSUPPORTED_ASSERTION"
@@ -281,14 +292,18 @@ def _operand(operand, rows):
             findings.append({"kind": finding, "claim_refs": [row["claim_id"]]})
         if condition in ("PRESENT", "CONFLICTING") and type(value) is not bool:
             findings.append({"kind": "UNSUPPORTED_BOOLEAN_INPUT", "claim_refs": [row["claim_id"]]})
-        if condition == "PRESENT" and type(value) is bool:
+        if (condition == "PRESENT" or hypothesized) and type(value) is bool:
             match = value == operand["expected"]
-        evaluations.append({"claim_id": row["claim_id"], "original_value": value,
-            "original_condition": condition, "boolean_match": match})
-    booleans = [row for row in rows if type(row["value"]) is bool]
-    if {row["value"] for row in booleans} == {True, False}:
+        evaluation = {"claim_id": row["claim_id"], "original_value": row["value"],
+                      "original_condition": condition, "boolean_match": match}
+        if assumptions is not None:
+            evaluation.update(effective_value=value, hypothesized=hypothesized)
+        evaluations.append(evaluation)
+        if type(value) is bool:
+            effective_booleans.append((row["claim_id"], value))
+    if {value for _, value in effective_booleans} == {True, False}:
         findings.append({"kind": "OPPOSING_BOOLEAN_ASSERTIONS",
-                         "claim_refs": [row["claim_id"] for row in booleans]})
+                         "claim_refs": [claim_id for claim_id, _ in effective_booleans]})
     matches = [row["boolean_match"] for row in evaluations]
     status = ("UNRESOLVED" if findings else "MATCH" if all(matches) else "MISMATCH")
     return {"operand_id": operand["operand_id"], "leaf_kind": "BOOLEAN_ASSERTIONS_EQUAL",
@@ -299,8 +314,8 @@ def _operand(operand, rows):
                                           if row["boolean_match"] is False]}
 
 
-def evaluate(workspace, packet_id, model):
-    """Fresh boundary validation once, then compute solely from owned snapshots."""
+def _prepare(workspace, packet_id, model):
+    """Own the model and freshly validate/own the actual packet boundary once."""
     owned_model = ConditionModel.from_dict(model.to_dict() if type(model) is ConditionModel else model)
     definition = owned_model.to_dict()
     packet, history = workspace.read(packet_id)
@@ -309,10 +324,19 @@ def evaluate(workspace, packet_id, model):
         _error("SELECTED_PACKET_IDENTITY_MISMATCH")
     v.check_identity(packet, v.PACKET_DOMAIN, "packet_id")
     context, groups = _groups(packet, definition)
+    return packet, history, definition, context, groups
+
+
+def _aggregate(operands):
+    return ("INDETERMINATE" if any(row["status"] == "UNRESOLVED" for row in operands)
+            else "NOT_SATISFIED_UNDER_ASSERTIONS" if any(row["status"] == "MISMATCH" for row in operands)
+            else "SATISFIED_UNDER_ASSERTIONS")
+
+
+def _evaluate_snapshot(packet, history, definition, context, groups):
+    """Pure ordinary calculation over an already owned and admitted snapshot."""
     operands = [_operand(operand, rows) for operand, rows in groups]
-    computed = ("INDETERMINATE" if any(row["status"] == "UNRESOLVED" for row in operands)
-                else "NOT_SATISFIED_UNDER_ASSERTIONS" if any(row["status"] == "MISMATCH" for row in operands)
-                else "SATISFIED_UNDER_ASSERTIONS")
+    computed = _aggregate(operands)
     selected = {ref for row in operands for ref in row["claim_refs"]}
     findings = [{"operand_id": row["operand_id"], **finding}
                 for row in operands for finding in row["findings"]]
@@ -341,6 +365,11 @@ def evaluate(workspace, packet_id, model):
             "review_authority": "AUTHORED_PACKET_OBSERVATIONS_DO_NOT_APPROVE_CONDITION_MODEL"}}
     value["result_id"] = v.identity(RESULT_VERSION, value, "result_id")
     return ConditionResult(v._canonical_candidate(value))
+
+
+def evaluate(workspace, packet_id, model):
+    """Fresh boundary validation once, then compute solely from owned snapshots."""
+    return _evaluate_snapshot(*_prepare(workspace, packet_id, model))
 
 
 def render(result):
