@@ -14,7 +14,7 @@ NEW_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/analysis.py"})
 
 
 def is_packet_analysis_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS
+    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 43823,
@@ -117,12 +117,115 @@ EXACT_SUCCESSORS = {'src/proposed_spell_packets/__main__.py': {'baseline_sha256'
                                             'successor_sha256': 'a105b2ff3388bc817f1b17b0571053184b223dcd5917379107640d0917823918'}}
 
 
+# Exact finite successor for the separately authorized conditional pilot. The
+# historical analysis constants above remain unchanged.
+CONDITIONAL_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/conditions.py"})
+CONDITIONAL_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 44701,
+               'baseline_sha256': '40ced5619bf2aaee4e077dda39431e3c25f0fcbacc7b291e33c53a8c965f722d',
+               'appendix_bytes': 929,
+               'appendix_sha256': '06cf9706ffdab1dfdfac9f6ee88f5a3dcff14b45ae637758aaa97ac7144ba6dc'},
+ 'PROJECT_INVENTORY.md': {'baseline_bytes': 99530,
+                          'baseline_sha256': 'c13e2c88ca8186e65a94a4d495fe547dace71179158f0ceef92ba7249d6bb11a',
+                          'appendix_bytes': 929,
+                          'appendix_sha256': '06cf9706ffdab1dfdfac9f6ee88f5a3dcff14b45ae637758aaa97ac7144ba6dc'},
+ 'CHANGELOG.md': {'baseline_bytes': 64957,
+                  'baseline_sha256': '1cfc984e081d4dfa45ef5d7d459e12f43fecf3d33f6f2fb323ee32f98cef3c8d',
+                  'appendix_bytes': 929,
+                  'appendix_sha256': '06cf9706ffdab1dfdfac9f6ee88f5a3dcff14b45ae637758aaa97ac7144ba6dc'},
+ 'docs/SESSION_STATE.md': {'baseline_bytes': 94558,
+                           'baseline_sha256': '6a193471b9a92f786afba78c843f66bce3ea9301b221ec5d41b9a78cbf88c772',
+                           'appendix_bytes': 924,
+                           'appendix_sha256': '59828605ec3d9dce8d812ead90806ea90d7a62324394267bcbbaa132709a5c1e'},
+ 'docs/NEXT_TASK.md': {'baseline_bytes': 76793,
+                       'baseline_sha256': '7170ec746b82ecaf5d784fb9c71064c18c2a6a78e3fc43afc5a926777b27007a',
+                       'appendix_bytes': 924,
+                       'appendix_sha256': '59828605ec3d9dce8d812ead90806ea90d7a62324394267bcbbaa132709a5c1e'},
+ 'docs/HANDOFF.md': {'baseline_bytes': 105350,
+                     'baseline_sha256': '41405df121d588d2bffe498a289a0b36eeae9d3f8b15b8fac3611de0a5ccc47e',
+                     'appendix_bytes': 924,
+                     'appendix_sha256': '59828605ec3d9dce8d812ead90806ea90d7a62324394267bcbbaa132709a5c1e'},
+ 'docs/ROADMAP.md': {'baseline_bytes': 47458,
+                     'baseline_sha256': 'bd1e6033ba9f45d5dc582c7ba7e635283c2db52b4e01aa6ad0ff26a85448af65',
+                     'appendix_bytes': 924,
+                     'appendix_sha256': '59828605ec3d9dce8d812ead90806ea90d7a62324394267bcbbaa132709a5c1e'},
+ 'docs/PROJECT_STATUS.md': {'baseline_bytes': 118726,
+                            'baseline_sha256': '6b9bfe703227e13ac4ac4c6cec9554b287ebc4a582c19216ea9f12df124afdfc',
+                            'appendix_bytes': 924,
+                            'appendix_sha256': '59828605ec3d9dce8d812ead90806ea90d7a62324394267bcbbaa132709a5c1e'}}
+CONDITIONAL_CLI_PATCHES = [('from .validation import PACKET_NAMES\n',
+  'from .validation import PACKET_NAMES\n'
+  'from .conditions import evaluate, read_model, render as render_condition\n'),
+ ('    comparison.add_argument("--json", action="store_true", help="Emit '
+  'deterministic derived-report bytes")\n',
+  '    comparison.add_argument("--json", action="store_true", help="Emit '
+  'deterministic derived-report bytes")\n'
+  '    evaluation = commands.add_parser("evaluate", help="Compute one '
+  'explicitly authored fictional condition under selected assertions")\n'
+  '    evaluation.add_argument("packet_id", help="Exact recorded packet '
+  'identity")\n'
+  '    evaluation.add_argument("--model", required=True, help="Separate '
+  'explicit versioned condition-model JSON file")\n'
+  '    evaluation.add_argument("--json", action="store_true", help="Emit '
+  'canonical immutable computed-result bytes")\n'),
+ ('            result = workspace.record(draft=args.draft, '
+  'sealed=args.sealed)\n',
+  '            result = workspace.record(draft=args.draft, '
+  'sealed=args.sealed)\n'
+  '        elif args.command == "evaluate":\n'
+  '            report = evaluate(workspace, args.packet_id, '
+  'read_model(args.model))\n'
+  '            if args.json:\n'
+  '                sys.stdout.buffer.write(report.canonical_bytes)\n'
+  '            else:\n'
+  '                print(render_condition(report))\n'
+  '            return 0\n')]
+CONDITIONAL_CLI_SHA256 = 'cc4a118c6da405792ae3de0d96a41cad204d1b8fdc1da1491b8656d7cb497012'
+
+
+def historical_document_before_conditional_append(path, raw):
+    """Strip only the exact conditional appendix, retaining the analysis body."""
+    if (type(path) is not str or path not in CONDITIONAL_DOCUMENT_APPENDICES
+            or type(raw) is not bytes):
+        raise AssertionError("Only named conditional-pilot document bytes are adapted")
+    pin = CONDITIONAL_DOCUMENT_APPENDICES[path]
+    size = pin["baseline_bytes"]
+    if len(raw) not in (size, size + pin["appendix_bytes"]):
+        raise AssertionError("Only the exact conditional-pilot appendix is permitted")
+    baseline, suffix = raw[:size], raw[size:]
+    if hashlib.sha256(baseline).hexdigest() != pin["baseline_sha256"]:
+        raise AssertionError("Pre-conditional historical document changed")
+    if suffix and hashlib.sha256(suffix).hexdigest() != pin["appendix_sha256"]:
+        raise AssertionError("Exact conditional-pilot appendix changed")
+    return baseline
+
+
+def historical_analysis_cli_bytes(raw):
+    """Reconstruct the exact PR #211 CLI from the narrow conditional successor."""
+    prior = EXACT_SUCCESSORS["src/proposed_spell_packets/__main__.py"]["successor_sha256"]
+    if type(raw) is not bytes:
+        raise AssertionError("Exact CLI bytes required")
+    if hashlib.sha256(raw).hexdigest() == prior:
+        return raw
+    if hashlib.sha256(raw).hexdigest() != CONDITIONAL_CLI_SHA256:
+        raise AssertionError("Exact conditional CLI successor changed")
+    for before, after in reversed(CONDITIONAL_CLI_PATCHES):
+        old, new = before.encode(), after.encode()
+        if raw.count(new) != 1:
+            raise AssertionError("Exact conditional CLI adaptation changed")
+        raw = raw.replace(new, old, 1)
+    if hashlib.sha256(raw).hexdigest() != prior:
+        raise AssertionError("Historical analysis CLI changed")
+    return raw
+
+
 def historical_document_before_analysis_append(path, raw):
     """Return the exact inherited document; reject all unaccounted suffixes."""
     if type(path) is not str or path not in DOCUMENT_APPENDICES or type(raw) is not bytes:
         raise AssertionError("Only named analysis-pilot document bytes are adapted")
     pin = DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        raw = historical_document_before_conditional_append(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact analysis-pilot appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]
@@ -181,6 +284,7 @@ def audit_canonical_git(root=ROOT):
             raw = historical_adapter_bytes(name, raw)
         elif name in EXACT_SUCCESSORS:
             pins = EXACT_SUCCESSORS[name]
+            raw = historical_analysis_cli_bytes(raw)
             if hashlib.sha256(raw).hexdigest() != pins["successor_sha256"]:
                 raise AssertionError("Exact analysis successor changed: " + name)
             raw = git("show", BASE + ":" + name)

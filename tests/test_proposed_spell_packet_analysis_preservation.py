@@ -1,4 +1,4 @@
-"""Three finite controls compose analysis changes with historical protections."""
+"""Four finite controls compose analysis and conditional changes with historical protections."""
 import hashlib
 from pathlib import Path
 import unittest
@@ -11,7 +11,8 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
     def test_exact_document_suffixes_compose_without_hiding_tampering(self):
         for name, pin in guard.DOCUMENT_APPENDICES.items():
             with self.subTest(path=name):
-                raw = (guard.ROOT / name).read_bytes()
+                raw = guard.historical_document_before_conditional_append(
+                    name, (guard.ROOT / name).read_bytes())
                 old = guard.historical_document_before_analysis_append(name, raw)
                 self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
                 self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
@@ -43,11 +44,37 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
                 with self.subTest(path=name), self.assertRaises(AssertionError):
                     guard.historical_adapter_bytes(name, changed)
 
+    def test_exact_conditional_suffixes_and_finite_source_successor(self):
+        self.assertEqual(guard.CONDITIONAL_SOURCE_PATHS,
+                         {'src/proposed_spell_packets/conditions.py'})
+        self.assertEqual(set(guard.CONDITIONAL_DOCUMENT_APPENDICES), set(guard.DOCUMENT_APPENDICES))
+        for name in guard.CONDITIONAL_SOURCE_PATHS:
+            self.assertTrue(guard.is_packet_analysis_addition(guard.ROOT / name))
+            self.assertTrue(previous.is_packet_authoring_addition(guard.ROOT / name))
+            self.assertFalse(previous.is_packet_authoring_addition(guard.ROOT / (name + '.future')))
+        for name, pin in guard.CONDITIONAL_DOCUMENT_APPENDICES.items():
+            with self.subTest(path=name):
+                raw = (guard.ROOT / name).read_bytes()
+                old = guard.historical_document_before_conditional_append(name, raw)
+                self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
+                self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
+                self.assertEqual(guard.historical_document_before_conditional_append(name, old), old)
+                for changed in (raw + b'future\n', raw[:-1], b'X' + raw[1:],
+                                old + b'X' + raw[len(old)+1:], bytearray(raw), True):
+                    with self.assertRaises(AssertionError):
+                        guard.historical_document_before_conditional_append(name, changed)
+        with self.assertRaises(AssertionError):
+            guard.historical_document_before_conditional_append('docs/future.md', b'')
+
     def test_exact_cli_successor_and_original_shared_validation_bytes(self):
         self.assertEqual(set(guard.EXACT_SUCCESSORS), {'src/proposed_spell_packets/__main__.py'})
         for name, pins in guard.EXACT_SUCCESSORS.items():
-            self.assertEqual(hashlib.sha256((guard.ROOT / name).read_bytes()).hexdigest(),
+            raw = (guard.ROOT / name).read_bytes()
+            self.assertEqual(hashlib.sha256(guard.historical_analysis_cli_bytes(raw)).hexdigest(),
                              pins['successor_sha256'])
+            for changed in (raw + b'future\n', raw[:-1], b'X' + raw[1:], bytearray(raw), True):
+                with self.assertRaises(AssertionError):
+                    guard.historical_analysis_cli_bytes(changed)
         # Direct pins avoid historical Git dependencies in disposable discovery.
         pins = {
             'src/proposed_spell_packets/authoring.py': '0762251886a9a02de8d06c96fe69fee9c97c3a1cafb0f71e51ea3169e76a7d7a',
