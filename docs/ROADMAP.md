@@ -637,3 +637,29 @@ review; the owner retains final merge approval. No later milestone is authorized
 future_milestone_authorized=false
 future_source_projection_authorized=false
 future_milestone_begun=false
+
+
+---
+
+## Current milestone — Offline requirement evaluation across named alternatives
+
+The owner-authorized bounded milestone adds explicit shared requirements and
+independent evaluation of 1–16 declared fictional alternatives. See the single
+[contract, usage and demonstration](OFFLINE_REQUIREMENT_ALTERNATIVES.md). Separate
+alternatives satisfying different requirements never establish one shared witness.
+All candidate findings remain visible; the listed set is not established exhaustive.
+PR #213 is merged; exact canonical base is
+`def003e8591c5bb15a1fa31bd960713f80bb7841`, tree
+`d2ec912a7cef936c2c8bb1580c9aa7626fbefc48`, matching its reviewed head.
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Historical document bodies, retained evidence, admission, ordinary evaluation and
+sensitivity behavior remain preserved. Fictional assertion comparison establishes
+no gameplay effect, feasibility, compatibility, casting permission or legality.
+Execution authority remains BLOCKED; semantic closure remains OPEN.
+Final-head validation evidence belongs in the one draft PR description. Stop for
+independent PM review; the owner retains final merge approval. No merge or
+auto-merge. No subsequent milestone or source projection is authorized or begun.
+
+future_milestone_authorized=false
+future_source_projection_authorized=false
+future_milestone_begun=false
