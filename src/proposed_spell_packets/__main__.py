@@ -7,9 +7,9 @@ from gameplay_rules.errors import GameplayContractError
 from .authoring import Workspace
 from .analysis import analyze, compare, render
 from .validation import PACKET_NAMES
-from .conditions import evaluate, read_model, render as render_condition
-from .sensitivity import analyze as analyze_sensitivity, render as render_sensitivity
-from .alternatives import evaluate as evaluate_alternatives, read_definition, render as render_alternatives
+from .dispatch import (evaluate, read_model, render_condition,
+                       analyze_sensitivity, render_sensitivity,
+                       evaluate_alternatives, read_definition, render_alternatives)
 
 
 def main(argv=None):

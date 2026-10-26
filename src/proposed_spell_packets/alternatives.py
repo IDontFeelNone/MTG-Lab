@@ -207,6 +207,9 @@ class AlternativesReport:
 
 def evaluate(workspace, packet_id, definition):
     """Freshly admit actual packet/root/history once, then compare owned scopes."""
+    from . import alternatives_v2 as v2
+    if type(definition) is v2.AlternativesDefinition or (type(definition) is dict and definition.get("definition_version") == v2.DEFINITION_VERSION):
+        return v2.evaluate(workspace, packet_id, definition)
     owned = AlternativesDefinition(definition.to_dict()
         if type(definition) is AlternativesDefinition else definition).to_dict()
     packet, history = workspace.read(packet_id)
@@ -279,6 +282,9 @@ def evaluate(workspace, packet_id, definition):
 
 
 def render(report):
+    from . import alternatives_v2 as v2
+    if type(report) is v2.AlternativesReport:
+        return v2.render(report)
     value = report.to_dict()
     lines = ["Computed alternative comparison: " + value["computed_result"],
              "Packet: " + json.dumps(value["packet"], sort_keys=True),

@@ -98,6 +98,9 @@ def analyze(workspace, packet_id, model):
     Reuses the sole operand/aggregate semantics from the ordinary evaluator.
     No packet, history or model is mutated and no synthetic packet is admitted.
     """
+    from . import conditions_v2 as c2, sensitivity_v2 as v2
+    if type(model) is c2.ConditionModel or (type(model) is dict and model.get("model_version") == c2.MODEL_VERSION):
+        return v2.analyze(workspace, packet_id, model)
     snapshot = c._prepare(workspace, packet_id, model)
     packet, history, definition, context, groups = snapshot
     baseline = c._evaluate_snapshot(*snapshot).to_dict()
@@ -169,6 +172,9 @@ def analyze(workspace, packet_id, model):
 
 
 def render(report):
+    from . import sensitivity_v2 as v2
+    if type(report) is v2.SensitivityReport:
+        return v2.render(report)
     value = report.to_dict()
     # The ordinary renderer presents the exact actual result separately.
     baseline = c.ConditionResult(v._canonical_candidate(value["baseline"]))

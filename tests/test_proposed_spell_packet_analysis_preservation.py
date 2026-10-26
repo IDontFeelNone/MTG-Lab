@@ -100,7 +100,8 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
         # Pin this narrowly authorized extraction while preserving the PR #212 pin.
         self.assertEqual(guard.SENSITIVITY_CONDITION_SHA256['baseline_sha256'],
                          'ebfe49ce04b8ecfc77cbd27fa74ff16a30b1dd8a4b0c4983f94c25e95ce36ca1')
-        raw = (guard.ROOT / 'src/proposed_spell_packets/conditions.py').read_bytes()
+        name = 'src/proposed_spell_packets/conditions.py'
+        raw = guard.historical_compound_dispatch_bytes(name, (guard.ROOT / name).read_bytes())
         self.assertEqual(hashlib.sha256(raw).hexdigest(),
                          guard.SENSITIVITY_CONDITION_SHA256['successor_sha256'])
 
@@ -114,7 +115,8 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
             self.assertFalse(previous.is_packet_authoring_addition(guard.ROOT / (name + '.future')))
         for name, pin in guard.ALTERNATIVES_DOCUMENT_APPENDICES.items():
             with self.subTest(path=name):
-                raw = (guard.ROOT / name).read_bytes()
+                raw = guard.historical_document_before_compound_append(
+                    name, (guard.ROOT / name).read_bytes())
                 old = guard.historical_document_before_alternatives_append(name, raw)
                 self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
                 self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
@@ -132,6 +134,47 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
         for changed in (raw + b'future\n', raw[:-1], b'X' + raw[1:], bytearray(raw), True):
             with self.assertRaises(AssertionError):
                 guard.historical_sensitivity_cli_bytes(changed)
+
+    def test_exact_compound_suffixes_sources_and_unchanged_v1_apis(self):
+        self.assertEqual(guard.COMPOUND_SOURCE_PATHS, {
+            'src/proposed_spell_packets/conditions_v2.py',
+            'src/proposed_spell_packets/sensitivity_v2.py',
+            'src/proposed_spell_packets/alternatives_v2.py',
+            'src/proposed_spell_packets/dispatch.py'})
+        self.assertEqual(set(guard.COMPOUND_DOCUMENT_APPENDICES), set(guard.DOCUMENT_APPENDICES))
+        for name in guard.COMPOUND_SOURCE_PATHS:
+            self.assertTrue(guard.is_packet_analysis_addition(guard.ROOT / name))
+            self.assertTrue(previous.is_packet_authoring_addition(guard.ROOT / name))
+            self.assertFalse(previous.is_packet_authoring_addition(guard.ROOT / (name + '.future')))
+        for name, pin in guard.COMPOUND_DOCUMENT_APPENDICES.items():
+            with self.subTest(path=name):
+                raw = (guard.ROOT / name).read_bytes()
+                old = guard.historical_document_before_compound_append(name, raw)
+                self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
+                self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
+                self.assertEqual(guard.historical_document_before_compound_append(name, old), old)
+                for changed in (raw + b'future\n', raw[:-1], b'X' + raw[1:],
+                                old + b'X' + raw[len(old)+1:], bytearray(raw), True):
+                    with self.assertRaises(AssertionError):
+                        guard.historical_document_before_compound_append(name, changed)
+        with self.assertRaises(AssertionError):
+            guard.historical_document_before_compound_append('docs/future.md', b'')
+        self.assertEqual(set(guard.COMPOUND_DISPATCH_PATCHES), {
+            'src/proposed_spell_packets/__main__.py',
+            'src/proposed_spell_packets/conditions.py',
+            'src/proposed_spell_packets/sensitivity.py',
+            'src/proposed_spell_packets/alternatives.py'})
+        for name, pins in guard.COMPOUND_DISPATCH_SHA256.items():
+            with self.subTest(path=name):
+                raw = (guard.ROOT / name).read_bytes()
+                old = guard.historical_compound_dispatch_bytes(name, raw)
+                self.assertEqual(hashlib.sha256(old).hexdigest(), pins['baseline_sha256'])
+                self.assertEqual(guard.historical_compound_dispatch_bytes(name, old), old)
+                for changed in (raw + b'future\n', raw[:-1], b'X' + raw[1:], bytearray(raw), True):
+                    with self.assertRaises(AssertionError):
+                        guard.historical_compound_dispatch_bytes(name, changed)
+        with self.assertRaises(AssertionError):
+            guard.historical_compound_dispatch_bytes('src/future.py', b'')
 
     def test_exact_cli_successor_and_original_shared_validation_bytes(self):
         self.assertEqual(set(guard.EXACT_SUCCESSORS), {'src/proposed_spell_packets/__main__.py'})

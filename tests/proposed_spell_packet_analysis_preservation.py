@@ -14,7 +14,7 @@ NEW_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/analysis.py"})
 
 
 def is_packet_analysis_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS
+    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 43823,
@@ -349,12 +349,199 @@ ALTERNATIVES_CLI_PATCHES = [('from .conditions import evaluate, read_model, rend
   '            report = analyze_sensitivity(workspace, args.packet_id, read_model(args.model))\n')]
 
 
+
+# Exact finite successor for the owner-authorized compound v2 capability.
+# All historical constants and appendix bytes above remain unchanged.
+COMPOUND_SOURCE_PATHS = frozenset({
+    "src/proposed_spell_packets/conditions_v2.py",
+    "src/proposed_spell_packets/sensitivity_v2.py",
+    "src/proposed_spell_packets/alternatives_v2.py",
+    "src/proposed_spell_packets/dispatch.py",
+})
+COMPOUND_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 48080,
+               'baseline_sha256': '0a5848d5b174af80bd389313010bafbd9320f64c8cdba1cea780ca121008ee49',
+               'appendix_bytes': 1688,
+               'appendix_sha256': '8b2cbc3e290be4b0b552f77048e580ae20013423730a30500c9fa6979ce614cb'},
+ 'PROJECT_INVENTORY.md': {'baseline_bytes': 102909,
+                          'baseline_sha256': '60cdf7b67132a88541638136d30b57b7658128190de8d681f5346d7fcf63facf',
+                          'appendix_bytes': 1688,
+                          'appendix_sha256': '8b2cbc3e290be4b0b552f77048e580ae20013423730a30500c9fa6979ce614cb'},
+ 'CHANGELOG.md': {'baseline_bytes': 68336,
+                  'baseline_sha256': '4a21472657b29823dbfeda2e152eb42eba7256d76ce25d0e339c6d7a000394b8',
+                  'appendix_bytes': 1688,
+                  'appendix_sha256': '8b2cbc3e290be4b0b552f77048e580ae20013423730a30500c9fa6979ce614cb'},
+ 'docs/SESSION_STATE.md': {'baseline_bytes': 97922,
+                           'baseline_sha256': 'f7084d1a83d99cbb9b7516689a0df6d20f13473d74033d00027c03f056e78084',
+                           'appendix_bytes': 1683,
+                           'appendix_sha256': '3a8406cf7671164dcd8a4dd895a48804a663f66a912495d67b31f5a7a0a26084'},
+ 'docs/NEXT_TASK.md': {'baseline_bytes': 80157,
+                       'baseline_sha256': 'e595d2bbf29c6d1ae380bda00c67a664741c83545099bdf133e13da31a00c2d8',
+                       'appendix_bytes': 1683,
+                       'appendix_sha256': '3a8406cf7671164dcd8a4dd895a48804a663f66a912495d67b31f5a7a0a26084'},
+ 'docs/HANDOFF.md': {'baseline_bytes': 108714,
+                     'baseline_sha256': 'cb3a4bae8dbd6885bb666f403237cba2880069d0313fa12b33b9703dc9065cc4',
+                     'appendix_bytes': 1683,
+                     'appendix_sha256': '3a8406cf7671164dcd8a4dd895a48804a663f66a912495d67b31f5a7a0a26084'},
+ 'docs/ROADMAP.md': {'baseline_bytes': 50822,
+                     'baseline_sha256': '642a321d25ca3b721647dbe77e36874af05f685b9b1fc3c5b66d8791a14beaf3',
+                     'appendix_bytes': 1683,
+                     'appendix_sha256': '3a8406cf7671164dcd8a4dd895a48804a663f66a912495d67b31f5a7a0a26084'},
+ 'docs/PROJECT_STATUS.md': {'baseline_bytes': 122090,
+                            'baseline_sha256': '92b733a9ace915bb44efc8cfaa935b655f8286ba46aa2c587ad35098ea4f9411',
+                            'appendix_bytes': 1683,
+                            'appendix_sha256': '3a8406cf7671164dcd8a4dd895a48804a663f66a912495d67b31f5a7a0a26084'}}
+
+
+def historical_document_before_compound_append(path, raw):
+    """Remove only the exact named compound appendix; retain all prior bytes."""
+    if (type(path) is not str or path not in COMPOUND_DOCUMENT_APPENDICES
+            or type(raw) is not bytes):
+        raise AssertionError("Only named compound document bytes are adapted")
+    pin = COMPOUND_DOCUMENT_APPENDICES[path]
+    size = pin["baseline_bytes"]
+    if len(raw) not in (size, size + pin["appendix_bytes"]):
+        raise AssertionError("Only the exact compound appendix is permitted")
+    baseline, suffix = raw[:size], raw[size:]
+    if hashlib.sha256(baseline).hexdigest() != pin["baseline_sha256"]:
+        raise AssertionError("Pre-compound historical document changed")
+    if suffix and hashlib.sha256(suffix).hexdigest() != pin["appendix_sha256"]:
+        raise AssertionError("Exact compound appendix changed")
+    return baseline
+
+
+# Only these exact public API/CLI dispatch snippets may precede v1 calculation.
+COMPOUND_DISPATCH_PATCHES = {'src/proposed_spell_packets/__main__.py': [('from .conditions import '
+                                             'evaluate, read_model, render as '
+                                             'render_condition\n'
+                                             'from .sensitivity import analyze '
+                                             'as analyze_sensitivity, render '
+                                             'as render_sensitivity\n'
+                                             'from .alternatives import '
+                                             'evaluate as '
+                                             'evaluate_alternatives, '
+                                             'read_definition, render as '
+                                             'render_alternatives\n',
+                                             'from .dispatch import (evaluate, '
+                                             'read_model, render_condition,\n'
+                                             '                       '
+                                             'analyze_sensitivity, '
+                                             'render_sensitivity,\n'
+                                             '                       '
+                                             'evaluate_alternatives, '
+                                             'read_definition, '
+                                             'render_alternatives)\n')],
+ 'src/proposed_spell_packets/conditions.py': [('    """Fresh boundary '
+                                               'validation once, then compute '
+                                               'solely from owned '
+                                               'snapshots."""\n',
+                                               '    """Fresh boundary '
+                                               'validation once, then compute '
+                                               'solely from owned '
+                                               'snapshots."""\n'
+                                               '    from . import '
+                                               'conditions_v2 as v2\n'
+                                               '    if type(model) is '
+                                               'v2.ConditionModel or '
+                                               '(type(model) is dict and '
+                                               'model.get("model_version") == '
+                                               'v2.MODEL_VERSION):\n'
+                                               '        return '
+                                               'v2.evaluate(workspace, '
+                                               'packet_id, model)\n'),
+                                              ('def render(result):\n',
+                                               'def render(result):\n'
+                                               '    from . import '
+                                               'conditions_v2 as v2\n'
+                                               '    if type(result) is '
+                                               'v2.ConditionResult:\n'
+                                               '        return '
+                                               'v2.render(result)\n')],
+ 'src/proposed_spell_packets/sensitivity.py': [('    """\n',
+                                                '    """\n'
+                                                '    from . import '
+                                                'conditions_v2 as c2, '
+                                                'sensitivity_v2 as v2\n'
+                                                '    if type(model) is '
+                                                'c2.ConditionModel or '
+                                                '(type(model) is dict and '
+                                                'model.get("model_version") == '
+                                                'c2.MODEL_VERSION):\n'
+                                                '        return '
+                                                'v2.analyze(workspace, '
+                                                'packet_id, model)\n'),
+                                               ('def render(report):\n',
+                                                'def render(report):\n'
+                                                '    from . import '
+                                                'sensitivity_v2 as v2\n'
+                                                '    if type(report) is '
+                                                'v2.SensitivityReport:\n'
+                                                '        return '
+                                                'v2.render(report)\n')],
+ 'src/proposed_spell_packets/alternatives.py': [('    """Freshly admit actual '
+                                                 'packet/root/history once, '
+                                                 'then compare owned '
+                                                 'scopes."""\n',
+                                                 '    """Freshly admit actual '
+                                                 'packet/root/history once, '
+                                                 'then compare owned '
+                                                 'scopes."""\n'
+                                                 '    from . import '
+                                                 'alternatives_v2 as v2\n'
+                                                 '    if type(definition) is '
+                                                 'v2.AlternativesDefinition or '
+                                                 '(type(definition) is dict '
+                                                 'and '
+                                                 'definition.get("definition_version") '
+                                                 '== v2.DEFINITION_VERSION):\n'
+                                                 '        return '
+                                                 'v2.evaluate(workspace, '
+                                                 'packet_id, definition)\n'),
+                                                ('def render(report):\n',
+                                                 'def render(report):\n'
+                                                 '    from . import '
+                                                 'alternatives_v2 as v2\n'
+                                                 '    if type(report) is '
+                                                 'v2.AlternativesReport:\n'
+                                                 '        return '
+                                                 'v2.render(report)\n')]}
+COMPOUND_DISPATCH_SHA256 = {'src/proposed_spell_packets/__main__.py': {'baseline_sha256': 'a62209a6040efae78c11d2a665dcb35c0d55ed2ff2ab0764dabb346171d3a669',
+                                            'successor_sha256': '877ebb244d707e82dc7ff373bf906f668b9595bcac43d73895b8ef75a53d6c7b'},
+ 'src/proposed_spell_packets/conditions.py': {'baseline_sha256': '4004e59906649c5195e8c52d2bf410b555cc2b2f6fcc3947e6335a0145c6fe72',
+                                              'successor_sha256': '536503eb443e556279def66cd8ce4ac4137ec2424617ec4770bdfe813dacd486'},
+ 'src/proposed_spell_packets/sensitivity.py': {'baseline_sha256': '34d5b2b15ecad959fe4e81639e6529b980aa15ff2da07b1c8014605e5ab1f37b',
+                                               'successor_sha256': 'c125786ecef1426593ba656f24cc23970d4690f167f028bb27ac73477d76cf64'},
+ 'src/proposed_spell_packets/alternatives.py': {'baseline_sha256': '4170aa3d5c3a823d81f59ee4ac7ea6830ac98ecd0189aa331f62ad29650c7ef5',
+                                                'successor_sha256': '34a615b4a8e28edd4f1c6614a6d4e583b62ac8c32fe33c230945ba5969c2826a'}}
+
+
+def historical_compound_dispatch_bytes(name, raw):
+    """Restore exact pre-compound API bytes without copying v1 implementations."""
+    if (type(name) is not str or name not in COMPOUND_DISPATCH_PATCHES
+            or type(raw) is not bytes):
+        raise AssertionError("Only named compound dispatch bytes are adapted")
+    pins = COMPOUND_DISPATCH_SHA256[name]
+    digest = hashlib.sha256(raw).hexdigest()
+    if digest == pins["baseline_sha256"]:
+        return raw
+    if digest != pins["successor_sha256"]:
+        raise AssertionError("Exact compound dispatch successor changed")
+    for before, after in reversed(COMPOUND_DISPATCH_PATCHES[name]):
+        old, new = before.encode(), after.encode()
+        if raw.count(new) != 1:
+            raise AssertionError("Exact compound dispatch adaptation changed")
+        raw = raw.replace(new, old, 1)
+    if hashlib.sha256(raw).hexdigest() != pins["baseline_sha256"]:
+        raise AssertionError("Historical v1 API bytes changed")
+    return raw
+
 def historical_sensitivity_cli_bytes(raw):
     """Reconstruct only the exact PR #213 CLI from the named successor."""
     if type(raw) is not bytes:
         raise AssertionError("Exact alternatives CLI bytes required")
     if hashlib.sha256(raw).hexdigest() == SENSITIVITY_CLI_SHA256:
         return raw
+    if hashlib.sha256(raw).hexdigest() != ALTERNATIVES_CLI_SHA256:
+        raw = historical_compound_dispatch_bytes("src/proposed_spell_packets/__main__.py", raw)
     if hashlib.sha256(raw).hexdigest() != ALTERNATIVES_CLI_SHA256:
         raise AssertionError("Exact alternatives CLI successor changed")
     for before, after in reversed(ALTERNATIVES_CLI_PATCHES):
@@ -374,6 +561,8 @@ def historical_document_before_alternatives_append(path, raw):
         raise AssertionError("Only named alternatives document bytes are adapted")
     pin = ALTERNATIVES_DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        raw = historical_document_before_compound_append(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact alternatives appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]

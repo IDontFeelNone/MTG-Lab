@@ -1155,3 +1155,34 @@ auto-merge. No subsequent milestone or source projection is authorized or begun.
 future_milestone_authorized=false
 future_source_projection_authorized=false
 future_milestone_begun=false
+
+
+---
+
+## Current milestone — Offline compound condition reasoning
+
+The owner-authorized milestone adds explicit v2 bounded ALL_OF / ANY_OF trees,
+missing-input sensitivity and the same expression across named alternatives through
+the existing evaluate, sensitivity and evaluate-alternatives workflows. See the
+[compound contract and usage](OFFLINE_COMPOUND_CONDITION_REASONING.md). Explicit version dispatch preserves
+v1 contracts, conservative flat ALL_OF behavior and canonical identities; no
+implicit migration occurs. Complete leaf groups retain UNKNOWN, unsupported and
+conflicting findings even when the v2 formula has a determinate root.
+PR #214 is merged. Exact canonical base is
+`a79fdd22aeb1c68be0cd11a207b6c102ea3e53b8`, tree
+`981a76c693d7bc84fb9b0ce2f4028a314a24cbd4`, matching reviewed head
+`a4a73bb589124ca97f4c028f2f0011c46a27ef39`. Branch:
+`codex/offline-compound-condition-reasoning`.
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+The source allowlist is empty; no TXT is inspected. Real coverage remains
+100 CR units / 15 projections with existing stage/range coverage unchanged.
+Semantic closure remains OPEN; all ten activation responsibilities remain
+OPEN / EXECUTION_BLOCKED; real gameplay execution remains BLOCKED.
+Historical documents, evidence, packet admission, histories/reviews and all v1
+behavior remain preserved. Final-head validation and actual demonstration evidence
+belong in the one draft PR description. Stop for independent PM review; owner
+retains final merge approval. Do not merge or enable auto-merge.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false
