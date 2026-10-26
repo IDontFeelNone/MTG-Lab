@@ -369,10 +369,16 @@ def _evaluate_snapshot(packet, history, definition, context, groups):
 
 def evaluate(workspace, packet_id, model):
     """Fresh boundary validation once, then compute solely from owned snapshots."""
+    from . import conditions_v2 as v2
+    if type(model) is v2.ConditionModel or (type(model) is dict and model.get("model_version") == v2.MODEL_VERSION):
+        return v2.evaluate(workspace, packet_id, model)
     return _evaluate_snapshot(*_prepare(workspace, packet_id, model))
 
 
 def render(result):
+    from . import conditions_v2 as v2
+    if type(result) is v2.ConditionResult:
+        return v2.render(result)
     value = result.to_dict()
     lines = ["Computed condition result: " + value["computed_result"],
         f'Condition: {value["condition_id"]} | {value["condition_name"]}',
