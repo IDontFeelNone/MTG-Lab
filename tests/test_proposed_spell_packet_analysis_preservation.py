@@ -1,4 +1,4 @@
-"""Four finite controls compose analysis and conditional changes with historical protections."""
+"""Finite controls compose analysis, condition and sensitivity history exactly."""
 import hashlib
 from pathlib import Path
 import unittest
@@ -54,7 +54,8 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
             self.assertFalse(previous.is_packet_authoring_addition(guard.ROOT / (name + '.future')))
         for name, pin in guard.CONDITIONAL_DOCUMENT_APPENDICES.items():
             with self.subTest(path=name):
-                raw = (guard.ROOT / name).read_bytes()
+                raw = guard.historical_document_before_sensitivity_append(
+                    name, (guard.ROOT / name).read_bytes())
                 old = guard.historical_document_before_conditional_append(name, raw)
                 self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
                 self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
@@ -65,6 +66,42 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
                         guard.historical_document_before_conditional_append(name, changed)
         with self.assertRaises(AssertionError):
             guard.historical_document_before_conditional_append('docs/future.md', b'')
+
+    def test_exact_sensitivity_suffixes_sources_and_reversible_successors(self):
+        self.assertEqual(guard.SENSITIVITY_SOURCE_PATHS,
+                         {'src/proposed_spell_packets/sensitivity.py'})
+        self.assertEqual(set(guard.SENSITIVITY_DOCUMENT_APPENDICES), set(guard.DOCUMENT_APPENDICES))
+        for name in guard.SENSITIVITY_SOURCE_PATHS:
+            self.assertTrue(guard.is_packet_analysis_addition(guard.ROOT / name))
+            self.assertTrue(previous.is_packet_authoring_addition(guard.ROOT / name))
+            self.assertFalse(previous.is_packet_authoring_addition(guard.ROOT / (name + '.future')))
+        for name, pin in guard.SENSITIVITY_DOCUMENT_APPENDICES.items():
+            with self.subTest(path=name):
+                raw = (guard.ROOT / name).read_bytes()
+                old = guard.historical_document_before_sensitivity_append(name, raw)
+                self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
+                self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
+                self.assertEqual(guard.historical_document_before_sensitivity_append(name, old), old)
+                for changed in (raw + b'future\n', raw[:-1], b'X' + raw[1:],
+                                old + b'X' + raw[len(old)+1:], bytearray(raw), True):
+                    with self.assertRaises(AssertionError):
+                        guard.historical_document_before_sensitivity_append(name, changed)
+        with self.assertRaises(AssertionError):
+            guard.historical_document_before_sensitivity_append('docs/future.md', b'')
+        raw = (guard.ROOT / 'src/proposed_spell_packets/__main__.py').read_bytes()
+        old = guard.historical_conditional_cli_bytes(raw)
+        self.assertEqual(hashlib.sha256(old).hexdigest(), guard.CONDITIONAL_CLI_SHA256)
+        self.assertEqual(guard.historical_conditional_cli_bytes(old), old)
+        for changed in (raw + b'future\n', raw[:-1], b'X' + raw[1:], bytearray(raw), True):
+            with self.assertRaises(AssertionError):
+                guard.historical_conditional_cli_bytes(changed)
+        # The conditional module was an addition after the historical audit BASE.
+        # Pin this narrowly authorized extraction while preserving the PR #212 pin.
+        self.assertEqual(guard.SENSITIVITY_CONDITION_SHA256['baseline_sha256'],
+                         'ebfe49ce04b8ecfc77cbd27fa74ff16a30b1dd8a4b0c4983f94c25e95ce36ca1')
+        raw = (guard.ROOT / 'src/proposed_spell_packets/conditions.py').read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(),
+                         guard.SENSITIVITY_CONDITION_SHA256['successor_sha256'])
 
     def test_exact_cli_successor_and_original_shared_validation_bytes(self):
         self.assertEqual(set(guard.EXACT_SUCCESSORS), {'src/proposed_spell_packets/__main__.py'})

@@ -14,7 +14,7 @@ NEW_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/analysis.py"})
 
 
 def is_packet_analysis_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS
+    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 43823,
@@ -182,6 +182,124 @@ CONDITIONAL_CLI_PATCHES = [('from .validation import PACKET_NAMES\n',
 CONDITIONAL_CLI_SHA256 = 'cc4a118c6da405792ae3de0d96a41cad204d1b8fdc1da1491b8656d7cb497012'
 
 
+# Exact finite successor for the separately authorized missing-input sensitivity
+# milestone. All historical analysis and conditional pins above remain intact.
+SENSITIVITY_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/sensitivity.py"})
+SENSITIVITY_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 45630,
+               'baseline_sha256': 'd7885ffefb69c6a018451f5c9b8c11be2d895d8fee0c46e83ecc1cc5612fdfb5',
+               'appendix_bytes': 1054,
+               'appendix_sha256': 'cb10ecebf347b1f9ac235e6176782ea95ecfe373f3cfff929cfc709dff4c6e30'},
+ 'PROJECT_INVENTORY.md': {'baseline_bytes': 100459,
+                          'baseline_sha256': '9a9a7f52e201deadddbdfb2ae7a9eae020951675dca7bd70f772ed6864564790',
+                          'appendix_bytes': 1054,
+                          'appendix_sha256': 'cb10ecebf347b1f9ac235e6176782ea95ecfe373f3cfff929cfc709dff4c6e30'},
+ 'CHANGELOG.md': {'baseline_bytes': 65886,
+                  'baseline_sha256': 'f6938b1e3d9048d9ef663afb2b743a6012d8f53c841802e24b69f314c09bc110',
+                  'appendix_bytes': 1054,
+                  'appendix_sha256': 'cb10ecebf347b1f9ac235e6176782ea95ecfe373f3cfff929cfc709dff4c6e30'},
+ 'docs/SESSION_STATE.md': {'baseline_bytes': 95482,
+                           'baseline_sha256': '90987bdf6627f84bc401f014b4597a4bdd9db9c9d8ba05f70ff217c5c7cb9122',
+                           'appendix_bytes': 1049,
+                           'appendix_sha256': 'b930291fb26228b94771256c950951a7ca1da10d7a101989539e4329b1848273'},
+ 'docs/NEXT_TASK.md': {'baseline_bytes': 77717,
+                       'baseline_sha256': '5d0ef26692be3df47a81bd6e965d56c61814d2d61ed5b41e9409a93e384b2337',
+                       'appendix_bytes': 1049,
+                       'appendix_sha256': 'b930291fb26228b94771256c950951a7ca1da10d7a101989539e4329b1848273'},
+ 'docs/HANDOFF.md': {'baseline_bytes': 106274,
+                     'baseline_sha256': '93524ed275d2db82944fd08a1ed4b94fa747f4b62bb99d31d74cd2a25873d74c',
+                     'appendix_bytes': 1049,
+                     'appendix_sha256': 'b930291fb26228b94771256c950951a7ca1da10d7a101989539e4329b1848273'},
+ 'docs/ROADMAP.md': {'baseline_bytes': 48382,
+                     'baseline_sha256': '39455cc7e3a45e0c19c2f02877b20324fbe257b2d0f94185d55a5f259ad929ab',
+                     'appendix_bytes': 1049,
+                     'appendix_sha256': 'b930291fb26228b94771256c950951a7ca1da10d7a101989539e4329b1848273'},
+ 'docs/PROJECT_STATUS.md': {'baseline_bytes': 119650,
+                            'baseline_sha256': '1fc7b74c107ffb8ca51f4bb6a81df1f529b1c8eaee83ce5533575ac72f9527ab',
+                            'appendix_bytes': 1049,
+                            'appendix_sha256': 'b930291fb26228b94771256c950951a7ca1da10d7a101989539e4329b1848273'}}
+
+
+SENSITIVITY_CONDITION_SHA256 = {"baseline_sha256": "ebfe49ce04b8ecfc77cbd27fa74ff16a30b1dd8a4b0c4983f94c25e95ce36ca1",
+                                "successor_sha256": "4004e59906649c5195e8c52d2bf410b555cc2b2f6fcc3947e6335a0145c6fe72"}
+SENSITIVITY_CLI_SHA256 = "0c566b8802ba63e401b7f1f50d3cb43bb84f6883c0a8c2ea9d59c2421264f64d"
+SENSITIVITY_CLI_PATCHES = [
+    ("""from .validation import PACKET_NAMES
+from .conditions import evaluate, read_model, render as render_condition
+
+
+""", """from .validation import PACKET_NAMES
+from .conditions import evaluate, read_model, render as render_condition
+from .sensitivity import analyze as analyze_sensitivity, render as render_sensitivity
+
+
+"""),
+    ("""    evaluation.add_argument("--model", required=True, help="Separate explicit versioned condition-model JSON file")
+    evaluation.add_argument("--json", action="store_true", help="Emit canonical immutable computed-result bytes")
+    args = parser.parse_args(argv)
+    try:
+""", """    evaluation.add_argument("--model", required=True, help="Separate explicit versioned condition-model JSON file")
+    evaluation.add_argument("--json", action="store_true", help="Emit canonical immutable computed-result bytes")
+    sensitivity = commands.add_parser("sensitivity", help="Examine independent Boolean hypotheses for selected UNKNOWN assertion groups")
+    sensitivity.add_argument("packet_id", help="Exact recorded packet identity")
+    sensitivity.add_argument("--model", required=True, help="Exact explicit versioned condition-model JSON file")
+    sensitivity.add_argument("--json", action="store_true", help="Emit canonical hypothetical-report bytes")
+    args = parser.parse_args(argv)
+    try:
+"""),
+    ("""        elif args.command == "record":
+            result = workspace.record(draft=args.draft, sealed=args.sealed)
+        elif args.command == "evaluate":
+            report = evaluate(workspace, args.packet_id, read_model(args.model))
+""", """        elif args.command == "record":
+            result = workspace.record(draft=args.draft, sealed=args.sealed)
+        elif args.command == "sensitivity":
+            report = analyze_sensitivity(workspace, args.packet_id, read_model(args.model))
+            if args.json:
+                sys.stdout.buffer.write(report.canonical_bytes)
+            else:
+                print(render_sensitivity(report))
+            return 0
+        elif args.command == "evaluate":
+            report = evaluate(workspace, args.packet_id, read_model(args.model))
+"""),
+]
+
+
+def historical_conditional_cli_bytes(raw):
+    """Reconstruct only the exact PR #212 CLI from this narrow successor."""
+    if type(raw) is not bytes:
+        raise AssertionError("Exact sensitivity CLI bytes required")
+    if hashlib.sha256(raw).hexdigest() == CONDITIONAL_CLI_SHA256:
+        return raw
+    if hashlib.sha256(raw).hexdigest() != SENSITIVITY_CLI_SHA256:
+        raise AssertionError("Exact sensitivity CLI successor changed")
+    for before, after in reversed(SENSITIVITY_CLI_PATCHES):
+        old, new = before.encode(), after.encode()
+        if raw.count(new) != 1:
+            raise AssertionError("Exact sensitivity CLI adaptation changed")
+        raw = raw.replace(new, old, 1)
+    if hashlib.sha256(raw).hexdigest() != CONDITIONAL_CLI_SHA256:
+        raise AssertionError("Historical conditional CLI changed")
+    return raw
+
+
+def historical_document_before_sensitivity_append(path, raw):
+    """Strip only the exact sensitivity appendix; preserve every historical body."""
+    if (type(path) is not str or path not in SENSITIVITY_DOCUMENT_APPENDICES
+            or type(raw) is not bytes):
+        raise AssertionError("Only named sensitivity document bytes are adapted")
+    pin = SENSITIVITY_DOCUMENT_APPENDICES[path]
+    size = pin["baseline_bytes"]
+    if len(raw) not in (size, size + pin["appendix_bytes"]):
+        raise AssertionError("Only the exact sensitivity appendix is permitted")
+    baseline, suffix = raw[:size], raw[size:]
+    if hashlib.sha256(baseline).hexdigest() != pin["baseline_sha256"]:
+        raise AssertionError("Pre-sensitivity historical document changed")
+    if suffix and hashlib.sha256(suffix).hexdigest() != pin["appendix_sha256"]:
+        raise AssertionError("Exact sensitivity appendix changed")
+    return baseline
+
+
 def historical_document_before_conditional_append(path, raw):
     """Strip only the exact conditional appendix, retaining the analysis body."""
     if (type(path) is not str or path not in CONDITIONAL_DOCUMENT_APPENDICES
@@ -189,6 +307,8 @@ def historical_document_before_conditional_append(path, raw):
         raise AssertionError("Only named conditional-pilot document bytes are adapted")
     pin = CONDITIONAL_DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        raw = historical_document_before_sensitivity_append(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact conditional-pilot appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]
@@ -204,6 +324,8 @@ def historical_analysis_cli_bytes(raw):
     prior = EXACT_SUCCESSORS["src/proposed_spell_packets/__main__.py"]["successor_sha256"]
     if type(raw) is not bytes:
         raise AssertionError("Exact CLI bytes required")
+    if hashlib.sha256(raw).hexdigest() not in (prior, CONDITIONAL_CLI_SHA256):
+        raw = historical_conditional_cli_bytes(raw)
     if hashlib.sha256(raw).hexdigest() == prior:
         return raw
     if hashlib.sha256(raw).hexdigest() != CONDITIONAL_CLI_SHA256:

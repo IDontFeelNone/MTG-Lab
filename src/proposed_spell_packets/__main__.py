@@ -8,6 +8,7 @@ from .authoring import Workspace
 from .analysis import analyze, compare, render
 from .validation import PACKET_NAMES
 from .conditions import evaluate, read_model, render as render_condition
+from .sensitivity import analyze as analyze_sensitivity, render as render_sensitivity
 
 
 def main(argv=None):
@@ -37,6 +38,10 @@ def main(argv=None):
     evaluation.add_argument("packet_id", help="Exact recorded packet identity")
     evaluation.add_argument("--model", required=True, help="Separate explicit versioned condition-model JSON file")
     evaluation.add_argument("--json", action="store_true", help="Emit canonical immutable computed-result bytes")
+    sensitivity = commands.add_parser("sensitivity", help="Examine independent Boolean hypotheses for selected UNKNOWN assertion groups")
+    sensitivity.add_argument("packet_id", help="Exact recorded packet identity")
+    sensitivity.add_argument("--model", required=True, help="Exact explicit versioned condition-model JSON file")
+    sensitivity.add_argument("--json", action="store_true", help="Emit canonical hypothetical-report bytes")
     args = parser.parse_args(argv)
     try:
         workspace = Workspace(args.workspace)
@@ -44,6 +49,13 @@ def main(argv=None):
             result = workspace.draft(example=args.example, base=args.base, output=args.output)
         elif args.command == "record":
             result = workspace.record(draft=args.draft, sealed=args.sealed)
+        elif args.command == "sensitivity":
+            report = analyze_sensitivity(workspace, args.packet_id, read_model(args.model))
+            if args.json:
+                sys.stdout.buffer.write(report.canonical_bytes)
+            else:
+                print(render_sensitivity(report))
+            return 0
         elif args.command == "evaluate":
             report = evaluate(workspace, args.packet_id, read_model(args.model))
             if args.json:
