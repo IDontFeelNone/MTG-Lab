@@ -9,6 +9,7 @@ from .analysis import analyze, compare, render
 from .validation import PACKET_NAMES
 from .conditions import evaluate, read_model, render as render_condition
 from .sensitivity import analyze as analyze_sensitivity, render as render_sensitivity
+from .alternatives import evaluate as evaluate_alternatives, read_definition, render as render_alternatives
 
 
 def main(argv=None):
@@ -42,6 +43,10 @@ def main(argv=None):
     sensitivity.add_argument("packet_id", help="Exact recorded packet identity")
     sensitivity.add_argument("--model", required=True, help="Exact explicit versioned condition-model JSON file")
     sensitivity.add_argument("--json", action="store_true", help="Emit canonical hypothetical-report bytes")
+    alternatives = commands.add_parser("evaluate-alternatives", help="Compare explicitly listed fictional alternatives against shared authored requirements")
+    alternatives.add_argument("packet_id", help="Exact recorded packet identity")
+    alternatives.add_argument("--requirements", required=True, help="Explicit versioned shared-requirement definition JSON file")
+    alternatives.add_argument("--json", action="store_true", help="Emit canonical computed comparison-report bytes")
     args = parser.parse_args(argv)
     try:
         workspace = Workspace(args.workspace)
@@ -49,6 +54,13 @@ def main(argv=None):
             result = workspace.draft(example=args.example, base=args.base, output=args.output)
         elif args.command == "record":
             result = workspace.record(draft=args.draft, sealed=args.sealed)
+        elif args.command == "evaluate-alternatives":
+            report = evaluate_alternatives(workspace, args.packet_id, read_definition(args.requirements))
+            if args.json:
+                sys.stdout.buffer.write(report.canonical_bytes)
+            else:
+                print(render_alternatives(report))
+            return 0
         elif args.command == "sensitivity":
             report = analyze_sensitivity(workspace, args.packet_id, read_model(args.model))
             if args.json:
