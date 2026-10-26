@@ -1579,3 +1579,30 @@ retains final merge approval. Do not merge or enable auto-merge.
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+---
+
+## Current milestone — Card–Rules mana-ability interpretation review pilot
+
+The owner-authorized bounded pilot binds exactly six retained Cards and seven
+explicitly authored ability/spell subjects to existing mechanical and CR evidence.
+Read-only individual and comparison commands reproduce pending interpretations,
+complete criterion matrices, counterevidence and unresolved semantic requirements.
+See the [contract and usage](CARD_RULES_MANA_INTERPRETATION_PILOT.md). Integrity validation supplies no semantic
+approval: every candidate remains requires_review, human_attestation=null,
+canonical_admission=false and execution_authority=BLOCKED. PR #215 is merged;
+exact canonical base is f53ec31b2bf289e578bcffd815ab0a2f1b89f98f, tree
+db040e92084cb3bb85e8147811b8a35f027b35a0, matching its reviewed head.
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+No new sources, projections, canonical facts or gameplay execution are added.
+Coverage remains 100 CR units / 15 projections; semantic closure remains OPEN;
+all ten activation responsibilities remain OPEN / EXECUTION_BLOCKED. Existing
+permission states, evidence, historical bodies and fictional v1/v2 behavior remain
+preserved. Final-head local/hosted validation belongs in the single draft PR.
+Stop for independent PM review. The owner retains final merge approval.
+Do not merge, enable auto-merge or begin another milestone.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false

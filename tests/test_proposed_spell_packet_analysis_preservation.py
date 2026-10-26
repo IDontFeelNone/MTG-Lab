@@ -148,7 +148,8 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
             self.assertFalse(previous.is_packet_authoring_addition(guard.ROOT / (name + '.future')))
         for name, pin in guard.COMPOUND_DOCUMENT_APPENDICES.items():
             with self.subTest(path=name):
-                raw = (guard.ROOT / name).read_bytes()
+                raw = guard.historical_document_before_card_rules_pilot_append(
+                    name, (guard.ROOT / name).read_bytes())
                 old = guard.historical_document_before_compound_append(name, raw)
                 self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
                 self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
@@ -175,6 +176,33 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
                         guard.historical_compound_dispatch_bytes(name, changed)
         with self.assertRaises(AssertionError):
             guard.historical_compound_dispatch_bytes('src/future.py', b'')
+
+    def test_exact_card_rules_pilot_suffixes_preserve_canonical_base(self):
+        self.assertEqual(guard.CARD_RULES_PILOT_SOURCE_PATHS, {
+            'src/card_rules_pilot/' + name for name in (
+                '__init__.py', '__main__.py', 'contract.py', 'pilot.py',
+                'authored.py', 'cards.py', 'rules.py')})
+        for name in guard.CARD_RULES_PILOT_SOURCE_PATHS:
+            self.assertTrue(guard.is_packet_analysis_addition(guard.ROOT / name))
+            self.assertTrue(previous.is_packet_authoring_addition(guard.ROOT / name))
+            self.assertFalse(guard.is_packet_analysis_addition(guard.ROOT / (name + '.future')))
+        self.assertFalse(guard.is_packet_analysis_addition(guard.ROOT / 'src/card_rules_pilot/future.py'))
+        self.assertEqual(set(guard.PILOT_DOCUMENT_APPENDICES), set(guard.DOCUMENT_APPENDICES))
+        for name, pin in guard.PILOT_DOCUMENT_APPENDICES.items():
+            with self.subTest(path=name):
+                raw = (guard.ROOT / name).read_bytes()
+                old = guard.historical_document_before_card_rules_pilot_append(name, raw)
+                self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
+                self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
+                self.assertEqual(guard.historical_document_before_card_rules_pilot_append(name, old), old)
+                self.assertEqual(guard.historical_document_before_compound_append(name, raw),
+                                 guard.historical_document_before_compound_append(name, old))
+                for changed in (raw + b'future\n', raw[:-1], b'X' + raw[1:],
+                                old + b'X' + raw[len(old)+1:], bytearray(raw), True):
+                    with self.assertRaises(AssertionError):
+                        guard.historical_document_before_card_rules_pilot_append(name, changed)
+        with self.assertRaises(AssertionError):
+            guard.historical_document_before_card_rules_pilot_append('docs/future.md', b'')
 
     def test_exact_cli_successor_and_original_shared_validation_bytes(self):
         self.assertEqual(set(guard.EXACT_SUCCESSORS), {'src/proposed_spell_packets/__main__.py'})
