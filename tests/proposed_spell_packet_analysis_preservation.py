@@ -14,7 +14,7 @@ NEW_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/analysis.py"})
 
 
 def is_packet_analysis_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS
+    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS | MANA_REASONING_SOURCE_PATHS
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 43823,
@@ -434,6 +434,146 @@ PILOT_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 49768,
                             'appendix_sha256': '52c0c299f945b82e4096cfe7ecc5b394743a2672b010f4ca6401194dbb1fd953'}}
 
 
+# Exact finite successor for bounded classification reasoning; existing pins stay intact.
+MANA_REASONING_SOURCE_PATHS = frozenset({
+    "src/card_rules_pilot/reasoning.py",
+    "src/card_rules_pilot/reasoning_policy.py",
+})
+MANA_REASONING_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 51301,
+               'baseline_sha256': 'a989941cac649d77af5b18a85c485f4bffcae2f6bbcc4f27c38a7870924d16fd',
+               'appendix_bytes': 1621,
+               'appendix_sha256': '67094c7962efe386f7139831ac7677b736fb1b2137ecc635440187a28130f5f0'},
+ 'PROJECT_INVENTORY.md': {'baseline_bytes': 106130,
+                          'baseline_sha256': 'df2fed4dfc4403924c645cb67c6886908d411b6f3c96706231f5c472a3215fb3',
+                          'appendix_bytes': 1621,
+                          'appendix_sha256': '67094c7962efe386f7139831ac7677b736fb1b2137ecc635440187a28130f5f0'},
+ 'CHANGELOG.md': {'baseline_bytes': 71557,
+                  'baseline_sha256': 'e0031a038871f965164a064ccd04f29ffa6e26e410e6463281b16ec5e6df723a',
+                  'appendix_bytes': 1621,
+                  'appendix_sha256': '67094c7962efe386f7139831ac7677b736fb1b2137ecc635440187a28130f5f0'},
+ 'docs/SESSION_STATE.md': {'baseline_bytes': 101133,
+                           'baseline_sha256': 'e00a88aca8cd8afcc1808d45a37593b4c337260a7559e5696e297bc518465c68',
+                           'appendix_bytes': 1616,
+                           'appendix_sha256': 'efed1b1e1530a0201b68711491bcf8404d2ac7fa1787b82394e947238b201624'},
+ 'docs/NEXT_TASK.md': {'baseline_bytes': 83368,
+                       'baseline_sha256': '58b7eb6cc70959bdb565a36bd3b94431cf0869d6aabae5c3ebb75144d7d22f03',
+                       'appendix_bytes': 1616,
+                       'appendix_sha256': 'efed1b1e1530a0201b68711491bcf8404d2ac7fa1787b82394e947238b201624'},
+ 'docs/HANDOFF.md': {'baseline_bytes': 111925,
+                     'baseline_sha256': '048c6236789d042a2dfc14173508731a555de5e3293b6c8e335250195912c545',
+                     'appendix_bytes': 1616,
+                     'appendix_sha256': 'efed1b1e1530a0201b68711491bcf8404d2ac7fa1787b82394e947238b201624'},
+ 'docs/ROADMAP.md': {'baseline_bytes': 54033,
+                     'baseline_sha256': '27bafc9d6d936d036a15e6e80f7e7b26da0a64f814178c415fd6a61f9e522244',
+                     'appendix_bytes': 1616,
+                     'appendix_sha256': 'efed1b1e1530a0201b68711491bcf8404d2ac7fa1787b82394e947238b201624'},
+ 'docs/PROJECT_STATUS.md': {'baseline_bytes': 125301,
+                            'baseline_sha256': 'c4ff87c2b88a386e4e61a60fcae8e3ac25dd6b6d9e56292cc2c4943ec262710d',
+                            'appendix_bytes': 1616,
+                            'appendix_sha256': 'efed1b1e1530a0201b68711491bcf8404d2ac7fa1787b82394e947238b201624'}}
+
+
+# Exact reversible public API/CLI integration against PR #216 main. These files
+# remain finite post-historical additions to earlier guards; this separate check
+# proves their inherited content independently of that source-path accounting.
+MANA_REASONING_SOURCE_PATCHES = {'src/card_rules_pilot/__init__.py': [("__all__ = ['PLAN_ID', 'PilotError', 'InterpretationCandidate', "
+                                       "'ReviewReport',\n"
+                                       "           'fixed_plan', 'load_pilot', 'render']\n",
+                                       "__all__ = ['PLAN_ID', 'PilotError', 'InterpretationCandidate', "
+                                       "'ReviewReport',\n"
+                                       "           'fixed_plan', 'load_pilot', 'render']\n"
+                                       '\n'
+                                       'from .reasoning import load_reasoning, render_reasoning, '
+                                       'ManaEvidenceReasoning, ReasoningReport\n'
+                                       '\n'
+                                       "__all__ += ['load_reasoning', 'render_reasoning', "
+                                       "'ManaEvidenceReasoning', 'ReasoningReport']\n")],
+ 'src/card_rules_pilot/__main__.py': [("    compare = commands.add_parser('compare', help='all seven pending "
+                                       "proposals')\n"
+                                       "    compare.add_argument('--json', action='store_true')\n"
+                                       "    commands.add_parser('check', help='explicit read-only byte "
+                                       "reproduction check of retained candidates/report')\n"
+                                       '    args = parser.parse_args(argv)\n',
+                                       "    compare = commands.add_parser('compare', help='all seven pending "
+                                       "proposals')\n"
+                                       "    compare.add_argument('--json', action='store_true')\n"
+                                       "    analyze = commands.add_parser('analyze', help='computed "
+                                       "conditional evidence analysis for one subject')\n"
+                                       "    analyze.add_argument('subject_id')\n"
+                                       "    analyze.add_argument('--json', action='store_true')\n"
+                                       "    for name in ('analyze-all', 'review-impact'):\n"
+                                       "        derived = commands.add_parser(name, help='bounded computed "
+                                       "pending-review reasoning')\n"
+                                       "        derived.add_argument('--json', action='store_true')\n"
+                                       "    commands.add_parser('check', help='explicit read-only byte "
+                                       "reproduction check of retained candidates/report')\n"
+                                       '    args = parser.parse_args(argv)\n'),
+                                      ('            '
+                                       'expected_query_snapshot_id=args.expected_query_snapshot_id,\n'
+                                       '            expected_plan_id=args.expected_plan_id)\n'
+                                       "        if args.command == 'check':\n"
+                                       '            report = pilot.comparison()\n'
+                                       '            directory = args.plan.parent\n',
+                                       '            '
+                                       'expected_query_snapshot_id=args.expected_query_snapshot_id,\n'
+                                       '            expected_plan_id=args.expected_plan_id)\n'
+                                       "        if args.command in ('analyze', 'analyze-all', "
+                                       "'review-impact'):\n"
+                                       '            from .reasoning import _from_pilot, render_reasoning\n'
+                                       '            reasoning = _from_pilot(pilot)\n'
+                                       '            document = (reasoning.subject(args.subject_id) if '
+                                       "args.command == 'analyze'\n"
+                                       '                else reasoning.comparison() if args.command == '
+                                       "'analyze-all'\n"
+                                       '                else reasoning.review_impact())\n'
+                                       '            sys.stdout.write(document.to_json() if args.json else '
+                                       'render_reasoning(document))\n'
+                                       "        elif args.command == 'check':\n"
+                                       '            report = pilot.comparison()\n'
+                                       '            directory = args.plan.parent\n')]}
+MANA_REASONING_SOURCE_SHA256 = {'src/card_rules_pilot/__init__.py': {'baseline_sha256': 'ec4e10c5f5595541208ca52b683cb3b60a89ccb1426b03989d91a4a1e580223c',
+                                      'successor_sha256': '2093c7424b37f6106539fd705bd5f92fad3265e57f91f70b78f6f77b85a25feb'},
+ 'src/card_rules_pilot/__main__.py': {'baseline_sha256': '2176be0b968e46585403b619b7b5507eb466320d2155859dc50e46b157bf8478',
+                                      'successor_sha256': 'c8caad5badb9da31d6db5a8b45457a5c4bee4e26b63c333fa77e856b990d427d'}}
+
+
+def historical_mana_reasoning_source_bytes(name, raw):
+    """Reconstruct only the two exact public integration predecessors."""
+    if type(name) is not str or name not in MANA_REASONING_SOURCE_PATCHES or type(raw) is not bytes:
+        raise AssertionError("Only exact mana reasoning API/CLI bytes are adapted")
+    pins = MANA_REASONING_SOURCE_SHA256[name]
+    digest = hashlib.sha256(raw).hexdigest()
+    if digest == pins['baseline_sha256']:
+        return raw
+    if digest != pins['successor_sha256']:
+        raise AssertionError("Exact mana reasoning API/CLI successor changed")
+    for old, new in reversed(MANA_REASONING_SOURCE_PATCHES[name]):
+        before, after = old.encode(), new.encode()
+        if raw.count(after) != 1:
+            raise AssertionError("Exact mana reasoning integration snippet changed")
+        raw = raw.replace(after, before, 1)
+    if hashlib.sha256(raw).hexdigest() != pins['baseline_sha256']:
+        raise AssertionError("PR #216 canonical API/CLI bytes changed")
+    return raw
+
+
+def historical_document_before_mana_reasoning_append(path, raw):
+    """Remove only eight exact reasoning suffixes, retaining PR #216 bytes."""
+    if (type(path) is not str or path not in MANA_REASONING_DOCUMENT_APPENDICES
+            or type(raw) is not bytes):
+        raise AssertionError("Only named mana reasoning document bytes are adapted")
+    pin = MANA_REASONING_DOCUMENT_APPENDICES[path]
+    size = pin["baseline_bytes"]
+    if len(raw) not in (size, size + pin["appendix_bytes"]):
+        raise AssertionError("Only the exact mana reasoning appendix is permitted")
+    baseline, suffix = raw[:size], raw[size:]
+    if hashlib.sha256(baseline).hexdigest() != pin["baseline_sha256"]:
+        raise AssertionError("PR #216 canonical document changed")
+    if suffix and hashlib.sha256(suffix).hexdigest() != pin["appendix_sha256"]:
+        raise AssertionError("Exact mana reasoning appendix changed")
+    return baseline
+
+
 def historical_document_before_card_rules_pilot_append(path, raw):
     """Remove only these exact eight appendices, retaining canonical-base bytes."""
     if (type(path) is not str or path not in PILOT_DOCUMENT_APPENDICES
@@ -441,6 +581,8 @@ def historical_document_before_card_rules_pilot_append(path, raw):
         raise AssertionError("Only named Card–Rules pilot document bytes are adapted")
     pin = PILOT_DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        raw = historical_document_before_mana_reasoning_append(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact Card–Rules pilot appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]
