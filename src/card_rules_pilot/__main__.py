@@ -19,6 +19,12 @@ def main(argv=None):
     subject.add_argument('--json', action='store_true')
     compare = commands.add_parser('compare', help='all seven pending proposals')
     compare.add_argument('--json', action='store_true')
+    analyze = commands.add_parser('analyze', help='computed conditional evidence analysis for one subject')
+    analyze.add_argument('subject_id')
+    analyze.add_argument('--json', action='store_true')
+    for name in ('analyze-all', 'review-impact'):
+        derived = commands.add_parser(name, help='bounded computed pending-review reasoning')
+        derived.add_argument('--json', action='store_true')
     commands.add_parser('check', help='explicit read-only byte reproduction check of retained candidates/report')
     args = parser.parse_args(argv)
     try:
@@ -27,7 +33,14 @@ def main(argv=None):
             plan_path=args.plan, expected_profile_id=args.expected_profile_id,
             expected_query_snapshot_id=args.expected_query_snapshot_id,
             expected_plan_id=args.expected_plan_id)
-        if args.command == 'check':
+        if args.command in ('analyze', 'analyze-all', 'review-impact'):
+            from .reasoning import _from_pilot, render_reasoning
+            reasoning = _from_pilot(pilot)
+            document = (reasoning.subject(args.subject_id) if args.command == 'analyze'
+                else reasoning.comparison() if args.command == 'analyze-all'
+                else reasoning.review_impact())
+            sys.stdout.write(document.to_json() if args.json else render_reasoning(document))
+        elif args.command == 'check':
             report = pilot.comparison()
             directory = args.plan.parent
             manifest = pilot.reproduction_manifest()

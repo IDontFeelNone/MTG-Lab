@@ -1328,3 +1328,31 @@ Do not merge, enable auto-merge or begin another milestone.
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+---
+
+## Current milestone — Bounded mana-classification evidence reasoning
+
+Read-only computed analysis now separates substantive classification criteria from
+assessment-method obligations over the unchanged PR #216 pending readings. The
+same verified pilot snapshot supplies seven individual/comparison results and
+exactly ten single-row hypothetical review-impact cases. See the [capability guide](BOUNDED_MANA_CLASSIFICATION_REASONING.md).
+PR #216 is merged; exact base is d6b649bfe82c88012d8b51bc6412e012fc6eddde,
+tree 8f51c376cb61acfc2dda018587e48b457c567602, matching reviewed head
+ada76667709cac5be03326b3764df26f6579a4fb. Original plan, manifest,
+candidate and comparison identities remain unchanged. Every derived result stays
+requires_review, human_attestation=null, canonical_admission=false,
+semantic_review_status=PENDING_NOT_ESTABLISHED and execution_authority=BLOCKED.
+No hypothetical is a corrected interpretation, new evidence or accepted candidate.
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
+Source-projection allowlist remains empty; retained coverage stays 100 CR units /
+15 projections. Semantic closure and all ten activation responsibilities remain
+OPEN / EXECUTION_BLOCKED. Permissions, Tier A states and historical bodies remain
+unchanged. Final-head validation and retained attempt evidence belong in the one
+draft PR. Stop for independent PM review; owner retains final merge approval.
+Do not merge, enable auto-merge or begin another milestone.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false
