@@ -14,7 +14,7 @@ NEW_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/analysis.py"})
 
 
 def is_packet_analysis_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS | MANA_REASONING_SOURCE_PATHS
+    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS | MANA_REASONING_SOURCE_PATHS | MANA_CONTEXT_SOURCE_PATHS | MANA_CONTEXT_REVIEW_PATHS
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 43823,
@@ -439,6 +439,56 @@ MANA_REASONING_SOURCE_PATHS = frozenset({
     "src/card_rules_pilot/reasoning.py",
     "src/card_rules_pilot/reasoning_policy.py",
 })
+
+# Exact finite additions for the four-unit source-context and pending
+# reassessment successor. This enumerates files, never a directory exemption.
+MANA_CONTEXT_SOURCE_PATHS = frozenset({
+    "src/gameplay_rules/projection/mana_context_source.py",
+    "src/gameplay_rules/projection/mana_context_contracts.py",
+    "src/gameplay_rules/projection/mana_context_package.py",
+    "src/card_rules_pilot/reassessment.py",
+    "src/card_rules_pilot/reassessment_cli.py",
+})
+MANA_CONTEXT_REVIEW_PATHS = frozenset({
+    "reference-reviews/gameplay-rules-mana-classification-source-context/projection.json",
+    "reference-reviews/gameplay-rules-mana-classification-source-context/dependency-review.json",
+    "reference-reviews/gameplay-rules-mana-classification-source-context/composite-coverage.json",
+    "reference-reviews/gameplay-rules-mana-classification-source-context/manifest.json",
+})
+
+MANA_CONTEXT_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 52922,
+               'baseline_sha256': '4d5a65045416da1cdb84352d970c759500da0f1f0baf6374babcdce0e82ac0c3',
+               'appendix_bytes': 2226,
+               'appendix_sha256': '50079786c6c267e4ea892660d9f2dc17d9d8764553e76de1dbbea444bb4ed9ad'},
+ 'PROJECT_INVENTORY.md': {'baseline_bytes': 107751,
+                          'baseline_sha256': 'ec7574c01babc6365e030f4967df7b202a752eacf0fcbac9cce6134e2c8542fe',
+                          'appendix_bytes': 2226,
+                          'appendix_sha256': '50079786c6c267e4ea892660d9f2dc17d9d8764553e76de1dbbea444bb4ed9ad'},
+ 'CHANGELOG.md': {'baseline_bytes': 73178,
+                  'baseline_sha256': 'b61d1fc223ddece3e8584455b58704a9471fbe956a786d6ffcfcd1f0ef1fce2d',
+                  'appendix_bytes': 2226,
+                  'appendix_sha256': '50079786c6c267e4ea892660d9f2dc17d9d8764553e76de1dbbea444bb4ed9ad'},
+ 'docs/SESSION_STATE.md': {'baseline_bytes': 102749,
+                           'baseline_sha256': '3c0c09733c16b75a5ed83bfc0fd520bdc44f870252d2d6dc5bd84dcf3feba00a',
+                           'appendix_bytes': 2221,
+                           'appendix_sha256': 'bc2f967cf093d20ca3ce445bc815bdb91c04870c0bd5288a43554ede1d2d1141'},
+ 'docs/NEXT_TASK.md': {'baseline_bytes': 84984,
+                       'baseline_sha256': '63cc86192e1a75a8010f77b5079f21ec66bcd407dea11bc9fd4a650571a44e97',
+                       'appendix_bytes': 2221,
+                       'appendix_sha256': 'bc2f967cf093d20ca3ce445bc815bdb91c04870c0bd5288a43554ede1d2d1141'},
+ 'docs/HANDOFF.md': {'baseline_bytes': 113541,
+                     'baseline_sha256': '604fabcc8d777010d6926908b43b7d972d85b33f9147f313afebecbeb7ad1309',
+                     'appendix_bytes': 2221,
+                     'appendix_sha256': 'bc2f967cf093d20ca3ce445bc815bdb91c04870c0bd5288a43554ede1d2d1141'},
+ 'docs/ROADMAP.md': {'baseline_bytes': 55649,
+                     'baseline_sha256': 'd8e8437ce28a185ff176eb846ddd0a9d6e51623fc705ddb37d5daafad695cbde',
+                     'appendix_bytes': 2221,
+                     'appendix_sha256': 'bc2f967cf093d20ca3ce445bc815bdb91c04870c0bd5288a43554ede1d2d1141'},
+ 'docs/PROJECT_STATUS.md': {'baseline_bytes': 126917,
+                            'baseline_sha256': '472032e5696526643bf3aa404cbf94faac0c3c12738e0497f214c3d9db8d54e6',
+                            'appendix_bytes': 2221,
+                            'appendix_sha256': 'bc2f967cf093d20ca3ce445bc815bdb91c04870c0bd5288a43554ede1d2d1141'}}
+
 MANA_REASONING_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 51301,
                'baseline_sha256': 'a989941cac649d77af5b18a85c485f4bffcae2f6bbcc4f27c38a7870924d16fd',
                'appendix_bytes': 1621,
@@ -557,6 +607,23 @@ def historical_mana_reasoning_source_bytes(name, raw):
     return raw
 
 
+def historical_document_before_mana_context_append(path, raw):
+    """Remove only the exact eight suffixes, preserving canonical PR #217 bytes."""
+    if (type(path) is not str or path not in MANA_CONTEXT_DOCUMENT_APPENDICES
+            or type(raw) is not bytes):
+        raise AssertionError("Only named mana context document bytes are adapted")
+    pin = MANA_CONTEXT_DOCUMENT_APPENDICES[path]
+    size = pin["baseline_bytes"]
+    if len(raw) not in (size, size + pin["appendix_bytes"]):
+        raise AssertionError("Only the exact mana context appendix is permitted")
+    baseline, suffix = raw[:size], raw[size:]
+    if hashlib.sha256(baseline).hexdigest() != pin["baseline_sha256"]:
+        raise AssertionError("PR #217 canonical document changed")
+    if suffix and hashlib.sha256(suffix).hexdigest() != pin["appendix_sha256"]:
+        raise AssertionError("Exact mana context appendix changed")
+    return baseline
+
+
 def historical_document_before_mana_reasoning_append(path, raw):
     """Remove only eight exact reasoning suffixes, retaining PR #216 bytes."""
     if (type(path) is not str or path not in MANA_REASONING_DOCUMENT_APPENDICES
@@ -564,6 +631,8 @@ def historical_document_before_mana_reasoning_append(path, raw):
         raise AssertionError("Only named mana reasoning document bytes are adapted")
     pin = MANA_REASONING_DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        raw = historical_document_before_mana_context_append(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact mana reasoning appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]

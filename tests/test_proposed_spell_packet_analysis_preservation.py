@@ -217,7 +217,8 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
         self.assertEqual(set(guard.MANA_REASONING_DOCUMENT_APPENDICES), set(guard.DOCUMENT_APPENDICES))
         for name, pin in guard.MANA_REASONING_DOCUMENT_APPENDICES.items():
             with self.subTest(path=name):
-                raw = (guard.ROOT / name).read_bytes()
+                raw = guard.historical_document_before_mana_context_append(
+                    name, (guard.ROOT / name).read_bytes())
                 old = guard.historical_document_before_mana_reasoning_append(name, raw)
                 self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
                 self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
@@ -230,6 +231,44 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
                         guard.historical_document_before_mana_reasoning_append(name, changed)
         with self.assertRaises(AssertionError):
             guard.historical_document_before_mana_reasoning_append('docs/future.md', b'')
+
+    def test_exact_mana_context_source_and_review_additions_remain_finite(self):
+        self.assertEqual(guard.MANA_CONTEXT_SOURCE_PATHS, {
+            'src/gameplay_rules/projection/mana_context_source.py',
+            'src/gameplay_rules/projection/mana_context_contracts.py',
+            'src/gameplay_rules/projection/mana_context_package.py',
+            'src/card_rules_pilot/reassessment.py',
+            'src/card_rules_pilot/reassessment_cli.py'})
+        self.assertEqual(guard.MANA_CONTEXT_REVIEW_PATHS, {
+            'reference-reviews/gameplay-rules-mana-classification-source-context/' + name
+            for name in ('projection.json', 'dependency-review.json',
+                         'composite-coverage.json', 'manifest.json')})
+        for name in guard.MANA_CONTEXT_SOURCE_PATHS | guard.MANA_CONTEXT_REVIEW_PATHS:
+            self.assertTrue(guard.is_packet_analysis_addition(guard.ROOT / name))
+            self.assertTrue(previous.is_packet_authoring_addition(guard.ROOT / name))
+            self.assertFalse(guard.is_packet_analysis_addition(guard.ROOT / (name + '.future')))
+        for name in ('src/card_rules_pilot/future.py',
+                     'src/gameplay_rules/projection/mana_context_future.py',
+                     'reference-reviews/gameplay-rules-mana-classification-source-context/future.json'):
+            self.assertFalse(guard.is_packet_analysis_addition(guard.ROOT / name))
+
+    def test_exact_mana_context_suffixes_preserve_canonical_predecessors(self):
+        self.assertEqual(set(guard.MANA_CONTEXT_DOCUMENT_APPENDICES), set(guard.DOCUMENT_APPENDICES))
+        for name, pin in guard.MANA_CONTEXT_DOCUMENT_APPENDICES.items():
+            with self.subTest(path=name):
+                raw = (guard.ROOT / name).read_bytes()
+                old = guard.historical_document_before_mana_context_append(name, raw)
+                self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
+                self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
+                self.assertEqual(guard.historical_document_before_mana_context_append(name, old), old)
+                self.assertEqual(guard.historical_document_before_mana_reasoning_append(name, raw),
+                                 guard.historical_document_before_mana_reasoning_append(name, old))
+                for changed in (raw + b'future\n', raw[:-1], b'X' + raw[1:],
+                                old + b'X' + raw[len(old)+1:], bytearray(raw), True):
+                    with self.assertRaises(AssertionError):
+                        guard.historical_document_before_mana_context_append(name, changed)
+        with self.assertRaises(AssertionError):
+            guard.historical_document_before_mana_context_append('docs/future.md', b'')
 
     def test_exact_mana_reasoning_public_api_cli_successors(self):
         self.assertEqual(set(guard.MANA_REASONING_SOURCE_PATCHES), {

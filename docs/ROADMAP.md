@@ -749,3 +749,42 @@ Do not merge, enable auto-merge or begin another milestone.
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+---
+
+## Current milestone — Mana classification source context and pending reassessment
+
+Exactly four freshly verified source units (106.12, 106.12a, 106.12b and
+614.15) add one non-executable projection: coverage is 104 real units /
+16 projections. Historical PR #216 interpretation context remains 17 units;
+the separately bound enriched context is 21. See the [capability guide](MANA_CLASSIFICATION_SOURCE_CONTEXT_REASSESSMENT.md).
+Five append-only pending reassessments bind original Card/provider evidence and
+source anchors; an explicit adapter computes before/after results for the same
+seven subjects through the unchanged PR #217 policy. No hypothetical is evidence.
+The four self-replacement method readings concern the complete retained Card
+text only: the broader external-state question remains unknown. Mana Flare's
+relationship reading remains an authored proposal. Historical records, identities,
+commands and outputs remain unchanged.
+
+GitHub PR #217 is merged. Exact authoritative base is
+2accac9e5d108b0964b9b503d999dcb89888f6f6, tree
+ad95c6f39caeb3488e0db72b6ba87aef7287b661, matching its reviewed head
+82957df798f861e6221f8578cb2cef5e6a0057f4. Architecture v13 remains ACTIVE
+APPROVED; Decision 017 remains ACCEPTED. Every new interpretation/result remains
+semantic_review_status=PENDING_NOT_ESTABLISHED, review.status=requires_review,
+human_attestation=null, canonical_admission=false, execution_authority=BLOCKED.
+Semantic closure stays OPEN; all ten activation responsibilities remain
+OPEN / EXECUTION_BLOCKED. Source-policy clearance remains not_granted; private
+retention, redistribution, free/commercial service and AI export remain
+NOT_ESTABLISHED. Tier A remains non-production with unapproved processing and
+operation. Historical acquisition identity and all publication gates are unchanged.
+
+One draft PR stops for independent PM review and final owner approval. No merge,
+auto-merge, canonical semantic admission or gameplay execution is authorized.
+Validation attempts, final-head hosted checkout and real publication/readback
+evidence belong in that PR's completion report.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false
