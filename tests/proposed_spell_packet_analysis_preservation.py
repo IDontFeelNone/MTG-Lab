@@ -14,7 +14,7 @@ NEW_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/analysis.py"})
 
 
 def is_packet_analysis_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS
+    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 43823,
@@ -392,6 +392,65 @@ COMPOUND_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 48080,
                             'appendix_sha256': '3a8406cf7671164dcd8a4dd895a48804a663f66a912495d67b31f5a7a0a26084'}}
 
 
+# Exact finite additions; no directory-wide exception is introduced.
+CARD_RULES_PILOT_SOURCE_PATHS = frozenset(
+    "src/card_rules_pilot/" + name for name in (
+        "__init__.py", "__main__.py", "contract.py", "pilot.py",
+        "authored.py", "cards.py", "rules.py"))
+
+
+# Exact finite successor for the bounded Card–Rules review pilot.
+PILOT_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 49768,
+               'baseline_sha256': '1922e4d54f9f36662b2d92fd57d8bba4382c2fc65abcf03edce8c28d4fcbc8a9',
+               'appendix_bytes': 1533,
+               'appendix_sha256': '68780d354423e5785a5fcc1683247aa82131f53f62277b1630a584046f6fe337'},
+ 'PROJECT_INVENTORY.md': {'baseline_bytes': 104597,
+                          'baseline_sha256': '3d028e5eb740b356a36c666de5e0d01d4f1b3991e4a895c0ddd4e440d8a1f8ef',
+                          'appendix_bytes': 1533,
+                          'appendix_sha256': '68780d354423e5785a5fcc1683247aa82131f53f62277b1630a584046f6fe337'},
+ 'CHANGELOG.md': {'baseline_bytes': 70024,
+                  'baseline_sha256': '4e8559cbc2b1ecbbc03fbf8fd7cabbd71daa0bc380ffec13c3fe4c525f20a4d8',
+                  'appendix_bytes': 1533,
+                  'appendix_sha256': '68780d354423e5785a5fcc1683247aa82131f53f62277b1630a584046f6fe337'},
+ 'docs/SESSION_STATE.md': {'baseline_bytes': 99605,
+                           'baseline_sha256': 'a4c3d7ef33e89e43fac92893fead3affe1de855f5b23d39c3c158920bab76f0b',
+                           'appendix_bytes': 1528,
+                           'appendix_sha256': '52c0c299f945b82e4096cfe7ecc5b394743a2672b010f4ca6401194dbb1fd953'},
+ 'docs/NEXT_TASK.md': {'baseline_bytes': 81840,
+                       'baseline_sha256': '5f495d58b91e0fdd3b232ad1b6c44592538d65b4b98f79d24c90aedbef6ff32b',
+                       'appendix_bytes': 1528,
+                       'appendix_sha256': '52c0c299f945b82e4096cfe7ecc5b394743a2672b010f4ca6401194dbb1fd953'},
+ 'docs/HANDOFF.md': {'baseline_bytes': 110397,
+                     'baseline_sha256': '3ce0ca28ee3cfbdb643fe453be4c15bdc15f488b1614dda8ae4500e8708b3e1f',
+                     'appendix_bytes': 1528,
+                     'appendix_sha256': '52c0c299f945b82e4096cfe7ecc5b394743a2672b010f4ca6401194dbb1fd953'},
+ 'docs/ROADMAP.md': {'baseline_bytes': 52505,
+                     'baseline_sha256': '0b2ebb078580afb1c638a34197c76eef239d3911adc2e7bf106797306e5044b1',
+                     'appendix_bytes': 1528,
+                     'appendix_sha256': '52c0c299f945b82e4096cfe7ecc5b394743a2672b010f4ca6401194dbb1fd953'},
+ 'docs/PROJECT_STATUS.md': {'baseline_bytes': 123773,
+                            'baseline_sha256': 'aa8dd87004af929d41661f399a3681320f06fb6aa86bee8ba3dea6c856043d92',
+                            'appendix_bytes': 1528,
+                            'appendix_sha256': '52c0c299f945b82e4096cfe7ecc5b394743a2672b010f4ca6401194dbb1fd953'}}
+
+
+def historical_document_before_card_rules_pilot_append(path, raw):
+    """Remove only these exact eight appendices, retaining canonical-base bytes."""
+    if (type(path) is not str or path not in PILOT_DOCUMENT_APPENDICES
+            or type(raw) is not bytes):
+        raise AssertionError("Only named Card–Rules pilot document bytes are adapted")
+    pin = PILOT_DOCUMENT_APPENDICES[path]
+    size = pin["baseline_bytes"]
+    if len(raw) not in (size, size + pin["appendix_bytes"]):
+        raise AssertionError("Only the exact Card–Rules pilot appendix is permitted")
+    baseline, suffix = raw[:size], raw[size:]
+    if hashlib.sha256(baseline).hexdigest() != pin["baseline_sha256"]:
+        raise AssertionError("Pre-pilot canonical document changed")
+    if suffix and hashlib.sha256(suffix).hexdigest() != pin["appendix_sha256"]:
+        raise AssertionError("Exact Card–Rules pilot appendix changed")
+    return baseline
+
+
 def historical_document_before_compound_append(path, raw):
     """Remove only the exact named compound appendix; retain all prior bytes."""
     if (type(path) is not str or path not in COMPOUND_DOCUMENT_APPENDICES
@@ -399,6 +458,8 @@ def historical_document_before_compound_append(path, raw):
         raise AssertionError("Only named compound document bytes are adapted")
     pin = COMPOUND_DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        raw = historical_document_before_card_rules_pilot_append(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact compound appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]
