@@ -14,7 +14,7 @@ NEW_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/analysis.py"})
 
 
 def is_packet_analysis_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS | MANA_REASONING_SOURCE_PATHS | MANA_CONTEXT_SOURCE_PATHS | MANA_CONTEXT_REVIEW_PATHS
+    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS | MANA_REASONING_SOURCE_PATHS | MANA_CONTEXT_SOURCE_PATHS | MANA_CONTEXT_REVIEW_PATHS | MANA_BEHAVIOR_SOURCE_PATHS
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 43823,
@@ -456,6 +456,47 @@ MANA_CONTEXT_REVIEW_PATHS = frozenset({
     "reference-reviews/gameplay-rules-mana-classification-source-context/manifest.json",
 })
 
+# Exact consumer-only additions. No new retained source unit or projection.
+MANA_BEHAVIOR_SOURCE_PATHS = frozenset({
+    "src/card_rules_pilot/behavior.py",
+    "src/card_rules_pilot/behavior_context.py",
+    "src/card_rules_pilot/behavior_policy.py",
+    "src/card_rules_pilot/behavior_cli.py",
+})
+
+MANA_BEHAVIOR_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 55148,
+               'baseline_sha256': '96206883b93605e051579b7d7951960a192d0a79c3fb483b8f5bd51a7374da08',
+               'appendix_bytes': 2183,
+               'appendix_sha256': 'e58638c7e7fdb1ec885f98360b3a02b987d2cde070883a4c063d0d3a5e6f774b'},
+ 'PROJECT_INVENTORY.md': {'baseline_bytes': 109977,
+                          'baseline_sha256': '9c19efbc4441202465d119bd954cd143ea6ed93f47d1e9880ee1531384369324',
+                          'appendix_bytes': 2183,
+                          'appendix_sha256': 'e58638c7e7fdb1ec885f98360b3a02b987d2cde070883a4c063d0d3a5e6f774b'},
+ 'CHANGELOG.md': {'baseline_bytes': 75404,
+                  'baseline_sha256': '0fd4c96e49c11ab47b39c965bd35aabebaf1d20092da45d2b9902d03b1a31a41',
+                  'appendix_bytes': 2183,
+                  'appendix_sha256': 'e58638c7e7fdb1ec885f98360b3a02b987d2cde070883a4c063d0d3a5e6f774b'},
+ 'docs/SESSION_STATE.md': {'baseline_bytes': 104970,
+                           'baseline_sha256': 'e4970ad533b335ebb9dbff94dda33e0719fbdc19dde74bd18826610afdad5711',
+                           'appendix_bytes': 2178,
+                           'appendix_sha256': '74ea4e3ec315ad6673c992c71e3ae80656b416c5be9e91de020af1af91d6403d'},
+ 'docs/NEXT_TASK.md': {'baseline_bytes': 87205,
+                       'baseline_sha256': 'd492770866938b6fde550d88b9203d7392eb2026a149a98ae158d284da607a7f',
+                       'appendix_bytes': 2178,
+                       'appendix_sha256': '74ea4e3ec315ad6673c992c71e3ae80656b416c5be9e91de020af1af91d6403d'},
+ 'docs/HANDOFF.md': {'baseline_bytes': 115762,
+                     'baseline_sha256': 'da55a97df830e51deef602b82e8deb50cfa9b1461fbc7d4b918ea5f7d355bf92',
+                     'appendix_bytes': 2178,
+                     'appendix_sha256': '74ea4e3ec315ad6673c992c71e3ae80656b416c5be9e91de020af1af91d6403d'},
+ 'docs/ROADMAP.md': {'baseline_bytes': 57870,
+                     'baseline_sha256': 'a3412d2aff0422e7cd1ec224f49129be5d3fcc6db0477bba5213eaec91d57328',
+                     'appendix_bytes': 2178,
+                     'appendix_sha256': '74ea4e3ec315ad6673c992c71e3ae80656b416c5be9e91de020af1af91d6403d'},
+ 'docs/PROJECT_STATUS.md': {'baseline_bytes': 129138,
+                            'baseline_sha256': '2b0907c94b3a97600ee6b515eff7d7490a3ceee7b9917a18c6934bbb9109ab91',
+                            'appendix_bytes': 2178,
+                            'appendix_sha256': '74ea4e3ec315ad6673c992c71e3ae80656b416c5be9e91de020af1af91d6403d'}}
+
 MANA_CONTEXT_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 52922,
                'baseline_sha256': '4d5a65045416da1cdb84352d970c759500da0f1f0baf6374babcdce0e82ac0c3',
                'appendix_bytes': 2226,
@@ -607,6 +648,23 @@ def historical_mana_reasoning_source_bytes(name, raw):
     return raw
 
 
+def historical_document_before_mana_behavior_append(path, raw):
+    """Remove only eight pinned suffixes, retaining exact canonical PR #218 bytes."""
+    if (type(path) is not str or path not in MANA_BEHAVIOR_DOCUMENT_APPENDICES
+            or type(raw) is not bytes):
+        raise AssertionError("Only named mana behavior document bytes are adapted")
+    pin = MANA_BEHAVIOR_DOCUMENT_APPENDICES[path]
+    size = pin["baseline_bytes"]
+    if len(raw) not in (size, size + pin["appendix_bytes"]):
+        raise AssertionError("Only the exact mana behavior appendix is permitted")
+    baseline, suffix = raw[:size], raw[size:]
+    if hashlib.sha256(baseline).hexdigest() != pin["baseline_sha256"]:
+        raise AssertionError("PR #218 canonical document changed")
+    if suffix and hashlib.sha256(suffix).hexdigest() != pin["appendix_sha256"]:
+        raise AssertionError("Exact mana behavior appendix changed")
+    return baseline
+
+
 def historical_document_before_mana_context_append(path, raw):
     """Remove only the exact eight suffixes, preserving canonical PR #217 bytes."""
     if (type(path) is not str or path not in MANA_CONTEXT_DOCUMENT_APPENDICES
@@ -614,6 +672,8 @@ def historical_document_before_mana_context_append(path, raw):
         raise AssertionError("Only named mana context document bytes are adapted")
     pin = MANA_CONTEXT_DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        raw = historical_document_before_mana_behavior_append(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact mana context appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]

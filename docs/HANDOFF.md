@@ -1531,3 +1531,41 @@ evidence belong in that PR's completion report.
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+## Bounded mana behavior and procedure reasoning — 2026-10-28
+
+This separately authorized implementation batch consumes the validated PR #218
+successor and the original PR #216/#217 readings for exactly the same seven
+subjects. Canonical base is `2e4f9daef9c9fb18a9b5ec0ab3b35600632face4`, tree
+`5d007d4e6d05349200f04f64cf2575f5e0693f92`; Architecture v13 remains ACTIVE
+APPROVED and Decision 017 ACCEPTED. Repository-first remains governing.
+
+The versioned behavior context reuses the 21-unit successor context plus only
+602.2, 602.2a and 601.2a: exactly 24 distinct retained units. Global source
+coverage remains 104 real CR units and 16 projections. Historical 17-unit and
+21-unit contexts remain distinct. No TXT inspection, source acquisition, source
+admission, new projection or Card cohort is authorized or performed.
+
+The read-only policy/API/CLI explains conditional activated and triggered mana
+exceptions, ordinary activated placement, spell-proposal placement, and the
+unresolved broad-603 Plunderer procedure frontier. Bounded assumed priority
+true/false/unknown cases are separate from Card evidence and actual game state.
+All current-game legality, actions, events, payment and output remain unevaluated.
+See [the focused guide](BOUNDED_MANA_BEHAVIOR_REASONING.md) for contracts, commands, demonstrations and validation evidence.
+
+Interpretations remain PENDING_NOT_ESTABLISHED; review requires_review;
+human_attestation=null; canonical_admission=false; execution_authority=BLOCKED.
+Semantic closure remains OPEN and all ten activation responsibilities remain
+OPEN / EXECUTION_BLOCKED. Permission states and Tier A non-production restrictions
+are unchanged. Tests, source integrity, PM review and owner merge establish no
+semantic attestation or execution authority.
+
+Delivery stops at exactly one draft PR for independent PM review and final owner
+merge approval. No merge or auto-merge is authorized. Validation results and
+final-head hosted evidence belong in that PR and the focused guide; this appendix
+does not assert checks that have not run.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false

@@ -256,7 +256,8 @@ class ProposedSpellPacketAnalysisPreservationTests(unittest.TestCase):
         self.assertEqual(set(guard.MANA_CONTEXT_DOCUMENT_APPENDICES), set(guard.DOCUMENT_APPENDICES))
         for name, pin in guard.MANA_CONTEXT_DOCUMENT_APPENDICES.items():
             with self.subTest(path=name):
-                raw = (guard.ROOT / name).read_bytes()
+                raw = guard.historical_document_before_mana_behavior_append(
+                    name, (guard.ROOT / name).read_bytes())
                 old = guard.historical_document_before_mana_context_append(name, raw)
                 self.assertEqual(len(raw), pin['baseline_bytes'] + pin['appendix_bytes'])
                 self.assertEqual(hashlib.sha256(old).hexdigest(), pin['baseline_sha256'])
