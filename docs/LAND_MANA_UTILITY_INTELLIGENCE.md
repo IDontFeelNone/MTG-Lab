@@ -503,7 +503,7 @@ using the unchanged owning catalog bound. This changes the demonstration's
 snapshot handling; application report/input bounds and historical modules remain
 unchanged. The successful final demonstration above supersedes that failed attempt.
 
-Final focused regressions passed **48 tests in 36.440s**, with no skips. They
+The pre-publication-correction focused regressions passed **48 tests in 36.440s**, with no skips. They
 cover actual cohort and package admission, complete passage/effect ownership,
 classification and behavior, generic synthetic composition cases, schema and
 identity rejection, private ownership, fresh-evidence drift, CLI agreement and
@@ -520,8 +520,11 @@ test placement was corrected; the seven strengthened synthetic tests then passed
 in 0.301s and are included in the final 48-test run. Earlier five-case synthetic,
 seven-case public-API and three-case CLI passes preceded the final composition
 binding and readable output; they are development evidence, not substitutes for
-the final focused run or complete discovery. No complete local discovery has been
-interrupted or superseded in this milestone.
+the later focused run or complete discovery. The first complete local discovery
+passed 2,798 tests in 2,854.918s with 15 inherited skips and exit 0; it is retained
+as pre-correction evidence. The concrete hosted fixture correction below
+requires new final-head complete local and hosted validation. No local complete
+discovery was interrupted.
 
 The executed synthetic label-independence case changes the fictional subject
 label and surrounding prose while keeping explicit structured premises: the
@@ -531,3 +534,58 @@ classification, conflicting ownership or unsupported kind removes the shared
 effect conclusion. Foreign ownership, borrowed sibling clauses and substituted
 calculations reject. These are separate synthetic calculations; none supplies
 real Card evidence or semantic attestation.
+
+
+## Retained hosted publication failure and finite test correction
+
+The first push workflow at implementation head
+`3c623f22cfdcc1b4c37ef79d3bf5677300c539bb`, run
+[40820600476](https://github.com/IDontFeelNone/MTG-Lab/actions/runs/40820600476),
+completed outer discovery successfully: **2,798 tests / 2,821.240s / OK /
+15 inherited skips**. Its actual nested discovery failed: **2,794 tests /
+2,188.689s / one setup error / 15 inherited skips**. Four authored-reading tests
+could not be instantiated because their setup unconditionally opened the new
+land plan in the disposable publication fixture. The unchanged fixture builder
+intentionally excludes current `data/` paths; that plan is absent and the real
+expanded catalog is incompatible with the fixed land attachment. This was a test
+fixture assumption, not a missing binding in the actual retained main repository.
+
+The publication gate correctly returned `blocked` at validation. Its wrapper
+failed one test in 2,253.368s; no publication or readback success is claimed. The
+recoverable disposable writer commit was
+`ff768c478d39f44d3c93c4496dc922bd71f9b8ea`. Complete decoded job log:
+`/tmp/land-push-job123271923220.log`, **1,390,919 bytes**, SHA-256
+`e08eda27f4228113b71c4ae1ccda71a050b906c52de6f099c56a9218c38ca3de`.
+Receipt: `/tmp/land-push-attempt1-failure-receipt.json`. This is a failed hosted
+attempt, not a passing publication gate. No timeout was changed or old-head job
+rerun. The independently running old-head PR attempt is retained separately in
+the completion report.
+
+The finite correction changes only the new `tests/test_land_authored.py` routing:
+when the actual catalog is intact, all positive authored contract/identity/
+ownership checks remain; absent required data still fails. When the actual
+writer-expanded catalog is incompatible, each of the same four tests freshly
+asserts rejection through the actual public land API before reading absent
+pending inputs. No positive historical catalog or cohort is installed, no test
+is skipped, and runtime admission, publication code, workflows, timeouts and
+required checks are unchanged.
+
+The corrected ordinary authored suite passed **4 tests / 0.325s / no skips**.
+A focused reproduction used the unchanged actual disposable writer preparation:
+**654 Cards / 42.631s**; it confirmed the pending plan is genuinely absent.
+Inside that actual expanded root, `python -m unittest test_land_authored
+test_land_cli -v` passed **7 tests / 2.387s / exit 0 / no skips**. Total focused
+preparation and subprocess time was 45.618s. No full local publication integration
+was run. Log `/tmp/land-publication-focused-correction.log`: 1,336 bytes, SHA-256
+`ed109626889011179d33f01ea540600ae6b62b4a4ab3ee77265d5dd0007a7437`.
+
+Final corrected-head local discovery and both hosted gates must be recorded in
+the same draft PR completion report before delivery. All runtime source modules,
+authored evidence files, policy/result identities and actual demonstration
+outputs are unchanged by this test-only correction.
+
+The complete corrected focused group passed **48 tests / 36.303s / OK /
+no skips**, including actual ordinary-root admission, all nine assessments and
+four comparisons, strict rejection, generic composition, CLI parity and owning-
+contract historical identity/output preservation. The log is
+`/tmp/land-focused-corrected.log`.
