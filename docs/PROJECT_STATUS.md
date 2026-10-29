@@ -1711,3 +1711,43 @@ does not assert checks that have not run.
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+## Bounded land mana and utility intelligence — 2026-10-29
+
+This separately authorized batch adds one finite six-Card/nine-subject land cohort
+on canonical main `121aecc20810c59ad689eaa25f23079305b3605d`, tree
+`562c4074d5523b04d80f54edad829a15071f0b93`. Architecture v13 remains ACTIVE
+APPROVED; Decision 017 remains ACCEPTED; repository-first remains governing.
+Historical appendices and the original seven-subject public surfaces are preserved.
+
+The read-only adapter binds actual retained catalog/mechanical evidence and
+complete authored passages for Snow-Covered Wastes, Rishadan Port, City of Brass,
+Tarnished Citadel, Cabal Coffers and Command Tower. Unchanged classification and
+behavior policies compute conditional results. A separately versioned composition
+uses explicit effect ownership to distinguish same-ability effects from a separate
+trigger. The overview and four comparisons expose costs, output descriptions,
+ownership and unknown external inputs without determining usable mana or a ranking.
+See [the focused guide](LAND_MANA_UTILITY_INTELLIGENCE.md).
+
+The new context reuses exactly 24 retained rule units with its own identity.
+Global coverage stays 104 real CR units / 16 projections. Fresh-source inspection
+and projection allowlists are empty; added source units and projections are zero.
+No TXT, new Card acquisition, parser, game-state engine or gameplay execution is
+introduced. Unknown Swamp count, commander palette, payment and broad 603 remain
+unknown. Retained observations do not establish current Oracle verification.
+
+All new readings and real-Card results remain PENDING_NOT_ESTABLISHED;
+review.status=requires_review; human_attestation=null; canonical_admission=false;
+execution_authority=BLOCKED. Semantic closure remains OPEN; all ten activation
+responsibilities remain OPEN / EXECUTION_BLOCKED. Permission states, Tier A
+non-production restrictions, historical identities and hosted gates are preserved.
+
+Delivery stops at exactly one draft PR for independent PM review and final owner
+approval. Final-head local/hosted validation, measured demonstration and retained
+attempt evidence belong in that PR's completion report. No merge, auto-merge,
+semantic approval or subsequent implementation is authorized.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false
