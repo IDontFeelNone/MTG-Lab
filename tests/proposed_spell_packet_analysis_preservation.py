@@ -14,7 +14,7 @@ NEW_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/analysis.py"})
 
 
 def is_packet_analysis_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS | MANA_REASONING_SOURCE_PATHS | MANA_CONTEXT_SOURCE_PATHS | MANA_CONTEXT_REVIEW_PATHS | MANA_BEHAVIOR_SOURCE_PATHS | LAND_MANA_SOURCE_PATHS
+    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS | MANA_REASONING_SOURCE_PATHS | MANA_CONTEXT_SOURCE_PATHS | MANA_CONTEXT_REVIEW_PATHS | MANA_BEHAVIOR_SOURCE_PATHS | LAND_MANA_SOURCE_PATHS | LAND_DECISION_SOURCE_PATHS
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 43823,
@@ -474,6 +474,45 @@ LAND_MANA_SOURCE_PATHS = frozenset({
     "src/card_rules_pilot/land_cli.py",
 })
 
+# Exact decision-record consumer additions; no ingestion or execution entry point.
+LAND_DECISION_SOURCE_PATHS = frozenset({
+    "src/card_rules_pilot/land_decision.py",
+    "src/card_rules_pilot/land_decision_cli.py",
+})
+
+LAND_DECISION_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 59700,
+               'baseline_sha256': '3b3b27c4e7d2ac02b8978b15aed541c4c412254c9eb4dd2a003cd893e13cf133',
+               'appendix_bytes': 2828,
+               'appendix_sha256': 'e56f6787aa7761fe51bacd531eaa83128620801da59113beca383ba06db8a4cf'},
+ 'PROJECT_INVENTORY.md': {'baseline_bytes': 114529,
+                          'baseline_sha256': 'a12c05983c508cf45a06adec93795e3d80eff5d3f246d9487316a02924cf2f51',
+                          'appendix_bytes': 2828,
+                          'appendix_sha256': 'e56f6787aa7761fe51bacd531eaa83128620801da59113beca383ba06db8a4cf'},
+ 'CHANGELOG.md': {'baseline_bytes': 79956,
+                  'baseline_sha256': 'd646bbbf9c9855706c70eaad71bbdc39b67f2c09b4b09e61c0d80394a205a4da',
+                  'appendix_bytes': 2828,
+                  'appendix_sha256': 'e56f6787aa7761fe51bacd531eaa83128620801da59113beca383ba06db8a4cf'},
+ 'docs/SESSION_STATE.md': {'baseline_bytes': 109512,
+                           'baseline_sha256': '8ceb5c40fed7ae93cbc1db581936ab4415e70fe8a948182e6bd9e18f295b1e0c',
+                           'appendix_bytes': 2823,
+                           'appendix_sha256': '3e633c919ab5b10b025e35370f656c3c8cabbf558af0923f5a47b48509e6c71d'},
+ 'docs/NEXT_TASK.md': {'baseline_bytes': 91747,
+                       'baseline_sha256': 'ec90e9000dff1b2c4489e08abf41714fd6c75324114353518a766e570f4e6e4d',
+                       'appendix_bytes': 2823,
+                       'appendix_sha256': '3e633c919ab5b10b025e35370f656c3c8cabbf558af0923f5a47b48509e6c71d'},
+ 'docs/HANDOFF.md': {'baseline_bytes': 120304,
+                     'baseline_sha256': '664ff44ce71a99cfac343e66baac8496cd17cf352202cb7282fee831675846b1',
+                     'appendix_bytes': 2823,
+                     'appendix_sha256': '3e633c919ab5b10b025e35370f656c3c8cabbf558af0923f5a47b48509e6c71d'},
+ 'docs/ROADMAP.md': {'baseline_bytes': 62412,
+                     'baseline_sha256': '97258df094028bc1f1b32ca8d83f54b0a970a0042ef3de15502555644b5831dd',
+                     'appendix_bytes': 2823,
+                     'appendix_sha256': '3e633c919ab5b10b025e35370f656c3c8cabbf558af0923f5a47b48509e6c71d'},
+ 'docs/PROJECT_STATUS.md': {'baseline_bytes': 133680,
+                            'baseline_sha256': 'ad059fa52fda67fbc92c6e94325dcb77529b1eb0011a9b59f276d92e60f78d6e',
+                            'appendix_bytes': 2823,
+                            'appendix_sha256': '3e633c919ab5b10b025e35370f656c3c8cabbf558af0923f5a47b48509e6c71d'}}
+
 LAND_MANA_DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 57331,
                'baseline_sha256': '088ae16b50f0e735626a8769405274e0d99efe2598a24afe92c0824130e84e4d',
                'appendix_bytes': 2369,
@@ -691,6 +730,23 @@ def historical_mana_reasoning_source_bytes(name, raw):
     return raw
 
 
+def historical_document_before_land_decision_append(path, raw):
+    """Remove only eight pinned suffixes, retaining exact canonical PR #220 bytes."""
+    if (type(path) is not str or path not in LAND_DECISION_DOCUMENT_APPENDICES
+            or type(raw) is not bytes):
+        raise AssertionError("Only named land decision document bytes are adapted")
+    pin = LAND_DECISION_DOCUMENT_APPENDICES[path]
+    size = pin["baseline_bytes"]
+    if len(raw) not in (size, size + pin["appendix_bytes"]):
+        raise AssertionError("Only the exact land decision appendix is permitted")
+    baseline, suffix = raw[:size], raw[size:]
+    if hashlib.sha256(baseline).hexdigest() != pin["baseline_sha256"]:
+        raise AssertionError("PR #220 canonical document changed")
+    if suffix and hashlib.sha256(suffix).hexdigest() != pin["appendix_sha256"]:
+        raise AssertionError("Exact land decision appendix changed")
+    return baseline
+
+
 def historical_document_before_land_mana_append(path, raw):
     """Remove only eight pinned suffixes, retaining exact canonical PR #219 bytes."""
     if (type(path) is not str or path not in LAND_MANA_DOCUMENT_APPENDICES
@@ -698,6 +754,8 @@ def historical_document_before_land_mana_append(path, raw):
         raise AssertionError("Only named land mana document bytes are adapted")
     pin = LAND_MANA_DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        raw = historical_document_before_land_decision_append(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact land mana appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]
