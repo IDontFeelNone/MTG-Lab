@@ -1609,3 +1609,49 @@ semantic approval or subsequent implementation is authorized.
 Future milestone authorized: false
 Future source projection authorized: false
 Future milestone begun: false
+
+
+## Append-only land semantic decision record — 2026-10-31
+
+On canonical main `399016f2f69d709a8a50fd16f94b94432a093524`, tree
+`5db2265fae343400b17ae67dcf461a1266e83e1f`, this separately authorized milestone
+records the owner's explicit approval of exactly the nine existing land candidates
+in collection `sha256:73bbedd05ae01f4869cbf7aeed2c4f5f95d624a7c19a2f31d0bd4a106ac9fc7e`.
+The owner also reported the preceding independent Senior PM recommendation to
+accept all nine. The decision is owner-supplied evidence; no authenticated account,
+signature, decision timestamp or separate human-attestation event is invented.
+
+A separate immutable, versioned record in
+`data/review/land-semantic-decisions/owner-acceptance-v1.json` and its read-only
+current decision view bind exact candidate membership, plan, manifest, retained
+Card evidence, CR context, original limitations and conditional results. Original
+interpretations remain byte-identical with their original requires_review status,
+null historical human attestation and PENDING_NOT_ESTABLISHED label. Historical
+computed reports and the earlier seven-subject cohort are unchanged. The current
+accepted status resolves only through the separately validated owner decision.
+See [the focused guide](LAND_SEMANTIC_DECISION_RECORD.md).
+
+Acceptance covers bounded historical retained-text passages, criterion/method
+readings, classifications, ability/effect ownership, written costs, conditions,
+output dependencies and supported conditional behavior. It establishes no current
+Oracle verification, actual output or payment, game-state legality, trigger event,
+complete stack/priority procedure, executable CardGameplaySemantics or parser.
+Unknown external context remains unknown. Real gameplay execution remains BLOCKED;
+canonical admission remains false. Semantic closure and all ten activation
+responsibilities remain OPEN / EXECUTION_BLOCKED.
+
+Architecture v13 remains ACTIVE APPROVED, Decision 017 ACCEPTED and repository-first
+governing. Source units/projections added: 0/0; global coverage: 104/16; land context:
+24 existing units. No TXT, Card acquisition, Oracle ingestion, automatic classifier,
+simulation or activation is introduced. source_policy_clearance remains not_granted;
+private retention, redistribution, free/commercial service and AI export remain
+NOT_ESTABLISHED. Tier A non-production restrictions and all validation gates remain.
+
+Delivery stops at one draft PR for independent PM review. Exact final-head local
+discovery, hosted discovery/publication/readback results and preservation accounting
+belong in that PR; this appendix does not claim validation that has not run. No
+merge, auto-merge or subsequent milestone is authorized.
+
+Future milestone authorized: false
+Future source projection authorized: false
+Future milestone begun: false
