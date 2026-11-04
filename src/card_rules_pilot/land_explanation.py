@@ -12,6 +12,7 @@ READABLE_LIMIT = 32768
 @dataclass(frozen=True, init=False)
 class LandExplanationConsumer:
     _snapshot: bytes
+    _decision: d.LandDecisionConsumer
 
     @property
     def subject_ids(self): return d.SUBJECT_IDS
@@ -58,6 +59,12 @@ class LandExplanationConsumer:
             subjects=selected, comparison=comparison, detailed=snapshot['detailed'])
         return c.ReviewDocument._verified(c.seal(REPORT_VERSION, value, 'report_id'), limit=REPORT_LIMIT)
 
+    def verify_evidence(self):
+        """Recompute all explanation evidence from its owning accepted consumer."""
+        expected = from_decision(self._decision)
+        c.exact(json.loads(self._snapshot), json.loads(expected._snapshot))
+        return self.check()
+
     def explain_subject(self, sid): return self._report('subject', sid)
     def explain_card(self, name): return self._report('card', name)
     def compare(self, name): return self._report('comparison', name)
@@ -81,7 +88,14 @@ class LandExplanationConsumer:
 
 
 def load_land_explanations(**arguments):
-    accepted = d.load_land_decision(**arguments)
+    return from_decision(d.load_land_decision(**arguments))
+
+
+def from_decision(accepted):
+    """Compose an actually admitted decision; no dictionary admission route."""
+    if type(accepted) is not d.LandDecisionConsumer:
+        raise c.PilotError('admitted land decision consumer required')
+    accepted.verify_evidence()
     overview = accepted.historical_overview().to_dict()
     context = overview['context']
     rows = []
@@ -106,6 +120,7 @@ def load_land_explanations(**arguments):
                 assessment_pointer='/assessments/' + str(len(rows)))))
     raw = c.canonical(overview)
     result = object.__new__(LandExplanationConsumer)
+    object.__setattr__(result, '_decision', accepted)
     object.__setattr__(result, '_snapshot', c.owned(dict(rows=rows, overview=overview,
         detailed=dict(report_id=overview['report_id'], bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest(),
             route='LandExplanationConsumer.detailed(reference)')), limit=1048576))

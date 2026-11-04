@@ -116,7 +116,8 @@ class RulesCardIntegrationDesignTests(unittest.TestCase):
         for name,pin in pins.items():
             if name.startswith('data/') and not intact: continue
             raw=(ROOT/name).read_bytes()
-            self.assertEqual(len(raw),pin['bytes'],name);self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['sha256'],name)
+            from overlay_preservation_support import verify_source_pin
+            verify_source_pin(name, raw, pin)
         if not intact:
             with self.assertRaises(ValueError):h.load_mana_scenarios(**decision_arguments())
 

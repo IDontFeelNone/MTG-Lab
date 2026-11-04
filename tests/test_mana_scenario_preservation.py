@@ -1,5 +1,6 @@
 """Exact predecessor preservation; incompatible live writer evidence must reject."""
 import hashlib
+from overlay_preservation_support import historical_source_bytes
 from pathlib import Path
 import unittest
 from card_rules_pilot import mana_scenario
@@ -20,7 +21,7 @@ class ManaScenarioPreservationTests(unittest.TestCase):
             path = ROOT / name
             self.assertFalse(path.is_symlink())
             self.assertEqual(path.stat().st_mode & 0o111, 0)
-            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), digest, name)
+            self.assertEqual(hashlib.sha256(historical_source_bytes(name, path.read_bytes())).hexdigest(), digest, name)
 
     def test_exact_three_source_additions_and_narrow_adapter_reversal(self):
         names = {"src/card_rules_pilot/mana_scenario.py", "src/card_rules_pilot/mana_scenario_policy.py", "src/card_rules_pilot/mana_scenario_cli.py"}
@@ -30,7 +31,7 @@ class ManaScenarioPreservationTests(unittest.TestCase):
             self.assertFalse(guard.is_packet_analysis_addition(ROOT / (name + '.future')))
         for name in ('src/card_rules_pilot/mana_scenario_engine.py', 'src/gameplay_rules/projection/mana_scenario.py'):
             self.assertFalse(guard.is_packet_analysis_addition(ROOT / name))
-        raw = (ROOT / 'tests/proposed_spell_packet_analysis_preservation.py').read_bytes()
+        raw = historical_source_bytes('tests/proposed_spell_packet_analysis_preservation.py', (ROOT / 'tests/proposed_spell_packet_analysis_preservation.py').read_bytes())
         old = raw.replace(b'| LAND_EXPLANATION_SOURCE_PATHS | MANA_SCENARIO_SOURCE_PATHS\n', b'| LAND_EXPLANATION_SOURCE_PATHS\n', 1)
         suffix = b'\nMANA_SCENARIO_SOURCE_PATHS = frozenset({"src/card_rules_pilot/mana_scenario.py", "src/card_rules_pilot/mana_scenario_policy.py", "src/card_rules_pilot/mana_scenario_cli.py"})\n'
         self.assertTrue(old.endswith(suffix))

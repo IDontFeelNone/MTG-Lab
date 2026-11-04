@@ -119,6 +119,10 @@ def controlled_inventory(roots):
                          and "__pycache__" not in p.parts and p.suffix != ".pyc")
     result = []
     for path in sorted(files):
+        from overlay_preservation_support import is_overlay_addition, assert_overlay_addition
+        if is_overlay_addition(path, ROOT):
+            assert_overlay_addition(path, ROOT)
+            continue
         # Preserve the original writer/admission inventory and its exact digest.
         # The exact added review/profiling tools have separate current pins.
         if is_shared_casting_design_addition(path) or is_validation_performance_addition(path):

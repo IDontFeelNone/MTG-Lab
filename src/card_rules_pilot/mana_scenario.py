@@ -93,8 +93,14 @@ class ManaScenarioConsumer:
 def load_mana_scenarios(**arguments):
     # Actual explanation consumer invokes actual decision and original evidence
     # admission once. Neither pending dictionaries nor hypothetical inputs admit.
-    explanations = e.load_land_explanations(**arguments)
-    detail = explanations.check().to_dict()['detailed']
+    return from_explanations(e.load_land_explanations(**arguments))
+
+
+def from_explanations(explanations):
+    """Reuse an actually admitted, privately owned explanation batch."""
+    if type(explanations) is not e.LandExplanationConsumer:
+        raise c.PilotError('admitted land explanation consumer required')
+    detail = explanations.verify_evidence().to_dict()['detailed']
     overview = explanations.detailed(detail).to_dict()
     subjects = {}
     candidates = overview['context']['interpretations']['candidates']

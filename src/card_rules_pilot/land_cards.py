@@ -56,7 +56,8 @@ SUBJECTS = (
 
 
 def read_cards(*, catalog_root: Path, mechanical_root: Path,
-               expected_profile_id: str, expected_query_snapshot_id: str) -> dict:
+               expected_profile_id: str, expected_query_snapshot_id: str,
+               mechanical_reader=None) -> dict:
     """Verify current independent roots once, then bind privately owned evidence.
 
     ``mechanical_root`` is the evidence repository root (its ``data`` child is
@@ -70,10 +71,22 @@ def read_cards(*, catalog_root: Path, mechanical_root: Path,
     attachment = attach_legacy_compatibility(
         catalog_root, control_path="config/catalog_profiles/legacy-public-tier-a.json",
         game="magic", expected_profile_id=expected_profile_id)
-    mechanical = MechanicalCardIntelligence.from_attachment(
-        attachment, data_root=mechanical_root / "data",
-        source_directory=mechanical_root / "data/market/acquisitions" / ACQUISITION,
-        expected_query_snapshot_id=expected_query_snapshot_id)
+    if mechanical_reader is None:
+        mechanical = MechanicalCardIntelligence.from_attachment(
+            attachment, data_root=mechanical_root / "data",
+            source_directory=mechanical_root / "data/market/acquisitions" / ACQUISITION,
+            expected_query_snapshot_id=expected_query_snapshot_id)
+    else:
+        # Public batch-composition seam. Revalidate both selected roots; never
+        # accept a dossier dictionary, stale reader, or unbound legacy reader.
+        mechanical = mechanical_reader
+        if type(mechanical) is not MechanicalCardIntelligence:
+            raise CardBindingError("actual attached mechanical reader required")
+        mechanical.verify_inputs()
+        if (mechanical.data_root != (mechanical_root / "data").resolve()
+                or mechanical.catalog_binding != attachment.binding
+                or mechanical.query.snapshot().snapshot_id != expected_query_snapshot_id):
+            raise CardBindingError("shared mechanical reader binding mismatch")
     # MCI has executed its real manifest, file and report checks. These are
     # independent fixed land expectations, additional to manifest consistency.
     source = json.loads(json.dumps(mechanical.source))
