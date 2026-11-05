@@ -14,7 +14,7 @@ NEW_SOURCE_PATHS = frozenset({"src/proposed_spell_packets/analysis.py"})
 
 
 def is_packet_analysis_addition(path, root=ROOT):
-    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS | MANA_REASONING_SOURCE_PATHS | MANA_CONTEXT_SOURCE_PATHS | MANA_CONTEXT_REVIEW_PATHS | MANA_BEHAVIOR_SOURCE_PATHS | LAND_MANA_SOURCE_PATHS | LAND_DECISION_SOURCE_PATHS | LAND_EXPLANATION_SOURCE_PATHS | MANA_SCENARIO_SOURCE_PATHS | LAND_OVERLAY_SOURCE_PATHS | STRATEGIC_REQUIREMENTS_SOURCE_PATHS
+    return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | CONDITIONAL_SOURCE_PATHS | SENSITIVITY_SOURCE_PATHS | ALTERNATIVES_SOURCE_PATHS | COMPOUND_SOURCE_PATHS | CARD_RULES_PILOT_SOURCE_PATHS | MANA_REASONING_SOURCE_PATHS | MANA_CONTEXT_SOURCE_PATHS | MANA_CONTEXT_REVIEW_PATHS | MANA_BEHAVIOR_SOURCE_PATHS | LAND_MANA_SOURCE_PATHS | LAND_DECISION_SOURCE_PATHS | LAND_EXPLANATION_SOURCE_PATHS | MANA_SCENARIO_SOURCE_PATHS | LAND_OVERLAY_SOURCE_PATHS | STRATEGIC_REQUIREMENTS_SOURCE_PATHS | CONTEXT_REVIEW_SOURCE_PATHS
 
 
 DOCUMENT_APPENDICES = {'README.md': {'baseline_bytes': 43823,
@@ -1202,3 +1202,5 @@ MANA_SCENARIO_SOURCE_PATHS = frozenset({"src/card_rules_pilot/mana_scenario.py",
 LAND_OVERLAY_SOURCE_PATHS = frozenset({"src/card_intelligence/land_overlay.py", "src/card_intelligence/land_overlay_cli.py", "src/projection/historical_evidence.py"})
 
 STRATEGIC_REQUIREMENTS_SOURCE_PATHS = frozenset(('src/card_intelligence/strategic_context.py', 'src/card_intelligence/strategic_requirements_policy.py', 'src/card_intelligence/strategic_requirements.py', 'src/card_intelligence/strategic_requirements_cli.py'))
+
+CONTEXT_REVIEW_SOURCE_PATHS = frozenset(('src/card_intelligence/context_review_input.py', 'src/card_intelligence/context_review.py', 'src/card_intelligence/context_review_cli.py'))

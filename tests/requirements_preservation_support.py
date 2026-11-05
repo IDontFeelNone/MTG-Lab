@@ -32,6 +32,8 @@ def _pin(raw):
 
 def preceding_bytes(name, raw):
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
+    from context_review_preservation_support import preceding_bytes as review_preceding
+    raw = review_preceding(name, raw)
     if name not in PINS:return raw
     pin=PINS[name]
     if _pin(raw)==pin['old']:return raw
@@ -47,10 +49,14 @@ def preceding_bytes(name, raw):
 
 
 def is_requirements_addition(path, root):
+    from context_review_preservation_support import is_review_addition
+    if is_review_addition(path, root): return True
     return path.relative_to(root).as_posix() in ADDITIONS
 
 
 def assert_requirements_addition(path, root):
+    from context_review_preservation_support import is_review_addition, assert_review_addition
+    if is_review_addition(path, root): return assert_review_addition(path, root)
     name=path.relative_to(root).as_posix()
     if name not in ADDITIONS or path.is_symlink() or path.stat().st_mode & 0o111:
         raise AssertionError('unsupported requirements source path/mode')
