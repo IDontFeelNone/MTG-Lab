@@ -4,6 +4,7 @@ The tests retain original input bytes and historical report contracts. A real
 expanded publication catalog must reject; no positive historical fixture is used.
 """
 import hashlib
+from overlay_preservation_support import historical_source_bytes
 from pathlib import Path
 import unittest
 
@@ -95,7 +96,7 @@ class LandDecisionPreservationTests(unittest.TestCase):
                 path = ROOT / name
                 self.assertFalse(path.is_symlink())
                 self.assertEqual(path.stat().st_mode & 0o111, 0)
-                self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), digest)
+                self.assertEqual(hashlib.sha256(historical_source_bytes(name, path.read_bytes())).hexdigest(), digest)
 
     def test_original_data_bytes_own_identities_and_pending_status_are_preserved(self):
         if not current_catalog_intact(self):

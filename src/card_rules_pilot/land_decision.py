@@ -184,6 +184,11 @@ class LandDecisionConsumer:
         c.exact(value, expected, limit=DECISION_LIMIT)
         return c.ReviewDocument._verified(expected, limit=DECISION_LIMIT)
 
+    def verify_evidence(self):
+        """Reproduce the exact decision and original evidence for composition."""
+        self.validate_record(json.loads(self._decision))
+        return self.check()
+
     def historical_overview(self):
         """The original report retains its original pending authority and bytes."""
         return c.ReviewDocument._verified(json.loads(self._overview), limit=1_048_576)
@@ -268,7 +273,7 @@ class LandDecisionConsumer:
 
 def load_land_decision(*, catalog_root, mechanical_root, review_root, cohort_root,
         decision_root, expected_profile_id, expected_query_snapshot_id,
-        expected_plan_id, expected_decision_id):
+        expected_plan_id, expected_decision_id, mechanical_reader=None):
     """One actual public land admission, then this fixed immutable decision.
 
     Incompatible current catalogs reject. Neither a historical fixture nor an
@@ -280,7 +285,7 @@ def load_land_decision(*, catalog_root, mechanical_root, review_root, cohort_roo
         review_root=review_root, cohort_root=cohort_root,
         expected_profile_id=expected_profile_id,
         expected_query_snapshot_id=expected_query_snapshot_id,
-        expected_plan_id=expected_plan_id)
+        expected_plan_id=expected_plan_id, mechanical_reader=mechanical_reader)
     overview = lands.overview()
     _verify_original(overview.to_dict())
     root = Path(decision_root)

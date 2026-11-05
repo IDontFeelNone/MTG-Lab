@@ -174,10 +174,11 @@ class LandConsumer:
 
 
 def load_lands(*, catalog_root, mechanical_root, review_root, cohort_root,
-               expected_profile_id, expected_query_snapshot_id, expected_plan_id):
+               expected_profile_id, expected_query_snapshot_id, expected_plan_id, mechanical_reader=None):
     """Fresh fail-closed public admission; no report store or fallback fixture."""
     evidence = land_cards.read_cards(catalog_root=catalog_root, mechanical_root=mechanical_root,
-        expected_profile_id=expected_profile_id, expected_query_snapshot_id=expected_query_snapshot_id)
+        expected_profile_id=expected_profile_id, expected_query_snapshot_id=expected_query_snapshot_id,
+        mechanical_reader=mechanical_reader)
     context = land_context.read_context(review_root)
     plan = land_authored.build_plan(evidence)
     interpretations = land_authored.build_interpretations(evidence, context)
