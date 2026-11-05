@@ -278,3 +278,25 @@ def assert_overlay_addition(path, root):
     raw = path.read_bytes()
     if dict(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest()) != OVERLAY_ADDITIONS[name]:
         raise AssertionError('exact overlay source bytes required')
+
+# Exact requirements-only successor: original overlay/source pins stay intact.
+_before_requirements_historical = historical_source_bytes
+_before_requirements_addition = is_overlay_addition
+_before_requirements_assertion = assert_overlay_addition
+
+
+def historical_source_bytes(name, raw):
+    from requirements_preservation_support import preceding_bytes
+    return _before_requirements_historical(name, preceding_bytes(name, raw))
+
+
+def is_overlay_addition(path, root):
+    from requirements_preservation_support import is_requirements_addition
+    return is_requirements_addition(path, root) or _before_requirements_addition(path, root)
+
+
+def assert_overlay_addition(path, root):
+    from requirements_preservation_support import is_requirements_addition, assert_requirements_addition
+    if is_requirements_addition(path, root):
+        return assert_requirements_addition(path, root)
+    return _before_requirements_assertion(path, root)
