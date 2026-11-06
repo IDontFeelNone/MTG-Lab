@@ -259,6 +259,16 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
         pins={v['path']:v for v in binding['files']};intact=current_catalog_intact(self)
         for name,pin in pins.items():
             if name=='data/canonical/state.json' and not intact:continue  # exact actual writer shape already verified by the inherited guard
+            path=ROOT/name
+            if (not intact and name=='data/review/land-semantic-decisions/owner-acceptance-v1.json'
+                    and not path.exists()):
+                # The real publication fixture deliberately copies no data/
+                # history. Never install a positive source to satisfy this pin.
+                # Missing historical authority must reject actual admission.
+                with self.assertRaises(review.ContextReviewError) as caught:
+                    review.load_context_evidence_review(**decision_arguments())
+                self.assertEqual(caught.exception.code,'EVIDENCE_ADMISSION_REJECTED')
+                continue
             path=ROOT/name;raw=path.read_bytes();self.assertEqual(len(raw),pin['bytes']);self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['sha256'])
         for subsystem in document('inventory.json')['subsystems']:
             self.assertTrue(subsystem['implemented']);self.assertTrue(subsystem['authority_boundary']);self.assertTrue(subsystem['missing_or_blocked'])
