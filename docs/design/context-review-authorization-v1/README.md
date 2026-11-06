@@ -187,7 +187,7 @@ No online source acquisition or provider integration is authorized now.
 | Claim selector | `context-evidence-review-claim-selector-proposal-v1`: exact packet/candidate, finite JSON pointer, value digest, scope digest and bounded proposition about the retained declaration. |
 | Authorization | `context-evidence-review-authorization-proposal-v1`: principal, role/action, exact scope, issuer/root provenance, effective interval and issuance/revocation references. |
 | Review body | `context-evidence-review-record-proposal-v1`: original packet digest, exact candidates/claims/submission/content identities, requirement IDs, claimed versus independently verified source refs, reviewer/grant, assessment, findings/counterevidence, disposition, conditions, provenance and predecessor identities. |
-| External event | `context-evidence-review-attestation-proposal-v1`: body ID, grant, principal, action, scope digest, unique request nonce, signed-payload digest and independent signature/time/issuer/revocation evidence references. |
+| External event | `context-evidence-review-attestation-proposal-v1`: explicit audience and verification-policy-proposal ID, body ID, grant, principal, action, scope digest, unique request nonce, signed-payload digest and independent signature/time/issuer/revocation evidence references. |
 | Authority revocation | `context-evidence-review-authority-revocation-proposal-v1`: exact grant, independently authorized issuer, effective versus recorded time, prospective/retrospective effect, reason and prior revocation reference. |
 | Future projection | `context-evidence-review-current-status-proposal-v1`: exact admitted input-set/lineage and verification-policy identities, explicit trusted evaluation time and separate historical/current statuses. **Not implemented.** |
 
@@ -202,6 +202,12 @@ Card abilities or new semantic interpretations.
 
 A review body has no embedded signature over itself, avoiding circular IDs.
 The external event binds its independently computed body ID and exact scope;
+its explicit audience is `mtglab:context-evidence-review:variable-output:v1`,
+and its `verification_policy_proposal_id` names the exact `design.json` policy
+proposal identity. Both fields participate in the signed-payload digest and
+event ID. That policy proposal is still design-only, not an approved runtime
+verification policy or a source of actual authentication. A future operational
+version needs a separately approved policy/trust snapshot and verifier.
 the grant does not depend on the later review ID. The attestation body also has
 its own separate domain identity. Rehashing a body invalidates an old event's
 binding; rehashing every document still cannot manufacture the independent

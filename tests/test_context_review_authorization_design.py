@@ -15,7 +15,7 @@ from test_land_decision import decision_arguments
 
 PACKAGE=ROOT/'docs/design/context-review-authorization-v1'
 DOMAIN='context-evidence-review-authorization-design-v1'
-EXPECTED_PACKAGE_ID='sha256:9003aba185b3c31f97306f96831cb34b84710958ebcf1643ba4eb1dc0e184872'
+EXPECTED_PACKAGE_ID='sha256:7431c2c7a4197a0d1b1d2024482b068688171a19a7d55622690f25e3903a1291'
 FILES={'README.md','inventory.json','source-bindings.json','contracts.schema.json','design.json','examples.json','runtime-preservation.json'}
 BASE='cd5c15b9238cd051ecbb7e164ba2cdac744ae03c'
 TREE='98177d19fbd09f4c692f5de590c850a9bb9a7e7a'
@@ -228,11 +228,16 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
         # A valid illustrative calendar interval still establishes no trusted time.
         self.assertLess(grant['effective_period']['not_before'],record['claimed_decision_time'])
         self.assertLess(record['claimed_decision_time'],grant['effective_period']['not_after'])
-        payload=dict(domain='context-evidence-review-event-signing-payload-proposal-v1',record_id=record['record_id'],authorization_id=grant['grant_id'],principal=event['principal'],action=record['requested_action'],scope_digest='sha256:'+hashlib.sha256(c.canonical(record['scope'])).hexdigest(),packet_id=record['packet_id'],claim_ids=sorted(v['claim_id'] for v in record['claims']),nonce=event['request_nonce'])
+        self.assertEqual(event['audience'],'mtglab:context-evidence-review:variable-output:v1')
+        self.assertEqual(event['verification_policy_proposal_id'],document('design.json')['design_id'])
+        payload=dict(domain='context-evidence-review-event-signing-payload-proposal-v1',audience=event['audience'],verification_policy_proposal_id=event['verification_policy_proposal_id'],record_id=record['record_id'],authorization_id=grant['grant_id'],principal=event['principal'],action=record['requested_action'],scope_digest='sha256:'+hashlib.sha256(c.canonical(record['scope'])).hexdigest(),packet_id=record['packet_id'],claim_ids=sorted(v['claim_id'] for v in record['claims']),nonce=event['request_nonce'])
         self.assertEqual(event['signed_payload_digest'],'sha256:'+hashlib.sha256(c.canonical(payload)).hexdigest())
         for field in ('signature_evidence_ref','trusted_timestamp_evidence_ref','issuer_trust_evidence_ref','revocation_snapshot_ref'):self.assertIsNone(event[field])
         changed=deepcopy(payload);changed['nonce']='illustrative:different-event'
         self.assertNotEqual(event['signed_payload_digest'],'sha256:'+hashlib.sha256(c.canonical(changed)).hexdigest())
+        for field in ('audience','verification_policy_proposal_id'):
+            changed=deepcopy(payload);changed[field]='illustrative:foreign-binding'
+            self.assertNotEqual(event['signed_payload_digest'],'sha256:'+hashlib.sha256(c.canonical(changed)).hexdigest())
         self.assertIn('NO_ACTUAL_SIGNATURE_OR_TRUSTED_TIMESTAMP',example['expected_boundary_findings'])
 
     def test_revocation_expiry_conflict_and_source_unavailability_remain_separate(self):
