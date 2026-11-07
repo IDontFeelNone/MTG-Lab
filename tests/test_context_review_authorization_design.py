@@ -15,7 +15,7 @@ from test_land_decision import decision_arguments
 
 PACKAGE=ROOT/'docs/design/context-review-authorization-v1'
 DOMAIN='context-evidence-review-authorization-design-v1'
-EXPECTED_PACKAGE_ID='sha256:7431c2c7a4197a0d1b1d2024482b068688171a19a7d55622690f25e3903a1291'
+EXPECTED_PACKAGE_ID='sha256:545d1f29d33776505bad2c9d90fa68b8bb83e22c2fed42a2fa3cd99bebff4292'
 FILES={'README.md','inventory.json','source-bindings.json','contracts.schema.json','design.json','examples.json','runtime-preservation.json'}
 BASE='cd5c15b9238cd051ecbb7e164ba2cdac744ae03c'
 TREE='98177d19fbd09f4c692f5de590c850a9bb9a7e7a'
@@ -303,6 +303,43 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
             path=ROOT/pin['path'];raw=path.read_bytes();self.assertFalse(path.is_symlink())
             self.assertEqual(len(raw),pin['bytes']);self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['sha256'])
             self.assertEqual(bool(path.stat().st_mode&0o111),pin['mode']=='100755')
+
+    def test_audit_reuse_history_and_delivery_priority_are_bound_without_authorization(self):
+        inventory=document('inventory.json');binding=document('source-bindings.json');manifest=verify(blobs())
+        self.assertEqual(manifest['supersedes_package_id'],'sha256:7431c2c7a4197a0d1b1d2024482b068688171a19a7d55622690f25e3903a1291')
+        self.assertEqual(manifest['prior_draft_head'],'15914174f718a11d2bab97491c6ebd5716bc63ab')
+        self.assertNotEqual(manifest['package_id'],manifest['supersedes_package_id'])
+        rows={v['subsystem_id']:v for v in inventory['subsystems']}
+        product=rows['product-packet-human-attestation']
+        self.assertEqual(product['owning_files'],['src/product_intelligence/evidence_packet.py'])
+        self.assertEqual(product['public_contracts'],['EvidencePacketEligibility','EvidencePacketReview','review_evidence_packet','require_ready_evidence_review'])
+        pins={v['path']:v for v in binding['files']}
+        self.assertIn(product['owning_files'][0],pins)
+        self.assertIn('src/schemas/v1/fixed-content-acquisition-evidence-review-v2.schema.json',pins)
+        self.assertIn('not independently verified reviewer authentication',product['authority_boundary'])
+        matrix=inventory['reuse_separation_matrix']
+        self.assertEqual({v['subsystem_id'] for v in matrix},{'host-admission-boundary','collection-history','product-packet-human-attestation','deterministic-handoff-review','context-review-proposal'})
+        for row in matrix:
+            self.assertEqual(set(row),{'subsystem_id','reusable_behaviors','trust_assumption','non_transferable_authority'})
+            self.assertTrue(row['reusable_behaviors']);self.assertTrue(row['trust_assumption']);self.assertTrue(row['non_transferable_authority'])
+        # Independently pinned source-inspection receipts, not a live authority
+        # or history service. The actual writer fixture has no ancestral Git
+        # objects; no substitute source/authorization is installed there.
+        history=binding['historical_contracts']
+        self.assertEqual(hashlib.sha256(c.canonical(history)).hexdigest(),'dfda301b1a5f9ca1629751b09ce97afb6da523e1f6ef9ef0ecdccf0a5e3d9379')
+        self.assertEqual(len(history),6)
+        self.assertEqual({v['commit'] for v in history},set(inventory['historical_comparison']['commits']))
+        self.assertEqual({v['phase'] for v in history},{'117','117A','118'})
+        for row in history:
+            self.assertEqual(set(row),{'phase','commit','path','git_blob','bytes','sha256','mode','contract_symbols','historical_only'})
+            self.assertIs(row['historical_only'],True);self.assertGreater(row['bytes'],0)
+        priority=inventory['delivery_priority']
+        self.assertEqual(priority,dict(status='DEFERRED_PENDING_OWNER_APPROVED_PRODUCT_DELIVERY_PRIORITY',technical_ranking_only=True,review_lineage_inspector_authorized=False,authentication_implementation_authorized=False,future_milestone_begun=False))
+        readme=(PACKAGE/'README.md').read_text()
+        self.assertIn('deferred pending an owner-approved product-delivery',readme)
+        self.assertIn("but does not depend on the new review record's later-computed ID",readme)
+        self.assertNotIn('version needs a separately approved policy/trust snapshot and verifier.\nthe grant',readme)
+        for row in history:self.assertIn(row['commit'],readme)
 
     def test_exact_one_future_recommendation_and_no_runtime_or_authority_promotion(self):
         design=document('design.json');manifest=verify(blobs());examples=document('examples.json')

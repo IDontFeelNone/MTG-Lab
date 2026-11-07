@@ -11,6 +11,10 @@ It implements no login, approval command, evidence promotion, persistent review
 store, signature verifier, authorization service or current-status projection.
 No governing architecture or owner semantic decision is changed.
 
+This design authorizes neither the review-lineage inspector nor any authentication
+implementation. Both remain deferred pending an owner-approved product-delivery
+priority decision; a technical option ranking is not implementation authorization.
+
 Canonical base: `cd5c15b9238cd051ecbb7e164ba2cdac744ae03c`, tree
 `98177d19fbd09f4c692f5de590c850a9bb9a7e7a`. GitHub main and merged PR #227
 were independently verified. Its ordered parents are
@@ -20,6 +24,19 @@ with the exact signed canonical commit before creating
 `codex/reviewer-authorization-design-v1`. No AGENTS.md was present in the
 repository or its workspace/root ancestors. Architecture v13 ACTIVE APPROVED,
 Decision 017 ACCEPTED and repository-first governance remain binding.
+
+### Bounded audit correction and identity succession
+
+The prior draft package at head
+`15914174f718a11d2bab97491c6ebd5716bc63ab` had identity
+`sha256:7431c2c7a4197a0d1b1d2024482b068688171a19a7d55622690f25e3903a1291`.
+It remains in Git history. This audit correction updates the owning-contract
+inventory, historical source bindings, reuse rationale and documentation only,
+with directly necessary design-consistency tests. Its new content identity is
+recorded in `manifest.json`; it is not the previously reviewed draft package.
+The proposal schema, decision model, twelve illustrative records, original packet
+IDs and complete runtime/workflow inventory remain unchanged. No baseline defect
+in deck allocation or generic evidence-review validation is repaired here.
 
 ## Package and owning evidence
 
@@ -98,6 +115,7 @@ machine-readable package; no source identity is inferred from a Card name.
 | `AdmissionReviewBoundary` / `AdmissionDecision` | Trusted-host capability protocol; the host must supply authentication and access control. The module explicitly implements no authentication service. Untrusted input cannot select the capability. |
 | `IsolatedAdmissionTestBoundary` | Nonserialized, lifetime/root-bound disposable test capability. Its simulated approval cannot be retained or transplanted as contextual authority. |
 | Collection assessment history | Snapshot/claim correspondence, explicit predecessor/supersedes, exclusive append and readback patterns. Trusted-caller and review-label assumptions are collection-specific; no contextual principal verifier. Writers are inspected, not invoked. |
+| Product evidence packet human review | `EvidencePacketEligibility`, `EvidencePacketReview`, `review_evidence_packet` and `require_ready_evidence_review` separate automated eligibility from explicit caller-supplied human attestation; they bind exact packet identity and the reviewed freshness window. The trusted caller owns authentication and the durable review reference. A supplied reviewer name, `human_approved` flag or READY result is not independently verified reviewer authentication or contextual authority. |
 | Evidence handoff / production candidate review | Deterministic integrity/completeness/conflict checks; production candidate review is explicitly signature-free. Software review is not a human-review event. |
 | Rules artifact correspondence | Explicit owner-origin/reviewer annotations with cryptographic authentication and source permission unestablished. A source-correspondence annotation does not authenticate a contextual reviewer. |
 | Reviewed usage/demand readers | Scope-bound market-fact readers, not a transferable reviewer-identity provider or evidence of Card strength. No market fact is added here. |
@@ -110,6 +128,57 @@ This is not a claim about undisclosed external services. The GitHub connector
 used for repository work authenticates repository operations; it does not
 authenticate the hypothetical reviewer events in this design. Existing patterns
 from other subsystems are not automatically authorized for contextual evidence.
+
+### Reuse versus separation
+
+| Existing boundary | Reusable mechanics | Trust assumption and authority that cannot transfer |
+|---|---|---|
+| Production admission: `AdmissionReviewBoundary`, `AdmissionDecision`, `AutomaticCanonicalUpdate._authorization` | Trusted-host capability injection; exact operation/reviewer/evidence bindings; repeat integrity and authorization checks on resumed writes. | The host supplies authentication/access control. An existing `canonical-admission` decision, serialized receipt or isolated test capability cannot authorize contextual review. Reusing the architectural capability pattern requires separately authorized contextual actions and exact claim scope. |
+| Collection: `CollectionAssessment._review`, `validate_assessment_history`, repository `append` | Source/snapshot correspondence, immutable predecessors, identical replay and exclusive append patterns. | `trusted_human_review` is a trusted-caller assertion, not an authenticated principal. Collection history rejects forks; contextual review must retain incompatible individually valid branches and abstain. Collection approval cannot approve contextual claims. |
+| Product packet: `review_evidence_packet`, `require_ready_evidence_review` | Separate eligibility/attestation; exact packet and as-of/freshness binding; recompute eligibility before stronger use. | The caller supplies human attestation; the module neither authenticates the reviewer nor signs/publishes review. READY_FOR_EVALUATION is bounded Product evidence eligibility plus attestation, not contextual factual acceptance, permission or Card semantics. |
+| Generic evidence: `review_handoff` | Integrity, declared-reference coverage, duplicate detection and contradiction findings, subject to each owning input contract. | Software findings and Ready for verification are neither human authentication nor factual/source approval. Context review needs its own exact scope, authority and non-promotion boundaries; generic labels cannot supply them. |
+| Contextual reviewer proposals in this package | Reuse those mechanical patterns through owning public contracts rather than a parallel evidence pipeline. | Claim-scoped authorization, review-event proof, revocation and historical/current-use separation are proposed only. No provider, trusted issuer, approval command or operational projection exists. |
+
+The machine-readable inventory records the same five boundaries. This is an
+architectural reuse analysis, not a new shared runtime abstraction or a grant of
+authority. Whether a separately authorized trusted host can satisfy contextual
+review requirements, and which issuer, event proof, time and revocation evidence
+it would use, remain unresolved. No separate authentication service is mandated
+or implemented by this correction. Caller trust flags are never silently upgraded
+to independently verified contextual reviewer authority.
+
+### Historical authorization loop: Phase 117, 117A and 118
+
+These exact commits are ancestors of canonical main; `source-bindings.json`
+records the inspected historical contract paths, Git blobs, byte lengths and raw
+digests. These are historical source references, not retained authorizations.
+
+| Historical change | Exact repository commit and affected contracts | Responsibility and limit |
+|---|---|---|
+| Phase 117 implementation | [`2d072b883c5a6f3c1b16c11d652e62f6d7756f6a`](https://github.com/IDontFeelNone/MTG-Lab/commit/2d072b883c5a6f3c1b16c11d652e62f6d7756f6a): `src/production_evidence/operator_authorization.py` (`verify_review_chain`, `build_signature_request`, `record_authorization`); `scripts/authorize_mb2_batch.py`; Phase 117 request/contract artifacts. | Reconstructed the exact Phase 115/116 MB2 batch evidence, pinned candidate and canonical pre-state digests, validated supplied operator fields and recorded one immutable non-promoting authorization with identical replay/conflict checks. Input syntax and checksums did not independently authenticate the operator. |
+| Phase 117A workflow/persistence | [`83ba0c2157b5771562d330dfc97cd691fd04cfbe`](https://github.com/IDontFeelNone/MTG-Lab/commit/83ba0c2157b5771562d330dfc97cd691fd04cfbe): `.github/workflows/mb2-operator-authorization.yml`, `scripts/mb2_authorization_persistence.py`, updated `operator_authorization.py` including `verify_authorization_artifact`. | Added manual workflow dispatch, dry run, exact batch/branch checks, authorization-only persistence and readback. Operator identity/role were submitted input strings, not bound by that workflow to `github.actor`; its artifact verifier established content/lineage correspondence, not cryptographic principal authentication. No actual authenticated review event is asserted here. |
+| Phase 118 removal | [`55ac1563e82651d03759f94f44de3124e81afd58`](https://github.com/IDontFeelNone/MTG-Lab/commit/55ac1563e82651d03759f94f44de3124e81afd58): removed the authorization module, both persistence/authorization scripts, workflow, active Phase 117 artifacts and tests; added `src/production_evidence/promotion_readiness.py` (`evaluate_review_gate`, `build_promotion_plan`). | Operator signatures ceased to be prerequisites for that trusted-source MB2 promotion. Trusted-source validation, normal PR review and green CI supplied oversight; promotion remained separately invoked, bounded, audited and rollback capable. The contemporaneous `docs/PROJECT_STATUS.md` states this replacement explicitly. |
+
+**Historically repeated mechanics:** exact evidence/subject membership, canonical
+content identities, immutable non-promoting records, independently reconstructed
+content/lineage correspondence, identical replay and conflicting-byte rejection.
+These are precedents to reuse, not new authentication capabilities to rebuild.
+
+**Genuinely new contextual requirements:** dispositions over exact submitted
+claims rather than an entire trusted-provider promotion batch; explicit reviewer
+action/claim/deck-version scope; independently verified authority at event time;
+issuer/grant expiration and revocation; corrected-submission and review lineage;
+retaining incompatible valid reviews; and historical-event validity separated
+from current-use eligibility. Existing personal-assessment and product-attestation
+states do not establish these stronger properties.
+
+Phase 118's removal is not a universal prohibition on contextual review, and it
+does not authenticate arbitrary owner-supplied material. Conversely, unverified
+context does not justify automatically reinstating the abandoned operator gate
+or requiring authorization-only branches, signature artifacts or an identity
+service for unrelated product delivery. The product need and operational trust
+mechanism require an explicit owner-approved delivery-priority decision. This
+design records those unresolved choices; it cannot satisfy or authorize them.
 
 ## Nine separate authority layers
 
@@ -208,8 +277,10 @@ proposal identity. Both fields participate in the signed-payload digest and
 event ID. That policy proposal is still design-only, not an approved runtime
 verification policy or a source of actual authentication. A future operational
 version needs a separately approved policy/trust snapshot and verifier.
-the grant does not depend on the later review ID. The attestation body also has
-its own separate domain identity. Rehashing a body invalidates an old event's
+The grant binds the explicit scope, including affected predecessor review IDs,
+but does not depend on the new review record's later-computed ID. The external
+attestation binds both the grant ID and that new review-record ID and has its
+own separate domain identity. Rehashing a body invalidates an old event's
 binding; rehashing every document still cannot manufacture the independent
 signer, trusted time, issuer authority or externally pinned original submission.
 
@@ -387,7 +458,9 @@ imported through the existing packet contract as an approved review decision.
 
 ## Future options and exactly one recommendation
 
-Engineering ranking concerns implementation readiness, not Card power:
+Engineering ranking concerns implementation readiness, not Card power or the
+owner's product-delivery priority. All options remain deferred pending an
+owner-approved product-delivery priority decision:
 
 | Rank | Next option | User value / reuse / testability | Authority risk / complexity / prerequisites |
 |---|---|---|---|
@@ -404,6 +477,11 @@ ingestion, operational current-status projection, evidence/permission promotion,
 strategic evaluation and gameplay. This gives independently testable visibility
 before any review authority can be consumed. The tests in this design PR only
 verify this one frozen package; they are not that general runtime inspector.
+
+That conditional technical preference neither schedules nor authorizes the next
+review-lineage inspector or any authentication implementation. Both remain
+deferred pending an owner-approved product-delivery priority decision. No future
+implementation begins through acceptance of this design or its audit correction.
 
 ## Verification, preservation and stop
 
