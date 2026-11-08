@@ -1,4 +1,7 @@
-"""Exact finite review-packet preservation adapter; no evidence exemptions."""
+"""Exact finite review-packet preservation adapter; no evidence exemptions.
+
+The collection regression adapter reverses only its pinned allocation repair.
+"""
 import hashlib
 
 PINS = {'tests/requirements_preservation_support.py': {'old': {'bytes': 4697,
@@ -25,6 +28,8 @@ def _pin(raw): return dict(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest()
 
 def preceding_bytes(name, raw):
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
+    from test_collection_intelligence import allocation_preceding_bytes
+    raw = allocation_preceding_bytes(name, raw)
     if name not in PINS: return raw
     pin=PINS[name]
     if _pin(raw)==pin['old']: return raw

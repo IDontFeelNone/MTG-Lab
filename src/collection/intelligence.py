@@ -368,22 +368,47 @@ def collection_summary(snapshot: Mapping[str, Any], resolver: CanonicalCollectio
 
 
 def compare_deck(snapshot: Mapping[str, Any], deck: Mapping[str, Any], resolver: CanonicalCollectionResolver) -> dict:
+    """Allocate resolved physical copies once: exact first, then flexible.
+
+    Report order is section/Card/Printing, with canonical requirement bytes as
+    a tie-breaker. Flexible rows consume remaining Printings in stable ID order.
+    Surplus fields describe final eligible leftovers, shared across row views.
+    """
     if deck.get("schema_version") != DECK_VERSION: raise CollectionIntelligenceError("unsupported deck requirement schema")
-    by_printing, by_card = Counter(), Counter()
+    remaining = Counter()
+    card_printings = defaultdict(set)
     for item in snapshot["resolved_holdings"]:
-        q=item["row"]["quantity"]; pid=item["printing_id"]; by_printing[pid]+=q; by_card[resolver.printings[pid]["card_id"]]+=q
-    remaining_printing, remaining_card = by_printing.copy(), by_card.copy()
+        quantity=item["row"]["quantity"]
+        if type(quantity) is not int or quantity<1:
+            raise CollectionIntelligenceError("resolved holding quantity must be a positive integer")
+        pid=item["printing_id"]; remaining[pid]+=quantity
+        card_printings[resolver.printings[pid]["card_id"]].add(pid)
+    ordered=sorted(deck["requirements"],key=lambda x:(x.get("section","main"),x["card_id"],x.get("printing_id",""),canonical_json(x)))
+    eligible=[]; policies=[]
+    for req in ordered:
+        if type(req["quantity"]) is not int or req["quantity"]<1:
+            raise CollectionIntelligenceError("deck requirement quantity must be a positive integer")
+        policy=req.get("acceptable_printing_policy",deck.get("acceptable_printing_policy","any"))
+        if policy not in {"any","exact"}:
+            raise CollectionIntelligenceError("unsupported acceptable Printing policy")
+        candidates=sorted(card_printings[req["card_id"]])
+        eligible.append(tuple(p for p in candidates if policy=="any" or p==req.get("printing_id")))
+        policies.append(policy)
+    allocated=[0]*len(ordered)
+    for index in sorted(range(len(ordered)),key=lambda i:(policies[i]!="exact",i)):
+        needed=ordered[index]["quantity"]
+        for pid in eligible[index]:
+            used=min(remaining[pid],needed)
+            remaining[pid]-=used; needed-=used; allocated[index]+=used
+            if not needed: break
     results=[]; required_total=owned_total=0
-    for req in sorted(deck["requirements"], key=lambda x:(x.get("section","main"),x["card_id"],x.get("printing_id", ""))):
-        required=int(req["quantity"]); policy=req.get("acceptable_printing_policy", deck.get("acceptable_printing_policy","any"))
-        available=remaining_card[req["card_id"]] if policy=="any" else remaining_printing[req.get("printing_id")]
-        used=min(available,required); missing=required-used; required_total+=required; owned_total+=used
-        if policy=="any": remaining_card[req["card_id"]]-=used
-        else: remaining_printing[req.get("printing_id")]-=used
-        total_owned=by_card[req["card_id"]] if policy=="any" else by_printing[req.get("printing_id")]
+    for index,req in enumerate(ordered):
+        required=req["quantity"]; used=allocated[index]; missing=required-used
+        required_total+=required; owned_total+=used
+        surplus=sum(remaining[pid] for pid in eligible[index])
         results.append({**req,"section":req.get("section","main"),"owned_quantity":used,"required_quantity":required,
-                        "missing_quantity":missing,"excess_copies":max(0,total_owned-required),
-                        "reusable_owned_copies":max(0,available-used),
+                        "missing_quantity":missing,"excess_copies":surplus,
+                        "reusable_owned_copies":surplus,
                         "status":"complete" if not missing else "partial" if used else "missing"})
     return {"schema_version":"deck-comparison-v1","deck_id":deck["deck_id"],"snapshot_id":snapshot["snapshot_id"],
             "completion_percentage": "100.00" if not required_total else format(Decimal(owned_total*100)/required_total,".2f"),
