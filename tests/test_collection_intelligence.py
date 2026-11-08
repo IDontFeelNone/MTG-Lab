@@ -170,6 +170,24 @@ class MixedPrintingAllocationTests(unittest.TestCase):
         for changed in (raw+b'future',b'X'+raw[1:],raw.replace(b'used=min(',b'used=max(',1),bytearray(raw)):
             with self.assertRaises(AssertionError):allocation_preceding_bytes(name,changed)
 
+    def test_historical_hash_length_and_inventory_routes_require_exact_collection_bytes(self):
+        import query_attachment_performance_preservation as support
+        name='src/collection/intelligence.py';raw=(ROOT/name).read_bytes()
+        old=allocation_preceding_bytes(name,raw)
+        old_row=dict(path=name,bytes=len(old),sha256=hashlib.sha256(old).hexdigest())
+        current_row=dict(path=name,bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+        support.assert_hash_row(dict(path=name,sha256=old_row['sha256']))
+        support.assert_retained_row(old_row)
+        self.assertEqual(support.historical_inventory_row(current_row),old_row)
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);path=root/name;path.parent.mkdir(parents=True)
+            path.write_bytes(raw+b'future')
+            changed=dict(path=name,bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+            for fn,row in ((support.assert_hash_row,dict(path=name,sha256=old_row['sha256'])),
+                           (support.assert_retained_row,old_row),(support.historical_inventory_row,changed)):
+                with self.assertRaises(AssertionError):fn(row,root)
+        with self.assertRaises(AssertionError):support.assert_retained_row(dict(old_row,sha256='0'*64))
+
 
 class CollectionIntelligenceTests(unittest.TestCase):
     def setUp(self):

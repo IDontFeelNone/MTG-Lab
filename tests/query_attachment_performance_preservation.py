@@ -3,6 +3,9 @@
 Historical fixtures and gameplay source verifiers keep their original contracts.
 Only the exact two authorized original rows select this milestone's successors;
 unrelated rows retain their original checks, including PR #205's finite ledger.
+
+The later collection repair delegates its historical byte view to the exact
+collection regression pin; no ledger row, fixture or runtime gate is rewritten.
 """
 import hashlib
 import json
@@ -68,6 +71,8 @@ def assert_hash_row(row, root=ROOT):
         raise AssertionError("Exact historical path/hash row schema required")
     pin = _replacement(row)
     raw = regular_bytes(row["path"], root)
+    from test_collection_intelligence import allocation_preceding_bytes
+    raw = allocation_preceding_bytes(row["path"], raw)
     if pin is not None:
         _check_pin(raw, pin)
     elif hashlib.sha256(raw).hexdigest() != row["sha256"]:
@@ -81,6 +86,10 @@ def assert_retained_row(row, root=ROOT):
             or type(row["bytes"]) is not int):
         raise AssertionError("Exact historical path/hash/length row schema required")
     pin = _replacement(row)
+    if row["path"] == "src/collection/intelligence.py":
+        from test_collection_intelligence import allocation_preceding_bytes
+        _check_pin(allocation_preceding_bytes(row["path"], regular_bytes(row["path"], root)), row)
+        return
     if pin is None:
         previous.assert_retained_row(row, root)
     else:
@@ -123,6 +132,12 @@ def historical_inventory_row(row, root=ROOT):
             or type(row["path"]) is not str or type(row["sha256"]) is not str
             or type(row["bytes"]) is not int):
         raise AssertionError("Exact current path/hash/length row schema required")
+    if row["path"] == "src/collection/intelligence.py":
+        from test_collection_intelligence import allocation_preceding_bytes
+        raw = regular_bytes(row["path"], root)
+        _check_pin(raw, row)
+        old = allocation_preceding_bytes(row["path"], raw)
+        return {"path": row["path"], "bytes": len(old), "sha256": hashlib.sha256(old).hexdigest()}
     item = next((item for item in ledger()["replacements"]
                  if item["path"] == row["path"]), None)
     if item is None:
