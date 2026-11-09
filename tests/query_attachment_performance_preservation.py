@@ -73,6 +73,8 @@ def assert_hash_row(row, root=ROOT):
     raw = regular_bytes(row["path"], root)
     from test_collection_intelligence import allocation_preceding_bytes
     raw = allocation_preceding_bytes(row["path"], raw)
+    from test_evidence_review_malformed import handoff_preceding_bytes
+    raw = handoff_preceding_bytes(row["path"], raw)
     if pin is not None:
         _check_pin(raw, pin)
     elif hashlib.sha256(raw).hexdigest() != row["sha256"]:
@@ -86,6 +88,10 @@ def assert_retained_row(row, root=ROOT):
             or type(row["bytes"]) is not int):
         raise AssertionError("Exact historical path/hash/length row schema required")
     pin = _replacement(row)
+    from test_evidence_review_malformed import HANDOFF_SOURCE_PATHS, handoff_preceding_bytes
+    if row["path"] in HANDOFF_SOURCE_PATHS:
+        _check_pin(handoff_preceding_bytes(row["path"], regular_bytes(row["path"], root)), row)
+        return
     if row["path"] == "src/collection/intelligence.py":
         from test_collection_intelligence import allocation_preceding_bytes
         _check_pin(allocation_preceding_bytes(row["path"], regular_bytes(row["path"], root)), row)
@@ -132,6 +138,12 @@ def historical_inventory_row(row, root=ROOT):
             or type(row["path"]) is not str or type(row["sha256"]) is not str
             or type(row["bytes"]) is not int):
         raise AssertionError("Exact current path/hash/length row schema required")
+    from test_evidence_review_malformed import HANDOFF_SOURCE_PATHS, handoff_preceding_bytes
+    if row["path"] in HANDOFF_SOURCE_PATHS:
+        raw = regular_bytes(row["path"], root)
+        _check_pin(raw, row)
+        old = handoff_preceding_bytes(row["path"], raw)
+        return {"path": row["path"], "bytes": len(old), "sha256": hashlib.sha256(old).hexdigest()}
     if row["path"] == "src/collection/intelligence.py":
         from test_collection_intelligence import allocation_preceding_bytes
         raw = regular_bytes(row["path"], root)

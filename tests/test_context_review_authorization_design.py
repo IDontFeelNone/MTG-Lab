@@ -269,7 +269,10 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
                     review.load_context_evidence_review(**decision_arguments())
                 self.assertEqual(caught.exception.code,'EVIDENCE_ADMISSION_REJECTED')
                 continue
-            path=ROOT/name;raw=path.read_bytes();self.assertEqual(len(raw),pin['bytes']);self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['sha256'])
+            path=ROOT/name;raw=path.read_bytes()
+            from test_evidence_review_malformed import handoff_preceding_bytes
+            raw=handoff_preceding_bytes(name,raw)
+            self.assertEqual(len(raw),pin['bytes']);self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['sha256'])
         for subsystem in document('inventory.json')['subsystems']:
             self.assertTrue(subsystem['implemented']);self.assertTrue(subsystem['authority_boundary']);self.assertTrue(subsystem['missing_or_blocked'])
             for name in subsystem['owning_files']:self.assertIn(name,pins)
@@ -305,6 +308,8 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
             path=ROOT/pin['path'];raw=path.read_bytes();self.assertFalse(path.is_symlink())
             from test_collection_intelligence import allocation_preceding_bytes
             raw=allocation_preceding_bytes(pin['path'],raw)
+            from test_evidence_review_malformed import handoff_preceding_bytes
+            raw=handoff_preceding_bytes(pin['path'],raw)
             self.assertEqual(len(raw),pin['bytes']);self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['sha256'])
             self.assertEqual(bool(path.stat().st_mode&0o111),pin['mode']=='100755')
 

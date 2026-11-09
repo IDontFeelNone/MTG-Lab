@@ -3,23 +3,28 @@
 from __future__ import annotations
 
 import hashlib
+from collections.abc import Mapping
 from typing import Any
 
 from validation import SchemaValidationError, validate_document
 
-from .loader import EvidenceHandoff
+from .loader import EvidenceHandoff, HandoffLoadError
 
 
 def validate_handoff(handoff: EvidenceHandoff) -> tuple[dict[str, Any], ...]:
     """Return deterministic validation findings; never infer domain rules."""
-    findings: list[dict[str, Any]] = []
+    if not isinstance(handoff.manifest, Mapping):
+        raise HandoffLoadError("Handoff manifest must be a JSON object")
+    findings: list[dict[str, Any]] = [
+        _finding("artifact_unreadable", "critical", message)
+        for message in handoff.load_errors
+    ]
     try:
-        validate_document(handoff.manifest, "evidence-handoff")
+        # This consumer owns v1; an untrusted version must not select a file.
+        validate_document(handoff.manifest, "evidence-handoff", "v1")
     except SchemaValidationError as error:
         findings.append(_finding("invalid_manifest", "critical", str(error)))
-
-    for message in handoff.load_errors:
-        findings.append(_finding("artifact_unreadable", "critical", message))
+        return tuple(sorted(findings, key=lambda item: (item["code"], item["detail"])))
 
     sources = handoff.manifest.get("sources", [])
     source_ids = {
