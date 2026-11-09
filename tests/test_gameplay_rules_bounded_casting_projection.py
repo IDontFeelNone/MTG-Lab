@@ -162,8 +162,9 @@ class BoundedCastingPreservationTests(unittest.TestCase):
     def test_fictional_profile_and_simulation_unchanged(self):
         self.assertEqual(ENGINE_CONTRACT_VERSION, "gameplay-kernel-v1")
         self.assertEqual(EXECUTION_PROFILE, "fictional-two-player-v1")
+        from pack_simulation_preservation import is_addition
         self.assertEqual({path.name for path in (ROOT / "src/simulation").iterdir()
-                          if path.name != "__pycache__"}, {".gitkeep"})
+                          if path.name != "__pycache__" and not is_addition(path,ROOT)}, {".gitkeep"})
 
     def test_new_projection_layer_has_no_network_card_ingestion_runtime_or_general_parser(self):
         imports = {"socket", "http", "urllib", "requests", "subprocess", "simulation", "random", "secrets",

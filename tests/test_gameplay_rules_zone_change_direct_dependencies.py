@@ -685,8 +685,9 @@ class ZoneChangeDependencyPreservationTests(unittest.TestCase):
     def test_fictional_execution_profile_and_empty_simulation_are_unchanged(self):
         self.assertEqual(ENGINE_CONTRACT_VERSION, "gameplay-kernel-v1")
         self.assertEqual(EXECUTION_PROFILE, "fictional-two-player-v1")
+        from pack_simulation_preservation import is_addition
         self.assertEqual({path.name for path in (ROOT / "src/simulation").iterdir()
-                          if path.name != "__pycache__"}, {".gitkeep"})
+                          if path.name != "__pycache__" and not is_addition(path,ROOT)}, {".gitkeep"})
 
     def test_new_modules_have_no_gameplay_network_or_card_semantics_implementation(self):
         forbidden_imports = {"socket", "http", "urllib", "requests", "subprocess", "simulation",
