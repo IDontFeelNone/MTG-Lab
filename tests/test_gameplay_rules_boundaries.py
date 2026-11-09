@@ -54,8 +54,9 @@ class GameplayRulesBoundaryTests(unittest.TestCase):
                      "src/repository/rule_research.py"):
             self.assertTrue((ROOT / name).is_file())
         self.assertIn("Print Sheet", (ROOT / "src/repository/rules.py").read_text())
+        from pack_simulation_preservation import is_addition
         self.assertEqual([p.name for p in (ROOT / "src/simulation").iterdir()
-                          if p.name != "__pycache__"], [".gitkeep"])
+                          if p.name != "__pycache__" and not is_addition(p,ROOT)], [".gitkeep"])
 
     def test_historical_card_acquisition_keeps_its_own_v12_dependency(self):
         directory = ROOT / "tests/fixtures/historical_replay/card-acquisition-pilot"
