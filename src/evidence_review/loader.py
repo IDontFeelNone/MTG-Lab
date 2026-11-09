@@ -51,14 +51,13 @@ def load_handoff(path: Path | str) -> EvidenceHandoff:
             relative = artifact.get("path")
             if not isinstance(artifact_id, str) or not isinstance(relative, str):
                 continue
-            artifact_path = root / relative
-            resolved = artifact_path.resolve()
-            if not resolved.is_relative_to(root):
-                errors.append(f"artifact[{index}] path escapes the handoff: {relative}")
-                continue
             try:
+                resolved = (root / relative).resolve()
+                if not resolved.is_relative_to(root):
+                    errors.append(f"artifact[{index}] path escapes the handoff: {relative}")
+                    continue
                 content[artifact_id] = resolved.read_bytes()
-            except OSError:
+            except (OSError, ValueError, RuntimeError):
                 errors.append(f"artifact {artifact_id} is missing or unreadable: {relative}")
     return EvidenceHandoff(root, manifest, content, tuple(sorted(errors)))
 

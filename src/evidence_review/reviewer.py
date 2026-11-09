@@ -15,6 +15,22 @@ def review_handoff(handoff: EvidenceHandoff) -> dict[str, Any]:
     """Review a handoff and return a schema-valid report-ready document."""
     manifest = handoff.manifest
     findings = list(validate_handoff(handoff))
+    if any(item["code"] == "invalid_manifest" for item in findings):
+        # No inventory, provenance or claim assessment is admitted on this path.
+        # Zero is the existing report contract's unassessed rejection score.
+        identity = manifest.get("id")
+        return {
+            "schema_version": "v1",
+            "handoff_id": identity if isinstance(identity, str) and identity else "unknown",
+            "evidence_inventory": [],
+            "supported_claims": [], "unsupported_claims": [],
+            "conflicting_claims": [], "missing_evidence": [],
+            "orphaned_artifacts": [], "duplicate_artifacts": [],
+            "completeness_score": 0,
+            "provenance_summary": {"declared_source_count": 0, "referenced_source_ids": []},
+            "validation_findings": findings,
+            "recommendation": "Reject",
+        }
     artifacts = [item for item in manifest.get("artifacts", []) if isinstance(item, dict)]
     sources = [item for item in manifest.get("sources", []) if isinstance(item, dict)]
     valid_artifacts = {

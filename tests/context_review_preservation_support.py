@@ -28,6 +28,8 @@ def _pin(raw): return dict(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest()
 
 def preceding_bytes(name, raw):
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
+    from test_evidence_review_malformed import handoff_preceding_bytes
+    raw = handoff_preceding_bytes(name, raw)
     from test_collection_intelligence import allocation_preceding_bytes
     raw = allocation_preceding_bytes(name, raw)
     if name not in PINS: return raw

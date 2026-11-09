@@ -58,6 +58,33 @@ between them or derive a replacement value.
 6. The returned report is validated against the version selected by its own
    `schema_version` before either JSON or Markdown is rendered.
 
+### Malformed-input rejection
+
+The handoff consumer validates against its existing v1 schema before reference,
+integrity, duplicate, conflict or completeness assessment. An untrusted manifest
+version cannot select another schema file. Schema-invalid JSON objects receive
+a limited, schema-valid **Reject** report retaining `invalid_manifest` and any
+artifact loading findings. They receive no inventory, supported-claim inference
+or provenance assessment. The required numeric completeness field is zero,
+meaning unassessed rejection, not measured coverage. Empty report collections
+do not reinterpret malformed input as authorized empty evidence. The supplied
+nonempty string handoff ID is retained; otherwise `unknown` is a report-only
+sentinel, not an assigned evidence identity.
+
+Secondary reference and integrity findings are intentionally not calculated for
+invalid manifests. Correctly structured manifests retain their existing reports,
+including missing/unsupported/orphaned evidence and duplicate/conflict findings.
+Artifact path resolution or reading failures become `artifact_unreadable` findings.
+Unreadable JSON or non-object roots raise the existing `HandoffLoadError`; direct
+review calls with a non-object manifest have the same explicit error boundary.
+Lower-level completeness and conflict helpers require a structurally admitted
+manifest; the public review pipeline enforces that precondition.
+
+The existing public entry points are Python loading, review, validation and
+JSON/Markdown rendering functions. There is no generic evidence-review CLI in
+this repository; this repair adds none. Ready for verification remains mechanical
+readiness for human inspection, never source authentication or reviewer approval.
+
 ## Reports
 
 The `evidence-review-report` schema covers the evidence inventory, supported and

@@ -48,7 +48,11 @@ class EvidenceReviewTests(unittest.TestCase):
     def test_invalid_metadata_and_unknown_source_references_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = self.make_handoff(Path(directory)); manifest = json.loads(path.read_text()); del manifest["title"]; manifest["artifacts"][0]["source_ids"] = ["undeclared"]; path.write_text(json.dumps(manifest)); report = review_handoff(load_handoff(path))
-            self.assertEqual({item["code"] for item in report["validation_findings"]}, {"invalid_manifest", "unknown_source_reference"}); self.assertEqual(report["recommendation"], "Reject")
+            self.assertEqual({item["code"] for item in report["validation_findings"]}, {"invalid_manifest"}); self.assertEqual(report["recommendation"], "Reject")
+            self.assertEqual(report["supported_claims"], []); self.assertEqual(report["completeness_score"], 0)
+            # Reference validation still runs once the manifest is structurally valid.
+            manifest["title"] = "Generic handoff"; path.write_text(json.dumps(manifest)); report = review_handoff(load_handoff(path))
+            self.assertEqual({item["code"] for item in report["validation_findings"]}, {"unknown_source_reference"}); self.assertEqual(report["recommendation"], "Reject")
 
     def test_unsafe_paths_and_non_object_manifests_fail_safely(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
