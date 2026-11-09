@@ -1,7 +1,14 @@
 import json
+import hashlib
+import copy
+import itertools
+import io
+from contextlib import redirect_stdout
+from unittest.mock import patch
 import shutil
 import tempfile
 import unittest
+from types import SimpleNamespace
 from pathlib import Path
 
 from query.engine import CanonicalQueryEngine
@@ -12,6 +19,174 @@ from collection.intelligence import (CanonicalCollectionResolver, CollectionInte
 
 
 ROOT = Path(__file__).parents[1]
+
+
+# Finite test-only successor. No runtime or historical package pins are changed.
+ALLOCATION_SOURCE_SHA256 = '275e3fec83618fc71569e505f35df03a0ba389cdff43936d6951b9bf816717b6'
+ALLOCATION_OLD_SHA256 = 'ca09a2e622c45fe3ff4a8ad884ed2543ac7846b6f43fd88fe6424f69f5d9f13b'
+ALLOCATION_OLD_FUNCTION = b'def compare_deck(snapshot: Mapping[str, Any], deck: Mapping[str, Any], resolver: CanonicalCollectionResolver) -> dict:\n    if deck.get("schema_version") != DECK_VERSION: raise CollectionIntelligenceError("unsupported deck requirement schema")\n    by_printing, by_card = Counter(), Counter()\n    for item in snapshot["resolved_holdings"]:\n        q=item["row"]["quantity"]; pid=item["printing_id"]; by_printing[pid]+=q; by_card[resolver.printings[pid]["card_id"]]+=q\n    remaining_printing, remaining_card = by_printing.copy(), by_card.copy()\n    results=[]; required_total=owned_total=0\n    for req in sorted(deck["requirements"], key=lambda x:(x.get("section","main"),x["card_id"],x.get("printing_id", ""))):\n        required=int(req["quantity"]); policy=req.get("acceptable_printing_policy", deck.get("acceptable_printing_policy","any"))\n        available=remaining_card[req["card_id"]] if policy=="any" else remaining_printing[req.get("printing_id")]\n        used=min(available,required); missing=required-used; required_total+=required; owned_total+=used\n        if policy=="any": remaining_card[req["card_id"]]-=used\n        else: remaining_printing[req.get("printing_id")]-=used\n        total_owned=by_card[req["card_id"]] if policy=="any" else by_printing[req.get("printing_id")]\n        results.append({**req,"section":req.get("section","main"),"owned_quantity":used,"required_quantity":required,\n                        "missing_quantity":missing,"excess_copies":max(0,total_owned-required),\n                        "reusable_owned_copies":max(0,available-used),\n                        "status":"complete" if not missing else "partial" if used else "missing"})\n    return {"schema_version":"deck-comparison-v1","deck_id":deck["deck_id"],"snapshot_id":snapshot["snapshot_id"],\n            "completion_percentage": "100.00" if not required_total else format(Decimal(owned_total*100)/required_total,".2f"),\n            "requirements":results,"complete_cards":sum(x["status"]=="complete" for x in results),\n            "partially_complete_cards":sum(x["status"]=="partial" for x in results),\n            "missing_cards":sum(x["status"]=="missing" for x in results),\n            "unresolved_may_affect_result": [x for x in snapshot["unresolved_holdings"] if x["status"] in {"ambiguous","unresolved"}]}\n'
+
+
+def allocation_preceding_bytes(name, raw):
+    if type(raw) is not bytes: raise AssertionError('exact source bytes required')
+    if name != 'src/collection/intelligence.py': return raw
+    digest=hashlib.sha256(raw).hexdigest()
+    if digest==ALLOCATION_OLD_SHA256:return raw
+    if digest!=ALLOCATION_SOURCE_SHA256:raise AssertionError('unreviewed allocation implementation')
+    start=raw.index(b'def compare_deck(');end=raw.index(b'\n\ndef acquisition_priorities',start)
+    old=raw[:start]+ALLOCATION_OLD_FUNCTION+raw[end:]
+    if hashlib.sha256(old).hexdigest()!=ALLOCATION_OLD_SHA256:
+        raise AssertionError('historical collection source not reproduced')
+    return old
+
+
+class MixedPrintingAllocationTests(unittest.TestCase):
+    def test_one_physical_copy_cannot_satisfy_any_and_exact(self):
+        resolver=SimpleNamespace(printings={'fixture-printing-a':{'card_id':'fixture-card'}})
+        snapshot={'snapshot_id':'fictional-allocation','resolved_holdings':[
+            {'printing_id':'fixture-printing-a','row':{'quantity':1}}],'unresolved_holdings':[]}
+        deck={'schema_version':'deck-requirement-v1','deck_id':'fictional-mixed','requirements':[
+            {'card_id':'fixture-card','quantity':1,'acceptable_printing_policy':'any'},
+            {'card_id':'fixture-card','printing_id':'fixture-printing-a','quantity':1,'acceptable_printing_policy':'exact'}]}
+        report=compare_deck(snapshot,deck,resolver)
+        self.assertEqual(sum(r['owned_quantity'] for r in report['requirements']),1)
+        self.assertEqual(sum(r['missing_quantity'] for r in report['requirements']),1)
+        self.assertEqual(report['completion_percentage'],'50.00')
+
+
+    def case(self, counts, requirements, unresolved=None):
+        resolver=SimpleNamespace(printings={p:{'card_id':'fixture-card'} for p in ('a','b')})
+        snapshot={'snapshot_id':'fictional','resolved_holdings':[{'printing_id':p,'row':{'quantity':q}} for p,q in counts.items() if q], 'unresolved_holdings':unresolved or []}
+        deck={'schema_version':'deck-requirement-v1','deck_id':'fictional','requirements':requirements}
+        before=copy.deepcopy((snapshot,deck));result=compare_deck(snapshot,deck,resolver)
+        self.assertEqual((snapshot,deck),before)
+        rows=result['requirements'];self.assertLessEqual(sum(x['owned_quantity'] for x in rows),sum(counts.values()))
+        for p in counts:self.assertLessEqual(sum(x['owned_quantity'] for x in rows if x.get('acceptable_printing_policy')=='exact' and x.get('printing_id')==p),counts[p])
+        # Match each reported allocation to distinct physical tokens. This checks
+        # Printing conservation for flexible rows without adding report fields.
+        tokens=tuple(p for p in sorted(counts) for _ in range(counts[p]))
+        def feasible(index,left):
+            if index==len(rows):return True
+            row=rows[index];eligible=[i for i in left if row.get('acceptable_printing_policy','any')=='any' or tokens[i]==row.get('printing_id')]
+            return any(feasible(index+1,tuple(i for i in left if i not in selected)) for selected in itertools.combinations(eligible,row['owned_quantity']))
+        self.assertTrue(feasible(0,tuple(range(len(tokens)))))
+        for row in rows:
+            self.assertGreaterEqual(row['owned_quantity'],0);self.assertEqual(row['owned_quantity']+row['missing_quantity'],row['required_quantity'])
+        return result
+
+    def row(self, policy='any',quantity=1,printing=None,section='main'):
+        value=dict(card_id='fixture-card',quantity=quantity,acceptable_printing_policy=policy,section=section)
+        if printing is not None:value['printing_id']=printing
+        return value
+
+    def test_exact_priority_preserves_scarce_match_in_either_input_order(self):
+        rows=[self.row(),self.row('exact',printing='a',section='sideboard')]
+        first=self.case({'a':1,'b':1},rows)
+        self.assertEqual(first,self.case({'b':1,'a':1},list(reversed(rows))))
+        self.assertEqual(first['completion_percentage'],'100.00')
+        self.assertEqual([x['owned_quantity'] for x in first['requirements']],[1,1])
+
+    def test_repeated_exact_and_flexible_quantities_across_sections(self):
+        for policy in ('any','exact'):
+            rows=[self.row(policy,2,'a' if policy=='exact' else None),self.row(policy,2,'a' if policy=='exact' else None,'sideboard')]
+            r=self.case({'a':3,'b':0},rows)
+            self.assertEqual([x['owned_quantity'] for x in r['requirements']],[2,1]);self.assertEqual(r['completion_percentage'],'75.00')
+            self.assertEqual([x['status'] for x in r['requirements']],['complete','partial'])
+            self.assertTrue(all(x['excess_copies']==x['reusable_owned_copies']==0 for x in r['requirements']))
+
+    def test_surplus_is_final_unallocated_eligible_inventory_not_prior_allocations(self):
+        rows=[self.row(),self.row('exact',printing='a')]
+        r=self.case({'b':3,'a':1},rows)
+        any_row=next(x for x in r['requirements'] if x['acceptable_printing_policy']=='any')
+        exact=next(x for x in r['requirements'] if x['acceptable_printing_policy']=='exact')
+        self.assertEqual((any_row['excess_copies'],any_row['reusable_owned_copies']),(2,2));self.assertEqual(exact['excess_copies'],0)
+
+    def test_small_inventory_conservation_sufficiency_and_order_permutations(self):
+        for a,b in itertools.product(range(3),repeat=2):
+            for exact in (1,2):
+                rows=[self.row('exact',exact,'a'),self.row('any',2),self.row('any',1,section='sideboard')]
+                r=self.case({'a':a,'b':b},rows)
+                expected=min(a,exact)+min(max(0,a-exact)+b,3)
+                self.assertEqual(sum(x['owned_quantity'] for x in r['requirements']),expected)
+                for shuffled in itertools.permutations(rows):self.assertEqual(r,self.case({'b':b,'a':a},list(shuffled)))
+        self.assertEqual(self.case({'a':2,'b':3},rows)['completion_percentage'],'100.00')
+
+    def test_unresolved_and_ambiguous_rows_never_supply_copies(self):
+        unknown=[dict(status=s,row={'quantity':100}) for s in ('unresolved','ambiguous','duplicate_input_row','invalid')]
+        r=self.case({'a':0,'b':0},[self.row(),self.row('exact',printing='a')],unknown)
+        self.assertEqual(r['completion_percentage'],'0.00');self.assertEqual([x['status'] for x in r['unresolved_may_affect_result']],['unresolved','ambiguous'])
+
+    def test_duplicate_requirements_and_canonical_tie_breaker(self):
+        rows=[self.row(quantity=2),self.row(quantity=1),self.row(quantity=1)]
+        r=self.case({'a':2,'b':0},rows)
+        self.assertEqual(r,self.case({'a':2,'b':0},list(reversed(rows))))
+        self.assertEqual(r['completion_percentage'],'50.00')
+
+    def test_acquisition_priority_uses_corrected_missing_quantity(self):
+        r=self.case({'a':1,'b':0},[self.row(),self.row('exact',printing='a')])
+        priority=acquisition_priorities([r])['priorities'][0]
+        self.assertEqual(priority['components']['missing_copy_points'],1)
+        self.assertEqual(priority['components']['completion_unlock_points'],'50.00')
+
+    def test_foreign_card_exact_printing_does_not_borrow_inventory(self):
+        resolver=SimpleNamespace(printings={'a':{'card_id':'other-card'}})
+        snapshot={'snapshot_id':'fictional','resolved_holdings':[{'printing_id':'a','row':{'quantity':2}}],'unresolved_holdings':[]}
+        deck={'schema_version':'deck-requirement-v1','deck_id':'fictional','requirements':[self.row('exact',printing='a')]}
+        self.assertEqual(compare_deck(snapshot,deck,resolver)['completion_percentage'],'0.00')
+
+    def test_invalid_quantities_and_policies_cannot_allocate_negative_copies(self):
+        for quantity in (-1,0,True,1.5,'2'):
+            with self.assertRaises(CollectionIntelligenceError):self.case({'a':1},[self.row(quantity=quantity)])
+        with self.assertRaises(CollectionIntelligenceError):self.case({'a':1},[self.row('foreign')])
+        for quantity in (-1,True,1.5):
+            with self.assertRaises(CollectionIntelligenceError):self.case({'a':quantity},[self.row()])
+
+    def test_flexible_allocation_uses_ascending_printing_ids(self):
+        rows=[self.row(),self.row('exact',printing='a')]
+        r=self.case({'b':1,'a':2},rows)
+        exact=next(x for x in r['requirements'] if x['acceptable_printing_policy']=='exact')
+        self.assertEqual(exact['excess_copies'],0)  # flexible consumed the second a, leaving b
+        self.assertEqual(r,self.case({'a':2,'b':1},list(reversed(rows))))
+
+    def test_single_uniform_requirement_retains_correct_surplus(self):
+        for policy in ('any','exact'):
+            row=self.case({'a':3},[self.row(policy,2,'a' if policy=='exact' else None)])['requirements'][0]
+            self.assertEqual((row['owned_quantity'],row['missing_quantity'],row['excess_copies'],row['reusable_owned_copies']),(2,0,1,1))
+
+    def test_multiple_cards_do_not_share_physical_inventory(self):
+        resolver=SimpleNamespace(printings={'a':{'card_id':'fixture-card'},'b':{'card_id':'other-card'}})
+        snapshot={'snapshot_id':'fictional','resolved_holdings':[{'printing_id':p,'row':{'quantity':1}} for p in ('b','a')],'unresolved_holdings':[]}
+        rows=[self.row(quantity=2),dict(card_id='other-card',quantity=2)]
+        report=compare_deck(snapshot,dict(schema_version='deck-requirement-v1',deck_id='fictional',requirements=rows),resolver)
+        self.assertEqual([r['owned_quantity'] for r in report['requirements']],[1,1])
+        self.assertEqual(report['completion_percentage'],'50.00')
+
+    def test_preservation_adapter_accepts_only_exact_successor_and_original(self):
+        name='src/collection/intelligence.py';raw=(ROOT/name).read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(),ALLOCATION_SOURCE_SHA256)
+        old=allocation_preceding_bytes(name,raw)
+        self.assertEqual(hashlib.sha256(old).hexdigest(),ALLOCATION_OLD_SHA256)
+        self.assertEqual(allocation_preceding_bytes(name,old),old)
+        for changed in (raw+b'future',b'X'+raw[1:],raw.replace(b'used=min(',b'used=max(',1),bytearray(raw)):
+            with self.assertRaises(AssertionError):allocation_preceding_bytes(name,changed)
+
+    def test_historical_hash_length_and_inventory_routes_require_exact_collection_bytes(self):
+        import query_attachment_performance_preservation as support
+        name='src/collection/intelligence.py';raw=(ROOT/name).read_bytes()
+        old=allocation_preceding_bytes(name,raw)
+        old_row=dict(path=name,bytes=len(old),sha256=hashlib.sha256(old).hexdigest())
+        current_row=dict(path=name,bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+        support.assert_hash_row(dict(path=name,sha256=old_row['sha256']))
+        support.assert_retained_row(old_row)
+        self.assertEqual(support.historical_inventory_row(current_row),old_row)
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);path=root/name;path.parent.mkdir(parents=True)
+            path.write_bytes(raw+b'future')
+            changed=dict(path=name,bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+            for fn,row in ((support.assert_hash_row,dict(path=name,sha256=old_row['sha256'])),
+                           (support.assert_retained_row,old_row),(support.historical_inventory_row,changed)):
+                with self.assertRaises(AssertionError):fn(row,root)
+        with self.assertRaises(AssertionError):support.assert_retained_row(dict(old_row,sha256='0'*64))
 
 
 class CollectionIntelligenceTests(unittest.TestCase):
@@ -94,6 +269,27 @@ class CollectionIntelligenceTests(unittest.TestCase):
         report=acquisition_priorities([result,compare_deck(snapshot,{**deck,"deck_id":"synthetic-two"},self.resolver)])
         self.assertTrue(report["price_independent"]); self.assertEqual(report["priorities"][0]["components"]["shared_deck_points"],20)
         self.assertEqual(report,acquisition_priorities([result,compare_deck(snapshot,{**deck,"deck_id":"synthetic-two"},self.resolver)]))
+
+
+    def test_public_deck_cli_reports_mixed_missing_copy_and_priorities(self):
+        from mtglab.__main__ import main
+        imported=read_import(self.write_json([{'printing_id':self.pid,'quantity':1}]))
+        snapshot=create_snapshot(imported,self.resolver.resolve(imported),self.root/'collections/snapshots','cli-mixed')
+        deck={'schema_version':'deck-requirement-v1','deck_id':'fictional-cli-mixed','requirements':[
+            {'card_id':self.card,'quantity':1,'acceptable_printing_policy':'any'},
+            {'card_id':self.card,'printing_id':self.pid,'quantity':1,'acceptable_printing_policy':'exact'}]}
+        path=self.root/'deck.json';path.write_text(json.dumps(deck))
+        for command in ('compare','missing','acquisition-priorities'):
+            output=io.StringIO()
+            # Reuse the real admitted resolver; only its CLI construction is
+            # injected so all retained snapshot/deck IO stays in the temp root.
+            with patch('mtglab.__main__.CanonicalCollectionResolver',return_value=self.resolver),redirect_stdout(output):
+                self.assertEqual(main(['--data-root',str(self.root),'deck',command,'--snapshot',snapshot['snapshot_id'],'--deck',str(path)]),0)
+            value=json.loads(output.getvalue())
+            if command=='compare':self.assertEqual(value['completion_percentage'],'50.00')
+            elif command=='missing':self.assertEqual(sum(x['missing_quantity'] for x in value['requirements']),1)
+            else:self.assertEqual(value['priorities'][0]['components']['missing_copy_points'],1)
+
 
 
 class ProductionCollectionResolutionTests(unittest.TestCase):

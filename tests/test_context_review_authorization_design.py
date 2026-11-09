@@ -292,6 +292,8 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(full.to_json().encode()).hexdigest(),decision.OVERVIEW_SHA256)
 
     def test_all_inherited_runtime_and_workflows_are_byte_exact_no_runtime_addition(self):
+        # Preserve the original design package. Only the separately authorized,
+        # exactly pinned collection successor is reversed for historical checks.
         value=document('runtime-preservation.json');self.assertEqual(value['canonical_base'],BASE)
         self.assertEqual(c.identity(value['schema_version'],value,'preservation_id'),value['preservation_id'])
         expected={v['path'] for v in value['files']};actual=set()
@@ -301,6 +303,8 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
         self.assertEqual(actual,expected)
         for pin in value['files']:
             path=ROOT/pin['path'];raw=path.read_bytes();self.assertFalse(path.is_symlink())
+            from test_collection_intelligence import allocation_preceding_bytes
+            raw=allocation_preceding_bytes(pin['path'],raw)
             self.assertEqual(len(raw),pin['bytes']);self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['sha256'])
             self.assertEqual(bool(path.stat().st_mode&0o111),pin['mode']=='100755')
 

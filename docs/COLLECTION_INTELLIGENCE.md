@@ -14,7 +14,7 @@ The bounded [Card acquisition pilot](CARD_ACQUISITION_PILOT.md), based on merged
 
 This repairs the Collection Intelligence import/snapshot resolver available for production identity imports. The acquisition pilot independently validates its direct source-bound ownership declaration against the same canonical query projection. The separate typed `CollectionService` repository path is unchanged. No real user collection was retained by that milestone, and its complete ownership input remains synthetic. Its original exclusions of sorting/reassessment history are superseded only by the bounded audit described above; production collection management and automatic reassessment remain outside the pilot.
 
-The acquisition adapter uses direct acceptable-copy accounting and does not call deck allocation. Mixed `any`/`exact` deck requirements can still allocate one physical copy twice; that demonstrated defect remains explicitly out of scope. Collection valuation is descriptive and does not validate comparable current all-in acquisition offers. Neither helper is used to choose a purchase.
+The acquisition adapter uses direct acceptable-copy accounting and does not call deck allocation. The separately authorized mixed-Printing repair below corrects deck completion; it does not change that adapter or authorize purchase advice. Collection valuation remains descriptive and does not validate comparable current all-in acquisition offers.
 
 **Contract versions:** `collection-import-v1`, `collection-snapshot-v1`,
 `deck-requirement-v1`. Collection intelligence is deterministic downstream user data;
@@ -57,16 +57,48 @@ A deck document contains `schema_version`, `deck_id`, `format`, version or snaps
 `requirements`, `acceptable_printing_policy`, `substitution_policy`, and `source` provenance.
 Each requirement declares a canonical `card_id`, positive quantity, `main` or `sideboard`,
 and optionally an exact `printing_id` and policy. `any` allows copies of the Card across
-Printings; `exact` allows only the declared Printing. Copies are allocated deterministically
-within each policy counter. Uniform-policy requirements consume those counters, but mixed
-`any`/`exact` requirements currently use separate counters and can double-count the same
-physical copy across requirements. Do not use mixed-policy completion for acquisition;
-its repair requires separate authorization.
+Printings; `exact` allows only the declared Printing belonging to that Card.
+One shared remaining inventory, indexed by Printing ID, prevents a resolved
+physical copy from satisfying more than one requirement in a deck comparison.
+All exact requirements allocate before flexible requirements, including exact
+sideboard requirements before flexible main-deck requirements. Within each policy,
+priority follows report order: section, Card ID, Printing ID, then canonical
+requirement JSON bytes to resolve otherwise equal keys. Flexible allocation consumes
+eligible remaining Printings in ascending Printing-ID order. This is deterministic
+copy accounting, not a general optimizer or a statement of deck legality/value.
+Quantities must be positive integers and policies must be `any` or `exact`.
+Missing, ambiguous, invalid and duplicate-input rows do not create owned copies.
+
+The regression is one owned copy and two requirements (one flexible, one matching
+exact): previously two allocations and `100.00%`; corrected one allocation, one
+missing copy and `50.00%`. Exact priority avoids spending a scarce exact match on
+a flexible requirement when another Printing can satisfy it. Input row order and
+inventory dictionary order do not change the result. Public field names/schema,
+snapshot identity/provenance, unresolved warnings and acquisition-priority formula
+remain unchanged. Requirements are returned in report order, not allocation order.
 
 For each requirement, comparison reports allocated owned, required, missing, excess and
 reusable quantities plus complete/partial/missing status. Completion is
 `100 * sum(min(available, required)) / sum(required)`. Potentially relevant unresolved
 collection evidence is returned rather than hidden.
+
+`owned_quantity` is allocated to this requirement, and `missing_quantity` is its
+remaining need. The formerly ambiguous `excess_copies` and `reusable_owned_copies`
+both describe eligible copies left **after the entire deck comparison**, excluding
+every copy already allocated to any other requirement. For an exact row that is
+the remaining matching Printing; for a flexible row it is the remaining Card pool.
+These are overlapping views of shared leftover inventory, not quantities to sum
+across rows or copy reservations for another deck. A single valid uniform-policy
+requirement retains its previous surplus; repeated/mixed rows no longer claim
+copies consumed elsewhere. Separate deck comparisons remain independent views
+of the supplied collection, with no persistent reservation or ownership mutation.
+
+Historical design/source packages remain immutable. Their tests use an exact,
+test-only reversible adapter for this one authorized function replacement; both
+current whole-file and reconstructed historical bytes are pinned. No source file,
+permission, report, workflow or arbitrary future edit is exempted. This repair
+does not change the separate generic evidence-handoff validator or any gameplay,
+market, strategic or reviewer-authorization capability.
 
 ## Acquisition priorities
 
