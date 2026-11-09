@@ -1,0 +1,32 @@
+{
+  "authorization_decision": "authorize_for_promotion",
+  "authorization_digest": "2335f440d4fd53e27886c7d8e93aec8485d94f6b38daf7f8ea9c4dcded5112a7",
+  "authorized_batch_id": "mb2-batch-000001-e32022126c07",
+  "authorized_candidate_digest": "e32022126c07036337f810d06dc29b5eead5afd850f7f3af0a26ad5b0d46e66e",
+  "canonical_write": false,
+  "immutable": true,
+  "operator_identity": "CJ Castro",
+  "operator_notes": "I personally reviewed the Phase 115 candidate review, Phase 116 identifier resolution, and Phase 117 authorization request for MB2 batch mb2-batch-000001-e32022126c07. I authorize only this reviewed batch for the subsequent bounded canonical promotion phase. This authorization does not apply to any other MB2 batch or any Marvel/MSH data.",
+  "operator_role": "MTG Lab Project Owner",
+  "prior_canonical_state_digest": "0e5ead0d4693f1dc75c2f7b5e401f22e4fa302f93bb8eab59f0ddeefd0f680ba",
+  "promotion_performed": false,
+  "review_chain_lineage": {
+    "archive_sha256": "2887ea307f07b58ddcf4f0179e99e54e79e072949542869e7c01b4275a1ee3ba",
+    "dependency_closure_digest": "8893e79c847c506e07513793f139f31c94eb2ebce47bddec2ccd6b0fbbdd62e6",
+    "evidence_identity": "30663562841-review-payload-v2",
+    "final_candidate_id_digest": "e32022126c07036337f810d06dc29b5eead5afd850f7f3af0a26ad5b0d46e66e",
+    "findings_digest": "7db72f1f94563ad29f8fef2879a7f64c32f5fab8df50fe1035e709c0a5fcb8b3",
+    "phase_115_decision_digest": "325270e3d20e0552a42e54d98af19e9bd77c357a1a125592e90f9cd185487a85",
+    "phase_115_decision_id": "phase-115/pending-review-decision",
+    "phase_116_decision_digest": "5eeb4ca18c3066fb52a5f396dee76a9b931d14b0ff23e3d022fd3131eac38322",
+    "phase_116_decision_id": "phase-116/pending-review-decision",
+    "source_artifact_identity": "mtgjson-ingestion-30663562841",
+    "source_sha256": "b47cc83600341e18663bdb48fe9d1337730976844465a35e75bcde5ac6f00d09",
+    "workflow_run_id": "30663562841"
+  },
+  "review_reference": "github:IDontFeelNone/MTG-Lab/phase-117a-mb2-batch-000001-review",
+  "reviewed_at": "2026-07-31T23:47:00-04:00",
+  "schema_version": "phase-117-operator-authorization-v1",
+  "signature_request_digest": "4b281b3eb45b6a7e3e82a2309c271bffe1cb6c8cb939d46c5b8be059e0b6000d",
+  "status": "authorized_for_later_promotion"
+}
