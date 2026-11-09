@@ -264,6 +264,19 @@ class CanonicalQueryEngine:
         self._verify_attachment()
         return self._catalog_attachment.binding if self._catalog_attachment is not None else None
 
+    def retained_record(self, identifier: str, *, entity_type: str) -> dict[str, Any]:
+        """Independent source view for strict downstream schema validation.
+
+        Typed compatibility defaults are not evidence of explicit source fields.
+        Ambiguous namespaces and state-only entities have no such record route.
+        This accessor grants no new attachment capability or source authority.
+        """
+        matches = self.entities(canonical_id=identifier)
+        if (len(matches) != 1 or matches[0].entity_type != entity_type
+                or identifier not in self._raw):
+            raise QueryError("unique retained record is unavailable")
+        return deepcopy(self._raw[identifier])
+
     def snapshot(self) -> QuerySnapshot:
         """Return all query results and their deterministic content identity."""
         self._verify_attachment()

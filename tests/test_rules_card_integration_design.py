@@ -187,7 +187,9 @@ class RulesCardIntegrationDesignTests(unittest.TestCase):
         self.assertEqual(ENGINE_CONTRACT_VERSION,'gameplay-kernel-v1');self.assertEqual(EXECUTION_PROFILE,'fictional-two-player-v1')
         readiness=json.loads((ROOT/'reference-reviews/gameplay-rules-execution-profile-design/readiness.json').read_bytes())
         self.assertEqual(readiness['overall_execution_readiness'],'BLOCKED');self.assertFalse(readiness['real_rules_executable']);self.assertFalse(readiness['execution_authorized'])
-        self.assertEqual([p.name for p in (ROOT/'src/simulation').iterdir()],['.gitkeep'])
+        from pack_simulation_preservation import is_addition
+        self.assertEqual([p.name for p in (ROOT/'src/simulation').iterdir()
+            if p.name!='__pycache__' and not is_addition(p,ROOT)],['.gitkeep'])
         self.assertEqual([p.name for p in (ROOT/'src/probability').glob('*.py')],['__init__.py'])
         self.assertEqual(document('examples.json')['status'],'ILLUSTRATIVE_NOT_STRATEGIC_VALIDATION')
 

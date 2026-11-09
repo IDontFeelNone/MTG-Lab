@@ -75,6 +75,8 @@ def assert_hash_row(row, root=ROOT):
     raw = allocation_preceding_bytes(row["path"], raw)
     from test_evidence_review_malformed import handoff_preceding_bytes
     raw = handoff_preceding_bytes(row["path"], raw)
+    from pack_simulation_preservation import preceding_bytes as pack_preceding
+    raw = pack_preceding(row["path"], raw)
     if pin is not None:
         _check_pin(raw, pin)
     elif hashlib.sha256(raw).hexdigest() != row["sha256"]:
@@ -88,6 +90,10 @@ def assert_retained_row(row, root=ROOT):
             or type(row["bytes"]) is not int):
         raise AssertionError("Exact historical path/hash/length row schema required")
     pin = _replacement(row)
+    from pack_simulation_preservation import REPLACEMENTS, preceding_bytes as pack_preceding
+    if row["path"] in REPLACEMENTS:
+        _check_pin(pack_preceding(row["path"], regular_bytes(row["path"], root)), pin if pin is not None else row)
+        return
     from test_evidence_review_malformed import HANDOFF_SOURCE_PATHS, handoff_preceding_bytes
     if row["path"] in HANDOFF_SOURCE_PATHS:
         _check_pin(handoff_preceding_bytes(row["path"], regular_bytes(row["path"], root)), row)
@@ -106,7 +112,8 @@ def assert_current_implementation(root=ROOT):
     """Require current replacements, exact additions and retained evidence bytes."""
     value = ledger()
     for item in value["replacements"]:
-        _check_pin(regular_bytes(item["path"], root), item["replacement"])
+        from pack_simulation_preservation import preceding_bytes as pack_preceding
+        _check_pin(pack_preceding(item["path"], regular_bytes(item["path"], root)), item["replacement"])
     for row in value["additions"]:
         _check_pin(regular_bytes(row["path"], root), row)
     for row in [value["prior_implementation_ledger"], *value["historical_fixtures"]]:
@@ -139,6 +146,12 @@ def historical_inventory_row(row, root=ROOT):
             or type(row["bytes"]) is not int):
         raise AssertionError("Exact current path/hash/length row schema required")
     from test_evidence_review_malformed import HANDOFF_SOURCE_PATHS, handoff_preceding_bytes
+    from pack_simulation_preservation import REPLACEMENTS, preceding_bytes as pack_preceding
+    if row["path"] in REPLACEMENTS:
+        raw = regular_bytes(row["path"], root)
+        _check_pin(raw, row)
+        old = pack_preceding(row["path"], raw)
+        row = {"path": row["path"], "bytes": len(old), "sha256": hashlib.sha256(old).hexdigest()}
     if row["path"] in HANDOFF_SOURCE_PATHS:
         raw = regular_bytes(row["path"], root)
         _check_pin(raw, row)
