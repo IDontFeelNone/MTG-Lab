@@ -139,8 +139,9 @@ class MadnessCastingPreservationTests(unittest.TestCase):
     def test_fictional_profile_and_simulation_are_unchanged(self):
         self.assertEqual(ENGINE_CONTRACT_VERSION, "gameplay-kernel-v1")
         self.assertEqual(EXECUTION_PROFILE, "fictional-two-player-v1")
+        from pack_simulation_preservation import is_addition
         self.assertEqual({path.name for path in (ROOT / "src/simulation").iterdir()
-                          if path.name != "__pycache__"}, {".gitkeep"})
+                          if path.name != "__pycache__" and not is_addition(path,ROOT)}, {".gitkeep"})
 
     def test_design_namespace_has_no_runtime_network_ingestion_or_payment_implementation(self):
         forbidden_imports = {"socket", "http", "urllib", "requests", "subprocess", "simulation",

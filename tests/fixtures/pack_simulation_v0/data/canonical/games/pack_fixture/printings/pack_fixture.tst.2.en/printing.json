@@ -1,0 +1,21 @@
+{
+  "card_id": "pack_fixture.card2",
+  "collector_number": "2",
+  "id": "pack_fixture.tst.2.en",
+  "provenance": [
+    {
+      "claim": "Explicit fictional model only; not real Magic, production data or physical collation.",
+      "field_paths": [
+        "card_id",
+        "collector_number",
+        "id",
+        "rarity",
+        "set_code"
+      ],
+      "source_id": "fictional-definition"
+    }
+  ],
+  "rarity": "common",
+  "schema_version": "v1",
+  "set_code": "TST"
+}

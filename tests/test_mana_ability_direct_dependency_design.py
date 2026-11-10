@@ -165,7 +165,8 @@ class ManaDirectPreservationTests(unittest.TestCase):
             self.assertEqual(rule["source_anchor"]["span_policy"], policy)
         self.assertEqual(ENGINE_CONTRACT_VERSION, "gameplay-kernel-v1")
         self.assertEqual(EXECUTION_PROFILE, "fictional-two-player-v1")
-        self.assertEqual({p.name for p in (ROOT / "src/simulation").iterdir() if p.name != "__pycache__"}, {".gitkeep"})
+        from pack_simulation_preservation import is_addition
+        self.assertEqual({p.name for p in (ROOT / "src/simulation").iterdir() if p.name != "__pycache__" and not is_addition(p,ROOT)}, {".gitkeep"})
 
     def test_architecture_v13_decision_017_and_historical_replay_bytes_preserved(self):
         values = inventory(ROOT / "docs" / name for name in (

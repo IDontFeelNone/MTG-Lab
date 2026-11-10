@@ -100,7 +100,7 @@ class QueryAttachmentPerformancePreservationTests(unittest.TestCase):
         # Authored finite old/new bytes exercise current-mode selection without
         # relying on unavailable historical Git objects in shallow hosted trees.
         original, replacement = b"historical implementation\n", b"authorized implementation\n"
-        name = "src/query/engine.py"
+        name = "src/fictional-query-fixture.py"
         value = {"replacements": [{"path": name, "original": pin(original),
                                     "replacement": pin(replacement)}]}
         with tempfile.TemporaryDirectory() as temporary, patch.object(guard, "ledger", return_value=value):

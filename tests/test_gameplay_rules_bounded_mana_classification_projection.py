@@ -228,7 +228,8 @@ class ProjectionTests(unittest.TestCase):
                 self.assertEqual(flags[key],'NOT_ESTABLISHED')
             for key in ('real_snapshot_created','real_profile_activated','real_rules_executable','oracle_ingested','source_body_retained'):
                 self.assertFalse(flags[key])
-        self.assertEqual({p.name for p in (ROOT/'src/simulation').iterdir() if p.name != '__pycache__'},{'.gitkeep'})
+        from pack_simulation_preservation import is_addition
+        self.assertEqual({p.name for p in (ROOT/'src/simulation').iterdir() if p.name != '__pycache__' and not is_addition(p,ROOT)},{'.gitkeep'})
 
     def test_no_source_prose_examples_txt_or_attachment_paths(self):
         for p in PACKAGE.iterdir():

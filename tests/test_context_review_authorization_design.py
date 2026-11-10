@@ -272,6 +272,8 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
             path=ROOT/name;raw=path.read_bytes()
             from test_evidence_review_malformed import handoff_preceding_bytes
             raw=handoff_preceding_bytes(name,raw)
+            from pack_simulation_preservation import preceding_bytes as pack_preceding
+            raw=pack_preceding(name,raw)
             self.assertEqual(len(raw),pin['bytes']);self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['sha256'])
         for subsystem in document('inventory.json')['subsystems']:
             self.assertTrue(subsystem['implemented']);self.assertTrue(subsystem['authority_boundary']);self.assertTrue(subsystem['missing_or_blocked'])
@@ -302,6 +304,8 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
         expected={v['path'] for v in value['files']};actual=set()
         for directory in ('src','.github'):
             for p in (ROOT/directory).rglob('*'):
+                from pack_simulation_preservation import is_addition
+                if p.is_file() and is_addition(p,ROOT): continue
                 if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.pyc':actual.add(p.relative_to(ROOT).as_posix())
         self.assertEqual(actual,expected)
         for pin in value['files']:
@@ -310,6 +314,8 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
             raw=allocation_preceding_bytes(pin['path'],raw)
             from test_evidence_review_malformed import handoff_preceding_bytes
             raw=handoff_preceding_bytes(pin['path'],raw)
+            from pack_simulation_preservation import preceding_bytes as pack_preceding
+            raw=pack_preceding(pin['path'],raw)
             self.assertEqual(len(raw),pin['bytes']);self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['sha256'])
             self.assertEqual(bool(path.stat().st_mode&0o111),pin['mode']=='100755')
 

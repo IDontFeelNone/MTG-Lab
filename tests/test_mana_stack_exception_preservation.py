@@ -106,8 +106,9 @@ class CanonicalPreservationTests(unittest.TestCase):
                 "src/production_evidence/automatic_updates.py", "src/repository/canonical.py",
                 "src/simulation/.gitkeep"):
             self.assertIn(name, names)
+        from pack_simulation_preservation import is_addition
         self.assertEqual({p.name for p in (ROOT / "src/simulation").iterdir()
-            if p.name != "__pycache__"}, {".gitkeep"})
+            if p.name != "__pycache__" and not is_addition(p,ROOT)}, {".gitkeep"})
         self.assertHistoricalRowsChecked(fixture()["protected_support_files"])
 
     def test_all_twelve_prior_packages_exact_file_bytes_and_historical_anchors(self):

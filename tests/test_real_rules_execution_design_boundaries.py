@@ -346,8 +346,9 @@ class RealRulesExecutionDesignBoundaryTests(unittest.TestCase):
         self.assertEqual(value.func.id, "frozenset")
         self.assertEqual(value.args, [])
         self.assertEqual(value.keywords, [])
+        from pack_simulation_preservation import is_addition
         self.assertEqual({p.name for p in (ROOT / "src/simulation").iterdir()
-                          if p.name != "__pycache__"}, {".gitkeep"})
+                          if p.name != "__pycache__" and not is_addition(p,ROOT)}, {".gitkeep"})
 
 
 if __name__ == "__main__":

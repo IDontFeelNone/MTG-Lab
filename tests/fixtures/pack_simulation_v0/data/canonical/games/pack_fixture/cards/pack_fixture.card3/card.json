@@ -1,0 +1,17 @@
+{
+  "game": "pack_fixture",
+  "id": "pack_fixture.card3",
+  "name": "Fictional Card 3",
+  "provenance": [
+    {
+      "claim": "Explicit fictional model only; not real Magic, production data or physical collation.",
+      "field_paths": [
+        "game",
+        "id",
+        "name"
+      ],
+      "source_id": "fictional-definition"
+    }
+  ],
+  "schema_version": "v1"
+}

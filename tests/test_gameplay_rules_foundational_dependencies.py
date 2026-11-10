@@ -675,8 +675,9 @@ class DependencyPreservationTests(unittest.TestCase):
     def test_fictional_profile_and_empty_simulation_are_preserved(self):
         self.assertEqual(ENGINE_CONTRACT_VERSION, "gameplay-kernel-v1")
         self.assertEqual(EXECUTION_PROFILE, "fictional-two-player-v1")
+        from pack_simulation_preservation import is_addition
         self.assertEqual({path.name for path in (ROOT / "src/simulation").iterdir()
-                          if path.name != "__pycache__"}, {".gitkeep"})
+                          if path.name != "__pycache__" and not is_addition(path,ROOT)}, {".gitkeep"})
 
     def test_dependency_modules_do_not_import_or_instantiate_gameplay_network_card_or_policy_engines(self):
         forbidden_imports = {"socket", "http", "urllib", "requests", "subprocess", "simulation",

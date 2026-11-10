@@ -208,7 +208,25 @@ def main(argv=None) -> int:
     for name in ("corpus", "inspect", "verify"):
         command = promote_commands.add_parser(name)
         command.add_argument("--format", choices=("json",), default="json")
-    args = parser.parse_args(argv); registry = DatasetRegistry(args.data_root / "datasets")
+    pack = commands.add_parser("pack")
+    pack_commands = pack.add_subparsers(dest="pack_command", required=True)
+    single = pack_commands.add_parser("simulate")
+    single.add_argument("--game", default="magic"); single.add_argument("--product-id", required=True)
+    single.add_argument("--definition-id"); single.add_argument("--seed", type=int, required=True)
+    single.add_argument("--recorded-at"); single.add_argument("--format", choices=("json", "text"), default="json")
+    args = parser.parse_args(argv)
+    if args.command == "pack":
+        from simulation import load_pack_simulator, PackSimulationError, render_pack_report
+        try:
+            result = load_pack_simulator(args.game, data_root=args.data_root).generate(
+                args.product_id, pack_definition_id=args.definition_id, seed=args.seed,
+                recorded_at=args.recorded_at)
+        except PackSimulationError as error:
+            print(render_pack_report(error.as_dict(), readable=args.format == "text"), end="")
+            return 2
+        print(render_pack_report(result, readable=args.format == "text"), end="")
+        return 0
+    registry = DatasetRegistry(args.data_root / "datasets")
     manager = ImportManager(args.data_root, registry)
     if args.command in {"collection", "deck"}:
         try:

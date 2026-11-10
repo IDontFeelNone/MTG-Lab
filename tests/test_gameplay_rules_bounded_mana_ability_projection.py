@@ -162,7 +162,8 @@ class BoundedManaPreservationTests(unittest.TestCase):
     def test_fictional_authority_constants_and_empty_simulation_unchanged(self):
         self.assertEqual(ENGINE_CONTRACT_VERSION, "gameplay-kernel-v1")
         self.assertEqual(EXECUTION_PROFILE, "fictional-two-player-v1")
-        self.assertEqual({p.name for p in (ROOT / "src/simulation").iterdir() if p.name != "__pycache__"}, {".gitkeep"})
+        from pack_simulation_preservation import is_addition
+        self.assertEqual({p.name for p in (ROOT / "src/simulation").iterdir() if p.name != "__pycache__" and not is_addition(p,ROOT)}, {".gitkeep"})
 
     def test_new_projection_layer_has_no_runtime_network_card_ingestion_or_general_parser(self):
         imports = {"socket", "http", "urllib", "requests", "subprocess", "simulation", "random", "secrets",
