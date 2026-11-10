@@ -1,0 +1,6 @@
+fictional-pack / fictional-definition: 3 cards
+Seed 1; sha256-counter-rejection-256-v1; non-production definition model
+base-slot: pack_fixture.tst.1.en, pack_fixture.tst.2.en
+accent-slot: pack_fixture.tst.3.en
+Input: sha256:4cbd3dd8c9d78ecf0a3503840507c0fbd711c96dbe8e07ca1712ef334fb5e8d2
+No physical collation or production authority established.

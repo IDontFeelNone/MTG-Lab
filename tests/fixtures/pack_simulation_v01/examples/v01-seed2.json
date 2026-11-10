@@ -1,0 +1,114 @@
+{
+  "algorithm": "sha256-counter-rejection-256-v1",
+  "card_count": 3,
+  "database_version": null,
+  "evidence_references": [
+    {
+      "content_id": "sha256:50d551f23c8786a3fb01d35053e53da43c3539584bdd6c080b216234ade12425",
+      "id": "foil",
+      "kind": "finish"
+    },
+    {
+      "content_id": "sha256:aa46980ac266f125298ea575aa744a6e87b65bd6b4f76ef7ae78095ca4cdca5f",
+      "id": "nonfoil",
+      "kind": "finish"
+    },
+    {
+      "content_id": "sha256:7d74ee3038c055b8f9dce8d9a689389c3b0693cfec660ece31c592292d711696",
+      "id": "fictional-definition",
+      "kind": "pack_definition"
+    },
+    {
+      "content_id": "sha256:164569820ebd81f9e83661b1590c17e8a75f00e2e8e154f3eda3211d447db2a9",
+      "id": "accent-sheet",
+      "kind": "print_sheet"
+    },
+    {
+      "content_id": "sha256:e87cdaf130feea7d202779e5503ae95619c52d22a3a4c89dce5b8bde9773ebdb",
+      "id": "base-sheet",
+      "kind": "print_sheet"
+    },
+    {
+      "content_id": "sha256:4f235275234e2b4233bcb897b562e419abb4890fb08fbed2c7cce68169c693a6",
+      "id": "pack_fixture.tst.1.en",
+      "kind": "printing"
+    },
+    {
+      "content_id": "sha256:cf46eb89ddf60d383b7e1bb1a2c887bf751f65bb72f451a67d5f75eebf5885e5",
+      "id": "pack_fixture.tst.2.en",
+      "kind": "printing"
+    },
+    {
+      "content_id": "sha256:88d8a25d5056c4ef3526cb87d087a949148e3fdcdcae0a934a121fd09ea6a5c2",
+      "id": "pack_fixture.tst.3.en",
+      "kind": "printing"
+    },
+    {
+      "content_id": "sha256:140954948c3f5e2affc3344030111d09919547f355ed0820b1c9c611ad29b518",
+      "id": "fictional-pack",
+      "kind": "product"
+    },
+    {
+      "content_id": "sha256:fd4183f8637fc3f8c4070d1e68686a7ef6e3082d3c3763caa5f1662acf83f217",
+      "id": "fictional-version",
+      "kind": "product_version"
+    },
+    {
+      "content_id": "sha256:85fcbed3b857c165c1b7b9c143ff1f998b33e14b9b70d2b473cafb61518475da",
+      "id": "accent-slot",
+      "kind": "slot"
+    },
+    {
+      "content_id": "sha256:9a8587dc95c82069ec070852392c80b9e0974176287af0ceacdce81127e47d1b",
+      "id": "base-slot",
+      "kind": "slot"
+    }
+  ],
+  "game": "pack_fixture",
+  "input_id": "sha256:43177ed777da2d687eeee56a872e3a35d73076777fabb88428a2c157a7a2f0e1",
+  "pack_definition_id": "fictional-definition",
+  "product_id": "fictional-pack",
+  "product_version_id": "fictional-version",
+  "production_authorized": false,
+  "query_snapshot_id": "sha256:1b17174e7f073691955ccb0e0843fc4c8b9497850489eff5897cd329024b5c15",
+  "recorded_at": null,
+  "sampling_model": "independent-finish-weighted-with-replacement-v1",
+  "schema_version": "pack-simulation-v0.1",
+  "scope": "EXPLICIT_DEFINITION_MODEL_ONLY_NON_PRODUCTION",
+  "seed": 2,
+  "simulator_version": "pack-simulation-v0.1",
+  "slots": [
+    {
+      "outcomes": [
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.2.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.1.en"
+        }
+      ],
+      "print_sheet_id": "base-sheet",
+      "slot_id": "base-slot"
+    },
+    {
+      "outcomes": [
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.2.en"
+        }
+      ],
+      "print_sheet_id": "accent-sheet",
+      "slot_id": "accent-slot"
+    }
+  ],
+  "source_references": [
+    {
+      "content_id": "sha256:ffe00550cf1d7710ef83e7d683c92439653214f1666f704154c63f3c55691417",
+      "id": "fictional-definition"
+    }
+  ],
+  "status": "GENERATED",
+  "timestamp_authority": "unspecified"
+}

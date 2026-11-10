@@ -6,6 +6,8 @@ ADDITIONS = {'src/simulation/__init__.py': {'bytes': 333, 'sha256': '44e47799458
 
 def preceding_bytes(name, raw):
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
+    from finish_simulation_preservation import preceding_bytes as finish_preceding
+    raw = finish_preceding(name, raw)
     if name not in REPLACEMENTS: return raw
     pin = REPLACEMENTS[name]; digest = hashlib.sha256(raw).hexdigest()
     if digest == pin['old_sha256']: return raw
@@ -18,10 +20,13 @@ def preceding_bytes(name, raw):
 
 def is_addition(path, root):
     name = path.relative_to(root).as_posix()
+    from finish_simulation_preservation import is_addition as finish_addition
+    if finish_addition(path, root): return True
     if name not in ADDITIONS: return False
     pin = ADDITIONS[name]
     if path.is_symlink() or path.stat().st_mode & 0o111: raise AssertionError('unsupported pack-v0 source mode')
-    raw = path.read_bytes()
+    from finish_simulation_preservation import preceding_bytes as finish_preceding
+    raw = finish_preceding(name, path.read_bytes())
     if len(raw) != pin['bytes'] or hashlib.sha256(raw).hexdigest() != pin['sha256']:
         raise AssertionError('exact pack-v0 addition pin required')
     return True

@@ -1,0 +1,15 @@
+{
+  "access_date": "2026-11-09",
+  "claims": [
+    "Original fictional definitions for a mathematical sampler; no real cards or production authority.",
+    "All finish eligibility, declarations and example dates are fictional supplied test facts; no real manufacturing or authority assertion."
+  ],
+  "id": "fictional-definition",
+  "provider": "MTG Lab test fixture",
+  "record_version": "1",
+  "schema_version": "v1",
+  "source_classification": "internal",
+  "source_location": "tests/fixtures/pack_simulation_v0/",
+  "title": "Fictional independent weighted pack",
+  "verification_status": "confirmed"
+}
