@@ -1,0 +1,221 @@
+{
+  "algorithm": "sha256-counter-rejection-256-v1",
+  "card_count": 15,
+  "database_version": null,
+  "evidence_references": [
+    {
+      "content_id": "sha256:50d551f23c8786a3fb01d35053e53da43c3539584bdd6c080b216234ade12425",
+      "id": "foil",
+      "kind": "finish"
+    },
+    {
+      "content_id": "sha256:aa46980ac266f125298ea575aa744a6e87b65bd6b4f76ef7ae78095ca4cdca5f",
+      "id": "nonfoil",
+      "kind": "finish"
+    },
+    {
+      "content_id": "sha256:a4c4ec17fbaadda855d94a80d84bff9659deb62398cb9b51550d8e4de9a9179d",
+      "id": "fictional-variants",
+      "kind": "pack_definition"
+    },
+    {
+      "content_id": "sha256:1b548f19c1c6f6ede0c4b96470398d7e33b170496e3718479693d1eb812fc41a",
+      "id": "variant-a-nonfoil",
+      "kind": "pack_definition"
+    },
+    {
+      "content_id": "sha256:076b57fe9a06939aa90df49384f02300267e4266616479c484785c4230400039",
+      "id": "variant-b-foil",
+      "kind": "pack_definition"
+    },
+    {
+      "content_id": "sha256:74e81291c5a77c8d3625e49c77f54dda26501e14391671682ae8a5d31a4f460b",
+      "id": "variant-c-mixed",
+      "kind": "pack_definition"
+    },
+    {
+      "content_id": "sha256:164569820ebd81f9e83661b1590c17e8a75f00e2e8e154f3eda3211d447db2a9",
+      "id": "accent-sheet",
+      "kind": "print_sheet"
+    },
+    {
+      "content_id": "sha256:111cfdb7aff3d5f6eee6abed2c624f99ffebe1ce66ad6e61c4e694d8f2d331ed",
+      "id": "base-sheet",
+      "kind": "print_sheet"
+    },
+    {
+      "content_id": "sha256:3d5289a1ec5e551115387327f7b1602d2386f9e3b9f7c40a62f343c2e9ead174",
+      "id": "foil-sheet",
+      "kind": "print_sheet"
+    },
+    {
+      "content_id": "sha256:30ee652ed4b4909eb62ae92c87e1ec03c6aa82af8aac41c71efd516df7e9f6c7",
+      "id": "mixed-sheet",
+      "kind": "print_sheet"
+    },
+    {
+      "content_id": "sha256:ef55a36f0833c27ae52915ed90ae5b0bfaa834b68be844ee787275e3796f3621",
+      "id": "nonfoil-sheet",
+      "kind": "print_sheet"
+    },
+    {
+      "content_id": "sha256:4f235275234e2b4233bcb897b562e419abb4890fb08fbed2c7cce68169c693a6",
+      "id": "pack_fixture.tst.1.en",
+      "kind": "printing"
+    },
+    {
+      "content_id": "sha256:cf46eb89ddf60d383b7e1bb1a2c887bf751f65bb72f451a67d5f75eebf5885e5",
+      "id": "pack_fixture.tst.2.en",
+      "kind": "printing"
+    },
+    {
+      "content_id": "sha256:88d8a25d5056c4ef3526cb87d087a949148e3fdcdcae0a934a121fd09ea6a5c2",
+      "id": "pack_fixture.tst.3.en",
+      "kind": "printing"
+    },
+    {
+      "content_id": "sha256:140954948c3f5e2affc3344030111d09919547f355ed0820b1c9c611ad29b518",
+      "id": "fictional-pack",
+      "kind": "product"
+    },
+    {
+      "content_id": "sha256:699e569067e357af6ace72ac38cd1ff2d2dd4d5beab79547cbb40bd1149032c2",
+      "id": "fictional-version",
+      "kind": "product_version"
+    },
+    {
+      "content_id": "sha256:ac0f69f5038fa2c9ec54476b84ab2cedc17ccccb56c212776fa92738a870a3a4",
+      "id": "accent-slot",
+      "kind": "slot"
+    },
+    {
+      "content_id": "sha256:68393090067ebeca9fb42fd303761b3a99fb3472e57e15679f565d2db4f23b4e",
+      "id": "base-slot",
+      "kind": "slot"
+    },
+    {
+      "content_id": "sha256:c6ddeb272764f02a303b3f1b456a6924d0cabf26906e817638eeaa3f3e149739",
+      "id": "foil-slot",
+      "kind": "slot"
+    },
+    {
+      "content_id": "sha256:060fa8ff063e0f53ff65ff552904b78a7f49f0acfe45e8c44d0c2bdfda840468",
+      "id": "mixed-slot",
+      "kind": "slot"
+    },
+    {
+      "content_id": "sha256:6d539f753f885c6ae58a775d3d6ac4bc1edf3efbd415d5aa0d786cfa4349ad03",
+      "id": "nonfoil-slot",
+      "kind": "slot"
+    },
+    {
+      "content_id": "sha256:7510fc1a20ce85768dadef6757de15a7ae875262e3eefc750698d1f6b9b16b0f",
+      "id": "short-base-slot",
+      "kind": "slot"
+    }
+  ],
+  "game": "pack_fixture",
+  "input_id": "sha256:22b07ab1ca25492ed9618160b748723448e196320edd78850884971fc0661f2e",
+  "pack_definition_id": "fictional-variants",
+  "product_id": "fictional-pack",
+  "product_version_id": "fictional-version",
+  "production_authorized": false,
+  "query_snapshot_id": "sha256:8805e6ed0336a69222658f2d1ca0ec4da59f4776f78e98c1d7e62a928e823a2a",
+  "recorded_at": null,
+  "sampling_model": "weighted-finish-pack-variants-with-replacement-v1",
+  "schema_version": "pack-simulation-v0.2",
+  "scope": "EXPLICIT_DEFINITION_MODEL_ONLY_NON_PRODUCTION",
+  "seed": 97,
+  "selected_variant_id": "variant-c-mixed",
+  "selected_variant_weight": 2,
+  "simulator_version": "pack-simulation-v0.2",
+  "slots": [
+    {
+      "outcomes": [
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.1.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.2.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.2.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.2.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.1.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.1.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.2.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.1.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.1.en"
+        }
+      ],
+      "print_sheet_id": "base-sheet",
+      "slot_id": "short-base-slot"
+    },
+    {
+      "outcomes": [
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.2.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.2.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.3.en"
+        },
+        {
+          "finish_id": "nonfoil",
+          "printing_id": "pack_fixture.tst.2.en"
+        }
+      ],
+      "print_sheet_id": "accent-sheet",
+      "slot_id": "accent-slot"
+    },
+    {
+      "outcomes": [
+        {
+          "finish_id": "foil",
+          "printing_id": "pack_fixture.tst.1.en"
+        },
+        {
+          "finish_id": "foil",
+          "printing_id": "pack_fixture.tst.1.en"
+        }
+      ],
+      "print_sheet_id": "mixed-sheet",
+      "slot_id": "mixed-slot"
+    }
+  ],
+  "source_references": [
+    {
+      "content_id": "sha256:47c32c2e0c6d53954f0923af66699ff71e97a55dc2f9a441b87010dbc38c084e",
+      "id": "fictional-definition"
+    }
+  ],
+  "status": "GENERATED",
+  "timestamp_authority": "unspecified",
+  "variant_total_weight": 100
+}

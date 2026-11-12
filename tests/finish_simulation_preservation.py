@@ -18,6 +18,8 @@ def ledger():
 
 def preceding_bytes(name, raw):
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
+    from variant_simulation_preservation import preceding_bytes as variant_preceding
+    raw = variant_preceding(name, raw)
     if name not in REPLACEMENT_PATHS: return raw
     pin=ledger()['replacements'][name];digest=hashlib.sha256(raw).hexdigest()
     if digest==pin['old_sha256'] or digest in pin.get('historical_sha256', ()): return raw
@@ -33,6 +35,8 @@ def preceding_bytes(name, raw):
 
 
 def is_addition(path, root):
+    from variant_simulation_preservation import is_addition as variant_addition
+    if variant_addition(path, root): return True
     name=path.relative_to(root).as_posix();pin=ledger()['additions'].get(name)
     if pin is None: return False
     if path.is_symlink() or path.stat().st_mode & 0o111: raise AssertionError('unsupported finish source mode')

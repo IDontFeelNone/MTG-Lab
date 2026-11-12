@@ -9,7 +9,7 @@ import tempfile
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
-from canonical import (Card, Finish, Game, PackDefinition, PackSlot, Printing,
+from canonical import (Card, Finish, Game, PackDefinition, PackVariant, PackSlot, Printing,
                        Product, ProductComponent, ProductVersion, Rarity, Sheet, SheetEntry, Treatment)
 from repository.cards import load_card_repository
 from repository.products import load_product
@@ -161,8 +161,13 @@ class CanonicalRepository:
     def _load_pack_definitions(self) -> tuple[PackDefinition, ...]:
         records=[]
         for data in self._documents(("packs/*.json", "packs/*/pack-definition.json")):
-            if data.get("schema_version") == "v2": validate_document(data, "pack-definition")
-            records.append(PackDefinition(str(data["id"]), dict(data.get("metadata", {})), str(data["product_version_id"]), str(data["name"]), tuple(map(str,data["slot_ids"]))))
+            native_variants = data.get("schema_version") == "v3"
+            if data.get("schema_version") in ("v2", "v3"): validate_document(data, "pack-definition")
+            records.append(PackDefinition(str(data["id"]), dict(data.get("metadata", {})),
+                str(data["product_version_id"]), str(data["name"]),
+                tuple(map(str, data.get("slot_ids", ()))), "v3" if native_variants else "v2",
+                tuple(PackVariant(x["pack_definition_id"], x["weight"]) for x in data["variants"])
+                if native_variants else None))
         return self._unique(records, "PackDefinition")
 
     def _load_slots(self) -> tuple[PackSlot, ...]:
@@ -252,6 +257,17 @@ class CanonicalRepository:
                         f"Product {product.id} references ProductVersion {identifier} owned by {versions[identifier].product_id}"
                     )
         self._validate_components()
+        packs = {item.id: item for item in self.pack_definitions}
+        for pack in self.pack_definitions:
+            if pack.variants is None: continue
+            identifiers = [v.pack_definition_id for v in pack.variants]
+            if len(identifiers) != len(set(identifiers)):
+                raise CanonicalRepositoryError(f"PackDefinition {pack.id} has duplicate variants")
+            for identifier in identifiers:
+                child = packs.get(identifier)
+                if (child is None or child.product_version_id != pack.product_version_id
+                        or child.variants is not None):
+                    raise CanonicalRepositoryError(f"PackDefinition {pack.id} has missing, foreign or nested variant {identifier}")
         self._refs_many(self.pack_definitions, "slot_ids", self.pack_slots, "PackDefinition", "PackSlot")
         self._refs(self.pack_slots, "print_sheet_id", self.sheets, "PackSlot", "Sheet")
         if self.rarities:

@@ -1,0 +1,23 @@
+{
+  "draw_count": 9,
+  "game": "pack_fixture",
+  "id": "short-base-slot",
+  "name": "Fictional short-base-slot",
+  "print_sheet_id": "base-sheet",
+  "provenance": [
+    {
+      "claim": "Explicit fictional model only; not real Magic, production data or physical collation.",
+      "field_paths": [
+        "draw_count",
+        "game",
+        "id",
+        "name",
+        "print_sheet_id",
+        "replacement"
+      ],
+      "source_id": "fictional-definition"
+    }
+  ],
+  "replacement": true,
+  "schema_version": "v2"
+}

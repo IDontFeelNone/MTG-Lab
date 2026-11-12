@@ -1,0 +1,194 @@
+{
+  "base": "ac7aaf390ffe8db035279a92126857bc0519cb4d",
+  "replacements": {
+    "src/canonical/__init__.py": {
+      "old_sha256": "c7126d685859898fe7c8d3094a651d1a2529e9baba6a1cb6fbb03ad3cada91a0",
+      "new_sha256": "0c3374b65ae6bddfe9e3ea3b24fb74795e7ffb0b8957003c2a6eb5fff42228a5",
+      "edits": [
+        {
+          "start": 76,
+          "end": 158,
+          "new": "    Card, Finish, Game, PackDefinition, PackVariant, PackSlot, Printing, Product,\n",
+          "old": "    Card, Finish, Game, PackDefinition, PackSlot, Printing, Product,\n"
+        },
+        {
+          "start": 433,
+          "end": 520,
+          "new": "    \"Card\", \"Finish\", \"Game\", \"PackDefinition\", \"PackVariant\", \"PackSlot\", \"Printing\",\n",
+          "old": "    \"Card\", \"Finish\", \"Game\", \"PackDefinition\", \"PackSlot\", \"Printing\",\n"
+        }
+      ]
+    },
+    "src/canonical/models.py": {
+      "old_sha256": "3468d9606dc827a07b7ee8f779d756bd5a480bd57080389ccda0259764f49645",
+      "new_sha256": "2054ab387f79a9e82720fe536f925367413eb4fc4878ca7112f240fbdcbaa6e0",
+      "edits": [
+        {
+          "start": 2738,
+          "end": 2827,
+          "new": "class PackVariant:\n    pack_definition_id: str\n    weight: int\n\n\n@dataclass(frozen=True)\n",
+          "old": ""
+        },
+        {
+          "start": 2975,
+          "end": 3075,
+          "new": "    variants: tuple[PackVariant, ...] | None = field(default=None, metadata={\"omit_if_none\": True})\n",
+          "old": ""
+        }
+      ],
+      "historical_sha256": [
+        "6fb62e96261f2f6d31112eb07d681f9223996c01955a7bb14315d77f3b630084"
+      ]
+    },
+    "src/repository/canonical.py": {
+      "old_sha256": "60a0bcaca9b1f538c45d12468a72435fe93b615daea2626559222683ebbd9d2d",
+      "new_sha256": "57150ef431ed5a0a5a386126ae659008a79f22cc978632d3c891688667a034ef",
+      "edits": [
+        {
+          "start": 231,
+          "end": 323,
+          "new": "from canonical import (Card, Finish, Game, PackDefinition, PackVariant, PackSlot, Printing,\n",
+          "old": "from canonical import (Card, Finish, Game, PackDefinition, PackSlot, Printing,\n"
+        },
+        {
+          "start": 8081,
+          "end": 8647,
+          "new": "            native_variants = data.get(\"schema_version\") == \"v3\"\n            if data.get(\"schema_version\") in (\"v2\", \"v3\"): validate_document(data, \"pack-definition\")\n            records.append(PackDefinition(str(data[\"id\"]), dict(data.get(\"metadata\", {})),\n                str(data[\"product_version_id\"]), str(data[\"name\"]),\n                tuple(map(str, data.get(\"slot_ids\", ()))), \"v3\" if native_variants else \"v2\",\n                tuple(PackVariant(x[\"pack_definition_id\"], x[\"weight\"]) for x in data[\"variants\"])\n                if native_variants else None))\n",
+          "old": "            if data.get(\"schema_version\") == \"v2\": validate_document(data, \"pack-definition\")\n            records.append(PackDefinition(str(data[\"id\"]), dict(data.get(\"metadata\", {})), str(data[\"product_version_id\"]), str(data[\"name\"]), tuple(map(str,data[\"slot_ids\"]))))\n"
+        },
+        {
+          "start": 13592,
+          "end": 14343,
+          "new": "        packs = {item.id: item for item in self.pack_definitions}\n        for pack in self.pack_definitions:\n            if pack.variants is None: continue\n            identifiers = [v.pack_definition_id for v in pack.variants]\n            if len(identifiers) != len(set(identifiers)):\n                raise CanonicalRepositoryError(f\"PackDefinition {pack.id} has duplicate variants\")\n            for identifier in identifiers:\n                child = packs.get(identifier)\n                if (child is None or child.product_version_id != pack.product_version_id\n                        or child.variants is not None):\n                    raise CanonicalRepositoryError(f\"PackDefinition {pack.id} has missing, foreign or nested variant {identifier}\")\n",
+          "old": ""
+        }
+      ],
+      "historical_sha256": [
+        "57326ae27a72b37d04bb784c649db3744201115748c74bed808c3c741920d165"
+      ]
+    },
+    "src/simulation/__init__.py": {
+      "old_sha256": "28c2321e85e2f1dd1ce17bd0ad7c1a5ef7133e6c07092d59c6d1b8fff6edc80d",
+      "new_sha256": "8b4b7cd096344bd4762a1653d98f93d7cf5e14785f4665b32f508c4d3d6a7594",
+      "edits": [
+        {
+          "start": 82,
+          "end": 211,
+          "new": "from .pack import (ALGORITHM, MODEL, VERSION, FINISH_MODEL, FINISH_VERSION, VARIANT_MODEL, VARIANT_VERSION, PackSimulationError,\n",
+          "old": "from .pack import (ALGORITHM, MODEL, VERSION, FINISH_MODEL, FINISH_VERSION, PackSimulationError,\n"
+        },
+        {
+          "start": 272,
+          "end": 409,
+          "new": "__all__ = ['ALGORITHM', 'MODEL', 'VERSION', 'FINISH_MODEL', 'FINISH_VERSION', 'VARIANT_MODEL', 'VARIANT_VERSION', 'PackSimulationError',\n",
+          "old": "__all__ = ['ALGORITHM', 'MODEL', 'VERSION', 'FINISH_MODEL', 'FINISH_VERSION', 'PackSimulationError',\n"
+        }
+      ],
+      "historical_sha256": [
+        "44e477994585bec51e2e7a7a17b7eda8dc757257144607384bd626e2e9997634"
+      ]
+    },
+    "src/simulation/pack.py": {
+      "old_sha256": "e19d4f55b26e9631e393057ffe57146e24b39e1aebd4456ba5c6e100496f9571",
+      "new_sha256": "13edf95e8d8de1a0d7ffa292c5afa53366c2c7a088d5c6999d4bcf68cc1b1af0",
+      "edits": [
+        {
+          "start": 465,
+          "end": 574,
+          "new": "VARIANT_VERSION = 'pack-simulation-v0.2'\nVARIANT_MODEL = 'weighted-finish-pack-variants-with-replacement-v1'\n",
+          "old": ""
+        },
+        {
+          "start": 6961,
+          "end": 7142,
+          "new": "        variant_model = selected['canonical_values']['schema_version'] == 'v3'\n        pack = record('pack_definition', pack_id, 'pack-definition', 'v3' if variant_model else 'v2')\n",
+          "old": "        pack = record('pack_definition', pack_id, 'pack-definition')\n"
+        },
+        {
+          "start": 7586,
+          "end": 7755,
+          "new": "        _require(pack.get('metadata') == {'simulation_model': model}\n                 and (model == VARIANT_MODEL if variant_model else model in (MODEL, FINISH_MODEL)),\n",
+          "old": "        _require(model in (MODEL, FINISH_MODEL) and pack['metadata'] == {'simulation_model': model},\n"
+        },
+        {
+          "start": 7814,
+          "end": 7983,
+          "new": "        finish_aware = variant_model or model == FINISH_MODEL\n        report_version = VARIANT_VERSION if variant_model else FINISH_VERSION if finish_aware else VERSION\n",
+          "old": "        finish_aware = model == FINISH_MODEL\n        report_version = FINISH_VERSION if finish_aware else VERSION\n"
+        },
+        {
+          "start": 8097,
+          "end": 14029,
+          "new": "\n        def composition(pack):\n            _require(len(pack['slot_ids']) <= MAX_SLOTS, 'SLOT_BOUND_EXCEEDED')\n            draws = []\n            total_cards = 0\n            for slot_id in pack['slot_ids']:\n                slot = record('slot', slot_id, 'slot')\n                sheet = record('print_sheet', slot['print_sheet_id'], 'print-sheet',\n                               'v3' if finish_aware else 'v2')\n                _require(slot['replacement'] is True, 'WITHOUT_REPLACEMENT_UNSUPPORTED')\n                _require(not slot.get('metadata') and not sheet.get('metadata'), 'UNSUPPORTED_SLOT_OR_SHEET_METADATA')\n                count = slot['draw_count']; total_cards += count\n                _require(type(count) is int and total_cards <= MAX_CARDS, 'CARD_COUNT_BOUND_EXCEEDED')\n                entries = sorted(((e['printing_id'], e['finish_id']) if finish_aware else e['printing_id'],\n                                  e['weight']) for e in sheet['entries'])\n                _require(0 < len(entries) <= MAX_POOL and len({p for p, _ in entries}) == len(entries),\n                         'EMPTY_OVERSIZED_OR_DUPLICATE_POOL')\n                _require(all(type(w) is int and 0 < w <= MAX_INTEGER for _, w in entries)\n                         and sum(w for _, w in entries) <= MAX_INTEGER, 'INVALID_EXPLICIT_WEIGHTS')\n                for outcome, _ in entries:\n                    printing_id = outcome[0] if finish_aware else outcome\n                    printing = items.get(('printing', printing_id))\n                    _require(printing is not None, 'UNKNOWN_PRINTING')\n                    _require(printing['supersession_state'] == 'current' and printing['uncertainty'] == 'known',\n                             'UNRESOLVED_OR_SUPERSEDED_PRINTING')\n                    if finish_aware:\n                        finish_id = outcome[1]\n                        finish = items.get(('finish', finish_id))\n                        _require(finish is not None and finish['uncertainty'] == 'known'\n                                 and finish['supersession_state'] == 'current', 'UNKNOWN_OR_UNRESOLVED_FINISH')\n                        raw = self._query.retained_record(printing_id, entity_type='printing')\n                        # The owning Card reader has admitted this record. Require an explicit\n                        # source-bound finish fact; compatibility defaults are never sufficient.\n                        _require(raw.get('schema_version') == 'v3' and type(raw.get('finishes')) is list\n                                 and finish_id in raw['finishes'], 'UNSUPPORTED_PRINTING_FINISH')\n                        assertions = [a for a in raw['assertions'] if a['path'] == '/finishes'\n                                      and a['status'] not in ('rejected', 'superseded')]\n                        _require(assertions and all(a['subject_id'] == printing_id\n                                 and a['status'] == 'promoted'\n                                 and a['verification_status'] in ('confirmed', 'verified')\n                                 and a['evidence_class'] not in ('unknown', 'conflicting')\n                                 and a['asserted_value'] == raw['finishes'] for a in assertions),\n                                 'UNRESOLVED_PRINTING_FINISH_EVIDENCE')\n                        for assertion in assertions:\n                            source_id = assertion['source_id']\n                            if source_id not in sources:\n                                sources[source_id] = load_source_record(snapshot.game, product_id, source_id,\n                                                                       games_root=self._query.games_root)\n                            _require(sources[source_id]['verification_status'] == 'confirmed',\n                                     'UNCONFIRMED_PRINTING_FINISH_SOURCE')\n                        records['printing', printing_id] = dict(kind='printing', id=printing_id,\n                                                               record=raw, query_evidence=printing)\n                        records['finish', finish_id] = dict(kind='finish', id=finish_id, query_evidence=finish)\n                    else:\n                        records['printing', printing_id] = dict(kind='printing', id=printing_id, query_evidence=printing)\n                draws.append((slot_id, sheet['id'], count, entries))\n            return draws, total_cards\n\n        candidates = {}\n        if variant_model:\n            variant_entries = sorted((v['pack_definition_id'], v['weight']) for v in pack['variants'])\n            _require(0 < len(variant_entries) <= MAX_SLOTS\n                     and len({v for v, _ in variant_entries}) == len(variant_entries),\n                     'EMPTY_OVERSIZED_OR_DUPLICATE_VARIANTS')\n            _require(all(type(w) is int and 0 < w <= MAX_INTEGER for _, w in variant_entries)\n                     and sum(w for _, w in variant_entries) <= MAX_INTEGER, 'INVALID_VARIANT_WEIGHTS')\n            aggregate_slots = aggregate_cards = aggregate_entries = 0\n            for identifier, _ in variant_entries:\n                child = record('pack_definition', identifier, 'pack-definition')\n                _require(child['product_version_id'] == version_id, 'VARIANT_PRODUCT_VERSION_MISMATCH')\n                _require(child.get('metadata') == {'simulation_model': FINISH_MODEL},\n                         'VARIANT_REQUIRES_FINISH_AWARE_COMPOSITION')\n                candidate = composition(child)\n                candidates[identifier] = candidate\n                aggregate_slots += len(candidate[0]); aggregate_cards += candidate[1]\n                aggregate_entries += sum(len(d[3]) for d in candidate[0])\n                _require(aggregate_slots <= MAX_SLOTS and aggregate_cards <= MAX_CARDS\n                         and aggregate_entries <= MAX_POOL, 'VARIANT_AGGREGATE_BOUND_EXCEEDED')\n        else:\n            draws, total_cards = composition(pack)\n",
+          "old": "        _require(len(pack['slot_ids']) <= MAX_SLOTS, 'SLOT_BOUND_EXCEEDED')\n        draws = []\n        total_cards = 0\n        for slot_id in pack['slot_ids']:\n            slot = record('slot', slot_id, 'slot')\n            sheet = record('print_sheet', slot['print_sheet_id'], 'print-sheet',\n                           'v3' if finish_aware else 'v2')\n            _require(slot['replacement'] is True, 'WITHOUT_REPLACEMENT_UNSUPPORTED')\n            _require(not slot.get('metadata') and not sheet.get('metadata'), 'UNSUPPORTED_SLOT_OR_SHEET_METADATA')\n            count = slot['draw_count']; total_cards += count\n            _require(type(count) is int and total_cards <= MAX_CARDS, 'CARD_COUNT_BOUND_EXCEEDED')\n            entries = sorted(((e['printing_id'], e['finish_id']) if finish_aware else e['printing_id'],\n                              e['weight']) for e in sheet['entries'])\n            _require(0 < len(entries) <= MAX_POOL and len({p for p, _ in entries}) == len(entries),\n                     'EMPTY_OVERSIZED_OR_DUPLICATE_POOL')\n            _require(all(type(w) is int and 0 < w <= MAX_INTEGER for _, w in entries)\n                     and sum(w for _, w in entries) <= MAX_INTEGER, 'INVALID_EXPLICIT_WEIGHTS')\n            for outcome, _ in entries:\n                printing_id = outcome[0] if finish_aware else outcome\n                printing = items.get(('printing', printing_id))\n                _require(printing is not None, 'UNKNOWN_PRINTING')\n                _require(printing['supersession_state'] == 'current' and printing['uncertainty'] == 'known',\n                         'UNRESOLVED_OR_SUPERSEDED_PRINTING')\n                if finish_aware:\n                    finish_id = outcome[1]\n                    finish = items.get(('finish', finish_id))\n                    _require(finish is not None and finish['uncertainty'] == 'known'\n                             and finish['supersession_state'] == 'current', 'UNKNOWN_OR_UNRESOLVED_FINISH')\n                    raw = self._query.retained_record(printing_id, entity_type='printing')\n                    # The owning Card reader has admitted this record. Require an explicit\n                    # source-bound finish fact; compatibility defaults are never sufficient.\n                    _require(raw.get('schema_version') == 'v3' and type(raw.get('finishes')) is list\n                             and finish_id in raw['finishes'], 'UNSUPPORTED_PRINTING_FINISH')\n                    assertions = [a for a in raw['assertions'] if a['path'] == '/finishes'\n                                  and a['status'] not in ('rejected', 'superseded')]\n                    _require(assertions and all(a['subject_id'] == printing_id\n                             and a['status'] == 'promoted'\n                             and a['verification_status'] in ('confirmed', 'verified')\n                             and a['evidence_class'] not in ('unknown', 'conflicting')\n                             and a['asserted_value'] == raw['finishes'] for a in assertions),\n                             'UNRESOLVED_PRINTING_FINISH_EVIDENCE')\n                    for assertion in assertions:\n                        source_id = assertion['source_id']\n                        if source_id not in sources:\n                            sources[source_id] = load_source_record(snapshot.game, product_id, source_id,\n                                                                   games_root=self._query.games_root)\n                        _require(sources[source_id]['verification_status'] == 'confirmed',\n                                 'UNCONFIRMED_PRINTING_FINISH_SOURCE')\n                    records['printing', printing_id] = dict(kind='printing', id=printing_id,\n                                                           record=raw, query_evidence=printing)\n                    records['finish', finish_id] = dict(kind='finish', id=finish_id, query_evidence=finish)\n                else:\n                    records['printing', printing_id] = dict(kind='printing', id=printing_id, query_evidence=printing)\n            draws.append((slot_id, sheet['id'], count, entries))\n"
+        },
+        {
+          "start": 14185,
+          "end": 14930,
+          "new": "        input_id = _identity('pack-simulation-input-v0.2' if variant_model else\n                             'pack-simulation-input-v0.1' if finish_aware else 'pack-simulation-input-v0', inputs)\n        counter = 0; slots = []; variant_result = {}\n        if variant_model:\n            total_weight = sum(w for _, w in variant_entries)\n            ticket, counter = _ticket(seed, counter, total_weight)\n            identifier = _select(variant_entries, ticket)\n            draws, total_cards = candidates[identifier]\n            variant_result = dict(selected_variant_id=identifier,\n                                  selected_variant_weight=dict(variant_entries)[identifier],\n                                  variant_total_weight=total_weight)\n",
+          "old": "        input_id = _identity('pack-simulation-input-v0.1' if finish_aware else 'pack-simulation-input-v0', inputs)\n        counter = 0; slots = []\n"
+        },
+        {
+          "start": 16352,
+          "end": 16457,
+          "new": "                    slots=slots, **variant_result, evidence_references=[dict(kind=r['kind'], id=r['id'],\n",
+          "old": "                    slots=slots, evidence_references=[dict(kind=r['kind'], id=r['id'],\n"
+        },
+        {
+          "start": 18163,
+          "end": 18603,
+          "new": "    if report['schema_version'] == VARIANT_VERSION:\n        lines += [VARIANT_VERSION + ': selected variant ' + report['selected_variant_id'] +\n                  ' (weight ' + str(report['selected_variant_weight']) + '/' +\n                  str(report['variant_total_weight']) + ')']\n    if report['schema_version'] in (FINISH_VERSION, VARIANT_VERSION):\n        lines += [report['schema_version'] + ': explicit Printing + Finish outcomes']\n",
+          "old": "    if report['schema_version'] == FINISH_VERSION:\n        lines += [FINISH_VERSION + ': explicit Printing + Finish outcomes']\n"
+        }
+      ],
+      "historical_sha256": [
+        "54a1f94e22c080691e46d772807a96f600a7fb3f309007f0187c5798b733b59d"
+      ]
+    },
+    "tests/finish_simulation_preservation.py": {
+      "old_sha256": "d01c2ec34907476ae9fe1ea19e8f7263a70f8c6a36aaafb2daa3e2d07109685b",
+      "new_sha256": "240d0c0d9f347391b6be046347aa6d4e4b9f607fe3c2749394c5f02a6c0fdf2d",
+      "edits": [
+        {
+          "start": 954,
+          "end": 1078,
+          "new": "    from variant_simulation_preservation import preceding_bytes as variant_preceding\n    raw = variant_preceding(name, raw)\n",
+          "old": ""
+        },
+        {
+          "start": 1818,
+          "end": 1947,
+          "new": "    from variant_simulation_preservation import is_addition as variant_addition\n    if variant_addition(path, root): return True\n",
+          "old": ""
+        }
+      ]
+    },
+    "tests/query_attachment_performance_preservation.py": {
+      "old_sha256": "bf6c871dd27a773a6f208268e1c14c84a867e6156b4fc53c8f797ab7fabf2e37",
+      "new_sha256": "32181bd350595928836357dec6473b7efdb75d5177efe6cb1796699e26ed515d",
+      "edits": [
+        {
+          "start": 4416,
+          "end": 4598,
+          "new": "    from variant_simulation_preservation import REPLACEMENT_PATHS as VARIANT_PATHS\n    if row[\"path\"] in REPLACEMENTS or row[\"path\"] in FINISH_PATHS or row[\"path\"] in VARIANT_PATHS:\n",
+          "old": "    if row[\"path\"] in REPLACEMENTS or row[\"path\"] in FINISH_PATHS:\n"
+        },
+        {
+          "start": 7565,
+          "end": 7747,
+          "new": "    from variant_simulation_preservation import REPLACEMENT_PATHS as VARIANT_PATHS\n    if row[\"path\"] in REPLACEMENTS or row[\"path\"] in FINISH_PATHS or row[\"path\"] in VARIANT_PATHS:\n",
+          "old": "    if row[\"path\"] in REPLACEMENTS or row[\"path\"] in FINISH_PATHS:\n"
+        }
+      ],
+      "historical_sha256": [
+        "a3d722282f89fc40e2a2a02c51c03f5debb8e9f5002d51951cfa5e5de8088950"
+      ]
+    }
+  },
+  "additions": {
+    "src/schemas/v3/pack-definition.schema.json": {
+      "bytes": 2256,
+      "sha256": "c470dc095eee4faa169580c21ade7ec1a50c4fdfaa932115cc62e70500476be1"
+    }
+  }
+}

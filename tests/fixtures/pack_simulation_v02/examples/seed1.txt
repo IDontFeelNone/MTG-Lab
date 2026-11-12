@@ -1,0 +1,9 @@
+fictional-pack / fictional-variants: 15 cards
+Seed 1; sha256-counter-rejection-256-v1; non-production definition model
+pack-simulation-v0.2: selected variant variant-a-nonfoil (weight 90/100)
+pack-simulation-v0.2: explicit Printing + Finish outcomes
+base-slot: pack_fixture.tst.2.en [nonfoil], pack_fixture.tst.2.en [nonfoil], pack_fixture.tst.2.en [nonfoil], pack_fixture.tst.1.en [nonfoil], pack_fixture.tst.2.en [nonfoil], pack_fixture.tst.2.en [nonfoil], pack_fixture.tst.1.en [nonfoil], pack_fixture.tst.1.en [nonfoil], pack_fixture.tst.2.en [nonfoil], pack_fixture.tst.2.en [nonfoil]
+accent-slot: pack_fixture.tst.3.en [nonfoil], pack_fixture.tst.3.en [nonfoil], pack_fixture.tst.3.en [nonfoil], pack_fixture.tst.3.en [nonfoil]
+nonfoil-slot: pack_fixture.tst.1.en [nonfoil]
+Input: sha256:22b07ab1ca25492ed9618160b748723448e196320edd78850884971fc0661f2e
+No physical collation or production authority established.

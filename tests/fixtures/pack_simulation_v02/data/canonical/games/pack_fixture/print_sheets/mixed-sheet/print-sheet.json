@@ -1,0 +1,30 @@
+{
+  "entries": [
+    {
+      "finish_id": "foil",
+      "printing_id": "pack_fixture.tst.1.en",
+      "weight": 3
+    },
+    {
+      "finish_id": "nonfoil",
+      "printing_id": "pack_fixture.tst.1.en",
+      "weight": 1
+    }
+  ],
+  "game": "pack_fixture",
+  "id": "mixed-sheet",
+  "name": "Fictional explicit mixed-finish pool",
+  "provenance": [
+    {
+      "claim": "Explicit fictional model only; not real Magic, production data or physical collation.",
+      "field_paths": [
+        "entries",
+        "game",
+        "id",
+        "name"
+      ],
+      "source_id": "fictional-definition"
+    }
+  ],
+  "schema_version": "v3"
+}
