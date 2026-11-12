@@ -18,6 +18,8 @@ def ledger():
 
 def preceding_bytes(name, raw):
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
+    from gameplay_session_preservation import preceding_bytes as session_preceding
+    raw = session_preceding(name, raw)
     if name not in REPLACEMENT_PATHS: return raw
     pin=ledger()['replacements'][name];digest=hashlib.sha256(raw).hexdigest()
     if digest==pin['old_sha256'] or digest in pin.get('historical_sha256',()): return raw
@@ -32,6 +34,8 @@ def preceding_bytes(name, raw):
 
 
 def is_addition(path, root):
+    from gameplay_session_preservation import is_addition as session_addition
+    if session_addition(path, root): return True
     name=path.relative_to(root).as_posix()
     if name not in ADDITION_PATHS: return False
     pin=ledger()['additions'][name]

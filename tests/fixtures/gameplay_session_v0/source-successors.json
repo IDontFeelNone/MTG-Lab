@@ -1,0 +1,33 @@
+{
+  "base": "f6e36f682a11953ee9f07be7f200afd9a40958f5",
+  "replacements": {
+    "tests/variant_simulation_preservation.py": {
+      "old_sha256": "254e1a9ef00865e034919f1079118d1a2df66792fb0afa8a925f987317c27948",
+      "new_sha256": "02378e5c165b8dba32f20b257363301a6d3c46fe9d8268343663a3b7282f031f",
+      "edits": [
+        {
+          "start": 980,
+          "end": 1102,
+          "new": "    from gameplay_session_preservation import preceding_bytes as session_preceding\n    raw = session_preceding(name, raw)\n",
+          "old": ""
+        },
+        {
+          "start": 1836,
+          "end": 1963,
+          "new": "    from gameplay_session_preservation import is_addition as session_addition\n    if session_addition(path, root): return True\n",
+          "old": ""
+        }
+      ]
+    }
+  },
+  "additions": {
+    "src/gameplay_rules/session.py": {
+      "bytes": 13903,
+      "sha256": "89e6fd0daa00e0164835a46ac318211c965fcad6244dcf17a5bd36842c5023b8"
+    },
+    "src/gameplay_rules/session_cli.py": {
+      "bytes": 4839,
+      "sha256": "57018d59609300cd560b331903fb12abe1d3fba15fa91bfa88db20df338ac152"
+    }
+  }
+}
