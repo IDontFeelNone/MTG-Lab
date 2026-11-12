@@ -68,5 +68,7 @@ def slot_v2(document: Mapping[str, Any]) -> PackSlot:
 
 
 def sheet_v2(document: Mapping[str, Any]) -> Sheet:
-    entries = tuple(SheetEntry(str(x["printing_id"]), int(x.get("weight", 1))) for x in document["entries"])
-    return Sheet(str(document["id"]), dict(document.get("metadata", {})), str(document["name"]), entries)
+    entries = tuple(SheetEntry(str(x["printing_id"]), int(x.get("weight", 1)),
+                               x.get("finish_id")) for x in document["entries"])
+    return Sheet(str(document["id"]), dict(document.get("metadata", {})), str(document["name"]),
+                 entries, "v3" if document.get("schema_version") == "v3" else "v2")

@@ -1,0 +1,95 @@
+{
+  "algorithm": "sha256-counter-rejection-256-v1",
+  "card_count": 3,
+  "database_version": null,
+  "evidence_references": [
+    {
+      "content_id": "sha256:27f01dd961bf096575bc840065106f1db5e2ca558211f741e9e042d7da00515e",
+      "id": "fictional-definition",
+      "kind": "pack_definition"
+    },
+    {
+      "content_id": "sha256:44c0ebd9dbbaeab4d8169655aa626aa135786b23bef24a914270a56f172e34eb",
+      "id": "accent-sheet",
+      "kind": "print_sheet"
+    },
+    {
+      "content_id": "sha256:a2155c7001c6afdda33cbea5b89fbb731c8d4aaf7178883ad3f119ff672aba0a",
+      "id": "base-sheet",
+      "kind": "print_sheet"
+    },
+    {
+      "content_id": "sha256:cc8c27e03680aa3c19e3ff87069ee9fc185831cd30efedc78e96b010749a16b0",
+      "id": "pack_fixture.tst.1.en",
+      "kind": "printing"
+    },
+    {
+      "content_id": "sha256:d357f440100677603e7b59c1304b56ccb525ca9a3d66b15343866807654c77cc",
+      "id": "pack_fixture.tst.2.en",
+      "kind": "printing"
+    },
+    {
+      "content_id": "sha256:4ae914c984222b1e3048f04a3e2448bd18a55f748d7e3d32f963ecd91eca1df6",
+      "id": "pack_fixture.tst.3.en",
+      "kind": "printing"
+    },
+    {
+      "content_id": "sha256:140954948c3f5e2affc3344030111d09919547f355ed0820b1c9c611ad29b518",
+      "id": "fictional-pack",
+      "kind": "product"
+    },
+    {
+      "content_id": "sha256:fd4183f8637fc3f8c4070d1e68686a7ef6e3082d3c3763caa5f1662acf83f217",
+      "id": "fictional-version",
+      "kind": "product_version"
+    },
+    {
+      "content_id": "sha256:85fcbed3b857c165c1b7b9c143ff1f998b33e14b9b70d2b473cafb61518475da",
+      "id": "accent-slot",
+      "kind": "slot"
+    },
+    {
+      "content_id": "sha256:9a8587dc95c82069ec070852392c80b9e0974176287af0ceacdce81127e47d1b",
+      "id": "base-slot",
+      "kind": "slot"
+    }
+  ],
+  "game": "pack_fixture",
+  "input_id": "sha256:4cbd3dd8c9d78ecf0a3503840507c0fbd711c96dbe8e07ca1712ef334fb5e8d2",
+  "pack_definition_id": "fictional-definition",
+  "product_id": "fictional-pack",
+  "product_version_id": "fictional-version",
+  "production_authorized": false,
+  "query_snapshot_id": "sha256:24cd6a7aa9baaddc651bc1fee23efbff20243e39e4a46fe79548405fae6f468c",
+  "recorded_at": null,
+  "sampling_model": "independent-weighted-with-replacement-v1",
+  "schema_version": "pack-simulation-v0",
+  "scope": "EXPLICIT_DEFINITION_MODEL_ONLY_NON_PRODUCTION",
+  "seed": 1,
+  "simulator_version": "pack-simulation-v0",
+  "slots": [
+    {
+      "print_sheet_id": "base-sheet",
+      "printing_ids": [
+        "pack_fixture.tst.1.en",
+        "pack_fixture.tst.2.en"
+      ],
+      "slot_id": "base-slot"
+    },
+    {
+      "print_sheet_id": "accent-sheet",
+      "printing_ids": [
+        "pack_fixture.tst.3.en"
+      ],
+      "slot_id": "accent-slot"
+    }
+  ],
+  "source_references": [
+    {
+      "content_id": "sha256:37c463cfb0ae526f2ce5db1649f57a3055d6189613066486986e3eba6fffc9ed",
+      "id": "fictional-definition"
+    }
+  ],
+  "status": "GENERATED",
+  "timestamp_authority": "unspecified"
+}

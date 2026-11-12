@@ -138,6 +138,8 @@ class PackSlot(Entity):
 class SheetEntry:
     printing_id: str
     weight: int = 1
+    # Absence preserves the historical Printing-only entry and query identity.
+    finish_id: str | None = field(default=None, metadata={"omit_if_none": True})
 
 
 @dataclass(frozen=True)

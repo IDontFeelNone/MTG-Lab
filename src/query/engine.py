@@ -26,7 +26,8 @@ def _plain(value: Any) -> Any:
         if isinstance(value, type):
             raise TypeError("asdict() should be called on dataclass instances")
         return {item.name: _plain(getattr(value, item.name))
-                for item in sorted(fields(value), key=lambda item: item.name)}
+                for item in sorted(fields(value), key=lambda item: item.name)
+                if not (item.metadata.get("omit_if_none") and getattr(value, item.name) is None)}
     if isinstance(value, Mapping):
         return {str.__str__(str(k)): _plain(v) for k, v in
                 sorted(value.items(), key=lambda x: str.__str__(str(x[0])))}

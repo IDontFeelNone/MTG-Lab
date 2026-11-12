@@ -1,0 +1,25 @@
+{
+  "game": "pack_fixture",
+  "id": "fictional-pack",
+  "lifecycle_status": "validated",
+  "name": "FICTIONAL demonstration pack",
+  "product_type": "booster",
+  "provenance": [
+    {
+      "claim": "Explicit fictional model only; not real Magic, production data or physical collation.",
+      "field_paths": [
+        "game",
+        "id",
+        "lifecycle_status",
+        "name",
+        "product_type",
+        "version_ids"
+      ],
+      "source_id": "fictional-definition"
+    }
+  ],
+  "schema_version": "v2",
+  "version_ids": [
+    "fictional-version"
+  ]
+}

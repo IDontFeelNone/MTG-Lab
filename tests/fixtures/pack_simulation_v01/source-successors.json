@@ -1,0 +1,212 @@
+{
+  "base": "5168792b34fd464b414a8fbe08dd8825890d8dbf",
+  "replacements": {
+    "src/canonical/models.py": {
+      "old_sha256": "6fb62e96261f2f6d31112eb07d681f9223996c01955a7bb14315d77f3b630084",
+      "new_sha256": "3468d9606dc827a07b7ee8f779d756bd5a480bd57080389ccda0259764f49645",
+      "edits": [
+        {
+          "start": 3402,
+          "end": 3562,
+          "new": "    # Absence preserves the historical Printing-only entry and query identity.\n    finish_id: str | None = field(default=None, metadata={\"omit_if_none\": True})\n",
+          "old": ""
+        }
+      ]
+    },
+    "src/query/engine.py": {
+      "old_sha256": "40c81e32dddd86724c8362694d37cc1f54fdca60a35b77e4d1eb1e4f05910052",
+      "new_sha256": "15d4a8eff920400e9275073d7209efdda2b753085a696b2e4a882445e69fee84",
+      "edits": [
+        {
+          "start": 883,
+          "end": 1059,
+          "new": "                for item in sorted(fields(value), key=lambda item: item.name)\n                if not (item.metadata.get(\"omit_if_none\") and getattr(value, item.name) is None)}\n",
+          "old": "                for item in sorted(fields(value), key=lambda item: item.name)}\n"
+        }
+      ],
+      "historical_sha256": [
+        "85e9b8a02a23c674ff7e2325d4704ef93537337eec56d6b1bc8e8d9c31d22a3c"
+      ]
+    },
+    "src/repository/canonical.py": {
+      "old_sha256": "57326ae27a72b37d04bb784c649db3744201115748c74bed808c3c741920d165",
+      "new_sha256": "60a0bcaca9b1f538c45d12468a72435fe93b615daea2626559222683ebbd9d2d",
+      "edits": [
+        {
+          "start": 9053,
+          "end": 9155,
+          "new": "            if data.get(\"schema_version\") in (\"v1\",\"v2\",\"v3\"): validate_document(data, \"print-sheet\")\n",
+          "old": "            if data.get(\"schema_version\") in (\"v1\",\"v2\"): validate_document(data, \"print-sheet\")\n"
+        },
+        {
+          "start": 10491,
+          "end": 10663,
+          "new": "            entries = tuple(SheetEntry(str(x[\"printing_id\"]), int(x.get(\"weight\", 1)),\n                                       x.get(\"finish_id\")) for x in data[\"entries\"])\n",
+          "old": "            entries = tuple(SheetEntry(str(x[\"printing_id\"]), int(x.get(\"weight\", 1))) for x in data[\"entries\"])\n"
+        },
+        {
+          "start": 13953,
+          "end": 14043,
+          "new": "            entry_ids = [(entry.printing_id, entry.finish_id) for entry in sheet.entries]\n",
+          "old": "            entry_ids = [entry.printing_id for entry in sheet.entries]\n"
+        },
+        {
+          "start": 14405,
+          "end": 14843,
+          "new": "                if entry.finish_id is not None:\n                    printing = next(p for p in self.printings if p.id == entry.printing_id)\n                    if (entry.finish_id not in {f.id for f in self.finishes}\n                            or entry.finish_id not in printing.finish_ids):\n                        raise CanonicalRepositoryError(\n                            f\"Sheet {sheet.id} has unsupported Printing/Finish outcome\")\n",
+          "old": ""
+        }
+      ]
+    },
+    "src/repository/canonical_compatibility.py": {
+      "old_sha256": "48d2500b75ad469181419f1a46d4e763cbea65d389deedcb45159472e4f149bc",
+      "new_sha256": "4d2ea99df83788085ee9acd8d6239648b1d080059a2af26e2e6c421edf387f91",
+      "edits": [
+        {
+          "start": 4262,
+          "end": 4603,
+          "new": "    entries = tuple(SheetEntry(str(x[\"printing_id\"]), int(x.get(\"weight\", 1)),\n                               x.get(\"finish_id\")) for x in document[\"entries\"])\n    return Sheet(str(document[\"id\"]), dict(document.get(\"metadata\", {})), str(document[\"name\"]),\n                 entries, \"v3\" if document.get(\"schema_version\") == \"v3\" else \"v2\")\n",
+          "old": "    entries = tuple(SheetEntry(str(x[\"printing_id\"]), int(x.get(\"weight\", 1))) for x in document[\"entries\"])\n    return Sheet(str(document[\"id\"]), dict(document.get(\"metadata\", {})), str(document[\"name\"]), entries)\n"
+        }
+      ]
+    },
+    "src/simulation/__init__.py": {
+      "old_sha256": "44e477994585bec51e2e7a7a17b7eda8dc757257144607384bd626e2e9997634",
+      "new_sha256": "28c2321e85e2f1dd1ce17bd0ad7c1a5ef7133e6c07092d59c6d1b8fff6edc80d",
+      "edits": [
+        {
+          "start": 82,
+          "end": 179,
+          "new": "from .pack import (ALGORITHM, MODEL, VERSION, FINISH_MODEL, FINISH_VERSION, PackSimulationError,\n",
+          "old": "from .pack import (ALGORITHM, MODEL, VERSION, PackSimulationError,\n"
+        },
+        {
+          "start": 240,
+          "end": 341,
+          "new": "__all__ = ['ALGORITHM', 'MODEL', 'VERSION', 'FINISH_MODEL', 'FINISH_VERSION', 'PackSimulationError',\n",
+          "old": "__all__ = ['ALGORITHM', 'MODEL', 'VERSION', 'PackSimulationError',\n"
+        }
+      ]
+    },
+    "src/simulation/pack.py": {
+      "old_sha256": "54a1f94e22c080691e46d772807a96f600a7fb3f309007f0187c5798b733b59d",
+      "new_sha256": "e19d4f55b26e9631e393057ffe57146e24b39e1aebd4456ba5c6e100496f9571",
+      "edits": [
+        {
+          "start": 465,
+          "end": 570,
+          "new": "FINISH_VERSION = 'pack-simulation-v0.1'\nFINISH_MODEL = 'independent-finish-weighted-with-replacement-v1'\n",
+          "old": ""
+        },
+        {
+          "start": 4965,
+          "end": 5032,
+          "new": "        def record(kind, identifier, schema, schema_version=\"v2\"):\n",
+          "old": "        def record(kind, identifier, schema):\n"
+        },
+        {
+          "start": 5490,
+          "end": 5709,
+          "new": "            _require(raw.get('schema_version') == schema_version,\n                     'EXPLICIT_' + schema_version.upper() + '_' + kind.upper() + '_REQUIRED')\n            validate_document(raw, schema, schema_version)\n",
+          "old": "            _require(raw.get('schema_version') == 'v2', 'EXPLICIT_V2_' + kind.upper() + '_REQUIRED')\n            validate_document(raw, schema, 'v2')\n"
+        },
+        {
+          "start": 7300,
+          "end": 7639,
+          "new": "        model = pack.get('metadata', {}).get('simulation_model')\n        _require(model in (MODEL, FINISH_MODEL) and pack['metadata'] == {'simulation_model': model},\n                 'UNSUPPORTED_OR_MISSING_COLLATION_MODEL')\n        finish_aware = model == FINISH_MODEL\n        report_version = FINISH_VERSION if finish_aware else VERSION\n",
+          "old": "        _require(pack.get('metadata') == {'simulation_model': MODEL}, 'UNSUPPORTED_OR_MISSING_COLLATION_MODEL')\n"
+        },
+        {
+          "start": 7964,
+          "end": 8104,
+          "new": "            sheet = record('print_sheet', slot['print_sheet_id'], 'print-sheet',\n                           'v3' if finish_aware else 'v2')\n",
+          "old": "            sheet = record('print_sheet', slot['print_sheet_id'], 'print-sheet')\n"
+        },
+        {
+          "start": 8464,
+          "end": 8638,
+          "new": "            entries = sorted(((e['printing_id'], e['finish_id']) if finish_aware else e['printing_id'],\n                              e['weight']) for e in sheet['entries'])\n",
+          "old": "            entries = sorted((e['printing_id'], e['weight']) for e in sheet['entries'])\n"
+        },
+        {
+          "start": 8978,
+          "end": 9087,
+          "new": "            for outcome, _ in entries:\n                printing_id = outcome[0] if finish_aware else outcome\n",
+          "old": "            for printing_id, _ in entries:\n"
+        },
+        {
+          "start": 9389,
+          "end": 11808,
+          "new": "                if finish_aware:\n                    finish_id = outcome[1]\n                    finish = items.get(('finish', finish_id))\n                    _require(finish is not None and finish['uncertainty'] == 'known'\n                             and finish['supersession_state'] == 'current', 'UNKNOWN_OR_UNRESOLVED_FINISH')\n                    raw = self._query.retained_record(printing_id, entity_type='printing')\n                    # The owning Card reader has admitted this record. Require an explicit\n                    # source-bound finish fact; compatibility defaults are never sufficient.\n                    _require(raw.get('schema_version') == 'v3' and type(raw.get('finishes')) is list\n                             and finish_id in raw['finishes'], 'UNSUPPORTED_PRINTING_FINISH')\n                    assertions = [a for a in raw['assertions'] if a['path'] == '/finishes'\n                                  and a['status'] not in ('rejected', 'superseded')]\n                    _require(assertions and all(a['subject_id'] == printing_id\n                             and a['status'] == 'promoted'\n                             and a['verification_status'] in ('confirmed', 'verified')\n                             and a['evidence_class'] not in ('unknown', 'conflicting')\n                             and a['asserted_value'] == raw['finishes'] for a in assertions),\n                             'UNRESOLVED_PRINTING_FINISH_EVIDENCE')\n                    for assertion in assertions:\n                        source_id = assertion['source_id']\n                        if source_id not in sources:\n                            sources[source_id] = load_source_record(snapshot.game, product_id, source_id,\n                                                                   games_root=self._query.games_root)\n                        _require(sources[source_id]['verification_status'] == 'confirmed',\n                                 'UNCONFIRMED_PRINTING_FINISH_SOURCE')\n                    records['printing', printing_id] = dict(kind='printing', id=printing_id,\n                                                           record=raw, query_evidence=printing)\n                    records['finish', finish_id] = dict(kind='finish', id=finish_id, query_evidence=finish)\n                else:\n                    records['printing', printing_id] = dict(kind='printing', id=printing_id, query_evidence=printing)\n",
+          "old": "                records['printing', printing_id] = dict(kind='printing', id=printing_id, query_evidence=printing)\n"
+        },
+        {
+          "start": 12029,
+          "end": 12144,
+          "new": "        input_id = _identity('pack-simulation-input-v0.1' if finish_aware else 'pack-simulation-input-v0', inputs)\n",
+          "old": "        input_id = _identity('pack-simulation-input-v0', inputs)\n"
+        },
+        {
+          "start": 12523,
+          "end": 13121,
+          "new": "            selections = {'outcomes': [dict(printing_id=p, finish_id=f) for p, f in selected_ids]} if finish_aware else {'printing_ids': selected_ids}\n            slots.append(dict(slot_id=slot_id, print_sheet_id=sheet_id, **selections))\n        key = 'outcomes' if finish_aware else 'printing_ids'\n        _require(sum(len(s[key]) for s in slots) == total_cards, 'PACK_RESULT_COUNT_MISMATCH')\n        return dict(schema_version=report_version, status='GENERATED', simulator_version=report_version,\n                    algorithm=ALGORITHM, sampling_model=model, seed=seed, recorded_at=recorded_at,\n",
+          "old": "            slots.append(dict(slot_id=slot_id, print_sheet_id=sheet_id, printing_ids=selected_ids))\n        _require(sum(len(s['printing_ids']) for s in slots) == total_cards, 'PACK_RESULT_COUNT_MISMATCH')\n        return dict(schema_version=VERSION, status='GENERATED', simulator_version=VERSION,\n                    algorithm=ALGORITHM, sampling_model=MODEL, seed=seed, recorded_at=recorded_at,\n"
+        },
+        {
+          "start": 15391,
+          "end": 15783,
+          "new": "    if report['schema_version'] == FINISH_VERSION:\n        lines += [FINISH_VERSION + ': explicit Printing + Finish outcomes']\n        lines += [s['slot_id'] + ': ' + ', '.join(\n            o['printing_id'] + ' [' + o['finish_id'] + ']' for o in s['outcomes']) for s in report['slots']]\n    else:\n        lines += [s['slot_id'] + ': ' + ', '.join(s['printing_ids']) for s in report['slots']]\n",
+          "old": "    lines += [s['slot_id'] + ': ' + ', '.join(s['printing_ids']) for s in report['slots']]\n"
+        }
+      ]
+    },
+    "tests/pack_simulation_preservation.py": {
+      "old_sha256": "7cd2110f531dbbceb02789cccc5d48834637885c336011088d0f281f3bd8eae4",
+      "new_sha256": "2971935532843787a45cad88341edc63cc6576bd8b94287b39c42b0fd4e876d0",
+      "edits": [
+        {
+          "start": 12785,
+          "end": 12906,
+          "new": "    from finish_simulation_preservation import preceding_bytes as finish_preceding\n    raw = finish_preceding(name, raw)\n",
+          "old": ""
+        },
+        {
+          "start": 13560,
+          "end": 13686,
+          "new": "    from finish_simulation_preservation import is_addition as finish_addition\n    if finish_addition(path, root): return True\n",
+          "old": ""
+        },
+        {
+          "start": 13868,
+          "end": 14003,
+          "new": "    from finish_simulation_preservation import preceding_bytes as finish_preceding\n    raw = finish_preceding(name, path.read_bytes())\n",
+          "old": "    raw = path.read_bytes()\n"
+        }
+      ]
+    },
+    "tests/query_attachment_performance_preservation.py": {
+      "old_sha256": "a3d722282f89fc40e2a2a02c51c03f5debb8e9f5002d51951cfa5e5de8088950",
+      "new_sha256": "bf6c871dd27a773a6f208268e1c14c84a867e6156b4fc53c8f797ab7fabf2e37",
+      "edits": [
+        {
+          "start": 4335,
+          "end": 4483,
+          "new": "    from finish_simulation_preservation import REPLACEMENT_PATHS as FINISH_PATHS\n    if row[\"path\"] in REPLACEMENTS or row[\"path\"] in FINISH_PATHS:\n",
+          "old": "    if row[\"path\"] in REPLACEMENTS:\n"
+        },
+        {
+          "start": 7369,
+          "end": 7517,
+          "new": "    from finish_simulation_preservation import REPLACEMENT_PATHS as FINISH_PATHS\n    if row[\"path\"] in REPLACEMENTS or row[\"path\"] in FINISH_PATHS:\n",
+          "old": "    if row[\"path\"] in REPLACEMENTS:\n"
+        }
+      ]
+    }
+  },
+  "additions": {
+    "src/schemas/v3/print-sheet.schema.json": {
+      "bytes": 2168,
+      "sha256": "cd216509d79576c2ecc52ace70ee7889eb424acf57863110e625ba3fd86e2dd1"
+    }
+  }
+}

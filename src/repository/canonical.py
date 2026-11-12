@@ -178,7 +178,7 @@ class CanonicalRepository:
     def _load_sheets(self) -> tuple[Sheet, ...]:
         records=[]
         for data in self._documents(("sheets/*.json", "print_sheets/*/print-sheet.json")):
-            if data.get("schema_version") in ("v1","v2"): validate_document(data, "print-sheet")
+            if data.get("schema_version") in ("v1","v2","v3"): validate_document(data, "print-sheet")
             records.append(sheet_v2(data))
         return self._unique(records, "Sheet")
 
@@ -207,7 +207,8 @@ class CanonicalRepository:
             raise ValueError(f"missing required fields: {', '.join(missing)}")
         meta = dict(data.get("metadata", {}))
         if model is Sheet:
-            entries = tuple(SheetEntry(str(x["printing_id"]), int(x.get("weight", 1))) for x in data["entries"])
+            entries = tuple(SheetEntry(str(x["printing_id"]), int(x.get("weight", 1)),
+                                       x.get("finish_id")) for x in data["entries"])
             if not entries or any(x.weight < 1 for x in entries):
                 raise ValueError("entries must be non-empty with positive weights")
             return Sheet(str(data["id"]), meta, str(data["name"]), entries)
@@ -262,12 +263,18 @@ class CanonicalRepository:
             self._refs_many(self.printings, "finish_ids", self.finishes, "Printing", "Finish")
         ids = {x.id for x in self.printings}
         for sheet in self.sheets:
-            entry_ids = [entry.printing_id for entry in sheet.entries]
+            entry_ids = [(entry.printing_id, entry.finish_id) for entry in sheet.entries]
             if len(entry_ids) != len(set(entry_ids)):
                 raise CanonicalRepositoryError(f"Sheet {sheet.id} has duplicate Printing entries")
             for entry in sheet.entries:
                 if entry.printing_id not in ids:
                     raise CanonicalRepositoryError(f"Sheet {sheet.id} references missing Printing {entry.printing_id}")
+                if entry.finish_id is not None:
+                    printing = next(p for p in self.printings if p.id == entry.printing_id)
+                    if (entry.finish_id not in {f.id for f in self.finishes}
+                            or entry.finish_id not in printing.finish_ids):
+                        raise CanonicalRepositoryError(
+                            f"Sheet {sheet.id} has unsupported Printing/Finish outcome")
         sheets = {item.id: item for item in self.sheets}
         for slot in self.pack_slots:
             if not slot.replacement and slot.draw_count > sum(item.weight for item in sheets[slot.print_sheet_id].entries):

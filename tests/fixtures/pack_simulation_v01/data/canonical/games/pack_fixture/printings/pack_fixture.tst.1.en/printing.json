@@ -1,0 +1,101 @@
+{
+  "assertions": [
+    {
+      "asserted_value": "pack_fixture.tst.1.en",
+      "confidence": 1,
+      "evidence_class": "direct_observation",
+      "id": "fictional-printing-1-id",
+      "notes": "Fictional input fact only; no real observation, authentication or production authority.",
+      "path": "/id",
+      "source_id": "fictional-definition",
+      "source_type": "original_fictional_fixture",
+      "status": "promoted",
+      "subject_id": "pack_fixture.tst.1.en",
+      "timestamp": "2026-11-10T00:00:00Z",
+      "verification_status": "confirmed"
+    },
+    {
+      "asserted_value": "pack_fixture.card1",
+      "confidence": 1,
+      "evidence_class": "direct_observation",
+      "id": "fictional-printing-1-card_id",
+      "notes": "Fictional input fact only; no real observation, authentication or production authority.",
+      "path": "/card_id",
+      "source_id": "fictional-definition",
+      "source_type": "original_fictional_fixture",
+      "status": "promoted",
+      "subject_id": "pack_fixture.tst.1.en",
+      "timestamp": "2026-11-10T00:00:00Z",
+      "verification_status": "confirmed"
+    },
+    {
+      "asserted_value": "tst",
+      "confidence": 1,
+      "evidence_class": "direct_observation",
+      "id": "fictional-printing-1-set_id",
+      "notes": "Fictional input fact only; no real observation, authentication or production authority.",
+      "path": "/set_id",
+      "source_id": "fictional-definition",
+      "source_type": "original_fictional_fixture",
+      "status": "promoted",
+      "subject_id": "pack_fixture.tst.1.en",
+      "timestamp": "2026-11-10T00:00:00Z",
+      "verification_status": "confirmed"
+    },
+    {
+      "asserted_value": "1",
+      "confidence": 1,
+      "evidence_class": "direct_observation",
+      "id": "fictional-printing-1-collector_number",
+      "notes": "Fictional input fact only; no real observation, authentication or production authority.",
+      "path": "/collector_number",
+      "source_id": "fictional-definition",
+      "source_type": "original_fictional_fixture",
+      "status": "promoted",
+      "subject_id": "pack_fixture.tst.1.en",
+      "timestamp": "2026-11-10T00:00:00Z",
+      "verification_status": "confirmed"
+    },
+    {
+      "asserted_value": "en",
+      "confidence": 1,
+      "evidence_class": "direct_observation",
+      "id": "fictional-printing-1-language",
+      "notes": "Fictional input fact only; no real observation, authentication or production authority.",
+      "path": "/language",
+      "source_id": "fictional-definition",
+      "source_type": "original_fictional_fixture",
+      "status": "promoted",
+      "subject_id": "pack_fixture.tst.1.en",
+      "timestamp": "2026-11-10T00:00:00Z",
+      "verification_status": "confirmed"
+    },
+    {
+      "asserted_value": [
+        "nonfoil",
+        "foil"
+      ],
+      "confidence": 1,
+      "evidence_class": "direct_observation",
+      "id": "fictional-printing-1-finishes",
+      "notes": "Fictional input fact only; no real observation, authentication or production authority.",
+      "path": "/finishes",
+      "source_id": "fictional-definition",
+      "source_type": "original_fictional_fixture",
+      "status": "promoted",
+      "subject_id": "pack_fixture.tst.1.en",
+      "timestamp": "2026-11-10T00:00:00Z",
+      "verification_status": "confirmed"
+    }
+  ],
+  "card_id": "pack_fixture.card1",
+  "collector_number": "1",
+  "finishes": [
+    "nonfoil",
+    "foil"
+  ],
+  "id": "pack_fixture.tst.1.en",
+  "language": "en",
+  "schema_version": "v3",
+  "set_id": "tst"
+}
