@@ -13,6 +13,8 @@ from validation import validate_document
 VERSION = 'pack-simulation-v0'
 ALGORITHM = 'sha256-counter-rejection-256-v1'
 MODEL = 'independent-weighted-with-replacement-v1'
+VARIANT_VERSION = 'pack-simulation-v0.2'
+VARIANT_MODEL = 'weighted-finish-pack-variants-with-replacement-v1'
 FINISH_VERSION = 'pack-simulation-v0.1'
 FINISH_MODEL = 'independent-finish-weighted-with-replacement-v1'
 MAX_CARDS = 1024
@@ -145,75 +147,112 @@ class _PackSimulator:
         product_raw = record('product', product_id, 'product')
         version_id = selected['canonical_values']['product_version_id']
         version = record('product_version', version_id, 'product-version')
-        pack = record('pack_definition', pack_id, 'pack-definition')
+        variant_model = selected['canonical_values']['schema_version'] == 'v3'
+        pack = record('pack_definition', pack_id, 'pack-definition', 'v3' if variant_model else 'v2')
         _require(version_id in product_raw['version_ids'] and version['product_id'] == product_id
                  and pack['product_version_id'] == version_id, 'PRODUCT_PACK_RELATIONSHIP_MISMATCH')
         _require(any(c['component_type'] == 'pack_definition' and c['component_id'] == pack_id
                      for c in version['components']), 'PACK_NOT_IN_PRODUCT_VERSION')
         model = pack.get('metadata', {}).get('simulation_model')
-        _require(model in (MODEL, FINISH_MODEL) and pack['metadata'] == {'simulation_model': model},
+        _require(pack.get('metadata') == {'simulation_model': model}
+                 and (model == VARIANT_MODEL if variant_model else model in (MODEL, FINISH_MODEL)),
                  'UNSUPPORTED_OR_MISSING_COLLATION_MODEL')
-        finish_aware = model == FINISH_MODEL
-        report_version = FINISH_VERSION if finish_aware else VERSION
+        finish_aware = variant_model or model == FINISH_MODEL
+        report_version = VARIANT_VERSION if variant_model else FINISH_VERSION if finish_aware else VERSION
         _require(not product_raw.get('metadata') and not version.get('metadata'), 'UNSUPPORTED_PRODUCT_METADATA')
-        _require(len(pack['slot_ids']) <= MAX_SLOTS, 'SLOT_BOUND_EXCEEDED')
-        draws = []
-        total_cards = 0
-        for slot_id in pack['slot_ids']:
-            slot = record('slot', slot_id, 'slot')
-            sheet = record('print_sheet', slot['print_sheet_id'], 'print-sheet',
-                           'v3' if finish_aware else 'v2')
-            _require(slot['replacement'] is True, 'WITHOUT_REPLACEMENT_UNSUPPORTED')
-            _require(not slot.get('metadata') and not sheet.get('metadata'), 'UNSUPPORTED_SLOT_OR_SHEET_METADATA')
-            count = slot['draw_count']; total_cards += count
-            _require(type(count) is int and total_cards <= MAX_CARDS, 'CARD_COUNT_BOUND_EXCEEDED')
-            entries = sorted(((e['printing_id'], e['finish_id']) if finish_aware else e['printing_id'],
-                              e['weight']) for e in sheet['entries'])
-            _require(0 < len(entries) <= MAX_POOL and len({p for p, _ in entries}) == len(entries),
-                     'EMPTY_OVERSIZED_OR_DUPLICATE_POOL')
-            _require(all(type(w) is int and 0 < w <= MAX_INTEGER for _, w in entries)
-                     and sum(w for _, w in entries) <= MAX_INTEGER, 'INVALID_EXPLICIT_WEIGHTS')
-            for outcome, _ in entries:
-                printing_id = outcome[0] if finish_aware else outcome
-                printing = items.get(('printing', printing_id))
-                _require(printing is not None, 'UNKNOWN_PRINTING')
-                _require(printing['supersession_state'] == 'current' and printing['uncertainty'] == 'known',
-                         'UNRESOLVED_OR_SUPERSEDED_PRINTING')
-                if finish_aware:
-                    finish_id = outcome[1]
-                    finish = items.get(('finish', finish_id))
-                    _require(finish is not None and finish['uncertainty'] == 'known'
-                             and finish['supersession_state'] == 'current', 'UNKNOWN_OR_UNRESOLVED_FINISH')
-                    raw = self._query.retained_record(printing_id, entity_type='printing')
-                    # The owning Card reader has admitted this record. Require an explicit
-                    # source-bound finish fact; compatibility defaults are never sufficient.
-                    _require(raw.get('schema_version') == 'v3' and type(raw.get('finishes')) is list
-                             and finish_id in raw['finishes'], 'UNSUPPORTED_PRINTING_FINISH')
-                    assertions = [a for a in raw['assertions'] if a['path'] == '/finishes'
-                                  and a['status'] not in ('rejected', 'superseded')]
-                    _require(assertions and all(a['subject_id'] == printing_id
-                             and a['status'] == 'promoted'
-                             and a['verification_status'] in ('confirmed', 'verified')
-                             and a['evidence_class'] not in ('unknown', 'conflicting')
-                             and a['asserted_value'] == raw['finishes'] for a in assertions),
-                             'UNRESOLVED_PRINTING_FINISH_EVIDENCE')
-                    for assertion in assertions:
-                        source_id = assertion['source_id']
-                        if source_id not in sources:
-                            sources[source_id] = load_source_record(snapshot.game, product_id, source_id,
-                                                                   games_root=self._query.games_root)
-                        _require(sources[source_id]['verification_status'] == 'confirmed',
-                                 'UNCONFIRMED_PRINTING_FINISH_SOURCE')
-                    records['printing', printing_id] = dict(kind='printing', id=printing_id,
-                                                           record=raw, query_evidence=printing)
-                    records['finish', finish_id] = dict(kind='finish', id=finish_id, query_evidence=finish)
-                else:
-                    records['printing', printing_id] = dict(kind='printing', id=printing_id, query_evidence=printing)
-            draws.append((slot_id, sheet['id'], count, entries))
+
+        def composition(pack):
+            _require(len(pack['slot_ids']) <= MAX_SLOTS, 'SLOT_BOUND_EXCEEDED')
+            draws = []
+            total_cards = 0
+            for slot_id in pack['slot_ids']:
+                slot = record('slot', slot_id, 'slot')
+                sheet = record('print_sheet', slot['print_sheet_id'], 'print-sheet',
+                               'v3' if finish_aware else 'v2')
+                _require(slot['replacement'] is True, 'WITHOUT_REPLACEMENT_UNSUPPORTED')
+                _require(not slot.get('metadata') and not sheet.get('metadata'), 'UNSUPPORTED_SLOT_OR_SHEET_METADATA')
+                count = slot['draw_count']; total_cards += count
+                _require(type(count) is int and total_cards <= MAX_CARDS, 'CARD_COUNT_BOUND_EXCEEDED')
+                entries = sorted(((e['printing_id'], e['finish_id']) if finish_aware else e['printing_id'],
+                                  e['weight']) for e in sheet['entries'])
+                _require(0 < len(entries) <= MAX_POOL and len({p for p, _ in entries}) == len(entries),
+                         'EMPTY_OVERSIZED_OR_DUPLICATE_POOL')
+                _require(all(type(w) is int and 0 < w <= MAX_INTEGER for _, w in entries)
+                         and sum(w for _, w in entries) <= MAX_INTEGER, 'INVALID_EXPLICIT_WEIGHTS')
+                for outcome, _ in entries:
+                    printing_id = outcome[0] if finish_aware else outcome
+                    printing = items.get(('printing', printing_id))
+                    _require(printing is not None, 'UNKNOWN_PRINTING')
+                    _require(printing['supersession_state'] == 'current' and printing['uncertainty'] == 'known',
+                             'UNRESOLVED_OR_SUPERSEDED_PRINTING')
+                    if finish_aware:
+                        finish_id = outcome[1]
+                        finish = items.get(('finish', finish_id))
+                        _require(finish is not None and finish['uncertainty'] == 'known'
+                                 and finish['supersession_state'] == 'current', 'UNKNOWN_OR_UNRESOLVED_FINISH')
+                        raw = self._query.retained_record(printing_id, entity_type='printing')
+                        # The owning Card reader has admitted this record. Require an explicit
+                        # source-bound finish fact; compatibility defaults are never sufficient.
+                        _require(raw.get('schema_version') == 'v3' and type(raw.get('finishes')) is list
+                                 and finish_id in raw['finishes'], 'UNSUPPORTED_PRINTING_FINISH')
+                        assertions = [a for a in raw['assertions'] if a['path'] == '/finishes'
+                                      and a['status'] not in ('rejected', 'superseded')]
+                        _require(assertions and all(a['subject_id'] == printing_id
+                                 and a['status'] == 'promoted'
+                                 and a['verification_status'] in ('confirmed', 'verified')
+                                 and a['evidence_class'] not in ('unknown', 'conflicting')
+                                 and a['asserted_value'] == raw['finishes'] for a in assertions),
+                                 'UNRESOLVED_PRINTING_FINISH_EVIDENCE')
+                        for assertion in assertions:
+                            source_id = assertion['source_id']
+                            if source_id not in sources:
+                                sources[source_id] = load_source_record(snapshot.game, product_id, source_id,
+                                                                       games_root=self._query.games_root)
+                            _require(sources[source_id]['verification_status'] == 'confirmed',
+                                     'UNCONFIRMED_PRINTING_FINISH_SOURCE')
+                        records['printing', printing_id] = dict(kind='printing', id=printing_id,
+                                                               record=raw, query_evidence=printing)
+                        records['finish', finish_id] = dict(kind='finish', id=finish_id, query_evidence=finish)
+                    else:
+                        records['printing', printing_id] = dict(kind='printing', id=printing_id, query_evidence=printing)
+                draws.append((slot_id, sheet['id'], count, entries))
+            return draws, total_cards
+
+        candidates = {}
+        if variant_model:
+            variant_entries = sorted((v['pack_definition_id'], v['weight']) for v in pack['variants'])
+            _require(0 < len(variant_entries) <= MAX_SLOTS
+                     and len({v for v, _ in variant_entries}) == len(variant_entries),
+                     'EMPTY_OVERSIZED_OR_DUPLICATE_VARIANTS')
+            _require(all(type(w) is int and 0 < w <= MAX_INTEGER for _, w in variant_entries)
+                     and sum(w for _, w in variant_entries) <= MAX_INTEGER, 'INVALID_VARIANT_WEIGHTS')
+            aggregate_slots = aggregate_cards = aggregate_entries = 0
+            for identifier, _ in variant_entries:
+                child = record('pack_definition', identifier, 'pack-definition')
+                _require(child['product_version_id'] == version_id, 'VARIANT_PRODUCT_VERSION_MISMATCH')
+                _require(child.get('metadata') == {'simulation_model': FINISH_MODEL},
+                         'VARIANT_REQUIRES_FINISH_AWARE_COMPOSITION')
+                candidate = composition(child)
+                candidates[identifier] = candidate
+                aggregate_slots += len(candidate[0]); aggregate_cards += candidate[1]
+                aggregate_entries += sum(len(d[3]) for d in candidate[0])
+                _require(aggregate_slots <= MAX_SLOTS and aggregate_cards <= MAX_CARDS
+                         and aggregate_entries <= MAX_POOL, 'VARIANT_AGGREGATE_BOUND_EXCEEDED')
+        else:
+            draws, total_cards = composition(pack)
         records = [records[key] for key in sorted(records)]
         inputs = dict(query_snapshot_id=snapshot.snapshot_id, records=records, sources=sources)
-        input_id = _identity('pack-simulation-input-v0.1' if finish_aware else 'pack-simulation-input-v0', inputs)
-        counter = 0; slots = []
+        input_id = _identity('pack-simulation-input-v0.2' if variant_model else
+                             'pack-simulation-input-v0.1' if finish_aware else 'pack-simulation-input-v0', inputs)
+        counter = 0; slots = []; variant_result = {}
+        if variant_model:
+            total_weight = sum(w for _, w in variant_entries)
+            ticket, counter = _ticket(seed, counter, total_weight)
+            identifier = _select(variant_entries, ticket)
+            draws, total_cards = candidates[identifier]
+            variant_result = dict(selected_variant_id=identifier,
+                                  selected_variant_weight=dict(variant_entries)[identifier],
+                                  variant_total_weight=total_weight)
         for slot_id, sheet_id, count, entries in draws:
             selected_ids = []
             for _ in range(count):
@@ -231,7 +270,7 @@ class _PackSimulator:
                     pack_definition_id=pack_id, query_snapshot_id=snapshot.snapshot_id, input_id=input_id,
                     database_version=None, production_authorized=False,
                     scope='EXPLICIT_DEFINITION_MODEL_ONLY_NON_PRODUCTION', card_count=total_cards,
-                    slots=slots, evidence_references=[dict(kind=r['kind'], id=r['id'],
+                    slots=slots, **variant_result, evidence_references=[dict(kind=r['kind'], id=r['id'],
                     content_id=_identity('pack-simulation-record-v0', r)) for r in records],
                     source_references=[dict(id=k, content_id=_identity('pack-simulation-source-v0', v))
                                        for k, v in sorted(sources.items())])
@@ -263,8 +302,12 @@ def render_pack_report(report, *, readable=False):
         return report['status'] + '\n' + '\n'.join('- ' + r for r in report['missing_requirements']) + '\n'
     lines = [f"{report['product_id']} / {report['pack_definition_id']}: {report['card_count']} cards",
              f"Seed {report['seed']}; {report['algorithm']}; non-production definition model"]
-    if report['schema_version'] == FINISH_VERSION:
-        lines += [FINISH_VERSION + ': explicit Printing + Finish outcomes']
+    if report['schema_version'] == VARIANT_VERSION:
+        lines += [VARIANT_VERSION + ': selected variant ' + report['selected_variant_id'] +
+                  ' (weight ' + str(report['selected_variant_weight']) + '/' +
+                  str(report['variant_total_weight']) + ')']
+    if report['schema_version'] in (FINISH_VERSION, VARIANT_VERSION):
+        lines += [report['schema_version'] + ': explicit Printing + Finish outcomes']
         lines += [s['slot_id'] + ': ' + ', '.join(
             o['printing_id'] + ' [' + o['finish_id'] + ']' for o in s['outcomes']) for s in report['slots']]
     else:

@@ -1,0 +1,38 @@
+{
+  "game": "pack_fixture",
+  "id": "fictional-variants",
+  "metadata": {
+    "simulation_model": "weighted-finish-pack-variants-with-replacement-v1"
+  },
+  "name": "Fictional weighted fifteen-card compositions",
+  "product_version_id": "fictional-version",
+  "provenance": [
+    {
+      "claim": "Explicit fictional model only; not real Magic, production data or physical collation.",
+      "field_paths": [
+        "game",
+        "id",
+        "metadata",
+        "name",
+        "product_version_id",
+        "variants"
+      ],
+      "source_id": "fictional-definition"
+    }
+  ],
+  "schema_version": "v3",
+  "variants": [
+    {
+      "pack_definition_id": "variant-a-nonfoil",
+      "weight": 90
+    },
+    {
+      "pack_definition_id": "variant-b-foil",
+      "weight": 8
+    },
+    {
+      "pack_definition_id": "variant-c-mixed",
+      "weight": 2
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "entries": [
+    {
+      "finish_id": "nonfoil",
+      "printing_id": "pack_fixture.tst.1.en",
+      "weight": 1
+    },
+    {
+      "finish_id": "nonfoil",
+      "printing_id": "pack_fixture.tst.2.en",
+      "weight": 2
+    }
+  ],
+  "game": "pack_fixture",
+  "id": "base-sheet",
+  "name": "base",
+  "provenance": [
+    {
+      "claim": "Explicit fictional model only; not real Magic, production data or physical collation.",
+      "field_paths": [
+        "entries",
+        "game",
+        "id",
+        "name"
+      ],
+      "source_id": "fictional-definition"
+    }
+  ],
+  "schema_version": "v3"
+}

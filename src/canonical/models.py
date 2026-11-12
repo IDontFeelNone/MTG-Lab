@@ -108,11 +108,18 @@ class Rarity(Entity):
 
 
 @dataclass(frozen=True)
+class PackVariant:
+    pack_definition_id: str
+    weight: int
+
+
+@dataclass(frozen=True)
 class PackDefinition(Entity):
     product_version_id: str = ""
     name: str = ""
     slot_ids: tuple[str, ...] = ()
     schema_version: str = "v2"
+    variants: tuple[PackVariant, ...] | None = field(default=None, metadata={"omit_if_none": True})
 
 
 @dataclass(frozen=True)

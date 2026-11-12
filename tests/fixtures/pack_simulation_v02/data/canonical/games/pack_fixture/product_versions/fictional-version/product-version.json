@@ -1,0 +1,27 @@
+{
+  "components": [
+    {
+      "component_id": "fictional-variants",
+      "component_type": "pack_definition",
+      "quantity": 1
+    }
+  ],
+  "game": "pack_fixture",
+  "id": "fictional-version",
+  "name": "Fictional version",
+  "product_id": "fictional-pack",
+  "provenance": [
+    {
+      "claim": "Explicit fictional model only; not real Magic, production data or physical collation.",
+      "field_paths": [
+        "components",
+        "game",
+        "id",
+        "name",
+        "product_id"
+      ],
+      "source_id": "fictional-definition"
+    }
+  ],
+  "schema_version": "v2"
+}

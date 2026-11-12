@@ -1,0 +1,29 @@
+{
+  "game": "pack_fixture",
+  "id": "variant-a-nonfoil",
+  "metadata": {
+    "simulation_model": "independent-finish-weighted-with-replacement-v1"
+  },
+  "name": "Fictional variant-a-nonfoil",
+  "product_version_id": "fictional-version",
+  "provenance": [
+    {
+      "claim": "Explicit fictional model only; not real Magic, production data or physical collation.",
+      "field_paths": [
+        "game",
+        "id",
+        "metadata",
+        "name",
+        "product_version_id",
+        "slot_ids"
+      ],
+      "source_id": "fictional-definition"
+    }
+  ],
+  "schema_version": "v2",
+  "slot_ids": [
+    "base-slot",
+    "accent-slot",
+    "nonfoil-slot"
+  ]
+}
