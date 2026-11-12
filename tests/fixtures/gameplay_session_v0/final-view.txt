@@ -1,0 +1,18 @@
+Fictional turn 2: active B; beginning/start; priority B; in_progress
+A: life 10; mana {}
+B: life 8; mana {}
+A:library (0): hidden
+A:hand (1): hidden
+A:battlefield (2): pebble-resource, moss-plot
+A:graveyard (1): ember-scroll
+A:exile (0):
+A:command (0):
+B:library (1): hidden
+B:hand (0): hidden
+B:battlefield (0):
+B:graveyard (0):
+B:exile (0):
+B:command (0):
+shared:stack (0):
+State: sha256:3d50568ea0ec2f7a1bfa471e9c6fca3aff3f8040096dff31d849a634809804e0
+Project-authored fictional rules only; not real Magic gameplay.
