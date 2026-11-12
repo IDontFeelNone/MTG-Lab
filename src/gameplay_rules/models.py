@@ -143,7 +143,8 @@ def _snapshot(body):
     _version(body["rules_version"], "rules_version")
     _date(body["effective_date"], "effective_date")
     _choice(body["engine_contract_version"], {ENGINE_CONTRACT_VERSION}, "engine_contract_version")
-    _choice(body["execution_profile"], {EXECUTION_PROFILE}, "execution_profile")
+    _choice(body["execution_profile"], {EXECUTION_PROFILE, "fictional-two-player-turn-lifecycle-v1"}, "execution_profile")
+    lifecycle = body["execution_profile"] == "fictional-two-player-turn-lifecycle-v1"
     if not isinstance(body["sources"], list) or not body["sources"]: _fail("sources", "nonempty array required")
     for source in body["sources"]: _source(source)
     source_ids = [s["source_id"] for s in body["sources"]]
@@ -172,9 +173,10 @@ def _snapshot(body):
         rule_ids.append(rule["rule_id"])
         categories.add(rule["category"])
     if len(set(rule_ids)) != len(rule_ids): _fail("rules", "duplicate rule identity")
+    if lifecycle and not {"untap", "draw"} <= categories: _fail("rules", "lifecycle requires untap and draw evidence")
     if not REQUIRED_RULE_CATEGORIES <= categories: _fail("rules", "missing primitive rule category")
     parameters = body["parameters"]
-    _keys(parameters, {"mana_symbols", "generic_payment_order", "main_phase", "main_step", "turn_steps", "land_plays_per_turn", "life_loss_threshold"}, "parameters")
+    _keys(parameters, {"mana_symbols", "generic_payment_order", "main_phase", "main_step", "turn_steps", "land_plays_per_turn", "life_loss_threshold"} | ({"turn_start"} if lifecycle else set()), "parameters")
     for key in ("mana_symbols", "generic_payment_order"): _strings(parameters[key], "parameters." + key)
     if not parameters["mana_symbols"] or set(parameters["mana_symbols"]) != set(parameters["generic_payment_order"]): _fail("parameters", "payment order must cover exact mana symbols")
     _text(parameters["main_phase"], "main_phase")
@@ -186,6 +188,11 @@ def _snapshot(body):
         for key in turn: _text(turn[key], "turn_steps")
         seen.append((turn["phase"], turn["step"]))
     if len(set(seen)) != len(seen) or (parameters["main_phase"], parameters["main_step"]) not in seen: _fail("turn_steps", "duplicate or missing main window")
+    if lifecycle:
+        if parameters["turn_start"] != {"untap": "controlled_battlefield", "draw_count": 1, "library_top": "first", "empty_library": "unsupported"} or type(parameters["turn_start"].get("draw_count")) is not int:
+            _fail("turn_start", "exact bounded lifecycle policy required")
+        if seen != [("beginning", "start"), ("main", "action"), ("ending", "end")]:
+            _fail("turn_steps", "lifecycle requires the three supported windows")
     _int(parameters["land_plays_per_turn"], "land_plays_per_turn", minimum=0)
     _int(parameters["life_loss_threshold"], "life_loss_threshold")
 
@@ -306,6 +313,36 @@ def _state(body):
         _choice(effect["knowledge"], {"unsupported", "unknown"}, "effect.knowledge")
         effect_ids.append(effect["effect_id"])
     if len(set(effect_ids)) != len(effect_ids): _fail("active_effects", "duplicate identity")
+
+
+def _ordered_state(body):
+    _keys(body, {"game_id", "rules_snapshot_id", "revision", "players", "active_player", "turn_number", "phase", "step", "priority_player", "zones", "objects", "stack", "consecutive_passes", "status", "winner_ids", "loser_ids", "pending_system_actions", "unknown_fields", "active_effects", "library_order", "turn_start"}, "ordered_game_state")
+    _state({k: v for k, v in body.items() if k not in {"library_order", "turn_start"}})
+    libraries = {z["zone_id"]: z for z in body["zones"] if z["kind"] == "library"}
+    players = {p["player_id"] for p in body["players"]}
+    for kind in ("library", "hand"):
+        scoped = [z for z in body["zones"] if z["kind"] == kind]
+        if len(scoped) != 2 or {z["owner"] for z in scoped} != players:
+            _fail(kind, "one exclusive zone per player required by lifecycle")
+    _keys(body["library_order"], libraries, "library_order")
+    for zone_id, order in body["library_order"].items():
+        _strings(order, "library_order")
+        members = [o for o in body["objects"] if o["zone_id"] == zone_id]
+        if set(order) != {o["object_id"] for o in members} or any(o["owner"] != libraries[zone_id]["owner"] for o in members):
+            _fail("library_order", "exact membership and library ownership required")
+    progress = body["turn_start"]
+    _keys(progress, {"turn_number", "player_id", "status"}, "turn_start")
+    _int(progress["turn_number"], "turn_start.turn_number", minimum=1)
+    if progress["turn_number"] != body["turn_number"] or progress["player_id"] != body["active_player"]:
+        _fail("turn_start", "progress must bind this turn and active player")
+    _choice(progress["status"], {"pending_untap", "pending_draw", "complete"}, "turn_start.status")
+    pending = body["pending_system_actions"]
+    if progress["status"] != "complete":
+        expected = (["untap_active_player"] if progress["status"] == "pending_untap" else []) + ["draw_for_turn", "perform_state_based_actions"]
+        if pending != expected or body["phase"] != "beginning" or body["step"] != "start" or body["stack"] or body["consecutive_passes"] or body["status"] != "in_progress":
+            _fail("turn_start", "exact mandatory lifecycle sequence required")
+    elif set(pending) & {"untap_active_player", "draw_for_turn"}:
+        _fail("turn_start", "completed operations cannot be rescheduled")
 
 
 def _action(body):
@@ -465,9 +502,28 @@ class CardGameplaySemantics(_Envelope):
 
 @dataclass(frozen=True)
 class GameState(_Envelope):
+    @classmethod
+    def create(cls, body):
+        if cls is GameState and isinstance(body, Mapping) and body.get("schema_version") == "gameplay-state-v2":
+            return OrderedGameState.create(body)
+        return super().create(body)
+
+    @classmethod
+    def from_dict(cls, value):
+        if cls is GameState and isinstance(value, Mapping) and value.get("schema_version") == "gameplay-state-v2":
+            return OrderedGameState.from_dict(value)
+        return super().from_dict(value)
+
     SCHEMA = "gameplay-state-v1"
     ID_FIELD = "state_id"
     VALIDATOR = staticmethod(_state)
+
+
+@dataclass(frozen=True)
+class OrderedGameState(GameState):
+    """V2 envelope only: the same state model with explicit order/progress."""
+    SCHEMA = "gameplay-state-v2"
+    VALIDATOR = staticmethod(_ordered_state)
 
 
 @dataclass(frozen=True)

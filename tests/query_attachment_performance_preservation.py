@@ -93,7 +93,8 @@ def assert_retained_row(row, root=ROOT):
     from pack_simulation_preservation import REPLACEMENTS, preceding_bytes as pack_preceding
     from finish_simulation_preservation import REPLACEMENT_PATHS as FINISH_PATHS
     from variant_simulation_preservation import REPLACEMENT_PATHS as VARIANT_PATHS
-    if row["path"] in REPLACEMENTS or row["path"] in FINISH_PATHS or row["path"] in VARIANT_PATHS:
+    from turn_lifecycle_preservation import REPLACEMENT_PATHS as LIFECYCLE_PATHS
+    if row["path"] in REPLACEMENTS or row["path"] in FINISH_PATHS or row["path"] in VARIANT_PATHS or row["path"] in LIFECYCLE_PATHS:
         _check_pin(pack_preceding(row["path"], regular_bytes(row["path"], root)), pin if pin is not None else row)
         return
     from test_evidence_review_malformed import HANDOFF_SOURCE_PATHS, handoff_preceding_bytes
@@ -151,7 +152,8 @@ def historical_inventory_row(row, root=ROOT):
     from pack_simulation_preservation import REPLACEMENTS, preceding_bytes as pack_preceding
     from finish_simulation_preservation import REPLACEMENT_PATHS as FINISH_PATHS
     from variant_simulation_preservation import REPLACEMENT_PATHS as VARIANT_PATHS
-    if row["path"] in REPLACEMENTS or row["path"] in FINISH_PATHS or row["path"] in VARIANT_PATHS:
+    from turn_lifecycle_preservation import REPLACEMENT_PATHS as LIFECYCLE_PATHS
+    if row["path"] in REPLACEMENTS or row["path"] in FINISH_PATHS or row["path"] in VARIANT_PATHS or row["path"] in LIFECYCLE_PATHS:
         raw = regular_bytes(row["path"], root)
         _check_pin(raw, row)
         old = pack_preceding(row["path"], raw)

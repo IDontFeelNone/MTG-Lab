@@ -13,7 +13,7 @@ from .snapshots import (MAX_CONTRACT_BYTES, load_card_semantics, load_game_state
 VERSION = 'gameplay-session-v0'
 MAX_ATTEMPTS = 128
 MAX_SYSTEM_TRANSITIONS = 8
-_SYSTEM_ACTIONS = frozenset(('perform_state_based_actions', 'resolve_top_of_stack', 'advance_step_or_phase'))
+_SYSTEM_ACTIONS = frozenset(('perform_state_based_actions', 'resolve_top_of_stack', 'advance_step_or_phase', 'untap_active_player', 'draw_for_turn'))
 
 
 def _require(condition, code, message):
@@ -85,6 +85,8 @@ class GameplaySession:
         _require(not before['pending_system_actions'] and
                  (before['status'] == 'ended' or before['priority_player'] is not None),
                  'initial_system_boundary', 'Initialize at a settled player decision boundary')
+        _require((before['schema_version'] == 'gameplay-state-v2') == (rules['execution_profile'] == 'fictional-two-player-turn-lifecycle-v1'),
+                 'incompatible_state_profile', 'Ordered V2 state and lifecycle profile must be selected together')
         definitions = {s.identity: s.to_dict() for s in self._semantics}
         for obj in before['objects']:
             if obj['knowledge'] == 'known':
@@ -136,7 +138,8 @@ class GameplaySession:
                     kind=kind, actor=None, object_id=None, ability_id=None, payment=None))
                 resolved = self._engine.apply_action(next_state, system)
                 _require(isinstance(resolved, GameTransition), 'blocked_system_action',
-                         'A mandatory system action did not produce a legal kernel transition')
+                         'A mandatory system action did not produce a legal kernel transition: ' +
+                         (', '.join(resolved.to_dict()['explanation']['reason_codes']) if not isinstance(resolved, GameTransition) else ''))
                 transitions.append(resolved.to_dict())
                 next_state = GameState.from_dict(resolved.after_state)
             _require(not next_state.pending_system_actions, 'session_bound', 'Mandatory system-action bound exceeded')
@@ -152,7 +155,7 @@ class GameplaySession:
 
     def _report(self, entries, current):
         body = dict(schema_version=VERSION, game_id=self._initial.game_id,
-                    execution_profile='fictional-two-player-v1',
+                    execution_profile=self._rules.execution_profile,
                     scope='PROJECT_AUTHORED_FICTIONAL_ONLY_FULL_INFORMATION_REPLAY',
                     rules_snapshot_id=self._rules.identity,
                     semantics_ids=sorted(s.identity for s in self._semantics),
