@@ -1,7 +1,7 @@
 """Small deterministic interpreter for explicitly selected fictional gameplay.
 
-Only ``fictional-two-player-v1`` is executable.  The rules snapshot supplies
-versioned evidence and coverage; this engine supplies the reviewed primitive
+Only the explicitly selected fictional V0 and turn-lifecycle profiles execute.
+The rules snapshot supplies versioned evidence and coverage; this engine supplies the reviewed primitive
 meaning.  Neither source prose nor card text is executable input.
 """
 
@@ -17,8 +17,12 @@ from .models import (
 
 
 _PLAYER_ACTIONS = {"pass_priority", "play_land", "cast_spell", "activate_ability"}
-_SYSTEM_ACTIONS = {"resolve_top_of_stack", "perform_state_based_actions", "advance_step_or_phase"}
+_LIFECYCLE_PROFILE = "fictional-two-player-turn-lifecycle-v1"
+_TURN_ACTIONS = {"untap_active_player", "draw_for_turn"}
+_SYSTEM_ACTIONS = {"resolve_top_of_stack", "perform_state_based_actions", "advance_step_or_phase"} | _TURN_ACTIONS
 _CAPABILITIES = {
+    "untap_active_player": ("active_player",),
+    "draw_for_turn": ("active_player", "zone_changes"),
     "pass_priority": ("priority", "stack"),
     "play_land": ("priority", "active_player", "land_play", "zone_changes", "stack"),
     "cast_spell": ("priority", "active_player", "spell_casting", "mana_payment", "generic_costs", "stack", "zone_changes"),
@@ -33,6 +37,8 @@ _CAPABILITIES = {
 _COMMON_CAPABILITIES = ("turn_structure", "zones", "state_based_actions")
 _COMMON_RULE_CATEGORIES = ("turn_structure", "zones", "state_based_actions")
 _RULE_CATEGORIES = {
+    "untap_active_player": ("untap",),
+    "draw_for_turn": ("draw",),
     "pass_priority": ("priority", "stack"),
     "play_land": ("priority", "timing", "zones", "land_play"),
     "cast_spell": ("priority", "timing", "zones", "spell_casting", "mana_payment", "stack"),
@@ -60,7 +66,7 @@ class GameplayRulesEngine:
             raise GameplayContractError("invalid_snapshot", "an explicit verified rules snapshot is required")
         snapshot.verify()
         body = snapshot.to_dict()
-        if body["engine_contract_version"] != "gameplay-kernel-v1" or body["execution_profile"] != "fictional-two-player-v1":
+        if body["engine_contract_version"] != "gameplay-kernel-v1" or body["execution_profile"] not in {"fictional-two-player-v1", _LIFECYCLE_PROFILE}:
             raise GameplayContractError("incompatible_rules", "the fictional kernel contract is required")
         if any(source["source_class"] != "project_authored_fictional" for source in body["sources"]):
             raise GameplayContractError("nonfictional_execution", "only project-authored fictional sources may execute")
@@ -105,6 +111,8 @@ class GameplayRulesEngine:
                 raise GameplayContractError("wrong_game", "state and action must belong to the selected game")
             if value["rules_snapshot_id"] != self._snapshot.identity:
                 raise GameplayContractError("rules_snapshot_mismatch", "state and action must bind the selected rules snapshot")
+        if (before["schema_version"] == "gameplay-state-v2") != (rules["execution_profile"] == _LIFECYCLE_PROFILE):
+            raise GameplayContractError("incompatible_state_profile", "Ordered V2 state and lifecycle profile must be selected together")
         if request["expected_state_id"] != state.identity:
             raise GameplayContractError("stale_state", "action must bind the exact before-state identity")
         if len(self._definitions) != len(self._definition_bindings):
@@ -167,7 +175,7 @@ class GameplayRulesEngine:
                 "explanation": {"action_kind": kind, "status": status, "reason_codes": sorted(set(failed + unknown + unsupported))},
             })
 
-        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS:
+        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS or (kind in _TURN_ACTIONS and rules["execution_profile"] != _LIFECYCLE_PROFILE):
             unsupported.append("action_kind:" + kind)
             return result()
         if before["status"] != "in_progress":
@@ -227,6 +235,20 @@ class GameplayRulesEngine:
                 failed.append("system_action_not_due")
             else:
                 satisfied.append("system_boundary_matches")
+        if kind in _TURN_ACTIONS:
+            if request["object_id"] is not None or request["ability_id"] is not None or request["payment"] is not None:
+                raise GameplayContractError("unexpected_action_fields", "turn-start system actions have no caller-selected object or payment")
+            if "system_action_not_due" in failed:
+                return result()
+            if kind == "untap_active_player":
+                for obj in before["objects"]:
+                    if zones[obj["zone_id"]]["kind"] == "battlefield" and obj["controller"] == before["active_player"] and obj["tapped"] is None:
+                        unknown.append("untap_state_unknown:" + obj["object_id"])
+            else:
+                library = self._zone(before, "library", before["active_player"])
+                if not before["library_order"][library]:
+                    unsupported.append("empty_library_draw_rule_not_implemented")
+            return result()
         if kind in {"pass_priority", "perform_state_based_actions", "advance_step_or_phase"}:
             if request["object_id"] is not None or request["ability_id"] is not None or request["payment"] is not None:
                 raise GameplayContractError("unexpected_action_fields", "this action does not accept object, ability or payment fields")
@@ -370,7 +392,8 @@ class GameplayRulesEngine:
             return legality
         rules, before, request = self._inputs(state, action)
         after = state.to_dict()
-        after.pop("schema_version", None)
+        if after["schema_version"] == "gameplay-state-v1":
+            after.pop("schema_version")
         after.pop("state_id", None)
         after["revision"] += 1
         kind, actor = request["kind"], request["actor"]
@@ -412,7 +435,19 @@ class GameplayRulesEngine:
                 players[actor]["mana_pool"][symbol] = players[actor]["mana_pool"].get(symbol, 0) + amount
         else:
             after["pending_system_actions"].pop(0)
-            if kind == "resolve_top_of_stack":
+            if kind == "untap_active_player":
+                zones = {z["zone_id"]: z for z in after["zones"]}
+                for obj in after["objects"]:
+                    if zones[obj["zone_id"]]["kind"] == "battlefield" and obj["controller"] == after["active_player"]:
+                        obj["tapped"] = False
+                after["turn_start"]["status"] = "pending_draw"
+            elif kind == "draw_for_turn":
+                library = self._zone(after, "library", after["active_player"])
+                obj = objects[after["library_order"][library].pop(0)]
+                move(obj, self._zone(after, "hand", after["active_player"]))
+                obj["controller"] = after["active_player"]
+                after["turn_start"]["status"] = "complete"
+            elif kind == "resolve_top_of_stack":
                 obj = objects[after["stack"].pop()]
                 definition = self._definition(obj)
                 for effect in definition["effects"]:
@@ -440,6 +475,9 @@ class GameplayRulesEngine:
                 if new_index == 0:
                     after["turn_number"] += 1
                     after["active_player"] = next(player for player in players if player != after["active_player"])
+                    if rules["execution_profile"] == _LIFECYCLE_PROFILE:
+                        after["turn_start"] = {"turn_number": after["turn_number"], "player_id": after["active_player"], "status": "pending_untap"}
+                        after["pending_system_actions"] = ["untap_active_player", "draw_for_turn", "perform_state_based_actions"]
                     for player in players.values():
                         player["land_plays_used"] = 0
                         player["land_plays_available"] = rules["parameters"]["land_plays_per_turn"]

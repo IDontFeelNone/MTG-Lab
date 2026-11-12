@@ -16,6 +16,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from turn_lifecycle_preservation import preceding_bytes as lifecycle_preceding
+    raw = lifecycle_preceding(name, raw)
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
     if name!='tests/variant_simulation_preservation.py': return raw
     pin=ledger()['replacements'][name];digest=hashlib.sha256(raw).hexdigest()
@@ -34,7 +36,8 @@ def is_addition(path, root):
     name=path.relative_to(root).as_posix()
     if name not in ADDITION_PATHS: return False
     if path.is_symlink() or path.stat().st_mode & 0o111: raise AssertionError('unsupported session source mode')
-    raw=path.read_bytes();pin=ledger()['additions'][name]
+    from turn_lifecycle_preservation import preceding_bytes as lifecycle_preceding
+    raw=lifecycle_preceding(name, path.read_bytes());pin=ledger()['additions'][name]
     if len(raw)!=pin['bytes'] or hashlib.sha256(raw).hexdigest()!=pin['sha256']:
         raise AssertionError('exact session source addition required')
     return True

@@ -1,0 +1,32 @@
+{
+  "abilities": [],
+  "card_id": "moss-plot",
+  "completeness": "complete",
+  "effects": [
+    {
+      "kind": "no_op"
+    }
+  ],
+  "game_id": "fictional-duel",
+  "mana_cost": {
+    "colored": {},
+    "generic": 0,
+    "kind": "mana",
+    "known": true,
+    "unsupported": []
+  },
+  "object_kind": "land",
+  "post_resolution_zone": "battlefield",
+  "required_capabilities": [],
+  "restrictions": [],
+  "review_status": "fictional_test_only",
+  "rules_snapshot_id": "sha256:5981a209c724637b2f2712c921a983d4afa75c6086b5daca22037928f2763f91",
+  "schema_version": "gameplay-card-semantics-v1",
+  "semantics_id": "sha256:fee71adf003e0f7f481335ad2ccddaeed12eeca8ad607d332679f1b68c8fc326",
+  "semantics_version": "fictional-card-semantics-v1",
+  "source_references": [
+    "fictional-authored-rules-v1"
+  ],
+  "timing": "none",
+  "unsupported_text": []
+}

@@ -1,0 +1,329 @@
+{
+  "base": "b755935287a6840502b8afa4af35e079ef1d1a4c",
+  "replacements": {
+    "src/gameplay_rules/models.py": {
+      "old_sha256": "2985d761c6a44810c978c56959150f7b6a52932b1a519d46961dd4fe3ecfecf1",
+      "new_sha256": "592ba26d6eae1534bd2bd39c09ab6c35e93d836b781ff72c545f407f71531f14",
+      "edits": [
+        {
+          "start": 6444,
+          "end": 6486,
+          "old": "",
+          "new": ", \"fictional-two-player-turn-lifecycle-v1\""
+        },
+        {
+          "start": 6509,
+          "end": 6595,
+          "old": "",
+          "new": "\n    lifecycle = body[\"execution_profile\"] == \"fictional-two-player-turn-lifecycle-v1\""
+        },
+        {
+          "start": 8832,
+          "end": 8951,
+          "old": "",
+          "new": "lifecycle and not {\"untap\", \"draw\"} <= categories: _fail(\"rules\", \"lifecycle requires untap and draw evidence\")\n    if "
+        },
+        {
+          "start": 9231,
+          "end": 9274,
+          "old": "",
+          "new": " | ({\"turn_start\"} if lifecycle else set())"
+        },
+        {
+          "start": 10157,
+          "end": 10628,
+          "old": "",
+          "new": "\")\n    if lifecycle:\n        if parameters[\"turn_start\"] != {\"untap\": \"controlled_battlefield\", \"draw_count\": 1, \"library_top\": \"first\", \"empty_library\": \"unsupported\"} or type(parameters[\"turn_start\"].get(\"draw_count\")) is not int:\n            _fail(\"turn_start\", \"exact bounded lifecycle policy required\")\n        if seen != [(\"beginning\", \"start\"), (\"main\", \"action\"), (\"ending\", \"end\")]:\n            _fail(\"turn_steps\", \"lifecycle requires the three supported windows"
+        },
+        {
+          "start": 18778,
+          "end": 21161,
+          "old": "",
+          "new": "\")\n\n\ndef _ordered_state(body):\n    _keys(body, {\"game_id\", \"rules_snapshot_id\", \"revision\", \"players\", \"active_player\", \"turn_number\", \"phase\", \"step\", \"priority_player\", \"zones\", \"objects\", \"stack\", \"consecutive_passes\", \"status\", \"winner_ids\", \"loser_ids\", \"pending_system_actions\", \"unknown_fields\", \"active_effects\", \"library_order\", \"turn_start\"}, \"ordered_game_state\")\n    _state({k: v for k, v in body.items() if k not in {\"library_order\", \"turn_start\"}})\n    libraries = {z[\"zone_id\"]: z for z in body[\"zones\"] if z[\"kind\"] == \"library\"}\n    players = {p[\"player_id\"] for p in body[\"players\"]}\n    for kind in (\"library\", \"hand\"):\n        scoped = [z for z in body[\"zones\"] if z[\"kind\"] == kind]\n        if len(scoped) != 2 or {z[\"owner\"] for z in scoped} != players:\n            _fail(kind, \"one exclusive zone per player required by lifecycle\")\n    _keys(body[\"library_order\"], libraries, \"library_order\")\n    for zone_id, order in body[\"library_order\"].items():\n        _strings(order, \"library_order\")\n        members = [o for o in body[\"objects\"] if o[\"zone_id\"] == zone_id]\n        if set(order) != {o[\"object_id\"] for o in members} or any(o[\"owner\"] != libraries[zone_id][\"owner\"] for o in members):\n            _fail(\"library_order\", \"exact membership and library ownership required\")\n    progress = body[\"turn_start\"]\n    _keys(progress, {\"turn_number\", \"player_id\", \"status\"}, \"turn_start\")\n    _int(progress[\"turn_number\"], \"turn_start.turn_number\", minimum=1)\n    if progress[\"turn_number\"] != body[\"turn_number\"] or progress[\"player_id\"] != body[\"active_player\"]:\n        _fail(\"turn_start\", \"progress must bind this turn and active player\")\n    _choice(progress[\"status\"], {\"pending_untap\", \"pending_draw\", \"complete\"}, \"turn_start.status\")\n    pending = body[\"pending_system_actions\"]\n    if progress[\"status\"] != \"complete\":\n        expected = ([\"untap_active_player\"] if progress[\"status\"] == \"pending_untap\" else []) + [\"draw_for_turn\", \"perform_state_based_actions\"]\n        if pending != expected or body[\"phase\"] != \"beginning\" or body[\"step\"] != \"start\" or body[\"stack\"] or body[\"consecutive_passes\"] or body[\"status\"] != \"in_progress\":\n            _fail(\"turn_start\", \"exact mandatory lifecycle sequence required\")\n    elif set(pending) & {\"untap_active_player\", \"draw_for_turn\"}:\n        _fail(\"turn_start\", \"completed operations cannot be rescheduled"
+        },
+        {
+          "start": 30541,
+          "end": 31041,
+          "old": "",
+          "new": "@classmethod\n    def create(cls, body):\n        if cls is GameState and isinstance(body, Mapping) and body.get(\"schema_version\") == \"gameplay-state-v2\":\n            return OrderedGameState.create(body)\n        return super().create(body)\n\n    @classmethod\n    def from_dict(cls, value):\n        if cls is GameState and isinstance(value, Mapping) and value.get(\"schema_version\") == \"gameplay-state-v2\":\n            return OrderedGameState.from_dict(value)\n        return super().from_dict(value)\n\n    "
+        },
+        {
+          "start": 31125,
+          "end": 31343,
+          "old": "",
+          "new": "_state)\n\n\n@dataclass(frozen=True)\nclass OrderedGameState(GameState):\n    \"\"\"V2 envelope only: the same state model with explicit order/progress.\"\"\"\n    SCHEMA = \"gameplay-state-v2\"\n    VALIDATOR = staticmethod(_ordered"
+        }
+      ]
+    },
+    "src/gameplay_rules/engine.py": {
+      "old_sha256": "6905f483e1d53cd9d13eaad36493cba870c495779c01bfa02fe72d6adb62a623",
+      "new_sha256": "3d536f1641f15ba0b535353183a19442652ec3299e32c19cba967537e4aabeec",
+      "edits": [
+        {
+          "start": 85,
+          "end": 109,
+          "old": "``",
+          "new": "the explicitly selected "
+        },
+        {
+          "start": 118,
+          "end": 130,
+          "old": "",
+          "new": " V0 and turn"
+        },
+        {
+          "start": 131,
+          "end": 143,
+          "old": "tw",
+          "new": "lifecycle pr"
+        },
+        {
+          "start": 144,
+          "end": 146,
+          "old": "-p",
+          "new": "fi"
+        },
+        {
+          "start": 147,
+          "end": 147,
+          "old": "ay",
+          "new": ""
+        },
+        {
+          "start": 148,
+          "end": 148,
+          "old": "r-v1`` i",
+          "new": ""
+        },
+        {
+          "start": 156,
+          "end": 156,
+          "old": "abl",
+          "new": ""
+        },
+        {
+          "start": 158,
+          "end": 159,
+          "old": "  ",
+          "new": "\n"
+        },
+        {
+          "start": 186,
+          "end": 187,
+          "old": "\n",
+          "new": " "
+        },
+        {
+          "start": 706,
+          "end": 825,
+          "old": "",
+          "new": "LIFECYCLE_PROFILE = \"fictional-two-player-turn-lifecycle-v1\"\n_TURN_ACTIONS = {\"untap_active_player\", \"draw_for_turn\"}\n_"
+        },
+        {
+          "start": 922,
+          "end": 938,
+          "old": "",
+          "new": " | _TURN_ACTIONS"
+        },
+        {
+          "start": 956,
+          "end": 1059,
+          "old": "",
+          "new": "\n    \"untap_active_player\": (\"active_player\",),\n    \"draw_for_turn\": (\"active_player\", \"zone_changes\"),"
+        },
+        {
+          "start": 2064,
+          "end": 2135,
+          "old": "",
+          "new": "\n    \"untap_active_player\": (\"untap\",),\n    \"draw_for_turn\": (\"draw\",),"
+        },
+        {
+          "start": 3534,
+          "end": 3537,
+          "old": "!=",
+          "new": "not"
+        },
+        {
+          "start": 3538,
+          "end": 3542,
+          "old": "",
+          "new": "in {"
+        },
+        {
+          "start": 3567,
+          "end": 3588,
+          "old": "",
+          "new": ", _LIFECYCLE_PROFILE}"
+        },
+        {
+          "start": 6724,
+          "end": 6978,
+          "old": "",
+          "new": "\")\n        if (before[\"schema_version\"] == \"gameplay-state-v2\") != (rules[\"execution_profile\"] == _LIFECYCLE_PROFILE):\n            raise GameplayContractError(\"incompatible_state_profile\", \"Ordered V2 state and lifecycle profile must be selected together"
+        },
+        {
+          "start": 10690,
+          "end": 10770,
+          "old": "",
+          "new": " or (kind in _TURN_ACTIONS and rules[\"execution_profile\"] != _LIFECYCLE_PROFILE)"
+        },
+        {
+          "start": 14214,
+          "end": 15179,
+          "old": "",
+          "new": ")\n        if kind in _TURN_ACTIONS:\n            if request[\"object_id\"] is not None or request[\"ability_id\"] is not None or request[\"payment\"] is not None:\n                raise GameplayContractError(\"unexpected_action_fields\", \"turn-start system actions have no caller-selected object or payment\")\n            if \"system_action_not_due\" in failed:\n                return result()\n            if kind == \"untap_active_player\":\n                for obj in before[\"objects\"]:\n                    if zones[obj[\"zone_id\"]][\"kind\"] == \"battlefield\" and obj[\"controller\"] == before[\"active_player\"] and obj[\"tapped\"] is None:\n                        unknown.append(\"untap_state_unknown:\" + obj[\"object_id\"])\n            else:\n                library = self._zone(before, \"library\", before[\"active_player\"])\n                if not before[\"library_order\"][library]:\n                    unsupported.append(\"empty_library_draw_rule_not_implemented\")\n            return result("
+        },
+        {
+          "start": 24222,
+          "end": 24285,
+          "old": "",
+          "new": "if after[\"schema_version\"] == \"gameplay-state-v1\":\n            "
+        },
+        {
+          "start": 24311,
+          "end": 24311,
+          "old": ", None",
+          "new": ""
+        },
+        {
+          "start": 26533,
+          "end": 27306,
+          "old": "",
+          "new": "untap_active_player\":\n                zones = {z[\"zone_id\"]: z for z in after[\"zones\"]}\n                for obj in after[\"objects\"]:\n                    if zones[obj[\"zone_id\"]][\"kind\"] == \"battlefield\" and obj[\"controller\"] == after[\"active_player\"]:\n                        obj[\"tapped\"] = False\n                after[\"turn_start\"][\"status\"] = \"pending_draw\"\n            elif kind == \"draw_for_turn\":\n                library = self._zone(after, \"library\", after[\"active_player\"])\n                obj = objects[after[\"library_order\"][library].pop(0)]\n                move(obj, self._zone(after, \"hand\", after[\"active_player\"]))\n                obj[\"controller\"] = after[\"active_player\"]\n                after[\"turn_start\"][\"status\"] = \"complete\"\n            elif kind == \""
+        },
+        {
+          "start": 29201,
+          "end": 29552,
+          "old": "",
+          "new": "\n                    if rules[\"execution_profile\"] == _LIFECYCLE_PROFILE:\n                        after[\"turn_start\"] = {\"turn_number\": after[\"turn_number\"], \"player_id\": after[\"active_player\"], \"status\": \"pending_untap\"}\n                        after[\"pending_system_actions\"] = [\"untap_active_player\", \"draw_for_turn\", \"perform_state_based_actions\"]"
+        }
+      ]
+    },
+    "src/gameplay_rules/session.py": {
+      "old_sha256": "89e6fd0daa00e0164835a46ac318211c965fcad6244dcf17a5bd36842c5023b8",
+      "new_sha256": "0e624eea670581c827faeeda125044afd803b39165f8f61e7ff835bd0751e373",
+      "edits": [
+        {
+          "start": 671,
+          "end": 711,
+          "old": "",
+          "new": "', 'untap_active_player', 'draw_for_turn"
+        },
+        {
+          "start": 4557,
+          "end": 4816,
+          "old": "",
+          "new": "_require((before['schema_version'] == 'gameplay-state-v2') == (rules['execution_profile'] == 'fictional-two-player-turn-lifecycle-v1'),\n                 'incompatible_state_profile', 'Ordered V2 state and lifecycle profile must be selected together')\n        "
+        },
+        {
+          "start": 8050,
+          "end": 8052,
+          "old": "",
+          "new": ": "
+        },
+        {
+          "start": 8053,
+          "end": 8195,
+          "old": "",
+          "new": " +\n                         (', '.join(resolved.to_dict()['explanation']['reason_codes']) if not isinstance(resolved, GameTransition) else '')"
+        },
+        {
+          "start": 9120,
+          "end": 9123,
+          "old": "'",
+          "new": "sel"
+        },
+        {
+          "start": 9124,
+          "end": 9135,
+          "old": "i",
+          "new": "._rules.exe"
+        },
+        {
+          "start": 9136,
+          "end": 9137,
+          "old": "",
+          "new": "u"
+        },
+        {
+          "start": 9141,
+          "end": 9147,
+          "old": "a",
+          "new": "_profi"
+        },
+        {
+          "start": 9148,
+          "end": 9148,
+          "old": "-two-play",
+          "new": ""
+        },
+        {
+          "start": 9149,
+          "end": 9149,
+          "old": "r-v1'",
+          "new": ""
+        }
+      ]
+    },
+    "tests/gameplay_session_preservation.py": {
+      "old_sha256": "0dcc004d66fb3f84768dacb560f6209a1215efce443e400d777aa703ce3cf6db",
+      "new_sha256": "e28d3cb317a2170a3847c6af1bc49dd4f31c6d260d8bcdea8075ef20e43e91f8",
+      "edits": [
+        {
+          "start": 644,
+          "end": 768,
+          "old": "",
+          "new": "\n    from turn_lifecycle_preservation import preceding_bytes as lifecycle_preceding\n    raw = lifecycle_preceding(name, raw)"
+        },
+        {
+          "start": 1768,
+          "end": 1851,
+          "old": "",
+          "new": "from turn_lifecycle_preservation import preceding_bytes as lifecycle_preceding\n    "
+        },
+        {
+          "start": 1855,
+          "end": 1881,
+          "old": "",
+          "new": "lifecycle_preceding(name, "
+        },
+        {
+          "start": 1897,
+          "end": 1898,
+          "old": "",
+          "new": ")"
+        }
+      ]
+    },
+    "tests/query_attachment_performance_preservation.py": {
+      "old_sha256": "32181bd350595928836357dec6473b7efdb75d5177efe6cb1796699e26ed515d",
+      "new_sha256": "2ebc5a58a1d8737f61999de86eb7a912f357e681364b9dc88545b3b5ac65c851",
+      "edits": [
+        {
+          "start": 4503,
+          "end": 4584,
+          "old": "",
+          "new": "from turn_lifecycle_preservation import REPLACEMENT_PATHS as LIFECYCLE_PATHS\n    "
+        },
+        {
+          "start": 4671,
+          "end": 4705,
+          "old": "",
+          "new": "_PATHS or row[\"path\"] in LIFECYCLE"
+        },
+        {
+          "start": 7767,
+          "end": 7848,
+          "old": "",
+          "new": "from turn_lifecycle_preservation import REPLACEMENT_PATHS as LIFECYCLE_PATHS\n    "
+        },
+        {
+          "start": 7935,
+          "end": 7969,
+          "old": "",
+          "new": "_PATHS or row[\"path\"] in LIFECYCLE"
+        }
+      ]
+    }
+  }
+}
