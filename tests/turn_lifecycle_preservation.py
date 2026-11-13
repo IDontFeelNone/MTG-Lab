@@ -17,6 +17,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from turn_structure_preservation import preceding_bytes as structure_preceding
+    raw = structure_preceding(name, raw)
     if type(raw) is not bytes:
         raise AssertionError('exact source bytes required')
     pin = ledger()['replacements'].get(name)

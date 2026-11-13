@@ -6,7 +6,7 @@ import json
 from .engine import GameplayRulesEngine
 from .errors import GameplayContractError
 from .models import (CardGameplaySemantics, GameAction, GameState, GameTransition,
-                     GameplayRulesSnapshot, content_identity)
+                     GameplayRulesSnapshot, content_identity, STATE_SCHEMAS_BY_PROFILE)
 from .snapshots import (MAX_CONTRACT_BYTES, load_card_semantics, load_game_state,
                         load_rules_snapshot)
 
@@ -85,8 +85,8 @@ class GameplaySession:
         _require(not before['pending_system_actions'] and
                  (before['status'] == 'ended' or before['priority_player'] is not None),
                  'initial_system_boundary', 'Initialize at a settled player decision boundary')
-        _require((before['schema_version'] == 'gameplay-state-v2') == (rules['execution_profile'] == 'fictional-two-player-turn-lifecycle-v1'),
-                 'incompatible_state_profile', 'Ordered V2 state and lifecycle profile must be selected together')
+        _require(before['schema_version'] == STATE_SCHEMAS_BY_PROFILE[rules['execution_profile']],
+                 'incompatible_state_profile', 'State schema must match the exact selected fictional profile')
         definitions = {s.identity: s.to_dict() for s in self._semantics}
         for obj in before['objects']:
             if obj['knowledge'] == 'known':

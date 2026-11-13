@@ -1,0 +1,545 @@
+{
+  "base": "abb7227fdeb3da2a85f7d86fe3a771a5187c17d1",
+  "replacements": {
+    "src/gameplay_rules/models.py": {
+      "old_sha256": "592ba26d6eae1534bd2bd39c09ab6c35e93d836b781ff72c545f407f71531f14",
+      "new_sha256": "95dd993c61a2cbfa5ab606dda96fdab8b1f49c3b87a36b0d21d0c621b48a0da9",
+      "edits": [
+        {
+          "start": 878,
+          "end": 1153,
+          "old": "",
+          "new": "\nTURN_STRUCTURE_PROFILE = \"fictional-two-player-turn-structure-v2\"\nSTATE_SCHEMAS_BY_PROFILE = MappingProxyType({\n    EXECUTION_PROFILE: \"gameplay-state-v1\",\n    \"fictional-two-player-turn-lifecycle-v1\": \"gameplay-state-v2\",\n    TURN_STRUCTURE_PROFILE: \"gameplay-state-v3\",\n})"
+        },
+        {
+          "start": 6701,
+          "end": 6705,
+          "old": "{",
+          "new": "STAT"
+        },
+        {
+          "start": 6706,
+          "end": 6710,
+          "old": "X",
+          "new": "_SCH"
+        },
+        {
+          "start": 6711,
+          "end": 6717,
+          "old": "CUTION",
+          "new": "MAS_BY"
+        },
+        {
+          "start": 6725,
+          "end": 6725,
+          "old": ", \"fictional-two-player-turn-lifecycle-v1\"}",
+          "new": ""
+        },
+        {
+          "start": 6790,
+          "end": 6791,
+          "old": "=",
+          "new": "!"
+        },
+        {
+          "start": 6793,
+          "end": 6832,
+          "old": "",
+          "new": "EXECUTION_PROFILE\n    structure = body["
+        },
+        {
+          "start": 6833,
+          "end": 6836,
+          "old": "fi",
+          "new": "exe"
+        },
+        {
+          "start": 6837,
+          "end": 6838,
+          "old": "",
+          "new": "u"
+        },
+        {
+          "start": 6842,
+          "end": 6845,
+          "old": "al-tw",
+          "new": "_pr"
+        },
+        {
+          "start": 6846,
+          "end": 6847,
+          "old": "-player-turn-l",
+          "new": "f"
+        },
+        {
+          "start": 6848,
+          "end": 6848,
+          "old": "fecyc",
+          "new": ""
+        },
+        {
+          "start": 6850,
+          "end": 6850,
+          "old": "-v1",
+          "new": ""
+        },
+        {
+          "start": 6851,
+          "end": 6878,
+          "old": "",
+          "new": "] == TURN_STRUCTURE_PROFILE"
+        },
+        {
+          "start": 9234,
+          "end": 9338,
+          "old": "",
+          "new": "structure and \"upkeep\" not in categories: _fail(\"rules\", \"turn windows require upkeep evidence\")\n    if "
+        },
+        {
+          "start": 10573,
+          "end": 10576,
+          "old": "",
+          "new": "pol"
+        },
+        {
+          "start": 10577,
+          "end": 10579,
+          "old": "f",
+          "new": "cy"
+        },
+        {
+          "start": 10580,
+          "end": 10580,
+          "old": "parameters[\"turn_start\"] !",
+          "new": ""
+        },
+        {
+          "start": 10690,
+          "end": 10823,
+          "old": "",
+          "new": "\n        if structure:\n            policy[\"priority_windows\"] = \"upkeep_and_after_draw\"\n        if parameters[\"turn_start\"] != policy"
+        },
+        {
+          "start": 10971,
+          "end": 11056,
+          "old": "",
+          "new": "expected = ([(\"beginning\", \"untap\"), (\"beginning\", \"upkeep\"), (\"beginning\", \"draw\")] "
+        },
+        {
+          "start": 11060,
+          "end": 11067,
+          "old": "",
+          "new": "tructur"
+        },
+        {
+          "start": 11068,
+          "end": 11069,
+          "old": "",
+          "new": " "
+        },
+        {
+          "start": 11070,
+          "end": 11073,
+          "old": "n !=",
+          "new": "lse"
+        },
+        {
+          "start": 11097,
+          "end": 11099,
+          "old": ",",
+          "new": "])"
+        },
+        {
+          "start": 11100,
+          "end": 11103,
+          "old": "",
+          "new": "+ ["
+        },
+        {
+          "start": 11141,
+          "end": 11262,
+          "old": "",
+          "new": "\n        if seen != expected or (structure and (parameters[\"main_phase\"], parameters[\"main_step\"]) != (\"main\", \"action\"))"
+        },
+        {
+          "start": 11297,
+          "end": 11301,
+          "old": "l",
+          "new": "prof"
+        },
+        {
+          "start": 11302,
+          "end": 11302,
+          "old": "fecyc",
+          "new": ""
+        },
+        {
+          "start": 11314,
+          "end": 11315,
+          "old": "",
+          "new": "i"
+        },
+        {
+          "start": 11316,
+          "end": 11318,
+          "old": "h",
+          "new": "s "
+        },
+        {
+          "start": 11319,
+          "end": 11322,
+          "old": " ",
+          "new": "xac"
+        },
+        {
+          "start": 11323,
+          "end": 11323,
+          "old": "hree",
+          "new": ""
+        },
+        {
+          "start": 19519,
+          "end": 19539,
+          "old": "",
+          "new": ", *, structure=False"
+        },
+        {
+          "start": 21178,
+          "end": 21242,
+          "old": "",
+          "new": "if structure:\n        _window_progress(body)\n        return\n    "
+        },
+        {
+          "start": 21959,
+          "end": 23928,
+          "old": "",
+          "new": ")\n\n\ndef _window_progress(body):\n    \"\"\"V3 only: phase/progress and exact mandatory queues cannot contradict.\"\"\"\n    progress, pending = body[\"turn_start\"], body[\"pending_system_actions\"]\n    _choice(progress[\"status\"], {\"pending_untap\", \"upkeep\", \"pending_draw\", \"complete\"}, \"turn_start.status\")\n    window = (body[\"phase\"], body[\"step\"])\n    expected = {\n        \"pending_untap\": ((\"beginning\", \"untap\"), [\"untap_active_player\"]),\n        \"pending_draw\": ((\"beginning\", \"draw\"), [\"draw_for_turn\", \"perform_state_based_actions\"]),\n    }\n    if progress[\"status\"] in expected:\n        target, queue = expected[progress[\"status\"]]\n        if window != target or pending != queue or body[\"stack\"] or body[\"consecutive_passes\"] or body[\"status\"] != \"in_progress\":\n            _fail(\"turn_start\", \"exact automatic window and sequence required\")\n    else:\n        allowed = {(\"beginning\", \"upkeep\")} if progress[\"status\"] == \"upkeep\" else {(\"beginning\", \"draw\"), (\"main\", \"action\"), (\"ending\", \"end\")}\n        if window not in allowed or set(pending) & {\"untap_active_player\", \"draw_for_turn\"}:\n            _fail(\"turn_start\", \"progress cannot skip or repeat an automatic window\")\n        # All remaining queues arise from passes, resolution or their checkpoint.\n        if pending not in ([], [\"perform_state_based_actions\"], [\"perform_state_based_actions\", \"resolve_top_of_stack\"], [\"perform_state_based_actions\", \"advance_step_or_phase\"], [\"resolve_top_of_stack\"], [\"advance_step_or_phase\"]):\n            _fail(\"pending_system_actions\", \"unsupported window boundary\")\n        if pending and pending[-1] == \"advance_step_or_phase\" and body[\"stack\"]:\n            _fail(\"pending_system_actions\", \"cannot advance past a pending spell\")\n        if not pending and body[\"status\"] == \"in_progress\" and body[\"priority_player\"] is None:\n            _fail(\"priority_player\", \"settled window must grant priority\")\n\n\ndef _windowed_state(body):\n    _ordered_state(body, structure=True"
+        },
+        {
+          "start": 33456,
+          "end": 33619,
+          "old": "",
+          "new": "3\":\n            return WindowedGameState.create(body)\n        if cls is GameState and isinstance(body, Mapping) and body.get(\"schema_version\") == \"gameplay-state-v"
+        },
+        {
+          "start": 33756,
+          "end": 33925,
+          "old": "",
+          "new": "\n        if cls is GameState and isinstance(value, Mapping) and value.get(\"schema_version\") == \"gameplay-state-v3\":\n            return WindowedGameState.from_dict(value)"
+        },
+        {
+          "start": 34439,
+          "end": 34666,
+          "old": "",
+          "new": "ed_state)\n\n\n@dataclass(frozen=True)\nclass WindowedGameState(OrderedGameState):\n    \"\"\"V3 envelope: reuse ordered state with distinct turn-window progress.\"\"\"\n    SCHEMA = \"gameplay-state-v3\"\n    VALIDATOR = staticmethod(_window"
+        }
+      ]
+    },
+    "src/gameplay_rules/engine.py": {
+      "old_sha256": "3d536f1641f15ba0b535353183a19442652ec3299e32c19cba967537e4aabeec",
+      "new_sha256": "912ed17edda48ed0990cb1df5ab9b307d4cff38f2bcdcc63e0f78c2e76d38bb5",
+      "edits": [
+        {
+          "start": 616,
+          "end": 666,
+          "old": "",
+          "new": ", STATE_SCHEMAS_BY_PROFILE, TURN_STRUCTURE_PROFILE"
+        },
+        {
+          "start": 3591,
+          "end": 3596,
+          "old": "{\"fictional-two-player-v1\", ",
+          "new": "STATE"
+        },
+        {
+          "start": 3597,
+          "end": 3600,
+          "old": "LIF",
+          "new": "SCH"
+        },
+        {
+          "start": 3601,
+          "end": 3606,
+          "old": "C",
+          "new": "MAS_B"
+        },
+        {
+          "start": 3607,
+          "end": 3607,
+          "old": "CLE",
+          "new": ""
+        },
+        {
+          "start": 3615,
+          "end": 3615,
+          "old": "}",
+          "new": ""
+        },
+        {
+          "start": 6765,
+          "end": 6765,
+          "old": "(",
+          "new": ""
+        },
+        {
+          "start": 6790,
+          "end": 6790,
+          "old": "== \"gameplay-state-v2\") ",
+          "new": ""
+        },
+        {
+          "start": 6793,
+          "end": 6818,
+          "old": "(",
+          "new": "STATE_SCHEMAS_BY_PROFILE["
+        },
+        {
+          "start": 6844,
+          "end": 6845,
+          "old": " == _LIFECYCLE_PROFILE)",
+          "new": "]"
+        },
+        {
+          "start": 6918,
+          "end": 6919,
+          "old": "Ordered V2 s",
+          "new": "S"
+        },
+        {
+          "start": 6924,
+          "end": 6929,
+          "old": "",
+          "new": "schem"
+        },
+        {
+          "start": 6930,
+          "end": 6930,
+          "old": "nd lifecycle profile",
+          "new": ""
+        },
+        {
+          "start": 6936,
+          "end": 6944,
+          "old": "b",
+          "new": "match th"
+        },
+        {
+          "start": 6945,
+          "end": 6951,
+          "old": "",
+          "new": " exact"
+        },
+        {
+          "start": 6961,
+          "end": 6964,
+          "old": "",
+          "new": "fic"
+        },
+        {
+          "start": 6965,
+          "end": 6966,
+          "old": "",
+          "new": "i"
+        },
+        {
+          "start": 6967,
+          "end": 6977,
+          "old": "g",
+          "new": "nal profil"
+        },
+        {
+          "start": 6978,
+          "end": 6978,
+          "old": "ther",
+          "new": ""
+        },
+        {
+          "start": 7989,
+          "end": 8249,
+          "old": "",
+          "new": "@staticmethod\n    def _categories(rules, kind):\n        if kind not in _RULE_CATEGORIES:\n            return ()\n        return _COMMON_RULE_CATEGORIES + _RULE_CATEGORIES[kind] + ((\"upkeep\",) if rules[\"execution_profile\"] == TURN_STRUCTURE_PROFILE else ())\n\n    "
+        },
+        {
+          "start": 8306,
+          "end": 8311,
+          "old": "",
+          "new": "self."
+        },
+        {
+          "start": 8312,
+          "end": 8319,
+          "old": "COMMON_RULE_CATEGORIES + _RULE_CATEGORIES[k",
+          "new": "categor"
+        },
+        {
+          "start": 8320,
+          "end": 8329,
+          "old": "nd] if",
+          "new": "es(rules,"
+        },
+        {
+          "start": 8334,
+          "end": 8334,
+          "old": " in _RULE_CATEGORIES else (",
+          "new": ""
+        },
+        {
+          "start": 10953,
+          "end": 10956,
+          "old": "!=",
+          "new": "not"
+        },
+        {
+          "start": 10957,
+          "end": 10961,
+          "old": "",
+          "new": "in {"
+        },
+        {
+          "start": 10979,
+          "end": 11004,
+          "old": "",
+          "new": ", TURN_STRUCTURE_PROFILE}"
+        },
+        {
+          "start": 12261,
+          "end": 12266,
+          "old": "",
+          "new": "self."
+        },
+        {
+          "start": 12267,
+          "end": 12284,
+          "old": "COMMON_RULE_CATEGORIES",
+          "new": "categories(rules,"
+        },
+        {
+          "start": 12285,
+          "end": 12285,
+          "old": "+ _RULE_CATEGORIES[",
+          "new": ""
+        },
+        {
+          "start": 12289,
+          "end": 12290,
+          "old": "]",
+          "new": ")"
+        },
+        {
+          "start": 27063,
+          "end": 27297,
+          "old": "",
+          "new": "if rules[\"execution_profile\"] == TURN_STRUCTURE_PROFILE:\n                    after[\"phase\"], after[\"step\"] = \"beginning\", \"upkeep\"\n                    after[\"turn_start\"][\"status\"] = \"upkeep\"\n                else:\n                    "
+        },
+        {
+          "start": 29705,
+          "end": 30014,
+          "old": "",
+          "new": "TURN_STRUCTURE_PROFILE:\n                        after[\"turn_start\"] = {\"turn_number\": after[\"turn_number\"], \"player_id\": after[\"active_player\"], \"status\": \"pending_untap\"}\n                        after[\"pending_system_actions\"] = [\"untap_active_player\"]\n                    elif rules[\"execution_profile\"] == "
+        },
+        {
+          "start": 30515,
+          "end": 30822,
+          "old": "",
+          "new": "\"]\n                elif rules[\"execution_profile\"] == TURN_STRUCTURE_PROFILE and after[\"phase\"] == \"beginning\" and after[\"step\"] == \"draw\":\n                    after[\"turn_start\"][\"status\"] = \"pending_draw\"\n                    after[\"pending_system_actions\"] = [\"draw_for_turn\", \"perform_state_based_actions"
+        }
+      ]
+    },
+    "src/gameplay_rules/session.py": {
+      "old_sha256": "0e624eea670581c827faeeda125044afd803b39165f8f61e7ff835bd0751e373",
+      "new_sha256": "66fe07653ee1770c77baef055cc5f26918070110df7cd8ee51f5be5a9143ee9a",
+      "edits": [
+        {
+          "start": 357,
+          "end": 383,
+          "old": "",
+          "new": ", STATE_SCHEMAS_BY_PROFILE"
+        },
+        {
+          "start": 4592,
+          "end": 4592,
+          "old": "(",
+          "new": ""
+        },
+        {
+          "start": 4620,
+          "end": 4645,
+          "old": "'gameplay-state-v2') == (",
+          "new": "STATE_SCHEMAS_BY_PROFILE["
+        },
+        {
+          "start": 4671,
+          "end": 4672,
+          "old": " == 'fictional-two-player-turn-lifecycle-v1')",
+          "new": "]"
+        },
+        {
+          "start": 4722,
+          "end": 4723,
+          "old": "Ordered V2 s",
+          "new": "S"
+        },
+        {
+          "start": 4728,
+          "end": 4733,
+          "old": "",
+          "new": "schem"
+        },
+        {
+          "start": 4734,
+          "end": 4734,
+          "old": "nd lifecycle profile",
+          "new": ""
+        },
+        {
+          "start": 4740,
+          "end": 4748,
+          "old": "b",
+          "new": "match th"
+        },
+        {
+          "start": 4749,
+          "end": 4755,
+          "old": "",
+          "new": " exact"
+        },
+        {
+          "start": 4765,
+          "end": 4768,
+          "old": "",
+          "new": "fic"
+        },
+        {
+          "start": 4769,
+          "end": 4770,
+          "old": "",
+          "new": "i"
+        },
+        {
+          "start": 4771,
+          "end": 4781,
+          "old": "g",
+          "new": "nal profil"
+        },
+        {
+          "start": 4782,
+          "end": 4782,
+          "old": "ther",
+          "new": ""
+        }
+      ]
+    },
+    "tests/turn_lifecycle_preservation.py": {
+      "old_sha256": "bbfc12f52f79b01b545391a940d7369f242c2e75c81691de8bd2cd15b0d2ba27",
+      "new_sha256": "92787bbc8ce28553ca41fc918d4154e1ce45ce135aa4a45e441e5a8bb87f0dff",
+      "edits": [
+        {
+          "start": 800,
+          "end": 924,
+          "old": "",
+          "new": "from turn_structure_preservation import preceding_bytes as structure_preceding\n    raw = structure_preceding(name, raw)\n    "
+        }
+      ]
+    }
+  }
+}

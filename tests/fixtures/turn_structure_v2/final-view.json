@@ -1,0 +1,165 @@
+{
+  "active_player": "A",
+  "loser_ids": [],
+  "phase": "beginning",
+  "players": [
+    {
+      "land_plays_available": 1,
+      "land_plays_used": 0,
+      "life": 10,
+      "mana_pool": {},
+      "player_id": "A"
+    },
+    {
+      "land_plays_available": 1,
+      "land_plays_used": 0,
+      "life": 10,
+      "mana_pool": {},
+      "player_id": "B"
+    }
+  ],
+  "priority_player": "A",
+  "rules_snapshot_id": "sha256:ded35b49c44db728351f720b8c38a4485aad6f8740324da06a6d08777a9ef5d8",
+  "schema_version": "gameplay-session-v0",
+  "scope": "PROJECT_AUTHORED_FICTIONAL_ONLY_PUBLIC_VIEW",
+  "stack_count": 0,
+  "state_id": "sha256:fc69efd1cc6fe906628d3f31d24cfa9a74a219aa7cd6ee4d3f7287727e41c628",
+  "status": "in_progress",
+  "step": "upkeep",
+  "turn_number": 3,
+  "winner_ids": [],
+  "zones": [
+    {
+      "count": 1,
+      "kind": "library",
+      "owner": "A",
+      "visibility": "hidden",
+      "zone_id": "A:library"
+    },
+    {
+      "count": 0,
+      "kind": "hand",
+      "owner": "A",
+      "visibility": "hidden",
+      "zone_id": "A:hand"
+    },
+    {
+      "count": 1,
+      "kind": "battlefield",
+      "objects": [
+        {
+          "card_id": "pebble-resource",
+          "controller": "A",
+          "knowledge": "known",
+          "object_id": "a-resource",
+          "owner": "A",
+          "semantics_id": "sha256:85c206a91481b09e2bf39176e0066adcafce58627704afb79765870b94e10299",
+          "tapped": false,
+          "zone_id": "A:battlefield"
+        }
+      ],
+      "owner": "A",
+      "visibility": "public",
+      "zone_id": "A:battlefield"
+    },
+    {
+      "count": 0,
+      "kind": "graveyard",
+      "objects": [],
+      "owner": "A",
+      "visibility": "public",
+      "zone_id": "A:graveyard"
+    },
+    {
+      "count": 0,
+      "kind": "exile",
+      "objects": [],
+      "owner": "A",
+      "visibility": "public",
+      "zone_id": "A:exile"
+    },
+    {
+      "count": 0,
+      "kind": "command",
+      "objects": [],
+      "owner": "A",
+      "visibility": "public",
+      "zone_id": "A:command"
+    },
+    {
+      "count": 1,
+      "kind": "library",
+      "owner": "B",
+      "visibility": "hidden",
+      "zone_id": "B:library"
+    },
+    {
+      "count": 0,
+      "kind": "hand",
+      "owner": "B",
+      "visibility": "hidden",
+      "zone_id": "B:hand"
+    },
+    {
+      "count": 2,
+      "kind": "battlefield",
+      "objects": [
+        {
+          "card_id": "pebble-resource",
+          "controller": "B",
+          "knowledge": "known",
+          "object_id": "b-resource",
+          "owner": "B",
+          "semantics_id": "sha256:85c206a91481b09e2bf39176e0066adcafce58627704afb79765870b94e10299",
+          "tapped": true,
+          "zone_id": "B:battlefield"
+        },
+        {
+          "card_id": "moss-plot",
+          "controller": "B",
+          "knowledge": "known",
+          "object_id": "b-top",
+          "owner": "B",
+          "semantics_id": "sha256:0ebf20907555162800373ff37e8c3c98d92510ca9dae6b6cfc1ed5ade796eb0d",
+          "tapped": false,
+          "zone_id": "B:battlefield"
+        }
+      ],
+      "owner": "B",
+      "visibility": "public",
+      "zone_id": "B:battlefield"
+    },
+    {
+      "count": 0,
+      "kind": "graveyard",
+      "objects": [],
+      "owner": "B",
+      "visibility": "public",
+      "zone_id": "B:graveyard"
+    },
+    {
+      "count": 0,
+      "kind": "exile",
+      "objects": [],
+      "owner": "B",
+      "visibility": "public",
+      "zone_id": "B:exile"
+    },
+    {
+      "count": 0,
+      "kind": "command",
+      "objects": [],
+      "owner": "B",
+      "visibility": "public",
+      "zone_id": "B:command"
+    },
+    {
+      "count": 0,
+      "kind": "stack",
+      "objects": [],
+      "owner": null,
+      "visibility": "public",
+      "zone_id": "shared:stack"
+    }
+  ]
+}

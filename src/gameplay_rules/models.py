@@ -22,6 +22,12 @@ from .errors import GameplayContractError
 
 _HASH = re.compile(r"sha256:[0-9a-f]{64}\Z")
 _STATUSES = {"LEGAL", "ILLEGAL", "INDETERMINATE", "UNSUPPORTED"}
+TURN_STRUCTURE_PROFILE = "fictional-two-player-turn-structure-v2"
+STATE_SCHEMAS_BY_PROFILE = MappingProxyType({
+    EXECUTION_PROFILE: "gameplay-state-v1",
+    "fictional-two-player-turn-lifecycle-v1": "gameplay-state-v2",
+    TURN_STRUCTURE_PROFILE: "gameplay-state-v3",
+})
 
 
 def _fail(field: str, message: str = "invalid contract value"):
@@ -143,8 +149,9 @@ def _snapshot(body):
     _version(body["rules_version"], "rules_version")
     _date(body["effective_date"], "effective_date")
     _choice(body["engine_contract_version"], {ENGINE_CONTRACT_VERSION}, "engine_contract_version")
-    _choice(body["execution_profile"], {EXECUTION_PROFILE, "fictional-two-player-turn-lifecycle-v1"}, "execution_profile")
-    lifecycle = body["execution_profile"] == "fictional-two-player-turn-lifecycle-v1"
+    _choice(body["execution_profile"], STATE_SCHEMAS_BY_PROFILE, "execution_profile")
+    lifecycle = body["execution_profile"] != EXECUTION_PROFILE
+    structure = body["execution_profile"] == TURN_STRUCTURE_PROFILE
     if not isinstance(body["sources"], list) or not body["sources"]: _fail("sources", "nonempty array required")
     for source in body["sources"]: _source(source)
     source_ids = [s["source_id"] for s in body["sources"]]
@@ -174,6 +181,7 @@ def _snapshot(body):
         categories.add(rule["category"])
     if len(set(rule_ids)) != len(rule_ids): _fail("rules", "duplicate rule identity")
     if lifecycle and not {"untap", "draw"} <= categories: _fail("rules", "lifecycle requires untap and draw evidence")
+    if structure and "upkeep" not in categories: _fail("rules", "turn windows require upkeep evidence")
     if not REQUIRED_RULE_CATEGORIES <= categories: _fail("rules", "missing primitive rule category")
     parameters = body["parameters"]
     _keys(parameters, {"mana_symbols", "generic_payment_order", "main_phase", "main_step", "turn_steps", "land_plays_per_turn", "life_loss_threshold"} | ({"turn_start"} if lifecycle else set()), "parameters")
@@ -189,10 +197,14 @@ def _snapshot(body):
         seen.append((turn["phase"], turn["step"]))
     if len(set(seen)) != len(seen) or (parameters["main_phase"], parameters["main_step"]) not in seen: _fail("turn_steps", "duplicate or missing main window")
     if lifecycle:
-        if parameters["turn_start"] != {"untap": "controlled_battlefield", "draw_count": 1, "library_top": "first", "empty_library": "unsupported"} or type(parameters["turn_start"].get("draw_count")) is not int:
+        policy = {"untap": "controlled_battlefield", "draw_count": 1, "library_top": "first", "empty_library": "unsupported"}
+        if structure:
+            policy["priority_windows"] = "upkeep_and_after_draw"
+        if parameters["turn_start"] != policy or type(parameters["turn_start"].get("draw_count")) is not int:
             _fail("turn_start", "exact bounded lifecycle policy required")
-        if seen != [("beginning", "start"), ("main", "action"), ("ending", "end")]:
-            _fail("turn_steps", "lifecycle requires the three supported windows")
+        expected = ([("beginning", "untap"), ("beginning", "upkeep"), ("beginning", "draw")] if structure else [("beginning", "start")]) + [("main", "action"), ("ending", "end")]
+        if seen != expected or (structure and (parameters["main_phase"], parameters["main_step"]) != ("main", "action")):
+            _fail("turn_steps", "profile requires its exact supported windows")
     _int(parameters["land_plays_per_turn"], "land_plays_per_turn", minimum=0)
     _int(parameters["life_loss_threshold"], "life_loss_threshold")
 
@@ -315,7 +327,7 @@ def _state(body):
     if len(set(effect_ids)) != len(effect_ids): _fail("active_effects", "duplicate identity")
 
 
-def _ordered_state(body):
+def _ordered_state(body, *, structure=False):
     _keys(body, {"game_id", "rules_snapshot_id", "revision", "players", "active_player", "turn_number", "phase", "step", "priority_player", "zones", "objects", "stack", "consecutive_passes", "status", "winner_ids", "loser_ids", "pending_system_actions", "unknown_fields", "active_effects", "library_order", "turn_start"}, "ordered_game_state")
     _state({k: v for k, v in body.items() if k not in {"library_order", "turn_start"}})
     libraries = {z["zone_id"]: z for z in body["zones"] if z["kind"] == "library"}
@@ -335,6 +347,9 @@ def _ordered_state(body):
     _int(progress["turn_number"], "turn_start.turn_number", minimum=1)
     if progress["turn_number"] != body["turn_number"] or progress["player_id"] != body["active_player"]:
         _fail("turn_start", "progress must bind this turn and active player")
+    if structure:
+        _window_progress(body)
+        return
     _choice(progress["status"], {"pending_untap", "pending_draw", "complete"}, "turn_start.status")
     pending = body["pending_system_actions"]
     if progress["status"] != "complete":
@@ -343,6 +358,36 @@ def _ordered_state(body):
             _fail("turn_start", "exact mandatory lifecycle sequence required")
     elif set(pending) & {"untap_active_player", "draw_for_turn"}:
         _fail("turn_start", "completed operations cannot be rescheduled")
+
+
+def _window_progress(body):
+    """V3 only: phase/progress and exact mandatory queues cannot contradict."""
+    progress, pending = body["turn_start"], body["pending_system_actions"]
+    _choice(progress["status"], {"pending_untap", "upkeep", "pending_draw", "complete"}, "turn_start.status")
+    window = (body["phase"], body["step"])
+    expected = {
+        "pending_untap": (("beginning", "untap"), ["untap_active_player"]),
+        "pending_draw": (("beginning", "draw"), ["draw_for_turn", "perform_state_based_actions"]),
+    }
+    if progress["status"] in expected:
+        target, queue = expected[progress["status"]]
+        if window != target or pending != queue or body["stack"] or body["consecutive_passes"] or body["status"] != "in_progress":
+            _fail("turn_start", "exact automatic window and sequence required")
+    else:
+        allowed = {("beginning", "upkeep")} if progress["status"] == "upkeep" else {("beginning", "draw"), ("main", "action"), ("ending", "end")}
+        if window not in allowed or set(pending) & {"untap_active_player", "draw_for_turn"}:
+            _fail("turn_start", "progress cannot skip or repeat an automatic window")
+        # All remaining queues arise from passes, resolution or their checkpoint.
+        if pending not in ([], ["perform_state_based_actions"], ["perform_state_based_actions", "resolve_top_of_stack"], ["perform_state_based_actions", "advance_step_or_phase"], ["resolve_top_of_stack"], ["advance_step_or_phase"]):
+            _fail("pending_system_actions", "unsupported window boundary")
+        if pending and pending[-1] == "advance_step_or_phase" and body["stack"]:
+            _fail("pending_system_actions", "cannot advance past a pending spell")
+        if not pending and body["status"] == "in_progress" and body["priority_player"] is None:
+            _fail("priority_player", "settled window must grant priority")
+
+
+def _windowed_state(body):
+    _ordered_state(body, structure=True)
 
 
 def _action(body):
@@ -504,12 +549,16 @@ class CardGameplaySemantics(_Envelope):
 class GameState(_Envelope):
     @classmethod
     def create(cls, body):
+        if cls is GameState and isinstance(body, Mapping) and body.get("schema_version") == "gameplay-state-v3":
+            return WindowedGameState.create(body)
         if cls is GameState and isinstance(body, Mapping) and body.get("schema_version") == "gameplay-state-v2":
             return OrderedGameState.create(body)
         return super().create(body)
 
     @classmethod
     def from_dict(cls, value):
+        if cls is GameState and isinstance(value, Mapping) and value.get("schema_version") == "gameplay-state-v3":
+            return WindowedGameState.from_dict(value)
         if cls is GameState and isinstance(value, Mapping) and value.get("schema_version") == "gameplay-state-v2":
             return OrderedGameState.from_dict(value)
         return super().from_dict(value)
@@ -524,6 +573,13 @@ class OrderedGameState(GameState):
     """V2 envelope only: the same state model with explicit order/progress."""
     SCHEMA = "gameplay-state-v2"
     VALIDATOR = staticmethod(_ordered_state)
+
+
+@dataclass(frozen=True)
+class WindowedGameState(OrderedGameState):
+    """V3 envelope: reuse ordered state with distinct turn-window progress."""
+    SCHEMA = "gameplay-state-v3"
+    VALIDATOR = staticmethod(_windowed_state)
 
 
 @dataclass(frozen=True)
