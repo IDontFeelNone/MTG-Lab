@@ -12,7 +12,7 @@ from .costs import plan_mana_payment
 from .errors import GameplayContractError
 from .models import (
     CardGameplaySemantics, GameAction, GameState, GameTransition,
-    GameplayRulesSnapshot, LegalityResult,
+    GameplayRulesSnapshot, LegalityResult, STATE_SCHEMAS_BY_PROFILE, TURN_STRUCTURE_PROFILE,
 )
 
 
@@ -66,7 +66,7 @@ class GameplayRulesEngine:
             raise GameplayContractError("invalid_snapshot", "an explicit verified rules snapshot is required")
         snapshot.verify()
         body = snapshot.to_dict()
-        if body["engine_contract_version"] != "gameplay-kernel-v1" or body["execution_profile"] not in {"fictional-two-player-v1", _LIFECYCLE_PROFILE}:
+        if body["engine_contract_version"] != "gameplay-kernel-v1" or body["execution_profile"] not in STATE_SCHEMAS_BY_PROFILE:
             raise GameplayContractError("incompatible_rules", "the fictional kernel contract is required")
         if any(source["source_class"] != "project_authored_fictional" for source in body["sources"]):
             raise GameplayContractError("nonfictional_execution", "only project-authored fictional sources may execute")
@@ -111,8 +111,8 @@ class GameplayRulesEngine:
                 raise GameplayContractError("wrong_game", "state and action must belong to the selected game")
             if value["rules_snapshot_id"] != self._snapshot.identity:
                 raise GameplayContractError("rules_snapshot_mismatch", "state and action must bind the selected rules snapshot")
-        if (before["schema_version"] == "gameplay-state-v2") != (rules["execution_profile"] == _LIFECYCLE_PROFILE):
-            raise GameplayContractError("incompatible_state_profile", "Ordered V2 state and lifecycle profile must be selected together")
+        if before["schema_version"] != STATE_SCHEMAS_BY_PROFILE[rules["execution_profile"]]:
+            raise GameplayContractError("incompatible_state_profile", "State schema must match the exact selected fictional profile")
         if request["expected_state_id"] != state.identity:
             raise GameplayContractError("stale_state", "action must bind the exact before-state identity")
         if len(self._definitions) != len(self._definition_bindings):
@@ -126,8 +126,14 @@ class GameplayRulesEngine:
                 raise GameplayContractError("semantics_snapshot_mismatch", "structured semantics must remain bound to selected rules")
         return rules, before, request
 
+    @staticmethod
+    def _categories(rules, kind):
+        if kind not in _RULE_CATEGORIES:
+            return ()
+        return _COMMON_RULE_CATEGORIES + _RULE_CATEGORIES[kind] + (("upkeep",) if rules["execution_profile"] == TURN_STRUCTURE_PROFILE else ())
+
     def _references(self, rules, kind):
-        categories = _COMMON_RULE_CATEGORIES + _RULE_CATEGORIES[kind] if kind in _RULE_CATEGORIES else ()
+        categories = self._categories(rules, kind)
         result = []
         for rule in rules["rules"]:
             if rule["category"] in categories:
@@ -175,7 +181,7 @@ class GameplayRulesEngine:
                 "explanation": {"action_kind": kind, "status": status, "reason_codes": sorted(set(failed + unknown + unsupported))},
             })
 
-        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS or (kind in _TURN_ACTIONS and rules["execution_profile"] != _LIFECYCLE_PROFILE):
+        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS or (kind in _TURN_ACTIONS and rules["execution_profile"] not in {_LIFECYCLE_PROFILE, TURN_STRUCTURE_PROFILE}):
             unsupported.append("action_kind:" + kind)
             return result()
         if before["status"] != "in_progress":
@@ -196,7 +202,7 @@ class GameplayRulesEngine:
             elif coverage != "supported":
                 unsupported.append("capability:" + capability)
         for rule in rules["rules"]:
-            if rule["category"] in _COMMON_RULE_CATEGORIES + _RULE_CATEGORIES[kind] and rule["status"] != "supported":
+            if rule["category"] in self._categories(rules, kind) and rule["status"] != "supported":
                 (unknown if rule["status"] == "unknown" else unsupported).append("rule_coverage:" + rule["rule_id"])
         for effect in before["active_effects"]:
             if kind in effect["affected_actions"] or "*" in effect["affected_actions"]:
@@ -440,7 +446,11 @@ class GameplayRulesEngine:
                 for obj in after["objects"]:
                     if zones[obj["zone_id"]]["kind"] == "battlefield" and obj["controller"] == after["active_player"]:
                         obj["tapped"] = False
-                after["turn_start"]["status"] = "pending_draw"
+                if rules["execution_profile"] == TURN_STRUCTURE_PROFILE:
+                    after["phase"], after["step"] = "beginning", "upkeep"
+                    after["turn_start"]["status"] = "upkeep"
+                else:
+                    after["turn_start"]["status"] = "pending_draw"
             elif kind == "draw_for_turn":
                 library = self._zone(after, "library", after["active_player"])
                 obj = objects[after["library_order"][library].pop(0)]
@@ -475,12 +485,18 @@ class GameplayRulesEngine:
                 if new_index == 0:
                     after["turn_number"] += 1
                     after["active_player"] = next(player for player in players if player != after["active_player"])
-                    if rules["execution_profile"] == _LIFECYCLE_PROFILE:
+                    if rules["execution_profile"] == TURN_STRUCTURE_PROFILE:
+                        after["turn_start"] = {"turn_number": after["turn_number"], "player_id": after["active_player"], "status": "pending_untap"}
+                        after["pending_system_actions"] = ["untap_active_player"]
+                    elif rules["execution_profile"] == _LIFECYCLE_PROFILE:
                         after["turn_start"] = {"turn_number": after["turn_number"], "player_id": after["active_player"], "status": "pending_untap"}
                         after["pending_system_actions"] = ["untap_active_player", "draw_for_turn", "perform_state_based_actions"]
                     for player in players.values():
                         player["land_plays_used"] = 0
                         player["land_plays_available"] = rules["parameters"]["land_plays_per_turn"]
+                elif rules["execution_profile"] == TURN_STRUCTURE_PROFILE and after["phase"] == "beginning" and after["step"] == "draw":
+                    after["turn_start"]["status"] = "pending_draw"
+                    after["pending_system_actions"] = ["draw_for_turn", "perform_state_based_actions"]
             if after["status"] == "in_progress" and not after["pending_system_actions"]:
                 after["priority_player"] = after["active_player"]
 
