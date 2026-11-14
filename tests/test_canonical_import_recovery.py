@@ -150,15 +150,31 @@ class CanonicalImportRecoveryTests(unittest.TestCase):
         self.assert_blocked_repeatedly()
         self.assert_original()
 
-    def test_legacy_orphan_candidate_is_preserved_and_blocks_retry(self):
+    def test_unmarked_legacy_directory_is_preserved_without_guessing_authority(self):
         orphan = self.root / 'tmp-original-import' / GAME
         shutil.copytree(self.current, orphan)
-        self.assert_blocked_repeatedly()
+        self.apply()
         self.assertEqual(hashes(orphan), self.original)
-        self.assert_original()
-        shutil.rmtree(self.current)
+        self.assertTrue((self.current / 'rarities/retained.json').exists())
+        # The old implementation's dangerous rename gap has an exact backup.
+        self.current.rename(self.backup)
+        self.assert_blocked_repeatedly()
         with self.assertRaisesRegex(CanonicalRepositoryError, 'recovery'):
             CanonicalRepository(GAME, games_root=self.root)
+        self.assertEqual(hashes(orphan), self.original)
+
+    def test_unrelated_tmp_named_game_is_not_misidentified_as_staging(self):
+        other = self.root / 'tmp_other'
+        (other / 'cards').mkdir(parents=True)
+        (other / 'game.json').write_text(json.dumps({'id': 'tmp_other', 'name': 'Other game'}))
+        before = hashes(other)
+        CanonicalRepository('tmp_other', games_root=self.root)
+        result = CanonicalRepository.apply_import('cards', {
+            'rarities/common.json': {'id': 'common', 'game_id': 'cards', 'name': 'Common'}
+        }, games_root=self.root)
+        self.assertEqual(result.rarities[0].id, 'common')
+        self.assertEqual(hashes(other), before)
+        self.assert_original()
 
     def test_original_rename_exception_keeps_original_and_candidate(self):
         rename = Path.rename

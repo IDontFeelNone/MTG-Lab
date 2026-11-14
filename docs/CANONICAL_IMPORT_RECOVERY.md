@@ -24,11 +24,17 @@ For game `G` under the explicitly selected `games_root`:
 * `.G.import-staging/G/` contains the candidate. Creating the fixed staging
   directory exclusively serializes cooperating calls for that game.
 
-An existing backup, staging path, or legacy `tmp*/G` candidate blocks an import
-before copying or writing. Nothing in these pre-existing paths is automatically
-cleaned. A missing live directory with such recovery material raises
+An existing backup or reserved staging path blocks an import before copying or
+writing. Nothing in these pre-existing paths is automatically cleaned. A missing
+live directory with these exact transaction markers raises
 `CanonicalRepositoryError` instead of constructing a successful empty catalog.
-A genuinely new empty game without recovery material remains supported.
+A genuinely new empty game without these transaction markers remains supported.
+Unmarked legacy `tmp*` directories are never deleted or promoted, but their names
+alone are not transaction evidence: an unrelated valid game can itself begin with
+`tmp`. The old implementation's dangerous between-rename state has the exact
+backup marker and is blocked. All new attempts use reserved staging, including
+first-time imports. Inspect unmarked historical material manually; it does not
+automatically acquire canonical authority or block an unrelated game.
 
 The importer copies existing records, writes sorted relative paths, validates the
 complete staged graph, and fingerprints the candidate. It renames the original
@@ -68,7 +74,7 @@ No previous backup is removed automatically on the next call.
 | Failure/window | Active tree | Recovery material | Read/retry result |
 |---|---|---|---|
 | Copy, partial candidate write, staged validation | Original unchanged | Own staging cleaned, or retained if cleanup fails | Original reads; retry only after any retained state is resolved |
-| Pre-existing backup/staging/legacy orphan | Unchanged | All existing bytes preserved | New import blocked; missing active tree never loads as empty |
+| Pre-existing backup/reserved staging | Unchanged | All existing bytes preserved | New import blocked; missing active tree never loads as empty |
 | Original rename failure | Original retained/restored if safe | Candidate retained | Explicit not-committed/recovery error; retry blocked |
 | Candidate promotion failure | Original restored if safe | Candidate retained | Same; compensation failure preserves both paths |
 | Abrupt exit between renames | Absent | Full original backup and candidate staging | Read and all ordinary retries blocked; no empty success |

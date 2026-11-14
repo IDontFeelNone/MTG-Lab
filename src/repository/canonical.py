@@ -32,9 +32,7 @@ class CanonicalImportCleanupWarning(RuntimeWarning):
 
 def _pending_import_paths(root: Path, game: str) -> tuple[Path, ...]:
     paths = (root / f".{game}.import-backup", root / f".{game}.import-staging")
-    # Retain old TemporaryDirectory-style candidates as well as new staging.
-    legacy = sorted(root.glob(f"tmp*/{game}"))
-    return tuple(p for p in (*paths, *legacy) if p.exists() or p.is_symlink())
+    return tuple(p for p in paths if p.exists() or p.is_symlink())
 
 
 def _import_fingerprint(directory: Path) -> tuple:

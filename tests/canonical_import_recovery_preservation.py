@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / 'tests/fixtures/canonical_import_recovery/source-successors.json'
-LEDGER_SHA256 = '5174406ccb2ea36cc7f7f20fe13abc2c7648e674322d424e6bb0c1238cc4f1f0'
+LEDGER_SHA256 = '2e1b9bafbad0e9976437d42358720ccff11d78225e9d43865fb9c57f1ef07e1f'
 PATHS = frozenset(('src/repository/canonical.py', 'tests/turn_structure_preservation.py'))
 
 
