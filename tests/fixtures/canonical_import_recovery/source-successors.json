@@ -1,0 +1,95 @@
+{
+  "base": "ae1c8d2a8880f4fc5d5174650e5fe5f258b4e913",
+  "replacements": {
+    "src/repository/canonical.py": {
+      "old_sha256": "57150ef431ed5a0a5a386126ae659008a79f22cc978632d3c891688667a034ef",
+      "new_sha256": "082e12d71f545b899b2445a0750f260e3058c530ae944d6eb5425f7405df09bc",
+      "edits": [
+        {
+          "start": 0,
+          "end": 74,
+          "old": "\"\"\"Read-only, deterministic access to Canonical Product Repository v1.\"\"\"\n",
+          "new": "\"\"\"Validated canonical reads and explicit, recoverable staged imports.\"\"\"\n"
+        },
+        {
+          "start": 111,
+          "end": 126,
+          "old": "",
+          "new": "import hashlib\n"
+        },
+        {
+          "start": 162,
+          "end": 178,
+          "old": "import tempfile\n",
+          "new": "import warnings\n"
+        },
+        {
+          "start": 992,
+          "end": 1694,
+          "old": "",
+          "new": "class CanonicalImportCleanupWarning(RuntimeWarning):\n    \"\"\"Publication succeeded, but recovery-directory cleanup needs inspection.\"\"\"\n\n\ndef _pending_import_paths(root: Path, game: str) -> tuple[Path, ...]:\n    paths = (root / f\".{game}.import-backup\", root / f\".{game}.import-staging\")\n    return tuple(p for p in paths if p.exists() or p.is_symlink())\n\n\ndef _import_fingerprint(directory: Path) -> tuple:\n    \"\"\"Prove ownership before compensation; never overwrite a changed candidate.\"\"\"\n    return tuple((p.relative_to(directory).as_posix(), p.is_dir(),\n                  None if p.is_dir() else hashlib.sha256(p.read_bytes()).hexdigest())\n                 for p in sorted(directory.rglob(\"*\")))\n\n\n"
+        },
+        {
+          "start": 1721,
+          "end": 1853,
+          "old": "    \"\"\"Validated in-memory view; this service never writes canonical files.\"\"\"\n",
+          "new": "    \"\"\"Validated in-memory view; writes require the explicit apply_import API.\"\"\"\n\n    import_cleanup_pending: tuple[str, ...] = ()\n"
+        },
+        {
+          "start": 2204,
+          "end": 2517,
+          "old": "",
+          "new": "        if not (self.root / game).exists() and _pending_import_paths(self.root, game):\n            raise CanonicalRepositoryError(\n                f\"Canonical import recovery required for {game}: active directory is missing; \"\n                \"preserve backup/staging and verify a recovery copy before retrying\")\n"
+        },
+        {
+          "start": 4632,
+          "end": 5091,
+          "old": "        \"\"\"Atomically apply importer-prepared relative paths through the repository API.\"\"\"\n",
+          "new": "        \"\"\"Stage and verify an import; uncertain recovery state blocks new writes.\n\n        A successful return means live verification completed. Cleanup failures\n        retain that publication and expose ``import_cleanup_pending`` plus a\n        warning. No stale backup or orphan candidate is automatically discarded.\n        \"\"\"\n        if not _ID.fullmatch(game):\n            raise CanonicalRepositoryError(\"game must be a stable lowercase identifier\")\n"
+        },
+        {
+          "start": 5246,
+          "end": 5977,
+          "old": "        with tempfile.TemporaryDirectory(dir=root) as temporary:\n            staged = Path(temporary) / game\n",
+          "new": "        backup = root / f\".{game}.import-backup\"\n        staging = root / f\".{game}.import-staging\"\n        pending = _pending_import_paths(root, game)\n        if pending:\n            raise CanonicalRepositoryError(\n                \"Canonical import recovery required; preserve and inspect \"\n                + \", \".join(str(p) for p in pending))\n        try:\n            # A fixed, exclusive directory also serializes cooperating importers.\n            staging.mkdir()\n        except FileExistsError as error:\n            raise CanonicalRepositoryError(\n                f\"Canonical import recovery required: staging already exists: {staging}\") from error\n        staged = staging / game\n        commit_started = False\n        try:\n"
+        },
+        {
+          "start": 6624,
+          "end": 6887,
+          "old": "            # The normal loader is the final relationship/schema gate before mutation.\n            cls(game, games_root=Path(temporary))\n            backup = root / f\".{game}.import-backup\"\n            if backup.exists(): shutil.rmtree(backup)\n            if current.exists(): current.rename(backup)\n",
+          "new": "            cls(game, games_root=staging)\n            candidate_fingerprint = _import_fingerprint(staged)\n            candidate_stat = staged.stat()\n            candidate_identity = (candidate_stat.st_dev, candidate_stat.st_ino)\n            commit_started = True\n"
+        },
+        {
+          "start": 6904,
+          "end": 7136,
+          "old": "",
+          "new": "                if backup.exists() or backup.is_symlink():\n                    raise CanonicalRepositoryError(\"Recovery backup appeared during import\")\n                if current.exists():\n                    current.rename(backup)\n"
+        },
+        {
+          "start": 7175,
+          "end": 10613,
+          "old": "            except BaseException:\n                if backup.exists(): backup.rename(current)\n",
+          "new": "                verified = cls(game, games_root=root)\n                live_stat = current.stat()\n                if ((live_stat.st_dev, live_stat.st_ino) != candidate_identity\n                        or _import_fingerprint(current) != candidate_fingerprint):\n                    raise CanonicalRepositoryError(\"Candidate changed during final verification\")\n                # Successful-publication boundary: no automatic rollback below.\n            except BaseException as error:\n                try:\n                    if current.exists() and not staged.exists():\n                        now = current.stat()\n                        if ((now.st_dev, now.st_ino) != candidate_identity\n                                or _import_fingerprint(current) != candidate_fingerprint):\n                            raise CanonicalRepositoryError(\"Current candidate changed; compensation refused\")\n                        current.rename(staged)  # Preserve the rejected candidate.\n                    if backup.exists():\n                        if current.exists():\n                            raise CanonicalRepositoryError(\"Conflicting active directory; compensation refused\")\n                        backup.rename(current)\n                except BaseException as recovery_error:\n                    raise CanonicalRepositoryError(\n                        f\"Canonical import recovery required: compensation incomplete \"\n                        f\"({recovery_error}); preserve {current}, {backup}, {staging}\") from error\n                raise CanonicalRepositoryError(\n                    f\"Canonical import not committed; original directory retained/restored if present. \"\n                    f\"Recovery required: inspect preserved candidate at {staging}; \"\n                    \"do not retry until recovery state is explicitly resolved\") from error\n        except BaseException as error:\n            if not commit_started:\n                try:\n                    shutil.rmtree(staging)\n                except OSError as cleanup_error:\n                    error.add_note(f\"Recovery required: preserve staging {staging}: {cleanup_error}\")\n            raise\n\n        for path in (backup, staging):\n            if not path.exists():\n                continue\n            try:\n                if path == staging:\n                    path.rmdir()  # Never delete unexpected recovery material.\n                else:\n                    shutil.rmtree(path)\n            except Exception as error:\n                verified.import_cleanup_pending = tuple(\n                    p.name for p in (backup, staging) if p.exists() or p.is_symlink())\n                message = (f\"Canonical import COMMITTED and verified; cleanup pending at \"\n                           f\"{verified.import_cleanup_pending}: {error}. Preserve these paths; \"\n                           \"inspect before another import. Do not roll back a verified publication.\")\n                try:\n                    warnings.warn(message, CanonicalImportCleanupWarning, stacklevel=2)\n                except CanonicalImportCleanupWarning:\n                    # Even warnings-as-errors must not turn a commit into an abort.\n                    pass\n                break\n            except BaseException as error:\n                error.add_note(\"Canonical import COMMITTED and verified; cleanup interrupted. \"\n                               f\"Preserve {backup} and {staging}; inspect before retrying.\")\n"
+        },
+        {
+          "start": 10635,
+          "end": 10659,
+          "old": "            if backup.exists(): shutil.rmtree(backup)\n        return cls(game, games_root=root)\n",
+          "new": "        return verified\n"
+        }
+      ]
+    },
+    "tests/turn_structure_preservation.py": {
+      "old_sha256": "e119925f4db71aa080f58033ee840706a75ab7a04a21993953c65096b74960ba",
+      "new_sha256": "2455fc44b40e6ebd2c51e3b7009ab367f9371cc414d6ab28308333c72431dac2",
+      "edits": [
+        {
+          "start": 732,
+          "end": 861,
+          "old": "",
+          "new": "    from canonical_import_recovery_preservation import preceding_bytes as import_preceding\n    raw = import_preceding(name, raw)\n"
+        }
+      ]
+    }
+  }
+}

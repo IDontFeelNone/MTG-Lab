@@ -10,9 +10,11 @@ make web requests and observations are never accepted as canonical input.
 
 The importer validates the dataset version and review status, required fields,
 duplicate identifiers, and the complete prospective relationship graph. It then asks
-`CanonicalRepository.apply_import` to stage, load, validate, and atomically replace the
-game tree. Validation, dry-run, and validation-only failures leave canonical storage
-unchanged. Incremental datasets upsert only the identifiers they contain.
+`CanonicalRepository.apply_import` to stage, load, validate, and publish the game
+tree with compensating recovery. Pre-publication validation, dry-run, and
+validation-only failures leave canonical storage unchanged. Incremental datasets
+upsert only the identifiers they contain. Publication and cleanup have separate
+outcomes; see [canonical import recovery](CANONICAL_IMPORT_RECOVERY.md).
 
 ## Dataset and review workflow
 

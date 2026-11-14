@@ -17,6 +17,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from canonical_import_recovery_preservation import preceding_bytes as import_preceding
+    raw = import_preceding(name, raw)
     if type(raw) is not bytes:
         raise AssertionError('exact source bytes required')
     if name not in REPLACEMENT_PATHS:
