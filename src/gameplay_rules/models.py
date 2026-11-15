@@ -23,10 +23,12 @@ from .errors import GameplayContractError
 _HASH = re.compile(r"sha256:[0-9a-f]{64}\Z")
 _STATUSES = {"LEGAL", "ILLEGAL", "INDETERMINATE", "UNSUPPORTED"}
 TURN_STRUCTURE_PROFILE = "fictional-two-player-turn-structure-v2"
+DRAW_FAILURE_PROFILE = "fictional-two-player-draw-failure-v1"
 STATE_SCHEMAS_BY_PROFILE = MappingProxyType({
     EXECUTION_PROFILE: "gameplay-state-v1",
     "fictional-two-player-turn-lifecycle-v1": "gameplay-state-v2",
     TURN_STRUCTURE_PROFILE: "gameplay-state-v3",
+    DRAW_FAILURE_PROFILE: "gameplay-state-v4",
 })
 
 
@@ -151,7 +153,8 @@ def _snapshot(body):
     _choice(body["engine_contract_version"], {ENGINE_CONTRACT_VERSION}, "engine_contract_version")
     _choice(body["execution_profile"], STATE_SCHEMAS_BY_PROFILE, "execution_profile")
     lifecycle = body["execution_profile"] != EXECUTION_PROFILE
-    structure = body["execution_profile"] == TURN_STRUCTURE_PROFILE
+    draw_failure = body["execution_profile"] == DRAW_FAILURE_PROFILE
+    structure = body["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}
     if not isinstance(body["sources"], list) or not body["sources"]: _fail("sources", "nonempty array required")
     for source in body["sources"]: _source(source)
     source_ids = [s["source_id"] for s in body["sources"]]
@@ -182,6 +185,7 @@ def _snapshot(body):
     if len(set(rule_ids)) != len(rule_ids): _fail("rules", "duplicate rule identity")
     if lifecycle and not {"untap", "draw"} <= categories: _fail("rules", "lifecycle requires untap and draw evidence")
     if structure and "upkeep" not in categories: _fail("rules", "turn windows require upkeep evidence")
+    if draw_failure and "draw_failure" not in categories: _fail("rules", "draw failure requires explicit fictional evidence")
     if not REQUIRED_RULE_CATEGORIES <= categories: _fail("rules", "missing primitive rule category")
     parameters = body["parameters"]
     _keys(parameters, {"mana_symbols", "generic_payment_order", "main_phase", "main_step", "turn_steps", "land_plays_per_turn", "life_loss_threshold"} | ({"turn_start"} if lifecycle else set()), "parameters")
@@ -198,6 +202,8 @@ def _snapshot(body):
     if len(set(seen)) != len(seen) or (parameters["main_phase"], parameters["main_step"]) not in seen: _fail("turn_steps", "duplicate or missing main window")
     if lifecycle:
         policy = {"untap": "controlled_battlefield", "draw_count": 1, "library_top": "first", "empty_library": "unsupported"}
+        if draw_failure:
+            policy["empty_library"] = "record_attempt_then_state_based_loss"
         if structure:
             policy["priority_windows"] = "upkeep_and_after_draw"
         if parameters["turn_start"] != policy or type(parameters["turn_start"].get("draw_count")) is not int:
@@ -390,6 +396,25 @@ def _windowed_state(body):
     _ordered_state(body, structure=True)
 
 
+def _draw_failure_state(body):
+    _keys(body, {"game_id", "rules_snapshot_id", "revision", "players", "active_player", "turn_number", "phase", "step", "priority_player", "zones", "objects", "stack", "consecutive_passes", "status", "winner_ids", "loser_ids", "pending_system_actions", "unknown_fields", "active_effects", "library_order", "turn_start", "failed_draw_players"}, "draw_failure_state")
+    _windowed_state({k: v for k, v in body.items() if k != "failed_draw_players"})
+    failed = body["failed_draw_players"]
+    _strings(failed, "failed_draw_players")
+    # Only the active player's single automatic draw can fail in this profile.
+    if failed:
+        if failed != [body["active_player"]] or (body["phase"], body["step"]) != ("beginning", "draw") or body["turn_start"]["status"] != "complete" or body["stack"] or body["consecutive_passes"]:
+            _fail("failed_draw_players", "only this turn's completed automatic draw may fail")
+        library = next(z["zone_id"] for z in body["zones"] if z["kind"] == "library" and z["owner"] == body["active_player"])
+        if body["library_order"][library]:
+            _fail("failed_draw_players", "failed draw requires an empty ordered library")
+        if body["status"] == "in_progress":
+            if body["pending_system_actions"] != ["perform_state_based_actions"] or body["priority_player"] is not None:
+                _fail("failed_draw_players", "pending loss requires its immediate mandatory checkpoint")
+        elif not set(failed) <= set(body["loser_ids"]):
+            _fail("failed_draw_players", "terminal outcome must retain the failed-draw loser")
+
+
 def _action(body):
     _keys(body, {"game_id", "rules_snapshot_id", "expected_state_id", "kind", "actor", "object_id", "ability_id", "payment"}, "game_action")
     for key in ("game_id", "kind"): _text(body[key], key)
@@ -549,6 +574,8 @@ class CardGameplaySemantics(_Envelope):
 class GameState(_Envelope):
     @classmethod
     def create(cls, body):
+        if cls is GameState and isinstance(body, Mapping) and body.get("schema_version") == "gameplay-state-v4":
+            return DrawFailureGameState.create(body)
         if cls is GameState and isinstance(body, Mapping) and body.get("schema_version") == "gameplay-state-v3":
             return WindowedGameState.create(body)
         if cls is GameState and isinstance(body, Mapping) and body.get("schema_version") == "gameplay-state-v2":
@@ -557,6 +584,8 @@ class GameState(_Envelope):
 
     @classmethod
     def from_dict(cls, value):
+        if cls is GameState and isinstance(value, Mapping) and value.get("schema_version") == "gameplay-state-v4":
+            return DrawFailureGameState.from_dict(value)
         if cls is GameState and isinstance(value, Mapping) and value.get("schema_version") == "gameplay-state-v3":
             return WindowedGameState.from_dict(value)
         if cls is GameState and isinstance(value, Mapping) and value.get("schema_version") == "gameplay-state-v2":
@@ -580,6 +609,13 @@ class WindowedGameState(OrderedGameState):
     """V3 envelope: reuse ordered state with distinct turn-window progress."""
     SCHEMA = "gameplay-state-v3"
     VALIDATOR = staticmethod(_windowed_state)
+
+
+@dataclass(frozen=True)
+class DrawFailureGameState(WindowedGameState):
+    """V4: one explicit failed automatic draw, consumed by the native checkpoint."""
+    SCHEMA = "gameplay-state-v4"
+    VALIDATOR = staticmethod(_draw_failure_state)
 
 
 @dataclass(frozen=True)

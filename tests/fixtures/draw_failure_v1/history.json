@@ -1,0 +1,3701 @@
+{
+  "current_state_id": "sha256:0eb921d2b3d3720ed1843fbb75c917f34e5b87ae5e39643ec40bdecbf6c3d89b",
+  "entries": [
+    {
+      "after_state_id": "sha256:fe3e3cdd8361ca5950f8124be434d134a8cd6d2c2087ccb402a0dd972659a8dc",
+      "before_state_id": "sha256:cadfb1e250923a2596a49e31944f223c475c16310416e2a4246595ffbb8473a9",
+      "legality": {
+        "action_id": "sha256:761bfca3be794a8f93fc711688c113a7a610cbaf950f6fc374abad26fa5486ac",
+        "assumptions": [
+          "project_authored_fictional_two_player_rules_only"
+        ],
+        "before_state_id": "sha256:cadfb1e250923a2596a49e31944f223c475c16310416e2a4246595ffbb8473a9",
+        "explanation": {
+          "action_kind": "pass_priority",
+          "reason_codes": [],
+          "status": "LEGAL"
+        },
+        "failed_requirements": [],
+        "game_id": "fictional-duel",
+        "payment": null,
+        "required_costs": [],
+        "result_id": "sha256:be8024a33a1f4d7cff97feee844fe8b30d7c27066de19c947a4a2447c9638f7f",
+        "rule_references": [
+          {
+            "category": "draw_failure",
+            "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+            "external_reference": null,
+            "rule_id": "fictional.draw-failure.draw_failure.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-draw-failure-v1",
+            "status": "supported"
+          },
+          {
+            "category": "priority",
+            "description": "Authored bounded fictional priority primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.priority.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "stack",
+            "description": "Authored bounded fictional stack primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.stack.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "state_based_actions",
+            "description": "Authored bounded fictional state based actions primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.state_based_actions.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "turn_structure",
+            "description": "Authored bounded fictional turn structure primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.turn_structure.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "zones",
+            "description": "Authored bounded fictional zones primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.zones.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "upkeep",
+            "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+            "external_reference": null,
+            "rule_id": "fictional.turn-structure.upkeep.2",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-turn-structure-v2",
+            "status": "supported"
+          }
+        ],
+        "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+        "satisfied_requirements": [
+          "actor_has_priority"
+        ],
+        "schema_version": "gameplay-legality-result-v1",
+        "status": "LEGAL",
+        "unknown_requirements": [],
+        "unsupported_dimensions": []
+      },
+      "request": {
+        "ability_id": null,
+        "action_id": "sha256:761bfca3be794a8f93fc711688c113a7a610cbaf950f6fc374abad26fa5486ac",
+        "actor": "A",
+        "expected_state_id": "sha256:cadfb1e250923a2596a49e31944f223c475c16310416e2a4246595ffbb8473a9",
+        "game_id": "fictional-duel",
+        "kind": "pass_priority",
+        "object_id": null,
+        "payment": null,
+        "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+        "schema_version": "gameplay-action-v1"
+      },
+      "sequence": 0,
+      "status": "LEGAL",
+      "transitions": [
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:761bfca3be794a8f93fc711688c113a7a610cbaf950f6fc374abad26fa5486ac",
+            "actor": "A",
+            "expected_state_id": "sha256:cadfb1e250923a2596a49e31944f223c475c16310416e2a4246595ffbb8473a9",
+            "game_id": "fictional-duel",
+            "kind": "pass_priority",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:761bfca3be794a8f93fc711688c113a7a610cbaf950f6fc374abad26fa5486ac",
+          "actor": "A",
+          "after_state": {
+            "active_effects": [],
+            "active_player": "A",
+            "consecutive_passes": [
+              "A"
+            ],
+            "failed_draw_players": [],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [],
+            "phase": "ending",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": "B",
+            "revision": 1,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:fe3e3cdd8361ca5950f8124be434d134a8cd6d2c2087ccb402a0dd972659a8dc",
+            "status": "in_progress",
+            "step": "end",
+            "turn_number": 1,
+            "turn_start": {
+              "player_id": "A",
+              "status": "complete",
+              "turn_number": 1
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:fe3e3cdd8361ca5950f8124be434d134a8cd6d2c2087ccb402a0dd972659a8dc",
+          "before_state_id": "sha256:cadfb1e250923a2596a49e31944f223c475c16310416e2a4246595ffbb8473a9",
+          "game_id": "fictional-duel",
+          "required_system_actions": [],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "priority",
+              "description": "Authored bounded fictional priority primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.priority.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "stack",
+              "description": "Authored bounded fictional stack primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.stack.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [
+                "A"
+              ],
+              "before": [],
+              "path": "consecutive_passes"
+            },
+            {
+              "after": "B",
+              "before": "A",
+              "path": "priority_player"
+            },
+            {
+              "after": 1,
+              "before": 0,
+              "path": "revision"
+            }
+          ],
+          "transition_id": "sha256:bd665a5cd8f04db391f020a2588354ca1f68cbd8203dae44d3ba29e7a41abb4a",
+          "zone_changes": []
+        }
+      ]
+    },
+    {
+      "after_state_id": "sha256:bd24c724e8d8a05c6e5864d096f382d73b19c37df4927dbfd8c7d2f887c3699c",
+      "before_state_id": "sha256:fe3e3cdd8361ca5950f8124be434d134a8cd6d2c2087ccb402a0dd972659a8dc",
+      "legality": {
+        "action_id": "sha256:c14cf2c7d1020189b024ac1fedb3d837fe6d86b61f56a61b824daedc3f5d8e08",
+        "assumptions": [
+          "project_authored_fictional_two_player_rules_only"
+        ],
+        "before_state_id": "sha256:fe3e3cdd8361ca5950f8124be434d134a8cd6d2c2087ccb402a0dd972659a8dc",
+        "explanation": {
+          "action_kind": "pass_priority",
+          "reason_codes": [],
+          "status": "LEGAL"
+        },
+        "failed_requirements": [],
+        "game_id": "fictional-duel",
+        "payment": null,
+        "required_costs": [],
+        "result_id": "sha256:1fbc7d3fcab9fc6e7304c38dbba103cdc00903f175889a07d2504cefdd4de59e",
+        "rule_references": [
+          {
+            "category": "draw_failure",
+            "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+            "external_reference": null,
+            "rule_id": "fictional.draw-failure.draw_failure.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-draw-failure-v1",
+            "status": "supported"
+          },
+          {
+            "category": "priority",
+            "description": "Authored bounded fictional priority primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.priority.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "stack",
+            "description": "Authored bounded fictional stack primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.stack.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "state_based_actions",
+            "description": "Authored bounded fictional state based actions primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.state_based_actions.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "turn_structure",
+            "description": "Authored bounded fictional turn structure primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.turn_structure.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "zones",
+            "description": "Authored bounded fictional zones primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.zones.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "upkeep",
+            "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+            "external_reference": null,
+            "rule_id": "fictional.turn-structure.upkeep.2",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-turn-structure-v2",
+            "status": "supported"
+          }
+        ],
+        "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+        "satisfied_requirements": [
+          "actor_has_priority"
+        ],
+        "schema_version": "gameplay-legality-result-v1",
+        "status": "LEGAL",
+        "unknown_requirements": [],
+        "unsupported_dimensions": []
+      },
+      "request": {
+        "ability_id": null,
+        "action_id": "sha256:c14cf2c7d1020189b024ac1fedb3d837fe6d86b61f56a61b824daedc3f5d8e08",
+        "actor": "B",
+        "expected_state_id": "sha256:fe3e3cdd8361ca5950f8124be434d134a8cd6d2c2087ccb402a0dd972659a8dc",
+        "game_id": "fictional-duel",
+        "kind": "pass_priority",
+        "object_id": null,
+        "payment": null,
+        "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+        "schema_version": "gameplay-action-v1"
+      },
+      "sequence": 1,
+      "status": "LEGAL",
+      "transitions": [
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:c14cf2c7d1020189b024ac1fedb3d837fe6d86b61f56a61b824daedc3f5d8e08",
+            "actor": "B",
+            "expected_state_id": "sha256:fe3e3cdd8361ca5950f8124be434d134a8cd6d2c2087ccb402a0dd972659a8dc",
+            "game_id": "fictional-duel",
+            "kind": "pass_priority",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:c14cf2c7d1020189b024ac1fedb3d837fe6d86b61f56a61b824daedc3f5d8e08",
+          "actor": "B",
+          "after_state": {
+            "active_effects": [],
+            "active_player": "A",
+            "consecutive_passes": [],
+            "failed_draw_players": [],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [
+              "perform_state_based_actions",
+              "advance_step_or_phase"
+            ],
+            "phase": "ending",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": null,
+            "revision": 2,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:a81b90744a70a291775d9b138801de03bb8f5f33b8efd9ad680ce1788b350402",
+            "status": "in_progress",
+            "step": "end",
+            "turn_number": 1,
+            "turn_start": {
+              "player_id": "A",
+              "status": "complete",
+              "turn_number": 1
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:a81b90744a70a291775d9b138801de03bb8f5f33b8efd9ad680ce1788b350402",
+          "before_state_id": "sha256:fe3e3cdd8361ca5950f8124be434d134a8cd6d2c2087ccb402a0dd972659a8dc",
+          "game_id": "fictional-duel",
+          "required_system_actions": [
+            "perform_state_based_actions",
+            "advance_step_or_phase"
+          ],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "priority",
+              "description": "Authored bounded fictional priority primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.priority.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "stack",
+              "description": "Authored bounded fictional stack primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.stack.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [],
+              "before": [
+                "A"
+              ],
+              "path": "consecutive_passes"
+            },
+            {
+              "after": [
+                "perform_state_based_actions",
+                "advance_step_or_phase"
+              ],
+              "before": [],
+              "path": "pending_system_actions"
+            },
+            {
+              "after": null,
+              "before": "B",
+              "path": "priority_player"
+            },
+            {
+              "after": 2,
+              "before": 1,
+              "path": "revision"
+            }
+          ],
+          "transition_id": "sha256:304e0826888d649715a9cf43a38e339e39a2ab2b8e2987a67fd84b2803f24673",
+          "zone_changes": []
+        },
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:683336e81e0198fa8b8c52efdfe8799bc975a33ec256ce51b1d0d31ee2d45efc",
+            "actor": null,
+            "expected_state_id": "sha256:a81b90744a70a291775d9b138801de03bb8f5f33b8efd9ad680ce1788b350402",
+            "game_id": "fictional-duel",
+            "kind": "perform_state_based_actions",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:683336e81e0198fa8b8c52efdfe8799bc975a33ec256ce51b1d0d31ee2d45efc",
+          "actor": null,
+          "after_state": {
+            "active_effects": [],
+            "active_player": "A",
+            "consecutive_passes": [],
+            "failed_draw_players": [],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [
+              "advance_step_or_phase"
+            ],
+            "phase": "ending",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": null,
+            "revision": 3,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:252108c8857181e0e87acb4aa46a249d6fce591fd590e4db826c2c9408f0ab5c",
+            "status": "in_progress",
+            "step": "end",
+            "turn_number": 1,
+            "turn_start": {
+              "player_id": "A",
+              "status": "complete",
+              "turn_number": 1
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:252108c8857181e0e87acb4aa46a249d6fce591fd590e4db826c2c9408f0ab5c",
+          "before_state_id": "sha256:a81b90744a70a291775d9b138801de03bb8f5f33b8efd9ad680ce1788b350402",
+          "game_id": "fictional-duel",
+          "required_system_actions": [
+            "advance_step_or_phase"
+          ],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [
+                "advance_step_or_phase"
+              ],
+              "before": [
+                "perform_state_based_actions",
+                "advance_step_or_phase"
+              ],
+              "path": "pending_system_actions"
+            },
+            {
+              "after": 3,
+              "before": 2,
+              "path": "revision"
+            }
+          ],
+          "transition_id": "sha256:07060d320122e66c6406329b79fa4e6df0e4b2bbacb03ddafe5c8e157b1dd13b",
+          "zone_changes": []
+        },
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:685c4f186b703cff0e523cfcc516cc0558db2576f75a8411d910ea37e968c78f",
+            "actor": null,
+            "expected_state_id": "sha256:252108c8857181e0e87acb4aa46a249d6fce591fd590e4db826c2c9408f0ab5c",
+            "game_id": "fictional-duel",
+            "kind": "advance_step_or_phase",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:685c4f186b703cff0e523cfcc516cc0558db2576f75a8411d910ea37e968c78f",
+          "actor": null,
+          "after_state": {
+            "active_effects": [],
+            "active_player": "B",
+            "consecutive_passes": [],
+            "failed_draw_players": [],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [
+              "untap_active_player"
+            ],
+            "phase": "beginning",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": null,
+            "revision": 4,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:f5ef60627232f449b081631a3d50f8b5170568300af920243465cdbb3468b0b8",
+            "status": "in_progress",
+            "step": "untap",
+            "turn_number": 2,
+            "turn_start": {
+              "player_id": "B",
+              "status": "pending_untap",
+              "turn_number": 2
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:f5ef60627232f449b081631a3d50f8b5170568300af920243465cdbb3468b0b8",
+          "before_state_id": "sha256:252108c8857181e0e87acb4aa46a249d6fce591fd590e4db826c2c9408f0ab5c",
+          "game_id": "fictional-duel",
+          "required_system_actions": [
+            "untap_active_player"
+          ],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": "B",
+              "before": "A",
+              "path": "active_player"
+            },
+            {
+              "after": [
+                "untap_active_player"
+              ],
+              "before": [
+                "advance_step_or_phase"
+              ],
+              "path": "pending_system_actions"
+            },
+            {
+              "after": "beginning",
+              "before": "ending",
+              "path": "phase"
+            },
+            {
+              "after": 4,
+              "before": 3,
+              "path": "revision"
+            },
+            {
+              "after": "untap",
+              "before": "end",
+              "path": "step"
+            },
+            {
+              "after": 2,
+              "before": 1,
+              "path": "turn_number"
+            },
+            {
+              "after": {
+                "player_id": "B",
+                "status": "pending_untap",
+                "turn_number": 2
+              },
+              "before": {
+                "player_id": "A",
+                "status": "complete",
+                "turn_number": 1
+              },
+              "path": "turn_start"
+            }
+          ],
+          "transition_id": "sha256:aab92fd9d5e32dcefa6b35a097dbd7de11b081244107ce88e118201a5fd2bf09",
+          "zone_changes": []
+        },
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:35e5b4264fc0fdd008b566a669c300c763055d050423e4c33e2e139ddc6f9a86",
+            "actor": null,
+            "expected_state_id": "sha256:f5ef60627232f449b081631a3d50f8b5170568300af920243465cdbb3468b0b8",
+            "game_id": "fictional-duel",
+            "kind": "untap_active_player",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:35e5b4264fc0fdd008b566a669c300c763055d050423e4c33e2e139ddc6f9a86",
+          "actor": null,
+          "after_state": {
+            "active_effects": [],
+            "active_player": "B",
+            "consecutive_passes": [],
+            "failed_draw_players": [],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": false,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [],
+            "phase": "beginning",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": "B",
+            "revision": 5,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:bd24c724e8d8a05c6e5864d096f382d73b19c37df4927dbfd8c7d2f887c3699c",
+            "status": "in_progress",
+            "step": "upkeep",
+            "turn_number": 2,
+            "turn_start": {
+              "player_id": "B",
+              "status": "upkeep",
+              "turn_number": 2
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:bd24c724e8d8a05c6e5864d096f382d73b19c37df4927dbfd8c7d2f887c3699c",
+          "before_state_id": "sha256:f5ef60627232f449b081631a3d50f8b5170568300af920243465cdbb3468b0b8",
+          "game_id": "fictional-duel",
+          "required_system_actions": [],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "untap",
+              "description": "Native automatic controlled-battlefield untap at beginning/untap; no priority before it; enter upkeep after untap.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.untap.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [
+                {
+                  "card_id": "pebble-resource",
+                  "controller": "A",
+                  "knowledge": "known",
+                  "object_id": "a-resource",
+                  "owner": "A",
+                  "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                  "tapped": true,
+                  "zone_id": "A:battlefield"
+                },
+                {
+                  "card_id": "pebble-resource",
+                  "controller": "B",
+                  "knowledge": "known",
+                  "object_id": "b-resource",
+                  "owner": "B",
+                  "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                  "tapped": false,
+                  "zone_id": "B:battlefield"
+                },
+                {
+                  "card_id": "moss-plot",
+                  "controller": "A",
+                  "knowledge": "known",
+                  "object_id": "a-next",
+                  "owner": "A",
+                  "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                  "tapped": false,
+                  "zone_id": "A:library"
+                }
+              ],
+              "before": [
+                {
+                  "card_id": "pebble-resource",
+                  "controller": "A",
+                  "knowledge": "known",
+                  "object_id": "a-resource",
+                  "owner": "A",
+                  "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                  "tapped": true,
+                  "zone_id": "A:battlefield"
+                },
+                {
+                  "card_id": "pebble-resource",
+                  "controller": "B",
+                  "knowledge": "known",
+                  "object_id": "b-resource",
+                  "owner": "B",
+                  "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                  "tapped": true,
+                  "zone_id": "B:battlefield"
+                },
+                {
+                  "card_id": "moss-plot",
+                  "controller": "A",
+                  "knowledge": "known",
+                  "object_id": "a-next",
+                  "owner": "A",
+                  "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                  "tapped": false,
+                  "zone_id": "A:library"
+                }
+              ],
+              "path": "objects"
+            },
+            {
+              "after": [],
+              "before": [
+                "untap_active_player"
+              ],
+              "path": "pending_system_actions"
+            },
+            {
+              "after": "B",
+              "before": null,
+              "path": "priority_player"
+            },
+            {
+              "after": 5,
+              "before": 4,
+              "path": "revision"
+            },
+            {
+              "after": "upkeep",
+              "before": "untap",
+              "path": "step"
+            },
+            {
+              "after": {
+                "player_id": "B",
+                "status": "upkeep",
+                "turn_number": 2
+              },
+              "before": {
+                "player_id": "B",
+                "status": "pending_untap",
+                "turn_number": 2
+              },
+              "path": "turn_start"
+            }
+          ],
+          "transition_id": "sha256:ff0cf9c5d5f3f16f3352a4f673f5fa5f81af18d3de2fe32971d61da594f9cd96",
+          "zone_changes": []
+        }
+      ]
+    },
+    {
+      "after_state_id": "sha256:fa1d00c0ac5990e3bf37c743704c2eb1d7b733ad072f97f7b0fcb5ea4298c5d4",
+      "before_state_id": "sha256:bd24c724e8d8a05c6e5864d096f382d73b19c37df4927dbfd8c7d2f887c3699c",
+      "legality": {
+        "action_id": "sha256:76345f3262a68e9bc3004e874a8d450de89396073728c487f510b40b2c022d57",
+        "assumptions": [
+          "project_authored_fictional_two_player_rules_only"
+        ],
+        "before_state_id": "sha256:bd24c724e8d8a05c6e5864d096f382d73b19c37df4927dbfd8c7d2f887c3699c",
+        "explanation": {
+          "action_kind": "pass_priority",
+          "reason_codes": [],
+          "status": "LEGAL"
+        },
+        "failed_requirements": [],
+        "game_id": "fictional-duel",
+        "payment": null,
+        "required_costs": [],
+        "result_id": "sha256:7dc6e79d2bfb9468b0c8d5fa643697ab985581abcc69e91322bebd38ce098cce",
+        "rule_references": [
+          {
+            "category": "draw_failure",
+            "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+            "external_reference": null,
+            "rule_id": "fictional.draw-failure.draw_failure.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-draw-failure-v1",
+            "status": "supported"
+          },
+          {
+            "category": "priority",
+            "description": "Authored bounded fictional priority primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.priority.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "stack",
+            "description": "Authored bounded fictional stack primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.stack.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "state_based_actions",
+            "description": "Authored bounded fictional state based actions primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.state_based_actions.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "turn_structure",
+            "description": "Authored bounded fictional turn structure primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.turn_structure.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "zones",
+            "description": "Authored bounded fictional zones primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.zones.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "upkeep",
+            "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+            "external_reference": null,
+            "rule_id": "fictional.turn-structure.upkeep.2",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-turn-structure-v2",
+            "status": "supported"
+          }
+        ],
+        "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+        "satisfied_requirements": [
+          "actor_has_priority"
+        ],
+        "schema_version": "gameplay-legality-result-v1",
+        "status": "LEGAL",
+        "unknown_requirements": [],
+        "unsupported_dimensions": []
+      },
+      "request": {
+        "ability_id": null,
+        "action_id": "sha256:76345f3262a68e9bc3004e874a8d450de89396073728c487f510b40b2c022d57",
+        "actor": "B",
+        "expected_state_id": "sha256:bd24c724e8d8a05c6e5864d096f382d73b19c37df4927dbfd8c7d2f887c3699c",
+        "game_id": "fictional-duel",
+        "kind": "pass_priority",
+        "object_id": null,
+        "payment": null,
+        "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+        "schema_version": "gameplay-action-v1"
+      },
+      "sequence": 2,
+      "status": "LEGAL",
+      "transitions": [
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:76345f3262a68e9bc3004e874a8d450de89396073728c487f510b40b2c022d57",
+            "actor": "B",
+            "expected_state_id": "sha256:bd24c724e8d8a05c6e5864d096f382d73b19c37df4927dbfd8c7d2f887c3699c",
+            "game_id": "fictional-duel",
+            "kind": "pass_priority",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:76345f3262a68e9bc3004e874a8d450de89396073728c487f510b40b2c022d57",
+          "actor": "B",
+          "after_state": {
+            "active_effects": [],
+            "active_player": "B",
+            "consecutive_passes": [
+              "B"
+            ],
+            "failed_draw_players": [],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": false,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [],
+            "phase": "beginning",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": "A",
+            "revision": 6,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:fa1d00c0ac5990e3bf37c743704c2eb1d7b733ad072f97f7b0fcb5ea4298c5d4",
+            "status": "in_progress",
+            "step": "upkeep",
+            "turn_number": 2,
+            "turn_start": {
+              "player_id": "B",
+              "status": "upkeep",
+              "turn_number": 2
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:fa1d00c0ac5990e3bf37c743704c2eb1d7b733ad072f97f7b0fcb5ea4298c5d4",
+          "before_state_id": "sha256:bd24c724e8d8a05c6e5864d096f382d73b19c37df4927dbfd8c7d2f887c3699c",
+          "game_id": "fictional-duel",
+          "required_system_actions": [],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "priority",
+              "description": "Authored bounded fictional priority primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.priority.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "stack",
+              "description": "Authored bounded fictional stack primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.stack.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [
+                "B"
+              ],
+              "before": [],
+              "path": "consecutive_passes"
+            },
+            {
+              "after": "A",
+              "before": "B",
+              "path": "priority_player"
+            },
+            {
+              "after": 6,
+              "before": 5,
+              "path": "revision"
+            }
+          ],
+          "transition_id": "sha256:6e9820e520280b04b4ca754cfa76e36a8e9439ba938d310cc3ac2d5d61bbbeb0",
+          "zone_changes": []
+        }
+      ]
+    },
+    {
+      "after_state_id": "sha256:0eb921d2b3d3720ed1843fbb75c917f34e5b87ae5e39643ec40bdecbf6c3d89b",
+      "before_state_id": "sha256:fa1d00c0ac5990e3bf37c743704c2eb1d7b733ad072f97f7b0fcb5ea4298c5d4",
+      "legality": {
+        "action_id": "sha256:0f83728719fcaa328caaa296d6f37e18f5ab89b24be626ecf5a090bd01345f3c",
+        "assumptions": [
+          "project_authored_fictional_two_player_rules_only"
+        ],
+        "before_state_id": "sha256:fa1d00c0ac5990e3bf37c743704c2eb1d7b733ad072f97f7b0fcb5ea4298c5d4",
+        "explanation": {
+          "action_kind": "pass_priority",
+          "reason_codes": [],
+          "status": "LEGAL"
+        },
+        "failed_requirements": [],
+        "game_id": "fictional-duel",
+        "payment": null,
+        "required_costs": [],
+        "result_id": "sha256:7432cd7e80527315385556e7c58e5656d7e91a3e054af4e8a2ab686ccf80215f",
+        "rule_references": [
+          {
+            "category": "draw_failure",
+            "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+            "external_reference": null,
+            "rule_id": "fictional.draw-failure.draw_failure.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-draw-failure-v1",
+            "status": "supported"
+          },
+          {
+            "category": "priority",
+            "description": "Authored bounded fictional priority primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.priority.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "stack",
+            "description": "Authored bounded fictional stack primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.stack.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "state_based_actions",
+            "description": "Authored bounded fictional state based actions primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.state_based_actions.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "turn_structure",
+            "description": "Authored bounded fictional turn structure primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.turn_structure.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "zones",
+            "description": "Authored bounded fictional zones primitive.",
+            "external_reference": null,
+            "rule_id": "fictional.rules.zones.1",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-authored-rules-v1",
+            "status": "supported"
+          },
+          {
+            "category": "upkeep",
+            "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+            "external_reference": null,
+            "rule_id": "fictional.turn-structure.upkeep.2",
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "source_id": "fictional-turn-structure-v2",
+            "status": "supported"
+          }
+        ],
+        "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+        "satisfied_requirements": [
+          "actor_has_priority"
+        ],
+        "schema_version": "gameplay-legality-result-v1",
+        "status": "LEGAL",
+        "unknown_requirements": [],
+        "unsupported_dimensions": []
+      },
+      "request": {
+        "ability_id": null,
+        "action_id": "sha256:0f83728719fcaa328caaa296d6f37e18f5ab89b24be626ecf5a090bd01345f3c",
+        "actor": "A",
+        "expected_state_id": "sha256:fa1d00c0ac5990e3bf37c743704c2eb1d7b733ad072f97f7b0fcb5ea4298c5d4",
+        "game_id": "fictional-duel",
+        "kind": "pass_priority",
+        "object_id": null,
+        "payment": null,
+        "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+        "schema_version": "gameplay-action-v1"
+      },
+      "sequence": 3,
+      "status": "LEGAL",
+      "transitions": [
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:0f83728719fcaa328caaa296d6f37e18f5ab89b24be626ecf5a090bd01345f3c",
+            "actor": "A",
+            "expected_state_id": "sha256:fa1d00c0ac5990e3bf37c743704c2eb1d7b733ad072f97f7b0fcb5ea4298c5d4",
+            "game_id": "fictional-duel",
+            "kind": "pass_priority",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:0f83728719fcaa328caaa296d6f37e18f5ab89b24be626ecf5a090bd01345f3c",
+          "actor": "A",
+          "after_state": {
+            "active_effects": [],
+            "active_player": "B",
+            "consecutive_passes": [],
+            "failed_draw_players": [],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": false,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [
+              "perform_state_based_actions",
+              "advance_step_or_phase"
+            ],
+            "phase": "beginning",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": null,
+            "revision": 7,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:0e9ebfe02d72556836fd5c7aab2e699948ee94e1ae6c9f8c209d3026c896fb68",
+            "status": "in_progress",
+            "step": "upkeep",
+            "turn_number": 2,
+            "turn_start": {
+              "player_id": "B",
+              "status": "upkeep",
+              "turn_number": 2
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:0e9ebfe02d72556836fd5c7aab2e699948ee94e1ae6c9f8c209d3026c896fb68",
+          "before_state_id": "sha256:fa1d00c0ac5990e3bf37c743704c2eb1d7b733ad072f97f7b0fcb5ea4298c5d4",
+          "game_id": "fictional-duel",
+          "required_system_actions": [
+            "perform_state_based_actions",
+            "advance_step_or_phase"
+          ],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "priority",
+              "description": "Authored bounded fictional priority primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.priority.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "stack",
+              "description": "Authored bounded fictional stack primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.stack.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [],
+              "before": [
+                "B"
+              ],
+              "path": "consecutive_passes"
+            },
+            {
+              "after": [
+                "perform_state_based_actions",
+                "advance_step_or_phase"
+              ],
+              "before": [],
+              "path": "pending_system_actions"
+            },
+            {
+              "after": null,
+              "before": "A",
+              "path": "priority_player"
+            },
+            {
+              "after": 7,
+              "before": 6,
+              "path": "revision"
+            }
+          ],
+          "transition_id": "sha256:642b5fba1e7e6f42d1ada9c9a76cc5f6b690818cf94af2d32ea864c1ebd7e245",
+          "zone_changes": []
+        },
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:9f7f3afe35cd2a29b7c4792bb84685c7686162277b716eb8e6c845c532b91df5",
+            "actor": null,
+            "expected_state_id": "sha256:0e9ebfe02d72556836fd5c7aab2e699948ee94e1ae6c9f8c209d3026c896fb68",
+            "game_id": "fictional-duel",
+            "kind": "perform_state_based_actions",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:9f7f3afe35cd2a29b7c4792bb84685c7686162277b716eb8e6c845c532b91df5",
+          "actor": null,
+          "after_state": {
+            "active_effects": [],
+            "active_player": "B",
+            "consecutive_passes": [],
+            "failed_draw_players": [],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": false,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [
+              "advance_step_or_phase"
+            ],
+            "phase": "beginning",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": null,
+            "revision": 8,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:208107929b6c31e2d16b9faa26dff82e4e692b9c7287b995f888382404a2a97a",
+            "status": "in_progress",
+            "step": "upkeep",
+            "turn_number": 2,
+            "turn_start": {
+              "player_id": "B",
+              "status": "upkeep",
+              "turn_number": 2
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:208107929b6c31e2d16b9faa26dff82e4e692b9c7287b995f888382404a2a97a",
+          "before_state_id": "sha256:0e9ebfe02d72556836fd5c7aab2e699948ee94e1ae6c9f8c209d3026c896fb68",
+          "game_id": "fictional-duel",
+          "required_system_actions": [
+            "advance_step_or_phase"
+          ],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [
+                "advance_step_or_phase"
+              ],
+              "before": [
+                "perform_state_based_actions",
+                "advance_step_or_phase"
+              ],
+              "path": "pending_system_actions"
+            },
+            {
+              "after": 8,
+              "before": 7,
+              "path": "revision"
+            }
+          ],
+          "transition_id": "sha256:9d305a8c5d0b9a054b1b526a3d9ee40877d5f83de9b90dd6645be8921eccf0e5",
+          "zone_changes": []
+        },
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:b40fa11411a8e1fa4b24200edb28901995545b45ab196d098871515d74177c56",
+            "actor": null,
+            "expected_state_id": "sha256:208107929b6c31e2d16b9faa26dff82e4e692b9c7287b995f888382404a2a97a",
+            "game_id": "fictional-duel",
+            "kind": "advance_step_or_phase",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:b40fa11411a8e1fa4b24200edb28901995545b45ab196d098871515d74177c56",
+          "actor": null,
+          "after_state": {
+            "active_effects": [],
+            "active_player": "B",
+            "consecutive_passes": [],
+            "failed_draw_players": [],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": false,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [
+              "draw_for_turn",
+              "perform_state_based_actions"
+            ],
+            "phase": "beginning",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": null,
+            "revision": 9,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:c0086131b14424defea898cc55221e3f8a7d045070485ac6f64323264efe5e2c",
+            "status": "in_progress",
+            "step": "draw",
+            "turn_number": 2,
+            "turn_start": {
+              "player_id": "B",
+              "status": "pending_draw",
+              "turn_number": 2
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:c0086131b14424defea898cc55221e3f8a7d045070485ac6f64323264efe5e2c",
+          "before_state_id": "sha256:208107929b6c31e2d16b9faa26dff82e4e692b9c7287b995f888382404a2a97a",
+          "game_id": "fictional-duel",
+          "required_system_actions": [
+            "draw_for_turn",
+            "perform_state_based_actions"
+          ],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [
+                "draw_for_turn",
+                "perform_state_based_actions"
+              ],
+              "before": [
+                "advance_step_or_phase"
+              ],
+              "path": "pending_system_actions"
+            },
+            {
+              "after": 9,
+              "before": 8,
+              "path": "revision"
+            },
+            {
+              "after": "draw",
+              "before": "upkeep",
+              "path": "step"
+            },
+            {
+              "after": {
+                "player_id": "B",
+                "status": "pending_draw",
+                "turn_number": 2
+              },
+              "before": {
+                "player_id": "B",
+                "status": "upkeep",
+                "turn_number": 2
+              },
+              "path": "turn_start"
+            }
+          ],
+          "transition_id": "sha256:cc469c95b2b2a6514f0ceefcb84c292e91e07715acb34f2c0b7bbabef359ab26",
+          "zone_changes": []
+        },
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:86a57db810db7d7c9b6dd3358db78d71c3ea56375c74d307c780954b273ad76e",
+            "actor": null,
+            "expected_state_id": "sha256:c0086131b14424defea898cc55221e3f8a7d045070485ac6f64323264efe5e2c",
+            "game_id": "fictional-duel",
+            "kind": "draw_for_turn",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:86a57db810db7d7c9b6dd3358db78d71c3ea56375c74d307c780954b273ad76e",
+          "actor": null,
+          "after_state": {
+            "active_effects": [],
+            "active_player": "B",
+            "consecutive_passes": [],
+            "failed_draw_players": [
+              "B"
+            ],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": false,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [
+              "perform_state_based_actions"
+            ],
+            "phase": "beginning",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": null,
+            "revision": 10,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:89b1d607273eb3ff4a1ec5103a88a9307710d2e906315f982477eae18d1c04b5",
+            "status": "in_progress",
+            "step": "draw",
+            "turn_number": 2,
+            "turn_start": {
+              "player_id": "B",
+              "status": "complete",
+              "turn_number": 2
+            },
+            "unknown_fields": [],
+            "winner_ids": [],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:89b1d607273eb3ff4a1ec5103a88a9307710d2e906315f982477eae18d1c04b5",
+          "before_state_id": "sha256:c0086131b14424defea898cc55221e3f8a7d045070485ac6f64323264efe5e2c",
+          "game_id": "fictional-duel",
+          "required_system_actions": [
+            "perform_state_based_actions"
+          ],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw",
+              "description": "Index-zero automatic turn draw; last card succeeds; empty attempted draw records failure without card creation; checkpoint before priority.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [
+                "B"
+              ],
+              "before": [],
+              "path": "failed_draw_players"
+            },
+            {
+              "after": [
+                "perform_state_based_actions"
+              ],
+              "before": [
+                "draw_for_turn",
+                "perform_state_based_actions"
+              ],
+              "path": "pending_system_actions"
+            },
+            {
+              "after": 10,
+              "before": 9,
+              "path": "revision"
+            },
+            {
+              "after": {
+                "player_id": "B",
+                "status": "complete",
+                "turn_number": 2
+              },
+              "before": {
+                "player_id": "B",
+                "status": "pending_draw",
+                "turn_number": 2
+              },
+              "path": "turn_start"
+            }
+          ],
+          "transition_id": "sha256:7c74492ee07bf5dbf0be8d2b04b69e02170ecb83ae64fd63e4e38d3a7d742ffb",
+          "zone_changes": []
+        },
+        {
+          "action": {
+            "ability_id": null,
+            "action_id": "sha256:aa1b974764ab2d96551f90c88af946ea9ede321d2ce12ade61f4c33faa45d2d0",
+            "actor": null,
+            "expected_state_id": "sha256:89b1d607273eb3ff4a1ec5103a88a9307710d2e906315f982477eae18d1c04b5",
+            "game_id": "fictional-duel",
+            "kind": "perform_state_based_actions",
+            "object_id": null,
+            "payment": null,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-action-v1"
+          },
+          "action_id": "sha256:aa1b974764ab2d96551f90c88af946ea9ede321d2ce12ade61f4c33faa45d2d0",
+          "actor": null,
+          "after_state": {
+            "active_effects": [],
+            "active_player": "B",
+            "consecutive_passes": [],
+            "failed_draw_players": [
+              "B"
+            ],
+            "game_id": "fictional-duel",
+            "library_order": {
+              "A:library": [
+                "a-next"
+              ],
+              "B:library": []
+            },
+            "loser_ids": [
+              "B"
+            ],
+            "objects": [
+              {
+                "card_id": "pebble-resource",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-resource",
+                "owner": "A",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": true,
+                "zone_id": "A:battlefield"
+              },
+              {
+                "card_id": "pebble-resource",
+                "controller": "B",
+                "knowledge": "known",
+                "object_id": "b-resource",
+                "owner": "B",
+                "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+                "tapped": false,
+                "zone_id": "B:battlefield"
+              },
+              {
+                "card_id": "moss-plot",
+                "controller": "A",
+                "knowledge": "known",
+                "object_id": "a-next",
+                "owner": "A",
+                "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+                "tapped": false,
+                "zone_id": "A:library"
+              }
+            ],
+            "pending_system_actions": [],
+            "phase": "beginning",
+            "players": [
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "A"
+              },
+              {
+                "land_plays_available": 1,
+                "land_plays_used": 0,
+                "life": 10,
+                "mana_pool": {},
+                "player_id": "B"
+              }
+            ],
+            "priority_player": null,
+            "revision": 11,
+            "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+            "schema_version": "gameplay-state-v4",
+            "stack": [],
+            "state_id": "sha256:0eb921d2b3d3720ed1843fbb75c917f34e5b87ae5e39643ec40bdecbf6c3d89b",
+            "status": "ended",
+            "step": "draw",
+            "turn_number": 2,
+            "turn_start": {
+              "player_id": "B",
+              "status": "complete",
+              "turn_number": 2
+            },
+            "unknown_fields": [],
+            "winner_ids": [
+              "A"
+            ],
+            "zones": [
+              {
+                "kind": "library",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "A",
+                "visibility": "hidden",
+                "zone_id": "A:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "A",
+                "visibility": "public",
+                "zone_id": "A:command"
+              },
+              {
+                "kind": "library",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:library"
+              },
+              {
+                "kind": "hand",
+                "owner": "B",
+                "visibility": "hidden",
+                "zone_id": "B:hand"
+              },
+              {
+                "kind": "battlefield",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:battlefield"
+              },
+              {
+                "kind": "graveyard",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:graveyard"
+              },
+              {
+                "kind": "exile",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:exile"
+              },
+              {
+                "kind": "command",
+                "owner": "B",
+                "visibility": "public",
+                "zone_id": "B:command"
+              },
+              {
+                "kind": "stack",
+                "owner": null,
+                "visibility": "public",
+                "zone_id": "shared:stack"
+              }
+            ]
+          },
+          "after_state_id": "sha256:0eb921d2b3d3720ed1843fbb75c917f34e5b87ae5e39643ec40bdecbf6c3d89b",
+          "before_state_id": "sha256:89b1d607273eb3ff4a1ec5103a88a9307710d2e906315f982477eae18d1c04b5",
+          "game_id": "fictional-duel",
+          "required_system_actions": [],
+          "resource_changes": [],
+          "rule_references": [
+            {
+              "category": "draw_failure",
+              "description": "At the mandatory checkpoint, recorded failed draw and configured life loss conditions jointly determine simultaneous losers; no priority before terminal result.",
+              "external_reference": null,
+              "rule_id": "fictional.draw-failure.draw_failure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-draw-failure-v1",
+              "status": "supported"
+            },
+            {
+              "category": "state_based_actions",
+              "description": "Authored bounded fictional state based actions primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.state_based_actions.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "turn_structure",
+              "description": "Authored bounded fictional turn structure primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.turn_structure.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "zones",
+              "description": "Authored bounded fictional zones primitive.",
+              "external_reference": null,
+              "rule_id": "fictional.rules.zones.1",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-authored-rules-v1",
+              "status": "supported"
+            },
+            {
+              "category": "upkeep",
+              "description": "Upkeep grants active-player priority; two passes resolve a stack top and remain in upkeep, or advance only with an empty stack after checkpoint; no triggers.",
+              "external_reference": null,
+              "rule_id": "fictional.turn-structure.upkeep.2",
+              "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+              "source_id": "fictional-turn-structure-v2",
+              "status": "supported"
+            }
+          ],
+          "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+          "schema_version": "gameplay-transition-v1",
+          "stack_changes": [],
+          "state_changes": [
+            {
+              "after": [
+                "B"
+              ],
+              "before": [],
+              "path": "loser_ids"
+            },
+            {
+              "after": [],
+              "before": [
+                "perform_state_based_actions"
+              ],
+              "path": "pending_system_actions"
+            },
+            {
+              "after": 11,
+              "before": 10,
+              "path": "revision"
+            },
+            {
+              "after": "ended",
+              "before": "in_progress",
+              "path": "status"
+            },
+            {
+              "after": [
+                "A"
+              ],
+              "before": [],
+              "path": "winner_ids"
+            }
+          ],
+          "transition_id": "sha256:cf69a677c13f9e573800f0ced06bdbfa494a515463852b7d6654ff8fa44a2cce",
+          "zone_changes": []
+        }
+      ]
+    }
+  ],
+  "execution_profile": "fictional-two-player-draw-failure-v1",
+  "game_id": "fictional-duel",
+  "initial_state": {
+    "active_effects": [],
+    "active_player": "A",
+    "consecutive_passes": [],
+    "failed_draw_players": [],
+    "game_id": "fictional-duel",
+    "library_order": {
+      "A:library": [
+        "a-next"
+      ],
+      "B:library": []
+    },
+    "loser_ids": [],
+    "objects": [
+      {
+        "card_id": "pebble-resource",
+        "controller": "A",
+        "knowledge": "known",
+        "object_id": "a-resource",
+        "owner": "A",
+        "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+        "tapped": true,
+        "zone_id": "A:battlefield"
+      },
+      {
+        "card_id": "pebble-resource",
+        "controller": "B",
+        "knowledge": "known",
+        "object_id": "b-resource",
+        "owner": "B",
+        "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+        "tapped": true,
+        "zone_id": "B:battlefield"
+      },
+      {
+        "card_id": "moss-plot",
+        "controller": "A",
+        "knowledge": "known",
+        "object_id": "a-next",
+        "owner": "A",
+        "semantics_id": "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+        "tapped": false,
+        "zone_id": "A:library"
+      }
+    ],
+    "pending_system_actions": [],
+    "phase": "ending",
+    "players": [
+      {
+        "land_plays_available": 1,
+        "land_plays_used": 0,
+        "life": 10,
+        "mana_pool": {},
+        "player_id": "A"
+      },
+      {
+        "land_plays_available": 1,
+        "land_plays_used": 0,
+        "life": 10,
+        "mana_pool": {},
+        "player_id": "B"
+      }
+    ],
+    "priority_player": "A",
+    "revision": 0,
+    "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+    "schema_version": "gameplay-state-v4",
+    "stack": [],
+    "state_id": "sha256:cadfb1e250923a2596a49e31944f223c475c16310416e2a4246595ffbb8473a9",
+    "status": "in_progress",
+    "step": "end",
+    "turn_number": 1,
+    "turn_start": {
+      "player_id": "A",
+      "status": "complete",
+      "turn_number": 1
+    },
+    "unknown_fields": [],
+    "winner_ids": [],
+    "zones": [
+      {
+        "kind": "library",
+        "owner": "A",
+        "visibility": "hidden",
+        "zone_id": "A:library"
+      },
+      {
+        "kind": "hand",
+        "owner": "A",
+        "visibility": "hidden",
+        "zone_id": "A:hand"
+      },
+      {
+        "kind": "battlefield",
+        "owner": "A",
+        "visibility": "public",
+        "zone_id": "A:battlefield"
+      },
+      {
+        "kind": "graveyard",
+        "owner": "A",
+        "visibility": "public",
+        "zone_id": "A:graveyard"
+      },
+      {
+        "kind": "exile",
+        "owner": "A",
+        "visibility": "public",
+        "zone_id": "A:exile"
+      },
+      {
+        "kind": "command",
+        "owner": "A",
+        "visibility": "public",
+        "zone_id": "A:command"
+      },
+      {
+        "kind": "library",
+        "owner": "B",
+        "visibility": "hidden",
+        "zone_id": "B:library"
+      },
+      {
+        "kind": "hand",
+        "owner": "B",
+        "visibility": "hidden",
+        "zone_id": "B:hand"
+      },
+      {
+        "kind": "battlefield",
+        "owner": "B",
+        "visibility": "public",
+        "zone_id": "B:battlefield"
+      },
+      {
+        "kind": "graveyard",
+        "owner": "B",
+        "visibility": "public",
+        "zone_id": "B:graveyard"
+      },
+      {
+        "kind": "exile",
+        "owner": "B",
+        "visibility": "public",
+        "zone_id": "B:exile"
+      },
+      {
+        "kind": "command",
+        "owner": "B",
+        "visibility": "public",
+        "zone_id": "B:command"
+      },
+      {
+        "kind": "stack",
+        "owner": null,
+        "visibility": "public",
+        "zone_id": "shared:stack"
+      }
+    ]
+  },
+  "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+  "schema_version": "gameplay-session-v0",
+  "scope": "PROJECT_AUTHORED_FICTIONAL_ONLY_FULL_INFORMATION_REPLAY",
+  "semantics_ids": [
+    "sha256:102df69d4c7aeffaf754c20e170d368fcf464a566e982c4ce0b22cdb83bff31e",
+    "sha256:4e801d4f561f17849ed88d44a0e34caeb96902444ece44041f57e1c9194a6ad1",
+    "sha256:502a6baec6d5d6d045bad46b2a90d38e72971576eb22845087b0005e144f9207",
+    "sha256:a9b5be3be49ca2aa1e4366f159c850f77edf2546fc9d7b9804dfb19ab82c0529",
+    "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0"
+  ],
+  "session_id": "sha256:c4c7d4e29585ff6e5af5274705832c6c4b28dfa15f1e954d20024527db03b7b6"
+}
