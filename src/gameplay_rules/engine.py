@@ -13,6 +13,7 @@ from .errors import GameplayContractError
 from .models import (
     CardGameplaySemantics, GameAction, GameState, GameTransition,
     GameplayRulesSnapshot, LegalityResult, STATE_SCHEMAS_BY_PROFILE, TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE,
+    STACK_ABILITY_PROFILE, stack_entry_identity,
 )
 
 
@@ -131,8 +132,9 @@ class GameplayRulesEngine:
         if kind not in _RULE_CATEGORIES:
             return ()
         return (_COMMON_RULE_CATEGORIES + _RULE_CATEGORIES[kind]
-                + (("upkeep",) if rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE} else ())
-                + (("draw_failure",) if rules["execution_profile"] == DRAW_FAILURE_PROFILE else ()))
+                + (("upkeep",) if rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE} else ())
+                + (("draw_failure",) if rules["execution_profile"] in {DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE} else ())
+                + (("stack_activation",) if rules["execution_profile"] == STACK_ABILITY_PROFILE else ()))
 
     def _references(self, rules, kind):
         categories = self._categories(rules, kind)
@@ -157,6 +159,35 @@ class GameplayRulesEngine:
         if result["card_id"] != obj["card_id"]:
             raise GameplayContractError("card_semantics_mismatch", "object identity must match its structured semantics")
         return result
+
+    @staticmethod
+    def _stack_ability_supported(ability, rules):
+        effect = ability["effect"]
+        return (rules["execution_profile"] == STACK_ABILITY_PROFILE
+                and ability["uses_stack"] and effect["kind"] == "adjust_life"
+                and effect["target"] == "controller")
+
+    def _ability_entry_coverage(self, entry, objects, zones, rules, unknown, unsupported):
+        """Presence-pinned fictional semantics; no last-known-information fallback."""
+        obj = objects.get(entry["source_object_id"])
+        if (obj is None or zones[obj["zone_id"]]["kind"] != "battlefield"
+                or obj["controller"] != entry["controller"]
+                or obj["semantics_id"] != entry["semantics_id"]):
+            unsupported.append("stack_ability_source_state_not_supported")
+            return
+        definition = self._definition(obj)
+        if obj["knowledge"] != "known" or definition is None:
+            unknown.append("stack_ability_source_unknown")
+            return
+        abilities = [a for a in definition["abilities"] if a["ability_id"] == entry["ability_id"]]
+        if len(abilities) != 1 or not self._stack_ability_supported(abilities[0], rules):
+            unsupported.append("stack_ability_semantics_not_supported")
+            return
+        cost = abilities[0]["mana_cost"]
+        if not cost["known"]:
+            unknown.append("stack_ability_cost_unknown")
+        if cost["kind"] != "mana" or cost["unsupported"] or set(cost["colored"]) - set(rules["parameters"]["mana_symbols"]):
+            unsupported.append("stack_ability_cost_not_supported")
 
     def evaluate_action(self, state, action):
         """Check a request without mutating or applying it."""
@@ -183,7 +214,7 @@ class GameplayRulesEngine:
                 "explanation": {"action_kind": kind, "status": status, "reason_codes": sorted(set(failed + unknown + unsupported))},
             })
 
-        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS or (kind in _TURN_ACTIONS and rules["execution_profile"] not in {_LIFECYCLE_PROFILE, TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}):
+        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS or (kind in _TURN_ACTIONS and rules["execution_profile"] not in {_LIFECYCLE_PROFILE, TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}):
             unsupported.append("action_kind:" + kind)
             return result()
         if before["status"] != "in_progress":
@@ -213,6 +244,10 @@ class GameplayRulesEngine:
 
         objects = {obj["object_id"]: obj for obj in before["objects"]}
         zones = {zone["zone_id"]: zone for zone in before["zones"]}
+        if rules["execution_profile"] == STACK_ABILITY_PROFILE:
+            for entry in before["stack_entries"]:
+                if entry["kind"] == "activated_ability":
+                    self._ability_entry_coverage(entry, objects, zones, rules, unknown, unsupported)
         # This is the future override seam: unmodeled active objects/effects
         # refuse a base-rule ruling rather than being silently ignored.
         for obj in before["objects"]:
@@ -254,7 +289,7 @@ class GameplayRulesEngine:
                         unknown.append("untap_state_unknown:" + obj["object_id"])
             else:
                 library = self._zone(before, "library", before["active_player"])
-                if not before["library_order"][library] and rules["execution_profile"] != DRAW_FAILURE_PROFILE:
+                if not before["library_order"][library] and rules["execution_profile"] not in {DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}:
                     unsupported.append("empty_library_draw_rule_not_implemented")
             return result()
         if kind in {"pass_priority", "perform_state_based_actions", "advance_step_or_phase"}:
@@ -272,7 +307,15 @@ class GameplayRulesEngine:
             if not before["stack"]:
                 failed.append("stack_empty")
                 return result()
-            obj = objects[before["stack"][-1]]
+            if rules["execution_profile"] == STACK_ABILITY_PROFILE:
+                entry = before["stack_entries"][-1]
+                if entry["kind"] == "activated_ability":
+                    # Source/effect/cost support was checked above for every pending
+                    # ability. Resolution does not pay its activation costs again.
+                    return result()
+                obj = objects[entry["source_object_id"]]
+            else:
+                obj = objects[before["stack"][-1]]
         else:
             obj = objects.get(request["object_id"])
             if obj is None:
@@ -333,7 +376,7 @@ class GameplayRulesEngine:
                 failed.append("ability_not_defined")
             else:
                 ability = abilities[0]
-                if ability["uses_stack"]:
+                if ability["uses_stack"] and not self._stack_ability_supported(ability, rules):
                     unsupported.append("stack_using_activated_ability")
                 if ability["tap_cost"]:
                     if obj["tapped"] is None:
@@ -341,7 +384,10 @@ class GameplayRulesEngine:
                     elif obj["tapped"]:
                         failed.append("tap_cost_object_already_tapped")
                 effect = ability["effect"]
-                if effect["kind"] != "add_mana":
+                if ability["uses_stack"]:
+                    if not self._stack_ability_supported(ability, rules):
+                        unsupported.append("unsupported_stack_ability_effect_or_timing")
+                elif effect["kind"] != "add_mana":
                     unsupported.append("ability_effect:" + effect["kind"])
                 elif set(effect["amount"]) - set(rules["parameters"]["mana_symbols"]):
                     unsupported.append("unsupported_generated_mana_symbol")
@@ -389,7 +435,8 @@ class GameplayRulesEngine:
             if effect["kind"] not in {"adjust_life", "no_op"}:
                 unsupported.append("card_effect:" + effect["kind"])
         for ability in definition["abilities"]:
-            if ability["uses_stack"] or ability["effect"]["kind"] != "add_mana":
+            if ((ability["uses_stack"] and not GameplayRulesEngine._stack_ability_supported(ability, rules))
+                    or (not ability["uses_stack"] and ability["effect"]["kind"] != "add_mana")):
                 unsupported.append("unmodeled_ability:" + ability["ability_id"])
 
     def apply_action(self, state, action):
@@ -413,6 +460,14 @@ class GameplayRulesEngine:
             zone_changes.append({"object_id": obj["object_id"], "from_zone": obj["zone_id"], "to_zone": destination})
             obj["zone_id"] = destination
 
+        def push_entry(entry_kind, obj, ability_id=None):
+            entry = dict(kind=entry_kind, source_object_id=obj["object_id"],
+                         semantics_id=obj["semantics_id"], controller=actor,
+                         ability_id=ability_id, origin_action_id=action.identity)
+            entry["entry_id"] = stack_entry_identity(entry)
+            after["stack_entries"].append(entry)
+            after["stack"].append(entry["entry_id"])
+
         if kind in _PLAYER_ACTIONS - {"pass_priority"}:
             after["consecutive_passes"] = []
         if checked["payment"] is not None:
@@ -432,15 +487,21 @@ class GameplayRulesEngine:
         elif kind == "cast_spell":
             obj = objects[request["object_id"]]
             move(obj, self._zone(after, "stack"))
-            after["stack"].append(obj["object_id"])
+            if rules["execution_profile"] == STACK_ABILITY_PROFILE:
+                push_entry("spell", obj)
+            else:
+                after["stack"].append(obj["object_id"])
         elif kind == "activate_ability":
             obj = objects[request["object_id"]]
             definition = self._definition(obj)
             ability = next(value for value in definition["abilities"] if value["ability_id"] == request["ability_id"])
             if ability["tap_cost"]:
                 obj["tapped"] = True
-            for symbol, amount in ability["effect"]["amount"].items():
-                players[actor]["mana_pool"][symbol] = players[actor]["mana_pool"].get(symbol, 0) + amount
+            if ability["uses_stack"]:
+                push_entry("activated_ability", obj, ability["ability_id"])
+            else:
+                for symbol, amount in ability["effect"]["amount"].items():
+                    players[actor]["mana_pool"][symbol] = players[actor]["mana_pool"].get(symbol, 0) + amount
         else:
             after["pending_system_actions"].pop(0)
             if kind == "untap_active_player":
@@ -448,14 +509,14 @@ class GameplayRulesEngine:
                 for obj in after["objects"]:
                     if zones[obj["zone_id"]]["kind"] == "battlefield" and obj["controller"] == after["active_player"]:
                         obj["tapped"] = False
-                if rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}:
+                if rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}:
                     after["phase"], after["step"] = "beginning", "upkeep"
                     after["turn_start"]["status"] = "upkeep"
                 else:
                     after["turn_start"]["status"] = "pending_draw"
             elif kind == "draw_for_turn":
                 library = self._zone(after, "library", after["active_player"])
-                if rules["execution_profile"] == DRAW_FAILURE_PROFILE and not after["library_order"][library]:
+                if rules["execution_profile"] in {DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE} and not after["library_order"][library]:
                     after["failed_draw_players"] = [after["active_player"]]
                 else:
                     obj = objects[after["library_order"][library].pop(0)]
@@ -463,14 +524,21 @@ class GameplayRulesEngine:
                     obj["controller"] = after["active_player"]
                 after["turn_start"]["status"] = "complete"
             elif kind == "resolve_top_of_stack":
-                obj = objects[after["stack"].pop()]
+                identifier = after["stack"].pop()
+                entry = after["stack_entries"].pop() if rules["execution_profile"] == STACK_ABILITY_PROFILE else None
+                obj = objects[entry["source_object_id"] if entry else identifier]
                 definition = self._definition(obj)
-                for effect in definition["effects"]:
+                controller = entry["controller"] if entry else obj["controller"]
+                is_ability = entry is not None and entry["kind"] == "activated_ability"
+                effects = ([next(a["effect"] for a in definition["abilities"] if a["ability_id"] == entry["ability_id"])]
+                           if is_ability else definition["effects"])
+                for effect in effects:
                     if effect["kind"] == "adjust_life":
-                        target = obj["controller"] if effect["target"] == "controller" else next(player for player in players if player != obj["controller"])
+                        target = controller if effect["target"] == "controller" else next(player for player in players if player != controller)
                         players[target]["life"] += effect["amount"]
-                owner = obj["owner"] if definition["post_resolution_zone"] == "graveyard" else obj["controller"]
-                move(obj, self._zone(after, definition["post_resolution_zone"], owner))
+                if not is_ability:
+                    owner = obj["owner"] if definition["post_resolution_zone"] == "graveyard" else obj["controller"]
+                    move(obj, self._zone(after, definition["post_resolution_zone"], owner))
                 after["pending_system_actions"] = ["perform_state_based_actions"]
             elif kind == "perform_state_based_actions":
                 losers = [player for player in players if players[player]["life"] <= rules["parameters"]["life_loss_threshold"]
@@ -491,7 +559,7 @@ class GameplayRulesEngine:
                 if new_index == 0:
                     after["turn_number"] += 1
                     after["active_player"] = next(player for player in players if player != after["active_player"])
-                    if rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}:
+                    if rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}:
                         after["turn_start"] = {"turn_number": after["turn_number"], "player_id": after["active_player"], "status": "pending_untap"}
                         after["pending_system_actions"] = ["untap_active_player"]
                     elif rules["execution_profile"] == _LIFECYCLE_PROFILE:
@@ -500,7 +568,7 @@ class GameplayRulesEngine:
                     for player in players.values():
                         player["land_plays_used"] = 0
                         player["land_plays_available"] = rules["parameters"]["land_plays_per_turn"]
-                elif rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE} and after["phase"] == "beginning" and after["step"] == "draw":
+                elif rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE} and after["phase"] == "beginning" and after["step"] == "draw":
                     after["turn_start"]["status"] = "pending_draw"
                     after["pending_system_actions"] = ["draw_for_turn", "perform_state_based_actions"]
             if after["status"] == "in_progress" and not after["pending_system_actions"]:

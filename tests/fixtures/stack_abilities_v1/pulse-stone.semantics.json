@@ -1,0 +1,52 @@
+{
+  "abilities": [
+    {
+      "ability_id": "pulse",
+      "effect": {
+        "amount": 2,
+        "kind": "adjust_life",
+        "target": "controller"
+      },
+      "mana_cost": {
+        "colored": {
+          "red": 1
+        },
+        "generic": 0,
+        "kind": "mana",
+        "known": true,
+        "unsupported": []
+      },
+      "tap_cost": true,
+      "uses_stack": true
+    }
+  ],
+  "card_id": "pulse-stone",
+  "completeness": "complete",
+  "effects": [
+    {
+      "kind": "no_op"
+    }
+  ],
+  "game_id": "fictional-duel",
+  "mana_cost": {
+    "colored": {},
+    "generic": 0,
+    "kind": "mana",
+    "known": true,
+    "unsupported": []
+  },
+  "object_kind": "resource",
+  "post_resolution_zone": "battlefield",
+  "required_capabilities": [],
+  "restrictions": [],
+  "review_status": "fictional_test_only",
+  "rules_snapshot_id": "sha256:a5738a4fe1d8d5daa8035a2060b02b6b1bf72ba83ec651fccae3d574c81e003f",
+  "schema_version": "gameplay-card-semantics-v1",
+  "semantics_id": "sha256:8fc365b721ff9400cfe8558b2c9f16cd4f9362931242a3f2c5580527afcb7645",
+  "semantics_version": "fictional-card-semantics-v1",
+  "source_references": [
+    "fictional-stack-abilities-v1"
+  ],
+  "timing": "none",
+  "unsupported_text": []
+}
