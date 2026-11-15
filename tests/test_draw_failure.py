@@ -12,7 +12,7 @@ from gameplay_rules.engine import GameplayRulesEngine
 from gameplay_rules.errors import GameplayContractError
 from gameplay_rules.models import (GameState, GameTransition, GameplayRulesSnapshot,
     CardGameplaySemantics, DRAW_FAILURE_PROFILE, rule_identity)
-from gameplay_rules.session import GameplaySession, load_gameplay_session, replay_session
+from gameplay_rules.session import GameplaySession, load_gameplay_session, replay_session, render_session_view
 from gameplay_rules.session_cli import main
 from gameplay_rules.snapshots import load_rules_snapshot, load_card_semantics, load_game_state
 from test_turn_structure import action, changed, enter_b, pass_window
@@ -207,6 +207,7 @@ class DrawFailureTests(unittest.TestCase):
         history = json.loads((FIX / 'history.json').read_text())
         self.assertEqual(s.report(), history)
         self.assertEqual(s.view(), json.loads((FIX / 'final-view.json').read_text()))
+        self.assertEqual(render_session_view(s.view()), (FIX / 'final-view.txt').read_text())
         self.assertEqual(sum(len(e['transitions']) for e in history['entries']), 11)
         rules, sem, _ = contracts()
         self.assertEqual(replay_session(rules, sem, history).report(), history)

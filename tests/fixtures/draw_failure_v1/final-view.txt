@@ -16,4 +16,3 @@ B:command (0):
 shared:stack (0):
 State: sha256:0eb921d2b3d3720ed1843fbb75c917f34e5b87ae5e39643ec40bdecbf6c3d89b
 Project-authored fictional rules only; not real Magic gameplay.
-
