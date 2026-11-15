@@ -1,0 +1,34 @@
+{
+  "abilities": [],
+  "card_id": "swift-lantern",
+  "completeness": "complete",
+  "effects": [
+    {
+      "kind": "no_op"
+    }
+  ],
+  "game_id": "fictional-duel",
+  "mana_cost": {
+    "colored": {
+      "blue": 1
+    },
+    "generic": 0,
+    "kind": "mana",
+    "known": true,
+    "unsupported": []
+  },
+  "object_kind": "spell",
+  "post_resolution_zone": "graveyard",
+  "required_capabilities": [],
+  "restrictions": [],
+  "review_status": "fictional_test_only",
+  "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+  "schema_version": "gameplay-card-semantics-v1",
+  "semantics_id": "sha256:502a6baec6d5d6d045bad46b2a90d38e72971576eb22845087b0005e144f9207",
+  "semantics_version": "fictional-card-semantics-v1",
+  "source_references": [
+    "fictional-authored-rules-v1"
+  ],
+  "timing": "instant",
+  "unsupported_text": []
+}

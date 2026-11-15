@@ -1,0 +1,51 @@
+{
+  "abilities": [
+    {
+      "ability_id": "make-red",
+      "effect": {
+        "amount": {
+          "red": 2
+        },
+        "kind": "add_mana"
+      },
+      "mana_cost": {
+        "colored": {},
+        "generic": 0,
+        "kind": "mana",
+        "known": true,
+        "unsupported": []
+      },
+      "tap_cost": true,
+      "uses_stack": false
+    }
+  ],
+  "card_id": "pebble-resource",
+  "completeness": "complete",
+  "effects": [
+    {
+      "kind": "no_op"
+    }
+  ],
+  "game_id": "fictional-duel",
+  "mana_cost": {
+    "colored": {},
+    "generic": 0,
+    "kind": "mana",
+    "known": true,
+    "unsupported": []
+  },
+  "object_kind": "resource",
+  "post_resolution_zone": "battlefield",
+  "required_capabilities": [],
+  "restrictions": [],
+  "review_status": "fictional_test_only",
+  "rules_snapshot_id": "sha256:b7a354e3115f4c7a1545a84a812238e89f617a4af660506db1f81ec7cf42dd1f",
+  "schema_version": "gameplay-card-semantics-v1",
+  "semantics_id": "sha256:f4ac7e90f0f64f98d76ba2c8a0f598e1c4aff42c25c76545b0da3f9e64674fb0",
+  "semantics_version": "fictional-card-semantics-v1",
+  "source_references": [
+    "fictional-authored-rules-v1"
+  ],
+  "timing": "none",
+  "unsupported_text": []
+}

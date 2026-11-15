@@ -1,6 +1,6 @@
 """Small deterministic interpreter for explicitly selected fictional gameplay.
 
-Only the explicitly selected fictional V0 and turn-lifecycle profiles execute.
+Only explicitly selected, versioned project-authored fictional profiles execute.
 The rules snapshot supplies versioned evidence and coverage; this engine supplies the reviewed primitive
 meaning.  Neither source prose nor card text is executable input.
 """
@@ -12,7 +12,7 @@ from .costs import plan_mana_payment
 from .errors import GameplayContractError
 from .models import (
     CardGameplaySemantics, GameAction, GameState, GameTransition,
-    GameplayRulesSnapshot, LegalityResult, STATE_SCHEMAS_BY_PROFILE, TURN_STRUCTURE_PROFILE,
+    GameplayRulesSnapshot, LegalityResult, STATE_SCHEMAS_BY_PROFILE, TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE,
 )
 
 
@@ -130,7 +130,9 @@ class GameplayRulesEngine:
     def _categories(rules, kind):
         if kind not in _RULE_CATEGORIES:
             return ()
-        return _COMMON_RULE_CATEGORIES + _RULE_CATEGORIES[kind] + (("upkeep",) if rules["execution_profile"] == TURN_STRUCTURE_PROFILE else ())
+        return (_COMMON_RULE_CATEGORIES + _RULE_CATEGORIES[kind]
+                + (("upkeep",) if rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE} else ())
+                + (("draw_failure",) if rules["execution_profile"] == DRAW_FAILURE_PROFILE else ()))
 
     def _references(self, rules, kind):
         categories = self._categories(rules, kind)
@@ -181,7 +183,7 @@ class GameplayRulesEngine:
                 "explanation": {"action_kind": kind, "status": status, "reason_codes": sorted(set(failed + unknown + unsupported))},
             })
 
-        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS or (kind in _TURN_ACTIONS and rules["execution_profile"] not in {_LIFECYCLE_PROFILE, TURN_STRUCTURE_PROFILE}):
+        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS or (kind in _TURN_ACTIONS and rules["execution_profile"] not in {_LIFECYCLE_PROFILE, TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}):
             unsupported.append("action_kind:" + kind)
             return result()
         if before["status"] != "in_progress":
@@ -252,7 +254,7 @@ class GameplayRulesEngine:
                         unknown.append("untap_state_unknown:" + obj["object_id"])
             else:
                 library = self._zone(before, "library", before["active_player"])
-                if not before["library_order"][library]:
+                if not before["library_order"][library] and rules["execution_profile"] != DRAW_FAILURE_PROFILE:
                     unsupported.append("empty_library_draw_rule_not_implemented")
             return result()
         if kind in {"pass_priority", "perform_state_based_actions", "advance_step_or_phase"}:
@@ -446,16 +448,19 @@ class GameplayRulesEngine:
                 for obj in after["objects"]:
                     if zones[obj["zone_id"]]["kind"] == "battlefield" and obj["controller"] == after["active_player"]:
                         obj["tapped"] = False
-                if rules["execution_profile"] == TURN_STRUCTURE_PROFILE:
+                if rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}:
                     after["phase"], after["step"] = "beginning", "upkeep"
                     after["turn_start"]["status"] = "upkeep"
                 else:
                     after["turn_start"]["status"] = "pending_draw"
             elif kind == "draw_for_turn":
                 library = self._zone(after, "library", after["active_player"])
-                obj = objects[after["library_order"][library].pop(0)]
-                move(obj, self._zone(after, "hand", after["active_player"]))
-                obj["controller"] = after["active_player"]
+                if rules["execution_profile"] == DRAW_FAILURE_PROFILE and not after["library_order"][library]:
+                    after["failed_draw_players"] = [after["active_player"]]
+                else:
+                    obj = objects[after["library_order"][library].pop(0)]
+                    move(obj, self._zone(after, "hand", after["active_player"]))
+                    obj["controller"] = after["active_player"]
                 after["turn_start"]["status"] = "complete"
             elif kind == "resolve_top_of_stack":
                 obj = objects[after["stack"].pop()]
@@ -468,7 +473,8 @@ class GameplayRulesEngine:
                 move(obj, self._zone(after, definition["post_resolution_zone"], owner))
                 after["pending_system_actions"] = ["perform_state_based_actions"]
             elif kind == "perform_state_based_actions":
-                losers = [player for player in players if players[player]["life"] <= rules["parameters"]["life_loss_threshold"]]
+                losers = [player for player in players if players[player]["life"] <= rules["parameters"]["life_loss_threshold"]
+                          or player in after.get("failed_draw_players", [])]
                 if losers:
                     after["status"] = "ended"
                     after["loser_ids"] = sorted(losers)
@@ -485,7 +491,7 @@ class GameplayRulesEngine:
                 if new_index == 0:
                     after["turn_number"] += 1
                     after["active_player"] = next(player for player in players if player != after["active_player"])
-                    if rules["execution_profile"] == TURN_STRUCTURE_PROFILE:
+                    if rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}:
                         after["turn_start"] = {"turn_number": after["turn_number"], "player_id": after["active_player"], "status": "pending_untap"}
                         after["pending_system_actions"] = ["untap_active_player"]
                     elif rules["execution_profile"] == _LIFECYCLE_PROFILE:
@@ -494,7 +500,7 @@ class GameplayRulesEngine:
                     for player in players.values():
                         player["land_plays_used"] = 0
                         player["land_plays_available"] = rules["parameters"]["land_plays_per_turn"]
-                elif rules["execution_profile"] == TURN_STRUCTURE_PROFILE and after["phase"] == "beginning" and after["step"] == "draw":
+                elif rules["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE} and after["phase"] == "beginning" and after["step"] == "draw":
                     after["turn_start"]["status"] = "pending_draw"
                     after["pending_system_actions"] = ["draw_for_turn", "perform_state_based_actions"]
             if after["status"] == "in_progress" and not after["pending_system_actions"]:

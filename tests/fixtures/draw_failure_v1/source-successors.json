@@ -1,0 +1,251 @@
+{
+  "base": "63824571ee43673d77aff3822335779fa8b8b7ef",
+  "replacements": {
+    "src/gameplay_rules/engine.py": {
+      "edits": [
+        {
+          "end": 85,
+          "new": "",
+          "old": "the ",
+          "start": 85
+        },
+        {
+          "end": 132,
+          "new": ", versioned project-authored",
+          "old": "",
+          "start": 104
+        },
+        {
+          "end": 142,
+          "new": "",
+          "old": " V0 and turn-lifecycle",
+          "start": 142
+        },
+        {
+          "end": 679,
+          "new": "URE_PROFILE, DRAW_FAIL",
+          "old": "",
+          "start": 657
+        },
+        {
+          "end": 8140,
+          "new": "(",
+          "old": "",
+          "start": 8139
+        },
+        {
+          "end": 8204,
+          "new": "\n               ",
+          "old": "",
+          "start": 8188
+        },
+        {
+          "end": 8252,
+          "new": "in",
+          "old": "==",
+          "start": 8250
+        },
+        {
+          "end": 8254,
+          "new": "{",
+          "old": "",
+          "start": 8253
+        },
+        {
+          "end": 8299,
+          "new": ", DRAW_FAILURE_PROFILE}",
+          "old": "",
+          "start": 8276
+        },
+        {
+          "end": 8407,
+          "new": "))\n                + ((\"draw_failure\",) if rules[\"execution_profile\"] == DRAW_FAILURE_PROFILE else ()",
+          "old": "",
+          "start": 8306
+        },
+        {
+          "end": 11180,
+          "new": "URE_PROFILE, DRAW_FAIL",
+          "old": "",
+          "start": 11158
+        },
+        {
+          "end": 15528,
+          "new": " and rules[\"execution_profile\"] != DRAW_FAILURE_PROFILE",
+          "old": "",
+          "start": 15473
+        },
+        {
+          "end": 27338,
+          "new": "in",
+          "old": "==",
+          "start": 27336
+        },
+        {
+          "end": 27340,
+          "new": "{",
+          "old": "",
+          "start": 27339
+        },
+        {
+          "end": 27385,
+          "new": ", DRAW_FAILURE_PROFILE}",
+          "old": "",
+          "start": 27362
+        },
+        {
+          "end": 27961,
+          "new": "if rules[\"execution_profile\"] == DRAW_FAILURE_PROFILE and not after[\"library_order\"][library]:\n                    after[\"failed_draw_players\"] = [after[\"active_player\"]]\n                else:\n                    ",
+          "old": "",
+          "start": 27748
+        },
+        {
+          "end": 28019,
+          "new": "    ",
+          "old": "",
+          "start": 28015
+        },
+        {
+          "end": 28100,
+          "new": "    ",
+          "old": "",
+          "start": 28096
+        },
+        {
+          "end": 29247,
+          "new": "\n                          or player in after.get(\"failed_draw_players\", [])",
+          "old": "",
+          "start": 29171
+        },
+        {
+          "end": 30268,
+          "new": "in",
+          "old": "==",
+          "start": 30266
+        },
+        {
+          "end": 30270,
+          "new": "{",
+          "old": "",
+          "start": 30269
+        },
+        {
+          "end": 30315,
+          "new": ", DRAW_FAILURE_PROFILE}",
+          "old": "",
+          "start": 30292
+        },
+        {
+          "end": 31156,
+          "new": "in",
+          "old": "==",
+          "start": 31154
+        },
+        {
+          "end": 31158,
+          "new": "{",
+          "old": "",
+          "start": 31157
+        },
+        {
+          "end": 31203,
+          "new": ", DRAW_FAILURE_PROFILE}",
+          "old": "",
+          "start": 31180
+        }
+      ],
+      "new_sha256": "2382d7451bf5dc8e8beb7beb64dcab02cac3e767166e8ba7f2ce8221f8dc280f",
+      "old_sha256": "912ed17edda48ed0990cb1df5ab9b307d4cff38f2bcdcc63e0f78c2e76d38bb5"
+    },
+    "src/gameplay_rules/models.py": {
+      "edits": [
+        {
+          "end": 1007,
+          "new": "DRAW_FAILURE_PROFILE = \"fictional-two-player-draw-failure-v1\"\n",
+          "old": "",
+          "start": 945
+        },
+        {
+          "end": 1257,
+          "new": "\",\n    DRAW_FAILURE_PROFILE: \"gameplay-state-v4",
+          "old": "",
+          "start": 1210
+        },
+        {
+          "end": 6993,
+          "new": "draw_failure = body[\"execution_profile\"] == DRAW_FAILURE_PROFILE\n    ",
+          "old": "",
+          "start": 6924
+        },
+        {
+          "end": 7033,
+          "new": "in",
+          "old": "==",
+          "start": 7031
+        },
+        {
+          "end": 7035,
+          "new": "{",
+          "old": "",
+          "start": 7034
+        },
+        {
+          "end": 7080,
+          "new": ", DRAW_FAILURE_PROFILE}",
+          "old": "",
+          "start": 7057
+        },
+        {
+          "end": 9666,
+          "new": "draw_failure and \"draw_failure\" not in categories: _fail(\"rules\", \"draw failure requires explicit fictional evidence\")\n    if ",
+          "old": "",
+          "start": 9540
+        },
+        {
+          "end": 11120,
+          "new": "\n        if draw_failure:\n            policy[\"empty_library\"] = \"record_attempt_then_state_based_loss\"",
+          "old": "",
+          "start": 11018
+        },
+        {
+          "end": 26001,
+          "new": "draw_failure_state(body):\n    _keys(body, {\"game_id\", \"rules_snapshot_id\", \"revision\", \"players\", \"active_player\", \"turn_number\", \"phase\", \"step\", \"priority_player\", \"zones\", \"objects\", \"stack\", \"consecutive_passes\", \"status\", \"winner_ids\", \"loser_ids\", \"pending_system_actions\", \"unknown_fields\", \"active_effects\", \"library_order\", \"turn_start\", \"failed_draw_players\"}, \"draw_failure_state\")\n    _windowed_state({k: v for k, v in body.items() if k != \"failed_draw_players\"})\n    failed = body[\"failed_draw_players\"]\n    _strings(failed, \"failed_draw_players\")\n    # Only the active player's single automatic draw can fail in this profile.\n    if failed:\n        if failed != [body[\"active_player\"]] or (body[\"phase\"], body[\"step\"]) != (\"beginning\", \"draw\") or body[\"turn_start\"][\"status\"] != \"complete\" or body[\"stack\"] or body[\"consecutive_passes\"]:\n            _fail(\"failed_draw_players\", \"only this turn's completed automatic draw may fail\")\n        library = next(z[\"zone_id\"] for z in body[\"zones\"] if z[\"kind\"] == \"library\" and z[\"owner\"] == body[\"active_player\"])\n        if body[\"library_order\"][library]:\n            _fail(\"failed_draw_players\", \"failed draw requires an empty ordered library\")\n        if body[\"status\"] == \"in_progress\":\n            if body[\"pending_system_actions\"] != [\"perform_state_based_actions\"] or body[\"priority_player\"] is not None:\n                _fail(\"failed_draw_players\", \"pending loss requires its immediate mandatory checkpoint\")\n        elif not set(failed) <= set(body[\"loser_ids\"]):\n            _fail(\"failed_draw_players\", \"terminal outcome must retain the failed-draw loser\")\n\n\ndef _",
+          "old": "",
+          "start": 24367
+        },
+        {
+          "end": 35686,
+          "new": "4\":\n            return DrawFailureGameState.create(body)\n        if cls is GameState and isinstance(body, Mapping) and body.get(\"schema_version\") == \"gameplay-state-v",
+          "old": "",
+          "start": 35520
+        },
+        {
+          "end": 36158,
+          "new": "\n        if cls is GameState and isinstance(value, Mapping) and value.get(\"schema_version\") == \"gameplay-state-v4\":\n            return DrawFailureGameState.from_dict(value)",
+          "old": "",
+          "start": 35986
+        },
+        {
+          "end": 37351,
+          "new": "DrawFailureGameState(WindowedGameState):\n    \"\"\"V4: one explicit failed automatic draw, consumed by the native checkpoint.\"\"\"\n    SCHEMA = \"gameplay-state-v4\"\n    VALIDATOR = staticmethod(_draw_failure_state)\n\n\n@dataclass(frozen=True)\nclass ",
+          "old": "",
+          "start": 37110
+        }
+      ],
+      "new_sha256": "5a09bd38804f36974ed076f07106da7e0841626b82f8b7315cd26f8620b2d911",
+      "old_sha256": "95dd993c61a2cbfa5ab606dda96fdab8b1f49c3b87a36b0d21d0c621b48a0da9"
+    },
+    "tests/canonical_import_recovery_preservation.py": {
+      "edits": [
+        {
+          "end": 1007,
+          "new": "from draw_failure_preservation import preceding_bytes as draw_preceding\n    raw = draw_preceding(name, raw)\n    ",
+          "old": "",
+          "start": 895
+        }
+      ],
+      "new_sha256": "8730a9bd6d86845313cc2cebb8bebd1672ecaaf4e5547f600560e7eaeba935f8",
+      "old_sha256": "b9c479f3bcbec0277c0d7240b2d958ad08eebddd61352225d77846316a2a4e9a"
+    }
+  }
+}

@@ -20,6 +20,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from draw_failure_preservation import preceding_bytes as draw_preceding
+    raw = draw_preceding(name, raw)
     if type(raw) is not bytes:
         raise AssertionError('exact source bytes required')
     if name not in PATHS:

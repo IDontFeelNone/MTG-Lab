@@ -1,0 +1,9 @@
+Project-authored fictional draw-failure policy V1. Not Magic CR or Oracle evidence.
+Reuse fictional turn windows V2 and its bounded card/payment procedures.
+A native automatic turn draw removes the explicit index-zero library object if present.
+Drawing the last card succeeds. An empty library alone never causes a loss.
+An attempted automatic draw on an empty library creates no object and records the active player in failed_draw_players.
+Complete draw progress exactly once. Queue the existing state-based checkpoint; grant no priority before it.
+At the checkpoint, all players with life at/below the configured threshold or a recorded failed draw lose simultaneously.
+The other players win; if all lose there are no winners. End the game, retain the failure record, clear pending procedures and grant no priority.
+Unknown life, unsupported effects and restrictions still fail closed. No general draw effect or replacement semantics exist.
