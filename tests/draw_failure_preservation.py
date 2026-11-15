@@ -20,6 +20,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from stack_ability_preservation import preceding_bytes as stack_preceding
+    raw = stack_preceding(name, raw)
     if type(raw) is not bytes:
         raise AssertionError('exact source bytes required')
     if name not in PATHS:

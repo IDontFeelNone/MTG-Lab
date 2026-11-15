@@ -1,0 +1,10 @@
+Project-authored fictional stack-using activated abilities V1. No real Magic or Oracle authority.
+Reuse fictional draw-failure V1 turn windows, mana payment, priority passes, life/draw-loss checkpoints and ordered libraries.
+The explicit stack_activation policy permits a selected uses_stack=true ability with the existing adjust_life/controller effect only.
+Its timing is priority: the activator must have priority and control the known battlefield source. Unsupported restrictions or costs block.
+Pay the declared supported mana cost and optional tap cost once. Create one typed activated_ability entry distinct from the source Card object. Do not apply the life effect at activation.
+Entries have deterministic domain-separated identities bound to originating action, kind, source object, exact semantics, controller and ability ID. Spell entries reference their real spell Card on the stack; ability entries never fabricate a Card.
+The activating player retains priority. Both players may respond using existing supported actions. Both must pass before exactly the top entry resolves, followed by the existing checkpoint and active-player priority.
+Resolution adjusts the captured controller's life by the exact declared integer once and removes only that entry. The source remains in its battlefield zone with cost changes preserved.
+This deliberately presence-pinned fictional rule requires the same known, identically controlled source and semantics on the battlefield until resolution. Source departure, controller/semantic changes or unknown interactions are unsupported; no last-known-information rule is invented.
+No targets, triggers, countering, new effects, replacement/prevention, continuous effects, combat, real-Card admission or extra timing permissions are supported.

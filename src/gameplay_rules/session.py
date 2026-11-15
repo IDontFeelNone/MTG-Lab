@@ -176,12 +176,20 @@ class GameplaySession:
         for zone in state['zones']:
             objects = [o for o in state['objects'] if o['zone_id'] == zone['zone_id']]
             zones.append(dict(zone, count=len(objects), **({'objects': objects} if zone['visibility'] == 'public' else {})))
-        return dict(schema_version=VERSION, scope='PROJECT_AUTHORED_FICTIONAL_ONLY_PUBLIC_VIEW',
+        view = dict(schema_version=VERSION, scope='PROJECT_AUTHORED_FICTIONAL_ONLY_PUBLIC_VIEW',
                     state_id=state['state_id'], rules_snapshot_id=state['rules_snapshot_id'],
                     turn_number=state['turn_number'], active_player=state['active_player'],
                     phase=state['phase'], step=state['step'], priority_player=state['priority_player'],
                     status=state['status'], players=state['players'], zones=zones,
                     stack_count=len(state['stack']), winner_ids=state['winner_ids'], loser_ids=state['loser_ids'])
+        if state['schema_version'] == 'gameplay-state-v5':
+            public = {o['object_id'] for z in state['zones'] if z['visibility'] == 'public'
+                      for o in state['objects'] if o['zone_id'] == z['zone_id']}
+            view['stack_entries'] = [dict(entry_id=e['entry_id'], kind=e['kind'], controller=e['controller'],
+                source_object_id=e['source_object_id'] if e['source_object_id'] in public else None,
+                ability_id=e['ability_id'] if e['source_object_id'] in public else None)
+                for e in state['stack_entries']]
+        return view
 
 
 def load_gameplay_session(*, rules_path, semantics_paths, state_path):
@@ -227,6 +235,11 @@ def render_session_view(view):
              f"{view['phase']}/{view['step']}; priority {view['priority_player']}; {view['status']}"]
     for player in view['players']:
         lines.append(f"{player['player_id']}: life {player['life']}; mana " + json.dumps(player['mana_pool'], sort_keys=True))
+    if 'stack_entries' in view:
+        lines.append(f"Stack entries ({view['stack_count']}), bottom to top:")
+        for entry in view['stack_entries']:
+            lines.append(f"  {entry['kind']} {entry['entry_id']}; controller {entry['controller']}; "
+                         f"source {entry['source_object_id'] or 'unavailable'}; ability {entry['ability_id'] or '-'}")
     for zone in view['zones']:
         contents = ', '.join(o['object_id'] for o in zone.get('objects', [])) if zone['visibility'] == 'public' else 'hidden'
         lines.append(f"{zone['zone_id']} ({zone['count']}): {contents}".rstrip())

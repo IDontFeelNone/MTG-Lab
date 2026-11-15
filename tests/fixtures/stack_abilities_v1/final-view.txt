@@ -1,0 +1,19 @@
+Fictional turn 1: active A; main/action; priority A; in_progress
+A: life 12; mana {"blue": 1, "red": 1}
+B: life 12; mana {"blue": 0, "red": 1}
+Stack entries (0), bottom to top:
+A:library (1): hidden
+A:hand (0): hidden
+A:battlefield (2): a-resource, a-pulse
+A:graveyard (0):
+A:exile (0):
+A:command (0):
+B:library (0): hidden
+B:hand (0): hidden
+B:battlefield (2): b-resource, b-pulse
+B:graveyard (1): response
+B:exile (0):
+B:command (0):
+shared:stack (0):
+State: sha256:da232d138885f4e06e781c87fdf03a6fac0cbd0c7004a7b70bc93647deebd004
+Project-authored fictional rules only; not real Magic gameplay.

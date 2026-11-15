@@ -24,12 +24,19 @@ _HASH = re.compile(r"sha256:[0-9a-f]{64}\Z")
 _STATUSES = {"LEGAL", "ILLEGAL", "INDETERMINATE", "UNSUPPORTED"}
 TURN_STRUCTURE_PROFILE = "fictional-two-player-turn-structure-v2"
 DRAW_FAILURE_PROFILE = "fictional-two-player-draw-failure-v1"
+STACK_ABILITY_PROFILE = "fictional-two-player-stack-abilities-v1"
 STATE_SCHEMAS_BY_PROFILE = MappingProxyType({
     EXECUTION_PROFILE: "gameplay-state-v1",
     "fictional-two-player-turn-lifecycle-v1": "gameplay-state-v2",
     TURN_STRUCTURE_PROFILE: "gameplay-state-v3",
     DRAW_FAILURE_PROFILE: "gameplay-state-v4",
+    STACK_ABILITY_PROFILE: "gameplay-state-v5",
 })
+
+
+def stack_entry_identity(entry):
+    """Separate identity domain; an entry refers to a Card object, never is one."""
+    return content_identity("gameplay-stack-entry-v1", {k: v for k, v in entry.items() if k != "entry_id"})
 
 
 def _fail(field: str, message: str = "invalid contract value"):
@@ -153,8 +160,9 @@ def _snapshot(body):
     _choice(body["engine_contract_version"], {ENGINE_CONTRACT_VERSION}, "engine_contract_version")
     _choice(body["execution_profile"], STATE_SCHEMAS_BY_PROFILE, "execution_profile")
     lifecycle = body["execution_profile"] != EXECUTION_PROFILE
-    draw_failure = body["execution_profile"] == DRAW_FAILURE_PROFILE
-    structure = body["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}
+    stack_abilities = body["execution_profile"] == STACK_ABILITY_PROFILE
+    draw_failure = body["execution_profile"] in {DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}
+    structure = body["execution_profile"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}
     if not isinstance(body["sources"], list) or not body["sources"]: _fail("sources", "nonempty array required")
     for source in body["sources"]: _source(source)
     source_ids = [s["source_id"] for s in body["sources"]]
@@ -186,9 +194,12 @@ def _snapshot(body):
     if lifecycle and not {"untap", "draw"} <= categories: _fail("rules", "lifecycle requires untap and draw evidence")
     if structure and "upkeep" not in categories: _fail("rules", "turn windows require upkeep evidence")
     if draw_failure and "draw_failure" not in categories: _fail("rules", "draw failure requires explicit fictional evidence")
+    if stack_abilities and "stack_activation" not in categories: _fail("rules", "stack activation requires explicit fictional evidence")
     if not REQUIRED_RULE_CATEGORIES <= categories: _fail("rules", "missing primitive rule category")
     parameters = body["parameters"]
-    _keys(parameters, {"mana_symbols", "generic_payment_order", "main_phase", "main_step", "turn_steps", "land_plays_per_turn", "life_loss_threshold"} | ({"turn_start"} if lifecycle else set()), "parameters")
+    _keys(parameters, {"mana_symbols", "generic_payment_order", "main_phase", "main_step", "turn_steps", "land_plays_per_turn", "life_loss_threshold"} | ({"turn_start"} if lifecycle else set()) | ({"stack_activation"} if stack_abilities else set()), "parameters")
+    if stack_abilities and parameters["stack_activation"] != {"timing": "priority", "effect": "adjust_controller_life", "source_at_resolution": "same_controlled_battlefield_object"}:
+        _fail("stack_activation", "exact bounded non-targeted activation policy required")
     for key in ("mana_symbols", "generic_payment_order"): _strings(parameters[key], "parameters." + key)
     if not parameters["mana_symbols"] or set(parameters["mana_symbols"]) != set(parameters["generic_payment_order"]): _fail("parameters", "payment order must cover exact mana symbols")
     _text(parameters["main_phase"], "main_phase")
@@ -415,6 +426,47 @@ def _draw_failure_state(body):
             _fail("failed_draw_players", "terminal outcome must retain the failed-draw loser")
 
 
+def _typed_stack_state(body):
+    if "stack_entries" not in body or not isinstance(body["stack_entries"], list):
+        _fail("stack_entries", "explicit typed array required")
+    entries = body["stack_entries"]
+    for entry in entries:
+        _keys(entry, {"entry_id", "kind", "source_object_id", "semantics_id", "ability_id", "controller", "origin_action_id"}, "stack_entry")
+        _choice(entry["kind"], {"spell", "activated_ability"}, "stack_entry.kind")
+        for key in ("entry_id", "semantics_id", "origin_action_id"):
+            _identity(entry[key], "stack_entry." + key)
+        for key in ("source_object_id", "controller"):
+            _text(entry[key], "stack_entry." + key)
+        _text(entry["ability_id"], "stack_entry.ability_id", nullable=entry["kind"] == "spell")
+        if entry["kind"] == "spell" and entry["ability_id"] is not None:
+            _fail("stack_entry.ability_id", "spell entries do not select abilities")
+        if entry["entry_id"] != stack_entry_identity(entry):
+            _fail("stack_entry.entry_id", "entry content identity mismatch")
+    _strings(body.get("stack"), "stack")
+    if body["stack"] != [e["entry_id"] for e in entries]:
+        _fail("stack_entries", "exact ordered stack membership required")
+    if len({e["origin_action_id"] for e in entries}) != len(entries):
+        _fail("stack_entries", "one entry per originating action required")
+    # Reuse all historical Card/zone/order/progress validation, projecting only
+    # actual spell Cards into its Card-only stack representation.
+    projected = {k: v for k, v in body.items() if k != "stack_entries"}
+    projected["stack"] = [e["source_object_id"] for e in entries if e["kind"] == "spell"]
+    _draw_failure_state(projected)
+    objects = {o["object_id"]: o for o in body["objects"]}
+    players = {p["player_id"] for p in body["players"]}
+    if set(body["stack"]) & set(objects):
+        _fail("stack_entries", "stack-entry and Card-object identities must be separate")
+    for entry in entries:
+        if entry["controller"] not in players:
+            _fail("stack_entry.controller", "unbound player")
+        if entry["kind"] == "spell":
+            obj = objects[entry["source_object_id"]]
+            if obj["knowledge"] != "known" or obj["semantics_id"] != entry["semantics_id"] or obj["controller"] != entry["controller"]:
+                _fail("stack_entry", "exact known spell binding required")
+    if body["stack"] and (body["turn_start"]["status"] in {"pending_untap", "pending_draw"} or body["failed_draw_players"] or (body["pending_system_actions"] and body["pending_system_actions"][-1] == "advance_step_or_phase")):
+        _fail("stack", "cannot bypass an ability with an automatic or advance boundary")
+
+
 def _action(body):
     _keys(body, {"game_id", "rules_snapshot_id", "expected_state_id", "kind", "actor", "object_id", "ability_id", "payment"}, "game_action")
     for key in ("game_id", "kind"): _text(body[key], key)
@@ -574,6 +626,8 @@ class CardGameplaySemantics(_Envelope):
 class GameState(_Envelope):
     @classmethod
     def create(cls, body):
+        if cls is GameState and isinstance(body, Mapping) and body.get("schema_version") == "gameplay-state-v5":
+            return TypedStackGameState.create(body)
         if cls is GameState and isinstance(body, Mapping) and body.get("schema_version") == "gameplay-state-v4":
             return DrawFailureGameState.create(body)
         if cls is GameState and isinstance(body, Mapping) and body.get("schema_version") == "gameplay-state-v3":
@@ -584,6 +638,8 @@ class GameState(_Envelope):
 
     @classmethod
     def from_dict(cls, value):
+        if cls is GameState and isinstance(value, Mapping) and value.get("schema_version") == "gameplay-state-v5":
+            return TypedStackGameState.from_dict(value)
         if cls is GameState and isinstance(value, Mapping) and value.get("schema_version") == "gameplay-state-v4":
             return DrawFailureGameState.from_dict(value)
         if cls is GameState and isinstance(value, Mapping) and value.get("schema_version") == "gameplay-state-v3":
@@ -616,6 +672,13 @@ class DrawFailureGameState(WindowedGameState):
     """V4: one explicit failed automatic draw, consumed by the native checkpoint."""
     SCHEMA = "gameplay-state-v4"
     VALIDATOR = staticmethod(_draw_failure_state)
+
+
+@dataclass(frozen=True)
+class TypedStackGameState(DrawFailureGameState):
+    """V5: typed stack entries, with separate source Card-object identities."""
+    SCHEMA = "gameplay-state-v5"
+    VALIDATOR = staticmethod(_typed_stack_state)
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,254 @@
+{
+  "base": "2932a7f3e1714824989944453df3adbc1c67cbba",
+  "replacements": {
+    "src/gameplay_rules/engine.py": {
+      "edits": [
+        {
+          "end": 741,
+          "new": "    STACK_ABILITY_PROFILE, stack_entry_identity,\n",
+          "old": "",
+          "start": 692
+        },
+        {
+          "end": 8612,
+          "new": "                + ((\"upkeep\",) if rules[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE} else ())\n                + ((\"draw_failure\",) if rules[\"execution_profile\"] in {DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE} else ())\n                + ((\"stack_activation\",) if rules[\"execution_profile\"] == STACK_ABILITY_PROFILE else ()))\n",
+          "old": "                + ((\"upkeep\",) if rules[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE} else ())\n                + ((\"draw_failure\",) if rules[\"execution_profile\"] == DRAW_FAILURE_PROFILE else ()))\n",
+          "start": 8238
+        },
+        {
+          "end": 11332,
+          "new": "\n    @staticmethod\n    def _stack_ability_supported(ability, rules):\n        effect = ability[\"effect\"]\n        return (rules[\"execution_profile\"] == STACK_ABILITY_PROFILE\n                and ability[\"uses_stack\"] and effect[\"kind\"] == \"adjust_life\"\n                and effect[\"target\"] == \"controller\")\n\n    def _ability_entry_coverage(self, entry, objects, zones, rules, unknown, unsupported):\n        \"\"\"Presence-pinned fictional semantics; no last-known-information fallback.\"\"\"\n        obj = objects.get(entry[\"source_object_id\"])\n        if (obj is None or zones[obj[\"zone_id\"]][\"kind\"] != \"battlefield\"\n                or obj[\"controller\"] != entry[\"controller\"]\n                or obj[\"semantics_id\"] != entry[\"semantics_id\"]):\n            unsupported.append(\"stack_ability_source_state_not_supported\")\n            return\n        definition = self._definition(obj)\n        if obj[\"knowledge\"] != \"known\" or definition is None:\n            unknown.append(\"stack_ability_source_unknown\")\n            return\n        abilities = [a for a in definition[\"abilities\"] if a[\"ability_id\"] == entry[\"ability_id\"]]\n        if len(abilities) != 1 or not self._stack_ability_supported(abilities[0], rules):\n            unsupported.append(\"stack_ability_semantics_not_supported\")\n            return\n        cost = abilities[0][\"mana_cost\"]\n        if not cost[\"known\"]:\n            unknown.append(\"stack_ability_cost_unknown\")\n        if cost[\"kind\"] != \"mana\" or cost[\"unsupported\"] or set(cost[\"colored\"]) - set(rules[\"parameters\"][\"mana_symbols\"]):\n            unsupported.append(\"stack_ability_cost_not_supported\")\n",
+          "old": "",
+          "start": 9719
+        },
+        {
+          "end": 13033,
+          "new": "        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS or (kind in _TURN_ACTIONS and rules[\"execution_profile\"] not in {_LIFECYCLE_PROFILE, TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}):\n",
+          "old": "        if kind not in _PLAYER_ACTIONS | _SYSTEM_ACTIONS or (kind in _TURN_ACTIONS and rules[\"execution_profile\"] not in {_LIFECYCLE_PROFILE, TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}):\n",
+          "start": 12820
+        },
+        {
+          "end": 15183,
+          "new": "        if rules[\"execution_profile\"] == STACK_ABILITY_PROFILE:\n            for entry in before[\"stack_entries\"]:\n                if entry[\"kind\"] == \"activated_ability\":\n                    self._ability_entry_coverage(entry, objects, zones, rules, unknown, unsupported)\n",
+          "old": "",
+          "start": 14911
+        },
+        {
+          "end": 17669,
+          "new": "                if not before[\"library_order\"][library] and rules[\"execution_profile\"] not in {DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}:\n",
+          "old": "                if not before[\"library_order\"][library] and rules[\"execution_profile\"] != DRAW_FAILURE_PROFILE:\n",
+          "start": 17528
+        },
+        {
+          "end": 19375,
+          "new": "            if rules[\"execution_profile\"] == STACK_ABILITY_PROFILE:\n                entry = before[\"stack_entries\"][-1]\n                if entry[\"kind\"] == \"activated_ability\":\n                    # Source/effect/cost support was checked above for every pending\n                    # ability. Resolution does not pay its activation costs again.\n                    return result()\n                obj = objects[entry[\"source_object_id\"]]\n            else:\n                obj = objects[before[\"stack\"][-1]]\n",
+          "old": "            obj = objects[before[\"stack\"][-1]]\n",
+          "start": 18868
+        },
+        {
+          "end": 23232,
+          "new": "                if ability[\"uses_stack\"] and not self._stack_ability_supported(ability, rules):\n",
+          "old": "                if ability[\"uses_stack\"]:\n",
+          "start": 23136
+        },
+        {
+          "end": 23861,
+          "new": "                if ability[\"uses_stack\"]:\n                    if not self._stack_ability_supported(ability, rules):\n                        unsupported.append(\"unsupported_stack_ability_effect_or_timing\")\n                elif effect[\"kind\"] != \"add_mana\":\n",
+          "old": "                if effect[\"kind\"] != \"add_mana\":\n",
+          "start": 23605
+        },
+        {
+          "end": 27195,
+          "new": "            if ((ability[\"uses_stack\"] and not GameplayRulesEngine._stack_ability_supported(ability, rules))\n                    or (not ability[\"uses_stack\"] and ability[\"effect\"][\"kind\"] != \"add_mana\")):\n",
+          "old": "            if ability[\"uses_stack\"] or ability[\"effect\"][\"kind\"] != \"add_mana\":\n",
+          "start": 26989
+        },
+        {
+          "end": 28731,
+          "new": "        def push_entry(entry_kind, obj, ability_id=None):\n            entry = dict(kind=entry_kind, source_object_id=obj[\"object_id\"],\n                         semantics_id=obj[\"semantics_id\"], controller=actor,\n                         ability_id=ability_id, origin_action_id=action.identity)\n            entry[\"entry_id\"] = stack_entry_identity(entry)\n            after[\"stack_entries\"].append(entry)\n            after[\"stack\"].append(entry[\"entry_id\"])\n\n",
+          "old": "",
+          "start": 28274
+        },
+        {
+          "end": 29971,
+          "new": "            if rules[\"execution_profile\"] == STACK_ABILITY_PROFILE:\n                push_entry(\"spell\", obj)\n            else:\n                after[\"stack\"].append(obj[\"object_id\"])\n",
+          "old": "            after[\"stack\"].append(obj[\"object_id\"])\n",
+          "start": 29788
+        },
+        {
+          "end": 30616,
+          "new": "            if ability[\"uses_stack\"]:\n                push_entry(\"activated_ability\", obj, ability[\"ability_id\"])\n            else:\n                for symbol, amount in ability[\"effect\"][\"amount\"].items():\n                    players[actor][\"mana_pool\"][symbol] = players[actor][\"mana_pool\"].get(symbol, 0) + amount\n",
+          "old": "            for symbol, amount in ability[\"effect\"][\"amount\"].items():\n                players[actor][\"mana_pool\"][symbol] = players[actor][\"mana_pool\"].get(symbol, 0) + amount\n",
+          "start": 30299
+        },
+        {
+          "end": 31123,
+          "new": "                if rules[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}:\n",
+          "old": "                if rules[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}:\n",
+          "start": 31003
+        },
+        {
+          "end": 31604,
+          "new": "                if rules[\"execution_profile\"] in {DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE} and not after[\"library_order\"][library]:\n",
+          "old": "                if rules[\"execution_profile\"] == DRAW_FAILURE_PROFILE and not after[\"library_order\"][library]:\n",
+          "start": 31468
+        },
+        {
+          "end": 32278,
+          "new": "                identifier = after[\"stack\"].pop()\n                entry = after[\"stack_entries\"].pop() if rules[\"execution_profile\"] == STACK_ABILITY_PROFILE else None\n                obj = objects[entry[\"source_object_id\"] if entry else identifier]\n",
+          "old": "                obj = objects[after[\"stack\"].pop()]\n",
+          "start": 32028
+        },
+        {
+          "end": 32728,
+          "new": "                controller = entry[\"controller\"] if entry else obj[\"controller\"]\n                is_ability = entry is not None and entry[\"kind\"] == \"activated_ability\"\n                effects = ([next(a[\"effect\"] for a in definition[\"abilities\"] if a[\"ability_id\"] == entry[\"ability_id\"])]\n                           if is_ability else definition[\"effects\"])\n                for effect in effects:\n",
+          "old": "                for effect in definition[\"effects\"]:\n",
+          "start": 32329
+        },
+        {
+          "end": 32928,
+          "new": "                        target = controller if effect[\"target\"] == \"controller\" else next(player for player in players if player != controller)\n",
+          "old": "                        target = obj[\"controller\"] if effect[\"target\"] == \"controller\" else next(player for player in players if player != obj[\"controller\"])\n",
+          "start": 32784
+        },
+        {
+          "end": 33240,
+          "new": "                if not is_ability:\n                    owner = obj[\"owner\"] if definition[\"post_resolution_zone\"] == \"graveyard\" else obj[\"controller\"]\n                    move(obj, self._zone(after, definition[\"post_resolution_zone\"], owner))\n",
+          "old": "                owner = obj[\"owner\"] if definition[\"post_resolution_zone\"] == \"graveyard\" else obj[\"controller\"]\n                move(obj, self._zone(after, definition[\"post_resolution_zone\"], owner))\n",
+          "start": 32996
+        },
+        {
+          "end": 34674,
+          "new": "                    if rules[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}:\n",
+          "old": "                    if rules[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}:\n",
+          "start": 34550
+        },
+        {
+          "end": 35647,
+          "new": "                elif rules[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE} and after[\"phase\"] == \"beginning\" and after[\"step\"] == \"draw\":\n",
+          "old": "                elif rules[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE} and after[\"phase\"] == \"beginning\" and after[\"step\"] == \"draw\":\n",
+          "start": 35463
+        }
+      ],
+      "historical_sha256": [
+        "3d536f1641f15ba0b535353183a19442652ec3299e32c19cba967537e4aabeec",
+        "6905f483e1d53cd9d13eaad36493cba870c495779c01bfa02fe72d6adb62a623",
+        "912ed17edda48ed0990cb1df5ab9b307d4cff38f2bcdcc63e0f78c2e76d38bb5"
+      ],
+      "new_sha256": "d74bdc317bc96b50e76b680f519651575288d6c088c74e2408b1f3ce3eaff9ee",
+      "old_sha256": "2382d7451bf5dc8e8beb7beb64dcab02cac3e767166e8ba7f2ce8221f8dc280f"
+    },
+    "src/gameplay_rules/models.py": {
+      "edits": [
+        {
+          "end": 1073,
+          "new": "STACK_ABILITY_PROFILE = \"fictional-two-player-stack-abilities-v1\"\n",
+          "old": "",
+          "start": 1007
+        },
+        {
+          "end": 1374,
+          "new": "    STACK_ABILITY_PROFILE: \"gameplay-state-v5\",\n",
+          "old": "",
+          "start": 1326
+        },
+        {
+          "end": 1604,
+          "new": "\n\ndef stack_entry_identity(entry):\n    \"\"\"Separate identity domain; an entry refers to a Card object, never is one.\"\"\"\n    return content_identity(\"gameplay-stack-entry-v1\", {k: v for k, v in entry.items() if k != \"entry_id\"})\n",
+          "old": "",
+          "start": 1377
+        },
+        {
+          "end": 7543,
+          "new": "    stack_abilities = body[\"execution_profile\"] == STACK_ABILITY_PROFILE\n    draw_failure = body[\"execution_profile\"] in {DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}\n    structure = body[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE, STACK_ABILITY_PROFILE}\n",
+          "old": "    draw_failure = body[\"execution_profile\"] == DRAW_FAILURE_PROFILE\n    structure = body[\"execution_profile\"] in {TURN_STRUCTURE_PROFILE, DRAW_FAILURE_PROFILE}\n",
+          "start": 7261
+        },
+        {
+          "end": 10258,
+          "new": "    if stack_abilities and \"stack_activation\" not in categories: _fail(\"rules\", \"stack activation requires explicit fictional evidence\")\n",
+          "old": "",
+          "start": 10121
+        },
+        {
+          "end": 10933,
+          "new": "    _keys(parameters, {\"mana_symbols\", \"generic_payment_order\", \"main_phase\", \"main_step\", \"turn_steps\", \"land_plays_per_turn\", \"life_loss_threshold\"} | ({\"turn_start\"} if lifecycle else set()) | ({\"stack_activation\"} if stack_abilities else set()), \"parameters\")\n    if stack_abilities and parameters[\"stack_activation\"] != {\"timing\": \"priority\", \"effect\": \"adjust_controller_life\", \"source_at_resolution\": \"same_controlled_battlefield_object\"}:\n        _fail(\"stack_activation\", \"exact bounded non-targeted activation policy required\")\n",
+          "old": "    _keys(parameters, {\"mana_symbols\", \"generic_payment_order\", \"main_phase\", \"main_step\", \"turn_steps\", \"land_plays_per_turn\", \"life_loss_threshold\"} | ({\"turn_start\"} if lifecycle else set()), \"parameters\")\n",
+          "start": 10395
+        },
+        {
+          "end": 29675,
+          "new": "def _typed_stack_state(body):\n    if \"stack_entries\" not in body or not isinstance(body[\"stack_entries\"], list):\n        _fail(\"stack_entries\", \"explicit typed array required\")\n    entries = body[\"stack_entries\"]\n    for entry in entries:\n        _keys(entry, {\"entry_id\", \"kind\", \"source_object_id\", \"semantics_id\", \"ability_id\", \"controller\", \"origin_action_id\"}, \"stack_entry\")\n        _choice(entry[\"kind\"], {\"spell\", \"activated_ability\"}, \"stack_entry.kind\")\n        for key in (\"entry_id\", \"semantics_id\", \"origin_action_id\"):\n            _identity(entry[key], \"stack_entry.\" + key)\n        for key in (\"source_object_id\", \"controller\"):\n            _text(entry[key], \"stack_entry.\" + key)\n        _text(entry[\"ability_id\"], \"stack_entry.ability_id\", nullable=entry[\"kind\"] == \"spell\")\n        if entry[\"kind\"] == \"spell\" and entry[\"ability_id\"] is not None:\n            _fail(\"stack_entry.ability_id\", \"spell entries do not select abilities\")\n        if entry[\"entry_id\"] != stack_entry_identity(entry):\n            _fail(\"stack_entry.entry_id\", \"entry content identity mismatch\")\n    _strings(body.get(\"stack\"), \"stack\")\n    if body[\"stack\"] != [e[\"entry_id\"] for e in entries]:\n        _fail(\"stack_entries\", \"exact ordered stack membership required\")\n    if len({e[\"origin_action_id\"] for e in entries}) != len(entries):\n        _fail(\"stack_entries\", \"one entry per originating action required\")\n    # Reuse all historical Card/zone/order/progress validation, projecting only\n    # actual spell Cards into its Card-only stack representation.\n    projected = {k: v for k, v in body.items() if k != \"stack_entries\"}\n    projected[\"stack\"] = [e[\"source_object_id\"] for e in entries if e[\"kind\"] == \"spell\"]\n    _draw_failure_state(projected)\n    objects = {o[\"object_id\"]: o for o in body[\"objects\"]}\n    players = {p[\"player_id\"] for p in body[\"players\"]}\n    if set(body[\"stack\"]) & set(objects):\n        _fail(\"stack_entries\", \"stack-entry and Card-object identities must be separate\")\n    for entry in entries:\n        if entry[\"controller\"] not in players:\n            _fail(\"stack_entry.controller\", \"unbound player\")\n        if entry[\"kind\"] == \"spell\":\n            obj = objects[entry[\"source_object_id\"]]\n            if obj[\"knowledge\"] != \"known\" or obj[\"semantics_id\"] != entry[\"semantics_id\"] or obj[\"controller\"] != entry[\"controller\"]:\n                _fail(\"stack_entry\", \"exact known spell binding required\")\n    if body[\"stack\"] and (body[\"turn_start\"][\"status\"] in {\"pending_untap\", \"pending_draw\"} or body[\"failed_draw_players\"] or (body[\"pending_system_actions\"] and body[\"pending_system_actions\"][-1] == \"advance_step_or_phase\")):\n        _fail(\"stack\", \"cannot bypass an ability with an automatic or advance boundary\")\n\n\n",
+          "old": "",
+          "start": 26924
+        },
+        {
+          "end": 39255,
+          "new": "        if cls is GameState and isinstance(body, Mapping) and body.get(\"schema_version\") == \"gameplay-state-v5\":\n            return TypedStackGameState.create(body)\n",
+          "old": "",
+          "start": 39090
+        },
+        {
+          "end": 40002,
+          "new": "        if cls is GameState and isinstance(value, Mapping) and value.get(\"schema_version\") == \"gameplay-state-v5\":\n            return TypedStackGameState.from_dict(value)\n",
+          "old": "",
+          "start": 39831
+        },
+        {
+          "end": 41597,
+          "new": "class TypedStackGameState(DrawFailureGameState):\n    \"\"\"V5: typed stack entries, with separate source Card-object identities.\"\"\"\n    SCHEMA = \"gameplay-state-v5\"\n    VALIDATOR = staticmethod(_typed_stack_state)\n\n\n@dataclass(frozen=True)\n",
+          "old": "",
+          "start": 41360
+        }
+      ],
+      "historical_sha256": [
+        "2985d761c6a44810c978c56959150f7b6a52932b1a519d46961dd4fe3ecfecf1",
+        "592ba26d6eae1534bd2bd39c09ab6c35e93d836b781ff72c545f407f71531f14",
+        "95dd993c61a2cbfa5ab606dda96fdab8b1f49c3b87a36b0d21d0c621b48a0da9"
+      ],
+      "new_sha256": "f4c83d42506f1bc25b6c0cbddd29f6aa21ffffebe51c9b135a112f1975028f04",
+      "old_sha256": "5a09bd38804f36974ed076f07106da7e0841626b82f8b7315cd26f8620b2d911"
+    },
+    "src/gameplay_rules/session.py": {
+      "edits": [
+        {
+          "end": 10418,
+          "new": "        view = dict(schema_version=VERSION, scope='PROJECT_AUTHORED_FICTIONAL_ONLY_PUBLIC_VIEW',\n",
+          "old": "        return dict(schema_version=VERSION, scope='PROJECT_AUTHORED_FICTIONAL_ONLY_PUBLIC_VIEW',\n",
+          "start": 10321
+        },
+        {
+          "end": 11507,
+          "new": "        if state['schema_version'] == 'gameplay-state-v5':\n            public = {o['object_id'] for z in state['zones'] if z['visibility'] == 'public'\n                      for o in state['objects'] if o['zone_id'] == z['zone_id']}\n            view['stack_entries'] = [dict(entry_id=e['entry_id'], kind=e['kind'], controller=e['controller'],\n                source_object_id=e['source_object_id'] if e['source_object_id'] in public else None,\n                ability_id=e['ability_id'] if e['source_object_id'] in public else None)\n                for e in state['stack_entries']]\n        return view\n",
+          "old": "",
+          "start": 10906
+        },
+        {
+          "end": 14919,
+          "new": "    if 'stack_entries' in view:\n        lines.append(f\"Stack entries ({view['stack_count']}), bottom to top:\")\n        for entry in view['stack_entries']:\n            lines.append(f\"  {entry['kind']} {entry['entry_id']}; controller {entry['controller']}; \"\n                         f\"source {entry['source_object_id'] or 'unavailable'}; ability {entry['ability_id'] or '-'}\")\n",
+          "old": "",
+          "start": 14543
+        }
+      ],
+      "historical_sha256": [
+        "0e624eea670581c827faeeda125044afd803b39165f8f61e7ff835bd0751e373",
+        "89e6fd0daa00e0164835a46ac318211c965fcad6244dcf17a5bd36842c5023b8"
+      ],
+      "new_sha256": "111f5cf3c3c05c1428d3ffb72e40a38e14457ba3e361eec845d64e8985ecbd9f",
+      "old_sha256": "66fe07653ee1770c77baef055cc5f26918070110df7cd8ee51f5be5a9143ee9a"
+    },
+    "tests/draw_failure_preservation.py": {
+      "edits": [
+        {
+          "end": 1023,
+          "new": "    from stack_ability_preservation import preceding_bytes as stack_preceding\n    raw = stack_preceding(name, raw)\n",
+          "old": "",
+          "start": 908
+        }
+      ],
+      "historical_sha256": [],
+      "new_sha256": "9f7a9256c34e9fefa064dbeb1cad34e0a99ec006b89e18b17222de9b809a88c9",
+      "old_sha256": "bc0833ed67a7ab02ec6a4395e4189a1bfee8cfdaff9df589c4a456d99e3f521b"
+    }
+  }
+}
