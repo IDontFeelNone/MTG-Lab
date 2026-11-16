@@ -196,6 +196,15 @@ introduced. Fictional source-presence policy cannot substitute for real stack
 source independence. Triggers, targeting, layers, combat, replacement/prevention,
 format legality, simulation and unrelated refactoring are excluded.
 
+Historical inventory selectors account for the two new source modules through a
+finite test-only addition guard. Each named addition must match exact bytes and
+mode; unknown neighboring additions remain visible. Eight hook lines across the
+existing pack/overlay/stack preservation helpers delegate to this guard. A pinned
+reversible ledger reconstructs their exact original bytes for historical assertions.
+Original inventories, source pins, counts, evidence and runtime modules are not
+rewritten. The initial full run exposed the missing addition accounting and is
+preserved as failed evidence; final validation uses the corrected test accounting.
+
 One next dependency is a separately owner-authorized applicability/source-evidence
 closure for the selected activation's priority, tap-cost and mana-output procedures,
 using this report to bound the exact missing evidence. It does not authorize

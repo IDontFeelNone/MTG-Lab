@@ -292,11 +292,15 @@ def historical_source_bytes(name, raw):
 
 def is_overlay_addition(path, root):
     from requirements_preservation_support import is_requirements_addition
+    from semantic_closure_preservation import is_addition as closure_addition
+    if closure_addition(path, root): return True
     return is_requirements_addition(path, root) or _before_requirements_addition(path, root)
 
 
 def assert_overlay_addition(path, root):
     from requirements_preservation_support import is_requirements_addition, assert_requirements_addition
+    from semantic_closure_preservation import is_addition as closure_addition
+    if closure_addition(path, root): return
     if is_requirements_addition(path, root):
         return assert_requirements_addition(path, root)
     return _before_requirements_assertion(path, root)

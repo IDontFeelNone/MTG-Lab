@@ -31,6 +31,30 @@ def synthetic():
 
 
 class GenericClosurePolicyTests(unittest.TestCase):
+    def test_finite_addition_accounting_pins_only_the_two_new_sources(self):
+        import semantic_closure_preservation as guard
+        self.assertEqual(len(guard.ADDITIONS),2)
+        for name in guard.ADDITIONS:
+            self.assertTrue(guard.is_addition(ROOT/name,ROOT))
+            self.assertFalse(guard.is_addition(ROOT/(name+'.future'),ROOT))
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);name=sorted(guard.ADDITIONS)[0];path=root/name
+            path.parent.mkdir(parents=True);path.write_bytes((ROOT/name).read_bytes())
+            self.assertTrue(guard.is_addition(path,root));path.write_bytes(path.read_bytes()+b'\n# changed\n')
+            with self.assertRaises(AssertionError):guard.is_addition(path,root)
+            path.write_bytes((ROOT/name).read_bytes());path.chmod(0o744)
+            with self.assertRaises(AssertionError):guard.is_addition(path,root)
+
+    def test_preservation_helper_successor_reconstructs_exact_historical_bytes(self):
+        import semantic_closure_preservation as guard
+        for name in guard.REPLACEMENTS:
+            raw=(ROOT/name).read_bytes();pin=guard.ledger()['replacements'][name]
+            self.assertEqual(hashlib.sha256(raw).hexdigest(),pin['new_sha256'])
+            old=guard.preceding_bytes(name,raw)
+            self.assertEqual(hashlib.sha256(old).hexdigest(),pin['old_sha256'])
+            self.assertEqual(guard.preceding_bytes(name,old),old)
+            with self.assertRaises(AssertionError):guard.preceding_bytes(name,raw+b'\n# unreviewed\n')
+
     def test_synthetic_alternative_subject_is_not_real_acceptance_or_execution(self):
         a,b,e=synthetic();out=p.evaluate(a,b,e)
         self.assertEqual(out['status'],'SATISFIED')
