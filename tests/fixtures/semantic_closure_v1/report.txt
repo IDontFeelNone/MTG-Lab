@@ -1,0 +1,116 @@
+Snow-Covered Wastes — non-executing semantic closure
+magic:legacy-promoted:card:46a07b53-ff58-4bd6-80dd-ded2eb0e29a3 / snow-wastes-mana
+Disposition: BLOCKED_NON_EXECUTING_ASSESSMENT
+Historical text: {T}: Add {C}.
+Observation: 2026-08-02T09:09:45.851000Z; retrieved 2026-08-02T15:34:06Z
+Current Oracle: UNKNOWN_NOT_CURRENTLY_VERIFIED
+Accepted candidate: sha256:7ce81b50485c09cb3ed789db287142253b55541c067d275f6750f1c9a2bc02e5
+Owner decision: sha256:648ebea0994f5d400664b35db6fcd5bcbc7feadeb0d28e039ecd55ed0c243075
+Conditional procedure: CONDITIONAL_ACTIVATED_MANA
+
+authorization.closure [BLOCKED]: Real semantic closure established?
+  Why: Enumerated graph closure is not complete applicable semantics.
+  Needed: Reviewed closure and exception coverage for the proposed bounded real profile.
+  Evidence: authority, rule-context; requirement sha256:63f34b9821930d6c45d16fffd02a270764d053ac19d976aa21f43311efa82a23
+authorization.profile [BLOCKED]: Real execution profile authorized?
+  Why: Fictional profiles cannot authorize real Card execution.
+  Needed: Separate explicit real-profile admission and owner activation authorization.
+  Evidence: authority; requirement sha256:dea33c15f50342e93254690493901f29858feaa41cfef897e260aedbc54a0c7e
+identity.historical [SATISFIED]: Exact historical identity correspondence?
+  Why: A Card, Printing and provider observation are separate identities.
+  Needed: Admitted exact namespace/Card/Printing/observation joins.
+  Evidence: identity; requirement sha256:5a0b15e573ff7c141d14c457630127b3f187364e30ec4b03ec002fce5ae3f0de
+identity.identifier [SATISFIED]: Promoted provider identifier edge?
+  Why: A historical observation alone does not establish the current promoted edge.
+  Needed: Exact promoted identifier-edge evidence.
+  Evidence: identity; requirement sha256:5e519dd3f7a9776bc4ba6f7224bbf6294a8ab823b4573822cb32671aaee5075c
+identity.operator [MISSING]: Operator-production identity established?
+  Why: Legacy evidence does not promote production identity.
+  Needed: Separately admitted operator snapshot and exact Card binding.
+  Evidence: identity; requirement sha256:49c0e37bf6e91ae7b0520561af3e576b8d3d296a0aa319557c87327e1ef364a5
+permissions.use [UNKNOWN]: Source-use rights established for proposed execution?
+  Why: Public accessibility, checksums and semantic review grant no use permission.
+  Needed: Operation-specific processing/retention/publication/service/AI-use clearance.
+  Evidence: authority; requirement sha256:3d0c5650f40b404101bea107f945752adead22bfdc0ba09f93db68b62fee2d7a
+procedure.activation [MISSING]: Activation authority and exact ability identity?
+  Why: Fictional implementation or retained rule coverage is not approved real execution.
+  Needed: Controller, source state and applicable permission/restriction evidence.
+  Evidence: authority, rule-context; requirement sha256:2133e67b6145bf10fd237e0104c9638742cdeae669fe04855839d9111bdae5df
+procedure.checkpoint [MISSING]: Applicable mandatory state checks?
+  Why: Fictional implementation or retained rule coverage is not approved real execution.
+  Needed: Reviewed applicable real state-based checks before the next priority boundary.
+  Evidence: authority, rule-context; requirement sha256:5bfe0d6c944b076322e09c5680be5bc09d4eb970caae6121d0cba274673137d6
+procedure.cost [MISSING]: Actual tap and other cost payment?
+  Why: Fictional implementation or retained rule coverage is not approved real execution.
+  Needed: Reviewed cost meaning, payable resources, atomic payment and source changes.
+  Evidence: authority, rule-context; requirement sha256:65fff530a036360e55ca7879f5a6705175484b41aa90a0b6f8357ab084441b70
+procedure.external [UNSUPPORTED]: Changed text, gained abilities or external interactions?
+  Why: The retained subject excludes arbitrary modified game states.
+  Needed: Separately reviewed applicable effect/interaction semantics or an explicit bounded exclusion.
+  Evidence: authority, rule-context; requirement sha256:ed4b0cb4a41cd921128ccdfabd488e879717109658f8a168cfb502a629a59a9f
+procedure.output [MISSING]: Actual mana-production semantics?
+  Why: Fictional implementation or retained rule coverage is not approved real execution.
+  Needed: Reviewed output quantity, colorless identity, pool update and applicable restrictions.
+  Evidence: authority, rule-context; requirement sha256:754466b038626952d2abc77786ffde8e907f84130815dcd90b812a32780da258
+procedure.recovery [MISSING]: Illegal-action handling and rollback?
+  Why: Fictional implementation or retained rule coverage is not approved real execution.
+  Needed: Applicable reviewed real recovery dependencies, reversibility and deterministic proof vectors.
+  Evidence: authority, rule-context; requirement sha256:9d0625d7994a639d1951a3599b2f4bb1fa8a08498a1f2b5fb07bd3a1c5460633
+procedure.resolution [MISSING]: Mana-exception procedure and completion?
+  Why: Fictional implementation or retained rule coverage is not approved real execution.
+  Needed: Reviewed real no-stack/immediate-resolution and conditional priority-return implementation.
+  Evidence: authority, rule-context; requirement sha256:6ab814a1698488613eadf490ef169c3990ab86267b0cd90e409bc16c37140011
+procedure.timing [MISSING]: Priority and mana-access timing?
+  Why: Fictional implementation or retained rule coverage is not approved real execution.
+  Needed: Reviewed priority and payment-window procedures; pre-activation priority when relevant.
+  Evidence: authority, rule-context; requirement sha256:544463b32db8f3aa610dba93de7c706a2bcea6184df14681cb56ac7440721ba7
+rules.dependencies [UNKNOWN]: Applicable retained dependency frontiers closed?
+  Why: An unresolved literal dependency cannot be replaced by a fictional procedure.
+  Needed: Reviewed support for applicable unresolved references, with unknown applicability retained.
+  Evidence: authority, rule-context; requirement sha256:6167113488d732955b1e034aca77e8285756eb332bbffb253017ea7e3b0966a4
+rules.execution_review [MISSING]: Applicable rules approved as executable semantics?
+  Why: A source/dependency review does not approve an execution primitive.
+  Needed: Separately reviewed applicable real-rule semantics and exception coverage.
+  Evidence: authority, rule-context; requirement sha256:20e7a3166c79ea7bbb1bfde4c61bc7a0866c581230f757cb601d7ce28d97db7a
+rules.retained [SATISFIED]: Selected supporting rule identities retained?
+  Why: Claims require exact rule/projection/source bindings.
+  Needed: Owning-context admission for every cited rule identity.
+  Evidence: rule-context, rule:115.6, rule:405.6c, rule:605.1a, rule:605.1b, rule:605.2, rule:605.3a, rule:605.3b, rule:605.3c, rule:606.1, rule:606.2; requirement sha256:9d71f71e8a2c7794385123dead9e18c7b5ee6a653bfac4a3d5f44214c705f98a
+rules.reviewed [SATISFIED]: Bounded dependency reviews retained?
+  Why: Retained projection and reviewed source correspondence are distinct.
+  Needed: Exact append-only review records and their limited scopes.
+  Evidence: review:0, review:1, review:2, review:3; requirement sha256:88481c2f62ca259e4b7fabe13b2e909f3e95938f1745a796c621f72d5070eefd
+semantics.conditional [SATISFIED]: Accepted conditional capability and ownership?
+  Why: Classification and written output do not imply present usability.
+  Needed: Admitted classification, behavior, cost and ownership calculations.
+  Evidence: accepted, calculation; requirement sha256:72c5cfe663bbce8332ebe3cd3f4561840e605bf1273e6cfca38991db38205dec
+semantics.executable [MISSING]: Canonical executable Card semantics admitted?
+  Why: Accepted descriptive readings are not CardGameplaySemantics.
+  Needed: Reviewed real semantics binding identity, rules, effects and unsupported contexts.
+  Evidence: accepted, authority; requirement sha256:a9d7461bcf77ed456a13dc7d62835a44541851274fdb166d22a736d65b54ce10
+text.accepted [SATISFIED]: Owner-accepted interpretation of those bytes?
+  Why: Integrity alone supplies no semantic acceptance.
+  Needed: Exact candidate membership and bounded owner decision.
+  Evidence: accepted, text; requirement sha256:4532759ed247382e977fa9775d0f7cda2351b74db6918db6043bfaefbe42135c
+text.current [UNKNOWN]: Current Oracle text verified?
+  Why: Historical acceptance and identifier promotion are not freshness verification.
+  Needed: Independently verified current text/version and identity correspondence.
+  Evidence: identity, text; requirement sha256:4ce595da213def526ddc63ee97ae45a97ac5aba6a8637a8c594ab62bff5dad40
+text.historical [SATISFIED]: Exact retained text and observation provenance?
+  Why: Interpretation must bind exact historical bytes.
+  Needed: Source field identity, passage boundaries and observation dates.
+  Evidence: text; requirement sha256:c4e5fb21dbc9ea3e1634f6388c87822caf891fedbdc27dd78b65afdcf4b9ffcc
+
+Retained supporting rules: 115.6, 405.6c, 605.1a, 605.1b, 605.2, 605.3a, 605.3b, 605.3c, 606.1, 606.2
+Exact rule, review, source and calculation identities: inspect canonical evidence/requirements.
+Semantic closure OPEN; execution BLOCKED; source clearance not_granted; permissions NOT_ESTABLISHED.
+SATISFIED is requirement-specific; no completeness percentage, readiness flag or execution permission follows.
+Historical acceptance is not current Oracle verification, production identity or source-use clearance.
+Fictional priority, cost, mana, stack and checkpoint execution supplies no real-procedure proof.
+The non-targeted mana exception does not eliminate control, timing, payment, output, checkpoint or recovery dependencies.
+Literal frontiers come only from admitted records; missing procedure categories are requirements, not invented CR citations.
+Basic/Snow labels establish no intrinsic ability, land-play or snow-payment semantics.
+No game state, legal activation, actual mana, strategic value or real-card execution is calculated.
+Integrity-checked detail: SemanticClosureConsumer.detailed(detailed_references[...]).
+Policy: sha256:e57648860541c4aada0ae72ea06e9070f0f698f1c7181308a44f68fb66729b52
+Report: sha256:bf3c12d0f87975d9cee608c4c3ac05ecd38a9b236ceeec0df2eb6d18ab46ada9
