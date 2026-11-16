@@ -19,6 +19,8 @@ def preceding_bytes(name, raw):
 
 
 def is_addition(path, root):
+    from semantic_closure_preservation import is_addition as closure_addition
+    if closure_addition(path, root): return True
     name = path.relative_to(root).as_posix()
     from finish_simulation_preservation import is_addition as finish_addition
     if finish_addition(path, root): return True

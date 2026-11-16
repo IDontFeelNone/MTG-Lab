@@ -1,0 +1,73 @@
+{
+  "additions": {
+    "src/card_intelligence/semantic_closure.py": {
+      "bytes": 18919,
+      "sha256": "a46ca9d44e334c0f6e4094867dedff810a0df4a7e0026666b30d422a1c3337b1"
+    },
+    "src/card_intelligence/semantic_closure_policy.py": {
+      "bytes": 13395,
+      "sha256": "ce299edd6baea9d7ee820a2a12fae0c56131cd479078a7e94b27b11c1ece0e51"
+    }
+  },
+  "base": "6fde7c3df38245ee827eec2cd2900793945c9761",
+  "purpose": "FINITE_SEMANTIC_CLOSURE_ADDITIONS_ONLY",
+  "replacements": {
+    "tests/overlay_preservation_support.py": {
+      "edits": [
+        {
+          "end": 23720,
+          "new": "    from semantic_closure_preservation import is_addition as closure_addition\n    if closure_addition(path, root): return True\n",
+          "old": "",
+          "start": 23593
+        },
+        {
+          "end": 24083,
+          "new": "    from semantic_closure_preservation import is_addition as closure_addition\n    if closure_addition(path, root): return\n",
+          "old": "",
+          "start": 23961
+        }
+      ],
+      "historical_sha256": [
+        "74475dba2d3e2892732ac6b20234d43a310f2a9cde029dc94f17076968402b99",
+        "ebbb70e934ef59b2256503efab1230485f88d28aaa305acb2071e29bb38a3205"
+      ],
+      "new_sha256": "4b63768fc68ca82f198a291ce94d4b36fc17e33151cd4c59588b496ff1e50790",
+      "old_sha256": "ebbb70e934ef59b2256503efab1230485f88d28aaa305acb2071e29bb38a3205"
+    },
+    "tests/pack_simulation_preservation.py": {
+      "edits": [
+        {
+          "end": 13642,
+          "new": "    from semantic_closure_preservation import is_addition as closure_addition\n    if closure_addition(path, root): return True\n",
+          "old": "",
+          "start": 13515
+        }
+      ],
+      "historical_sha256": [
+        "2971935532843787a45cad88341edc63cc6576bd8b94287b39c42b0fd4e876d0",
+        "3b5ae732792a992f86494243d962f314a129ae5e2ab582a3a0b113d0ca1b7e7d",
+        "7cd2110f531dbbceb02789cccc5d48834637885c336011088d0f281f3bd8eae4",
+        "9b60622fe39f8729ca35efccfa6493b5d2cb50b0873c3bb3772f8616474a1937",
+        "ac728b38bea2b16dbe274a461ffae60be1544ddb8abbca7b06fc67aeeaaefc72"
+      ],
+      "new_sha256": "fef6565675a2d98f3bb8bdc22ba27057a7b2a5d21063f1b75898d9f1ed5db617",
+      "old_sha256": "2971935532843787a45cad88341edc63cc6576bd8b94287b39c42b0fd4e876d0"
+    },
+    "tests/stack_ability_preservation.py": {
+      "edits": [
+        {
+          "end": 1055,
+          "new": "    from semantic_closure_preservation import preceding_bytes as closure_preceding\n    raw = closure_preceding(name, raw)\n",
+          "old": "",
+          "start": 933
+        }
+      ],
+      "historical_sha256": [
+        "b1dd58134dc94537c6c1f0fb5c07de220d1eac0d96e6eb7794043de8d4231502"
+      ],
+      "new_sha256": "ecfa7497de0ceb992dbe9e7ebd8bd6daa91cccea747639f7616c45952540ad1f",
+      "old_sha256": "b1dd58134dc94537c6c1f0fb5c07de220d1eac0d96e6eb7794043de8d4231502"
+    }
+  },
+  "tree": "9a2893b81c8566c8dbe07a3850be7f5ae3814794"
+}

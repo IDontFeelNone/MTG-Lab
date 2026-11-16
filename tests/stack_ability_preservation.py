@@ -20,6 +20,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from semantic_closure_preservation import preceding_bytes as closure_preceding
+    raw = closure_preceding(name, raw)
     if type(raw) is not bytes:
         raise AssertionError('exact source bytes required')
     if name not in PATHS:
