@@ -24,6 +24,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from mana_window_preservation import preceding_bytes as window_preceding
+    raw = window_preceding(name, raw)
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
     if name not in REPLACEMENTS: return raw
     pin = ledger()['replacements'][name]; digest = hashlib.sha256(raw).hexdigest()
@@ -39,6 +41,8 @@ def preceding_bytes(name, raw):
 
 
 def is_addition(path, root=ROOT):
+    from mana_window_preservation import is_addition as window_addition
+    if window_addition(path, root): return True
     name = path.relative_to(root).as_posix()
     if name not in ADDITIONS: return False
     if any(p.is_symlink() for p in (path,*path.parents)) or not path.is_file() or path.stat().st_mode & 0o111:
