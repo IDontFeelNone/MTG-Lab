@@ -1,0 +1,23 @@
+Real-mana activation-window applicability — hypothetical only
+Legal activation: NOT_ESTABLISHED; execution: BLOCKED
+Assumptions: {"activation_resolved": "UNKNOWN", "classification": "UNKNOWN", "context_id": "sha256:b4b79306015639fcd2655247b5b7fd8907c915c2600fe493fddf1c7bc270d1ab", "held_priority_before_activation": "UNKNOWN", "payment_opportunity": "UNKNOWN", "priority_opportunity": "UNKNOWN", "same_ability_unresolved": "UNKNOWN", "schema_version": "real-mana-window-context-v1", "stack_use": "UNKNOWN"}
+mana-payment-opportunity [UNKNOWN] — 605.3a / sha256:b996ad86f817a1d69ed179f5b299c6efe56591ff363d162dba64318c98f4c562
+  No consequence established; inspect the individual condition findings.
+no-stack-immediate-resolution [UNKNOWN] — 605.3b / sha256:64c8d9dffd2a31ad715d214fda4fb650c217f5bd803b72dcb65663cc03a73e04
+  No consequence established; inspect the individual condition findings.
+ordinary-priority-opportunity [UNKNOWN] — 605.3a / sha256:b996ad86f817a1d69ed179f5b299c6efe56591ff363d162dba64318c98f4c562
+  No consequence established; inspect the individual condition findings.
+post-resolution-priority-return [UNKNOWN] — 405.6c / sha256:014c5bf6eb8a3b751961d28ea1e612ade7509763ecd9886fb66dd68010294941
+  No consequence established; inspect the individual condition findings.
+same-ability-repeat-restriction [UNKNOWN] — 605.3c / sha256:c00f9b451db7dcce795fcfb2b1c53a192610feb2c3112a0d73bf155f4709039c
+  No consequence established; inspect the individual condition findings.
+General priority establishment and passing are not admitted.
+Actual payment requests, complete activation legality, tap costs, mana-pool changes, checkpoints and illegal-action recovery remain unestablished.
+No general 117 procedure or missing dependency body is inferred from a citation.
+APPLICABLE is conditional on hypothetical assumptions, not a legal action, observed event or complete procedure.
+An INAPPLICABLE proposition supplies no opposite permission or conclusion about other rules.
+Retained projection/dependency review is not executable semantic approval or current source verification.
+No triggered procedure, targets, additional-effect ordering or real-card execution is established.
+Fictional gameplay supplies no real-rules evidence or execution authority.
+Evidence: sha256:4f3733a530d13464bf6b84897c3c355664ac144c52f6043e5f8da95d8c810562
+Report: sha256:8eeb2a1797bf260cb707c0b42ff2dabfff760d866ff5c042a0030752255f50c1

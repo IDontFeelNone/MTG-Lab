@@ -1,0 +1,30 @@
+{
+  "additions": {
+    "src/card_intelligence/mana_window.py": {
+      "bytes": 18980,
+      "sha256": "608f3d9ab7991612667e99eeb279bedbbf9855e98eaac92e7a00a85969f44122"
+    }
+  },
+  "base": "a039baa62377283b950cf64a9078dc3bb34ec07c",
+  "replacements": {
+    "tests/semantic_closure_preservation.py": {
+      "edits": [
+        {
+          "end": 1290,
+          "new": "from mana_window_preservation import preceding_bytes as window_preceding\n    raw = window_preceding(name, raw)\n    ",
+          "old": "",
+          "start": 1175
+        },
+        {
+          "end": 2245,
+          "new": "from mana_window_preservation import is_addition as window_addition\n    if window_addition(path, root): return True\n    ",
+          "old": "",
+          "start": 2125
+        }
+      ],
+      "historical_sha256": [],
+      "new_sha256": "30d6bae8bb09971685d649ee9953a632c14d2ae4389ccb7f6631d7b2847a5998",
+      "old_sha256": "dbf77f632ac7bcb549cf493bc31427e836f8e72608a0a3a8d3e5d3d8353fdf83"
+    }
+  }
+}
