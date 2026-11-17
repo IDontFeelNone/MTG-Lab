@@ -304,6 +304,8 @@ class ContextReviewAuthorizationDesignTests(unittest.TestCase):
         expected={v['path'] for v in value['files']};actual=set()
         for directory in ('src','.github'):
             for p in (ROOT/directory).rglob('*'):
+                from draw_access_preservation import is_addition as draw_addition
+                if p.is_file() and draw_addition(p,ROOT): continue
                 from pack_simulation_preservation import is_addition
                 if p.is_file() and is_addition(p,ROOT): continue
                 if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.pyc':actual.add(p.relative_to(ROOT).as_posix())

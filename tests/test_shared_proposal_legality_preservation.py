@@ -9,6 +9,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
+from draw_access_preservation import is_addition as draw_addition
 from query_attachment_performance_preservation import assert_retained_row
 from casting_permission_family_preservation import is_casting_permission_family_addition
 from casting_stage_family_completion_preservation import (
@@ -48,6 +49,7 @@ def regular_paths(directory, root=ROOT):
             if (p.is_file() or p.is_symlink())
             and "__pycache__" not in p.parts and p.suffix != ".pyc"
             and not is_casting_permission_family_addition(p, root)
+            and not draw_addition(p, root)
             and not is_casting_stage_family_completion_addition(p, root)}
 
 
