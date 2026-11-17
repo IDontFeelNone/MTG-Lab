@@ -739,6 +739,9 @@ def historical_document_before_land_decision_append(path, raw):
         raise AssertionError("Only named land decision document bytes are adapted")
     pin = LAND_DECISION_DOCUMENT_APPENDICES[path]
     size = pin["baseline_bytes"]
+    if len(raw) > size + pin["appendix_bytes"]:
+        from documentation_continuity_preservation import restore
+        raw = restore(path, raw)
     if len(raw) not in (size, size + pin["appendix_bytes"]):
         raise AssertionError("Only the exact land decision appendix is permitted")
     baseline, suffix = raw[:size], raw[size:]
@@ -1125,6 +1128,8 @@ def historical_document_before_analysis_append(path, raw):
 
 
 def historical_adapter_bytes(name, raw):
+    from documentation_continuity_preservation import preceding_bytes
+    raw = preceding_bytes(name, raw)
     if type(name) is not str or name not in ADAPTER_PATCHES or type(raw) is not bytes:
         raise AssertionError("Only explicitly named analysis-pilot adapters are accepted")
     for before, after in reversed(ADAPTER_PATCHES[name]):

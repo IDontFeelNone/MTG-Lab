@@ -1,3 +1,34 @@
+# MTG Lab
+
+MTG Lab is an evidence-driven, reproducible decision-intelligence and research
+platform for collectible card games. Magic: The Gathering is the initial game;
+Mystery Booster 2 is the reference product. The [product vision](VISION.md)
+separates a first useful release from the ultimate research ambition.
+
+## Start here
+
+- [Governance and document responsibilities](docs/GOVERNANCE.md): owner approval,
+  routine PM review, Codex delivery and occasional independent Senior PM audits.
+- [Architecture](docs/ARCHITECTURE.md) and [accepted decisions](docs/DECISIONS.md):
+  Architecture v13 is ACTIVE APPROVED; Decision 017 is Accepted.
+- [Implemented capabilities and limitations](PROJECT_INVENTORY.md),
+  [current status](docs/PROJECT_STATUS.md), [handoff](docs/HANDOFF.md) and
+  [roadmap](docs/ROADMAP.md): current work and authorization boundaries.
+
+Executable generic pack simulation and bounded fictional gameplay are present.
+Neither proves authentic MB2 collation or real-Magic execution. Real-card
+semantic-closure and mana-window assessments are non-executing evidence tools.
+The inventory links to their owning contracts and limitations.
+
+---
+
+## Preserved historical records
+
+The complete predecessor document follows byte-for-byte. Its former “current”
+headings, baselines, counts and next-task recommendations describe their original
+milestones only. They neither supersede the current entry above nor authorize
+follow-on work. Historical evidence and authorization context remain unchanged.
+
 # Current milestone — Mana Ability Direct Dependency Design
 
 **Architecture v13 — ACTIVE APPROVED. Decision 017 remains Accepted.**

@@ -154,6 +154,8 @@ CHECKER_ADAPTER_SHA256 = '04a2fa5ef4a4e343b9ccee555cdfe199c36c1d384421f0a7b0f914
 
 
 def historical_adapter_bytes(name, raw):
+    from documentation_continuity_preservation import preceding_bytes
+    raw = preceding_bytes(name, raw)
     if type(name) is not str or name not in ADAPTER_PATCHES or type(raw) is not bytes:
         raise AssertionError("Only explicitly named pilot adapters are accepted")
     for before, after in reversed(ADAPTER_PATCHES[name]):

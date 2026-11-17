@@ -22,6 +22,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from documentation_continuity_preservation import preceding_bytes as documentation_preceding
+    raw = documentation_preceding(name, raw)
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
     if name not in REPLACEMENTS: return raw
     pin = ledger()['replacements'][name]; digest = hashlib.sha256(raw).hexdigest()

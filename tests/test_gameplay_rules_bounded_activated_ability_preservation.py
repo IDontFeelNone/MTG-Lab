@@ -110,6 +110,9 @@ class BoundedActivatedAbilityPreservationTests(unittest.TestCase):
         for row in rows:
             with self.subTest(path=row["path"]):
                 raw = (ROOT / row["path"]).read_bytes()
+                from documentation_continuity_preservation import DOCUMENTS, restore
+                if row["path"] in DOCUMENTS:
+                    raw = restore(row["path"], raw)
                 original = raw[:row["bytes"]]
                 self.assertEqual(len(original), row["bytes"])
                 self.assertEqual(hashlib.sha256(original).hexdigest(), row["sha256"])

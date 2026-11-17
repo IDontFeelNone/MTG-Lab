@@ -1,3 +1,44 @@
+# Current operational handoff
+
+## Read first
+
+[Vision](../VISION.md) → [governance](GOVERNANCE.md) →
+[implementation inventory](../PROJECT_INVENTORY.md) →
+[current status](PROJECT_STATUS.md) → [roadmap](ROADMAP.md).
+[Architecture v13](ARCHITECTURE.md) and [Accepted Decision 017](DECISIONS.md)
+remain governing authority. Verify GitHub main at the start of work; do not use a
+historical heading below as a new authorization.
+
+This documentation handoff was prepared against main
+`954592cd25e0e29c7d4d2764cad27f77a193a05b`, tree
+`effe6749579bee6a61075bf01de3673491cccd21`.
+
+## Exact next action
+
+The PM independently reviews the Documentation Continuity & Vision
+Canonicalization V1 draft PR, its exact reversible preservation adapter, final
+head and CI. The owner then makes the final merge decision. Exact delivery
+identities and test results belong in that PR and its validation receipts.
+Do not merge automatically or start follow-on implementation.
+
+Only this documentation work and its narrowly approved test compatibility changes
+are authorized. Rules-inventory implementation and full-corpus source processing
+remain unauthorized; the [proposed direction](ROADMAP.md#proposed-rules-corpus-direction)
+is preserved for later owner consideration. The two-rule Stage B projection is
+not being implemented. The CR attachment is unnecessary for this milestone.
+
+Future work updates only materially affected documents. Root VISION.md remains
+stable; older visions and the records below retain their historical context.
+
+---
+
+## Preserved historical records
+
+The complete predecessor document follows byte-for-byte. Its former “current”
+headings, baselines, counts and next-task recommendations describe their original
+milestones only. They neither supersede the current entry above nor authorize
+follow-on work. Historical evidence and authorization context remain unchanged.
+
 # PR #199 provenance correction — existing design milestone
 
 Independent PM review returned REVISE for twelve foreign review-ID selections
