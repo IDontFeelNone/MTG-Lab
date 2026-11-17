@@ -1,0 +1,60 @@
+"""Finite test-only addition accounting; inherited evidence and pins stay intact."""
+import hashlib
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+LEDGER = ROOT / 'tests/fixtures/draw_access_v1/successors.json'
+LEDGER_SHA256 = 'ee3f2ac178af8a456365a91b3541ff8838b1fac2157616e4f561742f77d6db3e'
+ADDITIONS = frozenset(('src/probability/draw_access.py', 'src/probability/__main__.py'))
+REPLACEMENTS = frozenset(('tests/validation_performance_preservation.py',
+                          'tests/documentation_continuity_preservation.py',
+                          'tests/test_rules_card_integration_design.py'))
+
+
+def pin(raw):
+    return {'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()}
+
+
+def ledger():
+    raw = LEDGER.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != LEDGER_SHA256:
+        raise AssertionError('exact draw-access compatibility ledger required')
+    value = json.loads(raw)
+    if (value['base'] != '75cd68ca86a533b4a8f0fef52e260f06daed88fd'
+            or value['tree'] != '5a4240d6bde7e9c2676b2ddbf951def8b382bd74'
+            or set(value['additions']) != ADDITIONS or set(value['replacements']) != REPLACEMENTS):
+        raise AssertionError('exact draw-access compatibility scope required')
+    return value
+
+
+def preceding_bytes(name, raw):
+    if type(name) is not str or type(raw) is not bytes:
+        raise AssertionError('exact named source bytes required')
+    if name not in REPLACEMENTS:
+        return raw
+    expected = ledger()['replacements'][name]
+    if pin(raw) == expected['old'] or hashlib.sha256(raw).hexdigest() in expected['historical_sha256']:
+        return raw
+    if pin(raw) != expected['new']:
+        raise AssertionError('unrecognized draw-access successor')
+    for edit in reversed(expected['edits']):
+        start, end = edit['start'], edit['end']
+        if hashlib.sha256(raw[start:end]).hexdigest() != edit['new_sha256']:
+            raise AssertionError('exact approved draw-access delta required')
+        raw = raw[:start] + edit['old'].encode() + raw[end:]
+    if pin(raw) != expected['old']:
+        raise AssertionError('exact historical predecessor required')
+    return raw
+
+
+def is_addition(path, root=ROOT):
+    name = path.relative_to(root).as_posix()
+    if name not in ADDITIONS:
+        return False
+    if (any(p.is_symlink() for p in (path, *path.parents))
+            or not path.is_file() or path.stat().st_mode & 0o111):
+        raise AssertionError('ordinary non-executable draw-access source required')
+    if pin(path.read_bytes()) != ledger()['additions'][name]:
+        raise AssertionError('exact draw-access source pin required')
+    return True

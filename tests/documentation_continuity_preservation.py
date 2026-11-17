@@ -64,6 +64,8 @@ def preceding_bytes(name, raw):
     Older, smaller historical versions still pass to their existing exact-pinned
     validators. This lane cannot exempt any file from those assertions.
     """
+    from draw_access_preservation import preceding_bytes as draw_preceding
+    raw = draw_preceding(name, raw)
     if type(name) is not str or type(raw) is not bytes:
         raise AssertionError('exact named source bytes required')
     if name in HELPERS and len(raw) >= ledger()['replacements'][name]['old']['bytes']:

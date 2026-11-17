@@ -116,6 +116,8 @@ def assert_current_implementation(root=ROOT):
 
 def is_validation_performance_addition(path, root=ROOT):
     """Select only the named helper/tool; neighboring additions stay visible."""
+    from draw_access_preservation import is_addition as draw_addition
+    if draw_addition(path, root): return True
     return path.relative_to(root).as_posix() in NEW_SOURCE_PATHS | NEW_TOOL_PATHS
 
 

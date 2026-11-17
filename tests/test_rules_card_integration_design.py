@@ -190,7 +190,8 @@ class RulesCardIntegrationDesignTests(unittest.TestCase):
         from pack_simulation_preservation import is_addition
         self.assertEqual([p.name for p in (ROOT/'src/simulation').iterdir()
             if p.name!='__pycache__' and not is_addition(p,ROOT)],['.gitkeep'])
-        self.assertEqual([p.name for p in (ROOT/'src/probability').glob('*.py')],['__init__.py'])
+        from draw_access_preservation import is_addition as draw_addition
+        self.assertEqual([p.name for p in (ROOT/'src/probability').glob('*.py') if not draw_addition(p,ROOT)],['__init__.py'])
         self.assertEqual(document('examples.json')['status'],'ILLUSTRATIVE_NOT_STRATEGIC_VALIDATION')
 
 if __name__=='__main__':unittest.main()
