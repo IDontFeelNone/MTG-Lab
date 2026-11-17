@@ -5,10 +5,21 @@ platform for collectible card games. It aims to help people understand cards,
 products and decisions, inspect the basis of an answer, and distinguish what is
 known from what remains uncertain.
 
+MTG Lab originated as an analytical foundation for ChatGPT, beginning with
+booster-pack probability questions and Mystery Booster 2 simulation research.
+Its intended experience is an accessible, AI-powered application through which
+users can investigate cards, decks, collections, products, markets and research
+hypotheses without programming knowledge.
+
+The Project Owner's conceptual comparison is: “If ChatGPT, Untapped.gg, Moxfield,
+and Collectr had a baby.” This describes an integrated experience, not a
+requirement to reproduce those applications.
+
 Magic: The Gathering is the initial game. Mystery Booster 2 is the reference
 product for demonstrating reusable product infrastructure. The architecture is
 intended to support additional collectible card games over time, with each
 game's identities, evidence and rules kept explicit.
+This ambition does not authorize expanding the present engineering scope.
 
 This document is the authoritative long-term product vision. It describes desired
 capabilities, not present implementation or permission to build them. Approved
@@ -27,6 +38,9 @@ Its exact feature set, acceptance criteria, delivery schedule and implementation
 authorization require separate Project Owner approval. A useful first release
 does not need to realize every research ambition below.
 
+Complete interactive gameplay, Arena feature parity and superhuman gameplay are
+not prerequisites for the first useful release.
+
 ## Ultimate research vision
 
 The long-term goal combines the following capabilities into an explainable
@@ -40,6 +54,12 @@ exceptions, procedures, interactions and strategic implications. Keep verified
 rules evidence, reviewed semantic understanding and executable gameplay as
 distinct achievements. Card text or a rule citation alone cannot establish a
 complete procedure or interaction.
+
+Expert-level strategic intelligence, autonomous gameplay and full-game simulation
+remain long-term research ambitions. MTG Lab is not intended to recreate MTG Arena.
+Rules understanding and gameplay simulation should primarily support analytical
+questions: deck consistency, win-condition probabilities, disruption, matchup
+analysis and strategy evaluation.
 
 ### Product and Pack Simulation
 
@@ -62,6 +82,10 @@ upgrades, legality, collection-aware recommendations and strategic comparison.
 Distinguish rules legality, observed performance and strategic hypotheses, with
 explicit objectives, alternatives and evidence.
 
+Tier classifications must be format-specific and supported by competitive
+evidence. Early-turn consistency matters, but turn-six performance is not a
+universal competitive benchmark.
+
 ### Market and Acquisition Intelligence
 
 Analyze prices, historical trends, sealed products, singles, supply, expected
@@ -76,12 +100,21 @@ explanations, questions, hypothetical scenarios and interactive experimentation.
 AI should reason over attributable evidence and supported procedures, disclose
 uncertainty and refuse to invent missing facts or authority.
 
+Support both ChatGPT-accessible analytical capabilities and a built-in AI
+research assistant. Both should reason over verified knowledge and analytical
+tools rather than becoming a competing source of canonical truth. Interchangeable
+model providers and orchestration architectures remain proposed technical
+approaches, not approved implementation requirements.
+
 ### Research and Experimentation
 
-Preserve hypotheses, evidence, experiments, outcomes, counterexamples and
+Preserve dated hypotheses, original evidence, experiments, outcomes, counterexamples and
 reproducible validation. Keep domain research in the established
 [Research Log](docs/RESEARCH_LOG_ARCHITECTURE.md), with engineering documentation
 and temporary conversation context serving their separate purposes.
+
+Retain experiment versions and later validation so the historical record can
+substantiate whether a sleeper-card discovery preceded widespread recognition.
 
 ### Evidence-Backed Discovery
 
@@ -101,3 +134,8 @@ semantic review, admission and execution remain independent gates.
 Capability breadth must preserve explainability, privacy, historical integrity
 and honest uncertainty. Neither this vision nor its first-release description
 silently expands the approved roadmap.
+
+Enduring product requirements guide desired outcomes; proposed technical
+approaches require separate approval; deferred features remain outside
+authorized work; aspirational research capabilities are benchmarks rather than
+release prerequisites. Nothing in this vision authorizes implementation.

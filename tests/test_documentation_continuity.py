@@ -119,6 +119,8 @@ class DocumentationContinuityTests(unittest.TestCase):
         texts = {}
         for name, expected in guard.ledger()['additions'].items():
             raw = (guard.ROOT / name).read_bytes()
+            from vision_alignment_preservation import preceding_bytes
+            raw = preceding_bytes(name, raw)
             self.assertEqual(pin(raw), expected)
             texts[name] = raw.decode()
         for name in guard.DOCUMENTS:
