@@ -119,6 +119,8 @@ ADAPTER_BASE_SHA256 = {'tests/casting_permission_family_preservation.py': 'b09cd
 
 
 def historical_adapter_bytes(name, raw):
+    from documentation_continuity_preservation import preceding_bytes
+    raw = preceding_bytes(name, raw)
     """Reverse only the two named finite compositions; original assertions survive."""
     if type(name) is not str or name not in ADAPTER_PATCHES or type(raw) is not bytes:
         raise AssertionError("Only explicitly named packet-design adapters are accepted")

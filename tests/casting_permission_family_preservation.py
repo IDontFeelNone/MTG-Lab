@@ -254,6 +254,8 @@ ADAPTER_BASE_SHA256 = {'tests/activated_ability_preservation.py': '5c955a9516581
  'tests/test_shared_target_declaration_preservation.py': '38336dc463b08183454bf603f8b15341d79a58d73d945a8ef8621b4a1782bf0a'}
 
 def historical_adapter_bytes(name, raw):
+    from documentation_continuity_preservation import preceding_bytes
+    raw = preceding_bytes(name, raw)
     if type(name) is not str or name not in ADAPTER_PATCHES or type(raw) is not bytes:
         raise AssertionError("Only explicitly named test adapter bytes are accepted")
     for before, after in reversed(ADAPTER_PATCHES[name]):

@@ -1,3 +1,40 @@
+# Current implementation inventory
+
+This entry supersedes historical opening summaries below. Verified baseline:
+[main 954592c](https://github.com/IDontFeelNone/MTG-Lab/commit/954592cd25e0e29c7d4d2764cad27f77a193a05b),
+tree `effe6749579bee6a61075bf01de3673491cccd21`. Architecture v13 remains
+ACTIVE APPROVED; Decision 017 remains Accepted.
+
+| Capability | Status and actual boundary | Owning documentation |
+| --- | --- | --- |
+| Generic pack simulation V0, V0.1 and V0.2 | IMPLEMENTED: seeded single-pack generation, explicit finishes and weighted variants. Fictional demonstrations do not establish real MB2 manufacturing probabilities. | [V0](docs/PACK_SIMULATION_V0.md), [V0.1](docs/PACK_SIMULATION_V01.md), [V0.2](docs/PACK_SIMULATION_V02.md) |
+| Collection comparison | IMPLEMENTED: exact identities, finite holdings and coherent mixed-Printing allocation; no strategic deck optimizer. | [Collection Intelligence](docs/COLLECTION_INTELLIGENCE.md) |
+| Fictional gameplay | IMPLEMENTED: sessions, supported priority/stack procedures, turn windows, ordered draws, draw-failure loss and bounded stack abilities. No arbitrary real-card execution. | [Sessions](docs/EXECUTABLE_GAMEPLAY_SESSION_V0.md), [turn structure](docs/GAMEPLAY_TURN_STRUCTURE_V2.md), [draw failure](docs/FICTIONAL_DRAW_FAILURE_V1.md), [stack abilities](docs/FICTIONAL_STACK_ABILITIES_V1.md) |
+| Card/rules evidence consumers | IMPLEMENTED: six-land historical overlay, strategic requirements and submitted context-review packets, within their exact finite cohorts. Requirements and unverified submissions are not strategic conclusions or approved evidence. | [Overlay](docs/SIX_LAND_EVIDENCE_OVERLAY.md), [requirements](docs/STRATEGIC_CONTEXT_REQUIREMENTS.md), [review packets](docs/CONTEXT_EVIDENCE_REVIEW_PACKET.md) |
+| Real-Card Semantic Closure V1 | IMPLEMENTED: non-executing exact-ID pilot; 23 requirements expose 7 satisfied, 10 missing, 3 unknown, 1 unsupported and 2 blocked findings. Historical text acceptance is not current Oracle verification. | [Semantic closure](docs/REAL_CARD_SEMANTIC_CLOSURE_V1.md) |
+| Real-Mana Activation-Window Applicability V1 | IMPLEMENTED: seven-field hypothetical context and five evidence-bound propositions; no legal-activation approval or closure promotion. | [Applicability](docs/REAL_MANA_WINDOW_APPLICABILITY_V1.md) |
+| Canonical import recovery | IMPLEMENTED: interrupted-state detection, protected backup retention and explicit publication/recovery boundaries. Power-loss durability is not established. | [Recovery contract](docs/CANONICAL_IMPORT_RECOVERY.md) |
+
+Retained CR coverage remains **104 units / 16 projections**; the land consumer
+admits **24 rules**. Neither count establishes complete semantic understanding.
+Real-card execution remains BLOCKED. Full deck intelligence, AI tutoring and
+independent overlooked-card discovery are ASPIRATIONAL, as described in
+[VISION.md](VISION.md), not present product capabilities.
+
+Use [GOVERNANCE](docs/GOVERNANCE.md) for document responsibilities and status
+meanings, [PROJECT_STATUS](docs/PROJECT_STATUS.md) for blockers, and
+[ROADMAP](docs/ROADMAP.md) for authorization. This documentation milestone adds no
+runtime, rules evidence, admission or source-use permission.
+
+---
+
+## Preserved historical records
+
+The complete predecessor document follows byte-for-byte. Its former “current”
+headings, baselines, counts and next-task recommendations describe their original
+milestones only. They neither supersede the current entry above nor authorize
+follow-on work. Historical evidence and authorization context remain unchanged.
+
 # Current implementation inventory — Activated Ability Procedure Design
 
 Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.

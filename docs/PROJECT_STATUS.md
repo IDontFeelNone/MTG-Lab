@@ -1,3 +1,52 @@
+# Current project state
+
+Verified baseline: canonical main
+`954592cd25e0e29c7d4d2764cad27f77a193a05b`, tree
+`effe6749579bee6a61075bf01de3673491cccd21`. The merged history includes generic
+pack variants, fictional turn/stack procedures, canonical import recovery,
+Real-Card Semantic Closure V1 and Real-Mana Activation-Window Applicability V1.
+See the [implementation inventory](../PROJECT_INVENTORY.md) for evidence-linked
+capability boundaries. Architecture v13 and Accepted Decision 017 are unchanged.
+
+Documentation Continuity & Vision Canonicalization V1, including its exact
+preservation-compatibility amendment, is owner-authorized. Its draft PR and
+validation receipts determine delivery readiness; this entry is not a claim of
+merge approval or completed CI. The next operational action is independent PM
+review of that bounded PR, followed by the owner's decision.
+
+## Current limits and authorization
+
+- **BLOCKED:** real-card execution and complete semantic closure. Historical
+  accepted interpretations and retained rules do not establish current Oracle
+  verification or approved real execution procedures.
+- **BLOCKED:** authentic statistically defensible MB2 generation. Generic seeded
+  simulation does not resolve physical-distribution evidence, identity admission
+  or operation-specific source-use gates.
+- **PROPOSED_NOT_AUTHORIZED:** rules-corpus infrastructure; see the
+  [roadmap](ROADMAP.md#proposed-rules-corpus-direction). No bulk source processing
+  or public corpus metadata publication is authorized.
+- **DEFERRED:** the original two-rule Stage B projection under the owner's change
+  of development strategy. No projection is created here.
+- Source-policy clearance remains **not_granted**. Broader private retention,
+  redistribution, free/commercial service and AI export remain
+  **NOT_ESTABLISHED**. No upstream permission is marked GRANTED.
+- Canonical admission remains false and execution authority BLOCKED for these
+  real-rules evidence lanes. Semantic closure remains OPEN; all ten activation
+  responsibilities remain OPEN / EXECUTION_BLOCKED. Tier A remains non-production.
+
+[VISION](../VISION.md) states enduring ambitions; [GOVERNANCE](GOVERNANCE.md)
+states the approval workflow. This milestone does not change product behavior,
+protected evidence, Research Log authority or permissions.
+
+---
+
+## Preserved historical records
+
+The complete predecessor document follows byte-for-byte. Its former “current”
+headings, baselines, counts and next-task recommendations describe their original
+milestones only. They neither supersede the current entry above nor authorize
+follow-on work. Historical evidence and authorization context remain unchanged.
+
 # Current project status — Bounded Mana Stack-Exception Projection
 
 ## Current status — bounded mana stack-exception projection

@@ -76,6 +76,9 @@ class LandDecisionPreservationTests(unittest.TestCase):
         for name, pin in guard.LAND_DECISION_DOCUMENT_APPENDICES.items():
             with self.subTest(path=name):
                 raw = (ROOT / name).read_bytes()
+                from documentation_continuity_preservation import DOCUMENTS, restore
+                if name in DOCUMENTS:
+                    raw = restore(name, raw)
                 inherited = guard.historical_document_before_land_decision_append(name, raw)
                 self.assertEqual(len(raw), pin["baseline_bytes"] + pin["appendix_bytes"])
                 self.assertEqual(hashlib.sha256(inherited).hexdigest(), pin["baseline_sha256"])

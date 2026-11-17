@@ -1,3 +1,59 @@
+# Current roadmap and authorization
+
+The [vision](../VISION.md) describes enduring ambition; this roadmap separates
+work status from implementation authority. [GOVERNANCE](GOVERNANCE.md) defines
+the statuses and owner-controlled workflow. Baseline:
+`954592cd25e0e29c7d4d2764cad27f77a193a05b`. Architecture v13 and Decision 017
+remain unchanged. Historical recommendations below are not current approvals.
+
+| Work | Status | Boundary |
+| --- | --- | --- |
+| Generic pack simulation through V0.2; fictional gameplay through stack abilities; canonical import recovery | IMPLEMENTED | See the [inventory](../PROJECT_INVENTORY.md); authentic MB2 and general real-Magic execution are not implied. |
+| Real-Card Semantic Closure V1 and Real-Mana Activation-Window Applicability V1 | IMPLEMENTED | Non-executing evidence assessment; no real-profile or semantic promotion. |
+| Documentation Continuity & Vision Canonicalization V1, with preservation amendment | APPROVED_NOT_IMPLEMENTED at milestone entry | This PR contains the implementation candidate; merge and validation disposition remain separate and require PM review and owner decision. |
+| Original 107.4c / 107.5 Stage B projection | DEFERRED | Owner changed development strategy; do not implement it under the earlier conditional proposal. |
+| Authentic MB2 generation and real-card gameplay execution | BLOCKED | Evidence, source-use, admission and procedural prerequisites remain independent. |
+| Full deck intelligence, AI tutoring and evidence-backed discovery | ASPIRATIONAL | No implementation authorization or delivery schedule follows from the vision. |
+
+## Proposed rules-corpus direction
+
+**Complete Single-Release CR Structural Inventory V1 — PROPOSED_NOT_AUTHORIZED.**
+
+The PM accepted the scaling assessment as a proposed technical direction. Its
+architecture separates (1) verified structural inventory, (2) typed rule
+relationships, (3) independently reviewed semantic batches, and (4) explicit
+consumer admission. Extracted identifiers or citation edges do not establish
+reviewed semantic understanding or admitted gameplay/Card Intelligence behavior.
+
+A possible phased path is structural inventory for one pinned release, dependency
+and batch-review tooling, substantive semantic/procedural review, then separately
+approved consumer integration. None of these phases is authorized by this entry.
+The first proposed milestone would inventory one complete release, preserve exact
+source spans and hashes, expose unresolved references and reconcile historical
+anchors without creating semantic approvals or execution authority.
+
+Before any implementation, obtain a separate operation-specific source-use
+disposition and explicit owner authorization covering:
+
+1. Whole-artifact transient structural parsing.
+2. Private derived metadata retention.
+3. Any proposed public metadata publication.
+
+The two-rule PROCEED WITH CONDITIONS disposition does not authorize these broader
+operations. Upstream permissions remain NOT_ESTABLISHED; source-policy clearance
+remains not_granted. No full-corpus processing, new projections or publication
+occurs in this documentation milestone. No first-release feature set or timeline
+is approved here.
+
+---
+
+## Preserved historical records
+
+The complete predecessor document follows byte-for-byte. Its former “current”
+headings, baselines, counts and next-task recommendations describe their original
+milestones only. They neither supersede the current entry above nor authorize
+follow-on work. Historical evidence and authorization context remain unchanged.
+
 # Current roadmap — Activated Ability Procedure Design
 
 Architecture v13 remains ACTIVE APPROVED; Decision 017 remains ACCEPTED.
