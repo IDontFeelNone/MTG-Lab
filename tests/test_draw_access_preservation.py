@@ -34,7 +34,7 @@ class DrawAccessPreservationTests(unittest.TestCase):
             path.chmod(0o644); path.unlink(); path.symlink_to(guard.ROOT / name)
             with self.assertRaises(AssertionError): guard.is_addition(path, root)
 
-    def test_three_successors_reverse_to_exact_canonical_baselines(self):
+    def test_four_successors_reverse_to_exact_canonical_baselines(self):
         for name, row in guard.ledger()['replacements'].items():
             raw = (guard.ROOT / name).read_bytes()
             self.assertEqual(guard.pin(raw), row['new'])
