@@ -5,12 +5,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / 'tests/fixtures/draw_access_v1/successors.json'
-LEDGER_SHA256 = '923620e85faa2f2a38c6690bc23aba44a7c2989149322be4c29bc260450b73ba'
+LEDGER_SHA256 = 'b9805847403bd97cd42a081123cc59032e5c516c2ffe62526ef640912a16ec16'
 ADDITIONS = frozenset(('src/probability/draw_access.py', 'src/probability/__main__.py'))
 REPLACEMENTS = frozenset(('tests/validation_performance_preservation.py',
                           'tests/documentation_continuity_preservation.py',
                           'tests/test_rules_card_integration_design.py',
-                          'tests/test_context_review_authorization_design.py'))
+                          'tests/test_context_review_authorization_design.py',
+                          'tests/test_shared_proposal_legality_preservation.py'))
 
 
 def pin(raw):
