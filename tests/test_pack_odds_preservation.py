@@ -18,6 +18,8 @@ class PackOddsPreservationTests(unittest.TestCase):
         self.assertEqual(len(guard.REPLACEMENTS), 4)
         for name, row in guard.ledger()['replacements'].items():
             raw = (guard.ROOT / name).read_bytes()
+            from supplied_deck_preservation import preceding_bytes
+            raw = preceding_bytes(name, raw)
             self.assertEqual(guard.pin(raw), row['new'])
             old = guard.preceding_bytes(name, raw)
             self.assertEqual(guard.pin(old), row['old'])

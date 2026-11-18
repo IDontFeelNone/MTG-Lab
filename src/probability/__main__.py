@@ -18,7 +18,24 @@ def main(argv=None):
     odds.add_argument('--data-root', type=Path)
     odds.add_argument('--product-id', required=True)
     odds.add_argument('--definition-id', required=True)
+    supplied = commands.add_parser('deck-consistency', help='derive exact access and compare supplied decks')
+    supplied.add_argument('--input', required=True, help='UTF-8 JSON file, or - for stdin')
+    supplied.add_argument('--format', choices=('json', 'text'), default='json')
     args = parser.parse_args(argv)
+    if args.command == 'deck-consistency':
+        from .supplied_deck import (MAX_INPUT_BYTES as DECK_BYTES, SuppliedDeckError,
+            parse_supplied_decks, assess_supplied_decks, render_supplied_decks)
+        try:
+            if args.input == '-': raw = sys.stdin.buffer.read(DECK_BYTES + 1)
+            else:
+                with Path(args.input).open('rb') as stream: raw = stream.read(DECK_BYTES + 1)
+            result = assess_supplied_decks(parse_supplied_decks(raw))
+        except (SuppliedDeckError, OSError) as error:
+            failure = error if isinstance(error, SuppliedDeckError) else SuppliedDeckError('input file unavailable')
+            print(render_supplied_decks(failure.as_dict(), readable=args.format == 'text'), end='')
+            return 2
+        print(render_supplied_decks(result, readable=args.format == 'text'), end='')
+        return 0
     if args.command == 'pack-target-odds':
         from simulation import load_pack_simulator, PackSimulationError
         from .pack_odds import PackOddsError, parse_pack_odds, assess_pack_target
