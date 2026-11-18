@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "supplied-deck-consistency-input-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "supplied-deck-consistency-input-v1"
+    },
+    "decks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "deck_id",
+          "identity_authority",
+          "complete",
+          "draw_population",
+          "entries",
+          "groups",
+          "schedule",
+          "assumptions"
+        ],
+        "properties": {
+          "deck_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "identity_authority": {
+            "const": "CALLER_DECLARED"
+          },
+          "complete": {
+            "const": true
+          },
+          "draw_population": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "section",
+              "declared_size"
+            ],
+            "properties": {
+              "section": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 48,
+                "pattern": "^(main|sideboard|commander|companion|other:.+)$"
+              },
+              "declared_size": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 120
+              }
+            }
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "card_id",
+                "section",
+                "quantity"
+              ],
+              "properties": {
+                "card_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "section": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 48,
+                  "pattern": "^(main|sideboard|commander|companion|other:.+)$"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 120
+                }
+              }
+            },
+            "minItems": 1,
+            "maxItems": 512
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "group_id",
+                "members",
+                "minimum"
+              ],
+              "properties": {
+                "group_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 64
+                },
+                "members": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "minItems": 1,
+                  "maxItems": 120,
+                  "uniqueItems": true
+                },
+                "minimum": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 120
+                }
+              }
+            },
+            "minItems": 1,
+            "maxItems": 3
+          },
+          "schedule": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "cards_seen"
+              ],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                },
+                "cards_seen": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 20
+                }
+              }
+            },
+            "minItems": 1,
+            "maxItems": 21
+          },
+          "assumptions": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "sampling",
+              "group_disjointness"
+            ],
+            "properties": {
+              "sampling": {
+                "const": "uniform-without-replacement"
+              },
+              "group_disjointness": {
+                "const": "caller_declared"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 2
+    }
+  }
+}
