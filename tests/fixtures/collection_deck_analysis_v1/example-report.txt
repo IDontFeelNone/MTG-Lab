@@ -1,0 +1,35 @@
+Collection-to-deck analysis: reported snapshot coverage; no physical reservations
+original: REPORTED_SNAPSHOT_COVERAGE
+59 covered by reported holdings; 1 uncovered in selected snapshot
+target-flex (any): pack_fixture.tst.4.en x1; uncovered 0
+target-exact (exact): pack_fixture.tst.1.en x1; uncovered 1
+filler (any): pack_fixture.tst.3.en x57; uncovered 0
+modified: REPORTED_SNAPSHOT_COVERAGE
+58 covered by reported holdings; 2 uncovered in selected snapshot
+target (any): pack_fixture.tst.1.en x1, pack_fixture.tst.4.en x1; uncovered 2
+filler (any): pack_fixture.tst.3.en x56; uncovered 0
+Supplied deck access (caller declarations; no gameplay or strategic ranking)
+original: 60 cards from main
+target-access: 3 declared copies; minimum 1
+Opening assumption (7 seen): 5397/17110 = 0.315429573349
+Later assumption (9 seen): 2679/6844 = 0.391437755698
+modified: 60 cards from main
+target-access: 4 declared copies; minimum 1
+Opening assumption (7 seen): 38962/97527 = 0.399499625745
+Later assumption (9 seen): 15849/32509 = 0.487526531114
+Comparison: COMPARABLE
+Opening assumption candidate minus baseline: 81991/975270 = 0.084070052396
+Later assumption candidate minus baseline: 12495/130036 = 0.096088775416
+Completeness, Card identities, quantities, section selection and interchangeability are caller declarations, not canonical admissions.
+Only the explicitly selected section is sampled uniformly without replacement; no other section is silently included.
+Observation labels establish no Magic turn, mulligan, play/draw or additional-draw rules.
+No casting, mana feasibility, combo success, legality, strategic superiority, disruption success or win rate follows.
+Comparison uses identical member identities, minima, selected section and full observation schedule; labels alone never establish equivalent events.
+No analytical mapping, private collection access, source acquisition or AI export is performed.
+Uncertainty: {"ambiguous_rows":0,"conflicting_lot_rows":0,"excluded_duplicate_rows":0,"invalid_rows":0,"physical_ownership_independently_verified":false,"scope_complete":null,"unresolved_rows":0}
+Coverage describes resolved reported holdings in the selected snapshot, not independently verified complete physical ownership.
+Uncovered quantities are shortages against that snapshot; unresolved evidence can change them.
+Probabilities describe the intended deck even when coverage is withheld or cards are uncovered.
+Alternatives reuse the same immutable snapshot independently; their allocations must not be summed or treated as simultaneous reservations.
+Printing-ID allocation does not establish finish-specific suitability, strategic strength, legality, casting or win rates.
+No private paths, raw sources, unrelated holdings, acquisition notes, AI export, ingestion or new authority are provided.

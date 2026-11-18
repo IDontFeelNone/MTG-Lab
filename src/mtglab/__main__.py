@@ -64,6 +64,10 @@ def main(argv=None) -> int:
                 help="Explicit trusted caller boundary for recording the supplied human approval; never inferred.")
     deck = commands.add_parser("deck")
     deck_commands = deck.add_subparsers(dest="deck_command", required=True)
+    analysis = deck_commands.add_parser("analyze")
+    for name in ("input", "snapshot", "source", "source-root", "catalog-root"):
+        analysis.add_argument("--" + name, type=Path, required=True)
+    analysis.add_argument("--format", choices=("json", "text"), default="json")
     for name in ("compare", "missing", "acquisition-priorities"):
         command = deck_commands.add_parser(name); command.add_argument("--snapshot", required=True)
         command.add_argument("--deck", type=Path, action="append", required=True); command.add_argument("--game", default="magic")
@@ -215,6 +219,9 @@ def main(argv=None) -> int:
     single.add_argument("--definition-id"); single.add_argument("--seed", type=int, required=True)
     single.add_argument("--recorded-at"); single.add_argument("--format", choices=("json", "text"), default="json")
     args = parser.parse_args(argv)
+    if args.command == "deck" and args.deck_command == "analyze":
+        from collection.deck_analysis import run_cli
+        return run_cli(args)
     if args.command == "pack":
         from simulation import load_pack_simulator, PackSimulationError, render_pack_report
         try:
