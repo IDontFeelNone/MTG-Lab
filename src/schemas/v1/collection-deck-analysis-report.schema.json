@@ -1,0 +1,1309 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "collection-deck-analysis-report-v1",
+  "$defs": {
+    "consistency": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "supplied-deck-consistency-report-v1",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "status",
+            "input",
+            "input_id",
+            "configurations",
+            "comparison",
+            "bounds",
+            "real_gameplay_authorized",
+            "scope",
+            "limitations",
+            "report_id"
+          ],
+          "properties": {
+            "schema_version": {
+              "const": "supplied-deck-consistency-report-v1"
+            },
+            "status": {
+              "const": "ASSESSED"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "schema_version",
+                "decks"
+              ],
+              "properties": {
+                "schema_version": {
+                  "const": "supplied-deck-consistency-input-v1"
+                },
+                "decks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "deck_id",
+                      "identity_authority",
+                      "complete",
+                      "draw_population",
+                      "entries",
+                      "groups",
+                      "schedule",
+                      "assumptions"
+                    ],
+                    "properties": {
+                      "deck_id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 128
+                      },
+                      "identity_authority": {
+                        "const": "CALLER_DECLARED"
+                      },
+                      "complete": {
+                        "const": true
+                      },
+                      "draw_population": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "section",
+                          "declared_size"
+                        ],
+                        "properties": {
+                          "section": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 48,
+                            "pattern": "^(main|sideboard|commander|companion|other:.+)$"
+                          },
+                          "declared_size": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 120
+                          }
+                        }
+                      },
+                      "entries": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "card_id",
+                            "section",
+                            "quantity"
+                          ],
+                          "properties": {
+                            "card_id": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 128
+                            },
+                            "section": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 48,
+                              "pattern": "^(main|sideboard|commander|companion|other:.+)$"
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 120
+                            }
+                          }
+                        },
+                        "minItems": 1,
+                        "maxItems": 512
+                      },
+                      "groups": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "group_id",
+                            "members",
+                            "minimum"
+                          ],
+                          "properties": {
+                            "group_id": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 64
+                            },
+                            "members": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 128
+                              },
+                              "minItems": 1,
+                              "maxItems": 120,
+                              "uniqueItems": true
+                            },
+                            "minimum": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 120
+                            }
+                          }
+                        },
+                        "minItems": 1,
+                        "maxItems": 3
+                      },
+                      "schedule": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "label",
+                            "cards_seen"
+                          ],
+                          "properties": {
+                            "label": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 80
+                            },
+                            "cards_seen": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 20
+                            }
+                          }
+                        },
+                        "minItems": 1,
+                        "maxItems": 21
+                      },
+                      "assumptions": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "sampling",
+                          "group_disjointness"
+                        ],
+                        "properties": {
+                          "sampling": {
+                            "const": "uniform-without-replacement"
+                          },
+                          "group_disjointness": {
+                            "const": "caller_declared"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "minItems": 1,
+                  "maxItems": 2
+                }
+              }
+            },
+            "input_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 71
+            },
+            "configurations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "deck_id",
+                  "deck_input_id",
+                  "deck_size",
+                  "selected_section",
+                  "selected_quantities",
+                  "derived_groups",
+                  "results",
+                  "status",
+                  "impossible_group_ids",
+                  "draw_access_report",
+                  "assumptions",
+                  "identity_authority"
+                ],
+                "properties": {
+                  "deck_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "deck_input_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 71
+                  },
+                  "deck_size": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 120
+                  },
+                  "selected_section": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 48,
+                    "pattern": "^(main|sideboard|commander|companion|other:.+)$"
+                  },
+                  "selected_quantities": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "card_id",
+                        "quantity"
+                      ],
+                      "properties": {
+                        "card_id": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 128
+                        },
+                        "quantity": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 120
+                        }
+                      }
+                    },
+                    "minItems": 1,
+                    "maxItems": 512
+                  },
+                  "derived_groups": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "group_id",
+                        "minimum",
+                        "copies",
+                        "members"
+                      ],
+                      "properties": {
+                        "group_id": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 64
+                        },
+                        "minimum": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 120
+                        },
+                        "copies": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 120
+                        },
+                        "members": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "card_id",
+                              "copies"
+                            ],
+                            "properties": {
+                              "card_id": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 128
+                              },
+                              "copies": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 120
+                              }
+                            }
+                          },
+                          "minItems": 0,
+                          "maxItems": 120
+                        }
+                      }
+                    },
+                    "minItems": 1,
+                    "maxItems": 3
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "label",
+                        "cards_seen",
+                        "probability"
+                      ],
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        },
+                        "cards_seen": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 20
+                        },
+                        "probability": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "numerator",
+                            "denominator",
+                            "decimal",
+                            "decimal_places",
+                            "rounding"
+                          ],
+                          "properties": {
+                            "numerator": {
+                              "type": "string",
+                              "pattern": "^-?(0|[1-9][0-9]*)$"
+                            },
+                            "denominator": {
+                              "type": "string",
+                              "pattern": "^[1-9][0-9]*$"
+                            },
+                            "decimal": {
+                              "type": "string",
+                              "pattern": "^-?[01]\\.[0-9]{12}$"
+                            },
+                            "decimal_places": {
+                              "const": 12
+                            },
+                            "rounding": {
+                              "const": "ROUND_HALF_EVEN"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "minItems": 1,
+                    "maxItems": 21
+                  },
+                  "status": {
+                    "enum": [
+                      "CALCULATED",
+                      "IMPOSSIBLE_POPULATION_REQUIREMENT"
+                    ]
+                  },
+                  "impossible_group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 64
+                    },
+                    "minItems": 0,
+                    "maxItems": 3
+                  },
+                  "draw_access_report": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "schema_version",
+                          "method",
+                          "status",
+                          "input_id",
+                          "input",
+                          "results",
+                          "limitations",
+                          "scope",
+                          "real_gameplay_authorized",
+                          "report_id"
+                        ],
+                        "properties": {
+                          "schema_version": {
+                            "const": "deck-draw-access-report-v1"
+                          },
+                          "method": {
+                            "const": "multivariate-hypergeometric-exact-v1"
+                          },
+                          "status": {
+                            "const": "CALCULATED"
+                          },
+                          "input_id": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 71
+                          },
+                          "input": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "schema_version",
+                              "deck_size",
+                              "groups",
+                              "schedule",
+                              "assumptions"
+                            ],
+                            "properties": {
+                              "schema_version": {
+                                "const": "deck-draw-access-input-v1"
+                              },
+                              "deck_size": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 120
+                              },
+                              "groups": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "group_id",
+                                    "minimum",
+                                    "copies",
+                                    "members"
+                                  ],
+                                  "properties": {
+                                    "group_id": {
+                                      "type": "string",
+                                      "minLength": 1,
+                                      "maxLength": 64
+                                    },
+                                    "minimum": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 120
+                                    },
+                                    "copies": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 120
+                                    },
+                                    "members": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "card_id",
+                                          "copies"
+                                        ],
+                                        "properties": {
+                                          "card_id": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 128
+                                          },
+                                          "copies": {
+                                            "type": "integer",
+                                            "minimum": 1,
+                                            "maximum": 120
+                                          }
+                                        }
+                                      },
+                                      "minItems": 0,
+                                      "maxItems": 120
+                                    }
+                                  }
+                                },
+                                "minItems": 1,
+                                "maxItems": 3
+                              },
+                              "schedule": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "label",
+                                    "cards_seen"
+                                  ],
+                                  "properties": {
+                                    "label": {
+                                      "type": "string",
+                                      "minLength": 1,
+                                      "maxLength": 80
+                                    },
+                                    "cards_seen": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 20
+                                    }
+                                  }
+                                },
+                                "minItems": 1,
+                                "maxItems": 21
+                              },
+                              "assumptions": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "sampling",
+                                  "group_disjointness"
+                                ],
+                                "properties": {
+                                  "sampling": {
+                                    "const": "uniform-without-replacement"
+                                  },
+                                  "group_disjointness": {
+                                    "const": "caller_declared"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "results": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "label",
+                                "cards_seen",
+                                "probability"
+                              ],
+                              "properties": {
+                                "label": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 80
+                                },
+                                "cards_seen": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 20
+                                },
+                                "probability": {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "numerator",
+                                    "denominator",
+                                    "decimal",
+                                    "decimal_places",
+                                    "rounding"
+                                  ],
+                                  "properties": {
+                                    "numerator": {
+                                      "type": "string",
+                                      "pattern": "^-?(0|[1-9][0-9]*)$"
+                                    },
+                                    "denominator": {
+                                      "type": "string",
+                                      "pattern": "^[1-9][0-9]*$"
+                                    },
+                                    "decimal": {
+                                      "type": "string",
+                                      "pattern": "^-?[01]\\.[0-9]{12}$"
+                                    },
+                                    "decimal_places": {
+                                      "const": 12
+                                    },
+                                    "rounding": {
+                                      "const": "ROUND_HALF_EVEN"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "minItems": 1,
+                            "maxItems": 21
+                          },
+                          "limitations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 1024
+                            },
+                            "minItems": 1,
+                            "maxItems": 12
+                          },
+                          "scope": {
+                            "const": "CALLER_DECLARED_CARD_ACCESS_ONLY"
+                          },
+                          "real_gameplay_authorized": {
+                            "const": false
+                          },
+                          "report_id": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 71
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "assumptions": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "sampling",
+                      "group_disjointness"
+                    ],
+                    "properties": {
+                      "sampling": {
+                        "const": "uniform-without-replacement"
+                      },
+                      "group_disjointness": {
+                        "const": "caller_declared"
+                      }
+                    }
+                  },
+                  "identity_authority": {
+                    "const": "CALLER_DECLARED"
+                  }
+                }
+              },
+              "minItems": 1,
+              "maxItems": 2
+            },
+            "comparison": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reasons",
+                "baseline_deck_id",
+                "candidate_deck_id",
+                "differences"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "NOT_REQUESTED",
+                    "ABSTAINED",
+                    "COMPARABLE"
+                  ]
+                },
+                "reasons": {
+                  "type": "array",
+                  "items": {
+                    "enum": [
+                      "TARGET_IDENTITIES_OR_MINIMUM_REQUIREMENTS_DIFFER",
+                      "OBSERVATION_SCHEDULES_DIFFER",
+                      "SELECTED_SECTIONS_DIFFER",
+                      "SAMPLING_ASSUMPTIONS_DIFFER"
+                    ]
+                  },
+                  "minItems": 0,
+                  "maxItems": 4
+                },
+                "baseline_deck_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "candidate_deck_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "differences": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "cards_seen",
+                      "candidate_minus_baseline"
+                    ],
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 80
+                      },
+                      "cards_seen": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 20
+                      },
+                      "candidate_minus_baseline": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "numerator",
+                          "denominator",
+                          "decimal",
+                          "decimal_places",
+                          "rounding"
+                        ],
+                        "properties": {
+                          "numerator": {
+                            "type": "string",
+                            "pattern": "^-?(0|[1-9][0-9]*)$"
+                          },
+                          "denominator": {
+                            "type": "string",
+                            "pattern": "^[1-9][0-9]*$"
+                          },
+                          "decimal": {
+                            "type": "string",
+                            "pattern": "^-?[01]\\.[0-9]{12}$"
+                          },
+                          "decimal_places": {
+                            "const": 12
+                          },
+                          "rounding": {
+                            "const": "ROUND_HALF_EVEN"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "minItems": 0,
+                  "maxItems": 21
+                }
+              }
+            },
+            "bounds": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "max_decks",
+                "max_rows_per_deck",
+                "max_deck_size",
+                "max_cards_seen",
+                "max_groups",
+                "max_input_bytes",
+                "max_report_bytes"
+              ],
+              "properties": {
+                "max_decks": {
+                  "const": 2
+                },
+                "max_rows_per_deck": {
+                  "const": 512
+                },
+                "max_deck_size": {
+                  "const": 120
+                },
+                "max_cards_seen": {
+                  "const": 20
+                },
+                "max_groups": {
+                  "const": 3
+                },
+                "max_input_bytes": {
+                  "const": 131072
+                },
+                "max_report_bytes": {
+                  "const": 262144
+                }
+              }
+            },
+            "real_gameplay_authorized": {
+              "const": false
+            },
+            "scope": {
+              "const": "CALLER_SUPPLIED_DECK_ACCESS_ONLY"
+            },
+            "limitations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              },
+              "minItems": 1,
+              "maxItems": 12
+            },
+            "report_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 71
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "status",
+            "reason",
+            "real_gameplay_authorized"
+          ],
+          "properties": {
+            "schema_version": {
+              "const": "supplied-deck-consistency-report-v1"
+            },
+            "status": {
+              "const": "REFUSED"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "real_gameplay_authorized": {
+              "const": false
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "status",
+        "input_id",
+        "bindings",
+        "consistency",
+        "coverage",
+        "uncertainty",
+        "allocation_scope",
+        "ownership_write",
+        "real_gameplay_authorized",
+        "limitations",
+        "report_id"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "collection-deck-analysis-report-v1"
+        },
+        "status": {
+          "const": "ASSESSED"
+        },
+        "input_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 71
+        },
+        "bindings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requested_catalog",
+            "requested_collection",
+            "verified_catalog_id",
+            "verified_collection",
+            "audit_id"
+          ],
+          "properties": {
+            "requested_catalog": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "game",
+                "snapshot_id"
+              ],
+              "properties": {
+                "game": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "snapshot_id": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                }
+              }
+            },
+            "requested_collection": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "snapshot_id",
+                "snapshot_digest",
+                "source_import_digest"
+              ],
+              "properties": {
+                "snapshot_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "snapshot_digest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "source_import_digest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            },
+            "verified_catalog_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "verified_collection": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "snapshot_id",
+                    "snapshot_digest",
+                    "source_import_digest"
+                  ],
+                  "properties": {
+                    "snapshot_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "snapshot_digest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "source_import_digest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "audit_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "consistency": {
+          "$ref": "#/$defs/consistency"
+        },
+        "coverage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "deck_id",
+              "status",
+              "reasons",
+              "identity_basis",
+              "intended_quantity",
+              "covered_quantity",
+              "uncovered_quantity",
+              "completion_percentage",
+              "requirements",
+              "unresolved_may_affect_coverage"
+            ],
+            "properties": {
+              "deck_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "status": {
+                "enum": [
+                  "WITHHELD",
+                  "REPORTED_SNAPSHOT_COVERAGE"
+                ]
+              },
+              "reasons": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "CATALOG_UNAVAILABLE_OR_MISMATCHED",
+                    "CONFLICTING_OWNERSHIP_LOTS",
+                    "COLLECTION_SOURCE_OR_SNAPSHOT_NOT_VERIFIED",
+                    "REPORTED_INVENTORY_IDENTITY_NOT_ESTABLISHED",
+                    "DECK_CARD_OR_PRINTING_JOIN_NOT_ESTABLISHED",
+                    "INPUT_DRIFT_DURING_ANALYSIS"
+                  ]
+                },
+                "minItems": 0,
+                "maxItems": 6
+              },
+              "identity_basis": {
+                "enum": [
+                  "UNESTABLISHED",
+                  "EXACT_SELECTED_CATALOG_JOIN"
+                ]
+              },
+              "intended_quantity": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 120
+              },
+              "covered_quantity": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 120
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "uncovered_quantity": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 120
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "completion_percentage": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[0-9]{1,3}\\.[0-9]{2}$"
+              },
+              "requirements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "requirement_index",
+                    "requirement_id",
+                    "card_id",
+                    "section",
+                    "policy",
+                    "required_quantity",
+                    "allocated_quantity",
+                    "uncovered_quantity",
+                    "printings"
+                  ],
+                  "properties": {
+                    "requirement_index": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 511
+                    },
+                    "requirement_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "card_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "section": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "policy": {
+                      "enum": [
+                        "any",
+                        "exact"
+                      ]
+                    },
+                    "required_quantity": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 120
+                    },
+                    "allocated_quantity": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 120
+                    },
+                    "uncovered_quantity": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 120
+                    },
+                    "printings": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "printing_id",
+                          "quantity"
+                        ],
+                        "properties": {
+                          "printing_id": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 128
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 120
+                          }
+                        }
+                      },
+                      "minItems": 0,
+                      "maxItems": 120
+                    }
+                  }
+                },
+                "minItems": 0,
+                "maxItems": 512
+              },
+              "unresolved_may_affect_coverage": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "uncertainty": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scope_complete",
+            "physical_ownership_independently_verified",
+            "unresolved_rows",
+            "ambiguous_rows",
+            "excluded_duplicate_rows",
+            "invalid_rows",
+            "conflicting_lot_rows"
+          ],
+          "properties": {
+            "scope_complete": {
+              "const": null
+            },
+            "physical_ownership_independently_verified": {
+              "const": false
+            },
+            "unresolved_rows": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "ambiguous_rows": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "excluded_duplicate_rows": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "invalid_rows": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "conflicting_lot_rows": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "allocation_scope": {
+          "const": "INDEPENDENT_ALTERNATIVES_NO_RESERVATION"
+        },
+        "ownership_write": {
+          "const": false
+        },
+        "real_gameplay_authorized": {
+          "const": false
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "minItems": 1,
+          "maxItems": 12
+        },
+        "report_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 71
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "status",
+        "reason",
+        "ownership_write",
+        "real_gameplay_authorized"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "collection-deck-analysis-report-v1"
+        },
+        "status": {
+          "const": "REFUSED"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "ownership_write": {
+          "const": false
+        },
+        "real_gameplay_authorized": {
+          "const": false
+        }
+      }
+    }
+  ]
+}

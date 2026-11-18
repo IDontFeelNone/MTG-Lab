@@ -28,6 +28,8 @@ ALLOCATION_OLD_FUNCTION = b'def compare_deck(snapshot: Mapping[str, Any], deck: 
 
 
 def allocation_preceding_bytes(name, raw):
+    from collection_deck_preservation import preceding_bytes as integration_preceding
+    raw = integration_preceding(name, raw)
     if type(raw) is not bytes: raise AssertionError('exact source bytes required')
     if name != 'src/collection/intelligence.py': return raw
     digest=hashlib.sha256(raw).hexdigest()
@@ -163,6 +165,8 @@ class MixedPrintingAllocationTests(unittest.TestCase):
 
     def test_preservation_adapter_accepts_only_exact_successor_and_original(self):
         name='src/collection/intelligence.py';raw=(ROOT/name).read_bytes()
+        from collection_deck_preservation import preceding_bytes
+        raw=preceding_bytes(name,raw)
         self.assertEqual(hashlib.sha256(raw).hexdigest(),ALLOCATION_SOURCE_SHA256)
         old=allocation_preceding_bytes(name,raw)
         self.assertEqual(hashlib.sha256(old).hexdigest(),ALLOCATION_OLD_SHA256)

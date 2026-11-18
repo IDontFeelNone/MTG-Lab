@@ -367,13 +367,15 @@ def collection_summary(snapshot: Mapping[str, Any], resolver: CanonicalCollectio
                 for name in ("finish","language","condition","acquisition_price","acquisition_date","storage_location","notes")}}
 
 
-def compare_deck(snapshot: Mapping[str, Any], deck: Mapping[str, Any], resolver: CanonicalCollectionResolver) -> dict:
+def compare_deck(snapshot: Mapping[str, Any], deck: Mapping[str, Any], resolver: CanonicalCollectionResolver,
+                 *, include_allocations: bool = False) -> dict:
     """Allocate resolved physical copies once: exact first, then flexible.
 
     Report order is section/Card/Printing, with canonical requirement bytes as
     a tie-breaker. Flexible rows consume remaining Printings in stable ID order.
     Surplus fields describe final eligible leftovers, shared across row views.
     """
+    if type(include_allocations) is not bool: raise CollectionIntelligenceError("allocation trace flag must be boolean")
     if deck.get("schema_version") != DECK_VERSION: raise CollectionIntelligenceError("unsupported deck requirement schema")
     remaining = Counter()
     card_printings = defaultdict(set)
@@ -395,11 +397,14 @@ def compare_deck(snapshot: Mapping[str, Any], deck: Mapping[str, Any], resolver:
         eligible.append(tuple(p for p in candidates if policy=="any" or p==req.get("printing_id")))
         policies.append(policy)
     allocated=[0]*len(ordered)
+    consumption=[[] for _ in ordered] if include_allocations else None
     for index in sorted(range(len(ordered)),key=lambda i:(policies[i]!="exact",i)):
         needed=ordered[index]["quantity"]
         for pid in eligible[index]:
             used=min(remaining[pid],needed)
             remaining[pid]-=used; needed-=used; allocated[index]+=used
+            if include_allocations and used:
+                consumption[index].append({"printing_id":pid,"quantity":used})
             if not needed: break
     results=[]; required_total=owned_total=0
     for index,req in enumerate(ordered):
@@ -410,12 +415,20 @@ def compare_deck(snapshot: Mapping[str, Any], deck: Mapping[str, Any], resolver:
                         "missing_quantity":missing,"excess_copies":surplus,
                         "reusable_owned_copies":surplus,
                         "status":"complete" if not missing else "partial" if used else "missing"})
-    return {"schema_version":"deck-comparison-v1","deck_id":deck["deck_id"],"snapshot_id":snapshot["snapshot_id"],
+    report={"schema_version":"deck-comparison-v1","deck_id":deck["deck_id"],"snapshot_id":snapshot["snapshot_id"],
             "completion_percentage": "100.00" if not required_total else format(Decimal(owned_total*100)/required_total,".2f"),
             "requirements":results,"complete_cards":sum(x["status"]=="complete" for x in results),
             "partially_complete_cards":sum(x["status"]=="partial" for x in results),
             "missing_cards":sum(x["status"]=="missing" for x in results),
             "unresolved_may_affect_result": [x for x in snapshot["unresolved_holdings"] if x["status"] in {"ambiguous","unresolved"}]}
+    if include_allocations:
+        report["schema_version"]="deck-comparison-v2"
+        report["allocation_trace"]=[{"requirement_index":i,"requirement_id":req.get("requirement_id"),
+            "card_id":req["card_id"],"section":req.get("section","main"),"policy":policies[i],
+            "required_quantity":req["quantity"],"allocated_quantity":allocated[i],
+            "uncovered_quantity":req["quantity"]-allocated[i],"printings":consumption[i]}
+            for i,req in enumerate(ordered)]
+    return report
 
 
 def acquisition_priorities(comparisons: Iterable[Mapping[str, Any]]) -> dict:
