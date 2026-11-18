@@ -72,7 +72,8 @@ class DrawAccessPreservationTests(unittest.TestCase):
 
     def test_new_runtime_imports_only_standard_library_and_own_package(self):
         for name in guard.ADDITIONS:
-            tree = ast.parse((guard.ROOT / name).read_text())
+            from pack_odds_preservation import preceding_bytes
+            tree = ast.parse(preceding_bytes(name, (guard.ROOT / name).read_bytes()).decode())
             for node in ast.walk(tree):
                 if isinstance(node, ast.Import):
                     self.assertTrue(all(x.name.split('.')[0] in {'argparse', 'json', 'sys'} for x in node.names))

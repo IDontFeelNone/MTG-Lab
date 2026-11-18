@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+from dataclasses import dataclass
 import hashlib
 import json
 from pathlib import Path
@@ -21,6 +22,8 @@ MAX_CARDS = 1024
 MAX_SLOTS = 32
 MAX_POOL = 10000
 MAX_INTEGER = 2**64 - 1
+MAX_COMPOSITION_BYTES = 4 * 1024 * 1024
+_VIEW_KEY = object()
 
 
 def _json(value):
@@ -70,6 +73,86 @@ def _select(entries, ticket):
     raise PackSimulationError('DRAW_OUTSIDE_DECLARED_POOL')
 
 
+@dataclass(frozen=True, init=False)
+class ValidatedPackComposition:
+    """Immutable owning-reader view; hashes confer no production authority."""
+    _encoded: bytes
+
+    def __init__(self, encoded, *, _key=None):
+        _require(_key is _VIEW_KEY and type(encoded) is bytes, 'OWNING_COMPOSITION_ADMISSION_REQUIRED')
+        object.__setattr__(self, '_encoded', encoded)
+
+    def to_dict(self):
+        """Detached composition and original evidence, without a private query handle."""
+        return json.loads(self._encoded)
+
+    def resolve_target(self, target):
+        _require(type(target) is dict and {'kind', 'id'} <= target.keys()
+                 and target.keys() <= {'kind', 'id', 'finish_id', 'treatment_id'}, 'INVALID_TARGET_FIELDS')
+        _require(type(target['kind']) is str and target['kind'] in ('card', 'printing'), 'INVALID_TARGET_KIND')
+        _require(all(type(v) is str and 0 < len(v) <= 128 and v == v.strip()
+                     and v.isprintable() for v in target.values()), 'INVALID_TARGET_IDENTITY')
+        body = self.to_dict(); context = body['context']; catalog = body['catalog']
+
+        def known(kind, identifier):
+            rows = catalog[kind].get(identifier, [])
+            _require(len(rows) == 1 and rows[0]['uncertainty'] == 'known'
+                     and rows[0]['supersession_state'] == 'current', 'UNKNOWN_AMBIGUOUS_OR_UNRESOLVED_TARGET_' + kind.upper())
+
+        known(target['kind'], target['id'])
+        for field, kind in (('finish_id', 'finish'), ('treatment_id', 'treatment')):
+            if field in target: known(kind, target[field])
+        if 'finish_id' in target:
+            _require(context['finish_aware'], 'LEGACY_FINISH_PROBABILITY_UNSUPPORTED')
+
+        def field_value(pid, field):
+            raw = body['printing_evidence'][pid]
+            _require(field in raw, 'EXPLICIT_TARGET_' + field.upper() + '_EVIDENCE_REQUIRED')
+            if raw['schema_version'] == 'v3':
+                assertions = [a for a in raw['assertions'] if a['path'] == '/' + field
+                              and a['status'] not in ('rejected', 'superseded')]
+                _require(assertions and all(a['subject_id'] == pid and a['status'] == 'promoted'
+                         and a['verification_status'] in ('confirmed', 'verified')
+                         and a['evidence_class'] not in ('unknown', 'conflicting')
+                         and a['asserted_value'] == raw[field] for a in assertions),
+                         'UNRESOLVED_TARGET_' + field.upper() + '_EVIDENCE')
+                source_ids = {a['source_id'] for a in assertions}
+            else:
+                source_ids = {p['source_id'] for p in raw.get('provenance', []) if field in p['field_paths']}
+            _require(source_ids and all(body['field_sources'].get(s, {}).get('verification_status') == 'confirmed'
+                                       for s in source_ids), 'UNCONFIRMED_TARGET_FIELD_SOURCE')
+            return raw[field]
+
+        eligible = set()
+        for pid in body['printing_evidence']:
+            if target['kind'] == 'card':
+                card_id = field_value(pid, 'card_id')
+                known('card', card_id)
+                _require(card_id == catalog['printing'][pid][0]['card_id'], 'TARGET_CARD_JOIN_CONFLICT')
+                matches = card_id == target['id']
+            else:
+                matches = pid == target['id']
+            if not matches: continue
+            _require(field_value(pid, 'id') == pid, 'TARGET_PRINTING_IDENTITY_CONFLICT')
+            if 'treatment_id' in target:
+                treatments = field_value(pid, 'treatments')
+                _require(type(treatments) is list and len(treatments) <= 1
+                         and all(type(t) is str for t in treatments), 'AMBIGUOUS_FIXED_TREATMENT')
+                if target['treatment_id'] not in treatments: continue
+            eligible.add(pid)
+        outcomes = set()
+        for draws, _ in context['candidates'].values():
+            for _, _, _, entries in draws:
+                for outcome, _ in entries:
+                    pid, finish = outcome if context['finish_aware'] else (outcome, None)
+                    if pid in eligible and ('finish_id' not in target or target['finish_id'] == finish):
+                        outcomes.add((pid, finish))
+        matched = [dict(printing_id=p, finish_id=f) for p, f in sorted(outcomes)]
+        return dict(target=dict(target), matched_outcomes=matched,
+                    target_id=_identity('pack-target-resolution-v1', dict(
+                        composition_id=body['composition_id'], target=target, matched_outcomes=matched)))
+
+
 class _PackSimulator:
     def __init__(self, query):
         self._query = query
@@ -93,7 +176,43 @@ class _PackSimulator:
         except (ValueError, OSError, KeyError, TypeError, AttributeError):
             raise PackSimulationError('INVALID_DEFINITION_OR_SOURCE_EVIDENCE') from None
 
-    def _generate(self, product_id, pack_id, seed, recorded_at):
+    def inspect(self, product_id, *, pack_definition_id=None):
+        """Admit every composition without drawing; target facts stay source-bound."""
+        _require(type(product_id) is str and product_id != '', 'INVALID_PRODUCT_ID')
+        _require(pack_definition_id is None or type(pack_definition_id) is str, 'INVALID_PACK_DEFINITION_ID')
+        try:
+            context = self._admit(product_id, pack_definition_id)
+            catalog = {k: {} for k in ('card', 'printing', 'finish', 'treatment')}
+            for entity in self._query.snapshot().entities:
+                if entity.entity_type not in catalog: continue
+                row = dict(uncertainty=entity.uncertainty, supersession_state=entity.supersession_state)
+                if entity.entity_type == 'printing': row['card_id'] = entity.as_dict()['canonical_values']['card_id']
+                catalog[entity.entity_type].setdefault(entity.canonical_identity, []).append(row)
+            printing_evidence = {}; field_sources = dict(context['sources'])
+            for record in context['records']:
+                if record['kind'] != 'printing': continue
+                raw = self._query.retained_record(record['id'], entity_type='printing')
+                printing_evidence[record['id']] = raw
+                for evidence in raw.get('assertions', raw.get('provenance', [])):
+                    source_id = evidence['source_id']
+                    if source_id in field_sources: continue
+                    try:
+                        field_sources[source_id] = load_source_record(self._query.game, product_id, source_id,
+                                                                      games_root=self._query.games_root)
+                    except (ValueError, OSError, KeyError, TypeError):
+                        pass  # Absence remains absence; resolve_target refuses if this field is needed.
+            body = dict(context=context, catalog=catalog, printing_evidence=printing_evidence,
+                        field_sources=field_sources)
+            body['composition_id'] = _identity('validated-pack-composition-v1', body)
+            encoded = _json(body)
+            _require(len(encoded) <= MAX_COMPOSITION_BYTES, 'COMPOSITION_VIEW_BYTE_BOUND_EXCEEDED')
+            return ValidatedPackComposition(encoded, _key=_VIEW_KEY)
+        except PackSimulationError:
+            raise
+        except (ValueError, OSError, KeyError, TypeError, AttributeError):
+            raise PackSimulationError('INVALID_DEFINITION_OR_SOURCE_EVIDENCE') from None
+
+    def _admit(self, product_id, pack_id):
         snapshot = self._query.snapshot()
         items = {(x.entity_type, x.canonical_identity): x.as_dict() for x in snapshot.entities}
         product = items.get(('product', product_id))
@@ -244,6 +363,20 @@ class _PackSimulator:
         inputs = dict(query_snapshot_id=snapshot.snapshot_id, records=records, sources=sources)
         input_id = _identity('pack-simulation-input-v0.2' if variant_model else
                              'pack-simulation-input-v0.1' if finish_aware else 'pack-simulation-input-v0', inputs)
+        if not variant_model: candidates[pack_id] = (draws, total_cards)
+        return dict(game=snapshot.game, query_snapshot_id=snapshot.snapshot_id, product_id=product_id,
+                    version_id=version_id, pack_id=pack_id, model=model, report_version=report_version,
+                    variant_model=variant_model, finish_aware=finish_aware, candidates=candidates,
+                    variant_entries=variant_entries if variant_model else [], records=records,
+                    sources=sources, input_id=input_id)
+
+    def _generate(self, product_id, pack_id, seed, recorded_at):
+        context = self._admit(product_id, pack_id)
+        variant_model = context['variant_model']; finish_aware = context['finish_aware']
+        variant_entries = context['variant_entries']; candidates = context['candidates']
+        if not variant_model: draws, total_cards = candidates[pack_id]
+        records = context['records']; sources = context['sources']; input_id = context['input_id']
+        model = context['model']; report_version = context['report_version']; version_id = context['version_id']
         counter = 0; slots = []; variant_result = {}
         if variant_model:
             total_weight = sum(w for _, w in variant_entries)
@@ -266,8 +399,8 @@ class _PackSimulator:
         return dict(schema_version=report_version, status='GENERATED', simulator_version=report_version,
                     algorithm=ALGORITHM, sampling_model=model, seed=seed, recorded_at=recorded_at,
                     timestamp_authority='caller_supplied' if recorded_at is not None else 'unspecified',
-                    game=snapshot.game, product_id=product_id, product_version_id=version_id,
-                    pack_definition_id=pack_id, query_snapshot_id=snapshot.snapshot_id, input_id=input_id,
+                    game=context['game'], product_id=product_id, product_version_id=version_id,
+                    pack_definition_id=pack_id, query_snapshot_id=context['query_snapshot_id'], input_id=input_id,
                     database_version=None, production_authorized=False,
                     scope='EXPLICIT_DEFINITION_MODEL_ONLY_NON_PRODUCTION', card_count=total_cards,
                     slots=slots, **variant_result, evidence_references=[dict(kind=r['kind'], id=r['id'],
