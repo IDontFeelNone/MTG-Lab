@@ -18,6 +18,8 @@ class VisionAlignmentTests(unittest.TestCase):
         for name, expected in guard.PINS.items():
             with self.subTest(path=name):
                 raw = (ROOT / name).read_bytes()
+                from proactive_vision_preservation import preceding_bytes
+                raw = preceding_bytes(name, raw)
                 self.assertEqual(guard.pin(raw), expected['new'])
                 old = guard.restore(name, raw)
                 self.assertEqual(guard.pin(old), expected['old'])
