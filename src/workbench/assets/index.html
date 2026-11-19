@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="mtg-lab-token" content="__TOKEN__">
+  <title>MTG Lab · Deck consistency workbench</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/app.css"><script src="/app.js" defer></script>
+</head>
+<body>
+  <header><p class="eyebrow">MTG LAB / LOCAL ANALYTICAL WORKBENCH</p>
+    <h1>Explore your deck’s draw consistency.</h1>
+    <p>Declare a complete deck, select the cards you want to see, and compare exact access probabilities.</p>
+    <p class="notice">Access only — not casting, combo success, legality or win probability. No card lookup or strategic advice.</p>
+  </header>
+  <main>
+    <details><summary>How this works &amp; privacy</summary>
+      <p>All card labels and identities are your declarations. A label never resolves a canonical Card identity.
+      Each local identity stays attached to its card when you duplicate a deck. Editing a shared card label changes its display label in both configurations.</p>
+      <p>Only the selected section is sampled, uniformly without replacement. Other sections are excluded.
+      Cards seen is cumulative, not cards still in hand. Observation labels establish no turn, play/draw, mulligan or extra-draw rules.</p>
+      <p>A group declares interchangeable cards for this question. All group minima must be met jointly.
+      Direct comparison requires the same member identities, minima, selected section and observation schedule.</p>
+      <p>Inputs and reports stay in this application’s memory. Nothing is automatically saved or exported.
+      Reloading loses your work. Download a report explicitly if you want to keep it; downloaded files contain your labels and deck quantities.</p>
+    </details>
+    <div class="toolbar"><button id="duplicate" type="button">Duplicate as alternative</button>
+      <button id="remove-alternative" type="button" hidden>Remove alternative</button>
+      <button id="example" type="button">Load fictional example (replaces inputs)</button></div>
+    <div id="decks"></div>
+    <div class="toolbar"><button id="calculate" type="button" class="primary">Calculate exact access</button>
+      <button id="download" type="button" disabled>Download current report (JSON)</button></div>
+    <p id="freshness" role="status" aria-live="polite">Enter your deck and confirm its selected population is complete.</p>
+    <section id="results" aria-label="Analytical results" aria-live="polite"></section>
+  </main>
+  <footer>Caller-supplied mathematical analysis. No collection, external provider, AI service or canonical-data mutation.</footer>
+</body>
+</html>
