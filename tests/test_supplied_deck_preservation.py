@@ -16,7 +16,8 @@ class SuppliedDeckPreservationTests(unittest.TestCase):
     def test_only_three_additions_and_three_exact_reversible_successors(self):
         self.assertEqual(len(guard.ADDITIONS),3);self.assertEqual(len(guard.REPLACEMENTS),3)
         for name,row in guard.ledger()['replacements'].items():
-            raw=(guard.ROOT/name).read_bytes();old=guard.preceding_bytes(name,raw)
+            from resource_assignment_preservation import preceding_bytes as resource_preceding
+            raw=resource_preceding(name,(guard.ROOT/name).read_bytes());old=guard.preceding_bytes(name,raw)
             self.assertEqual(guard.pin(raw),row['new']);self.assertEqual(guard.pin(old),row['old'])
             self.assertEqual(guard.preceding_bytes(name,old),old)
             for invalid in (b'X'+raw[1:],raw+b'future',raw[:-1],bytearray(raw),None):
