@@ -1,0 +1,335 @@
+{
+  "fixed_reviewed": {
+    "assumptions": {
+      "availability": "all-observed-resources-simultaneously-available",
+      "identity_authority": "CALLER_DECLARED",
+      "output": "one-unit-per-physical-copy",
+      "sampling": "uniform-without-replacement"
+    },
+    "cards_seen": 9,
+    "classes": [
+      {
+        "copies": 4,
+        "resources": [],
+        "target": true
+      },
+      {
+        "copies": 32,
+        "resources": [],
+        "target": false
+      },
+      {
+        "copies": 12,
+        "resources": [
+          "A"
+        ],
+        "target": false
+      },
+      {
+        "copies": 12,
+        "resources": [
+          "B"
+        ],
+        "target": false
+      }
+    ],
+    "complete": true,
+    "demands": {
+      "A": 1,
+      "B": 1
+    },
+    "population_id": "caller:population",
+    "population_size": 60,
+    "resource_kinds": [
+      "A",
+      "B"
+    ],
+    "schema_version": "declared-resource-assignment-input-v1",
+    "target": {
+      "minimum": 1,
+      "mode": "observe"
+    }
+  },
+  "flexible_reviewed": {
+    "assumptions": {
+      "availability": "all-observed-resources-simultaneously-available",
+      "identity_authority": "CALLER_DECLARED",
+      "output": "one-unit-per-physical-copy",
+      "sampling": "uniform-without-replacement"
+    },
+    "cards_seen": 9,
+    "classes": [
+      {
+        "copies": 4,
+        "resources": [],
+        "target": true
+      },
+      {
+        "copies": 32,
+        "resources": [],
+        "target": false
+      },
+      {
+        "copies": 8,
+        "resources": [
+          "A"
+        ],
+        "target": false
+      },
+      {
+        "copies": 8,
+        "resources": [
+          "B"
+        ],
+        "target": false
+      },
+      {
+        "copies": 8,
+        "resources": [
+          "A",
+          "B"
+        ],
+        "target": false
+      }
+    ],
+    "complete": true,
+    "demands": {
+      "A": 1,
+      "B": 1
+    },
+    "population_id": "caller:population",
+    "population_size": 60,
+    "resource_kinds": [
+      "A",
+      "B"
+    ],
+    "schema_version": "declared-resource-assignment-input-v1",
+    "target": {
+      "minimum": 1,
+      "mode": "observe"
+    }
+  },
+  "large_accepted": {
+    "assumptions": {
+      "availability": "all-observed-resources-simultaneously-available",
+      "identity_authority": "CALLER_DECLARED",
+      "output": "one-unit-per-physical-copy",
+      "sampling": "uniform-without-replacement"
+    },
+    "cards_seen": 19,
+    "classes": [
+      {
+        "copies": 24,
+        "resources": [],
+        "target": false
+      },
+      {
+        "copies": 24,
+        "resources": [],
+        "target": true
+      },
+      {
+        "copies": 24,
+        "resources": [
+          "A"
+        ],
+        "target": false
+      },
+      {
+        "copies": 24,
+        "resources": [
+          "B"
+        ],
+        "target": false
+      },
+      {
+        "copies": 24,
+        "resources": [
+          "A",
+          "B"
+        ],
+        "target": true
+      }
+    ],
+    "complete": true,
+    "demands": {
+      "A": 3,
+      "B": 2
+    },
+    "population_id": "caller:population",
+    "population_size": 120,
+    "resource_kinds": [
+      "A",
+      "B"
+    ],
+    "schema_version": "declared-resource-assignment-input-v1",
+    "target": {
+      "minimum": 1,
+      "mode": "observe"
+    }
+  },
+  "max_demands_target": {
+    "assumptions": {
+      "availability": "all-observed-resources-simultaneously-available",
+      "identity_authority": "CALLER_DECLARED",
+      "output": "one-unit-per-physical-copy",
+      "sampling": "uniform-without-replacement"
+    },
+    "cards_seen": 20,
+    "classes": [
+      {
+        "copies": 40,
+        "resources": [
+          "A"
+        ],
+        "target": false
+      },
+      {
+        "copies": 40,
+        "resources": [
+          "B"
+        ],
+        "target": false
+      },
+      {
+        "copies": 40,
+        "resources": [],
+        "target": true
+      }
+    ],
+    "complete": true,
+    "demands": {
+      "A": 3,
+      "B": 3
+    },
+    "population_id": "caller:population",
+    "population_size": 120,
+    "resource_kinds": [
+      "A",
+      "B"
+    ],
+    "schema_version": "declared-resource-assignment-input-v1",
+    "target": {
+      "minimum": 4,
+      "mode": "reserve"
+    }
+  },
+  "vector_refusal": {
+    "assumptions": {
+      "availability": "all-observed-resources-simultaneously-available",
+      "identity_authority": "CALLER_DECLARED",
+      "output": "one-unit-per-physical-copy",
+      "sampling": "uniform-without-replacement"
+    },
+    "cards_seen": 20,
+    "classes": [
+      {
+        "copies": 24,
+        "resources": [],
+        "target": false
+      },
+      {
+        "copies": 24,
+        "resources": [],
+        "target": true
+      },
+      {
+        "copies": 24,
+        "resources": [
+          "A"
+        ],
+        "target": false
+      },
+      {
+        "copies": 24,
+        "resources": [
+          "B"
+        ],
+        "target": false
+      },
+      {
+        "copies": 24,
+        "resources": [
+          "A",
+          "B"
+        ],
+        "target": true
+      }
+    ],
+    "complete": true,
+    "demands": {
+      "A": 1,
+      "B": 1
+    },
+    "population_id": "caller:population",
+    "population_size": 120,
+    "resource_kinds": [
+      "A",
+      "B"
+    ],
+    "schema_version": "declared-resource-assignment-input-v1",
+    "target": {
+      "minimum": 1,
+      "mode": "observe"
+    }
+  },
+  "work_refusal": {
+    "assumptions": {
+      "availability": "all-observed-resources-simultaneously-available",
+      "identity_authority": "CALLER_DECLARED",
+      "output": "one-unit-per-physical-copy",
+      "sampling": "uniform-without-replacement"
+    },
+    "cards_seen": 19,
+    "classes": [
+      {
+        "copies": 23,
+        "resources": [],
+        "target": false
+      },
+      {
+        "copies": 24,
+        "resources": [],
+        "target": true
+      },
+      {
+        "copies": 24,
+        "resources": [
+          "A"
+        ],
+        "target": false
+      },
+      {
+        "copies": 24,
+        "resources": [
+          "B"
+        ],
+        "target": false
+      },
+      {
+        "copies": 24,
+        "resources": [
+          "A",
+          "B"
+        ],
+        "target": true
+      }
+    ],
+    "complete": true,
+    "demands": {
+      "A": 3,
+      "B": 3
+    },
+    "population_id": "caller:population",
+    "population_size": 119,
+    "resource_kinds": [
+      "A",
+      "B"
+    ],
+    "schema_version": "declared-resource-assignment-input-v1",
+    "target": {
+      "minimum": 4,
+      "mode": "reserve"
+    }
+  }
+}

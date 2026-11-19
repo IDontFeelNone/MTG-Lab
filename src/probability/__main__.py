@@ -21,7 +21,23 @@ def main(argv=None):
     supplied = commands.add_parser('deck-consistency', help='derive exact access and compare supplied decks')
     supplied.add_argument('--input', required=True, help='UTF-8 JSON file, or - for stdin')
     supplied.add_argument('--format', choices=('json', 'text'), default='json')
+    resource = commands.add_parser('resource-assignment', help='exact hypothetical target and resource assignment')
+    resource.add_argument('--input', required=True, help='UTF-8 JSON file, or - for stdin')
     args = parser.parse_args(argv)
+    if args.command == 'resource-assignment':
+        from .resource_assignment import (MAX_INPUT_BYTES as RESOURCE_BYTES, ResourceAssignmentError,
+            parse_resource_assignment, assess_resource_assignment)
+        try:
+            if args.input == '-': raw = sys.stdin.buffer.read(RESOURCE_BYTES + 1)
+            else:
+                with Path(args.input).open('rb') as stream: raw = stream.read(RESOURCE_BYTES + 1)
+            result = assess_resource_assignment(parse_resource_assignment(raw))
+        except (ResourceAssignmentError, OSError) as error:
+            failure = error if isinstance(error, ResourceAssignmentError) else ResourceAssignmentError('INVALID_INPUT', 'input file unavailable')
+            print(canonical_json(failure.as_dict()))
+            return 2
+        print(canonical_json(result))
+        return 0
     if args.command == 'deck-consistency':
         from .supplied_deck import (MAX_INPUT_BYTES as DECK_BYTES, SuppliedDeckError,
             parse_supplied_decks, assess_supplied_decks, render_supplied_decks)

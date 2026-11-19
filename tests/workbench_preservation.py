@@ -30,6 +30,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from resource_assignment_preservation import preceding_bytes as resource_preceding
+    raw = resource_preceding(name, raw)
     if type(name) is not str or type(raw) is not bytes:
         raise AssertionError('exact named source bytes required')
     if name not in REPLACEMENTS:return raw
@@ -46,6 +48,8 @@ def preceding_bytes(name, raw):
 
 
 def is_addition(path, root=ROOT):
+    from resource_assignment_preservation import is_addition as resource_addition
+    if resource_addition(path, root): return True
     name=path.relative_to(root).as_posix()
     if name not in ADDITIONS:return False
     if (any(p.is_symlink() for p in (path,*path.parents)) or not path.is_file()
