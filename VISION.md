@@ -106,6 +106,53 @@ tools rather than becoming a competing source of canonical truth. Interchangeabl
 model providers and orchestration architectures remain proposed technical
 approaches, not approved implementation requirements.
 
+### Proactive Research Intelligence
+
+MTG Lab should eventually be an AI-powered research intelligence system that
+recognizes important Magic developments, independently investigates promising
+hypotheses, challenges its own findings, and brings meaningful discoveries to
+the user before the user knows to ask. This is an enduring strategic product
+requirement and a long-term research ambition, not a present capability, a
+prerequisite for the first useful release, or implementation authorization.
+
+From separately authorized sources, the system should eventually detect:
+
+- New cards and set previews.
+- Emerging interactions and strategies.
+- Format and rules changes.
+- Tournament results and metagame shifts.
+- Reprints, product releases and market developments.
+- Changes affecting previously recorded research hypotheses.
+
+Its multi-step research should eventually support:
+
+1. Detecting and verifying relevant developments.
+2. Resolving supported Card identities, mechanics and evidence.
+3. Generating testable hypotheses.
+4. Selecting and invoking authorized analytical tools.
+5. Comparing alternatives and investigating counterexamples.
+6. Challenging its own preliminary conclusions.
+7. Preserving evidence, experiments and reassessments through the established
+   [Research Log architecture](docs/RESEARCH_LOG_ARCHITECTURE.md).
+8. Proactively communicating meaningful findings and uncertainties.
+
+The system should prioritize investigations according to their potential strategic significance, novelty, evidentiary strength, uncertainty, and expected value of further research, while recognizing when an investigation should be deferred, stopped, or revisited.
+
+Research effort should be selective. Users should retain meaningful control over
+research interests, notification preferences, frequency, significance thresholds,
+privacy and authorized external actions.
+
+AI-generated hypotheses must remain distinct from verified facts and supported
+analytical conclusions. AI must not become a competing canonical authority or
+override deterministic analytical results. Proactive research must operate within
+separately approved source-use permissions, tool access, computational budgets,
+privacy restrictions, stopping conditions and publication controls.
+
+The long-term benchmark includes identifying genuinely powerful overlooked cards,
+interactions or strategies before widespread recognition, supported by verifiable
+evidence and later real-world validation. This ambition does not claim that the
+capability already exists or authorize any implementation or external action.
+
 ### Research and Experimentation
 
 Preserve dated hypotheses, original evidence, experiments, outcomes, counterexamples and

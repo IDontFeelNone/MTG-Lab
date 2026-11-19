@@ -63,6 +63,8 @@ def pin(raw):
 
 
 def restore(name, raw):
+    from proactive_vision_preservation import preceding_bytes as proactive_preceding
+    raw = proactive_preceding(name, raw)
     if type(name) is not str or name not in PINS or type(raw) is not bytes:
         raise AssertionError('exact named vision successor bytes required')
     expected = PINS[name]
