@@ -28,6 +28,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from set_preparation_preservation import preceding_bytes as set_preceding
+    raw = set_preceding(name, raw)
     if type(name) is not str or type(raw) is not bytes:
         raise AssertionError('exact named source bytes required')
     if name not in REPLACEMENTS:
@@ -48,6 +50,8 @@ def preceding_bytes(name, raw):
 
 
 def is_addition(path, root=ROOT):
+    from set_preparation_preservation import is_addition as set_addition
+    if set_addition(path, root): return True
     name = path.relative_to(root).as_posix()
     if name not in ADDITIONS:
         return False
