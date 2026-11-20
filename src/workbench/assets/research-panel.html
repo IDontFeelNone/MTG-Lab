@@ -1,0 +1,29 @@
+<section id="research-panel" class="deck" aria-label="Portable research investigation">
+  <h2>Portable deck research</h2>
+  <p>Save questions, independent branches and exact experiments. Nothing is automatically stored or sent to an AI service.</p>
+  <p class="notice">Notes and references are unverified user claims. Review private contents and source-use permission before sharing any file.</p>
+  <label>Original research question <textarea id="research-question" maxlength="4000" rows="2"></textarea></label>
+  <div class="toolbar"><button type="button" id="research-new">Start question</button>
+    <button type="button" id="research-reset">New investigation (clear working memory)</button>
+    <button type="button" id="research-example">Load original research example</button>
+    <label>Reopen saved investigation <input id="research-open" type="file" accept=".json,application/json"></label></div>
+  <p id="research-id"></p>
+  <label>Branch identity <input id="research-branch" value="baseline" maxlength="64"></label>
+  <p>To fork, load a saved revision, enter a new branch identity, then change the deck below. Existing branches extend their own latest saved revision.</p>
+  <label>Hypothesis (optional) <textarea id="research-hypothesis" maxlength="4000" rows="2"></textarea></label>
+  <label>User research outcome <select id="research-outcome"><option>exploring</option><option>unresolved</option><option>rejected</option><option>supported_under_declared_assumptions</option></select></label>
+  <label>Assumptions (one per line) <textarea id="research-assumptions" maxlength="12000" rows="2"></textarea></label>
+  <label>Exploratory notes (one per line) <textarea id="research-notes" maxlength="12000" rows="3"></textarea></label>
+  <label>Counterexamples (one per line) <textarea id="research-counterexamples" maxlength="12000" rows="2"></textarea></label>
+  <label>Rejected alternatives (one per line) <textarea id="research-rejected_alternatives" maxlength="12000" rows="2"></textarea></label>
+  <label>Unresolved questions (one per line) <textarea id="research-unresolved_questions" maxlength="12000" rows="2"></textarea></label>
+  <label>Supporting user-local reference <input id="research-reference" placeholder="user:my-observation or sha256:…" maxlength="128"></label>
+  <p>Reference IDs are not fetched or independently authenticated. Full reference relationships from reopened artifacts remain preserved.</p>
+  <label><input id="research-notes-only" type="checkbox"> Save this revision as notes only, with no current analytical result</label>
+  <div class="toolbar"><button type="button" id="research-record">Record new immutable revision</button>
+    <button type="button" id="research-save" disabled>Save investigation JSON</button>
+    <button type="button" id="research-replay" disabled>Verify saved calculations</button>
+    <button type="button" id="research-export" disabled>Download selected handoff text</button></div>
+  <p id="research-status" role="status" aria-live="polite">Start with notes, or calculate a deck experiment below.</p>
+  <div id="research-history" aria-label="Saved research history"></div>
+</section>

@@ -1,0 +1,6 @@
+#research-panel { margin: 1rem auto; max-width: 76rem; }
+#research-panel textarea { display: block; width: 100%; padding: .6rem; margin: .3rem 0 .8rem; font: inherit; box-sizing: border-box; }
+#research-panel label { display: block; margin: .5rem 0; }
+#research-panel input[type=text] { max-width: 100%; }
+#research-id, #research-history { overflow-wrap: anywhere; }
+#research-status { padding: .6rem; border-left: .2rem solid currentColor; overflow-wrap: anywhere; }
