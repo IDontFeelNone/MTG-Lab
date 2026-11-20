@@ -10,7 +10,7 @@ import json
 
 from dataset_import.framework import EntityResolver
 from external_ingestion.framework import DatasetManifest, JsonAdapter, ExternalDatasetError
-from repository.cards import load_card_repository, canonical_repository_bytes
+from repository.cards import canonical_repository_bytes
 from repository.canonical import load_canonical_repository
 from pathlib import Path
 from validation import validate_document, SchemaValidationError
@@ -142,8 +142,12 @@ def prepare_set_candidates(payload, manifest, request, *, game, games_root,
     try:
         _require(games_root is not None and (Path(games_root) / game).is_dir(), 'explicit existing catalog required')
         load_canonical_repository(game, games_root=games_root)
-        cards, printings = load_card_repository(game, games_root=games_root)
         catalog_bytes = canonical_repository_bytes(game, games_root=games_root)
+        # Compare ONLY the records contained in the validated bytes we bind.
+        # A separate reader result could race with this snapshot and attach
+        # a fresh digest to stale comparisons.
+        catalog_snapshot = json.loads(catalog_bytes)
+        cards, printings = catalog_snapshot['cards'], catalog_snapshot['printings']
     except ValueError:
         raise SetPreparationError('CATALOG_UNAVAILABLE', 'selected canonical catalog cannot be validated') from None
     catalog = {('card', c['id']): c for c in cards}

@@ -101,7 +101,9 @@ numbers, altered checksums and unsupported profiles refuse without any writes.
 The deterministic `set-candidate-preparation-report-v1` binds source bytes,
 manifest, request and the existing Card/Printing catalog byte identity. This is
 not a full v13 release/snapshot identity. No external production snapshot is
-activated and no new authority is created. Report identity covers all findings.
+activated and no new authority is created. All identity comparisons use the records from the exact validated bytes bound
+in the report; a second independent reader result is never paired with that
+digest. A final owning-reader check detects drift. Report identity covers all findings.
 Source-row order remains provenance; identical bytes and inputs replay exactly.
 
 Candidates are schema-validated, pending-review private records. The report's

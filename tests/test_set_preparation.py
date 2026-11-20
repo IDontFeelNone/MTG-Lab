@@ -186,7 +186,11 @@ class SetPreparationTests(unittest.TestCase):
         self.assertEqual(a['source_use']['publication'],'NOT_AUTHORIZED');self.assertFalse(a['real_card_execution_authorized'])
 
     def test_catalog_drift_refuses_report(self):
-        with patch('ingestion.set_preparation.canonical_repository_bytes',side_effect=[b'first',b'changed']):
+        from repository.cards import canonical_repository_bytes
+        original=canonical_repository_bytes('fixture-game',games_root=self.root)
+        changed=json.loads(original);changed['cards'][0]['name']='Changed catalog fixture'
+        successor=(canonical_json(changed)+'\n').encode()
+        with patch('ingestion.set_preparation.canonical_repository_bytes',side_effect=[original,successor]):
             with self.assertRaises(SetPreparationError) as c:self.run_case()
         self.assertEqual(c.exception.code,'CATALOG_DRIFT')
 
@@ -259,6 +263,19 @@ class SetPreparationTests(unittest.TestCase):
         doc,request=sample();doc['records'][1]['normalized']['id']='x'*129
         r=self.run_case(doc,request)
         self.assertEqual(r['unresolved_identity_rows'],[1]);self.assertEqual(r['candidates'],[])
+
+    def test_catalog_comparisons_use_the_exact_bound_snapshot_bytes(self):
+        doc,request=sample()
+        doc['records'][0]['normalized']['name']='Bound snapshot original label'
+        bound_card=copy.deepcopy(doc['records'][0]['normalized'])
+        bound=(canonical_json(dict(schema_version='v1',game='fixture-game',cards=[bound_card],printings=[]))+'\n').encode()
+        # The independent reader still exposes the earlier valid catalog.
+        # A report bound to the later bytes must not compare against that reader.
+        with patch('ingestion.set_preparation.canonical_repository_bytes',return_value=bound):
+            r=self.run_case(doc,request)
+        self.assertEqual(r['rows'][0]['catalog_relation'],'EXISTING_IDENTICAL_CONTENT')
+        self.assertEqual(r['bindings']['catalog_sha256'],sha256(bound).hexdigest())
+        self.assertEqual(len(r['candidates']),4)
 
     def test_retained_original_fixtures_replay(self):
         for code in ('FJA','FJB'):

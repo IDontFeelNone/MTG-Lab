@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 LEDGER=ROOT/'tests/fixtures/set_preparation_v1/successors.json'
-LEDGER_SHA256='a76f1e53f3cfc82eaf1a4def07d56fdde5a8e153b0d47d950e5ce7ce03d261f0'
+LEDGER_SHA256='41c0375340930dbc0fdd95165a264171b7c187d0658d0f2735d2e03faf6b1126'
 BASE='d8f5b6fd5fa107749bb7da7fbb1e04cebc148206'
 TREE='1b15c6e6c9c43eceb8222503e403e6970bad3c58'
 ADDITIONS=frozenset(('src/ingestion/set_preparation.py','docs/SET_CANDIDATE_PREPARATION_V1.md'))
