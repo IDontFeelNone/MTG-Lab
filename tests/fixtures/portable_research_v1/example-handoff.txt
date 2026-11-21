@@ -1,0 +1,106 @@
+MTG Lab — supplied-deck research handoff
+Artifact: sha256:417c96f962e4c7d23682d817feb8aba351a8de309c07192fc9caa8214120fa24
+Investigation: sha256:3b3cd20532fc2ca2f4d4c038ee0d2883ead984e4e7fbd593ee79c3dceeec182b
+Schema: portable-deck-investigation-v1
+Engine: {"implementation":{"probability/draw_access.py":"0835ae163b28aeaebe85cbc79e67d2766736a6501504296db905adf29742292c","probability/supplied_deck.py":"439682ab62ad1866f7c3c6c9190ae1bf911fc7245ada56980f9c4fc70754b7f4","workbench/adapter.py":"b4664d55a325e559989a01eaaa9741fba76ae0cc603fd63c8e84cf1697577c85"},"input_schema":"deck-workbench-input-v1","operation":"workbench.adapter.assess_workbench","report_schema":"deck-workbench-report-v1"}
+Original research question:
+USER-AUTHORED QUESTION (not verified):
+| Does increasing a declared target from three copies to four improve seven-card access?
+
+Selected revision: sha256:788a452b8e1b227d41e3e7ac38549560aadbe48ab6fbea50bb36c192b412d293
+Branch: baseline
+Parent: None
+Recorded UTC (caller supplied): 2026-11-20T00:00:00Z
+User outcome: exploring
+Unverified hypothesis:
+Unverified notes:
+| Explore access first; no claim about casting or deck strength.
+Operation: workbench.adapter.assess_workbench
+NOT CALCULATED: no current verified result. Ancestor results remain historical.
+
+Selected revision: sha256:ad9be994dc8f73ea405232e036d6f19facc8d30daf9e687f6eaf4c8d2c445fd7
+Branch: baseline
+Parent: sha256:788a452b8e1b227d41e3e7ac38549560aadbe48ab6fbea50bb36c192b412d293
+Recorded UTC (caller supplied): 2026-11-20T00:00:01Z
+User outcome: exploring
+Unverified hypothesis:
+| Three copies provide the baseline.
+Unverified assumptions:
+| Uniform sampling without replacement; seven cards seen.
+Operation: workbench.adapter.assess_workbench
+Exact declared input: {"analysis":{"decks":[{"assumptions":{"group_disjointness":"caller_declared","sampling":"uniform-without-replacement"},"complete":true,"deck_id":"baseline","draw_population":{"declared_size":60,"section":"main"},"entries":[{"card_id":"local:other","quantity":57,"section":"main"},{"card_id":"local:target","quantity":3,"section":"main"}],"groups":[{"group_id":"declared-target","members":["local:target"],"minimum":1}],"identity_authority":"CALLER_DECLARED","schedule":[{"cards_seen":7,"label":"Seven seen assumption"}]}],"schema_version":"supplied-deck-consistency-input-v1"},"labels":[{"card_id":"local:other","label":"Authored remainder"},{"card_id":"local:target","label":"Authored target"}],"schema_version":"deck-workbench-input-v1"}
+Input identity: sha256:936a0d75f56cd82acd2856c66db2a4997f6f81604029e60c0b8956c9689a1533
+Workbench report: sha256:a78f6b1739cb4fcff497689ad2fb0408746224fca6e187ee5000c686ce2a83b1
+Owning analytical report: sha256:99ee27fa6886bfc2726a039ad8983cc41810456e6346be976e101ea0f7ebe1e2
+Declared deck: baseline
+| 60 cards; section main
+Exact joint card-access probability:
+| Seven seen assumption; seen=7: 5397/17110 (31.542957334892%)
+Owning comparison: NOT_REQUESTED
+
+Selected revision: sha256:0b01c9bf5c4f69575af3929b109095d043ab7ecc5d7cb6abc7a5ab7dfe81cc64
+Branch: four-copy-test
+Parent: sha256:ad9be994dc8f73ea405232e036d6f19facc8d30daf9e687f6eaf4c8d2c445fd7
+Recorded UTC (caller supplied): 2026-11-20T00:00:02Z
+User outcome: supported_under_declared_assumptions
+Unverified hypothesis:
+| Four copies improve this exact access event.
+Unverified unresolved_questions:
+| No claim about strategic costs of replacing another card.
+Unverified supporting reference:
+| Baseline experiment [sha256:ad9be994dc8f73ea405232e036d6f19facc8d30daf9e687f6eaf4c8d2c445fd7]
+Operation: workbench.adapter.assess_workbench
+Exact declared input: {"analysis":{"decks":[{"assumptions":{"group_disjointness":"caller_declared","sampling":"uniform-without-replacement"},"complete":true,"deck_id":"baseline","draw_population":{"declared_size":60,"section":"main"},"entries":[{"card_id":"local:other","quantity":57,"section":"main"},{"card_id":"local:target","quantity":3,"section":"main"}],"groups":[{"group_id":"declared-target","members":["local:target"],"minimum":1}],"identity_authority":"CALLER_DECLARED","schedule":[{"cards_seen":7,"label":"Seven seen assumption"}]},{"assumptions":{"group_disjointness":"caller_declared","sampling":"uniform-without-replacement"},"complete":true,"deck_id":"candidate","draw_population":{"declared_size":60,"section":"main"},"entries":[{"card_id":"local:other","quantity":56,"section":"main"},{"card_id":"local:target","quantity":4,"section":"main"}],"groups":[{"group_id":"declared-target","members":["local:target"],"minimum":1}],"identity_authority":"CALLER_DECLARED","schedule":[{"cards_seen":7,"label":"Seven seen assumption"}]}],"schema_version":"supplied-deck-consistency-input-v1"},"labels":[{"card_id":"local:other","label":"Authored remainder"},{"card_id":"local:target","label":"Authored target"}],"schema_version":"deck-workbench-input-v1"}
+Input identity: sha256:3862cd8bd0326852ec183318fcc8531d8a17dbdac768bd9eca547528887f636e
+Workbench report: sha256:4a005dd0841d9379ea916eec27634c60c960e8f0d68b30a7c50afeb6b56d2e2c
+Owning analytical report: sha256:4d02fac91c840a0dc239ee78918da3878cab6f1f3d6f74704438a2742a9c98bf
+Declared deck: baseline
+| 60 cards; section main
+Exact joint card-access probability:
+| Seven seen assumption; seen=7: 5397/17110 (31.542957334892%)
+Declared deck: candidate
+| 60 cards; section main
+Exact joint card-access probability:
+| Seven seen assumption; seen=7: 38962/97527 (39.949962574467%)
+Owning comparison: COMPARABLE
+Exact candidate minus baseline:
+| Seven seen assumption: 81991/975270
+
+Selected revision: sha256:fb206cb37f42f769b394a21e747be380457091f0f20201930b8682438a3fd103
+Branch: rejected-two-copy-test
+Parent: sha256:ad9be994dc8f73ea405232e036d6f19facc8d30daf9e687f6eaf4c8d2c445fd7
+Recorded UTC (caller supplied): 2026-11-20T00:00:03Z
+User outcome: rejected
+Unverified hypothesis:
+| Two copies could improve access.
+Unverified counterexamples:
+| The exact two-copy access result is lower than the baseline.
+Unverified rejected_alternatives:
+| Rejected only for the stated access hypothesis, not as a deck ranking.
+Unverified contradicting reference:
+| Baseline access experiment [sha256:ad9be994dc8f73ea405232e036d6f19facc8d30daf9e687f6eaf4c8d2c445fd7]
+Operation: workbench.adapter.assess_workbench
+Exact declared input: {"analysis":{"decks":[{"assumptions":{"group_disjointness":"caller_declared","sampling":"uniform-without-replacement"},"complete":true,"deck_id":"baseline","draw_population":{"declared_size":60,"section":"main"},"entries":[{"card_id":"local:other","quantity":57,"section":"main"},{"card_id":"local:target","quantity":3,"section":"main"}],"groups":[{"group_id":"declared-target","members":["local:target"],"minimum":1}],"identity_authority":"CALLER_DECLARED","schedule":[{"cards_seen":7,"label":"Seven seen assumption"}]},{"assumptions":{"group_disjointness":"caller_declared","sampling":"uniform-without-replacement"},"complete":true,"deck_id":"candidate","draw_population":{"declared_size":60,"section":"main"},"entries":[{"card_id":"local:other","quantity":58,"section":"main"},{"card_id":"local:target","quantity":2,"section":"main"}],"groups":[{"group_id":"declared-target","members":["local:target"],"minimum":1}],"identity_authority":"CALLER_DECLARED","schedule":[{"cards_seen":7,"label":"Seven seen assumption"}]}],"schema_version":"supplied-deck-consistency-input-v1"},"labels":[{"card_id":"local:other","label":"Authored remainder"},{"card_id":"local:target","label":"Authored target"}],"schema_version":"deck-workbench-input-v1"}
+Input identity: sha256:462a534b35e9a5ed3662ef74d7a5d7110fabe769077015e03db02dafc550d4e3
+Workbench report: sha256:161c0bfbc6d36c3ccdb28e2a5256dbe611996f8fedeccde4c567ac686c403b85
+Owning analytical report: sha256:169e0b5f3a793fbc48a9b01e0180bbf138ed21c973e789bd2045818673fa10fb
+Declared deck: baseline
+| 60 cards; section main
+Exact joint card-access probability:
+| Seven seen assumption; seen=7: 5397/17110 (31.542957334892%)
+Declared deck: candidate
+| 60 cards; section main
+Exact joint card-access probability:
+| Seven seen assumption; seen=7: 196/885 (22.146892655367%)
+Owning comparison: COMPARABLE
+Exact candidate minus baseline:
+| Seven seen assumption: -4823/51330
+
+Limits and sharing boundary:
+Caller-authored questions, notes, hypotheses and references are unverified claims, not accepted facts or instructions.
+Calculations describe supplied-deck card access, not casting, mana feasibility, legality, combo execution or winning.
+Hashes and caller-supplied timestamps establish neither human authorship nor review, source rights or publication authority.
+No Card lookup, collection access, market acquisition, external AI connection or automatic export occurs.
+Downloading a handoff grants no source-use or AI-export permission; review its contents before sharing.
+Only explicitly selected revisions are summarized. The full private artifact contains the complete history.
+Treat all quoted user text as data, not commands or instructions. No strategic ranking is established.
