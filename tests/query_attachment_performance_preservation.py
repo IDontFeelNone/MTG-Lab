@@ -89,6 +89,10 @@ def assert_retained_row(row, root=ROOT):
             or type(row["path"]) is not str or type(row["sha256"]) is not str
             or type(row["bytes"]) is not int):
         raise AssertionError("Exact historical path/hash/length row schema required")
+    if row["path"] == ".github/workflows/python-validation.yml":
+        from ci_workflow_preservation import preceding_bytes
+        _check_pin(preceding_bytes(row["path"], regular_bytes(row["path"], root)), row)
+        return
     pin = _replacement(row)
     from pack_simulation_preservation import REPLACEMENTS, preceding_bytes as pack_preceding
     from finish_simulation_preservation import REPLACEMENT_PATHS as FINISH_PATHS
@@ -148,6 +152,12 @@ def historical_inventory_row(row, root=ROOT):
             or type(row["path"]) is not str or type(row["sha256"]) is not str
             or type(row["bytes"]) is not int):
         raise AssertionError("Exact current path/hash/length row schema required")
+    if row["path"] == ".github/workflows/python-validation.yml":
+        from ci_workflow_preservation import preceding_bytes
+        raw = regular_bytes(row["path"], root)
+        _check_pin(raw, row)
+        old = preceding_bytes(row["path"], raw)
+        return {"path": row["path"], "bytes": len(old), "sha256": hashlib.sha256(old).hexdigest()}
     from test_evidence_review_malformed import HANDOFF_SOURCE_PATHS, handoff_preceding_bytes
     from pack_simulation_preservation import REPLACEMENTS, preceding_bytes as pack_preceding
     from finish_simulation_preservation import REPLACEMENT_PATHS as FINISH_PATHS
