@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Private release catalog reconciliation report V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "source_release", "provider_metadata", "partition_inventory", "total_source_rows", "unique_supported_card_identities", "distinct_printing_identities", "conflicting_card_fields", "duplicate_printing_identities", "conflicting_printing_identities", "conflicting_external_identifiers", "exceptional_records", "unresolved_identity_records", "unsupported_records", "source_processing_completeness", "catalog_population_completeness", "canonical_admission", "production_activation", "source_use_status", "artifacts", "limits", "limitations", "report_id"],
+  "properties": {
+    "schema_version": {"const": "release-catalog-reconciliation-v1"},
+    "status": {"const": "CANDIDATES_PREPARED"},
+    "source_release": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "release_id", "version", "date", "artifact_sha256", "provenance_reference", "notice_reference"],
+      "properties": {
+        "provider": {"const": "MTGJSON"}, "release_id": {"type": "string"},
+        "version": {"type": "string"}, "date": {"type": "string"},
+        "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "provenance_reference": {"type": "string"}, "notice_reference": {"type": "string"}
+      }
+    },
+    "provider_metadata": {"type": "object"},
+    "partition_inventory": {"type": "array", "maxItems": 10000, "items": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ordinal", "source_key", "set_code", "source_partition_sha256", "rows"],
+      "properties": {"ordinal": {"type": "integer", "minimum": 0}, "source_key": {"type": "string"},
+        "set_code": {"type": "string"}, "source_partition_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "rows": {"type": "integer", "minimum": 0}}
+    }},
+    "total_source_rows": {"$ref": "#/$defs/count"},
+    "unique_supported_card_identities": {"$ref": "#/$defs/count"},
+    "distinct_printing_identities": {"$ref": "#/$defs/count"},
+    "conflicting_card_fields": {"$ref": "#/$defs/count"},
+    "duplicate_printing_identities": {"$ref": "#/$defs/count"},
+    "conflicting_printing_identities": {"$ref": "#/$defs/count"},
+    "conflicting_external_identifiers": {"$ref": "#/$defs/count"},
+    "exceptional_records": {"$ref": "#/$defs/count"},
+    "unresolved_identity_records": {"$ref": "#/$defs/count"},
+    "unsupported_records": {"$ref": "#/$defs/count"},
+    "source_processing_completeness": {"const": "ALL_ROWS_ACCOUNTED_FOR"},
+    "catalog_population_completeness": {"const": "NOT_ESTABLISHED"},
+    "canonical_admission": {"const": "NOT_PERFORMED"},
+    "production_activation": {"const": "NOT_PERFORMED"},
+    "source_use_status": {"const": "HOST_AUTHORIZED_FOR_EXACT_PRIVATE_OPERATION"},
+    "artifacts": {"type": "object", "additionalProperties": false,
+      "required": ["assertions.jsonl", "conflicts.jsonl", "duplicates.jsonl", "identifier-conflicts.jsonl", "cards.jsonl", "printings.jsonl", "exceptional.jsonl", "unresolved.jsonl"],
+      "properties": {
+        "assertions.jsonl": {"$ref": "#/$defs/artifact"}, "conflicts.jsonl": {"$ref": "#/$defs/artifact"},
+        "duplicates.jsonl": {"$ref": "#/$defs/artifact"}, "identifier-conflicts.jsonl": {"$ref": "#/$defs/artifact"},
+        "cards.jsonl": {"$ref": "#/$defs/artifact"}, "printings.jsonl": {"$ref": "#/$defs/artifact"},
+        "exceptional.jsonl": {"$ref": "#/$defs/artifact"}, "unresolved.jsonl": {"$ref": "#/$defs/artifact"}
+      }
+    },
+    "limits": {"type": "object", "additionalProperties": false,
+      "required": ["source_bytes", "decoded_bytes", "partition_bytes", "row_bytes", "rows", "partitions", "disk_bytes", "output_bytes", "cpu_seconds", "wall_seconds", "memory_bytes"],
+      "properties": {
+        "source_bytes": {"$ref": "#/$defs/limit"}, "decoded_bytes": {"$ref": "#/$defs/limit"},
+        "partition_bytes": {"$ref": "#/$defs/limit"}, "row_bytes": {"$ref": "#/$defs/limit"},
+        "rows": {"$ref": "#/$defs/limit"}, "partitions": {"$ref": "#/$defs/limit"},
+        "disk_bytes": {"$ref": "#/$defs/limit"}, "output_bytes": {"$ref": "#/$defs/limit"},
+        "cpu_seconds": {"$ref": "#/$defs/limit"}, "wall_seconds": {"$ref": "#/$defs/limit"},
+        "memory_bytes": {"$ref": "#/$defs/limit"}
+      }
+    },
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "report_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  },
+  "$defs": {
+    "count": {"type": "integer", "minimum": 0}, "limit": {"type": "integer", "minimum": 1},
+    "artifact": {"type": "object", "additionalProperties": false, "required": ["sha256", "bytes", "rows"],
+      "properties": {"sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"$ref": "#/$defs/count"}, "rows": {"$ref": "#/$defs/count"}}}
+  }
+}
