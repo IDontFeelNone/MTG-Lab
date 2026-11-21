@@ -33,6 +33,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from ci_workflow_preservation import preceding_bytes as ci_preceding
+    raw = ci_preceding(name, raw)
     if type(name) is not str or type(raw) is not bytes:
         raise AssertionError('exact named source bytes required')
     if name not in REPLACEMENTS:
@@ -53,6 +55,8 @@ def preceding_bytes(name, raw):
 
 
 def is_addition(path, root=ROOT):
+    from ci_workflow_preservation import is_addition as ci_addition
+    if ci_addition(path, root): return True
     name = path.relative_to(root).as_posix()
     if name not in ADDITIONS:
         return False
