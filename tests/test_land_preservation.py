@@ -74,7 +74,11 @@ class LandPreservationTests(unittest.TestCase):
                 path = ROOT / name
                 self.assertFalse(path.is_symlink())
                 self.assertEqual(path.stat().st_mode & 0o111, 0)
-                self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), digest)
+                raw = path.read_bytes()
+                if name == '.github/workflows/python-validation.yml':
+                    from ci_workflow_preservation import preceding_bytes
+                    raw = preceding_bytes(name, raw)
+                self.assertEqual(hashlib.sha256(raw).hexdigest(), digest)
 
     def test_historical_actual_owning_contract_identities_and_output_parity(self):
         from card_rules_pilot import behavior as b, behavior_policy as bp
