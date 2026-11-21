@@ -1,10 +1,13 @@
 """Bounded CI routing, actual-checkout evidence and fail-closed regressions."""
 import copy
+import contextlib
 import importlib.util
+import io
 import json
 import os
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 import urllib.request
@@ -200,8 +203,9 @@ class CIWorkflowEfficiencyTests(unittest.TestCase):
             env=dict(GITHUB_OUTPUT=str(root/'output'),GITHUB_STEP_SUMMARY=str(root/'summary'),
                      GITHUB_EVENT_PATH=str(root/'event'),GITHUB_EVENT_NAME='pull_request',
                      GITHUB_SHA=MERGE,GITHUB_REPOSITORY=REPOSITORY)
-            with patch.dict(os.environ,env),patch.object(ci,'git',side_effect=[MERGE.encode(),TREE.encode(),(BASE+' '+HEAD).encode()]),patch.object(ci,'GitHub') as api:
+            with contextlib.redirect_stdout(io.StringIO()) as printed,patch.dict(os.environ,env),patch.object(ci,'git',side_effect=[MERGE.encode(),TREE.encode(),(BASE+' '+HEAD).encode()]),patch.object(ci,'GitHub') as api:
                 self.assertEqual(ci.main(),0);api.assert_not_called()
+            self.assertTrue(json.loads(printed.getvalue())['full'])
             self.assertEqual((root/'output').read_text(),'full=true\nfull=true\n')
             self.assertIn('ci-validation-scope-v1',(root/'summary').read_text())
 
@@ -212,9 +216,32 @@ class CIWorkflowEfficiencyTests(unittest.TestCase):
                      GITHUB_EVENT_PATH=str(root/'event'),GITHUB_EVENT_NAME='push',
                      GITHUB_SHA=MERGE,GITHUB_REPOSITORY=REPOSITORY)
             responses=[MERGE.encode(),TREE.encode(),(BASE+' '+HEAD).encode(),b'src/probability/draw_access.py\0']
-            with patch.dict(os.environ,env),patch.object(ci,'git',side_effect=responses),patch.object(ci,'GitHub',return_value=API()):
+            with contextlib.redirect_stdout(io.StringIO()) as printed,patch.dict(os.environ,env),patch.object(ci,'git',side_effect=responses),patch.object(ci,'GitHub',return_value=API()):
                 self.assertEqual(ci.main(),0)
+            self.assertFalse(json.loads(printed.getvalue())['full'])
             self.assertEqual((root/'output').read_text(),'full=true\nfull=false\n')
+
+    def test_adapter_test_stdout_cannot_corrupt_real_publication_count(self):
+        # Run the real adapter tests, then exercise the unchanged production
+        # counter and independent diagnostics on their actual captured output.
+        from production_evidence.automatic_updates import GitHubPersistence
+        from publication_validation_regression import nested_validation_diagnostics
+        stdout,stderr=io.StringIO(),io.StringIO()
+        suite=unittest.TestSuite(CIWorkflowEfficiencyTests(name) for name in (
+            'test_main_pr_route_outputs_full_and_never_accesses_network',
+            'test_main_verified_push_emits_reuse_only_after_evidence'))
+        with contextlib.redirect_stdout(stdout):
+            result=unittest.TextTestRunner(stream=stderr,verbosity=2).run(suite)
+        self.assertTrue(result.wasSuccessful());self.assertEqual(result.testsRun,2)
+        self.assertEqual(stdout.getvalue(),'')
+        child=SimpleNamespace(returncode=0,stdout=stdout.getvalue(),stderr=stderr.getvalue())
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'.git').mkdir()
+            with patch('production_evidence.automatic_updates.subprocess.run',return_value=child):
+                validation=GitHubPersistence._required_admission_validation(root)
+            self.assertEqual(validation['tests'],2)
+            log=(root/'.git/catalog-admission-validation.log').read_bytes()
+            self.assertEqual(nested_validation_diagnostics(log,validation)['tests'],2)
 
     def test_unexpected_checkout_fails_job_without_emitting_skip(self):
         with tempfile.TemporaryDirectory() as directory:
