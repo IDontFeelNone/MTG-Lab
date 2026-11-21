@@ -174,6 +174,16 @@ class ReleaseReconciliationTests(unittest.TestCase):
         self.assertEqual(exceptional[1]['missing_related_printings'], ['missing-original-face'])
         self.assertTrue(all(x['candidate_status']=='WITHHELD' for x in self.lines('printings.jsonl') if x['printing_id'] in (a['uuid'],b['uuid'])))
 
+    def test_unresolved_multiface_rows_still_preserve_declared_relationships(self):
+        row=self.document['data']['QRA']['cards'][0]
+        row.update(layout='transform',side='a',otherFaceIds=['original-unresolved-face'],identifiers={})
+        self.prepare();report=self.run_release()
+        self.assertEqual(report['unresolved_identity_records'],1)
+        self.assertEqual(report['exceptional_records'],1)
+        exception=self.lines('exceptional.jsonl')[0]
+        self.assertIsNone(exception['card_id'])
+        self.assertEqual(exception['related_printings'],['original-unresolved-face'])
+
     def test_unsupported_records_and_missing_identifiers_are_accounted_not_fabricated(self):
         self.document['data']['QRA']['cards'] += [None, {'identifiers': {'scryfallOracleId':'fixture-broken'}}]
         self.prepare(); report = self.run_release()
@@ -293,6 +303,13 @@ class ReleaseReconciliationTests(unittest.TestCase):
         self.prepare()
         self.error('RESOURCE_BUDGET',lambda:self.run_release(limits=replace(ReconciliationLimits(),source_bytes=10)))
         self.error('RESOURCE_BUDGET',lambda:self.run_release(limits=replace(ReconciliationLimits(),decoded_bytes=10)))
+
+    def test_output_budget_includes_final_summary(self):
+        self.prepare();report=self.run_release()
+        artifact_bytes=sum(x['bytes'] for x in report['artifacts'].values())
+        self.workspace=self.root/'summary-bound'
+        self.error('RESOURCE_BUDGET',lambda:self.run_release(limits=replace(ReconciliationLimits(),output_bytes=artifact_bytes+1)))
+        self.assertFalse((self.workspace/'output/report.json').exists())
 
     def test_resource_partition_accumulation_is_bounded_before_decode(self):
         self.document['data']['QRA']['padding']='x'*10000

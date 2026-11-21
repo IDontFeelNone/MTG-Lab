@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT/'tests/fixtures/release_reconciliation_v1/successors.json'
-LEDGER_SHA256 = '4c936bfa3fd6185eff555e7ab10d42d203ee49b4e7e09bd15852621dc85b43a4'
+LEDGER_SHA256 = '4c1d2fba8f57cc2b0c5bc3d2c0483e62cb12536aaf2396e3b7618a032f61bf47'
 BASE = 'c1b2826ea3a80fdead9570c444e1d56f1f46c0ad'
 TREE = '3359eaae6283325a8d75059b7284d91ea5a15ae5'
 ADDITIONS = frozenset(('src/providers/mtgjson/reconciliation.py',

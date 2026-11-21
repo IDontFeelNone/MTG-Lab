@@ -173,6 +173,18 @@ def _row(meta, key, source_set, raw, limits):
         return row
     if _identifier(raw.get("uuid")):
         row["printing_id"] = raw["uuid"].casefold()
+    # Relationships are source assertions even when Card identity is unresolved.
+    # Preserve them before any identity/schema refusal; never manufacture faces.
+    row["exceptional"] = (raw.get("layout", "normal") != "normal" or
+                           any(k in raw for k in ("side", "faceName", "otherFaceIds")))
+    if row["exceptional"]:
+        row["facet"] = _json({k: raw[k] for k in ("side", "faceName") if k in raw})
+    relationships = raw.get("otherFaceIds", [])
+    if type(relationships) is not list or not all(_identifier(x) for x in relationships):
+        row["status"] = "UNSUPPORTED_RECORD"
+        row['reason'] = 'INVALID_FACE_RELATIONSHIPS'
+        return row
+    row["relationships"] = sorted(x.casefold() for x in relationships)
     ids = raw.get("identifiers", {})
     if type(ids) is not dict or any(not _identifier(k) or not _identifier(v) for k, v in ids.items()):
         row["status"] = "UNSUPPORTED_RECORD"
@@ -202,16 +214,6 @@ def _row(meta, key, source_set, raw, limits):
     row["mapped_printing"] = next(x for x in mapped if x["entity_type"] == "printing")
     row["card_id"] = row["mapped_card"]["mapped_fields"]["card_reference"]
     row["assertions"] = {k: raw[k] for k in CARD_FIELDS if k in raw}
-    row["exceptional"] = (raw.get("layout", "normal") != "normal" or
-                           any(k in raw for k in ("side", "faceName", "otherFaceIds")))
-    if row["exceptional"]:
-        row["facet"] = _json({k: raw[k] for k in ("side", "faceName") if k in raw})
-    relationships = raw.get("otherFaceIds", [])
-    if type(relationships) is not list or not all(_identifier(x) for x in relationships):
-        row["status"] = "UNSUPPORTED_RECORD"
-        row['reason'] = 'INVALID_FACE_RELATIONSHIPS'
-    else:
-        row["relationships"] = sorted(x.casefold() for x in relationships)
     return row
 
 
@@ -478,6 +480,8 @@ def _run(source, root, binding, limits, stop_after):
         _disk(root, limits)
         raw = (_json(result) + "\n").encode()
         _require(len(raw) <= min(4 * 1024**2, limits.output_bytes), "summary exceeds budget", "RESOURCE_BUDGET")
+        _require(sum(item['bytes'] for item in result['artifacts'].values()) + len(raw) <= limits.output_bytes,
+                 'artifacts plus summary exceed output budget', 'RESOURCE_BUDGET')
         _require(sum(p.stat().st_size for p in root.rglob('*') if p.is_file()) + len(raw) <= limits.disk_bytes,
                  "final summary exceeds disk budget", "RESOURCE_BUDGET")
         (output / "report.json.tmp").write_bytes(raw)
@@ -571,6 +575,7 @@ def reconcile_release(source, workspace, release, *, authorize_source=None,
             if not success:
                 raise ReconciliationError(value["code"], value["reason"])
             (root / "last-run.json").write_text(_json(measurement) + "\n")
+            _disk(root, limits)
             return value
         finally:
             if process.is_alive():

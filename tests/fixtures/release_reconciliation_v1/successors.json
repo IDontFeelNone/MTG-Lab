@@ -5,8 +5,8 @@
       "sha256": "8f8d9b03bb4846a67989cf5313942e14261c9d5bc8067ffb298ec117e41a38db"
     },
     "src/providers/mtgjson/reconciliation.py": {
-      "bytes": 32943,
-      "sha256": "7c26ee77ef0cde58580ccd211cfb7ca00a4c3083d1f8e4d0abdc09cfe456eaee"
+      "bytes": 33337,
+      "sha256": "2fa458e39e18d7449850d4224bc024c172b07c471607815b57d3aa44009ea67d"
     },
     "src/schemas/v1/release-catalog-reconciliation-report.schema.json": {
       "bytes": 4988,
