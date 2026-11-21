@@ -133,7 +133,8 @@ never approximate success or zero probability. Invalid source, unsupported
 platform, policy refusal, integrity mismatch and workspace contention are
 distinct refusals. A process killed by an OS limit produces no successful
 result. `last-run.json` holds new timing/peak-memory measurements separately
-from deterministic evidence.
+from deterministic evidence. Peak memory uses the worker's Linux `VmHWM`, not
+`ru_maxrss`, which can inherit a launcher's historical peak across `spawn`/exec.
 
 Each partition commits atomically. To deliberately pause after N newly committed
 partitions, pass `stop_after_partitions=N`. A pause reports `INCOMPLETE` and does

@@ -1,12 +1,12 @@
 {
   "additions": {
     "docs/RELEASE_CATALOG_RECONCILIATION_V1.md": {
-      "bytes": 9860,
-      "sha256": "8f8d9b03bb4846a67989cf5313942e14261c9d5bc8067ffb298ec117e41a38db"
+      "bytes": 9990,
+      "sha256": "b70c54274e912607462025801c4d99474e25dfbeb8f69a9e5e69a81cb130f77d"
     },
     "src/providers/mtgjson/reconciliation.py": {
-      "bytes": 33337,
-      "sha256": "2fa458e39e18d7449850d4224bc024c172b07c471607815b57d3aa44009ea67d"
+      "bytes": 34362,
+      "sha256": "244d3015676df46e2eda93adf25f8908b6ce25f8aec010fcdd2c0a2a13f0d84b"
     },
     "src/schemas/v1/release-catalog-reconciliation-report.schema.json": {
       "bytes": 4988,

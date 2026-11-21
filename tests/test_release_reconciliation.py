@@ -345,6 +345,23 @@ class ReleaseReconciliationTests(unittest.TestCase):
         measurement=json.loads((self.workspace/'last-run.json').read_text())
         self.assertLess(measurement['peak_memory_kib'],512*1024)
 
+    def test_worker_memory_measurement_does_not_inherit_launcher_peak(self):
+        import gc
+        import resource
+        self.prepare()
+        allocation=bytearray(80*1024**2)
+        del allocation
+        gc.collect()
+        launcher_peak=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        self.run_release()
+        measurement=json.loads((self.workspace/'last-run.json').read_text())
+        self.assertLess(measurement['peak_memory_kib'],launcher_peak)
+
+    def test_unavailable_worker_memory_measurement_refuses_explicitly(self):
+        from providers.mtgjson.reconciliation import _worker_peak_memory_kib
+        with patch.object(Path,'open',side_effect=PermissionError('PRIVATE_PATH')):
+            self.error('RESOURCE_MEASUREMENT_UNAVAILABLE',_worker_peak_memory_kib)
+
     def test_workspace_lock_refuses_concurrent_execution(self):
         import fcntl
         self.prepare();self.workspace.mkdir(mode=0o700)

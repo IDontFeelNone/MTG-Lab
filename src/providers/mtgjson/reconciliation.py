@@ -491,6 +491,22 @@ def _run(source, root, binding, limits, stop_after):
         db.close()
 
 
+def _worker_peak_memory_kib():
+    # Linux ru_maxrss survives exec with the launcher's historical high-water
+    # mark. VmHWM resets at exec and measures this isolated worker instead.
+    try:
+        with Path('/proc/self/status').open() as status:
+            for line in status:
+                if line.startswith('VmHWM:'):
+                    fields = line.split()
+                    _require(len(fields) == 3 and fields[1].isdigit() and fields[2] == 'kB',
+                             'worker memory measurement unavailable', 'RESOURCE_MEASUREMENT_UNAVAILABLE')
+                    return int(fields[1])
+    except OSError:
+        raise ReconciliationError('RESOURCE_MEASUREMENT_UNAVAILABLE', 'worker memory measurement unavailable') from None
+    raise ReconciliationError('RESOURCE_MEASUREMENT_UNAVAILABLE', 'worker high-water measurement unavailable')
+
+
 def _worker(connection, source, root, binding, limits, stop_after):
     started = time.monotonic()
     try:
@@ -499,8 +515,11 @@ def _worker(connection, source, root, binding, limits, stop_after):
         resource.setrlimit(resource.RLIMIT_FSIZE, (limits.disk_bytes // 2, limits.disk_bytes // 2))
         os.environ["SQLITE_TMPDIR"] = str(root)
         result = _run(source, root, binding, limits, stop_after)
+        peak_memory = _worker_peak_memory_kib()
+        _require(peak_memory * 1024 <= limits.memory_bytes,
+                 'worker memory high-water exceeds configured budget', 'RESOURCE_BUDGET')
         connection.send((True, result, dict(seconds=round(time.monotonic()-started,6),
-            peak_memory_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)))
+            peak_memory_kib=peak_memory)))
     except ReconciliationError as error:
         connection.send((False, error.as_dict(), None))
     except (MemoryError, sqlite3.OperationalError):
