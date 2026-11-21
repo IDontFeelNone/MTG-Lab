@@ -241,6 +241,15 @@ class ReleaseReconciliationTests(unittest.TestCase):
             db.execute('INSERT INTO records VALUES(?,?,?,?,?,?,?,?,?)', row)
         self.error('INTEGRITY_MISMATCH', self.run_release)
 
+    def test_checkpoint_triggers_cannot_change_previously_validated_rows_during_resume(self):
+        self.prepare(); self.run_release(stop_after_partitions=1)
+        with sqlite3.connect(self.workspace/'index.sqlite3') as db:
+            db.execute("""CREATE TRIGGER forged_checkpoint AFTER INSERT ON records BEGIN
+              UPDATE records SET card_id='forged-card' WHERE p=0; END""")
+        self.error('INTEGRITY_MISMATCH', self.run_release)
+        with sqlite3.connect(self.workspace/'index.sqlite3') as db:
+            self.assertEqual(db.execute('SELECT count(*) FROM partitions').fetchone()[0],1)
+
     def test_source_hash_metadata_and_workspace_bindings_rejected(self):
         self.prepare(); original = deepcopy(self.release)
         self.release['artifact_sha256']='0'*64

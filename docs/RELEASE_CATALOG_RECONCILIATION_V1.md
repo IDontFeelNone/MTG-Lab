@@ -141,6 +141,8 @@ not create a complete report. Resume with identical bindings and limits. Replay
 streams from the source beginning and independently checks each completed
 partition, row and assertion against the original source before skipping writes;
 it does not trust a coherently rehashed checkpoint. Concurrent runs are refused.
+Unexpected checkpoint schema objects, including triggers and views, are refused
+before resumed writes can alter previously validated rows.
 SQLite recovery handles interrupted transactions. Finalization is repeatable but
 not itself checkpointed; a finalization that exceeds budgets requires a smaller
 supported scope or future separately approved improvement. Never present a prior

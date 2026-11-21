@@ -216,6 +216,13 @@ def _row(meta, key, source_set, raw, limits):
 
 
 def _schema(db, limits):
+    tables = {'binding', 'partitions', 'records', 'assertions', 'conflicts',
+              'duplicate_printings', 'alias_conflicts'}
+    indexes = {'card_idx', 'print_idx', 'assertion_idx', 'conflict_idx', 'duplicate_idx'}
+    for kind, name, sql in db.execute("SELECT type,name,sql FROM sqlite_master WHERE name NOT LIKE 'sqlite_%'"):
+        _require((kind == 'table' and name in tables and not sql.upper().startswith('CREATE VIRTUAL'))
+                 or (kind == 'index' and name in indexes),
+                 'unrecognized or executable checkpoint schema', 'INTEGRITY_MISMATCH')
     db.execute("PRAGMA journal_mode=DELETE")
     db.execute("PRAGMA temp_store=FILE")
     db.execute("PRAGMA cache_size=-8192")
