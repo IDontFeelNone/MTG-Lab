@@ -1,0 +1,19 @@
+{
+  "meta": {"date": "2026-11-20", "version": "5.2.1"},
+  "data": {
+    "QRA": {
+      "code": "QRA", "name": "Original Fixture: Quiet Rivet Assembly",
+      "cards": [
+        {"uuid": "fixture-print-rivet-a", "name": "Quiet Rivet Archivist", "number": "1", "layout": "normal", "colors": [], "manaCost": "{2}", "finishes": ["nonfoil"], "identifiers": {"scryfallOracleId": "fixture-card-rivet", "scryfallId": "fixture-external-rivet-a"}},
+        {"uuid": "fixture-print-lantern", "name": "Uncharted Lantern Loom", "number": "2", "layout": "normal", "colors": ["U"], "manaCost": "{U}", "finishes": ["foil"], "identifiers": {"scryfallOracleId": "fixture-card-lantern"}}
+      ]
+    },
+    "QRB": {
+      "code": "QRB", "name": "Original Fixture: Quiet Rivet Beyond",
+      "cards": [
+        {"uuid": "fixture-print-rivet-b", "name": "Quiet Rivet Archivist", "number": "7", "layout": "normal", "colors": [], "manaCost": "{2}", "finishes": ["foil", "nonfoil"], "identifiers": {"scryfallOracleId": "fixture-card-rivet", "scryfallId": "fixture-external-rivet-b"}},
+        {"uuid": "fixture-print-bridge", "name": "Silent Copper Bridge", "number": "8", "layout": "normal", "colors": [], "manaCost": "{3}", "finishes": ["nonfoil"], "identifiers": {"scryfallOracleId": "fixture-card-bridge"}}
+      ]
+    }
+  }
+}
