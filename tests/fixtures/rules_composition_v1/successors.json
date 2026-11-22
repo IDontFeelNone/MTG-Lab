@@ -1,0 +1,106 @@
+{
+  "additions": {
+    "docs/RULES_REASONING_COMPOSITION_V1.md": {
+      "bytes": 9259,
+      "sha256": "d9b0844d7bcb0191a14183d7318e3203a1e8573c55882cb2c516e0c0bb8563e2"
+    },
+    "src/card_intelligence/rules_composition.py": {
+      "bytes": 16119,
+      "sha256": "5172e286320d729a8fb3b93a6b0b21fed896fb516421fd1c559f7a309cdfad8d"
+    },
+    "tests/fixtures/rules_composition_v1/payment-pool.json": {
+      "bytes": 1562,
+      "sha256": "17f57d7e55f838626c01f649e796ea8861827bc5be0687750f44027b42cfe161"
+    }
+  },
+  "base": "0d3f3a76b71b0bfbc0cb39b5f21dfae3cc6d06cd",
+  "replacements": {
+    "tests/rules_reasoning_preservation.py": {
+      "edits": [
+        {
+          "end": 1828,
+          "new_sha256": "814817a74ae67b203f4538a881b4f2cff5df40cd9bdae290da2e1af2b754141b",
+          "old": "",
+          "start": 1697
+        },
+        {
+          "end": 2770,
+          "new_sha256": "37673db8c009053aaf125afc9dc82b4bb688a209518dd3f39e8b803a326fa8b2",
+          "old": "",
+          "start": 2634
+        }
+      ],
+      "new": {
+        "bytes": 3134,
+        "sha256": "79520f8e5f0d18dc6602138bfa59b25c3c229a8e14bb0bf49b491ade165d3f50"
+      },
+      "old": {
+        "bytes": 2867,
+        "sha256": "fbf6e6884d821dab28eeeeeb8bd33f27cad6edb79ba8ea18fdc0c9da1d66fc59"
+      }
+    }
+  },
+  "tree": "b49e2b383113e344b06522932074d0f4582d7432",
+  "unchanged": {
+    ".github/workflows/python-validation.yml": {
+      "bytes": 1158,
+      "sha256": "9c945a48bfce23e9a57837df4080f3cada93af041bb4d4ef55502d1207bff2e2"
+    },
+    "VISION.md": {
+      "bytes": 9683,
+      "sha256": "ab0e0d02c9afceb4f436c1ef711468bb8c619ebc80759bfd1ba3ee2e9ed26f8d"
+    },
+    "docs/ARCHITECTURE.md": {
+      "bytes": 8082,
+      "sha256": "c4651ad45e47ff9a247151a9c4ca54e8e7dd18b23725cec0571039ef676284b3"
+    },
+    "docs/DECISIONS.md": {
+      "bytes": 16095,
+      "sha256": "47e1fc0e4353f251dde4fb316ec79642a3ab3d51fc0dcc6613b49a795ead73db"
+    },
+    "docs/GOVERNANCE.md": {
+      "bytes": 7331,
+      "sha256": "c88e696509ab99abae60c9b8aa63e3f9d79cef92f7814989cb91c46b659fa819"
+    },
+    "docs/RESEARCH_LOG_ARCHITECTURE.md": {
+      "bytes": 11712,
+      "sha256": "0bcd1637e7dc29c51f510e16c38184bf57343f69d0a2faeb6b8858b15dc9d79e"
+    },
+    "scripts/ci_merge_tree.py": {
+      "bytes": 13518,
+      "sha256": "56206410bf0dda4211171db3ff47d91cb80ecd51defc43f2317d6c9e11d5166c"
+    },
+    "src/card_intelligence/mana_window.py": {
+      "bytes": 18980,
+      "sha256": "608f3d9ab7991612667e99eeb279bedbbf9855e98eaac92e7a00a85969f44122"
+    },
+    "src/card_intelligence/rules_reasoning.py": {
+      "bytes": 19084,
+      "sha256": "bfe4cf9ad8520addfb217bd5201ec3a11aaa97edbe1d3c36602987c8c1112da0"
+    },
+    "src/card_rules_pilot/land_context.py": {
+      "bytes": 12875,
+      "sha256": "45b6ee3346e8c41c86732fb2f4a670b862106d22a4160e35a39c466090794d9a"
+    },
+    "src/probability/draw_access.py": {
+      "bytes": 8949,
+      "sha256": "0835ae163b28aeaebe85cbc79e67d2766736a6501504296db905adf29742292c"
+    },
+    "src/probability/resource_assignment.py": {
+      "bytes": 12731,
+      "sha256": "075dde356bd6e273789e9f64a1da264a9d7c74b222bd9c0343378c4a7f6b4eb6"
+    },
+    "src/probability/supplied_deck.py": {
+      "bytes": 14253,
+      "sha256": "439682ab62ad1866f7c3c6c9190ae1bf911fc7245ada56980f9c4fc70754b7f4"
+    },
+    "src/workbench/adapter.py": {
+      "bytes": 4640,
+      "sha256": "b4664d55a325e559989a01eaaa9741fba76ae0cc603fd63c8e84cf1697577c85"
+    },
+    "src/workbench/investigations.py": {
+      "bytes": 16231,
+      "sha256": "8f0a0c7d7a94c2babc3b3c8356fea3ab6240ee0bf211d61d7ad0a6845eb70c5e"
+    }
+  }
+}
