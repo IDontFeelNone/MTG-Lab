@@ -1,0 +1,90 @@
+{
+  "additions": {
+    "docs/REAL_CARD_RULES_REASONING_V1.md": {
+      "bytes": 7528,
+      "sha256": "bd74339c3d64c6d435a057258060b48b7381129f99b850570481f6f67f77b282"
+    },
+    "src/card_intelligence/rules_reasoning.py": {
+      "bytes": 19084,
+      "sha256": "bfe4cf9ad8520addfb217bd5201ec3a11aaa97edbe1d3c36602987c8c1112da0"
+    },
+    "src/schemas/v1/real-card-rules-reasoning-input.schema.json": {
+      "bytes": 3801,
+      "sha256": "58e03c8bd7dd112087fc4b08f8af5165376970cd528704b5889c5bafa7399a7c"
+    },
+    "tests/fixtures/rules_reasoning_v1/payment.json": {
+      "bytes": 684,
+      "sha256": "2a753ac08c1d61585f75cc77c8675cdb60ec88b0d925a67448e2e631d3ab76e1"
+    }
+  },
+  "base": "8d9468482461dc5c1ebca44aee44c24e38a48d7f",
+  "replacements": {
+    "tests/release_reconciliation_preservation.py": {
+      "edits": [
+        {
+          "end": 1863,
+          "new_sha256": "a3eeaee542569887ab0b42141bcece63e7cea32f6f8b21faeeec2602e9d0d9b4",
+          "old": "",
+          "start": 1738
+        },
+        {
+          "end": 2797,
+          "new_sha256": "ac21afc0248a32f9e360c12a24b5dbf84dfdf5a0397c2a513603c479eefa7b5f",
+          "old": "",
+          "start": 2667
+        }
+      ],
+      "new": {
+        "bytes": 3160,
+        "sha256": "734dcecc697f25239b0272f0589dd4f706e4c7c4b51921c04883a92af5cc5dc1"
+      },
+      "old": {
+        "bytes": 2905,
+        "sha256": "f388d1d40848345bc3156615b1c62af6447990fdd77473912cf4ba24ce00593e"
+      }
+    }
+  },
+  "tree": "0fa00199e092fa7bdf17f5de73d8a14871282552",
+  "unchanged": {
+    ".github/workflows/python-validation.yml": {
+      "bytes": 1158,
+      "sha256": "9c945a48bfce23e9a57837df4080f3cada93af041bb4d4ef55502d1207bff2e2"
+    },
+    "VISION.md": {
+      "bytes": 9683,
+      "sha256": "ab0e0d02c9afceb4f436c1ef711468bb8c619ebc80759bfd1ba3ee2e9ed26f8d"
+    },
+    "docs/ARCHITECTURE.md": {
+      "bytes": 8082,
+      "sha256": "c4651ad45e47ff9a247151a9c4ca54e8e7dd18b23725cec0571039ef676284b3"
+    },
+    "docs/DECISIONS.md": {
+      "bytes": 16095,
+      "sha256": "47e1fc0e4353f251dde4fb316ec79642a3ab3d51fc0dcc6613b49a795ead73db"
+    },
+    "docs/GOVERNANCE.md": {
+      "bytes": 7331,
+      "sha256": "c88e696509ab99abae60c9b8aa63e3f9d79cef92f7814989cb91c46b659fa819"
+    },
+    "docs/RESEARCH_LOG_ARCHITECTURE.md": {
+      "bytes": 11712,
+      "sha256": "0bcd1637e7dc29c51f510e16c38184bf57343f69d0a2faeb6b8858b15dc9d79e"
+    },
+    "src/card_intelligence/mana_window.py": {
+      "bytes": 18980,
+      "sha256": "608f3d9ab7991612667e99eeb279bedbbf9855e98eaac92e7a00a85969f44122"
+    },
+    "src/card_intelligence/semantic_closure.py": {
+      "bytes": 18919,
+      "sha256": "a46ca9d44e334c0f6e4094867dedff810a0df4a7e0026666b30d422a1c3337b1"
+    },
+    "src/card_rules_pilot/behavior_policy.py": {
+      "bytes": 27364,
+      "sha256": "ac67f056df9889afe377decc13d6d54fb0c741e101e67f5f718021b0e35c6d27"
+    },
+    "src/card_rules_pilot/land_context.py": {
+      "bytes": 12875,
+      "sha256": "45b6ee3346e8c41c86732fb2f4a670b862106d22a4160e35a39c466090794d9a"
+    }
+  }
+}
