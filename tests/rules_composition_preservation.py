@@ -35,6 +35,8 @@ def ledger():
 
 
 def preceding_bytes(name,raw):
+    from private_mtgjson_preservation import preceding_bytes as private_preceding
+    raw=private_preceding(name,raw)
     if type(name) is not str or type(raw) is not bytes:
         raise AssertionError('exact named predecessor bytes required')
     if name not in REPLACEMENTS:return raw
@@ -51,6 +53,8 @@ def preceding_bytes(name,raw):
 
 
 def is_addition(path,root=ROOT):
+    from private_mtgjson_preservation import is_addition as private_addition
+    if private_addition(path,root):return True
     name=path.relative_to(root).as_posix()
     if name not in ADDITIONS:return False
     if (any(p.is_symlink() for p in (path,*path.parents)) or not path.is_file()

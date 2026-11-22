@@ -22,8 +22,10 @@ import time
 from .mapper import map_dataset
 from .streaming import _decoded, _IncrementalJSON
 from .validator import IDENTIFIER_POLICY, MTGJSONValidationError, validate_document
+from .private_policy import RETENTION, SET_FIELDS, project_row
 
 VERSION = "release-catalog-reconciliation-v1"
+FACTUAL_VERSION = "private-mtgjson-import-report-v1"
 OPERATION = "private-release-catalog-reconciliation-v1"
 OUTPUT_NAMES = frozenset(('assertions.jsonl', 'conflicts.jsonl', 'duplicates.jsonl',
     'identifier-conflicts.jsonl', 'cards.jsonl', 'printings.jsonl', 'exceptional.jsonl',
@@ -247,7 +249,8 @@ def _schema(db, limits):
 
 def _stored(p, n, row):
     return (p, n, row["card_id"], row["printing_id"], row["facet"], row["status"],
-            _hash(row["mapped_printing"]) if row["mapped_printing"] else row['source_record_sha256'],
+            (row['source_record_sha256'] if row.get('retention_profile') == RETENTION else
+             _hash(row["mapped_printing"]) if row["mapped_printing"] else row['source_record_sha256']),
             int(row["exceptional"]), _json(row))
 
 
@@ -384,6 +387,17 @@ def _finalize(db, output, binding, meta, limits):
         canonical_admission="NOT_PERFORMED", production_activation="NOT_PERFORMED",
         source_use_status="HOST_AUTHORIZED_FOR_EXACT_PRIVATE_OPERATION",
         artifacts=out.inventory, limits=asdict(limits), limitations=list(LIMITATIONS))
+    if 'private_scope' in binding:
+        report['schema_version'] = FACTUAL_VERSION
+        report['source_use_status'] = 'HOST_SCOPED_DISPOSITION_NOT_EXTERNAL_LICENSE'
+        report['retention_profile'] = RETENTION
+        report['real_card_execution'] = 'BLOCKED'
+        report['limitations'] += [
+            'Whole-artifact reads and temporary mixed processing require independent scope support.',
+            'Only the declared factual projection is retained; excluded content is neither absent nor verified.',
+            'Duplicate source variations include excluded-field differences; no arbitrary candidate is selected.',
+            'No extra source copy is made. Replay requires the independently retained original source and host profile.',
+        ]
     report["report_id"] = "sha256:" + _hash(report)
     return report
 
@@ -437,7 +451,24 @@ def _run(source, root, binding, limits, stop_after):
                 db.execute("BEGIN")
             try:
                 for n, raw in enumerate(cards):
-                    row = _row(meta, key, source_set, raw, limits)
+                    if 'private_scope' in binding:
+                        # Authorization covered the COMPLETE input before any read.
+                        # Filter before the owning mapper/SQLite, never just at export.
+                        original = _json(raw).encode()
+                        _require(len(original) <= limits.row_bytes,
+                                 'row exceeds byte budget', 'RESOURCE_BUDGET')
+                        selected, omitted = project_row(raw)
+                        selected_set = {k: v for k, v in source_set.items() if k in SET_FIELDS}
+                        row = _row({k: meta[k] for k in ('date', 'version')}, key,
+                                   selected_set, selected, limits)
+                        row['source_record_sha256'] = _hash(original)
+                        row['retention_profile'] = RETENTION
+                        row['omitted_field_count'] = omitted
+                        for mapped in ('mapped_card', 'mapped_printing'):
+                            if row[mapped] is not None:
+                                row[mapped]['unknown_fields'] = {}
+                    else:
+                        row = _row(meta, key, source_set, raw, limits)
                     stored, values = _stored(seq, n, row), _values(seq, n, row)
                     if seq < completed:
                         _require(db.execute("SELECT * FROM records WHERE p=? AND n=?", (seq,n)).fetchone() == stored,
@@ -456,7 +487,8 @@ def _run(source, root, binding, limits, stop_after):
                 db.rollback(); raise
             seq += 1
             if stop_after is not None and processed >= stop_after:
-                return dict(schema_version=VERSION, status="PAUSED", completed_partitions=seq,
+                return dict(schema_version=FACTUAL_VERSION if 'private_scope' in binding else VERSION,
+                            status="PAUSED", completed_partitions=seq,
                             canonical_admission="NOT_PERFORMED", source_processing_completeness="INCOMPLETE")
         _require(meta is not None and seq > 0, "release must contain at least one partition")
         _require(db.execute("SELECT count(*) FROM records").fetchone()[0] == total_rows
@@ -476,7 +508,8 @@ def _run(source, root, binding, limits, stop_after):
                          "invalid output workspace", "INTEGRITY_MISMATCH")
                 p.unlink()
         output.mkdir(exist_ok=True)
-        result = _finalize(db, output, binding, meta, limits)
+        result = _finalize(db, output, binding,
+            {k: meta[k] for k in ('date', 'version')} if 'private_scope' in binding else meta, limits)
         _disk(root, limits)
         raw = (_json(result) + "\n").encode()
         _require(len(raw) <= min(4 * 1024**2, limits.output_bytes), "summary exceeds budget", "RESOURCE_BUDGET")
@@ -531,7 +564,8 @@ def _worker(connection, source, root, binding, limits, stop_after):
 
 
 def reconcile_release(source, workspace, release, *, authorize_source=None,
-                      limits=None, stop_after_partitions=None):
+                      limits=None, stop_after_partitions=None, retention_profile=None,
+                      source_use_receipt=None):
     """Reconcile one explicit local release in a bounded isolated worker.
 
     ``authorize_source`` is trusted host code, not a JSON approval flag. It must
@@ -561,12 +595,19 @@ def reconcile_release(source, workspace, release, *, authorize_source=None,
     bindings = dict(operation=OPERATION, release=release, limits=asdict(limits),
                     whole_artifact_read=True, private_source_and_derived_retention=True,
                     public_export=False, canonical_admission=False)
+    if retention_profile is not None or source_use_receipt is not None:
+        _require(retention_profile == RETENTION and type(source_use_receipt) is dict,
+                 'supported explicit private retention profile required', 'SOURCE_POLICY_REFUSAL')
+        bindings.update(retention_profile=retention_profile, source_use_receipt=deepcopy(source_use_receipt))
     _require(callable(authorize_source), "source-use scope not established", "SOURCE_POLICY_REFUSAL")
     try:
         authorized = authorize_source(deepcopy(bindings))
     except Exception:
         raise ReconciliationError("SOURCE_POLICY_REFUSAL", "host source-use disposition unavailable") from None
     _require(authorized is True, "exact source-use operation not authorized", "SOURCE_POLICY_REFUSAL")
+    if retention_profile is not None:
+        release['private_scope'] = dict(retention_profile=retention_profile,
+                                        source_use_receipt=deepcopy(source_use_receipt))
     _require(source.is_file(), "source unavailable")
     _require(source.stat().st_size <= limits.source_bytes, 'source exceeds byte budget', 'RESOURCE_BUDGET')
     root.mkdir(parents=True, exist_ok=True, mode=0o700)
