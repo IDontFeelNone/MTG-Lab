@@ -9,8 +9,8 @@
       "sha256": "f37c424107f07118126b0595ebc08612d4245e9b0d80faab979996ff6e3d367b"
     },
     "src/providers/mtgjson/private_policy.py": {
-      "bytes": 9985,
-      "sha256": "33924c8beacf5e4ca118ecb96c603da1f58f7bcaaa2449703e8172f7a55a7531"
+      "bytes": 10198,
+      "sha256": "29aafec59294ea18e783aef5a63377cec478c3fd1664bfe1ac80b37198406c03"
     },
     "src/schemas/v1/private-mtgjson-import-report.schema.json": {
       "bytes": 10671,

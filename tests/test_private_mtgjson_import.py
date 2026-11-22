@@ -154,6 +154,14 @@ class PrivateImportTests(unittest.TestCase):
             self.profile.bases[0],reference='restricted-evidence',disposition='EXPRESSLY_RESTRICTED')))
         with self.assertRaises(SourcePolicyError): self.run_import()
 
+    def test_applicable_subset_restriction_also_blocks_broader_grant(self):
+        self.prepare()
+        restricted=replace(self.profile.bases[0],reference='applicable-publisher-restriction',
+            kind='PUBLISHER_PERMISSION',material_scope='PUBLISHER_CONTROLLED_ONLY',
+            operations=('WHOLE_ARTIFACT_READ',),disposition='EXPRESSLY_RESTRICTED')
+        self.profile=replace(self.profile,bases=(self.profile.bases[0],restricted))
+        with self.assertRaisesRegex(SourcePolicyError,'express restriction'): self.run_import()
+
     def test_missing_profile_and_data_supplied_approval_cannot_authorize(self):
         self.prepare()
         for profile in (None,True,{'approved':True,'private_use':True}):

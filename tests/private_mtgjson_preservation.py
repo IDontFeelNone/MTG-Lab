@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 LEDGER=ROOT/'tests/fixtures/private_mtgjson_v1/successors.json'
-LEDGER_SHA256='b8754a3af6cf5b4c8d589871c4c28bf96bbaf213e1e76db2d13065365452099a'
+LEDGER_SHA256='9c7db032d239568fecd7e322a7239ffdec8299fa0c3fbfefbf832ec5a2e74f1c'
 BASE='fc652a99a9e53c05af9118f6ce7f7f4aebd4bf90'
 TREE='b6eca7446b9c761b1960d24c642441b7a0c0cfc7'
 ADDITIONS=frozenset(('src/providers/mtgjson/private_policy.py','src/providers/mtgjson/private_import.py',

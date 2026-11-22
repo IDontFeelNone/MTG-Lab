@@ -130,7 +130,10 @@ class PrivateResearchProfile:
             scope = ('FACTUAL_PROJECTION', 'COMPLETE_ARTIFACT') if operation in (
                 'PRIVATE_FACTUAL_RETENTION', 'PRIVATE_REPORTS') else ('COMPLETE_ARTIFACT',)
             evidence = [b for b in self.bases if operation in b.operations and b.material_scope in scope]
-            _check(not any(b.disposition == 'EXPRESSLY_RESTRICTED' for b in evidence),
+            # A reviewed applicable restriction on a subset also constrains a
+            # complete-artifact operation; a broader grant cannot erase it.
+            _check(not any(b.disposition == 'EXPRESSLY_RESTRICTED' and operation in b.operations
+                           for b in self.bases),
                    'express restriction conflicts with requested operation: ' + operation)
             _check(any(b.disposition == 'SUPPORTED' and b.kind != 'INTERNAL_POLICY' for b in evidence),
                    'supported source-use basis missing for ' + operation)
