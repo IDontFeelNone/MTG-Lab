@@ -212,7 +212,8 @@ class CompositionTests(unittest.TestCase):
 
     def test_no_card_acquisition_or_collection_reads_and_no_authority_promotion(self):
         original=Path.open;opened=[]
-        allowed={ROOT/'src'/name for name in api.CODE_FILES}
+        code_root=Path(api.__file__).resolve().parents[1]
+        allowed={code_root/name for name in api.CODE_FILES}
         def read(path,*args,**kwargs):
             self.assertTrue(path in allowed or path.is_relative_to(ROOT/'reference-reviews'),str(path))
             opened.append(path);return original(path,*args,**kwargs)
@@ -230,6 +231,19 @@ class CompositionTests(unittest.TestCase):
         self.assertEqual(authority['legal_activation'],'NOT_ESTABLISHED')
         self.assertFalse(authority['real_card_verified'])
         self.assertFalse(authority['canonical_admission'])
+
+    def test_packaged_code_and_explicit_review_data_can_have_different_roots(self):
+        # Publication validation uses the actual packaged engine against a
+        # disposable checkout's data. Keep BOTH finite read scopes enforced.
+        from card_rules_pilot.land_context import PACKAGE_IDS
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);reviews=root/'reference-reviews';reviews.mkdir()
+            for name in set(PACKAGE_IDS)|{'gameplay-rules-artifact-verification',
+                    'gameplay-rules-source-versioning','gameplay-rules-release-discovery-closure'}:
+                shutil.copytree(ROOT/'reference-reviews'/name,reviews/name)
+            self.assertNotEqual(root,Path(api.__file__).resolve().parents[2])
+            with patch.object(sys.modules[__name__],'ROOT',root):
+                self.test_no_card_acquisition_or_collection_reads_and_no_authority_promotion()
 
     def test_input_views_reports_and_replay_are_owned_and_deterministic(self):
         before=deepcopy(self.value);first=self.consumer.assess(self.value)
