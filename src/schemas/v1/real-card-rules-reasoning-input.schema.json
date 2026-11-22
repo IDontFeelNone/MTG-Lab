@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Declared real-rules reasoning input V1",
+  "description": "Structural schema. Runtime additionally enforces printable trimmed identities, input byte budget, scope and contradictory-fact refusals.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "question",
+    "scenario_id",
+    "evidence_context_id",
+    "characteristics",
+    "state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "real-card-rules-reasoning-input-v1"
+    },
+    "question": {
+      "const": "ACTIVATED_MANA_PAYMENT_TIMING_EXCEPTION"
+    },
+    "scenario_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "evidence_context_id": {
+      "const": "sha256:59eb902055e8f597f9b0761ac176ad37406365c53a87098e3dcf621a1c5df478"
+    },
+    "characteristics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ability_kind",
+        "target_requirement",
+        "chosen_targets",
+        "potential_mana",
+        "loyalty_symbol_in_cost",
+        "source_is_planeswalker",
+        "cost_library_movement",
+        "effect_library_movement",
+        "self_replacement",
+        "other_replacement"
+      ],
+      "properties": {
+        "ability_kind": {
+          "enum": [
+            "ACTIVATED",
+            "TRIGGERED",
+            "SPELL",
+            "UNKNOWN"
+          ]
+        },
+        "target_requirement": {
+          "enum": [
+            "NONE",
+            "PRESENT",
+            "UNKNOWN"
+          ]
+        },
+        "chosen_targets": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 16
+            },
+            {
+              "const": "UNKNOWN"
+            }
+          ]
+        },
+        "potential_mana": {
+          "enum": [
+            "YES",
+            "NO",
+            "UNKNOWN"
+          ]
+        },
+        "loyalty_symbol_in_cost": {
+          "enum": [
+            "YES",
+            "NO",
+            "UNKNOWN"
+          ]
+        },
+        "source_is_planeswalker": {
+          "enum": [
+            "YES",
+            "NO",
+            "UNKNOWN"
+          ]
+        },
+        "cost_library_movement": {
+          "enum": [
+            "YES",
+            "NO",
+            "UNKNOWN"
+          ]
+        },
+        "effect_library_movement": {
+          "enum": [
+            "YES",
+            "NO",
+            "UNKNOWN"
+          ]
+        },
+        "self_replacement": {
+          "enum": [
+            "ABSENT",
+            "PRESENT",
+            "UNKNOWN"
+          ]
+        },
+        "other_replacement": {
+          "enum": [
+            "ABSENT",
+            "PRESENT",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mana_payment_request",
+        "priority",
+        "same_ability_unresolved",
+        "current_mana_output"
+      ],
+      "properties": {
+        "mana_payment_request": {
+          "enum": [
+            "ABSENT",
+            "SPELL_CASTING_MANA_PAYMENT",
+            "ABILITY_ACTIVATION_MANA_PAYMENT",
+            "RULE_REQUESTED_MANA_PAYMENT",
+            "EFFECT_REQUESTED_MANA_PAYMENT",
+            "UNKNOWN"
+          ]
+        },
+        "priority": {
+          "enum": [
+            "YES",
+            "NO",
+            "UNKNOWN"
+          ]
+        },
+        "same_ability_unresolved": {
+          "enum": [
+            "YES",
+            "NO",
+            "UNKNOWN"
+          ]
+        },
+        "current_mana_output": {
+          "enum": [
+            "ZERO",
+            "NONZERO",
+            "UNKNOWN"
+          ]
+        }
+      }
+    }
+  }
+}
