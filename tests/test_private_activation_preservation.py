@@ -16,7 +16,7 @@ class ActivationPreservationTests(unittest.TestCase):
             self.assertTrue(guard.is_addition(guard.ROOT/name))
             self.assertTrue(is_addition(guard.ROOT/name))
         for name,pin in guard.ledger()['unchanged'].items():
-            self.assertEqual(guard.pin((guard.ROOT/name).read_bytes()),pin,name)
+            self.assertEqual(guard.pin(guard.preceding_bytes(name,(guard.ROOT/name).read_bytes())),pin,name)
 
     def test_exact_reversal_and_negative_preservation(self):
         for name,row in guard.ledger()['replacements'].items():

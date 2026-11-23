@@ -77,5 +77,5 @@ def import_private_release(source, workspace, *, profile, provenance, notice,
     except (ValueError, TypeError, OSError, RecursionError, KeyError):
         raise SourcePolicyError('invalid private provenance or notice') from None
     return reconcile_release(source, workspace, release, authorize_source=profile,
-        retention_profile=RETENTION, source_use_receipt=profile.receipt(),
+        retention_profile=profile.retention_profile, source_use_receipt=profile.receipt(),
         limits=limits, stop_after_partitions=stop_after_partitions)

@@ -13,7 +13,8 @@ class CIWorkflowPreservationTests(unittest.TestCase):
         from overlay_preservation_support import historical_source_bytes
         for name,row in guard.ledger()['replacements'].items():
             raw=(guard.ROOT/name).read_bytes()
-            self.assertEqual(guard.pin(raw),row['new'])
+            from mtgjson_evidence_preservation import preceding_bytes as evidence_preceding
+            self.assertEqual(guard.pin(evidence_preceding(name,raw)),row['new'])
             old=guard.preceding_bytes(name,raw)
             self.assertEqual(guard.pin(old),row['old'])
             self.assertEqual(guard.preceding_bytes(name,old),old)

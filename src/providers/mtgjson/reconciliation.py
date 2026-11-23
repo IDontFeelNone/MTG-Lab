@@ -22,7 +22,7 @@ import time
 from .mapper import map_dataset
 from .streaming import _decoded, _IncrementalJSON
 from .validator import IDENTIFIER_POLICY, MTGJSONValidationError, validate_document
-from .private_policy import RETENTION, SET_FIELDS, project_row
+from .private_policy import RETENTION, ORACLE_RETENTION, SET_FIELDS, project_row
 
 VERSION = "release-catalog-reconciliation-v1"
 FACTUAL_VERSION = "private-mtgjson-import-report-v1"
@@ -249,7 +249,7 @@ def _schema(db, limits):
 
 def _stored(p, n, row):
     return (p, n, row["card_id"], row["printing_id"], row["facet"], row["status"],
-            (row['source_record_sha256'] if row.get('retention_profile') == RETENTION else
+            (row['source_record_sha256'] if row.get('retention_profile') in (RETENTION, ORACLE_RETENTION) else
              _hash(row["mapped_printing"]) if row["mapped_printing"] else row['source_record_sha256']),
             int(row["exceptional"]), _json(row))
 
@@ -368,6 +368,10 @@ def _finalize(db, output, binding, meta, limits):
     out.write("exceptional.jsonl", exceptional())
     out.write("unresolved.jsonl", (dict(partition=p, row=n, status=s, reason=json.loads(v)['reason'], source_record_sha256=json.loads(v)["source_record_sha256"])
         for p, n, s, v in db.execute("SELECT p,n,status,payload FROM records WHERE status!='SUPPORTED' ORDER BY p,n")))
+    oracle = binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION
+    if oracle:
+        from .oracle_evidence import evidence_records
+        out.write('oracle-evidence.jsonl', evidence_records(db, binding))
     count = lambda sql: db.execute(sql).fetchone()[0]
     report = dict(schema_version=VERSION, status="CANDIDATES_PREPARED", source_release=binding,
         provider_metadata=meta, partition_inventory=[dict(ordinal=p, source_key=k, set_code=c,
@@ -398,6 +402,16 @@ def _finalize(db, output, binding, meta, limits):
             'Duplicate source variations include excluded-field differences; no arbitrary candidate is selected.',
             'No extra source copy is made. Replay requires the independently retained original source and host profile.',
         ]
+        if oracle:
+            from .oracle_evidence import REPORT_VERSION, replay_guarantees
+            report.update(schema_version=REPORT_VERSION, retention_profile=ORACLE_RETENTION,
+                          evidence_authority='UNADMITTED_SOURCE_EVIDENCE',
+                          replay=replay_guarantees(binding['private_scope']['source_use_receipt']['retention_mode']))
+            report['limitations'] = list(LIMITATIONS) + [
+                'Only explicitly authorized supplied text is retained; no ability interpretation occurs.',
+                'Evidence integrity is not current Oracle verification, semantic acceptance or canonical admission.',
+                'Exact source replay and checkpoint recovery require the original artifact and compatible host profile.',
+            ]
     report["report_id"] = "sha256:" + _hash(report)
     return report
 
@@ -467,6 +481,12 @@ def _run(source, root, binding, limits, stop_after):
                         for mapped in ('mapped_card', 'mapped_printing'):
                             if row[mapped] is not None:
                                 row[mapped]['unknown_fields'] = {}
+                        if binding['private_scope']['retention_profile'] == ORACLE_RETENTION:
+                            from .oracle_evidence import project_text
+                            row['retention_profile'] = ORACLE_RETENTION
+                            row['oracle_evidence'] = project_text(raw, key, n)
+                            if row['oracle_evidence']['status'] == 'SUPPLIED':
+                                row['assertions']['text'] = row['oracle_evidence']['value']
                     else:
                         row = _row(meta, key, source_set, raw, limits)
                     stored, values = _stored(seq, n, row), _values(seq, n, row)
@@ -504,10 +524,14 @@ def _run(source, root, binding, limits, stop_after):
         output = root / "output"
         if output.exists():
             for p in output.iterdir():
-                _require(p.name in OUTPUT_NAMES and p.is_file() and not p.is_symlink(),
+                allowed = OUTPUT_NAMES | ({'oracle-evidence.jsonl'} if binding.get(
+                    'private_scope', {}).get('retention_profile') == ORACLE_RETENTION else set())
+                _require(p.name in allowed and p.is_file() and not p.is_symlink(),
                          "invalid output workspace", "INTEGRITY_MISMATCH")
                 p.unlink()
         output.mkdir(exist_ok=True)
+        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION:
+            output.chmod(0o700)
         result = _finalize(db, output, binding,
             {k: meta[k] for k in ('date', 'version')} if 'private_scope' in binding else meta, limits)
         _disk(root, limits)
@@ -543,6 +567,10 @@ def _worker_peak_memory_kib():
 def _worker(connection, source, root, binding, limits, stop_after):
     started = time.monotonic()
     try:
+        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION:
+            # Host umasks differ (notably hosted CI). Source-bearing evidence
+            # must be private without relaxing the inspection boundary.
+            os.umask(0o077)
         resource.setrlimit(resource.RLIMIT_AS, (limits.memory_bytes, limits.memory_bytes))
         resource.setrlimit(resource.RLIMIT_CPU, (limits.cpu_seconds, limits.cpu_seconds))
         resource.setrlimit(resource.RLIMIT_FSIZE, (limits.disk_bytes // 2, limits.disk_bytes // 2))
@@ -596,9 +624,13 @@ def reconcile_release(source, workspace, release, *, authorize_source=None,
                     whole_artifact_read=True, private_source_and_derived_retention=True,
                     public_export=False, canonical_admission=False)
     if retention_profile is not None or source_use_receipt is not None:
-        _require(retention_profile == RETENTION and type(source_use_receipt) is dict,
+        _require(retention_profile in (RETENTION, ORACLE_RETENTION) and type(source_use_receipt) is dict,
                  'supported explicit private retention profile required', 'SOURCE_POLICY_REFUSAL')
         bindings.update(retention_profile=retention_profile, source_use_receipt=deepcopy(source_use_receipt))
+        if retention_profile == ORACLE_RETENTION:
+            mode = source_use_receipt.get('retention_mode')
+            _require(mode in ('retained-source', 'limited-retention'), 'explicit retention lifecycle required', 'SOURCE_POLICY_REFUSAL')
+            bindings.update(retention_mode=mode, private_source_and_derived_retention=mode == 'retained-source')
     _require(callable(authorize_source), "source-use scope not established", "SOURCE_POLICY_REFUSAL")
     try:
         authorized = authorize_source(deepcopy(bindings))
