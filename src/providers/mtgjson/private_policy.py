@@ -17,6 +17,7 @@ ORACLE_OPERATION = 'PRIVATE_ORACLE_EVIDENCE_RETENTION'
 ORACLE_INSPECTION = 'PRIVATE_ORACLE_EVIDENCE_INSPECTION'
 OPERATIONS = ('WHOLE_ARTIFACT_READ', 'LOCAL_PARSE', 'TEMPORARY_MIXED_PROCESSING',
               'PRIVATE_SOURCE_RETENTION', 'PRIVATE_FACTUAL_RETENTION', 'PRIVATE_REPORTS')
+LIMITED_OPERATIONS = tuple(x for x in OPERATIONS if x != 'PRIVATE_SOURCE_RETENTION')
 FACTUAL_FIELDS = frozenset(('uuid', 'name', 'number', 'layout', 'colors', 'colorIdentity',
     'manaCost', 'manaValue', 'power', 'toughness', 'loyalty', 'defense', 'type', 'types',
     'subtypes', 'supertypes', 'language', 'rarity', 'finishes', 'side', 'faceName', 'otherFaceIds'))
@@ -109,8 +110,7 @@ class PrivateResearchProfile:
 
     def validate(self):
         _check(self.retention_profile in (RETENTION, ORACLE_RETENTION), 'unsupported retention profile')
-        _check(self.retention_mode in ('retained-source', 'limited-retention')
-               and (self.retention_profile != RETENTION or self.retention_mode == 'retained-source'),
+        _check(self.retention_mode in ('retained-source', 'limited-retention'),
                'unsupported retention lifecycle')
         _check(type(self.release_json) is str and len(self.release_json) <= 4096, 'bounded release binding required')
         try:
@@ -140,7 +140,7 @@ class PrivateResearchProfile:
 
     def require_supported(self):
         self.validate()
-        operations = OPERATIONS
+        operations = LIMITED_OPERATIONS if self.retention_mode == 'limited-retention' else OPERATIONS
         if self.retention_profile == ORACLE_RETENTION:
             operations = tuple(x for x in OPERATIONS if self.retention_mode != 'limited-retention'
                                or x != 'PRIVATE_SOURCE_RETENTION') + (ORACLE_OPERATION,)
@@ -171,6 +171,10 @@ class PrivateResearchProfile:
         if self.retention_profile == ORACLE_RETENTION:
             body.update(retention_mode=self.retention_mode, retained_text_fields=['text'],
                         authority='UNADMITTED_SOURCE_EVIDENCE_NOT_VERIFIED_MECHANICS')
+        elif self.retention_mode == 'limited-retention':
+            # Leave every historical retained-source receipt and identity intact.
+            body.update(schema_version='private-mtgjson-source-profile-v2',
+                        retention_mode=self.retention_mode, requested_operations=list(LIMITED_OPERATIONS))
         return dict(body, profile_id='sha256:' + digest(body))
 
     def require_inspection(self):
@@ -194,14 +198,14 @@ class PrivateResearchProfile:
         keys = {'operation', 'release', 'limits', 'whole_artifact_read',
             'private_source_and_derived_retention', 'public_export', 'canonical_admission',
             'retention_profile', 'source_use_receipt'}
-        if self.retention_profile == ORACLE_RETENTION:
+        if self.retention_profile == ORACLE_RETENTION or self.retention_mode == 'limited-retention':
             keys.add('retention_mode')
         return (type(bindings) is dict and set(bindings) == keys
             and bindings['operation'] == OPERATION and bindings['release'] == json.loads(self.release_json)
             and bindings['retention_profile'] == self.retention_profile and bindings['source_use_receipt'] == self.receipt()
             and bindings['whole_artifact_read'] is True
             and bindings['private_source_and_derived_retention'] is (self.retention_mode == 'retained-source')
-            and (self.retention_profile != ORACLE_RETENTION or bindings['retention_mode'] == self.retention_mode)
+            and ('retention_mode' not in keys or bindings['retention_mode'] == self.retention_mode)
             and bindings['public_export'] is False and bindings['canonical_admission'] is False)
 
 

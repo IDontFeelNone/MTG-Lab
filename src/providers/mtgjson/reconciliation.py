@@ -49,6 +49,12 @@ def _hash(value):
     return hashlib.sha256(value if type(value) is bytes else _json(value).encode()).hexdigest()
 
 
+def _limited_factual(binding):
+    scope = binding.get('private_scope', {})
+    return (scope.get('retention_profile') == RETENTION and
+            scope.get('source_use_receipt', {}).get('retention_mode') == 'limited-retention')
+
+
 class ReconciliationError(ValueError):
     def __init__(self, code, reason):
         self.code = code
@@ -412,6 +418,16 @@ def _finalize(db, output, binding, meta, limits):
                 'Evidence integrity is not current Oracle verification, semantic acceptance or canonical admission.',
                 'Exact source replay and checkpoint recovery require the original artifact and compatible host profile.',
             ]
+        elif binding['private_scope']['source_use_receipt'].get('retention_mode') == 'limited-retention':
+            from .factual_retention import REPORT_VERSION, replay_guarantees
+            report.update(schema_version=REPORT_VERSION, retention_mode='limited-retention',
+                          replay=replay_guarantees())
+            report['limitations'] = list(LIMITATIONS) + [
+                'Only authorized factual derivatives and pinned provenance/notices are retained.',
+                'Whole-input reads and temporary mixed processing require independent scope support.',
+                'Complete source replay and incomplete checkpoint recovery require the exact original.',
+                'Cleanup eligibility requires a separately verified durable publication receipt; no source is deleted.',
+            ]
     report["report_id"] = "sha256:" + _hash(report)
     return report
 
@@ -526,11 +542,14 @@ def _run(source, root, binding, limits, stop_after):
             for p in output.iterdir():
                 allowed = OUTPUT_NAMES | ({'oracle-evidence.jsonl'} if binding.get(
                     'private_scope', {}).get('retention_profile') == ORACLE_RETENTION else set())
+                if _limited_factual(binding):
+                    from .factual_retention import PUBLICATION_NAMES
+                    allowed |= PUBLICATION_NAMES
                 _require(p.name in allowed and p.is_file() and not p.is_symlink(),
                          "invalid output workspace", "INTEGRITY_MISMATCH")
                 p.unlink()
         output.mkdir(exist_ok=True)
-        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION:
+        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION or _limited_factual(binding):
             output.chmod(0o700)
         result = _finalize(db, output, binding,
             {k: meta[k] for k in ('date', 'version')} if 'private_scope' in binding else meta, limits)
@@ -567,7 +586,7 @@ def _worker_peak_memory_kib():
 def _worker(connection, source, root, binding, limits, stop_after):
     started = time.monotonic()
     try:
-        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION:
+        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION or _limited_factual(binding):
             # Host umasks differ (notably hosted CI). Source-bearing evidence
             # must be private without relaxing the inspection boundary.
             os.umask(0o077)
@@ -627,9 +646,11 @@ def reconcile_release(source, workspace, release, *, authorize_source=None,
         _require(retention_profile in (RETENTION, ORACLE_RETENTION) and type(source_use_receipt) is dict,
                  'supported explicit private retention profile required', 'SOURCE_POLICY_REFUSAL')
         bindings.update(retention_profile=retention_profile, source_use_receipt=deepcopy(source_use_receipt))
-        if retention_profile == ORACLE_RETENTION:
+        if retention_profile == ORACLE_RETENTION or 'retention_mode' in source_use_receipt:
             mode = source_use_receipt.get('retention_mode')
             _require(mode in ('retained-source', 'limited-retention'), 'explicit retention lifecycle required', 'SOURCE_POLICY_REFUSAL')
+            _require(retention_profile == ORACLE_RETENTION or mode == 'limited-retention',
+                     'historical factual receipt must remain unchanged', 'SOURCE_POLICY_REFUSAL')
             bindings.update(retention_mode=mode, private_source_and_derived_retention=mode == 'retained-source')
     _require(callable(authorize_source), "source-use scope not established", "SOURCE_POLICY_REFUSAL")
     try:
@@ -648,7 +669,10 @@ def reconcile_release(source, workspace, release, *, authorize_source=None,
     _require(set(p.name for p in root.iterdir()) <= {"index.sqlite3", "index.sqlite3-journal", "output", "last-run.json", ".lock"},
              "workspace must be dedicated to reconciliation")
     import fcntl
-    with (root / ".lock").open("a") as lock:
+    limited_factual = (retention_profile == RETENTION and
+                       source_use_receipt.get('retention_mode') == 'limited-retention')
+    lock_descriptor = os.open(root/'.lock', os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600) if limited_factual else None
+    with (os.fdopen(lock_descriptor, 'a') if limited_factual else (root / ".lock").open("a")) as lock:
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:

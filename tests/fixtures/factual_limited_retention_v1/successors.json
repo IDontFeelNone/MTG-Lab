@@ -1,0 +1,476 @@
+{
+  "additions": {
+    "docs/FACTUAL_LIMITED_RETENTION_V1.md": {
+      "bytes": 6333,
+      "sha256": "b04a3f1fb3054deb2c6b0a92277d7def28213defd0dc2283eb074045265b20d4"
+    },
+    "src/providers/mtgjson/factual_retention.py": {
+      "bytes": 11359,
+      "sha256": "3da8bdaf299e9b3a7cd7c2defd9eb0d514375481f4e00e2e29b0636bb287b72e"
+    },
+    "src/schemas/v1/private-mtgjson-activation-plan-v2.schema.json": {
+      "bytes": 2675,
+      "sha256": "e0ef639e487378d0e73540948ecc7f2f8af6a7259db92284bef96ed5041fad0e"
+    },
+    "src/schemas/v1/private-mtgjson-factual-limited-report.schema.json": {
+      "bytes": 12092,
+      "sha256": "dcca2463d475d07ae49fc46c90159d4802809ae682a777cce9ac0fc3adfa5bd5"
+    }
+  },
+  "base": "80305c7595c6978753571df5dea7b80e1f51b3b9",
+  "replacements": {
+    "docs/PRIVATE_MTGJSON_IMPORT_V1.md": {
+      "ancestors": [],
+      "edits": [
+        {
+          "end": 404,
+          "new_sha256": "4bd221440bd7eaa5a4373238a5df564a7ae793d9485168e8d2b98ff304bbe222",
+          "old": "",
+          "start": 55
+        }
+      ],
+      "new": {
+        "bytes": 10605,
+        "sha256": "098bdcaac16aa39968f2112748bf0cb6c35d375695b3042777c619af0c3b4f08"
+      },
+      "old": {
+        "bytes": 10256,
+        "sha256": "96a2db6bae8dedaf6378a6c8a3b9a9882bee2be92c5c0050bd30348a6153e3d3"
+      }
+    },
+    "src/providers/mtgjson/private_activation.py": {
+      "ancestors": [],
+      "edits": [
+        {
+          "end": 794,
+          "new_sha256": "00fe9bfb890ed38f9b084e2c452551b8b00a5f7c9bc9a566e40dbc1fd98c2829",
+          "old": "                             OPERATIONS, RETENTION, canonical, digest)\n",
+          "start": 703
+        },
+        {
+          "end": 962,
+          "new_sha256": "ea49653df227cebfcc21d78951e24daa835540d39d69ed2c73de93f490aaf43c",
+          "old": "",
+          "start": 907
+        },
+        {
+          "end": 1542,
+          "new_sha256": "c2491ebf5732f3f7384bffc03c537badb123d11c4a7c9d50e4e0fe4c03127478",
+          "old": "def plan_private_activation(release, *, source_url, acquired_at, notice_sha256):\n",
+          "start": 1399
+        },
+        {
+          "end": 1899,
+          "new_sha256": "e95b6fc18cf6c7fad5e12837c17be98f7dcc2925e384ba36b379dccb8a2ab363",
+          "old": "",
+          "start": 1791
+        },
+        {
+          "end": 4081,
+          "new_sha256": "a15d2ca24c684e34258b96d667876d27823438a47104ed18a0bd1ea0560f9980",
+          "old": "",
+          "start": 3885
+        },
+        {
+          "end": 4342,
+          "new_sha256": "efc270b2e50c2e1f9b6f037cdf14eed17c04d5d4f757d7bc39b009fd8688452e",
+          "old": "",
+          "start": 4259
+        },
+        {
+          "end": 4862,
+          "new_sha256": "b00f5fc229b0ee2f95c8fad3da020708df24bade3aec27702f1880128b185386",
+          "old": "        'plan_id'}, 'closed activation plan required')\n",
+          "start": 4648
+        },
+        {
+          "end": 5108,
+          "new_sha256": "2336c81afd73244b97c736d7085659e27034e571328bc83253bafe8ae9836d08",
+          "old": "        acquired_at=plan['acquired_at'], notice_sha256=plan['notice_sha256'])\n",
+          "start": 4949
+        },
+        {
+          "end": 9594,
+          "new_sha256": "ec36c56e63f0db28bd1d4e89a69003a23aed9b834224b1c0fc726d5bd2ae2dc4",
+          "old": "        bases=reviewed_bases, internal_decision_reference=internal_decision_reference, material=material)\n",
+          "start": 9418
+        },
+        {
+          "end": 12141,
+          "new_sha256": "7071302b1b9093890235c8f15f0ed1ee495824705f2e99ab6ea35d7adc5f732f",
+          "old": "",
+          "start": 11994
+        },
+        {
+          "end": 12773,
+          "new_sha256": "5a1514982406042a5c321938acf1bec772f3bd20660bec0f5c0e5c6f1044cb02",
+          "old": "                acquired_at=args.acquired_at, notice_sha256=args.notice_sha256)\n",
+          "start": 12641
+        }
+      ],
+      "new": {
+        "bytes": 13063,
+        "sha256": "adec803c16aaa84d8d82ff78c6f4365626452fa3dbaab7f2b23db49e438dc495"
+      },
+      "old": {
+        "bytes": 12030,
+        "sha256": "c32396815d1e94f3729bc82ba83ff4d076e9c6c10a8013ed4d65032f1f685d17"
+      }
+    },
+    "src/providers/mtgjson/private_import.py": {
+      "ancestors": [
+        {
+          "bytes": 4147,
+          "sha256": "f37c424107f07118126b0595ebc08612d4245e9b0d80faab979996ff6e3d367b"
+        }
+      ],
+      "edits": [
+        {
+          "end": 1812,
+          "new_sha256": "4cacfa082c33a3be99f48eadcb5002e0f18a2193678d8565bf232cdccf4b0e14",
+          "old": "    The caller retains the original source for replay; this API does not copy it.\n",
+          "start": 1652
+        },
+        {
+          "end": 4324,
+          "new_sha256": "50e832ea2febe3b191c292442827286ea467860ff634e7eb848eeb7c6e3c0fa7",
+          "old": "",
+          "start": 3802
+        },
+        {
+          "end": 4453,
+          "new_sha256": "4aaaee41bf7a7b2b90af4a22444684fac9583f8111afd8211db3b096c4bc52da",
+          "old": "    except (ValueError, TypeError, OSError, RecursionError, KeyError):\n",
+          "start": 4368
+        },
+        {
+          "end": 4620,
+          "new_sha256": "62711e812e4da5bf03a3d39309ccdd7c891e24f19d6194102dfb2ddc28ea5228",
+          "old": "    return reconcile_release(source, workspace, release, authorize_source=profile,\n",
+          "start": 4535
+        },
+        {
+          "end": 5187,
+          "new_sha256": "d01e00e73d3b5e07cee1f0ba3b224d23385bb74bdbca903e6e91437470352786",
+          "old": "",
+          "start": 4779
+        }
+      ],
+      "new": {
+        "bytes": 5187,
+        "sha256": "0a141bb380f013addc4488ade8c3f9b8ca573f2537cf274d4d8659651f6bda61"
+      },
+      "old": {
+        "bytes": 4163,
+        "sha256": "274205296cf01e70d856f43f8eda342454fecaa7eb795da5ca623ba801b4f3b7"
+      }
+    },
+    "src/providers/mtgjson/private_policy.py": {
+      "ancestors": [
+        {
+          "bytes": 10198,
+          "sha256": "29aafec59294ea18e783aef5a63377cec478c3fd1664bfe1ac80b37198406c03"
+        }
+      ],
+      "edits": [
+        {
+          "end": 823,
+          "new_sha256": "7cad83930ce73922aa18c0c3d4867e9d3cfb82e90fb786c43147202694a18eb4",
+          "old": "",
+          "start": 738
+        },
+        {
+          "end": 4979,
+          "new_sha256": "7a0ad79392fb78a876a8d32eec2c5e2453f638bd93aff873790388d85acacec0",
+          "old": "        _check(self.retention_mode in ('retained-source', 'limited-retention')\n               and (self.retention_profile != RETENTION or self.retention_mode == 'retained-source'),\n",
+          "start": 4899
+        },
+        {
+          "end": 7125,
+          "new_sha256": "2dc312e9f19f66210b991dd4c316d0c5ed520dd685f14e810bab0827ab20fca6",
+          "old": "        operations = OPERATIONS\n",
+          "start": 7023
+        },
+        {
+          "end": 9743,
+          "new_sha256": "0a3ecf8262cf16ce133a557e8e7355c7e062123318890612a9de58aae46e4cc2",
+          "old": "",
+          "start": 9421
+        },
+        {
+          "end": 11180,
+          "new_sha256": "db33954e73d9ee35ce521143af2a442afc927b993232e79a94f403e7721a5dcc",
+          "old": "        if self.retention_profile == ORACLE_RETENTION:\n",
+          "start": 11079
+        },
+        {
+          "end": 11784,
+          "new_sha256": "5e3efd89b5f7bd125f7aae94e971c867bb469cab92ab43fe9edbddde8dfe6aaa",
+          "old": "            and (self.retention_profile != ORACLE_RETENTION or bindings['retention_mode'] == self.retention_mode)\n",
+          "start": 11684
+        }
+      ],
+      "new": {
+        "bytes": 13306,
+        "sha256": "e26db71dbd5f733064144c92fed0dc1dc837d73b2cbbf0e629d34029d0afbc63"
+      },
+      "old": {
+        "bytes": 12898,
+        "sha256": "c40ebf0b839984279cbeac5a7de4e25de6722c12d837c4897d4299fa76f7324b"
+      }
+    },
+    "src/providers/mtgjson/reconciliation.py": {
+      "ancestors": [
+        {
+          "bytes": 37299,
+          "sha256": "2e7a0543d00d1d78939f4b243211c6e0ff773fc75f957d946303d801fbc1e4d4"
+        },
+        {
+          "bytes": 34362,
+          "sha256": "244d3015676df46e2eda93adf25f8908b6ce25f8aec010fcdd2c0a2a13f0d84b"
+        }
+      ],
+      "edits": [
+        {
+          "end": 2280,
+          "new_sha256": "2e0169b928260ca99980f4e8745bad5b289baefdbcddb77ae49d7157de384f87",
+          "old": "",
+          "start": 2048
+        },
+        {
+          "end": 23890,
+          "new_sha256": "c44c81f3dfd2694597f075b070903b025c4623bb7508adfcb6e1ca67ec3aebfd",
+          "old": "",
+          "start": 23060
+        },
+        {
+          "end": 31492,
+          "new_sha256": "c016663b66a82ce300b974a5af4deaf3ba2387fad8a619bd3f11445fdbbbc279",
+          "old": "",
+          "start": 31328
+        },
+        {
+          "end": 31832,
+          "new_sha256": "b4da59ad35e157c43208bca935ef12cd8b765637ee0d8fc75f91779090e3b165",
+          "old": "        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION:\n",
+          "start": 31713
+        },
+        {
+          "end": 33854,
+          "new_sha256": "b4da59ad35e157c43208bca935ef12cd8b765637ee0d8fc75f91779090e3b165",
+          "old": "        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION:\n",
+          "start": 33735
+        },
+        {
+          "end": 38221,
+          "new_sha256": "a5faee7accc2a2fd4a7366591c342fe23948138b6f3ce2109941aebe9a5d2c81",
+          "old": "        if retention_profile == ORACLE_RETENTION:\n",
+          "start": 38129
+        },
+        {
+          "end": 38607,
+          "new_sha256": "0edb6b88b72ee12da7eff50209caac4e933744dc8d5cd1b85de78a2228a538f7",
+          "old": "",
+          "start": 38418
+        },
+        {
+          "end": 40311,
+          "new_sha256": "7a84cada58922a454bc08e6d38016998f4d6aa153d9f75a246b2e1eb36ad69c4",
+          "old": "    with (root / \".lock\").open(\"a\") as lock:\n",
+          "start": 39942
+        }
+      ],
+      "new": {
+        "bytes": 41642,
+        "sha256": "658ec4a3dc5d14e55299159b2fa3430bbf407776a3490fc4c70695c8c110b4f8"
+      },
+      "old": {
+        "bytes": 39803,
+        "sha256": "7d809a92d4556041934426358a5df9d96cac03b236a4708ce3572478de4f81bc"
+      }
+    },
+    "tests/mtgjson_evidence_preservation.py": {
+      "ancestors": [],
+      "edits": [
+        {
+          "end": 2617,
+          "new_sha256": "f2d94044eb45d393808fc96147cf457c77835ef72ed12c7248343776e0e4502d",
+          "old": "",
+          "start": 2497
+        },
+        {
+          "end": 3642,
+          "new_sha256": "3c280f0483d06f7d7d477369da40c10abc2bdc75d8734826cd3bdb3bc5c042b8",
+          "old": "",
+          "start": 3516
+        }
+      ],
+      "new": {
+        "bytes": 4002,
+        "sha256": "bb345b7adf32061069927af82b6a1d8c9901ed971d8128e63109e351086db1fa"
+      },
+      "old": {
+        "bytes": 3756,
+        "sha256": "b5e4149fa270573c897fccd01ff7fd89a07914777a98f8aa6ec84202590f4b40"
+      }
+    },
+    "tests/private_activation_preservation.py": {
+      "ancestors": [
+        {
+          "bytes": 3086,
+          "sha256": "7509f4e156e10fb5ddaa4a5dcdc45dc1c76dc41725a3e56f8b40c30b139e39c8"
+        }
+      ],
+      "edits": [
+        {
+          "end": 3148,
+          "new_sha256": "b0ae739f770b2bc39fdbf7dbd5e1c263cace28de5a8c3dd50da14027674452a6",
+          "old": "",
+          "start": 3064
+        },
+        {
+          "end": 3350,
+          "new_sha256": "62477635d2a8bb757c7060fb17c866867e33aac474c222511b363b53483fa319",
+          "old": "            or path.stat().st_mode&0o111 or pin(path.read_bytes())!=ledger()['additions'][name]):\n",
+          "start": 3228
+        }
+      ],
+      "new": {
+        "bytes": 3442,
+        "sha256": "67d1c4d033bbc75888b6f8d752e4f823486ae2208c98b10ab289d362ef0e1078"
+      },
+      "old": {
+        "bytes": 3334,
+        "sha256": "fc5e6616dc39b86ce43ebc40df4aa8cfbc2047bdfcb68439c49bdfc1081fb133"
+      }
+    },
+    "tests/test_mtgjson_evidence_preservation.py": {
+      "ancestors": [],
+      "edits": [
+        {
+          "end": 439,
+          "new_sha256": "c83653134036cd77139850e6e13dbeeee12da96bea63d88cfaed675e08345c55",
+          "old": "",
+          "start": 351
+        },
+        {
+          "end": 630,
+          "new_sha256": "0ca4cc7ff9b4e7cd53619f96c95e66bf754ec384507458410e3145bbba7d73cb",
+          "old": "            self.assertEqual(guard.pin(raw),row['new'])\n",
+          "start": 550
+        },
+        {
+          "end": 1165,
+          "new_sha256": "c83653134036cd77139850e6e13dbeeee12da96bea63d88cfaed675e08345c55",
+          "old": "",
+          "start": 1077
+        },
+        {
+          "end": 1331,
+          "new_sha256": "8a6d6e40e8fe44da0e719b4c55b56e6c7790211a18dd1bfb15643dd8733c341a",
+          "old": "            self.assertEqual(guard.pin((guard.ROOT/name).read_bytes()),pin,name)\n",
+          "start": 1226
+        }
+      ],
+      "new": {
+        "bytes": 2939,
+        "sha256": "545acedf2a0314ca0b0bf15d49b6a39a0e7edf12c7c1a1d420fe5492b6137e12"
+      },
+      "old": {
+        "bytes": 2715,
+        "sha256": "b586686daa531c4dd43767f90fd3d4b89f529facb83781c3d09631048f3eeee9"
+      }
+    }
+  },
+  "tree": "80760bcbd5dfcd2f5c24f8d23c270df9c6d8e747",
+  "unchanged": {
+    ".github/workflows/python-validation.yml": {
+      "bytes": 1158,
+      "sha256": "9c945a48bfce23e9a57837df4080f3cada93af041bb4d4ef55502d1207bff2e2"
+    },
+    "VISION.md": {
+      "bytes": 9683,
+      "sha256": "ab0e0d02c9afceb4f436c1ef711468bb8c619ebc80759bfd1ba3ee2e9ed26f8d"
+    },
+    "docs/ARCHITECTURE.md": {
+      "bytes": 8082,
+      "sha256": "c4651ad45e47ff9a247151a9c4ca54e8e7dd18b23725cec0571039ef676284b3"
+    },
+    "docs/DECISIONS.md": {
+      "bytes": 16095,
+      "sha256": "47e1fc0e4353f251dde4fb316ec79642a3ab3d51fc0dcc6613b49a795ead73db"
+    },
+    "docs/GOVERNANCE.md": {
+      "bytes": 7331,
+      "sha256": "c88e696509ab99abae60c9b8aa63e3f9d79cef92f7814989cb91c46b659fa819"
+    },
+    "reference-reviews/v13-legacy-profile-permission-closure/permission-matrix.json": {
+      "bytes": 504360,
+      "sha256": "5ff71ca2d4d8484aaa4b4b91b5dafe002659b1eaf514dc7e6bcfc4ad37b02a30"
+    },
+    "scripts/ci_merge_tree.py": {
+      "bytes": 13518,
+      "sha256": "56206410bf0dda4211171db3ff47d91cb80ecd51defc43f2317d6c9e11d5166c"
+    },
+    "src/card_intelligence/mechanics.py": {
+      "bytes": 34535,
+      "sha256": "eea9cc6644c64a1cb90b32b2f6479d2d93684f95d0663d8f98fa3ff8ce6dc80a"
+    },
+    "src/card_intelligence/rules_composition.py": {
+      "bytes": 16119,
+      "sha256": "5172e286320d729a8fb3b93a6b0b21fed896fb516421fd1c559f7a309cdfad8d"
+    },
+    "src/card_intelligence/rules_reasoning.py": {
+      "bytes": 19084,
+      "sha256": "bfe4cf9ad8520addfb217bd5201ec3a11aaa97edbe1d3c36602987c8c1112da0"
+    },
+    "src/probability/draw_access.py": {
+      "bytes": 8949,
+      "sha256": "0835ae163b28aeaebe85cbc79e67d2766736a6501504296db905adf29742292c"
+    },
+    "src/probability/supplied_deck.py": {
+      "bytes": 14253,
+      "sha256": "439682ab62ad1866f7c3c6c9190ae1bf911fc7245ada56980f9c4fc70754b7f4"
+    },
+    "src/providers/mtgjson/mapper.py": {
+      "bytes": 4534,
+      "sha256": "664e7eb086502fb32c0bdd4277b2b2a90dbdf9a8c5b348ea1de9f3c2774390c0"
+    },
+    "src/providers/mtgjson/oracle_evidence.py": {
+      "bytes": 10133,
+      "sha256": "df13d65d1facb2a76a8602aaa2cefe32fffc5fbd51e2436a1d7e5899b00c4876"
+    },
+    "src/providers/mtgjson/streaming.py": {
+      "bytes": 29526,
+      "sha256": "2553d5bc9e4ffaae86b42b4b9bf3190eb308c7d80e5a1584d4b27ba3b59388c5"
+    },
+    "src/providers/mtgjson/validator.py": {
+      "bytes": 9440,
+      "sha256": "04c8310bf832a29186d8a8962a200fea4b09baafa8901401a67f9498f98846a0"
+    },
+    "src/schemas/v1/private-mtgjson-activation-plan.schema.json": {
+      "bytes": 2075,
+      "sha256": "ff4da513a4978df2e403c418bb41d315846d6d6750907aa448abee9f88a8a51e"
+    },
+    "src/schemas/v1/private-mtgjson-import-report.schema.json": {
+      "bytes": 10671,
+      "sha256": "93b056339c5f415c96d99a6b573be9c9a22fa546450bcf83d6ecf7769023e305"
+    },
+    "src/schemas/v1/private-mtgjson-oracle-import-report.schema.json": {
+      "bytes": 12303,
+      "sha256": "bf09850aeab68fa370defa8cc80db5c3d9fb6a54a0d5b29f78f3940ba15d3ec1"
+    },
+    "tests/fixtures/mtgjson_evidence_v1/successors.json": {
+      "bytes": 16018,
+      "sha256": "2b1998ce0c33618be1ffbfb1c02095560848eeb51be61a769705eed468e4255b"
+    },
+    "tests/fixtures/private_activation_v1/successors.json": {
+      "bytes": 4186,
+      "sha256": "d1cb7baf0baecf0150ca2d79c8f816213434e503a2dcb530bdb51b3ccb72d0d4"
+    },
+    "tests/fixtures/private_mtgjson_v1/successors.json": {
+      "bytes": 7692,
+      "sha256": "9c7db032d239568fecd7e322a7239ffdec8299fa0c3fbfefbf832ec5a2e74f1c"
+    }
+  }
+}

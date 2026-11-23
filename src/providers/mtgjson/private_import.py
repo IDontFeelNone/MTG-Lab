@@ -41,7 +41,8 @@ def import_private_release(source, workspace, *, profile, provenance, notice,
 
     ``profile`` must come from reviewed trusted-host code, not imported JSON.
     Provenance and notice digests must be independently pinned by that host.
-    The caller retains the original source for replay; this API does not copy it.
+    Retained-source remains the default. Explicit factual limited retention
+    publishes a cleanup-eligible receipt; this API never copies/deletes the source.
     """
     _require(type(profile) is PrivateResearchProfile, 'trusted-host profile required')
     profile.require_supported()  # Refuse BEFORE reading even provenance or source files.
@@ -72,10 +73,22 @@ def import_private_release(source, workspace, *, profile, provenance, notice,
             _require(facts['source_url'].startswith('urn:mtglab:original:'), 'original fixture provenance required')
         _require(bool(_control(notice, profile.notice_sha256).strip()), 'retained notice required')
         source = _private_path(source)
+        if profile.retention_profile == RETENTION and profile.retention_mode == 'limited-retention':
+            # The reconciler rebuilds output/. Never consume the custodian's only
+            # controls from a location that this import may legitimately replace.
+            root = Path(workspace).resolve()
+            _require(all(root != Path(p).resolve() and root not in Path(p).resolve().parents
+                         for p in (provenance, notice)), 'factual controls must remain outside rebuildable workspace')
     except SourcePolicyError:
         raise
-    except (ValueError, TypeError, OSError, RecursionError, KeyError):
+    except (ValueError, TypeError, OSError, RecursionError, KeyError, RuntimeError):
         raise SourcePolicyError('invalid private provenance or notice') from None
-    return reconcile_release(source, workspace, release, authorize_source=profile,
+    result = reconcile_release(source, workspace, release, authorize_source=profile,
         retention_profile=profile.retention_profile, source_use_receipt=profile.receipt(),
         limits=limits, stop_after_partitions=stop_after_partitions)
+    if (profile.retention_profile == RETENTION and profile.retention_mode == 'limited-retention'
+            and result['status'] == 'CANDIDATES_PREPARED'):
+        from .factual_retention import publish_factual_results
+        publish_factual_results(workspace, profile=profile, expected_report_id=result['report_id'],
+                                provenance=provenance, notice=notice)
+    return result

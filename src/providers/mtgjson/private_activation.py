@@ -18,10 +18,11 @@ from urllib.parse import urlsplit
 
 from .private_import import import_private_release, _control, _private_path, CONTROL_BYTES
 from .private_policy import (PrivateResearchProfile, SourcePolicyError,
-                             OPERATIONS, RETENTION, canonical, digest)
+                             OPERATIONS, LIMITED_OPERATIONS, RETENTION, canonical, digest)
 from .validator import validate_document, MTGJSONValidationError
 
 VERSION = 'private-mtgjson-activation-plan-v1'
+LIMITED_VERSION = 'private-mtgjson-activation-plan-v2'
 RELEASE_FIELDS = frozenset(('provider', 'release_id', 'version', 'date', 'artifact_sha256',
                           'provenance_reference', 'notice_reference'))
 CONTROL_NAMES = frozenset(('activation-plan.json', 'provenance.json', 'notice.txt'))
@@ -36,12 +37,14 @@ def _sha(value):
     return type(value) is str and re.fullmatch(r'[0-9a-f]{64}', value)
 
 
-def plan_private_activation(release, *, source_url, acquired_at, notice_sha256):
+def plan_private_activation(release, *, source_url, acquired_at, notice_sha256,
+                            retention_mode='retained-source'):
     """Build an untrusted request without opening the source, notice or network.
 
     Hashes/URLs here are declarations. A host must independently review and pin
     the returned plan_id before it can be used to construct an import profile.
     """
+    _require(retention_mode in ('retained-source', 'limited-retention'), 'unsupported retention lifecycle')
     _require(type(release) is dict and set(release) == RELEASE_FIELDS,
              'closed release declaration required')
     _require(release['provider'] == 'MTGJSON' and _sha(release['artifact_sha256'])
@@ -71,17 +74,23 @@ def plan_private_activation(release, *, source_url, acquired_at, notice_sha256):
         requested_operations=list(OPERATIONS), retention_profile=RETENTION,
         authority='UNREVIEWED_REQUEST_NOT_AUTHORIZATION', canonical_admission=False,
         real_card_execution=False, public_export=False, external_ai_export=False)
+    if retention_mode == 'limited-retention':
+        body.update(schema_version=LIMITED_VERSION, retention_mode=retention_mode,
+                    requested_operations=list(LIMITED_OPERATIONS))
     return dict(body, plan_id='sha256:' + digest(body))
 
 
 def validate_activation_plan(plan):
     """Return an owned closed plan; structural validity grants no authorization."""
+    limited = type(plan) is dict and plan.get('schema_version') == LIMITED_VERSION
     _require(type(plan) is dict and set(plan) == {'schema_version', 'release', 'source_url',
         'acquired_at', 'acquisition_method', 'notice_sha256', 'requested_operations', 'retention_profile',
         'authority', 'canonical_admission', 'real_card_execution', 'public_export', 'external_ai_export',
-        'plan_id'}, 'closed activation plan required')
+        'plan_id'} | ({'retention_mode'} if limited else set()), 'closed activation plan required')
+    _require(not limited or plan['retention_mode'] == 'limited-retention', 'explicit limited retention required')
     expected = plan_private_activation(plan['release'], source_url=plan['source_url'],
-        acquired_at=plan['acquired_at'], notice_sha256=plan['notice_sha256'])
+        acquired_at=plan['acquired_at'], notice_sha256=plan['notice_sha256'],
+        retention_mode=plan['retention_mode'] if limited else 'retained-source')
     _require(plan == expected, 'altered or incompatible activation plan')
     # Canonical comparison also rejects bool/int aliases in the authority fields.
     try:
@@ -167,7 +176,8 @@ def activate_private_release(plan, source, directory, *, expected_plan_id,
     provenance = _provenance(plan)
     profile = PrivateResearchProfile.for_release(plan['release'],
         provenance_sha256=digest(provenance), notice_sha256=plan['notice_sha256'],
-        bases=reviewed_bases, internal_decision_reference=internal_decision_reference, material=material)
+        bases=reviewed_bases, internal_decision_reference=internal_decision_reference, material=material,
+        retention_mode=plan.get('retention_mode', 'retained-source'))
     profile.require_supported()  # Before any evidence, source or notice file reads/writes.
     _require(type(basis_files) is dict and set(basis_files) == {b.reference for b in profile.bases},
              'exact independently reviewed evidence file inventory required')
@@ -205,6 +215,8 @@ def main(argv=None):
         prepare.add_argument('--'+name, required=True)
     inspect = commands.add_parser('inspect', help='Validate a request, not its source or authorization')
     inspect.add_argument('plan')
+    prepare.add_argument('--retention-mode', choices=('retained-source', 'limited-retention'),
+                         default='retained-source')
     args = parser.parse_args(argv)
     try:
         if args.command == 'inspect':
@@ -214,7 +226,8 @@ def main(argv=None):
                 artifact_sha256=args.source_sha256, provenance_reference=args.provenance_reference,
                 notice_reference=args.notice_reference)
             result = plan_private_activation(release, source_url=args.source_url,
-                acquired_at=args.acquired_at, notice_sha256=args.notice_sha256)
+                acquired_at=args.acquired_at, notice_sha256=args.notice_sha256,
+                retention_mode=args.retention_mode)
         print(canonical(result))
         return 0
     except SourcePolicyError as error:

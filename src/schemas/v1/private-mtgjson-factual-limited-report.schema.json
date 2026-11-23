@@ -1,0 +1,499 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Private factual limited-retention MTGJSON report V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "source_release",
+    "provider_metadata",
+    "partition_inventory",
+    "total_source_rows",
+    "unique_supported_card_identities",
+    "distinct_printing_identities",
+    "conflicting_card_fields",
+    "duplicate_printing_identities",
+    "conflicting_printing_identities",
+    "conflicting_external_identifiers",
+    "exceptional_records",
+    "unresolved_identity_records",
+    "unsupported_records",
+    "source_processing_completeness",
+    "catalog_population_completeness",
+    "canonical_admission",
+    "production_activation",
+    "source_use_status",
+    "artifacts",
+    "limits",
+    "limitations",
+    "report_id",
+    "retention_profile",
+    "real_card_execution",
+    "retention_mode",
+    "replay"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "private-mtgjson-factual-limited-report-v1"
+    },
+    "status": {
+      "const": "CANDIDATES_PREPARED"
+    },
+    "source_release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "release_id",
+        "version",
+        "date",
+        "artifact_sha256",
+        "provenance_reference",
+        "notice_reference",
+        "private_scope"
+      ],
+      "properties": {
+        "provider": {
+          "const": "MTGJSON"
+        },
+        "release_id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "artifact_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "provenance_reference": {
+          "type": "string"
+        },
+        "notice_reference": {
+          "type": "string"
+        },
+        "private_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "retention_profile",
+            "source_use_receipt"
+          ],
+          "properties": {
+            "retention_profile": {
+              "const": "private-factual-v1"
+            },
+            "source_use_receipt": {
+              "$ref": "#/$defs/profile"
+            }
+          }
+        }
+      }
+    },
+    "provider_metadata": {
+      "type": "object"
+    },
+    "partition_inventory": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ordinal",
+          "source_key",
+          "set_code",
+          "source_partition_sha256",
+          "rows"
+        ],
+        "properties": {
+          "ordinal": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "source_key": {
+            "type": "string"
+          },
+          "set_code": {
+            "type": "string"
+          },
+          "source_partition_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "rows": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "total_source_rows": {
+      "$ref": "#/$defs/count"
+    },
+    "unique_supported_card_identities": {
+      "$ref": "#/$defs/count"
+    },
+    "distinct_printing_identities": {
+      "$ref": "#/$defs/count"
+    },
+    "conflicting_card_fields": {
+      "$ref": "#/$defs/count"
+    },
+    "duplicate_printing_identities": {
+      "$ref": "#/$defs/count"
+    },
+    "conflicting_printing_identities": {
+      "$ref": "#/$defs/count"
+    },
+    "conflicting_external_identifiers": {
+      "$ref": "#/$defs/count"
+    },
+    "exceptional_records": {
+      "$ref": "#/$defs/count"
+    },
+    "unresolved_identity_records": {
+      "$ref": "#/$defs/count"
+    },
+    "unsupported_records": {
+      "$ref": "#/$defs/count"
+    },
+    "source_processing_completeness": {
+      "const": "ALL_ROWS_ACCOUNTED_FOR"
+    },
+    "catalog_population_completeness": {
+      "const": "NOT_ESTABLISHED"
+    },
+    "canonical_admission": {
+      "const": "NOT_PERFORMED"
+    },
+    "production_activation": {
+      "const": "NOT_PERFORMED"
+    },
+    "source_use_status": {
+      "const": "HOST_SCOPED_DISPOSITION_NOT_EXTERNAL_LICENSE"
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assertions.jsonl",
+        "conflicts.jsonl",
+        "duplicates.jsonl",
+        "identifier-conflicts.jsonl",
+        "cards.jsonl",
+        "printings.jsonl",
+        "exceptional.jsonl",
+        "unresolved.jsonl"
+      ],
+      "properties": {
+        "assertions.jsonl": {
+          "$ref": "#/$defs/artifact"
+        },
+        "conflicts.jsonl": {
+          "$ref": "#/$defs/artifact"
+        },
+        "duplicates.jsonl": {
+          "$ref": "#/$defs/artifact"
+        },
+        "identifier-conflicts.jsonl": {
+          "$ref": "#/$defs/artifact"
+        },
+        "cards.jsonl": {
+          "$ref": "#/$defs/artifact"
+        },
+        "printings.jsonl": {
+          "$ref": "#/$defs/artifact"
+        },
+        "exceptional.jsonl": {
+          "$ref": "#/$defs/artifact"
+        },
+        "unresolved.jsonl": {
+          "$ref": "#/$defs/artifact"
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_bytes",
+        "decoded_bytes",
+        "partition_bytes",
+        "row_bytes",
+        "rows",
+        "partitions",
+        "disk_bytes",
+        "output_bytes",
+        "cpu_seconds",
+        "wall_seconds",
+        "memory_bytes"
+      ],
+      "properties": {
+        "source_bytes": {
+          "$ref": "#/$defs/limit"
+        },
+        "decoded_bytes": {
+          "$ref": "#/$defs/limit"
+        },
+        "partition_bytes": {
+          "$ref": "#/$defs/limit"
+        },
+        "row_bytes": {
+          "$ref": "#/$defs/limit"
+        },
+        "rows": {
+          "$ref": "#/$defs/limit"
+        },
+        "partitions": {
+          "$ref": "#/$defs/limit"
+        },
+        "disk_bytes": {
+          "$ref": "#/$defs/limit"
+        },
+        "output_bytes": {
+          "$ref": "#/$defs/limit"
+        },
+        "cpu_seconds": {
+          "$ref": "#/$defs/limit"
+        },
+        "wall_seconds": {
+          "$ref": "#/$defs/limit"
+        },
+        "memory_bytes": {
+          "$ref": "#/$defs/limit"
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "retention_profile": {
+      "const": "private-factual-v1"
+    },
+    "real_card_execution": {
+      "const": "BLOCKED"
+    },
+    "retention_mode": {
+      "const": "limited-retention"
+    },
+    "replay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "retention_mode",
+        "original_retention",
+        "full_source_replay",
+        "complete_source_replay_available_without_original",
+        "checkpoint_recovery_requires_original",
+        "automatic_source_deletion"
+      ],
+      "properties": {
+        "retention_mode": {
+          "const": "limited-retention"
+        },
+        "original_retention": {
+          "const": "CUSTODIAN_UNTIL_VERIFIED_PUBLICATION"
+        },
+        "full_source_replay": {
+          "const": "REQUIRES_EXACT_ORIGINAL_ARTIFACT"
+        },
+        "complete_source_replay_available_without_original": {
+          "const": false
+        },
+        "checkpoint_recovery_requires_original": {
+          "const": true
+        },
+        "automatic_source_deletion": {
+          "const": false
+        }
+      }
+    }
+  },
+  "$defs": {
+    "count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sha256",
+        "bytes",
+        "rows"
+      ],
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "$ref": "#/$defs/count"
+        },
+        "rows": {
+          "$ref": "#/$defs/count"
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "provenance_sha256",
+        "notice_sha256",
+        "internal_decision_reference",
+        "material",
+        "retention_profile",
+        "authority",
+        "profile_id",
+        "canonical_admission",
+        "real_card_execution",
+        "public_export",
+        "external_ai_export",
+        "release",
+        "retained_fields",
+        "retained_identifier_namespaces",
+        "bases",
+        "retention_mode",
+        "requested_operations"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "private-mtgjson-source-profile-v2"
+        },
+        "provenance_sha256": {
+          "type": "string"
+        },
+        "notice_sha256": {
+          "type": "string"
+        },
+        "internal_decision_reference": {
+          "type": "string"
+        },
+        "material": {
+          "type": "string"
+        },
+        "retention_profile": {
+          "const": "private-factual-v1"
+        },
+        "authority": {
+          "const": "HOST_DISPOSITION_NOT_EXTERNAL_LICENSE"
+        },
+        "profile_id": {
+          "type": "string"
+        },
+        "canonical_admission": {
+          "const": false
+        },
+        "real_card_execution": {
+          "const": false
+        },
+        "public_export": {
+          "const": false
+        },
+        "external_ai_export": {
+          "const": false
+        },
+        "release": {
+          "type": "object"
+        },
+        "retained_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "retained_identifier_namespaces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bases": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "reference",
+              "sha256",
+              "kind",
+              "material_scope",
+              "operations",
+              "disposition"
+            ],
+            "properties": {
+              "reference": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "kind": {
+                "enum": [
+                  "PROJECT_AUTHORSHIP",
+                  "PUBLISHER_PERMISSION",
+                  "QUALIFIED_DETERMINATION",
+                  "INTERNAL_POLICY"
+                ]
+              },
+              "material_scope": {
+                "enum": [
+                  "COMPLETE_ARTIFACT",
+                  "FACTUAL_PROJECTION",
+                  "PUBLISHER_CONTROLLED_ONLY"
+                ]
+              },
+              "operations": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "disposition": {
+                "enum": [
+                  "SUPPORTED",
+                  "NOT_ESTABLISHED",
+                  "EXPRESSLY_RESTRICTED"
+                ]
+              }
+            }
+          }
+        },
+        "retention_mode": {
+          "const": "limited-retention"
+        },
+        "requested_operations": {
+          "const": [
+            "WHOLE_ARTIFACT_READ",
+            "LOCAL_PARSE",
+            "TEMPORARY_MIXED_PROCESSING",
+            "PRIVATE_FACTUAL_RETENTION",
+            "PRIVATE_REPORTS"
+          ]
+        }
+      }
+    }
+  }
+}
