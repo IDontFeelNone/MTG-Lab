@@ -152,6 +152,12 @@ def historical_inventory_row(row, root=ROOT):
             or type(row["path"]) is not str or type(row["sha256"]) is not str
             or type(row["bytes"]) is not int):
         raise AssertionError("Exact current path/hash/length row schema required")
+    if row['path'] == 'src/card_intelligence/mechanics.py':
+        # The owning regular reader verifies symlinks and the exact successor.
+        old = regular_bytes(row['path'], root)
+        raw = (Path(root) / row['path']).read_bytes()
+        _check_pin(raw, row)
+        return {'path': row['path'], 'bytes': len(old), 'sha256': hashlib.sha256(old).hexdigest()}
     if row["path"] == ".github/workflows/python-validation.yml":
         from ci_workflow_preservation import preceding_bytes
         raw = regular_bytes(row["path"], root)

@@ -40,7 +40,14 @@ def regular_bytes(relative, root=ROOT):
     try:
         if not stat.S_ISREG(path.stat(follow_symlinks=False).st_mode):
             raise AssertionError("Protected repository member must be a regular file")
-        return path.read_bytes()
+        raw = path.read_bytes()
+        if relative == 'src/card_intelligence/mechanics.py':
+            from mtgjson_evidence_preservation import preceding_bytes
+            try:
+                raw = preceding_bytes(relative, raw)
+            except AssertionError as exc:
+                raise AssertionError('Protected canonical bytes do not match their explicit pin') from exc
+        return raw
     except OSError as exc:
         raise AssertionError("Protected repository member is unavailable") from exc
 

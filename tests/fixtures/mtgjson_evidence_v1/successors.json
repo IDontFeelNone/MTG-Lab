@@ -273,6 +273,48 @@
         "sha256": "1dfbec82a80a63d4b7699b4bb2e1ae4bb307e0ba6301518a6bd7b928dc5dd531"
       }
     },
+    "tests/query_attachment_performance_preservation.py": {
+      "ancestors": [
+        {
+          "bytes": 9341,
+          "sha256": "2ebc5a58a1d8737f61999de86eb7a912f357e681364b9dc88545b3b5ac65c851"
+        }
+      ],
+      "edits": [
+        {
+          "end": 8010,
+          "new_sha256": "2f5b4ec9b3aa29bf1039eaf0189001bacdf3f6b8aef88b3e370f7b08c9f5af64",
+          "old": "",
+          "start": 7642
+        }
+      ],
+      "new": {
+        "bytes": 10287,
+        "sha256": "e78f23880205a2a3f50b1d8957736103d207586c119e29c5e656d72a0ae71821"
+      },
+      "old": {
+        "bytes": 9919,
+        "sha256": "af48c41dda3437bff7fb4f5956564f7904a2085aa83f949f2c9b230ba6bb28b5"
+      }
+    },
+    "tests/test_ci_workflow_preservation.py": {
+      "edits": [
+        {
+          "end": 714,
+          "new_sha256": "b1ef1b740bf457de174cf14e4e855fcea0938ac9eb3069c78c37daa84264b1bb",
+          "old": "            self.assertEqual(guard.pin(raw),row['new'])\n",
+          "start": 541
+        }
+      ],
+      "new": {
+        "bytes": 4398,
+        "sha256": "21752f3f074ffaf1d298c2d3373418c3031bd0efe2808ff88edba8de5960f5c4"
+      },
+      "old": {
+        "bytes": 4281,
+        "sha256": "f67c0de37a63af88c76c3a750be9aa12049bbf31e617982ffa41f530c9e1ebb3"
+      }
+    },
     "tests/test_private_activation_preservation.py": {
       "edits": [
         {
@@ -289,6 +331,24 @@
       "old": {
         "bytes": 2971,
         "sha256": "754616bc9c6c5e4faea48b9d486bdf995b8b61cad954c0f3ddd24db9f6a8d159"
+      }
+    },
+    "tests/validation_performance_preservation.py": {
+      "edits": [
+        {
+          "end": 2340,
+          "new_sha256": "02851588e710c52d3b76e8496041ee64fb1f16aeacd52f1026ed33ea98b43a70",
+          "old": "        return path.read_bytes()\n",
+          "start": 1939
+        }
+      ],
+      "new": {
+        "bytes": 7018,
+        "sha256": "cdb9c4e19a6a15d3785d3032146de858166bcce1128457eda57f1c8e8de11558"
+      },
+      "old": {
+        "bytes": 6650,
+        "sha256": "ba135e2be0c796ee4de602abbf0fd3f0577ab592bc194721df2adef567603075"
       }
     }
   },
