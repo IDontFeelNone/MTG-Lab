@@ -1,8 +1,8 @@
 {
   "additions": {
     "docs/MTGJSON_EVIDENCE_PROJECTION_V1.md": {
-      "bytes": 8395,
-      "sha256": "268c674626c554d337ec70d178462e25c8f528824794920500acf66744f35f14"
+      "bytes": 8626,
+      "sha256": "5efde654786e01a786c03fefc1f2d9904d46ba52b82252d189048d21824663ec"
     },
     "src/providers/mtgjson/oracle_evidence.py": {
       "bytes": 10133,
@@ -204,21 +204,33 @@
           "start": 30084
         },
         {
-          "end": 36246,
-          "new_sha256": "80866cfdc3917a22c83b55c3303f88aa2d32d24564a54cdbc87908e9225fc158",
-          "old": "        _require(retention_profile == RETENTION and type(source_use_receipt) is dict,\n",
-          "start": 36140
+          "end": 30609,
+          "new_sha256": "51821d753d2d7641ac9b1fef429d46e72654b310baed39ba0c77d7932f515f80",
+          "old": "",
+          "start": 30487
         },
         {
-          "end": 36815,
+          "end": 32748,
+          "new_sha256": "a7556305666e70e149fee592c2368a9693838fbdccf6b5f552b2abc3884e4046",
+          "old": "",
+          "start": 32480
+        },
+        {
+          "end": 36636,
+          "new_sha256": "80866cfdc3917a22c83b55c3303f88aa2d32d24564a54cdbc87908e9225fc158",
+          "old": "        _require(retention_profile == RETENTION and type(source_use_receipt) is dict,\n",
+          "start": 36530
+        },
+        {
+          "end": 37205,
           "new_sha256": "9e7853011d35d8b9c3fdf8ad50f52dce4a3148476a9ab067302749d90848d45b",
           "old": "",
-          "start": 36455
+          "start": 36845
         }
       ],
       "new": {
-        "bytes": 39413,
-        "sha256": "00a4b851b18273dfadc6f2493fc7ea508d17a3255953dbdf324617040481a66f"
+        "bytes": 39803,
+        "sha256": "7d809a92d4556041934426358a5df9d96cac03b236a4708ce3572478de4f81bc"
       },
       "old": {
         "bytes": 37299,

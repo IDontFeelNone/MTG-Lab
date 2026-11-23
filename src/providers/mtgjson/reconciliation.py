@@ -530,6 +530,8 @@ def _run(source, root, binding, limits, stop_after):
                          "invalid output workspace", "INTEGRITY_MISMATCH")
                 p.unlink()
         output.mkdir(exist_ok=True)
+        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION:
+            output.chmod(0o700)
         result = _finalize(db, output, binding,
             {k: meta[k] for k in ('date', 'version')} if 'private_scope' in binding else meta, limits)
         _disk(root, limits)
@@ -565,6 +567,10 @@ def _worker_peak_memory_kib():
 def _worker(connection, source, root, binding, limits, stop_after):
     started = time.monotonic()
     try:
+        if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION:
+            # Host umasks differ (notably hosted CI). Source-bearing evidence
+            # must be private without relaxing the inspection boundary.
+            os.umask(0o077)
         resource.setrlimit(resource.RLIMIT_AS, (limits.memory_bytes, limits.memory_bytes))
         resource.setrlimit(resource.RLIMIT_CPU, (limits.cpu_seconds, limits.cpu_seconds))
         resource.setrlimit(resource.RLIMIT_FSIZE, (limits.disk_bytes // 2, limits.disk_bytes // 2))

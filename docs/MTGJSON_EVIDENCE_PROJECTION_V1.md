@@ -133,6 +133,9 @@ streamed output artifact, so it consumes more of those same budgets. The evidenc
 reader limits reports to 4 MiB, lines to 256 KiB and selected occurrences to 128.
 Limits refuse rather than approximate or silently enlarge. Full official-release
 capacity is unmeasured; authorization alone does not establish that it will fit.
+Oracle workers explicitly use a private umask and keep their output directory
+owner-only, including replay of an earlier host-default output directory. The
+inspection boundary is not relaxed to accommodate a permissive host umask.
 
 The end-to-end demonstration imports original EQA/EQB fixtures and retrieves the
 actual supplied paper-dial instruction through the existing mechanical consumer.

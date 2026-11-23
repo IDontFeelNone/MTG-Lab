@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 LEDGER=ROOT/'tests/fixtures/mtgjson_evidence_v1/successors.json'
-LEDGER_SHA256='ef93fd20ad60bb09f4ec1e9dca693e5849d66f9b0e5afb7221a3178530ec1d82'
+LEDGER_SHA256='2b1998ce0c33618be1ffbfb1c02095560848eeb51be61a769705eed468e4255b'
 BASE='3e564772dfdb6473aac11f906c636c4547d17f2b'
 TREE='420e5d9d3f464f0803261f0d531c259766bd593d'
 ADDITIONS=frozenset(('src/providers/mtgjson/oracle_evidence.py',

@@ -2,6 +2,7 @@
 from copy import deepcopy
 from dataclasses import replace
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -228,6 +229,23 @@ class EvidenceHandoffTests(unittest.TestCase):
         self.prepare()
         with self.assertRaises(ReconciliationError):self.run_import(limits=replace(ReconciliationLimits(),row_bytes=100))
         with self.assertRaises(ReconciliationError):self.run_import(limits=replace(ReconciliationLimits(),row_bytes=128*1024))
+
+    def test_host_umask_does_not_expose_or_block_oracle_evidence(self):
+        self.prepare()
+        previous=os.umask(0o022)
+        try:
+            report=self.run_import()
+            self.assertEqual((self.workspace/'output').stat().st_mode & 0o777,0o700)
+            for path in self.workspace.rglob('*'):
+                if path.is_file() and path.name not in ('.lock','last-run.json'):
+                    self.assertEqual(path.stat().st_mode & 0o077,0,path.name)
+            self.assertEqual(self.inspect(report)['evidence']['occurrences'][0]['text']['value'],TEXT)
+            (self.workspace/'output').chmod(0o755)  # Earlier host-default output mode.
+            self.assertEqual(self.run_import(),report)
+            self.assertEqual((self.workspace/'output').stat().st_mode & 0o777,0o700)
+            self.assertEqual(self.inspect(report)['evidence']['occurrences'][0]['text']['value'],TEXT)
+        finally:
+            os.umask(previous)
 
     def test_split_grants_and_unsupported_field_retention_cannot_inherit_scope(self):
         self.prepare()
