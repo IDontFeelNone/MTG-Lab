@@ -37,7 +37,8 @@ class DrawAccessPreservationTests(unittest.TestCase):
     def test_five_successors_reverse_to_exact_canonical_baselines(self):
         for name, row in guard.ledger()['replacements'].items():
             raw = (guard.ROOT / name).read_bytes()
-            self.assertEqual(guard.pin(raw), row['new'])
+            from mtgjson_evidence_preservation import preceding_bytes as evidence_preceding
+            self.assertEqual(guard.pin(evidence_preceding(name, raw)), row['new'])
             original = guard.preceding_bytes(name, raw)
             self.assertEqual(guard.pin(original), row['old'])
             self.assertEqual(guard.preceding_bytes(name, original), original)

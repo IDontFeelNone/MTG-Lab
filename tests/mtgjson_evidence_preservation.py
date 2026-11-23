@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 LEDGER=ROOT/'tests/fixtures/mtgjson_evidence_v1/successors.json'
-LEDGER_SHA256='5dcb1c67983f0982a8171f9a2dce8148fbee830bde83ea998e1976c5e28fe616'
+LEDGER_SHA256='ef93fd20ad60bb09f4ec1e9dca693e5849d66f9b0e5afb7221a3178530ec1d82'
 BASE='3e564772dfdb6473aac11f906c636c4547d17f2b'
 TREE='420e5d9d3f464f0803261f0d531c259766bd593d'
 ADDITIONS=frozenset(('src/providers/mtgjson/oracle_evidence.py',
@@ -16,7 +16,7 @@ REPLACEMENTS=frozenset(('src/providers/mtgjson/private_policy.py',
     'src/card_intelligence/mechanics.py','tests/private_activation_preservation.py',
     'tests/private_mtgjson_preservation.py','tests/test_private_activation_preservation.py',
     'tests/validation_performance_preservation.py','tests/query_attachment_performance_preservation.py',
-    'tests/test_ci_workflow_preservation.py'))
+    'tests/test_ci_workflow_preservation.py','tests/test_draw_access_preservation.py'))
 UNCHANGED=frozenset(('docs/ARCHITECTURE.md','docs/DECISIONS.md','docs/GOVERNANCE.md','VISION.md',
     'src/providers/mtgjson/private_activation.py','src/providers/mtgjson/mapper.py',
     'src/providers/mtgjson/streaming.py','src/providers/mtgjson/validator.py',

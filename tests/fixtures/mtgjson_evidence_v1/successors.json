@@ -315,6 +315,30 @@
         "sha256": "f67c0de37a63af88c76c3a750be9aa12049bbf31e617982ffa41f530c9e1ebb3"
       }
     },
+    "tests/test_draw_access_preservation.py": {
+      "ancestors": [
+        {
+          "bytes": 4945,
+          "sha256": "eb33130b76c098faacb2a7cd51c2c500de8617ddbdb4d5d9d9dbf9b00d9af90f"
+        }
+      ],
+      "edits": [
+        {
+          "end": 2154,
+          "new_sha256": "61796245ad7cbe6aa6c743100f038a4d7fc03650d9d393be5cf3dcd38355a8fa",
+          "old": "            self.assertEqual(guard.pin(raw), row['new'])\n",
+          "start": 1979
+        }
+      ],
+      "new": {
+        "bytes": 5159,
+        "sha256": "c812876a5c9eb497ad3ec2b21cc77fa16fb8867bc3b66202921c183f15fec7fe"
+      },
+      "old": {
+        "bytes": 5041,
+        "sha256": "a6722621aee6777d0e7bbd5da741def1e0967e53e5720368ef78b1c9a5e79628"
+      }
+    },
     "tests/test_private_activation_preservation.py": {
       "edits": [
         {
@@ -334,6 +358,12 @@
       }
     },
     "tests/validation_performance_preservation.py": {
+      "ancestors": [
+        {
+          "bytes": 6534,
+          "sha256": "a084251c3baa2bb3124c35d58f0ab4d68c98fd572238d5d0570107a283fe2698"
+        }
+      ],
       "edits": [
         {
           "end": 2340,
