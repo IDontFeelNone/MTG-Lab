@@ -1,5 +1,10 @@
 # Private MTGJSON Importer and Authorization Reform V1
 
+Explicit factual limited retention is now an additive option; retained-source
+remains the unchanged default. See [the lifecycle compatibility extension](FACTUAL_LIMITED_RETENTION_V1.md)
+for authorization, durable publication, custodian cleanup and replay guarantees.
+The original retained-source contract below remains applicable to default calls.
+
 This additive private pathway imports manually supplied MTGJSON-v5-shaped releases
 through the existing release reconciler. It reuses its bounded streaming decoder,
 validator, Card/Printing identity mapper, SQLite conflict accounting, checkpoints
