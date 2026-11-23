@@ -1,0 +1,370 @@
+{
+  "additions": {
+    "docs/MTGJSON_EVIDENCE_PROJECTION_V1.md": {
+      "bytes": 8395,
+      "sha256": "268c674626c554d337ec70d178462e25c8f528824794920500acf66744f35f14"
+    },
+    "src/providers/mtgjson/oracle_evidence.py": {
+      "bytes": 10133,
+      "sha256": "df13d65d1facb2a76a8602aaa2cefe32fffc5fbd51e2436a1d7e5899b00c4876"
+    },
+    "src/schemas/v1/private-mtgjson-oracle-import-report.schema.json": {
+      "bytes": 12303,
+      "sha256": "bf09850aeab68fa370defa8cc80db5c3d9fb6a54a0d5b29f78f3940ba15d3ec1"
+    }
+  },
+  "base": "3e564772dfdb6473aac11f906c636c4547d17f2b",
+  "replacements": {
+    "src/card_intelligence/mechanics.py": {
+      "edits": [
+        {
+          "end": 8480,
+          "new_sha256": "344d010411af622c90aaabbbbd6503769d418fe2f27b951bca471674df44d010",
+          "old": "",
+          "start": 5464
+        }
+      ],
+      "new": {
+        "bytes": 34535,
+        "sha256": "eea9cc6644c64a1cb90b32b2f6479d2d93684f95d0663d8f98fa3ff8ce6dc80a"
+      },
+      "old": {
+        "bytes": 31519,
+        "sha256": "dadb77480813e15ed2676f65f03182e4e0aa62621c7f50d4d93ee850050a0ea6"
+      }
+    },
+    "src/providers/mtgjson/private_import.py": {
+      "edits": [
+        {
+          "end": 4095,
+          "new_sha256": "aebf7451d39fc5ccadfc039724027fb801522534213167dece304bb78f800186",
+          "old": "        retention_profile=RETENTION, source_use_receipt=profile.receipt(),\n",
+          "start": 4004
+        }
+      ],
+      "new": {
+        "bytes": 4163,
+        "sha256": "274205296cf01e70d856f43f8eda342454fecaa7eb795da5ca623ba801b4f3b7"
+      },
+      "old": {
+        "bytes": 4147,
+        "sha256": "f37c424107f07118126b0595ebc08612d4245e9b0d80faab979996ff6e3d367b"
+      }
+    },
+    "src/providers/mtgjson/private_policy.py": {
+      "edits": [
+        {
+          "end": 566,
+          "new_sha256": "6fcc591a5ad8c5a99e1c2033df6c1f3d935c9e70322ed300ad9b8dded73d2488",
+          "old": "",
+          "start": 406
+        },
+        {
+          "end": 2818,
+          "new_sha256": "f1a4f965b70228230765704cb5d2fe14972db030fd285db18c9a19458b1e54da",
+          "old": "                                      'PUBLISHER_CONTROLLED_ONLY'), 'explicit material scope required')\n",
+          "start": 2693
+        },
+        {
+          "end": 3115,
+          "new_sha256": "651e61a19fbfc002a75c56027ca79cf825ba826ec4e894ecc16cd4f048554712",
+          "old": "               and all(x in OPERATIONS for x in self.operations), 'invalid operation scope')\n",
+          "start": 2982
+        },
+        {
+          "end": 3822,
+          "new_sha256": "1bb809ee830533811e4fe381623707d8e336ccec72f1dea3e5a22cf8ec08fefb",
+          "old": "",
+          "start": 3739
+        },
+        {
+          "end": 4061,
+          "new_sha256": "d907af08c287fc245664721683e6617ba7e0f7fb6ecbf705bd20f818864a5c38",
+          "old": "                    internal_decision_reference, material):\n",
+          "start": 3918
+        },
+        {
+          "end": 4636,
+          "new_sha256": "308ba53c06db358ebd5834979ff249146d42a5ca3a278e128ff07cd36b170fdb",
+          "old": "                     internal_decision_reference, material)\n",
+          "start": 4541
+        },
+        {
+          "end": 5045,
+          "new_sha256": "1fd1e1ef2f315453ba169a17be770712762027b55766dd0a91c686eced0a7395",
+          "old": "",
+          "start": 4709
+        },
+        {
+          "end": 6625,
+          "new_sha256": "e1ae90e661bb5139dde4321ce4cff1c5ffed2d2914a05e2f10dc9ef8fa40535e",
+          "old": "",
+          "start": 6329
+        },
+        {
+          "end": 7351,
+          "new_sha256": "0145ffa23ab08156754d7e662380f2d2cd75b665a19a1bf1175240603d0f2f49",
+          "old": "        for operation in OPERATIONS:\n",
+          "start": 7039
+        },
+        {
+          "end": 7706,
+          "new_sha256": "94fed8182670fd4cfb406ecf440ab28fb14dc0b655675cc7db924efe3f766ae3",
+          "old": "",
+          "start": 7525
+        },
+        {
+          "end": 8854,
+          "new_sha256": "0d7054d33a33835eca6d489c06c8f2f7299a6b9948d9d74adbac0f25c4eec310",
+          "old": "            material=self.material, retention_profile=RETENTION,\n",
+          "start": 8776
+        },
+        {
+          "end": 9367,
+          "new_sha256": "dfd8fd3be6068f88ea9ddd5d0675f8d398559066a37a2e164cf9b7280599ce6f",
+          "old": "",
+          "start": 9134
+        },
+        {
+          "end": 10115,
+          "new_sha256": "1608bb77f10d62d83f24111f7eb194b2e47b68e602ff1396e3e60f975ef9c522",
+          "old": "",
+          "start": 9430
+        },
+        {
+          "end": 10797,
+          "new_sha256": "30433cbe541a490d0a4bc26e76b9a593911aa0263fedcecd94358bf51be8d947",
+          "old": "",
+          "start": 10703
+        },
+        {
+          "end": 11095,
+          "new_sha256": "e1bb6296c8fee43092ef92a664b7add47c45a13d2d09ec83daff4def1b39d541",
+          "old": "            and bindings['retention_profile'] == RETENTION and bindings['source_use_receipt'] == self.receipt()\n",
+          "start": 10970
+        },
+        {
+          "end": 11376,
+          "new_sha256": "b0e8dd6863e0a3f8383390390b15b457d6c1da3eb9ad140be5faa50c0d5aca2d",
+          "old": "            and bindings['private_source_and_derived_retention'] is True\n",
+          "start": 11151
+        }
+      ],
+      "new": {
+        "bytes": 12898,
+        "sha256": "c40ebf0b839984279cbeac5a7de4e25de6722c12d837c4897d4299fa76f7324b"
+      },
+      "old": {
+        "bytes": 10198,
+        "sha256": "29aafec59294ea18e783aef5a63377cec478c3fd1664bfe1ac80b37198406c03"
+      }
+    },
+    "src/providers/mtgjson/reconciliation.py": {
+      "ancestors": [
+        {
+          "bytes": 34362,
+          "sha256": "244d3015676df46e2eda93adf25f8908b6ce25f8aec010fcdd2c0a2a13f0d84b"
+        }
+      ],
+      "edits": [
+        {
+          "end": 818,
+          "new_sha256": "e3ca5bd3739c1043a0c3a8255050297758deea030ddfaaf309bf8531c9dd2e46",
+          "old": "from .private_policy import RETENTION, SET_FIELDS, project_row\n",
+          "start": 737
+        },
+        {
+          "end": 12020,
+          "new_sha256": "8724e7b9364aab824e26392d4a89f7dfbf0de7b5efd4b9c95c26e17f06661a09",
+          "old": "            (row['source_record_sha256'] if row.get('retention_profile') == RETENTION else\n",
+          "start": 11909
+        },
+        {
+          "end": 19595,
+          "new_sha256": "a3645ad6f6b3fe065bdd8a87504af6248f86ea5bc11ffbb3c0dc70481f02efbf",
+          "old": "",
+          "start": 19361
+        },
+        {
+          "end": 22828,
+          "new_sha256": "fe256607e40a076be2f7791630e109bbe158e40ca4f2612daf9ce44a58959e18",
+          "old": "",
+          "start": 22029
+        },
+        {
+          "end": 27449,
+          "new_sha256": "5e2e0a48f4f4d9113535033db7fdc9cd58276cd7086b803aafdc00af2df4aab5",
+          "old": "",
+          "start": 26963
+        },
+        {
+          "end": 30349,
+          "new_sha256": "9b5d088afeee3ca85c6372e78502eb4dbc7ec01c2dc9bf2a2ecaa377319106d3",
+          "old": "                _require(p.name in OUTPUT_NAMES and p.is_file() and not p.is_symlink(),\n",
+          "start": 30084
+        },
+        {
+          "end": 36246,
+          "new_sha256": "80866cfdc3917a22c83b55c3303f88aa2d32d24564a54cdbc87908e9225fc158",
+          "old": "        _require(retention_profile == RETENTION and type(source_use_receipt) is dict,\n",
+          "start": 36140
+        },
+        {
+          "end": 36815,
+          "new_sha256": "9e7853011d35d8b9c3fdf8ad50f52dce4a3148476a9ab067302749d90848d45b",
+          "old": "",
+          "start": 36455
+        }
+      ],
+      "new": {
+        "bytes": 39413,
+        "sha256": "00a4b851b18273dfadc6f2493fc7ea508d17a3255953dbdf324617040481a66f"
+      },
+      "old": {
+        "bytes": 37299,
+        "sha256": "2e7a0543d00d1d78939f4b243211c6e0ff773fc75f957d946303d801fbc1e4d4"
+      }
+    },
+    "tests/private_activation_preservation.py": {
+      "edits": [
+        {
+          "end": 2097,
+          "new_sha256": "0199dfc76ca5e15597523c3536f3aeab03dc4289da6f6e17dbdf7fdea64c444b",
+          "old": "",
+          "start": 1976
+        },
+        {
+          "end": 2979,
+          "new_sha256": "086fd2b17ed494c743a8da026d6738b43b7f59480e142faaa53cdcc31c374e04",
+          "old": "",
+          "start": 2852
+        }
+      ],
+      "new": {
+        "bytes": 3334,
+        "sha256": "fc5e6616dc39b86ce43ebc40df4aa8cfbc2047bdfcb68439c49bdfc1081fb133"
+      },
+      "old": {
+        "bytes": 3086,
+        "sha256": "7509f4e156e10fb5ddaa4a5dcdc45dc1c76dc41725a3e56f8b40c30b139e39c8"
+      }
+    },
+    "tests/private_mtgjson_preservation.py": {
+      "ancestors": [
+        {
+          "bytes": 3193,
+          "sha256": "c70252af014b7a9af74e34f30d82ebfa72e6436cbe53aa3050dab4ae2d5b40a9"
+        }
+      ],
+      "edits": [
+        {
+          "end": 3379,
+          "new_sha256": "3c3c2e02b4842cdac3033ab05c02032c911a027f9bb425d8afa73a3360982af8",
+          "old": "            or path.stat().st_mode&0o111 or pin(path.read_bytes())!=ledger()['additions'][name]):\n",
+          "start": 3259
+        }
+      ],
+      "new": {
+        "bytes": 3475,
+        "sha256": "5b7c12b38f7704ebbd3e3866b5ccc94eab4145a3431de2aebf87d666b9e27893"
+      },
+      "old": {
+        "bytes": 3453,
+        "sha256": "1dfbec82a80a63d4b7699b4bb2e1ae4bb307e0ba6301518a6bd7b928dc5dd531"
+      }
+    },
+    "tests/test_private_activation_preservation.py": {
+      "edits": [
+        {
+          "end": 759,
+          "new_sha256": "af20e53154101642a600f4b1a67581748ee33e71fae60446dc786123ee58c481",
+          "old": "            self.assertEqual(guard.pin((guard.ROOT/name).read_bytes()),pin,name)\n",
+          "start": 650
+        }
+      ],
+      "new": {
+        "bytes": 2999,
+        "sha256": "5c3b7d28e9252642c9d64e6b2914f69e0636126f1b14e13f1111744f518640d1"
+      },
+      "old": {
+        "bytes": 2971,
+        "sha256": "754616bc9c6c5e4faea48b9d486bdf995b8b61cad954c0f3ddd24db9f6a8d159"
+      }
+    }
+  },
+  "tree": "420e5d9d3f464f0803261f0d531c259766bd593d",
+  "unchanged": {
+    ".github/workflows/python-validation.yml": {
+      "bytes": 1158,
+      "sha256": "9c945a48bfce23e9a57837df4080f3cada93af041bb4d4ef55502d1207bff2e2"
+    },
+    "VISION.md": {
+      "bytes": 9683,
+      "sha256": "ab0e0d02c9afceb4f436c1ef711468bb8c619ebc80759bfd1ba3ee2e9ed26f8d"
+    },
+    "docs/ARCHITECTURE.md": {
+      "bytes": 8082,
+      "sha256": "c4651ad45e47ff9a247151a9c4ca54e8e7dd18b23725cec0571039ef676284b3"
+    },
+    "docs/DECISIONS.md": {
+      "bytes": 16095,
+      "sha256": "47e1fc0e4353f251dde4fb316ec79642a3ab3d51fc0dcc6613b49a795ead73db"
+    },
+    "docs/GOVERNANCE.md": {
+      "bytes": 7331,
+      "sha256": "c88e696509ab99abae60c9b8aa63e3f9d79cef92f7814989cb91c46b659fa819"
+    },
+    "reference-reviews/v13-legacy-profile-permission-closure/permission-matrix.json": {
+      "bytes": 504360,
+      "sha256": "5ff71ca2d4d8484aaa4b4b91b5dafe002659b1eaf514dc7e6bcfc4ad37b02a30"
+    },
+    "scripts/ci_merge_tree.py": {
+      "bytes": 13518,
+      "sha256": "56206410bf0dda4211171db3ff47d91cb80ecd51defc43f2317d6c9e11d5166c"
+    },
+    "src/card_intelligence/rules_composition.py": {
+      "bytes": 16119,
+      "sha256": "5172e286320d729a8fb3b93a6b0b21fed896fb516421fd1c559f7a309cdfad8d"
+    },
+    "src/card_intelligence/rules_reasoning.py": {
+      "bytes": 19084,
+      "sha256": "bfe4cf9ad8520addfb217bd5201ec3a11aaa97edbe1d3c36602987c8c1112da0"
+    },
+    "src/ingestion/set_preparation.py": {
+      "bytes": 17363,
+      "sha256": "ad4f54a7651ed49e21eab388dd408e6c8f0735b2a4ef0b706098473c847f61e9"
+    },
+    "src/probability/draw_access.py": {
+      "bytes": 8949,
+      "sha256": "0835ae163b28aeaebe85cbc79e67d2766736a6501504296db905adf29742292c"
+    },
+    "src/providers/mtgjson/mapper.py": {
+      "bytes": 4534,
+      "sha256": "664e7eb086502fb32c0bdd4277b2b2a90dbdf9a8c5b348ea1de9f3c2774390c0"
+    },
+    "src/providers/mtgjson/private_activation.py": {
+      "bytes": 12030,
+      "sha256": "c32396815d1e94f3729bc82ba83ff4d076e9c6c10a8013ed4d65032f1f685d17"
+    },
+    "src/providers/mtgjson/streaming.py": {
+      "bytes": 29526,
+      "sha256": "2553d5bc9e4ffaae86b42b4b9bf3190eb308c7d80e5a1584d4b27ba3b59388c5"
+    },
+    "src/providers/mtgjson/validator.py": {
+      "bytes": 9440,
+      "sha256": "04c8310bf832a29186d8a8962a200fea4b09baafa8901401a67f9498f98846a0"
+    },
+    "src/schemas/v1/private-mtgjson-import-report.schema.json": {
+      "bytes": 10671,
+      "sha256": "93b056339c5f415c96d99a6b573be9c9a22fa546450bcf83d6ecf7769023e305"
+    },
+    "tests/fixtures/private_activation_v1/successors.json": {
+      "bytes": 4186,
+      "sha256": "d1cb7baf0baecf0150ca2d79c8f816213434e503a2dcb530bdb51b3ccb72d0d4"
+    },
+    "tests/fixtures/private_mtgjson_v1/successors.json": {
+      "bytes": 7692,
+      "sha256": "9c7db032d239568fecd7e322a7239ffdec8299fa0c3fbfefbf832ec5a2e74f1c"
+    }
+  }
+}

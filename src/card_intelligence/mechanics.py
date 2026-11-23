@@ -119,6 +119,47 @@ class MechanicalDossier:
 class MechanicalCardIntelligence:
     """Compose existing canonical queries with one verified retained acquisition."""
 
+    @staticmethod
+    def inspect_mtgjson_candidate(query, *, expected_query_snapshot_id,
+            card_id, printing_id, evidence_directory, profile, expected_report_id):
+        """Read unadmitted literal evidence; never build/populate a dossier.
+
+        This separate inspection entry point does not initialize the historical
+        Scryfall reader. Only an existing verified catalog attachment can establish
+        identities. Importer candidates cannot admit their own Card or Printing.
+        """
+        from providers.mtgjson.oracle_evidence import read_candidate_evidence
+
+        if type(query) is not CanonicalQueryEngine or query.catalog_binding is None:
+            raise MechanicalEvidenceError('verified explicit catalog attachment required')
+        snapshot = query.snapshot()
+        if snapshot.game != 'magic' or snapshot.snapshot_id != expected_query_snapshot_id:
+            raise MechanicalEvidenceError('exact mechanical query snapshot mismatch')
+        cards = query.entities(canonical_id=card_id, entity_type='card')
+        printings = query.entities(canonical_id=printing_id, entity_type='printing')
+        if (len(cards) != 1 or len(printings) != 1 or
+                cards[0].canonical_identity != card_id or printings[0].canonical_identity != printing_id or
+                cards[0].supersession_state != 'current' or printings[0].supersession_state != 'current' or
+                cards[0].canonical_values.get('card_reference') != card_id or
+                printings[0].canonical_values.get('card_id') != card_id or
+                printings[0].canonical_values.get('uuid') != printing_id):
+            raise MechanicalEvidenceError('exact current Card/Printing identity and relationship required')
+        evidence = read_candidate_evidence(evidence_directory, profile=profile,
+            expected_report_id=expected_report_id, card_id=card_id, printing_id=printing_id)
+        # Detect attachment withdrawal/drift while the private evidence was read.
+        if query.snapshot().snapshot_id != expected_query_snapshot_id:
+            raise MechanicalEvidenceError('catalog changed during evidence inspection')
+        body = dict(schema_version='mechanical-candidate-inspection-v1',
+            card_id=card_id, printing_id=printing_id, query_snapshot_id=expected_query_snapshot_id,
+            catalog_binding=query.catalog_binding, evidence=evidence,
+            authority='UNADMITTED_SOURCE_EVIDENCE_ONLY', admitted_dossier_populated=False,
+            canonical_admission='NOT_PERFORMED', semantic_authority='NOT_ESTABLISHED',
+            current_oracle_verified=False, real_card_execution='BLOCKED',
+            limitations=['Literal supplied text, not interpreted abilities or verified current Oracle.',
+                         'Identity admission does not admit imported mechanical evidence.',
+                         'No rules legality, strategic conclusion, gameplay or AI-export permission.'])
+        return dict(body, inspection_id=content_identity(body))
+
     def __init__(self, data_root: Path, *, source_directory: Path | None = None):
         self._initialize(data_root, source_directory=source_directory)
 
