@@ -1,0 +1,118 @@
+{
+  "additions": {
+    "docs/PRIVATE_MTGJSON_ACTIVATION_V1.md": {
+      "bytes": 12058,
+      "sha256": "0475aad478c9b7c7869b360714033ede6211bdc97440db2728012ffa7a9be13e"
+    },
+    "src/providers/mtgjson/private_activation.py": {
+      "bytes": 12030,
+      "sha256": "c32396815d1e94f3729bc82ba83ff4d076e9c6c10a8013ed4d65032f1f685d17"
+    },
+    "src/schemas/v1/private-mtgjson-activation-plan.schema.json": {
+      "bytes": 2075,
+      "sha256": "ff4da513a4978df2e403c418bb41d315846d6d6750907aa448abee9f88a8a51e"
+    }
+  },
+  "base": "69f9a2c9de6d8e1abce5a13e131438568262335d",
+  "replacements": {
+    "tests/private_mtgjson_preservation.py": {
+      "edits": [
+        {
+          "end": 2155,
+          "new_sha256": "46cb68cbbb25b48d91d41688c32ecc9569c900becf4de07354ea802387023041",
+          "old": "",
+          "start": 2028
+        },
+        {
+          "end": 3094,
+          "new_sha256": "c024b2fb197f9c51c2b6a25856e7a8ba84be9c4644c28c918c498b1e0fe615d9",
+          "old": "",
+          "start": 2961
+        }
+      ],
+      "new": {
+        "bytes": 3453,
+        "sha256": "1dfbec82a80a63d4b7699b4bb2e1ae4bb307e0ba6301518a6bd7b928dc5dd531"
+      },
+      "old": {
+        "bytes": 3193,
+        "sha256": "c70252af014b7a9af74e34f30d82ebfa72e6436cbe53aa3050dab4ae2d5b40a9"
+      }
+    }
+  },
+  "tree": "ba42c4eccbd64ddfb88f70f5c94b746d1012365c",
+  "unchanged": {
+    ".github/workflows/python-validation.yml": {
+      "bytes": 1158,
+      "sha256": "9c945a48bfce23e9a57837df4080f3cada93af041bb4d4ef55502d1207bff2e2"
+    },
+    "VISION.md": {
+      "bytes": 9683,
+      "sha256": "ab0e0d02c9afceb4f436c1ef711468bb8c619ebc80759bfd1ba3ee2e9ed26f8d"
+    },
+    "docs/ARCHITECTURE.md": {
+      "bytes": 8082,
+      "sha256": "c4651ad45e47ff9a247151a9c4ca54e8e7dd18b23725cec0571039ef676284b3"
+    },
+    "docs/DECISIONS.md": {
+      "bytes": 16095,
+      "sha256": "47e1fc0e4353f251dde4fb316ec79642a3ab3d51fc0dcc6613b49a795ead73db"
+    },
+    "docs/GOVERNANCE.md": {
+      "bytes": 7331,
+      "sha256": "c88e696509ab99abae60c9b8aa63e3f9d79cef92f7814989cb91c46b659fa819"
+    },
+    "reference-reviews/v13-legacy-profile-permission-closure/permission-matrix.json": {
+      "bytes": 504360,
+      "sha256": "5ff71ca2d4d8484aaa4b4b91b5dafe002659b1eaf514dc7e6bcfc4ad37b02a30"
+    },
+    "scripts/ci_merge_tree.py": {
+      "bytes": 13518,
+      "sha256": "56206410bf0dda4211171db3ff47d91cb80ecd51defc43f2317d6c9e11d5166c"
+    },
+    "src/card_intelligence/rules_composition.py": {
+      "bytes": 16119,
+      "sha256": "5172e286320d729a8fb3b93a6b0b21fed896fb516421fd1c559f7a309cdfad8d"
+    },
+    "src/card_intelligence/rules_reasoning.py": {
+      "bytes": 19084,
+      "sha256": "bfe4cf9ad8520addfb217bd5201ec3a11aaa97edbe1d3c36602987c8c1112da0"
+    },
+    "src/ingestion/set_preparation.py": {
+      "bytes": 17363,
+      "sha256": "ad4f54a7651ed49e21eab388dd408e6c8f0735b2a4ef0b706098473c847f61e9"
+    },
+    "src/probability/draw_access.py": {
+      "bytes": 8949,
+      "sha256": "0835ae163b28aeaebe85cbc79e67d2766736a6501504296db905adf29742292c"
+    },
+    "src/providers/mtgjson/mapper.py": {
+      "bytes": 4534,
+      "sha256": "664e7eb086502fb32c0bdd4277b2b2a90dbdf9a8c5b348ea1de9f3c2774390c0"
+    },
+    "src/providers/mtgjson/private_import.py": {
+      "bytes": 4147,
+      "sha256": "f37c424107f07118126b0595ebc08612d4245e9b0d80faab979996ff6e3d367b"
+    },
+    "src/providers/mtgjson/private_policy.py": {
+      "bytes": 10198,
+      "sha256": "29aafec59294ea18e783aef5a63377cec478c3fd1664bfe1ac80b37198406c03"
+    },
+    "src/providers/mtgjson/reconciliation.py": {
+      "bytes": 37299,
+      "sha256": "2e7a0543d00d1d78939f4b243211c6e0ff773fc75f957d946303d801fbc1e4d4"
+    },
+    "src/providers/mtgjson/streaming.py": {
+      "bytes": 29526,
+      "sha256": "2553d5bc9e4ffaae86b42b4b9bf3190eb308c7d80e5a1584d4b27ba3b59388c5"
+    },
+    "src/providers/mtgjson/validator.py": {
+      "bytes": 9440,
+      "sha256": "04c8310bf832a29186d8a8962a200fea4b09baafa8901401a67f9498f98846a0"
+    },
+    "tests/fixtures/private_mtgjson_v1/successors.json": {
+      "bytes": 7692,
+      "sha256": "9c7db032d239568fecd7e322a7239ffdec8299fa0c3fbfefbf832ec5a2e74f1c"
+    }
+  }
+}

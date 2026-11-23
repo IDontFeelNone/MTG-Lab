@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Private MTGJSON activation request V1 — not authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "release", "source_url", "acquired_at", "acquisition_method", "notice_sha256", "requested_operations", "retention_profile", "authority", "canonical_admission", "real_card_execution", "public_export", "external_ai_export", "plan_id"],
+  "properties": {
+    "schema_version": {"const": "private-mtgjson-activation-plan-v1"},
+    "release": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "release_id", "version", "date", "artifact_sha256", "provenance_reference", "notice_reference"],
+      "properties": {
+        "provider": {"const": "MTGJSON"},
+        "release_id": {"$ref": "#/$defs/text"},
+        "version": {"$ref": "#/$defs/text"},
+        "date": {"$ref": "#/$defs/text"},
+        "artifact_sha256": {"$ref": "#/$defs/sha"},
+        "provenance_reference": {"$ref": "#/$defs/text"},
+        "notice_reference": {"$ref": "#/$defs/text"}
+      }
+    },
+    "source_url": {"type": "string", "minLength": 1, "maxLength": 2048},
+    "acquired_at": {"type": "string", "minLength": 1, "maxLength": 40},
+    "acquisition_method": {"const": "MANUALLY_SUPPLIED"},
+    "notice_sha256": {"$ref": "#/$defs/sha"},
+    "requested_operations": {"const": ["WHOLE_ARTIFACT_READ", "LOCAL_PARSE", "TEMPORARY_MIXED_PROCESSING", "PRIVATE_SOURCE_RETENTION", "PRIVATE_FACTUAL_RETENTION", "PRIVATE_REPORTS"]},
+    "retention_profile": {"const": "private-factual-v1"},
+    "authority": {"const": "UNREVIEWED_REQUEST_NOT_AUTHORIZATION"},
+    "canonical_admission": {"const": false},
+    "real_card_execution": {"const": false},
+    "public_export": {"const": false},
+    "external_ai_export": {"const": false},
+    "plan_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  },
+  "$defs": {
+    "sha": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "text": {"type": "string", "minLength": 1, "maxLength": 256}
+  }
+}
