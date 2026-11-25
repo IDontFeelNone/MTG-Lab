@@ -22,11 +22,13 @@ import time
 from .mapper import map_dataset
 from .streaming import _decoded, _IncrementalJSON
 from .validator import IDENTIFIER_POLICY, MTGJSONValidationError, validate_document
-from .private_policy import RETENTION, ORACLE_RETENTION, SET_FIELDS, project_row
+from .private_policy import (RETENTION, ORACLE_RETENTION, SET_FIELDS, project_row,
+                             PrivateResearchProfile, canonical)
 
 VERSION = "release-catalog-reconciliation-v1"
 FACTUAL_VERSION = "private-mtgjson-import-report-v1"
 OPERATION = "private-release-catalog-reconciliation-v1"
+FORMAT_VALUE_ENCODED_BYTES = 64
 OUTPUT_NAMES = frozenset(('assertions.jsonl', 'conflicts.jsonl', 'duplicates.jsonl',
     'identifier-conflicts.jsonl', 'cards.jsonl', 'printings.jsonl', 'exceptional.jsonl',
     'unresolved.jsonl', 'report.json', 'report.json.tmp'))
@@ -93,6 +95,76 @@ class ReconciliationLimits:
                  "memory/disk limit below supported operating floor")
 
 
+@dataclass(frozen=True)
+class StandardExportContract:
+    """Host-selected envelope constraint, not source-use or legality authority.
+
+    Exact release/profile bindings already live in the checkpoint. This extra
+    validation constraint is supplied on every invocation, without changing those
+    historical bytes. The host should separately pin/retain ``receipt()`` with
+    its execution controls. It must never be selected from an incoming filename
+    or a source field. Only the documented Standard export is supported here.
+    """
+    release_json: str
+    source_use_profile_id: str
+
+    @classmethod
+    def for_profile(cls, profile):
+        _require(type(profile) is PrivateResearchProfile, 'trusted private profile required',
+                 'SOURCE_POLICY_REFUSAL')
+        profile.require_supported()
+        result = cls(profile.release_json, profile.receipt()['profile_id'])
+        result.require_compatible(json.loads(profile.release_json), profile.receipt())
+        return result
+
+    def require_compatible(self, release, receipt):
+        _require(type(self.release_json) is str and len(self.release_json) <= 4096
+                 and self.release_json == canonical(release)
+                 and type(self.source_use_profile_id) is str
+                 and re.fullmatch(r'sha256:[0-9a-f]{64}', self.source_use_profile_id)
+                 and type(receipt) is dict
+                 and receipt.get('profile_id') == self.source_use_profile_id
+                 and receipt.get('release') == release,
+                 'Standard envelope contract release/profile mismatch', 'SOURCE_POLICY_REFUSAL')
+        _require(receipt.get('retention_profile') == RETENTION,
+                 'Standard envelope extension supports only the factual pathway', 'UNSUPPORTED_PROFILE')
+
+    def receipt(self):
+        body = dict(schema_version='mtgjson-standard-export-envelope-v1',
+            release=json.loads(self.release_json), source_use_profile_id=self.source_use_profile_id,
+            required_sections=['meta', 'data', 'format_name'], expected_format='standard',
+            format_value_encoded_bytes=FORMAT_VALUE_ENCODED_BYTES, authority='SOURCE_ENVELOPE_METADATA_ONLY',
+            canonical_admission=False, format_legality=False, real_card_execution=False)
+        return dict(body, contract_id='sha256:' + _hash(body))
+
+
+def _standard_format_value(reader):
+    """Read a bounded JSON string, without materializing an arbitrary value.
+
+    The publisher emits the literal "standard"; normal JSON string escapes are
+    accepted too. Bound the encoded token before JSON decoding or retention.
+    """
+    reader._space()
+    token, size, escaped = [], 0, False
+    while True:
+        if reader.position >= len(reader.buffer):
+            _require(reader._fill(), 'truncated Standard format metadata')
+        char = reader.buffer[reader.position]; reader.position += 1
+        if not token:
+            _require(char == '"', 'Standard format metadata must be a JSON string')
+        size += len(char.encode())
+        _require(size <= FORMAT_VALUE_ENCODED_BYTES, 'Standard format metadata exceeds byte budget', 'RESOURCE_BUDGET')
+        token.append(char)
+        if len(token) > 1 and char == '"' and not escaped:
+            break
+        escaped = not escaped if char == '\\' else False
+    try:
+        value = reader.decoder.decode(''.join(token))
+    except ValueError:
+        raise ReconciliationError('INVALID_INPUT', 'invalid Standard format metadata') from None
+    _require(type(value) is str and value == 'standard', 'unsupported Standard format metadata')
+
+
 def _unique(pairs):
     value = {}
     for key, item in pairs:
@@ -128,21 +200,26 @@ class _Reader(_IncrementalJSON):
         return result
 
 
-def _partitions(path, limits):
+def _partitions(path, limits, source_contract=None):
     """Consume the entire envelope, rejecting duplicate sections and trailing data."""
+    _require(source_contract is None or type(source_contract) is StandardExportContract,
+             'explicit supported source envelope contract required', 'UNSUPPORTED_PROFILE')
     with _decoded(path) as stream:
         reader = _Reader(stream, limits)
         reader.char("{")
         seen, meta = set(), None
+        sections = ('meta', 'data') if source_contract is None else ('meta', 'data', 'format_name')
         while True:
             key = reader.value()
-            _require(type(key) is str and key in ("meta", "data") and key not in seen,
+            _require(type(key) is str and key in sections and key not in seen,
                      "closed unique MTGJSON meta/data envelope required")
+            if source_contract is not None:
+                _require(key == sections[len(seen)], 'unsupported Standard envelope ordering')
             seen.add(key); reader.char(":")
             if key == "meta":
                 meta = reader.value()
                 validate_document({"meta": meta, "data": {}})
-            else:
+            elif key == 'data':
                 _require(meta is not None, "meta must precede data", "UNSUPPORTED_PROFILE")
                 yield meta, None, None
                 count = 0
@@ -152,13 +229,16 @@ def _partitions(path, limits):
                     _require(len(_json(source_set).encode()) <= limits.partition_bytes,
                              "partition exceeds byte budget", "RESOURCE_BUDGET")
                     yield meta, set_key, source_set
+            else:
+                _standard_format_value(reader)
             reader._space()
             _require(reader.position < len(reader.buffer), "truncated source envelope")
             marker = reader.buffer[reader.position]; reader.position += 1
             if marker == "}":
                 break
             _require(marker == ",", "invalid source envelope separator")
-        _require(seen == {"meta", "data"}, "meta and data required")
+        _require(seen == set(sections), 'meta and data required' if source_contract is None else
+                 'required Standard envelope sections missing')
         reader._space()
         _require(reader.position == len(reader.buffer) and reader.eof, "trailing source content")
 
@@ -432,7 +512,7 @@ def _finalize(db, output, binding, meta, limits):
     return report
 
 
-def _run(source, root, binding, limits, stop_after):
+def _run(source, root, binding, limits, stop_after, source_contract=None):
     digest = hashlib.sha256()
     total = 0
     with source.open("rb") as stream:
@@ -456,7 +536,9 @@ def _run(source, root, binding, limits, stop_after):
         completed = db.execute("SELECT count(*) FROM partitions").fetchone()[0]
         processed, seq, total_rows, meta = 0, 0, 0, None
         seen_keys, seen_codes = set(), set()
-        for meta, key, source_set in _partitions(source, limits):
+        partitions = (_partitions(source, limits) if source_contract is None else
+                      _partitions(source, limits, source_contract))
+        for meta, key, source_set in partitions:
             if key is None:
                 _require(meta["version"] == binding["version"] and meta["date"] == binding["date"],
                          "source release metadata mismatch", "INTEGRITY_MISMATCH")
@@ -583,7 +665,7 @@ def _worker_peak_memory_kib():
     raise ReconciliationError('RESOURCE_MEASUREMENT_UNAVAILABLE', 'worker high-water measurement unavailable')
 
 
-def _worker(connection, source, root, binding, limits, stop_after):
+def _worker(connection, source, root, binding, limits, stop_after, source_contract=None):
     started = time.monotonic()
     try:
         if binding.get('private_scope', {}).get('retention_profile') == ORACLE_RETENTION or _limited_factual(binding):
@@ -594,7 +676,8 @@ def _worker(connection, source, root, binding, limits, stop_after):
         resource.setrlimit(resource.RLIMIT_CPU, (limits.cpu_seconds, limits.cpu_seconds))
         resource.setrlimit(resource.RLIMIT_FSIZE, (limits.disk_bytes // 2, limits.disk_bytes // 2))
         os.environ["SQLITE_TMPDIR"] = str(root)
-        result = _run(source, root, binding, limits, stop_after)
+        result = (_run(source, root, binding, limits, stop_after) if source_contract is None else
+                  _run(source, root, binding, limits, stop_after, source_contract))
         peak_memory = _worker_peak_memory_kib()
         _require(peak_memory * 1024 <= limits.memory_bytes,
                  'worker memory high-water exceeds configured budget', 'RESOURCE_BUDGET')
@@ -612,7 +695,7 @@ def _worker(connection, source, root, binding, limits, stop_after):
 
 def reconcile_release(source, workspace, release, *, authorize_source=None,
                       limits=None, stop_after_partitions=None, retention_profile=None,
-                      source_use_receipt=None):
+                      source_use_receipt=None, source_contract=None):
     """Reconcile one explicit local release in a bounded isolated worker.
 
     ``authorize_source`` is trusted host code, not a JSON approval flag. It must
@@ -627,6 +710,10 @@ def reconcile_release(source, workspace, release, *, authorize_source=None,
     _require(sys.platform == 'linux', 'bounded worker requires Linux resource controls', 'UNSUPPORTED_PLATFORM')
     _require(type(limits) is ReconciliationLimits, "explicit supported limits required")
     limits.validate()
+    if source_contract is not None:
+        _require(type(source_contract) is StandardExportContract,
+                 'explicit supported source envelope contract required', 'UNSUPPORTED_PROFILE')
+        source_contract.require_compatible(release, source_use_receipt)
     _require(type(release) is dict and release.keys() == {"provider", "release_id", "version", "date", "artifact_sha256", "provenance_reference", "notice_reference"},
              "closed release binding required")
     _require(all(_identifier(v) for v in release.values()) and release["provider"] == "MTGJSON"
@@ -679,7 +766,10 @@ def reconcile_release(source, workspace, release, *, authorize_source=None,
             raise ReconciliationError("WORKSPACE_BUSY", "another reconciliation owns this workspace") from None
         context = multiprocessing.get_context("spawn")
         reader, writer = context.Pipe(duplex=False)
-        process = context.Process(target=_worker, args=(writer,source,root,release,limits,stop_after_partitions))
+        arguments = (writer,source,root,release,limits,stop_after_partitions)
+        if source_contract is not None:
+            arguments += (source_contract,)
+        process = context.Process(target=_worker, args=arguments)
         process.start(); writer.close()
         try:
             if not reader.poll(limits.wall_seconds):

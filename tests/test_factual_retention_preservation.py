@@ -10,9 +10,10 @@ import factual_retention_preservation as guard
 
 class FactualRetentionPreservationTests(unittest.TestCase):
     def test_successors_reconstruct_exact_predecessors(self):
+        from standard_envelope_preservation import preceding_bytes as envelope_preceding
         for name,row in guard.ledger()['replacements'].items():
             raw=(guard.ROOT/name).read_bytes()
-            self.assertEqual(guard.pin(raw),row['new'])
+            self.assertEqual(guard.pin(envelope_preceding(name,raw)),row['new'])
             self.assertEqual(guard.pin(guard.preceding_bytes(name,raw)),row['old'])
             for invalid in (raw+b'future',raw[:-1],b'X'+raw[1:],bytearray(raw),None):
                 with self.subTest(name=name),self.assertRaises(AssertionError):guard.preceding_bytes(name,invalid)
