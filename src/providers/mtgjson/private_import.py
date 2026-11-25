@@ -8,7 +8,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 from .private_policy import PrivateResearchProfile, SourcePolicyError, RETENTION, digest
-from .reconciliation import reconcile_release
+from .reconciliation import reconcile_release, StandardExportContract
 
 CONTROL_BYTES = 64 * 1024
 
@@ -36,7 +36,7 @@ def _control(path, expected):
 
 
 def import_private_release(source, workspace, *, profile, provenance, notice,
-                           limits=None, stop_after_partitions=None):
+                           limits=None, stop_after_partitions=None, source_contract=None):
     """Return deterministic private candidates; never establish legal clearance.
 
     ``profile`` must come from reviewed trusted-host code, not imported JSON.
@@ -46,6 +46,9 @@ def import_private_release(source, workspace, *, profile, provenance, notice,
     """
     _require(type(profile) is PrivateResearchProfile, 'trusted-host profile required')
     profile.require_supported()  # Refuse BEFORE reading even provenance or source files.
+    if source_contract is not None:
+        _require(type(source_contract) is StandardExportContract, 'supported source envelope contract required')
+        source_contract.require_compatible(json.loads(profile.release_json), profile.receipt())
     try:
         raw = _control(provenance, profile.provenance_sha256)
         # Controls are small and pinned; reject duplicate keys nonetheless.
@@ -83,9 +86,10 @@ def import_private_release(source, workspace, *, profile, provenance, notice,
         raise
     except (ValueError, TypeError, OSError, RecursionError, KeyError, RuntimeError):
         raise SourcePolicyError('invalid private provenance or notice') from None
+    options = {} if source_contract is None else dict(source_contract=source_contract)
     result = reconcile_release(source, workspace, release, authorize_source=profile,
         retention_profile=profile.retention_profile, source_use_receipt=profile.receipt(),
-        limits=limits, stop_after_partitions=stop_after_partitions)
+        limits=limits, stop_after_partitions=stop_after_partitions, **options)
     if (profile.retention_profile == RETENTION and profile.retention_mode == 'limited-retention'
             and result['status'] == 'CANDIDATES_PREPARED'):
         from .factual_retention import publish_factual_results

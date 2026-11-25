@@ -1,0 +1,372 @@
+{
+  "additions": {
+    "docs/MTGJSON_STANDARD_ENVELOPE_V1.md": {
+      "bytes": 6068,
+      "sha256": "871a3edcabf7a028a83c302d4a33e0357f2a4d4f24f89f5f751481781ac18c3b"
+    }
+  },
+  "base": "a949c5edd52eafbd31b06b00aabbe19d4519c4c3",
+  "replacements": {
+    "src/providers/mtgjson/private_activation.py": {
+      "ancestors": [
+        {
+          "bytes": 12030,
+          "sha256": "c32396815d1e94f3729bc82ba83ff4d076e9c6c10a8013ed4d65032f1f685d17"
+        }
+      ],
+      "edits": [
+        {
+          "end": 8404,
+          "new_sha256": "448ac670cac344db33b67afcacb4f98bc014c126649591a2b557a0331cc0c98f",
+          "old": "        limits=None, stop_after_partitions=None):\n",
+          "start": 8332
+        },
+        {
+          "end": 9995,
+          "new_sha256": "009dd6f156f310019934616595260e0cf422995ceded3fe627a71cbad18c90fd",
+          "old": "",
+          "start": 9708
+        },
+        {
+          "end": 11491,
+          "new_sha256": "f3b2f48575bb058d804bf77fd34e4ec487da1d2a4d2ba6c76229dd3fe989be98",
+          "old": "",
+          "start": 11404
+        },
+        {
+          "end": 11717,
+          "new_sha256": "3e7ac05bc3654283f2e0caadf3ce61e726b007ed78e812318118107a002ccf03",
+          "old": "        limits=limits, stop_after_partitions=stop_after_partitions)\n",
+          "start": 11638
+        }
+      ],
+      "new": {
+        "bytes": 13470,
+        "sha256": "f81a2d2d1545d0d653d30c333c80327984cb94b8054383357f0b229236563f9f"
+      },
+      "old": {
+        "bytes": 13063,
+        "sha256": "adec803c16aaa84d8d82ff78c6f4365626452fa3dbaab7f2b23db49e438dc495"
+      }
+    },
+    "src/providers/mtgjson/private_import.py": {
+      "ancestors": [
+        {
+          "bytes": 4163,
+          "sha256": "274205296cf01e70d856f43f8eda342454fecaa7eb795da5ca623ba801b4f3b7"
+        },
+        {
+          "bytes": 4147,
+          "sha256": "f37c424107f07118126b0595ebc08612d4245e9b0d80faab979996ff6e3d367b"
+        }
+      ],
+      "edits": [
+        {
+          "end": 427,
+          "new_sha256": "fb7f99c73978978faf011895521a3d2584c018d6eb60fbd1291c169297d0c181",
+          "old": "from .reconciliation import reconcile_release\n",
+          "start": 357
+        },
+        {
+          "end": 1461,
+          "new_sha256": "d60a38a379c24a0db5d5ba1b9d5f58edca8671e32674d7a2cadbdcb3d8e16828",
+          "old": "                           limits=None, stop_after_partitions=None):\n",
+          "start": 1370
+        },
+        {
+          "end": 2288,
+          "new_sha256": "7ac231715beeb49524aff09647bfd418fab50e01278a6ed5d8daff4b14a64591",
+          "old": "",
+          "start": 2043
+        },
+        {
+          "end": 4913,
+          "new_sha256": "f3b2f48575bb058d804bf77fd34e4ec487da1d2a4d2ba6c76229dd3fe989be98",
+          "old": "",
+          "start": 4826
+        },
+        {
+          "end": 5168,
+          "new_sha256": "3e7ac05bc3654283f2e0caadf3ce61e726b007ed78e812318118107a002ccf03",
+          "old": "        limits=limits, stop_after_partitions=stop_after_partitions)\n",
+          "start": 5089
+        }
+      ],
+      "new": {
+        "bytes": 5576,
+        "sha256": "681e2feef81403da40eb5c19653ab41260bb7632a5db66e8c0fc8b82c01caf4d"
+      },
+      "old": {
+        "bytes": 5187,
+        "sha256": "0a141bb380f013addc4488ade8c3f9b8ca573f2537cf274d4d8659651f6bda61"
+      }
+    },
+    "src/providers/mtgjson/reconciliation.py": {
+      "ancestors": [
+        {
+          "bytes": 34362,
+          "sha256": "244d3015676df46e2eda93adf25f8908b6ce25f8aec010fcdd2c0a2a13f0d84b"
+        },
+        {
+          "bytes": 39803,
+          "sha256": "7d809a92d4556041934426358a5df9d96cac03b236a4708ce3572478de4f81bc"
+        },
+        {
+          "bytes": 37299,
+          "sha256": "2e7a0543d00d1d78939f4b243211c6e0ff773fc75f957d946303d801fbc1e4d4"
+        }
+      ],
+      "edits": [
+        {
+          "end": 884,
+          "new_sha256": "20a32417faf0ecb67ef2b8021646b0d6a63008d0c84e72d9db2afb176927c81f",
+          "old": "from .private_policy import RETENTION, ORACLE_RETENTION, SET_FIELDS, project_row\n",
+          "start": 737
+        },
+        {
+          "end": 1072,
+          "new_sha256": "3cba593f40299fa1df7702379ee36b145924dcbe58f14135d4e7583fba32a8b6",
+          "old": "",
+          "start": 1040
+        },
+        {
+          "end": 7286,
+          "new_sha256": "b66fe0867a173ae3595e41986c441cb473549730430d847d1e571030c70b0e54",
+          "old": "",
+          "start": 3692
+        },
+        {
+          "end": 8916,
+          "new_sha256": "c6afc9ec4a5903594066c9605fd29e66193b2c1e8e1a20040ff0394efa7671e2",
+          "old": "def _partitions(path, limits):\n",
+          "start": 8863
+        },
+        {
+          "end": 9184,
+          "new_sha256": "4f68eb5728c315444154ff3c9ca5b333ec9013bcaf95d5d506373bb46d046efb",
+          "old": "",
+          "start": 9003
+        },
+        {
+          "end": 9418,
+          "new_sha256": "34ffe0baaa0830d1bbfe0e6b8023735a11dee5551ca68e91ea24f9318b16e0de",
+          "old": "",
+          "start": 9318
+        },
+        {
+          "end": 9550,
+          "new_sha256": "f8570066272191ea6667d00e4db9b62aa3d678dfbcf281aaaf730e6245bdaa82",
+          "old": "            _require(type(key) is str and key in (\"meta\", \"data\") and key not in seen,\n",
+          "start": 9471
+        },
+        {
+          "end": 9763,
+          "new_sha256": "6a2419176d2e7098e802d8343db587ba0d8e52e4c21a114baaadfe7e3d845681",
+          "old": "",
+          "start": 9624
+        },
+        {
+          "end": 9969,
+          "new_sha256": "32bde55decf90106fcdb0300b3f076661f6e9b5a8e7340d7c972ffcb7afafb12",
+          "old": "            else:\n",
+          "start": 9937
+        },
+        {
+          "end": 10619,
+          "new_sha256": "f8e4a3205b0de2cc45c835798fd929f9723b3fe95262619aff70e17277132857",
+          "old": "",
+          "start": 10554
+        },
+        {
+          "end": 11095,
+          "new_sha256": "2a02214e57f0abe651a2ff260b81c6dc98846e56f8058438b82276848cfb04be",
+          "old": "        _require(seen == {\"meta\", \"data\"}, \"meta and data required\")\n",
+          "start": 10934
+        },
+        {
+          "end": 28334,
+          "new_sha256": "e6794622d88f92e95ffee16297eb0ce8b42d985206f641f6326b9d88a5582384",
+          "old": "def _run(source, root, binding, limits, stop_after):\n",
+          "start": 28259
+        },
+        {
+          "end": 29820,
+          "new_sha256": "0b1ec1f728c220b0ce52419e004733b68a9823eb34cd4227d55b49b0ae6f8688",
+          "old": "        for meta, key, source_set in _partitions(source, limits):\n",
+          "start": 29621
+        },
+        {
+          "end": 38169,
+          "new_sha256": "c82d3ea2d198c54fababfb319acb5a49689b656c3481b8a279ec7918fd29c2a5",
+          "old": "def _worker(connection, source, root, binding, limits, stop_after):\n",
+          "start": 38079
+        },
+        {
+          "end": 39017,
+          "new_sha256": "ebf8893b57e8025d3d71e3614b37a20a289ad72f265c5af8f4da57fe27bc84ed",
+          "old": "        result = _run(source, root, binding, limits, stop_after)\n",
+          "start": 38835
+        },
+        {
+          "end": 40124,
+          "new_sha256": "a1103b1c498f1681f21a959b16b35ac8736c902c586d86ac7844d23369a7ff61",
+          "old": "                      source_use_receipt=None):\n",
+          "start": 40054
+        },
+        {
+          "end": 41321,
+          "new_sha256": "104bb7c4230fa4d251aa6340d7ffe85141fb7d4971a3764a7b0d7ffca41a93a1",
+          "old": "",
+          "start": 41051
+        },
+        {
+          "end": 45747,
+          "new_sha256": "2c47e15c675918ba0ab28914637f7da539b7b5811582b1c2474b203d3182996f",
+          "old": "        process = context.Process(target=_worker, args=(writer,source,root,release,limits,stop_after_partitions))\n",
+          "start": 45519
+        }
+      ],
+      "new": {
+        "bytes": 46639,
+        "sha256": "ae7e4d45d6ccee1ec078f0426670df03ec806dac4607225594ed65ae63605662"
+      },
+      "old": {
+        "bytes": 41642,
+        "sha256": "658ec4a3dc5d14e55299159b2fa3430bbf407776a3490fc4c70695c8c110b4f8"
+      }
+    },
+    "tests/factual_retention_preservation.py": {
+      "ancestors": [],
+      "edits": [
+        {
+          "end": 2792,
+          "new_sha256": "ddf2ab785ca3a73deaf4bff73361210f28ad6950fcf7da24eb4a67a3280e703c",
+          "old": "",
+          "start": 2667
+        },
+        {
+          "end": 3737,
+          "new_sha256": "eaf0b94b799de98e0e03cc43a56c89d35bc17ae1040f36d38570744996a98e35",
+          "old": "",
+          "start": 3608
+        }
+      ],
+      "new": {
+        "bytes": 4099,
+        "sha256": "8ae635624b3bc6bc38dcbc83e255b512fda466ad87ffff1cdbd8ff501d03fffd"
+      },
+      "old": {
+        "bytes": 3845,
+        "sha256": "397d27e06cf23d1347c2fcdf2f1141ada6203f93957f1ebe3969aa33d896eb20"
+      }
+    },
+    "tests/test_factual_retention_preservation.py": {
+      "ancestors": [],
+      "edits": [
+        {
+          "end": 458,
+          "new_sha256": "9b0e8574423e1cb34ce269d00cd3acecd8a5f28eed04ec75711ff6284fa4e06a",
+          "old": "",
+          "start": 369
+        },
+        {
+          "end": 650,
+          "new_sha256": "c8f5803a6e4ad823c29f98aea0d36365e9b3abb0e57c7f4cc3748b5a1b195928",
+          "old": "            self.assertEqual(guard.pin(raw),row['new'])\n",
+          "start": 569
+        }
+      ],
+      "new": {
+        "bytes": 2841,
+        "sha256": "868b696fdf831e0f9d4d9605be068a3ca82f2e6f872855afbef0deaeb0a8eb09"
+      },
+      "old": {
+        "bytes": 2727,
+        "sha256": "493594434006aec41c49d25a06b11fcc3392774de8f381fe44b3c8f8a6748d78"
+      }
+    }
+  },
+  "tree": "e4c83dcad31489be24e67a5a7ecd2daed067e7a0",
+  "unchanged": {
+    ".github/workflows/python-validation.yml": {
+      "bytes": 1158,
+      "sha256": "9c945a48bfce23e9a57837df4080f3cada93af041bb4d4ef55502d1207bff2e2"
+    },
+    "PROJECT_INVENTORY.md": {
+      "bytes": 120963,
+      "sha256": "cee3e974e23543e6f3334b3562793481fd4f0ebff0c7ce77f4b7639649a1b183"
+    },
+    "VISION.md": {
+      "bytes": 9683,
+      "sha256": "ab0e0d02c9afceb4f436c1ef711468bb8c619ebc80759bfd1ba3ee2e9ed26f8d"
+    },
+    "docs/ARCHITECTURE.md": {
+      "bytes": 8082,
+      "sha256": "c4651ad45e47ff9a247151a9c4ca54e8e7dd18b23725cec0571039ef676284b3"
+    },
+    "docs/DECISIONS.md": {
+      "bytes": 16095,
+      "sha256": "47e1fc0e4353f251dde4fb316ec79642a3ab3d51fc0dcc6613b49a795ead73db"
+    },
+    "docs/GOVERNANCE.md": {
+      "bytes": 7331,
+      "sha256": "c88e696509ab99abae60c9b8aa63e3f9d79cef92f7814989cb91c46b659fa819"
+    },
+    "reference-reviews/v13-legacy-profile-permission-closure/permission-matrix.json": {
+      "bytes": 504360,
+      "sha256": "5ff71ca2d4d8484aaa4b4b91b5dafe002659b1eaf514dc7e6bcfc4ad37b02a30"
+    },
+    "scripts/ci_merge_tree.py": {
+      "bytes": 13518,
+      "sha256": "56206410bf0dda4211171db3ff47d91cb80ecd51defc43f2317d6c9e11d5166c"
+    },
+    "src/card_intelligence/mechanics.py": {
+      "bytes": 34535,
+      "sha256": "eea9cc6644c64a1cb90b32b2f6479d2d93684f95d0663d8f98fa3ff8ce6dc80a"
+    },
+    "src/card_intelligence/rules_composition.py": {
+      "bytes": 16119,
+      "sha256": "5172e286320d729a8fb3b93a6b0b21fed896fb516421fd1c559f7a309cdfad8d"
+    },
+    "src/card_intelligence/rules_reasoning.py": {
+      "bytes": 19084,
+      "sha256": "bfe4cf9ad8520addfb217bd5201ec3a11aaa97edbe1d3c36602987c8c1112da0"
+    },
+    "src/probability/draw_access.py": {
+      "bytes": 8949,
+      "sha256": "0835ae163b28aeaebe85cbc79e67d2766736a6501504296db905adf29742292c"
+    },
+    "src/probability/supplied_deck.py": {
+      "bytes": 14253,
+      "sha256": "439682ab62ad1866f7c3c6c9190ae1bf911fc7245ada56980f9c4fc70754b7f4"
+    },
+    "src/providers/mtgjson/factual_retention.py": {
+      "bytes": 11359,
+      "sha256": "3da8bdaf299e9b3a7cd7c2defd9eb0d514375481f4e00e2e29b0636bb287b72e"
+    },
+    "src/providers/mtgjson/mapper.py": {
+      "bytes": 4534,
+      "sha256": "664e7eb086502fb32c0bdd4277b2b2a90dbdf9a8c5b348ea1de9f3c2774390c0"
+    },
+    "src/providers/mtgjson/oracle_evidence.py": {
+      "bytes": 10133,
+      "sha256": "df13d65d1facb2a76a8602aaa2cefe32fffc5fbd51e2436a1d7e5899b00c4876"
+    },
+    "src/providers/mtgjson/private_policy.py": {
+      "bytes": 13306,
+      "sha256": "e26db71dbd5f733064144c92fed0dc1dc837d73b2cbbf0e629d34029d0afbc63"
+    },
+    "src/providers/mtgjson/streaming.py": {
+      "bytes": 29526,
+      "sha256": "2553d5bc9e4ffaae86b42b4b9bf3190eb308c7d80e5a1584d4b27ba3b59388c5"
+    },
+    "src/providers/mtgjson/validator.py": {
+      "bytes": 9440,
+      "sha256": "04c8310bf832a29186d8a8962a200fea4b09baafa8901401a67f9498f98846a0"
+    },
+    "tests/fixtures/factual_limited_retention_v1/successors.json": {
+      "bytes": 16722,
+      "sha256": "a4480afaaf3ae033c1c1ffc36e7d98dab6d2b4686042458c2214c58d44847be6"
+    }
+  }
+}

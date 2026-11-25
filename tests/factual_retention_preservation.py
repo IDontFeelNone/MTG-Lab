@@ -47,6 +47,8 @@ def ledger():
 
 
 def preceding_bytes(name, raw):
+    from standard_envelope_preservation import preceding_bytes as envelope_preceding
+    raw = envelope_preceding(name, raw)
     if type(name) is not str or type(raw) is not bytes:
         raise AssertionError('exact named predecessor bytes required')
     if name not in REPLACEMENTS:return raw
@@ -63,6 +65,8 @@ def preceding_bytes(name, raw):
 
 
 def is_addition(path, root=ROOT):
+    from standard_envelope_preservation import is_addition as envelope_addition
+    if envelope_addition(path, root):return True
     name=path.relative_to(root).as_posix()
     if name not in ADDITIONS:return False
     if (any(p.is_symlink() for p in (path,*path.parents)) or not path.is_file()

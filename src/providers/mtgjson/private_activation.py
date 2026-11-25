@@ -160,7 +160,7 @@ def _retain_control(path, raw):
 
 def activate_private_release(plan, source, directory, *, expected_plan_id,
         reviewed_bases, basis_files, internal_decision_reference, material, notice,
-        limits=None, stop_after_partitions=None):
+        limits=None, stop_after_partitions=None, source_contract=None):
     """Prepare controls, construct the existing profile, then invoke the importer.
 
     AUTHORITY INPUTS are supplied by trusted host code, not loaded from the plan:
@@ -179,6 +179,10 @@ def activate_private_release(plan, source, directory, *, expected_plan_id,
         bases=reviewed_bases, internal_decision_reference=internal_decision_reference, material=material,
         retention_mode=plan.get('retention_mode', 'retained-source'))
     profile.require_supported()  # Before any evidence, source or notice file reads/writes.
+    if source_contract is not None:
+        from .reconciliation import StandardExportContract
+        _require(type(source_contract) is StandardExportContract, 'supported source envelope contract required')
+        source_contract.require_compatible(plan['release'], profile.receipt())
     _require(type(basis_files) is dict and set(basis_files) == {b.reference for b in profile.bases},
              'exact independently reviewed evidence file inventory required')
     try:
@@ -201,9 +205,10 @@ def activate_private_release(plan, source, directory, *, expected_plan_id,
         raise SourcePolicyError('private activation controls unavailable or conflicting') from None
     # The owning bounded worker verifies the complete source hash before parsing
     # and again before a complete report. No extra source checksum/copy pass here.
+    options = {} if source_contract is None else dict(source_contract=source_contract)
     return import_private_release(source, root/'candidates', profile=profile,
         provenance=root/'provenance.json', notice=root/'notice.txt',
-        limits=limits, stop_after_partitions=stop_after_partitions)
+        limits=limits, stop_after_partitions=stop_after_partitions, **options)
 
 
 def main(argv=None):
