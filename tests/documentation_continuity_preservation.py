@@ -41,6 +41,8 @@ def ledger():
 
 def restore(name, raw):
     """Accept only an exact approved successor or its exact main predecessor."""
+    from candidate_mana_preservation import preceding_bytes as candidate_preceding
+    raw = candidate_preceding(name, raw)
     if type(name) is not str or name not in DOCUMENTS | HELPERS or type(raw) is not bytes:
         raise AssertionError('only named documentation compatibility bytes are accepted')
     pin = ledger()['replacements'][name]

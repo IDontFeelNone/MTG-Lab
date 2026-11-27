@@ -1,3 +1,32 @@
+# Current direction — candidate activated-mana interpretation
+
+Architecture v13 remains ACTIVE APPROVED; Decision 017 remains Accepted. The
+implementation candidate adds bounded, pending Card Intelligence interpretation
+of verified synthetic imported text. Its [contract](CANDIDATE_ACTIVATED_MANA_V1.md)
+defines the complete grammar, evidence/review boundary and conditional use of the
+existing rules reasoner. Merge and validation remain separate PM/Owner decisions.
+
+Independent Magic intelligence is the active development priority. iPhone-first
+Owner authorization is an established product requirement; bounded standing
+authorization is a long-term architectural requirement, with implementation not
+authorized. Authentication implementation is DEFERRED and actual private factual
+admission remains HOLD. Do not reopen the authentication assessment without a
+specific authorized milestone and concrete accessible mechanism.
+
+Population-scale factual admission remains future engineering: the current
+25-Printing cohort, manifest and snapshot ceilings, selected-cohort-only snapshots
+and lack of cumulative catalog expansion are not a permanent population strategy.
+The preserved whole-publication eligibility preflight does not authorize admission.
+Future admission revalidates exact implementation/pre-state bindings and prepares
+new evidence if they change. Current and historical source-use restrictions remain.
+
+---
+
+## Preserved predecessor roadmap
+
+The complete predecessor follows unchanged. Historical recommendations and
+approvals retain their original scope; no follow-on implementation is authorized.
+
 # Current roadmap and authorization
 
 The [vision](../VISION.md) describes enduring ambition; this roadmap separates

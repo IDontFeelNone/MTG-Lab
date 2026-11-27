@@ -9,6 +9,7 @@ from unittest.mock import patch
 import documentation_continuity_preservation as original
 import proactive_vision_preservation as guard
 import vision_alignment_preservation as previous
+from candidate_mana_preservation import preceding_bytes as candidate_preceding
 
 ROOT = Path(__file__).resolve().parents[1]
 PRIORITIZATION = ('The system should prioritize investigations according to their potential strategic '
@@ -54,7 +55,7 @@ class ProactiveResearchVisionTests(unittest.TestCase):
             self.assertIn(phrase, section)
 
     def test_removing_exact_insertion_preserves_every_prior_vision_byte(self):
-        raw = (ROOT/'VISION.md').read_bytes();old = guard.restore('VISION.md', raw)
+        raw = candidate_preceding('VISION.md', (ROOT/'VISION.md').read_bytes());old = guard.restore('VISION.md', raw)
         self.assertEqual(guard.pin(old), dict(bytes=7094,
             sha256='66a345656e2c51506d01dd458e83971b492792fda0fb74e241eb0013e975268e'))
         edit = guard.PINS['VISION.md']['edit']
@@ -65,7 +66,7 @@ class ProactiveResearchVisionTests(unittest.TestCase):
         self.assertEqual(set(guard.PINS), {'VISION.md', 'tests/vision_alignment_preservation.py',
                                          'tests/test_vision_alignment.py'})
         for name, expected in guard.PINS.items():
-            raw = (ROOT/name).read_bytes();self.assertEqual(guard.pin(raw), expected['new'])
+            raw = candidate_preceding(name, (ROOT/name).read_bytes());self.assertEqual(guard.pin(raw), expected['new'])
             old = guard.restore(name, raw);self.assertEqual(guard.pin(old), expected['old'])
             self.assertEqual(guard.restore(name, old), old)
             self.assertEqual(expected['new']['bytes']-expected['old']['bytes'],
@@ -75,7 +76,7 @@ class ProactiveResearchVisionTests(unittest.TestCase):
         self.assertEqual(original.LEDGER_SHA256,
             '1028116c72b31751ac6e4aba4d5ae4fe477d43264b928225603f332fb0985057')
         self.assertEqual(previous.PINS['VISION.md']['new'], guard.PINS['VISION.md']['old'])
-        current = (ROOT/'VISION.md').read_bytes();old = guard.restore('VISION.md', current)
+        current = candidate_preceding('VISION.md', (ROOT/'VISION.md').read_bytes());old = guard.restore('VISION.md', current)
         self.assertEqual(previous.restore('VISION.md', current), previous.restore('VISION.md', old))
         self.assertEqual(guard.pin(previous.restore('VISION.md', current)), original.ledger()['additions']['VISION.md'])
         ancestor = previous.restore('VISION.md', old)
@@ -84,7 +85,7 @@ class ProactiveResearchVisionTests(unittest.TestCase):
 
     def test_unrecognized_edits_old_and_new_bytes_and_bad_types_reject(self):
         for name, expected in guard.PINS.items():
-            raw = (ROOT/name).read_bytes();old = guard.restore(name, raw)
+            raw = candidate_preceding(name, (ROOT/name).read_bytes());old = guard.restore(name, raw)
             for value in (raw+b'future', raw[:-1], b'X'+raw[1:], raw+raw,
                           old+b'future', b'X'+old[1:], bytearray(raw), None, True):
                 with self.subTest(path=name), self.assertRaises(AssertionError):guard.restore(name, value)
@@ -92,7 +93,7 @@ class ProactiveResearchVisionTests(unittest.TestCase):
             with self.assertRaises(AssertionError):guard.restore(name, bad)
 
     def test_coherently_rehashed_or_expanded_pins_are_not_approval(self):
-        name = 'VISION.md';raw = (ROOT/name).read_bytes();forged = copy.deepcopy(guard.PINS)
+        name = 'VISION.md';raw = candidate_preceding(name, (ROOT/name).read_bytes());forged = copy.deepcopy(guard.PINS)
         start = forged[name]['edit']['start'];bad = raw[:start]+b'X'+raw[start+1:]
         forged[name]['new'] = guard.pin(bad)
         edit = forged[name]['edit'];edit['new_sha256'] = hashlib.sha256(bad[edit['start']:edit['end']]).hexdigest()
@@ -103,14 +104,14 @@ class ProactiveResearchVisionTests(unittest.TestCase):
 
     def test_unrelated_sources_cannot_be_exempted(self):
         for name in ('docs/GOVERNANCE.md', 'src/gameplay_rules/engine.py', 'docs/ROADMAP.md'):
-            raw = (ROOT/name).read_bytes();self.assertEqual(guard.preceding_bytes(name, raw), raw)
+            raw = candidate_preceding(name, (ROOT/name).read_bytes());self.assertEqual(guard.preceding_bytes(name, raw), raw)
             with self.assertRaises(AssertionError):guard.restore(name, raw)
         for name in (None, Path('VISION.md')):
             with self.assertRaises(AssertionError):guard.preceding_bytes(name, b'')
 
     def test_governing_documents_and_research_log_are_byte_identical(self):
         for name, expected in UNCHANGED_SHA256.items():
-            self.assertEqual(hashlib.sha256((ROOT/name).read_bytes()).hexdigest(), expected, name)
+            self.assertEqual(hashlib.sha256(candidate_preceding(name, (ROOT/name).read_bytes())).hexdigest(), expected, name)
         self.assertEqual(len(UNCHANGED_SHA256), 5)
 
     def test_relative_links_and_enduring_scope_are_preserved(self):

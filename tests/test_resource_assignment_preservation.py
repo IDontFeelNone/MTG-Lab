@@ -19,7 +19,8 @@ class ResourceAssignmentPreservationTests(unittest.TestCase):
         self.assertEqual(len(guard.ADDITIONS), 2)
         self.assertEqual(len(guard.REPLACEMENTS), 3)
         for name, row in guard.ledger()['replacements'].items():
-            raw = (guard.ROOT / name).read_bytes()
+            from candidate_mana_preservation import preceding_bytes as candidate_preceding
+            raw = candidate_preceding(name, (guard.ROOT / name).read_bytes())
             self.assertEqual(guard.pin(raw), row['new'])
             old = guard.preceding_bytes(name, raw)
             self.assertEqual(guard.pin(old), row['old'])
@@ -74,7 +75,8 @@ class ResourceAssignmentPreservationTests(unittest.TestCase):
             self.assertEqual(guard.pin((guard.ROOT / name).read_bytes()), pin)
         for name in guard.ADDITIONS: self.assertTrue(draw.is_addition(guard.ROOT / name))
         for name in ('VISION.md', 'docs/GOVERNANCE.md', 'docs/ARCHITECTURE.md', 'docs/DECISIONS.md'):
-            raw = (guard.ROOT / name).read_bytes()
+            from candidate_mana_preservation import preceding_bytes as candidate_preceding
+            raw = candidate_preceding(name, (guard.ROOT / name).read_bytes())
             self.assertEqual(guard.preceding_bytes(name, raw), raw)
         self.assertEqual(draw.LEDGER_SHA256, 'b9805847403bd97cd42a081123cc59032e5c516c2ffe62526ef640912a16ec16')
         self.assertEqual(pack.LEDGER_SHA256, 'c195d944bb7fa672207d476de919da721ec30ca901e896adcc0ca4269a0de946')

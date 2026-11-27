@@ -7,6 +7,7 @@ from unittest.mock import patch
 
 import documentation_continuity_preservation as original
 import vision_alignment_preservation as guard
+from candidate_mana_preservation import preceding_bytes as candidate_preceding
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,7 +55,7 @@ class VisionAlignmentTests(unittest.TestCase):
             guard.restore('VISION.md', raw)
 
     def test_unrelated_bytes_remain_subject_to_their_existing_contract(self):
-        raw = (ROOT / 'docs/GOVERNANCE.md').read_bytes()
+        raw = candidate_preceding('docs/GOVERNANCE.md', (ROOT / 'docs/GOVERNANCE.md').read_bytes())
         self.assertEqual(guard.preceding_bytes('docs/GOVERNANCE.md', raw), raw)
         self.assertEqual(guard.pin(raw), original.ledger()['additions']['docs/GOVERNANCE.md'])
         with self.assertRaises(AssertionError):

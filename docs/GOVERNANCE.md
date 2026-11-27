@@ -112,3 +112,26 @@ hashes and leaves the original reconstruction assertions intact. It neither
 permits arbitrary future headers nor requires future milestones to extend it.
 If a later edit encounters a preservation conflict, report it rather than
 loosening checks or rebaselining history.
+
+## Individual admission and future bounded delegation
+
+Current production canonical admission requires an independently authenticated
+exact-operation decision through the existing trusted-host boundary. Approval
+covers the complete bound cohort rather than individual database transactions.
+A conversation, digest, serialized decision or isolated-test capability does not
+supply production authentication.
+
+Future bounded standing authorization is established product direction, not
+implemented delegation. Policy creation, amendment and revocation must use
+independently authenticated Owner authority with the same iPhone-first usability
+as individual approval. A host must bind every qualifying execution to the exact
+active policy and its evidence, limits, validation, revocation and escalation
+conditions. It must not impersonate a new human review for each execution or
+expand its own permissions. Source-use, factual, semantic and gameplay authority
+remain independent.
+
+Decision 017 does not already authorize standing-policy execution. Any necessary
+future amendment must identify the changed security properties, preserve the
+remaining safeguards, and receive independent review and explicit Owner approval
+before implementation. No authentication, enrollment or standing-policy runtime
+is implemented by the candidate interpretation milestone.

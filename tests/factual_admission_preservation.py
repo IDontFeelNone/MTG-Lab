@@ -37,6 +37,8 @@ def ledger():
 
 
 def preceding_bytes(name,raw):
+    from candidate_mana_preservation import preceding_bytes as candidate_preceding
+    raw = candidate_preceding(name, raw)
     if type(name) is not str or type(raw) is not bytes:
         raise AssertionError('exact named predecessor bytes required')
     if name not in REPLACEMENTS:return raw
@@ -53,9 +55,11 @@ def preceding_bytes(name,raw):
 
 
 def is_addition(path,root=ROOT):
+    from candidate_mana_preservation import is_addition as candidate_addition, preceding_bytes
+    if candidate_addition(path, root):return True
     name=path.relative_to(root).as_posix()
     if name not in ADDITIONS:return False
     if (any(p.is_symlink() for p in (path,*path.parents)) or not path.is_file()
-            or path.stat().st_mode&0o111 or pin(path.read_bytes())!=ledger()['additions'][name]):
+            or path.stat().st_mode&0o111 or pin(preceding_bytes(name,path.read_bytes()))!=ledger()['additions'][name]):
         raise AssertionError('exact ordinary factual admission addition required')
     return True

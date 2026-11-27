@@ -69,7 +69,8 @@ class PackOddsPreservationTests(unittest.TestCase):
         import draw_access_preservation as previous
         self.assertEqual(previous.LEDGER_SHA256, 'b9805847403bd97cd42a081123cc59032e5c516c2ffe62526ef640912a16ec16')
         for name in ('src/probability/draw_access.py', 'VISION.md', 'docs/ARCHITECTURE.md', 'docs/DECISIONS.md'):
-            raw = (guard.ROOT / name).read_bytes()
+            from candidate_mana_preservation import preceding_bytes as candidate_preceding
+            raw = candidate_preceding(name, (guard.ROOT / name).read_bytes())
             self.assertEqual(guard.preceding_bytes(name, raw), raw)
         raw = (guard.ROOT / 'src/probability/draw_access.py').read_bytes()
         self.assertEqual(guard.pin(raw), previous.ledger()['additions']['src/probability/draw_access.py'])

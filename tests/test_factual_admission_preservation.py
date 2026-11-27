@@ -22,7 +22,8 @@ class FactualAdmissionPreservationTests(unittest.TestCase):
 
     def test_authority_importer_rules_transactions_and_prior_ledgers_unchanged(self):
         for name,pin in guard.ledger()['unchanged'].items():
-            self.assertEqual(guard.pin((guard.ROOT/name).read_bytes()),pin,name)
+            from candidate_mana_preservation import preceding_bytes
+            self.assertEqual(guard.pin(preceding_bytes(name,(guard.ROOT/name).read_bytes())),pin,name)
 
     def test_foreign_edits_cannot_redefine_predecessors_or_ledger(self):
         name='src/query/engine.py';data=deepcopy(guard.ledger())

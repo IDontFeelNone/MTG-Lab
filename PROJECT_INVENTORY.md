@@ -1,3 +1,29 @@
+# Current addition — bounded candidate ability interpretation
+
+The [candidate activated-mana interpreter](docs/CANDIDATE_ACTIVATED_MANA_V1.md)
+connects the existing synthetic MTGJSON Oracle evidence path and
+`MechanicalCardIntelligence.inspect_mtgjson_candidate` to pending structured
+written-cost/effect proposals, existing review criteria and optional native
+conditional rules reasoning. It is a reusable narrow grammar, not a universal
+Oracle parser, accepted mechanical dossier or verified real-card understanding.
+All proposal output remains requires_review; gameplay remains blocked.
+
+Existing [rules reasoning](docs/REAL_CARD_RULES_REASONING_V1.md),
+[resource composition](docs/RULES_REASONING_COMPOSITION_V1.md),
+[portable investigations](docs/PORTABLE_DECK_RESEARCH_V1.md),
+[private factual admission](docs/PRIVATE_FACTUAL_ADMISSION_V1.md) and optional
+[Oracle evidence inspection](docs/MTGJSON_EVIDENCE_PROJECTION_V1.md) retain their
+own contracts. The private admission runtime is implemented but actual real
+admission remains HOLD; authentication and standing-policy execution are not
+implemented. Historical mechanical cohorts and finite accepted interpretations
+are not general current Oracle or executable semantics.
+
+---
+
+## Preserved predecessor inventory
+
+The complete predecessor follows unchanged with its historical scope.
+
 # Current implementation inventory
 
 This entry supersedes historical opening summaries below. Verified baseline:
