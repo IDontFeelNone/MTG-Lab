@@ -11,7 +11,8 @@ import standard_envelope_preservation as guard
 class StandardEnvelopePreservationTests(unittest.TestCase):
     def test_all_successors_reconstruct_exact_baseline(self):
         for name,row in guard.ledger()['replacements'].items():
-            raw=(guard.ROOT/name).read_bytes()
+            from factual_admission_preservation import preceding_bytes
+            raw=preceding_bytes(name,(guard.ROOT/name).read_bytes())
             self.assertEqual(guard.pin(raw),row['new'])
             self.assertEqual(guard.pin(guard.preceding_bytes(name,raw)),row['old'])
             for altered in (raw+b'future',raw[:-1],b'X'+raw[1:],None,bytearray(raw)):
@@ -19,7 +20,8 @@ class StandardEnvelopePreservationTests(unittest.TestCase):
 
     def test_authority_policy_projection_limits_and_historical_ledgers_unchanged(self):
         for name,pin in guard.ledger()['unchanged'].items():
-            self.assertEqual(guard.pin((guard.ROOT/name).read_bytes()),pin,name)
+            from factual_admission_preservation import preceding_bytes
+            self.assertEqual(guard.pin(preceding_bytes(name,(guard.ROOT/name).read_bytes())),pin,name)
 
     def test_forged_reversal_or_ledger_is_refused(self):
         name='src/providers/mtgjson/reconciliation.py';data=deepcopy(guard.ledger())

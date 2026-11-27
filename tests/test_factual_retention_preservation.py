@@ -20,7 +20,8 @@ class FactualRetentionPreservationTests(unittest.TestCase):
 
     def test_historical_authority_source_policy_and_oracle_bytes_unchanged(self):
         for name,pin in guard.ledger()['unchanged'].items():
-            self.assertEqual(guard.pin((guard.ROOT/name).read_bytes()),pin,name)
+            from factual_admission_preservation import preceding_bytes
+            self.assertEqual(guard.pin(preceding_bytes(name,(guard.ROOT/name).read_bytes())),pin,name)
 
     def test_forged_reversal_or_ledger_cannot_redefine_predecessor(self):
         name='src/providers/mtgjson/private_policy.py';data=deepcopy(guard.ledger())

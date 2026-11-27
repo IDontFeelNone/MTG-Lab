@@ -120,6 +120,55 @@ class MechanicalCardIntelligence:
     """Compose existing canonical queries with one verified retained acquisition."""
 
     @staticmethod
+    def inspect_canonical_facts(query, *, expected_query_snapshot_id, card_id, printing_id=None):
+        """Inspect admitted factual characteristics without initializing mechanics.
+
+        Only the explicit private factual profile supplies this entry point. No
+        source reader, Oracle inspection, dossier or rules engine is initialized.
+        """
+        from repository.factual_snapshot import FactualSnapshotAttachment
+
+        if (type(query) is not CanonicalQueryEngine or
+                type(query._catalog_attachment) is not FactualSnapshotAttachment):
+            raise MechanicalEvidenceError('explicit private factual snapshot required')
+        query.require_capability('factual_inspection')
+        snapshot=query.snapshot()
+        if snapshot.snapshot_id!=expected_query_snapshot_id:
+            raise MechanicalEvidenceError('exact factual query snapshot required')
+        card=query.entity(card_id,entity_type='card')
+        values=card.canonical_values
+        facts=dict(values.get('facts',{}))
+        fields={name:values[name] for name in ('name','normalized_name','layout')}
+        fields.update(facts)
+        supported=('name','normalized_name','layout','colors','color_identity','mana_cost',
+                   'mana_value','type_line','power','toughness','loyalty')
+        characteristics={name:({'status':'known','value':fields[name]} if name in fields
+            and not isinstance(fields[name],dict) else fields.get(name,{'status':'unknown'}))
+            for name in supported}
+        printings=query.related(card_id,'card_printings')
+        if printing_id is not None:
+            printings=tuple(p for p in printings if p.canonical_identity==printing_id)
+            if len(printings)!=1:
+                raise MechanicalEvidenceError('exact associated Printing required')
+        crosswalk=query._catalog_attachment.read_json(query._catalog_attachment.root/'cohort.json')['crosswalk']
+        selected={card_id,*[p.canonical_identity for p in printings]}
+        body=dict(schema_version='canonical-factual-inspection-v1',card_id=card_id,
+            query_snapshot_id=expected_query_snapshot_id,catalog_binding=query.catalog_binding,
+            characteristics=characteristics,assertions=list(values.get('assertions',[])),
+            printings=[p.as_dict() for p in printings],
+            identity_bindings=[x for x in crosswalk if x['canonical_identity'] in selected],
+            authority='ADMITTED_FACTUAL_COHORT_NOT_VERIFIED_ABILITIES',
+            admitted_mechanical_dossier_populated=False,semantic_authority='NOT_ESTABLISHED',
+            current_oracle_verified=False,format_legality='NOT_ESTABLISHED',real_card_execution='BLOCKED',
+            external_ai_export=False,
+            limitations=['Version-bound factual characteristics, not ability interpretation.',
+                        'Casting mana cost is not activation cost or mana production.',
+                        'Finish availability is not ownership; export membership is not legality.'])
+        if query.snapshot().snapshot_id!=expected_query_snapshot_id:
+            raise MechanicalEvidenceError('factual catalog changed during inspection')
+        return dict(body,inspection_id=content_identity(body))
+
+    @staticmethod
     def inspect_mtgjson_candidate(query, *, expected_query_snapshot_id,
             card_id, printing_id, evidence_directory, profile, expected_report_id):
         """Read unadmitted literal evidence; never build/populate a dossier.

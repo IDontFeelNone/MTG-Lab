@@ -192,12 +192,13 @@ class CanonicalQueryEngine:
         """Read one verified attachment without changing legacy query identities."""
         from repository.snapshots import LegacyPublicAttachment, SnapshotAttachment, SnapshotError
         from repository.legacy_profile import LegacyCompatibilityAttachment
+        from repository.factual_snapshot import FactualSnapshotAttachment
 
         if not isinstance(attachment, (SnapshotAttachment, LegacyPublicAttachment,
-                                       LegacyCompatibilityAttachment)):
+                                       LegacyCompatibilityAttachment, FactualSnapshotAttachment)):
             raise SnapshotError("verified catalog attachment required")
         attachment.verify_unchanged()
-        bounded = isinstance(attachment, LegacyCompatibilityAttachment)
+        bounded = isinstance(attachment, (LegacyCompatibilityAttachment, FactualSnapshotAttachment))
         try:
             engine = cls(attachment.game, games_root=attachment.games_root,
                          data_root=attachment.data_root,

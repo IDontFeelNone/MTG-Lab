@@ -68,7 +68,8 @@ class DrawAccessPreservationTests(unittest.TestCase):
         self.assertEqual(pack_preceding(name, raw), pack_preceding(name, old))
         self.assertEqual(preceding_bytes(name, raw), old)
         for name in ('src/query/engine.py', 'VISION.md', 'docs/ARCHITECTURE.md'):
-            raw = (guard.ROOT / name).read_bytes()
+            from factual_admission_preservation import preceding_bytes as admission_preceding
+            raw = admission_preceding(name, (guard.ROOT / name).read_bytes())
             self.assertEqual(guard.preceding_bytes(name, raw), raw)
 
     def test_new_runtime_imports_only_standard_library_and_own_package(self):

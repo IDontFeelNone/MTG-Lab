@@ -41,6 +41,11 @@ def regular_bytes(relative, root=ROOT):
         if not stat.S_ISREG(path.stat(follow_symlinks=False).st_mode):
             raise AssertionError("Protected repository member must be a regular file")
         raw = path.read_bytes()
+        from factual_admission_preservation import preceding_bytes as admission_preceding
+        try:
+            raw = admission_preceding(relative, raw)
+        except AssertionError as exc:
+            raise AssertionError('Current bytes do not match the exact authorized pin') from exc
         if relative == 'src/card_intelligence/mechanics.py':
             from mtgjson_evidence_preservation import preceding_bytes
             try:

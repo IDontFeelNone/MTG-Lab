@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile", "game", "manifest_id", "canonical_pre_state", "source", "files", "capabilities", "canonical_authority", "authorization_scope", "semantic_authority", "real_card_execution", "default_catalog_changed", "snapshot_id"],
+  "properties": {
+    "schema_version": {"const": "v1"},
+    "profile": {"const": "private-factual-canonical-snapshot-v1"},
+    "game": {"const": "magic"},
+    "manifest_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "canonical_pre_state": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "snapshot_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "source": {"type": "object"},
+    "files": {"type": "object", "minProperties": 1, "maxProperties": 255, "additionalProperties": {
+      "type": "object", "additionalProperties": false, "required": ["bytes", "sha256"],
+      "properties": {"bytes": {"type": "integer", "minimum": 0, "maximum": 2097152}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+    }},
+    "capabilities": {"const": {"catalog_query_collection": "available", "factual_inspection": "available", "mechanical_semantics": "unsupported", "rules_execution": "unsupported", "format_legality": "unsupported", "public_export": "unsupported", "external_ai_export": "unsupported"}},
+    "canonical_authority": {"const": "SELECTED_REVIEWED_FACTUAL_COHORT_ONLY"},
+    "authorization_scope": {"enum": ["production", "isolated-test"]},
+    "semantic_authority": {"const": "NOT_ESTABLISHED"},
+    "real_card_execution": {"const": "BLOCKED"},
+    "default_catalog_changed": {"const": false}
+  }
+}
