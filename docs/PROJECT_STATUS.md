@@ -1,3 +1,20 @@
+# Candidate Ability Segmentation V1 — pending mechanical subjects
+
+The additive Card Intelligence pathway reuses native candidate inspection, the
+unchanged V1 mana recognizer/review policy and optional native conditional reasoning.
+It accounts for the complete literal field, preserves ordered local subject and
+region identities, stops at opaque text and retains cross-ability uncertainty.
+Reports require review; none admits mechanics, canonical facts or gameplay.
+See [the owning contract](CANDIDATE_ABILITY_SEGMENTATION_V1.md).
+
+The existing V1 implementation bindings and twelve factual-admission binding files
+remain unchanged. The real preflight/cohort and historical source/publication/custody
+are untouched; actual private admission remains HOLD and authentication deferred.
+The confirmed private snapshot mismatch (missing legacy identity fields and implicit
+canonical/provider equality) remains unrepaired. After successful delivery and merge
+verification, recommend separately authorizing Private Factual Snapshot-to-Candidate
+Interpretation Compatibility V1. No follow-on implementation is authorized here.
+
 # Current status — intelligence development with admission held
 
 The candidate activated-mana interpretation milestone develops a bounded

@@ -1,3 +1,18 @@
+# Candidate Ability Segmentation V1 — active intelligence progression
+
+The additive candidate consumer supports a closed field-start sequence of existing
+written tap/fixed-mana passages and an explicit unresolved remainder. It does not
+widen the mana grammar or grant accepted semantics, legality or gameplay authority.
+Source accounting is not complete Card understanding. See
+[CANDIDATE_ABILITY_SEGMENTATION_V1.md](CANDIDATE_ABILITY_SEGMENTATION_V1.md).
+
+After successful delivery and merge verification, recommend the separately scoped
+Private Factual Snapshot-to-Candidate Interpretation Compatibility V1: preserve
+reviewed canonical/provider crosswalks rather than manufacture legacy identity
+fields. That repair is not implemented. Authentication remains deferred, real
+admission HOLD; established iPhone-first, bounded standing-authorization, proactive
+research and population-scale expansion requirements remain unchanged.
+
 # Current direction — candidate activated-mana interpretation
 
 Architecture v13 remains ACTIVE APPROVED; Decision 017 remains Accepted. The
