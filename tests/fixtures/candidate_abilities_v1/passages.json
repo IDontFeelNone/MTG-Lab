@@ -1,0 +1,5 @@
+{
+  "authorship": "Original project-authored synthetic text only; not real provider evidence.",
+  "supported": ["{T}: Add {G}.", "{T}: Add {G}.\n{T}: Add {U}.", "{T}:Add {R}.\n{T}  :   Add {W}{U}{B}{R}{G}{C}.\n{T}: Add {C}{C}."],
+  "unresolved": ["", "Leading text.\n{T}: Add {G}.", " {T}: Add {G}.", "{T}: Add {G}. ", "{T}: Add {G}.\n", "{T}: Add {G}.\r\n{T}: Add {U}.", "{T}: Add {G}.\n\n{T}: Add {U}.", "{T}: Add {G}.\t{T}: Add {U}.", "{T}: Add {G}. Then draw a card.", "{T}: Add {G}.\nActivate only during your turn.", "{1}, {T}: Add {G}.", "{T}: Add {G}.\n{1}, {T}: Add {U}.", "Create a device with \"{T}: Add {G}.\"", "This object gains {T}: Add {G}.", "{T}: Add {G}.\n(An original reminder.)", "{T}: Add {G", "{T}: Add {G}", "{T}: Add {G}.\u2028{T}: Add {U}."]
+}

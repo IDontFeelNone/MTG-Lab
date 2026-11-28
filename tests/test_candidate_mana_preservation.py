@@ -7,12 +7,13 @@ import unittest
 from unittest.mock import patch
 
 import candidate_mana_preservation as guard
+from candidate_abilities_preservation import preceding_bytes as segment_preceding
 
 
 class CandidateManaPreservationTests(unittest.TestCase):
     def test_each_successor_reconstructs_exact_canonical_predecessor(self):
         for name, row in guard.ledger()['replacements'].items():
-            raw=(guard.ROOT/name).read_bytes()
+            raw=segment_preceding(name,(guard.ROOT/name).read_bytes())
             self.assertEqual(guard.pin(raw),row['new'],name)
             old=guard.preceding_bytes(name,raw)
             self.assertEqual(guard.pin(old),row['old'],name)

@@ -1,3 +1,16 @@
+# Candidate Ability Segmentation V1 — bounded additive capability
+
+Card Intelligence now offers an additive pending segmentation consumer in
+`src/card_intelligence/candidate_abilities.py`, using the unchanged activated-mana
+recognizer and native conditional reasoner. Exact source-byte accounting, local
+subject identities, unresolved context and recomputed replay remain separate from
+accepted semantics. See [the owning contract](docs/CANDIDATE_ABILITY_SEGMENTATION_V1.md).
+
+Private factual admission remains HOLD and authentication deferred. After successful
+segmentation delivery and merge verification, the recommended separately authorized
+next milestone is Private Factual Snapshot-to-Candidate Interpretation Compatibility V1.
+Its reviewed-crosswalk bridge is not implemented here. Historical inventory follows.
+
 # Current addition — bounded candidate ability interpretation
 
 The [candidate activated-mana interpreter](docs/CANDIDATE_ACTIVATED_MANA_V1.md)
