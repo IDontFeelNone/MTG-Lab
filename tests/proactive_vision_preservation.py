@@ -37,6 +37,8 @@ def pin(raw):
 
 
 def restore(name, raw):
+    from candidate_mana_preservation import preceding_bytes as candidate_preceding
+    raw = candidate_preceding(name, raw)
     if type(name) is not str or name not in PATHS or type(raw) is not bytes:
         raise AssertionError('exact named proactive vision bytes required')
     encoded = json.dumps(PINS, sort_keys=True, separators=(',', ':')).encode()
@@ -58,6 +60,8 @@ def restore(name, raw):
 
 
 def preceding_bytes(name, raw):
+    from candidate_mana_preservation import preceding_bytes as candidate_preceding
+    raw = candidate_preceding(name, raw)
     if type(name) is not str or type(raw) is not bytes:
         raise AssertionError('exact named source bytes required')
     return restore(name, raw) if name in PATHS else raw

@@ -1,0 +1,5 @@
+{
+  "authorship": "Original project-authored synthetic passages; no provider capture or verified real-card evidence.",
+  "supported": ["{T}: Add {G}.", "{T}: Add {C}{C}.", "{T}: Add {W}{U}{B}{R}{G}{C}.", "{T}:Add {R}.", "{T}  :   Add {U}."],
+  "unsupported": ["{T}: Add {G}. Then draw a card.", "{T}: Add {G}.\n{T}: Add {R}.", "{1}, {T}: Add {G}.", "{T}: Add {G} if you control a creature.", "{T}: Add {X}.", "{T}: Add {G} to target player.", "Create a token with \"{T}: Add {G}.\"", "This object gains {T}: Add {G}.", "{T}: Add {G}", "{T}: Add {S}.", "{T}: Add {G}{G}{G}{G}{G}{G}{G}{G}{G}.", " {T}: Add {G}.", "{T}:\tAdd {G}."]
+}

@@ -182,3 +182,20 @@ source-use dispositions remain unchanged throughout.
 
 No new acquisition, archive processing, Oracle extraction, external AI export,
 public redistribution, semantic promotion or real-card execution is authorized.
+
+## Future population-scale expansion and authorization usability
+
+The current 25-Printing cohort ceiling, 2 MiB manifest ceiling and immutable
+snapshot limits (256 files, 2 MiB per file, 16 MiB total) remain enforced. Every
+generation represents only its exact selected cohort; cumulative private canonical
+catalog expansion is not implemented. Future population-scale work must preserve
+previous admitted knowledge and history efficiently rather than requiring hundreds
+of separately approved small cohorts.
+
+Owner authorization must eventually be iPhone-first, with machine-generated
+bindings and audit metadata handled automatically. Authentication is deferred and
+actual real admission remains HOLD. Bounded standing authorization is future
+product direction, not permission to use this interface without its current live
+exact-operation boundary. Future execution must independently verify the current
+pre-state and bound implementation; changed bindings require deterministic
+reassessment and a new manifest. Existing historical pins must not be rewritten.

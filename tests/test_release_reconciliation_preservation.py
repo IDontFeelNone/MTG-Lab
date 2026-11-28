@@ -9,6 +9,8 @@ from unittest.mock import patch
 
 import release_reconciliation_preservation as guard
 
+from candidate_mana_preservation import preceding_bytes as candidate_preceding
+
 
 class ReconciliationPreservationTests(unittest.TestCase):
     def test_exact_additions_and_predecessor_reversal(self):
@@ -51,7 +53,7 @@ class ReconciliationPreservationTests(unittest.TestCase):
         import ci_workflow_preservation as previous
         self.assertEqual(previous.LEDGER_SHA256,'b5a31080d71a874532f11383b6b9c06af40168996106a786941dedfa08698af9')
         for name,row in previous.ledger()['additions'].items():
-            self.assertEqual(guard.pin((guard.ROOT/name).read_bytes()),row)
+            self.assertEqual(guard.pin(candidate_preceding(name,(guard.ROOT/name).read_bytes())),row)
         for name,row in previous.ledger()['replacements'].items():
             self.assertEqual(guard.pin(previous.preceding_bytes(name,(guard.ROOT/name).read_bytes())),row['old'])
 
@@ -59,7 +61,7 @@ class ReconciliationPreservationTests(unittest.TestCase):
         # Exact base pins work in the disposable publication checkout too, which
         # intentionally has unrelated Git ancestry and a different live catalog.
         for name,pin in guard.ledger()['unchanged'].items():
-            self.assertEqual(guard.pin((guard.ROOT/name).read_bytes()),pin,name)
+            self.assertEqual(guard.pin(candidate_preceding(name,(guard.ROOT/name).read_bytes())),pin,name)
 
     def test_new_document_links_resolve(self):
         p=guard.ROOT/'docs/RELEASE_CATALOG_RECONCILIATION_V1.md'

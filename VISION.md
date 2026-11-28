@@ -186,3 +186,32 @@ Enduring product requirements guide desired outcomes; proposed technical
 approaches require separate approval; deferred features remain outside
 authorized work; aspirational research capabilities are benchmarks rather than
 release prerequisites. Nothing in this vision authorizes implementation.
+
+## iPhone-first Owner authorization
+
+Owner authorization must be practical from an iPhone. MTG Lab presents the exact
+operation or policy, scope, validation results, material risks and limitations.
+The Owner authenticates and selects Approve or Reject. The system constructs and
+verifies identity, role, timestamps, request bindings, replay protection and audit
+evidence automatically. Routine approval must not require entering technical
+authorization metadata. Independent initial enrollment may be required.
+
+## Bounded standing authorization
+
+MTG Lab must eventually support independently authenticated, explicitly approved,
+bounded standing policies. Every execution must satisfy the active policy's
+operation, source, material, capability, resource and lifecycle constraints and
+retain exact policy, evidence and validation bindings. Out-of-policy operations
+fail closed or escalate. The system cannot grant itself permissions or amend its
+own authority. Standing policies do not establish source-use rights, factual
+reliability, semantic correctness, legality or gameplay authority. No standing-policy
+execution is currently implemented or authorized.
+
+Within independently approved source-use, research and execution scopes, MTG Lab
+should progressively detect relevant developments, prepare evidence-backed
+hypotheses, test alternatives and counterexamples, and escalate meaningful findings
+and unresolved conflicts. Routine qualifying operations should eventually proceed
+under bounded standing policies. Verified observations, accepted interpretations,
+rules-supported interactions, hypotheses, simulation results and competitive
+validation remain distinct. Sleeper-card discovery remains a research benchmark
+requiring verifiable evidence and eventual real-world validation.

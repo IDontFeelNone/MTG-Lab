@@ -11,6 +11,7 @@ from unittest.mock import patch
 from urllib.parse import unquote
 
 import documentation_continuity_preservation as guard
+from candidate_mana_preservation import preceding_bytes as candidate_preceding
 
 
 def pin(raw):
@@ -23,7 +24,7 @@ class DocumentationContinuityTests(unittest.TestCase):
         self.assertEqual(value['schema_version'], 'documentation-continuity-successors-v1')
         for name, row in value['replacements'].items():
             with self.subTest(path=name):
-                current = (guard.ROOT / name).read_bytes()
+                current = candidate_preceding(name, (guard.ROOT / name).read_bytes())
                 self.assertEqual(pin(current), row['new'])
                 old = guard.restore(name, current)
                 self.assertEqual(pin(old), row['old'])
@@ -56,7 +57,7 @@ class DocumentationContinuityTests(unittest.TestCase):
                     continue
                 for document in guard.DOCUMENTS:
                     with self.subTest(chain=module_name + '.' + name, document=document):
-                        raw = (guard.ROOT / document).read_bytes()
+                        raw = candidate_preceding(document, (guard.ROOT / document).read_bytes())
                         old = guard.restore(document, raw)
                         if document not in module.DOCUMENT_APPENDICES:
                             for candidate in (raw, old):
@@ -71,7 +72,7 @@ class DocumentationContinuityTests(unittest.TestCase):
         from overlay_preservation_support import historical_source_bytes
         from context_review_preservation_support import preceding_bytes
         for name in guard.HELPERS:
-            raw = (guard.ROOT / name).read_bytes()
+            raw = candidate_preceding(name, (guard.ROOT / name).read_bytes())
             old = guard.restore(name, raw)
             for function in (historical_source_bytes, preceding_bytes):
                 with self.subTest(path=name, chain=function.__module__):
@@ -79,7 +80,7 @@ class DocumentationContinuityTests(unittest.TestCase):
 
     def test_unknown_paths_types_and_unrecognized_edits_reject(self):
         for name in guard.DOCUMENTS | guard.HELPERS:
-            raw = (guard.ROOT / name).read_bytes()
+            raw = candidate_preceding(name, (guard.ROOT / name).read_bytes())
             old = guard.restore(name, raw)
             for candidate in (raw + b'future\n', raw[:-1], b'X' + raw[1:],
                               raw + raw, old + b'future\n', bytearray(raw), None, True):
@@ -92,7 +93,7 @@ class DocumentationContinuityTests(unittest.TestCase):
 
     def test_unchanged_size_historical_text_and_prefix_tampering_reject(self):
         for name in guard.DOCUMENTS:
-            raw = (guard.ROOT / name).read_bytes()
+            raw = candidate_preceding(name, (guard.ROOT / name).read_bytes())
             boundary = guard.ledger()['replacements'][name]['edits'][0]['end']
             for index in (0, boundary, len(raw) - 1):
                 altered = raw[:index] + bytes([raw[index] ^ 1]) + raw[index + 1:]
@@ -118,7 +119,7 @@ class DocumentationContinuityTests(unittest.TestCase):
     def test_new_document_pins_and_relative_links(self):
         texts = {}
         for name, expected in guard.ledger()['additions'].items():
-            raw = (guard.ROOT / name).read_bytes()
+            raw = candidate_preceding(name, (guard.ROOT / name).read_bytes())
             from vision_alignment_preservation import preceding_bytes
             raw = preceding_bytes(name, raw)
             self.assertEqual(pin(raw), expected)

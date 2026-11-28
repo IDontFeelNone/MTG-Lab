@@ -1,3 +1,37 @@
+# Current status — intelligence development with admission held
+
+The candidate activated-mana interpretation milestone develops a bounded
+synthetic evidence-to-proposal vertical through existing Card Intelligence and
+conditional Rules Intelligence. All generated interpretations require review;
+there is no accepted real-card semantics or gameplay execution.
+
+Actual private factual admission remains HOLD. The preserved preflight assessed
+5,460 Card groups and 9,531 Printings: 5,090 / 8,358 eligible and 370 / 1,173
+quarantined. Its prepared two-Card, three-Printing, 46-assertion cohort remains
+unadmitted. No reassessment, private-record inspection or source processing occurs
+in the interpretation milestone.
+
+Authentication implementation is DEFERRED. Private signing lacks independently
+authenticated Owner key enrollment and a demonstrated device workflow. GitHub
+approval lacks established credential separation, a suitable exact-operation
+integration and local provider verification access. No console/SSH or Codex-local
+exact-operation bridge is established. Reopen only for specifically authorized
+work with a concrete iPhone-accessible enrollment/approval mechanism; do not
+change credentials or repeat general authentication research.
+
+The private cohort, historical factual publication and source custody remain
+unchanged. Its manifest is not promised executable indefinitely: future execution
+must revalidate canonical pre-state, implementation, authority and evidence.
+Standing-policy execution is not implemented or authorized. See the existing
+[admission contract](PRIVATE_FACTUAL_ADMISSION_V1.md) and
+[interpretation contract](CANDIDATE_ACTIVATED_MANA_V1.md).
+
+---
+
+## Preserved predecessor status
+
+The complete predecessor follows unchanged with its historical scope.
+
 # Current project state
 
 Verified baseline: canonical main

@@ -8,6 +8,8 @@ from unittest.mock import patch
 
 import rules_reasoning_preservation as guard
 
+from candidate_mana_preservation import preceding_bytes as candidate_preceding
+
 
 class RulesReasoningPreservationTests(unittest.TestCase):
     def test_finite_additions_and_unchanged_governance(self):
@@ -17,7 +19,7 @@ class RulesReasoningPreservationTests(unittest.TestCase):
             self.assertTrue(guard.is_addition(guard.ROOT/name))
             self.assertTrue(is_addition(guard.ROOT/name))
         for name,row in ledger['unchanged'].items():
-            self.assertEqual(guard.pin((guard.ROOT/name).read_bytes()),row)
+            self.assertEqual(guard.pin(candidate_preceding(name,(guard.ROOT/name).read_bytes())),row)
 
     def test_exact_reversal_to_pinned_predecessor(self):
         import release_reconciliation_preservation as previous
@@ -59,6 +61,6 @@ class RulesReasoningPreservationTests(unittest.TestCase):
     def test_all_older_reconciliation_contract_pins_still_apply(self):
         import release_reconciliation_preservation as previous
         for name,row in previous.ledger()['unchanged'].items():
-            self.assertEqual(previous.pin((previous.ROOT/name).read_bytes()),row)
+            self.assertEqual(previous.pin(candidate_preceding(name,(previous.ROOT/name).read_bytes())),row)
         for name,row in previous.ledger()['replacements'].items():
             self.assertEqual(previous.pin(previous.preceding_bytes(name,(previous.ROOT/name).read_bytes())),row['old'])

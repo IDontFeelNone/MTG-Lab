@@ -55,7 +55,8 @@ class SuppliedDeckPreservationTests(unittest.TestCase):
         self.assertEqual(guard.pin((guard.ROOT/'src/probability/pack_odds.py').read_bytes()),previous.ledger()['additions']['src/probability/pack_odds.py'])
         self.assertEqual(guard.pin((guard.ROOT/'src/probability/draw_access.py').read_bytes()),draw.ledger()['additions']['src/probability/draw_access.py'])
         for name in ('VISION.md','docs/GOVERNANCE.md','docs/ARCHITECTURE.md','docs/DECISIONS.md'):
-            raw=(guard.ROOT/name).read_bytes();self.assertEqual(guard.preceding_bytes(name,raw),raw)
+            from candidate_mana_preservation import preceding_bytes as candidate_preceding
+            raw=candidate_preceding(name,(guard.ROOT/name).read_bytes());self.assertEqual(guard.preceding_bytes(name,raw),raw)
         for name in guard.ADDITIONS:self.assertTrue(draw.is_addition(guard.ROOT/name))
 
     def test_consumer_has_no_repository_collection_source_or_gameplay_access(self):
